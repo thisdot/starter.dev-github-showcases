@@ -10,5 +10,8 @@
       ],
       "extends": ["plugin:testing-library/react"]
     }
-  ]
+  ],
+  "rules": {
+    "import/no-anonymous-default-export": "off"
+  }
 }

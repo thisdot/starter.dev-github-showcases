@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "format": "prettier --write ./src"
+    "format": "prettier --write ./src",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "next": "11.1.2",
@@ -16,20 +18,27 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/react": "^6.3.12",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.0.2",
     "@types/react": "17.0.32",
-    "autoprefixer": "^10.3.7",
+    "autoprefixer": "9.8.8",
+    "babel-loader": "^8.2.3",
     "eslint": "7.32.0",
     "eslint-config-next": "^11.1.2",
     "eslint-plugin-testing-library": "^5.0.0",
     "jest": "^27.3.1",
-    "postcss": "^8.3.11",
+    "postcss": "7.0.39",
     "prettier": "^2.4.1",
     "react-test-renderer": "^17.0.2",
-    "tailwindcss": "^2.2.17",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "ts-jest": "^27.0.7",
     "typescript": "^4.4.4"
   }
