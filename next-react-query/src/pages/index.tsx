@@ -2,8 +2,8 @@ import type { GetServerSideProps, NextPage } from 'next';
 import type { Session } from 'next-auth';
 import { getSession } from 'next-auth/client';
 import Head from 'next/head';
-import { WelcomeUser } from '../components/WelcomeUser';
-import { RepoList } from '../components/RepoList';
+import WelcomeUser from '@components/WelcomeUser';
+import MyRepoList from '@components/MyRepoList';
 
 const Home: NextPage<{ session: Session }> = ({ session }) => {
   return (
@@ -13,9 +13,9 @@ const Home: NextPage<{ session: Session }> = ({ session }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="max-w-screen-xl mx-auto">
         <WelcomeUser name={session!.user!.name!} />
-        <RepoList />
+        <MyRepoList />
       </main>
     </div>
   );
@@ -23,18 +23,21 @@ const Home: NextPage<{ session: Session }> = ({ session }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
-  return session
-    ? {
-        props: {
-          session,
-        },
-      }
-    : {
-        redirect: {
-          permanent: false,
-          destination: '/api/auth/signin',
-        },
-      };
+
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/api/auth/signin',
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
 };
 
 export default Home;

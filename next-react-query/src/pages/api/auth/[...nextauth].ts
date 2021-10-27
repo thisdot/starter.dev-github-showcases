@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import Providers from 'next-auth/providers';
-import { getJwtOptions } from '../../../lib/getJwtOptions';
+import { getJwtOptions } from '@lib/getJwtOptions';
 
 const options: NextAuthOptions = {
   session: {
@@ -28,5 +28,7 @@ const options: NextAuthOptions = {
   ],
 };
 
-export default (req: NextApiRequest, res: NextApiResponse) =>
+const handler = (req: NextApiRequest, res: NextApiResponse) =>
   NextAuth(req, res, options);
+
+export default handler;

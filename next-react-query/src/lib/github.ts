@@ -1,7 +1,14 @@
+import { GraphQLClient } from 'graphql-request';
+import { RequestInit } from 'graphql-request/dist/types.dom';
+import { useQuery, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+
+function fetcher<TData, TVariables>(client: GraphQLClient, query: string, variables?: TVariables, headers?: RequestInit['headers']) {
+  return async (): Promise<TData> => client.request<TData, TVariables>(query, variables, headers);
+}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -21966,3 +21973,40 @@ export type WorkflowRunPendingDeploymentRequestsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
 };
+
+export type MyReposQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyReposQuery = { __typename?: 'Query', viewer: { __typename?: 'User', repositories: { __typename?: 'RepositoryConnection', nodes?: Array<{ __typename?: 'Repository', id: string, name: string, url: any, owner: { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } } | null | undefined> | null | undefined } } };
+
+
+export const MyReposDocument = `
+    query MyRepos {
+  viewer {
+    repositories(first: 10, orderBy: {field: UPDATED_AT, direction: DESC}) {
+      nodes {
+        id
+        name
+        url
+        owner {
+          login
+        }
+      }
+    }
+  }
+}
+    `;
+export const useMyReposQuery = <
+      TData = MyReposQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables?: MyReposQueryVariables, 
+      options?: UseQueryOptions<MyReposQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) => 
+    useQuery<MyReposQuery, TError, TData>(
+      variables === undefined ? ['MyRepos'] : ['MyRepos', variables],
+      fetcher<MyReposQuery, MyReposQueryVariables>(client, MyReposDocument, variables, headers),
+      options
+    );

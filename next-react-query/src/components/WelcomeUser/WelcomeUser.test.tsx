@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { WelcomeUser } from './WelcomeUser';
+import WelcomeUser from './WelcomeUser';
 
 describe('Home', () => {
   it('renders a heading welcoming the user', () => {
