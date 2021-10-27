@@ -1,0 +1,7 @@
+overwrite: true
+schema: 'github-schema-loader.js'
+generates:
+  src/types/github.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-document-nodes'

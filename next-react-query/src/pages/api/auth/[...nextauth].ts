@@ -1,17 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import Providers from 'next-auth/providers';
+import { getJwtOptions } from '../../../lib/getJwtOptions';
 
 const options: NextAuthOptions = {
   session: {
     jwt: true,
   },
   jwt: {
-    // options for encrypting users JWT
-    encryption: true,
-    secret: process.env.JWT_SECRET,
-    signingKey: process.env.JWT_SIGNING_KEY,
-    encryptionKey: process.env.JWT_ENCRYPTION_KEY,
+    ...getJwtOptions(),
   },
   callbacks: {
     // add our GH access token to our JWT on sign in

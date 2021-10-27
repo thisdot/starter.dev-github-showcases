@@ -3,6 +3,7 @@ import type { Session } from 'next-auth';
 import { getSession } from 'next-auth/client';
 import Head from 'next/head';
 import { WelcomeUser } from '../components/WelcomeUser';
+import { RepoList } from '../components/RepoList';
 
 const Home: NextPage<{ session: Session }> = ({ session }) => {
   return (
@@ -14,6 +15,7 @@ const Home: NextPage<{ session: Session }> = ({ session }) => {
 
       <main>
         <WelcomeUser name={session!.user!.name!} />
+        <RepoList />
       </main>
     </div>
   );
