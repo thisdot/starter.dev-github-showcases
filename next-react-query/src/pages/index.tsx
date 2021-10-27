@@ -1,8 +1,8 @@
-import type { GetServerSideProps, NextPage } from "next";
-import type { Session } from "next-auth";
-import { getSession } from "next-auth/client";
-import Head from "next/head";
-import { WelcomeUser } from "../components/WelcomeUser";
+import type { GetServerSideProps, NextPage } from 'next';
+import type { Session } from 'next-auth';
+import { getSession } from 'next-auth/client';
+import Head from 'next/head';
+import { WelcomeUser } from '../components/WelcomeUser';
 
 const Home: NextPage<{ session: Session }> = ({ session }) => {
   return (
@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     : {
         redirect: {
           permanent: false,
-          destination: "/api/auth/signin",
+          destination: '/api/auth/signin',
         },
       };
 };

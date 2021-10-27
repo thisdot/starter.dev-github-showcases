@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { getToken } from "next-auth/jwt";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { getToken } from 'next-auth/jwt';
 
 // todo: turn into proxy for github graphql api
 async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
