@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getToken } from 'next-auth/jwt';
-import { getJwtOptions } from '@lib/getJwtOptions';
+import { getJwtOptions } from '@lib/jwt';
 
 const GRAPHQL_ENDPOINT = process.env.GITHUB_GRAPHQL_ENDPOINT;
 
