@@ -33,7 +33,7 @@ export async function refreshAccessToken(token: JWT) {
 
     const refreshedTokens = await response.json();
 
-    if (!response.ok) {
+    if (!response.ok || refreshedTokens.error) {
       throw refreshedTokens;
     }
 
@@ -44,8 +44,6 @@ export async function refreshAccessToken(token: JWT) {
       refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
     };
   } catch (error) {
-    console.log(error);
-
     return {
       ...token,
       error: 'RefreshAccessTokenError',

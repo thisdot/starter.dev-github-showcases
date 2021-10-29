@@ -27,6 +27,10 @@ const options: NextAuthOptions = {
 
       return token;
     },
+    session: async (session, token) => {
+      session.error = token.error;
+      return session;
+    },
   },
   providers: [
     Providers.GitHub({
