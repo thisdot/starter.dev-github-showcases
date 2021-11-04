@@ -1,7 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import Providers from 'next-auth/providers';
-import { getJwtOptions, refreshAccessToken } from '@lib/jwt';
+import {
+  getJwtOptions,
+  refreshAccessToken,
+  calculateTokenExpiration,
+} from '@lib/jwt';
 
 const options: NextAuthOptions = {
   session: {
@@ -11,18 +15,16 @@ const options: NextAuthOptions = {
     ...getJwtOptions(),
   },
   callbacks: {
-    // add our GH access token to our JWT on sign in
     jwt: async (token, _, account) => {
       if (account) {
-        const expires = Date.now() + (account.expires_in ?? 0) * 1000;
-        token.expires = expires;
+        // add our GH access token to our JWT on sign in
+        token.expires = calculateTokenExpiration(account.expires_in ?? 0);
         token.accessToken = account.accessToken;
         token.refreshToken = account.refreshToken;
       }
 
-      if (typeof token.expires !== 'number' || Date.now() > token.expires) {
-        const refreshedToken = await refreshAccessToken(token);
-        return refreshedToken;
+      if (typeof token.expires !== 'number' || Date.now() >= token.expires) {
+        return await refreshAccessToken(token);
       }
 
       return token;

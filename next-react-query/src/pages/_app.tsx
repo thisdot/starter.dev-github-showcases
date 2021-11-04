@@ -3,17 +3,23 @@ import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { useSession, signIn } from 'next-auth/client';
+import { useSession, signOut } from 'next-auth/client';
+import { useRouter } from 'next/router';
+import { REFRESH_TOKEN_ERROR } from '@lib/jwt';
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [session] = useSession();
+  const router = useRouter();
   useEffect(() => {
-    if (session?.error === 'RefreshAccessTokenError') {
-      signIn();
+    // If token expired and refresh fails signout and redirect to sign in
+    if (session?.error === REFRESH_TOKEN_ERROR) {
+      signOut().finally(() => {
+        router.replace('/api/auth/signin');
+      });
     }
-  }, [session]);
+  }, [session, router]);
 
   return (
     <QueryClientProvider client={queryClient}>
