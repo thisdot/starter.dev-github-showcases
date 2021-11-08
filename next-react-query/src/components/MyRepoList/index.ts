@@ -1,2 +1,1 @@
-import MyRepoList from './MyRepoList.data';
-export default MyRepoList;
+export { default as default } from './MyRepoList.data';

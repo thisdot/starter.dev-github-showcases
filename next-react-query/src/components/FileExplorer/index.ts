@@ -1,2 +1,1 @@
-import FileExplorer from './FileExplorer.data';
-export default FileExplorer;
+export { default as default } from './FileExplorer.data';

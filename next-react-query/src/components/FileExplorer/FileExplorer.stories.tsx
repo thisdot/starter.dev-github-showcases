@@ -1,8 +1,9 @@
-import { ComponentProps } from 'react';
+import type { RepoContext } from '../../context/RepoContext';
 import { Story, Meta } from '@storybook/react';
 import FileExplorer from './FileExplorer.data';
 import { mockRepoTreeQuery } from './FileExplorer.mocks';
 import { createWrapper } from '@lib/testUtils';
+import { RepoProvider } from '@context/RepoContext';
 
 export default {
   component: FileExplorer,
@@ -22,19 +23,23 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<ComponentProps<typeof FileExplorer>> = (args) => (
-  <FileExplorer {...args} />
+const Template: Story<RepoContext> = (args) => (
+  <RepoProvider value={args}>
+    <FileExplorer />
+  </RepoProvider>
 );
 
 export const RepoRootDir = Template.bind({});
 RepoRootDir.args = {
-  repo: 'testrepos',
+  name: 'testrepos',
   owner: 'testowner',
+  branch: 'main',
+  path: '',
 };
 
 export const RepoSrcDir = Template.bind({});
 RepoSrcDir.args = {
-  repo: 'testrepos',
+  name: 'testrepos',
   owner: 'testowner',
   branch: 'main',
   path: 'src',
@@ -42,6 +47,6 @@ RepoSrcDir.args = {
 
 export const RepoNotFound = Template.bind({});
 RepoNotFound.args = {
-  repo: 'fourohfour',
+  name: 'fourohfour',
   owner: 'nobody',
 };

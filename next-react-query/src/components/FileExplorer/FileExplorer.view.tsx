@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { removeLastPathPart } from '@lib/pathUtils';
 import { FolderIcon } from '@heroicons/react/solid';
 import { DocumentIcon } from '@heroicons/react/outline';
+import styles from './FileExplorer.module.css';
 
 interface FileExplorerViewProps {
   items: ExplorerItem[];
@@ -20,29 +21,26 @@ function FileExplorerView({
   const backPath = removeLastPathPart(repoPath);
   const backLink = `${basePath}/tree/${branch}/${backPath}`;
   return (
-    <div className="border rounded border-gray-200 text-sm">
+    <div className={styles.container}>
       {repoPath && (
         <Link href={backLink}>
-          <a className="block py-2 px-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer">
+          <a className={styles.cellBack}>
             <div className="text-blue-600">..</div>
           </a>
         </Link>
       )}
       {items.map((item) => (
-        <div
-          key={item.path}
-          className="py-2 px-4 border-b border-gray-200 last-of-type:border-none hover:bg-gray-50"
-        >
+        <div key={item.path} className={styles.cell}>
           <div className="flex items-center">
             <div className="mr-2.5">
               {item.type === 'tree' ? (
-                <FolderIcon className="w-5 h-5 text-blue-400" />
+                <FolderIcon className={styles.iconDir} />
               ) : (
-                <DocumentIcon className="w-5 h-5 text-gray-500" />
+                <DocumentIcon className={styles.iconFile} />
               )}
             </div>
             <Link href={`${basePath}/${item.type}/${branch}/${item.path}`}>
-              <a className="hover:text-blue-600 hover:underline">{item.name}</a>
+              <a className={styles.link}>{item.name}</a>
             </Link>
           </div>
         </div>

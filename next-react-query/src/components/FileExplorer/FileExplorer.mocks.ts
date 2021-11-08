@@ -1,7 +1,7 @@
 import { graphql } from 'msw';
 
 export const mockRepoTreeQuery = graphql.query('RepoTree', (req, res, ctx) => {
-  const { path, name, owner } = req.variables;
+  const { expression, name, owner } = req.variables;
 
   if (name !== 'testrepo' && owner !== 'testowner') {
     return res(
@@ -21,7 +21,7 @@ export const mockRepoTreeQuery = graphql.query('RepoTree', (req, res, ctx) => {
     );
   }
 
-  switch (path) {
+  switch (expression) {
     case 'main:src':
       return res(ctx.data(srcDirRes));
     case 'HEAD:':

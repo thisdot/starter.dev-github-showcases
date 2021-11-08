@@ -1,57 +1,48 @@
-import type { Blob, Tree, TreeEntry } from '@lib/github';
-import type { ExplorerItem } from './types';
+import cn from 'classnames';
 import gqlClient from '@lib/gqlClient';
 import { useRepoTreeQuery } from '@lib/github';
-import { parseApiError } from '@lib/parseApiError';
+import { parseError } from '@lib/parseError';
+import { useRepo } from '@context/RepoContext';
+import { LoadingPulseDots } from '@components/Loading';
+import { parseQueryData } from './parseQueryData';
 import FileExplorerView from './FileExplorer.view';
+import styles from './FileExplorer.module.css';
 
-interface FileExplorerProps {
-  repo: string;
-  owner: string;
-  branch?: string;
-  path?: string | string[];
-}
+const containerClassName = cn(styles.container, 'p-4');
 
-function FileExplorer({ repo, owner, branch, path = '' }: FileExplorerProps) {
-  const formattedPath = Array.isArray(path) ? path.join('/') : path;
-  const expression = branch
-    ? `${branch}:${formattedPath}`
-    : `HEAD:${formattedPath}`;
-  const { data, error, isLoading } = useRepoTreeQuery(gqlClient, {
+function FileExplorer() {
+  const { owner, name, branch, path } = useRepo();
+  const {
+    data,
+    error: queryError,
+    isLoading,
+  } = useRepoTreeQuery(gqlClient, {
     owner,
-    name: repo,
-    path: expression,
+    name,
+    expression: `${branch}:${path}`,
   });
 
-  const defaultBranch = data?.repository?.defaultBranchRef?.name;
-  const fileTree = data?.repository?.tree as Tree | undefined;
-  const items: ExplorerItem[] =
-    fileTree?.entries?.map(({ name, path, type, object }: TreeEntry) => {
-      const file = object ? (object as Blob) : undefined;
-      return {
-        name,
-        path: path ?? '',
-        type,
-        text: file?.text,
-        byteSize: file?.byteSize,
-      };
-    }) ?? [];
+  const error = parseError(queryError);
+  const items = parseQueryData(data);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className={containerClassName}>
+        <LoadingPulseDots />
+      </div>
+    );
   }
 
   if (error) {
-    const message = parseApiError(error);
-    return <div>Error: {message}</div>;
+    return <div className={containerClassName}>Error: {error.message}</div>;
   }
 
   return (
     <FileExplorerView
       items={items}
-      branch={branch ?? defaultBranch ?? 'HEAD'}
-      basePath={`/${owner}/${repo}`}
-      repoPath={formattedPath}
+      branch={branch}
+      basePath={`/${owner}/${name}`}
+      repoPath={path}
     />
   );
 }

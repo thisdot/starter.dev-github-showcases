@@ -21977,11 +21977,11 @@ export type WorkflowRunPendingDeploymentRequestsArgs = {
 export type RepoTreeQueryVariables = Exact<{
   owner: Scalars['String'];
   name: Scalars['String'];
-  path: Scalars['String'];
+  expression: Scalars['String'];
 }>;
 
 
-export type RepoTreeQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', defaultBranchRef?: { __typename?: 'Ref', name: string } | null | undefined, branches?: { __typename?: 'RefConnection', nodes?: Array<{ __typename?: 'Ref', name: string } | null | undefined> | null | undefined } | null | undefined, tree?: { __typename?: 'Blob' } | { __typename?: 'Commit' } | { __typename?: 'Tag' } | { __typename?: 'Tree', entries?: Array<{ __typename?: 'TreeEntry', name: string, type: string, path?: string | null | undefined, object?: { __typename?: 'Blob', byteSize: number } | { __typename?: 'Commit' } | { __typename?: 'Tag' } | { __typename?: 'Tree' } | null | undefined }> | null | undefined } | null | undefined } | null | undefined };
+export type RepoTreeQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', branches?: { __typename?: 'RefConnection', nodes?: Array<{ __typename?: 'Ref', name: string } | null | undefined> | null | undefined } | null | undefined, tree?: { __typename?: 'Blob' } | { __typename?: 'Commit' } | { __typename?: 'Tag' } | { __typename?: 'Tree', entries?: Array<{ __typename?: 'TreeEntry', name: string, type: string, path?: string | null | undefined }> | null | undefined } | null | undefined } | null | undefined };
 
 export type RepoFileQueryVariables = Exact<{
   owner: Scalars['String'];
@@ -21990,36 +21990,36 @@ export type RepoFileQueryVariables = Exact<{
 }>;
 
 
-export type RepoFileQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', defaultBranchRef?: { __typename?: 'Ref', name: string } | null | undefined, blob?: { __typename?: 'Blob', byteSize: number, text?: string | null | undefined } | { __typename?: 'Commit' } | { __typename?: 'Tag' } | { __typename?: 'Tree' } | null | undefined } | null | undefined };
+export type RepoFileQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', blob?: { __typename?: 'Blob', byteSize: number, text?: string | null | undefined } | { __typename?: 'Commit' } | { __typename?: 'Tag' } | { __typename?: 'Tree' } | null | undefined } | null | undefined };
 
 export type MyReposQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MyReposQuery = { __typename?: 'Query', viewer: { __typename?: 'User', repositories: { __typename?: 'RepositoryConnection', nodes?: Array<{ __typename?: 'Repository', id: string, name: string, url: any, owner: { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } } | null | undefined> | null | undefined } } };
 
+export type RepoPageQueryVariables = Exact<{
+  owner: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type RepoPageQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', isPrivate: boolean, stargazerCount: number, forkCount: number, description?: string | null | undefined, defaultBranchRef?: { __typename?: 'Ref', name: string } | null | undefined, watchers: { __typename?: 'UserConnection', totalCount: number } } | null | undefined };
+
 
 export const RepoTreeDocument = `
-    query RepoTree($owner: String!, $name: String!, $path: String!) {
+    query RepoTree($owner: String!, $name: String!, $expression: String!) {
   repository(owner: $owner, name: $name) {
-    defaultBranchRef {
-      name
-    }
     branches: refs(refPrefix: "refs/heads/", last: 5) {
       nodes {
         name
       }
     }
-    tree: object(expression: $path) {
+    tree: object(expression: $expression) {
       ... on Tree {
         entries {
           name
           type
           path
-          object {
-            ... on Blob {
-              byteSize
-            }
-          }
         }
       }
     }
@@ -22043,9 +22043,6 @@ export const useRepoTreeQuery = <
 export const RepoFileDocument = `
     query RepoFile($owner: String!, $name: String!, $path: String!) {
   repository(owner: $owner, name: $name) {
-    defaultBranchRef {
-      name
-    }
     blob: object(expression: $path) {
       ... on Blob {
         byteSize
@@ -22097,5 +22094,35 @@ export const useMyReposQuery = <
     useQuery<MyReposQuery, TError, TData>(
       variables === undefined ? ['MyRepos'] : ['MyRepos', variables],
       fetcher<MyReposQuery, MyReposQueryVariables>(client, MyReposDocument, variables, headers),
+      options
+    );
+export const RepoPageDocument = `
+    query RepoPage($owner: String!, $name: String!) {
+  repository(owner: $owner, name: $name) {
+    defaultBranchRef {
+      name
+    }
+    isPrivate
+    stargazerCount
+    forkCount
+    description
+    watchers(last: 100) {
+      totalCount
+    }
+  }
+}
+    `;
+export const useRepoPageQuery = <
+      TData = RepoPageQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables: RepoPageQueryVariables, 
+      options?: UseQueryOptions<RepoPageQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) => 
+    useQuery<RepoPageQuery, TError, TData>(
+      ['RepoPage', variables],
+      fetcher<RepoPageQuery, RepoPageQueryVariables>(client, RepoPageDocument, variables, headers),
       options
     );

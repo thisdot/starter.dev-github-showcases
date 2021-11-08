@@ -1,2 +1,1 @@
-import FileViewer from './FileViewer.data';
-export default FileViewer;
+export { default as default } from './FileViewer.data';
