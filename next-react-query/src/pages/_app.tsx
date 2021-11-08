@@ -11,15 +11,15 @@ const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [session] = useSession();
-  const router = useRouter();
+  const { replace } = useRouter();
   useEffect(() => {
     // If token expired and refresh fails signout and redirect to sign in
     if (session?.error === REFRESH_TOKEN_ERROR) {
       signOut().finally(() => {
-        router.replace('/api/auth/signin');
+        replace('/api/auth/signin');
       });
     }
-  }, [session, router]);
+  }, [session?.error, replace]);
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -16,7 +16,7 @@ export const calculateTokenExpiration = (expiresIn: number) =>
 export async function refreshAccessToken(token: JWT) {
   try {
     if (typeof token.refreshToken !== 'string') {
-      throw new Error('No refresh token');
+      throw new Error('Invalid refresh token');
     }
 
     const params = new URLSearchParams({
@@ -37,17 +37,20 @@ export async function refreshAccessToken(token: JWT) {
       }
     );
 
-    const refreshedTokens = await response.json();
+    const refreshedToken = await response.json();
 
-    if (!response.ok || refreshedTokens.error) {
-      throw refreshedTokens;
+    if (!response.ok || refreshedToken.error) {
+      throw new Error('Failed to get new token');
     }
 
     return {
       ...token,
-      accessToken: refreshedTokens.access_token,
-      expires: calculateTokenExpiration(refreshedTokens.expires_in ?? 0),
-      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken,
+      accessToken: refreshedToken.access_token,
+      expires:
+        typeof refreshedToken.expires_in === 'number'
+          ? calculateTokenExpiration(refreshedToken.expires_in)
+          : undefined,
+      refreshToken: refreshedToken.refresh_token,
     };
   } catch (error) {
     return {
