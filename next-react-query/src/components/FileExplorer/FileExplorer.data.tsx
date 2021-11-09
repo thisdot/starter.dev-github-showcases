@@ -8,10 +8,8 @@ import { parseQueryData } from './parseQueryData';
 import FileExplorerView from './FileExplorer.view';
 import styles from './FileExplorer.module.css';
 
-const containerClassName = cn(styles.container, 'p-4');
-
 function FileExplorer() {
-  const { owner, name, branch, path } = useRepo();
+  const { owner, name, branch, path, isRepoLoading } = useRepo();
   const {
     data,
     error: queryError,
@@ -22,20 +20,27 @@ function FileExplorer() {
     expression: `${branch}:${path}`,
   });
 
-  const error = parseError(queryError);
-  const items = parseQueryData(data);
-
-  if (error) {
-    return <div className={containerClassName}>Error: {error.message}</div>;
+  // wait on base repo data to display dir contents
+  if (isRepoLoading) {
+    return null;
   }
 
   if (isLoading) {
     return (
-      <div className={containerClassName}>
+      <div className={cn(styles.container, 'p-4')}>
         <LoadingPulseDots />
       </div>
     );
   }
+
+  // errors are handled at the repo page level
+  const error = parseError(queryError);
+  if (error || !data?.repository?.tree) {
+    const err = error ? error : new Error('Repository path not found');
+    throw err;
+  }
+
+  const items = parseQueryData(data);
 
   return (
     <FileExplorerView

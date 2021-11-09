@@ -1,5 +1,6 @@
 import type { RepoContext } from '@context/RepoContext';
 import type { ReactNode } from 'react';
+import { useErrorBoundary } from 'use-error-boundary';
 import gqlClient from '@lib/gqlClient';
 import { useRepoPageQuery } from '@lib/github';
 import { parseError } from '@lib/parseError';
@@ -21,6 +22,7 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
   const formattedPath = Array.isArray(path) ? path.join('/') : path;
   const defaultBranch = typeof branch === 'string' ? branch : 'HEAD';
 
+  const { ErrorBoundary, error: caughtError } = useErrorBoundary();
   const {
     data,
     error: queryError,
@@ -41,7 +43,7 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
     return null;
   }
 
-  const error = parseError(queryError);
+  const error = parseError(queryError || caughtError);
   if (error) {
     return <RepoPageError error={error} />;
   }
@@ -64,7 +66,11 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
       : undefined,
   };
 
-  return <RepoProvider value={context}>{children}</RepoProvider>;
+  return (
+    <ErrorBoundary>
+      <RepoProvider value={context}>{children}</RepoProvider>
+    </ErrorBoundary>
+  );
 }
 
 export default RepoPage;

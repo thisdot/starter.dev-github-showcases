@@ -26,8 +26,16 @@ export const mockRepoTreeQuery = graphql.query('RepoTree', (req, res, ctx) => {
       return res(ctx.data(srcDirResponse));
     case 'HEAD:':
     case 'main:':
-    default:
       return res(ctx.data(rootDirResponse));
+    default:
+      return res(
+        ctx.data({
+          repository: {
+            ...srcDirResponse.repository,
+            tree: undefined,
+          },
+        })
+      );
   }
 });
 

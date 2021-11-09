@@ -2,7 +2,7 @@ import type { RepoContext } from '../../context/RepoContext';
 import { Story, Meta } from '@storybook/react';
 import FileExplorer from './FileExplorer.data';
 import { mockRepoTreeQuery } from './FileExplorer.mocks';
-import { createWrapper } from '@lib/testUtils';
+import { createWrapper, ErrorBoundaryTestComponent } from '@lib/testUtils';
 import { RepoProvider } from '@context/RepoContext';
 
 export default {
@@ -24,29 +24,33 @@ export default {
 } as Meta;
 
 const Template: Story<RepoContext> = (args) => (
-  <RepoProvider value={args}>
-    <FileExplorer />
-  </RepoProvider>
+  <ErrorBoundaryTestComponent>
+    <RepoProvider value={args}>
+      <FileExplorer />
+    </RepoProvider>
+  </ErrorBoundaryTestComponent>
 );
 
-export const RepoRootDir = Template.bind({});
-RepoRootDir.args = {
+export const ExplorerRootDir = Template.bind({});
+ExplorerRootDir.args = {
   name: 'testrepos',
   owner: 'testowner',
   branch: 'main',
   path: '',
 };
 
-export const RepoSrcDir = Template.bind({});
-RepoSrcDir.args = {
+export const ExplorerSrcDir = Template.bind({});
+ExplorerSrcDir.args = {
   name: 'testrepos',
   owner: 'testowner',
   branch: 'main',
   path: 'src',
 };
 
-export const RepoNotFound = Template.bind({});
-RepoNotFound.args = {
-  name: 'fourohfour',
-  owner: 'nobody',
+export const ExplorerBadPathError = Template.bind({});
+ExplorerBadPathError.args = {
+  name: 'testrepos',
+  owner: 'testowner',
+  branch: 'main',
+  path: 'bad/path',
 };

@@ -1,6 +1,6 @@
 import { setLogger } from 'react-query';
-import { screen } from '@testing-library/react';
-import { renderWithClient } from '@lib/testUtils';
+import { screen, waitFor } from '@testing-library/react';
+import { renderWithClient, ErrorBoundaryTestComponent } from '@lib/testUtils';
 import { setupMswServer } from '@lib/mswServer';
 import FileExplorer from './FileExplorer.data';
 import { RepoProvider } from '@context/RepoContext';
@@ -14,20 +14,28 @@ setLogger({
 setupMswServer();
 
 describe('FileExplorer', () => {
-  test('renders an error if repository is not found', async () => {
+  test('throws if tree is not found at repo path', async () => {
+    const cerr = console.error;
+    console.error = jest.fn();
     renderWithClient(
-      <RepoProvider
-        value={{
-          name: 'badrepo',
-          owner: 'satoshi',
-          branch: 'main',
-          path: '',
-        }}
-      >
-        <FileExplorer />
-      </RepoProvider>
+      <ErrorBoundaryTestComponent>
+        <RepoProvider
+          value={{
+            name: 'testrepo',
+            owner: 'testowner',
+            branch: 'main',
+            path: 'badpath',
+          }}
+        >
+          <FileExplorer />
+        </RepoProvider>
+      </ErrorBoundaryTestComponent>
     );
-    expect(await screen.findByText(/error/i)).toBeInTheDocument();
+
+    await waitFor(async () => {
+      expect(screen.getByTestId('errorBoundary')).toBeInTheDocument();
+    });
+    console.error = cerr;
   });
 
   test('successfully queries and renders root repository contents', async () => {

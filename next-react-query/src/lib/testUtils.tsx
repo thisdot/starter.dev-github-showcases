@@ -1,6 +1,8 @@
 /* eslint-disable react/display-name */
+import type { ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import * as React from 'react';
+import { useErrorBoundary } from 'use-error-boundary';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClientOptions = {
@@ -34,4 +36,16 @@ export function createWrapper() {
       {children}
     </QueryClientProvider>
   );
+}
+
+export function ErrorBoundaryTestComponent({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const { ErrorBoundary, didCatch, error } = useErrorBoundary();
+  if (didCatch) {
+    return <div data-testid="errorBoundary">{error.message}</div>;
+  }
+  return <ErrorBoundary>{children}</ErrorBoundary>;
 }
