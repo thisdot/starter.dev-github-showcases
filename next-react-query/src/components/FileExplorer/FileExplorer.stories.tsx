@@ -7,7 +7,7 @@ import { RepoProvider } from '@context/RepoContext';
 
 export default {
   component: FileExplorer,
-  title: 'Components/FileExplorer',
+  title: 'RepoPage/FileExplorer',
   parameters: {
     msw: [mockRepoTreeQuery],
   },

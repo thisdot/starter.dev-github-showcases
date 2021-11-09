@@ -25,16 +25,16 @@ function FileExplorer() {
   const error = parseError(queryError);
   const items = parseQueryData(data);
 
+  if (error) {
+    return <div className={containerClassName}>Error: {error.message}</div>;
+  }
+
   if (isLoading) {
     return (
       <div className={containerClassName}>
         <LoadingPulseDots />
       </div>
     );
-  }
-
-  if (error) {
-    return <div className={containerClassName}>Error: {error.message}</div>;
   }
 
   return (

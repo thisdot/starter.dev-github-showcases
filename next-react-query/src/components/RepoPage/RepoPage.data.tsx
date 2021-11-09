@@ -36,18 +36,17 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
     }
   );
 
-  const error = parseError(queryError);
-  const repository = data?.repository;
-
   // we're not server rendering, need to wait for client to hydrate
   if (!isOwnerNameValid) {
     return null;
   }
 
+  const error = parseError(queryError);
   if (error) {
     return <RepoPageError error={error} />;
   }
 
+  const repository = data?.repository;
   const context: RepoContext = {
     owner,
     name,
