@@ -27,8 +27,8 @@ const Template: Story<ComponentProps<typeof RepoPage>> = (args) => (
   <RepoPage {...args} />
 );
 
-export const RepoPageRoot = Template.bind({});
-RepoPageRoot.args = {
+export const Home = Template.bind({});
+Home.args = {
   name: 'testrepos',
   owner: 'testowner',
   branch: 'main',
@@ -36,8 +36,8 @@ RepoPageRoot.args = {
   children: <RenderContextValue />,
 };
 
-export const RepoPageWithPath = Template.bind({});
-RepoPageWithPath.args = {
+export const WithPath = Template.bind({});
+WithPath.args = {
   name: 'testrepos',
   owner: 'testowner',
   branch: 'main',
@@ -45,8 +45,8 @@ RepoPageWithPath.args = {
   children: <RenderContextValue />,
 };
 
-export const RepoNotFound = Template.bind({});
-RepoNotFound.args = {
+export const NotFound = Template.bind({});
+NotFound.args = {
   name: 'fourohfour',
   owner: 'nobody',
   children: <RenderContextValue />,

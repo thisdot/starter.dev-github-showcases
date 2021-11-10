@@ -57,6 +57,7 @@
     "postcss": "7.0.39",
     "prettier": "^2.4.1",
     "react-test-renderer": "^17.0.2",
+    "storybook-addon-next-router": "^3.0.8",
     "storybook-css-modules-preset": "^1.1.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "ts-jest": "^27.0.7",

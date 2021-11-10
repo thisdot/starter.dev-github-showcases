@@ -1,4 +1,5 @@
-import { LockClosedIcon, BookmarkAltIcon } from '@heroicons/react/outline';
+import { LockClosedIcon } from '@heroicons/react/outline';
+import { GitRepoIcon } from '@components/Icons';
 import styles from './RepoHeading.module.css';
 
 interface PrivacyIconProps {
@@ -13,7 +14,7 @@ function PrivacyIcon({ isPrivate }: PrivacyIconProps) {
   return isPrivate ? (
     <LockClosedIcon className={styles.privacyIcon} />
   ) : (
-    <BookmarkAltIcon className={styles.privacyIcon} />
+    <GitRepoIcon className={styles.privacyIcon} />
   );
 }
 

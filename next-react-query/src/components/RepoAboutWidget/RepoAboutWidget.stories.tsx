@@ -1,12 +1,12 @@
 import type { RepoContext } from '../../context/RepoContext';
 import { Story, Meta } from '@storybook/react';
-import RepoHeading from './RepoHeading';
+import RepoAboutWidget from './RepoAboutWidget';
 import { createWrapper } from '@lib/testUtils';
 import { RepoProvider } from '@context/RepoContext';
 
 export default {
-  component: RepoHeading,
-  title: 'RepoPage/RepoHeading',
+  component: RepoAboutWidget,
+  title: 'RepoPage/RepoAboutWidget',
   decorators: [
     (Story: Story) => {
       const Wrapper = createWrapper();
@@ -21,28 +21,32 @@ export default {
 
 const Template: Story<RepoContext> = (args) => (
   <RepoProvider value={args}>
-    <RepoHeading />
+    <RepoAboutWidget />
   </RepoProvider>
 );
 
-export const Public = Template.bind({});
-Public.args = {
+export const WithDescription = Template.bind({});
+WithDescription.args = {
   name: 'starter.dev',
   owner: 'thisdot',
+  isRepoLoading: false,
   data: {
     isPrivate: false,
     stargazerCount: 30,
     forkCount: 10,
     watcherCount: 5,
+    description:
+      'Demo app for JSMarathon presentation: React Native E2E Testing with Detox',
   },
 };
 
-export const Private = Template.bind({});
-Private.args = {
+export const NoDescription = Template.bind({});
+NoDescription.args = {
   name: 'starter.dev',
   owner: 'thisdot',
+  isRepoLoading: false,
   data: {
-    isPrivate: true,
+    isPrivate: false,
     stargazerCount: 30,
     forkCount: 10,
     watcherCount: 5,
@@ -54,5 +58,4 @@ Loading.args = {
   name: 'starter.dev',
   owner: 'thisdot',
   isRepoLoading: true,
-  data: undefined,
 };

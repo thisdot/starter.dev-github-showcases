@@ -1,12 +1,12 @@
 import type { RepoContext } from '../../context/RepoContext';
 import { Story, Meta } from '@storybook/react';
-import RepoHeading from './RepoHeading';
+import RepoHeader from './RepoHeader';
 import { createWrapper } from '@lib/testUtils';
 import { RepoProvider } from '@context/RepoContext';
 
 export default {
-  component: RepoHeading,
-  title: 'RepoPage/RepoHeading',
+  component: RepoHeader,
+  title: 'RepoPage/RepoHeader',
   decorators: [
     (Story: Story) => {
       const Wrapper = createWrapper();
@@ -17,32 +17,28 @@ export default {
       );
     },
   ],
+  parameters: {
+    nextRouter: {
+      path: '[owner]/[name]',
+      asPath: 'thisdot/starter.dev',
+      query: {},
+    },
+  },
 } as Meta;
 
 const Template: Story<RepoContext> = (args) => (
   <RepoProvider value={args}>
-    <RepoHeading />
+    <RepoHeader />
   </RepoProvider>
 );
 
-export const Public = Template.bind({});
-Public.args = {
+export const Default = Template.bind({});
+Default.args = {
   name: 'starter.dev',
   owner: 'thisdot',
+  isRepoLoading: false,
   data: {
     isPrivate: false,
-    stargazerCount: 30,
-    forkCount: 10,
-    watcherCount: 5,
-  },
-};
-
-export const Private = Template.bind({});
-Private.args = {
-  name: 'starter.dev',
-  owner: 'thisdot',
-  data: {
-    isPrivate: true,
     stargazerCount: 30,
     forkCount: 10,
     watcherCount: 5,
@@ -54,5 +50,4 @@ Loading.args = {
   name: 'starter.dev',
   owner: 'thisdot',
   isRepoLoading: true,
-  data: undefined,
 };

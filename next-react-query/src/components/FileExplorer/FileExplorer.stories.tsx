@@ -31,24 +31,24 @@ const Template: Story<RepoContext> = (args) => (
   </RepoProvider>
 );
 
-export const ExplorerRootDir = Template.bind({});
-ExplorerRootDir.args = {
+export const RootDir = Template.bind({});
+RootDir.args = {
   name: 'testrepos',
   owner: 'testowner',
   branch: 'main',
   path: '',
 };
 
-export const ExplorerSrcDir = Template.bind({});
-ExplorerSrcDir.args = {
+export const SrcDir = Template.bind({});
+SrcDir.args = {
   name: 'testrepos',
   owner: 'testowner',
   branch: 'main',
   path: 'src',
 };
 
-export const ExplorerBadPathError = Template.bind({});
-ExplorerBadPathError.args = {
+export const BadPathError = Template.bind({});
+BadPathError.args = {
   name: 'testrepos',
   owner: 'testowner',
   branch: 'main',

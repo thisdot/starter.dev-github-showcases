@@ -6,6 +6,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-postcss',
     'storybook-css-modules-preset',
+    'storybook-addon-next-router',
   ],
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
