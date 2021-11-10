@@ -16,7 +16,7 @@ function RepoTabNavigation() {
     <div className={styles.container}>
       <nav className={styles.nav} aria-label="Tabs">
         {tabList.map(({ title, path, Icon }, index) => (
-          <Link href={`${owner}/${name}/${path}`} key={index}>
+          <Link href={`/${owner}/${name}/${path}`} key={index}>
             <a
               key={title}
               className={cn(

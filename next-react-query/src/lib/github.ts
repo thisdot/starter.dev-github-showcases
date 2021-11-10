@@ -21986,7 +21986,7 @@ export type RepoTreeQuery = { __typename?: 'Query', repository?: { __typename?: 
 export type RepoFileQueryVariables = Exact<{
   owner: Scalars['String'];
   name: Scalars['String'];
-  path: Scalars['String'];
+  expression: Scalars['String'];
 }>;
 
 
@@ -22041,9 +22041,9 @@ export const useRepoTreeQuery = <
       options
     );
 export const RepoFileDocument = `
-    query RepoFile($owner: String!, $name: String!, $path: String!) {
+    query RepoFile($owner: String!, $name: String!, $expression: String!) {
   repository(owner: $owner, name: $name) {
-    blob: object(expression: $path) {
+    blob: object(expression: $expression) {
       ... on Blob {
         byteSize
         text
