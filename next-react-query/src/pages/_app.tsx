@@ -7,7 +7,15 @@ import { useSession, signOut } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { REFRESH_TOKEN_ERROR } from '@lib/jwt';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+      staleTime: 1000 * 60 * 60, // 1 hour
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [session] = useSession();
