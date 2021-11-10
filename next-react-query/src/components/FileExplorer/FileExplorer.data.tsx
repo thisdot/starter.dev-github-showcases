@@ -1,9 +1,9 @@
 import cn from 'classnames';
+import ContentLoader from 'react-content-loader';
 import gqlClient from '@lib/gqlClient';
 import { useRepoTreeQuery } from '@lib/github';
 import { parseError } from '@lib/parseError';
 import { useRepo } from '@context/RepoContext';
-import { LoadingPulseDots } from '@components/Loading';
 import { parseQueryData } from './parseQueryData';
 import FileExplorerView from './FileExplorer.view';
 import styles from './FileExplorer.module.css';
@@ -27,8 +27,18 @@ function FileExplorer() {
 
   if (isLoading) {
     return (
-      <div className={cn(styles.container, 'p-4')}>
-        <LoadingPulseDots />
+      <div className={cn(styles.container, 'py-2')}>
+        <ContentLoader
+          speed={2}
+          width={400}
+          height={28}
+          viewBox="-10 5 400 28"
+          backgroundColor="#f3f3f3"
+          foregroundColor="#ecebeb"
+        >
+          <circle cx="10" cy="20" r="8" />
+          <rect x="25" y="15" rx="5" ry="5" width="220" height="10" />
+        </ContentLoader>
       </div>
     );
   }

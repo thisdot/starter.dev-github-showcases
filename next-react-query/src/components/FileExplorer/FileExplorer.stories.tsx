@@ -16,7 +16,9 @@ export default {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
-          <Story />
+          <ErrorBoundaryTestComponent>
+            <Story />
+          </ErrorBoundaryTestComponent>
         </Wrapper>
       );
     },
@@ -24,11 +26,9 @@ export default {
 } as Meta;
 
 const Template: Story<RepoContext> = (args) => (
-  <ErrorBoundaryTestComponent>
-    <RepoProvider value={args}>
-      <FileExplorer />
-    </RepoProvider>
-  </ErrorBoundaryTestComponent>
+  <RepoProvider value={args}>
+    <FileExplorer />
+  </RepoProvider>
 );
 
 export const ExplorerRootDir = Template.bind({});
