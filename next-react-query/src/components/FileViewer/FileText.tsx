@@ -6,6 +6,7 @@ function FileText({ text }: FileTextProps) {
   const lines = text.split('\n');
   return (
     <pre
+      data-testid="text-block"
       className="text-left py-1 px-8 text-xs overflow-auto"
       style={{ borderSpacing: 5 }}
     >

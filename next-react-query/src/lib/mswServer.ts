@@ -1,8 +1,9 @@
 import { setupServer } from 'msw/node';
 import { mockRepoTreeQuery } from '@components/FileExplorer/FileExplorer.mocks';
 import { mockRepoPageQuery } from '@components/RepoPage/RepoPage.mocks';
+import { mockRepoFileQuery } from '@components/FileViewer/FileViewer.mocks';
 
-const handlers = [mockRepoTreeQuery, mockRepoPageQuery];
+const handlers = [mockRepoTreeQuery, mockRepoPageQuery, mockRepoFileQuery];
 export const server = setupServer(...handlers);
 
 export function setupMswServer() {

@@ -13,6 +13,7 @@ function FileCode({ text, language }: FileCodeProps) {
     <Highlight {...defaultProps} theme={theme} code={text} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
+          data-testid="code-block"
           className={cn('text-left text-xs py-1 px-8 overflow-auto', className)}
           style={{
             ...style,
