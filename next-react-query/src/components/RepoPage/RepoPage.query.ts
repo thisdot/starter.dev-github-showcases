@@ -10,7 +10,7 @@ export const REPO_PAGE_QUERY = gql`
       stargazerCount
       forkCount
       description
-      watchers(last: 100) {
+      watchers(last: 1) {
         totalCount
       }
     }

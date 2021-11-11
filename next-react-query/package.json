@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "yarn codegen",
     "dev": "next dev",
-    "build": "yarn codegen && next build",
+    "prebuild": "yarn codegen",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",

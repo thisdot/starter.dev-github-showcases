@@ -9,10 +9,8 @@ function PrivacyBadge({ isPrivate }: PrivacyBadgeProps) {
     return <div className={styles.badgePlaceholder} />;
   }
 
-  return isPrivate ? (
-    <span className={styles.badge}>Private</span>
-  ) : (
-    <span className={styles.badge}>Public</span>
+  return (
+    <span className={styles.badge}>{isPrivate ? 'Private' : 'Public'}</span>
   );
 }
 
