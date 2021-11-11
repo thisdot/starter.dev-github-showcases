@@ -1,10 +1,13 @@
 import type { Blob } from '@lib/github';
+import cn from 'classnames';
+import { Code } from 'react-content-loader';
 import { useRepoFileQuery } from '@lib/github';
 import gqlClient from '@lib/gqlClient';
 import { parseError } from '@lib/parseError';
 import { useRepo } from '@context/RepoContext';
 import FileViewerView from './FileViewer.view';
 import { mapExtensionToLanguage } from './mapExtensionToLanguage';
+import styles from './FileViewer.module.css';
 
 function FileViewer() {
   const { owner, name, branch, path, isRepoLoading } = useRepo();
@@ -25,7 +28,11 @@ function FileViewer() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className={cn(styles.container, 'py-2')}>
+        <Code width={400} height={100} viewBox="-20 0 400 80" />
+      </div>
+    );
   }
 
   const file = data?.repository?.blob as Blob | undefined;

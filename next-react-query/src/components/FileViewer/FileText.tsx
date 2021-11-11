@@ -1,3 +1,5 @@
+import styles from './FileViewer.module.css';
+
 interface FileTextProps {
   text: string;
 }
@@ -5,16 +7,10 @@ interface FileTextProps {
 function FileText({ text }: FileTextProps) {
   const lines = text.split('\n');
   return (
-    <pre
-      data-testid="text-block"
-      className="text-left py-1 px-8 text-xs overflow-auto"
-      style={{ borderSpacing: 5 }}
-    >
+    <pre data-testid="text-block" className={styles.codeBlock}>
       {lines.map((line, i) => (
         <div key={i} className="table-row">
-          <span className="table-cell text-right pr-4 select-none text-gray-500">
-            {i + 1}
-          </span>
+          <span className={styles.lineNumber}>{i + 1}</span>
           <span className="table-cell">{line}</span>
         </div>
       ))}
