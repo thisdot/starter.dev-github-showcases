@@ -1,7 +1,7 @@
 import { graphql } from 'msw';
 
 export const mockRepoTreeQuery = graphql.query('RepoTree', (req, res, ctx) => {
-  const { path, name, owner } = req.variables;
+  const { expression, name, owner } = req.variables;
 
   if (name !== 'testrepo' && owner !== 'testowner') {
     return res(
@@ -21,13 +21,21 @@ export const mockRepoTreeQuery = graphql.query('RepoTree', (req, res, ctx) => {
     );
   }
 
-  switch (path) {
+  switch (expression) {
     case 'main:src':
-      return res(ctx.data(srcDirRes));
+      return res(ctx.data(srcDirResponse));
     case 'HEAD:':
     case 'main:':
+      return res(ctx.data(rootDirResponse));
     default:
-      return res(ctx.data(rootDirRes));
+      return res(
+        ctx.data({
+          repository: {
+            ...srcDirResponse.repository,
+            tree: undefined,
+          },
+        })
+      );
   }
 });
 
@@ -35,7 +43,7 @@ export const mockRepoTreeQuery = graphql.query('RepoTree', (req, res, ctx) => {
 // Mocked responses
 //
 
-const rootDirRes = {
+const rootDirResponse = {
   repository: {
     defaultBranchRef: {
       name: 'main',
@@ -224,7 +232,7 @@ const rootDirRes = {
   },
 };
 
-const srcDirRes = {
+const srcDirResponse = {
   repository: {
     defaultBranchRef: {
       name: 'main',

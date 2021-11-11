@@ -1,12 +1,13 @@
-import { ComponentProps } from 'react';
+import type { RepoContext } from '../../context/RepoContext';
 import { Story, Meta } from '@storybook/react';
 import FileExplorer from './FileExplorer.data';
 import { mockRepoTreeQuery } from './FileExplorer.mocks';
-import { createWrapper } from '@lib/testUtils';
+import { createWrapper, ErrorBoundaryTestComponent } from '@lib/testUtils';
+import { RepoProvider } from '@context/RepoContext';
 
 export default {
   component: FileExplorer,
-  title: 'Components/FileExplorer',
+  title: 'RepoPage/FileExplorer',
   parameters: {
     msw: [mockRepoTreeQuery],
   },
@@ -15,33 +16,41 @@ export default {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
-          <Story />
+          <ErrorBoundaryTestComponent>
+            <Story />
+          </ErrorBoundaryTestComponent>
         </Wrapper>
       );
     },
   ],
 } as Meta;
 
-const Template: Story<ComponentProps<typeof FileExplorer>> = (args) => (
-  <FileExplorer {...args} />
+const Template: Story<RepoContext> = (args) => (
+  <RepoProvider value={args}>
+    <FileExplorer />
+  </RepoProvider>
 );
 
-export const RepoRootDir = Template.bind({});
-RepoRootDir.args = {
-  repo: 'testrepos',
+export const RootDir = Template.bind({});
+RootDir.args = {
+  name: 'testrepos',
   owner: 'testowner',
+  branch: 'main',
+  path: '',
 };
 
-export const RepoSrcDir = Template.bind({});
-RepoSrcDir.args = {
-  repo: 'testrepos',
+export const SrcDir = Template.bind({});
+SrcDir.args = {
+  name: 'testrepos',
   owner: 'testowner',
   branch: 'main',
   path: 'src',
 };
 
-export const RepoNotFound = Template.bind({});
-RepoNotFound.args = {
-  repo: 'fourohfour',
-  owner: 'nobody',
+export const BadPathError = Template.bind({});
+BadPathError.args = {
+  name: 'testrepos',
+  owner: 'testowner',
+  branch: 'main',
+  path: 'bad/path',
 };
