@@ -1,7 +1,7 @@
 @tailwind utilities;
 
 .container {
-  @apply border rounded border-gray-200 text-sm;
+  @apply border rounded border-gray-300 text-sm;
 }
 
 .cellBack {
@@ -9,7 +9,7 @@
 }
 
 .cell {
-  @apply py-2 px-4 border-b border-gray-200 last-of-type:border-none hover:bg-gray-50;
+  @apply py-2 px-4 border-b border-gray-300 last-of-type:border-none hover:bg-gray-50;
 }
 
 .iconFile {

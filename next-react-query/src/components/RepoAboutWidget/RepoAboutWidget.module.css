@@ -1,7 +1,7 @@
 @tailwind utilities;
 
 .container {
-  @apply pb-8 space-y-5 border-b border-gray-200;
+  @apply pb-8 space-y-5 border-b-2 border-gray-300;
 }
 
 .heading {

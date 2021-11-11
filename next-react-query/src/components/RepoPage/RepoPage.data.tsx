@@ -16,7 +16,7 @@ interface RepoPageProps {
 }
 
 function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
-  const isOwnerNameValid =
+  const isOwnerAndNameValid =
     typeof owner === 'string' && typeof name === 'string';
 
   const formattedPath = Array.isArray(path) ? path.join('/') : path;
@@ -29,17 +29,22 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
     isLoading,
   } = useRepoPageQuery(
     gqlClient,
+    isOwnerAndNameValid
+      ? {
+          owner: owner,
+          name: name,
+        }
+      : {
+          owner: '',
+          name: '',
+        },
     {
-      owner: owner as string,
-      name: name as string,
-    },
-    {
-      enabled: isOwnerNameValid,
+      enabled: isOwnerAndNameValid,
     }
   );
 
   // we're not server rendering, need to wait for client to hydrate
-  if (!isOwnerNameValid) {
+  if (!isOwnerAndNameValid) {
     return null;
   }
 
