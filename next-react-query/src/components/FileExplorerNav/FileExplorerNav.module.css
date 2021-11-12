@@ -5,7 +5,7 @@
 }
 
 .btn {
-  @apply relative inline-flex items-center px-4 py-1.5 rounded bg-gray-50 border border-gray-300 font-medium text-gray-700 hover:bg-gray-200 hover:bg-opacity-50;
+  @apply relative inline-flex items-center px-4 py-1 rounded-md bg-gray-50 border border-gray-300 font-medium text-gray-700 hover:bg-gray-200 hover:bg-opacity-50;
 }
 
 .btnIcon {
