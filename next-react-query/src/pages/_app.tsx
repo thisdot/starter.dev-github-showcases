@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { useSession, signOut } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { REFRESH_TOKEN_ERROR } from '@lib/jwt';
+import NavBar from '@components/NavBar';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <NavBar />
       <Component {...pageProps} />
       <ReactQueryDevtools />
     </QueryClientProvider>
