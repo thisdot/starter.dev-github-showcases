@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/client';
 import Link from 'next/link';
-import GitHubLogo from './GitHubLogo';
+import GitHubLogo from '@components/GitHubLogo';
 import UserDropdown from './UserDropdown';
 import styles from './NavBar.module.css';
 

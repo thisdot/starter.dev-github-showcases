@@ -8,4 +8,4 @@ export default {
 
 const Template: Story = () => <LoadingPulseDots />;
 
-export const Primary = Template.bind({});
+export const Default = Template.bind({});

@@ -1,7 +1,7 @@
 import { BookOpenIcon } from '@heroicons/react/outline';
 import { useRepo } from '@context/RepoContext';
 import Description from './Description';
-import DescriptionLoading from './DescriptionLoading';
+import { LoadingTextLine } from '@components/Loading';
 import styles from './RepoAboutWidget.module.css';
 
 function RepoAboutWidget() {
@@ -11,7 +11,7 @@ function RepoAboutWidget() {
       <h3 className={styles.heading}>About</h3>
       <div className={styles.description}>
         {isRepoLoading ? (
-          <DescriptionLoading />
+          <LoadingTextLine />
         ) : (
           <Description text={data?.description} />
         )}

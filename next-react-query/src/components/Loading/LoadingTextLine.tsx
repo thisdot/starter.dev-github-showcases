@@ -1,6 +1,6 @@
 import ContentLoader from 'react-content-loader';
 
-function DescriptionLoading() {
+function LoadingTextLine() {
   return (
     <ContentLoader
       speed={2}
@@ -15,4 +15,4 @@ function DescriptionLoading() {
   );
 }
 
-export default DescriptionLoading;
+export default LoadingTextLine;
