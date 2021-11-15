@@ -1,25 +1,21 @@
 import { useRouter } from 'next/router';
+import RepoPage from '@components/RepoPage';
+import RepoHeader from '@components/RepoHeader';
 import FileViewer from '@components/FileViewer/FileViewer.data';
 
 const RepoBranchBlob = () => {
-  const router = useRouter();
-  const { owner, repo, branch, path } = router.query;
-
-  if (
-    typeof owner !== 'string' ||
-    typeof repo !== 'string' ||
-    typeof branch !== 'string' ||
-    !path
-  ) {
-    return null;
-  }
-
+  const { query } = useRouter();
   return (
-    <div className="max-w-screen-lg mx-auto">
-      <div className="my-8">
-        <FileViewer owner={owner} repo={repo} branch={branch} path={path} />
+    <RepoPage {...query}>
+      <RepoHeader />
+      <div className="max-w-screen-2xl mx-auto py-8 px-4">
+        <div className="grid grid-cols-12 gap-8">
+          <div className="col-span-12">
+            <FileViewer />
+          </div>
+        </div>
       </div>
-    </div>
+    </RepoPage>
   );
 };
 

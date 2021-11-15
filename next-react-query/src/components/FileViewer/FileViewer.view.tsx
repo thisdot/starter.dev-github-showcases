@@ -1,15 +1,32 @@
-import { Blob } from '@lib/github';
+import type { Language } from 'prism-react-renderer';
+import FileCode from './FileCode';
+import FileText from './FileText';
+import styles from './FileViewer.module.css';
 
 interface FileViewerViewProps {
-  file: Blob;
+  text: string;
+  byteSize: number;
+  lines: number;
+  language?: Language;
 }
 
-function FileViewerView({ file }: FileViewerViewProps) {
+function FileViewerView({
+  text,
+  byteSize,
+  lines,
+  language,
+}: FileViewerViewProps) {
   return (
-    <div className="overflow-hidden p-8 rounded border border-gray-200">
-      <pre className="font-mono text-xs leading-tight break-all">
-        {file.text}
-      </pre>
+    <div className={styles.container}>
+      <div className={styles.fileHeader}>
+        <span className={styles.fileHeaderLines}>{lines} lines</span>
+        <span className={styles.fileHeaderBytes}>{byteSize} Bytes</span>
+      </div>
+      {language ? (
+        <FileCode text={text} language={language} />
+      ) : (
+        <FileText text={text} />
+      )}
     </div>
   );
 }
