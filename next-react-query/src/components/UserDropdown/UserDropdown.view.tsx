@@ -1,18 +1,20 @@
 import { Fragment } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { signOut } from 'next-auth/client';
-import styles from './NavBar.module.css';
+import styles from './UserDropdown.module.css';
 
-interface UserDropdownProps {
+interface UserDropdownViewProps {
   image?: string | null;
+  username?: string;
 }
 
-function UserDropdown({ image }: UserDropdownProps) {
+function UserDropdownView({ image, username }: UserDropdownViewProps) {
   return (
     <Menu as="nav" className={styles.dropdown}>
-      <Menu.Button className={styles.dropdownBtn}>
+      <Menu.Button role="button" className={styles.dropdownBtn}>
         <div className={styles.avatarContainer}>
           {image && (
             <Image src={image} alt="Profile Photo" width={32} height={32} />
@@ -30,11 +32,15 @@ function UserDropdown({ image }: UserDropdownProps) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className={styles.menuItems}>
+        <Menu.Items className={styles.menuItems} data-testid="dropdown-menu">
           <div className="py-1">
-            <Menu.Item>
-              <a className={styles.menuBtn}>Profile</a>
-            </Menu.Item>
+            {username && (
+              <Menu.Item>
+                <Link href={`/${username}`}>
+                  <a className={styles.menuBtn}>Profile</a>
+                </Link>
+              </Menu.Item>
+            )}
             <Menu.Item>
               <button onClick={() => signOut()} className={styles.menuBtn}>
                 Sign Out
@@ -47,4 +53,4 @@ function UserDropdown({ image }: UserDropdownProps) {
   );
 }
 
-export default UserDropdown;
+export default UserDropdownView;
