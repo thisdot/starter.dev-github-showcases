@@ -3,12 +3,14 @@ import { mockRepoTreeQuery } from '@components/FileExplorer/FileExplorer.mocks';
 import { mockRepoPageQuery } from '@components/RepoPage/RepoPage.mocks';
 import { mockRepoFileQuery } from '@components/FileViewer/FileViewer.mocks';
 import { mockCurrentUserQuery } from '@components/UserDropdown/UserDropdown.mocks';
+import { mockUserProfileQuery } from '@components/UserProfile/UserProfile.mocks';
 
 const handlers = [
   mockRepoTreeQuery,
   mockRepoPageQuery,
   mockRepoFileQuery,
   mockCurrentUserQuery,
+  mockUserProfileQuery,
 ];
 export const server = setupServer(...handlers);
 

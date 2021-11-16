@@ -1,0 +1,17 @@
+@tailwind utilities;
+
+.container {
+  @apply mt-5 border-t border-gray-200;
+}
+
+.heading {
+  @apply my-2 pt-2 text-gray-800 font-bold;
+}
+
+.list {
+  @apply flex flex-wrap space-x-2;
+}
+
+.listItem {
+  @apply relative w-9 h-9 rounded border border-gray-300 overflow-hidden;
+}
