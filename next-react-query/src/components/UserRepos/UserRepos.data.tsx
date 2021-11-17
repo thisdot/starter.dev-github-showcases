@@ -1,5 +1,9 @@
 import gqlClient from '@lib/gqlClient';
-import { useUserReposQuery } from '@lib/github';
+import {
+  useUserReposQuery,
+  OrderDirection,
+  RepositoryOrderField,
+} from '@lib/github';
 import { parseError } from '@lib/parseError';
 import { parseQuery } from './parseQuery';
 import LoadingRepos from './LoadingRepos';
@@ -16,6 +20,10 @@ function UserRepos({ username }: UserReposProps) {
     error: queryError,
   } = useUserReposQuery(gqlClient, {
     username,
+    orderBy: {
+      field: RepositoryOrderField.UpdatedAt,
+      direction: OrderDirection.Desc,
+    },
   });
 
   const repos = parseQuery(data);
