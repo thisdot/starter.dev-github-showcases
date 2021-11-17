@@ -2,24 +2,37 @@ import { useRouter } from 'next/router';
 import ProfilePage from '@components/ProfilePage';
 import UserProfile from '@components/UserProfile';
 import ProfileNav from '@components/ProfileNav';
+import UserRepos from '@components/UserRepos';
 
 const UserProfilePage = () => {
   const { query, pathname } = useRouter();
   return (
     <ProfilePage owner={query.owner}>
       {({ username }) => (
-        <>
-          <div className="max-w-screen-2xl mx-auto py-8 px-4">
-            <div className="grid grid-cols-12 gap-8">
-              <div className="col-span-12 md:col-span-4 xl:col-span-3">
-                <UserProfile username={username} />
-              </div>
+        <div className="relative pt-8">
+          <div className="border-b border-gray-200 sticky top-0 bg-white z-20  hidden md:block">
+            <div className="grid grid-cols-12 gap-8 max-w-screen-2xl mx-auto">
+              <div className="col-span-12 md:col-span-4 xl:col-span-3" />
               <div className="col-span-12 md:col-span-8 xl:col-span-9">
-                <ProfileNav className="sticky bg-white" basePath={pathname} />
+                <ProfileNav basePath={pathname} className="border-none" />
               </div>
             </div>
           </div>
-        </>
+          <div className="max-w-screen-2xl mx-auto py-8 px-4">
+            <div className="grid grid-cols-12 gap-8">
+              <div className="col-span-12 md:col-span-4 xl:col-span-3 relative md:-top-20">
+                <UserProfile username={username} />
+              </div>
+              <div className="col-span-12 md:col-span-8 xl:col-span-9">
+                <ProfileNav
+                  basePath={pathname}
+                  className="border-none md:hidden"
+                />
+                <UserRepos username={username} />
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </ProfilePage>
   );

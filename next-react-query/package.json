@@ -19,6 +19,7 @@
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.5",
     "classnames": "^2.3.1",
+    "date-fns": "^2.25.0",
     "graphql": "^15.7.0",
     "graphql-request": "^3.6.1",
     "next": "11.1.2",

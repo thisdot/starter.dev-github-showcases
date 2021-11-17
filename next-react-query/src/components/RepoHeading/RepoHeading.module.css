@@ -8,10 +8,6 @@
   @apply space-x-1.5 mb-0.5;
 }
 
-.badge {
-  @apply py-0.5 px-2 text-xs rounded-xl text-gray-600 border border-gray-300 font-medium;
-}
-
 .ownerLink {
   @apply text-blue-600 hover:underline;
 }

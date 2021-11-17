@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRepo } from '@context/RepoContext';
 import PrivacyIcon from './PrivacyIcon';
-import PrivacyBadge from './PrivacyBadge';
+import PrivacyBadge from '../PrivacyBadge';
 import styles from './RepoHeading.module.css';
 
 function RepoHeading() {
@@ -18,7 +18,11 @@ function RepoHeading() {
           <a className={styles.nameLink}>{name}</a>
         </Link>
       </span>
-      <PrivacyBadge isPrivate={data?.isPrivate} />
+      {data ? (
+        <PrivacyBadge isPrivate={data.isPrivate} />
+      ) : (
+        <div className={styles.badgePlaceholder} />
+      )}
     </h1>
   );
 }
