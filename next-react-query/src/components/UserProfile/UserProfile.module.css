@@ -1,7 +1,7 @@
 @tailwind utilities;
 
 .avatar {
-  @apply rounded-full shadow;
+  @apply rounded-full shadow z-30;
 }
 
 .name {
