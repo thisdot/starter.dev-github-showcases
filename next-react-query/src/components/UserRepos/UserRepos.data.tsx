@@ -1,4 +1,6 @@
 import gqlClient from '@lib/gqlClient';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import {
   useUserReposQuery,
   OrderDirection,
@@ -8,12 +10,57 @@ import { parseError } from '@lib/parseError';
 import { parseQuery } from './parseQuery';
 import LoadingRepos from './LoadingRepos';
 import UserReposView from './UserRepos.view';
+import Pagination from './Pagination';
+import { useRepoSearch } from './useRepoSearch';
+
+const filters = [
+  {
+    name: 'before',
+    value: '',
+  },
+  {
+    name: 'after',
+    value: '',
+  },
+  {
+    name: 'type',
+    value: '',
+  },
+  {
+    name: 'language',
+    value: '',
+  },
+  {
+    name: 'sort',
+    value: '',
+  },
+  {
+    name: 'q',
+    value: '',
+  },
+];
 
 interface UserReposProps {
   username: string;
 }
 
 function UserRepos({ username }: UserReposProps) {
+  const { query } = useRouter();
+  const afterCursor = typeof query.after === 'string' ? query.after : undefined;
+  const beforeCursor =
+    typeof query.before === 'string' ? query.before : undefined;
+
+  const { setFilter } = useRepoSearch(username, filters);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFilter('q', 'detox');
+      setTimeout(() => {
+        setFilter('sort', 'stars');
+      }, 5000);
+    }, 5000);
+  }, []);
+
   const {
     data,
     isLoading,
@@ -24,6 +71,8 @@ function UserRepos({ username }: UserReposProps) {
       field: RepositoryOrderField.UpdatedAt,
       direction: OrderDirection.Desc,
     },
+    afterCursor,
+    beforeCursor,
   });
 
   const repos = parseQuery(data);
@@ -45,7 +94,12 @@ function UserRepos({ username }: UserReposProps) {
     );
   }
 
-  return <UserReposView repos={repos} owner={username} />;
+  return (
+    <>
+      <UserReposView repos={repos.repos} owner={username} />
+      <Pagination pageInfo={repos.pageInfo} owner={username} />
+    </>
+  );
 }
 
 export default UserRepos;

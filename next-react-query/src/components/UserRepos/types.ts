@@ -1,3 +1,4 @@
+import { parseQuery } from './parseQuery';
 export interface Repo {
   id: string;
   name: string;
@@ -9,3 +10,5 @@ export interface Repo {
   forkCount: number;
   updatedAt: any;
 }
+
+export type ParsedUserReposQuery = ReturnType<typeof parseQuery>;

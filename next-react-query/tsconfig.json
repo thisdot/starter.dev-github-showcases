@@ -14,8 +14,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "downlevelIteration": true,
     "paths": {
       "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@lib/*": ["src/lib/*"],
       "@context/*": ["src/context/*"]
     }

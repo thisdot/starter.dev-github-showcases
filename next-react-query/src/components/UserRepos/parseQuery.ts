@@ -1,13 +1,15 @@
 import type { UserReposQuery } from '@lib/github';
 import type { Repo } from './types';
 
-export function parseQuery(data?: UserReposQuery): Repo[] | undefined {
+export function parseQuery(data?: UserReposQuery) {
   const nodes = data?.user?.repositories.nodes;
+  const pageInfo = data?.user?.repositories.pageInfo;
+
   if (!nodes) {
     return undefined;
   }
 
-  return nodes.reduce(
+  const repos = nodes.reduce(
     (acc: Repo[], repo) =>
       repo
         ? [
@@ -27,4 +29,9 @@ export function parseQuery(data?: UserReposQuery): Repo[] | undefined {
         : acc,
     []
   );
+
+  return {
+    repos,
+    pageInfo,
+  };
 }
