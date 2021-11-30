@@ -12,8 +12,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="w-full min-h-[calc(100vh-70px)] flex flex-col lg:flex-row bg-gray-100">
-        <aside className="w-96 bg-white p-8">
+      <div className="w-full  min-h-[calc(100vh-70px)] flex flex-col-reverse lg:flex-row bg-gray-100">
+        <aside className="w-full lg:w-96 bg-white p-8">
           <UserGists />
         </aside>
         <main className="max-w-screen-lg w-full">
