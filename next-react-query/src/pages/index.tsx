@@ -1,11 +1,10 @@
 import type { GetServerSideProps, NextPage } from 'next';
-import type { Session } from 'next-auth';
 import { getSession } from 'next-auth/client';
 import Head from 'next/head';
-import WelcomeUser from '@components/WelcomeUser';
 import MyRepoList from '@components/MyRepoList';
+import UserGists from '@components/UserGists/UserGists.data';
 
-const Home: NextPage<{ session: Session }> = ({ session }) => {
+const Home: NextPage = () => {
   return (
     <div>
       <Head>
@@ -13,10 +12,14 @@ const Home: NextPage<{ session: Session }> = ({ session }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="max-w-screen-xl mx-auto">
-        <WelcomeUser name={session!.user!.name!} />
-        <MyRepoList />
-      </main>
+      <div className="w-full min-h-[calc(100vh-70px)] flex flex-col lg:flex-row bg-gray-100">
+        <aside className="w-96 bg-white p-8">
+          <UserGists />
+        </aside>
+        <main className="max-w-screen-lg w-full">
+          <MyRepoList />
+        </main>
+      </div>
     </div>
   );
 };
@@ -34,9 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: {
-      session,
-    },
+    props: {},
   };
 };
 
