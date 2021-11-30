@@ -9,11 +9,11 @@
 }
 
 .avatarContainer {
-  @apply w-7 h-7 rounded-full overflow-hidden flex items-center justify-center bg-gray-600;
+  @apply w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-600;
 }
 
 .menuItems {
-  @apply z-30 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none border border-gray-200;
+  @apply z-30 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
 }
 
 .menuBtn {

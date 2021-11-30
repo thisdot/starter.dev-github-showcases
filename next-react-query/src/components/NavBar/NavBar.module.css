@@ -1,7 +1,7 @@
 @tailwind utilities;
 
 .header {
-  @apply bg-gray-800 flex justify-between items-center py-3 px-8;
+  @apply bg-gray-900 flex justify-between items-center py-4 px-8;
 }
 
 .navLink {

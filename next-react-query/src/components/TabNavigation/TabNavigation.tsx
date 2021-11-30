@@ -2,7 +2,6 @@ import type { TabItem } from './types';
 import cn from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getBasePath } from '@lib/pathUtils';
 import styles from './TabNavigation.module.css';
 
 interface TabNavigationProps {
@@ -13,7 +12,16 @@ interface TabNavigationProps {
 
 function TabNavigation({ tabs, basePath = '', className }: TabNavigationProps) {
   const { pathname, asPath, query } = useRouter();
-  const asPathBase = getBasePath(basePath, query);
+
+  const asPathBase = basePath
+    .replaceAll('[', '')
+    .replaceAll(']', '')
+    .split('/')
+    .reduce(
+      (acc, part) =>
+        typeof query[part] !== 'string' ? acc : `${acc}/${query[part]}`,
+      ''
+    );
 
   const isCurrentTab = (path?: string) => {
     const matchPath = path === '' ? basePath : `${basePath}/${path}`;

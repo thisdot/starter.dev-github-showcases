@@ -1,5 +1,4 @@
 import gqlClient from '@lib/gqlClient';
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import {
   useUserReposQuery,
@@ -11,35 +10,6 @@ import { parseQuery } from './parseQuery';
 import LoadingRepos from './LoadingRepos';
 import UserReposView from './UserRepos.view';
 import Pagination from './Pagination';
-import { useRepoSearch } from './useRepoSearch';
-
-const filters = [
-  {
-    name: 'before',
-    value: '',
-  },
-  {
-    name: 'after',
-    value: '',
-  },
-  {
-    name: 'type',
-    value: '',
-  },
-  {
-    name: 'language',
-    value: '',
-  },
-  {
-    name: 'sort',
-    value: '',
-  },
-  {
-    name: 'q',
-    value: '',
-  },
-];
-
 interface UserReposProps {
   username: string;
 }
@@ -49,17 +19,6 @@ function UserRepos({ username }: UserReposProps) {
   const afterCursor = typeof query.after === 'string' ? query.after : undefined;
   const beforeCursor =
     typeof query.before === 'string' ? query.before : undefined;
-
-  const { setFilter } = useRepoSearch(username, filters);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setFilter('q', 'detox');
-      setTimeout(() => {
-        setFilter('sort', 'stars');
-      }, 5000);
-    }, 5000);
-  }, []);
 
   const {
     data,
