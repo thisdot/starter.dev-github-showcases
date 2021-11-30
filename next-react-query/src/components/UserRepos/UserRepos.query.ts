@@ -9,7 +9,7 @@ export const USER_REPOS_QUERY = gql`
   ) {
     user(login: $username) {
       repositories(
-        first: 20
+        first: 100
         after: $afterCursor
         before: $beforeCursor
         orderBy: $orderBy
@@ -20,6 +20,8 @@ export const USER_REPOS_QUERY = gql`
           description
           stargazerCount
           forkCount
+          isArchived
+          isFork
           primaryLanguage {
             id
             color

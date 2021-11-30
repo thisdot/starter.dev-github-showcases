@@ -1,15 +1,13 @@
 import gqlClient from '@lib/gqlClient';
 import { useRouter } from 'next/router';
-import {
-  useUserReposQuery,
-  OrderDirection,
-  RepositoryOrderField,
-} from '@lib/github';
+import { useUserReposQuery, OrderDirection } from '@lib/github';
 import { parseError } from '@lib/parseError';
 import Pagination from '@components/Pagination';
 import { parseQuery } from './parseQuery';
 import LoadingRepos from './LoadingRepos';
 import UserReposView from './UserRepos.view';
+import { RepoFilters, useRepoFilters } from '@components/RepoFilters';
+import { filterRepos } from './filterRepos';
 
 interface UserReposProps {
   username: string;
@@ -17,9 +15,12 @@ interface UserReposProps {
 
 function UserRepos({ username }: UserReposProps) {
   const { query } = useRouter();
+
   const afterCursor = typeof query.after === 'string' ? query.after : undefined;
   const beforeCursor =
     typeof query.before === 'string' ? query.before : undefined;
+
+  const repoFilters = useRepoFilters();
 
   const {
     data,
@@ -28,7 +29,7 @@ function UserRepos({ username }: UserReposProps) {
   } = useUserReposQuery(gqlClient, {
     username,
     orderBy: {
-      field: RepositoryOrderField.UpdatedAt,
+      field: repoFilters.state.sort,
       direction: OrderDirection.Desc,
     },
     afterCursor,
@@ -54,9 +55,12 @@ function UserRepos({ username }: UserReposProps) {
     );
   }
 
+  const filteredRepos = filterRepos(repos.repos, repoFilters.state);
+
   return (
     <>
-      <UserReposView repos={repos.repos} owner={username} />
+      <RepoFilters {...repoFilters} languages={repos.languages} />
+      <UserReposView repos={filteredRepos} owner={username} />
       <Pagination pageInfo={repos.pageInfo} owner={username} />
     </>
   );
