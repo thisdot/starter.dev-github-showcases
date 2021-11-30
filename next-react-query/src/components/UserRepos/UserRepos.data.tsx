@@ -6,10 +6,11 @@ import {
   RepositoryOrderField,
 } from '@lib/github';
 import { parseError } from '@lib/parseError';
+import Pagination from '@components/Pagination';
 import { parseQuery } from './parseQuery';
 import LoadingRepos from './LoadingRepos';
 import UserReposView from './UserRepos.view';
-import Pagination from './Pagination';
+
 interface UserReposProps {
   username: string;
 }
