@@ -12,8 +12,10 @@ export function parseQuery(data: UserTopReposQuery) {
       {
         id: repo.id,
         name: repo.name,
+        description: repo.description,
         owner: repo.owner.login,
         language: repo.primaryLanguage?.name,
+        languageColor: repo.primaryLanguage?.color,
         isPrivate: repo.isPrivate,
         stargazerCount: repo.stargazerCount,
         forkCount: repo.forkCount,

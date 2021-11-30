@@ -1,5 +1,7 @@
 import type { GistItem } from './types';
 import Link from 'next/link';
+import Container from './Container';
+import styles from './UserGists.module.css';
 
 interface UserGistsProps {
   gists?: GistItem[];
@@ -7,23 +9,19 @@ interface UserGistsProps {
 
 function UserGistsView({ gists = [] }: UserGistsProps) {
   return (
-    <div className="py-8 border-t border-b">
-      <h3 className="font-semibold">Gists</h3>
+    <Container>
       <div className="mt-3">
         {gists.map((gist) => (
           <div key={gist.id} className="my-1">
             <Link href={gist.url}>
-              <a
-                className="text-sm hover:text-blue-500 hover:underline"
-                target="_blank"
-              >
+              <a className={styles.link} target="_blank">
                 {gist.name}
               </a>
             </Link>
           </div>
         ))}
       </div>
-    </div>
+    </Container>
   );
 }
 

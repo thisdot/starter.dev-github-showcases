@@ -1,9 +1,8 @@
 import type { Repo } from './types';
 import Link from 'next/link';
-import { formatDistance } from 'date-fns';
 import { StarIcon } from '@heroicons/react/outline';
-import { GitBranchIcon } from '@components/Icons';
 import PrivacyBadge from '@components/PrivacyBadge';
+import RepoMeta from '@components/RepoMeta';
 import styles from './UserRepos.module.css';
 
 export interface UserReposViewProps {
@@ -38,41 +37,13 @@ function UserReposView({ repos, owner }: UserReposViewProps) {
                 />
               </h3>
               <div className={styles.description}>{description}</div>
-              <div className={styles.metadata}>
-                {language && (
-                  <div>
-                    <span
-                      style={{
-                        backgroundColor: languageColor ? languageColor : '#ccc',
-                      }}
-                      className={styles.languageColor}
-                    />
-                    {language}
-                  </div>
-                )}
-                {(stargazerCount > 0 || forkCount > 0) && (
-                  <div className="space-x-4">
-                    {stargazerCount > 0 && (
-                      <span className={styles.socialCount}>
-                        <StarIcon className={styles.socialIcon} />{' '}
-                        {stargazerCount}
-                      </span>
-                    )}
-                    {forkCount > 0 && (
-                      <span className={styles.socialCount}>
-                        <GitBranchIcon className={styles.socialIcon} />{' '}
-                        {forkCount}
-                      </span>
-                    )}
-                  </div>
-                )}
-                <div>
-                  Updated{' '}
-                  {formatDistance(new Date(updatedAt), Date.now(), {
-                    addSuffix: true,
-                  })}
-                </div>
-              </div>
+              <RepoMeta
+                language={language}
+                languageColor={languageColor}
+                forkCount={forkCount}
+                stargazerCount={stargazerCount}
+                updatedAt={updatedAt}
+              />
             </div>
             <div className={styles.aside}>
               <button className={styles.starBtn}>

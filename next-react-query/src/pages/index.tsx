@@ -1,7 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import { getSession } from 'next-auth/client';
 import Head from 'next/head';
-import MyRepoList from '@components/MyRepoList';
+import UserTopRepos from '@components/UserTopRepos';
 import UserGists from '@components/UserGists/UserGists.data';
 
 const Home: NextPage = () => {
@@ -17,7 +17,10 @@ const Home: NextPage = () => {
           <UserGists />
         </aside>
         <main className="max-w-screen-lg w-full">
-          <MyRepoList />
+          <div className="p-12">
+            <h2 className="text-lg font-medium mb-4">Top Repositories</h2>
+            <UserTopRepos />
+          </div>
         </main>
       </div>
     </div>
