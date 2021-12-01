@@ -1,0 +1,13 @@
+@tailwind utilities;
+
+.container {
+  @apply flex relative mb-4 space-x-4;
+}
+
+.searchInput {
+  @apply border p-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md outline-none;
+}
+
+.filters {
+  @apply flex items-center space-x-1.5;
+}

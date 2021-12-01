@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { RepositoryOrderField } from '@lib/github';
 import FilterDropdown from './FilterDropdown';
 import { TypeFilter } from './useRepoFilters';
+import styles from './RepoFilters.module.css';
 
 type RepoFiltersProps = {
   languages: LanguageFilter[];
@@ -22,18 +23,18 @@ function RepoFilters({
   }, [languages, setLanguages]);
 
   return (
-    <div className="flex relative mb-4 space-x-4">
+    <div className={styles.container}>
       <div className="flex-grow">
         <input
           type="search"
           name="search"
           id="search"
-          className="border p-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md outline-none"
+          className={styles.searchInput}
           placeholder="Find a repository.."
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      <div className="flex items-center space-x-1.5">
+      <div className={styles.filters}>
         <div>
           <FilterDropdown
             name="Type"
