@@ -1,0 +1,12 @@
+<div>
+  <h3 class="my-2 text-xl font-medium">Repositories</h3>
+  <div *ngFor="let repo of user?.repositories">
+    <div class="my-1">
+      <!-- TODO: make this link look better -->
+      <!-- TODO: import real prop names -->
+      <a [routerLink]="'' + user?.username / repo.name">
+        {{ user?.username }} / {{ repo.name }}
+      </a>
+    </div>
+  </div>
+</div>
