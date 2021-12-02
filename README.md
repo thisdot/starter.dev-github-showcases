@@ -6,4 +6,4 @@ You'll find a list of projects below:
 
 | Project                  | Technologies           | Description                                                           |
 | ------------------------ | ---------------------- | --------------------------------------------------------------------- |
-| angular-project-tailwind | Angualr + Tailwind CSS | A github clone using Angular and Tailwind for quick utilities styles. |
+| angular-project-tailwind | Angular + Tailwind CSS | A github clone using Angular and Tailwind for quick utilities styles. |
