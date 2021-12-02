@@ -11,6 +11,7 @@ import { UserDropdownViewComponent } from './user-dropdown-view/user-dropdown-vi
 import { ChevronDropdownIconComponent } from './chevron-dropdown-icon/chevron-dropdown-icon.component';
 import { RepoListViewComponent } from './repo-list-view/repo-list-view.component';
 import { HomeComponent } from './home/home.component';
+import { RepoComponent } from './repo/repo.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HomeComponent } from './home/home.component';
     ChevronDropdownIconComponent,
     RepoListViewComponent,
     HomeComponent,
+    RepoComponent,
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule],
   providers: [],
