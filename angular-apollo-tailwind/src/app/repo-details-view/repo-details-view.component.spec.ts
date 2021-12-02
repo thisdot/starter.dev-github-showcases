@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RepoComponent } from './repo.component';
+import { RepoDetailsViewComponent } from './repo-details-view.component';
 
 describe('RepoComponent', () => {
-  let component: RepoComponent;
-  let fixture: ComponentFixture<RepoComponent>;
+  let component: RepoDetailsViewComponent;
+  let fixture: ComponentFixture<RepoDetailsViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RepoComponent ]
-    })
-    .compileComponents();
+      declarations: [RepoDetailsViewComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RepoComponent);
+    fixture = TestBed.createComponent(RepoDetailsViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

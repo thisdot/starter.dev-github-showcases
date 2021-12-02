@@ -5,8 +5,8 @@ import { Component, ElementRef, Input } from '@angular/core';
   host: {
     '(document:click)': 'onClick($event)',
   },
-  selector: 'app-user-dropdown-view',
-  templateUrl: './user-dropdown-view.component.html',
+  selector: 'app-user-dropdown-menu',
+  templateUrl: './user-dropdown-menu.component.html',
   animations: [
     trigger('openClose', [
       transition(':enter', [
@@ -19,7 +19,7 @@ import { Component, ElementRef, Input } from '@angular/core';
     ]),
   ],
 })
-export class UserDropdownViewComponent {
+export class UserDropdownMenuComponent {
   @Input() user: any = null;
 
   isOpen = false;

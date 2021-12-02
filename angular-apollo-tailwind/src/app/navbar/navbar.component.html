@@ -4,7 +4,7 @@
   </a>
   <div>
     <div *ngIf="user; else noAuth">
-      <app-user-dropdown-view [user]="user"></app-user-dropdown-view>
+      <app-user-dropdown-menu [user]="user"></app-user-dropdown-menu>
     </div>
     <ng-template #noAuth>
       <a routerLink="/api/auth/signin" class="text-white font-semibold text-lg"

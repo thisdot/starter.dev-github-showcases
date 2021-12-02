@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserDropdownViewComponent } from './user-dropdown-view.component';
+import { UserDropdownMenuComponent } from './user-dropdown-menu.component';
 
 describe('UserDropdownViewComponent', () => {
-  let component: UserDropdownViewComponent;
-  let fixture: ComponentFixture<UserDropdownViewComponent>;
+  let component: UserDropdownMenuComponent;
+  let fixture: ComponentFixture<UserDropdownMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserDropdownViewComponent ]
-    })
-    .compileComponents();
+      declarations: [UserDropdownMenuComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserDropdownViewComponent);
+    fixture = TestBed.createComponent(UserDropdownMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
