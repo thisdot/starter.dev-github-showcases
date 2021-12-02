@@ -1,4 +1,5 @@
 import type { FiltersAPI, LanguageFilter } from './useRepoFilters';
+import cn from 'classnames';
 import { useEffect } from 'react';
 import { XIcon } from '@heroicons/react/solid';
 import { RepositoryOrderField } from '@lib/github';
@@ -96,7 +97,7 @@ function RepoFilters({
         </div>
       </div>
       {isFiltersActive && (
-        <div className="py-4 border-t flex items-center justify-between">
+        <div className={styles.filtersDetail}>
           <div className="text-sm">
             <span className="font-semibold" data-testid="filterText">
               {resultCount}
@@ -127,12 +128,19 @@ function RepoFilters({
           <div>
             <button
               onClick={resetFilters}
-              className="inline-flex items-center justify-center group"
+              className={cn(styles.clearBtn, 'group')}
             >
-              <span className="p-0.5 rounded bg-gray-500 inline-flex items-center justify-center mr-2 group-hover:bg-blue-500">
-                <XIcon className="w-3.5 h-3.5 text-white" />
+              <span
+                className={cn(
+                  styles.clearBtnIconContainer,
+                  'group-hover:bg-blue-500'
+                )}
+              >
+                <XIcon className={styles.clearBtnIcon} />
               </span>
-              <span className="text-sm text-gray-500 group-hover:text-blue-500">
+              <span
+                className={cn(styles.clearBtnText, 'group-hover:text-blue-500')}
+              >
                 Clear filter
               </span>
             </button>
