@@ -113,7 +113,10 @@ function RepoFilters({
             )}{' '}
             {isLanguageActive && (
               <>
-                written in <span className="font-semibold">JavaScript</span>
+                written in{' '}
+                <span className="font-semibold capitalize">
+                  {state.language}
+                </span>
               </>
             )}{' '}
             sorted by{' '}
