@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
 })
-export class AppComponent {
+export class HomeComponent {
   // TODO: most likely will come from apollo and not as an obs
   user$: Observable<{
     username: string;

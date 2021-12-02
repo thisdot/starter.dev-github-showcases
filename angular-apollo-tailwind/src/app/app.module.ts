@@ -9,6 +9,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { GithubLogoComponent } from './github-logo/github-logo.component';
 import { UserDropdownViewComponent } from './user-dropdown-view/user-dropdown-view.component';
 import { ChevronDropdownIconComponent } from './chevron-dropdown-icon/chevron-dropdown-icon.component';
+import { RepoListViewComponent } from './repo-list-view/repo-list-view.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { ChevronDropdownIconComponent } from './chevron-dropdown-icon/chevron-dr
     GithubLogoComponent,
     UserDropdownViewComponent,
     ChevronDropdownIconComponent,
+    RepoListViewComponent,
+    HomeComponent,
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule],
   providers: [],
