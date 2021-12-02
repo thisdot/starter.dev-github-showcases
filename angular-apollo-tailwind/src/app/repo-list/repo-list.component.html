@@ -4,7 +4,7 @@
     <div class="my-1">
       <!-- TODO: make this link look better -->
       <!-- TODO: import real prop names -->
-      <a [routerLink]="'' + user?.username / repo.name">
+      <a [routerLink]="[user?.username, repo.name]">
         {{ user?.username }} / {{ repo.name }}
       </a>
     </div>

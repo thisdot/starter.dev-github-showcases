@@ -7,10 +7,11 @@ import { AppComponent } from './app.component';
 import { WelcomeUserComponent } from './welcome-user/welcome-user.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { GithubLogoComponent } from './github-logo/github-logo.component';
-import { UserDropdownViewComponent } from './user-dropdown-view/user-dropdown-view.component';
+import { UserDropdownMenuComponent } from './user-dropdown-menu/user-dropdown-menu.component';
 import { ChevronDropdownIconComponent } from './chevron-dropdown-icon/chevron-dropdown-icon.component';
-import { RepoListViewComponent } from './repo-list-view/repo-list-view.component';
 import { HomeComponent } from './home/home.component';
+import { RepoDetailsViewComponent } from './repo-details-view/repo-details-view.component';
+import { RepoListComponent } from './repo-list/repo-list.component';
 
 @NgModule({
   declarations: [
@@ -18,10 +19,11 @@ import { HomeComponent } from './home/home.component';
     WelcomeUserComponent,
     NavbarComponent,
     GithubLogoComponent,
-    UserDropdownViewComponent,
+    UserDropdownMenuComponent,
     ChevronDropdownIconComponent,
-    RepoListViewComponent,
+    RepoListComponent,
     HomeComponent,
+    RepoDetailsViewComponent,
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule],
   providers: [],
