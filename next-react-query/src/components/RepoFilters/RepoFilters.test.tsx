@@ -25,41 +25,43 @@ function RepoFiltersState() {
   const repoFilters = useRepoFilters();
   return (
     <>
-      <RepoFilters {...repoFilters} languages={languages} />
-      <div data-testid="query-value">{repoFilters.state.query}</div>
-      <div data-testid="type-value">{repoFilters.state.type}</div>
-      <div data-testid="language-value">{repoFilters.state.language}</div>
-      <div data-testid="sort-value">{repoFilters.state.sort}</div>
+      <RepoFilters {...repoFilters} languages={languages} resultCount={0} />
     </>
   );
 }
 
 describe('RepoFilters', () => {
-  it('should keep correct state of filter values when updating inputs', () => {
+  it('should keep correct state of filter values when updating inputs', async () => {
     render(<RepoFiltersState />);
-    expect(screen.getByTestId('query-value')).toHaveTextContent('');
-    expect(screen.getByTestId('type-value')).toHaveTextContent('0');
-    expect(screen.getByTestId('language-value')).toHaveTextContent('all');
-    expect(screen.getByTestId('sort-value')).toHaveTextContent('UPDATED_AT');
+    expect(screen.queryByTestId('filterText')).not.toBeInTheDocument();
 
     const testQuery = 'test query';
     fireEvent.change(screen.getByRole('search'), {
       target: { value: testQuery },
     });
-    expect(screen.getByTestId('query-value')).toHaveTextContent(testQuery);
+
+    expect(screen.getByText(/matching/i)).toBeInTheDocument();
+    expect(screen.getByText(testQuery)).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('Type'));
     fireEvent.click(screen.getByText('Forks'));
-    expect(screen.getByTestId('type-value')).toHaveTextContent('1');
+
+    expect(screen.getByText(/forked/i)).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('Language'));
     fireEvent.click(screen.getByText('TypeScript'));
-    expect(screen.getByTestId('language-value')).toHaveTextContent(
-      'typescript'
-    );
+
+    expect(screen.getByText(/written in/i)).toBeInTheDocument();
+    expect(screen.getByText('TypeScript')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('Sort'));
     fireEvent.click(screen.getByText('Stars'));
-    expect(screen.getByTestId('sort-value')).toHaveTextContent('STARGAZERS');
+
+    expect(screen.getByText(/sorted by/i)).toBeInTheDocument();
+    expect(screen.getByText('stargazers')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Clear filter'));
+
+    expect(screen.queryByTestId('filterText')).not.toBeInTheDocument();
   });
 });

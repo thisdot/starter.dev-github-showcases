@@ -4,9 +4,9 @@ import { RepositoryOrderField } from '@lib/github';
 export type FiltersAPI = ReturnType<typeof useRepoFilters>;
 
 export enum TypeFilter {
-  ALL,
-  FORKS,
-  ARCHIVED,
+  ALL = 'all',
+  FORKS = 'forked',
+  ARCHIVED = 'archived',
 }
 
 export interface LanguageFilter {
@@ -20,6 +20,7 @@ export enum ActionType {
   CHANGE_TYPE,
   SET_QUERY,
   SET_LANGUAGES,
+  RESET_FILTERS,
 }
 
 export interface FilterState {
@@ -50,6 +51,9 @@ type FilterAction =
   | {
       type: ActionType.SET_LANGUAGES;
       payload: { languages: LanguageFilter[] };
+    }
+  | {
+      type: ActionType.RESET_FILTERS;
     };
 
 const initialState: FilterState = {
@@ -81,6 +85,14 @@ const reducer = (state: FilterState, action: FilterAction) => {
       return {
         ...state,
         query: action.payload.query,
+      };
+    case ActionType.RESET_FILTERS:
+      return {
+        ...state,
+        sort: RepositoryOrderField.UpdatedAt,
+        type: TypeFilter.ALL,
+        language: 'all',
+        query: '',
       };
     default:
       return state;
@@ -125,6 +137,17 @@ export function useRepoFilters() {
     });
   };
 
+  const resetFilters = () => {
+    dispatch({
+      type: ActionType.RESET_FILTERS,
+    });
+  };
+
+  const isQueryActive = state.query !== '';
+  const isTypeActive = state.type !== TypeFilter.ALL;
+  const isLanguageActive = state.language !== 'all';
+  const isFiltersActive = isQueryActive || isTypeActive || isLanguageActive;
+
   return {
     state,
     changeSort,
@@ -132,5 +155,10 @@ export function useRepoFilters() {
     changeType,
     setQuery,
     setLanguages,
+    resetFilters,
+    isQueryActive,
+    isTypeActive,
+    isLanguageActive,
+    isFiltersActive,
   };
 }

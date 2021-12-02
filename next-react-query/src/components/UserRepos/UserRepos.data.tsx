@@ -61,9 +61,15 @@ function UserRepos({ username }: UserReposProps) {
 
   return (
     <>
-      <RepoFilters {...repoFilters} languages={languages} />
+      <RepoFilters
+        {...repoFilters}
+        languages={languages}
+        resultCount={filteredRepos.length}
+      />
       <UserReposView repos={filteredRepos} owner={username} />
-      <Pagination pageInfo={repos.pageInfo} owner={username} />
+      {(repos.pageInfo?.hasNextPage || repos.pageInfo?.hasPreviousPage) && (
+        <Pagination pageInfo={repos.pageInfo} owner={username} />
+      )}
     </>
   );
 }
