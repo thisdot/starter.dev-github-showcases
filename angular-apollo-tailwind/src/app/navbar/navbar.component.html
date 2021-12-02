@@ -1,0 +1,15 @@
+<header class="bg-gray-900 flex justify-between items-center py-4 px-8">
+  <a routerLink="/">
+    <app-github-logo></app-github-logo>
+  </a>
+  <div>
+    <div *ngIf="user; else noAuth">
+      <app-user-dropdown-view [user]="user"></app-user-dropdown-view>
+    </div>
+    <ng-template #noAuth>
+      <a routerLink="/api/auth/signin" class="text-white font-semibold text-lg"
+        >Sign In</a
+      >
+    </ng-template>
+  </div>
+</header>

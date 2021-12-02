@@ -1,0 +1,57 @@
+<ul class="relative top-1 inline-block text-left">
+  <button
+    role="button"
+    class="inline-flex items-center text-white"
+    (click)="toggleMenu()"
+  >
+    <div
+      class="
+        w-8
+        h-8
+        rounded-full
+        overflow-hidden
+        flex
+        items-center
+        justify-center
+        bg-gray-600
+      "
+    >
+      <img [src]="user?.image" alt="Profile Photo" width="{32}" height="{32}" />
+    </div>
+    <app-chevron-dropdown-icon></app-chevron-dropdown-icon>
+  </button>
+
+  <div
+    @openClose
+    *ngIf="isOpen"
+    class="
+      z-30
+      origin-top-right
+      absolute
+      right-0
+      mt-2
+      w-56
+      rounded-md
+      shadow-lg
+      bg-white
+      ring-1 ring-black ring-opacity-5
+      focus:outline-none
+    "
+    data-testid="dropdown-menu"
+  >
+    <div class="py-1">
+      <!-- TODO: clean this link up -->
+      <a
+        [routerLink]="'/' + user?.username"
+        class="block font-medium px-4 py-2 text-gray-900 hover:text-blue-600"
+        >Profile</a
+      >
+      <button
+        (click)="signOut()"
+        class="block font-medium px-4 py-2 text-gray-900 hover:text-blue-600"
+      >
+        Sign Out
+      </button>
+    </div>
+  </div>
+</ul>
