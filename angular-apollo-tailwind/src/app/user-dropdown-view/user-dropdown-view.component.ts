@@ -1,10 +1,4 @@
-import {
-  trigger,
-  transition,
-  style,
-  animate,
-  state,
-} from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, ElementRef, Input } from '@angular/core';
 
 @Component({
@@ -13,7 +7,6 @@ import { Component, ElementRef, Input } from '@angular/core';
   },
   selector: 'app-user-dropdown-view',
   templateUrl: './user-dropdown-view.component.html',
-  styleUrls: ['./user-dropdown-view.component.css'],
   animations: [
     trigger('openClose', [
       transition(':enter', [
