@@ -9,13 +9,7 @@ export function parseQuery(data?: UserReposQuery) {
     return undefined;
   }
 
-  const languageMap: { [key: string]: string } = { all: 'All' };
-
   const repos = nodes.reduce((acc: Repo[], repo) => {
-    if (repo?.primaryLanguage) {
-      const key = repo.primaryLanguage.name.toLowerCase();
-      languageMap[key] = repo.primaryLanguage.name;
-    }
     return repo
       ? [
           ...acc,
@@ -39,9 +33,5 @@ export function parseQuery(data?: UserReposQuery) {
   return {
     repos,
     pageInfo,
-    languages: Object.entries(languageMap).map(([key, value]) => ({
-      value: key,
-      label: value,
-    })),
   };
 }

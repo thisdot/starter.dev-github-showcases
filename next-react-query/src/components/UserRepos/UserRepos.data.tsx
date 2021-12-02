@@ -8,6 +8,7 @@ import LoadingRepos from './LoadingRepos';
 import UserReposView from './UserRepos.view';
 import { RepoFilters, useRepoFilters } from '@components/RepoFilters';
 import { filterRepos } from './filterRepos';
+import { getLanguages } from './getLanguages';
 
 interface UserReposProps {
   username: string;
@@ -56,10 +57,11 @@ function UserRepos({ username }: UserReposProps) {
   }
 
   const filteredRepos = filterRepos(repos.repos, repoFilters.state);
+  const languages = getLanguages(filteredRepos);
 
   return (
     <>
-      <RepoFilters {...repoFilters} languages={repos.languages} />
+      <RepoFilters {...repoFilters} languages={languages} />
       <UserReposView repos={filteredRepos} owner={username} />
       <Pagination pageInfo={repos.pageInfo} owner={username} />
     </>
