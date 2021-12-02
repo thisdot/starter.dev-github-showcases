@@ -26,6 +26,7 @@ function RepoFilters({
     <div className={styles.container}>
       <div className="flex-grow">
         <input
+          role="search"
           type="search"
           name="search"
           id="search"

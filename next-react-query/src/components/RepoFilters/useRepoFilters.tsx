@@ -60,7 +60,7 @@ const initialState: FilterState = {
   languages: undefined,
 };
 
-const reducers = (state: FilterState, action: FilterAction) => {
+const reducer = (state: FilterState, action: FilterAction) => {
   switch (action.type) {
     case ActionType.CHANGE_SORT:
       return {
@@ -88,7 +88,7 @@ const reducers = (state: FilterState, action: FilterAction) => {
 };
 
 export function useRepoFilters() {
-  const [state, dispatch] = useReducer(reducers, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const changeSort = (sort: RepositoryOrderField) => {
     dispatch({
