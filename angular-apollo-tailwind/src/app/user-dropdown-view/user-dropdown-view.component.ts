@@ -16,10 +16,13 @@ import { Component, ElementRef, Input } from '@angular/core';
   styleUrls: ['./user-dropdown-view.component.css'],
   animations: [
     trigger('openClose', [
-      state('open', style({ opacity: 1, transform: 'scale(1)' })),
-      state('close', style({ opacity: 0, transform: 'scale(0.95)' })),
-      transition('open => close', [animate('75ms ease-in')]),
-      transition('close => open', [animate('100ms ease-out')]),
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0.95)' }),
+        animate('100ms ease-out', style({ opacity: 1, transform: 'scale(1)' })),
+      ]),
+      transition(':leave', [
+        animate('75ms', style({ opacity: 0, transform: 'scale(0.95)' })),
+      ]),
     ]),
   ],
 })

@@ -22,7 +22,8 @@
   </button>
 
   <div
-    [@openClose]="isOpen ? 'open' : 'close'"
+    @openClose
+    *ngIf="isOpen"
     class="
       z-30
       origin-top-right

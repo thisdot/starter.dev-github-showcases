@@ -1,6 +1,6 @@
 # Starter.dev Angular
 
-This is the Starter.dev space for Angular projects ustilizing a variety of stacks to accomplish cool and fun tasks while offering practical solutions.
+This is the Starter.dev space for Angular projects utilizing a variety of stacks to accomplish cool and fun tasks while offering practical solutions.
 
 You'll find a list of projects below:
 
