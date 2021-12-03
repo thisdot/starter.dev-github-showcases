@@ -24,7 +24,7 @@ function RepoMeta({
         <div>
           <span
             style={{
-              backgroundColor: languageColor ? languageColor : '#ccc',
+              backgroundColor: languageColor || '#ccc',
             }}
             className={styles.languageColor}
           />
