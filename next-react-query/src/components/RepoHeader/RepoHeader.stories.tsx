@@ -19,9 +19,12 @@ export default {
   ],
   parameters: {
     nextRouter: {
-      path: '[owner]/[name]',
-      asPath: 'thisdot/starter.dev',
-      query: {},
+      path: '/[owner]/[name]',
+      asPath: '/thisdot/starter.dev',
+      query: {
+        owner: 'thisdot',
+        name: 'starter.dev',
+      },
     },
   },
 } as Meta;

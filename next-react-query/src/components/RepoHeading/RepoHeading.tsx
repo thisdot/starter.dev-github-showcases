@@ -10,7 +10,9 @@ function RepoHeading() {
     <h1 className={styles.heading}>
       <PrivacyIcon isPrivate={data?.isPrivate} />
       <span className={styles.navContainer}>
-        <a className={styles.ownerLink}>{owner}</a>
+        <Link href={`/${owner}`}>
+          <a className={styles.ownerLink}>{owner}</a>
+        </Link>
         <span className={styles.separator}>/</span>
         <Link href={`/${owner}/${name}`}>
           <a className={styles.nameLink}>{name}</a>

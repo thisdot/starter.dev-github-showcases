@@ -1,7 +1,8 @@
 import RepoHeading from '@components/RepoHeading';
 import RepoActionButtons from '@components/RepoActionButtons';
-import RepoTabNavigation from '@components/RepoTabNavigation';
+import TabNavigation from '@components/TabNavigation';
 import styles from './RepoHeader.module.css';
+import { tabList } from './tabList';
 
 function RepoHeader() {
   return (
@@ -11,7 +12,7 @@ function RepoHeader() {
         <RepoActionButtons />
       </div>
       <div className={styles.bottomRow}>
-        <RepoTabNavigation />
+        <TabNavigation tabs={tabList} basePath="/[owner]/[name]" />
       </div>
     </div>
   );

@@ -14,4 +14,7 @@ module.exports = {
     JWT_ENCRYPTION_KEY: process.env.JWT_ENCRYPTION_KEY,
     NEXT_PUBLIC_GRAPHQL_ENDPOINT: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
   },
+  images: {
+    domains: ['avatars.githubusercontent.com'],
+  },
 };
