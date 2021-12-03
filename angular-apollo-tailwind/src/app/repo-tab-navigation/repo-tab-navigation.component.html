@@ -1,0 +1,26 @@
+<div className="border-b border-gray-200">
+  <nav className="-mb-px flex" aria-label="Tabs">
+    {tabList.map(({ title, path, Icon }, index) => (
+      <Link
+        href={path ? `/${owner}/${name}/${path}` : `/${owner}/${name}`}
+        key={index}
+      >
+        <a
+          key={title}
+          className={cn(
+            isCurrentTab(path) ? styles.tabActive : styles.tabInactive,
+            styles.tab
+          )}
+        >
+          <Icon
+            className={cn(
+              isCurrentTab(path) ? styles.iconActive : styles.iconInactive,
+              styles.icon
+            )}
+          />
+          <span>{title}</span>
+        </a>
+      </Link>
+    ))}
+  </nav>
+</div>

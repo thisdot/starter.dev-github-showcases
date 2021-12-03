@@ -1,0 +1,12 @@
+<!-- TODO: Privacy Icon -->
+<h1 class="space-x-2.5 flex items-center text-xl">
+  <PrivacyIcon isPrivate={{data?.isPrivate}} />
+  <span class="space-x-1.5 mb-0.5">
+    <a class="text-blue-600 hover:underline">{{owner}}</a>
+    <span class="text-gray-600">/</span>
+    <a [routerLink]="[owner, name]">
+      <a class="text-blue-600 font-semibold hover:underline">{{name}}</a>
+    </a>
+  </span>
+  <app-privacy-badge isPrivate={{data?.isPrivate}} />
+</h1>
