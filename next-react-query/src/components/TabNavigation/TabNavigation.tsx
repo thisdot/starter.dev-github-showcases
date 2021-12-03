@@ -17,11 +17,9 @@ function TabNavigation({ tabs, basePath = '', className }: TabNavigationProps) {
     .replaceAll('[', '')
     .replaceAll(']', '')
     .split('/')
-    .reduce(
-      (acc, part) =>
-        typeof query[part] !== 'string' ? acc : `${acc}/${query[part]}`,
-      ''
-    );
+    .map((part) => query[part])
+    .filter((queryPart) => typeof queryPart === 'string')
+    .join('/');
 
   const isCurrentTab = (path?: string) => {
     const matchPath = path === '' ? basePath : `${basePath}/${path}`;
