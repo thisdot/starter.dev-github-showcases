@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TabItem } from '../repo-tab-navigation/repo-tab-navigation.component';
+
+// TODO: add icons
 @Component({
   selector: 'app-repo-header',
   templateUrl: './repo-header.component.html',
