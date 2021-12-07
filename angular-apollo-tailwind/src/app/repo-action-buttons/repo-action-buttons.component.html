@@ -1,0 +1,14 @@
+<div class="flex space-x-4">
+  <app-count-button-group count={data?.watcherCount}>
+    <app-eye-icon class="-ml-1 mr-1 h-4 w-4 text-gray-600"></app-eye-icon>
+    Watch
+  </app-count-button-group>
+  <app-count-button-group count={data?.stargazerCount}>
+    <app-star-icon class="-ml-1 mr-1 h-4 w-4 text-gray-600"></app-star-icon>
+    Star
+  </app-count-button-group>
+  <app-count-button-group count={data?.forkCount}>
+    <app-git-branch-icon class="-ml-1 mr-1 h-4 w-4 text-gray-600"></app-git-branch-icon>
+    Fork
+  </app-count-button-group>
+</div>

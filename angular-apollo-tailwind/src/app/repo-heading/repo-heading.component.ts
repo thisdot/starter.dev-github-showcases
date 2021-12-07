@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 // import { useRepo } from '@context/RepoContext';
 
 @Component({
-  selector: 'app-repo-header',
-  templateUrl: './repo-header.component.html',
-  styleUrls: ['./repo-header.component.css'],
+  selector: 'app-repo-heading',
+  templateUrl: './repo-heading.component.html',
 })
 export class RepoHeadingComponent implements OnInit {
   constructor() {}

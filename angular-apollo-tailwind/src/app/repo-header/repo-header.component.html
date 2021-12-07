@@ -1,9 +1,9 @@
 <div class="pt-6 px-12 bg-gray-100 border-b border-gray-300">
   <div class="flex flex-col space-y-8 lg:space-y-0 lg:flex-row lg:items-center justify-between">
-    <RepoHeading />
-    <RepoActionButtons />
+    <app-repo-heading></app-repo-heading>
+    <app-repo-action-buttons></app-repo-action-buttons>
   </div>
   <div class="mt-6">
-    <RepoTabNavigation />
+    <app-repo-tab-navigation tabs={{tabList}} basePath="/[owner]/[name]"></app-repo-tab-navigation>
   </div>
 </div>

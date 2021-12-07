@@ -1,0 +1,5 @@
+<ng-template *ngIf="isPrivate === undefined; then thenBlock else elseBlock">
+    <div class="w-6 h-6 bg-gray-200 opacity-25 rounded-lg"></div>
+</ng-template>
+<ng-template #thenBlock><app-lock-closed-icon class="w-6 h-6 text-gray-600"></app-lock-closed-icon></ng-template>
+<ng-template #elseBlock><app-git-repo-icon class="w-6 h-6 text-gray-600"></app-git-repo-icon></ng-template>
