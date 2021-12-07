@@ -11,7 +11,7 @@ export interface TabItem {
 })
 export class RepoTabNavigationComponent implements OnInit {
   constructor() {}
-  tabList!: TabItem[];
+  tabs!: TabItem[];
 
   ngOnInit(): void {}
 }
