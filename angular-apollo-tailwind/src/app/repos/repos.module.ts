@@ -14,6 +14,5 @@ import { RepoDetailsViewComponent } from './repo-details-view/repo-details-view.
     RepoDetailsViewComponent,
   ],
   imports: [CommonModule, RouterModule],
-  exports: [WelcomeUserComponent, RepoListComponent, RepoDetailsViewComponent],
 })
 export class ReposModule {}

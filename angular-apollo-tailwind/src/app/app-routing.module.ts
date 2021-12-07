@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'signin',
+    path: 'signin', // http:locahost:4200/signin
     loadChildren: () =>
       import('./provider/provider.module').then((m) => m.ProviderModule),
   },
   {
-    path: '',
+    path: '', // http:locahost:4200
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-    canActivate: [AuthGuard],
   },
 ];
 
