@@ -7,9 +7,9 @@
       <app-user-dropdown-menu [user]="user"></app-user-dropdown-menu>
     </div>
     <ng-template #noAuth>
-      <a routerLink="/api/auth/signin" class="text-white font-semibold text-lg"
-        >Sign In</a
-      >
+      <button (click)="signin()" class="text-white font-semibold text-lg">
+        Sign In
+      </button>
     </ng-template>
   </div>
 </header>
