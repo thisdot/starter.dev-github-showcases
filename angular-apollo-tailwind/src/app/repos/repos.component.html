@@ -1,4 +1,4 @@
 <main class="max-w-screen-xl mx-auto">
-  <app-welcome-user [name]="'Morgan'"></app-welcome-user>
-  <app-repo-list [user]="user$ | async"></app-repo-list>
+  <app-welcome-user [name]="userName$ | async"></app-welcome-user>
+  <app-repo-list [repos]="repos$ | async"></app-repo-list>
 </main>

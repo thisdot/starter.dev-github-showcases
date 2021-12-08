@@ -14,7 +14,7 @@ export class ProviderComponent {
     callbackUrl: new FormControl(''),
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   onSubmit() {
     this.authService.signin().subscribe(({ redirectUrl }) => {

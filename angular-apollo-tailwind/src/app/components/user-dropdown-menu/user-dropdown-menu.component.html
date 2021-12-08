@@ -16,7 +16,12 @@
         bg-gray-600
       "
     >
-      <img [src]="user?.image" alt="Profile Photo" width="{32}" height="{32}" />
+      <img
+        [src]="user?.avatarUrl"
+        alt="Profile Photo"
+        width="{32}"
+        height="{32}"
+      />
     </div>
     <app-chevron-dropdown-icon></app-chevron-dropdown-icon>
   </button>
@@ -42,7 +47,7 @@
     <div class="py-1">
       <!-- TODO: clean this link up -->
       <a
-        [routerLink]="'/' + user?.username"
+        [routerLink]="'/' + user?.name"
         class="block font-medium px-4 py-2 text-gray-900 hover:text-blue-600"
         >Profile</a
       >

@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'signin', // http:locahost:4200/signin
+    path: 'signin',
     loadChildren: () =>
       import('./provider/provider.module').then((m) => m.ProviderModule),
   },
   {
-    path: '', // http:locahost:4200
+    path: '',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
 ];

@@ -24,9 +24,9 @@ export class AuthService {
    * @memberof AuthService
    */
   signin(): Observable<any> {
-    // this.tokenService.removeToken();
-    // this.tokenService.removeRefreshToken();
-    return this.httpClient.get(`${environment.API_URL}/auth/signin`);
+    this.tokenService.removeToken();
+    this.tokenService.removeRefreshToken();
+    return this.httpClient.get(`${environment.apiUrl}/auth/signin`);
   }
 
   /**
@@ -42,7 +42,7 @@ export class AuthService {
    */
   getToken(code: string): Observable<AuthResponse> {
     return this.httpClient
-      .post<AuthResponse>(`${environment.API_URL}/auth/signin/callback`, {
+      .post<AuthResponse>(`${environment.apiUrl}/auth/signin/callback`, {
         code,
       })
       .pipe(tap((data) => this.tokenService.saveToken(data.access_token)));
@@ -55,7 +55,7 @@ export class AuthService {
    * @memberof AuthService
    */
   signout(): Observable<any> {
-    return this.httpClient.get(`${environment.API_URL}/auth/signout`);
+    return this.httpClient.get(`${environment.apiUrl}/auth/signout`);
   }
 
   /**
