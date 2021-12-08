@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { signOut } from 'next-auth/client';
@@ -12,6 +13,13 @@ interface UserDropdownViewProps {
 }
 
 function UserDropdownView({ image, username }: UserDropdownViewProps) {
+  const { replace } = useRouter();
+
+  const handleSignOut = () => {
+    signOut({ redirect: false });
+    replace('/api/auth/signin');
+  };
+
   return (
     <Menu as="nav" className={styles.dropdown}>
       <Menu.Button role="button" className={styles.dropdownBtn}>
@@ -42,7 +50,7 @@ function UserDropdownView({ image, username }: UserDropdownViewProps) {
               </Menu.Item>
             )}
             <Menu.Item>
-              <button onClick={() => signOut()} className={styles.menuBtn}>
+              <button onClick={handleSignOut} className={styles.menuBtn}>
                 Sign Out
               </button>
             </Menu.Item>
