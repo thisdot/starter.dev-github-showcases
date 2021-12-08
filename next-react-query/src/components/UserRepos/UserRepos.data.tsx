@@ -1,19 +1,28 @@
 import gqlClient from '@lib/gqlClient';
-import {
-  useUserReposQuery,
-  OrderDirection,
-  RepositoryOrderField,
-} from '@lib/github';
+import { useRouter } from 'next/router';
+import { useUserReposQuery, OrderDirection } from '@lib/github';
 import { parseError } from '@lib/parseError';
+import Pagination from '@components/Pagination';
 import { parseQuery } from './parseQuery';
 import LoadingRepos from './LoadingRepos';
 import UserReposView from './UserRepos.view';
+import { RepoFilters, useRepoFilters } from '@components/RepoFilters';
+import { filterRepos } from './filterRepos';
+import { getLanguages } from './getLanguages';
 
 interface UserReposProps {
   username: string;
 }
 
 function UserRepos({ username }: UserReposProps) {
+  const { query } = useRouter();
+
+  const afterCursor = typeof query.after === 'string' ? query.after : undefined;
+  const beforeCursor =
+    typeof query.before === 'string' ? query.before : undefined;
+
+  const repoFilters = useRepoFilters();
+
   const {
     data,
     isLoading,
@@ -21,9 +30,11 @@ function UserRepos({ username }: UserReposProps) {
   } = useUserReposQuery(gqlClient, {
     username,
     orderBy: {
-      field: RepositoryOrderField.UpdatedAt,
+      field: repoFilters.state.sort,
       direction: OrderDirection.Desc,
     },
+    afterCursor,
+    beforeCursor,
   });
 
   const repos = parseQuery(data);
@@ -45,7 +56,22 @@ function UserRepos({ username }: UserReposProps) {
     );
   }
 
-  return <UserReposView repos={repos} owner={username} />;
+  const filteredRepos = filterRepos(repos.repos, repoFilters.state);
+  const languages = getLanguages(filteredRepos);
+
+  return (
+    <>
+      <RepoFilters
+        {...repoFilters}
+        languages={languages}
+        resultCount={filteredRepos.length}
+      />
+      <UserReposView repos={filteredRepos} owner={username} />
+      {(repos.pageInfo?.hasNextPage || repos.pageInfo?.hasPreviousPage) && (
+        <Pagination pageInfo={repos.pageInfo} owner={username} />
+      )}
+    </>
+  );
 }
 
 export default UserRepos;
