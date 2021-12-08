@@ -7,7 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:prod": "NODE_ENV=production ng build --prod"
+    "build:prod": "NODE_ENV=production ng build --prod",
+    "start:dev": "concurrently \"ng serve\" \"npm run server\"",
+    "server": "./oauthserver/node_modules/.bin/nodemon ./oauthserver/app.js"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
     "@ngneat/tailwind": "^7.0.3",
+    "concurrently": "^6.4.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

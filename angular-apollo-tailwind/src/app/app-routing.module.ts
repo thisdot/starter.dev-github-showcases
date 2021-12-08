@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { RepoDetailsViewComponent } from './repo-details-view/repo-details-view.component';
 
 const routes: Routes = [
   {
-    path: ':owner/:repo',
-    component: RepoDetailsViewComponent,
+    path: 'signin', // http:locahost:4200/signin
+    loadChildren: () =>
+      import('./provider/provider.module').then((m) => m.ProviderModule),
   },
   {
-    path: '',
-    component: HomeComponent,
+    path: '', // http:locahost:4200
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
 ];
 
