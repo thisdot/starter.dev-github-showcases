@@ -1,7 +1,11 @@
 import serverless from "serverless-http";
 import express from "express";
-const app = express();
+import cors from 'cors';
 import { fetchSigninUrl, fetchAccessToken } from "./lib";
+
+const app = express();
+
+app.use(cors());
 
 app.get("/", (req, res, next) => {
   return res.status(200).json({
