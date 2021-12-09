@@ -1,10 +1,9 @@
-const axios = require("axios");
-const config = require("../config");
+import axios from "axios";
 
 /**
  * Make the request to fetch the access token.
  */
-module.exports = (req, res) => {
+export default (req, res) => {
   // Get code
   const { code } = req.body;
 
@@ -23,8 +22,8 @@ module.exports = (req, res) => {
       Accept: "application/json",
     },
     data: {
-      client_id: config.GITHUB_CLIENT_ID ?? "",
-      client_secret: config.GITHUB_CLIENT_SECRET ?? "",
+      client_id: process.env.GITHUB_CLIENT_ID ?? "",
+      client_secret: process.env.GITHUB_CLIENT_SECRET ?? "",
       code,
     },
   });

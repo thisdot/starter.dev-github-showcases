@@ -1,5 +1,5 @@
 const express = require("express");
-const { fetchSigninUrl, fetchAccessToken } = require("../lib");
+const { fetchSigninUrl, fetchAccessToken } = require("./lib");
 
 const router = express.Router();
 

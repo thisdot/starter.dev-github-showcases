@@ -3,4 +3,4 @@
  * @param {number} expiresIn - time to expiration
  * @returns {number} new time to expiration
  */
-module.exports = (expiresIn) => Date.now() + expiresIn * 1000;
+export default (expiresIn) => Date.now() + expiresIn * 1000;

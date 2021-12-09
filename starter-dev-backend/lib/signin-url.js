@@ -1,12 +1,10 @@
-const config = require("../config");
-
 /**
  * Fetches an access token from Github.
  */
-module.exports = () => {
+export default () => {
   const params = new URLSearchParams({
-    client_id: config.GITHUB_CLIENT_ID ?? "",
-    client_secret: config.GITHUB_CLIENT_SECRET ?? "",
+    client_id: process.env.GITHUB_CLIENT_ID ?? "",
+    client_secret: process.env.GITHUB_CLIENT_SECRET ?? "",
   });
 
   return {

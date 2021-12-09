@@ -1,11 +1,14 @@
-module.exports = REFRESH_TOKEN_ERROR = "RefreshAccessTokenError";
+import axios from "axios";
+import calculateTokenExpiration from './expiration';
+
+export const REFRESH_TOKEN_ERROR = "RefreshAccessTokenError";
 
 /**
  * Fetch a new access token from the refresh token.
  * @param {Object} token - old access token
  * @returns {Object} new access token
  */
-module.exports = async (token) => {
+export default async (token) => {
   try {
     if (typeof token.refreshToken !== "string") {
       throw new Error("Invalid refresh token");
@@ -18,9 +21,9 @@ module.exports = async (token) => {
       refresh_token: token.refreshToken,
     });
 
-    const response = await fetch(
-      `https://github.com/login/oauth/access_token?${params.toString()}`,
+    const response = await axios(
       {
+        url: `https://github.com/login/oauth/access_token?${params.toString()}`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
