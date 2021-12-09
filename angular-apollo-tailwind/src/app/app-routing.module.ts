@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { RepoDetailsViewComponent } from './repo/repo-details-view/repo-details-view.component';
 
 const routes: Routes = [
   {
-    path: ':owner/:repo',
-    component: RepoDetailsViewComponent,
+    path: 'signin',
+    loadChildren: () =>
+      import('./provider/provider.module').then((m) => m.ProviderModule),
   },
   {
     path: '',
-    component: HomeComponent,
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
 ];
 

@@ -7,7 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:prod": "NODE_ENV=production ng build --prod"
+    "build:prod": "NODE_ENV=production ng build --prod",
+    "config": "node ./tools/set-env.js",
+    "start:dev": "concurrently \"npm run config && ng serve\" \"npm run server\"",
+    "server": "./oauthserver/node_modules/.bin/nodemon ./oauthserver/app.js"
   },
   "private": true,
   "dependencies": {
@@ -19,7 +22,12 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "@apollo/client": "^3.0.0",
+    "@ngneat/content-loader": "^7.0.0",
     "@ngneat/tailwind": "^7.0.3",
+    "apollo-angular": "2.6.0",
+    "concurrently": "^6.4.0",
+    "graphql": "15.7.2",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -31,6 +39,8 @@
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "autoprefixer": "^9",
+    "colors": "^1.4.0",
+    "dotenv": "^10.0.0",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",

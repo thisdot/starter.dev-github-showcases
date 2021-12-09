@@ -1,9 +1,0 @@
-@tailwind utilities;
-
-.icon {
-    @apply -ml-1 mr-1 h-4 w-4 text-gray-600;
-}
-
-.privacyIcon {
-    @apply w-6 h-6 text-gray-600
-}
