@@ -6,6 +6,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RepoActionButtonsComponent implements OnInit {
   constructor() {}
+  owner = 'Morgnism';
+  name = 'Dotfiles';
+  data = { 
+    isPrivate: false,
+    watcherCount: 1,
+    stargazerCount: 1,
+    forkCount: 0,
+  }
 
   ngOnInit(): void {}
 }

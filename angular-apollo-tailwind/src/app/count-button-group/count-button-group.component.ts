@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-count-button-group',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 export class CountButtonGroupComponent implements OnInit {
   constructor() {
   }
-  count?: number;
+  @Input() count?: number;
 
   ngOnInit(): void {}
 }

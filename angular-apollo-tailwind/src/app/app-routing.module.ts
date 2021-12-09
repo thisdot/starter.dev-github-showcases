@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { RepoDetailsViewComponent } from './repo-details-view/repo-details-view.component';
+import { RepoDetailsViewComponent } from './repo/repo-details-view/repo-details-view.component';
 
 const routes: Routes = [
   {

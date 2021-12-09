@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { useRepo } from '@context/RepoContext';
 
 @Component({
   selector: 'app-repo-heading',
@@ -8,5 +7,13 @@ import { Component, OnInit } from '@angular/core';
 export class RepoHeadingComponent implements OnInit {
   constructor() {}
   // const { owner, name, data } = useRepo();
+  owner = 'Morgnism';
+  name = 'Dotfiles';
+  data = { 
+    isPrivate: false,
+    watcherCount: 1,
+    stargazerCount: 1,
+    forkCount: 0,
+  }
   ngOnInit(): void {}
 }
