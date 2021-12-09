@@ -1,4 +1,13 @@
 export interface RepoDetailsData {
+  resository: RepoDetails;
+}
+
+export interface RepoDetailsVars {
+  owner: string;
+  name: string; // repo name
+}
+
+export interface RepoDetails {
   defaultBranchRef: {
     name: string;
   };
@@ -11,7 +20,10 @@ export interface RepoDetailsData {
   };
 }
 
-export interface RepoDetailsVars {
+export interface ResolvedRepoDetails {
+  name: string;
   owner: string;
-  name: string; // repo name
+  error: any;
+  loading: boolean;
+  repository: RepoDetails;
 }

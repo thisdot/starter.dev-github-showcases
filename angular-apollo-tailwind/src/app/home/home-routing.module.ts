@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
-import { RepoDetailsViewComponent } from '../repos/repo-details-view/repo-details-view.component';
+import { RepoDetailsComponent } from '../repos/repo-details/repo-details.component';
 import { ReposComponent } from '../repos/repos.component';
 import { RedirectComponent } from '../provider/redirect/redirect.component';
 import { HomeComponent } from './home.component';
+import { RepoDataResolver } from '../repos/repo-data.resolver';
 
 const routes: Routes = [
   {
@@ -18,7 +19,10 @@ const routes: Routes = [
       },
       {
         path: ':owner/:repo',
-        component: RepoDetailsViewComponent,
+        component: RepoDetailsComponent,
+        resolve: {
+          userDetails: RepoDataResolver,
+        },
         children: [
           // TODO: add file viewer route
           // TODO: add issues route

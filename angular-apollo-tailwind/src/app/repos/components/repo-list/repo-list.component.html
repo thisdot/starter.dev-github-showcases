@@ -1,0 +1,14 @@
+<div *ngIf="repos.length; else noRepos">
+  <h3 class="my-2 text-xl font-medium">Repositories</h3>
+  <div *ngFor="let repo of repos">
+    <div class="my-1">
+      <a [routerLink]="[repo?.owner?.login, repo?.name]">
+        {{ repo?.owner?.login }} / {{ repo?.name }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<ng-template #noRepos>
+  <div>No repositories found</div>
+</ng-template>
