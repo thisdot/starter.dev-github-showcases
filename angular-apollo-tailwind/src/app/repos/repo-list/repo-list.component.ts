@@ -7,5 +7,5 @@ import { CurrentUserRepos } from 'src/app/gql';
   styleUrls: ['./repo-list.component.css'],
 })
 export class RepoListComponent {
-  @Input() repos: CurrentUserRepos[] | null = null;
+  @Input() repos: CurrentUserRepos[] = [];
 }

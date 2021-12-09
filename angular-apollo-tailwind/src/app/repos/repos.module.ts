@@ -5,6 +5,7 @@ import { WelcomeUserComponent } from './welcome-user/welcome-user.component';
 import { ReposComponent } from './repos.component';
 import { RepoListComponent } from './repo-list/repo-list.component';
 import { RepoDetailsViewComponent } from './repo-details-view/repo-details-view.component';
+import { LoadingModule } from '../components/loading/loading.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,6 @@ import { RepoDetailsViewComponent } from './repo-details-view/repo-details-view.
     RepoListComponent,
     RepoDetailsViewComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, LoadingModule],
 })
 export class ReposModule {}
