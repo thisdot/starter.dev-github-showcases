@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
-  Router,
   Resolve,
   RouterStateSnapshot,
   ActivatedRouteSnapshot,
   UrlSegment,
 } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {
   RepoDetailsData,
   RepoDetailsVars,
@@ -26,7 +25,7 @@ export class RepoDataResolver
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<any> {
+  ): Observable<ResolvedRepoDetails> {
     const [owner, name] = this.getUser(route.url);
 
     return this.apollo
@@ -48,15 +47,15 @@ export class RepoDataResolver
       );
   }
 
-  getUser(segments: UrlSegment[]): string[] {
+  private getUser(segments: UrlSegment[]): string[] {
     return segments.map(({ path }: UrlSegment) => path);
   }
 
-  isOwnerAndNameValid(owner: string, name: string): boolean {
+  private isOwnerAndNameValid(owner: string, name: string): boolean {
     return typeof owner === 'string' && typeof name === 'string';
   }
 
-  setVariables(owner: string, name: string): RepoDetailsVars {
+  private setVariables(owner: string, name: string): RepoDetailsVars {
     return this.isOwnerAndNameValid(owner, name)
       ? {
           owner,

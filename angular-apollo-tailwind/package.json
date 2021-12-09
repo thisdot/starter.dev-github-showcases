@@ -25,7 +25,7 @@
     "@apollo/client": "^3.0.0",
     "@ngneat/content-loader": "^7.0.0",
     "@ngneat/tailwind": "^7.0.3",
-    "apollo-angular": "^3.0.0-alpha.2",
+    "apollo-angular": "2.6.0",
     "concurrently": "^6.4.0",
     "graphql": "15.7.2",
     "rxjs": "~7.4.0",

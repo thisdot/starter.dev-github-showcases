@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ResolvedRepoDetails } from 'src/app/gql';
 
 @Component({
@@ -9,15 +9,10 @@ import { ResolvedRepoDetails } from 'src/app/gql';
   styleUrls: ['./repo-details.component.css'],
 })
 export class RepoDetailsComponent implements OnInit {
-  repoDetails$: Observable<ResolvedRepoDetails | null> = of(null);
+  repoDetails$: Observable<ResolvedRepoDetails> = this.route
+    .data as Observable<ResolvedRepoDetails>;
 
   constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.repoDetails$ = this.route.data as Observable<ResolvedRepoDetails>;
-  }
-
-  formattedPath(path: string) {
-    return Array.isArray(path) ? path.join('/') : path;
-  }
+  ngOnInit() {}
 }
