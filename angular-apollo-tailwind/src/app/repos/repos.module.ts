@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { WelcomeUserComponent } from './welcome-user/welcome-user.component';
 import { ReposComponent } from './repos.component';
-import { RepoListComponent } from './repo-list/repo-list.component';
-import { RepoDetailsViewComponent } from './repo-details-view/repo-details-view.component';
+import { RepoListComponent } from './components/repo-list/repo-list.component';
+import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import { LoadingModule } from '../components/loading/loading.module';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { LoadingModule } from '../components/loading/loading.module';
     ReposComponent,
     WelcomeUserComponent,
     RepoListComponent,
-    RepoDetailsViewComponent,
+    RepoDetailsComponent,
   ],
   imports: [CommonModule, RouterModule, LoadingModule],
 })
