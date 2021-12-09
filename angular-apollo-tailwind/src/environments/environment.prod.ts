@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  API_URL: 'http://starterdev-backend.us-east-1.elasticbeanstalk.com/api',
+  apiUrl: 'https://fhtfslckqb.execute-api.us-east-1.amazonaws.com/api',
+  graphApiUrl: 'https://api.github.com/graphql',
 };

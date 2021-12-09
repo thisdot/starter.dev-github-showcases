@@ -9,8 +9,7 @@
     "test": "ng test",
     "build:prod": "NODE_ENV=production ng build --prod",
     "config": "node ./tools/set-env.js",
-    "start:dev": "concurrently \"npm run config && ng serve\" \"npm run server\"",
-    "server": "./oauthserver/node_modules/.bin/nodemon ./oauthserver/app.js"
+    "start:dev": "npm run config && ng serve"
   },
   "private": true,
   "dependencies": {
