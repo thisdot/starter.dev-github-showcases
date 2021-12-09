@@ -6,7 +6,6 @@ import { AuthService } from '../auth/auth.service';
 @Component({
   selector: 'app-provider',
   templateUrl: './provider.component.html',
-  styleUrls: ['./provider.component.css'],
 })
 export class ProviderComponent {
   signinGroup = new FormGroup({
