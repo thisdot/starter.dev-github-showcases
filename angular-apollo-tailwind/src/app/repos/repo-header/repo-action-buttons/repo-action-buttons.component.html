@@ -1,13 +1,25 @@
 <div class="flex space-x-4">
-  <app-count-button-group [count]="detail?.repository?.watchers?.totalCount">
+  <!-- <app-count-button-group [count]="detail?.repository?.watchers?.totalCount">
+    <app-eye-icon></app-eye-icon>
+    Watch
+  </app-count-button-group> -->
+  <app-count-button-group [count]="data.watcherCount">
     <app-eye-icon></app-eye-icon>
     Watch
   </app-count-button-group>
-  <app-count-button-group [count]="detail?.repository?.stargazerCount">
+  <!-- <app-count-button-group [count]="detail?.repository?.stargazerCount">
+    <app-star-icon></app-star-icon>
+    Star
+  </app-count-button-group> -->
+  <app-count-button-group [count]="data.stargazerCount">
     <app-star-icon></app-star-icon>
     Star
   </app-count-button-group>
-  <app-count-button-group [count]="detail?.repository?.forkCount">
+  <!-- <app-count-button-group [count]="detail?.repository?.forkCount">
+    <app-git-branch-icon></app-git-branch-icon>
+    Fork
+  </app-count-button-group> -->
+  <app-count-button-group [count]="data.forkCount">
     <app-git-branch-icon></app-git-branch-icon>
     Fork
   </app-count-button-group>

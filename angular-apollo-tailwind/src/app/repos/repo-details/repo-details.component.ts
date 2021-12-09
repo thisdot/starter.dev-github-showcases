@@ -13,12 +13,7 @@ export class RepoDetailsComponent implements OnInit {
     .data as Observable<ResolvedRepoDetails>;
 
   constructor(private route: ActivatedRoute) {
-    console.log(this.route.data as any);
-    const details = this.route.data;
-  }
-
-  getRepoDetails() {
-    return this.repoDetails$;
+    console.log(this.route.data);
   }
 
   ngOnInit() {}
