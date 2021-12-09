@@ -1232,6 +1232,13 @@
   resolved "https://registry.yarnpkg.com/@jridgewell/resolve-uri/-/resolve-uri-1.0.0.tgz#3fdf5798f0b49e90155896f6291df186eac06c83"
   integrity sha512-9oLAnygRMi8Q5QkYEU4XWK04B+nuoXoxjRvRxgjuChkLZFBja0YPSgdZ7dZtwhncLBcQe/I/E+fLuk5qxcYVJA==
 
+"@ngneat/content-loader@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@ngneat/content-loader/-/content-loader-7.0.0.tgz#0080c129d0a0cdfcc198967b07f7867e12da8bf7"
+  integrity sha512-CfwsDxh2hsQfUwca3SWnyjQD5jcG6Vb6Ew0JIztj/spr3YIC9Obz7AqEVMDYPKch4QzPJiJ6OVRuLRM2DKiG9g==
+  dependencies:
+    tslib "^2.3.0"
+
 "@ngneat/tailwind@^7.0.3":
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/@ngneat/tailwind/-/tailwind-7.0.3.tgz#fff7edff35642b249d8711a9b10d5753216dd4a9"
