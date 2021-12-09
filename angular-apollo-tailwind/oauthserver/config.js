@@ -1,6 +1,6 @@
 const dotenv = require("dotenv");
 
-// get config vars
+// get .env vars
 dotenv.config();
 
 module.exports = {

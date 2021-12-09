@@ -1,23 +1,29 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Apollo } from 'apollo-angular';
+import { map, Observable } from 'rxjs';
+import {
+  CurrentUserData,
+  CurrentUserRepos,
+  CurrentUserReposData,
+  CurrentUserReposVars,
+  CURRENT_USER_QUERY,
+  CURRENT_USER_REPOS_QUERY,
+} from '../gql';
 
 @Component({
   selector: 'app-repos',
   templateUrl: './repos.component.html',
 })
 export class ReposComponent {
-  // TODO: most likely will come from apollo and not as an obs
-  // user$: Observable<{
-  //   username: string;
-  //   image: string;
-  // }> = of({
-  //   username: 'morgnism',
-  //   image: '',
-  //   repositories: [
-  //     {
-  //       name: 'dotfiles',
-  //     },
-  //   ],
-  // });
-  user$: Observable<any> = of(null);
+  userName$: Observable<string> = this.apollo
+    .watchQuery<CurrentUserData>({ query: CURRENT_USER_QUERY })
+    .valueChanges.pipe(map((res) => res.data.viewer.name));
+
+  repos$: Observable<CurrentUserRepos[]> = this.apollo
+    .watchQuery<CurrentUserReposData, CurrentUserReposVars>({
+      query: CURRENT_USER_REPOS_QUERY,
+    })
+    .valueChanges.pipe(map((res) => res.data.viewer.repositories.nodes));
+
+  constructor(private apollo: Apollo) {}
 }

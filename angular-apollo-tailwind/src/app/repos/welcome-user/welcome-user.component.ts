@@ -5,5 +5,5 @@ import { Component, Input } from '@angular/core';
   templateUrl: './welcome-user.component.html',
 })
 export class WelcomeUserComponent {
-  @Input() name: string = '';
+  @Input() name: string | null = '';
 }

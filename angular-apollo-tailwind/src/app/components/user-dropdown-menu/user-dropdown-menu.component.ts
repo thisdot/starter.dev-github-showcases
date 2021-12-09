@@ -1,5 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, ElementRef, Input } from '@angular/core';
+import { CurrentUser } from 'src/app/gql';
 
 @Component({
   host: {
@@ -20,7 +21,7 @@ import { Component, ElementRef, Input } from '@angular/core';
   ],
 })
 export class UserDropdownMenuComponent {
-  @Input() user: any = null;
+  @Input() user: CurrentUser | null = null;
 
   isOpen = false;
 
@@ -32,7 +33,7 @@ export class UserDropdownMenuComponent {
 
   signOut() {
     // TODO: make this work
-    console.log('sign out clicked');
+    console.log('sign out clicked', this.user);
   }
 
   // TODO: maybe convert to directive

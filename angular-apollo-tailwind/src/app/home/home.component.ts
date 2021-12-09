@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Apollo } from 'apollo-angular';
+import { map, Observable } from 'rxjs';
+import { CurrentUser, CurrentUserData, CURRENT_USER_QUERY } from '../gql';
 
 @Component({
   selector: 'app-home',
@@ -7,17 +9,9 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  // TODO: most likely will come from apollo and not as an obs
-  user$: Observable<{
-    username: string;
-    image: string;
-  }> = of({
-    username: 'morgnism',
-    image: '',
-    repositories: [
-      {
-        name: 'dotfiles',
-      },
-    ],
-  });
+  user$: Observable<CurrentUser> = this.apollo
+    .watchQuery<CurrentUserData>({ query: CURRENT_USER_QUERY })
+    .valueChanges.pipe(map((res) => res.data.viewer));
+
+  constructor(private apollo: Apollo) {}
 }
