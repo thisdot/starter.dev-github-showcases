@@ -1,0 +1,21 @@
+{
+  "name": "starter-dev-backend",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "sls offline"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "serverless-http": "^2.7.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "serverless-bundle": "^5.2.0",
+    "serverless-offline": "^8.3.1"
+  }
+}
