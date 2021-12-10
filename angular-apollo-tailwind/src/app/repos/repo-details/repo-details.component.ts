@@ -4,9 +4,9 @@ import { Apollo } from 'apollo-angular';
 import { concatMap, map, Observable } from 'rxjs';
 import { ResolvedRepoDetails } from 'src/app/gql';
 import {
+  FileExplorer,
   FileExplorerData,
   FileExplorerVars,
-  FileExplorer,
   RepoTree as Tree,
   TreeEntry,
 } from 'src/app/gql/models/file-explorer';
