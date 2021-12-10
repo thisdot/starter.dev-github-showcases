@@ -1,27 +1,9 @@
-<h1 class="space-x-2.5 flex items-center text-xl">
-  <!-- <app-privacy-icon
-    [isPrivate]="detail?.repository?.isPrivate"
-  ></app-privacy-icon> -->
-  <app-privacy-icon [isPrivate]="data.isPrivate"></app-privacy-icon>
-  <span class="space-x-1.5 mb-0.5">
-    <!-- <a class="text-blue-600 hover:underline">{{ detail?.owner }}</a> -->
-    <a class="text-blue-600 hover:underline">{{ owner }}</a>
-    <span class="text-gray-600">/</span>
-    <!-- <a [routerLink]="[detail?.owner, detail?.name]">
-      <a class="text-blue-600 font-semibold hover:underline">{{
-        detail?.name
-      }}</a>
-    </a> -->
-    <a [routerLink]="[owner, name]">
-      <a class="text-blue-600 font-semibold hover:underline">{{ name }}</a>
-    </a>
+<h1 class="heading">
+  <app-privacy-icon [isPrivate]="isPrivate"></app-privacy-icon>
+  <span class="navContainer">
+    <a class="ownerLink">{{ owner }}</a>
+    <span class="separator">/</span>
+    <a [routerLink]="[owner, name]" class="nameLink">{{ name }}</a>
   </span>
-  <!-- <app-privacy-badge
-    class="pb-1"
-    [isPrivate]="detail?.repository?.isPrivate"
-  ></app-privacy-badge> -->
-  <app-privacy-badge
-    class="pb-1"
-    [isPrivate]="data.isPrivate"
-  ></app-privacy-badge>
+  <app-privacy-badge class="pb-1" [isPrivate]="isPrivate"></app-privacy-badge>
 </h1>

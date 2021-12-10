@@ -1,14 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-count-button-group',
   templateUrl: './count-button-group.component.html',
 })
-export class CountButtonGroupComponent implements OnInit {
-  constructor() {
-  }
+export class CountButtonGroupComponent {
   @Input() count?: number;
-
-  ngOnInit(): void {}
 }
-// const { data } = useRepo();

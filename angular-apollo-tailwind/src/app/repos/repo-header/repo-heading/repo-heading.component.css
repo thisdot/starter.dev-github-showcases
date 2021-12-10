@@ -1,0 +1,23 @@
+.heading {
+  @apply space-x-2.5 flex items-center text-xl;
+}
+
+.navContainer {
+  @apply space-x-1.5 mb-0.5;
+}
+
+.badge {
+  @apply py-0.5 px-2 text-xs rounded-xl text-gray-600 border border-gray-300 font-medium;
+}
+
+.ownerLink {
+  @apply text-blue-600 hover:underline;
+}
+
+.nameLink {
+  @apply text-blue-600 font-semibold hover:underline;
+}
+
+.separator {
+  @apply text-gray-600;
+}

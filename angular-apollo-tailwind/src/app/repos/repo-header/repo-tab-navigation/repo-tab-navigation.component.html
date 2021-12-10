@@ -1,22 +1,50 @@
-<!-- Save for P2 -->
-<!-- <div className="border-b border-gray-200">
-  <nav className="-mb-px flex" aria-label="Tabs"> -->
-    <!-- {tabList.map(({ title, path, Icon }, index) => ( -->
-    <!-- <ng-container *ngFor="let tab of tabs"></ng-container>
-        <a [routerLink]="tab.path ? `/${owner}/${name}/${tab.path}` : `/${owner}/${name}`"
-          className={cn(
-            isCurrentTab(tab.path) ? styles.tabActive : styles.tabInactive,
-            styles.tab
-          )}
-        >
-          <Icon
-            className={cn(
-              isCurrentTab(tab.path) ? styles.iconActive : styles.iconInactive,
-              styles.icon
-            )}
-          />
-          <span>{tab.title}</span>
-        </a> -->
-    <!-- ))} -->
-  <!-- </nav>
-</div> -->
+<div class="container">
+  <nav class="nav" aria-label="Tabs">
+    <div>
+      <a
+        [routerLink]="setPath()"
+        routerLinkActive="tabActive"
+        class="tabInactive tab"
+        #codeLink="routerLinkActive"
+      >
+        <hero-icon
+          name="code"
+          type="outline"
+          class="iconInactive icon"
+          [ngClass]="{ iconActive: codeLink.isActive }"
+        ></hero-icon>
+        <span>Code</span>
+      </a>
+    </div>
+    <div>
+      <a
+        [routerLink]="setPath('/issues')"
+        routerLinkActive="tabActive"
+        class="tabInactive tab"
+        #issuesLink="routerLinkActive"
+      >
+        <hero-icon
+          name="information-circle"
+          type="outline"
+          class="iconInactive icon"
+          [ngClass]="{ iconActive: issuesLink.isActive }"
+        ></hero-icon>
+        <span>Issues</span>
+      </a>
+    </div>
+    <div>
+      <a
+        [routerLink]="setPath('/pull-requests')"
+        routerLinkActive="tabActive"
+        class="tabInactive tab"
+        #prLink="routerLinkActive"
+      >
+        <app-pull-request-icon
+          class="iconInactive icon"
+          [ngClass]="{ iconActive: prLink.isActive }"
+        ></app-pull-request-icon>
+        <span>Pull Requests</span>
+      </a>
+    </div>
+  </nav>
+</div>

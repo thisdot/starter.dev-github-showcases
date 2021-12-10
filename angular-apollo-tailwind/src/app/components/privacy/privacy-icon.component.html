@@ -1,5 +1,7 @@
-<ng-template *ngIf="isPrivate === undefined; then thenBlock else elseBlock">
-    <div class="w-6 h-6 bg-gray-200 opacity-25 rounded-lg"></div>
+<ng-template *ngIf="isPrivate === undefined; then thenBlock; else elseBlock">
+  <div class="iconPlaceholder"></div>
 </ng-template>
-<ng-template #thenBlock><app-lock-closed-icon></app-lock-closed-icon></ng-template>
+<ng-template #thenBlock>
+  <hero-icon name="code" type="outline" class="iconInactive icon"></hero-icon>
+</ng-template>
 <ng-template #elseBlock><app-git-repo-icon></app-git-repo-icon></ng-template>

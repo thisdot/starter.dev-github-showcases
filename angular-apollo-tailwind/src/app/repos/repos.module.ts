@@ -13,6 +13,9 @@ import { RepoTabNavigationComponent } from './repo-header/repo-tab-navigation/re
 import { PrivacyIconComponentModule } from '../components/privacy/privacy-icon.module';
 import { CountButtonGroupComponentModule } from '../components/count-button-group/count-button-group.module';
 import { IconsModule } from '../components/icons/icons.module';
+import { FileViewerModule } from '../file-viewer/file-viewer.module';
+import { RepoAboutComponent } from './components/repo-about/repo-about.component';
+import { DescriptionComponent } from './components/repo-about/description/description.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,8 @@ import { IconsModule } from '../components/icons/icons.module';
     RepoActionButtonsComponent,
     RepoHeadingComponent,
     RepoTabNavigationComponent,
+    RepoAboutComponent,
+    DescriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +37,7 @@ import { IconsModule } from '../components/icons/icons.module';
     LoadingModule,
     PrivacyIconComponentModule,
     CountButtonGroupComponentModule,
+    FileViewerModule,
   ],
 })
 export class ReposModule {}

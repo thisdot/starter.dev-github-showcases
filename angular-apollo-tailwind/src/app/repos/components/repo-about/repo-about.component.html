@@ -1,0 +1,18 @@
+<div class="container">
+  <h3 class="heading">About</h3>
+  <div class="description">
+    <ng-container *ngIf="isRepoLoading; else loading">
+      <app-description [description]="description"></app-description>
+    </ng-container>
+
+    <ng-template #loading>
+      <app-loading-text-line></app-loading-text-line>
+    </ng-template>
+  </div>
+  <div>
+    <a class="readmeLink">
+      <hero-icon name="book-open" type="outline" class="readmeIcon"></hero-icon>
+      Readme
+    </a>
+  </div>
+</div>

@@ -1,13 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-privacy-icon',
   templateUrl: './privacy-icon.component.html',
 })
-export class PrivacyIconComponent implements OnInit {
+export class PrivacyIconComponent {
   @Input() isPrivate?: boolean;
-
-  constructor() {
-  }
-
-  ngOnInit(): void {}
 }

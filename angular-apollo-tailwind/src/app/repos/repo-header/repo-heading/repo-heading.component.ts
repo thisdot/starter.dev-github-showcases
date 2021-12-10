@@ -1,23 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ResolvedRepoDetails } from 'src/app/gql';
-
-// TODO: swap to real data
+import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-repo-heading',
   templateUrl: './repo-heading.component.html',
+  styleUrls: ['./repo-heading.component.css'],
 })
-export class RepoHeadingComponent implements OnInit {
-  constructor() {}
-
-  owner = 'Morgnism';
-  name = 'Dotfiles';
-  data = {
-    isPrivate: false,
-    watcherCount: 1,
-    stargazerCount: 1,
-    forkCount: 0,
-  };
-
-  @Input() detail: ResolvedRepoDetails | undefined;
-  ngOnInit(): void {}
+export class RepoHeadingComponent {
+  @Input() owner: string = '';
+  @Input() name: string = '';
+  @Input() isPrivate: boolean = false;
 }

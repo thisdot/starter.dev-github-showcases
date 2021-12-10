@@ -1,32 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface TabItem {
-  title: string;
-  path?: string;
-  Icon: string;
-}
+import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-repo-tab-navigation',
   templateUrl: './repo-tab-navigation.component.html',
+  styleUrls: ['./repo-tab-navigation.component.css'],
 })
-export class RepoTabNavigationComponent implements OnInit {
-  constructor() {}
-  tabs!: TabItem[];
+export class RepoTabNavigationComponent {
+  @Input() basePath: string = '';
+  @Input() path: string = '';
 
-  ngOnInit(): void {}
+  setPath(path?: string) {
+    return path ? `${this.basePath}/${path}` : this.basePath;
+  }
 }
-
-// const { pathname, asPath, query } = useRouter();
-
-// const asPathBase = basePath
-//   .replaceAll('[', '')
-//   .replaceAll(']', '')
-//   .split('/')
-//   .map((part) => query[part])
-//   .filter((queryPart) => typeof queryPart === 'string')
-//   .join('/');
-
-//   const isCurrentTab = (path?: string) => {
-//     const matchPath = path === '' ? basePath : `${basePath}/${path}`;
-//     return typeof path === undefined ? false : pathname.includes(matchPath);
-//   };

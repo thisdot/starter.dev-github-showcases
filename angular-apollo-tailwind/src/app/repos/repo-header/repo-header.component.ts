@@ -1,35 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ResolvedRepoDetails } from 'src/app/gql';
-// import { TabItem } from '../repo-tab-navigation/repo-tab-navigation.component';
+import { Component, Input } from '@angular/core';
 
-// TODO: import added icons
-// This doesn't work in Angular, need a different approach
 @Component({
   selector: 'app-repo-header',
   templateUrl: './repo-header.component.html',
+  styleUrls: ['./repo-header.component.css'],
 })
-export class RepoHeaderComponent implements OnInit {
-  @Input() details: ResolvedRepoDetails | undefined;
-
-  constructor() {
-    // console.log(this.details);
-  }
-
-  // tabList: TabItem[] = [
-  //   {
-  //     title: 'Code',
-  //     path: '',
-  //     Icon: CodeIcon,
-  //   },
-  //   {
-  //     title: 'Issues',
-  //     Icon: InformationCircleIcon,
-  //   },
-  //   {
-  //     title: 'Pull Requests',
-  //     Icon: PullRequestIcon,
-  //   },
-  // ];
-
-  ngOnInit(): void {}
+export class RepoHeaderComponent {
+  @Input() owner: string = '';
+  @Input() name: string = '';
+  @Input() isPrivate: boolean = false;
+  @Input() watchers: number = 0;
+  @Input() stargazers: number = 0;
+  @Input() forks: number = 0;
+  @Input() basePath: string = '';
 }
