@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-loading-bullet-list',
   template: `<content-loader
     [speed]="2"
-    style="{width: '400px', height: '20px'}"
+    [style]="{ width: '400px', height: '20px' }"
     viewBox="-10 5 400 28"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"

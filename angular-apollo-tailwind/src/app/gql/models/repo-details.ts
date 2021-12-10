@@ -1,5 +1,7 @@
+import { ApolloQueryResult } from '@apollo/client/core';
+
 export interface RepoDetailsData {
-  resository: RepoDetails;
+  repository: RepoDetails;
 }
 
 export interface RepoDetailsVars {
@@ -8,6 +10,7 @@ export interface RepoDetailsVars {
 }
 
 export interface RepoDetails {
+  id: string;
   defaultBranchRef: {
     name: string;
   };
@@ -20,9 +23,12 @@ export interface RepoDetails {
   };
 }
 
-export interface ResolvedRepoDetails {
+export interface ResolvedRepoDetails
+  extends ApolloQueryResult<RepoDetailsData> {
   name: string;
   owner: string;
+  branch: string;
+  path?: string;
   error: any;
   loading: boolean;
   repository: RepoDetails;

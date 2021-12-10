@@ -1,0 +1,25 @@
+<div class="container">
+  <a *ngIf="repoPath" [routerLink]="getBackLink(repoPath)" class="cellBack">
+    <span class="text-blue-600">..</span>
+  </a>
+  <div *ngFor="let item of items" class="cell">
+    <div class="flex items-center">
+      <div class="mr-2.5">
+        <ng-container *ngIf="item.type === 'tree'; else file">
+          <!-- <FolderIcon class="iconDir" /> -->
+        </ng-container>
+        <ng-template #file>
+          <!-- <DocumentIcon class="iconFile" /> -->
+        </ng-template>
+      </div>
+      <a [routerLink]="getPathHref(item)" class="link">{{ item.name }}</a>
+    </div>
+  </div>
+</div>
+
+<!-- TODO: fix loading indicator -->
+<!-- <ng-template #loading>
+  <div class="container py-2">
+    <app-loading-bullet-list></app-loading-bullet-list>
+  </div>
+</ng-template> -->

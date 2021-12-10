@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-loading-text-line',
   template: `<content-loader
     [speed]="2"
-    style="{width: '400px', height: '20px'}"
+    [style]="{ width: '400px', height: '20px' }"
     viewBox="0 0 400 20"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
