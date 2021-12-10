@@ -24,7 +24,7 @@ export class RepoDataResolver
 
   resolve(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
   ): Observable<ResolvedRepoDetails> {
     const [owner, name] = this.getUser(route.url);
 
@@ -44,8 +44,8 @@ export class RepoDataResolver
               error: res.error ?? res.errors,
               loading: res.loading,
               repository: res.data.repository,
-            } as ResolvedRepoDetails)
-        )
+            } as ResolvedRepoDetails),
+        ),
       );
   }
 

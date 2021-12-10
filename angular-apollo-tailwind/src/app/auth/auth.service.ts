@@ -14,7 +14,7 @@ interface AuthResponse {
 export class AuthService {
   constructor(
     private httpClient: HttpClient,
-    private tokenService: TokenService
+    private tokenService: TokenService,
   ) {}
 
   /**

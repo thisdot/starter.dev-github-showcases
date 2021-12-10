@@ -6,10 +6,10 @@
     <div class="flex items-center">
       <div class="mr-2.5">
         <ng-container *ngIf="item.type === 'tree'; else file">
-          <!-- <FolderIcon class="iconDir" /> -->
+          <app-folder-icon class="iconDir"></app-folder-icon>
         </ng-container>
         <ng-template #file>
-          <!-- <DocumentIcon class="iconFile" /> -->
+          <app-document-icon class="iconFile"></app-document-icon>
         </ng-template>
       </div>
       <a [routerLink]="getPathHref(item)" class="link">{{ item.name }}</a>

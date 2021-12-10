@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { TreeEntry } from 'src/app/gql/models/file-explorer';
 
 const removeLastPathPart = (path: string) => {
   const pathParts = path.split('/');
@@ -12,7 +13,7 @@ const removeLastPathPart = (path: string) => {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileExplorerComponent {
-  @Input() items: any[] = [];
+  @Input() items: TreeEntry[] = [];
   @Input() branch: string = '';
   @Input() basePath: string = '';
   @Input() repoPath: string = '';

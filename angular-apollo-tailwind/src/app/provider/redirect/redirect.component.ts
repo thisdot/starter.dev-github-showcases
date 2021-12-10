@@ -11,7 +11,7 @@ export class RedirectComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -26,9 +26,9 @@ export class RedirectComponent implements OnInit {
           return this.authService.getToken(code).pipe(
             tap(() => {
               this.router.navigate(['/']);
-            })
+            }),
           );
-        })
+        }),
       )
       .subscribe();
   }

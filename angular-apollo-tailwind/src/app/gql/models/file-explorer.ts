@@ -39,6 +39,10 @@ export interface FileExplorer extends ApolloQueryResult<FileExplorerData> {
   basePath: string;
   branch: string;
   description: string;
+  isPrivate: boolean;
+  stargazers: number;
+  forks: number;
+  watchers: number;
 }
 
 export interface TreeEntry {

@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <div class="topRow">
+    <app-repo-heading
+      [owner]="owner"
+      [name]="name"
+      [isPrivate]="isPrivate"
+    ></app-repo-heading>
+    <app-repo-action-buttons
+      [owner]="owner"
+      [name]="name"
+      [watchers]="watchers"
+      [stargazers]="stargazers"
+      [forks]="forks"
+    ></app-repo-action-buttons>
+  </div>
+  <div class="bottomRow">
+    <app-repo-tab-navigation [basePath]="basePath"></app-repo-tab-navigation>
+  </div>
+</div>

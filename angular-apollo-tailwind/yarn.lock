@@ -1256,7 +1256,7 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
   integrity sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==
 
-"@graphql-codegen/cli@^2.3.0":
+"@graphql-codegen/cli@2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-2.3.0.tgz#07ef86eea6d42c56f9c7118871115d779dee49f3"
   integrity sha512-5pgrcnBFeOJbDGfZwhnytwMqpwFDrmdaAgD6HYywT9Fggsrx2yWSkVrxoAjEcbDMFLhxzjxECwfJYklm967AKA==
@@ -1312,7 +1312,15 @@
     "@graphql-tools/utils" "^8.1.1"
     tslib "~2.3.0"
 
-"@graphql-codegen/plugin-helpers@^2.3.0":
+"@graphql-codegen/introspection@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/introspection/-/introspection-2.1.0.tgz#07c7a321e69a053fbd2d80ec8d7a32b3ce28ca30"
+  integrity sha512-seGWZaX9vUd1RxSs+MBa9WOU+PCl8DNeScsOmxQP4qRC6rCle7y8pjeLKGduRarucIbO+nzY9jqaTAiMUogo8g==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^2.1.0"
+    tslib "~2.3.0"
+
+"@graphql-codegen/plugin-helpers@^2.1.0", "@graphql-codegen/plugin-helpers@^2.3.0":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-2.3.1.tgz#b66c742d3209a85bc2f72f9e2eceb6b08fc81f85"
   integrity sha512-rWH7igcjYqZ6rqNFTb4Wyp31863fRmmVpsRN8VHzBCltrepOO97jwTwB93aAw+T6Dm8aZto3QFfDIC79u8wA2Q==
@@ -1324,7 +1332,16 @@
     lodash "~4.17.0"
     tslib "~2.3.0"
 
-"@graphql-codegen/typescript-apollo-angular@^3.3.1":
+"@graphql-codegen/schema-ast@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/schema-ast/-/schema-ast-2.4.0.tgz#a41fdf2bacf88ec8318c78fdf03f19e620e5534a"
+  integrity sha512-xsLd4mF0H3mPp7Z2PHZ2Sv1KKIb/FOORqhDc9XHCnHJJ/h9nmaleKSTxTGzSUfIAQ1aCNzVilcaUwlenK+MMBQ==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^2.3.0"
+    "@graphql-tools/utils" "^8.1.1"
+    tslib "~2.3.0"
+
+"@graphql-codegen/typescript-apollo-angular@3.3.1":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-apollo-angular/-/typescript-apollo-angular-3.3.1.tgz#e2fe929301c07605725bffe109b3fbc4036b602a"
   integrity sha512-FwfKqj3y2+Z2pIkbmOLlDhazv0E/kou2NEeyO3S8yHsMyKdZRQ9lGGeFO+jm656aCfG+SDArTcQPwoYw6EqIDA==
@@ -1333,6 +1350,28 @@
     "@graphql-codegen/visitor-plugin-common" "2.5.1"
     auto-bind "~4.0.0"
     change-case-all "1.0.14"
+    tslib "~2.3.0"
+
+"@graphql-codegen/typescript-operations@2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-2.2.1.tgz#78a4ca25fa7d82ef259791f7b8a5a146f9e89830"
+  integrity sha512-f1Y/qhn6yCGGVE8cAL2xzFryW4UQjnYS+vHYEKvr2X0DeMoMhp/5QCJ07HGWbjHYGBy4L5FhND/6lCbsJxG2EQ==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^2.3.0"
+    "@graphql-codegen/typescript" "^2.4.1"
+    "@graphql-codegen/visitor-plugin-common" "2.5.1"
+    auto-bind "~4.0.0"
+    tslib "~2.3.0"
+
+"@graphql-codegen/typescript@2.4.1", "@graphql-codegen/typescript@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-2.4.1.tgz#96d427993982edc27c50c4cd8841bdbbe26689d9"
+  integrity sha512-1+dZ0Qar+jGISXTdm7nWpv7Agt5uRj3q2GtpTJ92aA/AEHh+MTharanYcExEbdqNQm7b859MusI+Jo1Hlqsfmw==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^2.3.0"
+    "@graphql-codegen/schema-ast" "^2.4.0"
+    "@graphql-codegen/visitor-plugin-common" "2.5.1"
+    auto-bind "~4.0.0"
     tslib "~2.3.0"
 
 "@graphql-codegen/visitor-plugin-common@2.5.1":
@@ -5862,6 +5901,13 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ng-heroicon@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/ng-heroicon/-/ng-heroicon-0.4.5.tgz#6a5b0cc4efef20b37e5cb8c98fc71c8a911c89c3"
+  integrity sha512-WA0+VCmwI4PpHciixUcFKULFcNwqaAWdLOEk8Bg5FTLq+Y8+mex6LdA0F8Xro0g8JvHihVzH0wVjNBQfaV4GdA==
+  dependencies:
+    tslib "^2.0.0"
+
 nice-napi@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/nice-napi/-/nice-napi-1.0.2.tgz#dc0ab5a1eac20ce548802fc5686eaa6bc654927b"
@@ -6892,6 +6938,11 @@ prepend-http@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
+
+prettier@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
+  integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==
 
 pretty-bytes@^5.3.0:
   version "5.6.0"

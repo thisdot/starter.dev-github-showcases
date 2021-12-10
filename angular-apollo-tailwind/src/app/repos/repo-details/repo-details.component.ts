@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { concatMap, map, Observable, of, tap } from 'rxjs';
+import { concatMap, map, Observable } from 'rxjs';
 import { ResolvedRepoDetails } from 'src/app/gql';
 import {
+  FileExplorer,
   FileExplorerData,
   FileExplorerVars,
-  FileExplorer,
   RepoTree as Tree,
   TreeEntry,
 } from 'src/app/gql/models/file-explorer';
@@ -38,22 +38,14 @@ export class RepoDetailsComponent {
             items: this.parseQueryData(res.data.repository.tree),
             basePath: `/${owner}/${name}`,
             description: repository.description,
-          }))
-          // TODO: enable for breadcrumbs
-          // tap((repo) => {
-          //   const path = repo.tree.entries.path;
-          //   this.crumbs = path.split('/').filter(Boolean);
-          //   this.crumbPath = this.crumbs.join('/'); // make pipe?
-          //   this.href = `/${this.owner}/${this.name}/tree/${this.branch}/${this.crumbPath}`;
-          // })
-        )
-    )
+            isPrivate: repository.isPrivate,
+            stargazers: repository.stargazerCount,
+            forks: repository.forkCount,
+            watchers: repository.watchers.totalCount,
+          })),
+        ),
+    ),
   );
-
-  // TODO: enable for breadcrumbs
-  // crumbs: string[] = [];
-  // crumbPath: string = '';
-  // href: string = '';
 
   constructor(private route: ActivatedRoute, private apollo: Apollo) {}
 
