@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TreeEntry } from 'src/app/gql/models/file-explorer';
 
 const removeLastPathPart = (path: string) => {
@@ -17,23 +12,19 @@ const removeLastPathPart = (path: string) => {
   styleUrls: ['./file-explorer.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileExplorerComponent implements OnInit {
+export class FileExplorerComponent {
   @Input() items: TreeEntry[] = [];
   @Input() branch: string = '';
   @Input() basePath: string = '';
   @Input() repoPath: string = '';
   @Input() isLoaded: boolean = false;
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  setBackLink(repoPath: string) {
+  getBackLink(repoPath: string) {
     const backPath = removeLastPathPart(repoPath);
     return `${this.basePath}/tree/${this.branch}/${backPath}`;
   }
 
-  setPathHref(item: any): string {
+  getPathHref(item: any): string {
     return `${this.basePath}/${item.type}/${this.branch}/${item.path}`;
   }
 }

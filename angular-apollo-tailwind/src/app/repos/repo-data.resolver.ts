@@ -6,7 +6,7 @@ import {
   UrlSegment,
 } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {
   RepoDetailsData,
   RepoDetailsVars,

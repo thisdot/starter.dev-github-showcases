@@ -1,5 +1,5 @@
 <div class="container">
-  <a *ngIf="repoPath" [routerLink]="setBackLink(repoPath)" class="cellBack">
+  <a *ngIf="repoPath" [routerLink]="getBackLink(repoPath)" class="cellBack">
     <span class="text-blue-600">..</span>
   </a>
   <div *ngFor="let item of items" class="cell">
@@ -12,7 +12,7 @@
           <app-document-icon class="iconFile"></app-document-icon>
         </ng-template>
       </div>
-      <a [routerLink]="setPathHref(item)" class="link">{{ item.name }}</a>
+      <a [routerLink]="getPathHref(item)" class="link">{{ item.name }}</a>
     </div>
   </div>
 </div>
