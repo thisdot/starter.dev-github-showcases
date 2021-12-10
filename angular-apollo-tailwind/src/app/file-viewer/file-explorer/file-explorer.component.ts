@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 const removeLastPathPart = (path: string) => {
   const pathParts = path.split('/');
@@ -16,16 +11,12 @@ const removeLastPathPart = (path: string) => {
   styleUrls: ['./file-explorer.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileExplorerComponent implements OnInit {
+export class FileExplorerComponent {
   @Input() items: any[] = [];
   @Input() branch: string = '';
   @Input() basePath: string = '';
   @Input() repoPath: string = '';
   @Input() isLoaded: boolean = false;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   getBackLink(repoPath: string) {
     const backPath = removeLastPathPart(repoPath);
