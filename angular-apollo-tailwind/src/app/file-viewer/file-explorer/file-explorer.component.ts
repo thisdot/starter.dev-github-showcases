@@ -27,12 +27,12 @@ export class FileExplorerComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  setBackLink(repoPath: string) {
+  getBackLink(repoPath: string) {
     const backPath = removeLastPathPart(repoPath);
     return `${this.basePath}/tree/${this.branch}/${backPath}`;
   }
 
-  setPathHref(item: any): string {
+  getPathHref(item: any): string {
     return `${this.basePath}/${item.type}/${this.branch}/${item.path}`;
   }
 }

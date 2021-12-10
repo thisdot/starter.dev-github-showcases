@@ -57,7 +57,7 @@ export class RepoDetailsComponent {
 
   constructor(private route: ActivatedRoute, private apollo: Apollo) {}
 
-  parseQueryData(tree: Tree) {
+  private parseQueryData(tree: Tree) {
     const items: TreeEntry[] =
       tree.entries.map(({ name, path, type }) => {
         return {
