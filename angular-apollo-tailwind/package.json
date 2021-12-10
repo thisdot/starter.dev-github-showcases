@@ -9,10 +9,7 @@
     "test": "ng test",
     "build:prod": "NODE_ENV=production ng build --prod",
     "config": "node ./tools/set-env.js",
-    "start:dev": "npm run config && ng serve",
-    "codegen": "graphql-codegen --config codegen.yml -r dotenv/config",
-    "prestart": "yarn codegen",
-    "predev": "yarn codegen"
+    "start:dev": "npm run config && ng serve"
   },
   "private": true,
   "dependencies": {
