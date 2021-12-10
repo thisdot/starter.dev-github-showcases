@@ -42,9 +42,9 @@ export class RepoDetailsComponent {
             stargazers: repository.stargazerCount,
             forks: repository.forkCount,
             watchers: repository.watchers.totalCount,
-          }))
-        )
-    )
+          })),
+        ),
+    ),
   );
 
   constructor(private route: ActivatedRoute, private apollo: Apollo) {}

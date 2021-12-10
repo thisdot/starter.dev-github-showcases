@@ -5,16 +5,7 @@
     (click)="toggleMenu()"
   >
     <div
-      class="
-        w-8
-        h-8
-        rounded-full
-        overflow-hidden
-        flex
-        items-center
-        justify-center
-        bg-gray-600
-      "
+      class="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-600"
     >
       <img
         [src]="user?.avatarUrl"
@@ -34,19 +25,7 @@
   <div
     @openClose
     *ngIf="isOpen"
-    class="
-      z-30
-      origin-top-right
-      absolute
-      right-0
-      mt-2
-      w-56
-      rounded-md
-      shadow-lg
-      bg-white
-      ring-1 ring-black ring-opacity-5
-      focus:outline-none
-    "
+    class="z-30 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
     data-testid="dropdown-menu"
   >
     <div class="py-1">

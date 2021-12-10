@@ -6,7 +6,7 @@ describe('TokenInterceptor', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       providers: [TokenInterceptor],
-    })
+    }),
   );
 
   it('should be created', () => {
