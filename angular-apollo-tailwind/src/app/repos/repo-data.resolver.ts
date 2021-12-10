@@ -6,7 +6,7 @@ import {
   UrlSegment,
 } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import {
   RepoDetailsData,
   RepoDetailsVars,
@@ -39,9 +39,11 @@ export class RepoDataResolver
             ({
               name,
               owner,
+              branch: res.data.repository.defaultBranchRef.name,
+              path: '',
               error: res.error ?? res.errors,
               loading: res.loading,
-              repository: res.data.resository,
+              repository: res.data.repository,
             } as ResolvedRepoDetails)
         )
       );

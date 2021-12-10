@@ -1,0 +1,14 @@
+overwrite: true
+schema: "https://api.github.com/graphql"
+documents:
+  - "./src/**/*.query.ts"
+  - "./src/**/*.mutation.ts"
+generates:
+  src/app/github:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-apollo-angular"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"

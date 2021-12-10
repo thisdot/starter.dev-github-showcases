@@ -9,7 +9,10 @@
     "test": "ng test",
     "build:prod": "NODE_ENV=production ng build --prod",
     "config": "node ./tools/set-env.js",
-    "start:dev": "npm run config && ng serve"
+    "start:dev": "npm run config && ng serve",
+    "codegen": "graphql-codegen --config codegen.yml",
+    "prestart": "yarn generate",
+    "predev": "yarn generate"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +38,8 @@
     "@angular-devkit/build-angular": "~13.0.2",
     "@angular/cli": "~13.0.2",
     "@angular/compiler-cli": "~13.0.0",
+    "@graphql-codegen/cli": "2.3.0",
+    "@graphql-codegen/typescript-apollo-angular": "3.3.1",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "autoprefixer": "^9",
@@ -48,6 +53,9 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "typescript": "~4.4.3"
+    "typescript": "~4.4.3",
+    "@graphql-codegen/typescript": "2.4.1",
+    "@graphql-codegen/typescript-operations": "2.2.1",
+    "@graphql-codegen/introspection": "2.1.0"
   }
 }
