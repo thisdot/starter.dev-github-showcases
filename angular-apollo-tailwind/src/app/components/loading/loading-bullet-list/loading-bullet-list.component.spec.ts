@@ -8,9 +8,8 @@ describe('LoadingBulletListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoadingBulletListComponent ]
-    })
-    .compileComponents();
+      declarations: [LoadingBulletListComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

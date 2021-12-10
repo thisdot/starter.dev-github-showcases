@@ -5,5 +5,5 @@ import { Component, Input } from '@angular/core';
   templateUrl: './count-button-group.component.html',
 })
 export class CountButtonGroupComponent {
-  @Input() count?: number;
+  @Input() count: number = 0;
 }

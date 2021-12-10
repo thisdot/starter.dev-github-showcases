@@ -8,9 +8,8 @@ describe('LoadingTextLineComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoadingTextLineComponent ]
-    })
-    .compileComponents();
+      declarations: [LoadingTextLineComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -5,8 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PrivacyBadgeComponent implements OnInit {
   @Input() isPrivate?: boolean;
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }
