@@ -18,26 +18,26 @@ import { RepoAboutComponent } from './components/repo-about/repo-about.component
 import { DescriptionComponent } from './components/repo-about/description/description.component';
 
 @NgModule({
-  declarations: [
-    ReposComponent,
-    WelcomeUserComponent,
-    RepoListComponent,
-    RepoDetailsComponent,
-    RepoHeaderComponent,
-    RepoActionButtonsComponent,
-    RepoHeadingComponent,
-    RepoTabNavigationComponent,
-    RepoAboutComponent,
-    DescriptionComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    IconsModule,
-    LoadingModule,
-    PrivacyIconComponentModule,
-    CountButtonGroupComponentModule,
-    FileViewerModule,
-  ],
+	declarations: [
+		ReposComponent,
+		WelcomeUserComponent,
+		RepoListComponent,
+		RepoDetailsComponent,
+		RepoHeaderComponent,
+		RepoActionButtonsComponent,
+		RepoHeadingComponent,
+		RepoTabNavigationComponent,
+		RepoAboutComponent,
+		DescriptionComponent,
+	],
+	imports: [
+		CommonModule,
+		RouterModule,
+		IconsModule,
+		LoadingModule,
+		PrivacyIconComponentModule,
+		CountButtonGroupComponentModule,
+		FileViewerModule,
+	],
 })
 export class ReposModule {}

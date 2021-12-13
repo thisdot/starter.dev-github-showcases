@@ -8,13 +8,13 @@ import { ReposModule } from '../repos/repos.module';
 import { IconsModule } from '../components/icons/icons.module';
 
 @NgModule({
-  declarations: [HomeComponent, NavbarComponent],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    UserDropdownMenuComponentModule,
-    IconsModule,
-    ReposModule,
-  ],
+	declarations: [HomeComponent, NavbarComponent],
+	imports: [
+		CommonModule,
+		HomeRoutingModule,
+		UserDropdownMenuComponentModule,
+		IconsModule,
+		ReposModule,
+	],
 })
 export class HomeModule {}

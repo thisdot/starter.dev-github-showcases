@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+cd angular-apollo-tailwind
 yarn lint-prepush
