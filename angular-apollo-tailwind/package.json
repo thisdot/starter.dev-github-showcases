@@ -9,7 +9,10 @@
     "test": "ng test",
     "build:prod": "NODE_ENV=production ng build --prod",
     "config": "node ./tools/set-env.js",
-    "start:dev": "npm run config && ng serve"
+    "start:dev": "npm run config && ng serve",
+    "prepare": "cd .. && husky install angular-apollo-tailwind/.husky",
+    "format:check": "prettier --config ./.prettierrc --list-different src/{app,environments}/**/*{.ts, .html,.scss}\"",
+    "format": "prettier --config ./.prettierrc --write src/{app,environments}/**/*{.ts, .html,.scss}\""
   },
   "private": true,
   "dependencies": {
@@ -46,15 +49,29 @@
     "autoprefixer": "^9",
     "colors": "^1.4.0",
     "dotenv": "^10.0.0",
+    "husky": "^7.0.4",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "lint-prepush": "^2.2.0",
+    "lint-staged": "^12.1.2",
     "postcss": "^7",
     "prettier": "^2.5.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "~4.4.3"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "lint-prepush": {
+    "base": "main",
+    "tasks": {
+      "**/*": [
+        "eslint"
+      ]
+    }
   }
 }
