@@ -6,16 +6,16 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
 import { LoadingBulletListComponent } from './loading-bullet-list/loading-bullet-list.component';
 
 @NgModule({
-  declarations: [
-    LoadingTextLineComponent,
-    LoadingPulseDotsComponent,
-    LoadingBulletListComponent,
-  ],
-  imports: [CommonModule, ContentLoaderModule],
-  exports: [
-    LoadingTextLineComponent,
-    LoadingPulseDotsComponent,
-    LoadingBulletListComponent,
-  ],
+	declarations: [
+		LoadingTextLineComponent,
+		LoadingPulseDotsComponent,
+		LoadingBulletListComponent,
+	],
+	imports: [CommonModule, ContentLoaderModule],
+	exports: [
+		LoadingTextLineComponent,
+		LoadingPulseDotsComponent,
+		LoadingBulletListComponent,
+	],
 })
 export class LoadingModule {}
