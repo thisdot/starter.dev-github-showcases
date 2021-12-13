@@ -34,7 +34,7 @@ export class UserDropdownMenuComponent {
   }
 
   // TODO: maybe convert to directive
-  @HostListener('document:click')
+  @HostListener('document:click', ['$event'])
   onClick(event: PointerEvent) {
     if (!this.elRef.nativeElement.contains(event.target)) {
       this.isOpen = false;

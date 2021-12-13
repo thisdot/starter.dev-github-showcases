@@ -6,9 +6,4 @@ import { Component, Input } from '@angular/core';
 })
 export class RepoTabNavigationComponent {
   @Input() basePath = '';
-  @Input() path = '';
-
-  setPath(path?: string) {
-    return path ? `${this.basePath}/${path}` : this.basePath;
-  }
 }

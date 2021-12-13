@@ -1,0 +1,44 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { RepoDataResolver } from './repo-data.resolver';
+import { RepoDetailsComponent } from './repo-details/repo-details.component';
+import { ReposComponent } from './repos.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: ReposComponent,
+  },
+  {
+    path: ':owner/:repo',
+    component: RepoDetailsComponent,
+    resolve: {
+      userDetails: RepoDataResolver,
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('../file-viewer/file-viewer.module').then(
+            (m) => m.FileViewerModule,
+          ),
+      },
+      {
+        path: 'issues',
+        loadChildren: () =>
+          import('../issues/issues.module').then((m) => m.IssuesModule),
+      },
+      {
+        path: 'code',
+        redirectTo: '',
+      },
+      // TODO: add pull requests route
+    ],
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class RepoRoutingModule {}

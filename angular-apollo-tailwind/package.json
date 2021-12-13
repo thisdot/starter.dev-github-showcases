@@ -13,8 +13,8 @@
     "config": "node ./tools/set-env.js",
     "start:dev": "npm run config && ng serve",
     "prepare": "cd .. && husky install angular-apollo-tailwind/.husky",
-    "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts, .html,.scss}\"",
-    "format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts, .html,.scss}\""
+    "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts, .html,.css}\"",
+    "format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts,.html,.css}\""
   },
   "private": true,
   "dependencies": {
@@ -81,7 +81,7 @@
   "lint-prepush": {
     "base": "main",
     "tasks": {
-      "src/**/*": [
+      "src/**/*{.js,.ts,.html}": [
         "eslint"
       ]
     }

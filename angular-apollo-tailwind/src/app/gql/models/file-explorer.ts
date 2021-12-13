@@ -31,17 +31,23 @@ export interface FileExplorerRepoDetails {
   tree: RepoTree;
 }
 
-export interface FileExplorer extends ApolloQueryResult<FileExplorerData> {
-  items: TreeEntry[];
+export interface ReportHeader extends ApolloQueryResult<FileExplorerData> {
   owner: string;
   name: string;
   basePath: string;
-  branch: string;
-  description: string;
   isPrivate: boolean;
   stargazers: number;
   forks: number;
   watchers: number;
+}
+
+export interface FileExplorer extends ApolloQueryResult<FileExplorerData> {
+  owner: string;
+  name: string;
+  items: TreeEntry[];
+  basePath: string;
+  branch: string;
+  description: string;
 }
 
 export interface TreeEntry {
