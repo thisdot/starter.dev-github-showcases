@@ -8,6 +8,7 @@
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"lint": "ng lint",
+		"lint:fix": "ng lint --fix",
 		"build:prod": "NODE_ENV=production ng build --prod",
 		"config": "node ./tools/set-env.js",
 		"start:dev": "npm run config && ng serve",
@@ -75,7 +76,7 @@
 		"typescript": "~4.4.3"
 	},
 	"lint-staged": {
-		"src/**/*": "npm run format"
+		"src/**/*": "[npm run lint:fix, npm run lint, npm run format]"
 	},
 	"lint-prepush": {
 		"base": "main",
