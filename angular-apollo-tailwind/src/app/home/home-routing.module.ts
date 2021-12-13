@@ -6,6 +6,7 @@ import { ReposComponent } from '../repos/repos.component';
 import { RedirectComponent } from '../provider/redirect/redirect.component';
 import { HomeComponent } from './home.component';
 import { RepoDataResolver } from '../repos/repo-data.resolver';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 const routes: Routes = [
 	{
@@ -29,6 +30,7 @@ const routes: Routes = [
 					// TODO: add pull requests route
 				],
 			},
+			{ path: ':owner', component: UserProfileComponent },
 		],
 	},
 	{

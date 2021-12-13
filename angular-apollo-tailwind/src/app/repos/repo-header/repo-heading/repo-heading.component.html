@@ -1,9 +1,9 @@
 <h1 class="heading">
-  <app-privacy-icon [isPrivate]="isPrivate"></app-privacy-icon>
-  <span class="navContainer">
-    <a class="ownerLink">{{ owner }}</a>
-    <span class="separator">/</span>
-    <a [routerLink]="[owner, name]" class="nameLink">{{ name }}</a>
-  </span>
-  <app-privacy-badge class="pb-1" [isPrivate]="isPrivate"></app-privacy-badge>
+	<app-privacy-icon [isPrivate]="isPrivate"></app-privacy-icon>
+	<span class="navContainer">
+		<a [routerLink]="[owner]" class="ownerLink">{{ owner }}</a>
+		<span class="separator">/</span>
+		<a [routerLink]="[owner, name]" class="nameLink">{{ name }}</a>
+	</span>
+	<app-privacy-badge class="pb-1" [isPrivate]="isPrivate"></app-privacy-badge>
 </h1>
