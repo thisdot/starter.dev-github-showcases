@@ -22,9 +22,7 @@ export class UserDropdownMenuComponent {
 
 	isOpen = false;
 
-	constructor(private elRef: ElementRef) {
-		console.log(this.user);
-	}
+	constructor(private elRef: ElementRef) {}
 
 	toggleMenu() {
 		this.isOpen = !this.isOpen;
