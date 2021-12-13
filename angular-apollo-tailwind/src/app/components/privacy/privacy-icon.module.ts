@@ -5,8 +5,8 @@ import { PrivacyBadgeComponent } from './privacy-badge.component';
 import { IconsModule } from '../icons/icons.module';
 
 @NgModule({
-  declarations: [PrivacyBadgeComponent, PrivacyIconComponent],
-  imports: [CommonModule, IconsModule],
-  exports: [PrivacyBadgeComponent, PrivacyIconComponent],
+	declarations: [PrivacyBadgeComponent, PrivacyIconComponent],
+	imports: [CommonModule, IconsModule],
+	exports: [PrivacyBadgeComponent, PrivacyIconComponent],
 })
 export class PrivacyIconComponentModule {}
