@@ -1,0 +1,18 @@
+<div class="container">
+	<nav class="nav" aria-label="Tabs">
+		<div>
+			<a
+				[routerLink]="setPath()"
+				routerLinkActive="tabActive"
+				class="tabInactive tab"
+				#repoLink="routerLinkActive"
+			>
+				<app-git-repo-icon
+					class="iconInactive icon"
+					[ngClass]="{ iconActive: repoLink.isActive }"
+				></app-git-repo-icon>
+				<span>Code</span>
+			</a>
+		</div>
+	</nav>
+</div>
