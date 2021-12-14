@@ -4,9 +4,11 @@ applications:
       phases:
         preBuild:
           commands:
+            - nvm use 16
             - yarn install
         build:
           commands:
+            - nvm use 16
             - node -v
             - yarn run build
       artifacts:
