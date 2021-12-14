@@ -8,4 +8,11 @@ import { CurrentUserRepos } from 'src/app/gql';
 })
 export class RepoListComponent {
   @Input() repos: CurrentUserRepos[] = [];
+  @Input() login: string | undefined;
+  @Input() isPrivate = false;
+  @Input() description: string | undefined;
+  @Input() languageColor: string | undefined;
+  @Input() forkCount?: number;
+  @Input() stargazerCount?: number;
+  @Input() updatedAt: string | undefined;
 }

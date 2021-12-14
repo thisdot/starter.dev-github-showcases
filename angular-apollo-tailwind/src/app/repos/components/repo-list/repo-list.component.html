@@ -1,12 +1,50 @@
-<div *ngIf="repos.length; else noRepos">
-  <h3 class="my-2 text-xl font-medium">Repositories</h3>
-  <div *ngFor="let repo of repos">
-    <div class="my-1">
-      <a [routerLink]="[repo?.owner?.login, repo?.name]">
-        {{ repo?.owner?.login }} / {{ repo?.name }}
-      </a>
+<div
+  *ngIf="repos.length; else noRepos"
+  class="w-full min-h-[calc(100vh-70px)] flex flex-col-reverse lg:flex-row bg-gray-100"
+>
+  <aside class="w-full lg:w-96 bg-white p-8">
+    <app-user-gists></app-user-gists>
+  </aside>
+  <main class="max-w-screen-lg w-full">
+    <div class="p-12">
+      <h2 class="text-lg font-medium mb-4">Top Repositories</h2>
+      <div class="w-full border rounded-lg relative bg-white">
+        <div *ngFor="let repo of repos">
+          <div class="p-4 border-b">
+            <h3 class="mb-2">
+              <a
+                [routerLink]="[repo?.owner?.login, repo?.name]"
+                class="text-xl text-blue-600 font-semibold hover:underline mr-3"
+                >{{ repo?.name }}</a
+              >
+              <app-privacy-badge
+                [isPrivate]="isPrivate"
+                class="relative bottom-0.5"
+              ></app-privacy-badge>
+            </h3>
+            <div class="text-gray-600 text-sm max-w-prose -mb-1 -mt-1">
+              <!-- {description} -->
+              to be a description
+            </div>
+            <!-- <RepoMeta
+                language={language}
+                languageColor={languageColor}
+                forkCount={forkCount}
+                stargazerCount={stargazerCount}
+                updatedAt={updatedAt}
+              /> -->
+          </div>
+        </div>
+        <div class="bg-gray-50 p-5 w-full text-center">
+          <a
+            [routerLink]="[login]"
+            class="font-semibold text-gray-600 hover:text-blue-500"
+            >View all repositories</a
+          >
+        </div>
+      </div>
     </div>
-  </div>
+  </main>
 </div>
 
 <ng-template #noRepos>

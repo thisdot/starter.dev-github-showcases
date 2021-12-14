@@ -1,0 +1,39 @@
+<div class="flex mt-4 text-xs text-gray-600 space-x-4">
+  <ng-container *ngIf="language">
+    <!-- <div>
+        <span
+          style={{
+            backgroundColor: 'w-3 h-3 inline-block rounded-full mr-1 relative top-0.5' || '#ccc',
+          }}
+          class="w-3 h-3 inline-block rounded-full mr-1 relative top-0.5"
+        ></span>
+        {{language}}
+      </div> -->
+  </ng-container>
+
+  <ng-container *ngIf="stargazerCount > 0 || forkCount > 0">
+    <div class="space-x-4">
+      <ng-container *ngIf="stargazerCount > 0">
+        <span class="hover:cursor-pointer hover:text-blue-600">
+          <!-- <StarIcon class="w-4 h-4 inline mb-0.5" /> {stargazerCount}
+             -->
+          <hero-icon name="star" type="outline" class="btnIcon"></hero-icon>
+          {{ stargazerCount }}
+        </span>
+      </ng-container>
+      <ng-container *ngIf="forkCount > 0">
+        <span class="hover:cursor-pointer hover:text-blue-600">
+          <!-- <GitBranchIcon class="w-4 h-4 inline mb-0.5" /> {forkCount} -->
+          <app-git-branch-icon class="btnIcon"></app-git-branch-icon>
+          {{ forkCount }}
+        </span>
+      </ng-container>
+    </div>
+  </ng-container>
+  <div>
+    <!-- Updated{' '}
+      {formatDistance(new Date(updatedAt), Date.now(), {
+        addSuffix: true,
+      })} -->
+  </div>
+</div>

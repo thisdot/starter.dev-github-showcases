@@ -1,11 +1,15 @@
-<main class="max-w-screen-xl mx-auto">
-  <app-welcome-user [name]="userName$ | async"></app-welcome-user>
-  <app-repo-list
-    *ngIf="repos$ | async as repos; else loading"
-    [repos]="repos"
-  ></app-repo-list>
+<ng-container *ngIf="userName$ | async as user">
+  <main class="max-w-screen-xl mx-auto">
+    <app-welcome-user [name]="user.name"></app-welcome-user>
 
-  <ng-template #loading>
-    <app-loading-pulse-dots></app-loading-pulse-dots>
-  </ng-template>
-</main>
+    <app-repo-list
+      *ngIf="repos$ | async as repos; else loading"
+      [repos]="repos"
+      [login]="user.login"
+    ></app-repo-list>
+
+    <ng-template #loading>
+      <app-loading-pulse-dots></app-loading-pulse-dots>
+    </ng-template>
+  </main>
+</ng-container>
