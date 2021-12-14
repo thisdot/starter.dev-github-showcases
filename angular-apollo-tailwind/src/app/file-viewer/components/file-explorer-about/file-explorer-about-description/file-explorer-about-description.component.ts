@@ -13,6 +13,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     </ng-template>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DescriptionComponent {
+export class FileExplorerAboutDescriptionComponent {
   @Input() description = '';
 }

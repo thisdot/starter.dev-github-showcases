@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-repo-about',
-  templateUrl: './repo-about.component.html',
-  styleUrls: ['./repo-about.component.css'],
+  templateUrl: './file-explorer-about.component.html',
+  styleUrls: ['./file-explorer-about.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RepoAboutComponent {
+export class FileExplorerAboutComponent {
   @Input() isRepoLoading = false;
   @Input() description = '';
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RepoRoutingModule } from './repo-routing.module';
 import { WelcomeUserComponent } from './welcome-user/welcome-user.component';
 import { ReposComponent } from './repos.component';
 import { RepoListComponent } from './components/repo-list/repo-list.component';
@@ -13,9 +13,6 @@ import { RepoTabNavigationComponent } from './repo-header/repo-tab-navigation/re
 import { PrivacyIconComponentModule } from '../components/privacy/privacy-icon.module';
 import { CountButtonGroupComponentModule } from '../components/count-button-group/count-button-group.module';
 import { IconsModule } from '../components/icons/icons.module';
-import { FileViewerModule } from '../file-viewer/file-viewer.module';
-import { RepoAboutComponent } from './components/repo-about/repo-about.component';
-import { DescriptionComponent } from './components/repo-about/description/description.component';
 
 @NgModule({
   declarations: [
@@ -27,17 +24,14 @@ import { DescriptionComponent } from './components/repo-about/description/descri
     RepoActionButtonsComponent,
     RepoHeadingComponent,
     RepoTabNavigationComponent,
-    RepoAboutComponent,
-    DescriptionComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule,
+    RepoRoutingModule,
     IconsModule,
     LoadingModule,
     PrivacyIconComponentModule,
     CountButtonGroupComponentModule,
-    FileViewerModule,
   ],
 })
 export class ReposModule {}

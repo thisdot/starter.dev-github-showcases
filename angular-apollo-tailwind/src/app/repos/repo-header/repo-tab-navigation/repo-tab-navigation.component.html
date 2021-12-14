@@ -2,9 +2,10 @@
   <nav class="nav" aria-label="Tabs">
     <div>
       <a
-        [routerLink]="setPath()"
+        [routerLink]="[basePath, 'code']"
         routerLinkActive="tabActive"
         class="tabInactive tab"
+        [ngClass]="{ tabActive: !issuesLink.isActive && !prLink.isActive }"
         #codeLink="routerLinkActive"
       >
         <hero-icon
@@ -18,7 +19,7 @@
     </div>
     <div>
       <a
-        [routerLink]="setPath('/issues')"
+        [routerLink]="[basePath, 'issues']"
         routerLinkActive="tabActive"
         class="tabInactive tab"
         #issuesLink="routerLinkActive"
@@ -34,7 +35,7 @@
     </div>
     <div>
       <a
-        [routerLink]="setPath('/pull-requests')"
+        [routerLink]="[basePath, 'pull-requests']"
         routerLinkActive="tabActive"
         class="tabInactive tab"
         #prLink="routerLinkActive"

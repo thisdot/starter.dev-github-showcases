@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RepoAboutComponent } from './repo-about.component';
+import { FileExplorerAboutComponent } from './file-explorer-about.component';
 
-describe('RepoAboutComponent', () => {
-  let component: RepoAboutComponent;
-  let fixture: ComponentFixture<RepoAboutComponent>;
+describe('FileExplorerAboutComponent', () => {
+  let component: FileExplorerAboutComponent;
+  let fixture: ComponentFixture<FileExplorerAboutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RepoAboutComponent],
+      declarations: [FileExplorerAboutComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RepoAboutComponent);
+    fixture = TestBed.createComponent(FileExplorerAboutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

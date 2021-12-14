@@ -1,11 +1,11 @@
-const { writeFile } = require("fs");
-const path = require("path");
-const colors = require("colors");
-const dotenv = require("dotenv");
+const { writeFile } = require('fs');
+const path = require('path');
+const colors = require('colors');
+const dotenv = require('dotenv');
 
 // get .env vars
 dotenv.config();
-const targetPath = path.join(__dirname, "../src/environments/environment.ts");
+const targetPath = path.join(__dirname, '../src/environments/environment.ts');
 
 const envVars = `export const environment = {
   production: ${process.env.PRODUCTION},
@@ -41,8 +41,8 @@ ${envVars}
 
 console.log(
   colors.magenta(
-    "The file `environment.ts` will be written with the following content: \n"
-  )
+    'The file `environment.ts` will be written with the following content: \n',
+  ),
 );
 console.log(colors.grey(envConfigFile));
 
@@ -53,7 +53,7 @@ writeFile(targetPath, envConfigFile, (err) => {
 
   console.log(
     colors.magenta(
-      `Angular environment.ts file generated correctly at ${targetPath} \n`
-    )
+      `Angular environment.ts file generated correctly at ${targetPath} \n`,
+    ),
   );
 });
