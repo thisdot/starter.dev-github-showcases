@@ -7,8 +7,8 @@ import { LoadingModule } from '../components/loading/loading.module';
 import { IconsModule } from '../components/icons/icons.module';
 
 @NgModule({
-	declarations: [FileViewerNavComponent, FileExplorerComponent],
-	imports: [CommonModule, RouterModule, LoadingModule, IconsModule],
-	exports: [FileViewerNavComponent, FileExplorerComponent],
+  declarations: [FileViewerNavComponent, FileExplorerComponent],
+  imports: [CommonModule, RouterModule, LoadingModule, IconsModule],
+  exports: [FileViewerNavComponent, FileExplorerComponent],
 })
 export class FileViewerModule {}

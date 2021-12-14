@@ -9,38 +9,38 @@ import { RepoDataResolver } from '../repos/repo-data.resolver';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 const routes: Routes = [
-	{
-		path: '',
-		component: HomeComponent,
-		canActivate: [AuthGuard],
-		children: [
-			{
-				path: '',
-				component: ReposComponent,
-			},
-			{
-				path: ':owner/:repo',
-				component: RepoDetailsComponent,
-				resolve: {
-					userDetails: RepoDataResolver,
-				},
-				children: [
-					// TODO: add file viewer route
-					// TODO: add issues route
-					// TODO: add pull requests route
-				],
-			},
-			{ path: ':owner', component: UserProfileComponent },
-		],
-	},
-	{
-		path: 'redirect',
-		component: RedirectComponent,
-	},
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: ReposComponent,
+      },
+      {
+        path: ':owner/:repo',
+        component: RepoDetailsComponent,
+        resolve: {
+          userDetails: RepoDataResolver,
+        },
+        children: [
+          // TODO: add file viewer route
+          // TODO: add issues route
+          // TODO: add pull requests route
+        ],
+      },
+      { path: ':owner', component: UserProfileComponent },
+    ],
+  },
+  {
+    path: 'redirect',
+    component: RedirectComponent,
+  },
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class HomeRoutingModule {}
