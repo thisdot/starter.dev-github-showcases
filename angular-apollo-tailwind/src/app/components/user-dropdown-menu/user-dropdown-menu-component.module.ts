@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { IconsModule } from '../icons/icons.module';
 
 @NgModule({
-	declarations: [UserDropdownMenuComponent],
-	imports: [CommonModule, RouterModule, IconsModule],
-	exports: [UserDropdownMenuComponent],
+  declarations: [UserDropdownMenuComponent],
+  imports: [CommonModule, RouterModule, IconsModule],
+  exports: [UserDropdownMenuComponent],
 })
 export class UserDropdownMenuComponentModule {}
