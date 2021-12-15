@@ -1,0 +1,58 @@
+<div class="filters-container">
+  <div class="flex space-x-4">
+    <button
+      data-testid="openIssuesButton"
+      class="flex text-sm"
+      [ngClass]="getOpenStyle()"
+      (click)="handleOpenIssueClick()"
+    >
+      <hero-icon
+        name="minus-circle"
+        type="outline"
+        class="typeIcon"
+        aria-hidden="true"
+      ></hero-icon>
+      {{ openCount }} Open
+    </button>
+    <button
+      data-testid="closedIssuesButton"
+      class="flex text-sm"
+      [ngClass]="getClosedStyle()"
+      (click)="handleCloseIssueClick()"
+    >
+      <hero-icon
+        name="check"
+        type="outline"
+        class="typeIcon"
+        aria-hidden="true"
+      ></hero-icon>
+      {{ closedCount }} Closed
+    </button>
+  </div>
+  <div class="space-x-8">
+    <app-filter-dropdown
+      name="Label"
+      description="Filter by label"
+      [current]="currentLabel"
+      [items]="labelOptions"
+      buttonClassName="filterButton"
+      (setFilter)="handleLabelClick($event)"
+    ></app-filter-dropdown>
+    <app-filter-dropdown
+      name="Milestones"
+      description="Filter by milestone"
+      [current]="currentMilestone"
+      [items]="milestoneOptions"
+      buttonClassName="filterButton"
+      (setFilter)="handleMilestoneClick($event)"
+    ></app-filter-dropdown>
+    <app-filter-dropdown
+      name="Sort"
+      description="Sort by"
+      [current]="sort?.field + '^' + sort?.direction"
+      [items]="sortOptions"
+      buttonClassName="filterButton"
+      (setFilter)="handleSortClick($event)"
+    ></app-filter-dropdown>
+  </div>
+</div>

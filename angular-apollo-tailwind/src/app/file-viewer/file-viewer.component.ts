@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { RouteConfigService } from '@this-dot/route-config';
 import { Apollo } from 'apollo-angular';
-import { Observable, map, concatMap } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { ResolvedRepoDetails } from '../gql';
 import {
   FileExplorer,
@@ -18,33 +18,37 @@ import { REPO_TREE_QUERY } from '../gql/queries/file-explorer.query';
   styleUrls: ['./file-viewer.component.css'],
 })
 export class FileViewerComponent {
-  repoDetails$: Observable<FileExplorer> = this.route.data.pipe(
-    map(({ userDetails }) => ({ ...userDetails } as ResolvedRepoDetails)),
-    concatMap(({ owner, name, branch, path, repository }) =>
-      this.apollo
-        .watchQuery<FileExplorerData, FileExplorerVars>({
-          query: REPO_TREE_QUERY,
-          variables: {
-            owner,
-            name,
-            expression: `${branch}:${path}`,
-          },
-        })
-        .valueChanges.pipe(
-          map((res) => ({
-            ...res,
-            owner,
-            name,
-            branch,
-            items: this.parseQueryData(res.data.repository.tree),
-            basePath: `/${owner}/${name}`,
-            description: repository.description,
-          })),
-        ),
-    ),
-  );
+  repoDetails$: Observable<FileExplorer> = this.routeConfigService
+    .getLeafConfig<ResolvedRepoDetails>('userDetails')
+    .pipe(
+      switchMap(({ owner, name, branch, path, repository }) =>
+        this.apollo
+          .watchQuery<FileExplorerData, FileExplorerVars>({
+            query: REPO_TREE_QUERY,
+            variables: {
+              owner,
+              name,
+              expression: `${branch}:${path}`,
+            },
+          })
+          .valueChanges.pipe(
+            map((res) => ({
+              ...res,
+              owner,
+              name,
+              branch,
+              items: this.parseQueryData(res.data.repository.tree),
+              basePath: `/${owner}/${name}`,
+              description: repository.description,
+            })),
+          ),
+      ),
+    );
 
-  constructor(private route: ActivatedRoute, private apollo: Apollo) {}
+  constructor(
+    private routeConfigService: RouteConfigService<string, 'userDetails'>,
+    private apollo: Apollo,
+  ) {}
 
   private parseQueryData(tree: Tree) {
     const items: TreeEntry[] =
