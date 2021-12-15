@@ -32,7 +32,6 @@ export class RepoDataResolver
               name,
               owner,
               branch: res.data.repository.defaultBranchRef.name,
-              path: '',
               error: res.error ?? res.errors,
               loading: res.loading,
               repository: res.data.repository,

@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-file-viewer-nav',
-  templateUrl: './file-viewer-nav.component.html',
-  styleUrls: ['./file-viewer-nav.component.css'],
+  selector: 'app-file-explorer-nav',
+  templateUrl: './file-explorer-nav.component.html',
+  styleUrls: ['./file-explorer-nav.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileViewerNavComponent {
+export class FileExplorerNavComponent {
   @Input() owner = '';
   @Input() name = '';
   @Input() branch = 'master';
