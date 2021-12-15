@@ -10,7 +10,7 @@ const routes: Routes = [
     component: FileExplorerRootComponent,
   },
   {
-    path: 'tree/main',
+    path: 'tree/:branch',
     children: [
       {
         matcher: (url) => {
@@ -31,7 +31,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'blob/main',
+    path: 'blob/:branch',
     children: [
       {
         matcher: (url) => {

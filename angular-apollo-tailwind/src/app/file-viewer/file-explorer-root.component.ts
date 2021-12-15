@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 import { RouteConfigService } from '@this-dot/route-config';
 import { Apollo } from 'apollo-angular';
-import { Observable, withLatestFrom, map, tap, switchMap } from 'rxjs';
+import { Observable, withLatestFrom, map, switchMap } from 'rxjs';
 import { ResolvedRepoDetails } from 'src/app/gql';
 import {
   FileExplorer,
@@ -24,7 +24,6 @@ export class FileExplorerRootComponent {
       withLatestFrom(
         this.route.paramMap.pipe(map((params: ParamMap) => params.get('path'))),
       ),
-      tap(console.log),
       switchMap(([{ owner, name, branch, repository }, path]) =>
         this.apollo
           .watchQuery<FileExplorerData, FileExplorerVars>({
