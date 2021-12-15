@@ -1,11 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FilterOption } from 'src/app/components/filter-dropdown/filter-dropdown.component';
 import { ORDER_BY_DIRECTION } from 'src/app/gql';
 import {
   ISSUE_ORDER_FIELD,
   Label,
   Milestone,
-  Milestones,
   OPEN_CLOSED_STATE,
   SortOption,
 } from 'src/app/gql/models/repo-issues';
@@ -41,6 +46,7 @@ const sortOptions: FilterOption[] = [
   selector: 'app-issues-filters',
   templateUrl: './issues-filters.component.html',
   styleUrls: ['./issues-filters.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IssuesFiltersComponent {
   @Input() openCount: number | null | undefined = 0;
@@ -48,7 +54,7 @@ export class IssuesFiltersComponent {
   @Input() currentMilestone: string | null = null;
   @Input() set milestones(val: Milestone[] | null | undefined) {
     const a = val as Milestone[];
-    const b = [{ title: 'Issue with no milestone', id: null }, ...a];
+    const b = [{ title: 'Issue with no milestone', id: '' }, ...a];
     this.milestoneOptions = b.map((milestone) => ({
       label: milestone.title,
       value: milestone.id,
@@ -65,23 +71,23 @@ export class IssuesFiltersComponent {
   @Input() sort: SortOption | null = null;
   @Input() issueState: OPEN_CLOSED_STATE | null = OPEN_CLOSED_STATE.OPEN;
 
-  @Output() openIssue: EventEmitter<void> = new EventEmitter();
-  @Output() closeIssue: EventEmitter<void> = new EventEmitter();
-  @Output() setLabel: EventEmitter<string> = new EventEmitter();
-  @Output() setMilestone: EventEmitter<string> = new EventEmitter();
-  @Output() setSort: EventEmitter<any> = new EventEmitter();
+  @Output() openIssue = new EventEmitter<void>();
+  @Output() closeIssue = new EventEmitter<void>();
+  @Output() setLabel = new EventEmitter<string>();
+  @Output() setMilestone = new EventEmitter<string>();
+  @Output() setSort = new EventEmitter<string>();
 
   labelOptions: FilterOption[] = [];
   milestoneOptions: FilterOption[] = [];
   sortOptions = sortOptions;
 
-  setOpenStyle() {
+  getOpenStyle() {
     return this.issueState === OPEN_CLOSED_STATE.OPEN
       ? 'font-semibold text-gray-900'
       : 'text-gray-600';
   }
 
-  setClosedStyle() {
+  getClosedStyle() {
     return this.issueState === OPEN_CLOSED_STATE.CLOSED
       ? 'font-semibold text-gray-900'
       : 'text-gray-600';
@@ -95,18 +101,15 @@ export class IssuesFiltersComponent {
     this.closeIssue.emit();
   }
 
-  handleLabelClick(label: string | number | null) {
-    const option = label as string;
-    this.setLabel.emit(option);
+  handleLabelClick(label: string) {
+    this.setLabel.emit(label);
   }
 
-  handleMilestoneClick(milestone: string | number | null) {
-    const option = milestone as string;
-    this.setMilestone.emit(option);
+  handleMilestoneClick(milestone: string) {
+    this.setMilestone.emit(milestone);
   }
 
-  handleSortClick(sort: string | number | null) {
-    const option = sort as string;
-    this.setSort.emit(option);
+  handleSortClick(sort: string) {
+    this.setSort.emit(sort);
   }
 }

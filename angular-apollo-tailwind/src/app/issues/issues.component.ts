@@ -1,10 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  IssuesFormatted,
-  OPEN_CLOSED_STATE,
-  SortOption,
-} from '../gql/models/repo-issues';
+import { IssuesFormatted, OPEN_CLOSED_STATE } from '../gql/models/repo-issues';
 import { IssuesStore, PaginatorOptions } from './issues.store';
 
 @Component({

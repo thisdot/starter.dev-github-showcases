@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RouteConfigService } from '@this-dot/route-config';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Apollo } from 'apollo-angular';
-import { Observable, switchMap, tap, withLatestFrom } from 'rxjs';
+import { Observable, switchMap, withLatestFrom } from 'rxjs';
 import { ORDER_BY_DIRECTION, ResolvedRepoDetails } from '../gql';
 import {
   Issue,
@@ -223,7 +223,9 @@ export class IssuesStore extends ComponentStore<FilterState> {
     this.openIssues$,
     this.closedIssues$,
     (state, openIssues, closedIssues) =>
-      state === ISSUE_STATE.OPEN ? openIssues : closedIssues,
+      state === ISSUE_STATE.OPEN
+        ? (openIssues as IssuesFormatted)
+        : (closedIssues as IssuesFormatted),
   );
 
   readonly pageInfo$ = this.select(
@@ -236,53 +238,50 @@ export class IssuesStore extends ComponentStore<FilterState> {
   readonly getIssues$ = this.effect((target$: Observable<void>) =>
     target$.pipe(
       withLatestFrom(this.state$),
-      tap(console.log),
-      switchMap(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        ([_, { label, milestone, sort, afterCursor, beforeCursor }]) =>
-          this.routeConfigService
-            .getLeafConfig<ResolvedRepoDetails>('userDetails')
-            .pipe(
-              switchMap(({ owner, name }) =>
-                this.apollo
-                  .watchQuery<RepoIssuesData, RepoIssuesVars>({
-                    query: REPO_ISSUES_QUERY,
-                    variables: {
-                      owner,
-                      name,
-                      orderBy: sort ?? undefined,
-                      filterBy:
-                        label || milestone
-                          ? {
-                              labels: label ? [label] : undefined,
-                              milestone: milestone || undefined,
-                            }
-                          : undefined,
-                      after: afterCursor ?? undefined,
-                      before: beforeCursor ?? undefined,
-                    },
-                  })
-                  .valueChanges.pipe(
-                    tapResponse(
-                      (res) => {
-                        const { milestones, openIssues, closedIssues } =
-                          res.data.repository;
+      switchMap(([, { label, milestone, sort, afterCursor, beforeCursor }]) =>
+        this.routeConfigService
+          .getLeafConfig<ResolvedRepoDetails>('userDetails')
+          .pipe(
+            switchMap(({ owner, name }) =>
+              this.apollo
+                .watchQuery<RepoIssuesData, RepoIssuesVars>({
+                  query: REPO_ISSUES_QUERY,
+                  variables: {
+                    owner,
+                    name,
+                    orderBy: sort ?? undefined,
+                    filterBy:
+                      label || milestone
+                        ? {
+                            labels: label ? [label] : undefined,
+                            milestone: milestone || undefined,
+                          }
+                        : undefined,
+                    after: afterCursor ?? undefined,
+                    before: beforeCursor ?? undefined,
+                  },
+                })
+                .valueChanges.pipe(
+                  tapResponse(
+                    (res) => {
+                      const { milestones, openIssues, closedIssues } =
+                        res.data.repository;
 
-                        this.setMilestones(milestones);
-                        this.setOpenIssues(openIssues);
-                        this.setClosedIssues(closedIssues);
-                        this.setActiveIssuesLabels([
-                          ...openIssues.nodes,
-                          ...closedIssues.nodes,
-                        ]);
-                      },
-                      (error) => {
-                        console.log(error);
-                      },
-                    ),
+                      this.setMilestones(milestones);
+                      this.setOpenIssues(openIssues);
+                      this.setClosedIssues(closedIssues);
+                      this.setActiveIssuesLabels([
+                        ...openIssues.nodes,
+                        ...closedIssues.nodes,
+                      ]);
+                    },
+                    (error) => {
+                      console.log(error);
+                    },
                   ),
-              ),
+                ),
             ),
+          ),
       ),
     ),
   );

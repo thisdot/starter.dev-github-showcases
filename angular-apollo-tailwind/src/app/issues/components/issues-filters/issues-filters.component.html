@@ -3,7 +3,7 @@
     <button
       data-testid="openIssuesButton"
       class="flex text-sm"
-      [ngClass]="setOpenStyle()"
+      [ngClass]="getOpenStyle()"
       (click)="handleOpenIssueClick()"
     >
       <hero-icon
@@ -17,7 +17,7 @@
     <button
       data-testid="closedIssuesButton"
       class="flex text-sm"
-      [ngClass]="setClosedStyle()"
+      [ngClass]="getClosedStyle()"
       (click)="handleCloseIssueClick()"
     >
       <hero-icon

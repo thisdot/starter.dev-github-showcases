@@ -10,7 +10,7 @@ import {
 
 export interface FilterOption {
   label: string;
-  value: number | string | null;
+  value: string;
 }
 
 @Component({
@@ -33,11 +33,10 @@ export class FilterDropdownComponent {
   @Input() name = '';
   @Input() description = '';
   @Input() current: string | null = '';
-  @Input() items: FilterOption[] | null = [];
+  @Input() items: FilterOption[] = [];
   @Input() buttonClassName = '';
 
-  @Output() setFilter: EventEmitter<number | string | null> =
-    new EventEmitter();
+  @Output() setFilter: EventEmitter<string> = new EventEmitter();
 
   isOpen = false;
 
@@ -47,7 +46,7 @@ export class FilterDropdownComponent {
     this.isOpen = !this.isOpen;
   }
 
-  handleSetFilterClick(label: number | string | null) {
+  handleSetFilterClick(label: string) {
     this.setFilter.emit(label);
   }
 
