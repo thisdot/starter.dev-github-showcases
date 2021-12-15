@@ -4,12 +4,20 @@
   @apply p-4 border-b;
 }
 
-.container {
+.issues-list-container {
   @apply flex flex-wrap justify-between items-start;
 }
 
 .stateIcon {
   @apply w-5 h-5 mr-2 mt-0.5;
+}
+
+.stateIcon.purple {
+  @apply text-purple-600;
+}
+
+.stateIcon.green {
+  @apply text-green-600;
 }
 
 .content {

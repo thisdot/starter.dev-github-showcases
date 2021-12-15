@@ -1,3 +1,5 @@
+import { ORDER_BY_DIRECTION } from './order-by';
+
 export interface RepoIssuesData {
   repository: RepoIssueDetails;
 }
@@ -19,6 +21,12 @@ export interface Issues {
   pageInfo: PageInfo;
   totalCount: number;
   nodes: Issue[];
+}
+
+export interface IssuesFormatted {
+  pageInfo: PageInfo;
+  totalCount: number;
+  nodes: IssueFormatted[];
 }
 
 export interface Milestone {
@@ -46,6 +54,11 @@ export interface Issue {
   title: string;
   number: number;
   createdAt: string;
+}
+
+export interface IssueFormatted extends Omit<Issue, 'createdAt' | 'closedAt'> {
+  createdAt: Date;
+  closedAt?: Date;
 }
 
 export interface Label {
@@ -83,4 +96,9 @@ export enum ISSUE_ORDER_FIELD {
   COMMENTS = 'COMMENTS',
   CREATED_AT = 'CREATED_AT',
   UPDATED_AT = 'UPDATED_AT',
+}
+
+export interface SortOption {
+  field: ISSUE_ORDER_FIELD;
+  direction: ORDER_BY_DIRECTION;
 }

@@ -7,15 +7,15 @@ import { ORDER_BY_DIRECTION, ResolvedRepoDetails } from '../gql';
 import {
   Issue,
   Issues,
+  IssuesFormatted,
   ISSUE_ORDER_FIELD,
   ISSUE_TYPE,
   Label,
-  Milestone,
   Milestones,
   OPEN_CLOSED_STATE as ISSUE_STATE,
-  RepoIssueDetails,
   RepoIssuesData,
   RepoIssuesVars,
+  SortOption,
 } from '../gql/models/repo-issues';
 import { REPO_ISSUES_QUERY } from '../gql/queries/repo-issues';
 
@@ -25,21 +25,12 @@ export interface FilterState {
   milestone: string;
   state: ISSUE_STATE;
   type: ISSUE_TYPE;
-  sort: {
-    field: ISSUE_ORDER_FIELD;
-    direction: ORDER_BY_DIRECTION;
-  };
+  sort: SortOption;
   afterCursor?: string;
   beforeCursor?: string;
   milestones: Milestones | null;
-  openIssues: Issues | null;
-  closedIssues: Issues | null;
-  activeIssues: Issues | null;
-}
-
-export interface SortOptions {
-  field: ISSUE_ORDER_FIELD;
-  direction: ORDER_BY_DIRECTION;
+  openIssues: IssuesFormatted | null;
+  closedIssues: IssuesFormatted | null;
 }
 
 export interface PaginatorOptions {
@@ -60,12 +51,18 @@ const INITIAL_STATE: FilterState = {
   milestones: null,
   openIssues: null,
   closedIssues: null,
-  activeIssues: null,
 };
 
 interface GenericLabel {
   [key: string]: Label;
 }
+
+const parseIssues = (values: Issues) =>
+  values.nodes.map((issue) => ({
+    ...issue,
+    createdAt: new Date(issue.createdAt),
+    closedAt: issue.closedAt ? new Date(issue.closedAt) : undefined,
+  }));
 
 @Injectable()
 export class IssuesStore extends ComponentStore<FilterState> {
@@ -104,7 +101,7 @@ export class IssuesStore extends ComponentStore<FilterState> {
   }));
 
   readonly setSort = this.updater(
-    (state, { field, direction }: SortOptions) => ({
+    (state, { field, direction }: SortOption) => ({
       ...state,
       sort: {
         field,
@@ -130,17 +127,18 @@ export class IssuesStore extends ComponentStore<FilterState> {
 
   readonly setOpenIssues = this.updater((state, values: Issues) => ({
     ...state,
-    openIssues: values,
+    openIssues: {
+      ...values,
+      nodes: parseIssues(values),
+    },
   }));
 
   readonly setClosedIssues = this.updater((state, values: Issues) => ({
     ...state,
-    closedIssues: values,
-  }));
-
-  readonly setActiveIssues = this.updater((state, values: Issues) => ({
-    ...state,
-    activeIssues: values,
+    closedIssues: {
+      ...values,
+      nodes: parseIssues(values),
+    },
   }));
 
   readonly setActiveIssuesLabels = this.updater((state, values: Issue[]) => {
@@ -175,7 +173,7 @@ export class IssuesStore extends ComponentStore<FilterState> {
 
   readonly milestone$ = this.select(({ milestone }) => milestone);
 
-  readonly milestones$ = this.select(({ milestones }) => milestones);
+  readonly milestones$ = this.select(({ milestones }) => milestones?.nodes);
 
   readonly issueState$ = this.select(({ state }) => state);
 
@@ -183,18 +181,13 @@ export class IssuesStore extends ComponentStore<FilterState> {
 
   readonly sort$ = this.select(({ sort }) => sort);
 
-  readonly page$ = this.select(({ afterCursor, beforeCursor }) => ({
-    afterCursor,
-    beforeCursor,
-  }));
-
-  readonly hasActiveFilters = this.select(
+  readonly hasActiveFilters$ = this.select(
     this.label$,
     this.milestone$,
     this.sort$,
     (label, milestone, sort) =>
-      typeof label === 'string' ||
-      typeof milestone === 'string' ||
+      label !== '' ||
+      milestone !== '' ||
       sort.direction !== ORDER_BY_DIRECTION.DESC ||
       sort.field !== ISSUE_ORDER_FIELD.CREATED_AT,
   );
@@ -213,7 +206,18 @@ export class IssuesStore extends ComponentStore<FilterState> {
     (issues) => issues?.totalCount,
   );
 
-  readonly aciveIssues$ = this.select(({ activeIssues }) => activeIssues);
+  readonly activeIssues$ = this.select(
+    this.issueState$,
+    this.openIssues$,
+    this.closedIssues$,
+    (state, openIssues, closedIssues) =>
+      state === ISSUE_STATE.OPEN ? openIssues : closedIssues,
+  );
+
+  readonly pageInfo$ = this.select(
+    this.activeIssues$,
+    (activeIssues) => activeIssues?.pageInfo,
+  );
 
   // *********** Effects *********** //
 
@@ -222,7 +226,7 @@ export class IssuesStore extends ComponentStore<FilterState> {
       withLatestFrom(this.state$),
       switchMap(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        ([_, { label, milestone, state, sort, afterCursor, beforeCursor }]) =>
+        ([_, { label, milestone, sort, afterCursor, beforeCursor }]) =>
           this.routeConfigService
             .getLeafConfig<ResolvedRepoDetails>('userDetails')
             .pipe(
@@ -250,15 +254,10 @@ export class IssuesStore extends ComponentStore<FilterState> {
                       (res) => {
                         const { milestones, openIssues, closedIssues } =
                           res.data.repository;
-                        const activeIssues =
-                          state === ISSUE_STATE.OPEN
-                            ? openIssues
-                            : closedIssues;
 
                         this.setMilestones(milestones);
                         this.setOpenIssues(openIssues);
                         this.setClosedIssues(closedIssues);
-                        this.setActiveIssues(activeIssues);
                         this.setActiveIssuesLabels([
                           ...openIssues.nodes,
                           ...closedIssues.nodes,
@@ -274,104 +273,4 @@ export class IssuesStore extends ComponentStore<FilterState> {
       ),
     ),
   );
-
-  // private parseIssues(issueConnection?: any) {
-  //   if (!issueConnection) {
-  //     return {
-  //       issues: [],
-  //       totalCount: 0,
-  //       pageInfo: { hasNextPage: false, hasPreviousPage: false },
-  //     };
-  //   }
-
-  //   const pageInfo = issueConnection.pageInfo;
-  //   const nodes = issueConnection.nodes || [];
-  //   const totalCount = issueConnection.totalCount;
-
-  //   const issues = nodes.reduce((issues: Issue[], issue: any) => {
-  //     if (!issue) {
-  //       return issues;
-  //     }
-
-  //     const labelNodes = issue.labels?.nodes || [];
-  //     const labels = labelNodes.reduce(
-  //       (labels: Label[], label: any) =>
-  //         label
-  //           ? [
-  //               ...labels,
-  //               {
-  //                 color: label.color,
-  //                 name: label.name,
-  //               },
-  //             ]
-  //           : labels,
-  //       [],
-  //     );
-
-  //     return [
-  //       ...issues,
-  //       {
-  //         id: issue.id,
-  //         login: issue.author?.login,
-  //         commentCount: issue.comments.totalCount,
-  //         labelCount: issue.labels.totalCount,
-  //         labels,
-  //         closed: issue.closed,
-  //         title: issue.title,
-  //         number: issue.number,
-  //         createdAt: issue.createdAt,
-  //         closedAt: issue.closedAt,
-  //       },
-  //     ];
-  //   }, []);
-
-  //   return { issues, totalCount, pageInfo };
-  // }
-
-  // private parseMilestones(milestones?: any) {
-  //   const nodes = milestones.nodes || [];
-  //   return nodes.reduce((milestones: Milestone[], milestone: any) => {
-  //     if (!milestone) {
-  //       return milestones;
-  //     }
-
-  //     return [
-  //       ...milestones,
-  //       {
-  //         id: milestone.id,
-  //         closed: milestone.closed,
-  //         title: milestone.title,
-  //         number: milestone.number,
-  //         description: milestone.description,
-  //       },
-  //     ];
-  //   }, []);
-  // }
-
-  // private parseQuery(data: RepoIssuesData) {
-  //   const openIssues = this.parseIssues(data.repository?.openIssues);
-  //   const closedIssues = this.parseIssues(data.repository?.closedIssues);
-  //   const milestones = this.parseMilestones(data.repository?.milestones);
-
-  //   const labelMap = [...closedIssues.issues, ...openIssues.issues].reduce(
-  //     (acc: { [key: string]: Label }, issue: Issue) => {
-  //       const map: { [key: string]: Label } = {};
-  //       issue.labels.forEach((label) => {
-  //         map[label.name] = label;
-  //       });
-  //       return {
-  //         ...acc,
-  //         ...map,
-  //       };
-  //     },
-  //     {},
-  //   );
-
-  //   return {
-  //     openIssues,
-  //     closedIssues,
-  //     milestones,
-  //     labels: Object.values(labelMap) as Label[],
-  //   };
-  // }
 }

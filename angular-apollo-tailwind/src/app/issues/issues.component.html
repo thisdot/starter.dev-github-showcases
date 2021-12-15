@@ -1,41 +1,45 @@
 <div class="md:py-12 max-w-screen-xl mx-auto">
-  <!-- Issues Container -->
-  <!-- <div *ngIf="hasActiveFilters$ | async"> -->
-  <div *ngIf="true">
+  <div *ngIf="hasActiveFilters$ | async">
     <button class="clearButton group" (click)="clearFilters()">
       <span class="clearButtonIconContainer group-hover:bg-blue-500">
-        <!-- <XIcon class="clearButtonIcon" /> -->
+        <hero-icon
+          name="x"
+          type="outline"
+          class="clearButtonIcon"
+          aria-hidden="true"
+        ></hero-icon>
       </span>
       <span class="clearButtonText group-hover:text-blue-500">
         Clear current search query, filters, and sorts
       </span>
     </button>
-    <div class="container">
-      <ng-container *ngIf="repoIssues$ | async as activeIssues; else loading">
-        <app-issues-filters
-          [openCount]="openIssuesCount$ | async"
-          [closedCount]="closedIssuesCount$ | async"
-          [milestones]="milestones$ | async"
-          [labels]="labels$ | async"
-          [issueState]="issueState$ | async"
-          [hasActiveFilters]="hasActiveFilters$ | async"
-          (clearFilters)="clearFilters()"
-          (setLabel)="setLabel($event)"
-        ></app-issues-filters>
-
-        <app-issues-list
-          *ngIf="activeIssues.nodes.length; else empty"
-          [issues]="activeIssues.nodes"
-        ></app-issues-list>
-
-        <ng-template #empty><app-issues-empty></app-issues-empty></ng-template>
-
-        <!-- TODO: pagination -->
-      </ng-container>
-
-      <ng-template #loading>
-        <app-issues-skeleton></app-issues-skeleton>
-      </ng-template>
-    </div>
   </div>
+  <div class="issues-container">
+    <ng-container *ngIf="repoIssues$ | async as activeIssues; else loading">
+      <app-issues-filters
+        [openCount]="openIssuesCount$ | async"
+        [closedCount]="closedIssuesCount$ | async"
+        [currentMilestone]="milestone$ | async"
+        [milestones]="milestones$ | async"
+        [currentLabel]="label$ | async"
+        [labels]="labels$ | async"
+        [sort]="sort$ | async"
+        [issueState]="issueState$ | async"
+        (setLabel)="setLabel($event)"
+        (setMilestone)="setMilestone($event)"
+      ></app-issues-filters>
+
+      <app-issues-list
+        *ngIf="activeIssues.nodes.length; else empty"
+        [issues]="activeIssues.nodes"
+      ></app-issues-list>
+
+      <ng-template #empty><app-issues-empty></app-issues-empty></ng-template>
+    </ng-container>
+
+    <ng-template #loading>
+      <app-issues-skeleton></app-issues-skeleton>
+    </ng-template>
+  </div>
+  <app-pagination [pageInfo]="pageInfo$ | async"></app-pagination>
 </div>

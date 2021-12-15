@@ -14,6 +14,6 @@
   @apply text-sm font-semibold text-gray-500;
 }
 
-.container {
+.issues-container {
   @apply border rounded-lg overflow-hidden;
 }

@@ -1,12 +1,22 @@
 <div *ngFor="let issue of issues">
   <div class="issue" data-testid="issue">
-    <div class="container">
+    <div class="issues-list-container">
       <div class="flex">
         <div *ngIf="issue.closed; else open">
-          <!-- <CheckCircleIcon class="stateIcon" /> -->
+          <hero-icon
+            name="check-circle"
+            type="outline"
+            class="stateIcon purple"
+            aria-hidden="true"
+          ></hero-icon>
         </div>
         <ng-template #open>
-          <!-- <MinusCircleIcon class="stateIcon" /> -->
+          <hero-icon
+            name="minus-circle"
+            type="outline"
+            class="stateIcon green"
+            aria-hidden="true"
+          ></hero-icon>
         </ng-template>
         <div>
           <div class="content">
@@ -21,21 +31,26 @@
             #{{ issue.number }}
             <span *ngIf="issue.closed === false">
               opened
-              {{ makeDate(issue.createdAt) | formatDistance: baseDate }}
+              {{ issue.createdAt | formatDistance: baseDate }}
               ago
             </span>
             by <span class="link">{{ issue.author.login }}</span>
             <span *ngIf="issue.closedAt">
               was closed
-              {{ makeDate(issue.closedAt) | formatDistance: baseDate }}
+              {{ issue.closedAt | formatDistance: baseDate }}
               ago
             </span>
           </div>
         </div>
       </div>
-      <div class="mt-1">
-        <span class="comments">
-          <!-- <ChatAltIcon class="commentsIcon" /> -->
+      <div class="mt-1 commentsIcon">
+        <hero-icon
+          name="chat-alt"
+          type="outline"
+          class="commentsIcon"
+          aria-hidden="true"
+        ></hero-icon>
+        <span>
           {{ issue.comments.totalCount }}
         </span>
       </div>
