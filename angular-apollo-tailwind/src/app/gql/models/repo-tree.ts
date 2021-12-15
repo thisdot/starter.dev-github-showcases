@@ -46,6 +46,7 @@ export interface FileExplorer extends ApolloQueryResult<FileExplorerData> {
   name: string;
   items: TreeEntry[];
   basePath: string;
+  path?: string;
   branch: string;
   description: string;
 }

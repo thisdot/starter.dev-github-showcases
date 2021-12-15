@@ -3,14 +3,16 @@
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-12">
         <app-file-explorer-nav
-          [owner]="details.owner"
+          [basePath]="details.basePath"
           [name]="details.name"
           [branch]="details.branch"
+          [path]="details.path"
         ></app-file-explorer-nav>
         <app-file-explorer-list
           [items]="details.items"
           [branch]="details.branch"
           [basePath]="details.basePath"
+          [repoPath]="details.path"
           [isLoaded]="details.loading"
         ></app-file-explorer-list>
       </div>

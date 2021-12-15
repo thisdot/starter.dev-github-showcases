@@ -25,6 +25,8 @@ export interface FileDetails extends ApolloQueryResult<RepoFileData> {
   owner: string;
   name: string;
   branch: string;
+  path: string;
+  basePath: string;
   byteSize: number;
   extension: string;
   language?: Language;

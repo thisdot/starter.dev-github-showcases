@@ -7,20 +7,17 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileExplorerNavComponent {
-  @Input() owner = '';
+  @Input() basePath = '';
   @Input() name = '';
   @Input() branch = 'master';
-  @Input() path = '';
+  @Input() set path(val: string | undefined) {
+    this.crumbs = val?.split('/').filter(Boolean) as string[];
+  }
 
   crumbs: string[] = [];
-  crumbPath = '';
-  href = '';
 
-  // TODO: enable for breadcrumbs
-  // tap((repo) => {
-  //   const path = repo.tree.entries.path;
-  //   this.crumbs = path.split('/').filter(Boolean);
-  //   this.crumbPath = this.crumbs.join('/'); // make pipe?
-  //   this.href = `/${this.owner}/${this.name}/tree/${this.branch}/${this.crumbPath}`;
-  // })
+  getHerf(i: number): string {
+    const crumbPath = this.crumbs.slice(0, i + 1).join('/');
+    return `/${this.basePath}/tree/${this.branch}/${crumbPath}`;
+  }
 }
