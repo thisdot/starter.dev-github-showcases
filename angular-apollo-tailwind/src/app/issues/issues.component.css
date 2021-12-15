@@ -15,5 +15,5 @@
 }
 
 .issues-container {
-  @apply border rounded-lg overflow-hidden;
+  @apply border rounded-lg;
 }

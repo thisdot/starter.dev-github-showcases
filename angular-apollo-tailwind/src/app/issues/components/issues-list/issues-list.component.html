@@ -2,14 +2,14 @@
   <div class="issue" data-testid="issue">
     <div class="issues-list-container">
       <div class="flex">
-        <div *ngIf="issue.closed; else open">
+        <ng-container *ngIf="issue.closed; else open">
           <hero-icon
             name="check-circle"
             type="outline"
             class="stateIcon purple"
             aria-hidden="true"
           ></hero-icon>
-        </div>
+        </ng-container>
         <ng-template #open>
           <hero-icon
             name="minus-circle"

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RouteConfigService } from '@this-dot/route-config';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Apollo } from 'apollo-angular';
-import { Observable, switchMap, withLatestFrom } from 'rxjs';
+import { Observable, switchMap, tap, withLatestFrom } from 'rxjs';
 import { ORDER_BY_DIRECTION, ResolvedRepoDetails } from '../gql';
 import {
   Issue,
@@ -53,6 +53,17 @@ const INITIAL_STATE: FilterState = {
   closedIssues: null,
 };
 
+const ISSUE_ORDER_DICT: { [key: string]: ISSUE_ORDER_FIELD } = {
+  COMMENTS: ISSUE_ORDER_FIELD.COMMENTS,
+  CREATED_AT: ISSUE_ORDER_FIELD.CREATED_AT,
+  UPDATED_AT: ISSUE_ORDER_FIELD.UPDATED_AT,
+};
+
+const DIRECTION_DICT: { [key: string]: ORDER_BY_DIRECTION } = {
+  ASC: ORDER_BY_DIRECTION.ASC,
+  DESC: ORDER_BY_DIRECTION.DESC,
+};
+
 interface GenericLabel {
   [key: string]: Label;
 }
@@ -100,17 +111,18 @@ export class IssuesStore extends ComponentStore<FilterState> {
     beforeCursor: undefined,
   }));
 
-  readonly setSort = this.updater(
-    (state, { field, direction }: SortOption) => ({
+  readonly setSort = this.updater((state, value: string) => {
+    const [field, direction] = value.split('^');
+    return {
       ...state,
       sort: {
-        field,
-        direction,
+        field: ISSUE_ORDER_DICT[field],
+        direction: DIRECTION_DICT[direction],
       },
       afterCursor: undefined,
       beforeCursor: undefined,
-    }),
-  );
+    };
+  });
 
   readonly changePage = this.updater(
     (state, { afterCursor, beforeCursor }: PaginatorOptions) => ({
@@ -224,6 +236,7 @@ export class IssuesStore extends ComponentStore<FilterState> {
   readonly getIssues$ = this.effect((target$: Observable<void>) =>
     target$.pipe(
       withLatestFrom(this.state$),
+      tap(console.log),
       switchMap(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         ([_, { label, milestone, sort, afterCursor, beforeCursor }]) =>
@@ -241,8 +254,8 @@ export class IssuesStore extends ComponentStore<FilterState> {
                       filterBy:
                         label || milestone
                           ? {
-                              labels: [label],
-                              milestone,
+                              labels: label ? [label] : undefined,
+                              milestone: milestone || undefined,
                             }
                           : undefined,
                       after: afterCursor ?? undefined,

@@ -95,13 +95,18 @@ export class IssuesFiltersComponent {
     this.closeIssue.emit();
   }
 
-  handleSetLabelClick(label: string | number | null) {
+  handleLabelClick(label: string | number | null) {
     const option = label as string;
     this.setLabel.emit(option);
   }
 
-  handleSetMilestoneClick(milestone: string | number | null) {
+  handleMilestoneClick(milestone: string | number | null) {
     const option = milestone as string;
     this.setMilestone.emit(option);
+  }
+
+  handleSortClick(sort: string | number | null) {
+    const option = sort as string;
+    this.setSort.emit(option);
   }
 }

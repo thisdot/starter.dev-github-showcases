@@ -92,7 +92,7 @@ export enum ISSUE_TYPE {
   PULL_REQUEST = 'pull',
 }
 
-export enum ISSUE_ORDER_FIELD {
+export const enum ISSUE_ORDER_FIELD {
   COMMENTS = 'COMMENTS',
   CREATED_AT = 'CREATED_AT',
   UPDATED_AT = 'UPDATED_AT',

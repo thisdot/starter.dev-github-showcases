@@ -41,25 +41,31 @@ export class IssuesComponent implements OnInit {
 
   setLabel(label: string) {
     this.issuesStore.setLabel(label);
+    this.issuesStore.getIssues$();
   }
 
-  setSort(sort: SortOption) {
+  setSort(sort: string) {
     this.issuesStore.setSort(sort);
+    this.issuesStore.getIssues$();
   }
 
   openIssue() {
     this.issuesStore.changeState(OPEN_CLOSED_STATE.OPEN);
+    this.issuesStore.getIssues$();
   }
 
   closeIssue() {
     this.issuesStore.changeState(OPEN_CLOSED_STATE.CLOSED);
+    this.issuesStore.getIssues$();
   }
 
   changePage(page: PaginatorOptions) {
     this.issuesStore.changePage(page);
+    this.issuesStore.getIssues$();
   }
 
   clearFilters() {
     this.issuesStore.resetState();
+    this.issuesStore.getIssues$();
   }
 }

@@ -27,6 +27,9 @@
         [issueState]="issueState$ | async"
         (setLabel)="setLabel($event)"
         (setMilestone)="setMilestone($event)"
+        (setSort)="setSort($event)"
+        (openIssue)="openIssue()"
+        (closeIssue)="closeIssue()"
       ></app-issues-filters>
 
       <app-issues-list
