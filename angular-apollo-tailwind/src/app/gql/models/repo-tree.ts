@@ -39,6 +39,8 @@ export interface ReportHeader extends ApolloQueryResult<FileExplorerData> {
   stargazers: number;
   forks: number;
   watchers: number;
+  openIssueCount: number;
+  openPullRequestCount: number;
 }
 
 export interface FileExplorer extends ApolloQueryResult<FileExplorerData> {

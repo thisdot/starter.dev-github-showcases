@@ -13,4 +13,6 @@ export class RepoHeaderComponent {
   @Input() stargazers = 0;
   @Input() forks = 0;
   @Input() basePath = '';
+  @Input() issuesCount = 0;
+  @Input() pullsCount = 0;
 }
