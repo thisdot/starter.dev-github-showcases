@@ -1,1 +1,41 @@
-<p>issues works!</p>
+<div class="md:py-12 max-w-screen-xl mx-auto">
+  <!-- Issues Container -->
+  <!-- <div *ngIf="hasActiveFilters$ | async"> -->
+  <div *ngIf="true">
+    <button class="clearButton group" (click)="clearFilters()">
+      <span class="clearButtonIconContainer group-hover:bg-blue-500">
+        <!-- <XIcon class="clearButtonIcon" /> -->
+      </span>
+      <span class="clearButtonText group-hover:text-blue-500">
+        Clear current search query, filters, and sorts
+      </span>
+    </button>
+    <div class="container">
+      <ng-container *ngIf="repoIssues$ | async as activeIssues; else loading">
+        <app-issues-filters
+          [openCount]="openIssuesCount$ | async"
+          [closedCount]="closedIssuesCount$ | async"
+          [milestones]="milestones$ | async"
+          [labels]="labels$ | async"
+          [issueState]="issueState$ | async"
+          [hasActiveFilters]="hasActiveFilters$ | async"
+          (clearFilters)="clearFilters()"
+          (setLabel)="setLabel($event)"
+        ></app-issues-filters>
+
+        <app-issues-list
+          *ngIf="activeIssues.nodes.length; else empty"
+          [issues]="activeIssues.nodes"
+        ></app-issues-list>
+
+        <ng-template #empty><app-issues-empty></app-issues-empty></ng-template>
+
+        <!-- TODO: pagination -->
+      </ng-container>
+
+      <ng-template #loading>
+        <app-issues-skeleton></app-issues-skeleton>
+      </ng-template>
+    </div>
+  </div>
+</div>
