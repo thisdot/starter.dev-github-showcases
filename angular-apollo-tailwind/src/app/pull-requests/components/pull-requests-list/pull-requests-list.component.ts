@@ -11,10 +11,6 @@ export class PullRequestsListComponent {
 
   readonly baseDate = new Date();
 
-  getColor(color: string) {
-    return { 'background-color': `#${color}` };
-  }
-
   colorMap(color: string): string {
     switch (color) {
       case 'D4C5F9': // violet
