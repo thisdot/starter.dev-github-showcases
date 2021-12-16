@@ -5,13 +5,14 @@
     <!-- TODO: remove this -->
     <!-- <app-welcome-user [name]="user.name"></app-welcome-user> -->
     <app-repo-list
-      *ngIf="repos$ | async as repos; else loading"
+      *ngIf="repos$ | async as repos"
       [repos]="repos"
       [login]="user.login"
     ></app-repo-list>
 
-    <ng-template #loading>
+    <!-- refactor loading to match react -->
+    <!-- <ng-template #loading>
       <app-loading-pulse-dots></app-loading-pulse-dots>
-    </ng-template>
+    </ng-template> -->
   </main>
 </ng-container>

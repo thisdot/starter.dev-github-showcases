@@ -11,9 +11,8 @@ interface GistItem {
   templateUrl: './user-gists.component.html',
 })
 export class UserGistsComponent {
-  @Input() isLoading: boolean | undefined;
+  @Input() isLoading!: boolean;
   @Input() error: any;
-  @Input() data: boolean | undefined;
+  @Input() data: any;
   @Input() gists?: GistItem[];
-  // implement array loop with array length 3 variable and then for loop with ng container?
 }

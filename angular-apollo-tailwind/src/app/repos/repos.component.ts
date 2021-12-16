@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import {
+  CurrentUser,
   CurrentUserData,
   CurrentUserRepos,
   CurrentUserReposData,
@@ -15,7 +16,7 @@ import {
   templateUrl: './repos.component.html',
 })
 export class ReposComponent {
-  userName$: Observable<any> = this.apollo
+  userName$: Observable<CurrentUser> = this.apollo
     .watchQuery<CurrentUserData>({ query: CURRENT_USER_QUERY })
     .valueChanges.pipe(
       map((res) => ({
