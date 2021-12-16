@@ -40,7 +40,6 @@ export class FileExplorerBlobComponent {
               const language = mapLanguageExt(extension);
               const text = file.text ? file.text : '';
               const lines = text.split('\n').length;
-
               return {
                 ...res,
                 owner,
