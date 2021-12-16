@@ -18,6 +18,18 @@ export interface CurrentUserRepos {
   id: string;
   name: string;
   url: string;
+  description: string;
+  isPrivate: boolean;
+  forkCount: number;
+  stargazerCount: number;
+  watchers: {
+    totalCount: number;
+  };
+  primaryLanguage: {
+    name: string;
+    color: string;
+  };
+  updatedAt: Date;
   owner: {
     login: string;
   };

@@ -9,6 +9,18 @@ export const CURRENT_USER_REPOS_QUERY = gql`
           id
           name
           url
+          description
+          isPrivate
+          forkCount
+          stargazerCount
+          updatedAt
+          watchers(last: 1) {
+            totalCount
+          }
+          primaryLanguage {
+            name
+            color
+          }
           owner {
             login
           }

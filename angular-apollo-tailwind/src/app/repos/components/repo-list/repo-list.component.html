@@ -18,21 +18,20 @@
                 >{{ repo?.name }}</a
               >
               <app-privacy-badge
-                [isPrivate]="isPrivate"
+                [isPrivate]="repo?.isPrivate"
                 class="relative bottom-0.5"
               ></app-privacy-badge>
             </h3>
             <div class="text-gray-600 text-sm max-w-prose -mb-1 -mt-1">
-              <!-- {description} -->
-              to be a description
+              {{ repo?.description }}
             </div>
-            <!-- <RepoMeta
-                language={language}
-                languageColor={languageColor}
-                forkCount={forkCount}
-                stargazerCount={stargazerCount}
-                updatedAt={updatedAt}
-              /> -->
+            <app-repo-meta
+              [language]="repo?.primaryLanguage?.name"
+              [languageColor]="repo?.primaryLanguage?.color"
+              [forkCount]="repo.forkCount"
+              [stargazerCount]="repo.stargazerCount"
+              [updatedAt]="repo.updatedAt"
+            ></app-repo-meta>
           </div>
         </div>
         <div class="bg-gray-50 p-5 w-full text-center">

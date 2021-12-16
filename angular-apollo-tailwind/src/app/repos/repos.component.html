@@ -1,7 +1,9 @@
 <ng-container *ngIf="userName$ | async as user">
-  <main class="max-w-screen-xl mx-auto">
-    <app-welcome-user [name]="user.name"></app-welcome-user>
-
+  <!-- max-w-screen-xl causing issues/not working like react version
+  removing will make it similar -->
+  <main class="mx-auto">
+    <!-- TODO: remove this -->
+    <!-- <app-welcome-user [name]="user.name"></app-welcome-user> -->
     <app-repo-list
       *ngIf="repos$ | async as repos; else loading"
       [repos]="repos"

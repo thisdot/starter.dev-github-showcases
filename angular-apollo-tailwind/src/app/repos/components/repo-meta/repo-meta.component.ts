@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { formatDistance } from 'date-fns';
 
 @Component({
   selector: 'app-repo-meta',
@@ -7,7 +8,14 @@ import { Component, Input } from '@angular/core';
 })
 export class RepoMetaComponent {
   @Input() language: string | undefined;
-  @Input() forkCount?: number = 0;
-  @Input() stargazerCount?: number = 0;
-  @Input() updatedAt: string | undefined;
+  @Input() languageColor: string | undefined;
+  @Input() forkCount!: number;
+  @Input() stargazerCount!: number;
+  @Input() updatedAt!: Date;
+
+  getDate(updatedAt: Date) {
+    return formatDistance(new Date(updatedAt), Date.now(), {
+      addSuffix: true,
+    });
+  }
 }
