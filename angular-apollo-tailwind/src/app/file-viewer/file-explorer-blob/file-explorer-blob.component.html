@@ -1,0 +1,21 @@
+<ng-container *ngIf="fileDetails$ | async as details">
+  <div *ngIf="!details?.error" class="max-w-screen-2xl mx-auto py-8 px-4">
+    <div class="grid grid-cols-12 gap-8">
+      <div class="col-span-12">
+        <app-file-explorer-nav
+          [basePath]="details.basePath"
+          [name]="details.name"
+          [branch]="details.branch"
+          [path]="details.path"
+        ></app-file-explorer-nav>
+        <app-file-viewer
+          [text]="details.text"
+          [byteSize]="details.byteSize"
+          [lines]="details.lines"
+          [language]="details.language"
+        ></app-file-viewer>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="details?.error">Error: {{ details.error?.message }}</div>
+</ng-container>

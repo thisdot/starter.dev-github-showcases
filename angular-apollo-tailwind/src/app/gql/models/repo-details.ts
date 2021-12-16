@@ -21,6 +21,12 @@ export interface RepoDetails {
   watchers: {
     totalCount: number;
   };
+  openIssues: {
+    totalCount: number;
+  };
+  openPullRequests: {
+    totalCount: number;
+  };
 }
 
 export interface ResolvedRepoDetails
@@ -28,7 +34,6 @@ export interface ResolvedRepoDetails
   name: string;
   owner: string;
   branch: string;
-  path?: string;
   loading: boolean;
   repository: RepoDetails;
 }

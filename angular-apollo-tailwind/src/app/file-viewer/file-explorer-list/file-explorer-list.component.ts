@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TreeEntry } from 'src/app/gql/models/file-explorer';
+import { TreeEntry } from 'src/app/gql/models/repo-tree';
 
 const removeLastPathPart = (path: string) => {
   const pathParts = path.split('/');
@@ -7,21 +7,22 @@ const removeLastPathPart = (path: string) => {
 };
 
 @Component({
-  selector: 'app-file-explorer',
-  templateUrl: './file-explorer.component.html',
-  styleUrls: ['./file-explorer.component.css'],
+  selector: 'app-file-explorer-list',
+  templateUrl: './file-explorer-list.component.html',
+  styleUrls: ['./file-explorer-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileExplorerComponent {
+export class FileExplorerListComponent {
   @Input() items: TreeEntry[] = [];
   @Input() branch = '';
   @Input() basePath = '';
-  @Input() repoPath = '';
+  @Input() repoPath: string | undefined = '';
   @Input() isLoaded = false;
 
   getBackLink(repoPath: string) {
     const backPath = removeLastPathPart(repoPath);
-    return `${this.basePath}/tree/${this.branch}/${backPath}`;
+    const treePath = `${this.basePath}/tree/${this.branch}`;
+    return backPath ? `${treePath}/${backPath}` : this.basePath;
   }
 
   getPathHref(item: TreeEntry): string {

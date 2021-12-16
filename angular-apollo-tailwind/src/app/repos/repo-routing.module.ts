@@ -19,8 +19,8 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('../file-viewer/file-viewer.module').then(
-            (m) => m.FileViewerModule,
+          import('../file-viewer/file-explorer.module').then(
+            (m) => m.FileExplorerModule,
           ),
       },
       {
