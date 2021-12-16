@@ -22,7 +22,10 @@
           <div class="content">
             <span class="title">{{ pullRequest.title }}</span>
             <span class="inline" *ngFor="let label of pullRequest.labels.nodes">
-              <span [style.background-color]="'#' + label.color" class="label">
+              <span
+                [style.background-color]="colorMap(label.color)"
+                class="label"
+              >
                 {{ label.name }}
               </span>
             </span>
