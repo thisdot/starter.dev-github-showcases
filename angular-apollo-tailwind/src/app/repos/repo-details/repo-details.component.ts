@@ -37,6 +37,8 @@ export class RepoDetailsComponent {
             stargazers: repository.stargazerCount,
             forks: repository.forkCount,
             watchers: repository.watchers.totalCount,
+            openIssueCount: repository.openIssues.totalCount,
+            openPullRequestCount: repository.openPullRequests.totalCount,
           })),
         ),
     ),

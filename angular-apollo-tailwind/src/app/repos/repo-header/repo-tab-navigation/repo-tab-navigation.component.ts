@@ -6,4 +6,6 @@ import { Component, Input } from '@angular/core';
 })
 export class RepoTabNavigationComponent {
   @Input() basePath = '';
+  @Input() issuesCount = 0;
+  @Input() pullsCount = 0;
 }

@@ -14,6 +14,12 @@ export const REPO_DETAILS_QUERY = gql`
       watchers(last: 1) {
         totalCount
       }
+      openIssues: issues(first: 1, states: [OPEN]) {
+        totalCount
+      }
+      openPullRequests: pullRequests(first: 1, states: [OPEN]) {
+        totalCount
+      }
     }
   }
 `;

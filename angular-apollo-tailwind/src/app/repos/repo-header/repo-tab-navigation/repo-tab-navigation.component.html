@@ -31,6 +31,11 @@
           [ngClass]="{ iconActive: issuesLink.isActive }"
         ></hero-icon>
         <span>Issues</span>
+        <span
+          class="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl"
+        >
+          {{ issuesCount }}
+        </span>
       </a>
     </div>
     <div>
@@ -45,6 +50,11 @@
           [ngClass]="{ iconActive: prLink.isActive }"
         ></app-pull-request-icon>
         <span>Pull Requests</span>
+        <span
+          class="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl"
+        >
+          {{ pullsCount }}
+        </span>
       </a>
     </div>
   </nav>
