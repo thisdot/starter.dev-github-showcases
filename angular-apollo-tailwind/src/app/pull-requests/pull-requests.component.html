@@ -1,0 +1,52 @@
+<div class="md:py-12 max-w-screen-xl mx-auto">
+  <div *ngIf="hasActiveFilters$ | async">
+    <button class="clearButton group" (click)="clearFilters()">
+      <span class="clearButtonIconContainer group-hover:bg-blue-500">
+        <hero-icon
+          name="x"
+          type="outline"
+          class="clearButtonIcon"
+          aria-hidden="true"
+        ></hero-icon>
+      </span>
+      <span class="clearButtonText group-hover:text-blue-500">
+        Clear current search query, filters, and sorts
+      </span>
+    </button>
+  </div>
+  <div class="pull-request-container">
+    <ng-container
+      *ngIf="repoPullRequests$ | async as activePullRequests; else loading"
+    >
+      <app-pull-requests-filters
+        [openCount]="openPullRequestsCount$ | async"
+        [closedCount]="closedPullRequestsCount$ | async"
+        [currentMilestone]="milestone$ | async"
+        [milestones]="milestones$ | async"
+        [currentLabel]="label$ | async"
+        [labels]="labels$ | async"
+        [sort]="sort$ | async"
+        [pullRequestState]="pullRequestState$ | async"
+        (setLabel)="setLabel($event)"
+        (setMilestone)="setMilestone($event)"
+        (setSort)="setSort($event)"
+        (openPullRequest)="openPullRequest()"
+        (closePullRequest)="closePullRequest()"
+      ></app-pull-requests-filters>
+
+      <app-pull-requests-list
+        *ngIf="activePullRequests.nodes.length; else empty"
+        [pullRequests]="activePullRequests.nodes"
+      ></app-pull-requests-list>
+
+      <ng-template #empty
+        ><app-pull-request-empty></app-pull-request-empty
+      ></ng-template>
+    </ng-container>
+
+    <ng-template #loading>
+      <app-pull-request-skeleton></app-pull-request-skeleton>
+    </ng-template>
+  </div>
+  <app-pagination [pageInfo]="pageInfo$ | async"></app-pagination>
+</div>

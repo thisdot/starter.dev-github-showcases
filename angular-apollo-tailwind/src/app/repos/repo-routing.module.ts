@@ -29,6 +29,13 @@ const routes: Routes = [
           import('../issues/issues.module').then((m) => m.IssuesModule),
       },
       {
+        path: 'pull-requests',
+        loadChildren: () =>
+          import('../pull-requests/pull-requests.module').then(
+            (m) => m.PullRequestsModule,
+          ),
+      },
+      {
         path: 'code',
         redirectTo: '',
       },
