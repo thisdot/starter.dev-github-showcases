@@ -20,7 +20,6 @@ export class ReposComponent {
     .watchQuery<CurrentUserData>({ query: CURRENT_USER_QUERY })
     .valueChanges.pipe(
       map((res) => ({
-        ...res,
         name: res.data.viewer.name,
         login: res.data.viewer.login,
       })),

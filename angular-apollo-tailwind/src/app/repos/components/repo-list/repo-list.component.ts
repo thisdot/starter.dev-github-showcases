@@ -8,5 +8,5 @@ import { CurrentUserRepos } from 'src/app/gql';
 })
 export class RepoListComponent {
   @Input() repos: CurrentUserRepos[] = [];
-  @Input() login!: string;
+  @Input() login: string = '';
 }
