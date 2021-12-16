@@ -26,7 +26,7 @@ export class PullRequestsListComponent {
       case 'ED1DB5': // hot pink
         return '#f9a8d4';
       default:
-        return '';
+        return `#${color}`;
     }
   }
 }
