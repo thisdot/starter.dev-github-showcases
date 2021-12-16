@@ -16,7 +16,7 @@ export class FileExplorerNavComponent {
 
   crumbs: string[] = [];
 
-  getHerf(i: number): string {
+  getHref(i: number): string {
     const crumbPath = this.crumbs.slice(0, i + 1).join('/');
     return `/${this.basePath}/tree/${this.branch}/${crumbPath}`;
   }
