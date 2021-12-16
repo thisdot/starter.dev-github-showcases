@@ -8,7 +8,7 @@ export interface CurrentUserData {
 }
 
 export interface CurrentUser {
-  avatarUrl: string;
+  avatarUrl?: string;
   login: string;
   name: string;
 }

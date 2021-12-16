@@ -13,6 +13,8 @@ import { RepoTabNavigationComponent } from './repo-header/repo-tab-navigation/re
 import { PrivacyIconComponentModule } from '../components/privacy/privacy-icon.module';
 import { CountButtonGroupComponentModule } from '../components/count-button-group/count-button-group.module';
 import { IconsModule } from '../components/icons/icons.module';
+import { UserGistsComponent } from './components/user-gists/user-gists.component';
+import { RepoMetaComponent } from './components/repo-meta/repo-meta.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { IconsModule } from '../components/icons/icons.module';
     RepoActionButtonsComponent,
     RepoHeadingComponent,
     RepoTabNavigationComponent,
+    UserGistsComponent,
+    RepoMetaComponent,
   ],
   imports: [
     CommonModule,
