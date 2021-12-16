@@ -28,7 +28,6 @@ export interface ResolvedRepoDetails
   name: string;
   owner: string;
   branch: string;
-  path?: string;
   loading: boolean;
   repository: RepoDetails;
 }

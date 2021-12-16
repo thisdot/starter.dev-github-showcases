@@ -7,8 +7,8 @@ import {
   ReportHeader,
   FileExplorerData,
   FileExplorerVars,
-} from 'src/app/gql/models/file-explorer';
-import { REPO_TREE_QUERY } from 'src/app/gql/queries/file-explorer.query';
+} from 'src/app/gql/models/repo-tree';
+import { REPO_TREE_QUERY } from 'src/app/gql/queries/repo-tree.query';
 
 @Component({
   selector: 'app-repo-details',
@@ -17,14 +17,14 @@ import { REPO_TREE_QUERY } from 'src/app/gql/queries/file-explorer.query';
 export class RepoDetailsComponent {
   headerStats$: Observable<ReportHeader> = this.route.data.pipe(
     map(({ userDetails }) => ({ ...userDetails } as ResolvedRepoDetails)),
-    concatMap(({ owner, name, branch, path, repository }) =>
+    concatMap(({ owner, name, branch, repository }) =>
       this.apollo
         .watchQuery<FileExplorerData, FileExplorerVars>({
           query: REPO_TREE_QUERY,
           variables: {
             owner,
             name,
-            expression: `${branch}:${path}`,
+            expression: `${branch}:`,
           },
         })
         .valueChanges.pipe(

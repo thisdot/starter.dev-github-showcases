@@ -1,0 +1,14 @@
+<div class="file-viewer-container">
+  <div class="fileHeader">
+    <span class="fileHeaderLines">{{ lines }} lines</span>
+    <span class="fileHeaderBytes">{{ byteSize }} Bytes</span>
+  </div>
+  <ng-container *ngIf="language; else unknownLanguage">
+    <!-- <FileCode text={text} language={language} /> -->
+    <pre>{{ text }}</pre>
+  </ng-container>
+  <ng-template #unknownLanguage>
+    <!-- <FileText text={text} /> -->
+    <pre>{{ text }}</pre>
+  </ng-template>
+</div>

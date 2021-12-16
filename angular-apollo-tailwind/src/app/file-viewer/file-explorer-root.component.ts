@@ -1,34 +1,37 @@
 import { Component } from '@angular/core';
+import { ParamMap, ActivatedRoute } from '@angular/router';
 import { RouteConfigService } from '@this-dot/route-config';
 import { Apollo } from 'apollo-angular';
-import { Observable, map, switchMap } from 'rxjs';
-import { ResolvedRepoDetails } from '../gql';
+import { Observable, withLatestFrom, map, switchMap } from 'rxjs';
+import { ResolvedRepoDetails } from 'src/app/gql';
 import {
   FileExplorer,
   FileExplorerData,
   FileExplorerVars,
   TreeEntry,
   RepoTree as Tree,
-} from '../gql/models/file-explorer';
-import { REPO_TREE_QUERY } from '../gql/queries/file-explorer.query';
+} from 'src/app/gql/models/repo-tree';
+import { REPO_TREE_QUERY } from 'src/app/gql/queries/repo-tree.query';
 
 @Component({
-  selector: 'app-file-viewer',
-  templateUrl: './file-viewer.component.html',
-  styleUrls: ['./file-viewer.component.css'],
+  selector: 'app-file-explorer-root',
+  templateUrl: './file-explorer-root.component.html',
 })
-export class FileViewerComponent {
+export class FileExplorerRootComponent {
   repoDetails$: Observable<FileExplorer> = this.routeConfigService
     .getLeafConfig<ResolvedRepoDetails>('userDetails')
     .pipe(
-      switchMap(({ owner, name, branch, path, repository }) =>
+      withLatestFrom(
+        this.route.paramMap.pipe(map((params: ParamMap) => params.get('path'))),
+      ),
+      switchMap(([{ owner, name, branch, repository }, path]) =>
         this.apollo
           .watchQuery<FileExplorerData, FileExplorerVars>({
             query: REPO_TREE_QUERY,
             variables: {
               owner,
               name,
-              expression: `${branch}:${path}`,
+              expression: `${branch}:${path ?? ''}`,
             },
           })
           .valueChanges.pipe(
@@ -46,6 +49,7 @@ export class FileViewerComponent {
     );
 
   constructor(
+    private route: ActivatedRoute,
     private routeConfigService: RouteConfigService<string, 'userDetails'>,
     private apollo: Apollo,
   ) {}
