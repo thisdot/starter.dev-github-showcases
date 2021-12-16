@@ -22,7 +22,10 @@
           <div class="content">
             <span class="title">{{ issue.title }}</span>
             <span class="inline" *ngFor="let label of issue.labels.nodes">
-              <span [style.background-color]="'#' + label.color" class="label">
+              <span
+                [style.background-color]="colorMap(label.color)"
+                class="label"
+              >
                 {{ label.name }}
               </span>
             </span>
