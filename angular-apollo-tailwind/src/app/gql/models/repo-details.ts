@@ -21,10 +21,10 @@ export interface RepoDetails {
   watchers: {
     totalCount: number;
   };
-  issues: {
+  openIssues: {
     totalCount: number;
   };
-  pullRequests: {
+  openPullRequests: {
     totalCount: number;
   };
 }

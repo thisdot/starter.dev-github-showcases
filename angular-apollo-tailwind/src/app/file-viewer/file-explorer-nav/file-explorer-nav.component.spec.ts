@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FileExplorerNavComponent } from './file-explorer-nav.component';
 
 describe('FileExplorerNavComponent', () => {

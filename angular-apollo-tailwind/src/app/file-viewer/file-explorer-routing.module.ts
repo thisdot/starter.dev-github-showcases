@@ -4,6 +4,20 @@ import { FileExplorerBlobComponent } from './file-explorer-blob/file-explorer-bl
 import { FileExplorerRootComponent } from './file-explorer-root.component';
 import { FileExplorerViewComponent } from './file-explorer-view/file-explorer-view.component';
 
+const pathMatcher = (url: UrlSegment[]) => {
+  const path = url.map((segment) => segment.path).join('/');
+  if (url.length && new RegExp(/^[.\w-]+(\/[.\w-]+)*$/gm).test(path)) {
+    return {
+      consumed: url,
+      posParams: {
+        path: new UrlSegment(path, {}),
+      },
+    };
+  }
+
+  return null;
+};
+
 const routes: Routes = [
   {
     path: '',
@@ -13,19 +27,7 @@ const routes: Routes = [
     path: 'tree/:branch',
     children: [
       {
-        matcher: (url) => {
-          const path = url.map((segment) => segment.path).join('/');
-          if (url.length && new RegExp(/^[.\w-]+(\/[.\w-]+)*$/gm).test(path)) {
-            return {
-              consumed: url,
-              posParams: {
-                path: new UrlSegment(path, {}),
-              },
-            };
-          }
-
-          return null;
-        },
+        matcher: pathMatcher,
         component: FileExplorerViewComponent,
       },
     ],
@@ -34,19 +36,7 @@ const routes: Routes = [
     path: 'blob/:branch',
     children: [
       {
-        matcher: (url) => {
-          const path = url.map((segment) => segment.path).join('/');
-          if (url.length && new RegExp(/^[.\w-]+(\/[.\w-]+)*$/gm).test(path)) {
-            return {
-              consumed: url,
-              posParams: {
-                path: new UrlSegment(path, {}),
-              },
-            };
-          }
-
-          return null;
-        },
+        matcher: pathMatcher,
         component: FileExplorerBlobComponent,
       },
     ],
