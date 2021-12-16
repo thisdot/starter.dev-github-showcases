@@ -16,12 +16,13 @@ export class FileExplorerListComponent {
   @Input() items: TreeEntry[] = [];
   @Input() branch = '';
   @Input() basePath = '';
-  @Input() repoPath = '';
+  @Input() repoPath: string | undefined = '';
   @Input() isLoaded = false;
 
   getBackLink(repoPath: string) {
     const backPath = removeLastPathPart(repoPath);
-    return `${this.basePath}/tree/${this.branch}/${backPath}`;
+    const treePath = `${this.basePath}/tree/${this.branch}`;
+    return backPath ? `${treePath}/${backPath}` : this.basePath;
   }
 
   getPathHref(item: TreeEntry): string {

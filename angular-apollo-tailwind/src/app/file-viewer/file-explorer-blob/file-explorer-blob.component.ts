@@ -45,6 +45,8 @@ export class FileExplorerBlobComponent {
                 owner,
                 name,
                 branch,
+                basePath: `/${owner}/${name}`,
+                path: path ?? '',
                 byteSize: file.byteSize,
                 extension,
                 language,

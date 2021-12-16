@@ -1,4 +1,4 @@
-.container {
+.file-explorer-list-container {
   @apply border rounded border-gray-300 text-sm;
 }
 

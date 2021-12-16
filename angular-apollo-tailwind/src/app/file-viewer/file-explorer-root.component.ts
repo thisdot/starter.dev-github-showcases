@@ -40,6 +40,7 @@ export class FileExplorerRootComponent {
               owner,
               name,
               branch,
+              path: path ?? '',
               items: this.parseQueryData(res.data.repository.tree),
               basePath: `/${owner}/${name}`,
               description: repository.description,
