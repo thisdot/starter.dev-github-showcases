@@ -1,0 +1,59 @@
+<div *ngFor="let pullRequest of pullRequests">
+  <div class="pull-request" data-testid="pull-request">
+    <div class="pull-requests-list-container">
+      <div class="flex">
+        <ng-container *ngIf="pullRequest.closed; else open">
+          <hero-icon
+            name="check-circle"
+            type="outline"
+            class="stateIcon purple"
+            aria-hidden="true"
+          ></hero-icon>
+        </ng-container>
+        <ng-template #open>
+          <hero-icon
+            name="minus-circle"
+            type="outline"
+            class="stateIcon green"
+            aria-hidden="true"
+          ></hero-icon>
+        </ng-template>
+        <div>
+          <div class="content">
+            <span class="title">{{ pullRequest.title }}</span>
+            <span class="inline" *ngFor="let label of pullRequest.labels.nodes">
+              <span [style.background-color]="'#' + label.color" class="label">
+                {{ label.name }}
+              </span>
+            </span>
+          </div>
+          <div class="meta">
+            #{{ pullRequest.number }}
+            <span *ngIf="pullRequest.closed === false">
+              opened
+              {{ pullRequest.createdAt | formatDistance: baseDate }}
+              ago
+            </span>
+            by <span class="link">{{ pullRequest.author.login }}</span>
+            <span *ngIf="pullRequest.closedAt">
+              was closed
+              {{ pullRequest.closedAt | formatDistance: baseDate }}
+              ago
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-1 commentsIcon">
+        <hero-icon
+          name="chat-alt"
+          type="outline"
+          class="commentsIcon"
+          aria-hidden="true"
+        ></hero-icon>
+        <span>
+          {{ pullRequest.comments.totalCount }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

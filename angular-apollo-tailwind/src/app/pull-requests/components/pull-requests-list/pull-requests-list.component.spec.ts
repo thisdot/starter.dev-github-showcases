@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FileExplorerNavComponent } from './file-explorer-nav.component';
 
-describe('FileExplorerNavComponent', () => {
-  let component: FileExplorerNavComponent;
-  let fixture: ComponentFixture<FileExplorerNavComponent>;
+import { PullRequestsListComponent } from './pull-requests-list.component';
+
+describe('PullRequestsListComponent', () => {
+  let component: PullRequestsListComponent;
+  let fixture: ComponentFixture<PullRequestsListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FileExplorerNavComponent],
+      declarations: [PullRequestsListComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FileExplorerNavComponent);
+    fixture = TestBed.createComponent(PullRequestsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
