@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
 import { RedirectComponent } from '../provider/redirect/redirect.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { HomeComponent } from './home.component';
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
     path: 'redirect',
     component: RedirectComponent,
   },
+  { path: ':owner', component: UserProfileComponent },
 ];
 
 @NgModule({
