@@ -7,5 +7,6 @@ import { ProfileNavComponent } from './profile-nav/profile-nav.component';
 @NgModule({
   declarations: [ProfileComponent, ProfileNavComponent],
   imports: [CommonModule, RouterModule],
+  exports: [ProfileComponent],
 })
 export class ProfileModule {}
