@@ -10,6 +10,11 @@ const routes: Routes = [
     component: ReposComponent,
   },
   {
+    path: ':owner',
+    loadChildren: () =>
+      import('../profile/profile.module').then((m) => m.ProfileModule),
+  },
+  {
     path: ':owner/:repo',
     component: RepoDetailsComponent,
     resolve: {

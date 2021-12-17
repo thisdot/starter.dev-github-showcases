@@ -26,8 +26,8 @@
               {{ repo.description }}
             </div>
             <app-repo-meta
-              [language]="repo.primaryLanguage.name"
-              [languageColor]="repo.primaryLanguage.color"
+              [language]="repo.primaryLanguage?.name"
+              [languageColor]="repo.primaryLanguage?.color"
               [forkCount]="repo.forkCount"
               [stargazerCount]="repo.stargazerCount"
               [updatedAt]="repo.updatedAt"

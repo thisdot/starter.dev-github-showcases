@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
 })
-export class UserProfileComponent {
+export class ProfileComponent {
   // const { query, pathname } = useRouter();
   @Input() basePath = '';
 }
