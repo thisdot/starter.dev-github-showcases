@@ -8,13 +8,16 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "lint:shared": "ng lint shared",
     "lint:fix": "ng lint --fix",
+    "lint:shared:fix": "ng lint shared --fix",
     "build:prod": "NODE_ENV=production ng build --prod",
     "config": "node ./tools/set-env.js",
     "start:dev": "npm run config && ng serve",
     "prepare": "cd .. && husky install angular-apollo-tailwind/.husky",
     "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts, .html,.css}\"",
-    "format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts,.html,.css}\""
+    "format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts,.html,.css}\"",
+    "format:libs": "prettier --config ./.prettierrc --write \"projects/**/*{.ts,.html,.css}\""
   },
   "private": true,
   "dependencies": {
@@ -73,18 +76,27 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "lint-prepush": "^2.2.0",
     "lint-staged": "^12.1.2",
+    "ng-packagr": "^13.0.0",
     "postcss": "^7",
     "prettier": "^2.5.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "~4.4.3"
   },
   "lint-staged": {
-    "src/**/*": "npm run format"
+    "src/**/*{.js,.ts,.html,.css}": [
+      "npm run format"
+    ],
+    "projects/**/*{.js,.ts,.html,.css}": [
+      "npm run format:libs"
+    ]
   },
   "lint-prepush": {
     "base": "main",
     "tasks": {
       "src/**/*{.js,.ts,.html}": [
+        "eslint"
+      ],
+      "projects/**/*{.js,.ts,.html}": [
         "eslint"
       ]
     }
