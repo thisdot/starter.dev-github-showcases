@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { formatDistance } from 'date-fns';
+import { formatDistance, Locale } from 'date-fns';
 
 const isValidDate = (date: Date | number): boolean =>
   !(date === undefined || date === null);

@@ -2,13 +2,9 @@ import { NgModule } from '@angular/core';
 import {
   ContentLoadingModule,
   CountButtonGroupComponentModule,
-  FilterDropdownModule,
   IconsModule,
-  PaginationModule,
-  PrivacyIconComponentModule,
-  UserDropdownMenuComponentModule,
 } from './components';
-import { PipesModule } from './pipes/pipe.module';
+import { PipesModule } from './pipes';
 
 @NgModule({
   declarations: [],
@@ -16,11 +12,7 @@ import { PipesModule } from './pipes/pipe.module';
     ContentLoadingModule,
     IconsModule,
     CountButtonGroupComponentModule,
-    FilterDropdownModule,
     ContentLoadingModule,
-    PaginationModule,
-    PrivacyIconComponentModule,
-    UserDropdownMenuComponentModule,
     PipesModule,
   ],
   exports: [],

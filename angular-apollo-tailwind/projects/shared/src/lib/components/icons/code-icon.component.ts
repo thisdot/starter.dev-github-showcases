@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sd-code-icon',
@@ -14,5 +14,6 @@ import { Component } from '@angular/core';
   >
     <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
   </svg>`,
+  encapsulation: ViewEncapsulation.None,
 })
 export class CodeIconComponent {}

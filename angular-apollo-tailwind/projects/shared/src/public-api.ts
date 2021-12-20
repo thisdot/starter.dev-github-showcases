@@ -11,4 +11,4 @@ export * from './lib/components';
 export * from './lib/shared.module';
 
 // Pipes
-export * from './lib/pipes/pipe.module';
+export * from './lib/pipes';

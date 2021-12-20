@@ -1,9 +1,9 @@
 <h1 class="heading">
-  <app-privacy-icon [isPrivate]="isPrivate"></app-privacy-icon>
+  <sd-privacy-icon [isPrivate]="isPrivate"></sd-privacy-icon>
   <span class="navContainer">
     <a [routerLink]="'/' + owner" class="ownerLink">{{ owner }}</a>
     <span class="separator">/</span>
     <a [routerLink]="[owner, name]" class="nameLink">{{ name }}</a>
   </span>
-  <app-privacy-badge class="pb-1" [isPrivate]="isPrivate"></app-privacy-badge>
+  <sd-privacy-badge class="pb-1" [isPrivate]="isPrivate"></sd-privacy-badge>
 </h1>

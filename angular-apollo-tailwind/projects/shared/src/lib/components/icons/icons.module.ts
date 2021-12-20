@@ -27,6 +27,8 @@ import { GitRepoIconComponent } from './git-repo-icon.component';
 import { GithubLogoComponent } from './github-logo.component';
 import { InformationCircleIconComponent } from './information-circle-icon.component';
 import { PullRequestIconComponent } from './pull-request-icon.component';
+import { PrivacyIconComponent } from './privacy-icon.component';
+import { PrivacyBadgeComponent } from './privacy-badge.component';
 
 const icons = [
   DocumentIconComponent,
@@ -38,6 +40,8 @@ const icons = [
   GithubLogoComponent,
   InformationCircleIconComponent,
   PullRequestIconComponent,
+  PrivacyIconComponent,
+  PrivacyBadgeComponent,
 ];
 
 @NgModule({

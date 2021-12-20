@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
     <div class="bg-gray-600 w-2 h-2 rounded-full animate-bounce delay-20"></div>
     <div class="bg-gray-600 w-2 h-2 rounded-full animate-bounce delay-30"></div>
   </div>`,
+  styleUrls: ['../../../styles.css'],
 })
 export class PulseDotsLoadingComponent {}
