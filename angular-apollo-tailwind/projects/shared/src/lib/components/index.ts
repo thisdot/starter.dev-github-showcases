@@ -1,3 +1,5 @@
+export * from './container/container.component';
+export * from './container/container.module';
 export * from './count-button-group/count-button-group.component';
 export * from './count-button-group/count-button-group.module';
 export * from './content-loading';

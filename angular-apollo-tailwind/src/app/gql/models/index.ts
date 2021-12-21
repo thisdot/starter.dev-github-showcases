@@ -6,3 +6,4 @@ export * from './repo-file';
 export * from './repo-issues';
 export * from './repo-pulls';
 export * from './repo-tree';
+export * from './user-gists';
