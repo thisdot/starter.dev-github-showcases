@@ -1,14 +1,14 @@
 import { Story, Meta } from '@storybook/react';
-import RepoIssues from './RepoIssues.data';
-import { mockRepoIssuesQuery } from './RepoIssues.mocks';
+import RepoPulls from './RepoPulls.data';
+import { mockRepoPullsQuery } from './RepoPulls.mocks';
 import { createWrapper } from '@lib/testUtils';
 import { RepoProvider } from '@context/RepoContext';
 
 export default {
-  component: RepoIssues,
-  title: 'RepoPage/RepoIssues',
+  component: RepoPulls,
+  title: 'RepoPage/RepoPulls',
   parameters: {
-    msw: [mockRepoIssuesQuery],
+    msw: [mockRepoPullsQuery],
   },
   decorators: [
     (Story: Story) => {
@@ -42,7 +42,7 @@ const Template: Story = () => (
       },
     }}
   >
-    <RepoIssues />
+    <RepoPulls />
   </RepoProvider>
 );
 

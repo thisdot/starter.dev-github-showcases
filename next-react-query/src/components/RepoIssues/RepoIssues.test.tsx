@@ -1,5 +1,5 @@
 import { setLogger } from 'react-query';
-import { screen, waitFor, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import { renderWithClient } from '@lib/testUtils';
 import { setupMswServer } from '@lib/mswServer';
 import RepoIssues from './RepoIssues.data';
@@ -40,7 +40,7 @@ describe('RepoIssues', () => {
     );
     expect(screen.getAllByTestId('skeleton').length).toBeGreaterThan(0);
 
-    const issues = await waitFor(() => screen.getAllByTestId('issue'));
+    const issues = await screen.findAllByTestId('issue');
     expect(issues[0]).toHaveTextContent(
       'Bug: onMouse leave triggered on hidden components if hovered over before hidden'
     );
@@ -55,7 +55,7 @@ describe('RepoIssues', () => {
 
     expect(screen.getAllByTestId('skeleton').length).toBeGreaterThan(0);
 
-    let openIssues = await waitFor(() => screen.getAllByTestId('issue'));
+    let openIssues = await screen.findAllByTestId('issue');
     expect(openIssues.at(0)).toHaveTextContent(
       'Bug: onMouse leave triggered on hidden components if hovered over before hidden'
     );
@@ -75,7 +75,7 @@ describe('RepoIssues', () => {
 
     expect(screen.getAllByTestId('skeleton').length).toBeGreaterThan(0);
 
-    let openIssues = await waitFor(() => screen.getAllByTestId('issue'));
+    let openIssues = await screen.findAllByTestId('issue');
     expect(openIssues.at(0)).toHaveTextContent(
       'Bug: onMouse leave triggered on hidden components if hovered over before hidden'
     );
@@ -95,20 +95,20 @@ describe('RepoIssues', () => {
 
     expect(screen.getAllByTestId('skeleton').length).toBeGreaterThan(0);
 
-    let openIssues = await waitFor(() => screen.getAllByTestId('issue'));
+    let openIssues = await screen.findAllByTestId('issue');
     expect(openIssues.at(0)).toHaveTextContent(
       'Bug: onMouse leave triggered on hidden components if hovered over before hidden'
     );
 
     fireEvent.click(screen.getByText('Next'));
 
-    let nextPageIssues = await waitFor(() => screen.getAllByTestId('issue'));
+    let nextPageIssues = await screen.findAllByTestId('issue');
     expect(nextPageIssues.at(0)).toHaveTextContent(
       '[DevTools Bug]: Components without own dimensions not highlighted at all'
     );
 
     fireEvent.click(screen.getByText('Previous'));
-    let firstPageIssues = await waitFor(() => screen.getAllByTestId('issue'));
+    let firstPageIssues = await screen.findAllByTestId('issue');
     expect(firstPageIssues.at(0)).toHaveTextContent(
       'Bug: onMouse leave triggered on hidden components if hovered over before hidden'
     );
@@ -123,7 +123,7 @@ describe('RepoIssues', () => {
 
     expect(screen.getAllByTestId('skeleton').length).toBeGreaterThan(0);
 
-    let openIssues = await waitFor(() => screen.getAllByTestId('issue'));
+    let openIssues = await screen.findAllByTestId('issue');
     expect(openIssues.at(0)).toHaveTextContent(
       'Bug: onMouse leave triggered on hidden components if hovered over before hidden'
     );
@@ -131,7 +131,7 @@ describe('RepoIssues', () => {
     fireEvent.click(screen.getByText('Label'));
     fireEvent.click(screen.getByText('React 18', { ignore: '.label' }));
 
-    let filteredIssues = await waitFor(() => screen.getAllByTestId('issue'));
+    let filteredIssues = await screen.findAllByTestId('issue');
     filteredIssues.forEach((issue) => {
       expect(issue).toHaveTextContent('React 18');
     });
@@ -146,7 +146,7 @@ describe('RepoIssues', () => {
 
     expect(screen.getAllByTestId('skeleton').length).toBeGreaterThan(0);
 
-    let openIssues = await waitFor(() => screen.getAllByTestId('issue'));
+    let openIssues = await screen.findAllByTestId('issue');
     expect(openIssues.at(0)).toHaveTextContent(
       'Bug: onMouse leave triggered on hidden components if hovered over before hidden'
     );
@@ -154,7 +154,7 @@ describe('RepoIssues', () => {
     fireEvent.click(screen.getByText('Sort'));
     fireEvent.click(screen.getByText('Oldest'));
 
-    let filteredIssues = await waitFor(() => screen.getAllByTestId('issue'));
+    let filteredIssues = await screen.findAllByTestId('issue');
     expect(filteredIssues.at(0)).toHaveTextContent(
       'Declarative API for installing global DOM event handlers'
     );

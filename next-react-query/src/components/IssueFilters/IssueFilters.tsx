@@ -3,6 +3,7 @@ import type { Label } from '@components/RepoIssues';
 import type { Milestone } from './types';
 import cn from 'classnames';
 import { CheckIcon, MinusCircleIcon } from '@heroicons/react/outline';
+import { PullRequestIcon } from '@components/Icons';
 import { IssueState, IssueOrderField, OrderDirection } from '@lib/github';
 import FilterDropdown from '@components/FilterDropdown';
 import { IssueType } from './useIssueFilters';
@@ -21,8 +22,8 @@ function IssueFilters({
   openCount = 0,
   closedCount = 0,
   className,
-  // type = IssueType.Issue,
-  milestones = [],
+  type = IssueType.Issue,
+  milestones,
   labels = [],
   state,
   changeState,
@@ -43,7 +44,11 @@ function IssueFilters({
           )}
           onClick={() => changeState(IssueState.Open)}
         >
-          <MinusCircleIcon className={styles.typeIcon} />
+          {type === IssueType.Issue ? (
+            <MinusCircleIcon className={styles.typeIcon} />
+          ) : (
+            <PullRequestIcon className={styles.typeIcon} />
+          )}
           {openCount} Open
         </button>
         <button
@@ -74,20 +79,22 @@ function IssueFilters({
           onChange={(label) => setLabel(label)}
           buttonClassName={styles.filterButton}
         />
-        <FilterDropdown
-          name="Milestones"
-          description="Filter by milestone"
-          current={state.milestone}
-          items={[
-            { label: 'Issue with no milestone', value: null },
-            ...milestones.map((milestone) => ({
-              label: milestone.title,
-              value: milestone.id,
-            })),
-          ]}
-          onChange={(milestone) => setMilestone(milestone)}
-          buttonClassName={styles.filterButton}
-        />
+        {milestones && (
+          <FilterDropdown
+            name="Milestones"
+            description="Filter by milestone"
+            current={state.milestone}
+            items={[
+              { label: 'Issue with no milestone', value: null },
+              ...milestones.map((milestone) => ({
+                label: milestone.title,
+                value: milestone.id,
+              })),
+            ]}
+            onChange={(milestone) => setMilestone(milestone)}
+            buttonClassName={styles.filterButton}
+          />
+        )}
         <FilterDropdown
           name="Sort"
           description="Sort by"

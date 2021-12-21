@@ -1,8 +1,8 @@
-import { MinusCircleIcon } from '@heroicons/react/outline';
 import gqlClient from '@lib/gqlClient';
-import { useRepoIssuesQuery, IssueState } from '@lib/github';
+import { useRepoPullRequestsQuery, IssueState } from '@lib/github';
 import { useRepo } from '@context/RepoContext';
 import { parseQuery } from './parseQuery';
+import { PullRequestIcon } from '@components/Icons';
 import IssuesContainer from '@components/IssuesContainer';
 import IssuesEmpty from '@components/IssuesEmpty';
 import IssuesSkeleton from '@components/IssuesSkeleton';
@@ -12,9 +12,9 @@ import {
   Pagination,
   IssueType,
 } from '@components/IssueFilters';
-import RepoIssuesView from './RepoIssues.view';
+import RepoPullsView from './RepoPulls.view';
 
-function RepoIssues() {
+function RepoPulls() {
   const { owner, name } = useRepo();
   const filters = useIssueFilters();
 
@@ -23,16 +23,13 @@ function RepoIssues() {
     isLoading,
     isFetching,
     error: queryError,
-  } = useRepoIssuesQuery(
+  } = useRepoPullRequestsQuery(
     gqlClient,
     {
       owner,
       name,
       orderBy: filters.state.sort,
-      filterBy: {
-        labels: filters.state.label ? [filters.state.label] : undefined,
-        milestone: filters.state.milestone,
-      },
+      labels: filters.state.label ? [filters.state.label] : undefined,
       after: filters.state.afterCursor,
       before: filters.state.beforeCursor,
     },
@@ -47,8 +44,8 @@ function RepoIssues() {
         filtersEl={
           <IssueFilters
             {...filters}
-            openCount={data?.repository?.openIssues.totalCount}
-            closedCount={data?.repository?.closedIssues.totalCount}
+            openCount={data?.repository?.openPullRequests.totalCount}
+            closedCount={data?.repository?.closedPullRequests.totalCount}
           />
         }
         clearFilters={filters.clearFilters}
@@ -62,20 +59,21 @@ function RepoIssues() {
   }
 
   if (queryError || !data) {
-    throw new Error('An error occurred loading issues.');
+    throw new Error('An error occurred loading pull requests.');
   }
 
-  const { openIssues, closedIssues, milestones, labels } = parseQuery(data);
-  const activeIssues =
-    filters.state.state === IssueState.Open ? openIssues : closedIssues;
+  const { openPullRequests, closedPullRequests, labels } = parseQuery(data);
+  const activePullRequests =
+    filters.state.state === IssueState.Open
+      ? openPullRequests
+      : closedPullRequests;
 
   const filtersElement = (
     <IssueFilters
-      openCount={openIssues.totalCount}
-      closedCount={closedIssues.totalCount}
-      milestones={milestones}
+      openCount={openPullRequests.totalCount}
+      closedCount={closedPullRequests.totalCount}
       labels={labels}
-      type={IssueType.Issue}
+      type={IssueType.PullRequest}
       {...filters}
     />
   );
@@ -87,15 +85,15 @@ function RepoIssues() {
         clearFilters={filters.clearFilters}
         hasActiveFilters={filters.hasActiveFilters}
       >
-        {activeIssues.issues.length > 0 ? (
-          <RepoIssuesView issues={activeIssues.issues} />
+        {activePullRequests.pullRequests.length > 0 ? (
+          <RepoPullsView pullRequests={activePullRequests.pullRequests} />
         ) : (
-          <IssuesEmpty Icon={MinusCircleIcon} />
+          <IssuesEmpty Icon={PullRequestIcon} />
         )}
       </IssuesContainer>
-      {activeIssues.pageInfo && (
+      {activePullRequests.pageInfo && (
         <Pagination
-          pageInfo={activeIssues.pageInfo}
+          pageInfo={activePullRequests.pageInfo}
           changePage={filters.changePage}
         />
       )}
@@ -103,4 +101,4 @@ function RepoIssues() {
   );
 }
 
-export default RepoIssues;
+export default RepoPulls;

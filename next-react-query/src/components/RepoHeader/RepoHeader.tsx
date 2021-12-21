@@ -2,9 +2,11 @@ import RepoHeading from '@components/RepoHeading';
 import RepoActionButtons from '@components/RepoActionButtons';
 import TabNavigation from '@components/TabNavigation';
 import styles from './RepoHeader.module.css';
-import { tabList } from './tabList';
+import { createTabList } from './tabList';
+import { useRepo } from '@context/RepoContext';
 
 function RepoHeader() {
+  const repo = useRepo();
   return (
     <div className={styles.wrapper}>
       <div className={styles.topRow}>
@@ -12,7 +14,13 @@ function RepoHeader() {
         <RepoActionButtons />
       </div>
       <div className={styles.bottomRow}>
-        <TabNavigation tabs={tabList} basePath="/[owner]/[name]" />
+        <TabNavigation
+          tabs={createTabList({
+            issueCount: repo.data?.openIssueCount,
+            pullRequestCount: repo.data?.openPullRequestCount,
+          })}
+          basePath="/[owner]/[name]"
+        />
       </div>
     </div>
   );

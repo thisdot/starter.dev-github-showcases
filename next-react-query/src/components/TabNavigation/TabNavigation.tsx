@@ -29,7 +29,7 @@ function TabNavigation({ tabs, basePath = '', className }: TabNavigationProps) {
   return (
     <div className={cn(styles.container, className)}>
       <nav className={styles.nav} aria-label="Tabs">
-        {tabs.map(({ title, path, Icon }, index) => {
+        {tabs.map(({ title, path, Icon, count }, index) => {
           let href = path === '' ? `/${asPathBase}` : `/${asPathBase}/${path}`;
           return (
             <Link href={path !== undefined ? href : asPath} key={index}>
@@ -48,6 +48,11 @@ function TabNavigation({ tabs, basePath = '', className }: TabNavigationProps) {
                   )}
                 />
                 <span>{title}</span>
+                {typeof count === 'number' && (
+                  <span className="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl">
+                    {count}
+                  </span>
+                )}
               </a>
             </Link>
           );

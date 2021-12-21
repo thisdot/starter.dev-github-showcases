@@ -1,6 +1,6 @@
 import { setLogger } from 'react-query';
 import { screen, fireEvent } from '@testing-library/react';
-import { renderWithClient } from '@lib/testUtils';
+import { renderWithClient, createRouterProvider } from '@lib/testUtils';
 import { setupMswServer } from '@lib/mswServer';
 import UserDropdown from './UserDropdown.data';
 
@@ -16,7 +16,12 @@ const FAKE_AVATAR_URL = '/profile.png';
 
 describe('UserDropdown', () => {
   test('dropdown opens when clicked and includes a Profile & Signout link', async () => {
-    renderWithClient(<UserDropdown image={FAKE_AVATAR_URL} />);
+    const RouterProvider = createRouterProvider();
+    renderWithClient(
+      <RouterProvider>
+        <UserDropdown image={FAKE_AVATAR_URL} />
+      </RouterProvider>
+    );
     fireEvent.click(
       screen.getByRole('button'),
       new MouseEvent('click', { bubbles: true, cancelable: true })
