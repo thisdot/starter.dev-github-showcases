@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile-nav',
@@ -7,11 +7,4 @@ import { Component, Input } from '@angular/core';
     '../../repos/repo-header/repo-tab-navigation/repo-tab-navigation.component.css',
   ],
 })
-export class ProfileNavComponent {
-  @Input() basePath = '';
-  @Input() path = '';
-
-  setPath(path?: string) {
-    return path ? `${this.basePath}/${path}` : this.basePath;
-  }
-}
+export class ProfileNavComponent {}

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RepoRoutingModule } from './repo-routing.module';
-import { WelcomeUserComponent } from './welcome-user/welcome-user.component';
 import { ReposComponent } from './repos.component';
 import { RepoListComponent } from './components/repo-list/repo-list.component';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
@@ -19,7 +18,6 @@ import { RepoMetaComponent } from './components/repo-meta/repo-meta.component';
 @NgModule({
   declarations: [
     ReposComponent,
-    WelcomeUserComponent,
     RepoListComponent,
     RepoDetailsComponent,
     RepoHeaderComponent,
