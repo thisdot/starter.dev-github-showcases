@@ -37,6 +37,8 @@ WithDescription.args = {
     watcherCount: 5,
     description:
       'Demo app for JSMarathon presentation: React Native E2E Testing with Detox',
+    openIssueCount: 8,
+    openPullRequestCount: 3,
   },
 };
 
@@ -50,6 +52,8 @@ NoDescription.args = {
     stargazerCount: 30,
     forkCount: 10,
     watcherCount: 5,
+    openIssueCount: 8,
+    openPullRequestCount: 3,
   },
 };
 

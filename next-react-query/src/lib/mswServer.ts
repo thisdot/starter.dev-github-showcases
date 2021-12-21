@@ -7,6 +7,7 @@ import { mockUserProfileQuery } from '@components/UserProfile/UserProfile.mocks'
 import { mockUserReposQuery } from '@components/UserRepos/UserRepos.mocks';
 import { mockUserTopReposQuery } from '@components/UserTopRepos/UserTopRepos.mocks';
 import { mockUserGistsQuery } from '@components/UserGists/UserGists.mocks';
+import { mockRepoIssuesQuery } from '@components/RepoIssues/RepoIssues.mocks';
 
 const handlers = [
   mockRepoTreeQuery,
@@ -17,6 +18,7 @@ const handlers = [
   mockUserReposQuery,
   mockUserTopReposQuery,
   mockUserGistsQuery,
+  mockRepoIssuesQuery,
 ];
 export const server = setupServer(...handlers);
 

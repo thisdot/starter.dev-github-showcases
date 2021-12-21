@@ -66,6 +66,8 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
           stargazerCount: repository.stargazerCount,
           forkCount: repository.forkCount,
           watcherCount: repository.watchers.totalCount,
+          openIssueCount: repository.issues.totalCount,
+          openPullRequestCount: repository.pullRequests.totalCount,
           description: repository.description,
         }
       : undefined,

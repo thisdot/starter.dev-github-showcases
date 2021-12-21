@@ -10,10 +10,12 @@ export const tabList: TabItem[] = [
   },
   {
     title: 'Issues',
+    path: 'issues',
     Icon: InformationCircleIcon,
   },
   {
     title: 'Pull Requests',
+    path: 'pulls',
     Icon: PullRequestIcon,
   },
 ];

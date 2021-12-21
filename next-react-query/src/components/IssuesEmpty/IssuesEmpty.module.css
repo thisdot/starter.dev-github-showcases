@@ -1,0 +1,13 @@
+@tailwind utilities;
+
+.container {
+  @apply w-full py-16 flex flex-col items-center;
+}
+
+.icon {
+  @apply w-6 h-6 text-gray-600;
+}
+
+.heading {
+  @apply text-2xl font-semibold text-gray-900 text-center my-4;
+}

@@ -37,5 +37,7 @@ const repoResponse = {
     description:
       'Demo app for JSMarathon presentation: React Native E2E Testing with Detox',
     watchers: { totalCount: 2 },
+    issues: { totalCount: 10 },
+    pullRequests: { totalCount: 5 },
   },
 };

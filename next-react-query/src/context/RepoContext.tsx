@@ -12,6 +12,8 @@ export interface RepoContext {
     stargazerCount: number;
     forkCount: number;
     watcherCount: number;
+    openIssueCount: number;
+    openPullRequestCount: number;
     description?: string | null;
   };
 }

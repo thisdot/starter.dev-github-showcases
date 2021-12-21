@@ -45,6 +45,8 @@ Default.args = {
     stargazerCount: 30,
     forkCount: 10,
     watcherCount: 5,
+    openIssueCount: 2,
+    openPullRequestCount: 1,
   },
 };
 

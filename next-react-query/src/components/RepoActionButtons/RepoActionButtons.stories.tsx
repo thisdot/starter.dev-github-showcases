@@ -42,6 +42,23 @@ Default.args = {
     stargazerCount: 30,
     forkCount: 10,
     watcherCount: 5,
+    openIssueCount: 2,
+    openPullRequestCount: 1,
+  },
+};
+
+export const BigNumbers = Template.bind({});
+Default.args = {
+  name: 'react',
+  owner: 'facebook',
+  isRepoLoading: false,
+  data: {
+    isPrivate: false,
+    stargazerCount: 178350,
+    forkCount: 36801,
+    watcherCount: 6321,
+    openIssueCount: 2,
+    openPullRequestCount: 1,
   },
 };
 

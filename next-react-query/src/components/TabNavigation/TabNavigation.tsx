@@ -23,18 +23,17 @@ function TabNavigation({ tabs, basePath = '', className }: TabNavigationProps) {
 
   const isCurrentTab = (path?: string) => {
     const matchPath = path === '' ? basePath : `${basePath}/${path}`;
-    return typeof path === undefined ? false : pathname.includes(matchPath);
+    return path === '' ? pathname === basePath : pathname.includes(matchPath);
   };
 
   return (
     <div className={cn(styles.container, className)}>
       <nav className={styles.nav} aria-label="Tabs">
         {tabs.map(({ title, path, Icon }, index) => {
-          let href = path === '' ? asPathBase : `${asPathBase}/${path}`;
+          let href = path === '' ? `/${asPathBase}` : `/${asPathBase}/${path}`;
           return (
             <Link href={path !== undefined ? href : asPath} key={index}>
               <a
-                key={title}
                 className={cn(
                   isCurrentTab(path) ? styles.tabActive : styles.tabInactive,
                   styles.tab

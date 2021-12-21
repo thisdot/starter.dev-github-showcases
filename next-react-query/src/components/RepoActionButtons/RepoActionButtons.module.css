@@ -1,11 +1,11 @@
 @tailwind utilities;
 
 .container {
-  @apply flex space-x-4;
+  @apply flex flex-wrap items-center justify-start;
 }
 
 .btnGroup {
-  @apply relative z-0 inline-flex shadow-sm rounded-md;
+  @apply relative z-0 inline-flex shadow-sm rounded-md mx-2 my-1;
 }
 
 .btnMain {
