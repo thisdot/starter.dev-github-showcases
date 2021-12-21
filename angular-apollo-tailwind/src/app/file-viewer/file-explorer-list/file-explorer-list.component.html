@@ -6,10 +6,10 @@
     <div class="flex items-center">
       <div class="mr-2.5">
         <ng-container *ngIf="item.type === 'tree'; else file">
-          <app-folder-icon class="iconDir"></app-folder-icon>
+          <sd-folder-icon class="iconDir"></sd-folder-icon>
         </ng-container>
         <ng-template #file>
-          <app-document-icon class="iconFile"></app-document-icon>
+          <sd-document-icon class="iconFile"></sd-document-icon>
         </ng-template>
       </div>
       <a [routerLink]="getPathHref(item)" class="link">{{ item.name }}</a>
@@ -20,6 +20,6 @@
 <!-- TODO: fix loading indicator -->
 <!-- <ng-template #loading>
   <div class="container py-2">
-    <app-loading-bullet-list></app-loading-bullet-list>
+    <sd-loading-bullet-list></sd-loading-bullet-list>
   </div>
 </ng-template> -->
