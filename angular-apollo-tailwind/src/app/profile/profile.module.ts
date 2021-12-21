@@ -13,6 +13,5 @@ import { IconsModule } from '@shared';
     ProfileReposListComponent,
   ],
   imports: [CommonModule, ProfileRoutingModule, IconsModule],
-  exports: [ProfileComponent, ProfileNavComponent, ProfileReposListComponent],
 })
 export class ProfileModule {}

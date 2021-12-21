@@ -15,6 +15,7 @@ import {
   ContentLoadingModule,
   CountButtonGroupComponentModule,
 } from '@shared';
+import { ContainerComponentModule } from '@shared';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {
     IconsModule,
     ContentLoadingModule,
     CountButtonGroupComponentModule,
+    ContainerComponentModule,
   ],
 })
 export class ReposModule {}
