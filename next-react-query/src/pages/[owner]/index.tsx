@@ -1,10 +1,12 @@
+import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { withAuthRedirect } from '@lib/withAuthRedirect';
 import ProfilePage from '@components/ProfilePage';
 import UserProfile from '@components/UserProfile';
 import ProfileNav from '@components/ProfileNav';
 import UserRepos from '@components/UserRepos';
 
-const UserProfilePage = () => {
+const UserProfilePage: NextPage = () => {
   const { query, pathname } = useRouter();
   return (
     <ProfilePage owner={query.owner}>
@@ -37,5 +39,7 @@ const UserProfilePage = () => {
     </ProfilePage>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = withAuthRedirect();
 
 export default UserProfilePage;

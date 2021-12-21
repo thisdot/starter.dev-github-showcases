@@ -1,4 +1,6 @@
+import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { withAuthRedirect } from '@lib/withAuthRedirect';
 import RepoPage from '@components/RepoPage';
 import FileExplorer from '@components/FileExplorer';
 import RepoHeader from '@components/RepoHeader';
@@ -6,7 +8,7 @@ import RepoAboutWidget from '@components/RepoAboutWidget/RepoAboutWidget';
 import FileExplorerNav from '@components/FileExplorerNav';
 import RepoReadMe from '@components/RepoReadMe';
 
-const RepoHome = () => {
+const RepoHome: NextPage = () => {
   const { query } = useRouter();
 
   return (
@@ -27,5 +29,7 @@ const RepoHome = () => {
     </RepoPage>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = withAuthRedirect();
 
 export default RepoHome;

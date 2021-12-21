@@ -1,10 +1,12 @@
+import type { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { withAuthRedirect } from '@lib/withAuthRedirect';
 import RepoPage from '@components/RepoPage';
 import RepoHeader from '@components/RepoHeader';
 import FileViewer from '@components/FileViewer/FileViewer.data';
 import FileExplorerNav from '@components/FileExplorerNav';
 
-const RepoBranchBlob = () => {
+const RepoBranchBlob: NextPage = () => {
   const { query } = useRouter();
   return (
     <RepoPage {...query}>
@@ -20,5 +22,7 @@ const RepoBranchBlob = () => {
     </RepoPage>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = withAuthRedirect();
 
 export default RepoBranchBlob;
