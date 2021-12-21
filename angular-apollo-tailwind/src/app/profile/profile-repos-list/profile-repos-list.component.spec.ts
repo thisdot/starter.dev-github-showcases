@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WelcomeUserComponent } from './welcome-user.component';
+import { ProfileReposListComponent } from './profile-repos-list.component';
 
-describe('WelcomeUserComponent', () => {
-  let component: WelcomeUserComponent;
-  let fixture: ComponentFixture<WelcomeUserComponent>;
+describe('ProfileReposListComponent', () => {
+  let component: ProfileReposListComponent;
+  let fixture: ComponentFixture<ProfileReposListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [WelcomeUserComponent],
+      declarations: [ProfileReposListComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WelcomeUserComponent);
+    fixture = TestBed.createComponent(ProfileReposListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

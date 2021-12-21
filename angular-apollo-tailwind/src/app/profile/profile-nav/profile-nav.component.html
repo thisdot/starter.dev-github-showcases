@@ -1,0 +1,15 @@
+<div class="container">
+  <nav class="nav" aria-label="Tabs">
+    <div>
+      <a
+        [routerLink]="['repos']"
+        routerLinkActive="tabActive"
+        class="tabInactive tab"
+        #repoLink="routerLinkActive"
+      >
+        <sd-git-repo-icon></sd-git-repo-icon>
+        <span>Repositories</span>
+      </a>
+    </div>
+  </nav>
+</div>

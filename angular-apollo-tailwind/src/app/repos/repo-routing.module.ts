@@ -3,11 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { RepoDataResolver } from './repo-data.resolver';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import { ReposComponent } from './repos.component';
-
 const routes: Routes = [
   {
     path: '',
     component: ReposComponent,
+  },
+  {
+    path: ':owner',
+
+    loadChildren: () =>
+      import('../profile/profile.module').then((m) => m.ProfileModule),
   },
   {
     path: ':owner/:repo',
@@ -39,7 +44,6 @@ const routes: Routes = [
         path: 'code',
         redirectTo: '',
       },
-      // TODO: add pull requests route
     ],
   },
 ];
