@@ -1,6 +1,8 @@
 import { BookOpenIcon } from '@heroicons/react/outline';
 import { useRepo } from '@context/RepoContext';
 import Description from './Description';
+import HomepageUrl from './HomepageUrl';
+import Topics from './Topics';
 import { LoadingTextLine } from '@components/Loading';
 import styles from './RepoAboutWidget.module.css';
 
@@ -13,7 +15,11 @@ function RepoAboutWidget() {
         {isRepoLoading ? (
           <LoadingTextLine />
         ) : (
-          <Description text={data?.description} />
+          <div className="space-y-4">
+            <Description text={data?.description} />
+            <HomepageUrl homepageUrl={data?.homepageUrl} />
+            <Topics topics={data?.topics} />
+          </div>
         )}
       </div>
       <div>

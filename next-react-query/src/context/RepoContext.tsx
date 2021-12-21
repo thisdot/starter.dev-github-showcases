@@ -15,6 +15,8 @@ export interface RepoContext {
     openIssueCount: number;
     openPullRequestCount: number;
     description?: string | null;
+    homepageUrl?: string | null;
+    topics: string[];
   };
 }
 

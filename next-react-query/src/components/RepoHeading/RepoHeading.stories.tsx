@@ -36,6 +36,7 @@ Public.args = {
     watcherCount: 5,
     openIssueCount: 2,
     openPullRequestCount: 1,
+    topics: [],
   },
 };
 
@@ -50,6 +51,7 @@ Private.args = {
     watcherCount: 5,
     openIssueCount: 2,
     openPullRequestCount: 1,
+    topics: [],
   },
 };
 

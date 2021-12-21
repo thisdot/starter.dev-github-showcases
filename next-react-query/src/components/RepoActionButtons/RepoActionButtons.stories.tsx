@@ -44,6 +44,7 @@ Default.args = {
     watcherCount: 5,
     openIssueCount: 2,
     openPullRequestCount: 1,
+    topics: [],
   },
 };
 
@@ -59,6 +60,7 @@ Default.args = {
     watcherCount: 6321,
     openIssueCount: 2,
     openPullRequestCount: 1,
+    topics: [],
   },
 };
 

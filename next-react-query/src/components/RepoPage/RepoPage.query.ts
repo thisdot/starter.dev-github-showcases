@@ -10,6 +10,7 @@ export const REPO_PAGE_QUERY = gql`
       stargazerCount
       forkCount
       description
+      homepageUrl
       watchers(last: 1) {
         totalCount
       }
@@ -18,6 +19,14 @@ export const REPO_PAGE_QUERY = gql`
       }
       pullRequests(first: 1, states: [OPEN]) {
         totalCount
+      }
+      topics: repositoryTopics(first: 10) {
+        nodes {
+          id
+          topic {
+            name
+          }
+        }
       }
     }
   }

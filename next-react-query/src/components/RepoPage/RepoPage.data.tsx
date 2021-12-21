@@ -6,6 +6,7 @@ import { useRepoPageQuery } from '@lib/github';
 import { parseError } from '@lib/parseError';
 import { RepoProvider } from '@context/RepoContext';
 import RepoPageError from './RepoPage.error';
+import { parseTopics } from './parseTopics';
 
 interface RepoPageProps {
   name?: string | string[];
@@ -69,6 +70,8 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
           openIssueCount: repository.issues.totalCount,
           openPullRequestCount: repository.pullRequests.totalCount,
           description: repository.description,
+          homepageUrl: repository.homepageUrl,
+          topics: parseTopics(repository.topics?.nodes),
         }
       : undefined,
   };

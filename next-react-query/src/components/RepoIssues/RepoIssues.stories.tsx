@@ -39,6 +39,7 @@ const Template: Story = () => (
         openPullRequestCount: 229,
         description:
           'A declarative, efficient, and flexible JavaScript library for building user interfaces.',
+        topics: [],
       },
     }}
   >

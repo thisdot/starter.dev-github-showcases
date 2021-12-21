@@ -37,8 +37,10 @@ WithDescription.args = {
     watcherCount: 5,
     description:
       'Demo app for JSMarathon presentation: React Native E2E Testing with Detox',
+    homepageUrl: 'www.youtube.com/watch?v=vm085szsz_m',
     openIssueCount: 8,
     openPullRequestCount: 3,
+    topics: ['react-native', 'pizza', 'e2e-tests', 'detox', 'jsmarathon'],
   },
 };
 
@@ -54,6 +56,7 @@ NoDescription.args = {
     watcherCount: 5,
     openIssueCount: 8,
     openPullRequestCount: 3,
+    topics: [],
   },
 };
 
