@@ -11,11 +11,17 @@
     "lint:shared": "ng lint shared",
     "lint:fix": "ng lint --fix",
     "lint:shared:fix": "ng lint shared --fix",
-    "build:prod": "NODE_ENV=production ng build --prod",
+    "prestart": "yarn run config && ng build shared",
     "config": "node ./tools/set-env.js",
-    "start:dev": "npm run config && ng serve",
     "prepare": "cd .. && husky install angular-apollo-tailwind/.husky",
-    "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts, .html,.css}\"",
+    "prebuild": "yarn build:libs",
+    "prebuild:prod": "yarn build:libs:prod",
+    "build:prod": "NODE_ENV=production ng build --prod",
+    "build:libs": "ng build shared",
+    "build:libs:watch": "ng build shared --watch",
+    "build:libs:prod": "NODE_ENV=production ng build shared --prod",
+    "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts,.html,.css}\"",
+    "format:libs:check": "prettier --config ./.prettierrc --list-different \"projects/**/*{.ts,.html,.css}\"",
     "format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts,.html,.css}\"",
     "format:libs": "prettier --config ./.prettierrc --write \"projects/**/*{.ts,.html,.css}\""
   },
@@ -84,10 +90,10 @@
   },
   "lint-staged": {
     "src/**/*{.js,.ts,.html,.css}": [
-      "npm run format"
+      "prettier --write"
     ],
     "projects/**/*{.js,.ts,.html,.css}": [
-      "npm run format:libs"
+      "prettier --write"
     ]
   },
   "lint-prepush": {

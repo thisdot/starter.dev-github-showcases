@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 @Component({
   selector: 'sd-privacy-icon',
   template: `<ng-template
@@ -16,8 +16,6 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
     <ng-template #elseBlock
       ><sd-git-repo-icon></sd-git-repo-icon
     ></ng-template>`,
-  styleUrls: ['../../styles.css'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class PrivacyIconComponent {
   @Input() isPrivate?: boolean;

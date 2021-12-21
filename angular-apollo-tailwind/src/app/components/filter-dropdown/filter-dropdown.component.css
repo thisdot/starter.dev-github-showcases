@@ -1,10 +1,9 @@
-.filter-dropdown-container {
+/* .filter-dropdown-container {
   @apply relative inline-block text-left z-30;
 }
 
-/* @apply text-gray-600 hover:text-gray-900 inline-flex items-center text-sm; */
 .filterButton {
-  @apply text-gray-600 inline-flex items-center text-sm;
+  @apply text-gray-600 hover:text-gray-900 inline-flex items-center text-sm;
 }
 
 .menuButton {
@@ -37,4 +36,4 @@
 
 .itemActiveIcon {
   @apply inline w-4 h-4 absolute left-4;
-}
+} */

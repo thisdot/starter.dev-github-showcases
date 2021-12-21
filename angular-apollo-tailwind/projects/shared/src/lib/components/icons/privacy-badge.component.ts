@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 @Component({
   selector: 'sd-privacy-badge',
   template: `<ng-template *ngIf="isPrivate === undefined; else elseBlock">
@@ -12,8 +12,6 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
         {{ isPrivate ? 'Private' : 'Public' }}
       </span>
     </ng-template>`,
-  styleUrls: ['../../styles.css'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class PrivacyBadgeComponent {
   @Input() isPrivate?: boolean;
