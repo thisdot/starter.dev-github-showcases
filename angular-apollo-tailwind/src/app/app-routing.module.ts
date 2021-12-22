@@ -9,6 +9,10 @@ const routes: Routes = [
       import('./provider/provider.module').then((m) => m.ProviderModule),
   },
   {
+    path: 'redirect',
+    redirectTo: 'signin/redirect',
+  },
+  {
     path: '',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
