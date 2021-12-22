@@ -1,0 +1,31 @@
+.avatar {
+  @apply rounded-full shadow z-30;
+}
+
+.name {
+  @apply text-2xl text-gray-800 font-bold leading-tight;
+}
+
+.username {
+  @apply text-xl text-gray-500 font-light;
+}
+
+.bio {
+  @apply text-gray-800 mt-4;
+}
+
+.count {
+  @apply font-medium text-gray-900;
+}
+
+.socials {
+  @apply text-sm text-gray-600 my-4;
+}
+
+.fields {
+  @apply text-sm text-gray-800 space-y-1;
+}
+
+.link {
+  @apply hover:text-blue-600 hover:underline;
+}

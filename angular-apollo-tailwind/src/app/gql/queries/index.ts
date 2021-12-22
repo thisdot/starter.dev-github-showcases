@@ -6,3 +6,4 @@ export * from './repo-issues';
 export * from './repo-pulls.query';
 export * from './repo-tree.query';
 export * from './user-gists.query';
+export * from './profile.query';

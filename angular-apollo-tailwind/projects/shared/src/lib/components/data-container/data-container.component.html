@@ -1,0 +1,13 @@
+<ng-container *ngIf="data; else loading">
+  <ng-container *ngIf="!data.error; else error">
+    <ng-content select="[content]"></ng-content>
+  </ng-container>
+
+  <ng-template #error>
+    <ng-content select="[error]"></ng-content>
+  </ng-template>
+</ng-container>
+
+<ng-template #loading>
+  <ng-content select="[loading]"></ng-content>
+</ng-template>

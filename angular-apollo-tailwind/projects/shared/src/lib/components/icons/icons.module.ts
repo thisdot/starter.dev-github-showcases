@@ -16,6 +16,10 @@ import {
   chatAlt,
   chevronLeft,
   chevronRight,
+  users,
+  officeBuilding,
+  locationMarker,
+  link,
   HeroIconModule,
 } from 'ng-heroicon';
 import { DocumentIconComponent } from './document-icon.component';
@@ -29,6 +33,7 @@ import { InformationCircleIconComponent } from './information-circle-icon.compon
 import { PullRequestIconComponent } from './pull-request-icon.component';
 import { PrivacyIconComponent } from './privacy-icon.component';
 import { PrivacyBadgeComponent } from './privacy-badge.component';
+import { TwitterIconComponent } from './twitter-icon.component';
 
 const icons = [
   DocumentIconComponent,
@@ -42,6 +47,7 @@ const icons = [
   PullRequestIconComponent,
   PrivacyIconComponent,
   PrivacyBadgeComponent,
+  TwitterIconComponent,
 ];
 
 @NgModule({
@@ -64,6 +70,10 @@ const icons = [
       chatAlt,
       chevronLeft,
       chevronRight,
+      users,
+      officeBuilding,
+      locationMarker,
+      link,
     }),
   ],
   exports: [...icons, HeroIconModule],

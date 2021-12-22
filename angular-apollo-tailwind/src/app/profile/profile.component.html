@@ -1,7 +1,5 @@
-<div class="relative pt-8">
-  <div
-    class="border-b border-gray-200 sticky top-0 bg-white z-20 hidden md:block"
-  >
+<div content class="relative pt-8">
+  <div class="border-b border-gray-200 sticky top-0 bg-white hidden md:block">
     <div class="grid grid-cols-12 gap-8 max-w-screen-2xl mx-auto">
       <div class="col-span-12 md:col-span-4 xl:col-span-3"></div>
       <div class="col-span-12 md:col-span-8 xl:col-span-9">
@@ -10,5 +8,15 @@
     </div>
   </div>
 
-  <router-outlet></router-outlet>
+  <div class="max-w-screen-2xl mx-auto py-8 px-4">
+    <div class="grid grid-cols-12 gap-8">
+      <div class="col-span-12 md:col-span-4 xl:col-span-3 relative md:-top-20">
+        <app-profile-about></app-profile-about>
+      </div>
+      <div class="col-span-12 md:col-span-8 xl:col-span-9">
+        <app-profile-nav class="border-none md:hidden"></app-profile-nav>
+        <!-- <router-outlet></router-outlet> -->
+      </div>
+    </div>
+  </div>
 </div>

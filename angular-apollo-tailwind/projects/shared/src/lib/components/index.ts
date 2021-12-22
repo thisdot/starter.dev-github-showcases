@@ -1,5 +1,7 @@
 export * from './container/container.component';
 export * from './container/container.module';
+export * from './data-container/data-container.component';
+export * from './data-container/data-container.module';
 export * from './count-button-group/count-button-group.component';
 export * from './count-button-group/count-button-group.module';
 export * from './content-loading';
@@ -14,4 +16,5 @@ export * from './icons/information-circle-icon.component';
 export * from './icons/privacy-badge.component';
 export * from './icons/privacy-icon.component';
 export * from './icons/pull-request-icon.component';
+export * from './icons/twitter-icon.component';
 export * from './icons/icons.module';
