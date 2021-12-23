@@ -75,9 +75,9 @@
           {{ profileDetails.websiteUrl }}
         </a>
       </div>
-      <div *ngIf="profileDetails.twitterUsername">
+      <div *ngIf="profileDetails.twitterUsername" class="flex items-center">
         <sd-twitter-icon
-          class="w-4 h-4 mb-0.5 mr-1 inline"
+          class="mr-1 inline"
           aria-hidden="true"
         ></sd-twitter-icon>
         <a

@@ -17,7 +17,7 @@ export function parseQuery(data?: UserProfileData): UserProfile | undefined {
 
   const orgs =
     organizations.nodes?.reduce(
-      (acc: Organization[], org: any) =>
+      (acc: Organization[], org: Organization) =>
         org ? [...acc, { avatarUrl: org.avatarUrl, login: org.login }] : acc,
       [],
     ) ?? [];

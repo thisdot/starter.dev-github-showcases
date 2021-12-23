@@ -37,7 +37,7 @@ export interface Organization {
 }
 
 export interface UserProfile {
-  avatarUrl: any;
+  avatarUrl: string;
   bio?: string | null;
   company?: string | null;
   location?: string | null;
