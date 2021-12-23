@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CurrentUserRepos } from 'src/app/gql';
+import { TopRepo } from 'src/app/gql';
 
 @Component({
   selector: 'app-repo-list',
@@ -7,6 +7,6 @@ import { CurrentUserRepos } from 'src/app/gql';
   styleUrls: ['./repo-list.component.css'],
 })
 export class RepoListComponent {
-  @Input() repos: CurrentUserRepos[] = [];
+  @Input() repos: TopRepo[] = [];
   @Input() login = '';
 }

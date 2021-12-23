@@ -46,7 +46,7 @@ const INITIAL_STATE: FilterState = {
   type: ISSUE_TYPE.ISSUE,
   sort: {
     field: ISSUE_ORDER_FIELD.CREATED_AT,
-    direction: ORDER_BY_DIRECTION.DESC,
+    direction: ORDER_BY_DIRECTION.Desc,
   },
   milestones: null,
   openIssues: null,
@@ -60,8 +60,8 @@ const ISSUE_ORDER_DICT: { [key: string]: ISSUE_ORDER_FIELD } = {
 };
 
 const DIRECTION_DICT: { [key: string]: ORDER_BY_DIRECTION } = {
-  ASC: ORDER_BY_DIRECTION.ASC,
-  DESC: ORDER_BY_DIRECTION.DESC,
+  ASC: ORDER_BY_DIRECTION.Asc,
+  DESC: ORDER_BY_DIRECTION.Desc,
 };
 
 interface GenericLabel {
@@ -200,7 +200,7 @@ export class IssuesStore extends ComponentStore<FilterState> {
     (label, milestone, sort) =>
       label !== '' ||
       milestone !== '' ||
-      sort.direction !== ORDER_BY_DIRECTION.DESC ||
+      sort.direction !== ORDER_BY_DIRECTION.Desc ||
       sort.field !== ISSUE_ORDER_FIELD.CREATED_AT,
   );
 

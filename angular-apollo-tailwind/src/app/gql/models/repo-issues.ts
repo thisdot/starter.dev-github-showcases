@@ -1,4 +1,5 @@
 import { ORDER_BY_DIRECTION } from './order-by';
+import { PageInfo } from './page-info';
 
 export interface RepoIssuesData {
   repository: RepoIssueDetails;
@@ -64,13 +65,6 @@ export interface IssueFormatted extends Omit<Issue, 'createdAt' | 'closedAt'> {
 export interface Label {
   color: string;
   name: string;
-}
-
-export interface PageInfo {
-  hasNextPage: boolean;
-  endCursor: string;
-  hasPreviousPage: boolean;
-  startCursor: string;
 }
 
 export interface RepoIssuesVars {

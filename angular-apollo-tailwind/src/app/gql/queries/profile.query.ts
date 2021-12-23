@@ -3,6 +3,7 @@ import { gql } from 'apollo-angular';
 export const USER_PROFILE_QUERY = gql`
   query UserProfile($username: String!) {
     user(login: $username) {
+      id
       avatarUrl
       bio
       company

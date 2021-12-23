@@ -18,27 +18,27 @@ import {
 const sortOptions: FilterOption[] = [
   {
     label: 'Newest',
-    value: `${ISSUE_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.DESC}`,
+    value: `${ISSUE_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.Desc}`,
   },
   {
     label: 'Oldest',
-    value: `${ISSUE_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.ASC}`,
+    value: `${ISSUE_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.Asc}`,
   },
   {
     label: 'Most commented',
-    value: `${ISSUE_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.DESC}`,
+    value: `${ISSUE_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.Desc}`,
   },
   {
     label: 'Least commented',
-    value: `${ISSUE_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.ASC}`,
+    value: `${ISSUE_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.Asc}`,
   },
   {
     label: 'Recently updated',
-    value: `${ISSUE_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.DESC}`,
+    value: `${ISSUE_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.Desc}`,
   },
   {
     label: 'Least recently updated',
-    value: `${ISSUE_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.ASC}`,
+    value: `${ISSUE_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.Asc}`,
   },
 ];
 

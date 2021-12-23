@@ -6,10 +6,11 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RepoMetaComponent {
-  // might not have language or color so these need to be optional
-  @Input() language?: string;
-  @Input() languageColor?: string;
+  @Input() language!: string;
+  @Input() languageColor!: string;
   @Input() forkCount!: number;
   @Input() stargazerCount!: number;
   @Input() updatedAt!: Date;
+
+  readonly baseDate = new Date();
 }

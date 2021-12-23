@@ -9,6 +9,7 @@ export interface UserProfileVars {
 }
 
 export interface User {
+  id: string;
   avatarUrl: string;
   bio: string;
   company: string;
