@@ -1,1 +1,57 @@
-<!-- <UserRepos username={username} /> -->
+<sd-data-container
+  *ngIf="profileRepos$ | async as profileRepos"
+  [data]="profileRepos"
+>
+  <div *ngFor="let repo of profileRepos.repos" content>
+    <div class="profile-repos-container">
+      <div class="content">
+        <h3 class="mb-2">
+          <a
+            [routerLink]="[profileRepos.owner, repo.name]"
+            routerLinkActive="router-link-active"
+            class="headingLink"
+            >{{ repo.name }}</a
+          >
+          <sd-privacy-badge
+            [isPrivate]="repo.isPrivate"
+            class="relative bottom-0.5"
+          ></sd-privacy-badge>
+        </h3>
+        <div class="description">{{ repo.description }}</div>
+        <app-repo-meta
+          [language]="repo.language"
+          [languageColor]="repo.languageColor"
+          [forkCount]="repo.forkCount"
+          [stargazerCount]="repo.stargazerCount"
+          [updatedAt]="repo.updatedAt"
+        ></app-repo-meta>
+      </div>
+      <div class="aside">
+        <button class="starBtn">
+          <hero-icon
+            name="star"
+            type="outline"
+            class="starIcon"
+            aria-hidden="true"
+          ></hero-icon>
+          Star
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    data-testid="errorMsg"
+    class="py-4 text-lg font-medium text-gray-800"
+    error
+  >
+    Error Loading Repositories. Check console / network tab for more
+    information.
+  </div>
+  <div
+    class="py-8 border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4"
+    loading
+  >
+    <app-profile-repos-loading></app-profile-repos-loading>
+  </div>
+</sd-data-container>

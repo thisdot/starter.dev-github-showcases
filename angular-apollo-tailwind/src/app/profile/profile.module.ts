@@ -8,6 +8,9 @@ import { ProfileAboutComponent } from './profile-about/profile-about.component';
 import { ProfileLoadingComponent } from './components/profile-loading/profile-loading.component';
 import { ContentLoaderModule } from '@ngneat/content-loader';
 import { OrgsListComponent } from './components/orgs-list/orgs-list.component';
+import { ProfileReposListComponent } from './profile-repos-list/profile-repos-list.component';
+import { ProfileReposLoadingComponent } from './components/profile-repos-loading/profile-repos-loading.component';
+import { ReposModule } from '../repos/repos.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +19,8 @@ import { OrgsListComponent } from './components/orgs-list/orgs-list.component';
     ProfileAboutComponent,
     ProfileLoadingComponent,
     OrgsListComponent,
+    ProfileReposListComponent,
+    ProfileReposLoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +28,7 @@ import { OrgsListComponent } from './components/orgs-list/orgs-list.component';
     IconsModule,
     ContentLoaderModule,
     DataContainerComponentModule,
+    ReposModule,
   ],
 })
 export class ProfileModule {}

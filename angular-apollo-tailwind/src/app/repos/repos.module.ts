@@ -14,6 +14,7 @@ import {
   IconsModule,
   ContentLoadingModule,
   CountButtonGroupComponentModule,
+  PipesModule,
 } from '@shared';
 import { ContainerComponentModule } from '@shared';
 
@@ -36,6 +37,8 @@ import { ContainerComponentModule } from '@shared';
     ContentLoadingModule,
     CountButtonGroupComponentModule,
     ContainerComponentModule,
+    PipesModule,
   ],
+  exports: [RepoMetaComponent],
 })
 export class ReposModule {}
