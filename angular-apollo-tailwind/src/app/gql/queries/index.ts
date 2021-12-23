@@ -1,5 +1,5 @@
 export * from './current-user.query';
-export * from './current-user-repos.query';
+export * from './user-top-repos.query';
 export * from './repo-details.query';
 export * from './repo-file.query';
 export * from './repo-issues';
