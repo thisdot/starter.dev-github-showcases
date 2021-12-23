@@ -23,7 +23,10 @@ export class RepoDataResolver
     return this.apollo
       .query<RepoDetailsData, RepoDetailsVars>({
         query: REPO_DETAILS_QUERY,
-        variables: this.setVariables(owner, name),
+        variables: {
+          owner: owner ?? undefined,
+          name: name ?? undefined,
+        },
       })
       .pipe(
         map(
@@ -42,21 +45,5 @@ export class RepoDataResolver
 
   private getUser(segments: UrlSegment[]): string[] {
     return segments.map(({ path }: UrlSegment) => path);
-  }
-
-  private isOwnerAndNameValid(owner: string, name: string): boolean {
-    return typeof owner === 'string' && typeof name === 'string';
-  }
-
-  private setVariables(owner: string, name: string): RepoDetailsVars {
-    return this.isOwnerAndNameValid(owner, name)
-      ? {
-          owner,
-          name,
-        }
-      : {
-          owner: '',
-          name: '',
-        };
   }
 }

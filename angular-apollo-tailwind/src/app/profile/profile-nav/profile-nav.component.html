@@ -5,6 +5,7 @@
         [routerLink]="['repos']"
         routerLinkActive="tabActive"
         class="tabInactive tab"
+        [class.tabActive]="!repoLink.isActive"
         #repoLink="routerLinkActive"
       >
         <sd-git-repo-icon></sd-git-repo-icon>

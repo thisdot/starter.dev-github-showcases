@@ -1,0 +1,101 @@
+<sd-data-container
+  *ngIf="profileDetails$ | async as profileDetails"
+  [data]="profileDetails"
+>
+  <div content>
+    <img
+      [src]="profileDetails.avatarUrl"
+      alt="Avatar"
+      [width]="260"
+      [height]="260"
+      class="avatar"
+    />
+    <h1 class="mt-2">
+      <div class="name">{{ profileDetails.name }}</div>
+      <div class="username">{{ profileDetails.username }}</div>
+    </h1>
+    <div class="bio">{{ profileDetails.bio }}</div>
+    <div class="socials">
+      <hero-icon
+        name="users"
+        type="outline"
+        class="w-4 h-4 mb-0.5 mr-1 inline"
+        aria-hidden="true"
+      ></hero-icon>
+      <span class="inline-block">
+        <span class="count">{{ profileDetails.followers }}</span> followers
+      </span>
+      <span class="mx-1">·</span>
+      <span class="inline-block">
+        <span class="count">{{ profileDetails.following }}</span> following
+      </span>
+      <span class="mx-1">·</span>
+      <hero-icon
+        name="star"
+        type="outline"
+        class="w-4 h-4 mb-0.5 mr-1 inline"
+        aria-hidden="true"
+      ></hero-icon>
+      <span class="inline-block">
+        <span class="count">{{ profileDetails.starredRepos }}</span>
+      </span>
+    </div>
+    <div class="fields">
+      <div *ngIf="profileDetails.company">
+        <hero-icon
+          name="office-building"
+          type="outline"
+          class="w-4 h-4 mb-0.5 mr-1 inline"
+          aria-hidden="true"
+        ></hero-icon>
+        {{ profileDetails.company }}
+      </div>
+      <div *ngIf="profileDetails.location" class="flex">
+        <hero-icon
+          name="location-marker"
+          type="outline"
+          class="w-4 h-4 mb-0.5 mr-1 inline"
+          aria-hidden="true"
+        ></hero-icon>
+        {{ profileDetails.location }}
+      </div>
+      <div *ngIf="profileDetails.websiteUrl">
+        <hero-icon
+          name="link"
+          type="outline"
+          class="w-4 h-4 mb-0.5 mr-1 inline"
+          aria-hidden="true"
+        ></hero-icon>
+        <a
+          class="link"
+          [href]="profileDetails.websiteUrl"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {{ profileDetails.websiteUrl }}
+        </a>
+      </div>
+      <div *ngIf="profileDetails.twitterUsername" class="flex items-center">
+        <sd-twitter-icon
+          class="mr-1 inline"
+          aria-hidden="true"
+        ></sd-twitter-icon>
+        <a
+          class="link"
+          [href]="'https:/twitter.com/' + profileDetails.twitterUsername"
+          target="_blank"
+          rel="noreferrer"
+        >
+          @{{ profileDetails.twitterUsername }}
+        </a>
+      </div>
+    </div>
+    <ng-container *ngIf="profileDetails?.organizations?.length">
+      <app-orgs-list
+        [organizations]="profileDetails?.organizations"
+      ></app-orgs-list>
+    </ng-container>
+  </div>
+  <p error>User not found</p>
+  <app-profile-loading loading></app-profile-loading>
+</sd-data-container>
