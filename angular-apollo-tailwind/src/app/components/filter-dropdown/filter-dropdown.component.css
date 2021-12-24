@@ -26,10 +26,6 @@
   @apply px-4 py-2.5 text-xs text-gray-800 font-semibold;
 }
 
-.closeButtonIcon {
-  @apply mr-2 h-4 w-4 text-gray-600;
-}
-
 .itemButton {
   @apply relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize;
 }

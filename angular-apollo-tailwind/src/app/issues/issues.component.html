@@ -14,8 +14,8 @@
       </span>
     </button>
   </div>
-  <ng-container *ngIf="repoIssues$ | async as repoIssues; else loading">
-    <div class="issues-container">
+  <ng-container *ngIf="issuesLoaded$ | async; else loading">
+    <div *ngIf="repoIssues$ | async as repoIssues" class="issues-container">
       <app-issues-filters
         [openCount]="openIssuesCount$ | async"
         [closedCount]="closedIssuesCount$ | async"
@@ -39,7 +39,7 @@
 
       <ng-template #empty><app-issues-empty></app-issues-empty></ng-template>
     </div>
-    <app-pagination [pageInfo]="repoIssues.pageInfo"></app-pagination>
+    <app-pagination [pageInfo]="pageInfo$ | async"></app-pagination>
   </ng-container>
 
   <ng-template #loading>

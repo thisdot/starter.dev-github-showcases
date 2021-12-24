@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RouteConfigService } from '@this-dot/route-config';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Apollo } from 'apollo-angular';
-import { Observable, switchMap, withLatestFrom } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import {
   Label,
   RepoIssuesData,
@@ -13,7 +13,7 @@ import {
   Milestone,
   OPEN_CLOSED_STATE,
 } from '../gql';
-import { ReposFilterStore } from '@filter-store';
+import { FilterState, ReposFilterStore } from '@filter-store';
 import { parseQuery } from './parse-issues';
 
 export interface IssuesState {
@@ -21,6 +21,7 @@ export interface IssuesState {
   milestones: Milestone[];
   openIssues: Issues;
   closedIssues: Issues;
+  issuesLoaded: boolean;
 }
 
 const INITIAL_ISSUES_STATE: Issues = {
@@ -37,6 +38,7 @@ const INITIAL_STATE: IssuesState = {
   milestones: [],
   openIssues: INITIAL_ISSUES_STATE,
   closedIssues: INITIAL_ISSUES_STATE,
+  issuesLoaded: false,
 };
 
 @Injectable()
@@ -49,14 +51,6 @@ export class IssuesStore extends ComponentStore<IssuesState> {
     super(INITIAL_STATE);
   }
   // *********** Updaters *********** //
-
-  // Filter store updaters
-  readonly setMilestone = this.reposFilterStore.setMilestone;
-  readonly setLabel = this.reposFilterStore.setLabel;
-  readonly changeState = this.reposFilterStore.changeState;
-  readonly setSort = this.reposFilterStore.setSort;
-  readonly changePage = this.reposFilterStore.changePage;
-  readonly clearFilters = this.reposFilterStore.clearFilters;
 
   readonly setMilestones = this.updater((state, values: Milestone[]) => ({
     ...state,
@@ -78,15 +72,12 @@ export class IssuesStore extends ComponentStore<IssuesState> {
     labels: values,
   }));
 
-  // *********** Selectors *********** //
+  readonly setIssuesLoaded = this.updater((state, value: boolean) => ({
+    ...state,
+    issuesLoaded: value,
+  }));
 
-  // Filter store selectors
-  readonly label$ = this.reposFilterStore.label$;
-  readonly milestone$ = this.reposFilterStore.milestone$;
-  readonly issueState$ = this.reposFilterStore.issueState$;
-  readonly type$ = this.reposFilterStore.type$;
-  readonly sort$ = this.reposFilterStore.sort$;
-  readonly hasActiveFilters$ = this.reposFilterStore.hasActiveFilters$;
+  // *********** Selectors *********** //
 
   readonly labels$ = this.select(({ labels }) => labels);
 
@@ -119,52 +110,65 @@ export class IssuesStore extends ComponentStore<IssuesState> {
     (activeIssues) => activeIssues?.pageInfo,
   );
 
+  readonly issuesLoaded$ = this.select(({ issuesLoaded }) => issuesLoaded);
+
   // *********** Effects *********** //
 
-  readonly getIssues$ = this.effect((target$: Observable<void>) =>
+  readonly getIssues$ = this.effect((target$: Observable<FilterState>) =>
     target$.pipe(
-      withLatestFrom(this.reposFilterStore.state$),
-      switchMap(([, { label, milestone, sort, afterCursor, beforeCursor }]) =>
-        this.routeConfigService
-          .getLeafConfig<ResolvedRepoDetails>('userDetails')
-          .pipe(
-            switchMap(({ owner, name }) =>
-              this.apollo
-                .watchQuery<RepoIssuesData, RepoIssuesVars>({
-                  query: REPO_ISSUES_QUERY,
-                  variables: {
-                    owner,
-                    name,
-                    orderBy: sort ?? undefined,
-                    filterBy:
-                      label || milestone
-                        ? {
-                            labels: label ? [label] : undefined,
-                            milestone: milestone || undefined,
-                          }
-                        : undefined,
-                    after: afterCursor ?? undefined,
-                    before: beforeCursor ?? undefined,
-                  },
-                })
-                .valueChanges.pipe(
-                  tapResponse(
-                    (res) => {
-                      const { openIssues, closedIssues, milestones, labels } =
-                        parseQuery(res.data);
+      switchMap(
+        ({
+          label,
+          milestone,
+          sort,
+          afterCursor,
+          beforeCursor,
+          filtersLoaded,
+        }) =>
+          this.routeConfigService
+            .getLeafConfig<ResolvedRepoDetails>('userDetails')
+            .pipe(
+              switchMap(({ owner, name }) =>
+                this.apollo
+                  .watchQuery<RepoIssuesData, RepoIssuesVars>({
+                    query: REPO_ISSUES_QUERY,
+                    variables: {
+                      owner,
+                      name,
+                      orderBy: sort ?? undefined,
+                      filterBy:
+                        label || milestone
+                          ? {
+                              labels: label ? [label] : undefined,
+                              milestone: milestone || undefined,
+                            }
+                          : undefined,
+                      after: afterCursor ?? undefined,
+                      before: beforeCursor ?? undefined,
+                    },
+                  })
+                  .valueChanges.pipe(
+                    tapResponse(
+                      (res) => {
+                        const { openIssues, closedIssues, milestones, labels } =
+                          parseQuery(res.data);
 
-                      this.setMilestones(milestones);
-                      this.setOpenIssues(openIssues);
-                      this.setClosedIssues(closedIssues);
-                      this.setLabels(labels);
-                    },
-                    (error) => {
-                      console.log(error);
-                    },
+                        if (!filtersLoaded) {
+                          this.setMilestones(milestones);
+                          this.setLabels(labels);
+                          this.reposFilterStore.setFiltersLoaded(true);
+                        }
+                        this.setOpenIssues(openIssues);
+                        this.setClosedIssues(closedIssues);
+                        this.setIssuesLoaded(true);
+                      },
+                      (error) => {
+                        console.log(error);
+                      },
+                    ),
                   ),
-                ),
+              ),
             ),
-          ),
       ),
     ),
   );

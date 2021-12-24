@@ -16,6 +16,7 @@ export interface FilterState {
   sort: SortOption;
   afterCursor?: string;
   beforeCursor?: string;
+  filtersLoaded: boolean;
 }
 
 export interface PaginatorOptions {
@@ -32,6 +33,7 @@ const INITIAL_STATE: FilterState = {
     field: ORDER_FIELD.CREATED_AT,
     direction: ORDER_BY_DIRECTION.Desc,
   },
+  filtersLoaded: false,
 };
 
 const ISSUE_ORDER_DICT: { [key: string]: ORDER_FIELD } = {
@@ -99,6 +101,11 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
     type: state.type,
   }));
 
+  readonly setFiltersLoaded = this.updater((state, value: boolean) => ({
+    ...state,
+    filtersLoaded: value,
+  }));
+
   // *********** Selectors *********** //
 
   readonly label$ = this.select(({ label }) => label);
@@ -121,4 +128,6 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
       sort.direction !== ORDER_BY_DIRECTION.Desc ||
       sort.field !== ORDER_FIELD.CREATED_AT,
   );
+
+  readonly filtersLoaded$ = this.select(({ filtersLoaded }) => filtersLoaded);
 }
