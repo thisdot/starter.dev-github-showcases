@@ -52,6 +52,7 @@ export interface Milestones {
   pageInfo: PageInfo;
   totalCount: number;
 }
+<<<<<<< HEAD
 
 export interface PaginatorOptions {
   afterCursor: string;
@@ -68,3 +69,5 @@ export interface LanguageFilter {
   label: string;
   value: string;
 }
+=======
+>>>>>>> 350f64c (feat: added filter store library)
