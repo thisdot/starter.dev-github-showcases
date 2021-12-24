@@ -1,0 +1,5 @@
+export const enum ORDER_FIELD {
+  COMMENTS = 'COMMENTS',
+  CREATED_AT = 'CREATED_AT',
+  UPDATED_AT = 'UPDATED_AT',
+}

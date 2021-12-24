@@ -8,7 +8,11 @@ import { IssuesEmptyComponent } from './components/issues-empty/issues-empty.com
 import { IssuesSkeletonComponent } from './components/issues-skeleton/issues-skeleton.component';
 import { PaginationModule } from '../components/pagination/pagination.module';
 import { FilterDropdownModule } from '../components/filter-dropdown/filter-dropdown.module';
-import { IconsModule, PipesModule } from '@shared';
+import {
+  DataContainerComponentModule,
+  IconsModule,
+  PipesModule,
+} from '@shared';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,7 @@ import { IconsModule, PipesModule } from '@shared';
     FilterDropdownModule,
     PaginationModule,
     PipesModule,
+    DataContainerComponentModule,
   ],
   exports: [IssuesComponent],
 })
