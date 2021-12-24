@@ -10,14 +10,6 @@ const routes: Routes = [
     component: ReposComponent,
   },
   {
-    path: ':owner',
-    resolve: {
-      username: UsernameResolver,
-    },
-    loadChildren: () =>
-      import('../profile/profile.module').then((m) => m.ProfileModule),
-  },
-  {
     path: ':owner/:repo',
     component: RepoDetailsComponent,
     resolve: {
@@ -48,6 +40,14 @@ const routes: Routes = [
         redirectTo: '',
       },
     ],
+  },
+  {
+    path: ':owner',
+    resolve: {
+      username: UsernameResolver,
+    },
+    loadChildren: () =>
+      import('../profile/profile.module').then((m) => m.ProfileModule),
   },
 ];
 

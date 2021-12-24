@@ -19,7 +19,9 @@
 <!-- loading -->
 <ng-template #loading>
   <sd-container title="Gists">
-    <div class="mt-3" *ngFor="let i of [3]">
+    <div class="mt-3">
+      <sd-loading-text-line class="my-1"></sd-loading-text-line>
+      <sd-loading-text-line class="my-1"></sd-loading-text-line>
       <sd-loading-text-line class="my-1"></sd-loading-text-line>
     </div>
   </sd-container>

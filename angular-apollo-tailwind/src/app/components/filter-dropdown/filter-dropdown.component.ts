@@ -34,7 +34,6 @@ export class FilterDropdownComponent {
   @Input() description = '';
   @Input() current: string | null = '';
   @Input() items: FilterOption[] = [];
-  @Input() buttonClassName = '';
 
   @Output() setFilter: EventEmitter<string> = new EventEmitter();
 

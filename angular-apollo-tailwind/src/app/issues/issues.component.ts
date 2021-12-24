@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { PaginatorOptions, ReposFilterStore } from '@filter-store';
 import { Observable } from 'rxjs';
-import { IssuesFormatted, OPEN_CLOSED_STATE } from '../gql/models/repo-issues';
-import { IssuesStore, PaginatorOptions } from './issues.store';
+import { Issues, OPEN_CLOSED_STATE } from '../gql';
+import { IssuesStore } from './issues.store';
 
 @Component({
   selector: 'app-issues',
   templateUrl: './issues.component.html',
   styleUrls: ['./issues.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [IssuesStore],
+  providers: [ReposFilterStore, IssuesStore],
 })
 export class IssuesComponent implements OnInit {
-  readonly repoIssues$: Observable<IssuesFormatted | null> =
-    this.issuesStore.activeIssues$;
+  readonly repoIssues$: Observable<Issues> = this.issuesStore.activeIssues$;
   readonly openIssuesCount$ = this.issuesStore.openIssuesCount$;
   readonly closedIssuesCount$ = this.issuesStore.closedIssuesCount$;
   readonly label$ = this.issuesStore.label$;
@@ -25,6 +25,8 @@ export class IssuesComponent implements OnInit {
   readonly hasActiveFilters$ = this.issuesStore.hasActiveFilters$;
   readonly pageInfo$ = this.issuesStore.pageInfo$;
 
+  activeIssues: Issues | null = null;
+
   constructor(private issuesStore: IssuesStore) {}
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class IssuesComponent implements OnInit {
 
   setMilestone(milestone: string) {
     this.issuesStore.setMilestone(milestone);
+    this.issuesStore.getIssues$();
   }
 
   setLabel(label: string) {
@@ -61,7 +64,7 @@ export class IssuesComponent implements OnInit {
   }
 
   clearFilters() {
-    this.issuesStore.resetState();
+    this.issuesStore.clearFilters();
     this.issuesStore.getIssues$();
   }
 }

@@ -111,10 +111,10 @@
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/shared/tsconfig.sd.prod.json"
+              "tsConfig": "projects/shared/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/shared/tsconfig.sd.json"
+              "tsConfig": "projects/shared/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -133,6 +133,46 @@
             "lintFilePatterns": [
               "projects/shared/**/*.ts",
               "projects/shared/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "filter": {
+      "projectType": "library",
+      "root": "projects/filter",
+      "sourceRoot": "projects/filter/src",
+      "prefix": "sd",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/filter/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/filter/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/filter/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/filter/src/test.ts",
+            "tsConfig": "projects/filter/tsconfig.spec.json",
+            "karmaConfig": "projects/filter/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/filter/**/*.ts",
+              "projects/filter/**/*.html"
             ]
           }
         }

@@ -1,4 +1,4 @@
-/* .filter-dropdown-container {
+.filter-dropdown-container {
   @apply relative inline-block text-left z-30;
 }
 
@@ -36,4 +36,4 @@
 
 .itemActiveIcon {
   @apply inline w-4 h-4 absolute left-4;
-} */
+}

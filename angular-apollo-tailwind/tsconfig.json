@@ -17,7 +17,8 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
-      "@shared": ["dist/shared/shared", "dist/shared"]
+      "@shared": ["dist/shared/shared", "dist/shared"],
+      "@filter-store": ["dist/filter/filter", "dist/filter"]
     },
     "target": "es2017",
     "module": "es2020",

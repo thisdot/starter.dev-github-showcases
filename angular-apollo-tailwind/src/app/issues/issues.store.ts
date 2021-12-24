@@ -3,81 +3,46 @@ import { RouteConfigService } from '@this-dot/route-config';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Apollo } from 'apollo-angular';
 import { Observable, switchMap, withLatestFrom } from 'rxjs';
-import { ORDER_BY_DIRECTION, ResolvedRepoDetails } from '../gql';
 import {
-  Issue,
-  Issues,
-  IssuesFormatted,
-  ISSUE_ORDER_FIELD,
-  ISSUE_TYPE,
   Label,
-  Milestones,
-  OPEN_CLOSED_STATE as ISSUE_STATE,
   RepoIssuesData,
   RepoIssuesVars,
-  SortOption,
-} from '../gql/models/repo-issues';
-import { REPO_ISSUES_QUERY } from '../gql/queries/repo-issues';
+  REPO_ISSUES_QUERY,
+  ResolvedRepoDetails,
+  Issues,
+  Milestone,
+  OPEN_CLOSED_STATE,
+} from '../gql';
+import { ReposFilterStore } from '@filter-store';
+import { parseQuery } from './parse-issues';
 
-export interface FilterState {
-  label: string;
+export interface IssuesState {
   labels: Label[];
-  milestone: string;
-  state: ISSUE_STATE;
-  type: ISSUE_TYPE;
-  sort: SortOption;
-  afterCursor?: string;
-  beforeCursor?: string;
-  milestones: Milestones | null;
-  openIssues: IssuesFormatted | null;
-  closedIssues: IssuesFormatted | null;
+  milestones: Milestone[];
+  openIssues: Issues;
+  closedIssues: Issues;
 }
 
-export interface PaginatorOptions {
-  afterCursor: string;
-  beforeCursor: string;
-}
-
-const INITIAL_STATE: FilterState = {
-  label: '',
-  labels: [],
-  milestone: '',
-  state: ISSUE_STATE.OPEN,
-  type: ISSUE_TYPE.ISSUE,
-  sort: {
-    field: ISSUE_ORDER_FIELD.CREATED_AT,
-    direction: ORDER_BY_DIRECTION.Desc,
+const INITIAL_ISSUES_STATE: Issues = {
+  issues: [],
+  totalCount: 0,
+  pageInfo: {
+    hasNextPage: false,
+    hasPreviousPage: false,
   },
-  milestones: null,
-  openIssues: null,
-  closedIssues: null,
 };
 
-const ISSUE_ORDER_DICT: { [key: string]: ISSUE_ORDER_FIELD } = {
-  COMMENTS: ISSUE_ORDER_FIELD.COMMENTS,
-  CREATED_AT: ISSUE_ORDER_FIELD.CREATED_AT,
-  UPDATED_AT: ISSUE_ORDER_FIELD.UPDATED_AT,
+const INITIAL_STATE: IssuesState = {
+  labels: [],
+  milestones: [],
+  openIssues: INITIAL_ISSUES_STATE,
+  closedIssues: INITIAL_ISSUES_STATE,
 };
-
-const DIRECTION_DICT: { [key: string]: ORDER_BY_DIRECTION } = {
-  ASC: ORDER_BY_DIRECTION.Asc,
-  DESC: ORDER_BY_DIRECTION.Desc,
-};
-
-interface GenericLabel {
-  [key: string]: Label;
-}
-
-const parseIssues = (values: Issues) =>
-  values.nodes.map((issue) => ({
-    ...issue,
-    createdAt: new Date(issue.createdAt),
-    closedAt: issue.closedAt ? new Date(issue.closedAt) : undefined,
-  }));
 
 @Injectable()
-export class IssuesStore extends ComponentStore<FilterState> {
+export class IssuesStore extends ComponentStore<IssuesState> {
   constructor(
+    private reposFilterStore: ReposFilterStore,
     private routeConfigService: RouteConfigService<string, 'userDetails'>,
     private apollo: Apollo,
   ) {
@@ -85,124 +50,47 @@ export class IssuesStore extends ComponentStore<FilterState> {
   }
   // *********** Updaters *********** //
 
-  readonly setMilestone = this.updater((state, value: string) => ({
-    ...state,
-    milestone: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
-  }));
+  // Filter store updaters
+  readonly setMilestone = this.reposFilterStore.setMilestone;
+  readonly setLabel = this.reposFilterStore.setLabel;
+  readonly changeState = this.reposFilterStore.changeState;
+  readonly setSort = this.reposFilterStore.setSort;
+  readonly changePage = this.reposFilterStore.changePage;
+  readonly clearFilters = this.reposFilterStore.clearFilters;
 
-  readonly setMilestones = this.updater((state, values: Milestones) => ({
+  readonly setMilestones = this.updater((state, values: Milestone[]) => ({
     ...state,
     milestones: values,
   }));
 
-  readonly setLabel = this.updater((state, value: string) => ({
-    ...state,
-    label: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
-  }));
-
-  readonly changeState = this.updater((state, value: ISSUE_STATE) => ({
-    ...state,
-    state: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
-  }));
-
-  readonly setSort = this.updater((state, value: string) => {
-    const [field, direction] = value.split('^');
-    return {
-      ...state,
-      sort: {
-        field: ISSUE_ORDER_DICT[field],
-        direction: DIRECTION_DICT[direction],
-      },
-      afterCursor: undefined,
-      beforeCursor: undefined,
-    };
-  });
-
-  readonly changePage = this.updater(
-    (state, { afterCursor, beforeCursor }: PaginatorOptions) => ({
-      ...state,
-      afterCursor,
-      beforeCursor,
-    }),
-  );
-
-  readonly resetState = this.updater((state) => ({
-    ...INITIAL_STATE,
-    type: state.type,
-  }));
-
   readonly setOpenIssues = this.updater((state, values: Issues) => ({
     ...state,
-    openIssues: {
-      ...values,
-      nodes: parseIssues(values),
-    },
+    openIssues: values,
   }));
 
   readonly setClosedIssues = this.updater((state, values: Issues) => ({
     ...state,
-    closedIssues: {
-      ...values,
-      nodes: parseIssues(values),
-    },
+    closedIssues: values,
   }));
 
-  readonly setActiveIssuesLabels = this.updater((state, values: Issue[]) => {
-    const labelsMap: GenericLabel = values.reduce(
-      (acc: GenericLabel, issue) => {
-        const map: GenericLabel = {};
-        issue.labels.nodes.forEach((label) => {
-          map[label.name] = label;
-        });
-
-        return {
-          ...acc,
-          ...map,
-        };
-      },
-      {},
-    );
-
-    return {
-      ...state,
-      labels: Object.values(labelsMap),
-    };
-  });
+  readonly setLabels = this.updater((state, values: Label[]) => ({
+    ...state,
+    labels: values,
+  }));
 
   // *********** Selectors *********** //
 
-  readonly label$ = this.select(({ label }) => label);
+  // Filter store selectors
+  readonly label$ = this.reposFilterStore.label$;
+  readonly milestone$ = this.reposFilterStore.milestone$;
+  readonly issueState$ = this.reposFilterStore.issueState$;
+  readonly type$ = this.reposFilterStore.type$;
+  readonly sort$ = this.reposFilterStore.sort$;
+  readonly hasActiveFilters$ = this.reposFilterStore.hasActiveFilters$;
 
-  readonly labels$ = this.select(
-    ({ labels: activeIssuesLabels }) => activeIssuesLabels,
-  );
+  readonly labels$ = this.select(({ labels }) => labels);
 
-  readonly milestone$ = this.select(({ milestone }) => milestone);
-
-  readonly milestones$ = this.select(({ milestones }) => milestones?.nodes);
-
-  readonly issueState$ = this.select(({ state }) => state);
-
-  readonly type$ = this.select(({ type }) => type);
-
-  readonly sort$ = this.select(({ sort }) => sort);
-
-  readonly hasActiveFilters$ = this.select(
-    this.label$,
-    this.milestone$,
-    this.sort$,
-    (label, milestone, sort) =>
-      label !== '' ||
-      milestone !== '' ||
-      sort.direction !== ORDER_BY_DIRECTION.Desc ||
-      sort.field !== ISSUE_ORDER_FIELD.CREATED_AT,
-  );
+  readonly milestones$ = this.select(({ milestones }) => milestones);
 
   readonly openIssues$ = this.select(({ openIssues }) => openIssues);
 
@@ -219,13 +107,11 @@ export class IssuesStore extends ComponentStore<FilterState> {
   );
 
   readonly activeIssues$ = this.select(
-    this.issueState$,
+    this.reposFilterStore.issueState$,
     this.openIssues$,
     this.closedIssues$,
     (state, openIssues, closedIssues) =>
-      state === ISSUE_STATE.OPEN
-        ? (openIssues as IssuesFormatted)
-        : (closedIssues as IssuesFormatted),
+      state === OPEN_CLOSED_STATE.OPEN ? openIssues : closedIssues,
   );
 
   readonly pageInfo$ = this.select(
@@ -237,7 +123,7 @@ export class IssuesStore extends ComponentStore<FilterState> {
 
   readonly getIssues$ = this.effect((target$: Observable<void>) =>
     target$.pipe(
-      withLatestFrom(this.state$),
+      withLatestFrom(this.reposFilterStore.state$),
       switchMap(([, { label, milestone, sort, afterCursor, beforeCursor }]) =>
         this.routeConfigService
           .getLeafConfig<ResolvedRepoDetails>('userDetails')
@@ -264,16 +150,13 @@ export class IssuesStore extends ComponentStore<FilterState> {
                 .valueChanges.pipe(
                   tapResponse(
                     (res) => {
-                      const { milestones, openIssues, closedIssues } =
-                        res.data.repository;
+                      const { openIssues, closedIssues, milestones, labels } =
+                        parseQuery(res.data);
 
                       this.setMilestones(milestones);
                       this.setOpenIssues(openIssues);
                       this.setClosedIssues(closedIssues);
-                      this.setActiveIssuesLabels([
-                        ...openIssues.nodes,
-                        ...closedIssues.nodes,
-                      ]);
+                      this.setLabels(labels);
                     },
                     (error) => {
                       console.log(error);
