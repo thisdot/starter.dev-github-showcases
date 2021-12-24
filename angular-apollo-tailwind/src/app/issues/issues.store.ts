@@ -73,8 +73,6 @@ export class IssuesStore extends ComponentStore<IssuesState> {
     issuesLoaded: value,
   }));
 
-  // *********** Selectors *********** //
-
   readonly labels$ = this.select(({ labels }) => labels);
 
   readonly milestones$ = this.select(({ milestones }) => milestones);
