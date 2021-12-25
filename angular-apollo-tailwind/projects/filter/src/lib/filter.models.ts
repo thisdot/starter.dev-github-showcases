@@ -3,15 +3,10 @@ export interface Label {
   name: string;
 }
 
-export enum ISSUE_TYPE {
-  ISSUE = 'issue',
-  PULL_REQUEST = 'pull',
-}
-
 export const enum ORDER_FIELD {
-  COMMENTS = 'COMMENTS',
-  CREATED_AT = 'CREATED_AT',
-  UPDATED_AT = 'UPDATED_AT',
+  Comments = 'COMMENTS',
+  CreatedAt = 'CREATED_AT',
+  UpdatedAt = 'UPDATED_AT',
 }
 
 export enum ORDER_BY_FIELD {
@@ -56,4 +51,20 @@ export interface Milestones {
   nodes: Milestone[];
   pageInfo: PageInfo;
   totalCount: number;
+}
+
+export interface PaginatorOptions {
+  afterCursor: string;
+  beforeCursor: string;
+}
+
+export enum TypeFilter {
+  ALL = 'all',
+  FORKED = 'forked',
+  ARCHIVED = 'archived',
+}
+
+export interface LanguageFilter {
+  label: string;
+  value: string;
 }

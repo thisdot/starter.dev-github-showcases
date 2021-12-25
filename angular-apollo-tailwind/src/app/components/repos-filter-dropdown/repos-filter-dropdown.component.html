@@ -1,0 +1,45 @@
+<ul class="filter-dropdown-container">
+  <div>
+    <button role="button" class="menuButton" (click)="toggleMenu()">
+      {{ name }}
+      <hero-icon
+        name="chevron-down"
+        type="outline"
+        class="menuButtonIcon"
+        aria-hidden="true"
+      ></hero-icon>
+    </button>
+  </div>
+
+  <div @openClose *ngIf="isOpen" class="menu" data-testid="filterDropdown">
+    <div *ngIf="description">
+      <div class="menuHeader">
+        <div class="description">{{ description }}</div>
+        <button class="flex" (click)="handleClearFilterClick()">
+          <hero-icon
+            name="x"
+            type="outline"
+            class="mr-2 h-4 w-4 text-gray-600"
+            aria-hidden="true"
+          ></hero-icon>
+        </button>
+      </div>
+      <ng-container *ngFor="let item of items">
+        <button
+          type="button"
+          class="itemButton"
+          (click)="handleSetFilterClick(item.value)"
+        >
+          <hero-icon
+            *ngIf="item.value === current"
+            name="check"
+            type="outline"
+            class="itemActiveIcon"
+            aria-hidden="true"
+          ></hero-icon>
+          {{ item.label }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</ul>

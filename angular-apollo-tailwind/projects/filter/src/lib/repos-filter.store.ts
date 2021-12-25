@@ -1,45 +1,42 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import {
-  ISSUE_TYPE,
   SortOption,
   ORDER_FIELD,
   ORDER_BY_DIRECTION,
   OPEN_CLOSED_STATE,
+  PaginatorOptions,
+  Label,
+  Milestone,
 } from './filter.models';
 
 export interface FilterState {
   label: string;
   milestone: string;
   state: OPEN_CLOSED_STATE;
-  type: ISSUE_TYPE;
   sort: SortOption;
   afterCursor?: string;
   beforeCursor?: string;
-  filtersLoaded: boolean;
-}
-
-export interface PaginatorOptions {
-  afterCursor: string;
-  beforeCursor: string;
+  labelsLoaded: boolean;
+  milestonesLoaded: boolean;
 }
 
 const INITIAL_STATE: FilterState = {
   label: '',
   milestone: '',
   state: OPEN_CLOSED_STATE.OPEN,
-  type: ISSUE_TYPE.ISSUE,
   sort: {
-    field: ORDER_FIELD.CREATED_AT,
+    field: ORDER_FIELD.CreatedAt,
     direction: ORDER_BY_DIRECTION.Desc,
   },
-  filtersLoaded: false,
+  labelsLoaded: false,
+  milestonesLoaded: false,
 };
 
-const ISSUE_ORDER_DICT: { [key: string]: ORDER_FIELD } = {
-  COMMENTS: ORDER_FIELD.COMMENTS,
-  CREATED_AT: ORDER_FIELD.CREATED_AT,
-  UPDATED_AT: ORDER_FIELD.UPDATED_AT,
+const ORDER_DICT: { [key: string]: ORDER_FIELD } = {
+  COMMENTS: ORDER_FIELD.Comments,
+  CREATED_AT: ORDER_FIELD.CreatedAt,
+  UPDATED_AT: ORDER_FIELD.UpdatedAt,
 };
 
 const DIRECTION_DICT: { [key: string]: ORDER_BY_DIRECTION } = {
@@ -61,11 +58,23 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
     beforeCursor: undefined,
   }));
 
+  readonly setMilestones = this.updater((state, values: Milestone[]) => ({
+    ...state,
+    milestones: values,
+    milestonesLoaded: true,
+  }));
+
   readonly setLabel = this.updater((state, value: string) => ({
     ...state,
     label: value,
     afterCursor: undefined,
     beforeCursor: undefined,
+  }));
+
+  readonly setLabels = this.updater((state, values: Label[]) => ({
+    ...state,
+    labels: values,
+    labelsLoaded: true,
   }));
 
   readonly changeState = this.updater((state, value: OPEN_CLOSED_STATE) => ({
@@ -80,7 +89,7 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
     return {
       ...state,
       sort: {
-        field: ISSUE_ORDER_DICT[field],
+        field: ORDER_DICT[field],
         direction: DIRECTION_DICT[direction],
       },
       afterCursor: undefined,
@@ -96,9 +105,8 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
     }),
   );
 
-  readonly clearFilters = this.updater((state) => ({
+  readonly clearFilters = this.updater(() => ({
     ...INITIAL_STATE,
-    type: state.type,
   }));
 
   readonly setFiltersLoaded = this.updater((state, value: boolean) => ({
@@ -114,8 +122,6 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
 
   readonly issueState$ = this.select(({ state }) => state);
 
-  readonly type$ = this.select(({ type }) => type);
-
   readonly sort$ = this.select(({ sort }) => sort);
 
   readonly hasActiveFilters$ = this.select(
@@ -126,8 +132,6 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
       label !== '' ||
       milestone !== '' ||
       sort.direction !== ORDER_BY_DIRECTION.Desc ||
-      sort.field !== ORDER_FIELD.CREATED_AT,
+      sort.field !== ORDER_FIELD.CreatedAt,
   );
-
-  readonly filtersLoaded$ = this.select(({ filtersLoaded }) => filtersLoaded);
 }

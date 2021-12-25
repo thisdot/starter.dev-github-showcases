@@ -33,5 +33,7 @@
       </ng-container>
     </div>
   </ng-container>
-  <div>Updated {{ updatedAt | formatDistance: baseDate }}</div>
+  <div>
+    Updated {{ updatedAt | formatDistance: baseDate:{ addSuffix: true } }}
+  </div>
 </div>

@@ -55,6 +55,7 @@ export class IssuesStore extends ComponentStore<IssuesState> {
   readonly setMilestones = this.updater((state, values: Milestone[]) => ({
     ...state,
     milestones: values,
+    milestonesLoaded: true,
   }));
 
   readonly setOpenIssues = this.updater((state, values: Issues) => ({
@@ -65,11 +66,6 @@ export class IssuesStore extends ComponentStore<IssuesState> {
   readonly setClosedIssues = this.updater((state, values: Issues) => ({
     ...state,
     closedIssues: values,
-  }));
-
-  readonly setLabels = this.updater((state, values: Label[]) => ({
-    ...state,
-    labels: values,
   }));
 
   readonly setIssuesLoaded = this.updater((state, value: boolean) => ({
@@ -107,7 +103,7 @@ export class IssuesStore extends ComponentStore<IssuesState> {
 
   readonly pageInfo$ = this.select(
     this.activeIssues$,
-    (activeIssues) => activeIssues?.pageInfo,
+    (activeIssues) => activeIssues.pageInfo,
   );
 
   readonly issuesLoaded$ = this.select(({ issuesLoaded }) => issuesLoaded);
@@ -123,7 +119,8 @@ export class IssuesStore extends ComponentStore<IssuesState> {
           sort,
           afterCursor,
           beforeCursor,
-          filtersLoaded,
+          milestonesLoaded,
+          labelsLoaded,
         }) =>
           this.routeConfigService
             .getLeafConfig<ResolvedRepoDetails>('userDetails')
@@ -153,9 +150,9 @@ export class IssuesStore extends ComponentStore<IssuesState> {
                         const { openIssues, closedIssues, milestones, labels } =
                           parseQuery(res.data);
 
-                        if (!filtersLoaded) {
-                          this.setMilestones(milestones);
-                          this.setLabels(labels);
+                        if (!(milestonesLoaded && labelsLoaded)) {
+                          this.reposFilterStore.setMilestones(milestones);
+                          this.reposFilterStore.setLabels(labels);
                           this.reposFilterStore.setFiltersLoaded(true);
                         }
                         this.setOpenIssues(openIssues);
