@@ -1,5 +1,5 @@
 import { ApolloQueryResult } from '@apollo/client/core';
-import { ORDER_BY_DIRECTION, ORDER_BY_FIELD } from './order-by';
+import { ORDER_BY_DIRECTION, ORDER_BY_FIELD } from '@filter-store';
 import { PageInfo } from './page-info';
 
 export interface UserReposData {

@@ -24,7 +24,6 @@ export class IssuesComponent implements OnInit {
   readonly label$ = this.reposFilterStore.label$;
   readonly milestone$ = this.reposFilterStore.milestone$;
   readonly issueState$ = this.reposFilterStore.issueState$;
-  readonly type$ = this.reposFilterStore.type$;
   readonly sort$ = this.reposFilterStore.sort$;
   readonly hasActiveFilters$ = this.reposFilterStore.hasActiveFilters$;
   readonly filterState$ = this.reposFilterStore.state$;

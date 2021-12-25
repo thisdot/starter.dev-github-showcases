@@ -1,13 +1,8 @@
 import { UserReposData, UserRepo, Repo, Repos } from 'src/app/gql';
 
-export function parseQuery(data?: UserReposData): Repos | undefined {
-  const nodes = data?.user.repositories.nodes;
-  const pageInfo = data?.user?.repositories.pageInfo;
-
-  if (!nodes) {
-    return undefined;
-  }
-
+export function parseQuery(data: UserReposData): Repos {
+  const nodes = data.user.repositories.nodes;
+  const pageInfo = data.user.repositories.pageInfo;
   const repos = nodes.reduce((acc: Repo[], repo: UserRepo) => {
     return repo
       ? [
