@@ -15,14 +15,14 @@ export class IssuesComponent implements OnInit {
   readonly repoIssues$: Observable<Issues> = this.issuesStore.activeIssues$;
   readonly openIssuesCount$ = this.issuesStore.openIssuesCount$;
   readonly closedIssuesCount$ = this.issuesStore.closedIssuesCount$;
-  readonly labels$ = this.issuesStore.labels$;
-  readonly milestones$ = this.issuesStore.milestones$;
   readonly pageInfo$ = this.issuesStore.pageInfo$;
   readonly issuesLoaded$ = this.issuesStore.issuesLoaded$;
 
   // Filter store selectors
   readonly label$ = this.reposFilterStore.label$;
+  readonly labels$ = this.reposFilterStore.labels$;
   readonly milestone$ = this.reposFilterStore.milestone$;
+  readonly milestones$ = this.reposFilterStore.milestones$;
   readonly issueState$ = this.reposFilterStore.issueState$;
   readonly sort$ = this.reposFilterStore.sort$;
   readonly hasActiveFilters$ = this.reposFilterStore.hasActiveFilters$;

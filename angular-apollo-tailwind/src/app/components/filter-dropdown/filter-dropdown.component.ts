@@ -34,6 +34,7 @@ export class FilterDropdownComponent {
   @Input() description = '';
   @Input() current: string | null = '';
   @Input() items: FilterOption[] = [];
+  @Input() toggle? = false;
 
   @Output() setFilter: EventEmitter<string> = new EventEmitter();
 
@@ -47,7 +48,11 @@ export class FilterDropdownComponent {
 
   handleSetFilterClick(label: string) {
     if (label === this.current) {
-      this.setFilter.emit('');
+      if (this.toggle) {
+        this.setFilter.emit('');
+      } else {
+        this.setFilter.emit(this.items[0].value);
+      }
     } else {
       this.setFilter.emit(label);
     }
@@ -55,7 +60,7 @@ export class FilterDropdownComponent {
   }
 
   handleClearFilterClick() {
-    this.setFilter.emit('');
+    this.setFilter.emit(this.items[0].value);
     this.isOpen = false;
   }
 

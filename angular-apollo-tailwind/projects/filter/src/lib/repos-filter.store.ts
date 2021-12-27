@@ -12,7 +12,9 @@ import {
 
 export interface FilterState {
   label: string;
+  labels: Label[];
   milestone: string;
+  milestones: Milestone[];
   state: OPEN_CLOSED_STATE;
   sort: SortOption;
   afterCursor?: string;
@@ -23,7 +25,9 @@ export interface FilterState {
 
 const INITIAL_STATE: FilterState = {
   label: '',
+  labels: [],
   milestone: '',
+  milestones: [],
   state: OPEN_CLOSED_STATE.OPEN,
   sort: {
     field: ORDER_FIELD.CreatedAt,
@@ -46,23 +50,7 @@ const DIRECTION_DICT: { [key: string]: ORDER_BY_DIRECTION } = {
 
 @Injectable()
 export class ReposFilterStore extends ComponentStore<FilterState> {
-  constructor() {
-    super(INITIAL_STATE);
-  }
   // *********** Updaters *********** //
-
-  readonly setMilestone = this.updater((state, value: string) => ({
-    ...state,
-    milestone: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
-  }));
-
-  readonly setMilestones = this.updater((state, values: Milestone[]) => ({
-    ...state,
-    milestones: values,
-    milestonesLoaded: true,
-  }));
 
   readonly setLabel = this.updater((state, value: string) => ({
     ...state,
@@ -75,6 +63,19 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
     ...state,
     labels: values,
     labelsLoaded: true,
+  }));
+
+  readonly setMilestone = this.updater((state, value: string) => ({
+    ...state,
+    milestone: value,
+    afterCursor: undefined,
+    beforeCursor: undefined,
+  }));
+
+  readonly setMilestones = this.updater((state, values: Milestone[]) => ({
+    ...state,
+    milestones: values,
+    milestonesLoaded: true,
   }));
 
   readonly changeState = this.updater((state, value: OPEN_CLOSED_STATE) => ({
@@ -118,7 +119,11 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
 
   readonly label$ = this.select(({ label }) => label);
 
+  readonly labels$ = this.select(({ labels }) => labels);
+
   readonly milestone$ = this.select(({ milestone }) => milestone);
+
+  readonly milestones$ = this.select(({ milestones }) => milestones);
 
   readonly issueState$ = this.select(({ state }) => state);
 
@@ -134,4 +139,8 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
       sort.direction !== ORDER_BY_DIRECTION.Desc ||
       sort.field !== ORDER_FIELD.CreatedAt,
   );
+
+  constructor() {
+    super(INITIAL_STATE);
+  }
 }
