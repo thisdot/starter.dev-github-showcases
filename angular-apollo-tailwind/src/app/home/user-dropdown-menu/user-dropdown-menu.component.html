@@ -31,6 +31,7 @@
     <div class="py-1">
       <a
         [routerLink]="[user?.login]"
+        (click)="closeDropdown()"
         class="block font-medium px-4 py-2 text-gray-900 hover:text-blue-600"
         >Profile</a
       >

@@ -8,6 +8,7 @@ import {
   UserProfileVars,
   USER_PROFILE_QUERY,
 } from 'src/app/gql';
+import { ProfileDetails } from '../profile.resolver';
 import { parseQuery } from './parse-profile';
 
 @Component({
@@ -17,12 +18,13 @@ import { parseQuery } from './parse-profile';
 })
 export class ProfileAboutComponent {
   profileDetails$: Observable<UserProfileDetails> = this.routeConfigService
-    .getLeafConfig<string>('username')
+    .getLeafConfig<ProfileDetails>('profile')
     .pipe(
-      switchMap((owner: string) =>
+      switchMap(({ owner, isOrg }: ProfileDetails) =>
         this.apollo
           .watchQuery<UserProfileData, UserProfileVars>({
-            query: USER_PROFILE_QUERY,
+            // TODO: add wuery for org profile
+            query: isOrg ? USER_PROFILE_QUERY : USER_PROFILE_QUERY,
             variables: {
               username: owner,
             },
@@ -37,7 +39,7 @@ export class ProfileAboutComponent {
     );
 
   constructor(
-    private routeConfigService: RouteConfigService<string, 'username'>,
+    private routeConfigService: RouteConfigService<string, 'profile'>,
     private apollo: Apollo,
   ) {}
 }
