@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NetworkStatus } from '@apollo/client/core';
-import {
-  ORDER_BY_DIRECTION,
-  ProfileFilterState,
-  ProfileReposFilterStore,
-} from '@filter-store';
+import { ProfileFilterState, ProfileReposFilterStore } from '@filter-store';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { RouteConfigService } from '@this-dot/route-config';
 import { Apollo } from 'apollo-angular';

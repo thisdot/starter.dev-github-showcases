@@ -52,9 +52,6 @@ const ORDER_BY_DICT: { [key: string]: ORDER_BY_FIELD } = {
 
 @Injectable()
 export class ProfileReposFilterStore extends ComponentStore<ProfileFilterState> {
-  constructor() {
-    super(INITIAL_STATE);
-  }
   // *********** Updaters *********** //
 
   readonly setSort = this.updater((state, value: string) => ({
@@ -139,4 +136,8 @@ export class ProfileReposFilterStore extends ComponentStore<ProfileFilterState> 
     (isQueryActive, isTypeActive, isLanguageActive) =>
       isQueryActive || isTypeActive || isLanguageActive,
   );
+
+  constructor() {
+    super(INITIAL_STATE);
+  }
 }

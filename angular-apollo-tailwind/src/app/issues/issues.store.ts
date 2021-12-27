@@ -4,7 +4,6 @@ import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Apollo } from 'apollo-angular';
 import { Observable, switchMap } from 'rxjs';
 import {
-  Label,
   RepoIssuesData,
   RepoIssuesVars,
   REPO_ISSUES_QUERY,
@@ -17,8 +16,6 @@ import { FilterState, ReposFilterStore } from '@filter-store';
 import { parseQuery } from './parse-issues';
 
 export interface IssuesState {
-  labels: Label[];
-  milestones: Milestone[];
   openIssues: Issues;
   closedIssues: Issues;
   issuesLoaded: boolean;
@@ -34,8 +31,6 @@ const INITIAL_ISSUES_STATE: Issues = {
 };
 
 const INITIAL_STATE: IssuesState = {
-  labels: [],
-  milestones: [],
   openIssues: INITIAL_ISSUES_STATE,
   closedIssues: INITIAL_ISSUES_STATE,
   issuesLoaded: false,
@@ -43,13 +38,6 @@ const INITIAL_STATE: IssuesState = {
 
 @Injectable()
 export class IssuesStore extends ComponentStore<IssuesState> {
-  constructor(
-    private reposFilterStore: ReposFilterStore,
-    private routeConfigService: RouteConfigService<string, 'userDetails'>,
-    private apollo: Apollo,
-  ) {
-    super(INITIAL_STATE);
-  }
   // *********** Updaters *********** //
 
   readonly setMilestones = this.updater((state, values: Milestone[]) => ({
@@ -74,10 +62,6 @@ export class IssuesStore extends ComponentStore<IssuesState> {
   }));
 
   // *********** Selectors *********** //
-
-  readonly labels$ = this.select(({ labels }) => labels);
-
-  readonly milestones$ = this.select(({ milestones }) => milestones);
 
   readonly openIssues$ = this.select(({ openIssues }) => openIssues);
 
@@ -169,4 +153,12 @@ export class IssuesStore extends ComponentStore<IssuesState> {
       ),
     ),
   );
+
+  constructor(
+    private reposFilterStore: ReposFilterStore,
+    private routeConfigService: RouteConfigService<string, 'userDetails'>,
+    private apollo: Apollo,
+  ) {
+    super(INITIAL_STATE);
+  }
 }

@@ -35,6 +35,7 @@
       description="Filter by label"
       [current]="currentLabel"
       [items]="labelOptions"
+      [toggle]="true"
       (setFilter)="handleLabelClick($event)"
     ></app-filter-dropdown>
     <app-filter-dropdown
