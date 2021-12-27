@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsernameResolver } from '../profile/username.resolver';
+import { ProfileResolver } from '../profile/profile.resolver';
 import { RepoDataResolver } from './repo-data.resolver';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import { ReposComponent } from './repos.component';
@@ -8,6 +8,14 @@ const routes: Routes = [
   {
     path: '',
     component: ReposComponent,
+  },
+  {
+    path: 'orgs/:owner',
+    resolve: {
+      profile: ProfileResolver,
+    },
+    loadChildren: () =>
+      import('../profile/profile.module').then((m) => m.ProfileModule),
   },
   {
     path: ':owner/:repo',
@@ -44,7 +52,7 @@ const routes: Routes = [
   {
     path: ':owner',
     resolve: {
-      username: UsernameResolver,
+      profile: ProfileResolver,
     },
     loadChildren: () =>
       import('../profile/profile.module').then((m) => m.ProfileModule),

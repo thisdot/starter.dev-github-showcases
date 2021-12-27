@@ -13,7 +13,7 @@ const routes: Route[] = [
         component: ProfileReposListComponent,
       },
       {
-        path: 'repos',
+        path: 'repositories',
         redirectTo: '',
       },
     ],

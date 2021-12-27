@@ -6,6 +6,7 @@ import { RouteConfigService } from '@this-dot/route-config';
 import { Apollo } from 'apollo-angular';
 import { map, Observable, switchMap, withLatestFrom } from 'rxjs';
 import {
+  ORG_REPOS_QUERY,
   Repo,
   Repos,
   UserRepoDetails,
@@ -13,6 +14,7 @@ import {
   UserReposVars,
   USER_REPOS_QUERY,
 } from 'src/app/gql';
+import { ProfileDetails } from '../profile.resolver';
 import { filterRepos } from './filter-repos';
 import { parseLanguages } from './parse-languages';
 import { parseQuery } from './parse-profile-repos';
@@ -78,14 +80,13 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     (target$: Observable<ProfileFilterState>) =>
       target$.pipe(
         switchMap((state) =>
-          this.routeConfigService.getLeafConfig<string>('username').pipe(
-            switchMap((owner: string) =>
+          this.routeConfigService.getLeafConfig<ProfileDetails>('profile').pipe(
+            switchMap(({ owner, isOrg }: ProfileDetails) =>
               this.apollo
                 .watchQuery<UserReposData, UserReposVars>({
-                  query: USER_REPOS_QUERY,
+                  query: isOrg ? ORG_REPOS_QUERY : USER_REPOS_QUERY,
                   variables: {
                     username: owner,
-                    // TODO: have the following controlled by filter state
                     orderBy: state.sort,
                     afterCursor: state.afterCursor ?? undefined,
                     beforeCursor: state.beforeCursor ?? undefined,
@@ -128,7 +129,7 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
 
   constructor(
     private profileReposFilterStore: ProfileReposFilterStore,
-    private routeConfigService: RouteConfigService<string, 'username'>,
+    private routeConfigService: RouteConfigService<string, 'profile'>,
     private apollo: Apollo,
   ) {
     super(INITIAL_PROFILE_REPOS_STATE);

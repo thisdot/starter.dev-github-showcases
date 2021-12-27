@@ -18,7 +18,7 @@ import { CurrentUser } from 'src/app/gql';
   ],
 })
 export class UserDropdownMenuComponent {
-  @Input() user: CurrentUser | null = null;
+  @Input() user!: CurrentUser;
 
   isOpen = false;
 
@@ -28,16 +28,21 @@ export class UserDropdownMenuComponent {
     this.isOpen = !this.isOpen;
   }
 
+  closeDropdown() {
+    this.isOpen = false;
+  }
+
   signOut() {
     // TODO: make this work
     console.log('sign out clicked', this.user);
+    this.closeDropdown();
   }
 
   // TODO: maybe convert to directive
   @HostListener('document:click', ['$event'])
   onClick(event: PointerEvent) {
     if (!this.elRef.nativeElement.contains(event.target)) {
-      this.isOpen = false;
+      this.closeDropdown();
     }
   }
 }

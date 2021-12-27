@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UsernameResolver } from './username.resolver';
+import { ProfileResolver } from './profile.resolver';
 
 describe('ProfileDataResolver', () => {
-  let resolver: UsernameResolver;
+  let resolver: ProfileResolver;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    resolver = TestBed.inject(UsernameResolver);
+    resolver = TestBed.inject(ProfileResolver);
   });
 
   it('should be created', () => {
