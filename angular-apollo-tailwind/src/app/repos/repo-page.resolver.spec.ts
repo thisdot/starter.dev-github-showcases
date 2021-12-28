@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RepoDataResolver } from './repo-data.resolver';
+import { RepoPageResolver } from './repo-page.resolver';
 
 describe('RepoDataResolver', () => {
-  let resolver: RepoDataResolver;
+  let resolver: RepoPageResolver;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    resolver = TestBed.inject(RepoDataResolver);
+    resolver = TestBed.inject(RepoPageResolver);
   });
 
   it('should be created', () => {

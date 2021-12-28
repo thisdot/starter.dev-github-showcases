@@ -9,7 +9,11 @@ import { FileExplorerAboutDescriptionComponent } from './components/file-explore
 import { FileExplorerRootComponent } from './file-explorer-root.component';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { FileExplorerBlobComponent } from './file-explorer-blob/file-explorer-blob.component';
-import { ContentLoadingModule, IconsModule } from '@shared';
+import {
+  ContentLoadingModule,
+  DataContainerComponentModule,
+  IconsModule,
+} from '@shared';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import { ContentLoadingModule, IconsModule } from '@shared';
     FileExplorerRoutingModule,
     IconsModule,
     ContentLoadingModule,
+    DataContainerComponentModule,
   ],
   exports: [
     FileExplorerRootComponent,

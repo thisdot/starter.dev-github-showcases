@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileResolver } from '../profile/profile.resolver';
-import { RepoDataResolver } from './repo-data.resolver';
+import { RepoPageResolver } from './repo-page.resolver';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import { ReposComponent } from './repos.component';
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
     path: ':owner/:repo',
     component: RepoDetailsComponent,
     resolve: {
-      userDetails: RepoDataResolver,
+      repoPageData: RepoPageResolver,
     },
     children: [
       {

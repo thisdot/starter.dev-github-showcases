@@ -1,21 +1,27 @@
-<ng-container *ngIf="fileDetails$ | async as details">
-  <div *ngIf="!details?.error" class="max-w-screen-2xl mx-auto py-8 px-4">
+<sd-data-container
+  *ngIf="fileDetails$ | async as fileDetails"
+  [data]="fileDetails"
+>
+  <div content class="max-w-screen-2xl mx-auto py-8 px-4">
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-12">
         <app-file-explorer-nav
-          [basePath]="details.basePath"
-          [name]="details.name"
-          [branch]="details.branch"
-          [path]="details.path"
+          [owner]="fileDetails.owner"
+          [name]="fileDetails.name"
+          [branch]="fileDetails.branch"
+          [path]="fileDetails.path"
         ></app-file-explorer-nav>
         <app-file-viewer
-          [text]="details.text"
-          [byteSize]="details.byteSize"
-          [lines]="details.lines"
-          [language]="details.language"
+          [text]="fileDetails.text"
+          [byteSize]="fileDetails.byteSize"
+          [lines]="fileDetails.lines"
+          [language]="fileDetails.language"
         ></app-file-viewer>
       </div>
     </div>
   </div>
-  <div *ngIf="details?.error">Error: {{ details.error?.message }}</div>
-</ng-container>
+
+  <div error>
+    <div>Error: {{ fileDetails.error?.message }}</div>
+  </div>
+</sd-data-container>

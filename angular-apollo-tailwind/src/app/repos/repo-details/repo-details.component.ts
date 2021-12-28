@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouteConfigService } from '@this-dot/route-config';
 import { Apollo } from 'apollo-angular';
 import { map, Observable, switchMap } from 'rxjs';
-import { ResolvedRepoDetails } from 'src/app/gql';
+import { RepoPageDetails } from 'src/app/gql';
 import {
   ReportHeader,
   FileExplorerData,
@@ -16,7 +16,7 @@ import { REPO_TREE_QUERY } from 'src/app/gql/queries/repo-tree.query';
 })
 export class RepoDetailsComponent {
   headerStats$: Observable<ReportHeader> = this.routeConfigService
-    .getLeafConfig<ResolvedRepoDetails>('userDetails')
+    .getLeafConfig<RepoPageDetails>('repoPageData')
     .pipe(
       switchMap(({ owner, name, branch, repository }) =>
         this.apollo
@@ -33,7 +33,6 @@ export class RepoDetailsComponent {
               ...res,
               owner,
               name,
-              basePath: `/${owner}/${name}`,
               isPrivate: repository.isPrivate,
               stargazers: repository.stargazerCount,
               forks: repository.forkCount,
@@ -46,7 +45,7 @@ export class RepoDetailsComponent {
     );
 
   constructor(
-    private routeConfigService: RouteConfigService<string, 'userDetails'>,
+    private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private apollo: Apollo,
   ) {}
 }
