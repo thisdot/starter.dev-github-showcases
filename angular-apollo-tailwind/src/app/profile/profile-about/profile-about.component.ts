@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { RouteConfigService } from '@this-dot/route-config';
+import { Component, Input, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Observable, switchMap, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import {
   UserProfileDetails,
   UserProfileData,
@@ -9,37 +8,33 @@ import {
   USER_PROFILE_QUERY,
 } from 'src/app/gql';
 import { ProfileDetails } from '../profile.resolver';
-import { parseQuery } from './parse-profile';
+import { parseUserQuery } from './parse-profile';
 
 @Component({
   selector: 'app-profile-about',
   templateUrl: './profile-about.component.html',
   styleUrls: ['./profile-about.component.css'],
 })
-export class ProfileAboutComponent {
-  profileDetails$: Observable<UserProfileDetails> = this.routeConfigService
-    .getLeafConfig<ProfileDetails>('profile')
-    .pipe(
-      switchMap(({ owner, isOrg }: ProfileDetails) =>
-        this.apollo
-          .watchQuery<UserProfileData, UserProfileVars>({
-            // TODO: add wuery for org profile
-            query: isOrg ? USER_PROFILE_QUERY : USER_PROFILE_QUERY,
-            variables: {
-              username: owner,
-            },
-          })
-          .valueChanges.pipe(
-            map((res) => ({
-              ...res,
-              ...parseQuery(res.data),
-            })),
-          ),
-      ),
-    );
+export class ProfileAboutComponent implements OnInit {
+  @Input() profile!: ProfileDetails;
 
-  constructor(
-    private routeConfigService: RouteConfigService<string, 'profile'>,
-    private apollo: Apollo,
-  ) {}
+  user$!: Observable<UserProfileDetails>;
+
+  constructor(private apollo: Apollo) {}
+
+  ngOnInit(): void {
+    this.user$ = this.apollo
+      .watchQuery<UserProfileData, UserProfileVars>({
+        query: USER_PROFILE_QUERY,
+        variables: {
+          username: this.profile.owner,
+        },
+      })
+      .valueChanges.pipe(
+        map((res) => ({
+          ...res,
+          ...parseUserQuery(res.data),
+        })),
+      );
+  }
 }

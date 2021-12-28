@@ -15,6 +15,8 @@ import { ReposFiltersComponent } from './components/repos-filters/repos-filters.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReposFilterDropdownModule } from '../components/repos-filter-dropdown/repos-filter-dropdown.module';
 import { OrgProfileComponent } from './org-profile/org-profile.component';
+import { OrgProfileAboutComponent } from './org-about/org-about.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { OrgProfileComponent } from './org-profile/org-profile.component';
     ProfileReposLoadingComponent,
     ReposFiltersComponent,
     OrgProfileComponent,
+    OrgProfileAboutComponent,
+    UserProfileComponent,
   ],
   imports: [
     CommonModule,

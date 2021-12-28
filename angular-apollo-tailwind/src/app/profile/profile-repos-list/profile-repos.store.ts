@@ -6,6 +6,8 @@ import { RouteConfigService } from '@this-dot/route-config';
 import { Apollo } from 'apollo-angular';
 import { map, Observable, switchMap, withLatestFrom } from 'rxjs';
 import {
+  OrgReposData,
+  OrgReposVars,
   ORG_REPOS_QUERY,
   Repo,
   Repos,
@@ -17,7 +19,10 @@ import {
 import { ProfileDetails } from '../profile.resolver';
 import { filterRepos } from './filter-repos';
 import { parseLanguages } from './parse-languages';
-import { parseQuery } from './parse-profile-repos';
+import {
+  parseOrgReposQuery,
+  parseProfileReposQuery,
+} from './parse-profile-repos';
 
 export interface ProfileReposState {
   repos: UserRepoDetails;
@@ -76,45 +81,20 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
 
   // *********** Effects *********** //
 
-  readonly getProfileRepos = this.effect(
-    (target$: Observable<ProfileFilterState>) =>
-      target$.pipe(
-        switchMap((state) =>
-          this.routeConfigService.getLeafConfig<ProfileDetails>('profile').pipe(
+  readonly getRepos = this.effect((target$: Observable<ProfileFilterState>) =>
+    target$.pipe(
+      switchMap((state) =>
+        this.routeConfigService
+          .getLeafConfig<ProfileDetails>('profile')
+          .pipe(
             switchMap(({ owner, isOrg }: ProfileDetails) =>
-              this.apollo
-                .watchQuery<UserReposData, UserReposVars>({
-                  query: isOrg ? ORG_REPOS_QUERY : USER_REPOS_QUERY,
-                  variables: {
-                    username: owner,
-                    orderBy: state.sort,
-                    afterCursor: state.afterCursor ?? undefined,
-                    beforeCursor: state.beforeCursor ?? undefined,
-                  },
-                })
-                .valueChanges.pipe(
-                  tapResponse(
-                    (res) => {
-                      const repos = parseQuery(res.data);
-                      const filteredRepos = filterRepos(repos.repos, state);
-
-                      if (!state.languagesLoaded) {
-                        const languages = parseLanguages(filteredRepos);
-                        this.profileReposFilterStore.setLanguages(languages);
-                      }
-
-                      this.setRepos({ owner, repos: filteredRepos });
-                      this.setReposLoaded(true);
-                    },
-                    (err) => {
-                      console.log(err);
-                    },
-                  ),
-                ),
+              isOrg
+                ? this.getOrgProfileRepos(owner, state)
+                : this.getProfileRepos(owner, state),
             ),
           ),
-        ),
       ),
+    ),
   );
 
   readonly search = this.effect((target$: Observable<ProfileFilterState>) =>
@@ -133,5 +113,69 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     private apollo: Apollo,
   ) {
     super(INITIAL_PROFILE_REPOS_STATE);
+  }
+
+  private getProfileRepos(owner: string, state: ProfileFilterState) {
+    return this.apollo
+      .watchQuery<UserReposData, UserReposVars>({
+        query: USER_REPOS_QUERY,
+        variables: {
+          username: owner,
+          orderBy: state.sort,
+          afterCursor: state.afterCursor ?? undefined,
+          beforeCursor: state.beforeCursor ?? undefined,
+        },
+      })
+      .valueChanges.pipe(
+        tapResponse(
+          (res) => {
+            const repos = parseProfileReposQuery(res.data);
+            const filteredRepos = filterRepos(repos.repos, state);
+
+            if (!state.languagesLoaded) {
+              const languages = parseLanguages(filteredRepos);
+              this.profileReposFilterStore.setLanguages(languages);
+            }
+
+            this.setRepos({ owner, repos: filteredRepos });
+            this.setReposLoaded(true);
+          },
+          (err) => {
+            console.log(err);
+          },
+        ),
+      );
+  }
+
+  private getOrgProfileRepos(owner: string, state: ProfileFilterState) {
+    return this.apollo
+      .watchQuery<OrgReposData, OrgReposVars>({
+        query: ORG_REPOS_QUERY,
+        variables: {
+          orgname: owner,
+          orderBy: state.sort,
+          afterCursor: state.afterCursor ?? undefined,
+          beforeCursor: state.beforeCursor ?? undefined,
+        },
+      })
+      .valueChanges.pipe(
+        tapResponse(
+          (res) => {
+            const repos = parseOrgReposQuery(res.data);
+            const filteredRepos = filterRepos(repos.repos, state);
+
+            if (!state.languagesLoaded) {
+              const languages = parseLanguages(filteredRepos);
+              this.profileReposFilterStore.setLanguages(languages);
+            }
+
+            this.setRepos({ owner, repos: filteredRepos });
+            this.setReposLoaded(true);
+          },
+          (err) => {
+            console.log(err);
+          },
+        ),
+      );
   }
 }

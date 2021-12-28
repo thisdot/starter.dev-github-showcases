@@ -1,11 +1,13 @@
-import { Organization, UserProfile, UserProfileData } from 'src/app/gql';
+import {
+  Org,
+  Organization,
+  OrgProfileData,
+  UserProfile,
+  UserProfileData,
+} from 'src/app/gql';
 
-export function parseQuery(data?: UserProfileData): UserProfile | undefined {
-  const user = data?.user;
-  if (!user) {
-    return undefined;
-  }
-
+export const parseUserQuery = (data: UserProfileData): UserProfile => {
+  const user = data.user;
   const {
     organizations,
     followers,
@@ -30,4 +32,6 @@ export function parseQuery(data?: UserProfileData): UserProfile | undefined {
     starredRepos: starredRepositories.totalCount,
     username: login,
   };
-}
+};
+
+export const parseOrgQuery = (data: OrgProfileData): Org => data.organization;

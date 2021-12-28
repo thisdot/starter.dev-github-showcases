@@ -1,5 +1,5 @@
-.container {
-  @apply border-b border-gray-200;
+.repo-nav-container {
+  @apply px-4;
 }
 
 .nav {

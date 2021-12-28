@@ -8,4 +8,5 @@ export * from './repo-tree.query';
 export * from './user-gists.query';
 export * from './org-repos.query';
 export * from './user-repos.query';
+export * from './org-profile.query';
 export * from './profile.query';
