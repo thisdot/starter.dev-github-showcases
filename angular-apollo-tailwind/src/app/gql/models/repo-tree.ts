@@ -34,7 +34,6 @@ export interface FileExplorerRepoDetails {
 export interface ReportHeader extends ApolloQueryResult<FileExplorerData> {
   owner: string;
   name: string;
-  basePath: string;
   isPrivate: boolean;
   stargazers: number;
   forks: number;
@@ -44,13 +43,8 @@ export interface ReportHeader extends ApolloQueryResult<FileExplorerData> {
 }
 
 export interface FileExplorer extends ApolloQueryResult<FileExplorerData> {
-  owner: string;
-  name: string;
   items: TreeEntry[];
-  basePath: string;
-  path?: string;
-  branch: string;
-  description: string;
+  path: string;
 }
 
 export interface TreeEntry {

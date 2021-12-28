@@ -11,7 +11,7 @@ import {
   PullRequests,
   Milestones,
   PullRequest,
-  ResolvedRepoDetails,
+  RepoPageDetails,
   RepoPullRequestsData,
   RepoPullRequestsVars,
   REPO_PULLS_QUERY,
@@ -80,7 +80,7 @@ const parsePullRequests = (values: PullRequests) =>
 @Injectable()
 export class PullRequestsStore extends ComponentStore<FilterState> {
   constructor(
-    private routeConfigService: RouteConfigService<string, 'userDetails'>,
+    private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private apollo: Apollo,
   ) {
     super(INITIAL_STATE);
@@ -252,7 +252,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
       withLatestFrom(this.state$),
       switchMap(([, { label, sort, afterCursor, beforeCursor }]) =>
         this.routeConfigService
-          .getLeafConfig<ResolvedRepoDetails>('userDetails')
+          .getLeafConfig<RepoPageDetails>('repoPageData')
           .pipe(
             switchMap(({ owner, name }) =>
               this.apollo

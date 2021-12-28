@@ -29,11 +29,14 @@ export interface RepoDetails {
   };
 }
 
-export interface ResolvedRepoDetails
-  extends ApolloQueryResult<RepoDetailsData> {
+export interface RepoPage {
   name: string;
   owner: string;
   branch: string;
-  loading: boolean;
+  path: string;
   repository: RepoDetails;
 }
+
+export interface RepoPageDetails
+  extends RepoPage,
+    ApolloQueryResult<RepoDetailsData> {}

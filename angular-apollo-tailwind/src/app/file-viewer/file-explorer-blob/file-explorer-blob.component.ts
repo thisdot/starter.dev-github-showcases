@@ -3,7 +3,7 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 import { RouteConfigService } from '@this-dot/route-config';
 import { Apollo } from 'apollo-angular';
 import { Observable, withLatestFrom, map, switchMap } from 'rxjs';
-import { ResolvedRepoDetails } from 'src/app/gql';
+import { RepoPageDetails } from 'src/app/gql';
 import {
   FileDetails,
   RepoFileData,
@@ -18,7 +18,7 @@ import { mapLanguageExt } from '../utils/map-language-ext';
 })
 export class FileExplorerBlobComponent {
   fileDetails$: Observable<FileDetails> = this.routeConfigService
-    .getLeafConfig<ResolvedRepoDetails>('userDetails')
+    .getLeafConfig<RepoPageDetails>('repoPageData')
     .pipe(
       withLatestFrom(
         this.route.paramMap.pipe(map((params: ParamMap) => params.get('path'))),
@@ -61,7 +61,7 @@ export class FileExplorerBlobComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private routeConfigService: RouteConfigService<string, 'userDetails'>,
+    private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private apollo: Apollo,
   ) {}
 }
