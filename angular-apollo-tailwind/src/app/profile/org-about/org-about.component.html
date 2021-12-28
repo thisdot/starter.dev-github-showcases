@@ -1,0 +1,16 @@
+<sd-data-container *ngIf="org$ | async as org" [data]="org">
+  <div content>
+    <a class="text-black" routerLink="./">
+      <h1 class="flex text-2xl font-bold">
+        <img
+          class="mr-1"
+          [src]="org.avatarUrl"
+          [alt]="org.name + 'logo'"
+          width="30"
+          height="30"
+        />
+        {{ org.name }}
+      </h1>
+    </a>
+  </div>
+</sd-data-container>

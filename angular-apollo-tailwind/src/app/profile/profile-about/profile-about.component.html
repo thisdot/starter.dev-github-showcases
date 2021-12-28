@@ -1,20 +1,17 @@
-<sd-data-container
-  *ngIf="profileDetails$ | async as profileDetails"
-  [data]="profileDetails"
->
+<sd-data-container *ngIf="user$ | async as user" [data]="user">
   <div content>
     <img
-      [src]="profileDetails.avatarUrl"
+      [src]="user.avatarUrl"
       alt="Avatar"
       [width]="260"
       [height]="260"
       class="avatar"
     />
     <h1 class="mt-2">
-      <div class="name">{{ profileDetails.name }}</div>
-      <div class="username">{{ profileDetails.username }}</div>
+      <div class="name">{{ user.name }}</div>
+      <div class="username">{{ user.username }}</div>
     </h1>
-    <div class="bio">{{ profileDetails.bio }}</div>
+    <div class="bio">{{ user.bio }}</div>
     <div class="socials">
       <hero-icon
         name="users"
@@ -23,11 +20,11 @@
         aria-hidden="true"
       ></hero-icon>
       <span class="inline-block">
-        <span class="count">{{ profileDetails.followers }}</span> followers
+        <span class="count">{{ user.followers }}</span> followers
       </span>
       <span class="mx-1">·</span>
       <span class="inline-block">
-        <span class="count">{{ profileDetails.following }}</span> following
+        <span class="count">{{ user.following }}</span> following
       </span>
       <span class="mx-1">·</span>
       <hero-icon
@@ -37,29 +34,29 @@
         aria-hidden="true"
       ></hero-icon>
       <span class="inline-block">
-        <span class="count">{{ profileDetails.starredRepos }}</span>
+        <span class="count">{{ user.starredRepos }}</span>
       </span>
     </div>
     <div class="fields">
-      <div *ngIf="profileDetails.company">
+      <div *ngIf="user.company">
         <hero-icon
           name="office-building"
           type="outline"
           class="w-4 h-4 mb-0.5 mr-1 inline"
           aria-hidden="true"
         ></hero-icon>
-        {{ profileDetails.company }}
+        {{ user.company }}
       </div>
-      <div *ngIf="profileDetails.location" class="flex">
+      <div *ngIf="user.location" class="flex">
         <hero-icon
           name="location-marker"
           type="outline"
           class="w-4 h-4 mb-0.5 mr-1 inline"
           aria-hidden="true"
         ></hero-icon>
-        {{ profileDetails.location }}
+        {{ user.location }}
       </div>
-      <div *ngIf="profileDetails.websiteUrl">
+      <div *ngIf="user.websiteUrl">
         <hero-icon
           name="link"
           type="outline"
@@ -68,32 +65,30 @@
         ></hero-icon>
         <a
           class="link"
-          [href]="profileDetails.websiteUrl"
+          [href]="user.websiteUrl"
           target="_blank"
           rel="noreferrer"
         >
-          {{ profileDetails.websiteUrl }}
+          {{ user.websiteUrl }}
         </a>
       </div>
-      <div *ngIf="profileDetails.twitterUsername" class="flex items-center">
+      <div *ngIf="user.twitterUsername" class="flex items-center">
         <sd-twitter-icon
           class="mr-1 inline"
           aria-hidden="true"
         ></sd-twitter-icon>
         <a
           class="link"
-          [href]="'https:/twitter.com/' + profileDetails.twitterUsername"
+          [href]="'https:/twitter.com/' + user.twitterUsername"
           target="_blank"
           rel="noreferrer"
         >
-          @{{ profileDetails.twitterUsername }}
+          @{{ user.twitterUsername }}
         </a>
       </div>
     </div>
-    <ng-container *ngIf="profileDetails?.organizations?.length">
-      <app-orgs-list
-        [organizations]="profileDetails?.organizations"
-      ></app-orgs-list>
+    <ng-container *ngIf="user?.organizations?.length">
+      <app-orgs-list [organizations]="user?.organizations"></app-orgs-list>
     </ng-container>
   </div>
   <p error>User not found</p>

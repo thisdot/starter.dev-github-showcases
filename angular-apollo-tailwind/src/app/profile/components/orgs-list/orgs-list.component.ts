@@ -7,7 +7,9 @@ import { Organization } from 'src/app/gql';
     <h2 class="heading">Organizations</h2>
     <div class="list">
       <div *ngFor="let organization of organizations" class="listItem">
-        <img [src]="organization.avatarUrl" alt="Organization" />
+        <a [routerLink]="['../orgs', organization.login]">
+          <img [src]="organization.avatarUrl" alt="Organization" />
+        </a>
       </div>
     </div>
   </div>`,

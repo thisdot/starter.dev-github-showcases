@@ -15,4 +15,5 @@ export * from './user-gists';
 export * from './org-repos';
 export * from './user-repos';
 export * from './page-info';
+export * from './org-profile';
 export * from './profile';

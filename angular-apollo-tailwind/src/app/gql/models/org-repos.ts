@@ -33,7 +33,7 @@ export interface OrgRepo {
 }
 
 export interface OrgReposVars {
-  username: string;
+  orgname: string;
   orderBy: {
     field: ORDER_BY_FIELD;
     direction: ORDER_BY_DIRECTION;

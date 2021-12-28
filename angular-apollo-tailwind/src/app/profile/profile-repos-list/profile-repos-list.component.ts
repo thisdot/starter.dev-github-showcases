@@ -28,7 +28,7 @@ export class ProfileReposListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.profileReposStore.getProfileRepos(this.filterState$);
+    this.profileReposStore.getRepos(this.filterState$);
   }
 
   search(term: string) {
@@ -41,31 +41,31 @@ export class ProfileReposListComponent implements OnInit {
 
   setType(type: string) {
     this.profileReposFilterStore.setType(type);
-    this.profileReposStore.getProfileRepos(this.filterState$);
+    this.profileReposStore.getRepos(this.filterState$);
   }
 
   setLanguage(language: string) {
     this.profileReposFilterStore.setLanguage(language);
-    this.profileReposStore.getProfileRepos(this.filterState$);
+    this.profileReposStore.getRepos(this.filterState$);
   }
 
   setLanguages(languages: LanguageFilter[]) {
     this.profileReposFilterStore.setLanguages(languages);
-    this.profileReposStore.getProfileRepos(this.filterState$);
+    this.profileReposStore.getRepos(this.filterState$);
   }
 
   setSort(sort: string) {
     this.profileReposFilterStore.setSort(sort);
-    this.profileReposStore.getProfileRepos(this.filterState$);
+    this.profileReposStore.getRepos(this.filterState$);
   }
 
   setQuery(query: string) {
     this.profileReposFilterStore.setQuery(query);
-    this.profileReposStore.getProfileRepos(this.filterState$);
+    this.profileReposStore.getRepos(this.filterState$);
   }
 
   clearFilters() {
     this.profileReposFilterStore.clearFilters();
-    this.profileReposStore.getProfileRepos(this.filterState$);
+    this.profileReposStore.getRepos(this.filterState$);
   }
 }
