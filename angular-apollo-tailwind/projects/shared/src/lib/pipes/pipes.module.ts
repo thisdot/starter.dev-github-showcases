@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { FormatDistancePipe } from './dfns/format-distance.pipe';
+import { FormatDistancePipe, RoundUpPipe } from './';
 
 @NgModule({
-  declarations: [FormatDistancePipe],
-  exports: [FormatDistancePipe],
+  declarations: [FormatDistancePipe, RoundUpPipe],
+  exports: [FormatDistancePipe, RoundUpPipe],
 })
 export class PipesModule {}
