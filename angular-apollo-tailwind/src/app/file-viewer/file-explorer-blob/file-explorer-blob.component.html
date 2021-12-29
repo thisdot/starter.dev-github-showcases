@@ -1,27 +1,23 @@
-<sd-data-container
-  *ngIf="fileDetails$ | async as fileDetails"
-  [data]="fileDetails"
->
+<sd-data-container *ngIf="repoPage$ | async as repoPage" [data]="repoPage">
   <div content class="max-w-screen-2xl mx-auto py-8 px-4">
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-12">
         <app-file-explorer-nav
-          [owner]="fileDetails.owner"
-          [name]="fileDetails.name"
-          [branch]="fileDetails.branch"
-          [path]="fileDetails.path"
+          [owner]="repoPage.owner"
+          [name]="repoPage.name"
+          [branch]="repoPage.branch"
+          [path]="repoPage.path"
         ></app-file-explorer-nav>
         <app-file-viewer
-          [text]="fileDetails.text"
-          [byteSize]="fileDetails.byteSize"
-          [lines]="fileDetails.lines"
-          [language]="fileDetails.language"
+          [owner]="repoPage.owner"
+          [name]="repoPage.name"
+          [branch]="repoPage.branch"
         ></app-file-viewer>
       </div>
     </div>
   </div>
 
   <div error>
-    <div>Error: {{ fileDetails.error?.message }}</div>
+    <div>Error: {{ repoPage.error?.message }}</div>
   </div>
 </sd-data-container>

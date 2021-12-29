@@ -1,109 +1,81 @@
 import { Language } from './language';
 
-export const mapLanguageExt = (extension?: string): Language | undefined => {
-  let language: Language | undefined;
-  switch (extension?.toLowerCase()) {
+export const mapLanguageExt = (extension: string): Language => {
+  switch (extension.toLowerCase()) {
     case 'html':
     case 'xhtml':
     case 'xml':
-      language = 'markup';
-      break;
+      return 'markup';
     case 'sh':
     case 'bash':
     case 'zsh':
-      language = 'bash';
-      break;
+      return 'bash';
     case 'c':
-      language = 'c';
-      break;
+      return 'c';
     case 'cpp':
     case 'cc':
     case 'h':
-      language = 'cpp';
-      break;
+      return 'cpp';
     case 'css':
-      language = 'css';
-      break;
+      return 'css';
     case 'js':
-      language = 'javascript';
-      break;
+      return 'javascript';
     case 'jsx':
-      language = 'jsx';
-      break;
+      return 'jsx';
     case 'coffee':
-      language = 'coffeescript';
-      break;
+      return 'coffeescript';
     case 'patch':
     case 'diff':
-      language = 'diff';
-      break;
+      return 'diff';
     case 'git':
-      language = 'git';
-      break;
+      return 'git';
     case 'go':
-      language = 'go';
-      break;
+      return 'go';
     case 'graphql':
     case 'gql':
-      language = 'graphql';
-      break;
+      return 'graphql';
     case 'handlebars':
     case 'hbs':
-      language = 'handlebars';
-      break;
+      return 'handlebars';
     case 'json':
-      language = 'json';
-      break;
+      return 'json';
     case 'less':
-      language = 'less';
-      break;
+      return 'less';
     case 'md':
-      language = 'markdown';
-      break;
+      return 'markdown';
     case 'm':
-      language = 'objectivec';
-      break;
+      return 'objectivec';
     case 'ocaml':
     case 'ml':
-      language = 'ocaml';
-      break;
+      return 'ocaml';
     case 'py':
     case 'py3':
     case 'pyc':
     case 'pyo':
     case 'pyw':
     case 'pyx':
-      language = 'python';
-      break;
+      return 'python';
     case 're':
     case 'rei':
-      language = 'reason';
-      break;
+      return 'reason';
     case 'sass':
-      language = 'sass';
-      break;
+      return 'sass';
     case 'scss':
-      language = 'scss';
-      break;
+      return 'scss';
     case 'sql':
-      language = 'sql';
-      break;
+      return 'sql';
     case 'stylus':
-      language = 'stylus';
-      break;
+      return 'stylus';
     case 'tsx':
-      language = 'tsx';
-      break;
+      return 'tsx';
     case 'ts':
-      language = 'typescript';
-      break;
+      return 'typescript';
     case 'wasm':
-      language = 'wasm';
-      break;
+      return 'wasm';
     case 'yml':
     case 'yaml':
-      language = 'yaml';
-      break;
+      return 'yaml';
+    default:
+      return '' as Language;
   }
-  return language;
 };
