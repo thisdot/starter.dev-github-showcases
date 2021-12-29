@@ -4,7 +4,7 @@
       <span class="fileHeaderLines">{{ file.lines }} lines</span>
       <span class="fileHeaderBytes">{{ file.byteSize }} Bytes</span>
     </div>
-    <ng-container *ngIf="file.language">
+    <ng-container *ngIf="file.language; else unknownLanguage">
       <app-file-code
         [text]="file.text"
         [language]="file.language"
