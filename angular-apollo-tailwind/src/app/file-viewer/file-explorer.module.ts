@@ -14,6 +14,9 @@ import {
   DataContainerComponentModule,
   IconsModule,
 } from '@shared';
+import { FileCodeComponent } from './components/file-code/file-code.component';
+import { PrismModule } from '@prism';
+import { FileTextComponent } from '../profile/components/file-text/file-text.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import {
     FileExplorerAboutDescriptionComponent,
     FileViewerComponent,
     FileExplorerBlobComponent,
+    FileCodeComponent,
+    FileTextComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +37,7 @@ import {
     IconsModule,
     ContentLoadingModule,
     DataContainerComponentModule,
+    PrismModule,
   ],
   exports: [
     FileExplorerRootComponent,
