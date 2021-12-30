@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, UrlSegment } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
+import { parseTopics } from './parse-topics';
 import {
   RepoDetailsData,
   RepoDetailsVars,
@@ -34,6 +35,8 @@ export class RepoPageResolver implements Resolve<RepoPageDetails | boolean> {
           branch: res.data.repository.defaultBranchRef.name,
           path: '',
           repository: res.data.repository,
+          homepageUrl: res.data.repository.homepageUrl,
+          topics: parseTopics(res.data.repository.topics?.nodes),
         })),
       );
   }

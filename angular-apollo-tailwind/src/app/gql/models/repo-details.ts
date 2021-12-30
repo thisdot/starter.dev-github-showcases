@@ -18,6 +18,7 @@ export interface RepoDetails {
   stargazerCount: number;
   forkCount: number;
   description: string;
+  homepageUrl: string;
   watchers: {
     totalCount: number;
   };
@@ -27,6 +28,9 @@ export interface RepoDetails {
   openPullRequests: {
     totalCount: number;
   };
+  topics: {
+    nodes: Topic[];
+  };
 }
 
 export interface RepoPage {
@@ -35,6 +39,15 @@ export interface RepoPage {
   branch: string;
   path: string;
   repository: RepoDetails;
+  homepageUrl: string;
+  topics: string[];
+}
+
+export interface Topic {
+  id: string;
+  topic: {
+    name: string;
+  };
 }
 
 export interface RepoPageDetails

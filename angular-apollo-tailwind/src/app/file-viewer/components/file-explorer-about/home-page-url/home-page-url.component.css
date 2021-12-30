@@ -1,0 +1,11 @@
+.linkContainer {
+  @apply max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap;
+}
+
+.linkIcon {
+  @apply w-4 h-4 inline text-gray-700 mr-2 -mt-0.5;
+}
+
+.link {
+  @apply font-semibold text-blue-600 hover:underline text-sm;
+}
