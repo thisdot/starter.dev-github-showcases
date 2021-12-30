@@ -21,6 +21,8 @@ export class FileExplorerRootComponent {
         name: res.name,
         branch: res.branch,
         path: path ?? '',
+        homepageUrl: res.homepageUrl,
+        topics: res.topics,
       })),
     );
 
