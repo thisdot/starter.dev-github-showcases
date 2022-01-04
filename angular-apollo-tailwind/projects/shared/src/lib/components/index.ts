@@ -17,4 +17,5 @@ export * from './icons/privacy-badge.component';
 export * from './icons/privacy-icon.component';
 export * from './icons/pull-request-icon.component';
 export * from './icons/twitter-icon.component';
+export * from './icons/toc.component';
 export * from './icons/icons.module';

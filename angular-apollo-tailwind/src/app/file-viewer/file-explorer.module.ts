@@ -13,12 +13,15 @@ import {
   ContentLoadingModule,
   DataContainerComponentModule,
   IconsModule,
+  PipesModule,
 } from '@shared';
 import { FileCodeComponent } from './components/file-code/file-code.component';
 import { PrismModule } from '@prism';
 import { FileTextComponent } from '../profile/components/file-text/file-text.component';
 import { HomePageUrlComponent } from './components/file-explorer-about/home-page-url/home-page-url.component';
 import { TopicsComponent } from './components/file-explorer-about/topics/topics.component';
+import { RepoReadMeComponent } from './repo-read-me/repo-read-me.component';
+import { ReadMeComponent } from './repo-read-me/read-me/read-me.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { TopicsComponent } from './components/file-explorer-about/topics/topics.
     FileTextComponent,
     HomePageUrlComponent,
     TopicsComponent,
+    RepoReadMeComponent,
+    ReadMeComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +47,7 @@ import { TopicsComponent } from './components/file-explorer-about/topics/topics.
     ContentLoadingModule,
     DataContainerComponentModule,
     PrismModule,
+    PipesModule,
   ],
   exports: [
     FileExplorerRootComponent,

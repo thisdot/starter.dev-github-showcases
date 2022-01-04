@@ -34,6 +34,7 @@ import { PullRequestIconComponent } from './pull-request-icon.component';
 import { PrivacyIconComponent } from './privacy-icon.component';
 import { PrivacyBadgeComponent } from './privacy-badge.component';
 import { TwitterIconComponent } from './twitter-icon.component';
+import { TOCIconComponent } from './toc.component';
 
 const icons = [
   DocumentIconComponent,
@@ -48,6 +49,7 @@ const icons = [
   PrivacyIconComponent,
   PrivacyBadgeComponent,
   TwitterIconComponent,
+  TOCIconComponent,
 ];
 
 @NgModule({
