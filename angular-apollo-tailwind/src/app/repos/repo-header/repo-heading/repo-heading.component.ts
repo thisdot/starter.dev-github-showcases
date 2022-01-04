@@ -20,7 +20,6 @@ export class RepoHeadingComponent implements OnInit {
     const paths = getPathSegments(this.route.snapshot.url);
     const isOrg = this.login !== paths[0];
     const path = isOrg ? `/orgs/${this.owner}` : `/${this.owner}`;
-    console.log(path);
     this.ownerPath = path;
   }
 }
