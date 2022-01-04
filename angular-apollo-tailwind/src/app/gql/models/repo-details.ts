@@ -1,6 +1,9 @@
 import { ApolloQueryResult } from '@apollo/client/core';
 
 export interface RepoDetailsData {
+  viewer: {
+    login: string;
+  };
   repository: RepoDetails;
 }
 
@@ -36,6 +39,7 @@ export interface RepoDetails {
 export interface RepoPage {
   name: string;
   owner: string;
+  login: string;
   branch: string;
   path: string;
   repository: RepoDetails;

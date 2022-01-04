@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { getPathSegments } from 'src/app/utils';
 
 @Component({
   selector: 'app-repo-header',
@@ -8,6 +10,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class RepoHeaderComponent implements OnInit {
   @Input() owner = '';
   @Input() name = '';
+  @Input() login = '';
   @Input() isPrivate = false;
   @Input() watchers = 0;
   @Input() stargazers = 0;

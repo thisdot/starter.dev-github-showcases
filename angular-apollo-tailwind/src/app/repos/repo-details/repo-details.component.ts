@@ -18,7 +18,7 @@ export class RepoDetailsComponent {
   headerStats$: Observable<ReportHeader> = this.routeConfigService
     .getLeafConfig<RepoPageDetails>('repoPageData')
     .pipe(
-      switchMap(({ owner, name, branch, repository }) =>
+      switchMap(({ owner, name, login, branch, repository }) =>
         this.apollo
           .watchQuery<FileExplorerData, FileExplorerVars>({
             query: REPO_TREE_QUERY,
@@ -33,6 +33,7 @@ export class RepoDetailsComponent {
               ...res,
               owner,
               name,
+              login,
               isPrivate: repository.isPrivate,
               stargazers: repository.stargazerCount,
               forks: repository.forkCount,
