@@ -9,4 +9,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class FileExplorerAboutComponent {
   @Input() isRepoLoading = false;
   @Input() description = '';
+  @Input() homepageUrl = '';
+  @Input() topics: string[] = [];
 }

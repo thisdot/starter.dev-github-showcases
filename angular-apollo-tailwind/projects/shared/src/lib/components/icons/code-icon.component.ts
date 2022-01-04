@@ -1,9 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sd-code-icon',
   template: `<svg
-    viewBox="0 0 24 24"
+    [attr.width]="width"
+    [attr.height]="height"
+    [attr.viewBox]="viewBox"
     version="1.1"
     fill="none"
     stroke="currentColor"
@@ -16,4 +18,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
   </svg>`,
   encapsulation: ViewEncapsulation.None,
 })
-export class CodeIconComponent {}
+export class CodeIconComponent {
+  @Input() width = 24;
+  @Input() height = 24;
+  @Input() viewBox = '0 0 24 24';
+}

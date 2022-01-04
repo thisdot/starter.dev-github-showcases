@@ -7,7 +7,7 @@ import {
   RepoIssuesData,
   RepoIssuesVars,
   REPO_ISSUES_QUERY,
-  ResolvedRepoDetails,
+  RepoPageDetails,
   Issues,
   Milestone,
   OPEN_CLOSED_STATE,
@@ -107,7 +107,7 @@ export class IssuesStore extends ComponentStore<IssuesState> {
           labelsLoaded,
         }) =>
           this.routeConfigService
-            .getLeafConfig<ResolvedRepoDetails>('userDetails')
+            .getLeafConfig<RepoPageDetails>('repoPageData')
             .pipe(
               switchMap(({ owner, name }) =>
                 this.apollo
@@ -156,7 +156,7 @@ export class IssuesStore extends ComponentStore<IssuesState> {
 
   constructor(
     private reposFilterStore: ReposFilterStore,
-    private routeConfigService: RouteConfigService<string, 'userDetails'>,
+    private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private apollo: Apollo,
   ) {
     super(INITIAL_STATE);

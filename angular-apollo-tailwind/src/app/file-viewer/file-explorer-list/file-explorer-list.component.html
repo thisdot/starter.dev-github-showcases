@@ -1,25 +1,30 @@
-<div class="file-explorer-list-container">
-  <a *ngIf="repoPath" [routerLink]="getBackLink(repoPath)" class="cellBack">
-    <span class="text-blue-600">..</span>
-  </a>
-  <div *ngFor="let item of items" class="cell">
-    <div class="flex items-center">
-      <div class="mr-2.5">
-        <ng-container *ngIf="item.type === 'tree'; else file">
-          <sd-folder-icon class="iconDir"></sd-folder-icon>
-        </ng-container>
-        <ng-template #file>
-          <sd-document-icon class="iconFile"></sd-document-icon>
-        </ng-template>
+<sd-data-container *ngIf="repoTree$ | async as repoTree" [data]="repoTree">
+  <div content class="file-explorer-list-container">
+    <a
+      *ngIf="repoTree.path"
+      [routerLink]="getBackLink(repoTree.path)"
+      class="cellBack"
+    >
+      <span class="text-blue-600">..</span>
+    </a>
+    <div *ngFor="let item of repoTree.items" class="cell">
+      <div class="flex items-center">
+        <div class="mr-2.5">
+          <ng-container *ngIf="item.type === 'tree'; else file">
+            <sd-folder-icon class="iconDir"></sd-folder-icon>
+          </ng-container>
+          <ng-template #file>
+            <sd-document-icon class="iconFile"></sd-document-icon>
+          </ng-template>
+        </div>
+        <a [routerLink]="getPathHref(item)" class="link">{{ item.name }}</a>
       </div>
-      <a [routerLink]="getPathHref(item)" class="link">{{ item.name }}</a>
     </div>
   </div>
-</div>
 
-<!-- TODO: fix loading indicator -->
-<!-- <ng-template #loading>
-  <div class="container py-2">
+  <div loading class="file-explorer-list-container py-2">
     <sd-loading-bullet-list></sd-loading-bullet-list>
   </div>
-</ng-template> -->
+
+  <p error>Repository path not found</p>
+</sd-data-container>

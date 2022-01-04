@@ -18,6 +18,7 @@ export interface RepoDetails {
   stargazerCount: number;
   forkCount: number;
   description: string;
+  homepageUrl: string;
   watchers: {
     totalCount: number;
   };
@@ -27,13 +28,28 @@ export interface RepoDetails {
   openPullRequests: {
     totalCount: number;
   };
+  topics: {
+    nodes: Topic[];
+  };
 }
 
-export interface ResolvedRepoDetails
-  extends ApolloQueryResult<RepoDetailsData> {
+export interface RepoPage {
   name: string;
   owner: string;
   branch: string;
-  loading: boolean;
+  path: string;
   repository: RepoDetails;
+  homepageUrl: string;
+  topics: string[];
 }
+
+export interface Topic {
+  id: string;
+  topic: {
+    name: string;
+  };
+}
+
+export interface RepoPageDetails
+  extends RepoPage,
+    ApolloQueryResult<RepoDetailsData> {}

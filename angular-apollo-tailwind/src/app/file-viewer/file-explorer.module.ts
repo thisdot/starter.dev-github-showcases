@@ -9,7 +9,16 @@ import { FileExplorerAboutDescriptionComponent } from './components/file-explore
 import { FileExplorerRootComponent } from './file-explorer-root.component';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { FileExplorerBlobComponent } from './file-explorer-blob/file-explorer-blob.component';
-import { ContentLoadingModule, IconsModule } from '@shared';
+import {
+  ContentLoadingModule,
+  DataContainerComponentModule,
+  IconsModule,
+} from '@shared';
+import { FileCodeComponent } from './components/file-code/file-code.component';
+import { PrismModule } from '@prism';
+import { FileTextComponent } from '../profile/components/file-text/file-text.component';
+import { HomePageUrlComponent } from './components/file-explorer-about/home-page-url/home-page-url.component';
+import { TopicsComponent } from './components/file-explorer-about/topics/topics.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +30,18 @@ import { ContentLoadingModule, IconsModule } from '@shared';
     FileExplorerAboutDescriptionComponent,
     FileViewerComponent,
     FileExplorerBlobComponent,
+    FileCodeComponent,
+    FileTextComponent,
+    HomePageUrlComponent,
+    TopicsComponent,
   ],
   imports: [
     CommonModule,
     FileExplorerRoutingModule,
     IconsModule,
     ContentLoadingModule,
+    DataContainerComponentModule,
+    PrismModule,
   ],
   exports: [
     FileExplorerRootComponent,
