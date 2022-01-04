@@ -13,11 +13,17 @@
           [name]="repoPage.name"
           [branch]="repoPage.branch"
         ></app-file-explorer-list>
+        <app-repo-read-me
+          [owner]="repoPage.owner"
+          [name]="repoPage.name"
+        ></app-repo-read-me>
       </div>
       <div class="col-span-12 md:col-span-5 xl:col-span-3">
         <app-repo-about
           [isRepoLoading]="true"
           [description]="repoPage.data.repository.description"
+          [homepageUrl]="repoPage.homepageUrl"
+          [topics]="repoPage.topics"
         ></app-repo-about>
       </div>
     </div>

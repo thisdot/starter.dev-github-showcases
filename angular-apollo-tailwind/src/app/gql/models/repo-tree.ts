@@ -27,6 +27,9 @@ export interface RepoTree {
 
 export interface FileExplorerRepoDetails {
   id: string;
+  viewer: {
+    login: string;
+  };
   branches: RepoBranches;
   tree: RepoTree;
 }
@@ -34,6 +37,7 @@ export interface FileExplorerRepoDetails {
 export interface ReportHeader extends ApolloQueryResult<FileExplorerData> {
   owner: string;
   name: string;
+  login: string;
   isPrivate: boolean;
   stargazers: number;
   forks: number;

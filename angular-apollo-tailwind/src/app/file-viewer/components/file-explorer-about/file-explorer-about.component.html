@@ -3,6 +3,8 @@
   <div class="description">
     <ng-container *ngIf="isRepoLoading; else loading">
       <app-description [description]="description"></app-description>
+      <app-home-page-url [homepageUrl]="homepageUrl"></app-home-page-url>
+      <app-topics [topics]="topics"></app-topics>
     </ng-container>
 
     <ng-template #loading>
