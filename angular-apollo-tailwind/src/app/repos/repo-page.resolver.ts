@@ -32,6 +32,7 @@ export class RepoPageResolver implements Resolve<RepoPageDetails | boolean> {
           ...res,
           name,
           owner,
+          login: res.data.viewer.login,
           branch: res.data.repository.defaultBranchRef.name,
           path: '',
           repository: res.data.repository,

@@ -2,6 +2,10 @@ import { gql } from 'apollo-angular';
 
 export const REPO_PAGE_QUERY = gql`
   query RepoPage($owner: String!, $name: String!) {
+    viewer {
+      id
+      login
+    }
     repository(owner: $owner, name: $name) {
       id
       defaultBranchRef {
