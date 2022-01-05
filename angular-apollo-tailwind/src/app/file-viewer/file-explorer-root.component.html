@@ -8,11 +8,11 @@
           [branch]="repoPage.branch"
           [path]="repoPage.path"
         ></app-file-explorer-nav>
-        <app-file-explorer-list
+        <app-file-explorer-list-container
           [owner]="repoPage.owner"
           [name]="repoPage.name"
           [branch]="repoPage.branch"
-        ></app-file-explorer-list>
+        ></app-file-explorer-list-container>
       </div>
       <div class="col-span-12 md:col-span-5 xl:col-span-3">
         <app-repo-about

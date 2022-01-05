@@ -49,6 +49,7 @@ export interface ReportHeader extends ApolloQueryResult<FileExplorerData> {
 export interface FileExplorer extends ApolloQueryResult<FileExplorerData> {
   items: TreeEntry[];
   path: string;
+  readme: string;
 }
 
 export interface TreeEntry {

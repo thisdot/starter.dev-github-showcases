@@ -1,6 +1,7 @@
 export * from './current-user.query';
 export * from './user-top-repos.query';
 export * from './repo-details.query';
+export * from './repo-read-me.query';
 export * from './repo-file.query';
 export * from './repo-issues';
 export * from './repo-pulls.query';

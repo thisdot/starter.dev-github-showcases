@@ -1,6 +1,7 @@
 export * from './current-user';
 export * from './user-top-repos';
 export * from './repo-details';
+export * from './repo-read-me';
 export * from './order-by';
 export * from './label';
 export * from './order-field';
