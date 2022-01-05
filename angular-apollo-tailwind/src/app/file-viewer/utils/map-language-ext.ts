@@ -1,4 +1,4 @@
-import { Language } from './language';
+import { Language } from '@prism';
 
 export const mapLanguageExt = (extension: string): Language => {
   switch (extension.toLowerCase()) {

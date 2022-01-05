@@ -1,5 +1,5 @@
 import { ApolloQueryResult } from '@apollo/client/core';
-import { Language } from 'src/app/file-viewer/utils/language';
+import { Language } from '@prism';
 
 export interface RepoFileData {
   repository: RepoFileDetails;

@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ParamMap, ActivatedRoute } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import {
   FileExplorer,
   FileExplorerData,
@@ -21,40 +25,39 @@ const removeLastPathPart = (path: string) => {
   styleUrls: ['./file-explorer-list-container.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileExplorerListContainerComponent {
+export class FileExplorerListContainerComponent implements OnInit {
   @Input() owner = '';
   @Input() name = '';
   @Input() branch = '';
+  @Input() path = '';
 
-  repoTree$: Observable<FileExplorer> = this.route.paramMap.pipe(
-    map((params: ParamMap) => params.get('path') as string),
-    switchMap((path: string) =>
-      this.apollo
-        .watchQuery<FileExplorerData, FileExplorerVars>({
-          query: REPO_TREE_QUERY,
-          variables: {
-            owner: this.owner,
-            name: this.name,
-            expression: `${this.branch}:${path ?? ''}`,
-          },
-        })
-        .valueChanges.pipe(
-          map((res) => {
-            const items = parseTree(res.data.repository.tree);
-            const readme = getReadMeFileName(items);
+  repoTree$!: Observable<FileExplorer>;
 
-            return {
-              ...res,
-              path,
-              items,
-              readme,
-            };
-          }),
-        ),
-    ),
-  );
+  constructor(private apollo: Apollo) {}
 
-  constructor(private route: ActivatedRoute, private apollo: Apollo) {}
+  ngOnInit(): void {
+    this.repoTree$ = this.apollo
+      .watchQuery<FileExplorerData, FileExplorerVars>({
+        query: REPO_TREE_QUERY,
+        variables: {
+          owner: this.owner,
+          name: this.name,
+          expression: `${this.branch}:${this.path ?? ''}`,
+        },
+      })
+      .valueChanges.pipe(
+        map((res) => {
+          const items = parseTree(res.data.repository.tree);
+          const readme = getReadMeFileName(items);
+
+          return {
+            ...res,
+            items,
+            readme,
+          };
+        }),
+      );
+  }
 
   getBackLink(path: string) {
     const basePath = `/${this.owner}/${this.name}`;
