@@ -1,11 +1,7 @@
 <sd-data-container *ngIf="repoTree$ | async as repoTree" [data]="repoTree">
   <div content>
     <div class="file-explorer-list-container">
-      <a
-        *ngIf="repoTree.path"
-        [routerLink]="getBackLink(repoTree.path)"
-        class="cellBack"
-      >
+      <a *ngIf="path" [routerLink]="getBackLink(path)" class="cellBack">
         <span class="text-blue-600">..</span>
       </a>
       <app-file-explorer-list
@@ -19,6 +15,7 @@
       *ngIf="repoTree.readme"
       [owner]="owner"
       [name]="name"
+      [path]="path"
       [fileName]="repoTree.readme"
     ></app-repo-read-me>
   </div>
