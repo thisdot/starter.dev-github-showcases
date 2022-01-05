@@ -22,6 +22,7 @@ import {
 export class RepoReadMeComponent implements OnInit {
   @Input() owner = '';
   @Input() name = '';
+  @Input() fileName = '';
 
   readme$!: Observable<ReadMe>;
 
@@ -34,6 +35,7 @@ export class RepoReadMeComponent implements OnInit {
         variables: {
           owner: this.owner,
           name: this.name,
+          expression: `HEAD:${this.fileName}`,
         },
       })
       .valueChanges.pipe(

@@ -19,3 +19,16 @@ export const parseTree = (tree: Tree) => {
     return a.name.localeCompare(b.name);
   });
 };
+
+/**
+ * Gets the exact name of the README file use in a repo.
+ * Sometimes the README file is spelled differently so getting the raw name is best
+ * before markdown.
+ *
+ * @param items list of files
+ * @returns README file name
+ */
+export const getReadMeFileName = (items: TreeEntry[]): string => {
+  const file = items.filter(({ name }) => /^(README.md)$/i.test(name))[0];
+  return file?.name || '';
+};

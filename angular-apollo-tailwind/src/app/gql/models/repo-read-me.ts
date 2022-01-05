@@ -10,6 +10,7 @@ export interface RepoReadmeData {
 export interface RepoReadmeVars {
   owner: string;
   name: string;
+  expression: string;
 }
 
 export interface ReadMeText {
