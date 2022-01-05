@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, UrlSegment } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { getPathSegments } from '../utils';
+import { getPathSegments, isOrgPath } from '../utils';
 
 export interface ProfileDetails {
   owner: string;
@@ -17,10 +17,6 @@ export class ProfileResolver implements Resolve<ProfileDetails | boolean> {
     return of(profile);
   }
 
-  private isOrg(path: string) {
-    return path === 'orgs';
-  }
-
   /**
    * Gets the organization's name if the first path segment is
    * `orgs` otherwise return the username.
@@ -30,7 +26,7 @@ export class ProfileResolver implements Resolve<ProfileDetails | boolean> {
    */
   private getProfileDetails(segments: UrlSegment[]) {
     const paths = getPathSegments(segments);
-    const isOrg = this.isOrg(paths[0]);
+    const isOrg = isOrgPath(paths[0]);
     return {
       owner: isOrg ? paths[1] : paths[0],
       isOrg,

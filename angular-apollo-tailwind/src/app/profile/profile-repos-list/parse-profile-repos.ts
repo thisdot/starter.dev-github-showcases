@@ -26,6 +26,7 @@ export const parseProfileReposQuery = (data: UserReposData): Repos => {
             isArchived: repo.isArchived,
             isFork: repo.isFork,
             updatedAt: new Date(repo.updatedAt),
+            routePath: repo.name,
           },
         ]
       : acc;
@@ -37,7 +38,10 @@ export const parseProfileReposQuery = (data: UserReposData): Repos => {
   } as Repos;
 };
 
-export const parseOrgReposQuery = (data: OrgReposData): Repos => {
+export const parseOrgReposQuery = (
+  data: OrgReposData,
+  owner: string,
+): Repos => {
   const nodes = data.organization.repositories.nodes;
   const pageInfo = data.organization.repositories.pageInfo;
   const repos = nodes.reduce((acc: Repo[], repo: OrgRepo) => {
@@ -56,6 +60,7 @@ export const parseOrgReposQuery = (data: OrgReposData): Repos => {
             isArchived: repo.isArchived,
             isFork: repo.isFork,
             updatedAt: new Date(repo.updatedAt),
+            routePath: `../../${owner}/${repo.name}`,
           },
         ]
       : acc;

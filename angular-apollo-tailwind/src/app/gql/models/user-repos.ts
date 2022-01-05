@@ -53,6 +53,7 @@ export interface Repo {
   stargazerCount: number;
   forkCount: number;
   updatedAt: Date;
+  routePath: string;
 }
 
 export interface Repos {
