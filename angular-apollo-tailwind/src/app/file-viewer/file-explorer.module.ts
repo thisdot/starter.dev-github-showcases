@@ -22,12 +22,14 @@ import { HomePageUrlComponent } from './components/file-explorer-about/home-page
 import { TopicsComponent } from './components/file-explorer-about/topics/topics.component';
 import { RepoReadMeComponent } from './repo-read-me/repo-read-me.component';
 import { ReadMeComponent } from './repo-read-me/read-me/read-me.component';
+import { FileExplorerListContainerComponent } from './file-explorer-list-container/file-explorer-list-container.component';
 
 @NgModule({
   declarations: [
     FileExplorerRootComponent,
     FileExplorerViewComponent,
     FileExplorerNavComponent,
+    FileExplorerListContainerComponent,
     FileExplorerListComponent,
     FileExplorerAboutComponent,
     FileExplorerAboutDescriptionComponent,
