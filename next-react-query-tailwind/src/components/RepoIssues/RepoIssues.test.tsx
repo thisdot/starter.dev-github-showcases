@@ -29,6 +29,7 @@ const mockRepoContext = {
     description:
       'A declarative, efficient, and flexible JavaScript library for building user interfaces.',
     topics: [],
+    isOrg: true,
   },
 };
 

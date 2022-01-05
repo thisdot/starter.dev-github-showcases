@@ -48,6 +48,7 @@ Default.args = {
     openIssueCount: 2,
     openPullRequestCount: 1,
     topics: [],
+    isOrg: true,
   },
 };
 

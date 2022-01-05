@@ -17,6 +17,7 @@ export interface RepoContext {
     description?: string | null;
     homepageUrl?: string | null;
     topics: string[];
+    isOrg: boolean;
   };
 }
 

@@ -41,6 +41,7 @@ WithDescription.args = {
     openIssueCount: 8,
     openPullRequestCount: 3,
     topics: ['react-native', 'pizza', 'e2e-tests', 'detox', 'jsmarathon'],
+    isOrg: true,
   },
 };
 
@@ -57,6 +58,7 @@ NoDescription.args = {
     openIssueCount: 8,
     openPullRequestCount: 3,
     topics: [],
+    isOrg: true,
   },
 };
 
