@@ -22,6 +22,8 @@ export class ProfileReposListComponent implements OnInit {
   readonly isTypeActive$ = this.profileReposFilterStore.isTypeActive$;
   readonly isLanguageActive$ = this.profileReposFilterStore.isLanguageActive$;
 
+  repoPath = '';
+
   constructor(
     private profileReposStore: ProfileReposStore,
     private profileReposFilterStore: ProfileReposFilterStore,

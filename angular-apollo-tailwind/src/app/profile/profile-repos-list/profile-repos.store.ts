@@ -161,7 +161,7 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
       .valueChanges.pipe(
         tapResponse(
           (res) => {
-            const repos = parseOrgReposQuery(res.data);
+            const repos = parseOrgReposQuery(res.data, owner);
             const filteredRepos = filterRepos(repos.repos, state);
 
             if (!state.languagesLoaded) {
