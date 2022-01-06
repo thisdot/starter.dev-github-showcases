@@ -5,6 +5,7 @@ import RepoPage from '@components/RepoPage';
 import FileExplorer from '@components/FileExplorer';
 import RepoHeader from '@components/RepoHeader';
 import FileExplorerNav from '@components/FileExplorerNav';
+import RepoReadMe from '@components/RepoReadMe';
 
 const RepoBranchTreePath: NextPage = () => {
   const { query } = useRouter();
@@ -16,6 +17,7 @@ const RepoBranchTreePath: NextPage = () => {
           <div className="col-span-12">
             <FileExplorerNav />
             <FileExplorer />
+            <RepoReadMe />
           </div>
         </div>
       </div>
