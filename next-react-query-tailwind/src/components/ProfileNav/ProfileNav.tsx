@@ -4,11 +4,17 @@ import { tabList } from './tabList';
 interface ProfileNavProps {
   basePath: string;
   className?: string;
+  isOrg?: boolean;
 }
 
-function ProfileNav({ basePath, className }: ProfileNavProps) {
+function ProfileNav({ basePath, className, isOrg = false }: ProfileNavProps) {
   return (
-    <TabNavigation tabs={tabList} basePath={basePath} className={className} />
+    <TabNavigation
+      tabs={tabList}
+      basePath={basePath}
+      className={className}
+      isOrg={isOrg}
+    />
   );
 }
 

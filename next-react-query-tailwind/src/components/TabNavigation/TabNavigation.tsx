@@ -8,9 +8,15 @@ interface TabNavigationProps {
   tabs: TabItem[];
   basePath?: string;
   className?: string;
+  isOrg?: boolean;
 }
 
-function TabNavigation({ tabs, basePath = '', className }: TabNavigationProps) {
+function TabNavigation({
+  tabs,
+  basePath = '',
+  className,
+  isOrg = false,
+}: TabNavigationProps) {
   const { pathname, asPath, query } = useRouter();
 
   const asPathBase = basePath
@@ -32,7 +38,12 @@ function TabNavigation({ tabs, basePath = '', className }: TabNavigationProps) {
         {tabs.map(({ title, path, Icon, count }, index) => {
           let href = path === '' ? `/${asPathBase}` : `/${asPathBase}/${path}`;
           return (
-            <Link href={path !== undefined ? href : asPath} key={index}>
+            <Link
+              href={
+                path !== undefined ? (isOrg ? `/orgs/${href}` : href) : asPath
+              }
+              key={index}
+            >
               <a
                 className={cn(
                   isCurrentTab(path) ? styles.tabActive : styles.tabInactive,
