@@ -4,7 +4,7 @@
       <div class="mt-3">
         <div class="my-1" *ngFor="let gist of details.gists">
           <a [routerLink]="[gist.url]" class="link" target="_blank">
-            {{ gist.name }}
+            {{ gist?.files?.[0]?.name || gist?.name }}
           </a>
         </div>
       </div>
