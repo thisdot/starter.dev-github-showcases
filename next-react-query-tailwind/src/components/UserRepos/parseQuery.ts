@@ -1,9 +1,9 @@
-import type { UserReposQuery } from '@lib/github';
+import type { UserReposQuery, OrgReposQuery } from '@lib/github';
 import type { Repo } from './types';
 
-export function parseQuery(data?: UserReposQuery) {
-  const nodes = data?.user?.repositories.nodes;
-  const pageInfo = data?.user?.repositories.pageInfo;
+export function parseQuery(data?: UserReposQuery | OrgReposQuery) {
+  const nodes = data?.owner?.repositories.nodes;
+  const pageInfo = data?.owner?.repositories.pageInfo;
 
   if (!nodes) {
     return undefined;

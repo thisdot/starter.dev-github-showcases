@@ -63,6 +63,8 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
     isRepoLoading: isLoading,
     data: repository
       ? {
+          // @ts-ignore - generated types be like that
+          isOrg: typeof repository.owner?.orgName === 'string',
           isPrivate: repository.isPrivate,
           stargazerCount: repository.stargazerCount,
           forkCount: repository.forkCount,

@@ -1,13 +1,13 @@
 import { gql } from 'graphql-request';
 
-export const USER_REPOS_QUERY = gql`
-  query UserRepos(
+export const ORG_REPOS_QUERY = gql`
+  query OrgRepos(
     $username: String!
     $afterCursor: String
     $beforeCursor: String
     $orderBy: RepositoryOrder
   ) {
-    owner: user(login: $username) {
+    owner: organization(login: $username) {
       repositories(
         first: 100
         after: $afterCursor

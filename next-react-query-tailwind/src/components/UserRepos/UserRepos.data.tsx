@@ -1,6 +1,6 @@
 import gqlClient from '@lib/gqlClient';
 import { useRouter } from 'next/router';
-import { useUserReposQuery, OrderDirection } from '@lib/github';
+import { OrderDirection } from '@lib/github';
 import { parseError } from '@lib/parseError';
 import Pagination from '@components/Pagination';
 import { parseQuery } from './parseQuery';
@@ -9,12 +9,14 @@ import UserReposView from './UserRepos.view';
 import { RepoFilters, useRepoFilters } from '@components/RepoFilters';
 import { filterRepos } from './filterRepos';
 import { getLanguages } from './getLanguages';
+import { useOrgOrUserQuery } from './useOrgOrUserQuery';
 
 interface UserReposProps {
   username: string;
+  isOrg?: boolean;
 }
 
-function UserRepos({ username }: UserReposProps) {
+function UserRepos({ username, isOrg = false }: UserReposProps) {
   const { query } = useRouter();
 
   const afterCursor = typeof query.after === 'string' ? query.after : undefined;
@@ -22,12 +24,13 @@ function UserRepos({ username }: UserReposProps) {
     typeof query.before === 'string' ? query.before : undefined;
 
   const repoFilters = useRepoFilters();
+  const useReposQuery = useOrgOrUserQuery(isOrg);
 
   const {
     data,
     isLoading,
     error: queryError,
-  } = useUserReposQuery(gqlClient, {
+  } = useReposQuery(gqlClient, {
     username,
     orderBy: {
       field: repoFilters.state.sort,

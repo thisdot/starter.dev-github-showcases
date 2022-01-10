@@ -37,6 +37,7 @@ Public.args = {
     openIssueCount: 2,
     openPullRequestCount: 1,
     topics: [],
+    isOrg: true,
   },
 };
 
@@ -52,6 +53,7 @@ Private.args = {
     openIssueCount: 2,
     openPullRequestCount: 1,
     topics: [],
+    isOrg: true,
   },
 };
 
