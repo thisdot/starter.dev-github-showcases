@@ -10,6 +10,7 @@ function RepoReadMe() {
   const { data, isLoading, error } = useRepoReadMeQuery(gqlClient, {
     owner: repo.owner,
     name: repo.name,
+    expression: repo.path ? `HEAD:${repo.path}/README.md` : 'HEAD:README.md',
   });
 
   if (isLoading || error || !data) {
