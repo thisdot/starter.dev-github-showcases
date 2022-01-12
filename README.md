@@ -11,7 +11,7 @@ You'll find a list of projects below:
 ## Possible Features and Enhancements
 
 This project is built using a number of beginner to advanced techniques to solve a number of different problems.
-The following is a list of additional features that could be built into theis application to either make it feel more like GitHub or add a unique, personal touch.
+The following is a list of additional features that could be build into the application to either make it feel more like GitHub or add a unique, personal touch.
 
 | Project                     | Description                                                                                                                  | Skill        |
 |-----------------------------|------------------------------------------------------------------------------------------------------------------------------|--------------|
