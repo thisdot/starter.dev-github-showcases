@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { FormatDistancePipe, RoundUpPipe } from './';
+import { RoundUpPipe } from './number/round-up.pipe';
+import { FormatDistancePipe } from './dfns/format-distance.pipe';
 import { MarkdownPipe } from './markdown/markdown.pipe';
 
 @NgModule({
