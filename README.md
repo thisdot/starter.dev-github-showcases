@@ -25,9 +25,9 @@ The following is a list of additional features that could be build into the appl
 | Profile overview page       | Add `Overview` tab to Profile page and display profile readme if it exists.                                                  | Intermediate |
 | Profile pinned repositories | Display pinned repositories on an `Overview` tab of Profile page.                                                            | Intermediate |
 | Commit pulse                | Integrate a chart library to view the lifeline of a project and its contributions.                                           | Intermediate |
-| Pull request view           | Create a page for displaying pull request details and allow to navigate to it from Pull requests page.                       | Intermediate |
-| Issue view                  | Create a page for displaying issue details and allow to navigate to it from Issues page.                                     | Intermediate |
-| File finder                 | Implement file fuzzy search functionality - available unde `Go to file` button                                               | Intermediate |
-| Contributor graph           | Display GitHub contributor graph on a `Overview` tab of profile page                                                         | Advanced     |
+| Pull request view           | Create a page for displaying pull request details and allow navigation to it from the Pull requests page.                    | Intermediate |
+| Issue view                  | Create a page for displaying issue details and allow navigation to it from the Issues page.                                  | Intermediate |
+| File finder                 | Implement file fuzzy search functionality - available under the `Go to file` button                                          | Intermediate |
+| Contributor graph           | Display GitHub contributor graph on an `Overview` tab of profile page                                                        | Advanced     |
 | Deployed Environments       | Display deployed environments for a repo.                                                                                    | Advanced     |
 | CI/CD Pipelines             | Graphical view of pipelines and github actions with [graphql-inspector](https://graphql-inspector.com/docs/products/github). | Advanced     |
