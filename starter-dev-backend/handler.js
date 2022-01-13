@@ -1,12 +1,15 @@
 import serverless from "serverless-http";
 import express from "express";
 import cors from 'cors';
+import bodyParser from "body-parser";
 import { fetchSigninUrl, fetchAccessToken } from "./lib";
+import { redirectMap } from "./config";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 
 app.get("/", (req, res, next) => {
   return res.status(200).json({
@@ -26,6 +29,21 @@ app.post("/api/auth/signin/callback", async (req, res, next) => {
   } catch (err) {
     return res.json(err);
   }
+});
+
+
+app.get('/api/auth/callback/:redirect', async (req, res, next) => {
+    const { redirect } = req.params;
+    const { code } = req.query;
+
+    const redirectUrl = redirectMap[redirect];
+
+    if (redirectUrl) {
+      return res.redirect(`${redirectUrl}?code=${code}`);
+    } else {
+      res.status(401).send('Redirect URL not found');
+    }
+  } 
 });
 
 app.post("/api/auth/sigout", (req, res, next) => {});
