@@ -18,27 +18,27 @@ import {
 const sortOptions: FilterOption[] = [
   {
     label: 'Newest',
-    value: `${PULL_REQUESTS_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.DESC}`,
+    value: `${PULL_REQUESTS_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.Desc}`,
   },
   {
     label: 'Oldest',
-    value: `${PULL_REQUESTS_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.ASC}`,
+    value: `${PULL_REQUESTS_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.Asc}`,
   },
   {
     label: 'Most commented',
-    value: `${PULL_REQUESTS_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.DESC}`,
+    value: `${PULL_REQUESTS_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.Desc}`,
   },
   {
     label: 'Least commented',
-    value: `${PULL_REQUESTS_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.ASC}`,
+    value: `${PULL_REQUESTS_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.Asc}`,
   },
   {
     label: 'Recently updated',
-    value: `${PULL_REQUESTS_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.DESC}`,
+    value: `${PULL_REQUESTS_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.Desc}`,
   },
   {
     label: 'Least recently updated',
-    value: `${PULL_REQUESTS_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.ASC}`,
+    value: `${PULL_REQUESTS_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.Asc}`,
   },
 ];
 

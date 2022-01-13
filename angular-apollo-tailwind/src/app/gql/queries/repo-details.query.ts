@@ -1,16 +1,21 @@
 import { gql } from 'apollo-angular';
 
-export const REPO_DETAILS_QUERY = gql`
-  query RepoDetails($owner: String!, $name: String!) {
+export const REPO_PAGE_QUERY = gql`
+  query RepoPage($owner: String!, $name: String!) {
+    viewer {
+      id
+      login
+    }
     repository(owner: $owner, name: $name) {
       id
       defaultBranchRef {
         name
       }
-      description
       isPrivate
-      forkCount
       stargazerCount
+      forkCount
+      description
+      homepageUrl
       watchers(last: 1) {
         totalCount
       }
@@ -19,6 +24,14 @@ export const REPO_DETAILS_QUERY = gql`
       }
       openPullRequests: pullRequests(first: 1, states: [OPEN]) {
         totalCount
+      }
+      topics: repositoryTopics(first: 10) {
+        nodes {
+          id
+          topic {
+            name
+          }
+        }
       }
     }
   }

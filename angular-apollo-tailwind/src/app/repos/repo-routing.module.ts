@@ -1,19 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RepoDataResolver } from './repo-data.resolver';
+import { ProfileResolver } from '../profile/profile.resolver';
+import { RepoPageResolver } from './repo-page.resolver';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import { ReposComponent } from './repos.component';
-
 const routes: Routes = [
   {
     path: '',
     component: ReposComponent,
   },
   {
+    path: 'orgs/:owner',
+    resolve: {
+      profile: ProfileResolver,
+    },
+    loadChildren: () =>
+      import('../profile/profile.module').then((m) => m.ProfileModule),
+  },
+  {
     path: ':owner/:repo',
     component: RepoDetailsComponent,
     resolve: {
-      userDetails: RepoDataResolver,
+      repoPageData: RepoPageResolver,
     },
     children: [
       {
@@ -39,8 +47,15 @@ const routes: Routes = [
         path: 'code',
         redirectTo: '',
       },
-      // TODO: add pull requests route
     ],
+  },
+  {
+    path: ':owner',
+    resolve: {
+      profile: ProfileResolver,
+    },
+    loadChildren: () =>
+      import('../profile/profile.module').then((m) => m.ProfileModule),
   },
 ];
 

@@ -2,9 +2,8 @@
   @apply relative inline-block text-left z-30;
 }
 
-/* @apply text-gray-600 hover:text-gray-900 inline-flex items-center text-sm; */
 .filterButton {
-  @apply text-gray-600 inline-flex items-center text-sm;
+  @apply text-gray-600 hover:text-gray-900 inline-flex items-center text-sm;
 }
 
 .menuButton {
@@ -25,10 +24,6 @@
 
 .description {
   @apply px-4 py-2.5 text-xs text-gray-800 font-semibold;
-}
-
-.closeButtonIcon {
-  @apply mr-2 h-4 w-4 text-gray-600;
 }
 
 .itemButton {

@@ -1,22 +1,22 @@
-<ng-container *ngIf="repoDetails$ | async as details">
-  <div *ngIf="!details?.error" class="max-w-screen-2xl mx-auto py-8 px-4">
+<sd-data-container *ngIf="repoPage$ | async as repoPage" [data]="repoPage">
+  <div content class="max-w-screen-2xl mx-auto py-8 px-4">
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-12">
         <app-file-explorer-nav
-          [basePath]="details.basePath"
-          [name]="details.name"
-          [branch]="details.branch"
-          [path]="details.path"
+          [owner]="repoPage.owner"
+          [name]="repoPage.name"
+          [branch]="repoPage.branch"
+          [path]="repoPage.path"
         ></app-file-explorer-nav>
-        <app-file-explorer-list
-          [items]="details.items"
-          [branch]="details.branch"
-          [basePath]="details.basePath"
-          [repoPath]="details.path"
-          [isLoaded]="details.loading"
-        ></app-file-explorer-list>
+        <app-file-explorer-list-container
+          [owner]="repoPage.owner"
+          [name]="repoPage.name"
+          [branch]="repoPage.branch"
+          [path]="repoPage.path"
+        ></app-file-explorer-list-container>
       </div>
     </div>
   </div>
-  <div *ngIf="details?.error">Error: {{ details.error?.message }}</div>
-</ng-container>
+
+  <div error>Error: {{ repoPage.error?.message }}</div>
+</sd-data-container>

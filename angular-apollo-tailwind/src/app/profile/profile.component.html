@@ -1,0 +1,9 @@
+<div *ngIf="profile$ | async as profile" class="relative pt-8">
+  <ng-container *ngIf="profile.isOrg; else user">
+    <app-org-profile [profile]="profile"></app-org-profile>
+  </ng-container>
+
+  <ng-template #user>
+    <app-user-profile [profile]="profile"></app-user-profile>
+  </ng-template>
+</div>

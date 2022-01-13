@@ -1,5 +1,5 @@
-import serverless from "serverless-http";
-import express from "express";
+import serverless from 'serverless-http';
+import express from 'express';
 import cors from 'cors';
 import bodyParser from "body-parser";
 import { fetchSigninUrl, fetchAccessToken } from "./lib";
@@ -11,18 +11,18 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
-app.get("/", (req, res, next) => {
+app.get('/', (req, res, next) => {
   return res.status(200).json({
-    message: "Hello from root!",
+    message: 'Hello from root!',
   });
 });
 
-app.get("/api/auth/signin", (req, res, next) => {
+app.get('/api/auth/signin', (req, res, next) => {
   const url = fetchSigninUrl();
   return res.send(url);
 });
 
-app.post("/api/auth/signin/callback", async (req, res, next) => {
+app.post('/api/auth/signin/callback', async (req, res, next) => {
   try {
     const { data } = await fetchAccessToken(req, res);
     return res.send(data);
@@ -50,7 +50,7 @@ app.post("/api/auth/sigout", (req, res, next) => {});
 
 app.use((req, res, next) => {
   return res.status(404).json({
-    error: "Not Found",
+    error: 'Not Found',
   });
 });
 

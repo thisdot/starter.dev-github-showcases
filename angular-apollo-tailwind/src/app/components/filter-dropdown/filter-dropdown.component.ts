@@ -34,7 +34,7 @@ export class FilterDropdownComponent {
   @Input() description = '';
   @Input() current: string | null = '';
   @Input() items: FilterOption[] = [];
-  @Input() buttonClassName = '';
+  @Input() toggle? = false;
 
   @Output() setFilter: EventEmitter<string> = new EventEmitter();
 
@@ -47,7 +47,21 @@ export class FilterDropdownComponent {
   }
 
   handleSetFilterClick(label: string) {
-    this.setFilter.emit(label);
+    if (label === this.current) {
+      if (this.toggle) {
+        this.setFilter.emit('');
+      } else {
+        this.setFilter.emit(this.items[0].value);
+      }
+    } else {
+      this.setFilter.emit(label);
+    }
+    this.isOpen = false;
+  }
+
+  handleClearFilterClick() {
+    this.setFilter.emit(this.items[0].value);
+    this.isOpen = false;
   }
 
   // TODO: maybe convert to directive

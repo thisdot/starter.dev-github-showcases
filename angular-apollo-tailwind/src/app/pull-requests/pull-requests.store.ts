@@ -11,7 +11,7 @@ import {
   PullRequests,
   Milestones,
   PullRequest,
-  ResolvedRepoDetails,
+  RepoPageDetails,
   RepoPullRequestsData,
   RepoPullRequestsVars,
   REPO_PULLS_QUERY,
@@ -47,7 +47,7 @@ const INITIAL_STATE: FilterState = {
   type: PULL_REQUESTS_TYPE.PULL_REQUEST,
   sort: {
     field: PULL_REQUESTS_ORDER_FIELD.CREATED_AT,
-    direction: ORDER_BY_DIRECTION.DESC,
+    direction: ORDER_BY_DIRECTION.Desc,
   },
   milestones: null,
   openPullRequests: null,
@@ -61,8 +61,8 @@ const PULL_REQUESTS_ORDER_DICT: { [key: string]: PULL_REQUESTS_ORDER_FIELD } = {
 };
 
 const DIRECTION_DICT: { [key: string]: ORDER_BY_DIRECTION } = {
-  ASC: ORDER_BY_DIRECTION.ASC,
-  DESC: ORDER_BY_DIRECTION.DESC,
+  ASC: ORDER_BY_DIRECTION.Asc,
+  DESC: ORDER_BY_DIRECTION.Desc,
 };
 
 interface GenericLabel {
@@ -80,7 +80,7 @@ const parsePullRequests = (values: PullRequests) =>
 @Injectable()
 export class PullRequestsStore extends ComponentStore<FilterState> {
   constructor(
-    private routeConfigService: RouteConfigService<string, 'userDetails'>,
+    private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private apollo: Apollo,
   ) {
     super(INITIAL_STATE);
@@ -208,7 +208,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
     (label, milestone, sort) =>
       label !== '' ||
       milestone !== '' ||
-      sort.direction !== ORDER_BY_DIRECTION.DESC ||
+      sort.direction !== ORDER_BY_DIRECTION.Desc ||
       sort.field !== PULL_REQUESTS_ORDER_FIELD.CREATED_AT,
   );
 
@@ -252,7 +252,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
       withLatestFrom(this.state$),
       switchMap(([, { label, sort, afterCursor, beforeCursor }]) =>
         this.routeConfigService
-          .getLeafConfig<ResolvedRepoDetails>('userDetails')
+          .getLeafConfig<RepoPageDetails>('repoPageData')
           .pipe(
             switchMap(({ owner, name }) =>
               this.apollo

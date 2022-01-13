@@ -15,11 +15,11 @@
     <div *ngIf="description">
       <div class="menuHeader">
         <div class="description">{{ description }}</div>
-        <button>
+        <button class="flex" (click)="handleClearFilterClick()">
           <hero-icon
             name="x"
             type="outline"
-            class="clearButtonIcon"
+            class="mr-2 h-4 w-4 text-gray-600"
             aria-hidden="true"
           ></hero-icon>
         </button>

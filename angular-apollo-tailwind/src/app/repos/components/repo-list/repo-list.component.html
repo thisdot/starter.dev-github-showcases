@@ -13,21 +13,21 @@
           <div class="p-4 border-b">
             <h3 class="mb-2">
               <a
-                [routerLink]="[repo.owner.login, repo.name]"
+                [routerLink]="[repo.owner, repo.name]"
                 class="text-xl text-blue-600 font-semibold hover:underline mr-3"
                 >{{ repo.name }}</a
               >
-              <app-privacy-badge
+              <sd-privacy-badge
                 [isPrivate]="repo.isPrivate"
                 class="relative bottom-0.5"
-              ></app-privacy-badge>
+              ></sd-privacy-badge>
             </h3>
             <div class="text-gray-600 text-sm max-w-prose -mb-1 -mt-1">
               {{ repo.description }}
             </div>
             <app-repo-meta
-              [language]="repo.primaryLanguage.name"
-              [languageColor]="repo.primaryLanguage.color"
+              [language]="repo.language"
+              [languageColor]="repo.languageColor"
               [forkCount]="repo.forkCount"
               [stargazerCount]="repo.stargazerCount"
               [updatedAt]="repo.updatedAt"

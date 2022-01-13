@@ -1,16 +1,12 @@
 <ng-container *ngIf="userName$ | async as user">
-  <!-- max-w-screen-xl causing issues/not working like react version
-  removing will make it similar -->
   <main class="mx-auto">
-    <!-- TODO: remove this -->
-    <!-- <app-welcome-user [name]="user.name"></app-welcome-user> -->
     <app-repo-list
-      *ngIf="repos$ | async as repos"
-      [repos]="repos"
+      *ngIf="repoDetails$ | async as repoDetails"
+      [repos]="repoDetails.repos"
       [login]="user.login"
     ></app-repo-list>
 
-    <!-- refactor loading to match react -->
+    <!-- TODO: refactor loading to match react -->
     <!-- <ng-template #loading>
       <app-loading-pulse-dots></app-loading-pulse-dots>
     </ng-template> -->

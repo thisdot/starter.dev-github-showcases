@@ -4,12 +4,14 @@ import { map, Observable } from 'rxjs';
 import {
   CurrentUser,
   CurrentUserData,
-  CurrentUserRepos,
-  CurrentUserReposData,
-  CurrentUserReposVars,
+  UserTopRepo,
+  UserTopReposData,
+  UserTopReposVars,
   CURRENT_USER_QUERY,
-  CURRENT_USER_REPOS_QUERY,
+  USER_TOP_REPOS_QUERY,
+  TopRepoDetials,
 } from '../gql';
+import { parseQuery } from './parse-top-repos';
 
 @Component({
   selector: 'app-repos',
@@ -25,11 +27,16 @@ export class ReposComponent {
       })),
     );
 
-  repos$: Observable<CurrentUserRepos[]> = this.apollo
-    .watchQuery<CurrentUserReposData, CurrentUserReposVars>({
-      query: CURRENT_USER_REPOS_QUERY,
+  repoDetails$: Observable<TopRepoDetials> = this.apollo
+    .watchQuery<UserTopReposData, UserTopReposVars>({
+      query: USER_TOP_REPOS_QUERY,
     })
-    .valueChanges.pipe(map((res) => res.data.viewer.repositories.nodes));
+    .valueChanges.pipe(
+      map((res) => ({
+        ...res,
+        repos: parseQuery(res.data),
+      })),
+    );
 
   constructor(private apollo: Apollo) {}
 }

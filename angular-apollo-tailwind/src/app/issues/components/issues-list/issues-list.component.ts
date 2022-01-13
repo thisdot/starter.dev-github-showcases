@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IssueFormatted } from 'src/app/gql/models/repo-issues';
+import { Issue } from 'src/app/gql';
 
 @Component({
   selector: 'app-issues-list',
@@ -7,7 +7,7 @@ import { IssueFormatted } from 'src/app/gql/models/repo-issues';
   styleUrls: ['./issues-list.component.css'],
 })
 export class IssuesListComponent {
-  @Input() issues: IssueFormatted[] = [];
+  @Input() issues: Issue[] = [];
 
   readonly baseDate = new Date();
 

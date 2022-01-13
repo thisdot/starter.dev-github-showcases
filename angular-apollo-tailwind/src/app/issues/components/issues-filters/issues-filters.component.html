@@ -35,7 +35,7 @@
       description="Filter by label"
       [current]="currentLabel"
       [items]="labelOptions"
-      buttonClassName="filterButton"
+      [toggle]="true"
       (setFilter)="handleLabelClick($event)"
     ></app-filter-dropdown>
     <app-filter-dropdown
@@ -43,7 +43,6 @@
       description="Filter by milestone"
       [current]="currentMilestone"
       [items]="milestoneOptions"
-      buttonClassName="filterButton"
       (setFilter)="handleMilestoneClick($event)"
     ></app-filter-dropdown>
     <app-filter-dropdown
@@ -51,7 +50,6 @@
       description="Sort by"
       [current]="sort?.field + '^' + sort?.direction"
       [items]="sortOptions"
-      buttonClassName="filterButton"
       (setFilter)="handleSortClick($event)"
     ></app-filter-dropdown>
   </div>

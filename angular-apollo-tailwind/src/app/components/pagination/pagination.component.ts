@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PageInfo } from 'src/app/gql/models/repo-issues';
+import { PageInfo } from 'src/app/gql/models';
 
 interface BeforePageEvent {
   before?: string;

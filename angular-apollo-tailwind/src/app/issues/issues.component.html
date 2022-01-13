@@ -14,8 +14,8 @@
       </span>
     </button>
   </div>
-  <div class="issues-container">
-    <ng-container *ngIf="repoIssues$ | async as activeIssues; else loading">
+  <ng-container *ngIf="issuesLoaded$ | async; else loading">
+    <div *ngIf="repoIssues$ | async as repoIssues" class="issues-container">
       <app-issues-filters
         [openCount]="openIssuesCount$ | async"
         [closedCount]="closedIssuesCount$ | async"
@@ -33,16 +33,34 @@
       ></app-issues-filters>
 
       <app-issues-list
-        *ngIf="activeIssues.nodes.length; else empty"
-        [issues]="activeIssues.nodes"
+        *ngIf="repoIssues.issues.length; else empty"
+        [issues]="repoIssues.issues"
       ></app-issues-list>
 
       <ng-template #empty><app-issues-empty></app-issues-empty></ng-template>
-    </ng-container>
+    </div>
+    <app-pagination [pageInfo]="pageInfo$ | async"></app-pagination>
+  </ng-container>
 
-    <ng-template #loading>
+  <ng-template #loading>
+    <div class="issues-container">
+      <app-issues-filters
+        [openCount]="0"
+        [closedCount]="0"
+        [currentMilestone]="milestone$ | async"
+        [milestones]="[]"
+        [currentLabel]="label$ | async"
+        [labels]="[]"
+        [sort]="sort$ | async"
+        [issueState]="issueState$ | async"
+        (setLabel)="setLabel($event)"
+        (setMilestone)="setMilestone($event)"
+        (setSort)="setSort($event)"
+        (openIssue)="openIssue()"
+        (closeIssue)="closeIssue()"
+      ></app-issues-filters>
+
       <app-issues-skeleton></app-issues-skeleton>
-    </ng-template>
-  </div>
-  <app-pagination [pageInfo]="pageInfo$ | async"></app-pagination>
+    </div>
+  </ng-template>
 </div>

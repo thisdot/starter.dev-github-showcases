@@ -1,76 +1,14 @@
-import { ORDER_BY_DIRECTION } from './order-by';
+import { ApolloQueryResult } from '@apollo/client/core';
+import { Label } from './label';
+import { PageInfo } from './page-info';
 
 export interface RepoIssuesData {
-  repository: RepoIssueDetails;
-}
-
-export interface RepoIssueDetails {
-  id: string;
-  milestones: Milestones;
-  closedIssues: Issues;
-  openIssues: Issues;
-}
-
-export interface Milestones {
-  nodes: Milestone[];
-  pageInfo: PageInfo;
-  totalCount: number;
-}
-
-export interface Issues {
-  pageInfo: PageInfo;
-  totalCount: number;
-  nodes: Issue[];
-}
-
-export interface IssuesFormatted {
-  pageInfo: PageInfo;
-  totalCount: number;
-  nodes: IssueFormatted[];
-}
-
-export interface Milestone {
-  id: string;
-  closed: boolean;
-  description: string;
-  number: number;
-  title: string;
-}
-
-export interface Issue {
-  id: string;
-  author: {
-    login: string;
+  repository: {
+    id: string;
+    milestones: Milestones;
+    closedIssues: RepoIssues;
+    openIssues: RepoIssues;
   };
-  comments: {
-    totalCount: number;
-  };
-  labels: {
-    nodes: Label[];
-    totalCount?: number;
-  };
-  closed: boolean;
-  closedAt?: string;
-  title: string;
-  number: number;
-  createdAt: string;
-}
-
-export interface IssueFormatted extends Omit<Issue, 'createdAt' | 'closedAt'> {
-  createdAt: Date;
-  closedAt?: Date;
-}
-
-export interface Label {
-  color: string;
-  name: string;
-}
-
-export interface PageInfo {
-  hasNextPage: boolean;
-  endCursor: string;
-  hasPreviousPage: boolean;
-  startCursor: string;
 }
 
 export interface RepoIssuesVars {
@@ -82,23 +20,73 @@ export interface RepoIssuesVars {
   orderBy?: any;
 }
 
-export enum OPEN_CLOSED_STATE {
-  OPEN = 'OPEN',
-  CLOSED = 'CLOSED',
+export interface Milestones {
+  nodes: Milestone[];
+  pageInfo: PageInfo;
+  totalCount: number;
 }
 
-export enum ISSUE_TYPE {
-  ISSUE = 'issue',
-  PULL_REQUEST = 'pull',
+export interface RepoIssues {
+  pageInfo: PageInfo;
+  totalCount: number;
+  nodes: RepoIssue[];
 }
 
-export const enum ISSUE_ORDER_FIELD {
-  COMMENTS = 'COMMENTS',
-  CREATED_AT = 'CREATED_AT',
-  UPDATED_AT = 'UPDATED_AT',
+export interface Milestone {
+  id: string;
+  closed: boolean;
+  description: string;
+  number: number;
+  title: string;
 }
 
-export interface SortOption {
-  field: ISSUE_ORDER_FIELD;
-  direction: ORDER_BY_DIRECTION;
+export interface RepoIssue {
+  id: string;
+  author: {
+    login: string;
+  };
+  comments: {
+    totalCount: number;
+  };
+  labels: {
+    nodes: Label[];
+    totalCount: number;
+  };
+  closed: boolean;
+  closedAt?: string;
+  title: string;
+  number: number;
+  createdAt: string;
+}
+
+export interface Issues {
+  issues: Issue[];
+  totalCount: number;
+  pageInfo: PageInfo;
+}
+
+export interface Issue {
+  id: string;
+  login: string;
+  commentCount: number;
+  labelCount: number;
+  labels: Label[];
+  closed: boolean;
+  title: string;
+  number: number;
+  createdAt: Date;
+  closedAt?: Date;
+}
+
+export interface IssueDetails {
+  openIssues: Issues;
+  closedIssues: Issues;
+  milestones: Milestone[];
+  labels: Label[];
+}
+
+export interface RepoIssueDetails
+  extends IssueDetails,
+    ApolloQueryResult<RepoIssuesData> {
+  activeIssues: Issues;
 }

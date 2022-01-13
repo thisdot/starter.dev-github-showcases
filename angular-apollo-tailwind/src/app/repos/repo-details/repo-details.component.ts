@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { RouteConfigService } from '@this-dot/route-config';
 import { Apollo } from 'apollo-angular';
-import { concatMap, map, Observable } from 'rxjs';
-import { ResolvedRepoDetails } from 'src/app/gql';
+import { map, Observable, switchMap } from 'rxjs';
+import { RepoPageDetails } from 'src/app/gql';
 import {
   ReportHeader,
   FileExplorerData,
@@ -15,34 +15,38 @@ import { REPO_TREE_QUERY } from 'src/app/gql/queries/repo-tree.query';
   templateUrl: './repo-details.component.html',
 })
 export class RepoDetailsComponent {
-  headerStats$: Observable<ReportHeader> = this.route.data.pipe(
-    map(({ userDetails }) => ({ ...userDetails } as ResolvedRepoDetails)),
-    concatMap(({ owner, name, branch, repository }) =>
-      this.apollo
-        .watchQuery<FileExplorerData, FileExplorerVars>({
-          query: REPO_TREE_QUERY,
-          variables: {
-            owner,
-            name,
-            expression: `${branch}:`,
-          },
-        })
-        .valueChanges.pipe(
-          map((res) => ({
-            ...res,
-            owner,
-            name,
-            basePath: `/${owner}/${name}`,
-            isPrivate: repository.isPrivate,
-            stargazers: repository.stargazerCount,
-            forks: repository.forkCount,
-            watchers: repository.watchers.totalCount,
-            openIssueCount: repository.openIssues.totalCount,
-            openPullRequestCount: repository.openPullRequests.totalCount,
-          })),
-        ),
-    ),
-  );
+  headerStats$: Observable<ReportHeader> = this.routeConfigService
+    .getLeafConfig<RepoPageDetails>('repoPageData')
+    .pipe(
+      switchMap(({ owner, name, login, branch, repository }) =>
+        this.apollo
+          .watchQuery<FileExplorerData, FileExplorerVars>({
+            query: REPO_TREE_QUERY,
+            variables: {
+              owner,
+              name,
+              expression: `${branch}:`,
+            },
+          })
+          .valueChanges.pipe(
+            map((res) => ({
+              ...res,
+              owner,
+              name,
+              login,
+              isPrivate: repository.isPrivate,
+              stargazers: repository.stargazerCount,
+              forks: repository.forkCount,
+              watchers: repository.watchers.totalCount,
+              openIssueCount: repository.openIssues.totalCount,
+              openPullRequestCount: repository.openPullRequests.totalCount,
+            })),
+          ),
+      ),
+    );
 
-  constructor(private route: ActivatedRoute, private apollo: Apollo) {}
+  constructor(
+    private routeConfigService: RouteConfigService<string, 'repoPageData'>,
+    private apollo: Apollo,
+  ) {}
 }

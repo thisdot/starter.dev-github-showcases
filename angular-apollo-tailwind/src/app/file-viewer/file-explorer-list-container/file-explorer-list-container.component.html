@@ -1,0 +1,28 @@
+<sd-data-container *ngIf="repoTree$ | async as repoTree" [data]="repoTree">
+  <div content>
+    <div class="file-explorer-list-container">
+      <a *ngIf="path" [routerLink]="getBackLink(path)" class="cellBack">
+        <span class="text-blue-600">..</span>
+      </a>
+      <app-file-explorer-list
+        [owner]="owner"
+        [name]="name"
+        [branch]="branch"
+        [items]="repoTree.items"
+      ></app-file-explorer-list>
+    </div>
+    <app-repo-read-me
+      *ngIf="repoTree.readme"
+      [owner]="owner"
+      [name]="name"
+      [path]="path"
+      [fileName]="repoTree.readme"
+    ></app-repo-read-me>
+  </div>
+
+  <div loading class="file-explorer-list-container py-2">
+    <sd-loading-bullet-list></sd-loading-bullet-list>
+  </div>
+
+  <p error>Repository path not found</p>
+</sd-data-container>

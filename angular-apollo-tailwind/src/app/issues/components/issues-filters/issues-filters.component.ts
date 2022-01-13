@@ -8,37 +8,37 @@ import {
 import { FilterOption } from 'src/app/components/filter-dropdown/filter-dropdown.component';
 import { ORDER_BY_DIRECTION } from 'src/app/gql';
 import {
-  ISSUE_ORDER_FIELD,
+  ORDER_FIELD,
   Label,
   Milestone,
   OPEN_CLOSED_STATE,
-  SortOption,
-} from 'src/app/gql/models/repo-issues';
+} from 'src/app/gql/models';
+import { SortOption } from '@filter-store';
 
 const sortOptions: FilterOption[] = [
   {
     label: 'Newest',
-    value: `${ISSUE_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.DESC}`,
+    value: `${ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.Desc}`,
   },
   {
     label: 'Oldest',
-    value: `${ISSUE_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.ASC}`,
+    value: `${ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.Asc}`,
   },
   {
     label: 'Most commented',
-    value: `${ISSUE_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.DESC}`,
+    value: `${ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.Desc}`,
   },
   {
     label: 'Least commented',
-    value: `${ISSUE_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.ASC}`,
+    value: `${ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.Asc}`,
   },
   {
     label: 'Recently updated',
-    value: `${ISSUE_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.DESC}`,
+    value: `${ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.Desc}`,
   },
   {
     label: 'Least recently updated',
-    value: `${ISSUE_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.ASC}`,
+    value: `${ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.Asc}`,
   },
 ];
 

@@ -16,6 +16,11 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "paths": {
+      "@shared": ["dist/shared/shared", "dist/shared"],
+      "@filter-store": ["dist/filter/filter", "dist/filter"],
+      "@prism": ["dist/prism/prism", "dist/prism"]
+    },
     "target": "es2017",
     "module": "es2020",
     "lib": ["es2020", "dom", "esnext.asynciterable"]

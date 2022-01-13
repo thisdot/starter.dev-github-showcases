@@ -3,18 +3,12 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { UserDropdownMenuComponentModule } from '../components/user-dropdown-menu/user-dropdown-menu-component.module';
 import { ReposModule } from '../repos/repos.module';
-import { IconsModule } from '../components/icons/icons.module';
+import { UserDropdownMenuComponent } from './user-dropdown-menu/user-dropdown-menu.component';
+import { IconsModule } from '@shared';
 
 @NgModule({
-  declarations: [HomeComponent, NavbarComponent],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    UserDropdownMenuComponentModule,
-    IconsModule,
-    ReposModule,
-  ],
+  declarations: [HomeComponent, NavbarComponent, UserDropdownMenuComponent],
+  imports: [CommonModule, HomeRoutingModule, IconsModule, ReposModule],
 })
 export class HomeModule {}

@@ -1,5 +1,5 @@
 import { ApolloQueryResult } from '@apollo/client/core';
-import { Language } from 'src/app/file-viewer/utils/language';
+import { Language } from '@prism';
 
 export interface RepoFileData {
   repository: RepoFileDetails;
@@ -22,14 +22,9 @@ export interface RepoFileVars {
 }
 
 export interface FileDetails extends ApolloQueryResult<RepoFileData> {
-  owner: string;
-  name: string;
-  branch: string;
-  path: string;
-  basePath: string;
   byteSize: number;
   extension: string;
-  language?: Language;
+  language: Language;
   text: string;
   lines: number;
 }

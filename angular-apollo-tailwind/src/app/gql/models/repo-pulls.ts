@@ -1,5 +1,6 @@
+import { Label } from './label';
 import { ORDER_BY_DIRECTION } from './order-by';
-import { Label, PageInfo } from './repo-issues';
+import { PageInfo } from './page-info';
 
 export interface RepoPullRequestsData {
   repository: PullRequestDetails;

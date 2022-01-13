@@ -1,43 +1,28 @@
-<!-- TODO: finish gist port -->
-
-<!-- <ng-container *ngIf="isLoading">
-  <div class="py-8 border-t border-b">
-    <h3 class="font-semibold">Gists</h3>
-    <div class="mt-3">
-      TODO: finish swapping out Array.from and port LoadingTextLine
-      implement array loop with array length 3 variable and then for loop with ng container?
-      <ng-container *ngFor="let item of list">
-        <LoadingTextLine class="my-1" />
-      </ng-container>
-      {Array.from({ length: 3 }).map((_, i) => (
-            <LoadingTextLine key={i} class="my-1" />
-          ))}
-    </div>
-  </div>
-</ng-container> -->
-
-<!-- <ng-container *ngIf="error || !data">
-  <div class="py-8 border-t border-b">
-    <h3 class="font-semibold">Gists</h3>
-    <p class="text-sm text-gray-600 font-medium">
-      Error: Failed to load user gists
-    </p>
-  </div>
-</ng-container> -->
-
-<div class="py-8 border-t border-b">
-  <h3 class="font-semibold">Gists</h3>
-  <div class="mt-3">
-    <ng-container *ngFor="let gist of gists">
-      <div class="my-1">
-        <a
-          [routerLink]="[gist.url]"
-          class="text-sm hover:text-blue-500 hover:underline"
-          target="_blank"
-        >
-          {{ gist.name }}
-        </a>
+<ng-container *ngIf="gistDetails$ | async as details; else loading">
+  <sd-container title="Gists">
+    <ng-container *ngIf="!details.error; else error">
+      <div class="mt-3">
+        <div class="my-1" *ngFor="let gist of details.gists">
+          <a [href]="gist.url" class="link" target="_blank">
+            {{ gist?.files?.[0]?.name || gist?.name }}
+          </a>
+        </div>
       </div>
     </ng-container>
-  </div>
-</div>
+
+    <ng-template #error>
+      <p class="error">Error: Failed to load user gists</p>
+    </ng-template>
+  </sd-container>
+</ng-container>
+
+<!-- loading -->
+<ng-template #loading>
+  <sd-container title="Gists">
+    <div class="mt-3">
+      <sd-loading-text-line class="my-1"></sd-loading-text-line>
+      <sd-loading-text-line class="my-1"></sd-loading-text-line>
+      <sd-loading-text-line class="my-1"></sd-loading-text-line>
+    </div>
+  </sd-container>
+</ng-template>
