@@ -1,39 +1,37 @@
-<!--
-title: 'Serverless Framework Node Express API on AWS'
-description: 'This template demonstrates how to develop and deploy a simple Node Express API running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v2
-platform: AWS
-language: nodeJS
-priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# starter.dev Backend
 
-# Serverless Framework Node Express API on AWS
+A Serverless Framework Express.js backend for allowing users to perform OAuth authentication with GitHub from a set of configured applications.
+## Getting Started
 
-This template demonstrates how to develop and deploy a simple Node Express API service running on AWS Lambda using the traditional Serverless Framework.
+### Requirements
 
-## Anatomy of the template
+- node v16
+- yarn
+- [serverless framework](https://www.serverless.com/framework/docs/getting-started)
+
+### Setup
+
+1. [Create a GitHub OAuth application](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app)
+2. Create your project `.env`
+```
+cp .env.example .env
+```
+3. Add your GitHub OAuth application credentials to `.env`
+4. Install dependencies: `yarn install`
+5. Run the project: `yarn start`
+
+## Anatomy of the Severless Framework template
 
 This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to the `httpApi` event. To learn more about `httpApi` event configuration options, please refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/). As the event is configured in a way to accept all incoming requests, `express` framework is responsible for routing and handling requests internally. Implementation takes advantage of `serverless-http` package, which allows you to wrap existing `express` applications. To learn more about `serverless-http`, please refer to corresponding [GitHub repository](https://github.com/dougmoscrop/serverless-http).
 
-## Usage
+## Deployment
 
-### Deployment
-
-Install dependencies with:
-
-```
-npm install
-```
-
-and then deploy with:
+[Create a new AWS profile](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/keys-profiles-credentials.html) called `starterdev` with your AWS credentials. Now, you can deploy the application using the following command:
 
 ```
 serverless deploy
 ```
+
 
 After running deploy, you should see output similar to:
 
@@ -107,21 +105,3 @@ You should receive the following response:
 ```bash
 {"error":"Not Found"}
 ```
-
-### Local development
-
-It is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
-
-```bash
-serverless plugin install -n serverless-offline
-```
-
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
-
-After installation, you can start local emulation with:
-
-```
-serverless offline
-```
-
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
