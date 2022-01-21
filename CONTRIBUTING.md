@@ -14,7 +14,7 @@ Contents
 
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-- Search [GitHub](https://github.com/thisdot/starter.dev-angular/pulls) for an open or
+- Search [GitHub](https://github.com/thisdot/starter.dev-showcases/pulls) for an open or
   closed PR that relates to your submission. Help us reduce redundancies.
 - Make your changes in your forked repository as a new git branch:
 
@@ -39,17 +39,10 @@ Before you submit your Pull Request (PR) consider the following guidelines:
   git push origin my-fix-branch
   ```
 
-- In GitHub, send a pull request to `this-dot/starter.dev-angular:main`.
+- In GitHub, send a pull request to `this-dot/starter.dev-showcases:main`.
 - If we suggest changes then:
 
-  - Make the required updates.
-  - Rebase your branch and force push to your GitHub repository (this will
-    update your Pull Request):
-
-    ```shell
-    git rebase main -i
-    git push -f
-    ```
+  - Make the required updates and push up the change (this will update your Pull Request).
 
   - When updating your feature branch with the requested changes, please do not
     overwrite the commit history, but rather contain the changes in new commits.
@@ -72,7 +65,7 @@ be updated as the team decides on new standards.
   run the code to aid their review if they want).
 - **Minimal Pull Requests** – Do not commit changes to files where there was not
   a new feature added or an existing feature altered. Files altered only to
-  remove unused imports or change formatting should not be included in pull
+  change formatting should not be included in pull
   requests. Code authors are expected to review the files in each pull request
   and revert files that were only incidentally changed. Please make sure you
   also update documentation as features get changed.
