@@ -1,0 +1,43 @@
+name: Deploy backend (main)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'starter-dev-backend/**'
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    defaults:
+      run:
+        working-directory: starter-dev-backend
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+          cache-dependency-path: starter-dev-backend/yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install Serverless
+        run: npm i -g serverless@2.x
+
+      - name: Deploy
+        run: sls deploy --stage dev
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
