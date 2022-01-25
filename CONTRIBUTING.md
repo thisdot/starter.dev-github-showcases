@@ -14,7 +14,7 @@ Contents
 
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-- Search [GitHub](https://github.com/thisdot/starter.dev-showcases/pulls) for an open or
+- Search [GitHub](https://github.com/thisdot/starter.dev-github-showcases/pulls) for an open or
   closed PR that relates to your submission. Help us reduce redundancies.
 - Make your changes in your forked repository as a new git branch:
 
@@ -39,7 +39,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
   git push origin my-fix-branch
   ```
 
-- In GitHub, send a pull request to `this-dot/starter.dev-showcases:main`.
+- In GitHub, send a pull request to `thisdot/starter.dev-github-showcases:main`.
 - If we suggest changes then:
 
   - Make the required updates and push up the change (this will update your Pull Request).
