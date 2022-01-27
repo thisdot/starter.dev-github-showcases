@@ -12,7 +12,7 @@ custom:
 
 provider:
   name: aws
-  profile: starterdev
+#  profile: starterdev
   stage: production
   runtime: nodejs14.x
   lambdaHashingVersion: '20201221'
