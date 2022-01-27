@@ -1,6 +1,8 @@
 name: Deploy backend (main)
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches:
       - main
@@ -37,7 +39,7 @@ jobs:
         run: npm i -g serverless@2.x
 
       - name: Deploy
-        run: sls deploy --stage dev
+        run: sls deploy --config serverless-ci.yml --stage dev
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -1,18 +1,11 @@
 service: starter-dev-backend
 frameworkVersion: '2 || 3'
-useDotenv: true
 
 plugins:
   - serverless-bundle
-  - serverless-offline
-
-custom:
-  serverless-offline:
-    httpPort: 4000
 
 provider:
   name: aws
-  profile: starterdev
   stage: production
   runtime: nodejs14.x
   lambdaHashingVersion: '20201221'
