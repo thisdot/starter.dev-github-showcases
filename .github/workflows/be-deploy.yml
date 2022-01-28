@@ -47,4 +47,4 @@ jobs:
             --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy
-        run: sls deploy
+        run: serverless deploy
