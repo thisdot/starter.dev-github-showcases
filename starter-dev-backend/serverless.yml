@@ -15,7 +15,6 @@ provider:
   profile: starterdev
   stage: dev
   runtime: nodejs14.x
-  lambdaHashingVersion: '20201221'
 
 functions:
   api:
