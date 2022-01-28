@@ -36,10 +36,15 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Install Serverless
-        run: npm i -g serverless@2.x
+        run: npm i -g serverless@3
+
+      - name: Configure credentials
+        run: |
+          serverless configure credentials \
+            --provider aws \
+            --profile starterdev \
+            --key ${{ secrets.AWS_ACCESS_KEY_ID }} \
+            --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy
-        run: sls deploy --config serverless-ci.yml --stage dev
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: sls deploy
