@@ -1,8 +1,6 @@
 name: Deploy backend (main)
 
 on:
-  pull_request:
-    branches: [main]
   push:
     branches:
       - main
@@ -47,4 +45,4 @@ jobs:
             --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy
-        run: serverless deploy
+        run: serverless deploy --production
