@@ -1,0 +1,5 @@
+{
+  "root": true,
+  "extends": ["plugin:storybook/recommended"],
+  "rules": {}
+}

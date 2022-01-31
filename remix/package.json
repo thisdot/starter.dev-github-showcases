@@ -1,0 +1,59 @@
+{
+  "private": true,
+  "name": "remix-github-clone",
+  "description": "",
+  "license": "",
+  "scripts": {
+    "build": "npm run build:css && remix build",
+    "build:css": "postcss styles/**/*.css --base styles --dir app/styles",
+    "build:css:prod": "npm run build:css -- --env production",
+    "dev": "concurrently -c magenta,cyan \"npm:dev:*\"",
+    "dev:remix": "node -r dotenv/config node_modules/.bin/remix dev",
+    "dev:css": "npm run build:css -- --w",
+    "postinstall": "remix setup node",
+    "start": "remix-serve build",
+    "storybook": "concurrently -n css,storybook -c cyan,magenta \"npm run dev:css\" \"start-storybook -p 6006\"",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "@heroicons/react": "^1.0.5",
+    "@remix-run/react": "^1.1.1",
+    "@remix-run/serve": "^1.1.1",
+    "dotenv": "^10.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "remix": "^1.1.1",
+    "remix-auth": "^3.2.1",
+    "remix-auth-github": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@remix-run/dev": "^1.1.1",
+    "@storybook/addon-actions": "^6.5.0-alpha.4",
+    "@storybook/addon-essentials": "^6.5.0-alpha.4",
+    "@storybook/addon-links": "^6.5.0-alpha.4",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/react": "^6.5.0-alpha.4",
+    "@tailwindcss/typography": "^0.5.0",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "autoprefixer": "^10.4.1",
+    "babel-loader": "^8.2.3",
+    "concurrently": "^6.5.1",
+    "eslint": "^8.5.0",
+    "eslint-plugin-storybook": "^0.5.5",
+    "msw": "^0.36.3",
+    "msw-storybook-addon": "^1.5.0",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0",
+    "prettier": "^2.5.1",
+    "storybook-builder-vite": "^0.1.12",
+    "tailwindcss": "^3.0.7",
+    "typescript": "^4.1.2",
+    "vite": "^2.7.6"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "sideEffects": false
+}
