@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
+  signInGroup = new FormGroup({
+    csrfToken: new FormControl(''),
+    callbackUrl: new FormControl(''),
+  });
 
-  constructor() { }
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
+  onSubmit() {
+    this.authService.signIn().subscribe(({ redirectUrl }) => {
+      window.location.href = redirectUrl;
+    });
   }
-
 }

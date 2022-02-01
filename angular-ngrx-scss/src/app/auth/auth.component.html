@@ -1,1 +1,11 @@
-<p>auth works!</p>
+<div class="page">
+  <div class="sign-in">
+    <div class="provider">
+      <form class="form" [formGroup]="signInGroup" (ngSubmit)="onSubmit()">
+        <input type="hidden" class="input" formControlName="csrfToken" />
+        <input type="hidden" class="input" formControlName="callbackUrl" />
+        <button type="submit" class="button">Sign in with GitHub</button>
+      </form>
+    </div>
+  </div>
+</div>
