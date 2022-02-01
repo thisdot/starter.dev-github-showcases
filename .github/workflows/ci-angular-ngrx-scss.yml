@@ -25,12 +25,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          
+
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: angular-ngrx-scss/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -57,6 +58,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: angular-ngrx-scss/package-lock.json
+
       - name: Install dependencies
         run: npm ci
         working-directory: angular-ngrx-scss
@@ -84,6 +87,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: angular-ngrx-scss/package-lock.json
 
       - name: Install dependencies
         run: npm ci
