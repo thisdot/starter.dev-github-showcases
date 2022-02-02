@@ -1,7 +1,7 @@
 import { FormEvent, useEffect } from 'react';
 import { Subject, switchMap } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
-import { SIGN_IN_URL } from '../../constants/auth.constants';
+import { SIGN_IN_URL } from '../../constants/url.constants';
 import { LoginResponse } from '../../interfaces/auth.interfaces';
 
 export function useSignIn(): (event: FormEvent) => void {

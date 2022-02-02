@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Subject, switchMap } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
+import { SIGN_OUT_URL } from '../../constants/url.constants';
 import { LoginResponse } from '../../interfaces/auth.interfaces';
-import { AUTH_TOKEN, SIGN_OUT_URL } from '../../constants/auth.constants';
+import { AUTH_TOKEN } from '../../constants/auth.constants';
 
 export function useSignOut() {
   const clickListener$ = new Subject<void>();

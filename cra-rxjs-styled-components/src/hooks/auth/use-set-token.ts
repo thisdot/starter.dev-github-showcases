@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { catchError, EMPTY, tap } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
+import { AUTH_TOKEN } from '../../constants/auth.constants';
+import { GET_TOKEN_URL } from '../../constants/url.constants';
 import { AuthSuccessResponse } from '../../interfaces/auth.interfaces';
-import { AUTH_TOKEN, GET_TOKEN_URL } from '../../constants/auth.constants';
 
 export function useSetToken() {
   const [params] = useSearchParams();
