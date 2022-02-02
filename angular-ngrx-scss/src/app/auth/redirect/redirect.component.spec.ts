@@ -8,9 +8,8 @@ describe('RedirectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RedirectComponent ]
-    })
-    .compileComponents();
+      declarations: [RedirectComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
