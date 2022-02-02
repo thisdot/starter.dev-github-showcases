@@ -1,0 +1,35 @@
+@use '../shared/variables';
+
+.page {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: variables.$black;
+  color: variables.$gray500;
+}
+
+.form {
+  width: 90%;
+  height: 90%;
+  display: grid;
+  place-items: center;
+}
+
+.button {
+  width: 34rem;
+  height: 3.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid variables.$gray500;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 100%;
+  background: variables.$black;
+  color: variables.$gray500;
+  cursor: pointer;
+}
