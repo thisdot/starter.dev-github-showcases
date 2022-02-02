@@ -4,9 +4,6 @@ import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TokenService } from './token.service';
 
-interface SigninResponse {
-  redirectUrl: string;
-}
 interface AuthResponse {
   access_token: string;
   bearer: string;
@@ -30,31 +27,25 @@ export class AuthService {
    * @return {*}  {Observable<any>}
    * @memberof AuthService
    */
-  signin(): Observable<SigninResponse> {
+  signin(): void {
     this.tokenService.removeToken();
     this.tokenService.removeRefreshToken();
-    return this.httpClient.get<SigninResponse>(
-      `${environment.apiUrl}/auth/signin`,
-    );
+    window.open(`${environment.apiUrl}/auth/signin?state=1234`, '_blank');
   }
 
   /**
    * Returns the access_token and stores it in a cookie.
    *
-   * Once the user accepts Github authentication, they're redirected to
-   * `RedirectComponent` which fetches the token. The code comes from a query
-   * appended to the callback url on redirect.
+   * Once the user accepts Github authentication, front-end will poll
+   * for the token.
    *
-   * @param {string} code - code used to verify authentication
    * @return {*}  {Observable<AuthResponse>} - token object shape
    * @memberof AuthService
    */
   getToken(code: string): Observable<AuthResponse> {
-    return this.httpClient
-      .post<AuthResponse>(`${environment.apiUrl}/auth/signin/callback`, {
-        code,
-      })
-      .pipe(tap((data) => this.tokenService.saveToken(data.access_token)));
+    return this.httpClient.get<AuthResponse>(
+      `${environment.apiUrl}/auth/signin/callback?code=${code}`,
+    );
   }
 
   /**

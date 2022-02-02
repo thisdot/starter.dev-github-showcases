@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -14,6 +14,16 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    // TODO: Possible possible strategy
+    // this.authService.getToken(code).pipe(
+    //   tap((token) => {
+    //     if(!token) {
+    //       // call endpoint to get token as a poll
+    //     }
+    //   }),
+    //   filter(token => token),
+    //   take(1)
+    // )
     if (this.authService.isAuthenticated()) {
       return true;
     }

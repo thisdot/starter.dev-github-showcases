@@ -18,6 +18,8 @@ export class RedirectComponent implements OnInit {
     // ActivatedRoute is destroyed when Router destoys the component
     // and doesn't need to be unsubscribed.
     // https://angular.io/guide/router-tutorial-toh#observable-parammap-and-component-reuse
+
+    // TODO: lift to a guard or resolver
     this.route.queryParamMap
       .pipe(
         filter((params) => params.has('code')),

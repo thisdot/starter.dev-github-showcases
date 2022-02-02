@@ -1,7 +1,7 @@
 import serverless from 'serverless-http';
 import express from 'express';
 import cors from 'cors';
-import { fetchSigninUrl, fetchAccessToken } from './lib';
+import { fetchSigninUrl, fetchAccessToken, codeAuth } from './lib';
 
 const app = express();
 
@@ -14,12 +14,15 @@ app.get('/', (req, res, next) => {
   });
 });
 
-app.get('/api/auth/signin', (req, res, next) => {
-  const url = fetchSigninUrl();
-  return res.send(url);
-});
+// Step 1 - push user to new tab for auth
+app.get('/api/auth/signin', fetchSigninUrl);
 
-app.post('/api/auth/signin/callback', async (req, res, next) => {
+// Step 2 - verify code and store cache
+// TODO: replace Github OAuth app with new endpoint -> `https://<aws-host>/api/auth/signin/callback`
+app.get('/api/auth/signin/callback', codeAuth);
+
+// Step 3 - client polls token endpoint
+app.get('/api/auth/token', async (req, res) => {
   try {
     const { data } = await fetchAccessToken(req, res);
     return res.send(data);

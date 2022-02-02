@@ -1,14 +1,28 @@
 import axios from 'axios';
+import { verifierCache } from './signin-url';
+import { codeCache } from './code-auth';
 
 /**
  * Make the request to fetch the access token.
  */
 export default (req, res) => {
   // Get code
-  const { code } = req.body;
+  const { state } = req.query;
 
-  if (!code) {
+  if (!state) {
     throw Error({
+      status: 404,
+      success: false,
+      error: 'No state provided.',
+    });
+  }
+
+  const verifier = verifierCache.get(state);
+  const code = codeCache.get(state);
+
+  if (!code && !verifier) {
+    throw Error({
+      status: 404,
       success: false,
       error: 'No authentication code provided.',
     });

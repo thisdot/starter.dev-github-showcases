@@ -2,27 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProviderComponent } from './provider.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RedirectComponent } from './redirect/redirect.component';
-import { Route, RouterModule } from '@angular/router';
-
-const routes: Route[] = [
-  {
-    path: '',
-    component: ProviderComponent,
-  },
-  {
-    path: 'redirect',
-    component: RedirectComponent,
-  },
-];
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [ProviderComponent, RedirectComponent],
+  declarations: [ProviderComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: ProviderComponent,
+      },
+    ]),
   ],
 })
 export class ProviderModule {}
