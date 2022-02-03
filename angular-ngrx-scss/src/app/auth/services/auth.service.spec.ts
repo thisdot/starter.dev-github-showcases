@@ -9,15 +9,29 @@ import { AuthService } from './auth.service';
 import { TokenService } from './token.service';
 
 describe('AuthService', () => {
-  let tokenService: jasmine.SpyObj<TokenService>;
+  let tokenService: TokenService;
   let authService: AuthService;
   let httpController: HttpTestingController;
+  let token: string | null = 'hello';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
+      providers: [
+        {
+          provide: TokenService,
+          useValue: {
+            getToken() {
+              return token;
+            },
+            saveToken(token: string) {},
+            removeToken() {},
+            removeRefreshToken() {},
+          },
+        },
+      ],
     });
-    tokenService = jasmine.createSpyObj('TokenService', ['getToken']);
+    tokenService = TestBed.inject(TokenService);
     authService = TestBed.inject(AuthService);
     httpController = TestBed.inject(HttpTestingController);
   });
@@ -60,15 +74,12 @@ describe('AuthService', () => {
   });
 
   it('checks if a user is authenticated', () => {
-    const token = 'hello';
-    tokenService.getToken.and.returnValue(token);
-
     const isAuthenticated = authService.isAuthenticated();
     expect(isAuthenticated).toBeTrue();
   });
 
   it('checks if a user is not authenticated', () => {
-    tokenService.getToken.and.returnValue(null);
+    token = null;
 
     const isNotAuthenticated = authService.isAuthenticated();
     expect(isNotAuthenticated).toBeFalse();
