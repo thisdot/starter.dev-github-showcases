@@ -24,9 +24,15 @@ describe('AuthService', () => {
             getToken() {
               return token;
             },
-            saveToken(token: string) {},
-            removeToken() {},
-            removeRefreshToken() {},
+            saveToken(token: string) {
+              return;
+            },
+            removeToken() {
+              return;
+            },
+            removeRefreshToken() {
+              return;
+            },
           },
         },
       ],
