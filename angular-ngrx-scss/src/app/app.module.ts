@@ -7,6 +7,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { reducers, metaReducers } from './state';
+import { EffectsModule } from '@ngrx/effects';
+import { StateEffects } from './state/state.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +23,8 @@ import { AppComponent } from './app.component';
       logOnly: environment.production,
       autoPause: true,
     }),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([StateEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
