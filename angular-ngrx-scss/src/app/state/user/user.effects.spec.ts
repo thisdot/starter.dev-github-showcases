@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { NavEffects } from './nav.effects';
+import { NavEffects } from './user.effects';
 
 describe('NavEffects', () => {
   let actions$: Observable<any>;
@@ -10,10 +10,7 @@ describe('NavEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        NavEffects,
-        provideMockActions(() => actions$)
-      ]
+      providers: [NavEffects, provideMockActions(() => actions$)],
     });
 
     effects = TestBed.inject(NavEffects);

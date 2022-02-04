@@ -7,9 +7,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { reducers, metaReducers } from './state';
-import { EffectsModule } from '@ngrx/effects';
-import { StateEffects } from './state/state.effects';
+import { reducers } from './state';
+// import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,14 +16,13 @@ import { StateEffects } from './state/state.effects';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
       autoPause: true,
     }),
-    StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([StateEffects]),
+    // EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],

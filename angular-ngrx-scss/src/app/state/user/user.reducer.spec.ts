@@ -1,4 +1,4 @@
-import { reducer, initialState } from './nav.reducer';
+import { reducer, initialState } from './user.reducer';
 
 describe('Nav Reducer', () => {
   describe('an unknown action', () => {

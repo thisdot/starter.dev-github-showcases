@@ -1,4 +1,4 @@
-import * as fromNav from './nav.actions';
+import * as fromNav from './user.actions';
 
 describe('loadNavs', () => {
   it('should return an action', () => {
