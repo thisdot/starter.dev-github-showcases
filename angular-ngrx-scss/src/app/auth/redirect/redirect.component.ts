@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { concatMap, filter, tap } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { userAuthenticated } from '../../state/user';
 
 @Component({
   selector: 'app-redirect',
@@ -14,7 +12,6 @@ export class RedirectComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store,
   ) {}
 
   ngOnInit(): void {
@@ -27,9 +24,6 @@ export class RedirectComponent implements OnInit {
         concatMap((params) => {
           const code = params.get('code') as string;
           return this.authService.getToken(code).pipe(
-            tap(() => {
-              this.store.dispatch(userAuthenticated());
-            }),
             tap(() => {
               this.router.navigate(['/']);
             }),

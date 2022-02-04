@@ -5,15 +5,17 @@ import * as UserActions from './user.actions';
 export const userFeatureKey = 'user';
 
 const initialUserState: UserState = {
-  isLoggedIn: false,
+  avatar: '',
+  username: '',
 };
 
 const userReducer = createReducer(
   initialUserState,
 
-  on(UserActions.userAuthenticated, (state) => ({
+  on(UserActions.fetchUserDataSuccess, (state, { userData }) => ({
     ...state,
-    isLoggedIn: true,
+    avatar: userData.avatar_url,
+    username: userData.login,
   })),
 );
 

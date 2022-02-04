@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { reducers } from './state';
-// import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './state/user';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,7 @@ import { reducers } from './state';
       logOnly: environment.production,
       autoPause: true,
     }),
-    // EffectsModule.forRoot([]),
+    EffectsModule.forRoot([UserEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
