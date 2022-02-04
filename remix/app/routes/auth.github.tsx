@@ -6,6 +6,6 @@ export const loader: LoaderFunction = () => redirect('/login');
 export const action: ActionFunction = async ({ request }) => {
   return await auth.authenticate('github', request, {
     successRedirect: '/',
-    failureRedirect: '/login'
+    failureRedirect: '/login',
   });
 };
