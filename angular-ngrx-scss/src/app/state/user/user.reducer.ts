@@ -2,8 +2,6 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { UserState } from './user.state';
 import * as UserActions from './user.actions';
 
-export const userFeatureKey = 'user';
-
 const initialUserState: UserState = {
   avatar: '',
   username: '',

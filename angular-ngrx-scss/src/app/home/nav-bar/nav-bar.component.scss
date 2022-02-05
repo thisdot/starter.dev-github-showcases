@@ -1,0 +1,23 @@
+@use '../../shared/styles/variables';
+
+header {
+  background: variables.$gray900;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  height: 100%;
+}
+
+a {
+  color: variables.$white;
+  font-weight: 600;
+  border: 2px solid variables.$white;
+  padding: 1%;
+}
+
+img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
