@@ -19,6 +19,18 @@ app.get('/api/auth/signin', (req, res, next) => {
   return res.send(url);
 });
 
+app.post('/api/auth/signin', (req, res, next) => {
+  let { redirectUrl } = fetchSigninUrl();
+  const uiRedirect = req.body.redirectUrl;
+  return res.send({
+    /**
+     * We use encodeURI here to make sure special characters are preserved if necessary.
+     * e.g.: the route contains a space character
+     */
+    redirectUrl: `${redirectUrl}&redirect_uri=${encodeURI(uiRedirect)}`
+  });
+});
+
 app.post('/api/auth/signin/callback', async (req, res, next) => {
   try {
     const { data } = await fetchAccessToken(req, res);
