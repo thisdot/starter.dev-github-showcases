@@ -1,6 +1,28 @@
-<header>
-  <a routerLink="/">GH</a>
-  <div>
-    <img src="{{ userAvatar$ | async }}" />
-  </div>
-</header>
+<nav aria-label="Main Navigation">
+  <ul>
+    <li>
+      <a routerLink="/">GH</a>
+    </li>
+    <li class="dropdown">
+      <button
+        type="button"
+        class="dropdown-title"
+        [attr.aria-expanded]="dropdownMenuIsOpen"
+        aria-controls="nav-dropdown"
+        (click)="toggleMenu()"
+      >
+        <img src="{{ userAvatar$ | async }}" />
+        <span> > </span>
+      </button>
+      <ul
+        @openClose
+        *ngIf="dropdownMenuIsOpen"
+        class="dropdown-menu"
+        id="nav-dropdown"
+      >
+        <li><a href="#" (click)="closeDropdown()">Profile</a></li>
+        <li><a href="#" (click)="closeDropdown()">Sign out</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
