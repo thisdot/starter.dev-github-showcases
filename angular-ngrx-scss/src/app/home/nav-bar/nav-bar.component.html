@@ -1,7 +1,7 @@
 <nav aria-label="Main Navigation">
   <ul>
     <li>
-      <a routerLink="/">GH</a>
+      <a routerLink="/" appOcticon="mark-github" size="32" color="white"></a>
     </li>
     <li class="dropdown">
       <button
@@ -12,7 +12,7 @@
         (click)="toggleMenu()"
       >
         <img src="{{ userAvatar$ | async }}" />
-        <span octicon="chevron-down" size="16"></span>
+        <span appOcticon="chevron-down" color="white" size="24"></span>
       </button>
       <ul
         @openClose

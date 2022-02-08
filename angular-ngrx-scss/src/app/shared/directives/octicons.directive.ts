@@ -1,29 +1,29 @@
-import { Directive, Input, OnInit, ElementRef } from '@angular/core';
+import { Directive, Input, ElementRef, Renderer2 } from '@angular/core';
 import * as octicons from '@primer/octicons';
 
 @Directive({
-  selector: '[octicon]',
+  selector: '[appOcticon]',
 })
-export class OcticonsDirective implements OnInit {
-  @Input() octicon: string = '';
+export class OcticonsDirective {
+  @Input() appOcticon = '';
   @Input() color?: string;
   @Input() size?: string;
-  @Input() verticalAlign?: string;
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     const el: HTMLElement = this.elementRef.nativeElement;
-    const icon = (el.innerHTML = octicons[this.octicon].toSVG());
+    const svg: string =
+      octicons[this.appOcticon as keyof typeof octicons].toSVG();
+    console.log(svg);
+    el.innerHTML = svg;
 
+    const icon = el.firstChild;
     if (this.color) {
-      el.style.fill = this.color;
+      this.renderer.setStyle(icon, 'fill', this.color);
     }
     if (this.size) {
-      el.style.width = this.size;
-      el.style.height = `100%`;
-    }
-    if (this.verticalAlign) {
-      el.style.verticalAlign = this.verticalAlign;
+      this.renderer.setStyle(icon, 'width', this.size);
+      this.renderer.setStyle(icon, 'height', '100%');
     }
   }
 }

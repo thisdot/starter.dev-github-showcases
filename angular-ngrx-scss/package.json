@@ -25,6 +25,7 @@
     "@ngrx/effects": "^13.0.2",
     "@ngrx/store": "^13.0.2",
     "@ngrx/store-devtools": "^13.0.2",
+    "@primer/octicons": "^16.3.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -39,7 +40,6 @@
     "@angular/cli": "~13.1.2",
     "@angular/compiler-cli": "~13.1.0",
     "@ngrx/schematics": "^13.0.2",
-    "@primer/octicons": "^16.3.1",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "@types/primer__octicons": "^16.1.0",

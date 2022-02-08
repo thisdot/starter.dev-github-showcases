@@ -10,10 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { reducers } from './state';
 import { UserEffects } from './state/user';
-import { OcticonsDirective } from './shared/directives/octicons.directive';
 
 @NgModule({
-  declarations: [AppComponent, OcticonsDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,6 +24,7 @@ import { OcticonsDirective } from './shared/directives/octicons.directive';
     }),
     EffectsModule.forRoot([UserEffects]),
   ],
+  declarations: [AppComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
