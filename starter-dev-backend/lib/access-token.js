@@ -3,10 +3,7 @@ import axios from 'axios';
 /**
  * Make the request to fetch the access token.
  */
-export default (req, res) => {
-  // Get code
-  const { code } = req.body;
-
+export default (code) => {
   if (!code) {
     throw Error({
       success: false,

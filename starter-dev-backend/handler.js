@@ -1,11 +1,13 @@
 import serverless from 'serverless-http';
 import express from 'express';
 import cors from 'cors';
-import { fetchSigninUrl, fetchAccessToken } from './lib';
+import { fetchAccessToken, fetchSigninUrl } from './lib';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
@@ -15,41 +17,48 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/api/auth/signin', (req, res, next) => {
-  const url = fetchSigninUrl();
-  return res.send(url);
+  const { redirectUrl } = fetchSigninUrl();
+  const uiRedirect = req.query['redirect_url'];
+  // TODO: set this up from env file probably
+  const redirectUri = `http://localhost:4000/api/auth/redirect`;
+  return res.cookie('redirect_url', uiRedirect, {
+    httpOnly: true
+  }).redirect(303,`${redirectUrl}&redirect_uri=${redirectUri}`);
 });
 
-app.post('/api/auth/signin', (req, res, next) => {
-  let { redirectUrl } = fetchSigninUrl();
-  const uiRedirect = req.body.redirectUrl;
-  const redirectUri = encodeURI(`http://localhost:4000/api/auth/redirect`);
-  return res.send({
-    /**
-     * We use encodeURI here to make sure special characters are preserved if necessary.
-     * e.g.: the route contains a space character
-     */
-    redirectUrl: `${redirectUrl}&redirect_uri=${redirectUri}&state=${atob(uiRedirect)}`
-  });
-});
-
-app.get('/api/auth/redirect', (req, res) => {
+app.get('/api/auth/redirect', async (req, res) => {
   const code = req.query['code'];
-  const state = req.query['state'];
-  const redirectUrl = btoa(state);
+  console.warn('redirected', req.cookies);
+  const redirectUrl = req.cookies['redirect_url'];
+  console.warn('redirected cleared', req.cookies);
 
-  res.redirect(200,`${redirectUrl}?code=${code}`);
+  const {data} = await fetchAccessToken(code);
+
+  res
+    .clearCookie('redirect_url')
+    .cookie('access_token', data.access_token, {
+      httpOnly: true
+    })
+    .redirect(303, `${redirectUrl}?code=${code}`);
 });
 
 app.post('/api/auth/signin/callback', async (req, res, next) => {
+  // TODO: I still don't understand the last step of the diagram
+  console.warn('cookies', req.cookies);
+
   try {
-    const { data } = await fetchAccessToken(req, res);
-    return res.send(data);
+    // const {code} = req.body;
+    // const {data} = await fetchAccessToken(code);
+    return res.send({
+      access_token: req.cookies.access_token
+    });
   } catch (err) {
     return res.json(err);
   }
 });
 
-app.post('/api/auth/sigout', (req, res, next) => {});
+app.post('/api/auth/sigout', (req, res, next) => {
+});
 
 app.use((req, res, next) => {
   return res.status(404).json({
