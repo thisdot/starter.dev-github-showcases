@@ -1,4 +1,4 @@
-# Contributing to Framework.dev
+# Contributing to Starter.dev
 
 Please [read our Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this
 repository, you are agreeing to its rules.
