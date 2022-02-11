@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ACCESS_TOKEN_COOKIE} from './constants';
+import { ACCESS_TOKEN_COOKIE } from './constants';
 
 /**
  * Make the request to fetch the access token.
@@ -40,10 +40,9 @@ export default async (req, res) => {
         sameSite: 'strict', // used with cors
         path: '/', // needed for `__Host-`
         maxAge: 604800000, // 1 week
-        httpOnly: true, // user `withCredentials` in the client to use the cookie
+        httpOnly: true, // use `withCredentials` in the client to use the cookie
         secure: true, // needed for `__Host-`
       })
-      // .send('Cookie created successfully');
       .redirect(303, `${redirectUrl}`);
   } catch (err) {
     console.log('Error:', err);

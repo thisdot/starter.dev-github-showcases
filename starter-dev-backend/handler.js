@@ -1,7 +1,12 @@
 import serverless from 'serverless-http';
 import express from 'express';
 import cors from 'cors';
-import {accessToken, clearCookies, fetchSigninUrl, getAccessToken} from './lib';
+import {
+  accessToken,
+  clearCookies,
+  fetchSigninUrl,
+  getAccessToken,
+} from './lib';
 import cookieParser from 'cookie-parser';
 
 const app = express();

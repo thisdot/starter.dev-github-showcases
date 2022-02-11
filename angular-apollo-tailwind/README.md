@@ -18,15 +18,18 @@ A GitHub account is required to login and view the application as it requires yo
 ### Setup
 
 1. Create your project `.env`
+
 ```
 cp .env.example .env
 ```
+
 2. Install dependencies: `yarn install`
 3. Run the project: `yarn start`
 
 ## Building
 
 This project was generated using the Angular CLI.
+
 ### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -47,6 +50,32 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
+### Running secure server
+
+To run https (recommended for Github OAuth), first create a key and cert:
+
+```bash
+openssl req -nodes -new -x509 -keyout private.key -out private.crt
+```
+
+Then run the server:
+
+```bash
+ng serve --ssl true --ssl-key <key_file> --ssl-cert <cert_file>
+```
+
+And navigate to `https://localhost:4200/`.
+
+### Running with a proxy to server
+
+Create a `proxy.conf.json` based on the `proxy.conf.example.json`. The example uses [ngrok](https://ngrok.com/) and is recommended for local a secure server. Be sure to set authtoken after install.
+
+Start a tunnel for a server:
+
+```bash
+ngrok http <custom_server_port>
+```
+
 ### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
@@ -57,7 +86,7 @@ This project is built using a number of beginner to advanced techniques to solve
 The following is a list of additional features that could be build into the application to either make it feel more like GitHub or add a unique, personal touch.
 
 | Project                     | Description                                                                                                                  | Skill        |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------|--------------|
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | Repo Star Categories        | Add a repo to a specialised list other than the default Star/Unstarred list.                                                 | Beginner     |
 | User Organizations          | List a user's organizations.                                                                                                 | Beginner     |
 | Repo Dependencies List      | Display the main dependencies/packages used in a repo.                                                                       | Beginner     |
