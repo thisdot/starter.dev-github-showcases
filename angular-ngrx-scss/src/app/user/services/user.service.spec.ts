@@ -5,8 +5,9 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { TokenService } from 'src/app/auth/services/token.service';
-import { UserState } from 'src/app/state/user';
+import { UserApiResponse, UserState } from 'src/app/state/user';
 import { environment } from 'src/environments/environment';
 
 import { UserService } from './user.service';
@@ -38,16 +39,22 @@ describe('UserService', () => {
     expect(userService).toBeTruthy();
   });
 
-  it('should return user data from the GitHub API', () => {
+  it('should return user data from the GitHub API', (done) => {
     const expectedResponse: UserState = {
-      avatar: '',
+      avatar: 'lindakatcodes_url',
       username: 'lindakatcodes',
     };
 
-    httpClientSpy.get.and.returnValue(of(expectedResponse));
+    const expectedHttpResponse: Partial<UserApiResponse> = {
+      avatar_url: 'lindakatcodes_url',
+      login: 'lindakatcodes',
+    };
+
+    httpClientSpy.get.and.returnValue(of(expectedHttpResponse).pipe(delay(0)));
 
     userService.getUserInfo().subscribe((res) => {
       expect(res).toEqual(expectedResponse);
+      done();
     });
 
     expect(httpClientSpy.get.calls.count()).withContext('called once').toBe(1);

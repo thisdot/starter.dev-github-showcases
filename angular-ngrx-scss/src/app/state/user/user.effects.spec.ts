@@ -1,23 +1,32 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { UserState } from '.';
-
 import { UserService } from '../../user/services/user.service';
+import { fetchUserData, fetchUserDataSuccess } from './user.actions';
 import { UserEffects } from './user.effects';
+import { UserState } from './user.state';
 
 describe('UserEffects', () => {
-  let actions$ = new Observable<Action>();
+  let actions$: Observable<Action>;
   let effects: UserEffects;
-  let userServiceSpy: jasmine.SpyObj<UserService>;
-
+  let userServiceMock: any;
   beforeEach(() => {
-    userServiceSpy = jasmine.createSpyObj('UserService', ['getUserInfo']);
+    userServiceMock = jasmine.createSpyObj('UserService', {
+      getUserInfo: () => {
+        return of();
+      },
+    });
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [UserEffects, provideMockActions(() => actions$)],
+      imports: [],
+      providers: [
+        {
+          provide: UserService,
+          useValue: userServiceMock,
+        },
+        UserEffects,
+        provideMockActions(() => actions$),
+      ],
     });
 
     effects = TestBed.inject(UserEffects);
@@ -27,20 +36,20 @@ describe('UserEffects', () => {
     expect(effects).toBeTruthy();
   });
 
-  it('should get the user info from the API', () => {
-    actions$ = of({ type: '[User API] User data requested' });
+  it('should get the user info from the API', (done) => {
+    actions$ = of(fetchUserData());
     const expectedUserData: UserState = {
       avatar: '',
       username: 'lindakatcodes',
     };
 
-    userServiceSpy.getUserInfo.and.returnValue(of(expectedUserData));
+    userServiceMock.getUserInfo.and.returnValue(of(expectedUserData));
 
     effects.loadUser$.subscribe((action) => {
-      expect(action).toEqual({
-        type: '[User API] User Data successfully received',
-        userData: expectedUserData,
-      });
+      expect(action).toEqual(
+        fetchUserDataSuccess({ userData: expectedUserData }),
+      );
+      done();
     });
   });
 });
