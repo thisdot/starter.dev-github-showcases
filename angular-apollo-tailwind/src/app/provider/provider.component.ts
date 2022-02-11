@@ -18,9 +18,4 @@ export class ProviderComponent {
   onSubmit() {
     this.authService.signin();
   }
-
-  // TODO: remove me later
-  getToken() {
-    this.authService.getToken().subscribe();
-  }
 }
