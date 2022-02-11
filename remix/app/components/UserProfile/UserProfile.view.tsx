@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/outline';
 import { TwitterIcon } from '../Icons';
 import OrgList from './OrgList';
-import { styles } from './UserProfile.classNames';
+import * as styles from './UserProfile.classNames';
 
 export interface UserProfileViewProps {
   avatarUrl: any;

@@ -17,10 +17,30 @@ export const meta: MetaFunction = () => {
   return { title: 'GitHub Demo App' };
 };
 
+// Global ErrorBoundary
+// TODO: Put in proper/approved error wording/formatting/styling
+export function ErrorBoundary({ error }: any) {
+  console.error(error);
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <div className="text-sm">Oh snap, we have an error!</div>
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
 export default function App() {
   return (
     <html lang="en">
       <head>
+        <title>GitHub Demo App</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />

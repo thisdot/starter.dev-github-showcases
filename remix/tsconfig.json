@@ -2,6 +2,7 @@
   "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "tailwind.config.js"],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "module": "esnext",
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "isolatedModules": true,
     "esModuleInterop": true,
