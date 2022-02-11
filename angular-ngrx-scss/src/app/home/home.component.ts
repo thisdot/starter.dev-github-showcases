@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as UserActions from '../state/user/user.actions';
+import { fetchUserData } from '../state/user/user.actions';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +11,6 @@ export class HomeComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(UserActions.fetchUserData());
+    this.store.dispatch(fetchUserData());
   }
 }

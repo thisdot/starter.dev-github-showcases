@@ -1,10 +1,10 @@
-import { Directive, Input, ElementRef, Renderer2 } from '@angular/core';
+import { Directive, Input, ElementRef, Renderer2, OnInit } from '@angular/core';
 import * as octicons from '@primer/octicons';
 
 @Directive({
   selector: '[appOcticon]',
 })
-export class OcticonsDirective {
+export class OcticonsDirective implements OnInit {
   @Input() appOcticon = '';
   @Input() color?: string;
   @Input() size?: string;
@@ -14,7 +14,6 @@ export class OcticonsDirective {
     const el: HTMLElement = this.elementRef.nativeElement;
     const svg: string =
       octicons[this.appOcticon as keyof typeof octicons].toSVG();
-    console.log(svg);
     el.innerHTML = svg;
 
     const icon = el.firstChild;

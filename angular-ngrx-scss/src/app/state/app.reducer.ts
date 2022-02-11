@@ -1,12 +1,8 @@
-import {
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-} from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 import { AppState } from './app.state';
 
-import * as UserReducer from './user/user.reducer';
+import { reducer } from './user/user.reducer';
 
 export const reducers: ActionReducerMap<AppState> = {
-  user: UserReducer.reducer,
+  user: reducer,
 };

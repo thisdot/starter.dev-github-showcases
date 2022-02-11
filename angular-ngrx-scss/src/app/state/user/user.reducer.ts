@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { UserState } from './user.state';
-import * as UserActions from './user.actions';
+import { fetchUserDataSuccess } from './user.actions';
 
 const initialUserState: UserState = {
   avatar: '',
@@ -10,10 +10,10 @@ const initialUserState: UserState = {
 const userReducer = createReducer(
   initialUserState,
 
-  on(UserActions.fetchUserDataSuccess, (state, { userData }) => ({
+  on(fetchUserDataSuccess, (state, { userData }) => ({
     ...state,
-    avatar: userData.avatar_url,
-    username: userData.login,
+    avatar: userData.avatar,
+    username: userData.username,
   })),
 );
 

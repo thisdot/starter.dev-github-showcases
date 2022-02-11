@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as UserSelectors from '../../state/user';
+import { selectUserAvatar } from '../../state/user';
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,7 +21,7 @@ import * as UserSelectors from '../../state/user';
 })
 export class NavBarComponent {
   dropdownMenuIsOpen = false;
-  userAvatar$ = this.store.select(UserSelectors.selectUserAvatar);
+  userAvatar$ = this.store.select(selectUserAvatar);
   constructor(private store: Store) {}
 
   toggleMenu() {
