@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TokenService } from './token.service';
 
@@ -30,7 +30,7 @@ export class AuthService {
   signin(): void {
     this.tokenService.removeToken();
     this.tokenService.removeRefreshToken();
-    window.open(`${environment.apiUrl}/auth/signin?state=1234`, '_blank');
+    window.location.href = `${environment.apiUrl}/auth/signin?redirect_url=${environment.redirectUrl}`;
   }
 
   /**
@@ -39,13 +39,15 @@ export class AuthService {
    * Once the user accepts Github authentication, front-end will poll
    * for the token.
    *
-   * @return {*}  {Observable<AuthResponse>} - token object shape
+   * @return {*}  {Observable<string>} - token
    * @memberof AuthService
    */
-  getToken(code: string): Observable<AuthResponse> {
-    return this.httpClient.get<AuthResponse>(
-      `${environment.apiUrl}/auth/signin/callback?code=${code}`,
-    );
+  getToken(): Observable<string> {
+    return this.httpClient
+      .get<AuthResponse>(`${environment.apiUrl}/auth/token`, {
+        withCredentials: true,
+      })
+      .pipe(map((data) => data.access_token));
   }
 
   /**

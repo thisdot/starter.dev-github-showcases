@@ -1,13 +1,13 @@
 import calculateTokenExpiration from './expiration';
 import fetchSigninUrl from './signin-url';
-import fetchAccessToken from './access-token';
+import accessToken from './access-token';
 import refreshAccessToken from './refresh-token';
-import codeAuth from './code-auth';
+import clearCookies from './clear-cookies';
 
 export {
   calculateTokenExpiration,
   fetchSigninUrl,
-  fetchAccessToken,
+  accessToken,
   refreshAccessToken,
-  codeAuth,
+  clearCookies,
 };

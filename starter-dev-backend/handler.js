@@ -1,11 +1,13 @@
 import serverless from 'serverless-http';
 import express from 'express';
 import cors from 'cors';
-import { fetchSigninUrl, fetchAccessToken, codeAuth } from './lib';
+import { fetchSigninUrl, accessToken, clearCookies } from './lib';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
@@ -14,24 +16,20 @@ app.get('/', (req, res, next) => {
   });
 });
 
-// Step 1 - push user to new tab for auth
+// Step 1 - push user to Github OAuth
 app.get('/api/auth/signin', fetchSigninUrl);
 
-// Step 2 - verify code and store cache
-// TODO: replace Github OAuth app with new endpoint -> `https://<aws-host>/api/auth/signin/callback`
-app.get('/api/auth/signin/callback', codeAuth);
+// Step 2 - verify code and state then fetch token and save it as a cookie
+// TODO: replace Github OAuth app with new endpoint -> `https://<host>/api/auth/signin/callback`
+app.get('/api/auth/signin/callback', accessToken);
 
-// Step 3 - client polls token endpoint
-app.get('/api/auth/token', async (req, res) => {
-  try {
-    const { data } = await fetchAccessToken(req, res);
-    return res.send(data);
-  } catch (err) {
-    return res.json(err);
-  }
+// Step 3 - client fetches token from cookie
+app.get('/api/auth/token', async (req, res, next) => {
+  console.log(req.cookies, res.cookies);
+  next();
 });
 
-app.post('/api/auth/sigout', (req, res, next) => {});
+app.post('/api/auth/sigout', clearCookies);
 
 app.use((req, res, next) => {
   return res.status(404).json({
