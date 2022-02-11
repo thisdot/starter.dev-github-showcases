@@ -1,7 +1,7 @@
 import serverless from 'serverless-http';
 import express from 'express';
 import cors from 'cors';
-import { fetchSigninUrl, accessToken, clearCookies } from './lib';
+import {accessToken, clearCookies, fetchSigninUrl, getAccessToken} from './lib';
 import cookieParser from 'cookie-parser';
 
 const app = express();
@@ -24,12 +24,9 @@ app.get('/api/auth/signin', fetchSigninUrl);
 app.get('/api/auth/signin/callback', accessToken);
 
 // Step 3 - client fetches token from cookie
-app.get('/api/auth/token', async (req, res, next) => {
-  console.log(req.cookies, res.cookies);
-  next();
-});
+app.get('/api/auth/token', getAccessToken);
 
-app.post('/api/auth/sigout', clearCookies);
+app.post('/api/auth/signout', clearCookies);
 
 app.use((req, res, next) => {
   return res.status(404).json({

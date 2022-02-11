@@ -5,9 +5,7 @@ import { environment } from 'src/environments/environment';
 import { TokenService } from './token.service';
 
 interface AuthResponse {
-  access_token: string;
-  bearer: string;
-  scope: string;
+  access_token?: string;
 }
 
 interface SignoutRepsonse {
@@ -29,7 +27,6 @@ export class AuthService {
    */
   signin(): void {
     this.tokenService.removeToken();
-    this.tokenService.removeRefreshToken();
     window.location.href = `${environment.apiUrl}/auth/signin?redirect_url=${environment.redirectUrl}`;
   }
 
@@ -42,12 +39,15 @@ export class AuthService {
    * @return {*}  {Observable<string>} - token
    * @memberof AuthService
    */
-  getToken(): Observable<string> {
+  getToken(): Observable<string | undefined> {
     return this.httpClient
       .get<AuthResponse>(`${environment.apiUrl}/auth/token`, {
         withCredentials: true,
       })
-      .pipe(map((data) => data.access_token));
+      .pipe(
+        map((data) => data.access_token),
+        tap((token) => token && this.tokenService.saveToken(token)),
+      );
   }
 
   /**
@@ -57,8 +57,10 @@ export class AuthService {
    * @memberof AuthService
    */
   signout(): Observable<SignoutRepsonse> {
-    return this.httpClient.get<SignoutRepsonse>(
+    this.tokenService.removeToken();
+    return this.httpClient.post<SignoutRepsonse>(
       `${environment.apiUrl}/auth/signout`,
+      null,
     );
   }
 
@@ -69,6 +71,7 @@ export class AuthService {
    * @memberof AuthService
    */
   isAuthenticated(): boolean {
+    console.log('isAuth: ', !!this.tokenService.getToken());
     return !!this.tokenService.getToken();
   }
 }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {ACCESS_TOKEN_COOKIE} from './constants';
 
 /**
  * Make the request to fetch the access token.
@@ -35,7 +36,7 @@ export default async (req, res) => {
 
     res
       // `__Host-` restricts the cookie to the origin making requests
-      .cookie('__Host-access_token', accessToken, {
+      .cookie(ACCESS_TOKEN_COOKIE, accessToken, {
         sameSite: 'strict', // used with cors
         path: '/', // needed for `__Host-`
         maxAge: 604800000, // 1 week

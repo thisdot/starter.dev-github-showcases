@@ -11,3 +11,5 @@ export {
   refreshAccessToken,
   clearCookies,
 };
+
+export * from './get-access-token';

@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProviderComponent } from './provider.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RedirectComponent } from './redirect/redirect.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [ProviderComponent],
+  declarations: [ProviderComponent, RedirectComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -14,6 +15,10 @@ import { RouterModule } from '@angular/router';
       {
         path: '',
         component: ProviderComponent,
+      },
+      {
+        path: 'redirect',
+        component: RedirectComponent,
       },
     ]),
   ],
