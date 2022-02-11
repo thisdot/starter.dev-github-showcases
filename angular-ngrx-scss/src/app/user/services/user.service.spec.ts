@@ -26,8 +26,8 @@ describe('UserService', () => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
     userService = new UserService(httpClientSpy, tokenServiceSpy);
 
-    let userToken = tokenServiceSpy.getToken.and.returnValue('1234');
-    let httpOptions = {
+    const userToken = tokenServiceSpy.getToken.and.returnValue('1234');
+    const httpOptions = {
       headers: new HttpHeaders({
         Authorization: `token ${userToken}`,
       }),
