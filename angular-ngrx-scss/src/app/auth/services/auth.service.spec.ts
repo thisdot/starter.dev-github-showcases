@@ -40,6 +40,7 @@ describe('AuthService', () => {
     tokenService = TestBed.inject(TokenService);
     authService = TestBed.inject(AuthService);
     httpController = TestBed.inject(HttpTestingController);
+    token = 'hello';
   });
 
   it('should redirect the user to the sign in link', () => {
