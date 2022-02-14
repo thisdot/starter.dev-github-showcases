@@ -1,15 +1,24 @@
-import React from 'react';
 import { Outlet } from 'react-router';
-import Header from './components/Header';
+import styled from 'styled-components';
+import Header from './components/layouts/Header';
+import { Layout } from './components/layouts/Layout';
+import Sidebar from './components/layouts/Sidebar';
+
+const Main = styled.main`
+  background-color: rgb(243, 244, 246);
+  padding: 3rem;
+  min-height: calc(100vh - 70px);
+`;
 
 function App() {
   return (
-    <>
+    <Layout>
       <Header></Header>
-      <main>
+      <Sidebar></Sidebar>
+      <Main>
         <Outlet />
-      </main>
-    </>
+      </Main>
+    </Layout>
   );
 }
 

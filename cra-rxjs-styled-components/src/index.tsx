@@ -6,6 +6,7 @@ import App from './App';
 import AuthGuard from './components/AuthGuard';
 import reportWebVitals from './reportWebVitals';
 import Redirect from './routes/redirect';
+import RepoDetails from './routes/repo-details';
 import SignIn from './routes/sign-in';
 import TopRepos from './routes/top-repos';
 
@@ -19,6 +20,14 @@ ReactDOM.render(
             element={
               <AuthGuard>
                 <TopRepos />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="repo"
+            element={
+              <AuthGuard>
+                <RepoDetails />
               </AuthGuard>
             }
           />

@@ -10,6 +10,7 @@ export interface Repository {
   stargazers_count: number;
   language: string;
   branches_url: string;
+  visibility: 'public' | 'private';
 }
 
 export interface RepositoryWithBranchCount extends Repository {
