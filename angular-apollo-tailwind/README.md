@@ -52,19 +52,21 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 ### Running secure server
 
-To run https (recommended for Github OAuth), first create a key and cert:
+1. To run https (recommended for Github OAuth), first create a key and cert:
 
 ```bash
-openssl req -nodes -new -x509 -keyout private.key -out private.crt
+yarn run generate-cert
 ```
 
-Then run the server:
+2. Then add the new cert to the macOS keychain by opening Keychain Access. Then under Certificates, paste the generated certificate file into the list. Change the permissions to "Always Trust" by right-click the certificate, selecting Get Info, and expanding the Trust section.
+
+3. Then run the server:
 
 ```bash
 ng serve --ssl true --ssl-key <key_file> --ssl-cert <cert_file>
 ```
 
-And navigate to `https://localhost:4200/`.
+4. And navigate to `https://localhost:4200/`.
 
 ### Running with a proxy to server
 

@@ -12,6 +12,7 @@ export default (req, res) => {
   const scopes = 'scope=user&scope=read:org';
   const params = new URLSearchParams({
     client_id: process.env.GITHUB_CLIENT_ID ?? '',
+    redirect_uri: `${process.env.SERVER_BASE_URL}/api/auth/signin/callback`,
     state,
   });
 
