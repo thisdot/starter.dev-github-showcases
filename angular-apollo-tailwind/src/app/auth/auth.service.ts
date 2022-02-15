@@ -71,7 +71,6 @@ export class AuthService {
    * @memberof AuthService
    */
   isAuthenticated(): boolean {
-    console.log('isAuth: ', !!this.tokenService.getToken());
     return !!this.tokenService.getToken();
   }
 }

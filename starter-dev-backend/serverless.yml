@@ -9,6 +9,10 @@ plugins:
 custom:
   serverless-offline:
     httpPort: 4000
+  customDomain:
+    domainName: api.starter.dev
+    basePath: ''
+    createRoute53Record: true
 
 provider:
   name: aws
