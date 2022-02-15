@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { UserService } from 'src/app/user/services/user.service';
 import {
   fetchUserData,
   fetchUserDataError,
   fetchUserDataSuccess,
 } from './user.actions';
-import { UserService } from 'src/app/user/services/user.service';
 
 @Injectable()
 export class UserEffects {
