@@ -1,49 +1,34 @@
-# Starter.dev - Vue3 + Typescript + Quasar (vue3-ts-quasar)
+# vue3-ts-quasar
 
-Vue3 + Typescript + Quasar & Composition API + Pinia.
-
-## Before you start
-
-This project relies on the quasar cli to work. That means you will need to install the cli to run the project. Run:
-
+## Project setup
 ```
-# Node.js >=12.22.1 is required.
-
-yarn global add @quasar/cli
-# or
-$ npm install -g @quasar/cli
+yarn install
 ```
 
-## Install the dependencies
-
-```bash
-yarn
+### Compiles and hot-reloads for development
+```
+yarn serve
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-
-```bash
-quasar dev
+### Compiles and minifies for production
+```
+yarn build
 ```
 
-### Lint the files
+### Run your unit tests
+```
+yarn test:unit
+```
 
-```bash
+### Run your end-to-end tests
+```
+yarn test:e2e
+```
+
+### Lints and fixes files
+```
 yarn lint
 ```
 
-### Format the files
-
-```bash
-yarn format
-```
-
-### Build the app for production
-
-```bash
-quasar build
-```
-
-### Customize the configuration
-
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
