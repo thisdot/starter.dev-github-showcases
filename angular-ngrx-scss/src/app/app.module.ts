@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { reducers } from './state';
 import { UserEffects } from './state/user';
 import { TokenInterceptor } from './auth/services/token.interceptor';
+import { ProfileEffects } from './state/profile/profile.effects';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { TokenInterceptor } from './auth/services/token.interceptor';
       logOnly: environment.production,
       autoPause: true,
     }),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([UserEffects, ProfileEffects]),
   ],
   declarations: [AppComponent],
   providers: [

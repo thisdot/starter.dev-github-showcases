@@ -20,7 +20,11 @@
         class="dropdown-menu"
         id="nav-dropdown"
       >
-        <li><a href="#" (click)="closeDropdown()">Profile</a></li>
+        <li>
+          <a href="/{{ username$ | async }}" (click)="closeDropdown()"
+            >Profile</a
+          >
+        </li>
         <li><a href="#" (click)="closeDropdown()">Sign out</a></li>
       </ul>
     </li>

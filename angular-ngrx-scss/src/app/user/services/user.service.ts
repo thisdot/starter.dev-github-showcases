@@ -10,8 +10,23 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getUserInfo(): Observable<UserState> {
-    return this.http.get<UserApiResponse>(`${environment.githubUrl}/user`).pipe(
+  getAuthenticatedUserInfo(): Observable<UserState> {
+    const url = `${environment.githubUrl}/user`;
+
+    return this.http.get<UserApiResponse>(url).pipe(
+      map((data) => ({
+        avatar: data.avatar_url,
+        username: data.login,
+      })),
+    );
+  }
+
+  getUserInfo(username: string): Observable<UserState> {
+    const url = `${environment.githubUrl}/users/${encodeURIComponent(
+      username,
+    )}`;
+
+    return this.http.get<UserApiResponse>(url).pipe(
       map((data) => ({
         avatar: data.avatar_url,
         username: data.login,

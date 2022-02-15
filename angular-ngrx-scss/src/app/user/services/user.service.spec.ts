@@ -30,7 +30,7 @@ describe('UserService', () => {
 
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse).pipe(delay(0)));
 
-    userService.getUserInfo().subscribe((res) => {
+    userService.getAuthenticatedUserInfo().subscribe((res) => {
       expect(res).toEqual(expectedResponse);
       done();
     });

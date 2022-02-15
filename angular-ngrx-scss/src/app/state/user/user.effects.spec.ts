@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
+import { fetchUserData, fetchUserDataSuccess } from '.';
 import { UserService } from '../../user/services/user.service';
-import { fetchUserData, fetchUserDataSuccess } from './user.actions';
 import { UserEffects } from './user.effects';
 import { UserState } from './user.state';
 
