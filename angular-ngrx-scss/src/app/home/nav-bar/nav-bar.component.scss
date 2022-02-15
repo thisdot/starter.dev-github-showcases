@@ -3,6 +3,7 @@
 nav {
   height: 100%;
   display: grid;
+  background: variables.$gray900;
 }
 
 ul {
@@ -18,7 +19,7 @@ img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 
 .dropdown {
@@ -29,7 +30,7 @@ img {
     border: none;
     font-family: inherit;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
   }
 
   .dropdown-menu {
