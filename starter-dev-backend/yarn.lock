@@ -2090,6 +2090,21 @@ aws-sdk@^2.1036.0:
     uuid "3.3.2"
     xml2js "0.4.19"
 
+aws-sdk@^2.1073.0:
+  version "2.1074.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1074.0.tgz#be3283f781b3060cd67d5abef50d1edacefede70"
+  integrity sha512-tD478mkukglutjs+mq5FQmYFzz+l/wddl5u3tTMWTNa+j1eSL+AqaHPFM1rC3O9h98QqpKKzeKbLrPhGDvYaRg==
+  dependencies:
+    buffer "4.9.2"
+    events "1.1.1"
+    ieee754 "1.1.13"
+    jmespath "0.16.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
 axios@^0.24.0:
   version "0.24.0"
   resolved "https://registry.npmjs.org/axios/-/axios-0.24.0.tgz"
@@ -5066,6 +5081,11 @@ jmespath@0.15.0:
   resolved "https://registry.npmjs.org/jmespath/-/jmespath-0.15.0.tgz"
   integrity sha1-o/Iiqarp+Wb10nx5ZRDigJF2Qhc=
 
+jmespath@0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.16.0.tgz#b15b0a85dfd4d930d43e69ed605943c802785076"
+  integrity sha512-9FzQjJ7MATs1tSpnco1K6ayiYE3figslrXA72G2HQ/n76RzvYlofyi5QM+iX4YRs/pu3yzxlVQSST23+dMDknw==
+
 joycon@^3.0.1:
   version "3.1.1"
   resolved "https://registry.npmjs.org/joycon/-/joycon-3.1.1.tgz"
@@ -6846,6 +6866,13 @@ serverless-bundle@^5.2.0:
     webpack-bundle-analyzer "^4.5.0"
     webpack-node-externals "^2.5.2"
     webpack-permissions-plugin "^1.0.8"
+
+serverless-domain-manager@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/serverless-domain-manager/-/serverless-domain-manager-6.0.2.tgz#d93578843b50d5e2e8dd96870e0d9489f21d2135"
+  integrity sha512-57PaNI0/LtFubn5/F0i2eTV6eQ9BFDXn1kk90/eHRKpQql0e/udMEWkJ9rk+Mgzv6lushHo9EPeyGVcl85RF9Q==
+  dependencies:
+    aws-sdk "^2.1073.0"
 
 serverless-http@^2.7.0:
   version "2.7.0"
