@@ -11,7 +11,6 @@ const envVars = `export const environment = {
   production: ${process.env.PRODUCTION},
   apiUrl: '${process.env.OAUTH_API_URL}',
   graphApiUrl: '${process.env.GITHUB_GRAPHQL_URL}',
-  publicGraphqlUrl: '${process.env.PUBLIC_GRAPHQL_URL}',
   redirectUrl: '${process.env.CLIENT_REDIRECT_URL}',
 };`;
 

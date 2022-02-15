@@ -13,12 +13,12 @@
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
-    "serverless-domain-manager": "^6.0.2",
     "serverless-http": "^2.7.0"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
     "serverless-bundle": "^5.2.0",
+    "serverless-domain-manager": "^6.0.2",
     "serverless-offline": "^8.3.1"
   }
 }

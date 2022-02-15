@@ -14,7 +14,6 @@ export const environment = {
   production: false,
   apiUrl: '/api',
   graphApiUrl: 'https://api.github.com/graphql',
-  publicGraphqlUrl: 'http://localhost:4000/api/graphql',
   redirectUrl: 'https://localhost:4200/redirect',
 };
 

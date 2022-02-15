@@ -19,8 +19,14 @@ A GitHub account is required to login and view the application as it requires yo
 
 1. Create your project `.env`
 
-```
+```bash
 cp .env.example .env
+```
+
+or for production:
+
+```bash
+cp .env.example .env.prod # and change PRODUCTION=true
 ```
 
 2. Install dependencies: `yarn install`

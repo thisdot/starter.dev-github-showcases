@@ -45,6 +45,7 @@ proxy.conf.json
 
 # local env files
 .env
+.env.prod
 
 # System Files
 .DS_Store
