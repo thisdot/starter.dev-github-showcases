@@ -10,8 +10,10 @@
 
 <style></style>
 
-<script>
-// export default {
-//   name: "HelloWorld",
-// };
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "HelloWorld",
+});
 </script>
