@@ -1,19 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { TokenService } from 'src/app/auth/services/token.service';
 import { UserApiResponse, UserState } from 'src/app/state/user';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
   let userService: UserService;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
-  let tokenServiceSpy: jasmine.SpyObj<TokenService>;
 
   beforeEach(() => {
-    tokenServiceSpy = jasmine.createSpyObj('TokenService', ['getToken']);
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-    userService = new UserService(httpClientSpy, tokenServiceSpy);
+    userService = new UserService(httpClientSpy);
   });
 
   it('should be created', () => {
