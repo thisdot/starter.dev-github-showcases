@@ -7,11 +7,11 @@ on:
   push:
     branches: [main]
     paths:
-      - 'angular-ngrx-scss/**'
+      - "angular-ngrx-scss/**"
   pull_request:
     branches: [main]
     paths:
-      - 'angular-ngrx-scss/**'
+      - "angular-ngrx-scss/**"
 
 jobs:
   lint:
@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: angular-ngrx-scss/package-lock.json
 
       - name: Install dependencies
@@ -57,7 +57,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: angular-ngrx-scss/package-lock.json
 
       - name: Install dependencies
@@ -86,7 +86,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: angular-ngrx-scss/package-lock.json
 
       - name: Install dependencies
@@ -95,4 +95,33 @@ jobs:
         working-directory: angular-ngrx-scss
       - name: Build Project
         run: npm run build
+        working-directory: angular-ngrx-scss
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [lint, format-check]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: angular-ngrx-scss/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+        working-directory: angular-ngrx-scss
+      - name: Test Project
+        run: npm run test:ci
         working-directory: angular-ngrx-scss

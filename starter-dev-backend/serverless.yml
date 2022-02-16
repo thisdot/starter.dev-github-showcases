@@ -3,6 +3,7 @@ frameworkVersion: '2 || 3'
 useDotenv: true
 
 plugins:
+  - serverless-domain-manager
   - serverless-bundle
   - serverless-offline
 
@@ -11,8 +12,10 @@ custom:
     httpPort: 4000
   customDomain:
     domainName: api.starter.dev
-    basePath: ''
-    createRoute53Record: true
+    stage: production
+    endpointType: 'regional'
+    apiType: http
+    certificateName: '*.starter.dev'
 
 provider:
   name: aws

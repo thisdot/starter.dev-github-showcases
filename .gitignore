@@ -14,3 +14,6 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+
+# System Files
+.DS_Store
