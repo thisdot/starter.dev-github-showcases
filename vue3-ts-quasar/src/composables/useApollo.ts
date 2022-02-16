@@ -4,7 +4,7 @@ import {
   InMemoryCache,
 } from '@apollo/client/core';
 
-export default (graphQLApiUrl = 'https://api.github.com/graphql') => {
+export default (graphQLApiUrl = 'https://api.github.com/graphql'): unknown => {
   // HTTP connection to the API
   const httpLink = createHttpLink({
     // You should use an absolute URL here

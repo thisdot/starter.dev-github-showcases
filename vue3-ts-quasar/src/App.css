@@ -1,0 +1,97 @@
+/* **************************** */
+/* Reset                        */
+/* **************************** */
+
+/* Box Sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+picture,
+figure {
+  margin: 0;
+}
+
+/* Set up Body */
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* set up images */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* form elements */
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove animation for those who don't want */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* **************************** */
+/* Utility Classes              */
+/* **************************** */
+
+.flex {
+  display: flex;
+  gap: var(--gap, 1rem);
+}
+
+.grid {
+  display: grid;
+  gap: var(--gap, 1rem)
+}
+
+.wrapper {
+  padding-inline: 2em;
+  margin-inline: auto;
+  max-width: 60rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  white-space: nowrap;
+  padding: 0;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+}
+
+:root {
+  --color-border-default: #d0d7de;
+  --color-fg-muted: #57606a;
+}
