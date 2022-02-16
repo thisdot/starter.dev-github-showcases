@@ -9,7 +9,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-const DEFAULT_LOGO_SIZE_PX = 36;
+const DEFAULT_LOGO_SIZE_PX = 32;
 const LG_LOGO_START_SIZE_PX = 120; // From GitHub guidelines https://github.com/logos
 
 export default defineComponent({
