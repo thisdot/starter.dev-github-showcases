@@ -22,6 +22,12 @@ provider:
   name: aws
   profile: starterdev
   runtime: nodejs14.x
+  environment:
+    COOKIE_SECRET: ${env:COOKIE_SECRET}
+    GITHUB_CLIENT_ID: ${env:X_GITHUB_CLIENT_ID}
+    GITHUB_CLIENT_SECRET: ${env:X_GITHUB_CLIENT_SECRET}
+    GITHUB_OAUTH_URL: ${env:X_GITHUB_OAUTH_URL}
+    SERVER_BASE_URL: ${env:SERVER_BASE_URL}
 
 functions:
   api:
