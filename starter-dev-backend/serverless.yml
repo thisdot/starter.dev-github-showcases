@@ -21,7 +21,7 @@ provider:
   name: aws
   profile: starterdev
   stage: ${sls:stage}
-  region: ${aws:region}
+  region: ${opt:region}
   runtime: nodejs14.x
 
 functions:

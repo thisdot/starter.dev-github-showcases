@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - 'starter-dev-backend/**'
+  pull_request:
+    branches:
+      - main
 
   workflow_dispatch:
 
@@ -45,4 +48,4 @@ jobs:
             --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy
-        run: serverless deploy --stage production --region us-east-1
+        run: serverless deploy --stage development --region us-east-1
