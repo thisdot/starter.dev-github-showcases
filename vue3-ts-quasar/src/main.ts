@@ -4,4 +4,12 @@ import router from './router';
 import { Quasar } from 'quasar';
 import quasarUserOptions from './quasar-user-options';
 
-createApp(App).use(Quasar, quasarUserOptions).use(router).mount('#app');
+import { createPinia } from 'pinia';
+
+const pinia = createPinia();
+
+createApp(App)
+  .use(Quasar, quasarUserOptions)
+  .use(pinia)
+  .use(router)
+  .mount('#app');
