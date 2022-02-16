@@ -1,6 +1,6 @@
 export interface GistItem {
   id: string;
-  description?: string | null;
+  description?: string;
   name: string;
   url: string;
 }
