@@ -51,21 +51,21 @@
 </template>
 
 <script lang="ts">
-import MyButton from "./Button.vue";
+import MyButton from './Button.vue';
 
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "Home",
+  name: 'Home',
   components: { MyButton },
   props: {
     user: {
       type: Object,
     },
   },
-  emits: ["login", "logout", "createAccount"],
+  emits: ['login', 'logout', 'createAccount'],
 });
 </script>
 <style>
-@import "./header.css";
+@import './header.css';
 </style>

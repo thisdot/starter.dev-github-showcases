@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed } from "vue";
+import { defineComponent, reactive, computed } from 'vue';
 
 export default defineComponent({
-  name: "Home",
+  name: 'Home',
   props: {
     label: {
       type: String,
@@ -21,7 +21,7 @@ export default defineComponent({
     size: {
       type: String,
       validator: function (value: string) {
-        return ["small", "medium", "large"].indexOf(value) !== -1;
+        return ['small', 'medium', 'large'].indexOf(value) !== -1;
       },
     },
     backgroundColor: {
@@ -29,25 +29,25 @@ export default defineComponent({
     },
   },
 
-  emits: ["click"],
+  emits: ['click'],
 
   setup(
     props: { primary: boolean; size: string; backgroundColor: string },
-    { emit }
+    { emit },
   ) {
     props = reactive(props);
     return {
       classes: computed(() => ({
-        "storybook-button": true,
-        "storybook-button--primary": props.primary,
-        "storybook-button--secondary": !props.primary,
-        [`storybook-button--${props.size || "medium"}`]: true,
+        'storybook-button': true,
+        'storybook-button--primary': props.primary,
+        'storybook-button--secondary': !props.primary,
+        [`storybook-button--${props.size || 'medium'}`]: true,
       })),
       style: computed(() => ({
         backgroundColor: props.backgroundColor,
       })),
       onClick() {
-        emit("click");
+        emit('click');
       },
     };
   },
@@ -55,5 +55,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@import "./button.css";
+@import './button.css';
 </style>

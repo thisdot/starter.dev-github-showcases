@@ -76,22 +76,22 @@
 </template>
 
 <script lang="ts">
-import MyHeader from "./Header.vue";
+import MyHeader from './Header.vue';
 
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "Home",
+  name: 'Home',
   components: { MyHeader },
   props: {
     user: {
       type: Object,
     },
   },
-  emits: ["login", "logout", "createAccount"],
+  emits: ['login', 'logout', 'createAccount'],
 });
 </script>
 
 <style>
-@import "./page.css";
+@import './page.css';
 </style>
