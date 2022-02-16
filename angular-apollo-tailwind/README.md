@@ -18,15 +18,24 @@ A GitHub account is required to login and view the application as it requires yo
 ### Setup
 
 1. Create your project `.env`
-```
+
+```bash
 cp .env.example .env
 ```
+
+or for production:
+
+```bash
+cp .env.example .env.prod # and change PRODUCTION=true
+```
+
 2. Install dependencies: `yarn install`
 3. Run the project: `yarn start`
 
 ## Building
 
 This project was generated using the Angular CLI.
+
 ### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -47,6 +56,34 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
+### Running secure server
+
+1. To run https (recommended for Github OAuth), first create a key and cert:
+
+```bash
+yarn run generate-cert
+```
+
+2. Then add the new cert to the macOS keychain by opening Keychain Access. Then under Certificates, paste the generated certificate file into the list. Change the permissions to "Always Trust" by right-click the certificate, selecting Get Info, and expanding the Trust section.
+
+3. Then run the server:
+
+```bash
+ng serve --ssl true --ssl-key <key_file> --ssl-cert <cert_file>
+```
+
+4. And navigate to `https://localhost:4200/`.
+
+### Running with a proxy to server
+
+Create a `proxy.conf.json` based on the `proxy.conf.example.json`. The example uses [ngrok](https://ngrok.com/) and is recommended for local a secure server. Be sure to set authtoken after install.
+
+Start a tunnel for a server:
+
+```bash
+ngrok http <custom_server_port>
+```
+
 ### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
@@ -57,7 +94,7 @@ This project is built using a number of beginner to advanced techniques to solve
 The following is a list of additional features that could be build into the application to either make it feel more like GitHub or add a unique, personal touch.
 
 | Project                     | Description                                                                                                                  | Skill        |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------|--------------|
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | Repo Star Categories        | Add a repo to a specialised list other than the default Star/Unstarred list.                                                 | Beginner     |
 | User Organizations          | List a user's organizations.                                                                                                 | Beginner     |
 | Repo Dependencies List      | Display the main dependencies/packages used in a repo.                                                                       | Beginner     |

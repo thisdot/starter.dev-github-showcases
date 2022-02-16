@@ -40,9 +40,12 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+certs
+proxy.conf.json
 
 # local env files
 .env
+.env.prod
 
 # System Files
 .DS_Store
