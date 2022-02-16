@@ -8,20 +8,19 @@ plugins:
   - serverless-offline
 
 custom:
-  serverless-offline:
-    httpPort: 4000
-  customDomain:
+  customDomain: # serverless-domain-manager
     domainName: api.starter.dev
     stage: production
     endpointType: 'regional'
     apiType: http
     certificateName: '*.starter.dev'
 
+  serverless-offline: # serverless-offline
+    httpPort: 4000
+
 provider:
   name: aws
   profile: starterdev
-  stage: ${sls:stage}
-  region: ${aws:region}
   runtime: nodejs14.x
 
 functions:
