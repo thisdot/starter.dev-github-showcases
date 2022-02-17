@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import './App.css';
+// import './App.css';
 import App from './App.vue';
 import router from './router';
 import { Quasar } from 'quasar';
