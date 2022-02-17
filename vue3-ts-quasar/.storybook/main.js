@@ -5,7 +5,7 @@ module.exports = {
   ],
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-essentials"
-  ],
-  "framework": "@storybook/vue3"
+    "@storybook/addon-essentials",
+    "@storybook/preset-scss"
+  ]
 }
