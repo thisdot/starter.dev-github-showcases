@@ -128,15 +128,6 @@
     display: flex;
 
     & > .repo-card_right_starIncrement {
-      color: var(--color-btn-text);
-      background-color: var(--color-btn-bg);
-      border: 1px solid;
-      border-color: var(--color-btn-border);
-      border-radius: 6px;
-      -webkit-border-radius: 6px;
-      -moz-border-radius: 6px;
-      -ms-border-radius: 6px;
-      -o-border-radius: 6px;
       & > svg {
         margin-right: 4px;
         &:hover {
@@ -148,10 +139,3 @@
 
 }
 
-.starSvg {
-  color: var(--color-fg-muted);
-  display: inline-block;
-  overflow: visible !important;
-  vertical-align: text-bottom;
-  fill: currentColor;
-}

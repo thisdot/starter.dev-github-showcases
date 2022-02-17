@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="repo-card_right">
-      <button class="repo-card_right_starIncrement btn btn-sm">
+      <button class="repo-card_right_starIncrement git-btn btn btn-sm">
         <svg
           aria-hidden="true"
           height="16"
