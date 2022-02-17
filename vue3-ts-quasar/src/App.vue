@@ -112,3 +112,6 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+@import './App.css';
+</style>

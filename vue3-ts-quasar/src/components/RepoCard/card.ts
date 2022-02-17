@@ -4,6 +4,10 @@ interface Lang {
   language: string;
   color: string;
 }
+interface Topics {
+  name: string;
+  url: string;
+}
 
 export default defineComponent({
   name: 'RepoCard',
@@ -26,6 +30,11 @@ export default defineComponent({
     mainLanguage: {
       type: Object as PropType<Lang>,
       required: true,
+    },
+    topics: {
+      type: Array as PropType<Topics[]>,
+      default: () => [],
+      required: false,
     },
     stars: {
       type: Number,
