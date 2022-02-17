@@ -1,1 +1,63 @@
 @import "~/src/App.css";
+
+.profile-card {
+  width: 400px;
+  display: none;
+  background-color: #FFFFFF;
+  padding: 1rem 2rem;
+  font-family: var(--font-family);
+
+  @media (min-width: 1024px) {
+    display: block;
+  }
+
+  & > .avatar_name_bio {
+    margin-inline: auto;
+    width: 100%;
+    // background-color: var(--color-btn-bg);
+
+    & > .avatar {
+       width: 100%;
+       min-height: 277.88px;
+       height: auto;
+       border: 1px solid var(--color-avatar-border);
+       background-color: var(--color-btn-bg);
+       border-radius: 50%;
+       -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+       -ms-border-radius: 50%;
+       -o-border-radius: 50%;
+       overflow: hidden;
+      }
+      & > .name_bio {
+        margin-top: 0.5rem;
+        padding: 1rem;
+        & > .name {
+          display: block !important;
+          font-size: 26px;
+          line-height: 1.25;
+          font-weight: 600;
+          overflow: hidden;
+        }
+        & > .login {
+          display: block !important;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 300;
+          line-height: 24px;
+          color: var(--color-fg-muted);
+        }
+      }
+  }
+
+  & > .bio {
+    padding: 1rem;
+    font-size: 16px !important;
+  }
+}
+
+
+img {
+  width: 100%;
+  height: 100%;
+}
