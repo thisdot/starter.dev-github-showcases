@@ -8,8 +8,11 @@ import '@quasar/extras/animate/fadeOutRight.css';
 import 'quasar/dist/quasar.css';
 import { app } from '@storybook/vue3';
 import { Quasar } from 'quasar';
+import { createPinia } from 'pinia';
 
-app.use(Quasar, {});
+const pinia = createPinia();
+
+app.use(Quasar, {}).use(pinia);
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
