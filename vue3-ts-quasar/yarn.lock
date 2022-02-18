@@ -1624,6 +1624,13 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@pinia/testing@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@pinia/testing/-/testing-0.0.9.tgz#6e4f7bbca7c307988a2efa83ac2afd971e708b35"
+  integrity sha512-JG+th+BENR89/7vpRxafDApU56AECZ9m+THd8IKsgomyRXaiRRdwt0BLbjStTkksnoNZfZBCz5NszykyNxz/sQ==
+  dependencies:
+    vue-demi "*"
+
 "@popperjs/core@^2.5.4", "@popperjs/core@^2.6.0":
   version "2.11.2"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.2.tgz#830beaec4b4091a9e9398ac50f865ddea52186b9"
