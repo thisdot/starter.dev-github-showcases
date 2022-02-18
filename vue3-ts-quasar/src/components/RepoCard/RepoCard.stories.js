@@ -19,7 +19,7 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: '<repo-card v-bind="args" />',
+  template: '<RepoCard v-bind="args" />',
 });
 
 export const Default = Template.bind({});
