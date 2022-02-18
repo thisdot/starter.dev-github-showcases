@@ -26,6 +26,7 @@ figure {
 /* Set up Body */
 
 body {
+  font-size: 14px;
   min-height: 100vh;
   line-height: 1.5;
 }
@@ -91,7 +92,7 @@ select {
   clip: rect(0, 0, 0, 0);
 }
 
-h3 {
+h3, h4 {
   font-size: 20px;
   font-weight: 600;
 }
@@ -109,6 +110,9 @@ h3 {
    --color-accent-subtle: #ddf4ff;
    --color-btn-text: #24292f;
    --color-btn-bg: #f6f8fa;
+   --color-fg-default: #24292f;
+   --color-avatar-bg: #ffffff;
+   --color-avatar-border: rgba(27, 31, 36, 0.15);
    --color-btn-border: rgba(27, 31, 36, 0.15);
    --color-topic-tag-border: rgba(0, 0, 0, 0);
    --color-border-muted: hsla(210, 18%, 87%, 1);
@@ -147,7 +151,7 @@ h3 {
    appearance: none;
  }
 
- .starSvg {
+ .allSvg {
    color: var(--color-fg-muted);
    display: inline-block;
    overflow: visible !important;
@@ -165,4 +169,19 @@ h3 {
    -moz-border-radius: 6px;
    -ms-border-radius: 6px;
    -o-border-radius: 6px;
+ }
+ .divider {
+   border-bottom: 1px solid var(--color-border-muted);
+   width: 100%;
+ }
+
+ .avatar {
+   display: inline-block;
+   overflow: hidden;
+   line-height: 1;
+   vertical-align: middle;
+   background-color: var(--color-avatar-bg);
+   border-radius: 6px;
+   flex-shrink: 0;
+   box-shadow: 0 0 0 1px var(--color-avatar-border);
  }
