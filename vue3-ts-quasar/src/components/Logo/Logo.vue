@@ -23,21 +23,21 @@ import { defineProps, computed } from 'vue';
 const props = defineProps({
   to: { type: String, default: '/' },
   dark: { type: Boolean, default: true }, //? Is the logo on a dark background?
-  size: { type: String, default: DEFAULT_LOGO_SIZE_PX.toString() },
+  size: { type: Number, default: DEFAULT_LOGO_SIZE_PX },
+  darkImg: { type: String, default: 'logos/gh-logo-dark-bg.svg' },
+  darkLgImg: { type: String, default: 'logos/gh-logo-lg-dark-bg.svg' },
+  lightLgImg: { type: String, default: 'logos/gh-logo-lg-light-bg.svg' },
+  lightImg: { type: String, default: 'logos/gh-logo-light-bg.svg' },
 });
 const assetUrl = computed(() => {
-  const sizePx = parseInt(props.size as string) || DEFAULT_LOGO_SIZE_PX;
+  const sizePx = props.size || DEFAULT_LOGO_SIZE_PX;
 
   if (sizePx >= LG_LOGO_START_SIZE_PX) {
-    return props.dark
-      ? 'logos/gh-logo-lg-dark-bg.svg'
-      : 'logos/gh-logo-lg-light-bg.svg';
+    return props.dark ? props.darkLgImg : props.lightLgImg;
   }
 
   //? Getting here means that logo is smaller than the large logo size - use the default logo
-  return props.dark
-    ? 'logos/gh-logo-dark-bg.svg'
-    : 'logos/gh-logo-light-bg.svg';
+  return props.dark ? props.darkImg : props.lightImg;
 });
 </script>
 
