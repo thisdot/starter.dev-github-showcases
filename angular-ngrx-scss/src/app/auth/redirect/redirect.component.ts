@@ -15,19 +15,11 @@ export class RedirectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /**
-     * When we get the code from GitHub, pass it to the authService and redirect the user to the home page
-     */
-    this.route.queryParamMap
+    this.authService
+      .getToken()
       .pipe(
-        filter((params) => params.has('code')),
-        concatMap((params) => {
-          const code = params.get('code') as string;
-          return this.authService.getToken(code).pipe(
-            tap(() => {
-              this.router.navigate(['/']);
-            }),
-          );
+        tap(() => {
+          this.router.navigate(['/']);
         }),
       )
       .subscribe();

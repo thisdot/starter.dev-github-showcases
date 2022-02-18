@@ -16,8 +16,6 @@ export class AuthComponent {
   constructor(private authService: AuthService) {}
 
   onSubmit() {
-    this.authService.signIn().subscribe(({ redirectUrl }) => {
-      window.location.href = redirectUrl;
-    });
+    this.authService.signIn();
   }
 }

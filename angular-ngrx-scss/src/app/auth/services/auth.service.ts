@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { SignInResponse, AuthResponse } from '../interfaces/auth';
+import { AuthResponse } from '../interfaces/auth';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -20,12 +20,9 @@ export class AuthService {
    *
    * @returns {*} {Observable<SignInResponse>}
    */
-  signIn(): Observable<SignInResponse> {
+  signIn(): void {
     this.tokenService.removeToken();
-    this.tokenService.removeRefreshToken();
-    return this.httpClient.get<SignInResponse>(
-      `${environment.apiUrl}/auth/signin`,
-    );
+    window.location.href = `${environment.apiUrl}/auth/signin?redirect_url=${environment.redirectUrl}`;
   }
 
   /**
@@ -38,12 +35,15 @@ export class AuthService {
    * @param {string} code - code used to verify authentication
    * @return {*}  {Observable<AuthResponse>}
    */
-  getToken(code: string): Observable<AuthResponse> {
+  getToken(): Observable<string | undefined> {
     return this.httpClient
-      .post<AuthResponse>(`${environment.apiUrl}/auth/signin/callback`, {
-        code,
+      .get<AuthResponse>(`${environment.apiUrl}/auth/token`, {
+        withCredentials: true,
       })
-      .pipe(tap((data) => this.tokenService.saveToken(data.access_token)));
+      .pipe(
+        map((data) => data.access_token),
+        tap((token) => token && this.tokenService.saveToken(token)),
+      );
   }
 
   /**

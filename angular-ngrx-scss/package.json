@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --ssl true --ssl-key ./certs/private.key --ssl-cert ./certs/private.crt",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts,.html,.scss}\"",
     "format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts,.html,.scss}\"",
-    "prep": "ng lint && npm run format"
+    "prep": "ng lint && npm run format",
+    "generate-cert": "./tools/generate-cert.sh"
   },
   "private": true,
   "dependencies": {
