@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import RepoCard from '@/components/RepoCard';
 
-const testdata = {
+const testData = {
   repoName: 'cowrywise-unsplashed',
   visibilityTag: 'Private',
   mainLanguage: {
@@ -32,7 +32,7 @@ describe('RepoCard', () => {
   it('should mount', () => {
     const wrapper = shallowMount(RepoCard, {
       props: {
-        ...testdata,
+        ...testData,
       },
     });
 
