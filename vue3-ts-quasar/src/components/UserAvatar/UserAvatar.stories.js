@@ -4,6 +4,7 @@ export default {
   title: 'component/UserAvatar',
   component: UserAvatar,
   argTypes: {
+    size: { type: 'number' },
     unit: {
       control: { type: 'radio' },
       options: ['px', 'rem', 'em', '%', 'vh', 'vw'],

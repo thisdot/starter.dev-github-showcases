@@ -3,7 +3,14 @@ import Logo from './Logo.vue';
 export default {
   title: 'component/Logo',
   component: Logo,
-  argTypes: {},
+  argTypes: {
+    dark: { type: 'boolean' },
+    size: { type: 'number' },
+    darkImg: { type: 'string' },
+    darkLgImg: { type: 'string' },
+    lightLgImg: { type: 'string' },
+    lightImg: { type: 'string' },
+  },
 };
 
 const Template = (args) => ({
