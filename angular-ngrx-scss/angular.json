@@ -75,7 +75,8 @@
               "browserTarget": "angular-ngrx-scss:build:production"
             },
             "development": {
-              "browserTarget": "angular-ngrx-scss:build:development"
+              "browserTarget": "angular-ngrx-scss:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
