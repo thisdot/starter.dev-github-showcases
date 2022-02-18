@@ -5,7 +5,7 @@
         <a href="" class="repo-name">
           {{ repoName }}
         </a>
-        <span class="repo-tag bg-primary">
+        <span class="repo-tag">
           {{ visibilityTag }}
         </span>
       </h3>
