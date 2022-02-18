@@ -1,0 +1,15 @@
+main {
+  padding-top: 2rem;
+}
+
+.container {
+  max-width: 1536px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  border-bottom: 1px solid rgb(229, 231, 235, 1);
+}

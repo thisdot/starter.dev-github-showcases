@@ -9,9 +9,7 @@ const profileReducer = createReducer(
 
   on(fetchProfileSuccess, (state, { data }) => ({
     ...state,
-    profile: {
-      user: data.user,
-    },
+    ...data,
   })),
 );
 

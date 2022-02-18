@@ -21,7 +21,7 @@
         id="nav-dropdown"
       >
         <li>
-          <a href="/{{ username$ | async }}" (click)="closeDropdown()"
+          <a routerLink="/{{ username$ | async }}" (click)="closeDropdown()"
             >Profile</a
           >
         </li>
