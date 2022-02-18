@@ -41,7 +41,7 @@
             version="1.1"
             width="16"
             data-view-component="true"
-            class="starSvg"
+            class="allSvg"
           >
             <path
               fill-rule="evenodd"
@@ -67,7 +67,7 @@
           version="1.1"
           width="16"
           data-view-component="true"
-          class="starSvg"
+          class="allSvg"
         >
           <path
             fill-rule="evenodd"
