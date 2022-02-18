@@ -14,24 +14,37 @@ export default defineComponent({
 import { defineProps, computed } from 'vue';
 
 //* Stores
-import { useUserStore } from '@/store/userStore';
+// import { useUserStore } from '../../store/userStore';
 
 const props = defineProps({
   size: {
-    type: String,
+    type: Number,
     default: null,
+  },
+  unit: {
+    type: String,
+    default: 'px',
+  },
+  img: {
+    type: String,
+    default: 'https://place-hold.it/64x64',
   },
 });
 
-const currentUser = useUserStore();
+// const currentUser = useUserStore();
 
 const userAvatarStyle = computed(() => {
+  // ${currentUser.$state.profileImg}
   let style: Record<string, unknown> = {
-    backgroundImage: `url(${currentUser.$state.profileImg})`,
+    backgroundImage: `url(${props.img})`,
   };
 
   if (props.size) {
-    style = { ...style, height: props.size, width: '100%' };
+    style = {
+      ...style,
+      height: `${props.size}${props.unit}`,
+      width: `${props.size}${props.unit}`,
+    };
   }
 
   return style;
