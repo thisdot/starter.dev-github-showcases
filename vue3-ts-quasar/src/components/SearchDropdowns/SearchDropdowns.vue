@@ -1,16 +1,17 @@
 <template>
   <div class="relative">
     <div tabindex="0" class="github_details" v-if="dropdownType === 'type'">
-      <details tabindex="-2">
-        <summary class="flexbox repo_star_button search_by">
-          <span>Type</span>
-          <span class="drop_own_caret_dack"></span>
-        </summary>
-        <div class="dropdown search_dropdown">
+      <q-btn-dropdown
+        label="Type"
+        flat
+        class="no-shadow repo_star_button search_b"
+        tabindex="-2"
+      >
+        <q-list class="dropdown-x search_dropdown-x">
           <div class="close_container">
             <strong>Select type</strong>
             <button
-              @click="closeAll()"
+              v-close-popup
               class="SelectMenu-closeButton"
               type="button"
               data-toggle-for="type-options"
@@ -24,7 +25,7 @@
                 data-view-component="true"
                 height="16"
                 width="16"
-                class="allSvg"
+                class="allSvgx"
               >
                 <path
                   fill-rule="evenodd"
@@ -33,27 +34,41 @@
               </svg>
             </button>
           </div>
-          <p>All</p>
-          <p>Public</p>
-          <p>Private</p>
-          <p>Sources</p>
-          <p>Forks</p>
-          <p>Archived</p>
-          <p>Mirrors</p>
-        </div>
-      </details>
+          <q-separator />
+          <q-item clickable v-close-popup class="row items-center m-list">All</q-item>
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Public</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Private</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Sources</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Forks</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Archived</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Mirrors</q-item
+          >
+        </q-list>
+      </q-btn-dropdown>
     </div>
     <div tabindex="0" class="github_details" v-if="dropdownType === 'language'">
-      <details tabindex="-3">
-        <summary class="flexbox repo_star_button search_by">
-          <span>Language</span>
-          <span class="drop_own_caret_dack"></span>
-        </summary>
-        <div class="dropdown search_dropdown">
+      <q-btn-dropdown
+        label="Language"
+        flat
+        class="no-shadow repo_star_button search_b"
+        tabindex="-3"
+      >
+        <q-list class="dropdown-x search_dropdown-x">
           <div class="close_container">
-            <strong>Select type</strong>
+            <strong>Select Language</strong>
             <button
-              @click="closeAll()"
+              v-close-popup
               class="SelectMenu-closeButton"
               type="button"
               data-toggle-for="type-options"
@@ -67,7 +82,6 @@
                 data-view-component="true"
                 height="16"
                 width="16"
-                class="allSvg"
               >
                 <path
                   fill-rule="evenodd"
@@ -76,28 +90,32 @@
               </svg>
             </button>
           </div>
-          <p>All</p>
-          <p>Js</p>
-          <p>Vue</p>
-          <p>CSS</p>
-          <p>HTML</p>
-          <p>PHP</p>
-          <p>Object-C</p>
-          <p>Ruby</p>
-        </div>
-      </details>
+          <q-separator />
+          <q-item clickable v-close-popup class="row items-center m-list">All</q-item>
+          <q-item clickable v-close-popup class="row items-center m-list">Js</q-item>
+          <q-item clickable v-close-popup class="row items-center m-list">Vue</q-item>
+          <q-item clickable v-close-popup class="row items-center m-list">CSS</q-item>
+          <q-item clickable v-close-popup class="row items-center m-list">HTML</q-item>
+          <q-item clickable v-close-popup class="row items-center m-list">PHP</q-item>
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Object-C</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center">Ruby</q-item>
+        </q-list>
+      </q-btn-dropdown>
     </div>
     <div tabindex="0" class="github_details" v-if="dropdownType === 'sort'">
-      <details tabindex="-4">
-        <summary class="repo_star_button search_by">
-          <span>Sort</span>
-          <span class="drop_own_caret_dack"></span>
-        </summary>
-        <div class="dropdown search_dropdown">
+      <q-btn-dropdown
+        label="Sort"
+        flat
+        class="no-shadow repo_star_button search_b"
+        tabindex="-4"
+      >
+        <q-list class="dropdown-x search_dropdown-x">
           <div class="flexbox close_container">
-            <strong>Select type</strong>
+            <strong>Sort By</strong>
             <button
-              @click="closeAll()"
+              v-close-popup
               class="SelectMenu-closeButton"
               type="button"
               data-toggle-for="type-options"
@@ -111,7 +129,6 @@
                 data-view-component="true"
                 height="16"
                 width="16"
-                class="allSvg"
               >
                 <path
                   fill-rule="evenodd"
@@ -120,10 +137,15 @@
               </svg>
             </button>
           </div>
-          <p>Last Updated</p>
-          <p>Stars</p>
-        </div>
-      </details>
+          <q-separator />
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Last Updated</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Stars</q-item
+          >
+        </q-list>
+      </q-btn-dropdown>
     </div>
   </div>
 </template>
@@ -140,18 +162,6 @@ export default defineComponent({
       required: true,
     },
   },
-  setup() {
-    function closeAll(value = null) {
-      let Details = document.querySelectorAll('details');
-      Details.forEach((detail) => {
-        if (value !== detail) {
-          detail.open = false;
-        }
-      });
-    }
-
-    return { closeAll };
-  },
 });
 </script>
 
@@ -160,8 +170,9 @@ export default defineComponent({
 
 .close_container {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 2px 10px;
+  padding: 10px 14px;
 
   button {
     background-color: transparent;
@@ -178,5 +189,11 @@ export default defineComponent({
 .search_by {
   display: flex;
   justify-content: space-between;
+}
+.search_dropdown-x {
+  width: 300px;
+}
+.m-list {
+  border-bottom: 1px solid var(--color-border);
 }
 </style>

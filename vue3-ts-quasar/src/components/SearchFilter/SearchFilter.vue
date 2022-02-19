@@ -66,7 +66,7 @@ export default defineComponent({
     color: #fff;
 
     position: relative;
-    padding: 5px 16px;
+    padding: 7px 16px;
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
