@@ -155,4 +155,28 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" src="./searchdropdowns.scss"></style>
+<style lang="scss">
+@import '~/src/App.css';
+
+.close_container {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 10px;
+
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background-color: #fff !important;
+      svg {
+        color: var(--color-border) !important;
+      }
+    }
+  }
+}
+.search_by {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
