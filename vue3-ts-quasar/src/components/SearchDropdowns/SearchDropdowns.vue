@@ -35,7 +35,9 @@
             </button>
           </q-item>
           <q-separator />
-          <q-item clickable v-close-popup class="row items-center m-list">All</q-item>
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >All</q-item
+          >
           <q-item clickable v-close-popup class="row items-center m-list"
             >Public</q-item
           >
@@ -65,7 +67,7 @@
         tabindex="-3"
       >
         <q-list class="dropdown-x search_dropdown-x">
-          <div class="close_container">
+          <q-item class="close_container">
             <strong>Select Language</strong>
             <button
               v-close-popup
@@ -89,14 +91,26 @@
                 ></path>
               </svg>
             </button>
-          </div>
+          </q-item>
           <q-separator />
-          <q-item clickable v-close-popup class="row items-center m-list">All</q-item>
-          <q-item clickable v-close-popup class="row items-center m-list">Js</q-item>
-          <q-item clickable v-close-popup class="row items-center m-list">Vue</q-item>
-          <q-item clickable v-close-popup class="row items-center m-list">CSS</q-item>
-          <q-item clickable v-close-popup class="row items-center m-list">HTML</q-item>
-          <q-item clickable v-close-popup class="row items-center m-list">PHP</q-item>
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >All</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Js</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >Vue</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >CSS</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >HTML</q-item
+          >
+          <q-item clickable v-close-popup class="row items-center m-list"
+            >PHP</q-item
+          >
           <q-item clickable v-close-popup class="row items-center m-list"
             >Object-C</q-item
           >
@@ -112,7 +126,7 @@
         tabindex="-4"
       >
         <q-list class="dropdown-x search_dropdown-x">
-          <div class="flexbox close_container">
+          <q-item class="flexbox close_container">
             <strong>Sort By</strong>
             <button
               v-close-popup
@@ -136,7 +150,7 @@
                 ></path>
               </svg>
             </button>
-          </div>
+          </q-item>
           <q-separator />
           <q-item clickable v-close-popup class="row items-center m-list"
             >Last Updated</q-item
