@@ -16,9 +16,9 @@ export class AuthService {
   ) {}
 
   /**
-   * Performs initial sign in with GitHub and gets authentication code
+   * Performs initial sign in with GitHub and provides a redirect url
    *
-   * @returns {*} {Observable<SignInResponse>}
+   * @returns void
    */
   signIn(): void {
     this.tokenService.removeToken();
