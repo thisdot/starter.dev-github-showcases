@@ -202,4 +202,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" src="./userprofilecard.scss"></style>
+<style lang="scss" src="./userprofilecard.scss" scoped></style>
