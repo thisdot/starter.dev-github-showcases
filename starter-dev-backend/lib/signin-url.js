@@ -18,6 +18,6 @@ export default (req, res) => {
 
   res.redirect(
     303,
-    `${process.env.GITHUB_OAUTH_URL}/authorize?${scopes}&${params.toString()}`
+    `${process.env.GITHUB_OAUTH_URL}/authorize?${scopes}&${params.toString()}`,
   );
 };

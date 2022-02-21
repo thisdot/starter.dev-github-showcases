@@ -12,9 +12,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: '',
+  apiUrl: 'https://api.starter.dev',
   graphApiUrl: 'https://api.github.com/graphql',
-  redirectUrl: 'https://localhost:4200/redirect',
+  redirectUrl: 'http://localhost:4200/redirect',
 };
 
 /*

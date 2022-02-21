@@ -11,7 +11,16 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 
-app.use(cors({ credentials: true, origin: process.env.SERVER_BASE_URL }));
+app.use(
+  cors({
+    credentials: true,
+    origin: new RegExp(
+      ['localhost', process.env.SERVER_BASE_URL, process.env.CORS_REGEXP]
+        .filter(Boolean)
+        .join('|'),
+    ),
+  }),
+);
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json());
 
