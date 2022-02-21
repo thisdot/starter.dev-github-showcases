@@ -21,6 +21,13 @@ describe('UserService', () => {
     const expectedResponse: UserState = {
       avatar: 'lindakatcodes_url',
       username: 'lindakatcodes',
+      fullName: 'John Doe',
+      followers: 1,
+      following: 1,
+      company: 'This Dot Inc.',
+      location: 'US',
+      blog_link: '',
+      organizations: 'Org',
     };
 
     const expectedHttpResponse: Partial<UserApiResponse> = {
