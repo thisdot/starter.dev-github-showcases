@@ -5,6 +5,13 @@ import { fetchUserDataSuccess } from './user.actions';
 const initialUserState: UserState = {
   avatar: '',
   username: '',
+  fullName: '',
+  followers: 0,
+  following: 0,
+  company: '',
+  location: '',
+  blog_link: '',
+  organizations: '',
 };
 
 const userReducer = createReducer(
@@ -14,6 +21,14 @@ const userReducer = createReducer(
     ...state,
     avatar: userData.avatar,
     username: userData.username,
+    fullName: userData.fullName,
+    followers: userData.followers,
+    following: userData.following,
+    stars: userData.stars,
+    company_info: userData.company,
+    location: userData.location,
+    blog_link: userData.blog_link,
+    organizations: userData.organizations,
   })),
 );
 

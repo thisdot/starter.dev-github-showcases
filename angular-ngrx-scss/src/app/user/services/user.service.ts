@@ -15,6 +15,13 @@ export class UserService {
       map((data) => ({
         avatar: data.avatar_url,
         username: data.login,
+        fullName: data.name,
+        followers: data.followers,
+        following: data.following,
+        company: data.company,
+        location: data.location,
+        blog_link: data.blog,
+        organizations: data.organizations_url,
       })),
     );
   }
