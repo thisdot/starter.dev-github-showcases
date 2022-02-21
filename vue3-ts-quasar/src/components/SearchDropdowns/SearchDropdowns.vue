@@ -8,7 +8,7 @@
         tabindex="-2"
       >
         <q-list class="dropdown-x search_dropdown-x">
-          <div class="close_container">
+          <q-item class="close_container">
             <strong>Select type</strong>
             <button
               v-close-popup
@@ -33,7 +33,7 @@
                 ></path>
               </svg>
             </button>
-          </div>
+          </q-item>
           <q-separator />
           <q-item clickable v-close-popup class="row items-center m-list">All</q-item>
           <q-item clickable v-close-popup class="row items-center m-list"
@@ -165,7 +165,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~/src/App.css';
 
 .close_container {

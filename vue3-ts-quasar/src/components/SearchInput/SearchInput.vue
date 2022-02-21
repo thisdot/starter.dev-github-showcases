@@ -21,7 +21,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~/src/App.css';
 
 .search_container {
