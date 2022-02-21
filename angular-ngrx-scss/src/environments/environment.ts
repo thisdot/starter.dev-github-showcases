@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:4200/api',
+  apiUrl: 'https://api.starter.dev',
   githubUrl: 'https://api.github.com',
-  redirectUrl: 'https://localhost:4200/redirect',
+  redirectUrl: 'http://localhost:4200/redirect',
 };
 
 /*

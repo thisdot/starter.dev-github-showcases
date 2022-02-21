@@ -22,7 +22,7 @@ export class AuthService {
    */
   signIn(): void {
     this.tokenService.removeToken();
-    window.location.href = `${environment.apiUrl}/auth/signin?redirect_url=${environment.redirectUrl}`;
+    window.location.href = `${environment.apiUrl}/api/auth/signin?redirect_url=${environment.redirectUrl}`;
   }
 
   /**
@@ -37,7 +37,7 @@ export class AuthService {
    */
   getToken(): Observable<string | undefined> {
     return this.httpClient
-      .get<AuthResponse>(`${environment.apiUrl}/auth/token`, {
+      .get<AuthResponse>(`${environment.apiUrl}/api/auth/token`, {
         withCredentials: true,
       })
       .pipe(
