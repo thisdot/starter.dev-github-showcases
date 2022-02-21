@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { fetchProfile } from 'src/app/state/profile/profile.actions';
+import { selectProfileState } from 'src/app/state/profile/profile.selectors';
+import { ProfileState } from 'src/app/state/profile/profile.state';
 import { fetchUserData } from 'src/app/state/user';
 
 @Component({
@@ -12,6 +14,8 @@ import { fetchUserData } from 'src/app/state/user';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
+
+  profile$?: Observable<ProfileState>;
 
   constructor(private store: Store, private route: ActivatedRoute) {}
 
@@ -23,6 +27,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .subscribe(({ username }) => {
         this.store.dispatch(fetchProfile({ username }));
       });
+
+    this.profile$ = this.store.select(selectProfileState);
   }
 
   ngOnDestroy(): void {

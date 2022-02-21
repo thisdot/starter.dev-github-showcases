@@ -5,6 +5,12 @@ import { fetchUserDataSuccess } from './user.actions';
 const initialUserState: UserState = {
   avatar: '',
   username: '',
+  bio: '',
+  email: '',
+  location: '',
+  name: '',
+  twitter_username: '',
+  company: '',
 };
 
 const reducer = createReducer(
@@ -12,8 +18,7 @@ const reducer = createReducer(
 
   on(fetchUserDataSuccess, (state, { userData }) => ({
     ...state,
-    avatar: userData.avatar,
-    username: userData.username,
+    ...userData,
   })),
 );
 

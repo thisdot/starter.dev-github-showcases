@@ -14,32 +14,6 @@ body {
   box-sizing: border-box;
 }
 
-// blockquote,
-// dl,
-// dd,
-// h1,
-// h2,
-// h3,
-// h4,
-// h5,
-// h6,
-// hr,
-// figure,
-// p,
-// pre {
-//   margin: 0;
-// }
-
-// h1,
-// h2,
-// h3,
-// h4,
-// h5,
-// h6 {
-//   font-size: inherit;
-//   font-weight: inherit;
-// }
-
 .octicon {
   display: inline-block;
   vertical-align: text-top;
@@ -61,4 +35,13 @@ body {
 
 .col-span-9 {
   grid-column: span 9 / span 9;
+}
+
+.subpage {
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
 }

@@ -1,15 +1,17 @@
 main {
   padding-top: 2rem;
+
+  .profile-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white;
+    border-bottom: 1px solid rgb(229, 231, 235, 1);
+  }
 }
 
-.container {
-  max-width: 1536px;
-  margin: 0 auto;
-}
-
-.profile-header {
-  position: sticky;
-  top: 0;
-  background-color: white;
-  border-bottom: 1px solid rgb(229, 231, 235, 1);
+.profile-body {
+  app-profile-about {
+    box-sizing: border-box;
+  }
 }

@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+/*
+ * This image is styled so that it renders over the sticky header just like what
+ * happens with upstream GitHub, while the content under it does not.
+ */
+img {
+  position: relative;
+  transform: translateY(-5rem);
+  z-index: 20;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1; // Prevent reflow of content under image on image load.
+  border-radius: 50%;
+}
+
+.content {
+  margin-top: -5rem;
+}

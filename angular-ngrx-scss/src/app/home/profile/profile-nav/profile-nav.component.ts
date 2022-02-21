@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { selectProfileState } from 'src/app/state/profile/profile.selectors';
 import { ProfileState } from 'src/app/state/profile/profile.state';
 
 @Component({
@@ -9,12 +7,7 @@ import { ProfileState } from 'src/app/state/profile/profile.state';
   templateUrl: './profile-nav.component.html',
   styleUrls: ['./profile-nav.component.scss'],
 })
-export class ProfileNavComponent implements OnInit {
+export class ProfileNavComponent {
+  @Input()
   profile$?: Observable<ProfileState>;
-
-  constructor(private store: Store) {}
-
-  ngOnInit(): void {
-    this.profile$ = this.store.select(selectProfileState);
-  }
 }

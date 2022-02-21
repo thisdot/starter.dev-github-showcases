@@ -1,1 +1,34 @@
-<p>profile-about works!</p>
+<ng-container *ngIf="(profile$ | async)?.user as user">
+  <img [src]="user.avatar" />
+
+  <div class="content">
+    <div class="name">{{ user.name }}</div>
+    <div class="username">{{ user.username }}</div>
+    <div class="bio">{{ user.bio }}</div>
+    <div class="socials">Socials</div>
+    <div class="fields">
+      <div>{{ user.company }}</div>
+      <div>{{ user.location }}</div>
+      <div>
+        <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+      </div>
+      <div>
+        <a href="https://twitter.com/{{ user.twitter_username }}">
+          @{{ user.twitter_username }}
+        </a>
+      </div>
+    </div>
+    <div class="organizations">Organizations</div>
+
+    <p>space</p>
+    <p>space</p>
+    <p>space</p>
+    <p>space</p>
+    <p>space</p>
+    <p>space</p>
+    <p>space</p>
+    <p>space</p>
+    <p>space</p>
+    <p>space</p>
+  </div>
+</ng-container>

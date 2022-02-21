@@ -17,6 +17,12 @@ export class UserService {
       map((data) => ({
         avatar: data.avatar_url,
         username: data.login,
+        name: data.name,
+        bio: data.bio,
+        twitter_username: data.twitter_username,
+        email: data.email,
+        location: data.location,
+        company: data.company,
       })),
     );
   }
@@ -30,6 +36,12 @@ export class UserService {
       map((data) => ({
         avatar: data.avatar_url,
         username: data.login,
+        name: data.name,
+        bio: data.bio,
+        twitter_username: data.twitter_username,
+        email: data.email,
+        location: data.location,
+        company: data.company,
       })),
     );
   }
