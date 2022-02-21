@@ -41,6 +41,13 @@ describe('UserEffects', () => {
     const expectedUserData: UserState = {
       avatar: '',
       username: 'lindakatcodes',
+      fullName: 'John Doe',
+      followers: 1,
+      following: 1,
+      company: 'This Dot Inc.',
+      location: 'US',
+      blog_link: '',
+      organizations: 'Org',
     };
 
     userServiceMock.getUserInfo.and.returnValue(of(expectedUserData));
