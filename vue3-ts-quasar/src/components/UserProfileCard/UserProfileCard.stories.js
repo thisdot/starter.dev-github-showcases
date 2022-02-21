@@ -25,7 +25,7 @@ const Template = (args) => ({
       args,
     };
   },
-  template: '<user-profile-card v-bind="args" />',
+  template: '<UserProfileCard v-bind="args" />',
 });
 
 export const Default = Template.bind({});
