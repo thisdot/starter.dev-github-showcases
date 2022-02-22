@@ -1,7 +1,7 @@
-@import "~/src/App.css";
+@import '../../App.css';
 
 .repo-card {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding: 1rem;
   width: 100%;
   border-bottom: 1px solid;
@@ -14,12 +14,11 @@
   color: #57606a;
 
   @media screen and (min-width: 1024px) {
-      flex-direction: row;
-      align-items: center;
+    flex-direction: row;
+    align-items: center;
   }
 
   & > &_left {
-
     & > *:not(:last-child) {
       margin-bottom: 1rem;
     }
@@ -60,7 +59,6 @@
     }
 
     .repo-card_left_topics {
-
       & > .topic-tag {
         display: inline-block;
         padding: 0 7px;
@@ -78,7 +76,7 @@
         text-decoration: none;
 
         &:hover {
-          color: #FFFFFF;
+          color: #ffffff;
           background-color: var(--color-accent-fg);
         }
         &:not(:last-child) {
@@ -110,14 +108,14 @@
         }
       }
 
-      & > .stars-count{
+      & > .stars-count {
         cursor: pointer;
         & > svg {
           margin-right: 1px;
         }
         &:hover {
           & > * {
-            color: var(--color-accent-fg)
+            color: var(--color-accent-fg);
           }
         }
       }
@@ -131,11 +129,9 @@
       & > svg {
         margin-right: 4px;
         &:hover {
-          color: var(--color-accent-fg)
+          color: var(--color-accent-fg);
         }
       }
     }
   }
-
 }
-
