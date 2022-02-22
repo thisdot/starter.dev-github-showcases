@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-// import { AuthService } from './services/auth.service';
 import { startSignIn } from '../state/auth/auth.actions';
 
 @Component({
