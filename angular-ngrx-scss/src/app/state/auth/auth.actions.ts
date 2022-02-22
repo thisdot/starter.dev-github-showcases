@@ -11,5 +11,5 @@ export const loadUserTokenSuccess = createAction(
 
 export const loadUserTokenFailure = createAction(
   '[Auth API] Failed to load user token',
-  props<{ error: any }>(),
+  props<{ error: object }>(),
 );

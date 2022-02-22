@@ -9,6 +9,12 @@ import { AuthEffects } from '../state/auth/auth.effects';
 
 @NgModule({
   declarations: [AuthComponent, RedirectComponent],
-  imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, EffectsModule.forFeature([AuthEffects])],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    EffectsModule.forFeature([AuthEffects]),
+  ],
 })
 export class AuthModule {}

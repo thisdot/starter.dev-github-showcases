@@ -15,12 +15,12 @@ const reducer = createReducer(
     ...state,
     loading: true,
   })),
-  on(loadUserTokenSuccess, (state, action) => ({
+  on(loadUserTokenSuccess, (state) => ({
     ...state,
     isAuthenticated: true,
     loading: false,
   })),
-  on(loadUserTokenFailure, (state, action) => ({
+  on(loadUserTokenFailure, (state) => ({
     ...state,
     isAuthenticated: false,
     loading: false,

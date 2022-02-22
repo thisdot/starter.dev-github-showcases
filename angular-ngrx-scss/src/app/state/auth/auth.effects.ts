@@ -21,7 +21,7 @@ export class AuthEffects {
       ofType(loadUserToken),
       concatMap(() =>
         this.authService.saveUserToken().pipe(
-          map((token) => loadUserTokenSuccess({ isAuthenticated: true })),
+          map(() => loadUserTokenSuccess({ isAuthenticated: true })),
           catchError((error) => of(loadUserTokenFailure({ error }))),
         ),
       ),
