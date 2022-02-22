@@ -20,10 +20,15 @@
     </q-card-section>
   </q-card>
 </template>
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+
+export default defineComponent({
+  name: 'GistsPanel',
+});
+</script>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-
 //* Types
 import { Gist } from '../../types';
 
@@ -92,14 +97,6 @@ const gistList: Gist[] = [
     public: true,
   },
 ];
-</script>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'GistsPanel',
-});
 </script>
 
 <style lang="scss" src="./gists-panel.scss" scoped></style>
