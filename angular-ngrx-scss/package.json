@@ -11,8 +11,7 @@
     "lint": "ng lint",
     "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts,.html,.scss}\"",
     "format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts,.html,.scss}\"",
-    "prep": "ng lint && npm run format",
-    "generate-cert": "./tools/generate-cert.sh"
+    "prep": "npm run format && ng lint"
   },
   "private": true,
   "dependencies": {
