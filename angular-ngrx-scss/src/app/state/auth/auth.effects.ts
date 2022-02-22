@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, tap, take } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
-
-import { startSignIn, signInSuccess, signInFailure } from './auth.actions';
+import { of } from 'rxjs';
+import { catchError, concatMap, map, take, tap } from 'rxjs/operators';
+import { loadUserToken, loadUserTokenFailure, loadUserTokenSuccess } from '.';
 import { AuthService } from '../../auth/services/auth.service';
+import { startSignIn } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -13,6 +13,18 @@ export class AuthEffects {
       ofType(startSignIn),
       tap(() => this.authService.signIn()),
       take(1),
+    );
+  });
+
+  saveUserToken$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(loadUserToken),
+      concatMap(() =>
+        this.authService.saveUserToken().pipe(
+          map((token) => loadUserTokenSuccess({ isAuthenticated: true })),
+          catchError((error) => of(loadUserTokenFailure({ error }))),
+        ),
+      ),
     );
   });
 

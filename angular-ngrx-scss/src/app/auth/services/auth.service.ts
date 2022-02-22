@@ -16,7 +16,7 @@ export class AuthService {
   ) {}
 
   /**
-   * Performs initial sign in with GitHub and provides a redirect url
+   * Initiates sign in with GitHub and provides a redirect url
    *
    * @returns void
    */
@@ -26,16 +26,11 @@ export class AuthService {
   }
 
   /**
-   * Returns the access_token and stores it in local storage.
+   * Calls the server to get the user's access token and saves it
    *
-   * Once the user accepts Github authentication, they're redirected to
-   * `RedirectComponent` which fetches the token. The code comes from a query
-   * appended to the callback url on redirect.
-   *
-   * @param {string} code - code used to verify authentication
-   * @return {*}  {Observable<AuthResponse>}
+   * @return {*}  {Observable<string | undefined>}
    */
-  getToken(): Observable<string | undefined> {
+  saveUserToken(): Observable<string | undefined> {
     return this.httpClient
       .get<AuthResponse>(`${environment.apiUrl}/api/auth/token`, {
         withCredentials: true,
@@ -44,14 +39,5 @@ export class AuthService {
         map((data) => data.access_token),
         tap((token) => token && this.tokenService.saveToken(token)),
       );
-  }
-
-  /**
-   * Verify if a user is authenticated.
-   *
-   * @return {*}  {boolean} - authentication status
-   */
-  isAuthenticated(): boolean {
-    return !!this.tokenService.getToken();
   }
 }

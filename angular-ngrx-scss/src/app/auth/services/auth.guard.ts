@@ -1,22 +1,31 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import { Store } from '@ngrx/store';
+import { map, Observable, take } from 'rxjs';
+import { selectIsAuthenticated } from 'src/app/state/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private store: Store, private router: Router) {}
 
   canActivate():
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.authService.isAuthenticated()) {
-      return true;
-    }
-    return this.router.createUrlTree(['/signin']);
+    return this.userIsAuthenticated().pipe(
+      map((authValue) => {
+        if (authValue) {
+          return true;
+        }
+        return this.router.createUrlTree(['/signin']);
+      }),
+    );
+  }
+
+  userIsAuthenticated() {
+    return this.store.select(selectIsAuthenticated).pipe(take(1));
   }
 }
