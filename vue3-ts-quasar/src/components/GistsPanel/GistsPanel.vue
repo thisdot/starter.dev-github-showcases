@@ -1,5 +1,5 @@
 <template>
-  <q-card class="card--gists-panel" flat>
+  <q-card class="card--gists-panel full-height" flat square>
     <q-card-section>
       <h6 class="text-weight-bold text-dark q-mb-sm">Gists</h6>
       <q-input
