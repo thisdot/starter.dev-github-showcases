@@ -1,8 +1,0 @@
-{
-  "/api": {
-    "target": "https://<YOUR_NGROK_ID>.ngrok.io",
-    "secure": true,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  }
-}

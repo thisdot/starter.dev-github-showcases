@@ -4,7 +4,7 @@ export default (req, res) => {
   res
     .status(200)
     .clearCookie(ACCESS_TOKEN_COOKIE, {
-      sameSite: 'strict',
+      sameSite: 'None',
       path: '/',
       httpOnly: true,
       secure: true,
