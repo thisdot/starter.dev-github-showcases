@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Logo from '@/components/Logo/Logo.vue';
+import { Logo } from '@/components';
 
 const DEFAULT_LOGO_SIZE_PX = 32;
 
