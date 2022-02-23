@@ -13,7 +13,7 @@
 import { defineComponent, ref } from 'vue';
 
 //* Components
-import NavHeader from '@/components/NavHeader/NavHeader.vue';
+import { NavHeader } from '@/components';
 
 export default defineComponent({
   name: 'App',

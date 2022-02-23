@@ -71,8 +71,7 @@ export default defineComponent({
 import { ref } from 'vue';
 
 //* Components
-import Logo from '@/components/Logo/Logo.vue';
-import UserAvatar from '@/components/UserAvatar/UserAvatar.vue';
+import { Logo, UserAvatar } from '@/components';
 
 //* Stores
 import { useUserStore } from '@/store/userStore';
