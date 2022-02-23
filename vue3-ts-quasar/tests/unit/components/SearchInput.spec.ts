@@ -1,4 +1,4 @@
-import SearchInput from '@/components/SearchInput';
+import { SearchInput } from '@/components';
 import { shallowMount } from '@vue/test-utils';
 
 describe('SearchInput', () => {
