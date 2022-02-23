@@ -168,7 +168,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'SearchDropdown',
+  name: 'SearchDropdowns',
   props: {
     dropdownType: {
       type: String,
