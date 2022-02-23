@@ -1,5 +1,5 @@
 import type { Organization } from './types';
-import { styles } from './OrgList.classNames';
+import * as styles from './OrgList.classNames';
 
 interface OrgListProps {
   organizations: Organization[];

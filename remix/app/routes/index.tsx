@@ -22,7 +22,6 @@ type LoaderData = {
 
 // localized ErrorBoundary
 export function ErrorBoundary({ error }: any) {
-  console.error(error);
   return <div className="text-sm">Error: {error.message}</div>;
 }
 

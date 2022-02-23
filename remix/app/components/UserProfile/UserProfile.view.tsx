@@ -1,4 +1,4 @@
-import { Organization } from './types';
+import { Follow, Nodes, Organization } from './types';
 import {
   UsersIcon,
   StarIcon,
@@ -15,13 +15,13 @@ export interface UserProfileViewProps {
   bio?: string | null;
   company?: string | null;
   location?: string | null;
-  username: string;
+  login: string;
   name?: string | null;
   twitterUsername?: string | null;
   websiteUrl?: string | null;
-  followers: number;
-  following: number;
-  organizations: Organization[];
+  followers: Follow;
+  following: Follow;
+  organizations: Nodes;
 }
 
 function UserProfileView({
@@ -29,7 +29,7 @@ function UserProfileView({
   bio,
   company,
   location,
-  username,
+  login,
   name,
   twitterUsername,
   websiteUrl,
@@ -48,19 +48,24 @@ function UserProfileView({
       />
       <h1 className="mt-2">
         <div className={styles.name}>{name}</div>
-        <div className={styles.username}>{username}</div>
+        <div className={styles.username}>{login}</div>
       </h1>
       {bio && (
         <div className={styles.bio} dangerouslySetInnerHTML={{ __html: bio }} />
       )}
+      <div className={styles.buttonContainer}>
+        <button className={styles.button}>
+          Edit Profile
+        </button>
+      </div>
       <div className={styles.socials}>
         <UsersIcon className={styles.icon} />
         <span className="inline-block">
-          <span className={styles.count}>{followers}</span> followers
+          <span className={styles.count}>{followers.totalCount}</span> followers
         </span>
         <span className="mx-1">·</span>
         <span className="inline-block">
-          <span className={styles.count}>{following}</span> following
+          <span className={styles.count}>{following.totalCount}</span> following
         </span>
       </div>
       <div className={styles.fields}>
@@ -103,7 +108,9 @@ function UserProfileView({
           </div>
         )}
       </div>
-      {organizations.length > 0 && <OrgList organizations={organizations} />}
+      {organizations.nodes.length > 0 && (
+        <OrgList organizations={organizations.nodes} />
+      )}
     </div>
   );
 }
