@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
-import GistsPanel from '@/components/GistsPanel/GistsPanel.vue';
 import { createTestingPinia } from '@pinia/testing';
+import { GistsPanel } from '@/components';
 
 describe('GistsPanel', () => {
   it('should mount', () => {

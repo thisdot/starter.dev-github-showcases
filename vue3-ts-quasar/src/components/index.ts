@@ -3,6 +3,7 @@
     This file does not implement any logic of its own and simply serves the purpose of importing components and exporting them out together so that they can be loaded from one file/directory.
 */
 import AppInput from './AppInput/AppInput.vue';
+import GistsPanel from './GistsPanel/GistsPanel.vue';
 import Logo from './Logo/Logo.vue';
 import NavHeader from './NavHeader/NavHeader.vue';
 import RepoCard from './RepoCard/RepoCard.vue';
@@ -17,6 +18,7 @@ import UserProfileCard from './UserProfileCard/UserProfileCard.vue';
 //
 export {
   AppInput,
+  GistsPanel,
   Logo,
   NavHeader,
   RepoCard,

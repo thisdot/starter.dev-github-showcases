@@ -29,8 +29,7 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import GistsPanel from '../../components/GistsPanel/GistsPanel.vue';
-import RepoCard from '../../components/RepoCard/RepoCard.vue';
+import { GistsPanel, RepoCard } from '@/components';
 
 const testRepoData = {
   repoName: 'cowrywise-unsplashed',
