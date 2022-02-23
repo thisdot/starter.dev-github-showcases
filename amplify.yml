@@ -1,6 +1,7 @@
 version: 1
 applications:
-  - frontend:
+  - appRoot: angular-apollo-tailwind
+    frontend:
       phases:
         preBuild:
           commands:
@@ -18,4 +19,24 @@ applications:
       cache:
         paths:
           - node_modules/**/*
-    appRoot: angular-apollo-tailwind
+    
+  - appRoot: vue3-ts-quasar
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install
+            - nvm use
+            - yarn install
+        build:
+          commands:
+            - node -v
+            - yarn run build
+      artifacts:
+        baseDirectory: dist/
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+    
