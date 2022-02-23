@@ -8,7 +8,7 @@
       no-caps
       inline-label
     >
-      <q-tab name="Overview" style="height: 50px; --gap: 0">
+      <q-tab name="Overview" style="height: 50px; --gap: 0" v-if="Overview">
         <q-icon>
           <svg
             height="16"
@@ -26,7 +26,11 @@
         </q-icon>
         <span class="tab_label">Overview</span>
       </q-tab>
-      <q-tab name="Respositories" style="height: 50px; --gap: 0">
+      <q-tab
+        name="Respositories"
+        style="height: 50px; --gap: 0"
+        v-if="Respositories"
+      >
         <svg
           height="16"
           viewBox="0 0 16 16"
@@ -47,7 +51,7 @@
           85
         </span>
       </q-tab>
-      <q-tab name="Projects" style="height: 50px; --gap: 0">
+      <q-tab name="Projects" style="height: 50px; --gap: 0" v-if="Projects">
         <svg
           height="16"
           viewBox="0 0 16 16"
@@ -65,7 +69,7 @@
           Projects
         </span>
       </q-tab>
-      <q-tab name="Packages" style="height: 50px; --gap: 0">
+      <q-tab name="Packages" style="height: 50px; --gap: 0" v-if="Packages">
         <svg
           height="16"
           viewBox="0 0 16 16"
@@ -83,7 +87,7 @@
           Packages
         </span>
       </q-tab>
-      <q-tab name="Stars" style="height: 50px; --gap: 0">
+      <q-tab name="Stars" style="height: 50px; --gap: 0" v-if="Stars">
         <svg
           aria-hidden="true"
           height="16"
@@ -114,6 +118,26 @@ export default defineComponent({
   name: 'TabHeader',
   props: {
     triggerTab: Function,
+    Overview: {
+      type: Boolean,
+      default: false,
+    },
+    Respositories: {
+      type: Boolean,
+      default: false,
+    },
+    Projects: {
+      type: Boolean,
+      default: false,
+    },
+    Packages: {
+      type: Boolean,
+      default: false,
+    },
+    Stars: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     const tab = ref('Respositories');

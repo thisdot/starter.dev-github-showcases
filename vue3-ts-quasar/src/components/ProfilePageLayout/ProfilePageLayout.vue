@@ -1,6 +1,13 @@
 <template>
   <div>
-    <TabHeader :triggerTab="changeTab" />
+    <TabHeader
+      :Overview="true"
+      :Respositories="true"
+      :Projects="true"
+      :Packages="true"
+      :Stars="true"
+      :triggerTab="changeTab"
+    />
     <div class="wrapper">
       <div class="row" style="--gap: 0">
         <!-- Left side -->
