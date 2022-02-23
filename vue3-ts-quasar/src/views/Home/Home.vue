@@ -1,11 +1,11 @@
 <template>
   <div
-    class="row reverse-sm q-pb-lg"
+    class="row container--home q-pb-lg"
     style="background-color: rgba(243, 244, 246)"
   >
-    <div class="col-12 col-sm-auto">
+    <div class="col-12 col-sm-3 col-lg-2">
       <!--  -->
-      <GistsPanel />
+      <GistsPanel class="card--gists" />
     </div>
     <div class="col-12 col-sm-8 col-xl-6 q-px-lg q-pt-xl">
       <h1 class="text-weight-bold q-mb-md">Top repositories</h1>
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'; //* Components
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Home',
@@ -59,3 +59,15 @@ const testRepoData = {
   lastUpdated: 'on 23 Sep 2020',
 };
 </script>
+
+<style lang="scss" scoped>
+@media (max-width: 600px) {
+  .container--home {
+    flex-direction: column-reverse !important;
+
+    .card--gists {
+      margin-top: 3rem;
+    }
+  }
+}
+</style>
