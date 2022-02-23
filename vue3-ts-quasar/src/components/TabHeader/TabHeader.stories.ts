@@ -1,4 +1,4 @@
-import TabHeader from ".";
+import TabHeader from '.';
 
 export default {
   title: 'component/Tab Header',

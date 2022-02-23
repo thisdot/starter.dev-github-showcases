@@ -3,14 +3,14 @@
     This file does not implement any logic of its own and simply serves the purpose of importing components and exporting them out together so that they can be loaded from one file/directory.
 */
 import AppInput from './AppInput';
-import GistsPanel from './GistsPanel/GistsPanel.vue';
+import GistsPanel from './GistsPanel';
 import Logo from './Logo/Logo.vue';
-import NavHeader from './NavHeader/NavHeader.vue';
+import NavHeader from './NavHeader';
 import RepoCard from './RepoCard';
 import SearchDropdowns from './SearchDropdowns';
 import SearchInput from './SearchInput';
 import SearchFilter from './SearchFilter';
-import UserAvatar from './UserAvatar/UserAvatar.vue';
+import UserAvatar from './UserAvatar';
 import UserProfileCard from './UserProfileCard';
 import TabHeader from './TabHeader';
 import ProfilePageLayout from './ProfilePageLayout';
