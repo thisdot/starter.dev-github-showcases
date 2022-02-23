@@ -1,5 +1,20 @@
+const path = require('path');
+
 module.exports = {
-  stories: ['../app/**/*.stories.mdx', '../app/**/*.stories.@(js|jsx|ts|tsx)'],
+  async viteFinal(config, { configType }) {
+    return {
+      ...config,
+      resolve: {
+        alias: {
+          remix: path.resolve(__dirname, './mockRemix'),
+        },
+      },
+    };
+  },
+  stories: [
+    '../app/components/**/*.stories.mdx',
+    '../app/components/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
