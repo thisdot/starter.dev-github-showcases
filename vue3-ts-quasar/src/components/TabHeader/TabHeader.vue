@@ -117,7 +117,10 @@ import { computed, defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'TabHeader',
   props: {
-    triggerTab: Function,
+    triggerTab: {
+      type: Function,
+      default: () => null,
+    },
     Overview: {
       type: Boolean,
       default: false,

@@ -188,8 +188,8 @@ export default defineComponent({
     justify-content: space-between !important;
 
     @media (min-width: 1024px) {
-      width: unset;
-      justify-content: center !important;
+      /* width: unset; */
+      /* justify-content: center !important; */
     }
   }
 }

@@ -13,6 +13,7 @@ import SearchFilter from './SearchFilter';
 import UserAvatar from './UserAvatar/UserAvatar.vue';
 import UserProfileCard from './UserProfileCard';
 import TabHeader from './TabHeader';
+import ProfilePageLayout from './ProfilePageLayout';
 
 // TODO: Consider reading the filesystem dynamically to fetch all vue components (children of the components/ directory)
 
@@ -29,4 +30,5 @@ export {
   UserAvatar,
   UserProfileCard,
   TabHeader,
+  ProfilePageLayout,
 };

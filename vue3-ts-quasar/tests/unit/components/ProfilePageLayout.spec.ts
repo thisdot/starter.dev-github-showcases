@@ -1,4 +1,4 @@
-import ProfilePageLayout from '@/components/ProfilePageLayout';
+import { ProfilePageLayout } from '@/components';
 import { shallowMount } from '@vue/test-utils';
 
 describe('', () => {
