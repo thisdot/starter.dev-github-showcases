@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import NavHeader from '@/components/NavHeader/NavHeader.vue';
+import Home from '@/views/Home/Home.vue';
 import { createTestingPinia } from '@pinia/testing';
 
-describe('NavHeader', () => {
+describe('Home', () => {
   it('should mount', () => {
-    const wrapper = shallowMount(NavHeader, {
+    const wrapper = shallowMount(Home, {
       global: { plugins: [createTestingPinia()] },
     });
 
