@@ -1,4 +1,4 @@
-import RepoCard from '.';
+import RepoCard from './RepoCard.vue';
 
 export default {
   title: 'component/RepoCard',
