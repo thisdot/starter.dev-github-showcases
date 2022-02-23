@@ -61,7 +61,6 @@ import SearchFilter from '../SearchFilter';
 import UserProfileCard from '../UserProfileCard';
 import TabHeader from './TabHeader.vue';
 
-
 export default defineComponent({
   name: 'ProfilePageLayout',
   components: {
