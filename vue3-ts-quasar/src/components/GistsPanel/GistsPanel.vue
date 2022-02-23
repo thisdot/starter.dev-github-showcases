@@ -99,4 +99,18 @@ const gistList: Gist[] = [
 ];
 </script>
 
-<style lang="scss" src="./gists-panel.scss" scoped></style>
+<style lang="scss" scoped>
+.card--gists-panel {
+  width: 100%;
+  min-height: 30rem;
+}
+
+a {
+  color: #24292f;
+  transition: 0.5s;
+
+  &:hover {
+    color: #4078c0;
+  }
+}
+</style>
