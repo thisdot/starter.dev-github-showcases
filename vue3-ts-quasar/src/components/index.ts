@@ -7,6 +7,7 @@ import Logo from './Logo/Logo.vue';
 import NavHeader from './NavHeader/NavHeader.vue';
 import RepoCard from './RepoCard/RepoCard.vue';
 import SearchDropdowns from './SearchDropdowns/SearchDropdowns.vue';
+import SearchFilter from './SearchFilter/SearchFilter.vue';
 import UserAvatar from './UserAvatar/UserAvatar.vue';
 import UserProfileCard from './UserProfileCard/UserProfileCard.vue';
 
@@ -19,6 +20,7 @@ export {
   NavHeader,
   RepoCard,
   SearchDropdowns,
+  SearchFilter,
   UserAvatar,
   UserProfileCard,
 };
