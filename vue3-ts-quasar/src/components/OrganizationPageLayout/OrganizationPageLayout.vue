@@ -1,10 +1,23 @@
 <template>
   <div>
-    <TabHeader
-      :Respositories="true"
-      :triggerTab="changeTab"
-      classNames="org_tab"
-    />
+    <div class="wrapper">
+      <div class="row items-center">
+        <span class="company_logo">
+          <img
+            src="https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4"
+            alt="company logo"
+            style="width: 42px; height: 42px"
+          />
+        </span>
+        &nbsp; &nbsp; &nbsp;
+        <h3 class="">Company Name</h3>
+      </div>
+      <TabHeader
+        :Respositories="true"
+        :triggerTab="changeTab"
+        classNames="org_tab"
+      />
+    </div>
     <div class="wrapper">
       <!-- Right side -->
       <div class="tab-contents">
@@ -68,6 +81,11 @@ export default defineComponent({
 @import '~/src/App.css';
 .tab-contents {
   flex-grow: 1;
+}
+
+.company_logo{
+  border: 1px solid var(--color-border-muted);
+  border-radius: 6px;
 }
 
 .org_tab {
