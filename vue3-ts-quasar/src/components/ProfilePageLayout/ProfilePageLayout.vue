@@ -64,9 +64,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import SearchFilter from '../SearchFilter';
-import UserProfileCard from '../UserProfileCard';
-import TabHeader from './TabHeader.vue';
+import { UserProfileCard, SearchFilter, TabHeader } from '..';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
