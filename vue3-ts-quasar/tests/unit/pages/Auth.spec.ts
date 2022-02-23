@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Auth from '@/components/Auth/Auth.vue';
+import Auth from '@/views/Auth/Auth.vue';
 import { createTestingPinia } from '@pinia/testing';
 
 describe('Auth', () => {
