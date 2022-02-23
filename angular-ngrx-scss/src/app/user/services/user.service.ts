@@ -16,13 +16,16 @@ export class UserService {
     return this.http.get<UserApiResponse>(url).pipe(
       map((data) => ({
         avatar: data.avatar_url,
-        username: data.login,
-        name: data.name,
         bio: data.bio,
-        twitter_username: data.twitter_username,
-        email: data.email,
-        location: data.location,
+        blog: data.blog,
         company: data.company,
+        email: data.email,
+        followers: data.followers,
+        following: data.following,
+        location: data.location,
+        name: data.name,
+        twitter_username: data.twitter_username,
+        username: data.login,
       })),
     );
   }
@@ -35,13 +38,16 @@ export class UserService {
     return this.http.get<UserApiResponse>(url).pipe(
       map((data) => ({
         avatar: data.avatar_url,
-        username: data.login,
-        name: data.name,
         bio: data.bio,
-        twitter_username: data.twitter_username,
-        email: data.email,
-        location: data.location,
+        blog: data.blog,
         company: data.company,
+        email: data.email,
+        followers: data.followers,
+        following: data.following,
+        location: data.location,
+        name: data.name,
+        twitter_username: data.twitter_username,
+        username: data.login,
       })),
     );
   }

@@ -11,9 +11,10 @@ describe('UserEffects', () => {
   let actions$: Observable<Action>;
   let effects: UserEffects;
   let userServiceMock: any;
+
   beforeEach(() => {
     userServiceMock = jasmine.createSpyObj('UserService', {
-      getUserInfo: () => {
+      getAuthenticatedUserInfo: () => {
         return of();
       },
     });
@@ -40,10 +41,21 @@ describe('UserEffects', () => {
     actions$ = of(fetchUserData());
     const expectedUserData: UserState = {
       avatar: '',
+      bio: '',
+      blog: '',
+      company: '',
+      email: '',
+      followers: 0,
+      following: 0,
+      location: '',
+      name: '',
+      twitter_username: '',
       username: 'lindakatcodes',
     };
 
-    userServiceMock.getUserInfo.and.returnValue(of(expectedUserData));
+    userServiceMock.getAuthenticatedUserInfo.and.returnValue(
+      of(expectedUserData),
+    );
 
     effects.loadUser$.subscribe((action) => {
       expect(action).toEqual(

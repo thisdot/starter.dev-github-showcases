@@ -1,12 +1,15 @@
 export interface UserState {
   avatar: string;
-  username: string;
-  name: string;
   bio: string;
-  twitter_username: string;
-  email: string;
-  location: string;
+  blog: string;
   company: string;
+  email: string;
+  followers: number;
+  following: number;
+  location: string;
+  name: string;
+  twitter_username: string;
+  username: string;
 }
 
 export interface UserApiResponse {

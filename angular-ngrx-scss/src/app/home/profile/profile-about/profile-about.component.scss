@@ -16,6 +16,34 @@ img {
   border-radius: 50%;
 }
 
+.icon {
+  margin-right: 6px;
+}
+
 .content {
   margin-top: -5rem;
+}
+
+.name {
+  font-size: 26px;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+.username {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 24px;
+  color: #8b949e;
+}
+
+.bio {
+  margin: 16px 0;
+}
+
+.twitter-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
 }
