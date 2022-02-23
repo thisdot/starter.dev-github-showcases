@@ -75,9 +75,11 @@ select {
 }
 
 .wrapper {
+  display: block!important;
+  border: unset!important;
   padding-inline: 2em;
   margin-inline: auto;
-  max-width: 60rem;
+  max-width: 90rem;
 }
 
 .sr-only {

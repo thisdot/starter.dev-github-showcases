@@ -62,9 +62,8 @@ export default defineComponent({
 
   .new_repo {
     background-color: #2ea44f;
-    justify-content: space-between;
     color: #fff;
-
+    display: flex;
     position: relative;
     padding: 7px 16px;
     font-size: 14px;
@@ -82,16 +81,25 @@ export default defineComponent({
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-
     width: 100%;
     justify-content: center;
-    transform: translateY(-130px);
+    @media (min-width: 1024px) {
+      width: unset;
+      justify-content: space-between;
+    }
+    /* transform: translateY(-130px);
     -webkit-transform: translateY(-130px);
     -moz-transform: translateY(-130px);
     -ms-transform: translateY(-130px);
-    -o-transform: translateY(-130px);
+    -o-transform: translateY(-130px); */
     margin-left: unset;
     text-decoration: none;
+
+    margin-top: 10px;
+
+    @media (min-width: 1024px) {
+      margin-top: unset;
+    }
 
     .new_repo_btn {
       padding-left: 5px;
