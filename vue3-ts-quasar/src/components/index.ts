@@ -6,10 +6,19 @@ import AppInput from './AppInput/AppInput.vue';
 import Logo from './Logo/Logo.vue';
 import NavHeader from './NavHeader/NavHeader.vue';
 import RepoCard from './RepoCard/RepoCard.vue';
+import SearchDropdowns from './SearchDropdowns/SearchDropdowns.vue';
 import UserAvatar from './UserAvatar/UserAvatar.vue';
 import UserProfileCard from './UserProfileCard/UserProfileCard.vue';
 
 // TODO: Consider reading the filesystem dynamically to fetch all vue components (children of the components/ directory)
 
 //
-export { AppInput, Logo, NavHeader, RepoCard, UserAvatar, UserProfileCard };
+export {
+  AppInput,
+  Logo,
+  NavHeader,
+  RepoCard,
+  SearchDropdowns,
+  UserAvatar,
+  UserProfileCard,
+};
