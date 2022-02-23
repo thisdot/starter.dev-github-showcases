@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import UserAvatar from '@/components/UserAvatar/UserAvatar.vue';
+import {UserAvatar} from '@/components';
 
 const testData = {
   size: 100,

@@ -1,4 +1,4 @@
-import SearchDropdowns from '.';
+import SearchDropdowns from './SearchDropdowns.vue';
 
 export default {
   title: 'component/Search Dropdowns',

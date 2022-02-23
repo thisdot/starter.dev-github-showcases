@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import { QItem, QSeparator, QList, QBtnDropdown, ClosePopup } from 'quasar';
-import SearchDropdowns from '@/components/SearchDropdowns';
+import { SearchDropdowns } from '@/components';
 
 describe('SearchDropdown', () => {
   it.todo('should mount without error');

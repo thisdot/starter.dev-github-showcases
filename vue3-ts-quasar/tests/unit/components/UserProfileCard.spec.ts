@@ -1,5 +1,5 @@
-import UserProfileCard from '@/components/UserProfileCard';
 import { shallowMount } from '@vue/test-utils';
+import { UserProfileCard } from '@/components';
 
 const testData = {
   avatarUrl: 'https://avatars.githubusercontent.com/u/28502531?v=4',

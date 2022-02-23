@@ -1,4 +1,4 @@
-import SearchFilter from '.';
+import SearchFilter from './SearchFilter.vue';
 
 export default {
   title: 'component/Search Filter',

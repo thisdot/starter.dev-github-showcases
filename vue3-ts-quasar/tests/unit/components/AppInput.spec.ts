@@ -1,4 +1,4 @@
-import AppInput from '@/components/AppInput';
+import { AppInput } from '@/components';
 import { mount } from '@vue/test-utils';
 
 describe('AppInput', () => {

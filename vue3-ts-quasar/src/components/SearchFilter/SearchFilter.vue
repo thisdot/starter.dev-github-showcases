@@ -29,8 +29,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import SearchInput from '@/components/SearchInput';
-import SearchDropdowns from '@/components/SearchDropdowns';
+import { SearchDropdowns, SearchInput } from '@/components';
 
 export default defineComponent({
   name: 'SearchFilter',

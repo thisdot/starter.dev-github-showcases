@@ -1,4 +1,4 @@
-import UserProfileCard from '.';
+import UserProfileCard from './UserProfileCard.vue';
 
 export default {
   title: 'Component/UserProfileCard',

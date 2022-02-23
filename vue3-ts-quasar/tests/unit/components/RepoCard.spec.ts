@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import RepoCard from '@/components/RepoCard';
+import { RepoCard } from '@/components';
 
 const testData = {
   repoName: 'cowrywise-unsplashed',

@@ -1,5 +1,5 @@
-import SearchFilter from '@/components/SearchFilter';
 import { shallowMount } from '@vue/test-utils';
+import { SearchFilter } from '@/components';
 
 describe('Search Filter', () => {
   it.todo('should mount without error');

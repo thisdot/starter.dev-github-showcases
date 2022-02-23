@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import AppInput from '../AppInput';
+import { AppInput } from '../';
 
 export default defineComponent({
   name: 'SearchInput',

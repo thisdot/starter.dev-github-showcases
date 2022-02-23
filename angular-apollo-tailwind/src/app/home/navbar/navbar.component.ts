@@ -12,7 +12,6 @@ export class NavbarComponent {
   constructor(private authService: AuthService) {}
 
   signin() {
-    // Http calls complete and don't need to be unsubscribed.
-    this.authService.signin().subscribe();
+    this.authService.signin();
   }
 }

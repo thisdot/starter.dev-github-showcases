@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TokenService } from './token.service';
 
-interface SigninResponse {
-  redirectUrl: string;
-}
 interface AuthResponse {
-  access_token: string;
-  bearer: string;
-  scope: string;
+  access_token?: string;
 }
 
 interface SignoutRepsonse {
@@ -30,31 +25,29 @@ export class AuthService {
    * @return {*}  {Observable<any>}
    * @memberof AuthService
    */
-  signin(): Observable<SigninResponse> {
+  signin(): void {
     this.tokenService.removeToken();
-    this.tokenService.removeRefreshToken();
-    return this.httpClient.get<SigninResponse>(
-      `${environment.apiUrl}/auth/signin`,
-    );
+    window.location.href = `${environment.apiUrl}/api/auth/signin?redirect_url=${environment.redirectUrl}`;
   }
 
   /**
    * Returns the access_token and stores it in a cookie.
    *
-   * Once the user accepts Github authentication, they're redirected to
-   * `RedirectComponent` which fetches the token. The code comes from a query
-   * appended to the callback url on redirect.
+   * Once the user accepts Github authentication, front-end will poll
+   * for the token.
    *
-   * @param {string} code - code used to verify authentication
-   * @return {*}  {Observable<AuthResponse>} - token object shape
+   * @return {*}  {Observable<string>} - token
    * @memberof AuthService
    */
-  getToken(code: string): Observable<AuthResponse> {
+  getToken(): Observable<string | undefined> {
     return this.httpClient
-      .post<AuthResponse>(`${environment.apiUrl}/auth/signin/callback`, {
-        code,
+      .get<AuthResponse>(`${environment.apiUrl}/api/auth/token`, {
+        withCredentials: true,
       })
-      .pipe(tap((data) => this.tokenService.saveToken(data.access_token)));
+      .pipe(
+        map((data) => data.access_token),
+        tap((token) => token && this.tokenService.saveToken(token)),
+      );
   }
 
   /**
@@ -64,8 +57,10 @@ export class AuthService {
    * @memberof AuthService
    */
   signout(): Observable<SignoutRepsonse> {
-    return this.httpClient.get<SignoutRepsonse>(
-      `${environment.apiUrl}/auth/signout`,
+    this.tokenService.removeToken();
+    return this.httpClient.post<SignoutRepsonse>(
+      `${environment.apiUrl}/api/auth/signout`,
+      null,
     );
   }
 

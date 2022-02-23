@@ -1,6 +1,9 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { CurrentUser } from 'src/app/gql';
+import { AuthService } from '../../auth/auth.service';
+import { tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-dropdown-menu',
@@ -22,7 +25,11 @@ export class UserDropdownMenuComponent {
 
   isOpen = false;
 
-  constructor(private elRef: ElementRef) {}
+  constructor(
+    private elRef: ElementRef,
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   toggleMenu() {
     this.isOpen = !this.isOpen;
@@ -33,8 +40,14 @@ export class UserDropdownMenuComponent {
   }
 
   signOut() {
-    // TODO: make this work
-    console.log('sign out clicked', this.user);
+    this.authService
+      .signout()
+      .pipe(
+        tap(() => {
+          this.router.navigate(['/signin']);
+        }),
+      )
+      .subscribe();
     this.closeDropdown();
   }
 
