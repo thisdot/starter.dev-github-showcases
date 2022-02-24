@@ -17,3 +17,4 @@ export const GET_TOKEN_URL = `${API_URL_BASE}/auth/token`;
 
 
 export const TOP_REPOS_URL = `${GITHUB_URL_BASE}/user/repos?sort=updated&affiliation=owner,collaborator,organization_member&per_page=20`;
+export const SINGLE_USER_REPO = (user: string, repo: string) => `${GITHUB_URL_BASE}/repos/${user}/${repo}`;

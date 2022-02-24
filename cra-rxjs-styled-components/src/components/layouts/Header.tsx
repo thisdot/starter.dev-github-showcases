@@ -21,7 +21,7 @@ export default function Header() {
 
   return (
     <Nav>
-      <Link to="https://github.com">
+      <Link to="/">
         <GithubLogo></GithubLogo>
       </Link>
       <button onClick={clickHandler}>log out</button>

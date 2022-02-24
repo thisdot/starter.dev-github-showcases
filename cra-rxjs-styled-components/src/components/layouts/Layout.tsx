@@ -7,14 +7,13 @@ export const Layout = styled.div`
   grid-template-rows: 70px auto;
   grid-template-columns: 384px auto;
   grid-template-areas:
-    'header header'
     'aside content';
 
-  @media screen and (max-width: 425px) {
+  @media(max-width: 850px){
     grid-template-columns: auto;
     grid-template-areas:
-      'header'
-      'content'
-      'aside';
+    'header'
+    'content'
+    'aside';
   }
 `;

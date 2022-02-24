@@ -87,10 +87,11 @@ const IconWrapper = styled.div`
 
 export default function RepositoryCard({ repository }: { repository: RepositoryWithBranchCount }) {
   const since = formatDistanceToNow(new Date(repository.updated_at), { addSuffix: true });
+
   return (
     <Card>
       <Heading>
-        <RepoNameLink to="/repo">{repository.name}</RepoNameLink>{' '}
+        <RepoNameLink to={`${repository.owner.login}/${repository.name}`}>{repository.name}</RepoNameLink>{' '}
         {repository.visibility === 'public' && <Badge>Public</Badge>}
       </Heading>
       <Description>{repository.description}</Description>
