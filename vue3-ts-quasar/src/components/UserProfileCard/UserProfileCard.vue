@@ -203,7 +203,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '~/src/App.css';
+@import '../../App.css';
 
 .profile-card {
   width: 400px;

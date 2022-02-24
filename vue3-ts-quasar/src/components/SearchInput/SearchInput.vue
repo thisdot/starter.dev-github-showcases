@@ -22,7 +22,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '~/src/App.css';
+@import '../../App.css';
 
 .search_container {
   width: 100%;

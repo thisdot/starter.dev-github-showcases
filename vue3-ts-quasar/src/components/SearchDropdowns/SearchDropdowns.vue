@@ -180,7 +180,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import '~/src/App.css';
+@import '../../App.css';
 
 .repo_star_button {
   & .q-btn__content {

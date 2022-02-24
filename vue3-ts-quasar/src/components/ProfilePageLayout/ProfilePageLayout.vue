@@ -6,7 +6,7 @@
       :Projects="true"
       :Packages="true"
       :Stars="true"
-      :triggerTab="changeTab"
+      @triggerTab="changeTab"
     />
     <div class="wrapper">
       <div class="row" style="--gap: 0">
@@ -141,7 +141,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '~/src/App.css';
+@import '../../App.css';
 .tab-contents {
   flex-grow: 1;
 }
