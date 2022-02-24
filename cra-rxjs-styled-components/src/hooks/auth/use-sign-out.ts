@@ -1,13 +1,12 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Subject, switchMap } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import { SIGN_OUT_URL } from '../../constants/url.constants';
-import { LoginResponse } from '../../interfaces/auth.interfaces';
 import { AUTH_TOKEN } from '../../constants/auth.constants';
 
 export function useSignOut() {
-  const clickListener$ = new Subject<void>();
+  const clickListener$ = useMemo(() => new Subject<void>(), [])
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,22 +14,24 @@ export function useSignOut() {
       .asObservable()
       .pipe(
         switchMap(() =>
-          fromFetch<LoginResponse>(SIGN_OUT_URL, {
+          fromFetch(SIGN_OUT_URL, {
+            method: 'POST',
+            credentials: 'include',
             selector: (response: Response) => response.json(),
           })
         )
       )
-      .subscribe(({ redirectUrl }: LoginResponse) => {
-        localStorage.removeItem(AUTH_TOKEN);
+      .subscribe(() => {
+        sessionStorage.removeItem(AUTH_TOKEN);
         navigate('/signin');
       });
 
     return () => {
       subscription.unsubscribe();
     };
-  });
+  }, [clickListener$, navigate]);
 
-  return () => {
+  return useCallback(() => {
     clickListener$.next();
-  };
+  }, [clickListener$]);
 }

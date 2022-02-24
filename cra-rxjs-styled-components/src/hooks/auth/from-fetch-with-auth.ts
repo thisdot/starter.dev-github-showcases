@@ -23,7 +23,7 @@ export function fromFetchWithAuth<T>(
   init?: RequestInitWithOptionalSelector<T>
 ): Observable<Response | T> {
   const authHeader = {
-    Authorization: `Bearer ${localStorage.getItem(AUTH_TOKEN)}`,
+    Authorization: `Bearer ${sessionStorage.getItem(AUTH_TOKEN)}`,
   };
   if (init) {
     init.headers = {

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { catchError, EMPTY, tap } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import { AUTH_TOKEN } from '../../constants/auth.constants';
@@ -7,19 +7,15 @@ import { GET_TOKEN_URL } from '../../constants/url.constants';
 import { AuthSuccessResponse } from '../../interfaces/auth.interfaces';
 
 export function useSetToken() {
-  const [params] = useSearchParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const code = params.get('code');
     const subscription = fromFetch<AuthSuccessResponse>(GET_TOKEN_URL, {
-      method: 'POST',
+      method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json; charset=UTF-8',
       }),
-      body: JSON.stringify({
-        code,
-      }),
+      credentials: 'include',
       selector: (response: Response) => response.json(),
     })
       .pipe(
@@ -28,17 +24,17 @@ export function useSetToken() {
             throw new Error(`Error: could not retrieve token`);
           }
         }),
-        catchError((e) => {
+        catchError(() => {
           navigate('/signin', { replace: true });
           return EMPTY;
         })
       )
       .subscribe(({ access_token }) => {
-        localStorage.setItem(AUTH_TOKEN, access_token);
+        sessionStorage.setItem(AUTH_TOKEN, access_token);
         navigate('/', { replace: true });
       });
     return () => {
       subscription.unsubscribe();
     };
-  });
+  }, [navigate]);
 }
