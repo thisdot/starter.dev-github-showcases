@@ -14,7 +14,7 @@
       </div>
       <TabHeader
         :Respositories="true"
-        :triggerTab="changeTab"
+        @triggerTab="changeTab"
         classNames="org_tab"
       />
     </div>
@@ -78,12 +78,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import '~/src/App.css';
+@import '../../App.css';
 .tab-contents {
   flex-grow: 1;
 }
 
-.company_logo{
+.company_logo {
   border: 1px solid var(--color-border-muted);
   border-radius: 6px;
 }

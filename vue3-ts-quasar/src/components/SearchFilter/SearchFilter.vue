@@ -47,7 +47,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '~/src/App.css';
+@import '../../App.css';
 
 .repo_search_header {
   display: flex;

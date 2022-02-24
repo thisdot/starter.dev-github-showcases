@@ -119,10 +119,10 @@ import { computed, defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'TabHeader',
   props: {
-    triggerTab: {
-      type: Function,
-      default: () => null,
-    },
+    // triggerTab: {
+    //   type: Function,
+    //   default: () => true,
+    // },
     Overview: {
       type: Boolean,
       default: false,
@@ -148,16 +148,19 @@ export default defineComponent({
       default: '',
     },
   },
-  setup(props) {
+  setup(props, context) {
     const tab = ref('Respositories');
     const activeTab = computed({
       get() {
-        props.triggerTab(tab.value);
+        // console.log(typeof props.triggerTab);
+        context.emit('triggerTab', tab.value);
+        // props.triggerTab(tab.value);
         return tab.value;
       },
       set(val: string) {
         tab.value = val;
-        props.triggerTab(val);
+        context.emit('triggerTab', tab.value);
+        // props.triggerTab(val);
       },
     });
     return {
@@ -169,7 +172,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '~/src/App.css';
+@import '../../App.css';
 
 .tab_header {
   margin: 10px auto 0;
