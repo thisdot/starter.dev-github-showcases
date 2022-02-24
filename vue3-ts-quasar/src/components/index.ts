@@ -14,6 +14,7 @@ import UserAvatar from './UserAvatar';
 import UserProfileCard from './UserProfileCard';
 import TabHeader from './TabHeader';
 import ProfilePageLayout from './ProfilePageLayout';
+import OrganizationPageLayout from './OrganizationPageLayout';
 
 // TODO: Consider reading the filesystem dynamically to fetch all vue components (children of the components/ directory)
 
@@ -31,4 +32,5 @@ export {
   UserProfileCard,
   TabHeader,
   ProfilePageLayout,
+  OrganizationPageLayout,
 };
