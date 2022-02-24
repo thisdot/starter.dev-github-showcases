@@ -1,49 +1,47 @@
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
-import { AuthService } from './auth.service';
-import { TokenService } from './token.service';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { selectIsAuthenticated } from 'src/app/state/auth';
+import { TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AuthGuard', () => {
-  let routerSpy: jasmine.SpyObj<Router>;
-  let authService: AuthService;
-  let tokenService: jasmine.SpyObj<TokenService>;
-  let httpClient: jasmine.SpyObj<HttpClient>;
   let guard: AuthGuard;
+  let router: Router;
+  let store: MockStore<unknown>;
 
   beforeEach(() => {
-    routerSpy = jasmine.createSpyObj('Router', ['createUrlTree']);
-    tokenService = jasmine.createSpyObj('TokenService', ['getToken']);
-    authService = new AuthService(httpClient, tokenService);
-    guard = new AuthGuard(authService, routerSpy);
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      providers: [
+        AuthGuard,
+        provideMockStore({}),
+        // other providers
+      ],
+    });
+
+    router = TestBed.inject(Router);
+    store = TestBed.inject(MockStore);
+    guard = TestBed.inject(AuthGuard);
   });
 
-  describe('if user is successfully authenticated', () => {
-    beforeEach(() => {
-      tokenService.getToken.and.returnValue('1234');
-    });
+  it(
+    'should return true if the user state is logged in',
+    waitForAsync(() => {
+      store.overrideSelector(selectIsAuthenticated, true);
+      guard.canActivate().subscribe((value) => expect(value).toBeTrue());
+    }),
+  );
 
-    it('grants route access to home page', () => {
-      const canActivate = guard.canActivate();
-
-      expect(canActivate).toBeTrue();
-    });
-  });
-
-  describe('if user is not authenticated', () => {
-    beforeEach(() => {
-      tokenService.getToken.and.returnValue(null);
-    });
-
-    it('routes the user to the sign in page', () => {
-      const routeSpy = routerSpy.createUrlTree as jasmine.Spy;
-
-      guard.canActivate();
-      const navArgs = routeSpy.calls.first().args[0];
-      expect(navArgs)
-        .withContext('should navigate to sign in page')
-        .toContain('/signin');
-    });
-  });
+  it(
+    'should return false if the user state is not logged in',
+    waitForAsync(() => {
+      store.overrideSelector(selectIsAuthenticated, false);
+      const expectation = router.createUrlTree(['/signin']);
+      guard
+        .canActivate()
+        .subscribe((value) => expect(value).toEqual(expectation));
+    }),
+  );
 });

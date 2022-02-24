@@ -10,11 +10,7 @@ import { selectIsAuthenticated } from 'src/app/state/auth';
 export class AuthGuard implements CanActivate {
   constructor(private store: Store, private router: Router) {}
 
-  canActivate():
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  canActivate(): Observable<boolean | UrlTree> {
     return this.userIsAuthenticated().pipe(
       map((authValue) => {
         if (authValue) {
