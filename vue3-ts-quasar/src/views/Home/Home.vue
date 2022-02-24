@@ -16,6 +16,12 @@
           </q-item>
         </q-list>
       </q-card>
+
+      <div class="row full-width items-center justify-center q-mt-lg">
+        <q-btn unelevated color="positive" to="/profile"
+          >View repositories</q-btn
+        >
+      </div>
     </div>
   </div>
 </template>
