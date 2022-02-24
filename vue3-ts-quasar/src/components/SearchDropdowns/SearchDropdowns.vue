@@ -179,9 +179,31 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~/src/App.css';
 
+.repo_star_button {
+  & .q-btn__content {
+    width: 100% !important;
+    justify-content: space-between !important;
+
+    @media (min-width: 1024px) {
+      /* width: unset; */
+      /* justify-content: center !important; */
+    }
+  }
+}
+
+.github_details {
+  margin-top: 10px;
+  @media (min-width: 1024px) {
+    margin-top: unset;
+  }
+  & button {
+    display: flex;
+    width: 100%;
+  }
+}
 .close_container {
   display: flex;
   align-items: center;
@@ -205,8 +227,13 @@ export default defineComponent({
   justify-content: space-between;
 }
 .search_dropdown-x {
-  width: 300px;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    width: 300px;
+  }
 }
+
 .m-list {
   border-bottom: 1px solid var(--color-border);
 }

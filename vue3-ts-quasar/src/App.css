@@ -71,13 +71,16 @@ select {
 
 .grid {
   display: grid;
-  gap: var(--gap, 1rem);
+  gap: var(--gap, 1rem)
 }
 
 .wrapper {
+  display: block!important;
+  border: unset!important;
+  padding: unset!important;
   padding-inline: 2em;
   margin-inline: auto;
-  max-width: 60rem;
+  max-width: 90rem;
 }
 
 .sr-only {
@@ -92,11 +95,127 @@ select {
   clip: rect(0, 0, 0, 0);
 }
 
-h3,
-h4 {
+h3, h4 {
   font-size: 20px;
   font-weight: 600;
 }
+
+ :root {
+   --primary-color: #0d1117;
+   --secondary-color: #7263ca;
+   --tertiary-color: #161b22;
+   --color-text-primary: #24292e;
+   --color-text-seconday: #586069;
+   --color-primer-border-contrast: rgba(27, 31, 36, 0.1);
+   --color-border: #eaecef;
+   --color-fg-muted: #57606a;
+   --color-accent-fg: #0969da;
+   --color-accent-subtle: #ddf4ff;
+   --color-btn-text: #24292f;
+   --color-btn-bg: #f6f8fa;
+   --color-fg-default: #24292f;
+   --color-avatar-bg: #ffffff;
+   --color-avatar-border: rgba(27, 31, 36, 0.15);
+   --color-btn-border: rgba(27, 31, 36, 0.15);
+   --color-topic-tag-border: rgba(0, 0, 0, 0);
+   --color-border-muted: hsla(210, 18%, 87%, 1);
+   --shadow-small: 0 1px 0 rgba(27, 31, 35, 0.04);
+   --font-family: -apple-system,
+     BlinkMacSystemFont,
+     Segoe UI,
+     Helvetica,
+     Arial,
+     sans-serif,
+     Apple Color Emoji,
+     Segoe UI Emoji;
+ }
+
+ .btn-sm {
+   padding: 3px 12px;
+   font-size: 12px;
+   line-height: 20px;
+ }
+
+ .btn {
+   display: inline-block;
+   padding: 5px 16px;
+   font-size: 14px;
+   font-weight: 500;
+   line-height: 20px;
+   white-space: nowrap;
+   vertical-align: middle;
+   cursor: pointer;
+   -webkit-user-select: none;
+   user-select: none;
+   border: 1px solid;
+   border-radius: 6px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+ }
+
+ .allSvg {
+   color: var(--color-fg-muted);
+   display: inline-block;
+   overflow: visible !important;
+   vertical-align: text-bottom;
+   fill: currentColor;
+ }
+
+ .git-btn {
+   color: var(--color-btn-text);
+   background-color: var(--color-btn-bg);
+   border: 1px solid;
+   border-color: var(--color-btn-border);
+   border-radius: 6px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   -ms-border-radius: 6px;
+   -o-border-radius: 6px;
+ }
+ .divider {
+   border-bottom: 1px solid var(--color-border-muted);
+   width: 100%;
+ }
+
+ .avatar {
+   display: inline-block;
+   overflow: hidden;
+   line-height: 1;
+   vertical-align: middle;
+   background-color: var(--color-avatar-bg);
+   border-radius: 6px;
+   flex-shrink: 0;
+   box-shadow: 0 0 0 1px var(--color-avatar-border);
+ }
+
+ .repo_star_button {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-align: center;
+   -ms-flex-align: center;
+   align-items: center;
+   background-color: #fafbfc;
+   border: 1px solid rgba(27, 31, 35, 0.15);
+   padding: 5px 12px;
+   border-radius: 6px;
+   color: #24292e;
+   font-size: 12px;
+   -webkit-box-shadow: var(--shadow-small);
+   box-shadow: var(--shadow-small);
+   cursor: pointer;
+   align-self: center;
+ }
+
+ .repo_star_button svg {
+   height: 16px;
+   margin-right: 4px;
+ }
+
+ .github_details details {
+   pointer-events: visible;
+ }
 
 :root {
   --primary-color: #0d1117;
@@ -224,6 +343,8 @@ h4 {
   -ms-transform: translateY(calc(100% + 20px));
   -o-transform: translateY(calc(100% + 20px));
 }
+
+
 
 .search_dropdown p {
   border-top: 1px solid var(--color-border);
