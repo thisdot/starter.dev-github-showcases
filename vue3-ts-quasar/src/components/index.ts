@@ -4,7 +4,7 @@
 */
 import AppInput from './AppInput';
 import GistsPanel from './GistsPanel';
-import Logo from './Logo/Logo.vue';
+import Logo from './Logo';
 import NavHeader from './NavHeader';
 import RepoCard from './RepoCard';
 import SearchDropdowns from './SearchDropdowns';
