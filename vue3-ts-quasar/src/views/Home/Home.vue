@@ -8,7 +8,9 @@
       <GistsPanel class="card--gists" />
     </div>
     <div class="col-12 col-sm-8 col-xl-6 q-px-lg q-pt-xl">
-      <h1 class="text-weight-bold q-mb-md">Top repositories</h1>
+      <h1 class="text-weight-bold text-h5 text-dark q-mb-md">
+        Top repositories
+      </h1>
       <q-card>
         <q-list>
           <q-item v-for="i in Array(10)" :key="i">

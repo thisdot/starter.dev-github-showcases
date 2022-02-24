@@ -1,7 +1,7 @@
 <template>
   <div class="repo-card">
     <div class="repo-card_left">
-      <h3 class="repo-card_left_name-tag">
+      <h3 class="repo-card_left_name-tag text-h6">
         <a href="" class="repo-name">
           {{ repoName }}
         </a>
