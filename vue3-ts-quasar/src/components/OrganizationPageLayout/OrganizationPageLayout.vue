@@ -21,7 +21,7 @@
     <div class="wrapper">
       <!-- Right side -->
       <div class="tab-contents">
-        <SearchFilter />
+        <SearchFilter repoBtnText="New repository" />
 
         <q-tab-panels v-model="tab">
           <q-tab-panel name="Overview">
