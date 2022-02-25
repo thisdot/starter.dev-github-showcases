@@ -3062,6 +3062,15 @@
     "@typescript-eslint/types" "4.33.0"
     eslint-visitor-keys "^2.0.0"
 
+"@vue/apollo-composable@^4.0.0-alpha.16":
+  version "4.0.0-alpha.16"
+  resolved "https://registry.yarnpkg.com/@vue/apollo-composable/-/apollo-composable-4.0.0-alpha.16.tgz#f0974372b07b016271a96425c3f676588e640bf4"
+  integrity sha512-P0Zxip0idW7HAkLAmvtso+UNdTNCm+mwAKvw9Nup4MzESDvfuvhXfOxYPZCKtd4Y8fS1FZ0dBGbOrxeQHYyfwQ==
+  dependencies:
+    throttle-debounce "^3.0.1"
+    ts-essentials "^9.0.0"
+    vue-demi "^0.12.1"
+
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@vue/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-1.2.1.tgz#31624a7a505fb14da1d58023725a4c5f270e6a81"
@@ -15086,6 +15095,11 @@ ts-dedent@^2.0.0:
   resolved "https://registry.yarnpkg.com/ts-dedent/-/ts-dedent-2.2.0.tgz#39e4bd297cd036292ae2394eb3412be63f563bb5"
   integrity sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==
 
+ts-essentials@^9.0.0:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/ts-essentials/-/ts-essentials-9.1.2.tgz#46db6944b73b4cd603f3d959ef1123c16ba56f59"
+  integrity sha512-EaSmXsAhEiirrTY1Oaa7TSpei9dzuCuFPmjKRJRPamERYtfaGS8/KpOSbjergLz/Y76/aZlV9i/krgzsuWEBbg==
+
 ts-invariant@^0.9.4:
   version "0.9.4"
   resolved "https://registry.yarnpkg.com/ts-invariant/-/ts-invariant-0.9.4.tgz#42ac6c791aade267dd9dc65276549df5c5d71cac"
@@ -15687,7 +15701,7 @@ vue-cli-plugin-quasar@~4.0.4:
   dependencies:
     webpack-merge "^5.7.3"
 
-vue-demi@*:
+vue-demi@*, vue-demi@^0.12.1:
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.12.1.tgz#f7e18efbecffd11ab069d1472d7a06e319b4174c"
   integrity sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw==
