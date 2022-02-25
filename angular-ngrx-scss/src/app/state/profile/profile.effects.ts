@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatest, map, of, pipe, switchMap, tap } from 'rxjs';
 import { UserService } from 'src/app/user/services/user.service';
 import {
   fetchProfile,
@@ -14,8 +14,14 @@ export class ProfileEffects {
     return this.actions$.pipe(
       ofType(fetchProfile),
       switchMap(({ username }) =>
-        this.userService.getUserInfo(username).pipe(
-          map((data) => fetchProfileSuccess({ data: { user: data } })),
+        combineLatest([
+          this.userService.getUserInfo(username),
+          this.userService.getUserOrganizations(username),
+          this.userService.getUserRepos(username),
+        ]).pipe(
+          map(([user, orgs, repos]) =>
+            fetchProfileSuccess({ data: { user, orgs, repos } }),
+          ),
           catchError((error) => of(fetchProfileFailure({ error }))),
         ),
       ),

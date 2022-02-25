@@ -16,6 +16,20 @@ img {
   border-radius: 50%;
 }
 
+a {
+  color: black;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: #0000ee;
+
+    &:visited {
+      color: #551a8b;
+    }
+  }
+}
+
 .icon {
   margin-right: 6px;
 }

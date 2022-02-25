@@ -10,6 +10,16 @@ body {
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
+a {
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
