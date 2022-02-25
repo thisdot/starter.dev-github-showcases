@@ -23,7 +23,8 @@
     "format:libs:check": "prettier --config ./.prettierrc --list-different \"projects/**/*{.ts,.html,.css}\"",
     "format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts,.html,.css}\"",
     "format:libs": "prettier --config ./.prettierrc --write \"projects/**/*{.ts,.html,.css}\"",
-    "generate-cert": "./tools/generate-cert.sh"
+    "generate-cert": "./tools/generate-cert.sh",
+    "generate": "graphql-codegen"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +40,7 @@
     "@ngneat/content-loader": "^7.0.0",
     "@ngneat/tailwind": "^7.0.3",
     "@ngrx/component-store": "^13.0.2",
+    "@octokit/graphql-schema": "^10.73.0",
     "@this-dot/route-config": "^1.2.1",
     "apollo-angular": "2.6.0",
     "concurrently": "^6.4.0",
