@@ -37,7 +37,7 @@ export default async (req, res) => {
     res
       // `__Host-` restricts the cookie to the origin making requests
       .cookie(ACCESS_TOKEN_COOKIE, accessToken, {
-        sameSite: 'lax', // used with cors
+        sameSite: 'None', // used with cors
         path: '/', // needed for `__Host-`
         maxAge: 604800000, // 1 week
         httpOnly: true, // use `withCredentials` in the client to use the cookie
