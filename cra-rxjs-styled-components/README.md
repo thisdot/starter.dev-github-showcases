@@ -1,57 +1,99 @@
-# Getting Started with Create React App
+# CRA-RxJS-SC App
+This is a demo application that re-implements some of GitHub's pages and functionality.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+- [Overview](#overview)
+  - [Featured Tech Stack](#featured-tech-stack)
+  - [Included Tooling](#included-tooling)
+- [Architectural Decisions](#architectural-decisions)
+- [Getting Started](#getting-started)
+  - [Cloning the Repository ](#cloning-the-repository)
+  - [Env Setup](#env-setup)
+  - [0Auth Setup](#oauth-setup)
+  - [Installation](#installation)
+- [Development](#development)
 
-## Setup
 
-1. Create your project `.env`
+## Overview
+
+### Featured Tech Stack
+* React
+* RxJS
+* TypeScript
+
+### Included Tooling
+* Prettier
+* React Testing Library
+* Jest
+* ESLint
+* Styled Components
+
+
+## Architectural Decisions
+- Project uses `snake-case` file naming convention over traditional `PascalCase`
+- Components should be contained in their own `components` directory or module folder and exported via the index file
+- The following directories should be restricted to the following types of components:
+  - routes: Only contains top-level page components
+  - hooks: Only reusable global hooks
+
+
+## Getting Started
+
+### Cloning the Repository
+Clone the starter.dev-showcases repository from https://github.com/thisdot/starter.dev-showcases
+
+```bash
+git clone https://github.com/thisdot/starter.dev-showcases.git
+```
+
+### Env Setup
+This project comes with a `.env.example` file.
+
+```
+REACT_APP_API_URL=https://api.starter.dev/api
+REACT_APP_BASE_URL=http://localhost:3000
+```
+While in the project directory, run this command in your terminal.
 
 ```bash
 cp .env.example .env
 ```
 
-2. Install dependencies: `npm install`
-3. Run the project: `npm start`
+### OAuth Setup
+To use this app and authenticate with GitHub, we need to setup the OAuth credentials in GitHub.
 
-## Available Scripts
+- Navigation to the [GitHub settings page](https://github.com/settings/profile).
+- Click the `Developer settings` link in the left sidebar.
+- Click the `OAuth Apps` link in the sidebar.
+- Click the `New OAuth App` button at the top right of the page.
 
-In the project directory, you can run:
+Register a new OAuth application form details
 
-### `npm start`
+- Application name - Enter a name for the application
+- Homepage URL - Enter the url of the RxJS application. _(If running locally http://localhost:3000 otherwise the url of the application on the internet)_
+- Authorization callback URL - Enter the url of the applications OAuth callback. _(If running locally http://localhost:3000/redirect)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Installation
+Open the project root directory in your terminal and navigate to the `cra-rxjs-styled-components` folder.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+cd cra-rxjs-styled-components
+```
 
-### `npm test`
+Run `yarn` to install the dependencies.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+yarn
+```
 
-### `npm run build`
+## Development
+In the `cra-rxjs-styled-components` folder start the app.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+yarn start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Open your browser to [http://localhost:3000](http://localhost:3000)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
