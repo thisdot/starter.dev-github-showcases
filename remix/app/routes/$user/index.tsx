@@ -3,16 +3,15 @@ import type { LoaderFunction } from 'remix';
 import gqlClient from '~/lib/graphql-client';
 import { USER_PROFILE_QUERY } from '~/lib/queries/UserProfile';
 import { auth } from '~/services/auth.server';
-import UserProfileView, {
-  UserProfileViewProps,
-} from '~/components/UserProfile/UserProfile.view';
-import UserReposView from '~/components/UserRepos/UserRepos.view';
+import { UserProfileViewProps } from '~/components/UserProfile/UserProfile.view';
 import { USER_REPOS_QUERY } from '~/lib/queries/UserRepos';
-import { Repo } from '~/components/UserRepos/types';
-import { OrderDirection, RepositoryOrderField, useRepoFilters } from '~/components/RepoFilters';
-import { filterRepos } from '~/components/UserRepos/filterRepos';
-import { getLanguages } from '~/components/UserRepos/getLanguages';
-import { OrgReposQuery, parseQuery, UserReposQuery } from '~/components/UserRepos/parseQuery';
+import {
+  OrderDirection,
+  RepositoryOrderField,
+  useRepoFilters,
+} from '~/components/RepoFilters';
+import { parseQuery } from '~/components/UserRepos/parseQuery';
+import ProfilePage from '~/components/ProfilePage/ProfilePage.view';
 
 type LoaderData = {
   user: UserProfileViewProps;
@@ -33,42 +32,31 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     }
   );
 
-  const afterCursor =  undefined;
+  const afterCursor = undefined;
   const beforeCursor = undefined;
 
   const repos = await gqlClient.request(
     USER_REPOS_QUERY,
     {
-    username: params.user,
-    orderBy: {
-      field: RepositoryOrderField.UpdatedAt,
-      direction: OrderDirection.Desc,
+      username: params.user,
+      orderBy: {
+        field: RepositoryOrderField.UpdatedAt,
+        direction: OrderDirection.Desc,
+      },
+      afterCursor,
+      beforeCursor,
     },
-    afterCursor,
-    beforeCursor
-  },
     {
       authorization: `Bearer ${accessToken}`,
     }
   );
-  const repositories = parseQuery(repos)
+  const repositories = parseQuery(repos);
   return json<LoaderData>({ user, repositories, owner: params.user });
 };
 
 export default function User() {
   const repoFilters = useRepoFilters();
   const { user, repositories, owner } = useLoaderData();
-  
-  return (
-    <div className="max-w-screen-2xl mx-auto py-8 px-4">
-      <div className="grid grid-cols-12 gap-8">
-        <div className="col-span-12 md:col-span-4 xl:col-span-3 relative md:-top-20">
-          <UserProfileView {...user} />
-        </div>
-        <div className="col-span-12 md:col-span-8 xl:col-span-9">
-          <UserReposView repos={repositories.repos} owner={owner} />
-        </div>
-      </div>
-    </div>
-  );
+
+  return <ProfilePage repos={repositories.repos} user={user} owner={owner} />;
 }

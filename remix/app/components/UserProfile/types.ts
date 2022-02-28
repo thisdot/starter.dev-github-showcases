@@ -4,7 +4,7 @@ export interface OrganizationNodes {
 }
 
 export interface Nodes {
-    nodes: OrganizationNodes[]
+  nodes: OrganizationNodes[]
 }
 
 export interface Follow {
