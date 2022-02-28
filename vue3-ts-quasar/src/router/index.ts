@@ -1,11 +1,20 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import Home from '../views/Home/Home.vue';
+
+//* Layouts
+import SiteLayout from '@/layouts/SiteLayout.vue';
+
+//* Pages
+import { Auth, Home, Redirect } from '../views';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    component: SiteLayout,
+    children: [
+      { path: '', component: Home },
+      { path: 'auth', component: Auth },
+      { path: 'redirect', component: Redirect },
+    ],
   },
 ];
 
