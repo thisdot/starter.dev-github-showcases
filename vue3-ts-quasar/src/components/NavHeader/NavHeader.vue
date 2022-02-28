@@ -50,7 +50,7 @@
           </q-item>
 
           <q-separator />
-          <q-item clickable>
+          <q-item clickable @click="handleSignOut">
             <q-item-section>Sign out</q-item-section>
           </q-item>
         </q-list>
@@ -69,6 +69,9 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+
+//* Composables
+import { useAuth, useNav } from '@/composables';
 
 //* Components
 import { Logo, UserAvatar } from '@/components';
@@ -99,6 +102,16 @@ const primaryNavItems = [
 
 //* Reactive values
 const searchText = ref('');
+
+const { goToExternal } = useNav();
+const { signOut } = useAuth();
+
+const handleSignOut = async () => {
+  await signOut();
+  // TODO: Add feedback/notify user that they have been signed out
+
+  goToExternal('/', 250);
+};
 </script>
 
 <style lang="scss" scoped>
