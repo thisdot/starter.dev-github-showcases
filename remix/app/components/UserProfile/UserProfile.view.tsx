@@ -1,4 +1,4 @@
-import { Follow, Nodes, Organization } from './types';
+import { Follow, Nodes } from './types';
 import {
   UsersIcon,
   StarIcon,
@@ -54,9 +54,7 @@ function UserProfileView({
         <div className={styles.bio} dangerouslySetInnerHTML={{ __html: bio }} />
       )}
       <div className={styles.buttonContainer}>
-        <button className={styles.button}>
-          Edit Profile
-        </button>
+        <button className={styles.button}>Edit Profile</button>
       </div>
       <div className={styles.socials}>
         <UsersIcon className={styles.icon} />

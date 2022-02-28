@@ -32,8 +32,12 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     }
   );
 
-  const afterCursor = undefined;
-  const beforeCursor = undefined;
+  let url = new URL(request.url);
+  let after = url.searchParams.get('after');
+  let before = url.searchParams.get('before');
+
+  const afterCursor = typeof after === 'string' ? after : undefined;
+  const beforeCursor = typeof before === 'string' ? before : undefined;
 
   const repos = await gqlClient.request(
     USER_REPOS_QUERY,
@@ -58,5 +62,5 @@ export default function User() {
   const repoFilters = useRepoFilters();
   const { user, repositories, owner } = useLoaderData();
 
-  return <ProfilePage repos={repositories.repos} user={user} owner={owner} />;
+  return <ProfilePage repos={repositories} user={user} owner={owner} />;
 }

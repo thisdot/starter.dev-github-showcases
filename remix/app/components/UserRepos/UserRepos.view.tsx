@@ -4,16 +4,42 @@ import { StarIcon } from '@heroicons/react/outline';
 import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
 import RepoMeta from '../RepoMeta/RepoMeta';
 import * as styles from './UserRepos.classNames';
+import Pagination from '../Pagination/Pagination';
+import { filterRepos } from './filterRepos';
+import { getLanguages } from './getLanguages';
+import { RepoFilters, useRepoFilters } from '../RepoFilters';
 
 export interface UserReposViewProps {
-  repos: Repo[];
+  repos: Repositories;
   owner: string;
 }
 
+export interface Repositories {
+  repos: Repo[];
+  pageInfo:
+    | {
+        __typename?: 'PageInfo' | undefined;
+        endCursor?: string | null | undefined;
+        startCursor?: string | null | undefined;
+        hasNextPage: boolean;
+        hasPreviousPage: boolean;
+      }
+    | undefined;
+}
+
 function UserReposView({ repos, owner }: UserReposViewProps) {
+  const repoFilters = useRepoFilters();
+  const filteredRepos = filterRepos(repos.repos, repoFilters.state);
+  const languages = getLanguages(filteredRepos);
+
   return (
-    <div>
-      {repos.map(
+    <>
+      <RepoFilters
+        {...repoFilters}
+        languages={languages}
+        resultCount={filteredRepos.length}
+      />
+      {filteredRepos.map(
         ({
           id,
           name,
@@ -28,8 +54,8 @@ function UserReposView({ repos, owner }: UserReposViewProps) {
           <div key={id} className={styles.container}>
             <div className={styles.content}>
               <h3 className="mb-2">
-                <Link to={`/${owner}/${name}`}>
-                  <a className={styles.headingLink}>{name}</a>
+                <Link to={`/${owner}/${name}`} className={styles.headingLink}>
+                  {name}
                 </Link>
                 <PrivacyBadge
                   isPrivate={isPrivate}
@@ -54,7 +80,10 @@ function UserReposView({ repos, owner }: UserReposViewProps) {
           </div>
         )
       )}
-    </div>
+      {(repos.pageInfo?.hasNextPage || repos.pageInfo?.hasPreviousPage) && (
+        <Pagination pageInfo={repos.pageInfo} owner={owner} />
+      )}
+    </>
   );
 }
 
