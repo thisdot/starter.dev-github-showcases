@@ -4,8 +4,7 @@ export class EnvironmentConfig {
 
   //* API stuff
   private static _DEV_API_URL = 'https://api.starter.dev';
-  private static _PROD_API_URL =
-    'https://fhtfslckqb.execute-api.us-east-1.amazonaws.com/api';
+  private static _PROD_API_URL = 'https://api.starter.dev';
 
   /** The starter.dev API url */
   static API_URL = EnvironmentConfig._IS_DEV
