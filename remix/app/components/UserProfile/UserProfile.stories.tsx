@@ -6,7 +6,7 @@ const exampleData = {
   avatarUrl: 'https://avatars.githubusercontent.com/u/2487968?v=4',
   bio: 'Senior Software Engineer <a class="user-mention" data-hovercard-type="organization" data-hovercard-url="/orgs/thisdot/hovercard" href="https://github.com/thisdot">@thisdot</a>',
   company: '@thisdot',
-  followers: { totalCount:24 },
+  followers: { totalCount: 24 },
   following: { totalCount: 20 },
   location: 'Washington, DC',
   login: 'tvanantwerp',
@@ -15,14 +15,12 @@ const exampleData = {
   websiteUrl: 'https://tomvanantwerp.com',
   organizations: {
     nodes: [
-    {
-      avatarUrl: 'https://avatars.githubusercontent.com/u/22839396?v=4',
-      login: 'thisdot',
-    },
-  ]
-}
-
-  ,
+      {
+        avatarUrl: 'https://avatars.githubusercontent.com/u/22839396?v=4',
+        login: 'thisdot',
+      },
+    ],
+  },
 };
 
 export default {
