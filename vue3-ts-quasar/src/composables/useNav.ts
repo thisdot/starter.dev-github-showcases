@@ -30,12 +30,10 @@ export default () => {
    * @param wait The amount of time to wait before redirecting in milliseconds
    */
   const goToExternal = (link: string, wait = 0) => {
-    if (window.location.pathname !== link) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      delay(() => {
-        window.location.replace(link);
-      }, wait);
-    }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    delay(() => {
+      window.location.replace(link);
+    }, wait);
   };
 
   return {
