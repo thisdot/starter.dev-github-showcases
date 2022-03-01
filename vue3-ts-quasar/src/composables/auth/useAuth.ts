@@ -1,6 +1,5 @@
 import { useToken } from '@/composables';
-import { EnvironmentConfig } from '@/config';
-import { useApi } from '@/helpers/useApi';
+import { useApi } from '@/helpers';
 
 interface AuthResponse {
   access_token?: string;
@@ -29,7 +28,7 @@ export const useAuth = (): UseAuth => {
    */
   const login = () => {
     removeAuthToken();
-    window.location.href = `${EnvironmentConfig.API_URL}/api/auth/signin?redirect_url=${EnvironmentConfig.REDIRECT_URL}`;
+    window.location.href = `${process.env.VUE_APP_API_URL}/api/auth/signin?redirect_url=${process.env.VUE_APP_REDIRECT_URL}`;
   };
 
   /**
@@ -39,7 +38,7 @@ export const useAuth = (): UseAuth => {
    */
   const getToken = async () => {
     const apiResponse = await getRequest<AuthResponse>(
-      `${EnvironmentConfig.API_URL}/api/auth/token`,
+      `${process.env.VUE_APP_API_URL}/api/auth/token`,
       {
         withCredentials: true,
       },
@@ -55,7 +54,7 @@ export const useAuth = (): UseAuth => {
   const signOut = () => {
     removeAuthToken();
     return postRequest<SignoutResponse>(
-      `${EnvironmentConfig.API_URL}/api/auth/signout`,
+      `${process.env.VUE_APP_API_URL}/api/auth/signout`,
       null,
       {
         withCredentials: true,
