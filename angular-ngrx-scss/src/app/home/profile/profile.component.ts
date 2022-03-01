@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { fetchProfile } from 'src/app/state/profile/profile.actions';
 import { selectProfileState } from 'src/app/state/profile/profile.selectors';
-import { ProfileState } from 'src/app/state/profile/profile.state';
+import {
+  ProfileState,
+  UserReposState,
+} from 'src/app/state/profile/profile.state';
 import { fetchUserData } from 'src/app/state/user';
 
 @Component({
@@ -16,6 +19,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
   profile$?: Observable<ProfileState>;
+  repos$?: Observable<UserReposState[]>;
 
   constructor(private store: Store, private route: ActivatedRoute) {}
 
@@ -29,6 +33,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
 
     this.profile$ = this.store.select(selectProfileState);
+    this.repos$ = this.profile$.pipe(map((profile) => profile.repos ?? []));
   }
 
   ngOnDestroy(): void {

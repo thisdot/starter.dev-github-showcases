@@ -1,1 +1,3 @@
-<p>profile-repos works!</p>
+<ul>
+  <li *ngFor="let repo of repos$ | async">{{ repo.name }}</li>
+</ul>

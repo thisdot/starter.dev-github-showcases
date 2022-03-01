@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProfileState } from 'src/app/state/profile/profile.state';
+import { UserReposState } from 'src/app/state/profile/profile.state';
 
 @Component({
   selector: 'app-profile-repos',
@@ -9,5 +9,5 @@ import { ProfileState } from 'src/app/state/profile/profile.state';
 })
 export class ProfileReposComponent {
   @Input()
-  profile$?: Observable<ProfileState>;
+  repos$?: Observable<UserReposState[]>;
 }
