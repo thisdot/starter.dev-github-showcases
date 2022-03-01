@@ -22,18 +22,13 @@ import { useAuth, useNav } from '@/composables';
 const { getToken } = useAuth();
 const { goToExternal } = useNav();
 
-const redirectIfTokenFound = async () => {
-  const { access_token } = await getToken();
+const redirectToHome = async () => {
+  await getToken();
 
-  if (!access_token) {
-    return setTimeout(redirectIfTokenFound, 1000);
-  }
-
-  //? Getting here means an access token was found - Redirect
   goToExternal('/', 500);
 };
 
 watchEffect(() => {
-  redirectIfTokenFound();
+  redirectToHome();
 });
 </script>
