@@ -1,7 +1,14 @@
 export const DEFAULT_TOKEN_STORAGE_NAME = 'vue3-starter-dev-access-token';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default (tokenStorageName = DEFAULT_TOKEN_STORAGE_NAME) => {
+interface UseToken {
+  getAuthToken: () => string;
+  saveAuthToken: (tokenToSave: string) => void;
+  removeAuthToken: () => void;
+}
+
+export const useToken = (
+  tokenStorageName = DEFAULT_TOKEN_STORAGE_NAME,
+): UseToken => {
   const getAuthToken = () => {
     return window.sessionStorage.getItem(tokenStorageName);
   };

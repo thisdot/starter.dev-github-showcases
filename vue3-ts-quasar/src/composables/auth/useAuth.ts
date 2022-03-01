@@ -1,6 +1,6 @@
 import { useToken } from '@/composables';
 import { EnvironmentConfig } from '@/config';
-import apiHelper from '@/helpers/api';
+import { useApi } from '@/helpers/useApi';
 
 interface AuthResponse {
   access_token?: string;
@@ -8,22 +8,26 @@ interface AuthResponse {
   scope: string;
 }
 
-interface SignoutRepsonse {
+interface SignoutResponse {
   message: string;
 }
 
 //
-const { getRequest, postRequest } = apiHelper();
+const { getRequest, postRequest } = useApi();
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default () => {
+interface UseAuth {
+  getToken: () => Promise<AuthResponse>;
+  login: () => void;
+  signOut: () => Promise<SignoutResponse>;
+}
+
+export const useAuth = (): UseAuth => {
   const { saveAuthToken, removeAuthToken } = useToken();
 
   /**
    * Performs initial sign in to Github to retrieve authentication code.
    */
   const login = () => {
-    console.log('logging in');
     removeAuthToken();
     window.location.href = `${EnvironmentConfig.API_URL}/api/auth/signin?redirect_url=${EnvironmentConfig.REDIRECT_URL}`;
   };
@@ -50,9 +54,12 @@ export default () => {
 
   const signOut = () => {
     removeAuthToken();
-    return postRequest<SignoutRepsonse>(
+    return postRequest<SignoutResponse>(
       `${EnvironmentConfig.API_URL}/api/auth/signout`,
       null,
+      {
+        withCredentials: true,
+      },
     );
   };
 
