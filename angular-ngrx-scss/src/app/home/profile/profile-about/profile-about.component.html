@@ -1,12 +1,16 @@
-<ng-container *ngIf="(profile$ | async)?.user as user">
-  <img [src]="user.avatar" />
+<ng-container *ngIf="profile$ | async as profile">
+  <img
+    *ngIf="profile?.user?.avatar"
+    class="avatar"
+    [src]="profile?.user?.avatar"
+  />
 
   <div class="content">
     <h1>
-      <div class="name">{{ user.name }}</div>
-      <div class="username">{{ user.username }}</div>
+      <div class="name">{{ profile?.user?.name }}</div>
+      <div class="username">{{ profile?.user?.username }}</div>
     </h1>
-    <div class="bio">{{ user.bio }}</div>
+    <div class="bio">{{ profile?.user?.bio }}</div>
     <div class="socials">
       <ng-container *ngFor="let social of socials; let i = index">
         <span
@@ -22,23 +26,25 @@
       </ng-container>
     </div>
     <div class="fields">
-      <div *ngIf="user.company">
+      <div *ngIf="profile?.user?.company">
         <span class="icon" appOcticon="organization"></span>
-        <span>{{ user.company }}</span>
+        <span>{{ profile?.user?.company }}</span>
       </div>
-      <div *ngIf="user.location">
+      <div *ngIf="profile?.user?.location">
         <span class="icon" appOcticon="location"></span
-        ><span>{{ user.location }}</span>
+        ><span>{{ profile?.user?.location }}</span>
       </div>
-      <div *ngIf="user.email">
+      <div *ngIf="profile?.user?.email">
         <span class="icon" appOcticon="mail"></span>
-        <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+        <a href="mailto:{{ profile?.user?.email }}">{{
+          profile?.user?.email
+        }}</a>
       </div>
-      <div *ngIf="user.blog">
+      <div *ngIf="profile?.user?.blog">
         <span class="icon" appOcticon="link"></span>
-        <a [href]="user.blog">{{ user.blog }}</a>
+        <a [href]="profile?.user?.blog">{{ profile?.user?.blog }}</a>
       </div>
-      <div *ngIf="user.twitter_username">
+      <div *ngIf="profile?.user?.twitter_username">
         <span class="icon twitter-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,25 +60,21 @@
             ></path>
           </svg>
         </span>
-        <a href="https://twitter.com/{{ user.twitter_username }}">
-          @{{ user.twitter_username }}
+        <a href="https://twitter.com/{{ profile?.user?.twitter_username }}">
+          @{{ profile?.user?.twitter_username }}
         </a>
       </div>
     </div>
 
-    <hr />
-
-    <div class="organizations"><h2>Organizations</h2></div>
-
-    <p>space</p>
-    <p>space</p>
-    <p>space</p>
-    <p>space</p>
-    <p>space</p>
-    <p>space</p>
-    <p>space</p>
-    <p>space</p>
-    <p>space</p>
-    <p>space</p>
+    <div class="organizations">
+      <h2>Organizations</h2>
+      <ul>
+        <li *ngFor="let org of profile?.orgs">
+          <a href="/orgs/{{ org.login }}">
+            <img [src]="org.avatar_url" />
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </ng-container>
