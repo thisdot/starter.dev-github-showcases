@@ -17,15 +17,13 @@ import { createPinia } from 'pinia';
 import { Quasar } from 'quasar';
 import quasarUserOptions from './quasar-user-options';
 
-import { EnvironmentConfig } from './config';
-
 const pinia = createPinia();
 
 //* GraphQL setup
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: EnvironmentConfig.GRAPHQL_URL,
+  uri: process.env.VUE_APP_GRAPHQL_URL,
 });
 
 // Cache implementation

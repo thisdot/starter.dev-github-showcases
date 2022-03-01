@@ -3,7 +3,6 @@ import axios, {
   AxiosRequestHeaders,
   AxiosRequestConfig,
 } from 'axios';
-import { EnvironmentConfig } from '../config';
 
 interface UseApi {
   getRequest: <T>(
@@ -19,7 +18,7 @@ interface UseApi {
 }
 
 export const useApi = (
-  baseUrl = EnvironmentConfig.API_URL,
+  baseUrl = process.env.VUE_APP_API_URL,
   additionalHeaders: AxiosRequestHeaders = {},
 ): UseApi => {
   axios.defaults.baseURL = baseUrl;
