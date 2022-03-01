@@ -1,8 +1,12 @@
 import { useRouter } from 'vue-router';
-import { delay } from 'lodash';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default () => {
+interface UseNav {
+  goTo: (link: string, wait: number) => void;
+  goToExternal: (link: string, wait: number) => void;
+  linkIsActive: (linkPath: string) => boolean;
+}
+
+export const useNav = (): UseNav => {
   const $router = useRouter();
 
   /** @param {String} linkPath the path the link is meant to redirect to. For example: `/auth` */
@@ -16,8 +20,7 @@ export default () => {
    */
   const goTo = (link: string, wait = 0) => {
     if (window.location.pathname !== link) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      delay(() => {
+      setTimeout(() => {
         void $router.push({
           path: link,
         });
@@ -30,8 +33,7 @@ export default () => {
    * @param wait The amount of time to wait before redirecting in milliseconds
    */
   const goToExternal = (link: string, wait = 0) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    delay(() => {
+    setTimeout(() => {
       window.location.replace(link);
     }, wait);
   };
