@@ -1,5 +1,9 @@
 <template>
+  <!-- Auth (If not logged in) -->
+  <Auth v-if="!user.isLoggedIn" />
+  <!-- Home page -->
   <div
+    v-else
     class="row container--home q-pb-lg"
     style="background-color: rgba(243, 244, 246)"
   >
@@ -38,7 +42,12 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { GistsPanel, RepoCard } from '@/components';
+import { Auth } from '@/views';
+import { useUserStore } from '@/store/userStore';
 
+const user = useUserStore();
+
+// TODO: Make this dynamic
 const testRepoData = {
   repoName: 'cowrywise-unsplashed',
   visibilityTag: 'Private',

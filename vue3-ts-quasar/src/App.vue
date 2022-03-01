@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header>
+    <q-header v-if="user.isLoggedIn">
       <NavHeader />
     </q-header>
     <q-page-container>
@@ -10,25 +10,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-//* Components
-import { NavHeader } from '@/components';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'App',
-  components: { NavHeader },
-  setup() {
-    const leftDrawerOpen = ref(false);
-
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
-    };
-  },
 });
+</script>
+
+<script lang="ts" setup>
+//* Components
+import { NavHeader } from '@/components';
+import { useUserStore } from '@/store/userStore';
+
+const user = useUserStore();
 </script>
 <style>
 @import './App.css';
