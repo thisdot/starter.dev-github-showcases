@@ -1,8 +1,5 @@
-import Auth from './Auth';
-import Home from './Home';
+export { default as Auth } from './Auth';
+export { default as Home } from './Home';
 
-//* 👇 Current directory vue files
-import Redirect from './Redirect.vue';
-
-//
-export { Auth, Home, Redirect };
+// Current directory direct vue files
+export { default as Redirect } from './Redirect.vue';
