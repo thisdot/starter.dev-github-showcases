@@ -12,7 +12,7 @@ export interface Repository {
   language: string;
   branches_url: string;
   visibility: 'public' | 'private';
-  watchers_count: number;
+  subscribers_count: number;
   forks_count: number;
   open_issues_count: number;
   pulls: number;
