@@ -2,7 +2,7 @@ import { useRouter } from 'vue-router';
 import { delay } from 'lodash';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default () => {
+export const useNav = () => {
   const $router = useRouter();
 
   /** @param {String} linkPath the path the link is meant to redirect to. For example: `/auth` */
