@@ -7,7 +7,7 @@ This is a demo application that re-implements some of GitHub's pages and functio
   - [Included Tooling](#included-tooling)
 - [Architectural Decisions](#architectural-decisions)
 - [Getting Started](#getting-started)
-  - [Cloning the Repository ](#cloning-the-repository)
+  - [Cloning the Repository](#cloning-the-repository)
   - [Env Setup](#env-setup)
   - [0Auth Setup](#oauth-setup)
   - [Installation](#installation)
