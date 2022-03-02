@@ -119,10 +119,6 @@ import { computed, defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'TabHeader',
   props: {
-    // triggerTab: {
-    //   type: Function,
-    //   default: () => true,
-    // },
     Overview: {
       type: Boolean,
       default: false,
@@ -148,19 +144,16 @@ export default defineComponent({
       default: '',
     },
   },
-  setup(props, context) {
+  setup(props, { emit }) {
     const tab = ref('Respositories');
     const activeTab = computed({
       get() {
-        // console.log(typeof props.triggerTab);
-        context.emit('triggerTab', tab.value);
-        // props.triggerTab(tab.value);
+        emit('triggerTab', tab.value);
         return tab.value;
       },
       set(val: string) {
         tab.value = val;
-        context.emit('triggerTab', tab.value);
-        // props.triggerTab(val);
+        emit('triggerTab', tab.value);
       },
     });
     return {

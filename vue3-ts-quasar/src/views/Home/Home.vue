@@ -1,5 +1,9 @@
 <template>
+  <!-- Auth (If not logged in) -->
+  <Auth v-if="!user.isLoggedIn" />
+  <!-- Home page -->
   <div
+    v-else
     class="row container--home q-pb-lg"
     style="background-color: rgba(243, 244, 246)"
   >
@@ -8,7 +12,9 @@
       <GistsPanel class="card--gists" />
     </div>
     <div class="col-12 col-sm-8 col-xl-6 q-px-lg q-pt-xl">
-      <h1 class="text-weight-bold q-mb-md">Top repositories</h1>
+      <h1 class="text-weight-bold text-h5 text-dark q-mb-md">
+        Top repositories
+      </h1>
       <q-card>
         <q-list>
           <q-item v-for="i in Array(10)" :key="i">
@@ -36,7 +42,12 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { GistsPanel, RepoCard } from '@/components';
+import { Auth } from '@/views';
+import { useUserStore } from '@/store/userStore';
 
+const user = useUserStore();
+
+// TODO: Make this dynamic
 const testRepoData = {
   repoName: 'cowrywise-unsplashed',
   visibilityTag: 'Private',

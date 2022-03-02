@@ -1,4 +1,5 @@
 # generates a certs for https
+mkdir certs
 openssl req -x509 -out ./certs/private.crt -keyout ./certs/private.key \
   -newkey rsa:2048 -nodes -sha256 \
   -subj '/CN=localhost' -extensions EXT -config <( \
