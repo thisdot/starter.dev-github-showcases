@@ -31,27 +31,27 @@
           <SearchFilter />
 
           <q-tab-panels v-model="tab">
-            <q-tab-panel name="Overview">
+            <q-tab-panel name="overview">
               <div class="text-h6">Overview</div>
               <slot name="overview"></slot>
             </q-tab-panel>
 
-            <q-tab-panel name="Respositories">
-              <div class="text-h6">Respositories</div>
+            <q-tab-panel name="repositories">
+              <div class="text-h6">Repositories</div>
               <slot name="repositories"></slot>
             </q-tab-panel>
 
-            <q-tab-panel name="Projects">
+            <q-tab-panel name="projects">
               <div class="text-h6">Projects</div>
               <slot name="projects"></slot>
             </q-tab-panel>
 
-            <q-tab-panel name="Packages">
+            <q-tab-panel name="packages">
               <div class="text-h6">Packages</div>
               <slot name="packages"></slot>
             </q-tab-panel>
 
-            <q-tab-panel name="Stars">
+            <q-tab-panel name="stars">
               <div class="text-h6">Stars</div>
               <slot name="stars"></slot>
             </q-tab-panel>

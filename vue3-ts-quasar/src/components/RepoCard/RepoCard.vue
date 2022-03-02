@@ -130,7 +130,7 @@ export default defineComponent({
       required: false,
     },
     lastUpdated: {
-      type: String,
+      type: Date,
       required: false,
     },
   },
