@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import ProfileNav from '../ProfileNav/ProfileNav';
 import UserProfileView, {
   UserProfileViewProps,

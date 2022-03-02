@@ -5,11 +5,7 @@ import { USER_PROFILE_QUERY } from '~/lib/queries/UserProfile';
 import { auth } from '~/services/auth.server';
 import { UserProfileViewProps } from '~/components/UserProfile/UserProfile.view';
 import { USER_REPOS_QUERY } from '~/lib/queries/UserRepos';
-import {
-  OrderDirection,
-  RepositoryOrderField,
-  useRepoFilters,
-} from '~/components/RepoFilters';
+import { OrderDirection, RepositoryOrderField } from '~/components/RepoFilters';
 import { parseQuery } from '~/components/UserRepos/parseQuery';
 import ProfilePage from '~/components/ProfilePage/ProfilePage.view';
 
