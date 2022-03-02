@@ -53,7 +53,7 @@
           </span>
         </span>
         <span class="lastupdate">
-          Updated
+          Updated on
           {{ lastUpdated }}
         </span>
       </div>
@@ -264,6 +264,11 @@ export default defineComponent({
 
   & > &_right {
     display: flex;
+    margin-top: 10px;
+
+    @media screen and (min-width: 1024px) {
+      margin-top: unset;
+    }
 
     & > .repo-card_right_starIncrement {
       & > svg {

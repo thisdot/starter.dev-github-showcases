@@ -47,5 +47,5 @@ Default.args = {
     },
   ],
   stars: 1,
-  lastUpdated: 'on 23 Sep 2020',
+  lastUpdated: '23 Sep 2020',
 };
