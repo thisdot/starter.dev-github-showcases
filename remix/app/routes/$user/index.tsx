@@ -59,7 +59,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 export default function User() {
-  const repoFilters = useRepoFilters();
   const { user, repositories, owner } = useLoaderData();
 
   return <ProfilePage repos={repositories} user={user} owner={owner} />;
