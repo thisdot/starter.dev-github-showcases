@@ -26,6 +26,7 @@
     "react": "^17.0.2",
     "react-content-loader": "^6.1.0",
     "react-dom": "^17.0.2",
+    "react-markdown": "5.0.3",
     "remix": "^1.1.1",
     "remix-auth": "^3.2.1",
     "remix-auth-github": "^1.0.0"

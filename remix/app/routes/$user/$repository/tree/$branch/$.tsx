@@ -1,27 +1,24 @@
-import { json, useLoaderData, useOutletContext } from 'remix';
-import type { LoaderFunction } from 'remix';
-import { auth } from '~/services/auth.server';
-import gqlClient from '~/lib/graphql-client';
-import { RepoContext, RepoProvider } from '~/context/RepoContext';
-import RepoHeader from '../../../components/RepoHeader/RepoHeader';
-import FileExplorerNav from '../../../components/FileExplorerNav/FileExplorerNav';
-import FileExplorer from '../../../components/FileExplorer/FileExplorer.view';
-import RepoReadMe from '../../../components/RepoReadMe/RepoReadMe.view';
-import RepoAboutWidget from '~/components/RepoAboutWidget/RepoAboutWidget';
-import { parseTopics } from '~/components/RepoPage/parseTopics';
+import { LoaderFunction, useOutletContext } from 'remix';
+import { json, useLoaderData } from 'remix';
 import { parseQueryData } from '~/components/FileExplorer/parseQueryData';
+import FileExplorerNav from '~/components/FileExplorerNav/FileExplorerNav';
+import RepoHeader from '~/components/RepoHeader/RepoHeader';
+import FileExplorer from '~/components/FileExplorer/FileExplorer.view';
+import { parseTopics } from '~/components/RepoPage/parseTopics';
 import { parseQuery } from '~/components/RepoReadMe/parseQuery';
+import RepoReadMe from '~/components/RepoReadMe/RepoReadMe.view';
+import { RepoContext, RepoProvider } from '~/context/RepoContext';
+import gqlClient from '~/lib/graphql-client';
+import { auth } from '~/services/auth.server';
 import { REPO_PAGE_QUERY } from '~/lib/queries/RepoPage';
 import { REPO_TREE_QUERY } from '~/lib/queries/FileExplorer';
 import { REPO_README_QUERY } from '~/lib/queries/RepoReadMe';
-
 type LoaderData = {
-  context: RepoContext;
-  items: any;
-  readme: any;
+  context: any,
+  items: any,
+  readme: any
 };
-
-export const loader: LoaderFunction = async ({ request, params }) => {
+export const loader: LoaderFunction = async ({ params, request }) => {
   const { accessToken } = await auth.isAuthenticated(request, {
     failureRedirect: '/login',
   });
@@ -29,7 +26,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   let url = new URL(request.url);
   const rr = url.pathname;
   const basePath = rr.split('/');
-  const index = basePath.indexOf(`${params.repository}`);
+  const index = basePath.indexOf(`${params.branch}`);
   const path = basePath.splice(index + 1);
 
   const { repository } = await gqlClient.request(
@@ -53,6 +50,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     path: formattedPath,
     data: repository
       ? {
+          // @ts-ignore - generated types be like that
           ...repository,
           isOrg: typeof repository.owner?.orgName === 'string',
           watcherCount: repository.watchers.totalCount,
@@ -68,7 +66,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     {
       owner: params.user,
       name: params.repository,
-      expression: `${context.branch}:${formattedPath}`,
+      expression: `${context.branch}:${context.path}`,
     },
     {
       authorization: `Bearer ${accessToken}`,
@@ -76,6 +74,10 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   );
 
   const items = parseQueryData(data);
+  
+  if (items.length < 1) throw new Response("Not Found", {
+    status: 404,
+  });
 
   const readmeData = await gqlClient.request(
     REPO_README_QUERY,
@@ -94,14 +96,14 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json<LoaderData>({ context, items, readme });
 };
 
-export default function Repository() {
-  const { context, items, readme } = useLoaderData<LoaderData>()
+export default function Screen() {
+  const { context, items, readme } = useLoaderData<LoaderData>();
   return (
     <RepoProvider value={context}>
       <RepoHeader />
-      <div className="max-w-screen-2xl mx-auto md:py-8 px-4">
+      <div className="max-w-screen-2xl mx-auto py-8 px-4">
         <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 md:col-span-7 xl:col-span-9">
+          <div className="col-span-12">
             <FileExplorerNav />
             <FileExplorer
               items={items}
@@ -110,9 +112,6 @@ export default function Repository() {
               repoPath={context.path}
             />
             <RepoReadMe readme={readme} />
-          </div>
-          <div className="col-span-12 md:col-span-5 xl:col-span-3">
-            <RepoAboutWidget />
           </div>
         </div>
       </div>

@@ -1,18 +1,20 @@
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from 'remix';
 import type { MetaFunction } from 'remix';
 import styles from './styles/tailwind.css';
 
 type DocumentProps = {
-  children: React.ReactNode,
-  title?: string
-}
+  children: React.ReactNode;
+  title?: string;
+};
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
@@ -34,18 +36,38 @@ export function ErrorBoundary({ error }: any) {
   );
 }
 
-export default function App() {
+export function CatchBoundary() {
+  const caught = useCatch();
   return (
-    <Document>
-      <Outlet />
-        <ScrollRestoration />
-        <Scripts />
+    <Document title="Error">
+      <div className="text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className=' text-9xl mb-8'>{caught.status}</div>
+        <div className="text-2xl mb-5">
+          <span className="">Ooops...</span>
+          <br />
+          {caught.statusText}
+        </div>
+        <div className=" bg-gray-900 text-white rounded px-7 py-2">
+          <Link to={`/`} className=" ">
+            Go to Home
+          </Link>
+        </div>
+      </div>
     </Document>
   );
 }
 
+export default function App() {
+  return (
+    <Document>
+      <Outlet />
+      <ScrollRestoration />
+      <Scripts />
+    </Document>
+  );
+}
 
-export function Document( { children, title}: DocumentProps) {
+export function Document({ children, title }: DocumentProps) {
   return (
     <html lang="en">
       <head>

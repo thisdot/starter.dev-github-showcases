@@ -1,6 +1,6 @@
 import type { TabItem } from './types';
 import cn from 'classnames';
-import { Link } from 'remix';
+import { Link, useLocation } from 'remix';
 import * as styles from './TabNavigation.classNames';
 
 interface TabNavigationProps {
@@ -10,18 +10,36 @@ interface TabNavigationProps {
   isOrg?: boolean;
 }
 
-function TabNavigation({ tabs, className }: TabNavigationProps) {
+function TabNavigation({ tabs, className, basePath = '' }: TabNavigationProps) {
+  const location = useLocation();
+  const isCurrentTab = (path?: string) => {
+    const matchPath = path === '' ? basePath : `${basePath}/${path}`;
+    const pathname = location.pathname;
+
+    if (!pathname.includes(path!) || path?.length == 0)
+      return pathname.includes(matchPath);
+    return pathname === `/${basePath}`;
+  };
   return (
     <div className={cn(styles.container, className)}>
       <nav className={styles.nav} aria-label="Tabs">
         {tabs.map(({ title, path, Icon, count }, index) => {
+          let href = path === '' ? `/${basePath}` : `/${basePath}/${path}`;
           return (
             <Link
-              to=""
+              to={href}
               key={index}
-              className={`${styles.tabActive}, ${styles.tab}`}
+              className={cn(
+                isCurrentTab(path) ? styles.tabActive : styles.tabInactive,
+                styles.tab
+              )}
             >
-              <Icon className={`${styles.iconActive}, ${styles.icon}`} />
+              <Icon
+                className={cn(
+                  isCurrentTab(path) ? styles.iconActive : styles.iconInactive,
+                  styles.icon
+                )}
+              />
               <span>{title}</span>
               {typeof count === 'number' && (
                 <span className="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl">

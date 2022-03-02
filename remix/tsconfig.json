@@ -1,5 +1,5 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "tailwind.config.js"],
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "tailwind.config.js", "app/routes/$user/$repository/tree/$branch/...$path.tsx"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "module": "esnext",
