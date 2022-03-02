@@ -1,11 +1,11 @@
 <template>
   <div>
     <TabHeader
-      :Overview="true"
-      :Respositories="true"
-      :Projects="true"
-      :Packages="true"
-      :Stars="true"
+      :overview="true"
+      :repositories="true"
+      :projects="true"
+      :packages="true"
+      :stars="true"
       @triggerTab="changeTab"
     />
     <div class="wrapper">

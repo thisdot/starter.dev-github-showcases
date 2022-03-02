@@ -4,11 +4,11 @@ export default {
   title: 'component/Tab Header',
   component: TabHeader,
   argTypes: {
-    Overview: {},
-    Respositories: {},
-    Projects: {},
-    Packages: {},
-    Stars: {},
+    overview: {},
+    repositories: {},
+    projects: {},
+    packages: {},
+    stars: {},
   },
 };
 
@@ -22,9 +22,9 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  Overview: true,
-  Respositories: true,
-  Projects: true,
-  Packages: true,
-  Stars: true,
+  overview: true,
+  repositories: true,
+  projects: true,
+  packages: true,
+  stars: true,
 };
