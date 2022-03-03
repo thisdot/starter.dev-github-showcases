@@ -22,7 +22,10 @@ export class ProfileEffects {
           map(([user, orgs, repos]) =>
             fetchProfileSuccess({ data: { user, orgs, repos } }),
           ),
-          catchError((error) => of(fetchProfileFailure({ error }))),
+          catchError((error) => {
+            console.error(error);
+            return of(fetchProfileFailure({ error }));
+          }),
         ),
       ),
     );

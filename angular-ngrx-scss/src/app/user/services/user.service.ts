@@ -89,7 +89,18 @@ export class UserService {
           forks_count: repo.forks_count,
           private: repo.private,
           updated_at: repo.updated_at,
-          license: repo.license,
+          license: repo.license
+            ? {
+                key: repo.license.key,
+                name: repo.license.name,
+                spdx_id: repo.license.spdx_id,
+                url: repo.license.url,
+                node_id: repo.license.node_id,
+              }
+            : null,
+          owner: {
+            login: repo.owner.login,
+          },
         })),
       ),
     );

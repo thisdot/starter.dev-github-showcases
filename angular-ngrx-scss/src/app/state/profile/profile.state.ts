@@ -37,13 +37,16 @@ export interface UserReposState {
   forks_count: number;
   private: boolean;
   updated_at: string;
-  license: {
+  owner: {
+    login: string;
+  };
+  license?: {
     key: string;
     name: string;
     spdx_id: string;
     url: string;
     node_id: string;
-  };
+  } | null;
 }
 
 export interface UserRepo {
@@ -134,13 +137,13 @@ export interface UserRepo {
   archived: boolean;
   disabled: boolean;
   open_issues_count: number;
-  license: {
+  license?: {
     key: string;
     name: string;
     spdx_id: string;
     url: string;
     node_id: string;
-  };
+  } | null;
   allow_forking: boolean;
   is_template: boolean;
   topics: string[];
