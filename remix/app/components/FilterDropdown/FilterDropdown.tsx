@@ -38,7 +38,7 @@ function FilterDropdown({
         searchParams.set(name, value as string);
         str = searchParams.toString();
       } else {
-        searchParams.delete(name)
+        searchParams.delete(name);
         str = searchParams.toString();
       }
     } else {
@@ -108,7 +108,7 @@ function FilterDropdown({
                   className={styles.itemButton}
                   onClick={(e) => {
                     onChange(value);
-                    handleAppendQuery(name, value)
+                    handleAppendQuery(name, value);
                   }}
                 >
                   {value === current && (
