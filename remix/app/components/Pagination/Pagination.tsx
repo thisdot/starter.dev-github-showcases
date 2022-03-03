@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'remix';
 import * as styles from './Pagination.classNames';
 
 interface PaginationProps {
@@ -14,7 +14,7 @@ function Pagination({ pageInfo, owner }: PaginationProps) {
 
   const prevUrl = `/${owner}?before=${pageInfo.startCursor}`;
   const nextUrl = `/${owner}?after=${pageInfo.endCursor}`;
-  let navigate = useNavigate();
+  let navigate = useNavigate()
 
   const handlePreviousClick = () => {
     navigate(prevUrl);

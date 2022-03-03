@@ -7,7 +7,8 @@ import * as styles from './UserRepos.classNames';
 import Pagination from '../Pagination/Pagination';
 import { filterRepos } from './filterRepos';
 import { getLanguages } from './getLanguages';
-import { RepoFilters, useRepoFilters } from '../RepoFilters';
+import { useRepoFilters } from '../RepoFilters/useRepoFilters';
+import RepoFilters from '../RepoFilters/RepoFilters';
 
 export interface UserReposViewProps {
   repos: Repositories;

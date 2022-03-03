@@ -18,7 +18,7 @@ function ProfilePage({ repos, user, owner }: ProfilePageProps) {
         <div className={styles.gridNav}>
           <div className="col-span-12 md:col-span-4 xl:col-span-3" />
           <div className={styles.profileNav}>
-            <ProfileNav className="border-none" />
+            <ProfileNav basePath='vyktoremario' className="border-none" />
           </div>
         </div>
       </div>

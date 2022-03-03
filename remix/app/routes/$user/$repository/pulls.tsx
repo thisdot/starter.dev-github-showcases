@@ -1,19 +1,18 @@
 import { LoaderFunction } from 'remix';
 import { json, useLoaderData } from 'remix';
 import RepoHeader from '~/components/RepoHeader/RepoHeader';
-import { parseQuery } from '~/components/RepoIssues/parseQuery';
-import RepoIssues from '~/components/RepoIssues/RepoIssues';
 import { parseTopics } from '~/components/RepoPage/parseTopics';
+import { parseQuery } from '~/components/RepoPulls/parseQuery';
+import RepoPulls from '~/components/RepoPulls/RepoPulls';
 import { RepoContext, RepoProvider } from '~/context/RepoContext';
 import gqlClient from '~/lib/graphql-client';
-import { REPO_ISSUES_QUERY } from '~/lib/queries/RepoIssues';
 import { REPO_PAGE_QUERY } from '~/lib/queries/RepoPage';
+import { REPO_PULLS_QUERY } from '~/lib/queries/RepoPulls';
 import { auth } from '~/services/auth.server';
 type LoaderData = {
   context: RepoContext;
-  openIssues: any;
-  closedIssues: any;
-  milestones: any;
+  openPullRequests: any;
+  closedPullRequests: any;
   labels: any;
 };
 
@@ -67,7 +66,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   };
 
   const data = await gqlClient.request(
-    REPO_ISSUES_QUERY,
+    REPO_PULLS_QUERY,
     {
       owner: params.user,
       name: params.repository,
@@ -87,28 +86,27 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     }
   );
 
-  const { openIssues, closedIssues, milestones, labels } = parseQuery(data);
+  const { openPullRequests, closedPullRequests, labels } = parseQuery(data);
 
   return json<LoaderData>({
     context,
-    openIssues,
-    closedIssues,
-    milestones,
+    openPullRequests,
+    closedPullRequests,
     labels,
   });
 };
 
-export default function Issues() {
-  const { context, openIssues, closedIssues, milestones, labels } =
+export default function Pulls() {
+  const { context, openPullRequests, closedPullRequests, labels } =
     useLoaderData<LoaderData>();
+
   return (
     <RepoProvider value={context}>
       <RepoHeader />
       <div className="md:py-12 max-w-screen-xl mx-auto">
-        <RepoIssues
-          openIssues={openIssues}
-          closedIssues={closedIssues}
-          milestones={milestones}
+        <RepoPulls
+          openPullRequests={openPullRequests}
+          closedPullRequests={closedPullRequests}
           labels={labels}
         />
       </div>

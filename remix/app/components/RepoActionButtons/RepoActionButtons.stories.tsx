@@ -2,7 +2,6 @@ import { RepoContext, RepoProvider } from '../../context/RepoContext';
 import { Story, Meta } from '@storybook/react';
 import RepoActionButtons from './RepoActionButtons';
 
-
 export default {
   component: RepoActionButtons,
   title: 'RepoPage/RepoActionButtons',
@@ -32,7 +31,7 @@ Default.args = {
 };
 
 export const BigNumbers = Template.bind({});
-Default.args = {
+BigNumbers.args = {
   name: 'react',
   owner: 'facebook',
   isRepoLoading: false,

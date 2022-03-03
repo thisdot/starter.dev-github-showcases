@@ -10,16 +10,18 @@ interface TabNavigationProps {
   isOrg?: boolean;
 }
 
-function TabNavigation({ tabs, className, basePath = '' }: TabNavigationProps) {
+function TabNavigation({ tabs, className, basePath }: TabNavigationProps) {
   const location = useLocation();
+
   const isCurrentTab = (path?: string) => {
     const matchPath = path === '' ? basePath : `${basePath}/${path}`;
     const pathname = location.pathname;
 
-    if (!pathname.includes(path!) || path?.length == 0)
-      return pathname.includes(matchPath);
-    return pathname === `/${basePath}`;
+    if (!pathname.includes(path!) || path === '')
+      return pathname === `/${matchPath}`;
+    return pathname === `/${basePath}/${path}`;
   };
+
   return (
     <div className={cn(styles.container, className)}>
       <nav className={styles.nav} aria-label="Tabs">

@@ -5,6 +5,6 @@ export const tabList: TabItem[] = [
   {
     title: 'Repositories',
     path: '',
-    Icon: GitRepoIcon,
+    Icon: GitRepoIcon
   },
 ];
