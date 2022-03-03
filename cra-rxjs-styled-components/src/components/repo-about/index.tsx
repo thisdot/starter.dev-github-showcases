@@ -1,1 +1,1 @@
-export { default } from './repo-about';
+export { default } from './RepoAbout';

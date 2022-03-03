@@ -1,2 +1,10 @@
-export { LinkIcon } from './link-icon';
-export { ReadmeBookIcon } from './readme-book-icon';
+export { BookIcon } from './BookIcon';
+export { CodeIcon } from './CodeIcon';
+export { DropdownIcon } from './DropdownIcon';
+export { EyeIcon } from './EyeIcon';
+export { ForkIcon } from './ForkIcon';
+export { IssuesIcon } from './IssuesIcon';
+export { LinkIcon } from './LinkIcon';
+export { PrIcon } from './PrIcon';
+export { ReadmeBookIcon } from './ReadmeBookIcon';
+export { StarIcon } from './StarIcon';

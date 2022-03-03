@@ -6,7 +6,7 @@ import { Repository } from '../interfaces/repositories.interfaces';
 import { fromFetchWithAuth } from '../hooks/auth/from-fetch-with-auth';
 import SubHeader from '../components/sub-header';
 import RepoAbout from '../components/repo-about';
-import { RepoLayout, RepoAside } from '../components/layouts/repo-layout-page';
+import { RepoLayout, RepoAside } from '../components/layouts/RepoLayoutPage';
 
 type RepositoryDetails = {
   repo: Repository | null;

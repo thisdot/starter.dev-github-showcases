@@ -1,1 +1,1 @@
-export { default } from './sub-header';
+export { default } from './SubHeader';

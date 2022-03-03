@@ -1,4 +1,4 @@
-import { LinkIcon, ReadmeBookIcon } from '../icons';
+import { LinkIcon, ReadmeBookIcon } from '../icons/index';
 import {
   AboutContainer,
   Header,
@@ -10,8 +10,8 @@ import {
   ReadmeHoverEffect,
   ReadmeText,
   DescriptionText,
-  ReadmeIconStyles
-} from './repo-about.styles';
+  ReadmeIconStyles,
+} from './RepoAbout.styles';
 
 type Props = {
   description?: string;
@@ -21,37 +21,29 @@ type Props = {
 
 export default function RepoAbout({ description, websiteLink, topics }: Props) {
   return (
-
     <AboutContainer>
       <Header>About</Header>
       <SpacingContainer>
+        {description ? (
+          <DescriptionText>{description}</DescriptionText>
+        ) : (
+          <DefaultRepoText>
+            No description, website, or topics provided.
+          </DefaultRepoText>
+        )}
 
-        {
-          description ?
-            <DescriptionText>
-              {description}
-            </DescriptionText>
-            :
-            <DefaultRepoText>
-              No description, website, or topics provided.
-            </DefaultRepoText>
-        }
-
-        {
-          websiteLink ?
-            <LinkContainer>
-              <LinkIcon />
-              <WebsiteLink href={websiteLink} rel="noopener" target="_blank">
-                {websiteLink}
-              </WebsiteLink>
-            </LinkContainer>
-            : null
-        }
+        {websiteLink ? (
+          <LinkContainer>
+            <LinkIcon />
+            <WebsiteLink href={websiteLink} rel="noopener" target="_blank">
+              {websiteLink}
+            </WebsiteLink>
+          </LinkContainer>
+        ) : null}
 
         {topics?.map((topic, index) => (
           <Tag key={index}>{topic}</Tag>
         ))}
-
       </SpacingContainer>
 
       <ReadmeHoverEffect>
@@ -60,7 +52,6 @@ export default function RepoAbout({ description, websiteLink, topics }: Props) {
         </ReadmeIconStyles>
         <ReadmeText>Readme</ReadmeText>
       </ReadmeHoverEffect>
-
     </AboutContainer>
   );
 }

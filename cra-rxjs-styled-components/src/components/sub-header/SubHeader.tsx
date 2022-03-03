@@ -18,15 +18,17 @@ import {
   TabNavigationInactiveLinks,
   TabNavigationActive,
   TabNavigationIcon,
-  TabNavigationCount
-} from './sub-header.styles';
-import { BookIcon } from '../icons/book-icon';
-import { EyeIcon } from '../icons/eye-icon';
-import { StarIcon } from '../icons/star-icon';
-import { ForkIcon } from '../icons/fork-icon';
-import { CodeIcon } from '../icons/code-icon';
-import { PrIcon } from '../icons/pr-icon';
-import { IssuesIcon } from '../icons/issues-icon';
+  TabNavigationCount,
+} from './SubHeader.styles';
+import {
+  BookIcon,
+  EyeIcon,
+  StarIcon,
+  ForkIcon,
+  CodeIcon,
+  PrIcon,
+  IssuesIcon,
+} from '../icons/index';
 
 type Props = {
   user: string;
@@ -37,13 +39,22 @@ type Props = {
   forkCount: number;
   issuesCount: number;
   prCount: number;
-}
+};
 
-export default function SubHeader({ user, repo, privacy, watchCount, starCount, forkCount, issuesCount, prCount, }: Props) {
+export default function SubHeader({
+  user,
+  repo,
+  privacy,
+  watchCount,
+  starCount,
+  forkCount,
+  issuesCount,
+  prCount,
+}: Props) {
   const btnArr = [
-    { label: "Watch", icon: <EyeIcon />, count: watchCount },
-    { label: "Star", icon: <StarIcon />, count: starCount },
-    { label: "Fork", icon: <ForkIcon />, count: forkCount }
+    { label: 'Watch', icon: <EyeIcon />, count: watchCount },
+    { label: 'Star', icon: <StarIcon />, count: starCount },
+    { label: 'Fork', icon: <ForkIcon />, count: forkCount },
   ];
 
   return (
@@ -58,7 +69,9 @@ export default function SubHeader({ user, repo, privacy, watchCount, starCount, 
             <SubHeaderSeperator>/</SubHeaderSeperator>
             <SubHeaderRepoLink>{repo}</SubHeaderRepoLink>
           </SubHeaderSpanContainer>
-          <SubHeaderPrivacyBadge>{privacy ? "Private" : "Public"}</SubHeaderPrivacyBadge>
+          <SubHeaderPrivacyBadge>
+            {privacy ? 'Private' : 'Public'}
+          </SubHeaderPrivacyBadge>
         </SubHeaderH1Section>
         <SubHeaderButtonsActionsContainer>
           {btnArr.map((btnInfo, index) => (
@@ -69,7 +82,9 @@ export default function SubHeader({ user, repo, privacy, watchCount, starCount, 
                 </SubHeaderButtonsActionsIcon>
                 {btnInfo.label}
               </SubHeaderMainButtonSection>
-              <SubHeaderMainButtonCount>{btnInfo.count}</SubHeaderMainButtonCount>
+              <SubHeaderMainButtonCount>
+                {btnInfo.count}
+              </SubHeaderMainButtonCount>
             </SubHeaderIndividualButtonContainer>
           ))}
         </SubHeaderButtonsActionsContainer>
@@ -99,5 +114,5 @@ export default function SubHeader({ user, repo, privacy, watchCount, starCount, 
         </TabNavigation>
       </SubHeaderBottomRow>
     </SubHeaderWrapper>
-  )
-};
+  );
+}

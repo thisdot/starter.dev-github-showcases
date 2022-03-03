@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import RepositoryCard from '../components/top-repositories/repository';
+import RepositoryCard from '../components/top-repositories/RepositoryCard';
 import { useTopRepos } from '../hooks/top-repositories/use-top-repos';
 import Sidebar from '../components/layouts/Sidebar';
 import { Layout } from '../components/layouts/Layout';
@@ -12,7 +12,7 @@ const Main = styled.main`
   background-color: rgb(243, 244, 246);
   padding: 3rem;
   min-height: calc(100vh - 70px);
-  @media(max-width: 850px){
+  @media (max-width: 850px) {
     padding: 2rem;
   }
 `;
