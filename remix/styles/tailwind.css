@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .border-spacing-5 {
+    border-spacing: 5px;
+  }
+  .codeBlock = {
+    border-spacing: 5px;
+    background-color: #ffffff !important;
+  }
+}

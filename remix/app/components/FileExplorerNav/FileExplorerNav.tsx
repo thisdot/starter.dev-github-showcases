@@ -1,7 +1,7 @@
 import { GitBranchIcon } from '../Icons';
 import { Link } from 'remix';
 import { useRepo } from '../../context/RepoContext';
-import * as styles from './FileExplorerNav.classNames';
+import * as  styles from './FileExplorerNav.classNames';
 import { removePathPart } from '../../lib/pathUtils';
 
 function RepoNavigation() {
@@ -21,7 +21,7 @@ function RepoNavigation() {
           <span className={styles.separator}>/</span>
           {crumbs.map((crumb, i) => {
             const isLast = i === crumbs.length - 1;
-            const crumbPath = removePathPart(crumbs, i);
+            const crumbPath = removePathPart(crumbs, i)
             const href = `${owner}/${name}/tree/${branch}/${crumbPath}`;
             return (
               <>
