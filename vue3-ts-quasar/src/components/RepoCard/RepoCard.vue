@@ -111,7 +111,7 @@ const { getFriendlyDate, upperFirst } = useFormatter();
 const friendlyUpdatedAt = getFriendlyDate(props.updatedAt);
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../../styles/quasar.variables.scss';
 
 a {
