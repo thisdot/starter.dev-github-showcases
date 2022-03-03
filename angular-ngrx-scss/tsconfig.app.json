@@ -4,8 +4,10 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [],
-    "typeRoots": ["node_modules/@types", "typings.d.ts"]
+    "typeRoots": ["node_modules/@types", "typings.d.ts"],
+    "experimentalDecorators": true
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
-  "include": ["src/**/*.d.ts", "typings.d.ts"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "typings.d.ts"],
+  "exclude": ["src/**/*.spec.ts"]
 }
