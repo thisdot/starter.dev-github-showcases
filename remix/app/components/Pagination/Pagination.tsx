@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import { useNavigate } from 'remix';
 import * as styles from './Pagination.classNames';
 
 interface PaginationProps {
@@ -14,14 +13,13 @@ function Pagination({ pageInfo, owner }: PaginationProps) {
 
   const prevUrl = `/${owner}?before=${pageInfo.startCursor}`;
   const nextUrl = `/${owner}?after=${pageInfo.endCursor}`;
-  let navigate = useNavigate()
 
   const handlePreviousClick = () => {
-    navigate(prevUrl);
+    window.location.assign(prevUrl);
   };
 
   const handleNextClick = () => {
-    navigate(nextUrl);
+    window.location.assign(nextUrl);
   };
 
   return (
@@ -31,7 +29,11 @@ function Pagination({ pageInfo, owner }: PaginationProps) {
           type="button"
           disabled={!pageInfo.hasPreviousPage || !pageInfo.startCursor}
           onClick={handlePreviousClick}
-          className={cn(styles.button, styles.buttonPrev)}
+          className={
+            !pageInfo.hasPreviousPage || !pageInfo.startCursor
+              ? cn(styles.button, styles.buttonPrev)
+              : cn(styles.button, styles.buttonPrev)
+          }
         >
           Previous
         </button>
@@ -39,7 +41,11 @@ function Pagination({ pageInfo, owner }: PaginationProps) {
           type="button"
           onClick={handleNextClick}
           disabled={!pageInfo.hasNextPage || !pageInfo.endCursor}
-          className={cn(styles.button, styles.buttonNext)}
+          className={
+            !pageInfo.hasNextPage || !pageInfo.endCursor
+              ? cn(styles.button, styles.buttonNext)
+              : cn(styles.button, styles.buttonNext)
+          }
         >
           Next
         </button>
