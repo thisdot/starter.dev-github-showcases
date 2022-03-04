@@ -15,8 +15,14 @@ A GitHub account is required to login and view the application, as it requires y
 
 ### Setup
 
+1. Create your project `.env`
+
+```bash
+cp .env.example .env
+```
+
 1. Install dependencies: `npm install`
-2. Run the project: `npm run start`
+1. Run the project: `npm run start`
 
 ## Building
 

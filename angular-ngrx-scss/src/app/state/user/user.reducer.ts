@@ -7,7 +7,7 @@ const initialUserState: UserState = {
   username: '',
 };
 
-const userReducer = createReducer(
+const reducer = createReducer(
   initialUserState,
 
   on(fetchUserDataSuccess, (state, { userData }) => ({
@@ -17,6 +17,6 @@ const userReducer = createReducer(
   })),
 );
 
-export function reducer(state: UserState | undefined, action: Action) {
-  return userReducer(state, action);
+export function userReducer(state: UserState | undefined, action: Action) {
+  return reducer(state, action);
 }
