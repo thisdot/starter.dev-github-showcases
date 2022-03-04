@@ -12,7 +12,8 @@ export const RepoLayout = styled.div`
     'readme readme';
 
   @media (max-width: 768px) {
-    grid-template-columns: 60% 40%;
+    display: flex;
+    flex-direction: column;
   }
 `;
 

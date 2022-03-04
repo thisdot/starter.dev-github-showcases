@@ -27,6 +27,7 @@
   --inline-block: inline-block;
   --align-items-center: center;
   --flex-space-between: space-between;
+  --tw-border-opacity: 1;
   --tw-bg-opacity: 1;
   --tw-text-opacity-1: 1;
   --tw-black-shadow: 0 10px 15px -3px rgb(0 0 0/0.1),

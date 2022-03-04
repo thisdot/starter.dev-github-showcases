@@ -4,8 +4,9 @@ import { tap, forkJoin } from 'rxjs';
 import { SINGLE_USER_REPO } from '../constants/url.constants';
 import { Repository } from '../interfaces/repositories.interfaces';
 import { fromFetchWithAuth } from '../hooks/auth/from-fetch-with-auth';
-import SubHeader from '../components/sub-header';
-import RepoAbout from '../components/repo-about';
+import SubHeader from '../components/sub-header/SubHeader';
+import RepoAbout from '../components/repo-about/RepoAbout';
+import FileExplorer from '../components/file-explorer/FileExplorer';
 import { RepoLayout, RepoAside } from '../components/layouts/RepoLayoutPage';
 
 type RepositoryDetails = {
@@ -23,7 +24,14 @@ export default function RepoDetails() {
   });
   const [loading, setLoading] = useState(true);
   const params = useParams();
-  const { repo, openPr, issues, topics } = repoDetails;
+  const { repo, openPr, rootFileInfo, issues, topics } = repoDetails;
+  const listOfDirectoryNames = rootFileInfo
+    ?.filter((obj) => obj.type === 'dir')
+    .map((obj) => obj.name);
+  const listOfFileNames = rootFileInfo
+    ?.filter((obj) => obj.type === 'file')
+    .map((obj) => obj.name)
+    .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
   const request = (url: string) =>
     fromFetchWithAuth(url, {
@@ -78,6 +86,11 @@ export default function RepoDetails() {
         prCount={openPr!}
       />
       <RepoLayout>
+        <FileExplorer
+          fileNames={listOfFileNames!}
+          dirNames={listOfDirectoryNames!}
+          branch={repo?.default_branch!}
+        />
         <RepoAside>
           <RepoAbout
             topics={topics}
