@@ -1,10 +1,8 @@
 import { json, useLoaderData } from 'remix';
 import type { LoaderFunction } from 'remix';
 import gqlClient from '~/lib/graphql-client';
-import { USER_PROFILE_QUERY } from '~/lib/queries/UserProfile';
+import { FULL_USER_PROFILE_QUERY } from '~/lib/queries/UserProfile';
 import { auth } from '~/services/auth.server';
-import { UserProfileViewProps } from '~/components/UserProfile/UserProfile.view';
-import { USER_REPOS_QUERY } from '~/lib/queries/UserRepos';
 import { parseQuery } from '~/components/UserRepos/parseQuery';
 import ProfilePage from '~/components/ProfilePage/ProfilePage.view';
 import {
@@ -13,8 +11,7 @@ import {
 } from '~/components/RepoFilters/useRepoFilters';
 
 type LoaderData = {
-  user: UserProfileViewProps;
-  repositories: any;
+  userProfileData: any;
   owner?: string;
 };
 
@@ -23,14 +20,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     failureRedirect: '/login',
   });
 
-  const { user } = await gqlClient.request(
-    USER_PROFILE_QUERY,
-    { username: params.user },
-    {
-      authorization: `Bearer ${accessToken}`,
-    }
-  );
-
   let url = new URL(request.url);
   let after = url.searchParams.get('after');
   let before = url.searchParams.get('before');
@@ -38,8 +27,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const afterCursor = typeof after === 'string' ? after : undefined;
   const beforeCursor = typeof before === 'string' ? before : undefined;
 
-  const repos = await gqlClient.request(
-    USER_REPOS_QUERY,
+  const data = await gqlClient.request(
+    FULL_USER_PROFILE_QUERY,
     {
       username: params.user,
       orderBy: {
@@ -53,12 +42,15 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       authorization: `Bearer ${accessToken}`,
     }
   );
-  const repositories = parseQuery(repos);
-  return json<LoaderData>({ user, repositories, owner: params.user });
+  const repositories = parseQuery(data);
+  data.user.repositories = repositories;
+  const userProfileData = { ...data.user };
+
+  return json<LoaderData>({ owner: params.user, userProfileData });
 };
 
 export default function User() {
-  const { user, repositories, owner } = useLoaderData();
+  const { userProfileData, owner } = useLoaderData();
 
-  return <ProfilePage repos={repositories} user={user} owner={owner} />;
+  return <ProfilePage userProfileData={userProfileData} owner={owner} />;
 }

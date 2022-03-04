@@ -1,5 +1,5 @@
 import type { GistItem } from './types';
-import Container from './Container';
+import Container from './container';
 
 import { Link } from 'remix';
 import * as styles from './UserGists.classNames';
