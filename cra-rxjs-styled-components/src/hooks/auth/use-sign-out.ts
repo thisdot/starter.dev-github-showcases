@@ -6,7 +6,7 @@ import { SIGN_OUT_URL } from '../../constants/url.constants';
 import { AUTH_TOKEN } from '../../constants/auth.constants';
 
 export function useSignOut() {
-  const clickListener$ = useMemo(() => new Subject<void>(), [])
+  const clickListener$ = useMemo(() => new Subject<void>(), []);
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const SubHeaderWrapper = styled.div`
   --tw-border-opacity: 1;
-  border-bottom: 1px solid rgb(209 213 219/var(--tw-border-opacity));
+  border-bottom: 1px solid rgb(209 213 219 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246/var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
   padding: 1.5rem 3rem 0;
 `;
 
@@ -13,7 +13,7 @@ export const SubHeaderTopRow = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media(max-width: 1025px){
+  @media (max-width: 1025px) {
     align-items: flex-start;
     flex-direction: column;
     justify-content: space-between;
@@ -31,9 +31,8 @@ export const BookIconStyles = styled.div`
   height: 1.5rem;
   width: 1.5rem;
   --tw-text-opacity: 1;
-  color: rgb(75 85 99/var(--tw-text-opacity));
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 `;
-
 
 export const SubHeaderSpanContainer = styled.span`
   margin-bottom: 0.125rem;
@@ -47,7 +46,7 @@ export const SubHeaderUserLink = styled.a`
   font-weight: 400;
   margin-bottom: 0.125rem;
   --tw-text-opacity: 1;
-  color: rgb(37 99 235/var(--tw-text-opacity));
+  color: rgb(37 99 235 / var(--tw-text-opacity));
 
   &:hover {
     text-decoration: underline;
@@ -57,7 +56,7 @@ export const SubHeaderUserLink = styled.a`
 export const SubHeaderSeperator = styled.span`
   font-weight: 400;
   --tw-text-opacity: 1;
-  color: rgb(75 85 99/var(--tw-text-opacity));
+  color: rgb(75 85 99 / var(--tw-text-opacity));
   --tw-space-x-reverse: 0;
   margin-right: calc(0.375rem * var(--tw-space-x-reverse));
   margin-left: calc(0.375rem * calc(1 - var(--tw-space-x-reverse)));
@@ -67,7 +66,7 @@ export const SubHeaderRepoLink = styled.a`
   cursor: pointer;
   font-weight: 600;
   --tw-text-opacity: 1;
-  color: rgb(37 99 235/var(--tw-text-opacity));
+  color: rgb(37 99 235 / var(--tw-text-opacity));
   --tw-space-x-reverse: 0;
   margin-right: calc(0.375rem * var(--tw-space-x-reverse));
   margin-left: calc(0.375rem * calc(1 - var(--tw-space-x-reverse)));
@@ -79,17 +78,16 @@ export const SubHeaderRepoLink = styled.a`
 
 export const SubHeaderPrivacyBadge = styled.span`
   border-radius: 0.75rem;
-  border: 1px solid rgb(209 213 219/var(--tw-border-opacity));
+  border: 1px solid rgb(209 213 219 / var(--tw-border-opacity));
   --tw-border-opacity: 1;
   padding: 0.125rem 0.5rem;
-  font-size: .75rem;
+  font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
   --tw-text-opacity: 1;
-  color: rgb(75 85 99/var(--tw-text-opacity));
-  margin-left: .7rem;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+  margin-left: 0.7rem;
 `;
-
 
 export const SubHeaderButtonsActionsContainer = styled.div`
   display: flex;
@@ -100,8 +98,8 @@ export const SubHeaderButtonsActionsContainer = styled.div`
   margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0px * var(--tw-space-y-reverse));
 
-  @media(max-width: 1025px){
-   margin-top: 1.2rem;
+  @media (max-width: 1025px) {
+    margin-top: 1.2rem;
   }
 `;
 
@@ -114,7 +112,8 @@ export const SubHeaderIndividualButtonContainer = styled.span`
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0/0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   border-color: var(--gray-300);
-  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 `;
 
 export const SubHeaderMainButtonSection = styled.button`
@@ -128,13 +127,13 @@ export const SubHeaderMainButtonSection = styled.button`
   --tw-border-opacity: 1;
   background-color: transparent;
   padding: 0.375rem 1rem;
-  font-size: .75rem;
+  font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
   color: var(--gray-600);
 
   &:hover {
-    background-color: rgb(238,238,238);
+    background-color: rgb(238, 238, 238);
   }
 `;
 
@@ -149,9 +148,9 @@ export const SubHeaderMainButtonCount = styled.button`
   border: 1px solid var(--gray-300);
   --tw-border-opacity: 1;
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   padding: 0.375rem 0.75rem;
-  font-size: .75rem;
+  font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 600;
   color: var(--gray-600);
@@ -167,7 +166,7 @@ export const SubHeaderButtonsActionsIcon = styled.div`
   height: 1rem;
   width: 1rem;
   --tw-text-opacity: 1;
-  color: rgb(75 85 99/var(--tw-text-opacity));
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 `;
 
 export const SubHeaderBottomRow = styled.div`
@@ -182,11 +181,11 @@ export const TabNavigation = styled.nav`
 export const TabNavigationInactiveLinks = styled.a`
   cursor: pointer;
   --tw-text-opacity: 1;
-  color: rgb(75 85 99/var(--tw-text-opacity));
+  color: rgb(75 85 99 / var(--tw-text-opacity));
   display: inline-flex;
   align-items: center;
   padding: 1rem;
-  font-size: .875rem;
+  font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
 
@@ -200,13 +199,13 @@ export const TabNavigationActive = styled.a`
   display: inline-flex;
   align-items: center;
   --tw-border-opacity: 1;
-  border-bottom: 2px solid rgb(234 179 8/var(--tw-border-opacity));
+  border-bottom: 2px solid rgb(234 179 8 / var(--tw-border-opacity));
   padding: 1rem;
-  font-size: .875rem;
+  font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 600;
   --tw-text-opacity: 1;
-  color: rgb(17 24 39/var(--tw-text-opacity));
+  color: rgb(17 24 39 / var(--tw-text-opacity));
 `;
 
 export const TabNavigationIcon = styled.div`
@@ -221,11 +220,11 @@ export const TabNavigationCount = styled.span`
   margin-left: 0.5rem;
   border-radius: 0.75rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235/var(--tw-bg-opacity));
-  padding:0.125rem 0.5rem;
-  font-size: .75rem;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
   --tw-text-opacity: 1;
-  color: rgb(31 41 55/var(--tw-text-opacity));
+  color: rgb(31 41 55 / var(--tw-text-opacity));
 `;

@@ -5,5 +5,5 @@ export function useSignIn(): (event: FormEvent) => void {
   return useCallback((event: FormEvent) => {
     event.preventDefault();
     window.location.href = SIGN_IN_URL;
-  },[]);
+  }, []);
 }

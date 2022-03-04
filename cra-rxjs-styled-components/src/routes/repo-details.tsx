@@ -23,7 +23,7 @@ export default function RepoDetails() {
   });
   const [loading, setLoading] = useState(true);
   const params = useParams();
-  const { repo, openPr, closedPr, rootFileInfo, issues, topics } = repoDetails;
+  const { repo, openPr, issues, topics } = repoDetails;
 
   const request = (url: string) =>
     fromFetchWithAuth(url, {
@@ -59,7 +59,7 @@ export default function RepoDetails() {
         })
       )
       .subscribe();
-  }, [params.username!, params.repo!]);
+  }, [params.username, params.repo]);
 
   if (loading) {
     return <p>...Loading</p>;

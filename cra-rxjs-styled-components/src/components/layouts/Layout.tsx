@@ -6,14 +6,13 @@ export const Layout = styled.div`
   display: grid;
   grid-template-rows: 70px auto;
   grid-template-columns: 384px auto;
-  grid-template-areas:
-    'aside content';
+  grid-template-areas: 'aside content';
 
-  @media(max-width: 850px){
+  @media (max-width: 850px) {
     grid-template-columns: auto;
     grid-template-areas:
-    'header'
-    'content'
-    'aside';
+      'header'
+      'content'
+      'aside';
   }
 `;

@@ -7,11 +7,11 @@ export const RepoLayout = styled.div`
   grid-template-columns: 70% 30%;
   grid-template-rows: 70px auto;
   grid-template-areas:
-  "header header"
-  "main aside"
-  "readme readme";
+    'header header'
+    'main aside'
+    'readme readme';
 
-  @media(max-width:768px){
+  @media (max-width: 768px) {
     grid-template-columns: 60% 40%;
   }
 `;

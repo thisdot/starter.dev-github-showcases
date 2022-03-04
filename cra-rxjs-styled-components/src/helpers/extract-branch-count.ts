@@ -7,7 +7,10 @@ const BRANCH_COUNT_FROM_LAST_PAGE_REGEX = new RegExp('([\\d]*)>; rel="last"');
 
 export function extractBranchCount(response: Response): Observable<number> {
   const linkHeader = response.headers.get('link') || '';
-  const [, match] = (linkHeader.match(BRANCH_COUNT_FROM_LAST_PAGE_REGEX) || [, '0']) as string[];
+  const [, match] = (linkHeader.match(BRANCH_COUNT_FROM_LAST_PAGE_REGEX) || [
+    undefined,
+    '0',
+  ]) as string[];
   const count = parseInt(match, 10);
   return of(count);
 }

@@ -68,7 +68,6 @@ export const Tag = styled.span`
   }
 `;
 
-
 export const ReadmeHoverEffect = styled.a`
   display: flex;
   align-items: center;
@@ -82,9 +81,9 @@ export const ReadmeHoverEffect = styled.a`
 `;
 
 export const ReadmeText = styled.p`
-  margin-left: .8rem;
+  margin-left: 0.8rem;
 `;
 
 export const ReadmeIconStyles = styled.p`
- font-size: 1.5em;
+  font-size: 1.5em;
 `;
