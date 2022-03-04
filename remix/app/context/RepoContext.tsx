@@ -6,6 +6,7 @@ export interface RepoContext {
   owner: string;
   branch: string;
   path: string;
+  pathname: string;
   isRepoLoading?: boolean;
   data?: {
     isPrivate: boolean;

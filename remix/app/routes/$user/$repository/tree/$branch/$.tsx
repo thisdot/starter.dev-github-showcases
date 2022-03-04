@@ -24,8 +24,8 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   });
 
   let url = new URL(request.url);
-  const rr = url.pathname;
-  const basePath = rr.split('/');
+  const pathname = url.pathname;
+  const basePath = pathname.split('/');
   const index = basePath.indexOf(`${params.branch}`);
   const path = basePath.splice(index + 1);
 
@@ -48,6 +48,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     name: params.repository!,
     branch: repository?.defaultBranchRef?.name ?? defaultBranch,
     path: formattedPath,
+    pathname: pathname,
     data: repository
       ? {
           // @ts-ignore - generated types be like that
@@ -74,7 +75,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   );
 
   const items = parseQueryData(data);
-  
+
   if (items.length < 1) throw new Response("Not Found", {
     status: 404,
   });

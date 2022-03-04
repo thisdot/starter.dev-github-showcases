@@ -24,4 +24,5 @@ Default.args = {
       Icon: ClipboardListIcon,
     },
   ],
+  pathname: ''
 };

@@ -5,10 +5,11 @@ interface ProfileNavProps {
   className?: string;
   basePath?: string;
   isOrg?: boolean;
+  pathname: string;
 }
 
-function ProfileNav({ basePath, className }: ProfileNavProps) {
-  return <TabNavigation tabs={tabList} className={className} basePath={basePath} />;
+function ProfileNav({ className, pathname }: ProfileNavProps) {
+  return <TabNavigation tabs={tabList} className={className} pathname={pathname} />;
 }
 
 export default ProfileNav;

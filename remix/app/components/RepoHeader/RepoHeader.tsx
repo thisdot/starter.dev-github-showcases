@@ -20,6 +20,7 @@ function RepoHeader() {
             pullRequestCount: repo.data?.openPullRequestCount,
           })}
           basePath={`${repo.owner}/${repo.name}`}
+          pathname={repo.pathname}
         />
       </div>
     </div>

@@ -29,8 +29,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const orderBy = searchParams.get('Sort');
   const orderByArr = orderBy?.split('^');
 
-  const rr = url.pathname;
-  const basePath = rr.split('/');
+  const pathname = url.pathname;
+  const basePath = pathname.split('/');
   const index = basePath.indexOf(`${params.repository}`);
   const path = basePath.splice(index + 1);
 
@@ -53,6 +53,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     name: params.repository!,
     branch: repository?.defaultBranchRef?.name ?? defaultBranch,
     path: formattedPath,
+    pathname: pathname,
     data: repository
       ? {
           ...repository,

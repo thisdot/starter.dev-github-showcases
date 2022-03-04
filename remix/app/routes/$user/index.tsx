@@ -1,4 +1,4 @@
-import { json, useLoaderData } from 'remix';
+import { json, useLoaderData, useLocation } from 'remix';
 import type { LoaderFunction } from 'remix';
 import gqlClient from '~/lib/graphql-client';
 import { FULL_USER_PROFILE_QUERY } from '~/lib/queries/UserProfile';
@@ -50,7 +50,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 export default function User() {
+  const location = useLocation();
   const { userProfileData, owner } = useLoaderData();
 
-  return <ProfilePage userProfileData={userProfileData} owner={owner} />;
+  return <ProfilePage userProfileData={userProfileData} owner={owner} pathname={location.pathname} />;
 }

@@ -1,6 +1,6 @@
 import type { TabItem } from './types';
 import cn from 'classnames';
-import { Link, useLocation } from 'remix';
+import { Link } from 'remix';
 import * as styles from './TabNavigation.classNames';
 
 interface TabNavigationProps {
@@ -8,14 +8,17 @@ interface TabNavigationProps {
   basePath?: string;
   className?: string;
   isOrg?: boolean;
+  pathname: string;
 }
 
-function TabNavigation({ tabs, className, basePath }: TabNavigationProps) {
-  const location = useLocation();
-
+function TabNavigation({
+  tabs,
+  className,
+  basePath = '',
+  pathname,
+}: TabNavigationProps) {
   const isCurrentTab = (path?: string) => {
     const matchPath = path === '' ? basePath : `${basePath}/${path}`;
-    const pathname = location.pathname;
 
     if (!pathname.includes(path!) || path === '')
       return pathname === `/${matchPath}`;

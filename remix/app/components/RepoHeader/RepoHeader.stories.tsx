@@ -17,6 +17,7 @@ export const Default = Template.bind({});
 Default.args = {
   name: 'starter.dev',
   owner: 'thisdot',
+  pathname: '/thisdot/starter.dev',
   isRepoLoading: false,
   data: {
     isPrivate: false,

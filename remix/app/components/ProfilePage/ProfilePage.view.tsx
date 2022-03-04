@@ -8,16 +8,17 @@ import * as styles from './ProfilePage.classNames';
 interface ProfilePageProps {
   userProfileData: any;
   owner: string;
+  pathname: string;
 }
 
-function ProfilePage({ userProfileData, owner }: ProfilePageProps) {
+function ProfilePage({ userProfileData, owner, pathname }: ProfilePageProps) {
   return (
     <div className={styles.container}>
       <div className={styles.stickyNav}>
         <div className={styles.gridNav}>
           <div className="col-span-12 md:col-span-4 xl:col-span-3" />
           <div className={styles.profileNav}>
-            <ProfileNav basePath='vyktoremario' className="border-none" />
+            <ProfileNav className="border-none" pathname={pathname} />
           </div>
         </div>
       </div>
@@ -27,7 +28,7 @@ function ProfilePage({ userProfileData, owner }: ProfilePageProps) {
             <UserProfileView {...userProfileData} />
           </div>
           <div className="col-span-12 md:col-span-8 xl:col-span-9">
-            <ProfileNav className="border-none md:hidden" />
+            <ProfileNav className="border-none md:hidden" pathname={pathname} />
             <UserReposView repos={userProfileData.repositories} owner={owner} />
           </div>
         </div>
