@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { getPathSegments } from 'src/app/utils';
 
 @Component({
   selector: 'app-repo-header',

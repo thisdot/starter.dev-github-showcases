@@ -1,33 +1,28 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import {
-  LanguageFilter,
-  ORDER_BY_DIRECTION,
-  ORDER_BY_FIELD,
-  PaginatorOptions,
-  TypeFilter,
-} from './filter.models';
-
-interface SortOption {
-  field: ORDER_BY_FIELD;
-  direction: ORDER_BY_DIRECTION;
-}
+  RepositoryOrderField,
+  OrderDirection,
+  PageInfo,
+  RepositoryOrder,
+} from '../../../../src/app/gql';
+import { LanguageFilter, TypeFilter } from './filter.models';
 
 export interface ProfileFilterState {
-  sort: SortOption;
+  sort: RepositoryOrder;
   query: string;
-  language: string;
   type: TypeFilter;
+  language: string;
   languages: LanguageFilter[];
   languagesLoaded: boolean;
-  afterCursor?: string;
-  beforeCursor?: string;
+  startCursor?: string;
+  endCursor?: string;
 }
 
 const INITIAL_STATE: ProfileFilterState = {
   sort: {
-    field: ORDER_BY_FIELD.UpdatedAt,
-    direction: ORDER_BY_DIRECTION.Desc,
+    field: RepositoryOrderField.UpdatedAt,
+    direction: OrderDirection.Desc,
   },
   type: TypeFilter.ALL,
   language: 'all',
@@ -42,12 +37,12 @@ const TYPES_DICT: { [key: string]: TypeFilter } = {
   archived: TypeFilter.ARCHIVED,
 };
 
-const ORDER_BY_DICT: { [key: string]: ORDER_BY_FIELD } = {
-  CREATED_AT: ORDER_BY_FIELD.CreatedAt,
-  UPDATED_AT: ORDER_BY_FIELD.UpdatedAt,
-  PUSHED_AT: ORDER_BY_FIELD.PushedAt,
-  NAME: ORDER_BY_FIELD.Name,
-  STARGAZERS: ORDER_BY_FIELD.Stargazers,
+const ORDER_BY_DICT: { [key: string]: RepositoryOrderField } = {
+  CREATED_AT: RepositoryOrderField.CreatedAt,
+  UPDATED_AT: RepositoryOrderField.UpdatedAt,
+  // PUSHED_AT: RepositoryOrderField.PushedAt,
+  // NAME: RepositoryOrderField.Name,
+  // STARGAZERS: RepositoryOrderField.Stargazers,
 };
 
 @Injectable()
@@ -58,7 +53,7 @@ export class ProfileReposFilterStore extends ComponentStore<ProfileFilterState> 
     ...state,
     sort: {
       field: ORDER_BY_DICT[value],
-      direction: ORDER_BY_DIRECTION.Desc,
+      direction: OrderDirection.Desc,
     },
     afterCursor: undefined,
     beforeCursor: undefined,
@@ -94,18 +89,18 @@ export class ProfileReposFilterStore extends ComponentStore<ProfileFilterState> 
   }));
 
   readonly setPage = this.updater(
-    (state, { afterCursor, beforeCursor }: PaginatorOptions) => ({
+    (state, { startCursor, endCursor }: PageInfo) => ({
       ...state,
-      afterCursor,
-      beforeCursor,
+      startCursor: startCursor as string,
+      endCursor: endCursor as string,
     }),
   );
 
   readonly clearFilters = this.updater((state) => ({
     ...state,
     sort: {
-      field: ORDER_BY_FIELD.UpdatedAt,
-      direction: ORDER_BY_DIRECTION.Desc,
+      field: RepositoryOrderField.UpdatedAt,
+      direction: OrderDirection.Desc,
     },
     type: TypeFilter.ALL,
     language: 'all',

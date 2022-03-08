@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Organization } from 'src/app/gql';
+import { RepoOrganization } from '../../../gql';
 
 @Component({
   selector: 'app-orgs-list',
@@ -16,5 +16,5 @@ import { Organization } from 'src/app/gql';
   styleUrls: ['./orgs-list.component.css'],
 })
 export class OrgsListComponent {
-  @Input() organizations?: Organization[] = [];
+  @Input() organizations: RepoOrganization[] = [];
 }

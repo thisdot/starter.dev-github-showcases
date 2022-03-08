@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PullRequestFormatted } from 'src/app/gql';
+import { RepoPullRequest } from 'src/app/gql';
 
 @Component({
   selector: 'app-pull-requests-list',
@@ -7,7 +7,7 @@ import { PullRequestFormatted } from 'src/app/gql';
   styleUrls: ['./pull-requests-list.component.css'],
 })
 export class PullRequestsListComponent {
-  @Input() pullRequests: PullRequestFormatted[] = [];
+  @Input() pullRequests: RepoPullRequest[] = [];
 
   readonly baseDate = new Date();
 

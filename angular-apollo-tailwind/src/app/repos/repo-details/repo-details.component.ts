@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
 import { RouteConfigService } from '@this-dot/route-config';
-import { Apollo } from 'apollo-angular';
 import { map, Observable, switchMap } from 'rxjs';
-import { RepoPageDetails } from 'src/app/gql';
-import {
-  ReportHeader,
-  FileExplorerData,
-  FileExplorerVars,
-} from 'src/app/gql/models/repo-tree';
-import { REPO_TREE_QUERY } from 'src/app/gql/queries/repo-tree.query';
+import { RepoPage, ReportHeader, RepoTreeGQL } from '../../gql';
 
 @Component({
   selector: 'app-repo-details',
@@ -16,30 +9,26 @@ import { REPO_TREE_QUERY } from 'src/app/gql/queries/repo-tree.query';
 })
 export class RepoDetailsComponent {
   headerStats$: Observable<ReportHeader> = this.routeConfigService
-    .getLeafConfig<RepoPageDetails>('repoPageData')
+    .getLeafConfig<RepoPage>('repoPageData')
     .pipe(
       switchMap(({ owner, name, login, branch, repository }) =>
-        this.apollo
-          .watchQuery<FileExplorerData, FileExplorerVars>({
-            query: REPO_TREE_QUERY,
-            variables: {
-              owner,
-              name,
-              expression: `${branch}:`,
-            },
+        this.repoTreeGQL
+          .watch({
+            owner,
+            name,
+            expression: `${branch}:`,
           })
           .valueChanges.pipe(
             map((res) => ({
-              ...res,
               owner,
               name,
               login,
-              isPrivate: repository.isPrivate,
-              stargazers: repository.stargazerCount,
-              forks: repository.forkCount,
-              watchers: repository.watchers.totalCount,
-              openIssueCount: repository.openIssues.totalCount,
-              openPullRequestCount: repository.openPullRequests.totalCount,
+              isPrivate: repository?.isPrivate,
+              stargazers: repository?.stargazerCount,
+              forks: repository?.forkCount,
+              watchers: repository?.watcherCount,
+              openIssueCount: repository?.openIssueCount,
+              openPullRequestCount: repository?.openPullRequestCount,
             })),
           ),
       ),
@@ -47,6 +36,6 @@ export class RepoDetailsComponent {
 
   constructor(
     private routeConfigService: RouteConfigService<string, 'repoPageData'>,
-    private apollo: Apollo,
+    private repoTreeGQL: RepoTreeGQL,
   ) {}
 }

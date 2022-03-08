@@ -1,22 +1,12 @@
 import { Injectable } from '@angular/core';
-import { NetworkStatus } from '@apollo/client/core';
-import { ProfileFilterState, ProfileReposFilterStore } from '@filter-store';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { RouteConfigService } from '@this-dot/route-config';
-import { Apollo } from 'apollo-angular';
 import { map, Observable, switchMap, withLatestFrom } from 'rxjs';
 import {
-  OrgReposData,
-  OrgReposVars,
-  ORG_REPOS_QUERY,
-  Repo,
-  Repos,
-  UserRepoDetails,
-  UserReposData,
-  UserReposVars,
-  USER_REPOS_QUERY,
-} from 'src/app/gql';
-import { ProfileDetails } from '../profile.resolver';
+  ProfileFilterState,
+  ProfileReposFilterStore,
+} from '../../components/filters/profile-repos-filter-store';
+import { OrgReposGQL, ProfileDetails, Repo, UserReposGQL } from '../../gql';
 import { filterRepos } from './filter-repos';
 import { parseLanguages } from './parse-languages';
 import {
@@ -25,25 +15,23 @@ import {
 } from './parse-profile-repos';
 
 export interface ProfileReposState {
-  repos: UserRepoDetails;
+  owner: string;
+  repos: Repo[];
+  pageInfo: {
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+  };
   resultCount: number;
   reposLoaded: boolean;
 }
 
-const INITIAL_REPOS_STATE: UserRepoDetails = {
+const INITIAL_PROFILE_REPOS_STATE: ProfileReposState = {
   owner: '',
   repos: [],
   pageInfo: {
     hasNextPage: false,
     hasPreviousPage: false,
   },
-  data: {} as UserReposData,
-  loading: false,
-  networkStatus: NetworkStatus.ready,
-};
-
-const INITIAL_PROFILE_REPOS_STATE: ProfileReposState = {
-  repos: INITIAL_REPOS_STATE,
   resultCount: 0,
   reposLoaded: false,
 };
@@ -54,28 +42,28 @@ const INITIAL_PROFILE_REPOS_STATE: ProfileReposState = {
 export class ProfileReposStore extends ComponentStore<ProfileReposState> {
   // *********** Updaters *********** //
 
-  readonly setRepos = this.updater(
-    (state, { owner, repos }: Partial<Repos>) => ({
-      ...state,
-      repos: { ...state.repos, repos, owner },
-    }),
-  );
-
-  readonly setReposLoaded = this.updater((state, value: boolean) => ({
+  readonly setOwner = this.updater((state, owner: string) => ({
     ...state,
-    reposLoaded: value,
+    owner,
+  }));
+
+  readonly setRepos = this.updater((state, repos: Repo[]) => ({
+    ...state,
+    repos,
+  }));
+
+  readonly setReposLoaded = this.updater((state, reposLoaded: boolean) => ({
+    ...state,
+    reposLoaded,
   }));
 
   // *********** Selectors *********** //
 
-  readonly reposDetails$ = this.select(({ repos }) => repos);
+  readonly owner$ = this.select(({ repos }) => repos);
 
-  readonly repos$ = this.select(({ repos }) => repos.repos);
+  readonly repos$ = this.select(({ repos }) => repos);
 
-  readonly resultCount$ = this.select(
-    this.reposDetails$,
-    (repos) => repos.repos?.length,
-  );
+  readonly resultCount$ = this.select(({ resultCount }) => resultCount);
 
   readonly reposLoaded$ = this.select(({ reposLoaded }) => reposLoaded);
 
@@ -101,8 +89,8 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     target$.pipe(
       withLatestFrom(this.repos$),
       map(([state, repos]) => {
-        const filteredRepos = filterRepos(repos as Repo[], state);
-        this.setRepos({ repos: filteredRepos });
+        const filteredRepos = filterRepos(repos, state);
+        this.setRepos(filteredRepos);
       }),
     ),
   );
@@ -110,34 +98,41 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
   constructor(
     private profileReposFilterStore: ProfileReposFilterStore,
     private routeConfigService: RouteConfigService<string, 'profile'>,
-    private apollo: Apollo,
+    private userReposGQL: UserReposGQL,
+    private orgReposGQL: OrgReposGQL,
   ) {
     super(INITIAL_PROFILE_REPOS_STATE);
   }
 
   private getProfileRepos(owner: string, state: ProfileFilterState) {
-    return this.apollo
-      .watchQuery<UserReposData, UserReposVars>({
-        query: USER_REPOS_QUERY,
-        variables: {
-          username: owner,
-          orderBy: state.sort,
-          afterCursor: state.afterCursor ?? undefined,
-          beforeCursor: state.beforeCursor ?? undefined,
-        },
+    return this.userReposGQL
+      .watch({
+        username: owner,
+        orderBy: state.sort,
+        afterCursor: state.startCursor ?? undefined,
+        beforeCursor: state.endCursor ?? undefined,
       })
       .valueChanges.pipe(
         tapResponse(
           (res) => {
             const repos = parseProfileReposQuery(res.data);
-            const filteredRepos = filterRepos(repos.repos, state);
+
+            if (!repos) {
+              throw 'repos error';
+            }
+
+            const filteredRepos = filterRepos(
+              repos.repos as unknown as Repo[],
+              state,
+            );
 
             if (!state.languagesLoaded) {
               const languages = parseLanguages(filteredRepos);
               this.profileReposFilterStore.setLanguages(languages);
             }
 
-            this.setRepos({ owner, repos: filteredRepos });
+            this.setOwner(owner);
+            this.setRepos(filteredRepos);
             this.setReposLoaded(true);
           },
           (err) => {
@@ -148,28 +143,34 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
   }
 
   private getOrgProfileRepos(owner: string, state: ProfileFilterState) {
-    return this.apollo
-      .watchQuery<OrgReposData, OrgReposVars>({
-        query: ORG_REPOS_QUERY,
-        variables: {
-          orgname: owner,
-          orderBy: state.sort,
-          afterCursor: state.afterCursor ?? undefined,
-          beforeCursor: state.beforeCursor ?? undefined,
-        },
+    return this.orgReposGQL
+      .watch({
+        orgname: owner,
+        orderBy: state.sort,
+        afterCursor: state.startCursor ?? undefined,
+        beforeCursor: state.endCursor ?? undefined,
       })
       .valueChanges.pipe(
         tapResponse(
           (res) => {
             const repos = parseOrgReposQuery(res.data, owner);
-            const filteredRepos = filterRepos(repos.repos, state);
+
+            if (!repos) {
+              throw 'repos error';
+            }
+
+            const filteredRepos = filterRepos(
+              repos.repos as unknown as Repo[],
+              state,
+            );
 
             if (!state.languagesLoaded) {
               const languages = parseLanguages(filteredRepos);
               this.profileReposFilterStore.setLanguages(languages);
             }
 
-            this.setRepos({ owner, repos: filteredRepos });
+            this.setOwner(owner);
+            this.setRepos(filteredRepos);
             this.setReposLoaded(true);
           },
           (err) => {

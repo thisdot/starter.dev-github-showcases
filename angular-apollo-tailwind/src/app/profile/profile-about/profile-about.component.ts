@@ -1,13 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { Observable, map } from 'rxjs';
-import {
-  UserProfileDetails,
-  UserProfileData,
-  UserProfileVars,
-  USER_PROFILE_QUERY,
-} from 'src/app/gql';
-import { ProfileDetails } from '../profile.resolver';
+import { map, Observable } from 'rxjs';
+import { ProfileDetails, UserProfile, UserProfileGQL } from '../../gql';
 import { parseUserQuery } from './parse-profile';
 
 @Component({
@@ -18,23 +11,15 @@ import { parseUserQuery } from './parse-profile';
 export class ProfileAboutComponent implements OnInit {
   @Input() profile!: ProfileDetails;
 
-  user$!: Observable<UserProfileDetails>;
+  user$!: Observable<UserProfile | undefined>;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private userProfileGQL: UserProfileGQL) {}
 
   ngOnInit(): void {
-    this.user$ = this.apollo
-      .watchQuery<UserProfileData, UserProfileVars>({
-        query: USER_PROFILE_QUERY,
-        variables: {
-          username: this.profile.owner,
-        },
+    this.user$ = this.userProfileGQL
+      .watch({
+        username: this.profile.owner,
       })
-      .valueChanges.pipe(
-        map((res) => ({
-          ...res,
-          ...parseUserQuery(res.data),
-        })),
-      );
+      .valueChanges.pipe(map((res) => parseUserQuery(res.data)));
   }
 }

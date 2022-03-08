@@ -1,14 +1,21 @@
-import { TreeEntry, RepoTree as Tree } from '../gql';
+import { RepoTreeQuery, Tree, TreeEntry } from '../gql/github.schema';
 
-export const parseTree = (tree: Tree) => {
+export const parseTree = (data?: RepoTreeQuery): TreeEntry[] => {
+  const fileTree = data?.repository?.tree as Tree | undefined;
   const items: TreeEntry[] =
-    tree.entries.map(({ name, path, type }) => {
-      return {
-        name,
-        path: path ?? '',
-        type,
-      };
-    }) ?? [];
+    fileTree?.entries?.map(
+      ({ name, path, type, isGenerated, mode, oid, repository }: TreeEntry) => {
+        return {
+          name,
+          path: path ?? '',
+          type,
+          isGenerated,
+          mode,
+          oid,
+          repository,
+        };
+      },
+    ) ?? [];
   return items.sort((a, b) => {
     if (a.type === 'tree' && b.type !== 'tree') {
       return -1;

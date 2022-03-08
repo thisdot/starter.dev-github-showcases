@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
-import { RouteConfigService } from '@this-dot/route-config';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Apollo } from 'apollo-angular';
+import { RouteConfigService } from '@this-dot/route-config';
 import { Observable, switchMap } from 'rxjs';
 import {
-  RepoIssuesData,
-  RepoIssuesVars,
-  REPO_ISSUES_QUERY,
-  RepoPageDetails,
-  Issues,
-  Milestone,
-  OPEN_CLOSED_STATE,
-} from '../gql';
-import { FilterState, ReposFilterStore } from '@filter-store';
-import { parseQuery } from './parse-issues';
+  FilterState,
+  ReposFilterStore,
+} from '../components/filters/repos-filter.store';
+import { IssueState, Milestone, RepoIssuesGQL, RepoPage } from '../gql';
+import { Issues } from '../gql/models/repo-issues';
+import { parseIssuesQuery } from './parse-issues';
 
 export interface IssuesState {
   openIssues: Issues;
@@ -82,7 +77,7 @@ export class IssuesStore extends ComponentStore<IssuesState> {
     this.openIssues$,
     this.closedIssues$,
     (state, openIssues, closedIssues) =>
-      state === OPEN_CLOSED_STATE.OPEN ? openIssues : closedIssues,
+      state === IssueState.Open ? openIssues : closedIssues,
   );
 
   readonly pageInfo$ = this.select(
@@ -101,55 +96,50 @@ export class IssuesStore extends ComponentStore<IssuesState> {
           label,
           milestone,
           sort,
-          afterCursor,
-          beforeCursor,
+          startCursor,
+          endCursor,
           milestonesLoaded,
           labelsLoaded,
         }) =>
-          this.routeConfigService
-            .getLeafConfig<RepoPageDetails>('repoPageData')
-            .pipe(
-              switchMap(({ owner, name }) =>
-                this.apollo
-                  .watchQuery<RepoIssuesData, RepoIssuesVars>({
-                    query: REPO_ISSUES_QUERY,
-                    variables: {
-                      owner,
-                      name,
-                      orderBy: sort ?? undefined,
-                      filterBy:
-                        label || milestone
-                          ? {
-                              labels: label ? [label] : undefined,
-                              milestone: milestone || undefined,
-                            }
-                          : undefined,
-                      after: afterCursor ?? undefined,
-                      before: beforeCursor ?? undefined,
-                    },
-                  })
-                  .valueChanges.pipe(
-                    tapResponse(
-                      (res) => {
-                        const { openIssues, closedIssues, milestones, labels } =
-                          parseQuery(res.data);
-
-                        if (!(milestonesLoaded && labelsLoaded)) {
-                          this.reposFilterStore.setMilestones(milestones);
-                          this.reposFilterStore.setLabels(labels);
-                          this.reposFilterStore.setFiltersLoaded(true);
+          this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
+            switchMap(({ owner, name }) =>
+              this.repoIssuesGQL
+                .watch({
+                  owner,
+                  name,
+                  orderBy: sort ?? undefined,
+                  filterBy:
+                    label || milestone
+                      ? {
+                          labels: label ? [label] : undefined,
+                          milestone: milestone || undefined,
                         }
-                        this.setOpenIssues(openIssues);
-                        this.setClosedIssues(closedIssues);
-                        this.setIssuesLoaded(true);
-                      },
-                      (error) => {
-                        console.log(error);
-                      },
-                    ),
+                      : undefined,
+                  after: startCursor ?? undefined,
+                  before: endCursor ?? undefined,
+                })
+                .valueChanges.pipe(
+                  tapResponse(
+                    (res) => {
+                      const { openIssues, closedIssues, milestones, labels } =
+                        parseIssuesQuery(res.data);
+
+                      if (!(milestonesLoaded && labelsLoaded)) {
+                        this.reposFilterStore.setMilestones(milestones);
+                        this.reposFilterStore.setLabels(labels);
+                        this.reposFilterStore.setFiltersLoaded(true);
+                      }
+                      this.setOpenIssues(openIssues);
+                      this.setClosedIssues(closedIssues);
+                      this.setIssuesLoaded(true);
+                    },
+                    (error) => {
+                      console.log(error);
+                    },
                   ),
-              ),
+                ),
             ),
+          ),
       ),
     ),
   );
@@ -157,7 +147,7 @@ export class IssuesStore extends ComponentStore<IssuesState> {
   constructor(
     private reposFilterStore: ReposFilterStore,
     private routeConfigService: RouteConfigService<string, 'repoPageData'>,
-    private apollo: Apollo,
+    private repoIssuesGQL: RepoIssuesGQL,
   ) {
     super(INITIAL_STATE);
   }

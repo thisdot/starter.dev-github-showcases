@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { map } from 'rxjs';
 import {
   LanguageFilter,
-  ORDER_BY_FIELD,
-  ProfileFilterState,
-} from '@filter-store';
-import { map } from 'rxjs';
-import { TypeFilter } from '@filter-store';
+  TypeFilter,
+} from '../../../components/filters/filter.models';
+import { ProfileFilterState } from '../../../components/filters/profile-repos-filter-store';
+import { RepositoryOrderField } from '../../../gql';
 
 const TYPE_FILTERS = [
   {
@@ -25,11 +25,11 @@ const TYPE_FILTERS = [
 
 const SORT_ITEMS = [
   {
-    value: ORDER_BY_FIELD.UpdatedAt,
+    value: RepositoryOrderField.UpdatedAt,
     label: 'Last updated',
   },
-  { value: ORDER_BY_FIELD.Name, label: 'Name' },
-  { value: ORDER_BY_FIELD.Stargazers, label: 'Stars' },
+  { value: RepositoryOrderField.Name, label: 'Name' },
+  { value: RepositoryOrderField.Stargazers, label: 'Stars' },
 ];
 
 @Component({

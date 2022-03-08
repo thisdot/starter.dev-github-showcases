@@ -16,7 +16,7 @@
     "prebuild": "yarn run config:prod && yarn build:libs",
     "prebuild:prod": "yarn build:libs:prod",
     "build:prod": "NODE_ENV=production ng build --prod",
-    "build:libs": "ng build shared && ng build filter && ng build prism",
+    "build:libs": "ng build shared && ng build prism",
     "build:libs:watch": "ng build shared --watch",
     "build:libs:prod": "NODE_ENV=production ng build shared --prod",
     "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts,.html,.css}\"",

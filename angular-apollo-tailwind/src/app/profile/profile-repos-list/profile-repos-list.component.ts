@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LanguageFilter, ProfileReposFilterStore } from '@filter-store';
+import { ProfileReposFilterStore } from '../../components/filters/profile-repos-filter-store';
 import { Observable } from 'rxjs';
-import { UserRepoDetails } from 'src/app/gql';
 import { ProfileReposStore } from './profile-repos.store';
+import { LanguageFilter } from 'src/app/components/filters/filter.models';
+import { Repo } from 'src/app/gql';
 
 @Component({
   selector: 'app-profile-repos-list',
@@ -11,8 +12,7 @@ import { ProfileReposStore } from './profile-repos.store';
   providers: [ProfileReposFilterStore, ProfileReposStore],
 })
 export class ProfileReposListComponent implements OnInit {
-  readonly profileReposDetails$: Observable<UserRepoDetails> =
-    this.profileReposStore.reposDetails$;
+  readonly userRepos$: Observable<Repo[]> = this.profileReposStore.repos$;
   readonly resultCount$ = this.profileReposStore.resultCount$;
 
   // Profile Repos Filters Store selectors

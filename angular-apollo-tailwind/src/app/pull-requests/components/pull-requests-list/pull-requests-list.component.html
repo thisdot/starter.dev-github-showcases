@@ -21,7 +21,7 @@
         <div>
           <div class="content">
             <span class="title">{{ pullRequest.title }}</span>
-            <span class="inline" *ngFor="let label of pullRequest.labels.nodes">
+            <span class="inline" *ngFor="let label of pullRequest.labels">
               <span
                 [style.background-color]="colorMap(label.color)"
                 class="label"
@@ -37,7 +37,7 @@
               {{ pullRequest.createdAt | formatDistance: baseDate }}
               ago
             </span>
-            by <span class="link">{{ pullRequest.author.login }}</span>
+            by <span class="link">{{ pullRequest.login }}</span>
             <span *ngIf="pullRequest.closedAt">
               was closed
               {{ pullRequest.closedAt | formatDistance: baseDate }}
@@ -54,7 +54,7 @@
           aria-hidden="true"
         ></hero-icon>
         <span>
-          {{ pullRequest.comments.totalCount }}
+          {{ pullRequest.commentCount }}
         </span>
       </div>
     </div>

@@ -1,4 +1,4 @@
-<sd-data-container *ngIf="org$ | async as org" [data]="org">
+<ng-container *ngIf="org$ | async as org">
   <div content>
     <a class="text-black" routerLink="./">
       <h1 class="flex text-2xl font-bold">
@@ -13,4 +13,4 @@
       </h1>
     </a>
   </div>
-</sd-data-container>
+</ng-container>

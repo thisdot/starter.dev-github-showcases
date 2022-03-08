@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { Observable, map } from 'rxjs';
-import { GistDetails, UserGistsData, USER_GISTS_QUERY } from 'src/app/gql';
+import { map, Observable } from 'rxjs';
+import { UserGistsGQL, UserGistsQuery } from '../../../gql';
 @Component({
   selector: 'app-user-gists',
   templateUrl: './user-gists.component.html',
   styleUrls: ['./user-gists.component.css'],
 })
 export class UserGistsComponent {
-  gistDetails$: Observable<GistDetails> = this.apollo
-    .watchQuery<UserGistsData>({
-      query: USER_GISTS_QUERY,
-    })
-    .valueChanges.pipe(
-      map((res) => ({ ...res, gists: res.data.viewer.gists.nodes })),
-    );
+  gists$: Observable<UserGistsQuery['viewer']['gists']['nodes']> =
+    this.userGistsGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.viewer.gists.nodes));
 
-  constructor(private apollo: Apollo) {}
+  constructor(private userGistsGQL: UserGistsGQL) {}
 }
