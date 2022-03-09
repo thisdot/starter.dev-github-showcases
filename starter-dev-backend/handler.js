@@ -27,7 +27,7 @@ app.use(express.json());
 
 app.get('/', (req, res, next) => {
   return res.status(200).json({
-    message: 'Welcome to the starter kit!',
+    message: 'Welcome to the starter.dev backend!',
   });
 });
 
