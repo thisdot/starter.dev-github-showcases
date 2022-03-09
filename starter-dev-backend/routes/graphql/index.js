@@ -1,15 +1,13 @@
-const { graphqlHTTP } = require('express-graphql');
-const { makeExecutableSchema } = require('graphql-tools');
+import { graphqlHTTP } from 'express-graphql';
+import { buildSchema } from 'graphql';
 
-const typeDefs = require('./typeDefs');
-const resolvers = require('./resolvers');
+const schema = buildSchema(`
+  type Query {
+    hello(greeting: String!): String!
+  }
+`);
 
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
-
-module.exports = graphqlHTTP({
+export default graphqlHTTP({
   schema,
   graphiql: true,
 });

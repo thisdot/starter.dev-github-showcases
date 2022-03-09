@@ -1,7 +1,7 @@
-const routes = require('express').Router();
-//const { graphqlHTTP } = require('express-graphql');
-const graphql = require('./graphql');
+import Router from 'express';
+import graphql from './graphql';
 
+const routes = Router();
 routes.use('/graphql', graphql);
 
-module.exports = routes;
+export default routes;
