@@ -1,6 +1,7 @@
 import serverless from 'serverless-http';
 import express from 'express';
 import cors from 'cors';
+import routes from './routes';
 import {
   accessToken,
   clearCookies,
@@ -33,6 +34,8 @@ app.get('/', (req, res, next) => {
 app.get('/hello', (req, res) => {
   res.send(`Hello, ${req.query.greeting}`);
 });
+
+app.use('/', routes);
 
 // Step 1 - push user to Github OAuth
 app.get('/api/auth/signin', fetchSigninUrl);
