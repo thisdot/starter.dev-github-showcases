@@ -35,7 +35,7 @@ app.get('/hello', (req, res) => {
   res.send(`Hello, ${req.query.greeting}`);
 });
 
-app.use('/', routes);
+app.use('/graphql', routes);
 
 // Step 1 - push user to Github OAuth
 app.get('/api/auth/signin', fetchSigninUrl);
