@@ -9,5 +9,5 @@ const schema = buildSchema(`
 
 export default graphqlHTTP({
   schema,
-  graphiql: true,
+  graphiql: process.env.NODE_ENV !== 'production',
 });
