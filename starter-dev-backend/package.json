@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
+    "serverless": "^3.7.2",
     "serverless-bundle": "^5.2.0",
     "serverless-domain-manager": "^6.0.2",
     "serverless-offline": "^8.3.1"
