@@ -32,6 +32,9 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/hello', (req, res) => {
+  if (!req.query.greeting) {
+    res.send('Hello, there');
+  }
   res.send(`Hello, ${req.query.greeting}`);
 });
 
