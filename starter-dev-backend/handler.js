@@ -30,6 +30,10 @@ app.get('/', (req, res, next) => {
   });
 });
 
+app.get('/hello', (req, res) => {
+  res.send(`Hello, ${req.query.greeting}`);
+});
+
 // Step 1 - push user to Github OAuth
 app.get('/api/auth/signin', fetchSigninUrl);
 
