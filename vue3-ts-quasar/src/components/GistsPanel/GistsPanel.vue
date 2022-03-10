@@ -11,8 +11,8 @@
       />
     </q-card-section>
     <q-separator></q-separator>
-    <q-card-section>
-      <q-list v-for="gist in gistData" :key="gist.id">
+    <q-card-section v-if="!gistLoading.value">
+      <q-list v-for="gist in gistList" :key="gist.id">
         <q-item class="ellipsis">
           <a :href="gist.url" target="__blank">{{ gist.name }}</a>
         </q-item>
@@ -21,7 +21,7 @@
   </q-card>
 </template>
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'GistsPanel',
@@ -32,21 +32,13 @@ export default defineComponent({
 import { useGists } from '@/composables';
 
 const searchText = ref('');
-
 const { getUserGists } = useGists();
-// let gistData, gistLoading;
-
-const { data: gistData, loading: gistLoading } = getUserGists();
-console.log(gistData);
-// watch(getUserGists(), (data, loading) => {
-//   gistData = data;
-//   gistLoading = loading;
-//   console.log(gistData);
-// });
-// watch(gistData, value) => {
-//   return value;
-// }
-
+const { data: gistList, loading: gistLoading } = getUserGists();
+console.log('Start imported data from useGists');
+console.log('Data from imported info', gistList);
+console.log('Loading state from imported info', gistLoading.value);
+console.log('End imported data from useGists');
+// this.$forceUpdate();
 </script>
 
 <style lang="scss" scoped>

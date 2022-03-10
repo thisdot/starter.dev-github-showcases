@@ -1,4 +1,3 @@
-// import type { UserGistsQuery } from '@lib/github';
 import type { GistItem } from '../../composables/github/types';
 
 interface UserGistsQuery {
