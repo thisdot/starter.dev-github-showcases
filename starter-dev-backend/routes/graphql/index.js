@@ -8,7 +8,7 @@ const schema = buildSchema(`
 `);
 
 const root = {
-  hello: ({ greeting }) => {
+  hello: async ({ greeting }) => {
     return `Hello, ${greeting}`;
   },
 };
