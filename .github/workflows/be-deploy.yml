@@ -38,11 +38,10 @@ jobs:
 
       - name: Configure credentials
         run: |
-          serverless config credentials \
-            --provider aws \
-            --profile starterdev \
-            --key ${{ secrets.AWS_ACCESS_KEY_ID }} \
-            --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Deploy
         run: serverless deploy --stage production --region us-east-1
