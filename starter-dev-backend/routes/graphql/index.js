@@ -7,7 +7,13 @@ const schema = buildSchema(`
   }
 `);
 
+const root = {
+  hello: ({ greeting }) => {
+    return `Hello, ${greeting}`;
+  },
+};
 export default graphqlHTTP({
   schema,
+  rootValue: root,
   graphiql: process.env.NODE_ENV !== 'production',
 });
