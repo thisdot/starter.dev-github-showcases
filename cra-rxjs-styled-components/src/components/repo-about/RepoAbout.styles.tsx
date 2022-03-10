@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const AboutContainer = styled.div`
+  margin-top: 4rem;
   border-bottom: 2px solid var(--gray-300);
   width: 90%;
 `;

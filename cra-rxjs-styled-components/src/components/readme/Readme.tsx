@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react';
 import Markdown from 'markdown-to-jsx';
+import {
+  ReadmeHeader,
+  ReadmeDiv,
+  ReadmeContainer,
+  ReadmeIconContainer,
+  ReadmeText,
+} from './Readme.styles';
+import { ReadmeListIcon } from '../icons/index';
 
 export default function Readme({
   username,
@@ -20,7 +28,19 @@ export default function Readme({
         .then((res) => res.text())
         .then((data) => setReadme(data));
     }
-  }, [branch]);
+  }, [branch, repository, username]);
 
-  return <Markdown children={readme} />;
+  return (
+    <ReadmeContainer>
+      <ReadmeHeader>
+        <ReadmeIconContainer>
+          <ReadmeListIcon />
+        </ReadmeIconContainer>
+        <ReadmeText>README.md</ReadmeText>
+      </ReadmeHeader>
+      <ReadmeDiv>
+        <Markdown children={readme} />
+      </ReadmeDiv>
+    </ReadmeContainer>
+  );
 }

@@ -5,11 +5,11 @@ export const RepoLayout = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: 70% 30%;
-  grid-template-rows: 70px auto;
+  grid-template-rows: auto;
   grid-template-areas:
     'header header'
-    'main aside'
-    'readme readme';
+    'main  aside'
+    'readme .';
 
   @media (max-width: 768px) {
     display: flex;
@@ -19,6 +19,14 @@ export const RepoLayout = styled.div`
 
 export const RepoHeader = styled.div`
   grid-area: header;
+`;
+
+export const RepoSubHeader = styled.div`
+  grid-area: header;
+`;
+
+export const RepoMain = styled.div`
+  grid-area: main;
 `;
 
 export const RepoAside = styled.div`

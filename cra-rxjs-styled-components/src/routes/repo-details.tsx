@@ -6,8 +6,15 @@ import { Repository } from '../interfaces/repositories.interfaces';
 import { fromFetchWithAuth } from '../hooks/auth/from-fetch-with-auth';
 import SubHeader from '../components/sub-header/SubHeader';
 import RepoAbout from '../components/repo-about/RepoAbout';
+import Readme from '../components/readme/Readme';
 import FileExplorer from '../components/file-explorer/FileExplorer';
-import { RepoLayout, RepoAside } from '../components/layouts/RepoLayoutPage';
+import {
+  RepoLayout,
+  RepoMain,
+  RepoAside,
+  RepoSubHeader,
+  RepoReadme,
+} from '../components/layouts/RepoLayoutPage';
 
 type RepositoryDetails = {
   repo: Repository | null;
@@ -74,31 +81,41 @@ export default function RepoDetails() {
   }
 
   return (
-    <>
-      <SubHeader
-        user={repo?.owner.login!}
-        repo={repo?.name!}
-        privacy={repo?.private!}
-        watchCount={repo?.subscribers_count!}
-        starCount={repo?.stargazers_count!}
-        forkCount={repo?.forks_count!}
-        issuesCount={issues?.length!}
-        prCount={openPr!}
-      />
-      <RepoLayout>
+    <RepoLayout>
+      <RepoSubHeader>
+        <SubHeader
+          user={repo?.owner.login!}
+          repo={repo?.name!}
+          privacy={repo?.private!}
+          watchCount={repo?.subscribers_count!}
+          starCount={repo?.stargazers_count!}
+          forkCount={repo?.forks_count!}
+          issuesCount={issues?.length!}
+          prCount={openPr!}
+        />
+      </RepoSubHeader>
+      <RepoAside>
+        <RepoAbout
+          topics={topics}
+          description={repo?.description}
+          websiteLink={repo?.homepage}
+        />
+      </RepoAside>
+      <RepoMain>
         <FileExplorer
           fileNames={listOfFileNames!}
           dirNames={listOfDirectoryNames!}
           branch={repo?.default_branch!}
         />
-        <RepoAside>
-          <RepoAbout
-            topics={topics}
-            description={repo?.description}
-            websiteLink={repo?.homepage}
-          />
-        </RepoAside>
-      </RepoLayout>
-    </>
+      </RepoMain>
+
+      <RepoReadme>
+        <Readme
+          branch={repo?.default_branch!}
+          username={repo?.owner.login!}
+          repository={repo?.name!}
+        />
+      </RepoReadme>
+    </RepoLayout>
   );
 }

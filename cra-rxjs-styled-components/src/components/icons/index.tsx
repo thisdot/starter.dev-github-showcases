@@ -8,5 +8,6 @@ export { LinkIcon } from './LinkIcon';
 export { PrIcon } from './PrIcon';
 export { ReadmeBookIcon } from './ReadmeBookIcon';
 export { StarIcon } from './StarIcon';
+export { ReadmeListIcon } from './ReadmeListIcon';
 export { DirectoryIcon } from './DirectoryIcon';
 export { FileIcon } from './FileIcon';
