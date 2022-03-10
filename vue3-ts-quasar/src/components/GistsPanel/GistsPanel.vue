@@ -12,16 +12,16 @@
     </q-card-section>
     <q-separator></q-separator>
     <q-card-section>
-      <q-list v-for="gist in gistList" :key="gist.id">
+      <q-list v-for="gist in gistData" :key="gist.id">
         <q-item class="ellipsis">
-          <a :href="gist.html_url" target="__blank">{{ gist.description }}</a>
+          <a :href="gist.url" target="__blank">{{ gist.name }}</a>
         </q-item>
       </q-list>
     </q-card-section>
   </q-card>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 
 export default defineComponent({
   name: 'GistsPanel',
@@ -29,74 +29,24 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-//* Types
-import { Gist } from '../../types';
+import { useGists } from '@/composables';
 
 const searchText = ref('');
 
-// TODO: Fetch 👇🏾these from the API
-const gistList: Gist[] = [
-  {
-    id: '123435325',
-    html_url: '#',
-    description: 'Staring Octocat',
-    files: {
-      test: {
-        filename: 'test-gist.txt',
-        language: 'Text',
-        raw_url: '#',
-        type: 'text/text',
-        size: 500,
-      },
-    },
-    public: true,
-  },
-  {
-    id: '123435325',
-    html_url: '#',
-    description: 'Laughing Octocat',
-    files: {
-      test: {
-        filename: 'test-gist.txt',
-        language: 'Text',
-        raw_url: '#',
-        type: 'text/text',
-        size: 500,
-      },
-    },
-    public: true,
-  },
-  {
-    id: '123435325',
-    html_url: '#',
-    description: 'Talking Octocat',
-    files: {
-      test: {
-        filename: 'test-gist.txt',
-        language: 'Text',
-        raw_url: '#',
-        type: 'text/text',
-        size: 500,
-      },
-    },
-    public: true,
-  },
-  {
-    id: '123435325',
-    html_url: '#',
-    description: 'Crying Octocat',
-    files: {
-      test: {
-        filename: 'test-gist.txt',
-        language: 'Text',
-        raw_url: '#',
-        type: 'text/text',
-        size: 500,
-      },
-    },
-    public: true,
-  },
-];
+const { getUserGists } = useGists();
+// let gistData, gistLoading;
+
+const { data: gistData, loading: gistLoading } = getUserGists();
+console.log(gistData);
+// watch(getUserGists(), (data, loading) => {
+//   gistData = data;
+//   gistLoading = loading;
+//   console.log(gistData);
+// });
+// watch(gistData, value) => {
+//   return value;
+// }
+
 </script>
 
 <style lang="scss" scoped>

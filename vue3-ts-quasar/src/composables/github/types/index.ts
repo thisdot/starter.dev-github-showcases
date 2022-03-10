@@ -1,4 +1,4 @@
 //? This file simply acts as an aggregator for all types
-import Gist from './Gist';
+import GistItem from './Gist';
 
-export { Gist };
+export { GistItem };
