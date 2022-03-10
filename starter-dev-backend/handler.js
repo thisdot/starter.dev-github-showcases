@@ -1,6 +1,7 @@
 import serverless from 'serverless-http';
 import express from 'express';
 import cors from 'cors';
+import routes from './routes';
 import {
   accessToken,
   clearCookies,
@@ -26,9 +27,18 @@ app.use(express.json());
 
 app.get('/', (req, res, next) => {
   return res.status(200).json({
-    message: 'Hello from root!',
+    message: 'Welcome to the starter.dev backend!',
   });
 });
+
+app.get('/hello', (req, res) => {
+  if (!req.query.greeting) {
+    res.send('Hello, there');
+  }
+  res.send(`Hello, ${req.query.greeting}`);
+});
+
+app.use('/graphql', routes);
 
 // Step 1 - push user to Github OAuth
 app.get('/api/auth/signin', fetchSigninUrl);
