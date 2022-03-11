@@ -122,7 +122,6 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { Loading } from '@/components';
 import { useUser } from '@/composables';
 const { getUserProfile } = useUser();
 
