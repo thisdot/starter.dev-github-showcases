@@ -11,7 +11,7 @@
       />
     </q-card-section>
     <q-separator></q-separator>
-    <q-card-section v-if="!gistLoading.value">
+    <q-card-section v-if="!loading">
       <q-list v-for="gist in gistList" :key="gist.id">
         <q-item class="ellipsis">
           <a :href="gist.url" target="__blank">{{ gist.name }}</a>
@@ -33,10 +33,10 @@ import { useGists } from '@/composables';
 
 const searchText = ref('');
 const { getUserGists } = useGists();
-const { data: gistList, loading: gistLoading } = getUserGists();
+const { data: gistList, loading } = getUserGists();
 console.log('Start imported data from useGists');
 console.log('Data from imported info', gistList);
-console.log('Loading state from imported info', gistLoading.value);
+console.log('Loading state from imported info', loading);
 console.log('End imported data from useGists');
 // this.$forceUpdate();
 </script>

@@ -13,7 +13,6 @@ interface UseGists {
 
 export const useGists = (): UseGists => {
   const getUserGists = () => {
-    // const { onResult } = useQuery(USER_GISTS_QUERY);
     const { result, loading } = useQuery(USER_GISTS_QUERY);
     watch(result, (value) => {
       if (!loading.value) {
@@ -26,10 +25,6 @@ export const useGists = (): UseGists => {
       }
     });
     return { loading };
-    // onResult((queryResult) => {
-    //   console.log(queryResult);
-    // return { data: queryResult.value, loading: queryResult.loading };
-    // });
   };
   return { getUserGists };
 };
