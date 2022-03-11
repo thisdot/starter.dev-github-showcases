@@ -1,30 +1,6 @@
 <template>
-  <!-- Loading -->
-  <div v-if="userLoading" class="q-mt-xl q-px-lg" style="width: 400px">
-    <div class="full-width text-center q-mb-md">
-      <q-skeleton
-        class="avatar q-mb-sm"
-        type="circle"
-        style="width: 18rem; height: 18rem"
-      ></q-skeleton>
-    </div>
-    <q-skeleton class="q-mb-xs" type="rect"></q-skeleton>
-    <q-skeleton class="q-mb-md" type="text"></q-skeleton>
-
-    <div class="row q-col-gutter-x-md q-mb-lg">
-      <div class="col-6">
-        <q-skeleton type="rect"></q-skeleton>
-      </div>
-      <div class="col-6">
-        <q-skeleton type="rect"></q-skeleton>
-      </div>
-    </div>
-    <q-skeleton class="q-mb-md" type="text"></q-skeleton>
-    <q-skeleton class="q-mb-md" type="text"></q-skeleton>
-  </div>
-
   <!-- Actual content -->
-  <div v-else class="profile-card" v-bind="$attrs">
+  <div v-if="!userLoading" class="profile-card" v-bind="$attrs">
     <div class="avatar_name_bio">
       <!-- TODO: Replace with q-avatar -->
       <div class="avatar">
@@ -110,6 +86,30 @@
         </a>
       </div>
     </template>
+  </div>
+
+  <!-- Loading -->
+  <div v-else class="q-mt-xl q-px-lg" style="width: 400px">
+    <div class="full-width text-center q-mb-md">
+      <q-skeleton
+        class="avatar q-mb-sm"
+        type="circle"
+        style="width: 18rem; height: 18rem"
+      ></q-skeleton>
+    </div>
+    <q-skeleton class="q-mb-xs" type="rect"></q-skeleton>
+    <q-skeleton class="q-mb-md" type="text"></q-skeleton>
+
+    <div class="row q-col-gutter-x-md q-mb-lg">
+      <div class="col-6">
+        <q-skeleton type="rect"></q-skeleton>
+      </div>
+      <div class="col-6">
+        <q-skeleton type="rect"></q-skeleton>
+      </div>
+    </div>
+    <q-skeleton class="q-mb-md" type="text"></q-skeleton>
+    <q-skeleton class="q-mb-md" type="text"></q-skeleton>
   </div>
 </template>
 
