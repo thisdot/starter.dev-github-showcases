@@ -8,6 +8,8 @@ export const REPO_ISSUES_QUERY = gql`
     $after: String
     $filterBy: IssueFilters
     $orderBy: IssueOrder
+    $last: Int
+    $first: Int
   ) {
     repository(owner: $owner, name: $name) {
       milestones(first: 100, states: [OPEN]) {
@@ -27,7 +29,8 @@ export const REPO_ISSUES_QUERY = gql`
         totalCount
       }
       closedIssues: issues(
-        first: 25
+        first: $first
+        last: $last
         states: [CLOSED]
         filterBy: $filterBy
         orderBy: $orderBy
@@ -64,7 +67,8 @@ export const REPO_ISSUES_QUERY = gql`
         }
       }
       openIssues: issues(
-        first: 25
+        first: $first
+        last: $last
         states: [OPEN]
         filterBy: $filterBy
         orderBy: $orderBy

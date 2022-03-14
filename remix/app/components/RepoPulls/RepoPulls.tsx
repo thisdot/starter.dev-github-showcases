@@ -46,7 +46,7 @@ function RepoPulls({ openPullRequests, closedPullRequests, labels }: RepoPullPro
           <IssuesEmpty Icon={PullRequestIcon} />
         )}
       </IssuesContainer>
-      {activePullRequests.pageInfo && (
+      {(activePullRequests.pageInfo.hasNextPage || activePullRequests.pageInfo?.hasPreviousPage) && (
         <Pagination
           pageInfo={activePullRequests.pageInfo}
           changePage={filters.changePage}

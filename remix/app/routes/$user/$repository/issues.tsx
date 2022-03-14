@@ -27,12 +27,14 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   const label = searchParams.get('Label');
   const milestone = searchParams.get('Milestones');
+  const after = searchParams.get('after');
+  const before = searchParams.get('before')
   const orderBy = searchParams.get('Sort');
   const orderByArr = orderBy?.split('^');
 
   const pathname = url.pathname;
   const basePath = pathname.split('/');
-  const index = basePath.indexOf(`${params.repository}`);
+  const index = basePath.lastIndexOf(`${params.repository}`);
   const path = basePath.splice(index + 1);
 
   const { repository } = await gqlClient.request(
@@ -80,8 +82,10 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         labels: label,
         milestone: milestone,
       },
-      // after: filters.state.afterCursor,
-      // before: filters.state.beforeCursor,
+      last: before ? 25 : undefined,
+      first: (!before || after) ? 25 : undefined,
+      after,
+      before,
     },
     {
       authorization: `Bearer ${accessToken}`,

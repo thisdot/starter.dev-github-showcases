@@ -60,7 +60,7 @@ function RepoIssues({ openIssues, closedIssues, milestones, labels }: RepoIssues
           <IssuesEmpty Icon={MinusCircleIcon} />
         )}
       </IssuesContainer>
-      {activeIssues.pageInfo && (
+      {(activeIssues.pageInfo.hasNextPage || activeIssues.pageInfo?.hasPreviousPage) && (
         <Pagination
           pageInfo={activeIssues.pageInfo}
           changePage={filters.changePage}
