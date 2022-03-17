@@ -2,7 +2,7 @@
 
 > Please note: This document is still a work in progress.
 
-![Vue3 + TS + Quasar](/public/vue3-ts-quasar.png)
+![Vue3 + TS + Quasar](public/vue3-ts-quasar.png)
 
 Welcome to the Vue3 + TS + Quasar GitHub showcases contribution guide.
 
