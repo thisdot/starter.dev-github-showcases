@@ -72,6 +72,22 @@ yarn storybook
 
 You can then access your storybook via [localhost:6006/](http://localhost:6006/)
 
+#### Fix for StoryBook
+
+> Initially storybook was not working with the default scaffolded application
+
+The issue was with some dependencies like `style-loader`, `sass-loader` and `css-loader`. The recent versions don’t work with vue2 and 3.
+
+so these are the versions that worked:
+
+```
+"sass-loader": "^10.0.2",
+"style-loader": "^1.3.0",
+"css-loader": "^4.3.0",
+```
+
+Also another dependency `@storybook/preset-scss` **is required** which is to be added in the “addons” array in the [main.js](.storybook/main.js) file inside the `.storybook/` directory after successfully installing it using `yarn`.
+
 ### Run the application
 
 To run your application, use the following command in your command line
@@ -83,6 +99,14 @@ yarn serve
 You can then access your application via [localhost:8080/](http://localhost:8080/)
 
 Congrats! You're in.
+
+## Lints and fixes files
+
+We use ESLint for linting and Prettier for formatting the code in this codebase. To run the linter, use the following command:
+
+```
+yarn lint
+```
 
 ### Running unit tests
 
@@ -97,10 +121,16 @@ yarn test:unit
 To deploy the application, you will first need to build it. You can build it using the following command:
 
 ```
-
+yarn build
 ```
 
-# [Contributing]()
+Your built application files will reside in `dist/spa/` in your root vue3-ts-quasar directory.
+
+## Customize VueJS configuration
+
+See [Configuration Reference.](https://cli.vuejs.org/config/)
+
+# [Contributing](CONTRIBUTING.md)
 
 If you would like to contribute to this project, great! We're glad to have you here.
 
