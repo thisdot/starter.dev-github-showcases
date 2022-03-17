@@ -2,7 +2,7 @@
 
 Somewhere around here, there should be _some wise summary on what GitHub Showcases is actually about_. Well... If not, please check out the [base repository's readme.](https://github.com/thisdot/starter.dev-github-showcases/blob/main/README.md)
 
-![Vue3 + TS + Quasar](/public/vue3-ts-quasar.png)
+![Vue3 + TS + Quasar](public/vue3-ts-quasar.png)
 
 ## Vue3 + TS + Quasar
 
