@@ -59,7 +59,7 @@ export class UserService {
   }
 
   getUserOrganizations(username: string): Observable<UserOrgsState[]> {
-    const url = `https://api.github.com/users/${encodeURIComponent(
+    const url = `${environment.githubUrl}/users/${encodeURIComponent(
       username,
     )}/orgs`;
 
@@ -75,7 +75,7 @@ export class UserService {
   }
 
   getUserRepos(username: string): Observable<UserReposState[]> {
-    const url = `https://api.github.com/users/${encodeURIComponent(
+    const url = `${environment.githubUrl}/users/${encodeURIComponent(
       username,
     )}/repos`;
 

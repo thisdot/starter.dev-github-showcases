@@ -16,10 +16,7 @@
 
     <div class="grid grid-cols-12 profile-body container">
       <div class="subpage col-span-3">
-        <app-profile-about
-          class="col-span-3"
-          [profile$]="profile$"
-        ></app-profile-about>
+        <app-profile-about [profile$]="profile$"></app-profile-about>
       </div>
       <app-profile-repos
         class="col-span-9"
