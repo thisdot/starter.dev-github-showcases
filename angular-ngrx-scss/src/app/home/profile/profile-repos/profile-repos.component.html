@@ -23,7 +23,7 @@
         <span class="icon" appOcticon="law"></span>
         <span class="license-name">{{ repo.license.name }}</span>
       </div>
-      <div class="updated">{{ relativeTimeFmt(repo.updated_at) }}</div>
+      <div class="updated">{{ repo.updated_at | relativeTime }}</div>
     </div>
   </li>
 </ul>

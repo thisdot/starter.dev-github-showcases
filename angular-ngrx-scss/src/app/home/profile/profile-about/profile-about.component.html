@@ -12,18 +12,15 @@
     </h1>
     <div class="bio">{{ profile?.user?.bio }}</div>
     <div class="socials">
-      <ng-container *ngFor="let social of socials; let i = index">
-        <span
-          *ngIf="social.icon"
-          class="icon"
-          appOcticon="{{ social.icon }}"
-          color="black"
-          size="16"
-        ></span>
-        <span class="social-label">{{ social.value }} {{ social.label }}</span>
-        <!-- Separator dot between social entries. -->
-        {{ i === socials.length - 1 ? '' : '·' }}
-      </ng-container>
+      <span class="icon" appOcticon="people" color="black" size="16"></span>
+      <span class="social-label">
+        {{ profile?.user?.followers ?? 0 }} Followers
+      </span>
+      ·
+      <span class="icon" appOcticon="people" color="black" size="16"></span>
+      <span class="social-label">
+        {{ profile?.user?.following ?? 0 }} Following
+      </span>
     </div>
     <div class="fields">
       <div *ngIf="profile?.user?.company">

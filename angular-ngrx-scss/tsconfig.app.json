@@ -4,7 +4,6 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [],
-    "typeRoots": ["node_modules/@types", "typings.d.ts"],
     "experimentalDecorators": true
   },
   "files": ["src/main.ts", "src/polyfills.ts"],

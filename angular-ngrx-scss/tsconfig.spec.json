@@ -4,7 +4,6 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": ["jasmine"],
-    "typeRoots": ["node_modules/@types", "typings.d.ts"],
     "experimentalDecorators": true
   },
   "files": ["src/test.ts", "src/polyfills.ts"],
