@@ -1,21 +1,25 @@
-<sd-data-container [data]="file$ | async">
-  <div content *ngIf="file$ | async as file" class="file-viewer-container">
-    <div class="fileHeader">
-      <span class="fileHeaderLines">{{ file.lines }} lines</span>
-      <span class="fileHeaderBytes">{{ file.byteSize }} Bytes</span>
-    </div>
-    <ng-container *ngIf="file.language; else unknownLanguage">
-      <app-file-code
-        [text]="file.text"
-        [language]="file.language"
-      ></app-file-code>
-    </ng-container>
-    <ng-template #unknownLanguage>
-      <app-file-text [text]="file.text"></app-file-text>
-    </ng-template>
+<div
+  content
+  *ngIf="file$ | async as file; else loading"
+  class="file-viewer-container"
+>
+  <div class="fileHeader">
+    <span class="fileHeaderLines">{{ file.lines }} lines</span>
+    <span class="fileHeaderBytes">{{ file.byteSize }} Bytes</span>
   </div>
+  <ng-container *ngIf="file.language; else unknownLanguage">
+    <app-file-code
+      [text]="file.text!"
+      [language]="file.language"
+    ></app-file-code>
+  </ng-container>
+  <ng-template #unknownLanguage>
+    <app-file-text [text]="file.text!"></app-file-text>
+  </ng-template>
+</div>
 
-  <div loading class="file-viewer-container py-2">
+<ng-template #loading>
+  <div class="file-viewer-container py-2">
     <sd-code-icon
       type="outline"
       [width]="400"
@@ -23,6 +27,6 @@
       viewBox="-20 0 400 80"
     ></sd-code-icon>
   </div>
+</ng-template>
 
-  <p error>Repository path not found</p>
-</sd-data-container>
+<!-- <p error>Repository path not found</p> -->

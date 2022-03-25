@@ -1,8 +1,8 @@
-import { TopRepo, UserTopRepo, UserTopReposData } from '../gql';
+import { TopRepo, UserTopReposQuery } from '../gql';
 
-export const parseQuery = (data: UserTopReposData) => {
+export const parseTopRepos = (data: UserTopReposQuery): TopRepo[] => {
   const repos = data.viewer.topRepositories.nodes ?? [];
-  return repos.reduce((acc: TopRepo[], repo: UserTopRepo) => {
+  return repos.reduce((acc: TopRepo[], repo) => {
     if (!repo) {
       return acc;
     }

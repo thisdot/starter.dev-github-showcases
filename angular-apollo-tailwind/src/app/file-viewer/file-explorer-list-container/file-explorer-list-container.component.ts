@@ -4,14 +4,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { Observable, map } from 'rxjs';
-import {
-  FileExplorer,
-  FileExplorerData,
-  FileExplorerVars,
-  REPO_TREE_QUERY,
-} from 'src/app/gql';
+import { map, Observable } from 'rxjs';
+import { FileExplorer, RepoTreeGQL } from '../../gql';
 import { getReadMeFileName, parseTree } from '../parse-tree';
 
 const removeLastPathPart = (path: string) => {
@@ -33,25 +27,21 @@ export class FileExplorerListContainerComponent implements OnInit {
 
   repoTree$!: Observable<FileExplorer>;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private repoTreeGQL: RepoTreeGQL) {}
 
   ngOnInit(): void {
-    this.repoTree$ = this.apollo
-      .watchQuery<FileExplorerData, FileExplorerVars>({
-        query: REPO_TREE_QUERY,
-        variables: {
-          owner: this.owner,
-          name: this.name,
-          expression: `${this.branch}:${this.path ?? ''}`,
-        },
+    this.repoTree$ = this.repoTreeGQL
+      .watch({
+        owner: this.owner,
+        name: this.name,
+        expression: `${this.branch}:${this.path ?? ''}`,
       })
       .valueChanges.pipe(
         map((res) => {
-          const items = parseTree(res.data.repository.tree);
+          const items = parseTree(res?.data);
           const readme = getReadMeFileName(items);
 
           return {
-            ...res,
             items,
             readme,
           };

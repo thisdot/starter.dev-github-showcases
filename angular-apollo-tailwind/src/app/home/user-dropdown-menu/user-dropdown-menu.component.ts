@@ -1,9 +1,9 @@
-import { trigger, transition, style, animate } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, HostListener, Input } from '@angular/core';
-import { CurrentUser } from 'src/app/gql';
-import { AuthService } from '../../auth/auth.service';
-import { tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
+import { CurrentUserQuery } from 'src/app/gql';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-user-dropdown-menu',
@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
   ],
 })
 export class UserDropdownMenuComponent {
-  @Input() user!: CurrentUser;
+  @Input() user!: CurrentUserQuery['viewer'];
 
   isOpen = false;
 

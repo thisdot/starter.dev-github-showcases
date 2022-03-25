@@ -5,40 +5,40 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { FilterOption } from 'src/app/components/filter-dropdown/filter-dropdown.component';
-import { ORDER_BY_DIRECTION } from 'src/app/gql';
+import { FilterOption } from '../../../components/filter-dropdown/filter-dropdown.component';
 import {
-  ORDER_FIELD,
+  IssueOrder,
+  IssueOrderField,
+  IssueState,
   Label,
   Milestone,
-  OPEN_CLOSED_STATE,
-} from 'src/app/gql/models';
-import { SortOption } from '@filter-store';
+  OrderDirection,
+} from '../../../gql';
 
 const sortOptions: FilterOption[] = [
   {
     label: 'Newest',
-    value: `${ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.Desc}`,
+    value: `${IssueOrderField.CreatedAt}^${OrderDirection.Desc}`,
   },
   {
     label: 'Oldest',
-    value: `${ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.Asc}`,
+    value: `${IssueOrderField.CreatedAt}^${OrderDirection.Asc}`,
   },
   {
     label: 'Most commented',
-    value: `${ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.Desc}`,
+    value: `${IssueOrderField.Comments}^${OrderDirection.Desc}`,
   },
   {
     label: 'Least commented',
-    value: `${ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.Asc}`,
+    value: `${IssueOrderField.Comments}^${OrderDirection.Asc}`,
   },
   {
     label: 'Recently updated',
-    value: `${ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.Desc}`,
+    value: `${IssueOrderField.UpdatedAt}^${OrderDirection.Desc}`,
   },
   {
     label: 'Least recently updated',
-    value: `${ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.Asc}`,
+    value: `${IssueOrderField.UpdatedAt}^${OrderDirection.Asc}`,
   },
 ];
 
@@ -68,8 +68,8 @@ export class IssuesFiltersComponent {
       value: label.name,
     }));
   }
-  @Input() sort: SortOption | null = null;
-  @Input() issueState: OPEN_CLOSED_STATE | null = OPEN_CLOSED_STATE.OPEN;
+  @Input() sort: IssueOrder | null = null;
+  @Input() issueState: IssueState | null = IssueState.Open;
 
   @Output() openIssue = new EventEmitter<void>();
   @Output() closeIssue = new EventEmitter<void>();
@@ -82,13 +82,13 @@ export class IssuesFiltersComponent {
   sortOptions = sortOptions;
 
   getOpenStyle() {
-    return this.issueState === OPEN_CLOSED_STATE.OPEN
+    return this.issueState === IssueState.Open
       ? 'font-semibold text-gray-900'
       : 'text-gray-600';
   }
 
   getClosedStyle() {
-    return this.issueState === OPEN_CLOSED_STATE.CLOSED
+    return this.issueState === IssueState.Closed
       ? 'font-semibold text-gray-900'
       : 'text-gray-600';
   }

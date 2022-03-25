@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, UrlSegment } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { ProfileDetails } from '../gql';
 import { getPathSegments, isOrgPath } from '../utils';
-
-export interface ProfileDetails {
-  owner: string;
-  isOrg: boolean;
-}
 
 @Injectable({
   providedIn: 'root',

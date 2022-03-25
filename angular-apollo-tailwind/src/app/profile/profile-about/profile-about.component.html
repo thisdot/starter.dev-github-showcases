@@ -1,5 +1,5 @@
-<sd-data-container *ngIf="user$ | async as user" [data]="user">
-  <div content>
+<ng-container *ngIf="user$ | async as user; else loading">
+  <div>
     <img
       [src]="user.avatarUrl"
       alt="Avatar"
@@ -88,9 +88,13 @@
       </div>
     </div>
     <ng-container *ngIf="user?.organizations?.length">
-      <app-orgs-list [organizations]="user?.organizations"></app-orgs-list>
+      <app-orgs-list [organizations]="user?.organizations!"></app-orgs-list>
     </ng-container>
   </div>
-  <p error>User not found</p>
-  <app-profile-loading loading></app-profile-loading>
-</sd-data-container>
+</ng-container>
+
+<!-- TODO: fix loading/error states -->
+<!-- <p error>User not found</p> -->
+<ng-template #loading>
+  <app-profile-loading></app-profile-loading>
+</ng-template>

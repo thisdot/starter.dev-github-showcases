@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PageInfo } from 'src/app/gql/models';
+import { PageInfo } from '../../gql';
 
 interface BeforePageEvent {
-  before?: string;
+  before?: string | null;
 }
 interface AfterPageEvent {
-  after?: string;
+  after?: string | null;
 }
 type ChangePageEvent = BeforePageEvent | AfterPageEvent;
 

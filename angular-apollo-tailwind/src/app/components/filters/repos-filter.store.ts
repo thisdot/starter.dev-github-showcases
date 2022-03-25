@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import {
-  SortOption,
-  ORDER_FIELD,
-  ORDER_BY_DIRECTION,
-  OPEN_CLOSED_STATE,
-  PaginatorOptions,
+  IssueOrder,
+  IssueOrderField,
+  IssueState,
   Label,
   Milestone,
-} from './filter.models';
+  OrderDirection,
+  PageInfo,
+} from '../../gql';
 
 export interface FilterState {
   label: string;
   labels: Label[];
   milestone: string;
   milestones: Milestone[];
-  state: OPEN_CLOSED_STATE;
-  sort: SortOption;
-  afterCursor?: string;
-  beforeCursor?: string;
+  state: IssueState;
+  sort: IssueOrder;
+  startCursor?: string;
+  endCursor?: string;
   labelsLoaded: boolean;
   milestonesLoaded: boolean;
 }
@@ -28,35 +28,39 @@ const INITIAL_STATE: FilterState = {
   labels: [],
   milestone: '',
   milestones: [],
-  state: OPEN_CLOSED_STATE.OPEN,
+  state: IssueState.Open,
   sort: {
-    field: ORDER_FIELD.CreatedAt,
-    direction: ORDER_BY_DIRECTION.Desc,
+    field: IssueOrderField.CreatedAt,
+    direction: OrderDirection.Desc,
   },
   labelsLoaded: false,
   milestonesLoaded: false,
 };
 
-const ORDER_DICT: { [key: string]: ORDER_FIELD } = {
-  COMMENTS: ORDER_FIELD.Comments,
-  CREATED_AT: ORDER_FIELD.CreatedAt,
-  UPDATED_AT: ORDER_FIELD.UpdatedAt,
+const ORDER_DICT: { [key: string]: IssueOrderField } = {
+  COMMENTS: IssueOrderField.Comments,
+  CREATED_AT: IssueOrderField.CreatedAt,
+  UPDATED_AT: IssueOrderField.UpdatedAt,
 };
 
-const DIRECTION_DICT: { [key: string]: ORDER_BY_DIRECTION } = {
-  ASC: ORDER_BY_DIRECTION.Asc,
-  DESC: ORDER_BY_DIRECTION.Desc,
+const DIRECTION_DICT: { [key: string]: OrderDirection } = {
+  ASC: OrderDirection.Asc,
+  DESC: OrderDirection.Desc,
 };
 
 @Injectable()
 export class ReposFilterStore extends ComponentStore<FilterState> {
+  constructor() {
+    super(INITIAL_STATE);
+  }
+
   // *********** Updaters *********** //
 
   readonly setLabel = this.updater((state, value: string) => ({
     ...state,
     label: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
+    startCursor: undefined,
+    endCursor: undefined,
   }));
 
   readonly setLabels = this.updater((state, values: Label[]) => ({
@@ -68,8 +72,8 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
   readonly setMilestone = this.updater((state, value: string) => ({
     ...state,
     milestone: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
+    startCursor: undefined,
+    endCursor: undefined,
   }));
 
   readonly setMilestones = this.updater((state, values: Milestone[]) => ({
@@ -78,11 +82,11 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
     milestonesLoaded: true,
   }));
 
-  readonly changeState = this.updater((state, value: OPEN_CLOSED_STATE) => ({
+  readonly changeState = this.updater((state, value: IssueState) => ({
     ...state,
     state: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
+    startCursor: undefined,
+    endCursor: undefined,
   }));
 
   readonly setSort = this.updater((state, value: string) => {
@@ -93,16 +97,16 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
         field: ORDER_DICT[field],
         direction: DIRECTION_DICT[direction],
       },
-      afterCursor: undefined,
-      beforeCursor: undefined,
+      startCursor: undefined,
+      endCursor: undefined,
     };
   });
 
   readonly changePage = this.updater(
-    (state, { afterCursor, beforeCursor }: PaginatorOptions) => ({
+    (state, { startCursor, endCursor }: PageInfo) => ({
       ...state,
-      afterCursor,
-      beforeCursor,
+      startCursor: startCursor as string,
+      endCursor: endCursor as string,
     }),
   );
 
@@ -136,11 +140,7 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
     (label, milestone, sort) =>
       label !== '' ||
       milestone !== '' ||
-      sort.direction !== ORDER_BY_DIRECTION.Desc ||
-      sort.field !== ORDER_FIELD.CreatedAt,
+      sort.direction !== OrderDirection.Desc ||
+      sort.field !== IssueOrderField.CreatedAt,
   );
-
-  constructor() {
-    super(INITIAL_STATE);
-  }
 }

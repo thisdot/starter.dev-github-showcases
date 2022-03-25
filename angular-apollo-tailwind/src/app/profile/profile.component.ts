@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouteConfigService } from '@this-dot/route-config';
-import { ProfileDetails } from './profile.resolver';
+import { ProfileDetails } from '../gql';
 
 @Component({
   selector: 'app-profile',

@@ -1,3 +1,5 @@
-<app-navbar [user]="user$ | async"></app-navbar>
+<ng-container *ngIf="user$ | async as user">
+  <app-navbar [user]="user"></app-navbar>
+</ng-container>
 
 <router-outlet></router-outlet>

@@ -1,14 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { Observable, map } from 'rxjs';
-import {
-  OrgProfileData,
-  OrgProfileDetails,
-  OrgProfileVars,
-  ORG_PROFILE_QUERY,
-} from 'src/app/gql';
-import { parseOrgQuery } from '../profile-about/parse-profile';
-import { ProfileDetails } from '../profile.resolver';
+import { map, Observable } from 'rxjs';
+import { OrgProfileGQL, OrgProfileQuery, ProfileDetails } from '../../gql';
 
 @Component({
   selector: 'app-org-profile-about',
@@ -17,20 +9,15 @@ import { ProfileDetails } from '../profile.resolver';
 export class OrgProfileAboutComponent implements OnInit {
   @Input() profile!: ProfileDetails;
 
-  org$!: Observable<OrgProfileDetails>;
+  org$!: Observable<OrgProfileQuery['organization']>;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private orgProfileGQL: OrgProfileGQL) {}
 
   ngOnInit(): void {
-    this.org$ = this.apollo
-      .watchQuery<OrgProfileData, OrgProfileVars>({
-        query: ORG_PROFILE_QUERY,
-        variables: {
-          orgname: this.profile.owner,
-        },
+    this.org$ = this.orgProfileGQL
+      .watch({
+        orgname: this.profile.owner,
       })
-      .valueChanges.pipe(
-        map((res) => ({ ...res, ...parseOrgQuery(res.data) })),
-      );
+      .valueChanges.pipe(map((res) => res.data.organization));
   }
 }

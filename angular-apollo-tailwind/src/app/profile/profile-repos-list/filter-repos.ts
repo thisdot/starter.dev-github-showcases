@@ -1,5 +1,6 @@
-import { ProfileFilterState, TypeFilter } from '@filter-store';
-import { Repo } from 'src/app/gql';
+import { TypeFilter } from '../../components/filters/filter.models';
+import { ProfileFilterState } from '../../components/filters/profile-repos-filter-store';
+import { Repo } from '../../gql';
 
 export const filterRepos = (repos: Repo[], state: ProfileFilterState) =>
   repos.reduce((acc: Repo[], repo: Repo) => {

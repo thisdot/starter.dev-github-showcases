@@ -3,7 +3,7 @@ export * from './user-top-repos.query';
 export * from './repo-details.query';
 export * from './repo-read-me.query';
 export * from './repo-file.query';
-export * from './repo-issues';
+export * from './repo-issues.query';
 export * from './repo-pulls.query';
 export * from './repo-tree.query';
 export * from './user-gists.query';
