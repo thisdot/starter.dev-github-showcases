@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +20,6 @@ import { ProfileEffects } from './state/profile/profile.effects';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

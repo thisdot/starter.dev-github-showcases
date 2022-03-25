@@ -4,7 +4,7 @@ import { ProfileState } from './profile.state';
 
 export const initialState: ProfileState = {};
 
-const profileReducer = createReducer(
+const reducer = createReducer(
   initialState,
 
   on(fetchProfileSuccess, (state, { data }) => ({
@@ -13,6 +13,9 @@ const profileReducer = createReducer(
   })),
 );
 
-export function reducer(state: ProfileState | undefined, action: Action) {
-  return profileReducer(state, action);
+export function profileReducer(
+  state: ProfileState | undefined,
+  action: Action,
+) {
+  return reducer(state, action);
 }
