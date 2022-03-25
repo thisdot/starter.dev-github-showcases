@@ -16,6 +16,9 @@ interface RepoPageProps {
   children: ReactNode;
 }
 
+/**
+ * Parses repo query params, fetches general repo data, and wraps children in a context provider containing repo data
+ */
 function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
   const isOwnerAndNameValid =
     typeof owner === 'string' && typeof name === 'string';

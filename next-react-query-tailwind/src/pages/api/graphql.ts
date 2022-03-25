@@ -4,6 +4,9 @@ import { getJwtOptions } from '@lib/jwt';
 
 const GRAPHQL_ENDPOINT = process.env.GITHUB_GRAPHQL_ENDPOINT;
 
+/**
+ * This endpoint is a client proxy to the GitHub GraphQL API
+ */
 async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   if (!GRAPHQL_ENDPOINT) {
     return res.status(500).json({ message: 'Invalid server configuration' });

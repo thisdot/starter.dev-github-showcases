@@ -25,6 +25,7 @@ const options: NextAuthOptions = {
         token.refreshToken = account.refreshToken;
       }
 
+      // Fetch an updated access token if current one expires
       if (
         token.refreshToken &&
         typeof token.expires === 'number' &&

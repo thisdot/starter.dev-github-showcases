@@ -7,6 +7,9 @@ interface ProfilePageProps {
   children: (props: { username: string }) => ReactNode;
 }
 
+/**
+ * Page error boundary and passes a parsed username param to child component
+ */
 function ProfilePage({ owner, children }: ProfilePageProps) {
   const isOwnerValid = typeof owner === 'string';
   const { ErrorBoundary, error: caughtError } = useErrorBoundary();

@@ -18,8 +18,10 @@ function FileExplorerView({
   basePath,
   repoPath,
 }: FileExplorerViewProps) {
+  // get a proper go back path based on repo file path
   const backPath = removeLastPathPart(repoPath);
   const backLink = `${basePath}/tree/${branch}/${backPath}`;
+
   return (
     <div className={styles.container}>
       {repoPath && (
