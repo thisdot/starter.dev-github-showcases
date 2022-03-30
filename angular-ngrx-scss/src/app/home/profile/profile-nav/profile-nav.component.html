@@ -1,0 +1,10 @@
+<nav>
+  <ul>
+    <li class="active-tab">
+      <a routerLink="/{{ (profile$ | async)?.user?.username }}">
+        <span class="icon" appOcticon="repo" size="24"></span>
+        <span>Repositories</span>
+      </a>
+    </li>
+  </ul>
+</nav>
