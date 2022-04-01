@@ -9,6 +9,7 @@ import Redirect from './routes/redirect';
 import RepoDetails from './routes/repo-details';
 import SignIn from './routes/sign-in';
 import TopRepos from './routes/top-repos';
+import RepoPullRequest from './routes/repository-pull-request';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -32,6 +33,14 @@ ReactDOM.render(
             }
           />
         </Route>
+        <Route
+          path="pulls"
+          element={
+            <AuthGuard>
+              <RepoPullRequest />
+            </AuthGuard>
+          }
+        />
         <Route path="signin" element={<SignIn />} />
         <Route path="redirect" element={<Redirect />} />
       </Routes>
