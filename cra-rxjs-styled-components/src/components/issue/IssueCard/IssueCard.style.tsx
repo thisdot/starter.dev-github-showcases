@@ -17,11 +17,8 @@ export const IssueCardWrapper = styled.div`
       margin-right: 0.8rem;
       align-self: start;
       color: ${colors.green800};
-      &.merged {
-        color: ${colors.purple500};
-      }
       &.closed {
-        color: ${colors.red600};
+        color: ${colors.purple500};
       }
     }
     & > .info {

@@ -1,7 +1,7 @@
 import IssueTabHeader from '../IssueTabHeader';
 import IssueCard from '../IssueCard';
-import { PaginationContainer, Content, Wrapper } from './Issue.style'
-import type { Issue } from './Issue.type'
+import { PaginationContainer, Content, Wrapper } from './Issue.style';
+import type { Issue } from './Issue.type';
 import type { IssueTabValues } from '../types';
 
 type IssueProps = {
@@ -9,10 +9,7 @@ type IssueProps = {
   changeActiveTab: (value: IssueTabValues) => void;
 };
 
-export default function IssueView({
-  issues,
-  changeActiveTab,
-}: IssueProps) {
+export default function IssueView({ issues, changeActiveTab }: IssueProps) {
   return (
     <Wrapper>
       <Content>

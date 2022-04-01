@@ -1,7 +1,7 @@
 import React from 'react';
-import ClosedPRIcon from '../../icons/ClosedPRIcon';
+import ClosedIssueIcon from '../../icons/ClosedIssueIcon';
 import MessageIcon from '../../icons/MessageIcon';
-import OpenPRIcon from '../../icons/OpenPRIcon';
+import OpenIssueIcon from '../../icons/OpenIssueIcon';
 import PullRequestIssueInfo from '../../PullRequestIssueInfo';
 import { IssueCardWrapper } from './IssueCard.style';
 import type { Status } from '../types';
@@ -26,10 +26,10 @@ export default function IssueCard({
   const getPRIcon = (status: Status) => {
     switch (status) {
       case 'closed':
-        return <ClosedPRIcon />;
+        return <ClosedIssueIcon />;
       case 'open':
       default:
-        return <OpenPRIcon />;
+        return <OpenIssueIcon />;
     }
   };
   return (

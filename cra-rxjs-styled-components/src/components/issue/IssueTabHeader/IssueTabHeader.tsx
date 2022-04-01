@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import DetailsDropdown from '../../DetailsDropdown';
 import CorrectIcon from '../../icons/CorrectIcon';
-import PullRequestIcon from '../../icons/PullRequestIcon';
+import IssueIcon from '../../icons/IssueIcon';
 import type { IssueTabValues } from '../types';
 
 import { Container, StatusLabel, StatusTab } from './IssueTabHeader.style';
@@ -35,7 +35,7 @@ export default function IssueTabHeader(props: Props) {
           onClick={() => changeTab('open')}
           active={activeTab === 'open'}
         >
-          <PullRequestIcon />
+          <IssueIcon />
           <span>10</span>
           <span>Open</span>
         </StatusLabel>

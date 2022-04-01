@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PullRequestView from './Issue.view';
-import type { Issue } from './Issue.type'
+import type { Issue } from './Issue.type';
 import type { IssueTabValues } from '../types';
 
 export default function PullRequestCtrl() {
