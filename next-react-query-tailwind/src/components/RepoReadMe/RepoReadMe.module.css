@@ -1,0 +1,31 @@
+.container {
+  @apply rounded-md border border-gray-300 my-4;
+}
+
+.header {
+  @apply p-2.5 border-b border-gray-300 sticky top-0 bg-white z-30;
+}
+
+.tocIconContainer {
+  @apply hover:bg-gray-100 mr-2 p-1.5 rounded;
+}
+
+.tocIcon {
+  @apply inline-block -mt-0.5;
+}
+
+.filename {
+  @apply text-sm font-semibold;
+}
+
+.emptyContainer {
+  @apply bg-sky-100 p-4 rounded-md border border-sky-200 flex items-center justify-between my-4;
+}
+
+.emptyText {
+  @apply text-gray-800 text-sm;
+}
+
+.addReadmeBtn {
+  @apply bg-green-600 hover:bg-green-700 inline-flex text-white font-semibold rounded-lg border border-gray-200 py-1.5 px-4 text-xs;
+}
