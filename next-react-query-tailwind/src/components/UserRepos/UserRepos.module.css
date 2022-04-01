@@ -1,0 +1,29 @@
+@tailwind utilities;
+
+.container {
+  @apply py-8 border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4;
+}
+
+.content {
+  @apply col-span-12 md:col-span-7;
+}
+
+.headingLink {
+  @apply text-xl text-blue-600 font-semibold hover:underline mr-3;
+}
+
+.description {
+  @apply text-gray-600 text-sm max-w-prose;
+}
+
+.aside {
+  @apply col-span-12 md:col-span-5 flex items-start justify-end;
+}
+
+.starBtn {
+  @apply relative inline-flex items-center px-3 py-1 rounded-md bg-gray-100 bg-opacity-75 border border-gray-300 text-sm font-medium text-gray-800 hover:bg-gray-200 hover:bg-opacity-50;
+}
+
+.starIcon {
+  @apply w-4 h-4 text-gray-600 mr-1;
+}
