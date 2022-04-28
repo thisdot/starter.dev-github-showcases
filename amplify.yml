@@ -1,5 +1,24 @@
 version: 1
 applications:
+  - appRoot: next-react-query-tailwind
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - yarn install
+        build:
+          commands:
+            - yarn run build
+      artifacts:
+        baseDirectory: .next
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+
+
   - appRoot: angular-apollo-tailwind
     frontend:
       phases:
