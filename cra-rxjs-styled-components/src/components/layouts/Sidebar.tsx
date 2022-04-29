@@ -5,7 +5,7 @@ const Aside = styled.aside`
   padding: 2rem;
 `;
 
-const MenuItem = styled.div`
+const Menu = styled.div`
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-top-width: 1px;
@@ -16,15 +16,57 @@ const MenuItem = styled.div`
 
 const MenuTitle = styled.h3`
   font-weight: 600;
-  margin: 0;
+  margin: 0 0 1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
-export default function Sidebar() {
+const MenuList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const MenuItem = styled.li`
+  margin: 0 0 0.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const MenuLink = styled.a`
+  color: #24292f;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export default function Sidebar({
+  title,
+  links,
+}: {
+  title: string;
+  links: { id: string; title: string; href: string }[];
+}) {
   return (
     <Aside>
-      <MenuItem>
-        <MenuTitle>Gists</MenuTitle>
-      </MenuItem>
+      <Menu>
+        {title && <MenuTitle>{title}</MenuTitle>}
+        {links && (
+          <MenuList>
+            {links.map(({ id, title, href }) => (
+              <MenuItem key={id}>
+                <MenuLink href={href}>{title}</MenuLink>
+              </MenuItem>
+            ))}
+          </MenuList>
+        )}
+      </Menu>
     </Aside>
   );
 }
