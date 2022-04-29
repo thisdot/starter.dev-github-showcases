@@ -7,7 +7,7 @@ See some of the projects we've built:
 | Project                                             | Technologies                     | Deployment                                                              |
 | --------------------------------------------------- | -------------------------------- | ----------------------------------------------------------------------- |
 | [angular-apollo-tailwind](/angular-apollo-tailwind) | Angular v13, Apollo, TailwindCSS | [https://angular-apollo-tailwind.starter.dev](https://angular-apollo-tailwind.starter.dev) |
-| [next-react-query-tailwind](/next-react-query-tailwind) | NextJS, React Query, Tailwind. | [https://next-react-query-tailwind.starter.dev](https://next-react-query-tailwind.starter.dev) |
+| [next-react-query-tailwind](/next-react-query-tailwind) | NextJS, React Query, Tailwind | [https://next-react-query-tailwind.starter.dev](https://next-react-query-tailwind.starter.dev) |
 
 ## Contributing
 
