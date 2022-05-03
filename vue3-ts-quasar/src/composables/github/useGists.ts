@@ -1,6 +1,6 @@
-import { Ref, watch } from 'vue';
+import { Ref } from 'vue';
 import { parseQuery } from '@/components/GistsPanel/parseQuery';
-import { useQuery } from '@vue/apollo-composable';
+import { useQuery, useResult } from '@vue/apollo-composable';
 import { USER_GISTS_QUERY } from './queries';
 import { GistItem } from '../github/types';
 
@@ -12,19 +12,10 @@ interface UseGists {
 }
 
 export const useGists = (): UseGists => {
-  const getUserGists = () => {
+  const getUserGists = (): any => {
     const { result, loading } = useQuery(USER_GISTS_QUERY);
-    watch(result, (value) => {
-      if (!loading.value) {
-        const gists: GistItem[] = parseQuery(value);
-        console.log('Start data from watch() on userGists query');
-        console.log('DATA FROM USEGISTS:', gists);
-        console.log('LOADING STATE FROM USEGISTS:', loading.value);
-        console.log('End data from watch() on userGists query');
-        return { data: gists, loading };
-      }
-    });
-    return { loading };
+    const gists = useResult(result, [], (data) => parseQuery(data));
+    return { data: gists, loading };
   };
   return { getUserGists };
 };

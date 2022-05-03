@@ -34,11 +34,6 @@ import { useGists } from '@/composables';
 const searchText = ref('');
 const { getUserGists } = useGists();
 const { data: gistList, loading } = getUserGists();
-console.log('Start imported data from useGists');
-console.log('Data from imported info', gistList);
-console.log('Loading state from imported info', loading);
-console.log('End imported data from useGists');
-// this.$forceUpdate();
 </script>
 
 <style lang="scss" scoped>
