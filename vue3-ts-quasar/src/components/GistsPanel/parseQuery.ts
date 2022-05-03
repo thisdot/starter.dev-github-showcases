@@ -4,7 +4,12 @@ interface UserGistsQuery {
   viewer: { gists: { nodes: any[] } };
 }
 
-export function parseQuery(data: UserGistsQuery) {
+type GistParse = {
+  acc: GistItem[];
+  gists: any;
+};
+
+export function parseQuery(data: UserGistsQuery): GistParse {
   return data.viewer.gists.nodes?.reduce((acc: GistItem[], gist) => {
     if (!gist) {
       return acc;

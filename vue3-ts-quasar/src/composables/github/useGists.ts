@@ -6,7 +6,7 @@ import { GistItem } from '../github/types';
 
 interface UseGists {
   getUserGists: () => {
-    data?: any;
+    data?: GistItem;
     loading: Ref<boolean>;
   };
 }
