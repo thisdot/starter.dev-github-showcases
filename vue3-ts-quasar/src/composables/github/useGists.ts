@@ -1,21 +1,37 @@
-import { Ref } from 'vue';
-import { parseQuery } from '@/components/GistsPanel/parseQuery';
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { USER_GISTS_QUERY } from './queries';
-import { GistItem } from '../github/types';
-
-interface UseGists {
-  getUserGists: () => {
-    data?: GistItem;
-    loading: Ref<boolean>;
-  };
-}
+import { GistItem, UseGists } from '../github/types';
+import { Ref } from 'vue';
 
 export const useGists = (): UseGists => {
-  const getUserGists = (): any => {
+  const getUserGists = () => {
     const { result, loading } = useQuery(USER_GISTS_QUERY);
-    const gists = useResult(result, [], (data) => parseQuery(data));
-    return { data: gists, loading };
+    const gists = useResult(result, [], (data) =>
+      data.viewer.gists.nodes?.reduce((acc: GistItem[], gist) => {
+        if (!gist) {
+          return acc;
+        }
+        const files = gist.files ?? [];
+        const gists = files.reduce(
+          (_acc: GistItem[], file) =>
+            file
+              ? [
+                  ..._acc,
+                  {
+                    id: gist.id,
+                    description: gist.description,
+                    name: file.name || gist.name,
+                    url: gist.url,
+                  },
+                ]
+              : acc,
+          [],
+        );
+        return [...acc, ...gists];
+      }, []),
+    );
+    console.log(gists);
+    return { data: gists as Readonly<Ref<Readonly<[] | GistItem[]>>>, loading };
   };
   return { getUserGists };
 };
