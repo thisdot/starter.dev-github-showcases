@@ -1,15 +1,24 @@
 import {
+  ActionFunction,
+  json,
   Link,
   Links,
   LiveReload,
+  LoaderFunction,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
   useCatch,
+  useLoaderData,
 } from 'remix';
 import type { MetaFunction } from 'remix';
 import styles from './styles/tailwind.css';
+import NavBar from './components/Navbar/NavBar';
+import { auth } from './services/auth.server';
+import { CURRENT_USER_QUERY } from './lib/queries/UserDropdown';
+import gqlClient from './lib/graphql-client';
+import { getSession, sessionStorage } from './services/session.server';
 
 type DocumentProps = {
   children: React.ReactNode;
@@ -41,7 +50,7 @@ export function CatchBoundary() {
   return (
     <Document title="Error">
       <div className="text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className=' text-9xl mb-8'>{caught.status}</div>
+        <div className=" text-9xl mb-8">{caught.status}</div>
         <div className="text-2xl mb-5">
           <span className="">Ooops...</span>
           <br />
@@ -57,9 +66,32 @@ export function CatchBoundary() {
   );
 }
 
+export const action: ActionFunction = async ({ request }) => {
+  // const session = await getSession(request);
+  // await sessionStorage.destroySession(session);
+  await auth.logout(request, { redirectTo: '/login' });
+};
+
+type LoaderData = {
+  viewer: any;
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const { accessToken } = await auth.isAuthenticated(request, {
+    failureRedirect: '/login',
+  });
+  const { viewer } = await gqlClient.request(CURRENT_USER_QUERY, undefined, {
+    authorization: `Bearer ${accessToken}`,
+  });
+
+  return json<LoaderData>({ viewer });
+};
+
 export default function App() {
+  const { viewer } = useLoaderData<LoaderData>();
   return (
     <Document>
+      <NavBar user={viewer} />
       <Outlet />
       <ScrollRestoration />
       <Scripts />
@@ -82,5 +114,5 @@ export function Document({ children, title }: DocumentProps) {
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
-  )
+  );
 }
