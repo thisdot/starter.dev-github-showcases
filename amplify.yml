@@ -13,11 +13,10 @@ applications:
       artifacts:
         baseDirectory: .next
         files:
-          - '**/*'
+          - "**/*"
       cache:
         paths:
           - node_modules/**/*
-
 
   - appRoot: angular-apollo-tailwind
     frontend:
@@ -34,11 +33,11 @@ applications:
       artifacts:
         baseDirectory: dist/starter-dev-angular
         files:
-          - '**/*'
+          - "**/*"
       cache:
         paths:
           - node_modules/**/*
-    
+
   - appRoot: vue3-ts-quasar
     frontend:
       phases:
@@ -54,7 +53,7 @@ applications:
       artifacts:
         baseDirectory: dist/
         files:
-          - '**/*'
+          - "**/*"
       cache:
         paths:
           - node_modules/**/*
@@ -72,7 +71,25 @@ applications:
       artifacts:
         baseDirectory: .next
         files:
-          - '**/*'
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+
+  - appRoot: cra-rxjs-styled-components
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - yarn install
+        build:
+          commands:
+            - yarn run build
+      artifacts:
+        baseDirectory: build/
+        files:
+          - "**/*"
       cache:
         paths:
           - node_modules/**/*
