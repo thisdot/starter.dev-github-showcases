@@ -1,7 +1,7 @@
 import type { LoaderFunction } from 'remix';
 import { Form, json, useLoaderData } from 'remix';
 import { auth } from '~/services/auth.server';
-import { sessionStorage } from '~/services/session.server'
+import { sessionStorage } from '~/services/session.server';
 type LoaderData = {
   error: { message: string } | null;
 };

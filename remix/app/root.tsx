@@ -18,7 +18,7 @@ import NavBar from './components/Navbar/NavBar';
 import { auth } from './services/auth.server';
 import { CURRENT_USER_QUERY } from './lib/queries/UserDropdown';
 import gqlClient from './lib/graphql-client';
-import { getSession, sessionStorage } from './services/session.server';
+import { sessionStorage } from './services/session.server';
 
 type DocumentProps = {
   children: React.ReactNode;
@@ -67,31 +67,38 @@ export function CatchBoundary() {
 }
 
 export const action: ActionFunction = async ({ request }) => {
-  // const session = await getSession(request);
-  // await sessionStorage.destroySession(session);
   await auth.logout(request, { redirectTo: '/login' });
 };
 
 type LoaderData = {
-  viewer: any;
+  viewer?: any;
+  valid?: any;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const { accessToken } = await auth.isAuthenticated(request, {
-    failureRedirect: '/login',
-  });
-  const { viewer } = await gqlClient.request(CURRENT_USER_QUERY, undefined, {
-    authorization: `Bearer ${accessToken}`,
-  });
+  const session = await sessionStorage.getSession(
+    request.headers.get('Cookie')
+  );
+  const valid = session.get(auth.sessionKey);
 
-  return json<LoaderData>({ viewer });
+  // verifies authed before calling to prevent redirect spiral
+  if (valid) {
+    const { accessToken } = await auth.isAuthenticated(request, {
+      failureRedirect: '/login',
+    });
+    const { viewer } = await gqlClient.request(CURRENT_USER_QUERY, undefined, {
+      authorization: `Bearer ${accessToken}`,
+    });
+    return json<LoaderData>({ viewer, valid });
+  }
+  return json<LoaderData>({ valid });
 };
 
 export default function App() {
-  const { viewer } = useLoaderData<LoaderData>();
+  const { viewer, valid } = useLoaderData<LoaderData>();
   return (
     <Document>
-      <NavBar user={viewer} />
+      {valid ? <NavBar user={viewer} /> : null}
       <Outlet />
       <ScrollRestoration />
       <Scripts />
