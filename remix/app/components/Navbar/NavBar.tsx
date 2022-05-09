@@ -3,14 +3,14 @@ import UserDropdownView from '../UserDropdown/UserDropdown.view';
 import { Link } from 'remix';
 import { GitHubLogo } from '../Icons/GitHubLogo';
 
-type navBarProps = {
+type NavBarProps = {
   user: {
     avatarUrl: string;
     login: string;
   };
 };
 
-function NavBar({ user }: navBarProps) {
+function NavBar({ user }: NavBarProps) {
   return (
     <header className={styles.header}>
       <Link to="/">
