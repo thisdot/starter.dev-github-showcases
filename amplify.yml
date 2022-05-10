@@ -26,6 +26,7 @@ applications:
             - nvm install
             - nvm use
             - yarn install
+            - yarn generate
         build:
           commands:
             - node -v
