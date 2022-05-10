@@ -1,13 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PageInfo } from '../../gql';
-
-interface BeforePageEvent {
-  before?: string | null;
-}
-interface AfterPageEvent {
-  after?: string | null;
-}
-type ChangePageEvent = BeforePageEvent | AfterPageEvent;
+import { ChangePageEvent, PageInfo } from '../../gql';
 
 @Component({
   selector: 'app-pagination',

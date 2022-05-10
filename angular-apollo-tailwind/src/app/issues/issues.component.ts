@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ReposFilterStore } from '../components/filters/repos-filter.store';
 import { Observable } from 'rxjs';
-import { IssueState, PageInfo } from '../gql';
+import { IssueState, ChangePageEvent } from '../gql';
 import { IssuesStore } from './issues.store';
 import { Issues } from '../gql/models/repo-issues';
 
@@ -63,7 +63,7 @@ export class IssuesComponent implements OnInit {
     this.issuesStore.getIssues$(this.filterState$);
   }
 
-  changePage(page: PageInfo) {
+  changePage(page: ChangePageEvent) {
     this.reposFilterStore.changePage(page);
     this.issuesStore.getIssues$(this.filterState$);
   }
