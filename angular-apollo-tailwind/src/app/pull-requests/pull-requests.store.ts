@@ -23,16 +23,11 @@ export interface FilterState {
   state: PullRequestState;
   type: PULL_REQUESTS_TYPE;
   sort: IssueOrder;
-  afterCursor?: string;
-  beforeCursor?: string;
+  endCursor?: string;
+  startCursor?: string;
   milestones: Milestone[] | null;
   openPullRequests: RepoPullRequests | null;
   closedPullRequests: RepoPullRequests | null;
-}
-
-export interface PaginatorOptions {
-  afterCursor: string;
-  beforeCursor: string;
 }
 
 const INITIAL_STATE: FilterState = {
@@ -78,8 +73,8 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly setMilestone = this.updater((state, value: string) => ({
     ...state,
     milestone: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
+    endCursor: undefined,
+    startCursor: undefined,
   }));
 
   readonly setMilestones = this.updater((state, values: Milestone[]) => ({
@@ -90,15 +85,15 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly setLabel = this.updater((state, value: string) => ({
     ...state,
     label: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
+    endCursor: undefined,
+    startCursor: undefined,
   }));
 
   readonly changeState = this.updater((state, value: PullRequestState) => ({
     ...state,
     state: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
+    endCursor: undefined,
+    startCursor: undefined,
   }));
 
   readonly setSort = this.updater((state, value: string) => {
@@ -109,18 +104,16 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
         field: PULL_REQUESTS_ORDER_DICT[field],
         direction: DIRECTION_DICT[direction],
       },
-      afterCursor: undefined,
-      beforeCursor: undefined,
+      endCursor: undefined,
+      startCursor: undefined,
     };
   });
 
-  readonly changePage = this.updater(
-    (state, { afterCursor, beforeCursor }: PaginatorOptions) => ({
-      ...state,
-      afterCursor,
-      beforeCursor,
-    }),
-  );
+  readonly changePage = this.updater((state, { before, after }: any) => ({
+    ...state,
+    endCursor: after as string,
+    startCursor: before as string,
+  }));
 
   readonly resetState = this.updater((state) => ({
     ...INITIAL_STATE,
@@ -210,7 +203,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly getPullRequests$ = this.effect((target$: Observable<void>) =>
     target$.pipe(
       withLatestFrom(this.state$),
-      switchMap(([, { label, sort, afterCursor, beforeCursor }]) =>
+      switchMap(([, { label, sort, endCursor, startCursor }]) =>
         this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
           switchMap(({ owner, name }) =>
             this.repoPullRequestsGQL
@@ -219,8 +212,8 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
                 name,
                 orderBy: sort ?? undefined,
                 labels: label ? [label] : undefined,
-                after: afterCursor ?? undefined,
-                before: beforeCursor ?? undefined,
+                after: endCursor ?? undefined,
+                before: startCursor ?? undefined,
               })
               .valueChanges.pipe(
                 tapResponse(
