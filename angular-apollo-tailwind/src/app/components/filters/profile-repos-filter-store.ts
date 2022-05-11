@@ -5,6 +5,7 @@ import {
   OrderDirection,
   PageInfo,
   RepositoryOrder,
+  PaginationEvent,
 } from '../../../../src/app/gql';
 import { LanguageFilter, TypeFilter } from './filter.models';
 
@@ -112,11 +113,13 @@ export class ProfileReposFilterStore extends ComponentStore<ProfileFilterState> 
     filtersLoaded: value,
   }));
 
-  readonly changePage = this.updater((state, { before, after }: any) => ({
-    ...state,
-    afterCursor: after as string,
-    beforeCursor: before as string,
-  }));
+  readonly changePage = this.updater(
+    (state, { before, after }: PaginationEvent) => ({
+      ...state,
+      afterCursor: after as string,
+      beforeCursor: before as string,
+    }),
+  );
 
   // *********** Selectors *********** //
 

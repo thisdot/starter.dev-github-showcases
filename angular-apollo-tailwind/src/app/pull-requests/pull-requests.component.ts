@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ChangePageEvent, PullRequestState, RepoPullRequests } from '../gql';
+import { PaginationEvent, PullRequestState, RepoPullRequests } from '../gql';
 import { PullRequestsStore } from './pull-requests.store';
 
 @Component({
@@ -57,7 +57,7 @@ export class PullRequestsComponent implements OnInit {
     this.pullRequestsStore.getPullRequests$();
   }
 
-  changePage(page: ChangePageEvent) {
+  changePage(page: PaginationEvent) {
     this.pullRequestsStore.changePage(page);
     this.pullRequestsStore.getPullRequests$();
   }

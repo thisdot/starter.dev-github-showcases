@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ChangePageEvent, PageInfo } from '../../gql';
+import { PageInfo, PaginationEvent } from '../../gql';
 
 @Component({
   selector: 'app-pagination',
@@ -9,7 +9,7 @@ import { ChangePageEvent, PageInfo } from '../../gql';
 export class PaginationComponent {
   @Input() pageInfo: PageInfo | null = null;
 
-  @Output() changePage: EventEmitter<ChangePageEvent> = new EventEmitter();
+  @Output() changePage: EventEmitter<PaginationEvent> = new EventEmitter();
 
   handlePreviousPageClick() {
     this.changePage.emit({

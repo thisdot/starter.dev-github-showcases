@@ -8,6 +8,7 @@ import {
   Label,
   Milestone,
   OrderDirection,
+  PaginationEvent,
   PullRequestState,
   PULL_REQUESTS_TYPE,
   RepoPage,
@@ -109,11 +110,13 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
     };
   });
 
-  readonly changePage = this.updater((state, { before, after }: any) => ({
-    ...state,
-    endCursor: after as string,
-    startCursor: before as string,
-  }));
+  readonly changePage = this.updater(
+    (state, { before, after }: PaginationEvent) => ({
+      ...state,
+      endCursor: after as string,
+      startCursor: before as string,
+    }),
+  );
 
   readonly resetState = this.updater((state) => ({
     ...INITIAL_STATE,
