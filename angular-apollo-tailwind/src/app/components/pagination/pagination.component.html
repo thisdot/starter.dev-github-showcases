@@ -6,27 +6,27 @@
       (click)="handlePreviousPageClick()"
       class="button"
     >
-      <hero-icon
+      <!-- <hero-icon
         name="chevron-left"
         type="outline"
         class="w-4 h-4 inline mr-1.5"
         aria-hidden="true"
-      ></hero-icon>
+      ></hero-icon> -->
       Previous
     </button>
     <button
-      type="button"
+      type="button right"
       [disabled]="!pageInfo?.hasNextPage"
       (click)="handleNextPageClick()"
       class="button"
     >
       Next
-      <hero-icon
+      <!-- <hero-icon
         name="chevron-right"
         type="outline"
         class="w-4 h-4 inline ml-1.5"
         aria-hidden="true"
-      ></hero-icon>
+      ></hero-icon> -->
     </button>
   </span>
 </div>
