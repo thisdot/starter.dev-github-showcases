@@ -40,14 +40,21 @@ export function useGists(): GistWithFilename[] {
     )
       .pipe(
         filter((gists) => !!gists.length),
-        switchMap((gists: Gist[]) => {
-          const requests = gists.map(createGistRequest);
+        map((gists) => {
+          return gists.map((gist) => {
+            const { url, id, html_url, files } = gist;
 
-          return zip(...requests).pipe(
-            map((gists) => {
-              return mergeGists(gists);
-            })
-          );
+            let filename = Object.keys(files)[0];
+            filename = files[filename].filename;
+
+            return {
+              url,
+              id,
+              html_url,
+              files,
+              filename,
+            };
+          });
         }),
         tap(setState)
       )
@@ -59,29 +66,4 @@ export function useGists(): GistWithFilename[] {
   }, [currentUser]);
 
   return state;
-}
-
-function createGistRequest(gist: Gist): Observable<Gist> {
-  return fromFetchWithAuth<Gist>(gist.url, {
-    selector: (response: Response) => {
-      return response.json();
-    },
-  });
-}
-
-function mergeGists(gists: Gist[]) {
-  return gists.map((gist) => {
-    const { url, id, html_url, files } = gist;
-
-    let filename = Object.keys(files)[0];
-    filename = files[filename].filename;
-
-    return {
-      url,
-      id,
-      html_url,
-      files,
-      filename,
-    };
-  });
 }
