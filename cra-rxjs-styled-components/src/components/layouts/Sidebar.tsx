@@ -15,7 +15,9 @@ const Menu = styled.div`
 `;
 
 const MenuTitle = styled.h3`
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
   margin: 0 0 1rem;
 
   &:last-child {
@@ -39,6 +41,8 @@ const MenuItem = styled.li`
 
 const MenuLink = styled.a`
   color: #24292f;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   text-decoration: none;
 
   &:hover {
