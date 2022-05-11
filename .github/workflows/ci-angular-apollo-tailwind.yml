@@ -93,6 +93,10 @@ jobs:
         run: yarn install --frozen-lockfile
         working-directory: angular-apollo-tailwind
 
+      - name: GraphQL codegen
+        run: yarn generate
+        working-directory: angular-apollo-tailwind
+
       - name: Build Project
         run: yarn build
         working-directory: angular-apollo-tailwind
