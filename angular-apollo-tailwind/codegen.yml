@@ -12,4 +12,3 @@ generates:
     config:
       addExplicitOverride: true
       fetcher: graphql-request
-      addExplicitOverride: true
