@@ -1,7 +1,9 @@
-/* TODO: fix last-of-type */
-/* @apply py-2 px-4 border-b border-gray-300 last-of-type:border-none hover:bg-gray-50; */
 .cell {
   @apply py-2 px-4 border-b border-gray-300 hover:bg-gray-50;
+}
+
+.cell:last-of-type {
+  @apply border-none;
 }
 
 .iconFile {
