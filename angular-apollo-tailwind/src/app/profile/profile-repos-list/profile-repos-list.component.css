@@ -1,6 +1,9 @@
-/* @apply py-8 border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4; */
 .profile-repos-container {
   @apply py-8 border-b border-gray-200 grid grid-cols-12 gap-x-4;
+}
+
+.profile-repos-container:first-of-type {
+  @apply border-t;
 }
 
 .content {
