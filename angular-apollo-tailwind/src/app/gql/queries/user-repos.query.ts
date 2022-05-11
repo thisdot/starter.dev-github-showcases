@@ -10,7 +10,7 @@ export const USER_REPOS_QUERY = gql`
     user(login: $username) {
       id
       repositories(
-        first: 100
+        first: 10
         after: $afterCursor
         before: $beforeCursor
         orderBy: $orderBy

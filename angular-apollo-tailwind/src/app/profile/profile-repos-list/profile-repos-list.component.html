@@ -52,7 +52,10 @@
         </div>
       </div>
     </div>
-    <!-- TODO: pagination -->
+    <app-pagination
+      [pageInfo]="(pageInfo$ | async)!"
+      (changePage)="changePage($event)"
+    ></app-pagination>
   </div>
 </ng-container>
 

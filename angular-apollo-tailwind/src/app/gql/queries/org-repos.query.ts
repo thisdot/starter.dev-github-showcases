@@ -10,7 +10,7 @@ export const ORG_REPOS_QUERY = gql`
     organization(login: $orgname) {
       id
       repositories(
-        first: 100
+        first: 10
         after: $afterCursor
         before: $beforeCursor
         orderBy: $orderBy

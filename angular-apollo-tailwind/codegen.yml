@@ -11,3 +11,4 @@ generates:
       - 'typescript-apollo-angular'
     config:
       fetcher: graphql-request
+      addExplicitOverride: true

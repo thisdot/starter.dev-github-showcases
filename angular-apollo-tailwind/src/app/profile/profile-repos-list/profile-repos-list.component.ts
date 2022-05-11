@@ -3,7 +3,7 @@ import { ProfileReposFilterStore } from '../../components/filters/profile-repos-
 import { Observable } from 'rxjs';
 import { ProfileReposStore } from './profile-repos.store';
 import { LanguageFilter } from 'src/app/components/filters/filter.models';
-import { Repo } from 'src/app/gql';
+import { Repo, ChangePageEvent } from 'src/app/gql';
 
 @Component({
   selector: 'app-profile-repos-list',
@@ -14,6 +14,7 @@ import { Repo } from 'src/app/gql';
 export class ProfileReposListComponent implements OnInit {
   readonly userRepos$: Observable<Repo[]> = this.profileReposStore.repos$;
   readonly resultCount$ = this.profileReposStore.resultCount$;
+  readonly pageInfo$ = this.profileReposStore.pageInfo$;
 
   // Profile Repos Filters Store selectors
   readonly filterState$ = this.profileReposFilterStore.state$;
@@ -63,6 +64,11 @@ export class ProfileReposListComponent implements OnInit {
 
   setQuery(query: string) {
     this.profileReposFilterStore.setQuery(query);
+    this.profileReposStore.getRepos(this.filterState$);
+  }
+
+  changePage(page: ChangePageEvent) {
+    this.profileReposFilterStore.changePage(page);
     this.profileReposStore.getRepos(this.filterState$);
   }
 
