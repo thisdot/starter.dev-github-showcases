@@ -10,9 +10,10 @@ import * as styles from './RepoIssues.classNames';
 
 interface RepoIssuesViewProps {
   issues: Issue[];
+  pathname: string;
 }
 
-function RepoIssuesView({ issues }: RepoIssuesViewProps) {
+function RepoIssuesView({ issues, pathname }: RepoIssuesViewProps) {
   return (
     <>
       {issues.map((issue) => (
@@ -32,7 +33,14 @@ function RepoIssuesView({ issues }: RepoIssuesViewProps) {
               </div>
               <div>
                 <div className={styles.content}>
-                  <span className={styles.title}>{issue.title}</span>
+                  <span className={styles.title}>
+                    <a
+                      href={`https://github.com${pathname}/${issue.number}`}
+                      target="_blank"
+                    >
+                      {issue.title}
+                    </a>
+                  </span>
                   <span className="inline">
                     {issue.labels.map(({ color, name }) => (
                       <span

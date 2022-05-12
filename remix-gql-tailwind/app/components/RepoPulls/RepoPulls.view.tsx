@@ -11,9 +11,11 @@ import * as styles from '../RepoIssues/RepoIssues.classNames';
 
 interface RepoPullsViewProps {
   pullRequests: PullRequest[];
+  name: string;
+  owner: string;
 }
 
-function RepoPullsView({ pullRequests }: RepoPullsViewProps) {
+function RepoPullsView({ pullRequests, name, owner }: RepoPullsViewProps) {
   return (
     <>
       {pullRequests.map((pullRequest) => {
@@ -40,7 +42,14 @@ function RepoPullsView({ pullRequests }: RepoPullsViewProps) {
                 <div>{icon}</div>
                 <div>
                   <div className={styles.content}>
-                    <span className={styles.title}>{pullRequest.title}</span>
+                    <span className={styles.title}>
+                      <a
+                        href={`https://github.com/${owner}/${name}/pull/${pullRequest.number}`}
+                        target="_blank"
+                      >
+                        {pullRequest.title}
+                      </a>
+                    </span>
                     <span className="inline">
                       {pullRequest.labels.map(({ color, name }) => (
                         <span

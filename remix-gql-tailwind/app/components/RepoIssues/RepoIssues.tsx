@@ -30,7 +30,7 @@ export const stateFilter = () => {
 
 
 function RepoIssues({ openIssues, closedIssues, milestones, labels }: RepoIssuesProps ) {
-  const { owner, name } = useRepo();
+  const { pathname } = useRepo();
 
   const filters = useIssueFilters();
 
@@ -55,7 +55,7 @@ function RepoIssues({ openIssues, closedIssues, milestones, labels }: RepoIssues
         hasActiveFilters={filters.hasActiveFilters}
       >
         {activeIssues.issues.length > 0 ? (
-          <RepoIssuesView issues={activeIssues.issues} />
+          <RepoIssuesView pathname={pathname} issues={activeIssues.issues} />
         ) : (
           <IssuesEmpty Icon={MinusCircleIcon} />
         )}
