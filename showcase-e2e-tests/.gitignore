@@ -1,0 +1,6 @@
+# Generated Files
+videos
+
+# System Files
+.DS_Store
+node_modules

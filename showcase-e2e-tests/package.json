@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "cy:run": "cypress run --config-file $CYPRESS_CONFIG",
+    "start:angular-apollo-tailwind": "cd ../angular-apollo-tailwind && npm start",
+    "test:angular-apollo-tailwind": "CYPRESS_CONFIG='cypress/configs/angular-apollo-tailwind.json' start-server-and-test start:angular-apollo-tailwind http://localhost:4200 cy:run",
+    "start:angular-ngrx-scss": "cd ../angular-ngrx-scss && npm start",
+    "test:angular-ngrx-scss": "CYPRESS_CONFIG='cypress/configs/angular-ngrx-scss.json' start-server-and-test start:angular-ngrx-scss http://localhost:4200 cy:run",
+    "start:next-react-query-tailwind": "cd ../next-react-query-tailwind && npm dev",
+    "test:next-react-query-tailwind": "CYPRESS_CONFIG='cypress/configs/next-react-query-tailwind.json' start-server-and-test start:next-react-query-tailwind http://localhost:3000 cy:run",
+    "start:remix-gql-tailwind": "cd ../remix-gql-tailwind && npm dev",
+    "test:remix-gql-tailwind": "CYPRESS_CONFIG='cypress/configs/remix-gql-tailwind.json' start-server-and-test start:remix-gql-tailwind http://localhost:3000 cy:run",
+    "start:vue3-ts-quasar": "cd ../vue3-ts-quasar && yarn dev",
+    "test:vue3-ts-quasar": "CYPRESS_CONFIG='cypress/configs/vue3-ts-quasar.json' start-server-and-test start:vue3-ts-quasar http://localhost:8080 cy:run"
+  },
+  "devDependencies": {
+    "cypress": "^9.6.1"
+  },
+  "dependencies": {
+    "start-server-and-test": "^1.14.0",
+    "typescript": "^4.6.4"
+  }
+}
