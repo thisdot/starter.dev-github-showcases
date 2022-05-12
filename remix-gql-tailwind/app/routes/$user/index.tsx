@@ -42,7 +42,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       authorization: `Bearer ${accessToken}`,
     }
   );
-  console.log(data);
   const repositories = parseQuery(data);
   data.user.repositories = repositories;
   const userProfileData = { ...data.user };
