@@ -9,8 +9,4 @@ beforeEach(() => {
   }).as(`token`);
   //cy.mockNextAuth();
   cy.visit(Cypress.env(`authUrl`));
-
-  cy.intercept(`GET`, `/user`, {
-    fixture: `user/currentUser.json`,
-  }).as(`user`);
 });

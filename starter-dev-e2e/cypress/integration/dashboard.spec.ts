@@ -20,9 +20,20 @@ describe(`Sign in`, () => {
 
         req.continue();
       });
+      cy.intercept(`GET`, `/user`, {
+        fixture: `user/currentUser.json`,
+      }).as(`user`);
+      cy.intercept(
+        `GET`,
+        `/user/repos?sort=updated&affiliation=owner,collaborator,organization_member&per_page=20`,
+        {
+          fixture: `user/userTopRepos.json`,
+        }
+      ).as(`repos`);
     });
 
     it(`top repos should be listed`, () => {
+      //TODO: In #264, we should properly look for elements using `[data-testid="some-test-id"]`
       cy.get(`h2`).should(`be.visible`);
     });
   });
