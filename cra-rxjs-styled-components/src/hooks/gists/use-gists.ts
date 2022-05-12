@@ -2,20 +2,16 @@ import { useEffect, useState } from 'react';
 import { GITHUB_URL_BASE, GISTS_URL } from '../../constants/url.constants';
 import { Gist, GistWithFilename } from '../../interfaces/gists.interfaces';
 import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
-import {
-  filter,
-  map,
-  Subscription,
-  Observable,
-  switchMap,
-  tap,
-  zip,
-} from 'rxjs';
+import { filter, map, Subscription, tap } from 'rxjs';
 
 export function useGists(): GistWithFilename[] {
   const [state, setState] = useState<GistWithFilename[]>([]);
   const [currentUser, setCurrentUser] = useState<string>('');
 
+  /**
+   * @todo Refactor getting the currently authenticated user's username into
+   *       a global context.
+   */
   const getCurrentUser = () =>
     fromFetchWithAuth<{
       login: string;
