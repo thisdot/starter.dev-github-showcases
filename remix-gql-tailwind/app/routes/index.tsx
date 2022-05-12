@@ -12,8 +12,6 @@ import UserGistsView from '~/components/UserGists/UserGists.view';
 import { TopRepo } from '~/components/UserTopRepos/types';
 import { GistItem } from '~/components/UserGists/types';
 
-
-
 type LoaderData = {
   profile: GitHubProfile;
   userRepos: TopRepo[];
