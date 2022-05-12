@@ -17,12 +17,9 @@ function TabNavigation({
   basePath = '',
   pathname,
 }: TabNavigationProps) {
-  const isCurrentTab = (path?: string) => {
-    const matchPath = path === '' ? basePath : `${basePath}/${path}`;
-
-    if (!pathname.includes(path!) || path === '')
-      return pathname === `/${matchPath}`;
-    return pathname === `/${basePath}/${path}`;
+  const isCurrentTab = (pathName?: string) => {
+    const otherPaths = tabs.filter(({ path }) => path !== pathName).map(({ path }) => path);
+    return pathName !== '' ? pathname.includes(pathName!) : (otherPaths.every(path => !pathname.includes(path!)))
   };
 
   return (
