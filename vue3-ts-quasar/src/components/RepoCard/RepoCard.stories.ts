@@ -4,12 +4,11 @@ export default {
   title: 'component/RepoCard',
   component: RepoCard,
   argType: {
-    repoName: {},
+    name: {},
     visibilityTag: {},
     mainLanguage: {},
     description: {},
     lastUpdated: {},
-    topics: {},
     stars: {},
   },
 };
@@ -24,28 +23,14 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  repoName: 'cowrywise-unsplashed',
-  visibilityTag: 'Private',
-  mainLanguage: {
+  name: 'cowrywise-unsplashed',
+  visibility: 'Private',
+  primaryLanguage: {
     color: 'yellow',
-    language: 'Javascript',
+    name: 'Javascript',
   },
   description:
     'Using basic pull requests to add your name and github link to BE A MEMBER of ZTM-ng',
-  topics: [
-    {
-      name: 'JavaScript',
-      url: '',
-    },
-    {
-      name: 'css',
-      url: '',
-    },
-    {
-      name: 'graphql-api',
-      url: '',
-    },
-  ],
-  stars: 1,
-  lastUpdated: '23 Sep 2020',
+  stargazerCount: 1,
+  updatedAt: '23 Sep 2020',
 };
