@@ -5,20 +5,35 @@ import { HttpLink } from 'apollo-angular/http';
 import { environment } from 'src/environments/environment';
 
 import { onError } from '@apollo/client/link/error';
+import { ToasterService } from '../components/toaster/toaster.service';
+import { ToasterType } from '../components/toaster/toaster.model';
 
 const uri = environment.graphApiUrl; // <-- add the URL of the GraphQL server here
 
-export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
+export function createApollo(
+  httpLink: HttpLink,
+  toasterService: ToasterService,
+): ApolloClientOptions<any> {
   const http = httpLink.create({ uri });
   const error = onError(({ networkError, graphQLErrors }) => {
     if (graphQLErrors)
-      graphQLErrors.map(({ message, locations, path }) =>
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-        ),
-      );
+      graphQLErrors.map(({ message, locations, path }) => {
+        toasterService.showToast({
+          type: ToasterType.ERROR,
+          title: 'GraphQL error',
+          message: `Message: ${message}, 
+          Location: ${locations}, Path: ${path}`,
+        });
+      });
 
-    if (networkError) console.log(`[Network error]: ${networkError.name}`);
+    if (networkError) {
+      toasterService.showToast({
+        type: ToasterType.ERROR,
+        title: 'Network error',
+        message: `Name: ${networkError.name}, 
+        Message: ${networkError.message}`,
+      });
+    }
   });
 
   const link = error.concat(http);
@@ -39,7 +54,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpLink],
+      deps: [HttpLink, ToasterService],
     },
   ],
 })

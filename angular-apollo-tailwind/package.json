@@ -47,6 +47,7 @@
     "date-fns": "^2.27.0",
     "graphql": "15.7.2",
     "marked": "^4.0.8",
+    "ng-animate": "^1.0.0",
     "ng-heroicon": "^0.4.5",
     "prismjs": "^1.25.0",
     "rxjs": "~7.4.0",

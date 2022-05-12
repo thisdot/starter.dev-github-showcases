@@ -6849,6 +6849,13 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ng-animate@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ng-animate/-/ng-animate-1.0.0.tgz#59b0ae69a14ab88ac10fea5ae92406f95615b3c7"
+  integrity sha512-30l80kCkAelXEbQ0RKCCQo+5NOXWHQx3+HwtN+oarWhP6ISbmx/LtMGbEGYSwSTUj6NQZ+u07sFxlEsoC8AMDw==
+  dependencies:
+    tslib "^2.0.0"
+
 ng-heroicon@^0.4.5:
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/ng-heroicon/-/ng-heroicon-0.4.5.tgz#6a5b0cc4efef20b37e5cb8c98fc71c8a911c89c3"
