@@ -21,6 +21,7 @@ export interface UserProfileViewProps {
   websiteUrl?: string | null;
   followers: Follow;
   following: Follow;
+  starredRepositories: Follow;
   organizations: Nodes;
 }
 
@@ -35,6 +36,7 @@ function UserProfileView({
   websiteUrl,
   followers,
   following,
+  starredRepositories,
   organizations,
 }: UserProfileViewProps) {
   return (
@@ -53,9 +55,6 @@ function UserProfileView({
       {bio && (
         <div className={styles.bio} dangerouslySetInnerHTML={{ __html: bio }} />
       )}
-      <div className={styles.buttonContainer}>
-        <button className={styles.button}>Edit Profile</button>
-      </div>
       <div className={styles.socials}>
         <UsersIcon className={styles.icon} />
         <span className="inline-block">
@@ -64,6 +63,11 @@ function UserProfileView({
         <span className="mx-1">·</span>
         <span className="inline-block">
           <span className={styles.count}>{following.totalCount}</span> following
+        </span>
+        <span className="mx-1">·</span>
+        <StarIcon className={styles.icon} />
+        <span className="inline-block">
+          <span className={styles.count}>{starredRepositories.totalCount}</span>{' '}
         </span>
       </div>
       <div className={styles.fields}>

@@ -8,6 +8,7 @@ const exampleData = {
   company: '@thisdot',
   followers: { totalCount: 24 },
   following: { totalCount: 20 },
+  starredRepositories: { totalCount: 3 },
   location: 'Washington, DC',
   login: 'tvanantwerp',
   name: 'Tom VanAntwerp',

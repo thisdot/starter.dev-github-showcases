@@ -53,5 +53,11 @@ export default function User() {
   const location = useLocation();
   const { userProfileData, owner } = useLoaderData();
 
-  return <ProfilePage userProfileData={userProfileData} owner={owner} pathname={location.pathname} />;
+  return (
+    <ProfilePage
+      userProfileData={userProfileData}
+      owner={owner}
+      pathname={location.pathname}
+    />
+  );
 }
