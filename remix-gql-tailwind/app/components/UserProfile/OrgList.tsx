@@ -1,8 +1,8 @@
-import type { Organization } from './types';
+import type { OrganizationNodes } from './types';
 import * as styles from './OrgList.classNames';
 
 interface OrgListProps {
-  organizations: Organization[];
+  organizations: OrganizationNodes[];
 }
 
 function OrgList({ organizations }: OrgListProps) {

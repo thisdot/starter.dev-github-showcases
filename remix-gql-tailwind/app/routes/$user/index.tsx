@@ -42,6 +42,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       authorization: `Bearer ${accessToken}`,
     }
   );
+  console.log(data);
   const repositories = parseQuery(data);
   data.user.repositories = repositories;
   const userProfileData = { ...data.user };
@@ -53,5 +54,11 @@ export default function User() {
   const location = useLocation();
   const { userProfileData, owner } = useLoaderData();
 
-  return <ProfilePage userProfileData={userProfileData} owner={owner} pathname={location.pathname} />;
+  return (
+    <ProfilePage
+      userProfileData={userProfileData}
+      owner={owner}
+      pathname={location.pathname}
+    />
+  );
 }
