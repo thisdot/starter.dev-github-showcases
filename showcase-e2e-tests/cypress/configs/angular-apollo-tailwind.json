@@ -1,0 +1,7 @@
+{
+  "baseUrl": "http://localhost:4200",
+  "integrationFolder": "cypress/integration",
+  "env": {
+    "authUrl": "/redirect"
+  }
+}
