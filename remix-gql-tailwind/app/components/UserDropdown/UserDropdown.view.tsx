@@ -39,7 +39,7 @@ function UserDropdownView({ image, username }: UserDropdownViewProps) {
               </Menu.Item>
             )}
             <Menu.Item>
-              <Form method="post">
+              <Form method="post" action="/logout">
                 <button className={styles.menuBtn}>Sign Out</button>
               </Form>
             </Menu.Item>

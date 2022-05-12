@@ -1,5 +1,4 @@
 import {
-  ActionFunction,
   json,
   Link,
   Links,
@@ -65,10 +64,6 @@ export function CatchBoundary() {
     </Document>
   );
 }
-
-export const action: ActionFunction = async ({ request }) => {
-  await auth.logout(request, { redirectTo: '/login' });
-};
 
 type LoaderData = {
   viewer?: any;
