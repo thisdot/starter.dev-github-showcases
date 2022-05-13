@@ -25,7 +25,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const searchParams = url.searchParams;
 
   const label = searchParams.get('Label');
-  const milestone = searchParams.get('Milestones');
   const after = searchParams.get('after');
   const before = searchParams.get('before')
   const orderBy = searchParams.get('Sort');
@@ -77,10 +76,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         field: orderByArr ? orderByArr[0] : 'CREATED_AT',
         direction: orderByArr ? orderByArr[1] : 'DESC',
       },
-      filterBy: {
-        labels: label,
-        milestone: milestone,
-      },
+      labels: label ? [label] : undefined,
       last: before ? 25 : undefined,
       first: (!before || after) ? 25 : undefined,
       after,
