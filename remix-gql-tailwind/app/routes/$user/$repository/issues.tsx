@@ -28,7 +28,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const label = searchParams.get('Label');
   const milestone = searchParams.get('Milestones');
   const after = searchParams.get('after');
-  const before = searchParams.get('before')
+  const before = searchParams.get('before');
   const orderBy = searchParams.get('Sort');
   const orderByArr = orderBy?.split('^');
 
@@ -56,7 +56,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     name: params.repository!,
     branch: repository?.defaultBranchRef?.name ?? defaultBranch,
     path: formattedPath,
-    pathname:pathname,
+    pathname,
     data: repository
       ? {
           ...repository,
@@ -78,12 +78,15 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         field: orderByArr ? orderByArr[0] : 'CREATED_AT',
         direction: orderByArr ? orderByArr[1] : 'DESC',
       },
-      filterBy: {
-        labels: label,
-        milestone: milestone,
-      },
-      last: before ? 25 : undefined,
-      first: (!before || after) ? 25 : undefined,
+      filterBy:
+        label || milestone
+          ? {
+              labels: label ? [label] : undefined,
+              milestone: milestone || undefined,
+            }
+          : undefined,
+      last: before ? 25 : null,
+      first: !before || after ? 25 : null,
       after,
       before,
     },

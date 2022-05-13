@@ -15,7 +15,7 @@ export type RepoPullProps = {
 }
 
 function RepoPulls({ openPullRequests, closedPullRequests, labels }: RepoPullProps) {
-  const { owner, name } = useRepo();
+  const { name, owner } = useRepo();
   const filters = useIssueFilters();
 
   const activePullRequests =
@@ -41,7 +41,7 @@ function RepoPulls({ openPullRequests, closedPullRequests, labels }: RepoPullPro
         hasActiveFilters={filters.hasActiveFilters}
       >
         {activePullRequests.pullRequests.length > 0 ? (
-          <RepoPullsView pullRequests={activePullRequests.pullRequests} />
+          <RepoPullsView pullRequests={activePullRequests.pullRequests} name={name} owner={owner} />
         ) : (
           <IssuesEmpty Icon={PullRequestIcon} />
         )}
