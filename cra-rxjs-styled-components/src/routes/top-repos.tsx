@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import RepositoryCard from '../components/top-repositories/RepositoryCard';
 import { useTopRepos } from '../hooks/top-repositories/use-top-repos';
+import { useGists } from '../hooks/gists/use-gists';
 import Sidebar from '../components/layouts/Sidebar';
 import { Layout } from '../components/layouts/Layout';
 
@@ -35,11 +36,19 @@ const RepositoriesContainer = styled.section`
 
 export default function TopRepos() {
   const repositories = useTopRepos();
+  const gists = useGists();
 
   return (
     <>
       <Layout>
-        <Sidebar />
+        <Sidebar
+          title="Gists"
+          links={gists.map((gist) => ({
+            id: gist.id,
+            title: gist.filename,
+            href: gist.html_url,
+          }))}
+        />
         <Main>
           <Page>
             <Heading>Top Repositories</Heading>
