@@ -1,14 +1,16 @@
+import * as styles from './RepoFilters.classNames';
+
 import {
   FiltersAPI,
   LanguageFilter,
   RepositoryOrderField,
 } from './useRepoFilters';
-import cn from 'classnames';
-import { useEffect } from 'react';
-import { XIcon } from '@heroicons/react/solid';
+
 import FilterDropdown from './FilterDropdown';
 import { TypeFilter } from './useRepoFilters';
-import * as styles from './RepoFilters.classNames';
+import { XIcon } from '@heroicons/react/solid';
+import cn from 'classnames';
+import { useEffect } from 'react';
 
 type RepoFiltersProps = {
   languages: LanguageFilter[];

@@ -1,17 +1,16 @@
 import { useReducer } from 'react';
 
-
 export enum RepositoryOrderField {
   CreatedAt = 'CREATED_AT',
   Name = 'NAME',
   PushedAt = 'PUSHED_AT',
   Stargazers = 'STARGAZERS',
-  UpdatedAt = 'UPDATED_AT'
+  UpdatedAt = 'UPDATED_AT',
 }
 
 export enum OrderDirection {
   Asc = 'ASC',
-  Desc = 'DESC'
+  Desc = 'DESC',
 }
 
 export type FiltersAPI = ReturnType<typeof useRepoFilters>;
@@ -159,7 +158,9 @@ export function useRepoFilters() {
   const isQueryActive = state.query !== '';
   const isTypeActive = state.type !== TypeFilter.ALL;
   const isLanguageActive = state.language !== 'all';
-  const isFiltersActive = isQueryActive || isTypeActive || isLanguageActive;
+  const isSortActive = state.sort !== RepositoryOrderField.UpdatedAt;
+  const isFiltersActive =
+    isQueryActive || isTypeActive || isLanguageActive || isSortActive;
 
   return {
     state,

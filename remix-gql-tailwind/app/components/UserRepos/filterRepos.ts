@@ -1,5 +1,9 @@
+import {
+  FilterState,
+  RepositoryOrderField,
+} from '../RepoFilters/useRepoFilters';
+
 import type { Repo } from './types';
-import type { FilterState } from '../RepoFilters/useRepoFilters';
 import { TypeFilter } from '../RepoFilters/useRepoFilters';
 
 export function filterRepos(repos: Repo[], state: FilterState) {
@@ -14,6 +18,23 @@ export function filterRepos(repos: Repo[], state: FilterState) {
         if (!repo.isArchived) {
           return acc;
         }
+    }
+
+    switch (state.sort) {
+      case RepositoryOrderField.Name: {
+        return [...acc, repo].sort((a, b) => {
+          if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
+            return -1;
+          }
+          if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+      case RepositoryOrderField.Stargazers: {
+        return [...acc, repo].sort((a, b) => {});
+      }
     }
 
     if (
