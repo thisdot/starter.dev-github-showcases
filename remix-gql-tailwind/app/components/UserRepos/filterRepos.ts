@@ -33,7 +33,15 @@ export function filterRepos(repos: Repo[], state: FilterState) {
         });
       }
       case RepositoryOrderField.Stargazers: {
-        return [...acc, repo].sort((a, b) => {});
+        return [...acc, repo].sort((a, b) => {
+          if (a.stargazerCount < b.stargazerCount) {
+            return 1;
+          }
+          if (a.stargazerCount > b.stargazerCount) {
+            return -1;
+          }
+          return 0;
+        });
       }
     }
 
