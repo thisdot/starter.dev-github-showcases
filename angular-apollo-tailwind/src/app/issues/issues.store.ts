@@ -115,8 +115,8 @@ export class IssuesStore extends ComponentStore<IssuesState> {
                           milestone: milestone || undefined,
                         }
                       : undefined,
-                  after: startCursor ?? undefined,
-                  before: endCursor ?? undefined,
+                  after: endCursor ?? undefined,
+                  before: startCursor ?? undefined,
                 })
                 .valueChanges.pipe(
                   tapResponse(

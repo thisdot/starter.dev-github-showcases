@@ -48,5 +48,8 @@
       <app-pull-request-skeleton></app-pull-request-skeleton>
     </ng-template>
   </div>
-  <app-pagination [pageInfo]="(pageInfo$ | async)!"></app-pagination>
+  <app-pagination
+    [pageInfo]="(pageInfo$ | async)!"
+    (changePage)="changePage($event)"
+  ></app-pagination>
 </div>

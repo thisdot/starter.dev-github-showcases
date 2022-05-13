@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PullRequestState, RepoPullRequests } from '../gql';
-import { PaginatorOptions, PullRequestsStore } from './pull-requests.store';
+import { PaginationEvent, PullRequestState, RepoPullRequests } from '../gql';
+import { PullRequestsStore } from './pull-requests.store';
 
 @Component({
   selector: 'app-pull-requests',
@@ -57,7 +57,7 @@ export class PullRequestsComponent implements OnInit {
     this.pullRequestsStore.getPullRequests$();
   }
 
-  changePage(page: PaginatorOptions) {
+  changePage(page: PaginationEvent) {
     this.pullRequestsStore.changePage(page);
     this.pullRequestsStore.getPullRequests$();
   }

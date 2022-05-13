@@ -6,3 +6,4 @@ export * from './repo-tree';
 export * from './user-repos';
 export * from './org-profile';
 export * from './profile';
+export * from './pagination';

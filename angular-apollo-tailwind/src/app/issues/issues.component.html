@@ -39,7 +39,10 @@
 
       <ng-template #empty><app-issues-empty></app-issues-empty></ng-template>
     </div>
-    <app-pagination [pageInfo]="pageInfo$ | async"></app-pagination>
+    <app-pagination
+      [pageInfo]="pageInfo$ | async"
+      (changePage)="changePage($event)"
+    ></app-pagination>
   </ng-container>
 
   <ng-template #loading>
