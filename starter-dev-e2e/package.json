@@ -1,20 +1,8 @@
 {
   "scripts": {
     "cy:run": "cypress run --config-file $CYPRESS_CONFIG",
-    "start:angular-apollo-tailwind": "cd ../angular-apollo-tailwind && npm start",
-    "test:angular-apollo-tailwind": "CYPRESS_CONFIG='cypress/configs/angular-apollo-tailwind.json' start-server-and-test start:angular-apollo-tailwind http://localhost:4200 cy:run",
-    "start:angular-ngrx-scss": "cd ../angular-ngrx-scss && npm start",
-    "test:angular-ngrx-scss": "CYPRESS_CONFIG='cypress/configs/angular-ngrx-scss.json' start-server-and-test start:angular-ngrx-scss http://localhost:4200 cy:run",
-    "start:cra-rxjs-styled-components": "cd ../cra-rxjs-styled-components && npm dev",
-    "test:cra-rxjs-styled-components": "CYPRESS_CONFIG='cypress/configs/cra-rxjs-styled-components.json' start-server-and-test start:cra-rxjs-styled-components http://localhost:3000 cy:run",
-    "start:next-react-query-tailwind": "cd ../next-react-query-tailwind && npm dev",
-    "test:next-react-query-tailwind": "CYPRESS_CONFIG='cypress/configs/next-react-query-tailwind.json' start-server-and-test start:next-react-query-tailwind http://localhost:3000 cy:run",
-    "start:remix-gql-tailwind": "cd ../remix-gql-tailwind && npm dev",
-    "test:remix-gql-tailwind": "CYPRESS_CONFIG='cypress/configs/remix-gql-tailwind.json' start-server-and-test start:remix-gql-tailwind http://localhost:3000 cy:run",
-    "start:vite-apollo-vanilla": "cd ../vite-apollo-vanilla && yarn dev",
-    "test:vite-apollo-vanilla": "CYPRESS_CONFIG='cypress/configs/vite-apollo-vanilla.json' start-server-and-test start:vite-apollo-vanilla http://localhost:3000 cy:run",
-    "start:vue3-ts-quasar": "cd ../vue3-ts-quasar && yarn dev",
-    "test:vue3-ts-quasar": "CYPRESS_CONFIG='cypress/configs/vue3-ts-quasar.json' start-server-and-test start:vue3-ts-quasar http://localhost:8080 cy:run"
+    "start": "START_COMMAND=`node -p \"require('$CYPRESS_CONFIG').startCommand\"` && cd ../$SHOWCASE_APP && $START_COMMAND",
+    "test": "CYPRESS_CONFIG=./cypress/configs/$SHOWCASE_APP.json BASE_URL=`node -p \"require('$CYPRESS_CONFIG').baseUrl\"` && CYPRESS_CONFIG=$CYPRESS_CONFIG start-server-and-test start $BASE_URL cy:run"
   },
   "devDependencies": {
     "cypress": "^9.6.1"

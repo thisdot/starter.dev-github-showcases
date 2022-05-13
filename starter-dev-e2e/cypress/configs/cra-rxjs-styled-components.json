@@ -1,8 +1,8 @@
 {
-    "baseUrl": "http://localhost:3000",
-    "integrationFolder": "cypress/integration",
-    "env": {
-      "authUrl": "/redirect"
-    }
+  "baseUrl": "http://localhost:3000",
+  "startCommand": "npm dev",
+  "integrationFolder": "cypress/integration",
+  "env": {
+    "authUrl": "/redirect"
   }
-  
+}
