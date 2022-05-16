@@ -34,13 +34,13 @@
             #{{ pullRequest.number }}
             <span *ngIf="pullRequest.closed === false">
               opened
-              {{ pullRequest.createdAt | formatDistance: baseDate }}
+              {{ toDate(pullRequest.createdAt) | formatDistance: baseDate }}
               ago
             </span>
             by <span class="link">{{ pullRequest.login }}</span>
             <span *ngIf="pullRequest.closedAt">
               was closed
-              {{ pullRequest.closedAt | formatDistance: baseDate }}
+              {{ toDate(pullRequest.closedAt) | formatDistance: baseDate }}
               ago
             </span>
           </div>
