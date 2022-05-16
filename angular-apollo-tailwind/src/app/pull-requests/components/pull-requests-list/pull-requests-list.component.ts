@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RepoPullRequest } from 'src/app/gql';
 
 @Component({
@@ -6,10 +6,18 @@ import { RepoPullRequest } from 'src/app/gql';
   templateUrl: './pull-requests-list.component.html',
   styleUrls: ['./pull-requests-list.component.css'],
 })
-export class PullRequestsListComponent {
+export class PullRequestsListComponent implements OnInit {
   @Input() pullRequests: RepoPullRequest[] = [];
 
   readonly baseDate = new Date();
+
+  ngOnInit(): void {
+    console.log(this.pullRequests);
+    this.pullRequests.map((pr) => {
+      pr.createdAt = new Date(pr.createdAt);
+      // pr.closedAt = pr.closedAt ? new Date(pr.closedAt) : null;
+    });
+  }
 
   colorMap(color: string): string {
     switch (color) {
