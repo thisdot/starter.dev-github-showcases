@@ -31,7 +31,7 @@ export interface Repositories {
 function UserReposView({ repos, owner }: UserReposViewProps) {
   const repoFilters = useRepoFilters();
   const filteredRepos = filterRepos(repos.repos, repoFilters.state);
-  const languages = getLanguages(filteredRepos);
+  const languages = getLanguages(repos.repos);
 
   return (
     <>
