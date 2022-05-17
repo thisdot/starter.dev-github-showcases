@@ -1,7 +1,6 @@
 import type { GistItem } from './types';
 import Container from './container';
 
-import { Link } from 'remix';
 import * as styles from './UserGists.classNames';
 
 interface UserGistsProps {
@@ -14,9 +13,9 @@ function UserGistsView({ gists = [] }: UserGistsProps) {
       <div className="mt-3">
         {gists.map((gist) => (
           <div key={gist.id} className="my-1">
-            <Link to={gist.url} className={styles.link} target="_blank">
+            <a href={gist.url} className={styles.link} target="_blank">
               {gist.name}
-            </Link>
+            </a>
           </div>
         ))}
       </div>
