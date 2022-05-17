@@ -17,7 +17,6 @@ type LoaderData = {
   context: any;
   items: any;
   readme: any;
-  params: any;
 };
 export const loader: LoaderFunction = async ({ params, request }) => {
   const { accessToken } = await auth.isAuthenticated(request, {
@@ -98,15 +97,12 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
   const readme = parseQuery(readmeData);
 
-  return json<LoaderData>({ context, items, readme, params });
+  return json<LoaderData>({ context, items, readme });
 };
 
 export default function Screen() {
-  const { context, items, readme, params } = useLoaderData<LoaderData>();
-  console.log(`PATH: ${context.path}`);
-  console.log(`PATHNAME: ${context.pathname}`);
-  console.log(`PARAMS: { repo: ${params.repository}, user: ${params.user} }`);
-  console.log(`README: ${readme}`);
+  const { context, items, readme } = useLoaderData<LoaderData>();
+
   return (
     <RepoProvider value={context}>
       <RepoHeader />
