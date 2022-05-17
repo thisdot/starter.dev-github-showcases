@@ -19,6 +19,7 @@ type LoaderData = {
   context: RepoContext;
   items: any;
   readme: any;
+  params: any;
 };
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -83,20 +84,26 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     {
       owner: params.user,
       name: params.repository,
-      expression: context.path ? `HEAD:${context.path}/README.md` : 'HEAD:README.md',
+      expression: context.path
+        ? `HEAD:${context.path}/README.md`
+        : 'HEAD:README.md',
     },
     {
       authorization: `Bearer ${accessToken}`,
     }
   );
-
+  // console.log(readmeData);
   const readme = parseQuery(readmeData);
 
-  return json<LoaderData>({ context, items, readme });
+  return json<LoaderData>({ context, items, readme, params });
 };
 
 export default function Repository() {
-  const { context, items, readme } = useLoaderData<LoaderData>()
+  const { context, items, readme, params } = useLoaderData<LoaderData>();
+
+  // console.log(`PATH: ${context.path}`);
+  // console.log(`PATHNAME: ${context.pathname}`);
+  // console.log(`PARAMS: { repo: ${params.repository}, user: ${params.user} }`);
   return (
     <RepoProvider value={context}>
       <RepoHeader />
