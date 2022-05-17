@@ -7,6 +7,6 @@ beforeEach(() => {
   cy.intercept(`POST`, `/auth/github`, {
     fixture: `auth/token.json`,
   }).as(`token`);
-  //cy.mockNextAuth();
+  cy.mockNextAuthJWT();
   cy.visit(Cypress.env(`authUrl`));
 });
