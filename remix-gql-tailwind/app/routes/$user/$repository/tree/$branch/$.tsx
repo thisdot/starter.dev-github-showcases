@@ -102,7 +102,6 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
 export default function Screen() {
   const { context, items, readme } = useLoaderData<LoaderData>();
-
   return (
     <RepoProvider value={context}>
       <RepoHeader />

@@ -91,7 +91,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       authorization: `Bearer ${accessToken}`,
     }
   );
-  // console.log(readmeData);
   const readme = parseQuery(readmeData);
 
   return json<LoaderData>({ context, items, readme });
@@ -99,7 +98,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
 export default function Repository() {
   const { context, items, readme } = useLoaderData<LoaderData>();
-
   return (
     <RepoProvider value={context}>
       <RepoHeader />
