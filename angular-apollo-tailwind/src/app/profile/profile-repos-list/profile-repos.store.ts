@@ -6,7 +6,13 @@ import {
   ProfileFilterState,
   ProfileReposFilterStore,
 } from '../../components/filters/profile-repos-filter-store';
-import { OrgReposGQL, ProfileDetails, Repo, UserReposGQL } from '../../gql';
+import {
+  OrgReposGQL,
+  PaginationEvent,
+  ProfileDetails,
+  Repo,
+  UserReposGQL,
+} from '../../gql';
 import { filterRepos } from './filter-repos';
 import { parseLanguages } from './parse-languages';
 import {
@@ -23,6 +29,8 @@ export interface ProfileReposState {
   };
   resultCount: number;
   reposLoaded: boolean;
+  afterCursor: string;
+  beforeCursor: string;
 }
 
 const INITIAL_PROFILE_REPOS_STATE: ProfileReposState = {
@@ -61,6 +69,14 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     ...state,
     reposLoaded,
   }));
+
+  readonly changePage = this.updater(
+    (state, { before, after }: PaginationEvent) => ({
+      ...state,
+      afterCursor: after as string,
+      beforeCursor: before as string,
+    }),
+  );
 
   // *********** Selectors *********** //
 
