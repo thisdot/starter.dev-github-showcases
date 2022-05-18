@@ -2,7 +2,8 @@
   "scripts": {
     "cy:run": "cypress run --config-file $CYPRESS_CONFIG",
     "start": "START_COMMAND=`node -p \"require('$CYPRESS_CONFIG').startCommand\"` && cd ../$SHOWCASE_APP && $START_COMMAND",
-    "test": "CYPRESS_CONFIG=./cypress/configs/$SHOWCASE_APP.json BASE_URL=`node -p \"require('$CYPRESS_CONFIG').baseUrl\"` && CYPRESS_CONFIG=$CYPRESS_CONFIG start-server-and-test start $BASE_URL cy:run"
+    "test": "CYPRESS_CONFIG=./cypress/configs/$SHOWCASE_APP.json BASE_URL=`node -p \"require('$CYPRESS_CONFIG').baseUrl\"` && CYPRESS_CONFIG=$CYPRESS_CONFIG start-server-and-test start $BASE_URL cy:run",
+    "test:watch": "yarn run cypress open --config-file cypress/configs/$SHOWCASE_APP.json"
   },
   "devDependencies": {
     "cypress": "^9.6.1"
