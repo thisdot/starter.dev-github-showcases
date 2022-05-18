@@ -115,7 +115,7 @@ export default function Screen() {
               basePath={`/${context.owner}/${context.name}`}
               repoPath={context.path}
             />
-            <RepoReadMe readme={readme} />
+            {readme && <RepoReadMe readme={readme} />}
           </div>
         </div>
       </div>
