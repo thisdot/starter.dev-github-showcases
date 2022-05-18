@@ -10,7 +10,7 @@ const Main = styled.main`
   padding: 0;
 `;
 
-const Page = styled.div `
+const Page = styled.div`
   background: black;
   display: table-cell;
   vertical-align: middle;
