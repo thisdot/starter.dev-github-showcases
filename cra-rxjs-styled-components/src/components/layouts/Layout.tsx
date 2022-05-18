@@ -4,7 +4,6 @@ export const Layout = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 70px auto;
   grid-template-columns: 384px auto;
   grid-template-areas: 'aside content';
 
