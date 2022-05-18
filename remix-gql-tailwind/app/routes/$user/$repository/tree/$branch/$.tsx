@@ -14,9 +14,9 @@ import { REPO_PAGE_QUERY } from '~/lib/queries/RepoPage';
 import { REPO_TREE_QUERY } from '~/lib/queries/FileExplorer';
 import { REPO_README_QUERY } from '~/lib/queries/RepoReadMe';
 type LoaderData = {
-  context: any,
-  items: any,
-  readme: any
+  context: any;
+  items: any;
+  readme: any;
 };
 export const loader: LoaderFunction = async ({ params, request }) => {
   const { accessToken } = await auth.isAuthenticated(request, {
@@ -76,16 +76,19 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
   const items = parseQueryData(data);
 
-  if (items.length < 1) throw new Response("Not Found", {
-    status: 404,
-  });
+  if (items.length < 1)
+    throw new Response('Not Found', {
+      status: 404,
+    });
 
   const readmeData = await gqlClient.request(
     REPO_README_QUERY,
     {
       owner: params.user,
       name: params.repository,
-      expression: context.path ? `HEAD:${context.path}/README.md` : 'HEAD:README.md',
+      expression: context.path
+        ? `HEAD:${context.path}/README.md`
+        : 'HEAD:README.md',
     },
     {
       authorization: `Bearer ${accessToken}`,
@@ -112,7 +115,7 @@ export default function Screen() {
               basePath={`/${context.owner}/${context.name}`}
               repoPath={context.path}
             />
-            <RepoReadMe readme={readme} />
+            {readme && <RepoReadMe readme={readme} />}
           </div>
         </div>
       </div>

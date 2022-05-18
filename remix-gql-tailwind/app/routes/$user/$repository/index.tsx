@@ -83,20 +83,21 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     {
       owner: params.user,
       name: params.repository,
-      expression: context.path ? `HEAD:${context.path}/README.md` : 'HEAD:README.md',
+      expression: context.path
+        ? `HEAD:${context.path}/README.md`
+        : 'HEAD:README.md',
     },
     {
       authorization: `Bearer ${accessToken}`,
     }
   );
-
   const readme = parseQuery(readmeData);
 
   return json<LoaderData>({ context, items, readme });
 };
 
 export default function Repository() {
-  const { context, items, readme } = useLoaderData<LoaderData>()
+  const { context, items, readme } = useLoaderData<LoaderData>();
   return (
     <RepoProvider value={context}>
       <RepoHeader />
