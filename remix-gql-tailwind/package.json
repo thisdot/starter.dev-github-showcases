@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "remix-github-clone",
+  "name": "remix-gql-tailwind",
   "description": "",
   "license": "",
   "scripts": {
@@ -13,7 +13,8 @@
     "postinstall": "remix setup node",
     "start": "remix-serve build",
     "storybook": "concurrently -n css,storybook -c cyan,magenta \"npm run dev:css\" \"start-storybook -p 6006\"",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "dev:arc": "node ./dev sandbox"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.3",
@@ -33,6 +34,7 @@
     "remix-auth-github": "^1.0.0"
   },
   "devDependencies": {
+    "@architect/architect": "^10.2.1",
     "@babel/core": "^7.16.5",
     "@remix-run/dev": "^1.1.1",
     "@storybook/addon-actions": "^6.5.0-alpha.4",
