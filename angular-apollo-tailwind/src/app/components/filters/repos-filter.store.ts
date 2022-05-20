@@ -109,8 +109,8 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
     ...state,
     startCursor: before as string,
     endCursor: after as string,
-    first: before ? 25 : undefined,
-    last: after ? 25 : undefined,
+    first: after ? 25 : undefined,
+    last: before ? 25 : undefined,
   }));
 
   readonly clearFilters = this.updater(() => ({
