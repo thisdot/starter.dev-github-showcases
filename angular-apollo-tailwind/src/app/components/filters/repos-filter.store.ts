@@ -20,6 +20,8 @@ export interface FilterState {
   endCursor?: string;
   labelsLoaded: boolean;
   milestonesLoaded: boolean;
+  first?: number;
+  last?: number;
 }
 
 const INITIAL_STATE: FilterState = {
@@ -34,6 +36,8 @@ const INITIAL_STATE: FilterState = {
   },
   labelsLoaded: false,
   milestonesLoaded: false,
+  first: 25,
+  last: undefined,
 };
 
 const ORDER_DICT: { [key: string]: IssueOrderField } = {
@@ -105,6 +109,8 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
     ...state,
     startCursor: before as string,
     endCursor: after as string,
+    first: before ? 25 : undefined,
+    last: after ? 25 : undefined,
   }));
 
   readonly clearFilters = this.updater(() => ({
