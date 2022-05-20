@@ -3,9 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import {
   RepositoryOrderField,
   OrderDirection,
-  PageInfo,
   RepositoryOrder,
-  PaginationEvent,
 } from '../../../../src/app/gql';
 import { LanguageFilter, TypeFilter } from './filter.models';
 
@@ -60,46 +58,28 @@ export class ProfileReposFilterStore extends ComponentStore<ProfileFilterState> 
       field: ORDER_BY_DICT[value],
       direction: OrderDirection.Desc,
     },
-    afterCursor: undefined,
-    beforeCursor: undefined,
   }));
 
   readonly setLanguage = this.updater((state, value: string) => ({
     ...state,
     language: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
   }));
 
   readonly setType = this.updater((state, value: string) => ({
     ...state,
     type: TYPES_DICT[value],
-    afterCursor: undefined,
-    beforeCursor: undefined,
   }));
 
   readonly setQuery = this.updater((state, value: string) => ({
     ...state,
     query: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
   }));
 
   readonly setLanguages = this.updater((state, values: LanguageFilter[]) => ({
     ...state,
     languages: values,
-    afterCursor: undefined,
-    beforeCursor: undefined,
     languagesLoaded: true,
   }));
-
-  readonly setPage = this.updater(
-    (state, { startCursor, endCursor }: PageInfo) => ({
-      ...state,
-      beforeCursor: startCursor as string,
-      afterCursor: endCursor as string,
-    }),
-  );
 
   readonly clearFilters = this.updater((state) => ({
     ...state,
@@ -116,16 +96,6 @@ export class ProfileReposFilterStore extends ComponentStore<ProfileFilterState> 
     ...state,
     filtersLoaded: value,
   }));
-
-  readonly changePage = this.updater(
-    (state, { before, after }: PaginationEvent) => ({
-      ...state,
-      afterCursor: after as string,
-      beforeCursor: before as string,
-      first: after ? 10 : undefined,
-      last: before ? 10 : undefined,
-    }),
-  );
 
   // *********** Selectors *********** //
 

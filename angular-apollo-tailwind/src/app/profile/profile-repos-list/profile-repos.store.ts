@@ -157,6 +157,8 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
       .watch({
         orgname: owner,
         orderBy: state.sort,
+        first: state.first,
+        last: state.last,
         afterCursor: state.afterCursor ?? undefined,
         beforeCursor: state.beforeCursor ?? undefined,
       })
