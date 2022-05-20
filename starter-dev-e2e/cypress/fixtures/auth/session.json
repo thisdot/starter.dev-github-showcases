@@ -1,9 +1,0 @@
-{
-  "user": {
-    "name": "Test User",
-    "email": null,
-    "image": "https://avatars.githubusercontent.com/u/22839396?v=4"
-  },
-  "expires": "3000-01-01T00:00:00.000Z",
-  "accessToken": "abcdefghijklmnopqrst"
-}
