@@ -14,24 +14,23 @@ export const RepoContainer = styled.div`
     display: flex;
     flex-direction: column;
   }
-`
+`;
 
 export const RepoGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(12,minmax(0,1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-gap: 2rem;
 `;
 
 export const RepoMain = styled.div`
-  grid-column: span 12 /span 12;
-
+  grid-column: span 12 / span 12;
 
   @media (min-width: 768px) {
-    grid-column: span 7/span 7;
+    grid-column: span 7 / span 7;
   }
 
   @media (min-width: 1280px) {
-    grid-column: span 9 /span 9;
+    grid-column: span 9 / span 9;
   }
 `;
 
@@ -39,11 +38,11 @@ export const RepoAside = styled.div`
   grid-column: span 12 / span 12;
 
   @media (min-width: 768px) {
-    grid-column: span 5/span 5;
+    grid-column: span 5 / span 5;
   }
 
   @media (min-width: 1280px) {
-    grid-column: span 3/span 3;
+    grid-column: span 3 / span 3;
   }
 `;
 

@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-export const FileExplorerWrapper = styled.div`
-  // margin: 1rem;
-`;
+export const FileExplorerWrapper = styled.div``;
 
 export const FileExplorerButtonNav = styled.nav`
   margin: 1.5rem 0 1.5rem;

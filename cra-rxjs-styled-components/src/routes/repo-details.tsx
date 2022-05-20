@@ -82,16 +82,16 @@ export default function RepoDetails() {
 
   return (
     <RepoLayout>
-        <SubHeader
-          user={repo?.owner.login!}
-          repo={repo?.name!}
-          privacy={repo?.private!}
-          watchCount={repo?.subscribers_count!}
-          starCount={repo?.stargazers_count!}
-          forkCount={repo?.forks_count!}
-          issuesCount={issues?.length!}
-          prCount={openPr!}
-        />
+      <SubHeader
+        user={repo?.owner.login!}
+        repo={repo?.name!}
+        privacy={repo?.private!}
+        watchCount={repo?.subscribers_count!}
+        starCount={repo?.stargazers_count!}
+        forkCount={repo?.forks_count!}
+        issuesCount={issues?.length!}
+        prCount={openPr!}
+      />
       <RepoContainer>
         <RepoGrid>
           <RepoMain>
