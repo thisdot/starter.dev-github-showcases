@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const FileExplorerWrapper = styled.div`
-  margin: 1rem;
+  // margin: 1rem;
 `;
 
 export const FileExplorerButtonNav = styled.nav`
-  margin: 4.5rem 0 1.5rem;
+  margin: 1.5rem 0 1.5rem;
   display: var(--flex);
   align-items: var(--align-items-center);
 `;
@@ -50,7 +50,7 @@ export const FileExplorerContainer = styled.div`
 `;
 
 export const FileExplorerCell = styled.div`
-  border: 1px solid rgb(209 213 219 / var(--tw-border-opacity));
+  border-bottom: 1px solid rgba(209 213 219 / var(--tw-border-opacity));
   padding: 0.5rem 1rem;
 
   &:hover {
