@@ -13,6 +13,7 @@
 // the project's config changing)
 
 const jose = require("jose");
+const cookieSignature = require("cookie-signature");
 
 /**
  * @type {Cypress.PluginConfig}
@@ -35,6 +36,20 @@ module.exports = (on, config) => {
         zip: "DEF",
       });
       return encryptedJWT;
+    },
+    generateRemixAuthJWT(jwtOptions) {
+      const value = jwtOptions.value;
+      const secrets = jwtOptions.options.secrets;
+
+      let encoded = Buffer.from(JSON.stringify(value), "binary").toString(
+        "base64"
+      );
+
+      if (secrets.length > 0) {
+        encoded = cookieSignature.sign(encoded, secrets[0]);
+      }
+
+      return encoded;
     },
   });
 };

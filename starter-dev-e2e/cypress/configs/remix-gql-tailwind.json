@@ -1,8 +1,16 @@
 {
   "baseUrl": "http://localhost:3000",
-  "startCommand": "yarn dev",
+  "startCommand": "yarn mock",
   "integrationFolder": "cypress/integration",
   "env": {
-    "authUrl": "/redirect"
+    "authUrl": "/",
+    "remixCookieOptions": {
+      "name": "__session",
+      "httpOnly": true,
+      "path": "/",
+      "sameSite": "lax",
+      "secrets": ["s3cr3t"],
+      "secure": false
+    }
   }
 }

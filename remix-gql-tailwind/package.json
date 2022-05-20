@@ -10,6 +10,9 @@
     "dev": "concurrently -c magenta,cyan \"npm:dev:*\"",
     "dev:remix": "node -r dotenv/config ./node_modules/@remix-run/dev/cli.js",
     "dev:css": "npm run build:css -- --w",
+    "mock": "concurrently -c magenta,cyan \"npm:mock:*\"",
+    "mock:remix": "node -r dotenv/config --require ./mocks ./node_modules/@remix-run/dev/cli.js",
+    "mock:css": "npm run build:css -- --w",
     "postinstall": "remix setup node",
     "start": "remix-serve build",
     "storybook": "concurrently -n css,storybook -c cyan,magenta \"npm run dev:css\" \"start-storybook -p 6006\"",
@@ -61,5 +64,8 @@
   "engines": {
     "node": ">=14"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "msw": {
+    "workerDirectory": "public"
+  }
 }

@@ -8,5 +8,6 @@ beforeEach(() => {
     fixture: `auth/token.json`,
   }).as(`token`);
   cy.mockNextAuthJWT();
+  cy.mockRemixAuthJWT();
   cy.visit(Cypress.env(`authUrl`));
 });
