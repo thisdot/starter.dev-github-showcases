@@ -20,6 +20,22 @@ export function filterRepos(repos: Repo[], state: FilterState) {
         }
     }
 
+    if (
+      state.language !== 'all' &&
+      repo.language?.toLocaleLowerCase() !== state.language
+    ) {
+      return acc;
+    }
+
+    if (
+      state.query !== '' &&
+      !repo.name.toLocaleLowerCase().includes(state.query.toLocaleLowerCase())
+    ) {
+      return acc;
+    }
+
+    // add individual filters above this line that depend on a repo-property and not the array of repos
+    // this sorts the repos array
     switch (state.sort) {
       case RepositoryOrderField.Name: {
         return [...acc, repo].sort((a, b) => {
@@ -43,20 +59,6 @@ export function filterRepos(repos: Repo[], state: FilterState) {
           return 0;
         });
       }
-    }
-
-    if (
-      state.language !== 'all' &&
-      repo.language?.toLocaleLowerCase() !== state.language
-    ) {
-      return acc;
-    }
-
-    if (
-      state.query !== '' &&
-      !repo.name.toLocaleLowerCase().includes(state.query.toLocaleLowerCase())
-    ) {
-      return acc;
     }
 
     return [...acc, repo];
