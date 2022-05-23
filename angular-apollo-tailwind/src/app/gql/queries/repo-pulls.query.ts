@@ -54,7 +54,8 @@ export const REPO_PULLS_QUERY = gql`
         }
       }
       closedPullRequests: pullRequests(
-        first: 25
+        first: $first
+        last: $last
         states: [CLOSED, MERGED]
         labels: $labels
         orderBy: $orderBy

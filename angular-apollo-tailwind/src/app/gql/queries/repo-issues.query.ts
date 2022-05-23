@@ -68,7 +68,8 @@ export const REPO_ISSUES_QUERY = gql`
         }
       }
       openIssues: issues(
-        first: 25
+        first: $first
+        last: $last
         states: [OPEN]
         filterBy: $filterBy
         orderBy: $orderBy

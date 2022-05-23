@@ -117,8 +117,8 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly changePage = this.updater(
     (state, { before, after }: PaginationEvent) => ({
       ...state,
-      endCursor: after as string,
       startCursor: before as string,
+      endCursor: after as string,
       first: after ? 25 : undefined,
       last: before ? 25 : undefined,
     }),
@@ -229,8 +229,6 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
               .valueChanges.pipe(
                 tapResponse(
                   (res) => {
-                    console.log('first', first);
-                    console.log('last', last);
                     const { openPullRequests, closedPullRequests } =
                       parsePullRequestsQuery(res.data);
 
