@@ -1,14 +1,15 @@
-import type { Repo } from './types';
-import { Link } from 'remix';
-import { StarIcon } from '@heroicons/react/outline';
-import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
-import RepoMeta from '../RepoMeta/RepoMeta';
 import * as styles from './UserRepos.classNames';
+
+import { Link } from 'remix';
 import Pagination from '../Pagination/Pagination';
+import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
+import type { Repo } from './types';
+import RepoFilters from '../RepoFilters/RepoFilters';
+import RepoMeta from '../RepoMeta/RepoMeta';
+import { StarIcon } from '@heroicons/react/outline';
 import { filterRepos } from './filterRepos';
 import { getLanguages } from './getLanguages';
 import { useRepoFilters } from '../RepoFilters/useRepoFilters';
-import RepoFilters from '../RepoFilters/RepoFilters';
 
 export interface UserReposViewProps {
   repos: Repositories;
