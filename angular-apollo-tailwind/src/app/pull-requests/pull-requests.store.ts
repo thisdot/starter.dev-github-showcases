@@ -29,6 +29,8 @@ export interface FilterState {
   milestones: Milestone[] | null;
   openPullRequests: RepoPullRequests | null;
   closedPullRequests: RepoPullRequests | null;
+  first?: number;
+  last?: number;
 }
 
 const INITIAL_STATE: FilterState = {
@@ -44,6 +46,8 @@ const INITIAL_STATE: FilterState = {
   milestones: null,
   openPullRequests: null,
   closedPullRequests: null,
+  first: 25,
+  last: undefined,
 };
 
 const PULL_REQUESTS_ORDER_DICT: { [key: string]: IssueOrderField } = {
@@ -113,8 +117,10 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly changePage = this.updater(
     (state, { before, after }: PaginationEvent) => ({
       ...state,
-      endCursor: after as string,
       startCursor: before as string,
+      endCursor: after as string,
+      first: after ? 25 : undefined,
+      last: before ? 25 : undefined,
     }),
   );
 
@@ -206,7 +212,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly getPullRequests$ = this.effect((target$: Observable<void>) =>
     target$.pipe(
       withLatestFrom(this.state$),
-      switchMap(([, { label, sort, endCursor, startCursor }]) =>
+      switchMap(([, { label, sort, endCursor, startCursor, first, last }]) =>
         this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
           switchMap(({ owner, name }) =>
             this.repoPullRequestsGQL
@@ -217,6 +223,8 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
                 labels: label ? [label] : undefined,
                 after: endCursor ?? undefined,
                 before: startCursor ?? undefined,
+                first: first ?? undefined,
+                last: last ?? undefined,
               })
               .valueChanges.pipe(
                 tapResponse(

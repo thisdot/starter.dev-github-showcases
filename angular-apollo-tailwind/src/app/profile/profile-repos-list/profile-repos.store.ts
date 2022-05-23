@@ -118,6 +118,8 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
         orderBy: state.sort,
         afterCursor: state.afterCursor ?? undefined,
         beforeCursor: state.beforeCursor ?? undefined,
+        first: state.first,
+        last: state.last,
       })
       .valueChanges.pipe(
         tapResponse(
@@ -157,6 +159,8 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
         orderBy: state.sort,
         afterCursor: state.afterCursor ?? undefined,
         beforeCursor: state.beforeCursor ?? undefined,
+        first: state.first,
+        last: state.last,
       })
       .valueChanges.pipe(
         tapResponse(

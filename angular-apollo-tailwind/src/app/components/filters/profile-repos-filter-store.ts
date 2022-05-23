@@ -18,6 +18,8 @@ export interface ProfileFilterState {
   languagesLoaded: boolean;
   beforeCursor?: string;
   afterCursor?: string;
+  first?: number;
+  last?: number;
 }
 
 const INITIAL_STATE: ProfileFilterState = {
@@ -30,6 +32,8 @@ const INITIAL_STATE: ProfileFilterState = {
   query: '',
   languages: [],
   languagesLoaded: false,
+  first: 10,
+  last: undefined,
 };
 
 const TYPES_DICT: { [key: string]: TypeFilter } = {
@@ -118,6 +122,8 @@ export class ProfileReposFilterStore extends ComponentStore<ProfileFilterState> 
       ...state,
       afterCursor: after as string,
       beforeCursor: before as string,
+      first: after ? 10 : undefined,
+      last: before ? 10 : undefined,
     }),
   );
 

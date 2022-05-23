@@ -3,6 +3,8 @@ import { gql } from 'apollo-angular';
 export const ORG_REPOS_QUERY = gql`
   query OrgRepos(
     $orgname: String!
+    $first: Int
+    $last: Int
     $afterCursor: String
     $beforeCursor: String
     $orderBy: RepositoryOrder
@@ -10,7 +12,8 @@ export const ORG_REPOS_QUERY = gql`
     organization(login: $orgname) {
       id
       repositories(
-        first: 10
+        first: $first
+        last: $last
         after: $afterCursor
         before: $beforeCursor
         orderBy: $orderBy
