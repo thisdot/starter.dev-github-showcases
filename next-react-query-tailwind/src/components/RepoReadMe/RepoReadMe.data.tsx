@@ -21,11 +21,13 @@ function RepoReadMe() {
 
   const readme = parseQuery(data);
 
-  return readme ? (
-    <RepoReadMeView readme={readme} />
-  ) : !pathname.includes('tree') ? (
-    <Empty />
-  ) : null;
+  if (readme) {
+    return <RepoReadMeView readme={readme} />;
+  }
+  if (!pathname.includes('tree')) {
+    return <Empty />;
+  }
+  return null;
 }
 
 export default RepoReadMe;
