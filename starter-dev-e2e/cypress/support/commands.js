@@ -1,4 +1,4 @@
-Cypress.Commands.add("mockNextAuthJWT", () => {
+Cypress.Commands.add("mockNextAuthCookie", () => {
   const signingKey = Cypress.env("JWT_SIGNING_KEY");
   const encryptionKey = Cypress.env("JWT_ENCRYPTION_KEY");
   if (!signingKey || !encryptionKey) {
@@ -24,7 +24,7 @@ Cypress.Commands.add("mockNextAuthJWT", () => {
   Cypress.Cookies.preserveOnce("next-auth.session-token");
 });
 
-Cypress.Commands.add("mockRemixAuthJWT", () => {
+Cypress.Commands.add("mockRemixAuthCookie", () => {
   const options = Cypress.env("remixCookieOptions");
   if (!options) {
     return;

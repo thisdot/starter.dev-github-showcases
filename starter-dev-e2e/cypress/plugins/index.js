@@ -21,6 +21,7 @@ const cookieSignature = require("cookie-signature");
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
   on("task", {
+    // Adapted from: https://github.com/nextauthjs/next-auth/blob/dda4e0a7d8121b50f9cc9f1810424020427ef5de/packages/next-auth/src/jwt/index.ts#L17-L26
     generateNextAuthJWT(jwtOptions) {
       const maxAge = 30 * 24 * 60 * 60; // 30 days
       const signingKey = jose.JWK.asKey(JSON.parse(jwtOptions.signingKey));
@@ -37,6 +38,8 @@ module.exports = (on, config) => {
       });
       return encryptedJWT;
     },
+
+    // Adapted from: https://github.com/remix-run/remix/blob/dce27e2664de022f183f34f7a1e3034fa0e6d414/packages/remix-server-runtime/cookies.ts#L146-L158
     generateRemixAuthJWT(jwtOptions) {
       const value = jwtOptions.value;
       const secrets = jwtOptions.options.secrets;
