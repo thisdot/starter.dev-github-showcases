@@ -29,9 +29,10 @@ function TabNavigation({
 
   const isCurrentTab = (path?: string) => {
     const matchPath = path === '' ? basePath : `${basePath}/${path}`;
-    return path === ''
-      ? pathname === basePath || pathname.includes('tree')
-      : pathname.includes(matchPath);
+    if (path === '') {
+      return pathname === basePath || pathname.includes('tree');
+    }
+    return pathname.includes(matchPath);
   };
 
   return (
