@@ -6,20 +6,27 @@ Amplify URL: https://main.d31pj5m17ne70k.amplifyapp.com
 
 ## Table of Contents
 
-- [Overview](#overview)
-  - [Featured Tech Stack](#featured-tech-stack)
-  - [Included Tooling](#included-tooling)
-  - [Demo Application Libraries](#demo-application-libraries)
-- [Getting Started](#getting-started)
-  - [Downloading](#downloading)
-  - [Installation](#installation)
-  - [Generated Files](#generated-files)
-- [Configuration](#configuration)
-  - [Environment Variables](#environment-variables)
-  - [OAuth Setup](#oauth-setup)
-  - [JWT Encryption Keys](#jwt-encryption-keys)
-- [Development](#development)
-- [Deployment](#deployment)
+- [next-react-query-tailwind](#next-react-query-tailwind)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+    - [Featured Tech Stack](#featured-tech-stack)
+    - [Included Tooling](#included-tooling)
+    - [Demo Application Libraries](#demo-application-libraries)
+  - [Getting Started](#getting-started)
+    - [Downloading](#downloading)
+      - [Git](#git)
+      - [GitHub CLI](#github-cli)
+    - [Installation](#installation)
+    - [Generated Files](#generated-files)
+  - [Configuration](#configuration)
+    - [Environment Variables](#environment-variables)
+    - [OAuth Setup](#oauth-setup)
+    - [JWT Encryption Keys](#jwt-encryption-keys)
+      - [`JWT_SECRET`](#jwt_secret)
+      - [`JWT_SIGNING_KEY`](#jwt_signing_key)
+      - [`JWT_ENCRYPTION_KEY`](#jwt_encryption_key)
+  - [Development](#development)
+  - [Deployment](#deployment)
 
 ## Overview
 
@@ -106,8 +113,8 @@ To use this app and authenticate with GitHub, we need to setup the OAuth credent
 Register a new OAuth application form details
 
 - Application name - Enter a name for the application
-- Homepage URL - Enter the url of the Next application. _(If running locally http://localhost:3000 otherwise the url of the application on the interenet)_
-- Authorization callback URL - Enter the url of the applications oauth callback. _(If running locally http://localhost:3000/api/auth/github/callback otherwise the url of the Next application with `/api/auth/github/callback` appended to it)_
+- Homepage URL - Enter the url of the Next application. _(If running locally `http://localhost:3000` otherwise the url of the application on the interenet)_
+- Authorization callback URL - Enter the url of the applications oauth callback. _(If running locally `http://localhost:3000` otherwise the url of the Next application)_
 
 After registering your OAuth application, add the generated client id and secret to a `.env` file for the project.
 
