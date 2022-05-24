@@ -27,7 +27,7 @@ function TabNavigation({
     .filter((queryPart) => typeof queryPart === 'string')
     .join('/');
 
-  const isCurrentTab = (path?: string) => {
+  const isCurrentTab = (path?: string): boolean => {
     const matchPath = path === '' ? basePath : `${basePath}/${path}`;
     if (path === '') {
       return pathname === basePath || pathname.includes('tree');
