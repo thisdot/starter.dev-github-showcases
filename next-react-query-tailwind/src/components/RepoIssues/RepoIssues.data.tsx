@@ -9,9 +9,9 @@ import IssuesSkeleton from '@components/IssuesSkeleton';
 import {
   useIssueFilters,
   IssueFilters,
-  Pagination,
   IssueType,
 } from '@components/IssueFilters';
+import Pagination from '@components/Pagination';
 import RepoIssuesView from './RepoIssues.view';
 
 function RepoIssues() {

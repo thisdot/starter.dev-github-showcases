@@ -2,7 +2,7 @@ import gqlClient from '@lib/gqlClient';
 import { useRouter } from 'next/router';
 import { OrderDirection } from '@lib/github';
 import { parseError } from '@lib/parseError';
-import { Pagination } from '@components/IssueFilters';
+import Pagination from '@components/Pagination';
 import { parseQuery } from './parseQuery';
 import LoadingRepos from './LoadingRepos';
 import UserReposView from './UserRepos.view';
@@ -73,8 +73,6 @@ function UserRepos({ username, isOrg = false }: UserReposProps) {
       />
       <UserReposView repos={filteredRepos} owner={username} />
       {(repos.pageInfo?.hasNextPage || repos.pageInfo?.hasPreviousPage) && (
-        // <Pagination pageInfo={repos.pageInfo} owner={username} />
-
         <Pagination
           pageInfo={repos.pageInfo}
           changePage={repoFilters.changePage}

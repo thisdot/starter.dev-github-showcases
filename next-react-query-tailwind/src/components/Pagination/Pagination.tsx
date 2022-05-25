@@ -1,29 +1,20 @@
+import type { IssueFilterAPI } from '@components/IssueFilters';
 import type { PageInfo } from '@lib/github';
-import cn from 'classnames';
-import { useRouter } from 'next/router';
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/outline';
 import styles from './Pagination.module.css';
 
 interface PaginationProps {
   pageInfo?: PageInfo;
-  owner: string;
+  changePage: IssueFilterAPI['changePage'];
 }
 
-function Pagination({ pageInfo, owner }: PaginationProps) {
-  const router = useRouter();
-
-  if (!pageInfo) {
-    return null;
-  }
-
-  const prevUrl = `/${owner}?before=${pageInfo.startCursor}`;
-  const nextUrl = `/${owner}?after=${pageInfo.endCursor}`;
-
-  const handlePreviousClick = () => {
-    router.push(prevUrl, prevUrl, { shallow: true });
+function Pagination({ pageInfo, changePage }: PaginationProps) {
+  const nextPage = () => {
+    changePage({ after: pageInfo?.endCursor });
   };
 
-  const handleNextClick = () => {
-    router.push(nextUrl, nextUrl, { shallow: true });
+  const previousPage = () => {
+    changePage({ before: pageInfo?.startCursor });
   };
 
   return (
@@ -31,19 +22,21 @@ function Pagination({ pageInfo, owner }: PaginationProps) {
       <span className={styles.group}>
         <button
           type="button"
-          disabled={!pageInfo.hasPreviousPage || !pageInfo.startCursor}
-          onClick={handlePreviousClick}
-          className={cn(styles.button, styles.buttonPrev)}
+          disabled={!pageInfo?.hasPreviousPage || !pageInfo.startCursor}
+          onClick={previousPage}
+          className={styles.button}
         >
+          <ChevronLeftIcon className="w-4 h-4 inline mr-1.5" />
           Previous
         </button>
         <button
           type="button"
-          onClick={handleNextClick}
-          disabled={!pageInfo.hasNextPage || !pageInfo.endCursor}
-          className={cn(styles.button, styles.buttonNext)}
+          onClick={nextPage}
+          disabled={!pageInfo?.hasNextPage || !pageInfo.endCursor}
+          className={styles.button}
         >
           Next
+          <ChevronRightIcon className="w-4 h-4 inline ml-1.5" />
         </button>
       </span>
     </div>
