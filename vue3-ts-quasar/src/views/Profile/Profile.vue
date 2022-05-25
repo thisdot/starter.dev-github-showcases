@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="q-pr-lg q-pl-lg">
     <UserProfileCard :username="route.params.username" />
   </div>
 </template>
