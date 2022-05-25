@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     </ng-container>
 
     <ng-template #noDescription>
-      <span className="italic"
+      <span data-testid="about description" className="italic"
         >No description, website, or topics provided.</span
       >
     </ng-template>`,

@@ -1,0 +1,50 @@
+{
+  "data": {
+    "viewer": {
+      "id": "TESTUSERID",
+      "login": "TestUser",
+      "__typename": "User"
+    },
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "defaultBranchRef": { "name": "main", "__typename": "Ref" },
+      "isPrivate": false,
+      "stargazerCount": 30,
+      "forkCount": 5,
+      "description": "A collection of GitHub clone implementations.",
+      "homepageUrl": "",
+      "watchers": { "totalCount": 14, "__typename": "UserConnection" },
+      "openIssues": { "totalCount": 68, "__typename": "IssueConnection" },
+      "openPullRequests": {
+        "totalCount": 12,
+        "__typename": "PullRequestConnection"
+      },
+      "topics": {
+        "nodes": [
+          {
+            "id": "RT_kwDOGd0nu84CDGrX",
+            "topic": { "name": "angular", "__typename": "Topic" },
+            "__typename": "RepositoryTopic"
+          },
+          {
+            "id": "RT_kwDOGd0nu84CDGrY",
+            "topic": { "name": "apollo-client", "__typename": "Topic" },
+            "__typename": "RepositoryTopic"
+          },
+          {
+            "id": "RT_kwDOGd0nu84CDGrZ",
+            "topic": { "name": "tailwindcss", "__typename": "Topic" },
+            "__typename": "RepositoryTopic"
+          },
+          {
+            "id": "RT_kwDOGd0nu84CDGra",
+            "topic": { "name": "github", "__typename": "Topic" },
+            "__typename": "RepositoryTopic"
+          }
+        ],
+        "__typename": "RepositoryTopicConnection"
+      },
+      "__typename": "Repository"
+    }
+  }
+}
