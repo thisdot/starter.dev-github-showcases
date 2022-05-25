@@ -1,9 +1,16 @@
 <h1 class="heading">
   <sd-privacy-icon [isPrivate]="isPrivate"></sd-privacy-icon>
   <span class="navContainer">
-    <a [routerLink]="ownerPath" class="ownerLink">{{ owner }}</a>
+    <a
+      data-testid="header owner name"
+      [routerLink]="ownerPath"
+      class="ownerLink"
+      >{{ owner }}</a
+    >
     <span class="separator">/</span>
-    <a routerLink="./" class="nameLink">{{ name }}</a>
+    <a data-testid="header repo name" routerLink="./" class="nameLink">{{
+      name
+    }}</a>
   </span>
   <sd-privacy-badge class="pb-1" [isPrivate]="isPrivate"></sd-privacy-badge>
 </h1>

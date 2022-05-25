@@ -23,6 +23,7 @@
         routerLinkActive="tabActive"
         class="tabInactive tab"
         #issuesLink="routerLinkActive"
+        data-testid="repo issues tab"
       >
         <hero-icon
           name="information-circle"
@@ -32,6 +33,7 @@
         ></hero-icon>
         <span>Issues</span>
         <span
+          data-testid="repo issues count"
           class="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl"
         >
           {{ issuesCount }}
@@ -44,6 +46,7 @@
         routerLinkActive="tabActive"
         class="tabInactive tab"
         #prLink="routerLinkActive"
+        data-testid="repo pull request tab"
       >
         <app-pull-request-icon
           class="iconInactive icon"
@@ -51,6 +54,7 @@
         ></app-pull-request-icon>
         <span>Pull Requests</span>
         <span
+          data-testid="repo pull request count"
           class="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl"
         >
           {{ pullsCount }}
