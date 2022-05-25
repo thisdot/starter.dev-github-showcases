@@ -35,6 +35,8 @@ function RepoIssues() {
       },
       after: filters.state.afterCursor,
       before: filters.state.beforeCursor,
+      first: filters.state.first,
+      last: filters.state.last,
     },
     {
       keepPreviousData: true,
