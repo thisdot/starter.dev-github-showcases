@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: '/api',
+  apiUrl: 'https://api.starter.dev',
   githubUrl: 'https://api.github.com',
   redirectUrl: 'https://angular-ngrx-scss.starter.dev/redirect',
 };

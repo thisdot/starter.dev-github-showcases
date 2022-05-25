@@ -77,7 +77,7 @@ export class UserService {
   getUserRepos(username: string): Observable<UserReposState[]> {
     const url = `${environment.githubUrl}/users/${encodeURIComponent(
       username,
-    )}/repos`;
+    )}/repos?sort='created'`;
 
     return this.http.get<UserReposApiResponse>(url).pipe(
       map((data) =>
