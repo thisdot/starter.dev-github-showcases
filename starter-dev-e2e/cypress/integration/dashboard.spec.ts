@@ -12,7 +12,7 @@ describe("Sign in", () => {
       }
 
       if (hasOperationName(req, "UserTopRepos")) {
-        aliasQuery(req, "CurrentUser");
+        aliasQuery(req, "UserTopRepos");
         req.reply({
           fixture: "user/userTopRepos.graphql.json",
         });
