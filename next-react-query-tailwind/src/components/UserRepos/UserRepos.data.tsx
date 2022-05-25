@@ -2,7 +2,7 @@ import gqlClient from '@lib/gqlClient';
 import { useRouter } from 'next/router';
 import { OrderDirection } from '@lib/github';
 import { parseError } from '@lib/parseError';
-import Pagination from '@components/Pagination';
+import { Pagination } from '@components/IssueFilters';
 import { parseQuery } from './parseQuery';
 import LoadingRepos from './LoadingRepos';
 import UserReposView from './UserRepos.view';
@@ -19,9 +19,9 @@ interface UserReposProps {
 function UserRepos({ username, isOrg = false }: UserReposProps) {
   const { query } = useRouter();
 
-  const afterCursor = typeof query.after === 'string' ? query.after : undefined;
-  const beforeCursor =
-    typeof query.before === 'string' ? query.before : undefined;
+  // const afterCursor = typeof query.after === 'string' ? query.after : undefined;
+  // const beforeCursor =
+  //   typeof query.before === 'string' ? query.before : undefined;
 
   const repoFilters = useRepoFilters();
   const useReposQuery = useOrgOrUserQuery(isOrg);
@@ -36,8 +36,10 @@ function UserRepos({ username, isOrg = false }: UserReposProps) {
       field: repoFilters.state.sort,
       direction: OrderDirection.Desc,
     },
-    afterCursor,
-    beforeCursor,
+    afterCursor: repoFilters.state.afterCursor,
+    beforeCursor: repoFilters.state.beforeCursor,
+    first: repoFilters.state.first,
+    last: repoFilters.state.last,
   });
 
   const repos = parseQuery(data);
@@ -71,7 +73,12 @@ function UserRepos({ username, isOrg = false }: UserReposProps) {
       />
       <UserReposView repos={filteredRepos} owner={username} />
       {(repos.pageInfo?.hasNextPage || repos.pageInfo?.hasPreviousPage) && (
-        <Pagination pageInfo={repos.pageInfo} owner={username} />
+        // <Pagination pageInfo={repos.pageInfo} owner={username} />
+
+        <Pagination
+          pageInfo={repos.pageInfo}
+          changePage={repoFilters.changePage}
+        />
       )}
     </>
   );

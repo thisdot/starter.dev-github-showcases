@@ -20,6 +20,7 @@ export enum ActionType {
   CHANGE_TYPE,
   SET_QUERY,
   SET_LANGUAGES,
+  CHANGE_PAGE,
   RESET_FILTERS,
 }
 
@@ -29,6 +30,10 @@ export interface FilterState {
   language: string;
   type: TypeFilter;
   languages?: LanguageFilter[];
+  afterCursor?: string | null;
+  beforeCursor?: string | null;
+  first?: number;
+  last?: number;
 }
 
 type FilterAction =
@@ -53,6 +58,15 @@ type FilterAction =
       payload: { languages: LanguageFilter[] };
     }
   | {
+      type: ActionType.CHANGE_PAGE;
+      payload: {
+        afterCursor?: string | null;
+        beforeCursor?: string | null;
+        first?: number | undefined;
+        last?: number | undefined;
+      };
+    }
+  | {
       type: ActionType.RESET_FILTERS;
     };
 
@@ -62,6 +76,7 @@ const initialState: FilterState = {
   language: 'all',
   query: '',
   languages: undefined,
+  first: 25,
 };
 
 const reducer = (state: FilterState, action: FilterAction) => {
@@ -70,21 +85,37 @@ const reducer = (state: FilterState, action: FilterAction) => {
       return {
         ...state,
         sort: action.payload.sort,
+        afterCursor: undefined,
+        beforeCursor: undefined,
       };
     case ActionType.CHANGE_LANGUAGE:
       return {
         ...state,
         language: action.payload.language,
+        afterCursor: undefined,
+        beforeCursor: undefined,
       };
     case ActionType.CHANGE_TYPE:
       return {
         ...state,
         type: action.payload.type,
+        afterCursor: undefined,
+        beforeCursor: undefined,
       };
     case ActionType.SET_QUERY:
       return {
         ...state,
         query: action.payload.query,
+        afterCursor: undefined,
+        beforeCursor: undefined,
+      };
+    case ActionType.CHANGE_PAGE:
+      return {
+        ...state,
+        afterCursor: action.payload.afterCursor,
+        beforeCursor: action.payload.beforeCursor,
+        first: action.payload.first,
+        last: action.payload.last,
       };
     case ActionType.RESET_FILTERS:
       return {
@@ -93,6 +124,8 @@ const reducer = (state: FilterState, action: FilterAction) => {
         type: TypeFilter.ALL,
         language: 'all',
         query: '',
+        afterCursor: undefined,
+        beforeCursor: undefined,
       };
     default:
       return state;
@@ -137,6 +170,24 @@ export function useRepoFilters() {
     });
   };
 
+  const changePage = ({
+    after,
+    before,
+  }: {
+    after?: string | null;
+    before?: string | null;
+  }) => {
+    dispatch({
+      type: ActionType.CHANGE_PAGE,
+      payload: {
+        afterCursor: after,
+        beforeCursor: before,
+        first: after ? 25 : undefined,
+        last: before ? 25 : undefined,
+      },
+    });
+  };
+
   const resetFilters = () => {
     dispatch({
       type: ActionType.RESET_FILTERS,
@@ -156,6 +207,7 @@ export function useRepoFilters() {
     setQuery,
     setLanguages,
     resetFilters,
+    changePage,
     isQueryActive,
     isTypeActive,
     isLanguageActive,
