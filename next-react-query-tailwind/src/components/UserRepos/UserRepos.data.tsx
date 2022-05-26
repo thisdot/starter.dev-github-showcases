@@ -36,8 +36,10 @@ function UserRepos({ username, isOrg = false }: UserReposProps) {
       field: repoFilters.state.sort,
       direction: OrderDirection.Desc,
     },
-    afterCursor,
-    beforeCursor,
+    afterCursor: afterCursor,
+    beforeCursor: beforeCursor,
+    first: repoFilters.state.first,
+    last: repoFilters.state.last,
   });
 
   const repos = parseQuery(data);
@@ -71,7 +73,7 @@ function UserRepos({ username, isOrg = false }: UserReposProps) {
       />
       <UserReposView repos={filteredRepos} owner={username} />
       {(repos.pageInfo?.hasNextPage || repos.pageInfo?.hasPreviousPage) && (
-        <Pagination pageInfo={repos.pageInfo} owner={username} />
+        <Pagination pageInfo={repos.pageInfo} link={username} />
       )}
     </>
   );

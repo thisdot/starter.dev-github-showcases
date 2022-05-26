@@ -6,10 +6,13 @@ export const USER_REPOS_QUERY = gql`
     $afterCursor: String
     $beforeCursor: String
     $orderBy: RepositoryOrder
+    $first: Int
+    $last: Int
   ) {
     owner: user(login: $username) {
       repositories(
-        first: 100
+        first: $first
+        last: $last
         after: $afterCursor
         before: $beforeCursor
         orderBy: $orderBy
