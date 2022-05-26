@@ -1,19 +1,29 @@
-import type { IssueFilterAPI } from '@components/IssueFilters';
 import type { PageInfo } from '@lib/github';
+import cn from 'classnames';
+import { useRouter } from 'next/router';
 import styles from './Pagination.module.css';
 
 interface PaginationProps {
   pageInfo?: PageInfo;
-  changePage: IssueFilterAPI['changePage'];
+  link: string;
 }
 
-function Pagination({ pageInfo, changePage }: PaginationProps) {
-  const nextPage = () => {
-    changePage({ after: pageInfo?.endCursor });
+function Pagination({ pageInfo, link }: PaginationProps) {
+  const router = useRouter();
+
+  if (!pageInfo) {
+    return null;
+  }
+
+  const prevUrl = `/${link}?before=${pageInfo.startCursor}`;
+  const nextUrl = `/${link}?after=${pageInfo.endCursor}`;
+
+  const handlePreviousClick = () => {
+    router.push(prevUrl, prevUrl, { shallow: true });
   };
 
-  const previousPage = () => {
-    changePage({ before: pageInfo?.startCursor });
+  const handleNextClick = () => {
+    router.push(nextUrl, nextUrl, { shallow: true });
   };
 
   return (
@@ -21,17 +31,17 @@ function Pagination({ pageInfo, changePage }: PaginationProps) {
       <span className={styles.group}>
         <button
           type="button"
-          disabled={!pageInfo?.hasPreviousPage || !pageInfo.startCursor}
-          onClick={previousPage}
-          className={styles.button}
+          disabled={!pageInfo.hasPreviousPage || !pageInfo.startCursor}
+          onClick={handlePreviousClick}
+          className={cn(styles.button, styles.buttonPrev)}
         >
           Previous
         </button>
         <button
           type="button"
-          onClick={nextPage}
-          disabled={!pageInfo?.hasNextPage || !pageInfo.endCursor}
-          className={styles.button}
+          onClick={handleNextClick}
+          disabled={!pageInfo.hasNextPage || !pageInfo.endCursor}
+          className={cn(styles.button, styles.buttonNext)}
         >
           Next
         </button>

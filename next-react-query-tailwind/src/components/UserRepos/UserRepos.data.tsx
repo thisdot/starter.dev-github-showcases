@@ -19,9 +19,9 @@ interface UserReposProps {
 function UserRepos({ username, isOrg = false }: UserReposProps) {
   const { query } = useRouter();
 
-  // const afterCursor = typeof query.after === 'string' ? query.after : undefined;
-  // const beforeCursor =
-  //   typeof query.before === 'string' ? query.before : undefined;
+  const afterCursor = typeof query.after === 'string' ? query.after : undefined;
+  const beforeCursor =
+    typeof query.before === 'string' ? query.before : undefined;
 
   const repoFilters = useRepoFilters();
   const useReposQuery = useOrgOrUserQuery(isOrg);
@@ -36,8 +36,8 @@ function UserRepos({ username, isOrg = false }: UserReposProps) {
       field: repoFilters.state.sort,
       direction: OrderDirection.Desc,
     },
-    afterCursor: repoFilters.state.afterCursor,
-    beforeCursor: repoFilters.state.beforeCursor,
+    afterCursor: afterCursor,
+    beforeCursor: beforeCursor,
     first: repoFilters.state.first,
     last: repoFilters.state.last,
   });
@@ -73,10 +73,7 @@ function UserRepos({ username, isOrg = false }: UserReposProps) {
       />
       <UserReposView repos={filteredRepos} owner={username} />
       {(repos.pageInfo?.hasNextPage || repos.pageInfo?.hasPreviousPage) && (
-        <Pagination
-          pageInfo={repos.pageInfo}
-          changePage={repoFilters.changePage}
-        />
+        <Pagination pageInfo={repos.pageInfo} link={username} />
       )}
     </>
   );

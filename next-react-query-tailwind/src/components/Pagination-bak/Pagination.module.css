@@ -1,0 +1,33 @@
+@tailwind utilities;
+
+.container {
+  @apply flex items-center justify-center my-8;
+}
+
+.group {
+  @apply relative z-0 inline-flex;
+}
+
+.button {
+  @apply relative inline-flex px-4 py-1 border bg-gray-100 text-sm font-medium text-blue-500 transition-colors duration-150 ease-in-out;
+}
+
+.button:first-child {
+  @apply rounded-l-md;
+}
+
+.button:last-child {
+  @apply rounded-r-md border-l-0;
+}
+
+.button:hover {
+  @apply bg-blue-600 text-white;
+}
+
+.button:disabled {
+  @apply text-blue-200;
+}
+
+.button:disabled:hover {
+  @apply bg-gray-100;
+}
