@@ -31,7 +31,7 @@ cp .env.example .env.prod # and change PRODUCTION=true
 
 2. Install dependencies: `yarn install`
 3. Graphql codegen: `yarn generate`
-3. Run the project: `yarn start`
+4. Run the project: `yarn start`
 
 ## Building
 
@@ -112,3 +112,5 @@ The following is a list of additional features that could be build into the appl
 | Contributor graph           | Display GitHub contributor graph on an `Overview` tab of profile page                                                        | Advanced     |
 | Deployed Environments       | Display deployed environments for a repo.                                                                                    | Advanced     |
 | CI/CD Pipelines             | Graphical view of pipelines and github actions with [graphql-inspector](https://graphql-inspector.com/docs/products/github). | Advanced     |
+
+Test text to verify pr preview :)
