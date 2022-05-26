@@ -11,11 +11,15 @@ function RepoHeading() {
       <PrivacyIcon isPrivate={data?.isPrivate} />
       <span className={styles.navContainer}>
         <Link href={data?.isOrg ? `/orgs/${owner}` : `/${owner}`}>
-          <a className={styles.ownerLink}>{owner}</a>
+          <a data-testid="header owner name" className={styles.ownerLink}>
+            {owner}
+          </a>
         </Link>
         <span className={styles.separator}>/</span>
         <Link href={`/${owner}/${name}`}>
-          <a className={styles.nameLink}>{name}</a>
+          <a data-testid="header repo name" className={styles.nameLink}>
+            {name}
+          </a>
         </Link>
       </span>
       {data ? (

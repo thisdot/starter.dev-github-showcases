@@ -19,6 +19,11 @@
         "totalCount": 12,
         "__typename": "PullRequestConnection"
       },
+      "issues": { "totalCount": 68, "__typename": "IssueConnection" },
+      "pullRequests": {
+        "totalCount": 12,
+        "__typename": "PullRequestConnection"
+      },
       "topics": {
         "nodes": [
           {
