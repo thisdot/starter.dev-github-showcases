@@ -48,6 +48,7 @@ function TabNavigation({
               key={index}
             >
               <a
+                data-testid={`repo ${title.toLowerCase()} tab`}
                 className={cn(
                   isCurrentTab(path) ? styles.tabActive : styles.tabInactive,
                   styles.tab
@@ -63,7 +64,10 @@ function TabNavigation({
                 />
                 <span>{title}</span>
                 {typeof count === 'number' && (
-                  <span className="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl">
+                  <span
+                    data-testid={`repo ${title.toLowerCase()} count`}
+                    className="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl"
+                  >
                     {count}
                   </span>
                 )}
