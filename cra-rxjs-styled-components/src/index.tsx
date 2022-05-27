@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
+import UserProvider from './context/UserContext';
 import AuthGuard from './components/AuthGuard';
 import reportWebVitals from './reportWebVitals';
 import Redirect from './routes/redirect';
@@ -13,38 +14,40 @@ import RepoPullRequest from './routes/repository-pull-request';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
+    <UserProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route
+              path=""
+              element={
+                <AuthGuard>
+                  <TopRepos />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/:username/:repo"
+              element={
+                <AuthGuard>
+                  <RepoDetails />
+                </AuthGuard>
+              }
+            />
+          </Route>
           <Route
-            path=""
+            path="pulls"
             element={
               <AuthGuard>
-                <TopRepos />
+                <RepoPullRequest />
               </AuthGuard>
             }
           />
-          <Route
-            path="/:username/:repo"
-            element={
-              <AuthGuard>
-                <RepoDetails />
-              </AuthGuard>
-            }
-          />
-        </Route>
-        <Route
-          path="pulls"
-          element={
-            <AuthGuard>
-              <RepoPullRequest />
-            </AuthGuard>
-          }
-        />
-        <Route path="signin" element={<SignIn />} />
-        <Route path="redirect" element={<Redirect />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="signin" element={<SignIn />} />
+          <Route path="redirect" element={<Redirect />} />
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
