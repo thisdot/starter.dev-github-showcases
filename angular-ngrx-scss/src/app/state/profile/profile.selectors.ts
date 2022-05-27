@@ -9,3 +9,8 @@ export const selectProfile = createSelector(
   selectProfileState,
   (state: ProfileState) => state,
 );
+
+export const selectGists = createSelector(
+  selectProfileState,
+  (state: ProfileState) => state.gists,
+);

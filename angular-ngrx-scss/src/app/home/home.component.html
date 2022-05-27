@@ -2,7 +2,12 @@
   <header class="nav">
     <app-nav-bar></app-nav-bar>
   </header>
-  <main class="main">
-    <div>Main content!</div>
-  </main>
+  <ng-container *ngIf="user$ | async as user">
+    <main class="main">
+      <aside>
+        <app-user-gists></app-user-gists>
+      </aside>
+      <div>Main content!</div>
+    </main>
+  </ng-container>
 </div>

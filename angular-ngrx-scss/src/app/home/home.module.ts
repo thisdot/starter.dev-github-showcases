@@ -10,6 +10,7 @@ import { ProfileAboutComponent } from './profile/profile-about/profile-about.com
 import { ProfileReposComponent } from './profile/profile-repos/profile-repos.component';
 import { RelativeTimePipe } from '../shared/pipes/relative-time.pipe';
 import { RepoCardComponent } from '../shared/components/repo-card/repo-card.component';
+import { UserGistsComponent } from './user-gists/user-gists.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { RepoCardComponent } from '../shared/components/repo-card/repo-card.comp
     ProfileReposComponent,
     RepoCardComponent,
     RelativeTimePipe,
+    UserGistsComponent,
   ],
   imports: [CommonModule, HomeRoutingModule],
 })

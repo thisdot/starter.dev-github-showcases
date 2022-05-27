@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
+  UserGist,
+  UserGistsApiResponse,
+  UserGistsState,
   UserOrgsApiResponse,
   UserOrgsState,
   UserReposApiResponse,
@@ -101,6 +104,21 @@ export class UserService {
           owner: {
             login: repo.owner.login,
           },
+        })),
+      ),
+    );
+  }
+
+  getUserGists(username: string): Observable<UserGistsState[]> {
+    const url = `${environment.githubUrl}/users/${encodeURIComponent(
+      username,
+    )}/gists`;
+
+    return this.http.get<UserGistsApiResponse>(url).pipe(
+      map((data) =>
+        data.map((gist: UserGist) => ({
+          url: gist.html_url,
+          fileName: Object.keys(gist.files)[0],
         })),
       ),
     );

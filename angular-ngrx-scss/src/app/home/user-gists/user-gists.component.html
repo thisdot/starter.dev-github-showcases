@@ -1,0 +1,16 @@
+<div class="container">
+  <h3>Gists</h3>
+  <ng-container *ngIf="userGists$ | async as gists">
+    <ng-container *ngIf="gists.length > 0; else noGists">
+      <div class="list-container">
+        <ng-container *ngFor="let gist of gists">
+          <a class="link" [href]="gist.url" target="_blank">{{gist.fileName}}</a>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #noGists>
+  <p>User does not have any gists</p>
+</ng-template>
