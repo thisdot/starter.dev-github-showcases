@@ -52,6 +52,11 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     repos,
   }));
 
+  readonly setPageInfo = this.updater((state, pageInfo: any) => ({
+    ...state,
+    pageInfo,
+  }));
+
   readonly setReposLoaded = this.updater((state, reposLoaded: boolean) => ({
     ...state,
     reposLoaded,
@@ -66,6 +71,8 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
   readonly resultCount$ = this.select(({ resultCount }) => resultCount);
 
   readonly reposLoaded$ = this.select(({ reposLoaded }) => reposLoaded);
+
+  readonly pageInfo$ = this.select(({ pageInfo }) => pageInfo);
 
   // *********** Effects *********** //
 
@@ -109,8 +116,10 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
       .watch({
         username: owner,
         orderBy: state.sort,
-        afterCursor: state.startCursor ?? undefined,
-        beforeCursor: state.endCursor ?? undefined,
+        afterCursor: state.afterCursor ?? undefined,
+        beforeCursor: state.beforeCursor ?? undefined,
+        first: state.first,
+        last: state.last,
       })
       .valueChanges.pipe(
         tapResponse(
@@ -134,6 +143,7 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
             this.setOwner(owner);
             this.setRepos(filteredRepos);
             this.setReposLoaded(true);
+            this.setPageInfo(res.data.user?.repositories.pageInfo);
           },
           (err) => {
             console.log(err);
@@ -147,8 +157,10 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
       .watch({
         orgname: owner,
         orderBy: state.sort,
-        afterCursor: state.startCursor ?? undefined,
-        beforeCursor: state.endCursor ?? undefined,
+        afterCursor: state.afterCursor ?? undefined,
+        beforeCursor: state.beforeCursor ?? undefined,
+        first: state.first,
+        last: state.last,
       })
       .valueChanges.pipe(
         tapResponse(
@@ -172,6 +184,7 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
             this.setOwner(owner);
             this.setRepos(filteredRepos);
             this.setReposLoaded(true);
+            this.setPageInfo(res.data.organization?.repositories.pageInfo);
           },
           (err) => {
             console.log(err);

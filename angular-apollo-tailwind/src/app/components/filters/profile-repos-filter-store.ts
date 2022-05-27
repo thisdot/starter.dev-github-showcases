@@ -5,6 +5,7 @@ import {
   OrderDirection,
   PageInfo,
   RepositoryOrder,
+  PaginationEvent,
 } from '../../../../src/app/gql';
 import { LanguageFilter, TypeFilter } from './filter.models';
 
@@ -15,8 +16,10 @@ export interface ProfileFilterState {
   language: string;
   languages: LanguageFilter[];
   languagesLoaded: boolean;
-  startCursor?: string;
-  endCursor?: string;
+  beforeCursor?: string;
+  afterCursor?: string;
+  first?: number;
+  last?: number;
 }
 
 const INITIAL_STATE: ProfileFilterState = {
@@ -29,6 +32,8 @@ const INITIAL_STATE: ProfileFilterState = {
   query: '',
   languages: [],
   languagesLoaded: false,
+  first: 10,
+  last: undefined,
 };
 
 const TYPES_DICT: { [key: string]: TypeFilter } = {
@@ -91,8 +96,8 @@ export class ProfileReposFilterStore extends ComponentStore<ProfileFilterState> 
   readonly setPage = this.updater(
     (state, { startCursor, endCursor }: PageInfo) => ({
       ...state,
-      startCursor: startCursor as string,
-      endCursor: endCursor as string,
+      beforeCursor: startCursor as string,
+      afterCursor: endCursor as string,
     }),
   );
 
@@ -111,6 +116,16 @@ export class ProfileReposFilterStore extends ComponentStore<ProfileFilterState> 
     ...state,
     filtersLoaded: value,
   }));
+
+  readonly changePage = this.updater(
+    (state, { before, after }: PaginationEvent) => ({
+      ...state,
+      afterCursor: after as string,
+      beforeCursor: before as string,
+      first: after ? 10 : undefined,
+      last: before ? 10 : undefined,
+    }),
+  );
 
   // *********** Selectors *********** //
 

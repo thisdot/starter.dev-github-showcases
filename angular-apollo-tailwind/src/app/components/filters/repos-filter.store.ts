@@ -7,7 +7,7 @@ import {
   Label,
   Milestone,
   OrderDirection,
-  PageInfo,
+  PaginationEvent,
 } from '../../gql';
 
 export interface FilterState {
@@ -21,6 +21,8 @@ export interface FilterState {
   endCursor?: string;
   labelsLoaded: boolean;
   milestonesLoaded: boolean;
+  first?: number;
+  last?: number;
 }
 
 const INITIAL_STATE: FilterState = {
@@ -35,6 +37,8 @@ const INITIAL_STATE: FilterState = {
   },
   labelsLoaded: false,
   milestonesLoaded: false,
+  first: 25,
+  last: undefined,
 };
 
 const ORDER_DICT: { [key: string]: IssueOrderField } = {
@@ -103,10 +107,12 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
   });
 
   readonly changePage = this.updater(
-    (state, { startCursor, endCursor }: PageInfo) => ({
+    (state, { before, after }: PaginationEvent) => ({
       ...state,
-      startCursor: startCursor as string,
-      endCursor: endCursor as string,
+      startCursor: before as string,
+      endCursor: after as string,
+      first: after ? 25 : undefined,
+      last: before ? 25 : undefined,
     }),
   );
 

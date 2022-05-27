@@ -9,7 +9,7 @@ const isValidDate = (date: Date | number): boolean =>
 })
 export class FormatDistancePipe implements PipeTransform {
   transform(
-    date: Date | number,
+    date: Date | number | string,
     dateToCompare: Date | number,
     options?: {
       includeSeconds?: boolean;
@@ -17,6 +17,10 @@ export class FormatDistancePipe implements PipeTransform {
       locale?: Locale;
     },
   ): string {
+    if (typeof date === 'string') {
+      date = new Date(date);
+      return formatDistance(date, dateToCompare, options);
+    }
     if (isValidDate(date) && isValidDate(dateToCompare)) {
       return formatDistance(date, dateToCompare, options);
     }

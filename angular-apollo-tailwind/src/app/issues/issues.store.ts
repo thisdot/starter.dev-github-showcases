@@ -100,6 +100,8 @@ export class IssuesStore extends ComponentStore<IssuesState> {
           endCursor,
           milestonesLoaded,
           labelsLoaded,
+          first,
+          last,
         }) =>
           this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
             switchMap(({ owner, name }) =>
@@ -115,8 +117,10 @@ export class IssuesStore extends ComponentStore<IssuesState> {
                           milestone: milestone || undefined,
                         }
                       : undefined,
-                  after: startCursor ?? undefined,
-                  before: endCursor ?? undefined,
+                  after: endCursor ?? undefined,
+                  before: startCursor ?? undefined,
+                  first: first ?? undefined,
+                  last: last ?? undefined,
                 })
                 .valueChanges.pipe(
                   tapResponse(

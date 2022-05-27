@@ -8,10 +8,13 @@ export const REPO_PULLS_QUERY = gql`
     $after: String
     $labels: [String!]
     $orderBy: IssueOrder
+    $first: Int
+    $last: Int
   ) {
     repository(owner: $owner, name: $name) {
       openPullRequests: pullRequests(
-        first: 25
+        first: $first
+        last: $last
         states: [OPEN]
         labels: $labels
         orderBy: $orderBy
@@ -50,7 +53,8 @@ export const REPO_PULLS_QUERY = gql`
         }
       }
       closedPullRequests: pullRequests(
-        first: 25
+        first: $first
+        last: $last
         states: [CLOSED, MERGED]
         labels: $labels
         orderBy: $orderBy

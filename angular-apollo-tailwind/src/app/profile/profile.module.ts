@@ -17,6 +17,7 @@ import { ReposFilterDropdownModule } from '../components/repos-filter-dropdown/r
 import { OrgProfileComponent } from './org-profile/org-profile.component';
 import { OrgProfileAboutComponent } from './org-about/org-about.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { PaginationModule } from '../components/pagination/pagination.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     FormsModule,
     ReactiveFormsModule,
     ReposFilterDropdownModule,
+    PaginationModule,
   ],
 })
 export class ProfileModule {}
