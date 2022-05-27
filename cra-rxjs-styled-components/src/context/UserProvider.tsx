@@ -58,7 +58,6 @@ export function UserProvider({ children }: UserProviderProps) {
     request(`${GITHUB_URL_BASE}/user`)
       .pipe(
         tap((val) => {
-          console.log(val);
           setUser(val as IUserContext);
         })
       )
@@ -71,8 +70,7 @@ export function UserProvider({ children }: UserProviderProps) {
 export function useUser() {
   const context = useContext(UserContext);
   if (context === undefined) {
-    // throw new Error('useUser must be used within a React component');
-    console.log(UserContext);
+    throw new Error('useUser must be used within a React component');
   }
   return context;
 }
