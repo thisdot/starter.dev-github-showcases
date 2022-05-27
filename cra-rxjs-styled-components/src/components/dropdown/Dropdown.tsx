@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSignOut } from '../../hooks/auth/use-sign-out';
 import { DropdownIcon } from '../icons/index';
 import { useUser } from '../../context/UserProvider';
@@ -26,7 +26,9 @@ export default function Dropdown() {
       <DropdownBtn onClick={toggleDropdown}>
         <UserDropdownAvatarContainer>
           <UserDropdownAvatarSpan>
-            <UserDropdownAvatarImage alt={user?.name} src={user?.avatar_url} />
+            {user?.avatar_url && user.name && (
+              <UserDropdownAvatarImage alt={user.name} src={user.avatar_url} />
+            )}
           </UserDropdownAvatarSpan>
         </UserDropdownAvatarContainer>
         <IconContainer>
