@@ -69,8 +69,5 @@ export function UserProvider({ children }: UserProviderProps) {
 
 export function useUser() {
   const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error('useUser must be used within a React component');
-  }
   return context;
 }
