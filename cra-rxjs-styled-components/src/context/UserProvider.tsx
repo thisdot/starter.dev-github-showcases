@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { createContext, useContext, useState, useEffect } from 'react';
 import { fromFetchWithAuth } from '../hooks/auth/from-fetch-with-auth';
 import { GITHUB_URL_BASE } from '../constants/url.constants';
-import { catchError, EMPTY, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
 export interface IUserContext {
   avatar_url: string;
