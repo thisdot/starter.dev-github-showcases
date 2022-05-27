@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router';
 import Header from './components/header';
-import StateProvider from './context/StateProvider'
+import { UserProvider } from './context/UserProvider';
 
 function App() {
   return (
-    <StateProvider>
+    <UserProvider>
       <Header />
       <Outlet />
-    </StateProvider>
+    </UserProvider>
   );
 }
 
