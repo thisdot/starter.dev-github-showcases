@@ -11,10 +11,9 @@ interface Props {
   toggleTab: any;
 }
 
-export default function IssueTabHeader(props: Props) {
+export default function IssueTabHeader({ toggleTab }: Props) {
   const [activeTab, setActiveTab] = useState<IssueTabValues>('open');
   const [openDropdown, setOpenDropdown] = useState<DropdownTitle | undefined>();
-  const { toggleTab } = props;
 
   const changeTab = (value: IssueTabValues) => {
     toggleTab(value);

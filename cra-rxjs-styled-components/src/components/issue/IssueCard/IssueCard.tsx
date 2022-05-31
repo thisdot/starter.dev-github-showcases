@@ -24,12 +24,10 @@ export default function IssueCard({
   messageCount,
 }: Props) {
   const getPRIcon = (status: Status) => {
-    switch (status) {
-      case 'closed':
-        return <ClosedIssueIcon />;
-      case 'open':
-      default:
-        return <OpenIssueIcon />;
+    if (status === 'open') {
+      return <OpenIssueIcon />;
+    } else {
+      return <ClosedIssueIcon />;
     }
   };
   return (

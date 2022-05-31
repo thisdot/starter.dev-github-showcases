@@ -11,6 +11,7 @@ export const Content = styled.div`
   border: 1px solid ${colors.gray300};
   border-radius: 6px;
 `;
+
 export const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
