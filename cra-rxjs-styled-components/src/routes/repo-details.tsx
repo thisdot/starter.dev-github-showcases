@@ -10,10 +10,10 @@ import Readme from '../components/readme/Readme';
 import FileExplorer from '../components/file-explorer/FileExplorer';
 import {
   RepoLayout,
+  RepoContainer,
+  RepoGrid,
   RepoMain,
   RepoAside,
-  RepoSubHeader,
-  RepoReadme,
 } from '../components/layouts/RepoLayoutPage';
 
 type RepositoryDetails = {
@@ -82,40 +82,39 @@ export default function RepoDetails() {
 
   return (
     <RepoLayout>
-      <RepoSubHeader>
-        <SubHeader
-          user={repo?.owner.login!}
-          repo={repo?.name!}
-          privacy={repo?.private!}
-          watchCount={repo?.subscribers_count!}
-          starCount={repo?.stargazers_count!}
-          forkCount={repo?.forks_count!}
-          issuesCount={issues?.length!}
-          prCount={openPr!}
-        />
-      </RepoSubHeader>
-      <RepoAside>
-        <RepoAbout
-          topics={topics}
-          description={repo?.description}
-          websiteLink={repo?.homepage}
-        />
-      </RepoAside>
-      <RepoMain>
-        <FileExplorer
-          fileNames={listOfFileNames!}
-          dirNames={listOfDirectoryNames!}
-          branch={repo?.default_branch!}
-        />
-      </RepoMain>
-
-      <RepoReadme>
-        <Readme
-          branch={repo?.default_branch!}
-          username={repo?.owner.login!}
-          repository={repo?.name!}
-        />
-      </RepoReadme>
+      <SubHeader
+        user={repo?.owner.login!}
+        repo={repo?.name!}
+        privacy={repo?.private!}
+        watchCount={repo?.subscribers_count!}
+        starCount={repo?.stargazers_count!}
+        forkCount={repo?.forks_count!}
+        issuesCount={issues?.length!}
+        prCount={openPr!}
+      />
+      <RepoContainer>
+        <RepoGrid>
+          <RepoMain>
+            <FileExplorer
+              fileNames={listOfFileNames!}
+              dirNames={listOfDirectoryNames!}
+              branch={repo?.default_branch!}
+            />
+            <Readme
+              branch={repo?.default_branch!}
+              username={repo?.owner.login!}
+              repository={repo?.name!}
+            />
+          </RepoMain>
+          <RepoAside>
+            <RepoAbout
+              topics={topics}
+              description={repo?.description}
+              websiteLink={repo?.homepage}
+            />
+          </RepoAside>
+        </RepoGrid>
+      </RepoContainer>
     </RepoLayout>
   );
 }
