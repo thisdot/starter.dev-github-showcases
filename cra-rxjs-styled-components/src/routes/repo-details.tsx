@@ -5,16 +5,11 @@ import { SINGLE_USER_REPO } from '../constants/url.constants';
 import { Repository } from '../interfaces/repositories.interfaces';
 import { fromFetchWithAuth } from '../hooks/auth/from-fetch-with-auth';
 import SubHeader from '../components/sub-header/SubHeader';
-import RepoAbout from '../components/repo-about/RepoAbout';
-import Readme from '../components/readme/Readme';
-import FileExplorer from '../components/file-explorer/FileExplorer';
-import {
-  RepoLayout,
-  RepoMain,
-  RepoAside,
-  RepoSubHeader,
-  RepoReadme,
-} from '../components/layouts/RepoLayoutPage';
+import { RepoLayout } from '../components/layouts/RepoLayoutPage';
+import { Route, Routes } from 'react-router-dom';
+import RepoCodeTab from '../components/repo-code-tab';
+import IssuesCtrl from '../components/issue/Issue/Issue.data';
+import PullRequestCtrl from '../components/pull-request/PullRequest';
 
 type RepositoryDetails = {
   repo: Repository | null;
@@ -82,40 +77,36 @@ export default function RepoDetails() {
 
   return (
     <RepoLayout>
-      <RepoSubHeader>
-        <SubHeader
-          user={repo?.owner.login!}
-          repo={repo?.name!}
-          privacy={repo?.private!}
-          watchCount={repo?.subscribers_count!}
-          starCount={repo?.stargazers_count!}
-          forkCount={repo?.forks_count!}
-          issuesCount={issues?.length!}
-          prCount={openPr!}
-        />
-      </RepoSubHeader>
-      <RepoAside>
-        <RepoAbout
-          topics={topics}
-          description={repo?.description}
-          websiteLink={repo?.homepage}
-        />
-      </RepoAside>
-      <RepoMain>
-        <FileExplorer
-          fileNames={listOfFileNames!}
-          dirNames={listOfDirectoryNames!}
-          branch={repo?.default_branch!}
-        />
-      </RepoMain>
+      <SubHeader
+        user={repo?.owner.login!}
+        repo={repo?.name!}
+        privacy={repo?.private!}
+        watchCount={repo?.subscribers_count!}
+        starCount={repo?.stargazers_count!}
+        forkCount={repo?.forks_count!}
+        issuesCount={issues?.length!}
+        prCount={openPr!}
+      />
 
-      <RepoReadme>
-        <Readme
-          branch={repo?.default_branch!}
-          username={repo?.owner.login!}
-          repository={repo?.name!}
+      <Routes>
+        <Route path="issues" element={<IssuesCtrl />} />
+        <Route path="pulls" element={<PullRequestCtrl />} />
+        <Route
+          path="/"
+          element={
+            <RepoCodeTab
+              topics={topics}
+              description={repo?.description}
+              websiteLink={repo?.homepage}
+              fileNames={listOfFileNames!}
+              dirNames={listOfDirectoryNames!}
+              branch={repo?.default_branch!}
+              ownerUsername={repo?.owner.login!}
+              repositoryName={repo?.name!}
+            />
+          }
         />
-      </RepoReadme>
+      </Routes>
     </RepoLayout>
   );
 }
