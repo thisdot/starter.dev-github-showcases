@@ -5,22 +5,22 @@
     </header>
 
     <div :class="styles.messageContainer">
-      <p :class="styles.paragraph" data-testid="message-value">Message: {{ message }}</p>
+      <p :class="styles.paragraph" data-testid="message-value">
+        Message: {{ message }}
+      </p>
     </div>
-    <NuxtLink to="/" :class="styles.link">
-      Return Home
-    </NuxtLink>
+    <NuxtLink to="/" :class="styles.link"> Return Home </NuxtLink>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
-import * as styles from './TheGreeting.classNames';
+import * as styles from './TheGreeting.classNames'
 
 export default defineComponent({
   name: 'TheGreeting',
   setup() {
-    const { $axios } = useContext();
+    const { $axios } = useContext()
 
     const message = useAsync(async () => {
       try {

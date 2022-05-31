@@ -35,9 +35,7 @@
         Reset
       </button>
     </div>
-    <NuxtLink to="/" :class="styles.link">
-      Return Home
-    </NuxtLink>
+    <NuxtLink to="/" :class="styles.link"> Return Home </NuxtLink>
   </div>
 </template>
 
