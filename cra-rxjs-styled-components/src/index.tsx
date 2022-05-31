@@ -25,7 +25,7 @@ ReactDOM.render(
             }
           />
           <Route
-            path="/:username/:repo"
+            path="/:username/:repo/*"
             element={
               <AuthGuard>
                 <RepoDetails />
