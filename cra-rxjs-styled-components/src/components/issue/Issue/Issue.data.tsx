@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import PullRequestView from './Issue.view';
+import { useState } from 'react';
+import IssuesView from './Issue.view';
 import type { Issue } from './Issue.type';
 import type { IssueTabValues } from '../types';
 
-export default function PullRequestCtrl() {
+export default function IssuesCtrl() {
   const [activeTab, setActiveTab] = useState<IssueTabValues>('open');
   const OPEN_PRS: Issue[] = [
     {
@@ -83,7 +83,7 @@ export default function PullRequestCtrl() {
   ];
 
   return (
-    <PullRequestView
+    <IssuesView
       issues={activeTab === 'open' ? OPEN_PRS : CLOSED_PRS}
       changeActiveTab={setActiveTab}
     />

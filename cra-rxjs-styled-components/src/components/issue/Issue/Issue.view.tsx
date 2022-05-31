@@ -9,7 +9,7 @@ type IssueProps = {
   changeActiveTab: (value: IssueTabValues) => void;
 };
 
-export default function IssueView({ issues, changeActiveTab }: IssueProps) {
+export default function IssuesView({ issues, changeActiveTab }: IssueProps) {
   return (
     <Wrapper>
       <Content>
