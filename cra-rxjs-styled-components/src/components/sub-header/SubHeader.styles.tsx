@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const SubHeaderWrapper = styled.div`
   --tw-border-opacity: 1;
@@ -178,7 +179,7 @@ export const TabNavigation = styled.nav`
   display: flex;
 `;
 
-export const TabNavigationInactiveLinks = styled.a`
+export const TabNavigationLink = styled(NavLink)`
   cursor: pointer;
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
@@ -188,24 +189,18 @@ export const TabNavigationInactiveLinks = styled.a`
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
 
   &:hover {
     border-bottom: 2px solid var(--gray-300);
   }
-`;
 
-export const TabNavigationActive = styled.a`
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  --tw-border-opacity: 1;
-  border-bottom: 2px solid rgb(234 179 8 / var(--tw-border-opacity));
-  padding: 1rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 600;
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
+  &.active {
+    border-bottom: 2px solid rgb(234 179 8 / var(--tw-border-opacity));
+    font-weight: 600;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+  }
 `;
 
 export const TabNavigationIcon = styled.div`

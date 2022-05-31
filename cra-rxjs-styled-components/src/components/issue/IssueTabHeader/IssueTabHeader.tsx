@@ -50,6 +50,15 @@ export default function IssueTabHeader(props: Props) {
       </StatusTab>
       <StatusTab className="pr-tab_right">
         <DetailsDropdown
+          title="Milestones"
+          DropdownLabel="Filter by Milestones"
+          toggleDropDown={() => toggleDropdown('Milestones')}
+          isOpen={openDropdown === 'Milestones'}
+        >
+          <a href="/"> Issues with no milestones </a>
+          <a href="/"> Serverless Migrations </a>
+        </DetailsDropdown>
+        <DetailsDropdown
           title="Label"
           DropdownLabel="Filter by label"
           toggleDropDown={() => toggleDropdown('Label')}

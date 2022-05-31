@@ -15,8 +15,7 @@ import {
   SubHeaderMainButtonCount,
   SubHeaderButtonsActionsIcon,
   TabNavigation,
-  TabNavigationInactiveLinks,
-  TabNavigationActive,
+  TabNavigationLink,
   TabNavigationIcon,
   TabNavigationCount,
 } from './SubHeader.styles';
@@ -91,26 +90,26 @@ export default function SubHeader({
       </SubHeaderTopRow>
       <SubHeaderBottomRow>
         <TabNavigation>
-          <TabNavigationActive>
+          <TabNavigationLink to="." end>
             <TabNavigationIcon>
               <CodeIcon />
             </TabNavigationIcon>
             <span>Code</span>
-          </TabNavigationActive>
-          <TabNavigationInactiveLinks>
+          </TabNavigationLink>
+          <TabNavigationLink to="issues">
             <TabNavigationIcon>
               <IssuesIcon />
             </TabNavigationIcon>
             <span>Issues</span>
             <TabNavigationCount>{issuesCount}</TabNavigationCount>
-          </TabNavigationInactiveLinks>
-          <TabNavigationInactiveLinks>
+          </TabNavigationLink>
+          <TabNavigationLink to="pulls">
             <TabNavigationIcon>
               <PrIcon />
             </TabNavigationIcon>
             <span>Pull Requests</span>
             <TabNavigationCount>{prCount}</TabNavigationCount>
-          </TabNavigationInactiveLinks>
+          </TabNavigationLink>
         </TabNavigation>
       </SubHeaderBottomRow>
     </SubHeaderWrapper>
