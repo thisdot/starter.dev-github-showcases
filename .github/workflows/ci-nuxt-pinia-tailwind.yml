@@ -5,11 +5,11 @@ name: Nuxt Pinia Tailwind CI
 
 on:
   push:
-    branches: [setup-nuxt-project]
+    branches: [main]
     paths:
       - "nuxt-pinia-tailwind/**"
   pull_request:
-    branches: [setup-nuxt-project]
+    branches: [main]
     paths:
       - "nuxt-pinia-tailwind/**"
 
