@@ -45,7 +45,7 @@ interface UserProviderProps {
 export const UserContext = createContext<IUserContext | undefined>(undefined);
 
 export function UserProvider({ children }: UserProviderProps) {
-  const [user, setUser] = useState<IUserContext | undefined>(undefined);
+  const [user, setUser] = useState<IUserContext>();
 
   const request = (url: string) =>
     fromFetchWithAuth(url, {
@@ -55,13 +55,17 @@ export function UserProvider({ children }: UserProviderProps) {
     });
 
   useEffect(() => {
-    request(`${GITHUB_URL_BASE}/user`)
+    const subscription = request(`${GITHUB_URL_BASE}/user`)
       .pipe(
         tap((val) => {
           setUser(val as IUserContext);
         })
       )
       .subscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
