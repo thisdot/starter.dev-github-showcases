@@ -1,7 +1,8 @@
 <template>
   <!-- Actual content -->
+  <Auth v-if="!user?.isLoggedIn" />
   <q-card
-    v-if="!userLoading"
+    v-else-if="!userLoading"
     class="full-height"
     flat
     square
@@ -11,7 +12,7 @@
       <q-list>
         <q-item-section>
           <q-avatar class="" type="circle" style="width: 18rem; height: 18rem">
-            <img :src="userData.avatarUrl" alt="avatar" />
+            <img :src="userData?.avatarUrl" alt="avatar" />
           </q-avatar>
         </q-item-section>
       </q-list>
@@ -21,7 +22,7 @@
             class="name text-bold q-pt-md"
             style="font-size: 24px; line-height: 1.25"
           >
-            {{ userData.name }}
+            {{ userData?.name }}
           </q-item-label>
           <q-item-label
             class="login"
@@ -31,14 +32,14 @@
               color: var(--color-fg-muted);
             "
           >
-            {{ userData.login }}
+            {{ userData?.login }}
           </q-item-label>
         </q-item-section>
       </q-list>
       <q-list>
         <!-- bio section -->
         <q-item-section class="bio">
-          {{ userData.bio }}
+          {{ userData?.bio }}
         </q-item-section>
         <!-- follow section TODO: spacing issues and alignment-->
         <q-item-section style="display: inline">
@@ -46,15 +47,18 @@
             <a
               href="#"
               style="text-decoration: none"
-              v-if="userData.followers.totalCount"
+              v-if="userData?.followers?.totalCount"
             >
               <q-icon
                 class="q-mr-xs"
                 style="color: var(--color-btn-text)"
                 name="fas fa-users"
               ></q-icon>
-              <span class="text-bold" style="color: var(--color-btn-text)">
-                {{ userData.followers.totalCount }}</span
+              <span
+                class="text-bold q-pl-sm q-pr-sm"
+                style="color: var(--color-btn-text)"
+              >
+                {{ userData?.followers?.totalCount }}</span
               >
               <span style="color: var(--color-fg-muted)">followers</span>
             </a>
@@ -62,27 +66,32 @@
             <a
               href="#"
               style="text-decoration: none"
-              v-if="userData.following.totalCount"
+              v-if="userData?.following?.totalCount"
             >
-              <span class="text-bold" style="color: var(--color-btn-text)">{{
-                userData.following.totalCount
-              }}</span>
+              <span
+                class="text-bold q-pr-sm"
+                style="color: var(--color-btn-text)"
+                >{{ userData?.following?.totalCount }}</span
+              >
               <span style="color: var(--color-fg-muted)">following</span>
             </a>
-            .
+            ·
             <a
               href="#"
               style="text-decoration: none"
-              v-if="userData.followers.totalCount"
+              v-if="userData?.followers?.totalCount"
             >
               <q-icon
                 class="q-mr-xs"
                 style="color: var(--color-btn-text)"
                 name="far fa-star"
               ></q-icon>
-              <span class="text-bold" style="color: var(--color-btn-text)">
+              <span
+                class="text-bold q-pl-sm"
+                style="color: var(--color-btn-text)"
+              >
                 {{
-                  userData.starredRepositories?.totalCount?.toLocaleString() ||
+                  userData?.starredRepositories?.totalCount?.toLocaleString() ||
                   0
                 }}
               </span>
@@ -90,19 +99,19 @@
           </q-item-label>
         </q-item-section>
       </q-list>
-      <!-- media section (need to add twitter icon) -->
+      <!-- media section -->
       <q-list style="margin-top: 1rem">
         <q-item-section>
           <q-item-label
-            v-if="userData.company"
+            v-if="userData?.company"
             class="items-center text-bold"
             style="margin-bottom: 4px"
           >
             <q-icon class="q-mr-xs" name="far fa-building"></q-icon>
-            {{ userData.company }}</q-item-label
+            {{ userData?.company }}</q-item-label
           >
           <q-item-label
-            v-if="userData.location"
+            v-if="userData?.location"
             class="items-center"
             style="margin-bottom: 4px"
           >
@@ -110,28 +119,28 @@
             {{ userData?.location }}</q-item-label
           >
           <q-item-label
-            v-if="userData.websiteUrl"
+            v-if="userData?.websiteUrl"
             class="items-center"
             style="margin-bottom: 4px"
           >
             <q-icon class="q-mr-xs" name="fas fa-link"></q-icon>
             <a
-              :href="userData.websiteUrl"
+              :href="userData?.websiteUrl"
               target="__blank"
               style="
                 text-decoration: none;
                 margin-left: 4px;
                 color: var(--color-btn-text);
               "
-              >{{ userData.websiteUrl }}</a
+              >{{ userData?.websiteUrl }}</a
             >
           </q-item-label>
           <q-item-label
-            v-if="userData.twitterUsername"
+            v-if="userData?.twitterUsername"
             class="items-center"
             style="margin-bottom: 1rem"
           >
-            <q-icon class="q-mr-xs" name="fas fa-twitter"></q-icon>
+            <q-icon class="q-mr-xs" name="fab fa-twitter"></q-icon>
             <a
               href="https://twitter.com/${userData.twitterUsername}"
               target="__blank"
@@ -140,13 +149,13 @@
                 margin-left: 4px;
                 color: var(--color-btn-text);
               "
-              >@{{ userData.twitterUsername }}</a
+              >@{{ userData?.twitterUsername }}</a
             >
           </q-item-label>
         </q-item-section>
       </q-list>
       <!-- org section -->
-      <template late v-if="userData.organizations.nodes.length">
+      <template late v-if="userData?.organizations?.nodes?.length">
         <q-separator></q-separator>
         <q-list>
           <q-item-section>
@@ -154,13 +163,13 @@
               Organizations
             </p-item-label>
             <a
-              v-for="organization in userData.organizations.nodes"
-              :href="organization.login"
-              :key="`org-${organization.login}`"
+              v-for="organization in userData?.organizations?.nodes"
+              :href="organization?.login"
+              :key="`org-${organization?.login}`"
               class="q-pt-sm"
             >
               <img
-                :src="organization.avatarUrl"
+                :src="organization?.avatarUrl"
                 alt="some"
                 class="avatar"
                 style="width: 32px; height: 32px"
@@ -206,11 +215,14 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { useUser } from '@/composables';
+import { useUserStore } from '@/store/userStore';
+import { Auth } from '@/views';
 
 const { getUserProfile } = useUser();
 const props = defineProps({
   username: String,
 });
+const user = useUserStore();
 const { data: userData, loading: userLoading } = getUserProfile(props.username);
 </script>
 
