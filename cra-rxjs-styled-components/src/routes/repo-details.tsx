@@ -5,7 +5,10 @@ import { SINGLE_USER_REPO } from '../constants/url.constants';
 import { Repository } from '../interfaces/repositories.interfaces';
 import { fromFetchWithAuth } from '../hooks/auth/from-fetch-with-auth';
 import SubHeader from '../components/sub-header/SubHeader';
-import { RepoLayout } from '../components/layouts/RepoLayoutPage';
+import {
+  RepoLayout,
+  RepoContainer,
+} from '../components/layouts/RepoLayoutPage';
 import { Route, Routes } from 'react-router-dom';
 import RepoCodeTab from '../components/repo-code-tab';
 import IssuesCtrl from '../components/issue/Issue/Issue.data';
@@ -87,25 +90,27 @@ export default function RepoDetails() {
         issuesCount={issues?.length!}
         prCount={openPr!}
       />
-      <Routes>
-        <Route path="issues" element={<IssuesCtrl />} />
-        <Route path="pulls" element={<PullRequestCtrl />} />
-        <Route
-          path="/"
-          element={
-            <RepoCodeTab
-              topics={topics}
-              description={repo?.description}
-              websiteLink={repo?.homepage}
-              fileNames={listOfFileNames!}
-              dirNames={listOfDirectoryNames!}
-              branch={repo?.default_branch!}
-              ownerUsername={repo?.owner.login!}
-              repositoryName={repo?.name!}
-            />
-          }
-        />
-      </Routes>
+      <RepoContainer>
+        <Routes>
+          <Route path="issues" element={<IssuesCtrl />} />
+          <Route path="pulls" element={<PullRequestCtrl />} />
+          <Route
+            path="/"
+            element={
+              <RepoCodeTab
+                topics={topics}
+                description={repo?.description}
+                websiteLink={repo?.homepage}
+                fileNames={listOfFileNames!}
+                dirNames={listOfDirectoryNames!}
+                branch={repo?.default_branch!}
+                ownerUsername={repo?.owner.login!}
+                repositoryName={repo?.name!}
+              />
+            }
+          />
+        </Routes>
+      </RepoContainer>
     </RepoLayout>
   );
 }
