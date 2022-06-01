@@ -18,7 +18,7 @@
     "lint:prettier": "prettier --check .",
     "lint": "yarn lint:js && yarn lint:style && yarn lint:prettier",
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix && yarn lint:style --fix",
-    "prepare": "cd .. husky install",
+    "prepare": "cd .. && husky install nuxt-pinia-tailwind/.husky",
     "test": "jest",
     "stories": "nuxt storybook"
   },
