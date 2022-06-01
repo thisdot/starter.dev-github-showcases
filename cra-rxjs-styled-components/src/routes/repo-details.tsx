@@ -87,7 +87,6 @@ export default function RepoDetails() {
         issuesCount={issues?.length!}
         prCount={openPr!}
       />
-
       <Routes>
         <Route path="issues" element={<IssuesCtrl />} />
         <Route path="pulls" element={<PullRequestCtrl />} />
