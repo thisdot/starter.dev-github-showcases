@@ -17,7 +17,7 @@ import NavBar from './components/Navbar/NavBar';
 import { auth } from './services/auth.server';
 import { CURRENT_USER_QUERY } from './lib/queries/UserDropdown';
 import gqlClient from './lib/graphql-client';
-import { getUser } from './services/session.server';
+import { getSession, getUser } from './services/session.server';
 
 type DocumentProps = {
   children: React.ReactNode;
@@ -71,6 +71,7 @@ type LoaderData = {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
+  // const { getUser } = await getSession(request);
   const { accessToken, valid } = await getUser(request);
   console.log(`ACCESSTOKEN ${accessToken}`);
   console.log(valid);
