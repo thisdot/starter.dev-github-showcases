@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxt-pinia-tailwind starter kit',
+    title: 'Github Demo App',
     htmlAttrs: {
       lang: 'en',
     },
@@ -41,13 +41,20 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: 'https://api.github.com',
   },
+
+  publicRuntimeConfig: {
+    API_URL: process.env.API_URL,
+    BASE_URL: process.env.BASE_URL,
+  },
+
+  privateRuntimeConfig: {},
 
   // Storybook module configuration: https://storybook.nuxtjs.org/api/options
   storybook: {
@@ -56,4 +63,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  devServerHandlers: [],
+
+  router: {
+    middleware: 'auth',
+  },
 }
