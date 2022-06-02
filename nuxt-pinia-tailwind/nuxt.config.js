@@ -46,11 +46,12 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://api.github.com',
+    baseURL: process.env.GITHUB_API_URL,
   },
 
   publicRuntimeConfig: {
-    API_URL: process.env.API_URL,
+    GITHUB_API_URL: process.env.GITHUB_API_URL,
+    STARTER_API_URL: process.env.STARTER_API_URL,
     BASE_URL: process.env.BASE_URL,
   },
 
@@ -68,5 +69,43 @@ export default {
 
   router: {
     middleware: 'auth',
+  },
+
+  auth: {
+    redirect: {
+      login: '/sign-in',
+      home: '/',
+    },
+    strategies: {
+      customLogin: {
+        scheme: '~/schemes/authScheme',
+        user: {
+          property: false,
+        },
+        token: {
+          property: 'access_token',
+        },
+        endpoints: {
+          login: {
+            baseURL: process.env.STARTER_API_URL,
+            url: '/auth/token',
+            method: 'get',
+            withCredentials: true,
+            propertyName: 'access_token',
+          },
+          user: {
+            baseURL: process.env.GITHUB_API_URL,
+            url: '/user',
+            method: 'get',
+            propertyName: false,
+          },
+          logout: {
+            baseURL: process.env.STARTER_API_URL,
+            url: '/auth/signout',
+            method: 'post',
+          },
+        },
+      },
+    },
   },
 }

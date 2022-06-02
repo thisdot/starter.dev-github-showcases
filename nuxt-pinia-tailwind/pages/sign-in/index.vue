@@ -17,14 +17,15 @@ import { SIGN_IN_URL } from '~/constants/url.constants'
 
 export default defineComponent({
   name: 'SignIn',
+  auth: 'guest',
   setup() {
     const {
-      $config: { API_URL, BASE_URL },
+      $config: { STARTER_API_URL, BASE_URL },
     } = useContext()
 
     const handleSignIn = (event: Event): void => {
       event.preventDefault()
-      window.location.href = SIGN_IN_URL(API_URL, BASE_URL)
+      window.location.href = SIGN_IN_URL(STARTER_API_URL, BASE_URL)
     }
 
     return { handleSignIn }
@@ -32,6 +33,5 @@ export default defineComponent({
   head: {
     titleTemplate: '%s - Sign-in',
   },
-  auth: false,
 })
 </script>

@@ -2,16 +2,26 @@
   <div>Redirecting...</div>
 </template>
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useUserStore } from '~/stores/userStore'
+import { defineComponent, onMounted, useContext } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'Redirect',
+  auth: 'guest',
   setup() {
-    const user = useUserStore()
+    const { $auth, redirect } = useContext()
 
-    user.getUserToken()
+    onMounted(async () => {
+      try {
+        /**
+         * Fetching on client side to avoid nuxt/auth headers error
+         * For reference see: https://github.com/nuxt-community/auth-module/discussions/1510
+         */
+        await $auth.loginWith('customLogin')
+        redirect('/')
+      } catch (error) {
+        redirect('/sign-in')
+      }
+    })
   },
-  auth: false,
 })
 </script>
