@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Badge = styled.span`
-position: relative;
+  position: relative;
   padding: 0.125rem 0.5rem;
   font-size: 0.75rem;
   line-height: 1rem;

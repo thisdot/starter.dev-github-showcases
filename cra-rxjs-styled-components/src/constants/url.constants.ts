@@ -19,7 +19,7 @@ export const TOP_REPOS_URL = `${GITHUB_URL_BASE}/user/repos?sort=updated&affilia
 export const SINGLE_USER_REPO = (user: string, repo: string) =>
   `${GITHUB_URL_BASE}/repos/${user}/${repo}`;
 
-  export const ORG_REPO_LIST = (user: string) =>
+export const ORG_REPO_LIST = (user: string) =>
   `${GITHUB_URL_BASE}/orgs/${user}/repos?sort=updated&per_page=10`;
 
 export const GISTS_URL = (user: string) =>

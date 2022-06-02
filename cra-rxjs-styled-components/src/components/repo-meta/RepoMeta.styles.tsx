@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 export const Metadata = styled.div`
   display: flex;
@@ -9,7 +8,7 @@ export const Metadata = styled.div`
   color: rgb(75 85 99);
   & > *:not(:first-child) {
     margin-left: 1rem;
-  };
+  }
 `;
 
 export const LanguageColor = styled.span`
@@ -26,7 +25,7 @@ export const SocialWrapper = styled.div`
   display: flex;
   & > *:not(:first-child) {
     margin-left: 1rem;
-  };
+  }
 `;
 
 export const SocialCount = styled.div`
@@ -38,9 +37,8 @@ export const SocialCount = styled.div`
   }
   & > *:not(:first-child) {
     margin-left: 0.25rem;
-  };
+  }
 `;
-
 
 export const TextSpan = styled.span`
   margin: 0;

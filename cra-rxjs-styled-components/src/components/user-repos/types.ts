@@ -2,8 +2,8 @@ export interface Repo {
   id: string;
   name: string;
   owner: {
-    login: string
-  }
+    login: string;
+  };
   description?: string | null;
   languageColor?: string | null;
   language?: string | null;

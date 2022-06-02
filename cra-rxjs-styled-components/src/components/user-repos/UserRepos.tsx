@@ -50,7 +50,7 @@ function UserRepos({ isOrg = false }) {
   if (loading) {
     return <p>Loading...</p>;
   }
-  
+
   return (
     <RepoListWrapper>
       {repos &&

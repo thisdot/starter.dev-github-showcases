@@ -33,7 +33,7 @@ ReactDOM.render(
               </AuthGuard>
             }
           />
-         <Route
+          <Route
             path="/orgs/:username"
             element={
               <AuthGuard>

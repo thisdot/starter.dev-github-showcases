@@ -5,7 +5,9 @@ interface PrivacyBadgeProps {
 }
 
 function PrivacyBadge({ visibility }: PrivacyBadgeProps) {
-  return <Badge>{visibility.charAt(0).toUpperCase() + visibility.slice(1)}</Badge>;
+  return (
+    <Badge>{visibility.charAt(0).toUpperCase() + visibility.slice(1)}</Badge>
+  );
 }
 
 export default PrivacyBadge;

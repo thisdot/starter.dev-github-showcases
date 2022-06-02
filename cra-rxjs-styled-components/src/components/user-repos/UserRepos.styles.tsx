@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import {Star} from '@styled-icons/heroicons-outline'
+import { Star } from '@styled-icons/heroicons-outline';
 
 export const RepoListWrapper = styled.div`
   max-width: 1024px;
@@ -14,7 +14,7 @@ export const Containers = styled.div`
   column-gap: 1rem;
   &:first-of-type {
     border-top: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
-  };
+  }
   padding: 2rem 0;
   border-bottom: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
 `;
@@ -29,7 +29,7 @@ export const Content = styled.div`
 
 export const Header = styled.h3`
   margin-bottom: 0.5rem;
-`
+`;
 
 export const HeadingLink = styled(Link)`
   margin-right: 0.75rem;
@@ -40,7 +40,7 @@ export const HeadingLink = styled(Link)`
   font-weight: 600;
   &:hover {
     text-decoration-line: underline;
-  };
+  }
 `;
 
 export const BadgeWrapper = styled.span`
@@ -79,7 +79,7 @@ export const StarBtn = styled.button`
   color: rgb(31 41 55 0.75);
   &:hover {
     background-color: rgb(229 231 235 / 0.5);
-  };
+  }
 `;
 
 export const StarIcon = styled(Star)`
@@ -88,5 +88,3 @@ export const StarIcon = styled(Star)`
   color: rgb(75 85 99 / var(--tw-text-opacity));
   margin-right: 0.25rem;
 `;
-
-
