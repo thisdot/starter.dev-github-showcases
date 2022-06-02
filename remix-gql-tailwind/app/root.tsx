@@ -17,7 +17,7 @@ import NavBar from './components/Navbar/NavBar';
 import { auth } from './services/auth.server';
 import { CURRENT_USER_QUERY } from './lib/queries/UserDropdown';
 import gqlClient from './lib/graphql-client';
-import { sessionStorage } from './services/session.server';
+import { getUser } from './services/session.server';
 
 type DocumentProps = {
   children: React.ReactNode;
@@ -71,16 +71,16 @@ type LoaderData = {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const session = await sessionStorage.getSession(
-    request.headers.get('Cookie')
-  );
-  const valid = session.get(auth.sessionKey);
-
+  const { accessToken, valid } = await getUser(request);
+  console.log(`ACCESSTOKEN ${accessToken}`);
+  console.log(valid);
   // verifies authed before calling to prevent redirect spiral
+  // let valid = '';
   if (valid) {
-    const { accessToken } = await auth.isAuthenticated(request, {
-      failureRedirect: '/login',
-    });
+    // const { accessToken } = await auth.isAuthenticated(request, {
+    //   failureRedirect: '/login',
+    // });
+    // console.log(typeof accessToken);
     const { viewer } = await gqlClient.request(CURRENT_USER_QUERY, undefined, {
       authorization: `Bearer ${accessToken}`,
     });
