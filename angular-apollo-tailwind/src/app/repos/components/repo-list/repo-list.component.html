@@ -13,6 +13,7 @@
           <div class="p-4 border-b">
             <h3 class="mb-2">
               <a
+                data-testid="show repo list"
                 [routerLink]="[repo.owner, repo.name]"
                 class="text-xl text-blue-600 font-semibold hover:underline mr-3"
                 >{{ repo.name }}</a

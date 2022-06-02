@@ -3,7 +3,34 @@
     "viewer": {
       "id": "TESTUSERID",
       "gists": {
-        "nodes": [],
+        "nodes": [
+          {
+            "id": "G_kwDOBWLUH9oAIDlhMjBkZTY3OWRjZDVkNzAyNzY4ODBlZjM3ZWRjYTNm",
+            "description": "second gist test",
+            "url": "https://gist.github.com/9a20de679dcd5d70276880ef37edca3f",
+            "name": "9a20de679dcd5d70276880ef37edca3f",
+            "files": [
+              {
+                "name": "gist example 2",
+                "__typename": "GistFile"
+              }
+            ],
+            "__typename": "Gist"
+          },
+          {
+            "id": "G_kwDOBWLUH9oAIDA4OTU3MWVjYjMzZDFkNTA0NmY1YTcwYjc2ZDYxYjEx",
+            "description": "first gist test",
+            "url": "https://gist.github.com/089571ecb33d1d5046f5a70b76d61b11",
+            "name": "089571ecb33d1d5046f5a70b76d61b11",
+            "files": [
+              {
+                "name": "gist example 1",
+                "__typename": "GistFile"
+              }
+            ],
+            "__typename": "Gist"
+          }
+        ],
         "__typename": "GistConnection"
       },
       "__typename": "User"

@@ -27,6 +27,30 @@ describe("Sign in", () => {
         return;
       }
 
+      if (hasOperationName(req, "RepoPage")) {
+        aliasQuery(req, "RepoPage");
+        req.reply({
+          fixture: "repo/repoPage.graphql.json",
+        });
+        return true;
+      }
+
+      if (hasOperationName(req, "RepoTree")) {
+        aliasQuery(req, "RepoTree");
+        req.reply({
+          fixture: "repo/repoTree.graphql.json",
+        });
+        return true;
+      }
+
+      if (hasOperationName(req, "RepoReadMe")) {
+        aliasQuery(req, "RepoReadMe");
+        req.reply({
+          fixture: "repo/repoReadMe.graphql.json",
+        });
+        return true;
+      }
+
       req.continue();
     });
     cy.intercept("GET", "/user", {
@@ -41,10 +65,25 @@ describe("Sign in", () => {
     ).as("restUserTopRepos");
   });
 
-  describe("My First Test", () => {
-    it("top repos should be listed", () => {
-      //TODO: In #264, we should properly look for elements using `[data-testid="some-test-id"]`
-      cy.get("h2").should("be.visible");
+  it("should display list of gists", () => {
+    cy.get(`[data-testid="show gists list"]`).should("be.visible");
+    cy.contains('gist example 1').should('have.attr', 'href')
+    .then(href => {
+      expect(href).to.match(/https:\/\/gist\.github\.com/)
     });
+  });
+
+  it("top repos should be listed with valid repo links", () => {
+    cy.get(`[data-testid="show repo list"]`).should(`be.visible`);
+    cy.contains("starter.dev-github-showcases").click();
+    cy.wait("@gqlRepoPageQuery")
+      .wait("@gqlRepoTreeQuery")
+      .wait("@gqlRepoReadMeQuery");
+    cy.url().should("include", "/thisdot/starter.dev-github-showcases");
+    cy.get(`[data-testid="readme"]`).should("be.visible");
+  });
+
+  it("should be able to see user's avatar in header", () => {
+    cy.get(`[data-testid="user avatar header"]`).should(`be.visible`);
   });
 });
