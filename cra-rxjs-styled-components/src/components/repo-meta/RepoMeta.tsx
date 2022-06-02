@@ -2,13 +2,13 @@ import { formatDistance } from 'date-fns';
 import { getColourForLanguage } from '../../helpers/colours';
 import { BranchLogo } from '../misc/BranchLogo';
 import { StarLogo } from '../misc/StarLogo';
+import MetaIcon from './MetaIcon';
 import {
   LanguageColor,
   Metadata,
-  SocialCount,
-  TextSpan,
   SocialWrapper,
 } from './RepoMeta.styles';
+
 interface RepoMetaProps {
   language?: string | null;
   stargazerCount: number;
@@ -37,16 +37,10 @@ function RepoMeta({
       {(stargazerCount > 0 || forkCount > 0) && (
         <SocialWrapper>
           {stargazerCount > 0 && (
-            <SocialCount>
-              <StarLogo />
-              <TextSpan>{stargazerCount}</TextSpan>
-            </SocialCount>
+           <MetaIcon text={stargazerCount} children={<StarLogo />} />
           )}
           {forkCount > 0 && (
-            <SocialCount>
-              <BranchLogo />
-              <TextSpan>{forkCount}</TextSpan>
-            </SocialCount>
+           <MetaIcon text={forkCount} children={<BranchLogo />} />
           )}
         </SocialWrapper>
       )}

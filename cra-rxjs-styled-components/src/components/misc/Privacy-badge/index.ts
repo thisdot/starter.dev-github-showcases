@@ -1,1 +1,1 @@
-export { default as default } from './PrivacyBadge';
+export { default } from './PrivacyBadge';

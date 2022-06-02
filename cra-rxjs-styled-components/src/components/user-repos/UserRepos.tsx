@@ -1,10 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { tap } from 'rxjs';
-import { ORG_REPO_LIST } from '../../constants/url.constants';
-import { fromFetchWithAuth } from '../../hooks/auth/from-fetch-with-auth';
 import { Star } from '@styled-icons/heroicons-outline';
-import { Repo } from './types';
 import {
   Aside,
   BadgeWrapper,
@@ -19,33 +13,10 @@ import {
 } from './UserRepos.styles';
 import RepoMeta from '../repo-meta';
 import PrivacyBadge from '../misc/Privacy-badge';
+import { useUserRepositories } from '../../hooks/user-repositories/use-user-repositories';
 
 function UserRepos({ isOrg = false }) {
-  const [repos, setRepos] = useState<Repo[]>();
-  const [loading, setLoading] = useState(true);
-  const params = useParams();
-
-  const GITHUB_URL = isOrg ? ORG_REPO_LIST(params.username!) : ''; // The empty string can be replaced with URL to get all User Repos.
-
-  const request = (url: string) =>
-    fromFetchWithAuth(url, {
-      selector: (response: Response) => {
-        return response.json();
-      },
-    });
-
-  useEffect(() => {
-    request(GITHUB_URL)
-      .pipe(
-        tap((val) => {
-          if (val) {
-            setRepos(val);
-            setLoading(false);
-          }
-        })
-      )
-      .subscribe();
-  }, [GITHUB_URL, params.username]);
+  const { loading, repos } = useUserRepositories(isOrg);
 
   if (loading) {
     return <p>Loading...</p>;
