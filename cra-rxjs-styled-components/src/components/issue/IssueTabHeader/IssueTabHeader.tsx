@@ -2,18 +2,16 @@ import { useCallback, useState } from 'react';
 import DetailsDropdown from '../../DetailsDropdown';
 import CorrectIcon from '../../icons/CorrectIcon';
 import IssueIcon from '../../icons/IssueIcon';
-import type { IssueTabValues } from '../types';
+import type { IssueTabValues, DropdownTitle } from '../types';
 import { Link } from 'react-router-dom';
 import { Container, StatusLabel, StatusTab } from './IssueTabHeader.style';
-import type { DropdownTitle } from '../types';
-
 interface Props {
-  toggleTab: any;
+  toggleTab: (value: IssueTabValues) => void;
 }
 
 export default function IssueTabHeader({ toggleTab }: Props) {
   const [activeTab, setActiveTab] = useState<IssueTabValues>('open');
-  const [openDropdown, setOpenDropdown] = useState<DropdownTitle | undefined>();
+  const [openDropdown, setOpenDropdown] = useState<DropdownTitle>();
 
   const changeTab = (value: IssueTabValues) => {
     toggleTab(value);
@@ -22,7 +20,9 @@ export default function IssueTabHeader({ toggleTab }: Props) {
 
   const toggleDropdown = useCallback(
     (dropdownName: DropdownTitle) => {
-      setOpenDropdown(openDropdown === dropdownName ? undefined : dropdownName);
+      setOpenDropdown((prevValue) =>
+        prevValue === dropdownName ? undefined : dropdownName
+      );
     },
     [openDropdown]
   );

@@ -5,9 +5,9 @@ import Readme from '../readme/Readme';
 import { RepoCodeTabContainer } from './repo-code-tab.styles';
 
 type RepoCodeProps = {
-  topics: string[] | undefined;
-  description: string | undefined;
-  websiteLink: string | undefined;
+  topics?: string[];
+  description?: string;
+  websiteLink?: string;
   fileNames: string[];
   dirNames: string[];
   branch: string;
