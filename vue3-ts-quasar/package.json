@@ -18,6 +18,7 @@
     "@vue/apollo-composable": "^4.0.0-alpha.16",
     "axios": "^0.26.0",
     "core-js": "^3.6.5",
+    "dayjs": "^1.10.8",
     "graphql": "^16.3.0",
     "graphql-tag": "^2.12.6",
     "pinia": "^2.0.11",
