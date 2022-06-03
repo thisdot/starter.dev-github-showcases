@@ -18,6 +18,16 @@ function RepoMeta({
   forkCount,
   updatedAt,
 }: RepoMetaProps) {
+  const socialIcons = [];
+  if (stargazerCount > 0) {
+    socialIcons.push(
+      <MetaIcon text={stargazerCount} children={<StarLogo />} />
+    );
+  }
+  if (forkCount > 0) {
+    socialIcons.push(<MetaIcon text={forkCount} children={<BranchLogo />} />);
+  }
+
   return (
     <Metadata>
       {language && (
@@ -30,16 +40,7 @@ function RepoMeta({
           {language}
         </div>
       )}
-      {(stargazerCount > 0 || forkCount > 0) && (
-        <SocialWrapper>
-          {stargazerCount > 0 && (
-            <MetaIcon text={stargazerCount} children={<StarLogo />} />
-          )}
-          {forkCount > 0 && (
-            <MetaIcon text={forkCount} children={<BranchLogo />} />
-          )}
-        </SocialWrapper>
-      )}
+      {socialIcons.length > 0 && <SocialWrapper>{socialIcons}</SocialWrapper>}
       <div>
         Updated{' '}
         {formatDistance(new Date(updatedAt), Date.now(), {
