@@ -24,7 +24,7 @@ export function useUserRepositories(isOrg = false) {
     const GITHUB_URL = isOrg
       ? ORG_REPO_LIST(username)
       : USER_REPO_LIST(username);
-    request(GITHUB_URL)
+    const subscription = request(GITHUB_URL)
       .pipe(
         tap((data) => {
           if (data) {
@@ -34,6 +34,9 @@ export function useUserRepositories(isOrg = false) {
         })
       )
       .subscribe();
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [isOrg, username]);
 
   return {
