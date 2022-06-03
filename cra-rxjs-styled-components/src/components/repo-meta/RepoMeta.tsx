@@ -3,11 +3,7 @@ import { getColourForLanguage } from '../../helpers/colours';
 import { BranchLogo } from '../misc/BranchLogo';
 import { StarLogo } from '../misc/StarLogo';
 import MetaIcon from './MetaIcon';
-import {
-  LanguageColor,
-  Metadata,
-  SocialWrapper,
-} from './RepoMeta.styles';
+import { LanguageColor, Metadata, SocialWrapper } from './RepoMeta.styles';
 
 interface RepoMetaProps {
   language?: string | null;
@@ -37,10 +33,10 @@ function RepoMeta({
       {(stargazerCount > 0 || forkCount > 0) && (
         <SocialWrapper>
           {stargazerCount > 0 && (
-           <MetaIcon text={stargazerCount} children={<StarLogo />} />
+            <MetaIcon text={stargazerCount} children={<StarLogo />} />
           )}
           {forkCount > 0 && (
-           <MetaIcon text={forkCount} children={<BranchLogo />} />
+            <MetaIcon text={forkCount} children={<BranchLogo />} />
           )}
         </SocialWrapper>
       )}

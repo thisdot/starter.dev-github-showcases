@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { SocialCount, TextSpan } from './RepoMeta.styles';
 
 interface MetaIconProps {
-  text: number;
+  text: number | string;
   children: ReactNode;
 }
 

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { tap } from "rxjs";
-import { Repo } from "./types";
-import { ORG_REPO_LIST, USER_REPO_LIST } from "../../constants/url.constants";
-import { fromFetchWithAuth } from "../auth/from-fetch-with-auth";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { tap } from 'rxjs';
+import { Repo } from './types';
+import { ORG_REPO_LIST, USER_REPO_LIST } from '../../constants/url.constants';
+import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 
 export function useUserRepositories(isOrg = false) {
   const [repos, setRepos] = useState<Repo[]>();
@@ -19,9 +19,11 @@ export function useUserRepositories(isOrg = false) {
 
   useEffect(() => {
     if (!username) {
-      return
+      return;
     }
-    const GITHUB_URL = isOrg ? ORG_REPO_LIST(username) : USER_REPO_LIST(username);
+    const GITHUB_URL = isOrg
+      ? ORG_REPO_LIST(username)
+      : USER_REPO_LIST(username);
     request(GITHUB_URL)
       .pipe(
         tap((data) => {
@@ -37,6 +39,5 @@ export function useUserRepositories(isOrg = false) {
   return {
     loading,
     repos,
-
-  }
+  };
 }
