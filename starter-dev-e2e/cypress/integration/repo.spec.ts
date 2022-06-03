@@ -63,6 +63,17 @@ function handleGqlRequest(req): Boolean {
     return true;
   }
 
+  if (
+    hasOperationName(req, "RepoReadMe") &&
+    hasExpression(req, "HEAD:angular-apollo-tailwind/README.md")
+  ) {
+    aliasQuery(req, "RepoReadMeFolder1");
+    req.reply({
+      fixture: "repo/repoReadMe-folder1.graphql.json",
+    });
+    return true;
+  }
+
   if (hasOperationName(req, "RepoReadMe")) {
     aliasQuery(req, "RepoReadMe");
     req.reply({
@@ -87,6 +98,14 @@ function handleGqlRequest(req): Boolean {
     return true;
   }
 
+  if (hasOperationName(req, "RepoFile")) {
+    aliasQuery(req, "RepoFile");
+    req.reply({
+      fixture: "repo/repoFile.graphql.json",
+    });
+    return true;
+  }
+
   return false;
 }
 
@@ -103,25 +122,25 @@ describe("When there is proper repository page responses", () => {
     cy.visit("/thisdot/starter.dev-github-showcases");
   });
 
-  it("should display correct nav header names", () => {
+  it("should display correct nav header names and information", () => {
     cy.wait("@gqlCurrentUserQuery")
       .wait("@gqlRepoPageQuery")
       .wait("@gqlRepoTreeQuery")
       .wait("@gqlRepoReadMeQuery")
       .get(`[data-testid="header owner name"]`)
-      .contains("thisdot")
+      .should("contain.text", "thisdot")
       .get(`[data-testid="header repo name"]`)
-      .contains("starter.dev-github-showcases")
+      .should("contain.text", "starter.dev-github-showcases")
       .get(`[data-testid="repo watch count"]`)
-      .contains("14")
+      .should("contain.text", "14")
       .get(`[data-testid="repo star count"]`)
-      .contains("30")
+      .should("contain.text", "30")
       .get(`[data-testid="repo fork count"]`)
-      .contains("5")
+      .should("contain.text", "5")
       .get(`[data-testid="repo issues count"]`)
-      .contains("68")
+      .should("contain.text", "68")
       .get(`[data-testid="repo pull requests count"]`)
-      .contains("12")
+      .should("contain.text", "12")
       //.get(`[data-testid="about description"]`) // Bug currently on angular-apollo, not set correctly
       //.contains("A collection of GitHub clone implementations.")
       .get(`[data-testid="readme"]`)
@@ -172,5 +191,31 @@ describe("When there is proper repository page responses", () => {
         `[data-testid="file explorer nav root starter.dev-github-showcases"]`
       )
       .click();
+  });
+
+  it("should display a README for folders that contain them", () => {
+    cy.get(`[data-testid="readme"]`)
+      .should("be.visible")
+      .get(`[data-testid="file explorer list angular-apollo-tailwind"]`)
+      .click()
+      .get(`[data-testid="readme"]`)
+      .should("be.visible")
+      .get(`[data-testid="file explorer list src"]`)
+      .click()
+      .get(`[data-testid="readme"]`)
+      .should("not.exist");
+  });
+
+  it("should display a file and its metadata when clicking on it in the repo tree", () => {
+    cy.get(`[data-testid="file explorer list README.md"]`)
+      .click()
+      .get(`[data-testid="file viewer line count"]`)
+      .should("be.visible")
+      .should("contain.text", "3 lines")
+      .get(`[data-testid="file viewer byte size"]`)
+      .should("be.visible")
+      .should("contain.text", "1234")
+      .get(`[data-testid="code-block"]`)
+      .should("be.visible");
   });
 });
