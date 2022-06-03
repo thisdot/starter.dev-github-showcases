@@ -1,13 +1,31 @@
 version: 1
 applications:
+  - appRoot: next-react-query-tailwind
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - yarn install
+        build:
+          commands:
+            - yarn run build
+      artifacts:
+        baseDirectory: .next
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+
   - appRoot: angular-apollo-tailwind
     frontend:
       phases:
         preBuild:
           commands:
-            - nvm install
-            - nvm use
+            - nvm install --lts=gallium
             - yarn install
+            - yarn generate
         build:
           commands:
             - node -v
@@ -15,18 +33,17 @@ applications:
       artifacts:
         baseDirectory: dist/starter-dev-angular
         files:
-          - '**/*'
+          - "**/*"
       cache:
         paths:
           - node_modules/**/*
-    
+
   - appRoot: vue3-ts-quasar
     frontend:
       phases:
         preBuild:
           commands:
-            - nvm install
-            - nvm use
+            - nvm install --lts=gallium
             - yarn install
         build:
           commands:
@@ -35,8 +52,61 @@ applications:
       artifacts:
         baseDirectory: dist/
         files:
-          - '**/*'
+          - "**/*"
       cache:
         paths:
           - node_modules/**/*
-    
+
+  - appRoot: next-react-query
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - yarn install
+        build:
+          commands:
+            - yarn run build
+      artifacts:
+        baseDirectory: .next
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+
+  - appRoot: cra-rxjs-styled-components
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - yarn install
+        build:
+          commands:
+            - yarn run build
+      artifacts:
+        baseDirectory: build/
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+
+  - appRoot: angular-ngrx-scss
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - npm ci
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: dist/angular-ngrx-scss
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*

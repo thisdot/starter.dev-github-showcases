@@ -1,0 +1,29 @@
+<ul>
+  <li *ngFor="let repo of repos$ | async">
+    <h3 class="name-container">
+      <a class="name" href="/{{ repo.owner.login }}/{{ repo.name }}">{{
+        repo.name
+      }}</a>
+      <span class="visibility">{{ repo.private ? 'Private' : 'Public' }}</span>
+    </h3>
+    <p class="description">{{ repo.description }}</p>
+    <div class="subline">
+      <div *ngIf="repo.language" class="language">
+        <div
+          class="language-color"
+          [style.backgroundColor]="getColor(repo.language)"
+        ></div>
+        <div class="language-label">{{ repo.language }}</div>
+      </div>
+      <div *ngIf="repo.stargazers_count" class="stars">
+        <span class="icon" appOcticon="star"></span>
+        <span class="star-count">{{ repo.stargazers_count }}</span>
+      </div>
+      <div *ngIf="repo.license" class="license">
+        <span class="icon" appOcticon="law"></span>
+        <span class="license-name">{{ repo.license.name }}</span>
+      </div>
+      <div class="updated">{{ repo.updated_at | relativeTime }}</div>
+    </div>
+  </li>
+</ul>

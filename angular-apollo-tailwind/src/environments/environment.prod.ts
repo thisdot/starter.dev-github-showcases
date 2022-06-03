@@ -1,7 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://fhtfslckqb.execute-api.us-east-1.amazonaws.com/api',
+  apiUrl: 'https://api.starter.dev',
   graphApiUrl: 'https://api.github.com/graphql',
-  redirectUrl:
-    'https://fhtfslckqb.execute-api.us-east-1.amazonaws.com/redirect',
+  redirectUrl: 'https://angular-apollo-tailwind.starter.dev/redirect',
 };

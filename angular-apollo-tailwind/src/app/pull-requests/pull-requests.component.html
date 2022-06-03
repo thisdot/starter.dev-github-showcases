@@ -19,12 +19,12 @@
       *ngIf="repoPullRequests$ | async as activePullRequests; else loading"
     >
       <app-pull-requests-filters
-        [openCount]="openPullRequestsCount$ | async"
-        [closedCount]="closedPullRequestsCount$ | async"
+        [openCount]="(openPullRequestsCount$ | async)!"
+        [closedCount]="(closedPullRequestsCount$ | async)!"
         [currentMilestone]="milestone$ | async"
-        [milestones]="milestones$ | async"
+        [milestones]="(milestones$ | async)!"
         [currentLabel]="label$ | async"
-        [labels]="labels$ | async"
+        [labels]="(labels$ | async)!"
         [sort]="sort$ | async"
         [pullRequestState]="pullRequestState$ | async"
         (setLabel)="setLabel($event)"
@@ -35,8 +35,8 @@
       ></app-pull-requests-filters>
 
       <app-pull-requests-list
-        *ngIf="activePullRequests.nodes.length; else empty"
-        [pullRequests]="activePullRequests.nodes"
+        *ngIf="activePullRequests.pullRequests.length; else empty"
+        [pullRequests]="activePullRequests.pullRequests"
       ></app-pull-requests-list>
 
       <ng-template #empty
@@ -48,5 +48,8 @@
       <app-pull-request-skeleton></app-pull-request-skeleton>
     </ng-template>
   </div>
-  <app-pagination [pageInfo]="pageInfo$ | async"></app-pagination>
+  <app-pagination
+    [pageInfo]="(pageInfo$ | async)!"
+    (changePage)="changePage($event)"
+  ></app-pagination>
 </div>

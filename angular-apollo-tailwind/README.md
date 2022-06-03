@@ -30,6 +30,7 @@ cp .env.example .env.prod # and change PRODUCTION=true
 ```
 
 2. Install dependencies: `yarn install`
+3. Graphql codegen: `yarn generate`
 3. Run the project: `yarn start`
 
 ## Building

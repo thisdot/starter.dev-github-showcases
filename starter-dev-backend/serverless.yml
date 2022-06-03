@@ -8,6 +8,9 @@ plugins:
   - serverless-offline
 
 custom:
+  bundle:
+    packager: yarn
+
   customDomain: # serverless-domain-manager
     domainName: api.starter.dev
     stage: production

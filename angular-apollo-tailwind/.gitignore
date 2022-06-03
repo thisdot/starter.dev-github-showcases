@@ -50,3 +50,6 @@ proxy.conf.json
 # System Files
 .DS_Store
 Thumbs.db
+
+# generated files
+github.schema.ts

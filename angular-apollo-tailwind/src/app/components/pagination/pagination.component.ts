@@ -1,13 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PageInfo } from 'src/app/gql/models';
-
-interface BeforePageEvent {
-  before?: string;
-}
-interface AfterPageEvent {
-  after?: string;
-}
-type ChangePageEvent = BeforePageEvent | AfterPageEvent;
+import { PageInfo, PaginationEvent } from '../../gql';
 
 @Component({
   selector: 'app-pagination',
@@ -17,7 +9,7 @@ type ChangePageEvent = BeforePageEvent | AfterPageEvent;
 export class PaginationComponent {
   @Input() pageInfo: PageInfo | null = null;
 
-  @Output() changePage: EventEmitter<ChangePageEvent> = new EventEmitter();
+  @Output() changePage: EventEmitter<PaginationEvent> = new EventEmitter();
 
   handlePreviousPageClick() {
     this.changePage.emit({

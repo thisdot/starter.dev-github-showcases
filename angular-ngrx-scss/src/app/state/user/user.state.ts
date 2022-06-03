@@ -1,5 +1,14 @@
 export interface UserState {
   avatar: string;
+  bio: string;
+  blog: string;
+  company: string;
+  email: string;
+  followers: number;
+  following: number;
+  location: string;
+  name: string;
+  twitter_username: string;
   username: string;
 }
 

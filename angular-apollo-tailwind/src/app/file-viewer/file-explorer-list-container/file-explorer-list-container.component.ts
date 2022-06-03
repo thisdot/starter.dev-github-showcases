@@ -2,16 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnChanges,
   OnInit,
 } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { Observable, map } from 'rxjs';
-import {
-  FileExplorer,
-  FileExplorerData,
-  FileExplorerVars,
-  REPO_TREE_QUERY,
-} from 'src/app/gql';
+import { map, Observable } from 'rxjs';
+import { FileExplorer, RepoTreeGQL } from '../../gql';
 import { getReadMeFileName, parseTree } from '../parse-tree';
 
 const removeLastPathPart = (path: string) => {
@@ -25,38 +20,33 @@ const removeLastPathPart = (path: string) => {
   styleUrls: ['./file-explorer-list-container.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileExplorerListContainerComponent implements OnInit {
+export class FileExplorerListContainerComponent implements OnInit, OnChanges {
   @Input() owner = '';
   @Input() name = '';
   @Input() branch = '';
   @Input() path = '';
 
   repoTree$!: Observable<FileExplorer>;
+  queryRef = this.repoTreeGQL.watch(this.getVariables());
 
-  constructor(private apollo: Apollo) {}
+  constructor(private repoTreeGQL: RepoTreeGQL) {}
 
   ngOnInit(): void {
-    this.repoTree$ = this.apollo
-      .watchQuery<FileExplorerData, FileExplorerVars>({
-        query: REPO_TREE_QUERY,
-        variables: {
-          owner: this.owner,
-          name: this.name,
-          expression: `${this.branch}:${this.path ?? ''}`,
-        },
-      })
-      .valueChanges.pipe(
-        map((res) => {
-          const items = parseTree(res.data.repository.tree);
-          const readme = getReadMeFileName(items);
+    this.repoTree$ = this.queryRef.valueChanges.pipe(
+      map((res) => {
+        const items = parseTree(res?.data);
+        const readme = getReadMeFileName(items);
 
-          return {
-            ...res,
-            items,
-            readme,
-          };
-        }),
-      );
+        return {
+          items,
+          readme,
+        };
+      }),
+    );
+  }
+
+  ngOnChanges(): void {
+    this.queryRef.setVariables(this.getVariables());
   }
 
   getBackLink(path: string) {
@@ -64,5 +54,13 @@ export class FileExplorerListContainerComponent implements OnInit {
     const backPath = removeLastPathPart(path);
     const treePath = `${basePath}/tree/${this.branch}`;
     return backPath ? `${treePath}/${backPath}` : basePath;
+  }
+
+  getVariables() {
+    return {
+      owner: this.owner,
+      name: this.name,
+      expression: `${this.branch}:${this.path ?? ''}`,
+    };
   }
 }

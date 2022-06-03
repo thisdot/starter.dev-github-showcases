@@ -1,42 +1,32 @@
 import { Component } from '@angular/core';
-import { Apollo } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import {
-  CurrentUser,
-  CurrentUserData,
-  UserTopRepo,
-  UserTopReposData,
-  UserTopReposVars,
-  CURRENT_USER_QUERY,
-  USER_TOP_REPOS_QUERY,
-  TopRepoDetials,
+  CurrentUserGQL,
+  CurrentUserQuery,
+  TopRepo,
+  UserTopReposGQL,
 } from '../gql';
-import { parseQuery } from './parse-top-repos';
+import { parseTopRepos } from './parse-top-repos';
 
 @Component({
   selector: 'app-repos',
   templateUrl: './repos.component.html',
 })
 export class ReposComponent {
-  userName$: Observable<CurrentUser> = this.apollo
-    .watchQuery<CurrentUserData>({ query: CURRENT_USER_QUERY })
+  user$: Observable<CurrentUserQuery['viewer']> = this.currentUserGQL
+    .watch()
+    .valueChanges.pipe(map((res) => res.data.viewer));
+
+  repoDetails$: Observable<{ repos: TopRepo[] }> = this.userTopReposGQL
+    .watch()
     .valueChanges.pipe(
       map((res) => ({
-        name: res.data.viewer.name,
-        login: res.data.viewer.login,
+        repos: parseTopRepos(res.data),
       })),
     );
 
-  repoDetails$: Observable<TopRepoDetials> = this.apollo
-    .watchQuery<UserTopReposData, UserTopReposVars>({
-      query: USER_TOP_REPOS_QUERY,
-    })
-    .valueChanges.pipe(
-      map((res) => ({
-        ...res,
-        repos: parseQuery(res.data),
-      })),
-    );
-
-  constructor(private apollo: Apollo) {}
+  constructor(
+    private currentUserGQL: CurrentUserGQL,
+    private userTopReposGQL: UserTopReposGQL,
+  ) {}
 }

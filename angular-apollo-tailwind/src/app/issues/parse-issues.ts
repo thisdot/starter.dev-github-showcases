@@ -1,21 +1,20 @@
-import {
-  Issue,
-  IssueDetails,
-  Issues,
-  Label,
-  Milestone,
-  Milestones,
-  RepoIssue,
-  RepoIssues,
-  RepoIssuesData,
-} from '../gql/models';
+import { Label, Milestone, RepoIssuesQuery } from '../gql';
+import { Issue, IssueDetails, Issues } from '../gql/models/repo-issues';
 
-const parseIssues = (issueConnection: RepoIssues): Issues => {
+const parseIssues = (issueConnection: any): Issues => {
+  if (!issueConnection) {
+    return {
+      issues: [],
+      totalCount: 0,
+      pageInfo: { hasNextPage: false, hasPreviousPage: false },
+    };
+  }
+
   const pageInfo = issueConnection.pageInfo;
   const nodes = issueConnection.nodes;
   const totalCount = issueConnection.totalCount;
 
-  const issues = nodes.reduce((issues: Issue[], issue: RepoIssue) => {
+  const issues = nodes.reduce((issues: Issue[], issue: any) => {
     const labelNodes = issue.labels.nodes;
     const labels = labelNodes.reduce(
       (labels: Label[], label: Label) =>
@@ -51,7 +50,7 @@ const parseIssues = (issueConnection: RepoIssues): Issues => {
   return { issues, totalCount, pageInfo };
 };
 
-function parseMilestones(milestones: Milestones) {
+const parseMilestones = (milestones: any) => {
   const nodes = milestones.nodes;
   return nodes.reduce((milestones: Milestone[], milestone: Milestone) => {
     if (!milestone) {
@@ -69,12 +68,12 @@ function parseMilestones(milestones: Milestones) {
       },
     ];
   }, []);
-}
+};
 
-export const parseQuery = (data: RepoIssuesData): IssueDetails => {
-  const openIssues = parseIssues(data.repository.openIssues);
-  const closedIssues = parseIssues(data.repository.closedIssues);
-  const milestones = parseMilestones(data.repository.milestones);
+export const parseIssuesQuery = (data: RepoIssuesQuery): IssueDetails => {
+  const openIssues = parseIssues(data?.repository?.openIssues);
+  const closedIssues = parseIssues(data?.repository?.closedIssues);
+  const milestones = parseMilestones(data.repository?.milestones);
 
   const labelMap = [...closedIssues.issues, ...openIssues.issues].reduce(
     (acc: { [key: string]: Label }, issue: Issue) => {

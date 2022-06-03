@@ -1,0 +1,21 @@
+@tailwind utilities;
+
+.clearButton {
+  @apply mb-6 inline-flex items-center space-x-1.5;
+}
+
+.clearButtonIconContainer {
+  @apply bg-gray-500 rounded-md p-0.5 inline-flex items-center justify-center;
+}
+
+.clearButtonIcon {
+  @apply h-3.5 w-3.5 text-white;
+}
+
+.clearButtonText {
+  @apply text-sm font-semibold text-gray-500;
+}
+
+.container {
+  @apply border rounded-lg overflow-hidden;
+}

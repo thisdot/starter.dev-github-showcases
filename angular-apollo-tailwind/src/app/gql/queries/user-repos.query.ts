@@ -3,6 +3,8 @@ import { gql } from 'apollo-angular';
 export const USER_REPOS_QUERY = gql`
   query UserRepos(
     $username: String!
+    $first: Int
+    $last: Int
     $afterCursor: String
     $beforeCursor: String
     $orderBy: RepositoryOrder
@@ -10,7 +12,8 @@ export const USER_REPOS_QUERY = gql`
     user(login: $username) {
       id
       repositories(
-        first: 100
+        first: $first
+        last: $last
         after: $afterCursor
         before: $beforeCursor
         orderBy: $orderBy

@@ -1,63 +1,4 @@
-import { ApolloQueryResult } from '@apollo/client/core';
-import { Label } from './label';
-import { PageInfo } from './page-info';
-
-export interface RepoIssuesData {
-  repository: {
-    id: string;
-    milestones: Milestones;
-    closedIssues: RepoIssues;
-    openIssues: RepoIssues;
-  };
-}
-
-export interface RepoIssuesVars {
-  owner: string;
-  name: string;
-  before?: string;
-  after?: string;
-  filterBy?: any;
-  orderBy?: any;
-}
-
-export interface Milestones {
-  nodes: Milestone[];
-  pageInfo: PageInfo;
-  totalCount: number;
-}
-
-export interface RepoIssues {
-  pageInfo: PageInfo;
-  totalCount: number;
-  nodes: RepoIssue[];
-}
-
-export interface Milestone {
-  id: string;
-  closed: boolean;
-  description: string;
-  number: number;
-  title: string;
-}
-
-export interface RepoIssue {
-  id: string;
-  author: {
-    login: string;
-  };
-  comments: {
-    totalCount: number;
-  };
-  labels: {
-    nodes: Label[];
-    totalCount: number;
-  };
-  closed: boolean;
-  closedAt?: string;
-  title: string;
-  number: number;
-  createdAt: string;
-}
+import { Label, Milestone, PageInfo } from '../github.schema';
 
 export interface Issues {
   issues: Issue[];
@@ -83,10 +24,4 @@ export interface IssueDetails {
   closedIssues: Issues;
   milestones: Milestone[];
   labels: Label[];
-}
-
-export interface RepoIssueDetails
-  extends IssueDetails,
-    ApolloQueryResult<RepoIssuesData> {
-  activeIssues: Issues;
 }

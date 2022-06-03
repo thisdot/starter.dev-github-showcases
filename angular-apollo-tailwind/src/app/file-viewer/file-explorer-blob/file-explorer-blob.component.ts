@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 import { RouteConfigService } from '@this-dot/route-config';
 import { Observable, withLatestFrom, map } from 'rxjs';
-import { RepoPageDetails } from 'src/app/gql';
+import { RepoPage } from 'src/app/gql';
 
 @Component({
   selector: 'app-file-explorer-blob',
   templateUrl: './file-explorer-blob.component.html',
 })
 export class FileExplorerBlobComponent {
-  repoPage$: Observable<RepoPageDetails> = this.routeConfigService
-    .getLeafConfig<RepoPageDetails>('repoPageData')
+  repoPage$: Observable<RepoPage> = this.routeConfigService
+    .getLeafConfig<RepoPage>('repoPageData')
     .pipe(
       withLatestFrom(
         this.route.paramMap.pipe(map((params: ParamMap) => params.get('path'))),

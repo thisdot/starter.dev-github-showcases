@@ -1,0 +1,73 @@
+ul {
+  list-style: none;
+
+  li {
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(229, 231, 235, 1);
+  }
+}
+
+.name-container {
+  display: flex;
+  margin: 0 0 0.5rem 0;
+
+  .name {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    color: rgba(37, 99, 235, 1);
+  }
+
+  .visibility {
+    display: inline-block;
+    padding: 0 7px;
+    margin: 2px 2px 2px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    color: rgba(75, 85, 99, 1);
+    border: 1px solid rgba(209, 213, 219, 1);
+    border-radius: 2em;
+  }
+}
+
+.description {
+  margin: 8px auto;
+}
+
+.subline {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(75, 85, 99, 1);
+
+  .language {
+    display: flex;
+    align-items: center;
+
+    .language-color {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+  }
+
+  .stars {
+    display: flex;
+    align-items: center;
+    line-height: 16px;
+
+    .star-count {
+      margin-left: 4px;
+    }
+  }
+
+  .license {
+    .license-name {
+      margin-left: 6px;
+    }
+  }
+}

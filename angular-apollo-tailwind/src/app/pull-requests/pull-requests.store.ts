@@ -1,87 +1,75 @@
 import { Injectable } from '@angular/core';
-import { RouteConfigService } from '@this-dot/route-config';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Apollo } from 'apollo-angular';
+import { RouteConfigService } from '@this-dot/route-config';
 import { Observable, switchMap, withLatestFrom } from 'rxjs';
 import {
+  IssueOrder,
+  IssueOrderField,
   Label,
-  SortPullOption,
-  PullRequestsFormatted,
-  ORDER_BY_DIRECTION,
-  PullRequests,
-  Milestones,
-  PullRequest,
-  RepoPageDetails,
-  RepoPullRequestsData,
-  RepoPullRequestsVars,
-  REPO_PULLS_QUERY,
-  PULL_REQUESTS_ORDER_FIELD,
-  OPEN_CLOSED_STATE,
+  Milestone,
+  OrderDirection,
+  PaginationEvent,
+  PullRequestState,
   PULL_REQUESTS_TYPE,
+  RepoPage,
+  RepoPullRequests,
+  RepoPullRequestsGQL,
 } from '../gql';
+import { parsePullRequestsQuery } from './parse-pull-requests';
 
 export interface FilterState {
   label: string;
   labels: Label[];
   milestone: string;
-  state: OPEN_CLOSED_STATE;
+  state: PullRequestState;
   type: PULL_REQUESTS_TYPE;
-  sort: SortPullOption;
-  afterCursor?: string;
-  beforeCursor?: string;
-  milestones: Milestones | null;
-  openPullRequests: PullRequestsFormatted | null;
-  closedPullRequests: PullRequestsFormatted | null;
-}
-
-export interface PaginatorOptions {
-  afterCursor: string;
-  beforeCursor: string;
+  sort: IssueOrder;
+  endCursor?: string;
+  startCursor?: string;
+  milestones: Milestone[] | null;
+  openPullRequests: RepoPullRequests | null;
+  closedPullRequests: RepoPullRequests | null;
+  first?: number;
+  last?: number;
 }
 
 const INITIAL_STATE: FilterState = {
   label: '',
   labels: [],
   milestone: '',
-  state: OPEN_CLOSED_STATE.OPEN,
+  state: PullRequestState.Open,
   type: PULL_REQUESTS_TYPE.PULL_REQUEST,
   sort: {
-    field: PULL_REQUESTS_ORDER_FIELD.CREATED_AT,
-    direction: ORDER_BY_DIRECTION.Desc,
+    field: IssueOrderField.CreatedAt,
+    direction: OrderDirection.Desc,
   },
   milestones: null,
   openPullRequests: null,
   closedPullRequests: null,
+  first: 25,
+  last: undefined,
 };
 
-const PULL_REQUESTS_ORDER_DICT: { [key: string]: PULL_REQUESTS_ORDER_FIELD } = {
-  COMMENTS: PULL_REQUESTS_ORDER_FIELD.COMMENTS,
-  CREATED_AT: PULL_REQUESTS_ORDER_FIELD.CREATED_AT,
-  UPDATED_AT: PULL_REQUESTS_ORDER_FIELD.UPDATED_AT,
+const PULL_REQUESTS_ORDER_DICT: { [key: string]: IssueOrderField } = {
+  COMMENTS: IssueOrderField.Comments,
+  CREATED_AT: IssueOrderField.CreatedAt,
+  UPDATED_AT: IssueOrderField.UpdatedAt,
 };
 
-const DIRECTION_DICT: { [key: string]: ORDER_BY_DIRECTION } = {
-  ASC: ORDER_BY_DIRECTION.Asc,
-  DESC: ORDER_BY_DIRECTION.Desc,
+const DIRECTION_DICT: { [key: string]: OrderDirection } = {
+  ASC: OrderDirection.Asc,
+  DESC: OrderDirection.Desc,
 };
 
 interface GenericLabel {
   [key: string]: Label;
 }
 
-const parsePullRequests = (values: PullRequests) =>
-  values.nodes.map((pull) => ({
-    ...pull,
-    createdAt: new Date(pull.createdAt),
-    closedAt: pull.closedAt ? new Date(pull.closedAt) : undefined,
-    mergedAt: new Date(pull.mergedAt),
-  }));
-
 @Injectable()
 export class PullRequestsStore extends ComponentStore<FilterState> {
   constructor(
     private routeConfigService: RouteConfigService<string, 'repoPageData'>,
-    private apollo: Apollo,
+    private repoPullRequestsGQL: RepoPullRequestsGQL,
   ) {
     super(INITIAL_STATE);
   }
@@ -90,11 +78,11 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly setMilestone = this.updater((state, value: string) => ({
     ...state,
     milestone: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
+    endCursor: undefined,
+    startCursor: undefined,
   }));
 
-  readonly setMilestones = this.updater((state, values: Milestones) => ({
+  readonly setMilestones = this.updater((state, values: Milestone[]) => ({
     ...state,
     milestones: values,
   }));
@@ -102,15 +90,15 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly setLabel = this.updater((state, value: string) => ({
     ...state,
     label: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
+    endCursor: undefined,
+    startCursor: undefined,
   }));
 
-  readonly changeState = this.updater((state, value: OPEN_CLOSED_STATE) => ({
+  readonly changeState = this.updater((state, value: PullRequestState) => ({
     ...state,
     state: value,
-    afterCursor: undefined,
-    beforeCursor: undefined,
+    endCursor: undefined,
+    startCursor: undefined,
   }));
 
   readonly setSort = this.updater((state, value: string) => {
@@ -121,16 +109,18 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
         field: PULL_REQUESTS_ORDER_DICT[field],
         direction: DIRECTION_DICT[direction],
       },
-      afterCursor: undefined,
-      beforeCursor: undefined,
+      endCursor: undefined,
+      startCursor: undefined,
     };
   });
 
   readonly changePage = this.updater(
-    (state, { afterCursor, beforeCursor }: PaginatorOptions) => ({
+    (state, { before, after }: PaginationEvent) => ({
       ...state,
-      afterCursor,
-      beforeCursor,
+      startCursor: before as string,
+      endCursor: after as string,
+      first: after ? 25 : undefined,
+      last: before ? 25 : undefined,
     }),
   );
 
@@ -140,47 +130,21 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   }));
 
   readonly setOpenPullRequests = this.updater(
-    (state, values: PullRequests) => ({
+    (state, values: RepoPullRequests) => ({
       ...state,
       openPullRequests: {
         ...values,
-        nodes: parsePullRequests(values),
       },
     }),
   );
 
   readonly setClosedPullRequests = this.updater(
-    (state, values: PullRequests) => ({
+    (state, values: RepoPullRequests) => ({
       ...state,
       closedPullRequests: {
         ...values,
-        nodes: parsePullRequests(values),
       },
     }),
-  );
-
-  readonly setActivePullRequestsLabels = this.updater(
-    (state, values: PullRequest[]) => {
-      const labelsMap: GenericLabel = values.reduce(
-        (acc: GenericLabel, pullRequest) => {
-          const map: GenericLabel = {};
-          pullRequest.labels.nodes.forEach((label) => {
-            map[label.name] = label;
-          });
-
-          return {
-            ...acc,
-            ...map,
-          };
-        },
-        {},
-      );
-
-      return {
-        ...state,
-        labels: Object.values(labelsMap),
-      };
-    },
   );
 
   // *********** Selectors *********** //
@@ -193,7 +157,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
 
   readonly milestone$ = this.select(({ milestone }) => milestone);
 
-  readonly milestones$ = this.select(({ milestones }) => milestones?.nodes);
+  readonly milestones$ = this.select(({ milestones }) => milestones);
 
   readonly pullRequestState$ = this.select(({ state }) => state);
 
@@ -208,8 +172,8 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
     (label, milestone, sort) =>
       label !== '' ||
       milestone !== '' ||
-      sort.direction !== ORDER_BY_DIRECTION.Desc ||
-      sort.field !== PULL_REQUESTS_ORDER_FIELD.CREATED_AT,
+      sort.direction !== OrderDirection.Desc ||
+      sort.field !== IssueOrderField.CreatedAt,
   );
 
   readonly openPullRequests$ = this.select(
@@ -235,9 +199,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
     this.openPullRequests$,
     this.closedPullRequests$,
     (state, openPullRequests, closedPullRequests) =>
-      state === OPEN_CLOSED_STATE.OPEN
-        ? (openPullRequests as PullRequestsFormatted)
-        : (closedPullRequests as PullRequestsFormatted),
+      state === PullRequestState.Open ? openPullRequests : closedPullRequests,
   );
 
   readonly pageInfo$ = this.select(
@@ -250,43 +212,36 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly getPullRequests$ = this.effect((target$: Observable<void>) =>
     target$.pipe(
       withLatestFrom(this.state$),
-      switchMap(([, { label, sort, afterCursor, beforeCursor }]) =>
-        this.routeConfigService
-          .getLeafConfig<RepoPageDetails>('repoPageData')
-          .pipe(
-            switchMap(({ owner, name }) =>
-              this.apollo
-                .watchQuery<RepoPullRequestsData, RepoPullRequestsVars>({
-                  query: REPO_PULLS_QUERY,
-                  variables: {
-                    owner,
-                    name,
-                    orderBy: sort ?? undefined,
-                    labels: label ? [label] : undefined,
-                    after: afterCursor ?? undefined,
-                    before: beforeCursor ?? undefined,
-                  },
-                })
-                .valueChanges.pipe(
-                  tapResponse(
-                    (res) => {
-                      const { openPullRequests, closedPullRequests } =
-                        res.data.repository;
+      switchMap(([, { label, sort, endCursor, startCursor, first, last }]) =>
+        this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
+          switchMap(({ owner, name }) =>
+            this.repoPullRequestsGQL
+              .watch({
+                owner,
+                name,
+                orderBy: sort ?? undefined,
+                labels: label ? [label] : undefined,
+                after: endCursor ?? undefined,
+                before: startCursor ?? undefined,
+                first: first ?? undefined,
+                last: last ?? undefined,
+              })
+              .valueChanges.pipe(
+                tapResponse(
+                  (res) => {
+                    const { openPullRequests, closedPullRequests } =
+                      parsePullRequestsQuery(res.data);
 
-                      this.setOpenPullRequests(openPullRequests);
-                      this.setClosedPullRequests(closedPullRequests);
-                      this.setActivePullRequestsLabels([
-                        ...openPullRequests.nodes,
-                        ...closedPullRequests.nodes,
-                      ]);
-                    },
-                    (error) => {
-                      console.log(error);
-                    },
-                  ),
+                    this.setOpenPullRequests(openPullRequests);
+                    this.setClosedPullRequests(closedPullRequests);
+                  },
+                  (error) => {
+                    console.log(error);
+                  },
                 ),
-            ),
+              ),
           ),
+        ),
       ),
     ),
   );

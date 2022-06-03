@@ -1,16 +1,14 @@
-import {
-  UserReposData,
-  UserRepo,
-  Repo,
-  Repos,
-  OrgReposData,
-  OrgRepo,
-} from 'src/app/gql';
+import { OrgReposQuery, Repo, UserReposQuery } from '../../gql';
 
-export const parseProfileReposQuery = (data: UserReposData): Repos => {
-  const nodes = data.user.repositories.nodes;
-  const pageInfo = data.user.repositories.pageInfo;
-  const repos = nodes.reduce((acc: Repo[], repo: UserRepo) => {
+export const parseProfileReposQuery = (data: UserReposQuery) => {
+  const nodes = data?.user?.repositories.nodes;
+  const pageInfo = data?.user?.repositories.pageInfo;
+
+  if (!nodes) {
+    return undefined;
+  }
+
+  const repos = nodes.reduce((acc: Repo[], repo: any) => {
     return repo
       ? [
           ...acc,
@@ -35,16 +33,17 @@ export const parseProfileReposQuery = (data: UserReposData): Repos => {
   return {
     repos,
     pageInfo,
-  } as Repos;
+  };
 };
 
-export const parseOrgReposQuery = (
-  data: OrgReposData,
-  owner: string,
-): Repos => {
-  const nodes = data.organization.repositories.nodes;
-  const pageInfo = data.organization.repositories.pageInfo;
-  const repos = nodes.reduce((acc: Repo[], repo: OrgRepo) => {
+export const parseOrgReposQuery = (data: OrgReposQuery, owner: string) => {
+  const nodes = data?.organization?.repositories.nodes;
+  const pageInfo = data?.organization?.repositories.pageInfo;
+
+  if (!nodes) {
+    return undefined;
+  }
+  const repos = nodes.reduce((acc: Repo[], repo: any) => {
     return repo
       ? [
           ...acc,
@@ -69,5 +68,5 @@ export const parseOrgReposQuery = (
   return {
     repos,
     pageInfo,
-  } as Repos;
+  };
 };

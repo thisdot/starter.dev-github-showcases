@@ -1,78 +1,27 @@
-import { Label } from './label';
-import { ORDER_BY_DIRECTION } from './order-by';
-import { PageInfo } from './page-info';
+import { Label, PageInfo } from '../github.schema';
 
-export interface RepoPullRequestsData {
-  repository: PullRequestDetails;
-}
-
-export interface PullRequestDetails {
-  id: string;
-  closedPullRequests: PullRequests;
-  openPullRequests: PullRequests;
-}
-
-export interface PullRequests {
+export interface RepoPullRequests {
   pageInfo: PageInfo;
   totalCount: number;
-  nodes: PullRequest[];
+  pullRequests: RepoPullRequest[];
 }
 
-export interface PullRequestsFormatted {
-  pageInfo: PageInfo;
-  totalCount: number;
-  nodes: PullRequestFormatted[];
-}
-
-export interface PullRequest {
+export interface RepoPullRequest {
   id: string;
-  author: {
-    login: string;
-  };
-  comments: {
-    totalCount: number;
-  };
-  labels: {
-    nodes: Label[];
-    totalCount?: number;
-  };
-  closed: boolean;
-  closedAt?: string;
-  merged: boolean;
-  mergedAt: string;
+  login?: string | null;
   title: string;
   number: number;
-  createdAt: string;
-}
-
-export interface PullRequestFormatted
-  extends Omit<PullRequest, 'createdAt' | 'closedAt' | 'mergedAt'> {
+  closed: boolean;
+  closedAt?: Date | null;
+  merged: boolean;
+  mergedAt?: Date | null;
   createdAt: Date;
-  closedAt?: Date;
-  mergedAt: Date;
-}
-
-export interface RepoPullRequestsVars {
-  owner: string;
-  name: string;
-  before?: string;
-  after?: string;
-  labels?: string[];
-  orderBy?: any;
+  labels: Label[];
+  commentCount: number;
+  labelCount: number;
 }
 
 export enum PULL_REQUESTS_TYPE {
   ISSUE = 'issue',
   PULL_REQUEST = 'pull',
-}
-
-export const enum PULL_REQUESTS_ORDER_FIELD {
-  COMMENTS = 'COMMENTS',
-  CREATED_AT = 'CREATED_AT',
-  UPDATED_AT = 'UPDATED_AT',
-}
-
-export interface SortPullOption {
-  field: PULL_REQUESTS_ORDER_FIELD;
-  direction: ORDER_BY_DIRECTION;
 }
