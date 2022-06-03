@@ -7,7 +7,7 @@ export interface Repository {
   private: boolean;
   html_url: string;
   url: string;
-  updated_at: string;
+  updated_at: Date;
   stargazers_count: number;
   language: string;
   branches_url: string;

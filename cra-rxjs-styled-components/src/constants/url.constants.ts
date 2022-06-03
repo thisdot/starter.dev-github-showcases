@@ -16,8 +16,15 @@ export const SIGN_OUT_URL = `${API_URL_BASE}/auth/signout`;
 export const GET_TOKEN_URL = `${API_URL_BASE}/auth/token`;
 
 export const TOP_REPOS_URL = `${GITHUB_URL_BASE}/user/repos?sort=updated&affiliation=owner,collaborator,organization_member&per_page=20`;
+
 export const SINGLE_USER_REPO = (user: string, repo: string) =>
   `${GITHUB_URL_BASE}/repos/${user}/${repo}`;
+
+export const ORG_REPO_LIST = (user: string) =>
+  `${GITHUB_URL_BASE}/orgs/${user}/repos?sort=updated&per_page=10`;
+
+export const USER_REPO_LIST = (user: string) =>
+  `${GITHUB_URL_BASE}/users/${user}/repos?sort=updated&per_page=10`;
 
 export const GISTS_URL = (user: string) =>
   `${GITHUB_URL_BASE}/users/${user}/gists?per_page=10`;
