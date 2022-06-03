@@ -67,6 +67,8 @@ describe("Sign in", () => {
 
   it("should display list of gists", () => {
     cy.get(`[data-testid="show gists list"]`).should("be.visible");
+    cy.wait("@gqlCurrentUserQuery")
+    .wait("@gqlUserGistsQuery");
     cy.contains('gist example 1').should('have.attr', 'href')
     .then(href => {
       expect(href).to.match(/https:\/\/gist\.github\.com/)
