@@ -30,7 +30,6 @@ export const useGists = (): UseGists => {
         return [...acc, ...gists];
       }, []),
     );
-    console.log(gists);
     return { data: gists as Readonly<Ref<Readonly<[] | GistItem[]>>>, loading };
   };
   return { getUserGists };
