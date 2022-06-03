@@ -8,6 +8,13 @@ export interface UserProfileVars {
   username: string;
 }
 
+export interface LoggedInUser {
+  id: string;
+  avatarUrl: string;
+  login: string;
+  name: string;
+}
+
 export interface User {
   id: string;
   avatarUrl: string;
