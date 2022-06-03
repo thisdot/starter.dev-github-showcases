@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { SignInResponse, AuthResponse } from '../interfaces/auth';
+import { AuthResponse } from '../interfaces/auth';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -16,42 +16,28 @@ export class AuthService {
   ) {}
 
   /**
-   * Performs initial sign in with GitHub and gets authentication code
+   * Initiates sign in with GitHub and provides a redirect url
    *
-   * @returns {*} {Observable<SignInResponse>}
+   * @returns void
    */
-  signIn(): Observable<SignInResponse> {
+  signIn(): void {
     this.tokenService.removeToken();
-    this.tokenService.removeRefreshToken();
-    return this.httpClient.get<SignInResponse>(
-      `${environment.apiUrl}/auth/signin`,
-    );
+    window.location.href = `${environment.apiUrl}/api/auth/signin?redirect_url=${environment.redirectUrl}`;
   }
 
   /**
-   * Returns the access_token and stores it in local storage.
+   * Calls the server to get the user's access token and saves it
    *
-   * Once the user accepts Github authentication, they're redirected to
-   * `RedirectComponent` which fetches the token. The code comes from a query
-   * appended to the callback url on redirect.
-   *
-   * @param {string} code - code used to verify authentication
-   * @return {*}  {Observable<AuthResponse>}
+   * @return {*}  {Observable<string | undefined>}
    */
-  getToken(code: string): Observable<AuthResponse> {
+  saveUserToken(): Observable<string | undefined> {
     return this.httpClient
-      .post<AuthResponse>(`${environment.apiUrl}/auth/signin/callback`, {
-        code,
+      .get<AuthResponse>(`${environment.apiUrl}/api/auth/token`, {
+        withCredentials: true,
       })
-      .pipe(tap((data) => this.tokenService.saveToken(data.access_token)));
-  }
-
-  /**
-   * Verify if a user is authenticated.
-   *
-   * @return {*}  {boolean} - authentication status
-   */
-  isAuthenticated(): boolean {
-    return !!this.tokenService.getToken();
+      .pipe(
+        map((data) => data.access_token),
+        tap((token) => token && this.tokenService.saveToken(token)),
+      );
   }
 }

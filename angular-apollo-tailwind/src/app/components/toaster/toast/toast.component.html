@@ -1,0 +1,40 @@
+<div
+  class="w-80 h-fit shadow-xl fixed top-14 right-14 bg-white rounded-xl flex z-50"
+  [@showToasterAnimation]="showToaster ? 'show' : 'hide'"
+>
+  <div
+    [ngClass]="{
+      'bg-red-600': toast.type === 'error',
+      'bg-green-600': toast.type === 'success',
+      'bg-yellow-600': toast.type === 'warning',
+      'bg-blue-600': toast.type === 'info',
+      'h-min-full w-2 rounded-l-xl': true
+    }"
+  ></div>
+  <div class="flex w-full h-fit flex-row p-3 justify-start">
+    <div class="h-min-full flex flex-col justify-center mr-3">
+      <hero-icon
+        name="exclamation-circle"
+        type="outline"
+        class="menuButtonIcon"
+        aria-hidden="true"
+      ></hero-icon>
+    </div>
+    <div class="">
+      <p class="font-bold capitalize">{{ toast.type }}: {{ toast.title }}</p>
+      <p class="text-sm">{{ toast.message }}</p>
+    </div>
+  </div>
+  <div class="absolute pl-2 pr-2 h-1 w-full bottom-0 left-0">
+    <div
+      [ngClass]="{
+        'bg-red-600': toast.type === 'error',
+        'bg-green-600': toast.type === 'success',
+        'bg-yellow-600': toast.type === 'warning',
+        'bg-blue-600': toast.type === 'info',
+        'h-full': true
+      }"
+      [style.width]="progress"
+    ></div>
+  </div>
+</div>

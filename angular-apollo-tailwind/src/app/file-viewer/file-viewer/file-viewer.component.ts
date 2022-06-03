@@ -1,13 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Apollo } from 'apollo-angular';
-import { Observable, map, switchMap } from 'rxjs';
-import {
-  FileDetails,
-  RepoFileData,
-  RepoFileVars,
-  REPO_FILE_QUERY,
-} from 'src/app/gql';
+import { map, Observable, switchMap } from 'rxjs';
+import { FileDetails, RepoFileGQL } from 'src/app/gql';
 import { mapLanguageExt } from '../utils/map-language-ext';
 
 @Component({
@@ -23,27 +17,24 @@ export class FileViewerComponent {
   file$: Observable<FileDetails> = this.route.paramMap.pipe(
     map((params: ParamMap) => params.get('path') as string),
     switchMap((path: string) =>
-      this.apollo
-        .watchQuery<RepoFileData, RepoFileVars>({
-          query: REPO_FILE_QUERY,
-          variables: {
-            owner: this.owner,
-            name: this.name,
-            expression: `${this.branch}:${path ?? ''}`,
-          },
+      this.repoFileGQL
+        .watch({
+          owner: this.owner,
+          name: this.name,
+          expression: `${this.branch}:${path ?? ''}`,
         })
         .valueChanges.pipe(
           map((res) => {
-            const file = res.data.repository.blob;
+            const file = res?.data?.repository?.blob;
             const extension = path?.split('.').pop() as string;
             const language = mapLanguageExt(extension);
-            const text = file.text ? file.text : '';
-            const lines = text.split('\n').length;
+            const text = file?.__typename === 'Blob' ? file.text : '';
+            const byteSize = file?.__typename === 'Blob' ? file.byteSize : '';
+            const lines = text ? text.split('\n').length : 0;
 
             return {
-              ...res,
               path,
-              byteSize: file.byteSize,
+              byteSize,
               extension,
               language,
               text,
@@ -54,5 +45,8 @@ export class FileViewerComponent {
     ),
   );
 
-  constructor(private route: ActivatedRoute, private apollo: Apollo) {}
+  constructor(
+    private route: ActivatedRoute,
+    private repoFileGQL: RepoFileGQL,
+  ) {}
 }

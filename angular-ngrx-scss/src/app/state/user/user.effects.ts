@@ -15,7 +15,7 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(fetchUserData),
       switchMap(() =>
-        this.userService.getUserInfo().pipe(
+        this.userService.getAuthenticatedUserInfo().pipe(
           map((data) => fetchUserDataSuccess({ userData: data })),
           catchError((error) => of(fetchUserDataError({ error }))),
         ),

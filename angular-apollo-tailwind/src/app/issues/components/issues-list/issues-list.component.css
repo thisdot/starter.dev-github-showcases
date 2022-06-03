@@ -1,7 +1,9 @@
-/* TODO: make hover work */
-/* @apply p-4 hover:bg-gray-100 border-b; */
 .issue {
   @apply p-4 border-b;
+}
+
+.issue:hover {
+  @apply bg-gray-100;
 }
 
 .issues-list-container {
@@ -24,9 +26,12 @@
   @apply max-w-3xl leading-tight;
 }
 
-/* @apply font-semibold text-gray-800 hover:text-blue-500 hover:cursor-pointer mr-1; */
 .title {
   @apply font-semibold text-gray-800 mr-1;
+}
+
+.title:hover {
+  @apply text-blue-500;
 }
 
 .label {
@@ -37,9 +42,12 @@
   @apply mt-1.5 text-xs text-gray-600;
 }
 
-/* @apply hover:text-blue-500 cursor-pointer; */
 .link {
   @apply cursor-pointer;
+}
+
+.link:hover {
+  @apply text-blue-500;
 }
 
 .comments {

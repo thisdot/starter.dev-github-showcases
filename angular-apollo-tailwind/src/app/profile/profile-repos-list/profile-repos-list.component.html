@@ -1,8 +1,5 @@
-<sd-data-container
-  *ngIf="profileReposDetails$ | async as profileRepos"
-  [data]="profileRepos"
->
-  <div content>
+<ng-container *ngIf="userRepos$ | async as userRepos; else loading">
+  <div>
     <app-repos-filters
       [state]="(filterState$ | async)!"
       [resultCount]="resultCount$ | async"
@@ -18,7 +15,7 @@
       (setQuery)="setQuery($event)"
       (clearFilters)="clearFilters()"
     ></app-repos-filters>
-    <div *ngFor="let repo of profileRepos.repos">
+    <div *ngFor="let repo of userRepos">
       <div class="profile-repos-container">
         <div class="content">
           <h3 class="mb-2">
@@ -36,7 +33,7 @@
           <div class="description">{{ repo.description }}</div>
           <app-repo-meta
             [language]="repo.language"
-            [languageColor]="repo.languageColor"
+            [languageColor]="repo.languageColor!"
             [forkCount]="repo.forkCount"
             [stargazerCount]="repo.stargazerCount"
             [updatedAt]="repo.updatedAt"
@@ -55,21 +52,25 @@
         </div>
       </div>
     </div>
-    <!-- TODO: pagination -->
+    <app-pagination
+      [pageInfo]="(pageInfo$ | async)!"
+      (changePage)="changePage($event)"
+    ></app-pagination>
   </div>
+</ng-container>
 
-  <div
-    data-testid="errorMsg"
-    class="py-4 text-lg font-medium text-gray-800"
-    error
-  >
-    Error Loading Repositories. Check console / network tab for more
-    information.
-  </div>
+<!-- <div
+  data-testid="errorMsg"
+  class="py-4 text-lg font-medium text-gray-800"
+>
+  Error Loading Repositories. Check console / network tab for more
+  information.
+</div> -->
+
+<ng-template #loading>
   <div
     class="py-8 border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4"
-    loading
   >
     <app-profile-repos-loading></app-profile-repos-loading>
   </div>
-</sd-data-container>
+</ng-template>

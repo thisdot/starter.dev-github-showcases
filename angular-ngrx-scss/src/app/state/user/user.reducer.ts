@@ -4,19 +4,27 @@ import { fetchUserDataSuccess } from './user.actions';
 
 const initialUserState: UserState = {
   avatar: '',
+  bio: '',
+  blog: '',
+  company: '',
+  email: '',
+  followers: 0,
+  following: 0,
+  location: '',
+  name: '',
+  twitter_username: '',
   username: '',
 };
 
-const userReducer = createReducer(
+const reducer = createReducer(
   initialUserState,
 
   on(fetchUserDataSuccess, (state, { userData }) => ({
     ...state,
-    avatar: userData.avatar,
-    username: userData.username,
+    ...userData,
   })),
 );
 
-export function reducer(state: UserState | undefined, action: Action) {
-  return userReducer(state, action);
+export function userReducer(state: UserState | undefined, action: Action) {
+  return reducer(state, action);
 }

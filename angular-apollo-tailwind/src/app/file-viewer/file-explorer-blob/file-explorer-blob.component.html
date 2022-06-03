@@ -1,4 +1,4 @@
-<sd-data-container *ngIf="repoPage$ | async as repoPage" [data]="repoPage">
+<ng-container *ngIf="repoPage$ | async as repoPage">
   <div content class="max-w-screen-2xl mx-auto py-8 px-4">
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-12">
@@ -16,8 +16,8 @@
       </div>
     </div>
   </div>
+</ng-container>
 
-  <div error>
-    <div>Error: {{ repoPage.error?.message }}</div>
-  </div>
-</sd-data-container>
+<!-- <div error>
+  <div>Error: {{ repoPage.error?.message }}</div>
+</div> -->

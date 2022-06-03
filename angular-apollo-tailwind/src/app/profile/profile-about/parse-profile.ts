@@ -1,13 +1,14 @@
-import {
-  Org,
-  Organization,
-  OrgProfileData,
-  UserProfile,
-  UserProfileData,
-} from 'src/app/gql';
+import { RepoOrganization, UserProfile, UserProfileQuery } from '../../gql';
 
-export const parseUserQuery = (data: UserProfileData): UserProfile => {
+export const parseUserQuery = (
+  data: UserProfileQuery,
+): UserProfile | undefined => {
   const user = data.user;
+
+  if (!user) {
+    return undefined;
+  }
+
   const {
     organizations,
     followers,
@@ -17,9 +18,10 @@ export const parseUserQuery = (data: UserProfileData): UserProfile => {
     ...rest
   } = user;
 
+  const nodes = organizations.nodes as RepoOrganization[];
   const orgs =
-    organizations.nodes?.reduce(
-      (acc: Organization[], org: Organization) =>
+    nodes.reduce(
+      (acc: RepoOrganization[], org: RepoOrganization) =>
         org ? [...acc, { avatarUrl: org.avatarUrl, login: org.login }] : acc,
       [],
     ) ?? [];
@@ -33,5 +35,3 @@ export const parseUserQuery = (data: UserProfileData): UserProfile => {
     username: login,
   };
 };
-
-export const parseOrgQuery = (data: OrgProfileData): Org => data.organization;

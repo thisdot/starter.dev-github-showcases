@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments}/**/*{.ts,.html,.scss}\"",
     "format": "prettier --config ./.prettierrc --write \"src/{app,environments}/**/*{.ts,.html,.scss}\"",
-    "prep": "ng lint && npm run format"
+    "prep": "ng lint && npm run format",
+    "gen-lang-colors": "node ./scripts/generate-language-colors.js"
   },
   "private": true,
   "dependencies": {
@@ -55,7 +56,9 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "node-fetch": "^3.2.0",
     "prettier": "2.5.1",
-    "typescript": "~4.5.2"
+    "typescript": "~4.5.2",
+    "yaml": "^1.10.2"
   }
 }

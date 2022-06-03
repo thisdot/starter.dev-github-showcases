@@ -5,40 +5,40 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { FilterOption } from 'src/app/components/filter-dropdown/filter-dropdown.component';
+import { FilterOption } from '../../../components/filter-dropdown/filter-dropdown.component';
 import {
+  IssueOrder,
   Label,
   Milestone,
-  OPEN_CLOSED_STATE,
-  ORDER_BY_DIRECTION,
-  PULL_REQUESTS_ORDER_FIELD,
-  SortPullOption,
-} from 'src/app/gql';
+  OrderDirection,
+  PullRequestOrderField,
+  PullRequestState,
+} from '../../../gql';
 
 const sortOptions: FilterOption[] = [
   {
     label: 'Newest',
-    value: `${PULL_REQUESTS_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.Desc}`,
+    value: `${PullRequestOrderField.CreatedAt}^${OrderDirection.Desc}`,
   },
   {
     label: 'Oldest',
-    value: `${PULL_REQUESTS_ORDER_FIELD.CREATED_AT}^${ORDER_BY_DIRECTION.Asc}`,
+    value: `${PullRequestOrderField.CreatedAt}^${OrderDirection.Asc}`,
   },
-  {
-    label: 'Most commented',
-    value: `${PULL_REQUESTS_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.Desc}`,
-  },
-  {
-    label: 'Least commented',
-    value: `${PULL_REQUESTS_ORDER_FIELD.COMMENTS}^${ORDER_BY_DIRECTION.Asc}`,
-  },
+  // {
+  //   label: 'Most commented',
+  //   value: `${IssueOrderField.Comments}^${OrderDirection.Desc}`,
+  // },
+  // {
+  //   label: 'Least commented',
+  //   value: `${IssueOrderField.Comments}^${OrderDirection.Asc}`,
+  // },
   {
     label: 'Recently updated',
-    value: `${PULL_REQUESTS_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.Desc}`,
+    value: `${PullRequestOrderField.UpdatedAt}^${OrderDirection.Desc}`,
   },
   {
     label: 'Least recently updated',
-    value: `${PULL_REQUESTS_ORDER_FIELD.UPDATED_AT}^${ORDER_BY_DIRECTION.Asc}`,
+    value: `${PullRequestOrderField.UpdatedAt}^${OrderDirection.Asc}`,
   },
 ];
 
@@ -49,10 +49,10 @@ const sortOptions: FilterOption[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PullRequestFiltersComponent {
-  @Input() openCount: number | null | undefined = 0;
-  @Input() closedCount: number | null | undefined = 0;
+  @Input() openCount = 0;
+  @Input() closedCount = 0;
   @Input() currentMilestone: string | null = null;
-  @Input() set milestones(val: Milestone[] | null | undefined) {
+  @Input() set milestones(val: Milestone[]) {
     if (val) {
       const a = val as Milestone[];
       const b = [{ title: 'PullRequest with no milestone', id: '' }, ...a];
@@ -63,17 +63,17 @@ export class PullRequestFiltersComponent {
     }
   }
   @Input() currentLabel: string | null = '';
-  @Input() set labels(val: Label[] | null) {
+  @Input() set labels(val: Label[]) {
     const a = val as Label[];
     this.labelOptions = a.map((label) => ({
       label: label.name,
       value: label.name,
     }));
   }
-  @Input() sort: SortPullOption | null = null;
-  @Input() pullRequestState: OPEN_CLOSED_STATE | null = OPEN_CLOSED_STATE.OPEN;
+  @Input() sort: IssueOrder | null = null;
+  @Input() pullRequestState: PullRequestState | null = PullRequestState.Open;
 
-  @Output() openPullRequest = new EventEmitter<void>();
+  @Output() OpenPullRequest = new EventEmitter<void>();
   @Output() closePullRequest = new EventEmitter<void>();
   @Output() setLabel = new EventEmitter<string>();
   @Output() setMilestone = new EventEmitter<string>();
@@ -84,19 +84,19 @@ export class PullRequestFiltersComponent {
   sortOptions = sortOptions;
 
   getOpenStyle() {
-    return this.pullRequestState === OPEN_CLOSED_STATE.OPEN
+    return this.pullRequestState === PullRequestState.Open
       ? 'font-semibold text-gray-900'
       : 'text-gray-600';
   }
 
   getClosedStyle() {
-    return this.pullRequestState === OPEN_CLOSED_STATE.CLOSED
+    return this.pullRequestState === PullRequestState.Closed
       ? 'font-semibold text-gray-900'
       : 'text-gray-600';
   }
 
   handleOpenPullRequestClick() {
-    this.openPullRequest.emit();
+    this.OpenPullRequest.emit();
   }
 
   handleClosePullRequestClick() {

@@ -1,4 +1,4 @@
-<ng-container *ngIf="userName$ | async as user">
+<ng-container *ngIf="user$ | async as user">
   <main class="mx-auto">
     <app-repo-list
       *ngIf="repoDetails$ | async as repoDetails"

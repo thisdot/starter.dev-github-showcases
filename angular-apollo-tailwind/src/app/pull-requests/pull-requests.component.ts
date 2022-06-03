@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PullRequestsFormatted, OPEN_CLOSED_STATE } from '../gql';
-import { PullRequestsStore, PaginatorOptions } from './pull-requests.store';
+import { PaginationEvent, PullRequestState, RepoPullRequests } from '../gql';
+import { PullRequestsStore } from './pull-requests.store';
 
 @Component({
   selector: 'app-pull-requests',
@@ -11,7 +11,7 @@ import { PullRequestsStore, PaginatorOptions } from './pull-requests.store';
   providers: [PullRequestsStore],
 })
 export class PullRequestsComponent implements OnInit {
-  readonly repoPullRequests$: Observable<PullRequestsFormatted | null> =
+  readonly repoPullRequests$: Observable<RepoPullRequests | null> =
     this.pullRequestsStore.activePullRequests$;
   readonly openPullRequestsCount$ =
     this.pullRequestsStore.openPullRequestsCount$;
@@ -48,16 +48,16 @@ export class PullRequestsComponent implements OnInit {
   }
 
   openPullRequest() {
-    this.pullRequestsStore.changeState(OPEN_CLOSED_STATE.OPEN);
+    this.pullRequestsStore.changeState(PullRequestState.Open);
     this.pullRequestsStore.getPullRequests$();
   }
 
   closePullRequest() {
-    this.pullRequestsStore.changeState(OPEN_CLOSED_STATE.CLOSED);
+    this.pullRequestsStore.changeState(PullRequestState.Closed);
     this.pullRequestsStore.getPullRequests$();
   }
 
-  changePage(page: PaginatorOptions) {
+  changePage(page: PaginationEvent) {
     this.pullRequestsStore.changePage(page);
     this.pullRequestsStore.getPullRequests$();
   }

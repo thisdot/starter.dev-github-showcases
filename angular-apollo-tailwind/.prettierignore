@@ -2,3 +2,4 @@ dist
 coverage
 e2e
 node_modules
+src/app/gql/github.schema.ts

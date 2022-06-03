@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { PaginatorOptions, ReposFilterStore } from '@filter-store';
+import { ReposFilterStore } from '../components/filters/repos-filter.store';
 import { Observable } from 'rxjs';
-import { Issues, OPEN_CLOSED_STATE } from '../gql';
+import { IssueState, PaginationEvent } from '../gql';
 import { IssuesStore } from './issues.store';
+import { Issues } from '../gql/models/repo-issues';
 
 @Component({
   selector: 'app-issues',
@@ -27,8 +28,6 @@ export class IssuesComponent implements OnInit {
   readonly sort$ = this.reposFilterStore.sort$;
   readonly hasActiveFilters$ = this.reposFilterStore.hasActiveFilters$;
   readonly filterState$ = this.reposFilterStore.state$;
-
-  activeIssues: Issues | null = null;
 
   constructor(
     private reposFilterStore: ReposFilterStore,
@@ -55,16 +54,16 @@ export class IssuesComponent implements OnInit {
   }
 
   openIssue() {
-    this.reposFilterStore.changeState(OPEN_CLOSED_STATE.OPEN);
+    this.reposFilterStore.changeState(IssueState.Open);
     this.issuesStore.getIssues$(this.filterState$);
   }
 
   closeIssue() {
-    this.reposFilterStore.changeState(OPEN_CLOSED_STATE.CLOSED);
+    this.reposFilterStore.changeState(IssueState.Closed);
     this.issuesStore.getIssues$(this.filterState$);
   }
 
-  changePage(page: PaginatorOptions) {
+  changePage(page: PaginationEvent) {
     this.reposFilterStore.changePage(page);
     this.issuesStore.getIssues$(this.filterState$);
   }

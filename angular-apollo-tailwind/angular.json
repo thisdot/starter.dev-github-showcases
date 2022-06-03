@@ -22,13 +22,8 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -89,23 +84,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
@@ -145,46 +132,6 @@
             "lintFilePatterns": [
               "projects/shared/**/*.ts",
               "projects/shared/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "filter": {
-      "projectType": "library",
-      "root": "projects/filter",
-      "sourceRoot": "projects/filter/src",
-      "prefix": "sd",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/filter/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/filter/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/filter/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/filter/src/test.ts",
-            "tsConfig": "projects/filter/tsconfig.spec.json",
-            "karmaConfig": "projects/filter/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/filter/**/*.ts",
-              "projects/filter/**/*.html"
             ]
           }
         }

@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { CurrentUser } from '../../gql';
+import { CurrentUserQuery } from '../../gql';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
-  @Input() user: CurrentUser | null = null;
+  @Input() user!: CurrentUserQuery['viewer'];
 
   constructor(private authService: AuthService) {}
 

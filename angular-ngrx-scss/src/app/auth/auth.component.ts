@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AuthService } from './services/auth.service';
+import { Store } from '@ngrx/store';
+import { startSignIn } from '../state/auth/auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -13,11 +14,9 @@ export class AuthComponent {
     callbackUrl: new FormControl(''),
   });
 
-  constructor(private authService: AuthService) {}
+  constructor(private store: Store) {}
 
   onSubmit() {
-    this.authService.signIn().subscribe(({ redirectUrl }) => {
-      window.location.href = redirectUrl;
-    });
+    this.store.dispatch(startSignIn());
   }
 }

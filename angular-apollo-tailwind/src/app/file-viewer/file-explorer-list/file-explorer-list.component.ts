@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TreeEntry } from 'src/app/gql/models/repo-tree';
+import { TreeEntry } from '../../gql';
 
 @Component({
   selector: 'app-file-explorer-list',

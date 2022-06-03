@@ -1,0 +1,27 @@
+<div class="page">
+  <header>
+    <app-nav-bar></app-nav-bar>
+  </header>
+
+  <main>
+    <div class="profile-header">
+      <div class="grid grid-cols-12 container">
+        <div class="col-span-3"></div>
+        <app-profile-nav
+          class="col-span-9"
+          [profile$]="profile$"
+        ></app-profile-nav>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 profile-body container">
+      <div class="subpage col-span-3">
+        <app-profile-about [profile$]="profile$"></app-profile-about>
+      </div>
+      <app-profile-repos
+        class="col-span-9"
+        [repos$]="repos$"
+      ></app-profile-repos>
+    </div>
+  </main>
+</div>

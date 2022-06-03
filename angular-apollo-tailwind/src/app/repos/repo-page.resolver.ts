@@ -1,43 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, UrlSegment } from '@angular/router';
-import { Apollo } from 'apollo-angular';
+import { ActivatedRouteSnapshot, Resolve, UrlSegment } from '@angular/router';
 import { map, Observable } from 'rxjs';
+import { RepoPage, RepoPageGQL } from '../gql';
 import { parseTopics } from './parse-topics';
-import {
-  RepoDetailsData,
-  RepoDetailsVars,
-  REPO_PAGE_QUERY,
-  RepoPageDetails,
-} from '../gql';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RepoPageResolver implements Resolve<RepoPageDetails | boolean> {
-  constructor(private apollo: Apollo) {}
+export class RepoPageResolver implements Resolve<RepoPage | boolean> {
+  constructor(private repoPageGQL: RepoPageGQL) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<RepoPageDetails> {
+  resolve(route: ActivatedRouteSnapshot): Observable<RepoPage> {
     const [owner, name] = this.getUser(route.url);
 
-    return this.apollo
-      .query<RepoDetailsData, RepoDetailsVars>({
-        query: REPO_PAGE_QUERY,
-        variables: {
-          owner: owner ?? undefined,
-          name: name ?? undefined,
-        },
+    return this.repoPageGQL
+      .fetch({
+        owner: owner ?? undefined,
+        name: name ?? undefined,
       })
       .pipe(
         map((res) => ({
-          ...res,
           name,
           owner,
-          login: res.data.viewer.login,
-          branch: res.data.repository.defaultBranchRef.name,
+          login: res.data?.viewer?.login,
+          branch: res.data?.repository?.defaultBranchRef?.name ?? 'HEAD',
           path: '',
-          repository: res.data.repository,
-          homepageUrl: res.data.repository.homepageUrl,
-          topics: parseTopics(res.data.repository.topics?.nodes),
+          repository: {
+            isPrivate: res.data.repository?.isPrivate,
+            stargazerCount: res.data.repository?.stargazerCount,
+            forkCount: res.data.repository?.forkCount,
+            watcherCount: res.data.repository?.watchers.totalCount,
+            openIssueCount: res.data.repository?.openIssues.totalCount,
+            openPullRequestCount:
+              res.data.repository?.openPullRequests.totalCount,
+            homepageUrl: res.data?.repository?.homepageUrl,
+            topics: parseTopics(res.data?.repository?.topics?.nodes),
+          },
         })),
       );
   }
