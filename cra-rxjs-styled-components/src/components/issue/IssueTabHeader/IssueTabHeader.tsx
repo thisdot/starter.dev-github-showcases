@@ -3,7 +3,7 @@ import DetailsDropdown from '../../DetailsDropdown';
 import CorrectIcon from '../../icons/CorrectIcon';
 import IssueIcon from '../../icons/IssueIcon';
 import type { IssueTabValues } from '../types';
-
+import { Link } from 'react-router-dom';
 import { Container, StatusLabel, StatusTab } from './IssueTabHeader.style';
 import type { DropdownTitle } from '../types';
 
@@ -54,8 +54,8 @@ export default function IssueTabHeader({ toggleTab }: Props) {
           toggleDropDown={() => toggleDropdown('Milestones')}
           isOpen={openDropdown === 'Milestones'}
         >
-          <a href="/"> Issues with no milestones </a>
-          <a href="/"> Serverless Migrations </a>
+          <Link to="/"> Issues with no milestones </Link>
+          <Link to="/"> Serverless Migrations </Link>
         </DetailsDropdown>
         <DetailsDropdown
           title="Label"
@@ -63,8 +63,8 @@ export default function IssueTabHeader({ toggleTab }: Props) {
           toggleDropDown={() => toggleDropdown('Label')}
           isOpen={openDropdown === 'Label'}
         >
-          <a href="/"> WIP DO NOT MERGE </a>
-          <a href="/"> Enhancement </a>
+          <Link to="/"> WIP DO NOT MERGE </Link>
+          <Link to="/"> Enhancement </Link>
         </DetailsDropdown>
         <DetailsDropdown
           title="Sort"
@@ -72,12 +72,12 @@ export default function IssueTabHeader({ toggleTab }: Props) {
           toggleDropDown={() => toggleDropdown('Sort')}
           isOpen={openDropdown === 'Sort'}
         >
-          <a href="/">Newest </a>
-          <a href="/">Oldest</a>
-          <a href="/">Most Commented</a>
-          <a href="/">Least Commented</a>
-          <a href="/">Resently Updated</a>
-          <a href="/">Least Resently Updated</a>
+          <Link to="/">Newest </Link>
+          <Link to="/">Oldest</Link>
+          <Link to="/">Most Commented</Link>
+          <Link to="/">Least Commented</Link>
+          <Link to="/">Resently Updated</Link>
+          <Link to="/">Least Resently Updated</Link>
         </DetailsDropdown>
       </StatusTab>
     </Container>

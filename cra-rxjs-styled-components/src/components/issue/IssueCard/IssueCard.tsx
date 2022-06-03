@@ -1,10 +1,10 @@
-import React from 'react';
 import ClosedIssueIcon from '../../icons/ClosedIssueIcon';
 import MessageIcon from '../../icons/MessageIcon';
 import OpenIssueIcon from '../../icons/OpenIssueIcon';
 import PullRequestIssueInfo from '../../PullRequestIssueInfo';
 import { IssueCardWrapper } from './IssueCard.style';
 import type { Status } from '../types';
+import { Link } from 'react-router-dom';
 
 interface Props {
   status: Status;
@@ -43,10 +43,10 @@ export default function IssueCard({
       </div>
       <div className="right">
         {messageCount > 0 && (
-          <a href="/" className="message">
+          <Link to="/" className="message">
             <MessageIcon />
             <span className="count">8</span>
-          </a>
+          </Link>
         )}
       </div>
     </IssueCardWrapper>
