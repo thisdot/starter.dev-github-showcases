@@ -7,6 +7,16 @@ export const hasOperationName = (req, operationName) => {
   );
 };
 
+export const hasExpression = (req, expression) => {
+  const { body } = req;
+
+  return (
+    (body.hasOwnProperty("variables") &&
+      body.variables.expression === expression) ||
+    body.query?.includes(`expression=${expression}`)
+  );
+};
+
 export const aliasQuery = (req, operationName) => {
   if (hasOperationName(req, operationName)) {
     req.alias = `gql${operationName}Query`;
