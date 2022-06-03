@@ -8,6 +8,11 @@
         <sd-document-icon class="iconFile"></sd-document-icon>
       </ng-template>
     </div>
-    <a [routerLink]="getPathHref(item)" class="link">{{ item.name }}</a>
+    <a
+      [routerLink]="getPathHref(item)"
+      class="link"
+      [attr.data-testid]="'file explorer list ' + item.name"
+      >{{ item.name }}</a
+    >
   </div>
 </div>
