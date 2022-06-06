@@ -28,10 +28,10 @@ export default function IssueCard({ issue }: Props) {
       </div>
       <div className="right">
         {issue.comments > 0 && (
-          <a href="#" className="message">
+          <div className="message">
             <MessageIcon />
             <span className="count">{issue.comments}</span>
-          </a>
+          </div>
         )}
       </div>
     </IssueCardWrapper>
