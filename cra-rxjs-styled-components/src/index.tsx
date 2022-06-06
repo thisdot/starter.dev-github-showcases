@@ -6,10 +6,12 @@ import App from './App';
 import AuthGuard from './components/AuthGuard';
 import reportWebVitals from './reportWebVitals';
 import Redirect from './routes/redirect';
-import RepoDetails from './routes/repo-details';
+import RepoDetails from './routes/repo/repository-code';
 import SignIn from './routes/sign-in';
 import TopRepos from './routes/top-repos';
-import RepoPullRequest from './routes/repository-pull-request';
+import RepoPullRequest from './routes/repo/repository-pull-request';
+import RepoIssues from './routes/repo/repository-issues';
+import Repo from './routes/repo';
 import UserRepos from './components/user-repos';
 
 ReactDOM.render(
@@ -25,15 +27,8 @@ ReactDOM.render(
               </AuthGuard>
             }
           />
-          <Route
-            path="/:username/:repo"
-            element={
-              <AuthGuard>
-                <RepoDetails />
-              </AuthGuard>
-            }
-          />
-          <Route
+        </Route>
+        <Route
             path="/orgs/:username"
             element={
               <AuthGuard>
@@ -41,15 +36,32 @@ ReactDOM.render(
               </AuthGuard>
             }
           />
-        </Route>
         <Route
-          path="pulls"
+          path="/:username/:repo"
           element={
             <AuthGuard>
-              <RepoPullRequest />
+              <Repo/>
             </AuthGuard>
-          }
-        />
+          }>
+            <Route
+              path=""
+              element={
+                <RepoDetails />
+              }
+            />
+            <Route
+              path="issues"
+              element={
+                <RepoIssues />
+              }
+            />
+            <Route
+              path="pull-requests"
+              element={
+                <RepoPullRequest />
+              }
+            />
+        </Route>
         <Route path="signin" element={<SignIn />} />
         <Route path="redirect" element={<Redirect />} />
       </Routes>
