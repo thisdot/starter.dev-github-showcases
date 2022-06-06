@@ -17,7 +17,7 @@ import NavBar from './components/Navbar/NavBar';
 import { auth } from './services/auth.server';
 import { CURRENT_USER_QUERY } from './lib/queries/UserDropdown';
 import gqlClient from './lib/graphql-client';
-import { getSession, getUser } from './services/session.server';
+import { getSession } from './services/session.server';
 
 type DocumentProps = {
   children: React.ReactNode;
