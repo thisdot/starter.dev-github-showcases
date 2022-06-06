@@ -69,7 +69,6 @@ export default function RepoDetails() {
 
   return (
     <>
-
       <RepoContainer>
         <RepoGrid>
           <RepoMain>

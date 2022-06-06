@@ -31,15 +31,18 @@ import {
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { tap, forkJoin } from 'rxjs';
-import { SINGLE_USER_REPO, ISSUE_PR_SEARCH } from '../../constants/url.constants';
+import {
+  SINGLE_USER_REPO,
+  ISSUE_PR_SEARCH,
+} from '../../constants/url.constants';
 import { Repository } from '../../interfaces/repositories.interfaces';
 import { fromFetchWithAuth } from '../../hooks/auth/from-fetch-with-auth';
 
 type IssueDetails = {
   total_count: number;
-  incomplete_results: boolean,
-  items: any[]
-}
+  incomplete_results: boolean;
+  items: any[];
+};
 
 type RepositoryDetails = {
   repo: Repository | null;
@@ -47,7 +50,6 @@ type RepositoryDetails = {
   rootFileInfo?: any[];
   issues?: IssueDetails;
 };
-
 
 export default function SubHeader() {
   const [repoDetails, setRepoDetails] = useState<RepositoryDetails>({
@@ -65,23 +67,33 @@ export default function SubHeader() {
   useEffect(() => {
     forkJoin([
       request(SINGLE_USER_REPO(params.username!, params.repo!)),
-      request(`${ISSUE_PR_SEARCH(params.username!, params.repo!, 'pr', 'open', 1, 0)}`),
-      request(`${ISSUE_PR_SEARCH(params.username!, params.repo!, 'issue', 'open', 1, 0)}`),
-      ])
+      request(
+        `${ISSUE_PR_SEARCH(params.username!, params.repo!, 'pr', 'open', 1, 0)}`
+      ),
+      request(
+        `${ISSUE_PR_SEARCH(
+          params.username!,
+          params.repo!,
+          'issue',
+          'open',
+          1,
+          0
+        )}`
+      ),
+    ])
       .pipe(
         tap((val) => {
           if (val) {
             setRepoDetails({
               repo: val[0],
               prs: val[1],
-              issues: val[2]
+              issues: val[2],
             });
           }
         })
       )
       .subscribe();
   }, [params.username, params.repo]);
-
 
   const basePath = `/${repo?.owner.login!}/${repo?.name!}`;
 
@@ -93,8 +105,18 @@ export default function SubHeader() {
 
   const tabArr = [
     { label: 'Code', icon: <CodeIcon />, count: '', to: `` },
-    { label: 'Issues', icon: <IssuesIcon />, count: issues?.total_count!, to: `issues` },
-    { label: 'Pull Requests', icon: <PrIcon />, count: prs?.total_count!, to: `pull-requests` },
+    {
+      label: 'Issues',
+      icon: <IssuesIcon />,
+      count: issues?.total_count!,
+      to: `issues`,
+    },
+    {
+      label: 'Pull Requests',
+      icon: <PrIcon />,
+      count: prs?.total_count!,
+      to: `pull-requests`,
+    },
   ];
 
   return (
@@ -132,13 +154,14 @@ export default function SubHeader() {
       <SubHeaderBottomRow>
         <TabNavigation>
           {tabArr.map((tabInfo, index) => (
-            <TabNavigationLink 
-              key={index} 
-              to={`${basePath}/${tabInfo.to}`} 
-            >
+            <TabNavigationLink key={index} to={`${basePath}/${tabInfo.to}`}>
               <TabNavigationIcon>{tabInfo.icon}</TabNavigationIcon>
               <span>{tabInfo.label}</span>
-              {tabInfo.count ? <TabNavigationCount>{tabInfo.count}</TabNavigationCount> : ''}
+              {tabInfo.count ? (
+                <TabNavigationCount>{tabInfo.count}</TabNavigationCount>
+              ) : (
+                ''
+              )}
             </TabNavigationLink>
           ))}
         </TabNavigation>

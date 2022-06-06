@@ -29,38 +29,24 @@ ReactDOM.render(
           />
         </Route>
         <Route
-            path="/orgs/:username"
-            element={
-              <AuthGuard>
-                <UserRepos isOrg />
-              </AuthGuard>
-            }
-          />
+          path="/orgs/:username"
+          element={
+            <AuthGuard>
+              <UserRepos isOrg />
+            </AuthGuard>
+          }
+        />
         <Route
           path="/:username/:repo"
           element={
             <AuthGuard>
-              <Repo/>
+              <Repo />
             </AuthGuard>
-          }>
-            <Route
-              path=""
-              element={
-                <RepoDetails />
-              }
-            />
-            <Route
-              path="issues"
-              element={
-                <RepoIssues />
-              }
-            />
-            <Route
-              path="pull-requests"
-              element={
-                <RepoPullRequest />
-              }
-            />
+          }
+        >
+          <Route path="" element={<RepoDetails />} />
+          <Route path="issues" element={<RepoIssues />} />
+          <Route path="pull-requests" element={<RepoPullRequest />} />
         </Route>
         <Route path="signin" element={<SignIn />} />
         <Route path="redirect" element={<Redirect />} />

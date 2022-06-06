@@ -6,7 +6,7 @@ import SubHeader from '../../components/sub-header';
 function Repo() {
   return (
     <>
-      <Header/>
+      <Header />
       <RepoLayout>
         <SubHeader />
         <Outlet />

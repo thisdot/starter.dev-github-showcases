@@ -1,5 +1,3 @@
 export default function RepoIssues() {
-  return (
-    <h1>Issues</h1>
-  )
+  return <h1>Issues</h1>;
 }
