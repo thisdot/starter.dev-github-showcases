@@ -3,6 +3,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, useContext } from '@nuxtjs/composition-api'
+import { LoginStrategies } from '~/types/auth/enums'
 
 export default defineComponent({
   name: 'Redirect',
@@ -16,8 +17,7 @@ export default defineComponent({
          * Fetching on client side to avoid nuxt/auth headers error
          * For reference see: https://github.com/nuxt-community/auth-module/discussions/1510
          */
-        await $auth.loginWith('customLogin')
-        redirect('/')
+        await $auth.loginWith(LoginStrategies.CustomLogin)
       } catch (error) {
         redirect('/sign-in')
       }

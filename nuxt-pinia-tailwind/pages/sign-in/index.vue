@@ -4,6 +4,7 @@
       <button
         type="submit"
         class="border-2 border-zinc-700 text-zinc-100 px-20 py-2 rounded-md hover:bg-zinc-100 hover:border-zinc-100 hover:text-zinc-900 transition-all"
+        data-testid="sign-in-button"
       >
         Sign in with GitHub
       </button>

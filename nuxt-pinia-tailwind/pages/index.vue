@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { useContext, useRouter } from '@nuxtjs/composition-api'
+import { useContext } from '@nuxtjs/composition-api'
 import Vue from 'vue'
 
 export default Vue.extend({
@@ -16,11 +16,9 @@ export default Vue.extend({
   auth: true,
   setup() {
     const { $auth } = useContext()
-    const router = useRouter()
 
     const handleClick = async () => {
       await $auth.logout()
-      router.push('/sign-in')
     }
     return { handleClick }
   },

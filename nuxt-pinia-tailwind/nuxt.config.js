@@ -1,3 +1,5 @@
+import { LoginStrategies } from './types/auth/enums'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -34,7 +36,7 @@ export default {
     // https://composition-api.nuxtjs.org/getting-started/setup#quick-start
     '@nuxtjs/composition-api/module',
     // https://pinia.vuejs.org/ssr/nuxt.html#installation
-    '@pinia/nuxt',
+    ['@pinia/nuxt', { disableVuex: false }],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -75,9 +77,10 @@ export default {
     redirect: {
       login: '/sign-in',
       home: '/',
+      logout: '/sign-in',
     },
     strategies: {
-      customLogin: {
+      [LoginStrategies.CustomLogin]: {
         scheme: '~/schemes/authScheme',
         user: {
           property: false,
