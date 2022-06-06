@@ -67,7 +67,6 @@ export function CatchBoundary() {
 
 type LoaderData = {
   viewer?: any;
-  // valid?: any;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
