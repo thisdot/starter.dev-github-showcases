@@ -42,23 +42,27 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import * as styles from './TheCounter.classNames'
-import { useCounterStore } from '~/stores/counterStore'
+import { useCounterStore } from '~/store/counterStore'
 
 export default defineComponent({
   name: 'TheCounter',
   setup() {
     const counterState = useCounterStore()
+
     const increaseCount = () => {
       counterState.counter = counterState.counter + 1
     }
+
     const decreaseCount = () => {
       if (counterState.counter) {
         counterState.counter = counterState.counter - 1
       }
     }
+
     const resetCount = () => {
       counterState.$reset()
     }
+
     return { counterState, styles, increaseCount, decreaseCount, resetCount }
   },
 })
