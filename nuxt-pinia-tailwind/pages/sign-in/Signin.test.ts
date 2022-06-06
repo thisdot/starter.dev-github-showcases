@@ -5,8 +5,9 @@ import { SIGN_IN_URL } from '~/constants/url.constants'
 describe('<SignIn />', () => {
   it('Should redirect the user when clicking at the signin button', async () => {
     // Arrange
-    const STARTER_API_URL = process.env.STARTER_API_URL || ''
-    const BASE_URL = process.env.BASE_URL || ''
+    const STARTER_API_URL =
+      process.env.STARTER_API_URL || 'https://api.starter.dev/api'
+    const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'
 
     // Redefine window.location in order to mock it
     const windowLocation = JSON.stringify(window.location)
