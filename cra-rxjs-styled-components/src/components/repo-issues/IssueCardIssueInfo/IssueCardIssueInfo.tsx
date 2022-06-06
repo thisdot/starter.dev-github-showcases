@@ -11,9 +11,7 @@ export default function IssueCardIssueInfo({ issue }: Props) {
 
   return (
     <div className="info">
-      <div className="heading">
-        {issue.title}
-      </div>
+      <div className="heading">{issue.title}</div>
       <div className="sub_heading">
         <span className="opened_num">#{issue.number}</span>
         {issue.state === 'open' ? (
