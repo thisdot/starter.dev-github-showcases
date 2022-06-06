@@ -67,34 +67,30 @@ export function CatchBoundary() {
 
 type LoaderData = {
   viewer?: any;
-  valid?: any;
+  // valid?: any;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  // const { getUser } = await getSession(request);
-  const { accessToken, valid } = await getUser(request);
-  console.log(`ACCESSTOKEN ${accessToken}`);
-  console.log(valid);
-  // verifies authed before calling to prevent redirect spiral
-  // let valid = '';
-  if (valid) {
-    // const { accessToken } = await auth.isAuthenticated(request, {
-    //   failureRedirect: '/login',
-    // });
-    // console.log(typeof accessToken);
-    const { viewer } = await gqlClient.request(CURRENT_USER_QUERY, undefined, {
-      authorization: `Bearer ${accessToken}`,
+  const { getUser } = await getSession(request);
+  const session = await getUser(request);
+  let viewer;
+
+  if (session) {
+    const { accessToken } = await auth.isAuthenticated(request, {
+      failureRedirect: '/login',
     });
-    return json<LoaderData>({ viewer, valid });
+    ({ viewer } = await gqlClient.request(CURRENT_USER_QUERY, undefined, {
+      authorization: `Bearer ${accessToken}`,
+    }));
   }
-  return json<LoaderData>({ valid });
+  return json<LoaderData>({ viewer });
 };
 
 export default function App() {
-  const { viewer, valid } = useLoaderData<LoaderData>();
+  const { viewer } = useLoaderData<LoaderData>();
   return (
     <Document>
-      {valid ? <NavBar user={viewer} /> : null}
+      {viewer ? <NavBar user={viewer} /> : null}
       <Outlet />
       <ScrollRestoration />
       <Scripts />
