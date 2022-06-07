@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { RouteConfigService } from '@this-dot/route-config';
-import { Observable, switchMap } from 'rxjs';
+import { first, Observable, switchMap } from 'rxjs';
 import {
   FilterState,
   ReposFilterStore,
@@ -91,59 +92,59 @@ export class IssuesStore extends ComponentStore<IssuesState> {
 
   readonly getIssues$ = this.effect((target$: Observable<FilterState>) =>
     target$.pipe(
-      switchMap(
-        ({
-          label,
-          milestone,
-          sort,
-          startCursor,
-          endCursor,
-          milestonesLoaded,
-          labelsLoaded,
-          first,
-          last,
-        }) =>
-          this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
-            switchMap(({ owner, name }) =>
-              this.repoIssuesGQL
-                .watch({
-                  owner,
-                  name,
-                  orderBy: sort ?? undefined,
-                  filterBy:
-                    label || milestone
-                      ? {
-                          labels: label ? [label] : undefined,
-                          milestone: milestone || undefined,
-                        }
-                      : undefined,
-                  after: endCursor ?? undefined,
-                  before: startCursor ?? undefined,
-                  first: first ?? undefined,
-                  last: last ?? undefined,
-                })
-                .valueChanges.pipe(
-                  tapResponse(
-                    (res) => {
-                      const { openIssues, closedIssues, milestones, labels } =
-                        parseIssuesQuery(res.data);
+      switchMap(({ label, milestone, sort, milestonesLoaded, labelsLoaded }) =>
+        this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
+          switchMap(({ owner, name }) => {
+            const endCursor =
+              this.activatedRoute.snapshot.queryParams['after'] ?? undefined;
+            const startCursor =
+              this.activatedRoute.snapshot.queryParams['before'] ?? undefined;
+            const last = endCursor ? 25 : undefined;
+            let first = startCursor ? 25 : undefined;
 
-                      if (!(milestonesLoaded && labelsLoaded)) {
-                        this.reposFilterStore.setMilestones(milestones);
-                        this.reposFilterStore.setLabels(labels);
-                        this.reposFilterStore.setFiltersLoaded(true);
+            if (endCursor == undefined && startCursor == undefined) {
+              first = 25;
+            }
+
+            return this.repoIssuesGQL
+              .watch({
+                owner,
+                name,
+                orderBy: sort ?? undefined,
+                filterBy:
+                  label || milestone
+                    ? {
+                        labels: label ? [label] : undefined,
+                        milestone: milestone || undefined,
                       }
-                      this.setOpenIssues(openIssues);
-                      this.setClosedIssues(closedIssues);
-                      this.setIssuesLoaded(true);
-                    },
-                    (error) => {
-                      console.log(error);
-                    },
-                  ),
+                    : undefined,
+                after: endCursor,
+                before: startCursor,
+                first: first,
+                last: last,
+              })
+              .valueChanges.pipe(
+                tapResponse(
+                  (res) => {
+                    const { openIssues, closedIssues, milestones, labels } =
+                      parseIssuesQuery(res.data);
+
+                    if (!(milestonesLoaded && labelsLoaded)) {
+                      this.reposFilterStore.setMilestones(milestones);
+                      this.reposFilterStore.setLabels(labels);
+                      this.reposFilterStore.setFiltersLoaded(true);
+                    }
+                    this.setOpenIssues(openIssues);
+                    this.setClosedIssues(closedIssues);
+                    this.setIssuesLoaded(true);
+                  },
+                  (error) => {
+                    console.log(error);
+                  },
                 ),
-            ),
-          ),
+              );
+          }),
+        ),
       ),
     ),
   );
@@ -152,6 +153,7 @@ export class IssuesStore extends ComponentStore<IssuesState> {
     private reposFilterStore: ReposFilterStore,
     private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private repoIssuesGQL: RepoIssuesGQL,
+    private activatedRoute: ActivatedRoute,
   ) {
     super(INITIAL_STATE);
   }

@@ -63,11 +63,6 @@ export class IssuesComponent implements OnInit {
     this.issuesStore.getIssues$(this.filterState$);
   }
 
-  changePage(page: PaginationEvent) {
-    this.reposFilterStore.changePage(page);
-    this.issuesStore.getIssues$(this.filterState$);
-  }
-
   clearFilters() {
     this.reposFilterStore.clearFilters();
     this.issuesStore.getIssues$(this.filterState$);
