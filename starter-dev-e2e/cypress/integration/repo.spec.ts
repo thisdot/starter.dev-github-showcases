@@ -4,7 +4,6 @@ import {
   hasExpression,
 } from "../utils/graphql-test-utils";
 
-//TODO: this can be refactored, probably using an enum/json structure to check against
 function handleGqlRequest(req): Boolean {
   if (hasOperationName(req, "CurrentUser")) {
     aliasQuery(req, "CurrentUser");
@@ -141,8 +140,8 @@ describe("When there is proper repository page responses", () => {
       .should("contain.text", "68")
       .get(`[data-testid="repo pull requests count"]`)
       .should("contain.text", "12")
-      //.get(`[data-testid="about description"]`) // Bug currently on angular-apollo, not set correctly
-      //.contains("A collection of GitHub clone implementations.")
+      .get(`[data-testid="repo file explorer description"]`)
+      .should("contain.text", "A collection of GitHub clone implementations.")
       .get(`[data-testid="readme"]`)
       .should("be.visible");
   });
@@ -150,12 +149,108 @@ describe("When there is proper repository page responses", () => {
   it("should be able to navigate to issues and pull requests tabs", () => {
     cy.get(`[data-testid="repo issues tab"]`)
       .click()
-      //.should("have.class", "tabActive") // fails on next-react because classes aren't space separated
       .wait("@gqlRepoIssuesQuery")
+      .get(`[data-testid="repo issues"]`)
+      .should("be.visible")
       .get(`[data-testid="repo pull requests tab"]`)
       .click()
-      //.should("have.class", "tabActive")
-      .wait("@gqlRepoPullRequestsQuery");
+      .wait("@gqlRepoPullRequestsQuery")
+      .get(`[data-testid="repo pull requests"]`)
+      .should("be.visible");
+  });
+
+  it("should be able to see open issues with valid data", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@gqlRepoIssuesQuery")
+      .get(`[data-testid="issue"]`)
+      .should("have.length", "24")
+      .should("be.visible")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      )
+      .get(`[data-testid="issue label name"]`)
+      .should("not.exist")
+      .get(`[data-testid="issue number"]`)
+      .should("contain.text", "#308")
+      .get(`[data-testid="issue created at"]`)
+      .should("be.visible")
+      .get(`[data-testid="issue created by"]`)
+      .should("contain.text", "BrettZeidler")
+      .get(`[data-testid="issue comment count"]`)
+      .should("contain.text", "32");
+  });
+
+  it("should be able to see closed issues with valid data", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@gqlRepoIssuesQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="issue"]`)
+      .should("have.length", "25")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Tab focus lost when not at root level of repo"
+      )
+      .get(`[data-testid="issue label name"]`)
+      .should("contain.text", "bug")
+      .get(`[data-testid="issue number"]`)
+      .should("contain.text", "#292")
+      .get(`[data-testid="issue closed at"]`)
+      .should("be.visible")
+      .get(`[data-testid="issue created by"]`)
+      .should("contain.text", "vyktoremario")
+      .get(`[data-testid="issue comment count"]`)
+      .should("contain.text", "0");
+  });
+
+  it("should be able to see open pull requests with valid data", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@gqlRepoPullRequestsQuery")
+      .get(`[data-testid="pr"]`)
+      .should("have.length", "12")
+      .get(`[data-testid="pull request title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Update readme for local and deployment"
+      )
+      .get(`[data-testid="pull request label name"]`)
+      .should("contain.text", "WIP DO NOT MERGE")
+      .get(`[data-testid="pull request number"]`)
+      .should("contain.text", "#304")
+      .get(`[data-testid="pull request created at"]`)
+      .should("be.visible")
+      .get(`[data-testid="pull request created by"]`)
+      .should("contain.text", "iansamz")
+      .get(`[data-testid="pull request comment count"]`)
+      .should("contain.text", "12");
+  });
+
+  it("should be able to see closed pull requests with valid data", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@gqlRepoPullRequestsQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="pr"]`)
+      .should("have.length", "25")
+      .get(`[data-testid="pull request title"]`)
+      .should("contain.text", "fix: fix dist folder for angular ngrx")
+      .get(`[data-testid="pull request label name"]`)
+      .should("not.exist")
+      .get(`[data-testid="pull request number"]`)
+      .should("contain.text", "#312")
+      .get(`[data-testid="pull request closed at"]`)
+      .should("be.visible")
+      .get(`[data-testid="pull request created by"]`)
+      .should("contain.text", "lindakatcodes")
+      .get(`[data-testid="pull request comment count"]`)
+      .should("contain.text", "0");
   });
 
   it("should be able to navigate down and up three folders deep", () => {
