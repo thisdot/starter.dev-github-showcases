@@ -10,6 +10,7 @@ import RepoDetails from './routes/repo-details';
 import SignIn from './routes/sign-in';
 import TopRepos from './routes/top-repos';
 import RepoPullRequest from './routes/repository-pull-request';
+import UserRepos from './components/user-repos';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -29,6 +30,14 @@ ReactDOM.render(
             element={
               <AuthGuard>
                 <RepoDetails />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/orgs/:username"
+            element={
+              <AuthGuard>
+                <UserRepos isOrg />
               </AuthGuard>
             }
           />

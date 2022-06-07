@@ -1,33 +1,22 @@
 import { useEffect, useState } from 'react';
-import { GITHUB_URL_BASE, GISTS_URL } from '../../constants/url.constants';
+import { GISTS_URL } from '../../constants/url.constants';
 import { Gist, GistWithFilename } from '../../interfaces/gists.interfaces';
 import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 import { filter, map, Subscription, tap } from 'rxjs';
+import { useUser } from '../../context/UserProvider';
 
 export function useGists(): GistWithFilename[] {
   const [state, setState] = useState<GistWithFilename[]>([]);
-  const [currentUser, setCurrentUser] = useState<string>('');
+  const user = useUser();
 
   /**
    * @todo Refactor getting the currently authenticated user's username into
    *       a global context.
    */
-  const getCurrentUser = () =>
-    fromFetchWithAuth<{
-      login: string;
-    }>(`${GITHUB_URL_BASE}/user`, {
-      selector: (response: Response) => {
-        return response.json();
-      },
-    });
 
   useEffect(() => {
-    getCurrentUser().subscribe((user) => {
-      setCurrentUser(user.login);
-    });
-
     const subscription: Subscription = fromFetchWithAuth<Gist[]>(
-      GISTS_URL(currentUser),
+      GISTS_URL(user?.login as string),
       {
         selector: (response: Response) => {
           return response.json();
@@ -59,7 +48,7 @@ export function useGists(): GistWithFilename[] {
     return () => {
       subscription.unsubscribe();
     };
-  }, [currentUser]);
+  }, [user]);
 
   return state;
 }

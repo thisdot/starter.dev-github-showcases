@@ -1,18 +1,12 @@
-import { formatDistanceToNow } from 'date-fns';
-import { getColourForLanguage } from '../../helpers/colours';
 import { RepositoryWithBranchCount } from '../../interfaces/repositories.interfaces';
-import { BranchLogo } from '../misc/BranchLogo';
-import { StarLogo } from '../misc/StarLogo';
+import PrivacyBadge from '../misc/Privacy-badge';
+import RepoMeta from '../repo-meta';
 import {
   Card,
   Heading,
   RepoNameLink,
   Badge,
   Description,
-  MetaData,
-  LanguageColor,
-  LanguageWrapper,
-  IconWrapper,
 } from './RepositoryCard.styles';
 
 export default function RepositoryCard({
@@ -20,34 +14,29 @@ export default function RepositoryCard({
 }: {
   repository: RepositoryWithBranchCount;
 }) {
-  const since = formatDistanceToNow(new Date(repository.updated_at), {
-    addSuffix: true,
-  });
-
+  const {
+    owner,
+    name,
+    visibility,
+    description,
+    language,
+    forks_count,
+    stargazers_count,
+    updated_at,
+  } = repository;
   return (
     <Card>
       <Heading>
-        <RepoNameLink to={`${repository.owner.login}/${repository.name}`}>
-          {repository.name}
-        </RepoNameLink>{' '}
-        {repository.visibility === 'public' && <Badge>Public</Badge>}
+        <RepoNameLink to={`${owner.login}/${name}`}>{name}</RepoNameLink>{' '}
+        <Badge>{<PrivacyBadge visibility={visibility} />}</Badge>
       </Heading>
-      <Description>{repository.description}</Description>
-      <MetaData>
-        <LanguageWrapper>
-          <LanguageColor color={getColourForLanguage(repository.language)} />
-          <span>{repository.language}</span>
-        </LanguageWrapper>
-        <IconWrapper>
-          <StarLogo />
-          <span>{repository.stargazers_count}</span>
-        </IconWrapper>
-        <IconWrapper>
-          <BranchLogo />
-          <span>{repository.branches_count}</span>
-        </IconWrapper>
-        <span> Updated {since}</span>
-      </MetaData>
+      <Description>{description}</Description>
+      <RepoMeta
+        language={language}
+        forkCount={forks_count}
+        stargazerCount={stargazers_count}
+        updatedAt={updated_at}
+      />
     </Card>
   );
 }
