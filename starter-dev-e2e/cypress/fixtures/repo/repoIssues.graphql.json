@@ -601,7 +601,7 @@
             "id": "I_kwDOGd0nu85KT8JI",
             "author": { "login": "BrettZeidler", "__typename": "User" },
             "comments": {
-              "totalCount": 0,
+              "totalCount": 32,
               "__typename": "IssueCommentConnection"
             },
             "labels": { "nodes": [], "__typename": "LabelConnection" },
