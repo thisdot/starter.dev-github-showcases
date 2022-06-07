@@ -81,7 +81,7 @@ export default {
     },
     strategies: {
       [LoginStrategies.CustomLogin]: {
-        scheme: '~/schemes/authScheme',
+        scheme: './schemes/authScheme',
         user: {
           property: false,
         },

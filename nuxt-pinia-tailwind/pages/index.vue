@@ -13,7 +13,6 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'IndexPage',
-  auth: true,
   setup() {
     const { $auth } = useContext()
 
