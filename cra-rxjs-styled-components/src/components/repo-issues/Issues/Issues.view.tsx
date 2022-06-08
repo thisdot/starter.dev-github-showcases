@@ -1,8 +1,9 @@
 import IssueTabHeader from '../IssueTabHeader';
 import IssueCard from '../IssueCard';
-import { PaginationContainer, Content, Wrapper } from './Issue.style';
+import { Content, Wrapper } from './Issue.style';
 import type { Issue } from './Issue.type';
 import { IssueTabValues } from '../../../types/types';
+import Pagination from '../../pagination';
 
 type IssueProps = {
   issues: Issue[];
@@ -17,7 +18,6 @@ export default function IssueView({
   openCount,
   changeActiveTab,
 }: IssueProps) {
-  console.log(issues);
   return (
     <Wrapper>
       <Content>
@@ -30,10 +30,7 @@ export default function IssueView({
           <IssueCard issue={issue} key={index} />
         ))}
       </Content>
-      <PaginationContainer>
-        <span className="prev">Previous</span>
-        <span className="next">Next</span>
-      </PaginationContainer>
+      <Pagination />
     </Wrapper>
   );
 }
