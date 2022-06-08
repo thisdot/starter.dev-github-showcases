@@ -47,10 +47,10 @@ export const IssueCardWrapper = styled.div`
 
   & > .right {
     .message {
-       ${flex};
-       & .icon {
-         font-size: 1.1rem;
-       }
+      ${flex};
+      & .icon {
+        font-size: 1.1rem;
+      }
       flex-direction: column;
     }
   }

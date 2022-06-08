@@ -4,7 +4,10 @@ import { ISSUE_PR_SEARCH } from '../../constants/url.constants';
 import { IssueTypes } from '../../types/types';
 import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 
-export function useRepositoryIssues(username: string, repo: string): IssueTypes {
+export function useRepositoryIssues(
+  username: string,
+  repo: string
+): IssueTypes {
   const [issues, setIssues] = useState<IssueTypes>({
     closed: {
       total_count: 0,
@@ -25,29 +28,10 @@ export function useRepositoryIssues(username: string, repo: string): IssueTypes 
       },
     });
 
-  
   useEffect(() => {
     forkJoin([
-      request(
-        `${ISSUE_PR_SEARCH(
-          username,
-          repo,
-          'issue',
-          'open',
-          20,
-          1
-        )}`
-      ),
-      request(
-        `${ISSUE_PR_SEARCH(
-          username,
-          repo,
-          'issue',
-          'closed',
-          20,
-          1
-        )}`
-      ),
+      request(`${ISSUE_PR_SEARCH(username, repo, 'issue', 'open', 20, 1)}`),
+      request(`${ISSUE_PR_SEARCH(username, repo, 'issue', 'closed', 20, 1)}`),
     ])
       .pipe(
         tap((val) => {
