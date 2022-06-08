@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
   "Transform": "AWS::Serverless-2016-10-31",
-  "Description": "Exported by architect/package@8.1.3 on 2022-05-18T22:50:59.220Z",
+  "Description": "Exported by architect/package@8.1.3 on 2022-06-08T21:21:22.926Z",
   "Resources": {
     "Role": {
       "Type": "AWS::IAM::Role",
@@ -178,13 +178,13 @@
           },
           "paths": {
             "/{proxy+}": {
-              "get": {
+              "x-amazon-apigateway-any-method": {
                 "x-amazon-apigateway-integration": {
                   "payloadFormatVersion": "2.0",
                   "type": "aws_proxy",
                   "httpMethod": "POST",
                   "uri": {
-                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetCatchallHTTPLambda.Arn}/invocations"
+                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AnyCatchallHTTPLambda.Arn}/invocations"
                   },
                   "connectionType": "INTERNET"
                 }
@@ -215,11 +215,11 @@
         }
       }
     },
-    "GetCatchallHTTPLambda": {
+    "AnyCatchallHTTPLambda": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
         "Handler": "index.handler",
-        "CodeUri": "/Users/williamhutt/Documents/work/thisdot/starter.dev-github-showcases/remix-gql-tailwind/node_modules/@architect/asap/src",
+        "CodeUri": "/Users/williamhutt/Documents/work/thisdot/starter.dev-github-showcases/remix-gql-tailwind/server",
         "Runtime": "nodejs14.x",
         "Architectures": [
           "x86_64"
@@ -242,7 +242,9 @@
             },
             "ARC_STATIC_BUCKET": {
               "Ref": "StaticBucket"
-            }
+            },
+            "ARC_STATIC_SPA": false,
+            "SESSION_SECRET": "36bbf98c12098e385b4ba332c8fe4fce4a587a9a4055326d45bffd7cd21f8c1e"
           }
         },
         "Role": {
@@ -256,11 +258,11 @@
           ]
         },
         "Events": {
-          "GetCatchallHTTPEvent": {
+          "AnyCatchallHTTPEvent": {
             "Type": "HttpApi",
             "Properties": {
               "Path": "/{proxy+}",
-              "Method": "GET",
+              "Method": "ANY",
               "ApiId": {
                 "Ref": "HTTP"
               }

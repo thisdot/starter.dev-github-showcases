@@ -1,9 +1,9 @@
-import type { ExplorerItem } from './types';
-import { Link } from 'remix';
-import { removeLastPathPart } from '../../lib/pathUtils';
-import { FolderIcon } from '@heroicons/react/solid';
-import { DocumentIcon } from '@heroicons/react/outline';
-import * as styles from './FileExplorer.classNames';
+import type { ExplorerItem } from "./types";
+import { Link } from "@remix-run/react";
+import { removeLastPathPart } from "../../lib/pathUtils";
+import { FolderIcon } from "@heroicons/react/solid";
+import { DocumentIcon } from "@heroicons/react/outline";
+import * as styles from "./FileExplorer.classNames";
 
 interface FileExplorerViewProps {
   items: ExplorerItem[];
@@ -31,7 +31,7 @@ function FileExplorerView({
         <div key={item.path} className={styles.cell}>
           <div className="flex items-center">
             <div className="mr-2.5">
-              {item.type === 'tree' ? (
+              {item.type === "tree" ? (
                 <FolderIcon className={styles.iconDir} />
               ) : (
                 <DocumentIcon className={styles.iconFile} />

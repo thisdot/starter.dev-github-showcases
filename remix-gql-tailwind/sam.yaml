@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Exported by architect/package@8.1.3 on 2022-05-18T22:50:59.220Z
+Description: Exported by architect/package@8.1.3 on 2022-06-08T21:21:22.926Z
 Resources:
   Role:
     Type: AWS::IAM::Role
@@ -105,13 +105,13 @@ Resources:
             Ref: AWS::StackName
         paths:
           /{proxy+}:
-            get:
+            x-amazon-apigateway-any-method:
               x-amazon-apigateway-integration:
                 payloadFormatVersion: '2.0'
                 type: aws_proxy
                 httpMethod: POST
                 uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetCatchallHTTPLambda.Arn}/invocations
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AnyCatchallHTTPLambda.Arn}/invocations
                 connectionType: INTERNET
           /_static/{proxy+}:
             get:
@@ -126,11 +126,11 @@ Resources:
                       Ref: StaticBucket
                 connectionType: INTERNET
                 timeoutInMillis: 30000
-  GetCatchallHTTPLambda:
+  AnyCatchallHTTPLambda:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://remix-gql-tailwind-cfn-deployments-a96b2/cdf84c4caa1df72110d2348fe11fc99a
+      CodeUri: s3://remix-gql-tailwind-cfn-deployments-a96b2/a542b0c791e1e9e6e03b4e47adb85861
       Runtime: nodejs14.x
       Architectures:
       - x86_64
@@ -149,17 +149,19 @@ Resources:
             Ref: AWS::StackName
           ARC_STATIC_BUCKET:
             Ref: StaticBucket
+          ARC_STATIC_SPA: false
+          SESSION_SECRET: 36bbf98c12098e385b4ba332c8fe4fce4a587a9a4055326d45bffd7cd21f8c1e
       Role:
         Fn::Sub:
         - arn:aws:iam::${AWS::AccountId}:role/${roleName}
         - roleName:
             Ref: Role
       Events:
-        GetCatchallHTTPEvent:
+        AnyCatchallHTTPEvent:
           Type: HttpApi
           Properties:
             Path: /{proxy+}
-            Method: GET
+            Method: ANY
             ApiId:
               Ref: HTTP
   StaticBucket:

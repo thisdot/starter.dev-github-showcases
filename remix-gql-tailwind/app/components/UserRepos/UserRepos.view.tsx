@@ -1,14 +1,14 @@
-import type { Repo } from './types';
-import { Link } from 'remix';
-import { StarIcon } from '@heroicons/react/outline';
-import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
-import RepoMeta from '../RepoMeta/RepoMeta';
-import * as styles from './UserRepos.classNames';
-import Pagination from '../Pagination/Pagination';
-import { filterRepos } from './filterRepos';
-import { getLanguages } from './getLanguages';
-import { useRepoFilters } from '../RepoFilters/useRepoFilters';
-import RepoFilters from '../RepoFilters/RepoFilters';
+import type { Repo } from "./types";
+import { Link } from "@remix-run/react";
+import { StarIcon } from "@heroicons/react/outline";
+import PrivacyBadge from "../PrivacyBadge/PrivacyBadge";
+import RepoMeta from "../RepoMeta/RepoMeta";
+import * as styles from "./UserRepos.classNames";
+import Pagination from "../Pagination/Pagination";
+import { filterRepos } from "./filterRepos";
+import { getLanguages } from "./getLanguages";
+import { useRepoFilters } from "../RepoFilters/useRepoFilters";
+import RepoFilters from "../RepoFilters/RepoFilters";
 
 export interface UserReposViewProps {
   repos: Repositories;
@@ -19,7 +19,7 @@ export interface Repositories {
   repos: Repo[];
   pageInfo:
     | {
-        __typename?: 'PageInfo' | undefined;
+        __typename?: "PageInfo" | undefined;
         endCursor?: string | null | undefined;
         startCursor?: string | null | undefined;
         hasNextPage: boolean;

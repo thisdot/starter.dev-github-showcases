@@ -1,14 +1,14 @@
-import { json, useLoaderData, useLocation } from 'remix';
-import type { LoaderFunction } from 'remix';
-import gqlClient from '~/lib/graphql-client';
-import { FULL_USER_PROFILE_QUERY } from '~/lib/queries/UserProfile';
-import { auth } from '~/services/auth.server';
-import { parseQuery } from '~/components/UserRepos/parseQuery';
-import ProfilePage from '~/components/ProfilePage/ProfilePage.view';
+import { useLoaderData, useLocation } from "@remix-run/react";
+import { json, LoaderFunction } from "@remix-run/node";
+import gqlClient from "~/lib/graphql-client";
+import { FULL_USER_PROFILE_QUERY } from "~/lib/queries/UserProfile";
+import { auth } from "~/services/auth.server";
+import { parseQuery } from "~/components/UserRepos/parseQuery";
+import ProfilePage from "~/components/ProfilePage/ProfilePage.view";
 import {
   OrderDirection,
   RepositoryOrderField,
-} from '~/components/RepoFilters/useRepoFilters';
+} from "~/components/RepoFilters/useRepoFilters";
 
 type LoaderData = {
   userProfileData: any;
@@ -17,15 +17,15 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const { accessToken } = await auth.isAuthenticated(request, {
-    failureRedirect: '/login',
+    failureRedirect: "/login",
   });
 
   let url = new URL(request.url);
-  let after = url.searchParams.get('after');
-  let before = url.searchParams.get('before');
+  let after = url.searchParams.get("after");
+  let before = url.searchParams.get("before");
 
-  const afterCursor = typeof after === 'string' ? after : undefined;
-  const beforeCursor = typeof before === 'string' ? before : undefined;
+  const afterCursor = typeof after === "string" ? after : undefined;
+  const beforeCursor = typeof before === "string" ? before : undefined;
 
   const data = await gqlClient.request(
     FULL_USER_PROFILE_QUERY,
