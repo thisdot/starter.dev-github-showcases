@@ -26,7 +26,7 @@ export const IssueCardWrapper = styled.div`
       flex-direction: column;
       align-items: start;
       & > .heading {
-        font-weight: 600 !important
+        font-weight: 600 !important;
         font-size: 16px !important;
         vertical-align: middle !important;
         color: ${colors.gray800};

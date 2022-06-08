@@ -2,11 +2,63 @@ import styled from 'styled-components';
 import colors from '../../constants/colors';
 
 export const PaginationContainer = styled.div`
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 10px 0;
 
-  & > span {
+  .group {
+    position: relative;
+    z-index: 0;
+    display: inline-flex;
+  }
+
+  .button {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    border-width: 1px;
+    --tw-bg-opacity: 1;
+    background-color: rgba(243,244,246,1);
+    padding: 0.25rem 1rem;
+    font-size: .875rem;
+    font-weight: 500 !important;  
+    line-height: 1.25rem;
+    --tw-text-opacity: 1;
+    color: rgba(59,130,246,1);
+    transition-property: background-color,border-color,color,fill,stroke;
+    transition-duration: .15s;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    border-style: solid;
+    border-color: rgba(229,231,235,1);
+
+    &:first-child {
+      border-top-left-radius: 0.375rem;
+      border-bottom-left-radius: 0.375rem;
+    }
+
+    &:last-child {
+      border-top-right-radius: 0.375rem;
+      border-bottom-right-radius: 0.375rem;
+      border-left-width: 0px;
+    }
+
+    &:hover {
+      background-color: rgba(37,99,235,1);
+      color: rgba(255,255,255,1);
+    }
+
+    &:disabled {
+      color: rgba(191,219,254,1);
+
+      &:hover {
+        background-color: rgba(243,244,246,1);
+      }
+    }
+  }
+
+  /* & > span {
     min-width: 32px;
     padding: 5px 10px;
     font-style: normal;
@@ -27,75 +79,6 @@ export const PaginationContainer = styled.div`
     color: ${colors.gray400};
     cursor: default;
     border-color: transparent;
-  }
+  } */
 
-  & > .prev {
-    position: relative;
-    &::before {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      vertical-align: text-bottom;
-      content: '';
-      background-color: currentColor;
-      margin-right: 4px;
-      -webkit-clip-path: polygon(
-        9.8px 12.8px,
-        8.7px 12.8px,
-        4.5px 8.5px,
-        4.5px 7.5px,
-        8.7px 3.2px,
-        9.8px 4.3px,
-        6.1px 8px,
-        9.8px 11.7px,
-        9.8px 12.8px
-      );
-      clip-path: polygon(
-        9.8px 12.8px,
-        8.7px 12.8px,
-        4.5px 8.5px,
-        4.5px 7.5px,
-        8.7px 3.2px,
-        9.8px 4.3px,
-        6.1px 8px,
-        9.8px 11.7px,
-        9.8px 12.8px
-      );
-    }
-  }
-
-  & > .next {
-    position: relative;
-    &::after {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      vertical-align: text-bottom;
-      content: '';
-      background-color: currentColor;
-      margin-left: 4px;
-      -webkit-clip-path: polygon(
-        6.2px 3.2px,
-        7.3px 3.2px,
-        11.5px 7.5px,
-        11.5px 8.5px,
-        7.3px 12.8px,
-        6.2px 11.7px,
-        9.9px 8px,
-        6.2px 4.3px,
-        6.2px 3.2px
-      );
-      clip-path: polygon(
-        6.2px 3.2px,
-        7.3px 3.2px,
-        11.5px 7.5px,
-        11.5px 8.5px,
-        7.3px 12.8px,
-        6.2px 11.7px,
-        9.9px 8px,
-        6.2px 4.3px,
-        6.2px 3.2px
-      );
-    }
-  }
 `;

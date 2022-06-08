@@ -60,6 +60,16 @@ export default function IssueTabHeader(props: Props) {
           <a href="/"> WIP DO NOT MERGE </a>
           <a href="/"> Enhancement </a>
         </DetailsDropdown>
+
+        <DetailsDropdown
+          title="Milestones"
+          DropdownLabel="Filter by milestone"
+          toggleDropDown={() => toggleDropdown('Milestones')}
+          isOpen={openDropdown === 'Milestones'}
+        >
+          <a href="/"> Issue With No Milestone </a>
+        </DetailsDropdown>
+
         <DetailsDropdown
           title="Sort"
           DropdownLabel="Sort by"
