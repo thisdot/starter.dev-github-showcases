@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia'
-import { IUserRepository } from '~/types/user/interfaces'
+import { IUserRepository, UserGist } from '~/types/user/interfaces'
 
 interface IUserRootState {
   topRepos: IUserRepository[]
+  gists: UserGist[]
 }
 
 export const useUserStore = defineStore('userStore ', {
   state: (): IUserRootState => ({
     topRepos: [],
+    gists: [],
   }),
   actions: {
     async getUserTopRepos() {
@@ -28,6 +30,23 @@ export const useUserStore = defineStore('userStore ', {
         })
 
         this.topRepos = data
+      } catch (error) {
+        return error
+      }
+    },
+    async getUsetGists() {
+      try {
+        const {
+          $config: { GITHUB_API_URL },
+          $auth: { user },
+          $axios,
+        } = this.$nuxt
+
+        const url = `${GITHUB_API_URL}/users/${user.login}/gists?per_page=10`
+
+        const { data } = await $axios.get<UserGist[]>(url)
+
+        this.gists = data
       } catch (error) {
         return error
       }

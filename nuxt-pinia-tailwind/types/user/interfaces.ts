@@ -19,3 +19,14 @@ export interface IUserRepository {
   default_branch: string
   homepage: string
 }
+
+export interface UserGist {
+  url: string
+  id: string
+  html_url: string
+  files: {
+    [key: string]: {
+      filename: string
+    }
+  }
+}
