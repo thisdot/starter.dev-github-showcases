@@ -13,6 +13,7 @@ import {
   RepoContainer,
   RepoGrid,
 } from '../../components/layouts/RepoLayoutPage';
+import { useRepositoryDetails } from '../../hooks/repository-code/use-repository-details';
 
 type RepositoryDetails = {
   repo: Repository | null;
@@ -21,11 +22,8 @@ type RepositoryDetails = {
 };
 
 export default function RepoDetails() {
-  const [repoDetails, setRepoDetails] = useState<RepositoryDetails>({
-    repo: null,
-  });
-  const [loading, setLoading] = useState(true);
   const params = useParams();
+  const repoDetails: RepositoryDetails = useRepositoryDetails(params.username!, params.repo!);
   const { repo, rootFileInfo, topics } = repoDetails;
   const listOfDirectoryNames = rootFileInfo
     ?.filter((obj) => obj.type === 'dir')
@@ -35,37 +33,6 @@ export default function RepoDetails() {
     .map((obj) => obj.name)
     .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
-  const request = (url: string) =>
-    fromFetchWithAuth(url, {
-      selector: (response: Response) => {
-        return response.json();
-      },
-    });
-
-  useEffect(() => {
-    forkJoin([
-      request(SINGLE_USER_REPO(params.username!, params.repo!)),
-      request(`${SINGLE_USER_REPO(params.username!, params.repo!)}/contents`),
-      request(`${SINGLE_USER_REPO(params.username!, params.repo!)}/topics`),
-    ])
-      .pipe(
-        tap((val) => {
-          if (val) {
-            setRepoDetails({
-              repo: val[0],
-              rootFileInfo: val[1],
-              topics: val[2].names,
-            });
-            setLoading(false);
-          }
-        })
-      )
-      .subscribe();
-  }, [params.username, params.repo]);
-
-  if (loading) {
-    return <p>...Loading</p>;
-  }
 
   return (
     <>
