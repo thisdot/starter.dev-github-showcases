@@ -7,7 +7,7 @@ import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 export function useRepositoryIssues(
   username: string,
   repo: string,
-  issueType: IssueType,
+  issueType: IssueType
 ): IssueTypes {
   const [issues, setIssues] = useState<IssueTypes>({
     closed: {
