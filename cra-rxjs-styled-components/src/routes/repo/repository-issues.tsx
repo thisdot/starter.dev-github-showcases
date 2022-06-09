@@ -4,6 +4,6 @@ import { useRepositoryIssues } from '../../hooks/repository-issues/use-repositor
 
 export default function RepoIssues() {
   const params = useParams();
-  const issues = useRepositoryIssues(params.username!, params.repo!);
+  const issues = useRepositoryIssues(params.username!, params.repo!, 'issue');
   return <IssueCtrl issues={issues!} />;
 }

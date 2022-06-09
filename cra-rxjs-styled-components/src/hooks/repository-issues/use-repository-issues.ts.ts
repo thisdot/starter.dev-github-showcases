@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { forkJoin, tap } from 'rxjs';
 import { ISSUE_PR_SEARCH } from '../../constants/url.constants';
-import { IssueTypes } from '../../types/types';
+import { IssueTypes, IssueType } from '../../types/types';
 import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 
 export function useRepositoryIssues(
   username: string,
-  repo: string
+  repo: string,
+  issueType: IssueType,
 ): IssueTypes {
   const [issues, setIssues] = useState<IssueTypes>({
     closed: {
@@ -29,9 +30,9 @@ export function useRepositoryIssues(
     });
 
   useEffect(() => {
-    forkJoin([
-      request(`${ISSUE_PR_SEARCH(username, repo, 'issue', 'open', 20, 1)}`),
-      request(`${ISSUE_PR_SEARCH(username, repo, 'issue', 'closed', 20, 1)}`),
+    const subscription = forkJoin([
+      request(`${ISSUE_PR_SEARCH(username, repo, issueType, 'open', 20, 1)}`),
+      request(`${ISSUE_PR_SEARCH(username, repo, issueType, 'closed', 20, 1)}`),
     ])
       .pipe(
         tap((val) => {
@@ -44,7 +45,10 @@ export function useRepositoryIssues(
         })
       )
       .subscribe();
-  }, [username, repo]);
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [username, repo, issueType]);
 
   return issues;
 }
