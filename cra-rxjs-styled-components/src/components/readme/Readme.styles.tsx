@@ -1,20 +1,19 @@
 import styled from 'styled-components';
 export const ReadmeContainer = styled.div`
-  margin: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.375rem;
+  border: 1px solid rgb(209 213 219 / var(--tw-border-opacity));
 `;
 
 export const ReadmeHeader = styled.header`
   z-index: 30;
-  border-radius: 0.375rem;
-  border: 1px solid rgb(209 213 219 / var(--tw-border-opacity));
+  border-bottom: 1px solid rgba(209 213 219 / var(--tw-border-opacity));
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   padding: 0.625rem;
 `;
 
 export const ReadmeDiv = styled.div`
-  padding: 1rem;
-  border-radius: 0.375rem;
-  border: 0.1px solid rgb(209 213 219 / var(--tw-border-opacity));
+  padding: 1.5rem 2.5rem;
 `;
 
 export const ReadmeIconContainer = styled.span`

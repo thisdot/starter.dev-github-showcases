@@ -9,14 +9,20 @@ import IssuesSkeleton from '@components/IssuesSkeleton';
 import {
   useIssueFilters,
   IssueFilters,
-  Pagination,
   IssueType,
 } from '@components/IssueFilters';
+import Pagination from '@components/Pagination';
 import RepoPullsView from './RepoPulls.view';
+import { useRouter } from 'next/router';
 
 function RepoPulls() {
   const { owner, name } = useRepo();
+  const { query } = useRouter();
   const filters = useIssueFilters();
+
+  const afterCursor = typeof query.after === 'string' ? query.after : undefined;
+  const beforeCursor =
+    typeof query.before === 'string' ? query.before : undefined;
 
   const {
     data,
@@ -30,8 +36,10 @@ function RepoPulls() {
       name,
       orderBy: filters.state.sort,
       labels: filters.state.label ? [filters.state.label] : undefined,
-      after: filters.state.afterCursor,
-      before: filters.state.beforeCursor,
+      after: afterCursor,
+      before: beforeCursor,
+      first: filters.state.first,
+      last: filters.state.last,
     },
     {
       keepPreviousData: true,
@@ -91,10 +99,12 @@ function RepoPulls() {
           <IssuesEmpty Icon={PullRequestIcon} />
         )}
       </IssuesContainer>
-      {activePullRequests.pageInfo && (
+
+      {(activePullRequests.pageInfo?.hasNextPage ||
+        activePullRequests.pageInfo?.hasPreviousPage) && (
         <Pagination
           pageInfo={activePullRequests.pageInfo}
-          changePage={filters.changePage}
+          link={`${owner}/${name}/pulls`}
         />
       )}
     </>

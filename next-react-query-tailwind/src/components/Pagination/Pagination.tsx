@@ -5,18 +5,18 @@ import styles from './Pagination.module.css';
 
 interface PaginationProps {
   pageInfo?: PageInfo;
-  owner: string;
+  link: string;
 }
 
-function Pagination({ pageInfo, owner }: PaginationProps) {
+function Pagination({ pageInfo, link }: PaginationProps) {
   const router = useRouter();
 
   if (!pageInfo) {
     return null;
   }
 
-  const prevUrl = `/${owner}?before=${pageInfo.startCursor}`;
-  const nextUrl = `/${owner}?after=${pageInfo.endCursor}`;
+  const prevUrl = `/${link}?before=${pageInfo.startCursor}`;
+  const nextUrl = `/${link}?after=${pageInfo.endCursor}`;
 
   const handlePreviousClick = () => {
     router.push(prevUrl, prevUrl, { shallow: true });

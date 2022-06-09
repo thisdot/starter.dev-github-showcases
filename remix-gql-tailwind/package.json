@@ -18,7 +18,14 @@
     "test:e2e:dev": "start-server-and-test dev http://localhost:3000 \"npx cypress open\"",
     "test:e2e:run": "cross-env PORT=8811 start-server-and-test dev http://localhost:8811 \"npx cypress run\"",
     "typecheck": "tsc -b && tsc -b cypress",
-    "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run"
+    "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run",
+    "mock": "concurrently -c magenta,cyan \"npm:mock:*\"",
+    "mock:remix": "node -r dotenv/config --require ./mocks ./node_modules/@remix-run/dev/cli.js",
+    "mock:css": "npm run build:css -- --w",
+    "postinstall": "remix setup node",
+    "start": "remix-serve build",
+    "storybook": "concurrently -n css,storybook -c cyan,magenta \"npm run dev:css\" \"start-storybook -p 6006\"",
+    "build-storybook": "build-storybook"
   },
   "prettier": {},
   "eslintIgnore": [
@@ -103,5 +110,8 @@
   },
   "engines": {
     "node": ">=14"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

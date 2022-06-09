@@ -3,13 +3,12 @@ import styled from 'styled-components';
 export const RepoLayout = styled.div`
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: 70% 30%;
-  grid-template-rows: auto;
-  grid-template-areas:
-    'header header'
-    'main  aside'
-    'readme .';
+`;
+
+export const RepoContainer = styled.div`
+  padding: 2rem 1rem;
+  max-width: 1536px;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
     display: flex;
@@ -17,20 +16,34 @@ export const RepoLayout = styled.div`
   }
 `;
 
-export const RepoHeader = styled.div`
-  grid-area: header;
-`;
-
-export const RepoSubHeader = styled.div`
-  grid-area: header;
+export const RepoGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-gap: 2rem;
 `;
 
 export const RepoMain = styled.div`
-  grid-area: main;
+  grid-column: span 12 / span 12;
+
+  @media (min-width: 768px) {
+    grid-column: span 7 / span 7;
+  }
+
+  @media (min-width: 1280px) {
+    grid-column: span 9 / span 9;
+  }
 `;
 
 export const RepoAside = styled.div`
-  grid-area: aside;
+  grid-column: span 12 / span 12;
+
+  @media (min-width: 768px) {
+    grid-column: span 5 / span 5;
+  }
+
+  @media (min-width: 1280px) {
+    grid-column: span 3 / span 3;
+  }
 `;
 
 export const RepoReadme = styled.div`

@@ -1,5 +1,9 @@
+import {
+  FilterState,
+  RepositoryOrderField,
+} from '../RepoFilters/useRepoFilters';
+
 import type { Repo } from './types';
-import type { FilterState } from '../RepoFilters/useRepoFilters';
 import { TypeFilter } from '../RepoFilters/useRepoFilters';
 
 export function filterRepos(repos: Repo[], state: FilterState) {
@@ -28,6 +32,33 @@ export function filterRepos(repos: Repo[], state: FilterState) {
       !repo.name.toLocaleLowerCase().includes(state.query.toLocaleLowerCase())
     ) {
       return acc;
+    }
+
+    // add individual filters above this line that depend on a repo-property and not the array of repos
+    // this sorts the repos array
+    switch (state.sort) {
+      case RepositoryOrderField.Name: {
+        return [...acc, repo].sort((a, b) => {
+          if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
+            return -1;
+          }
+          if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+      case RepositoryOrderField.Stargazers: {
+        return [...acc, repo].sort((a, b) => {
+          if (a.stargazerCount < b.stargazerCount) {
+            return 1;
+          }
+          if (a.stargazerCount > b.stargazerCount) {
+            return -1;
+          }
+          return 0;
+        });
+      }
     }
 
     return [...acc, repo];

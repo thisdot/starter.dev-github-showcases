@@ -17,7 +17,7 @@ import NavBar from "./components/Navbar/NavBar";
 import { auth } from "./services/auth.server";
 import { CURRENT_USER_QUERY } from "./lib/queries/UserDropdown";
 import gqlClient from "./lib/graphql-client";
-import { sessionStorage } from "./services/session.server";
+import { getSession } from "./services/session.server";
 
 type DocumentProps = {
   children: React.ReactNode;
@@ -67,33 +67,29 @@ export function CatchBoundary() {
 
 type LoaderData = {
   viewer?: any;
-  valid?: any;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const session = await sessionStorage.getSession(
-    request.headers.get("Cookie")
-  );
-  const valid = session.get(auth.sessionKey);
+  const { getUser } = await getSession(request);
+  const session = await getUser();
+  let viewer;
 
-  // verifies authed before calling to prevent redirect spiral
-  if (valid) {
+  if (session) {
     const { accessToken } = await auth.isAuthenticated(request, {
       failureRedirect: "/login",
     });
-    const { viewer } = await gqlClient.request(CURRENT_USER_QUERY, undefined, {
+    ({ viewer } = await gqlClient.request(CURRENT_USER_QUERY, undefined, {
       authorization: `Bearer ${accessToken}`,
-    });
-    return json<LoaderData>({ viewer, valid });
+    }));
   }
-  return json<LoaderData>({ valid });
+  return json<LoaderData>({ viewer });
 };
 
 export default function App() {
-  const { viewer, valid } = useLoaderData<LoaderData>();
+  const { viewer } = useLoaderData<LoaderData>();
   return (
     <Document>
-      {valid ? <NavBar user={viewer} /> : null}
+      {viewer ? <NavBar user={viewer} /> : null}
       <Outlet />
       <ScrollRestoration />
       <Scripts />

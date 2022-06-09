@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const AboutContainer = styled.div`
-  margin-top: 4rem;
   border-bottom: 2px solid var(--gray-300);
-  width: 90%;
+  width: 100%;
 `;
 
 export const Header = styled.h3`
@@ -22,7 +21,7 @@ export const DefaultRepoText = styled.span`
 `;
 
 export const DescriptionText = styled.span`
-  font-size: 1.1em;
+  font-size: inherit;
   line-height: 1.4em;
   color: var(--gray-600);
 `;
@@ -45,6 +44,10 @@ export const WebsiteLink = styled.a`
   &:hover {
     text-decoration: underline;
   }
+`;
+
+export const TagsContainer = styled.div`
+  margin-top: 1rem;
 `;
 
 export const Tag = styled.span`

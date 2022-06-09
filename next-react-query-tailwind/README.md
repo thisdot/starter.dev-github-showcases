@@ -106,8 +106,8 @@ To use this app and authenticate with GitHub, we need to setup the OAuth credent
 Register a new OAuth application form details
 
 - Application name - Enter a name for the application
-- Homepage URL - Enter the url of the Next application. _(If running locally http://localhost:3000 otherwise the url of the application on the interenet)_
-- Authorization callback URL - Enter the url of the applications oauth callback. _(If running locally http://localhost:3000/api/auth/github/callback otherwise the url of the Next application with `/api/auth/github/callback` appended to it)_
+- Homepage URL - Enter the url of the Next application. _(If running locally `http://localhost:3000` otherwise the url of the application on the interenet)_
+- Authorization callback URL - Enter the url of the applications oauth callback. _(If running locally `http://localhost:3000` otherwise the url of the Next application)_
 
 After registering your OAuth application, add the generated client id and secret to a `.env` file for the project.
 

@@ -23,8 +23,7 @@ applications:
       phases:
         preBuild:
           commands:
-            - nvm install
-            - nvm use
+            - nvm install --lts=gallium
             - yarn install
             - yarn generate
         build:
@@ -44,8 +43,7 @@ applications:
       phases:
         preBuild:
           commands:
-            - nvm install
-            - nvm use
+            - nvm install --lts=gallium
             - yarn install
         build:
           commands:
@@ -89,6 +87,42 @@ applications:
             - yarn run build
       artifacts:
         baseDirectory: build/
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+
+  - appRoot: angular-ngrx-scss
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - npm ci
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: dist/angular-ngrx-scss
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+
+  - appRoot: nuxt-pinia-tailwind
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - yarn install
+        build:
+          commands:
+            - yarn run build
+      artifacts:
+        baseDirectory: .nuxt
         files:
           - "**/*"
       cache:

@@ -9,14 +9,20 @@ import IssuesSkeleton from '@components/IssuesSkeleton';
 import {
   useIssueFilters,
   IssueFilters,
-  Pagination,
   IssueType,
 } from '@components/IssueFilters';
+import Pagination from '@components/Pagination';
 import RepoIssuesView from './RepoIssues.view';
+import { useRouter } from 'next/router';
 
 function RepoIssues() {
   const { owner, name } = useRepo();
+  const { query } = useRouter();
   const filters = useIssueFilters();
+
+  const afterCursor = typeof query.after === 'string' ? query.after : undefined;
+  const beforeCursor =
+    typeof query.before === 'string' ? query.before : undefined;
 
   const {
     data,
@@ -33,8 +39,10 @@ function RepoIssues() {
         labels: filters.state.label ? [filters.state.label] : undefined,
         milestone: filters.state.milestone,
       },
-      after: filters.state.afterCursor,
-      before: filters.state.beforeCursor,
+      after: afterCursor,
+      before: beforeCursor,
+      first: filters.state.first,
+      last: filters.state.last,
     },
     {
       keepPreviousData: true,
@@ -93,10 +101,11 @@ function RepoIssues() {
           <IssuesEmpty Icon={MinusCircleIcon} />
         )}
       </IssuesContainer>
-      {activeIssues.pageInfo && (
+      {(activeIssues.pageInfo?.hasNextPage ||
+        activeIssues.pageInfo?.hasPreviousPage) && (
         <Pagination
           pageInfo={activeIssues.pageInfo}
-          changePage={filters.changePage}
+          link={`${owner}/${name}/issues`}
         />
       )}
     </>

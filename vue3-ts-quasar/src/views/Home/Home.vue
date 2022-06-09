@@ -16,11 +16,18 @@
         Top repositories
       </h1>
       <q-card>
-        <q-list>
-          <q-item v-for="i in Array(10)" :key="i">
-            <RepoCard v-bind="testRepoData" />
-          </q-item>
-        </q-list>
+        <template v-if="!reposLoading">
+          <q-list v-if="repoList" separator>
+            <q-item v-for="repo in repoList" :key="repo.id">
+              <RepoCard v-bind="repo" />
+            </q-item>
+          </q-list>
+
+          <!-- Repositories were NOT found -->
+          <div v-else>
+            <h2>Repos not found</h2>
+          </div>
+        </template>
       </q-card>
 
       <div class="row full-width items-center justify-center q-mt-lg">
@@ -33,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 export default defineComponent({
   name: 'Home',
@@ -44,36 +51,15 @@ export default defineComponent({
 import { GistsPanel, RepoCard } from '@/components';
 import { Auth } from '@/views';
 import { useUserStore } from '@/store/userStore';
+import { useRepository } from '@/composables';
 
 const user = useUserStore();
 
-// TODO: Make this dynamic
-const testRepoData = {
-  repoName: 'cowrywise-unsplashed',
-  visibilityTag: 'Private',
-  mainLanguage: {
-    color: 'yellow',
-    language: 'Javascript',
-  },
-  description:
-    'Using basic pull requests to add your name and github link to BE A MEMBER of ZTM-ng',
-  topics: [
-    {
-      name: 'JavaScript',
-      url: '',
-    },
-    {
-      name: 'css',
-      url: '',
-    },
-    {
-      name: 'graphql-api',
-      url: '',
-    },
-  ],
-  stars: 1,
-  lastUpdated: 'on 23 Sep 2020',
-};
+const { getTopRepositories } = useRepository();
+
+const { data: repoData, loading: reposLoading } = getTopRepositories();
+
+const repoList = computed(() => repoData.value?.topRepositories ?? null);
 </script>
 
 <style lang="scss" scoped>

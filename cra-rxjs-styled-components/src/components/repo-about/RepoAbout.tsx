@@ -11,6 +11,7 @@ import {
   ReadmeText,
   DescriptionText,
   ReadmeIconStyles,
+  TagsContainer,
 } from './RepoAbout.styles';
 
 type Props = {
@@ -40,10 +41,11 @@ export default function RepoAbout({ description, websiteLink, topics }: Props) {
             </WebsiteLink>
           </LinkContainer>
         ) : null}
-
-        {topics?.map((topic, index) => (
-          <Tag key={index}>{topic}</Tag>
-        ))}
+        <TagsContainer>
+          {topics?.map((topic, index) => (
+            <Tag key={index}>{topic}</Tag>
+          ))}
+        </TagsContainer>
       </SpacingContainer>
 
       <ReadmeHoverEffect>

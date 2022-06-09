@@ -1,0 +1,12 @@
+{
+  "data": {
+    "viewer": {
+      "id": "TESTUSERID",
+      "gists": {
+        "nodes": [],
+        "__typename": "GistConnection"
+      },
+      "__typename": "User"
+    }
+  }
+}

@@ -38,7 +38,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   );
 
   const formattedPath = Array.isArray(path) ? path.join("/") : path;
-  console.log(formattedPath);
   const defaultBranch = "HEAD";
 
   const context: RepoContext = {
