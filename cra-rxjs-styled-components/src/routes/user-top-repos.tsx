@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import RepositoryCard from '../components/top-repositories/RepositoryCard';
 import { useTopRepos } from '../hooks/top-repositories/use-top-repos';
 import { useGists } from '../hooks/gists/use-gists';
 import Sidebar from '../components/layouts/Sidebar';
 import { Layout } from '../components/layouts/Layout';
+import RepoCard from '../components/repo-card';
 
 const Page = styled.div`
   width: 100%;
@@ -53,8 +53,8 @@ export default function TopRepos() {
           <Page>
             <Heading>Top Repositories</Heading>
             <RepositoriesContainer>
-              {repositories.map((r) => (
-                <RepositoryCard repository={r} key={r.id}></RepositoryCard>
+              {repositories.map((repo) => (
+                <RepoCard repo={repo} key={repo.id} />
               ))}
             </RepositoriesContainer>
           </Page>
