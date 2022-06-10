@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import RepositoryCard from '../components/top-repositories/RepositoryCard';
 import { useTopRepos } from '../hooks/top-repositories/use-top-repos';
 import { useGists } from '../hooks/gists/use-gists';
-import Sidebar from '../components/layouts/Sidebar';
 import { Layout } from '../components/layouts/Layout';
+import UserGists from '../components/user-gists';
 
 const Page = styled.div`
   width: 100%;
@@ -41,7 +41,7 @@ export default function TopRepos() {
   return (
     <>
       <Layout>
-        <Sidebar
+        <UserGists
           title="Gists"
           links={gists.map((gist) => ({
             id: gist.id,
