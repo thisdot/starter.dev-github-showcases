@@ -28,19 +28,33 @@ export default class CustomLoginScheme extends LocalScheme {
 
       const user = response.data
 
-      const newEndpoint: HTTPRequest = {
+      // Fetch organizations
+      const orgsEndpoint: HTTPRequest = {
         ...endpoint,
         url: `users/${user.login}/orgs`,
       }
 
-      const { data: userOrgs } = await this.$auth.requestWith(
-        this.name,
-        newEndpoint
-      )
+      const getOrgs = this.$auth.requestWith(this.name, orgsEndpoint)
+      //
+
+      // Fetch stars
+      const starsEndpoint: HTTPRequest = {
+        ...endpoint,
+        url: `users/${user.login}/starred`,
+      }
+
+      const getStars = this.$auth.requestWith(this.name, starsEndpoint)
+      //
+
+      const [{ data: orgs }, { data: stars }] = await Promise.all([
+        getOrgs,
+        getStars,
+      ])
 
       const customUser: IUser = {
         ...user,
-        orgs: userOrgs,
+        orgs,
+        stars,
       }
 
       this.$auth.setUser(customUser)

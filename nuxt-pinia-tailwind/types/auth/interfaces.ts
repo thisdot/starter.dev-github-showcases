@@ -13,6 +13,11 @@ export interface IUserOrg {
   description: string
 }
 
+export interface IUserStar {
+  name: string
+  url: string
+}
+
 export interface IUserApiResponse {
   login: string
   id: number
@@ -50,4 +55,5 @@ export interface IUserApiResponse {
 
 export interface IUser extends IUserApiResponse {
   orgs: IUserOrg[]
+  stars: IUserStar[]
 }
