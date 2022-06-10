@@ -71,7 +71,10 @@ describe("When there is proper repository page responses", () => {
       .get(`[data-testid="org about avatar"]`)
       .should("be.visible")
       .and("have.attr", "src")
-      .and("contain", "22839396");
+      .and(
+        "match",
+        /.*(https).*(avatars\.githubusercontent\.com).*(22839396).*/
+      );
   });
 
   it("should display repository list and data", () => {
