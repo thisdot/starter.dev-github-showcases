@@ -19,7 +19,7 @@ interface RepoCardProps {
   star?: boolean;
 }
 
-function RepoCard({ repo,  star }: RepoCardProps) {
+function RepoCard({ repo, star }: RepoCardProps) {
   const {
     id,
     name,
@@ -49,14 +49,16 @@ function RepoCard({ repo,  star }: RepoCardProps) {
           updatedAt={updated_at}
         />
       </Content>
-      {star && (<Aside>
-        <StarBtn>
-          <StarIcon>
-            <Star />
-          </StarIcon>
-          Star
-        </StarBtn>
-      </Aside>)}
+      {star && (
+        <Aside>
+          <StarBtn>
+            <StarIcon>
+              <Star />
+            </StarIcon>
+            Star
+          </StarBtn>
+        </Aside>
+      )}
     </Containers>
   );
 }

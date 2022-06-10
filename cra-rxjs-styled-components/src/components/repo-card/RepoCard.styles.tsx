@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Star } from '@styled-icons/heroicons-outline';
 
@@ -11,9 +11,10 @@ export const Containers = styled.div<Props>`
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 1rem;
   &:first-of-type {
-    border-top: ${props => props.star && '1px solid rgb(229 231 235 / var(--tw-border-opacity))'};
+    border-top: ${(props) =>
+      props.star && '1px solid rgb(229 231 235 / var(--tw-border-opacity))'};
   }
-  padding: ${props => props.star ? '2rem 0' : '1rem'};
+  padding: ${(props) => (props.star ? '2rem 0' : '1rem')};
   border-bottom: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
 `;
 
