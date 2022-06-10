@@ -10,13 +10,15 @@ type RepositoryDetails = {
   topics?: string[];
 };
 
-
-export function useRepositoryDetails(username: string, repo: string, ) {
-
+export function useRepositoryDetails(
+  username: string,
+  repo: string,
+  branch?: string,
+  folder?: string
+): RepositoryDetails {
   const [repoDetails, setRepoDetails] = useState<RepositoryDetails>({
     repo: null,
   });
-
 
   const request = (url: string) =>
     fromFetchWithAuth(url, {
@@ -25,11 +27,17 @@ export function useRepositoryDetails(username: string, repo: string, ) {
       },
     });
 
+  const path = folder ? `/${folder}` : '';
+  const branchRef = branch ? `?ref=${branch}` : '';
+  const repoUrl: string = `${SINGLE_USER_REPO(
+    username,
+    repo
+  )}/contents${path}${branchRef}`;
 
   useEffect(() => {
     const subscription = forkJoin([
       request(SINGLE_USER_REPO(username, repo)),
-      request(`${SINGLE_USER_REPO(username, repo)}/contents`),
+      request(repoUrl),
       request(`${SINGLE_USER_REPO(username, repo)}/topics`),
     ])
       .pipe(
@@ -47,9 +55,8 @@ export function useRepositoryDetails(username: string, repo: string, ) {
 
     return () => {
       subscription.unsubscribe();
-    }
-
-  }, [username, repo]);
+    };
+  }, [username, repo, repoUrl]);
 
   return repoDetails;
 }

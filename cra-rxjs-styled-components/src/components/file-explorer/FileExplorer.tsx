@@ -15,12 +15,22 @@ import {
 import { ForkIcon, DirectoryIcon, FileIcon } from '../icons/index';
 
 type Props = {
+  basePath: string;
+  repoPath: string;
   branch: string;
-  dirNames: string[];
-  fileNames: string[];
+  directories: Item[];
+  files: Item[];
+  ifTree?: boolean;
 };
 
-export default function FileExplorer({ branch, dirNames, fileNames }: Props) {
+type Item = {
+  name: string;
+  path: string;
+};
+
+export default function FileExplorer({ basePath, repoPath, branch, files, directories, ifTree= false }: Props) {
+  const backPath = removeLastPathPart(repoPath);
+
   return (
     <FileExplorerWrapper>
       <FileExplorerButtonNav>
@@ -34,27 +44,41 @@ export default function FileExplorer({ branch, dirNames, fileNames }: Props) {
       </FileExplorerButtonNav>
 
       <FileExplorerContainer>
-        {dirNames.map((folder, index) => (
+        {ifTree && (
+          <FileExplorerCell>
+            <FileExplorerLink href={backPath}>
+              ..
+            </FileExplorerLink>
+          </FileExplorerCell>
+        )}
+        {directories?.map((folder, index) => (
           <FileExplorerCell key={index}>
             <FileExplorerInnerCell>
               <FileExplorerDirContainer>
                 <DirectoryIcon />
               </FileExplorerDirContainer>
-              <FileExplorerLink>{folder}</FileExplorerLink>
+              <FileExplorerLink href={`/${basePath}/tree/${branch}/${folder.path}`}>
+                {folder.name}
+              </FileExplorerLink>
             </FileExplorerInnerCell>
           </FileExplorerCell>
         ))}
-        {fileNames.map((file, index) => (
+        {files?.map((file, index) => (
           <FileExplorerCell key={index}>
             <FileExplorerInnerCell>
               <FileExplorerFileContainer>
                 <FileIcon />
               </FileExplorerFileContainer>
-              <FileExplorerLink>{file}</FileExplorerLink>
+              <FileExplorerLink>{file.name}</FileExplorerLink>
             </FileExplorerInnerCell>
           </FileExplorerCell>
         ))}
       </FileExplorerContainer>
     </FileExplorerWrapper>
   );
+}
+
+function removeLastPathPart(path: string) {
+  const pathParts = path.split('/');
+  return pathParts.slice(0, pathParts.length - 1).join('/');
 }

@@ -13,6 +13,7 @@ import RepoPullRequest from './routes/repo/repository-pull-request';
 import RepoIssues from './routes/repo/repository-issues';
 import Repo from './routes/repo';
 import UserRepos from './components/user-repos';
+import RepoTree from './routes/repo/repository-code/repository-tree/repository-tree';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -45,6 +46,7 @@ ReactDOM.render(
           }
         >
           <Route path="" element={<RepoDetails />} />
+          <Route path="tree/:branch/*" element={<RepoTree />} />
           <Route path="issues" element={<RepoIssues />} />
           <Route path="pull-requests" element={<RepoPullRequest />} />
         </Route>
