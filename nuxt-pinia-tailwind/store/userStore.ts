@@ -34,7 +34,7 @@ export const useUserStore = defineStore('userStore ', {
         return error
       }
     },
-    async getUsetGists() {
+    async getUserGists() {
       try {
         const {
           $config: { GITHUB_API_URL },
@@ -42,9 +42,13 @@ export const useUserStore = defineStore('userStore ', {
           $axios,
         } = this.$nuxt
 
-        const url = `${GITHUB_API_URL}/users/${user.login}/gists?per_page=10`
+        const url = `${GITHUB_API_URL}/users/${user.login}/gists`
 
-        const { data } = await $axios.get<UserGist[]>(url)
+        const { data } = await $axios.get<UserGist[]>(url, {
+          params: {
+            per_page: '10',
+          },
+        })
 
         this.gists = data
       } catch (error) {
