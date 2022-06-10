@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import Redirect from './routes/redirect';
 import RepoDetails from './routes/repo-details';
 import SignIn from './routes/sign-in';
-import TopRepos from './routes/top-repos';
+import TopRepos from './routes/user-top-repos';
 import RepoPullRequest from './routes/repository-pull-request';
 import UserRepos from './components/user-repos';
 
