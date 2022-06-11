@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
-import * as RepositoryActions from './repository.actions';
-
-
-
+import {
+  fetchRepository,
+  fetchRepositorySuccess,
+  fetchRepositoryFailure,
+} from './repository.actions';
+import { RepositoryService } from 'src/app/repository/services/repository.service';
 @Injectable()
 export class RepositoryEffects {
-
-  fetchRepositorys$ = createEffect(() => {
-    return this.actions$.pipe( 
-
-      ofType(RepositoryActions.fetchRepositorys),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map(data => RepositoryActions.fetchRepositorysSuccess({ data })),
-          catchError(error => of(RepositoryActions.fetchRepositorysFailure({ error }))))
-      )
+  fetchRepository$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fetchRepository),
+      switchMap(({ owner, repoName }) =>
+        this.repoService.getRepositoryInfo(owner, repoName).pipe(
+          map((data) => fetchRepositorySuccess({ repoData: data })),
+          catchError((error) => of(fetchRepositoryFailure({ error }))),
+        ),
+      ),
     );
   });
 
-
-
-  constructor(private actions$: Actions) {}
-
+  constructor(
+    private actions$: Actions,
+    private repoService: RepositoryService,
+  ) {}
 }

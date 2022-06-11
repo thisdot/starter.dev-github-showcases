@@ -1,7 +1,6 @@
 import { UserApiResponse } from '../user';
 
 export interface RepoState {
-  ownerName: string;
   repoName: string;
   description: string;
   website: string;
@@ -11,13 +10,12 @@ export interface RepoState {
   forkCount: number;
   issueCount: number;
   tags: string[];
+  // ownerName: string;
   // 'readme'?: fetch,
   // 'prCount': fetch
   // 'tree': fetch
   // 'branchNames': fetch
 }
-
-// /repos/{owner}/{repo}
 export interface RepoApiResponse {
   id: number;
   node_id: string;
