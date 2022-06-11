@@ -20,12 +20,16 @@
 <script lang="ts">
 import { useContext } from '@nuxtjs/composition-api'
 import Vue from 'vue'
+import { useUserStore } from '~/store/userStore'
 
 export default Vue.extend({
   name: 'IndexPage',
   setup() {
     const { $auth } = useContext()
 
+    const { getUserRepos } = useUserStore()
+
+    getUserRepos()
     const handleClick = async () => {
       await $auth.logout()
     }

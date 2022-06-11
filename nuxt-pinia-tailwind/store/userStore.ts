@@ -4,12 +4,14 @@ import { IUserRepository, UserGist } from '~/types/user/interfaces'
 interface IUserRootState {
   topRepos: IUserRepository[]
   gists: UserGist[]
+  repos: IUserRepository[]
 }
 
 export const useUserStore = defineStore('userStore ', {
   state: (): IUserRootState => ({
     topRepos: [],
     gists: [],
+    repos: [],
   }),
   actions: {
     async getUserTopRepos() {
@@ -51,6 +53,27 @@ export const useUserStore = defineStore('userStore ', {
         })
 
         this.gists = data
+      } catch (error) {
+        return error
+      }
+    },
+    async getUserRepos() {
+      try {
+        const {
+          $config: { GITHUB_API_URL },
+          $axios,
+        } = this.$nuxt
+
+        const url = `${GITHUB_API_URL}/user/repos`
+
+        const { data } = await $axios.get<IUserRepository[]>(url, {
+          params: {
+            sort: 'updated',
+            per_page: '10',
+          },
+        })
+
+        this.repos = data
       } catch (error) {
         return error
       }
