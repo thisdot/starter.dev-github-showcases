@@ -1,5 +1,5 @@
 import { Auth as NuxtAuth } from '@nuxtjs/auth-next'
-import { IUser } from './interfaces'
+import { IUser } from '../user/interfaces'
 
 /**
  * Nuxt/auth doesn't have a proper way to type our user yet
