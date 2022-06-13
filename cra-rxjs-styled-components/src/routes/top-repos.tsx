@@ -1,9 +1,10 @@
-import styled from 'styled-components';
-import RepositoryCard from '../components/top-repositories/RepositoryCard';
-import { useTopRepos } from '../hooks/top-repositories/use-top-repos';
-import { useGists } from '../hooks/gists/use-gists';
-import Sidebar from '../components/layouts/Sidebar';
 import { Layout } from '../components/layouts/Layout';
+import ReactPaginate from 'react-paginate';
+import RepositoryCard from '../components/top-repositories/RepositoryCard';
+import Sidebar from '../components/layouts/Sidebar';
+import styled from 'styled-components';
+import { useGists } from '../hooks/gists/use-gists';
+import { useRepos } from '../hooks/repositories/use-repos';
 
 const Page = styled.div`
   width: 100%;
@@ -35,8 +36,10 @@ const RepositoriesContainer = styled.section`
 `;
 
 export default function TopRepos() {
-  const repositories = useTopRepos();
+  const repositories = useRepos();
   const gists = useGists();
+
+  const handlePageClick = () => {};
 
   return (
     <>
@@ -57,6 +60,15 @@ export default function TopRepos() {
                 <RepositoryCard repository={r} key={r.id}></RepositoryCard>
               ))}
             </RepositoriesContainer>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="next >"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={5}
+              pageCount={30}
+              previousLabel="< previous"
+              renderOnZeroPageCount={() => {}}
+            />
           </Page>
         </Main>
       </Layout>
