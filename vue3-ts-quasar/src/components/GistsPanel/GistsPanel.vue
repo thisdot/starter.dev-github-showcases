@@ -11,10 +11,10 @@
       />
     </q-card-section>
     <q-separator></q-separator>
-    <q-card-section>
+    <q-card-section v-if="!loading">
       <q-list v-for="gist in gistList" :key="gist.id">
         <q-item class="ellipsis">
-          <a :href="gist.html_url" target="__blank">{{ gist.description }}</a>
+          <a :href="gist.url" target="__blank">{{ gist.name }}</a>
         </q-item>
       </q-list>
     </q-card-section>
@@ -29,74 +29,11 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-//* Types
-import { Gist } from '../../types';
+import { useGists } from '@/composables';
 
 const searchText = ref('');
-
-// TODO: Fetch 👇🏾these from the API
-const gistList: Gist[] = [
-  {
-    id: '123435325',
-    html_url: '#',
-    description: 'Staring Octocat',
-    files: {
-      test: {
-        filename: 'test-gist.txt',
-        language: 'Text',
-        raw_url: '#',
-        type: 'text/text',
-        size: 500,
-      },
-    },
-    public: true,
-  },
-  {
-    id: '123435325',
-    html_url: '#',
-    description: 'Laughing Octocat',
-    files: {
-      test: {
-        filename: 'test-gist.txt',
-        language: 'Text',
-        raw_url: '#',
-        type: 'text/text',
-        size: 500,
-      },
-    },
-    public: true,
-  },
-  {
-    id: '123435325',
-    html_url: '#',
-    description: 'Talking Octocat',
-    files: {
-      test: {
-        filename: 'test-gist.txt',
-        language: 'Text',
-        raw_url: '#',
-        type: 'text/text',
-        size: 500,
-      },
-    },
-    public: true,
-  },
-  {
-    id: '123435325',
-    html_url: '#',
-    description: 'Crying Octocat',
-    files: {
-      test: {
-        filename: 'test-gist.txt',
-        language: 'Text',
-        raw_url: '#',
-        type: 'text/text',
-        size: 500,
-      },
-    },
-    public: true,
-  },
-];
+const { getUserGists } = useGists();
+const { data: gistList, loading } = getUserGists();
 </script>
 
 <style lang="scss" scoped>

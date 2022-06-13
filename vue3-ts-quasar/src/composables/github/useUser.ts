@@ -41,8 +41,6 @@ export const useUser = (): UserRepository => {
       ...viewer,
     }));
 
-    console.log('Current user data: ', data);
-
     return { data: data as Ref<LoggedInUser | null>, loading };
   };
 
