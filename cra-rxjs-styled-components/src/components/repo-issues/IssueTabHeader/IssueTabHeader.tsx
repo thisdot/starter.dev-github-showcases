@@ -4,7 +4,7 @@ import CorrectIcon from '../../icons/CorrectIcon';
 import OpenIssueIcon from '../../icons/OpenIssueIcon';
 import type { IssueTabValues } from '../../../types/types';
 
-import { Container, StatusLabel, StatusTab } from './IssueTabHeader.style';
+import { Container, StatusLabel, StatusTab } from './IssueTabHeader.styles';
 import type { DropdownTitle } from '../../../types/types';
 
 interface Props {

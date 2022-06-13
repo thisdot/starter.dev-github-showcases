@@ -1,1 +1,1 @@
-export { default } from './Issues.data';
+export { default } from './Issues';

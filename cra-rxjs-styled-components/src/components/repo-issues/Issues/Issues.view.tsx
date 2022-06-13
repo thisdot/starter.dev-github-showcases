@@ -1,6 +1,6 @@
 import IssueTabHeader from '../IssueTabHeader';
 import IssueCard from '../IssueCard';
-import { Content, Wrapper } from './Issue.style';
+import { Content, Wrapper } from './Issues.view.styles';
 import type { Issue } from './Issue.type';
 import { IssueTabValues } from '../../../types/types';
 import Pagination from '../../pagination';

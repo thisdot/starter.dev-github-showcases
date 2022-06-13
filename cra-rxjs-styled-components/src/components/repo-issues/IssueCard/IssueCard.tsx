@@ -2,7 +2,7 @@ import ClosedIssueIcon from '../../icons/ClosedIssueIcon';
 import MessageIcon from '../../icons/MessageIcon';
 import OpenIssueIcon from '../../icons/OpenIssueIcon';
 import IssueCardIssueInfo from '../IssueCardIssueInfo';
-import { IssueCardWrapper } from './IssueCard.style';
+import { IssueCardWrapper } from './IssueCard.styles';
 import { Issue } from '../Issues/Issue.type';
 import { State } from '../../../types/types';
 

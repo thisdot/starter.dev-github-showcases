@@ -57,27 +57,4 @@ export const PaginationContainer = styled.div`
       }
     }
   }
-
-  /* & > span {
-    min-width: 32px;
-    padding: 5px 10px;
-    font-style: normal;
-    line-height: 20px;
-    color: ${colors.gray800};
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    border-radius: 6px;
-    transition: border-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-  }
-
-  & .disabled {
-    color: ${colors.gray400};
-    cursor: default;
-    border-color: transparent;
-  } */
 `;

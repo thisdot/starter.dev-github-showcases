@@ -9,8 +9,6 @@ export default function Pagination() {
         </button>
         <button className="button">Next</button>
       </div>
-      {/* <span className="prev">Previous</span>
-      <span className="next">Next</span> */}
     </PaginationContainer>
   );
 }
