@@ -1,8 +1,6 @@
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { tap, forkJoin } from 'rxjs';
 import { SINGLE_USER_REPO } from '../../constants/url.constants';
-import { Repository } from '../../interfaces/repositories.interfaces';
 import { fromFetchWithAuth } from '../../hooks/auth/from-fetch-with-auth';
 import RepoAbout from '../../components/repo-about/RepoAbout';
 import Readme from '../../components/readme/Readme';
@@ -13,20 +11,20 @@ import {
   RepoContainer,
   RepoGrid,
 } from '../../components/layouts/RepoLayoutPage';
+import { useRepo } from '../../context/RepoContext';
 
 type RepositoryDetails = {
-  repo: Repository | null;
-  rootFileInfo?: any[];
-  topics?: string[];
+  rootFileInfo: any[];
+  topics: string[];
 };
 
 export default function RepoDetails() {
+  const repo = useRepo();
   const [repoDetails, setRepoDetails] = useState<RepositoryDetails>({
-    repo: null,
+    rootFileInfo: [],
+    topics: [],
   });
-  const [loading, setLoading] = useState(true);
-  const params = useParams();
-  const { repo, rootFileInfo, topics } = repoDetails;
+  const { rootFileInfo, topics } = repoDetails;
   const listOfDirectoryNames = rootFileInfo
     ?.filter((obj) => obj.type === 'dir')
     .map((obj) => obj.name);
@@ -44,28 +42,21 @@ export default function RepoDetails() {
 
   useEffect(() => {
     forkJoin([
-      request(SINGLE_USER_REPO(params.username!, params.repo!)),
-      request(`${SINGLE_USER_REPO(params.username!, params.repo!)}/contents`),
-      request(`${SINGLE_USER_REPO(params.username!, params.repo!)}/topics`),
+      request(`${SINGLE_USER_REPO(repo.owner, repo.name)}/contents`),
+      request(`${SINGLE_USER_REPO(repo.owner, repo.name)}/topics`),
     ])
       .pipe(
         tap((val) => {
           if (val) {
             setRepoDetails({
-              repo: val[0],
-              rootFileInfo: val[1],
-              topics: val[2].names,
+              rootFileInfo: val[0],
+              topics: val[1].names,
             });
-            setLoading(false);
           }
         })
       )
       .subscribe();
-  }, [params.username, params.repo]);
-
-  if (loading) {
-    return <p>...Loading</p>;
-  }
+  }, [repo.owner, repo.name]);
 
   return (
     <>
@@ -75,19 +66,19 @@ export default function RepoDetails() {
             <FileExplorer
               fileNames={listOfFileNames!}
               dirNames={listOfDirectoryNames!}
-              branch={repo?.default_branch!}
+              branch={repo.branch}
             />
             <Readme
-              branch={repo?.default_branch!}
-              username={repo?.owner.login!}
-              repository={repo?.name!}
+              branch={repo.branch}
+              username={repo.owner}
+              repository={repo.name}
             />
           </RepoMain>
           <RepoAside>
             <RepoAbout
               topics={topics}
-              description={repo?.description}
-              websiteLink={repo?.homepage}
+              description={repo.data?.description}
+              websiteLink={repo.data?.homepageUrl}
             />
           </RepoAside>
         </RepoGrid>

@@ -1,9 +1,9 @@
-import { useParams } from 'react-router-dom';
 import IssueCtrl from '../../components/repo-issues/Issues';
+import { useRepo } from '../../context/RepoContext';
 import { useRepositoryIssues } from '../../hooks/repository-issues/use-repository-issues.ts';
 
 export default function RepoIssues() {
-  const params = useParams();
-  const issues = useRepositoryIssues(params.username!, params.repo!, 'issue');
-  return <IssueCtrl issues={issues!} />;
+  const repo = useRepo();
+  const issues = useRepositoryIssues(repo.owner, repo.name, 'issue');
+  return <IssueCtrl issues={issues} />;
 }
