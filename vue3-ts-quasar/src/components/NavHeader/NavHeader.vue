@@ -16,7 +16,7 @@
     <q-space></q-space>
 
     <q-btn class="text-white" flat icon-right="expand_more">
-      <UserAvatar />
+      <UserAvatar :img="userStore.profileImgUrl" />
       <q-menu
         class="menu--nav-header"
         transition-show="jump-down"
@@ -30,7 +30,7 @@
               Signed in as
               <br />
               <span class="text-weight-bold">{{
-                currentUser.$state.username || '--'
+                userStore.username || '--'
               }}</span>
             </q-item-section>
           </q-item>
@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 export default defineComponent({
   name: 'NavHeader',
@@ -79,12 +79,12 @@ import { Logo, UserAvatar } from '@/components';
 //* Stores
 import { useUserStore } from '@/store/userStore';
 
-const currentUser = useUserStore();
+const userStore = useUserStore();
 
-const primaryNavItems = [
+const primaryNavItems = computed(() => [
   {
     label: 'Profile',
-    to: '#',
+    to: `/${userStore.username || '#'}`,
   },
   {
     label: 'Repositories',
@@ -98,7 +98,7 @@ const primaryNavItems = [
     label: 'Organizations',
     to: '#',
   },
-];
+]);
 
 //* Reactive values
 const searchText = ref('');
