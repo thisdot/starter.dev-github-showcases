@@ -59,19 +59,8 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
   useEffect(() => {
     forkJoin([
       request(SINGLE_USER_REPO(owner, name)),
-      request(
-        `${ISSUE_PR_SEARCH(owner, name, 'pr', 'open', 1, 0)}`
-      ),
-      request(
-        `${ISSUE_PR_SEARCH(
-          owner,
-          name,
-          'issue',
-          'open',
-          1,
-          0
-        )}`
-      ),
+      request(`${ISSUE_PR_SEARCH(owner, name, 'pr', 'open', 1, 0)}`),
+      request(`${ISSUE_PR_SEARCH(owner, name, 'issue', 'open', 1, 0)}`),
       request(`${SINGLE_USER_REPO(owner, name)}/topics`),
     ])
       .pipe(
@@ -89,8 +78,6 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
       )
       .subscribe();
   }, [owner, name]);
-
-
 
   // we're not server rendering, need to wait for client to hydrate
   if (!isOwnerAndNameValid) {
@@ -121,9 +108,7 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
       : undefined,
   };
 
-  return (
-    <RepoProvider value={context}>{children}</RepoProvider>
-  );
+  return <RepoProvider value={context}>{children}</RepoProvider>;
 }
 
 export default RepoPage;
