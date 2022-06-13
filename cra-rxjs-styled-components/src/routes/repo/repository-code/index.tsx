@@ -29,54 +29,52 @@ export default function RepoDetails() {
     .map((obj) => {
       return {
         name: obj.name,
-        path: obj.path
-      }
+        path: obj.path,
+      };
     });
   const listOfFiles = rootFileInfo
     ?.filter((obj) => obj.type === 'file')
     .map((obj) => {
       return {
         name: obj.name,
-        path: obj.path
-      }})
+        path: obj.path,
+      };
+    })
     .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-
 
   const location = useLocation();
   const repoPath = location.pathname;
-  const basePath = `${params.username!}/${params.repo!}`
+  const basePath = `${params.username!}/${params.repo!}`;
 
   return (
     <>
       <RepoContainer>
         <RepoGrid>
-          {
-            repoDetails.rootFileInfo && (
-              <>
-                <RepoMain>
-                  <FileExplorer
-                    basePath={basePath}
-                    repoPath={repoPath}
-                    files={listOfFiles!}
-                    directories={listOfDirectories!}
-                    branch={repo?.default_branch!}
-                  />
-                  <Readme
-                    branch={repo?.default_branch!}
-                    username={repo?.owner.login!}
-                    repository={repo?.name!}
-                  />
-                </RepoMain>
-                <RepoAside>
-                  <RepoAbout
-                    topics={topics}
-                    description={repo?.description}
-                    websiteLink={repo?.homepage}
-                  />
-                </RepoAside>
-              </>
-            )
-          }
+          {repoDetails.rootFileInfo && (
+            <>
+              <RepoMain>
+                <FileExplorer
+                  basePath={basePath}
+                  repoPath={repoPath}
+                  files={listOfFiles!}
+                  directories={listOfDirectories!}
+                  branch={repo?.default_branch!}
+                />
+                <Readme
+                  branch={repo?.default_branch!}
+                  username={repo?.owner.login!}
+                  repository={repo?.name!}
+                />
+              </RepoMain>
+              <RepoAside>
+                <RepoAbout
+                  topics={topics}
+                  description={repo?.description}
+                  websiteLink={repo?.homepage}
+                />
+              </RepoAside>
+            </>
+          )}
         </RepoGrid>
       </RepoContainer>
     </>

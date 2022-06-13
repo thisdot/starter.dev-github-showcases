@@ -28,7 +28,14 @@ type Item = {
   path: string;
 };
 
-export default function FileExplorer({ basePath, repoPath, branch, files, directories, ifTree= false }: Props) {
+export default function FileExplorer({
+  basePath,
+  repoPath,
+  branch,
+  files,
+  directories,
+  ifTree = false,
+}: Props) {
   const backPath = removeLastPathPart(repoPath);
 
   return (
@@ -46,9 +53,7 @@ export default function FileExplorer({ basePath, repoPath, branch, files, direct
       <FileExplorerContainer>
         {ifTree && (
           <FileExplorerCell>
-            <FileExplorerLink href={backPath}>
-              ..
-            </FileExplorerLink>
+            <FileExplorerLink href={backPath}>..</FileExplorerLink>
           </FileExplorerCell>
         )}
         {directories?.map((folder, index) => (
@@ -57,7 +62,9 @@ export default function FileExplorer({ basePath, repoPath, branch, files, direct
               <FileExplorerDirContainer>
                 <DirectoryIcon />
               </FileExplorerDirContainer>
-              <FileExplorerLink href={`/${basePath}/tree/${branch}/${folder.path}`}>
+              <FileExplorerLink
+                href={`/${basePath}/tree/${branch}/${folder.path}`}
+              >
                 {folder.name}
               </FileExplorerLink>
             </FileExplorerInnerCell>
