@@ -56,13 +56,12 @@ export default function SubHeader() {
     },
   ];
 
-
   const isCurrentTab = (path?: string): boolean => {
     const matchPath = path === '' ? repo.basePath : `${repo.basePath}${path}`;
     if (path === '') {
       return pathname === repo.basePath || pathname.includes('tree');
     }
-    console.log(pathname.includes(matchPath))
+    console.log(pathname.includes(matchPath));
     return pathname.includes(matchPath);
   };
 
@@ -101,7 +100,11 @@ export default function SubHeader() {
       <SubHeaderBottomRow>
         <TabNavigation>
           {tabArr.map((tabInfo, index) => (
-            <TabNavigationLink key={index} to={`${repo.basePath}${tabInfo.to}`} className={isCurrentTab(tabInfo.to) ? 'active-tab' : ''}>
+            <TabNavigationLink
+              key={index}
+              to={`${repo.basePath}${tabInfo.to}`}
+              className={isCurrentTab(tabInfo.to) ? 'active-tab' : ''}
+            >
               <TabNavigationIcon>{tabInfo.icon}</TabNavigationIcon>
               <span>{tabInfo.label}</span>
               {tabInfo.count ? (
