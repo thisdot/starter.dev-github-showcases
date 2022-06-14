@@ -19,6 +19,6 @@ export const hasExpression = (req, expression) => {
 
 export const aliasQuery = (req, operationName) => {
   if (hasOperationName(req, operationName)) {
-    req.alias = `gql${operationName}Query`;
+    req.alias = `${operationName}Query`;
   }
 };

@@ -108,24 +108,49 @@ function handleGqlRequest(req): Boolean {
   return false;
 }
 
+function handleRestRequests() {
+  cy.intercept("GET", /.*\/user$/, {
+    fixture: "user/currentUser.json",
+  }).as("CurrentUser");
+  cy.intercept("GET", /.*\/repos\/thisdot\/starter.dev-github-showcases$/, {
+    fixture: "repo/rest/repo.json",
+  }).as("Repo");
+  cy.intercept("GET", /.*\/pulls$/, {
+    fixture: "repo/rest/repoPullRequests.json",
+  }).as("PullRequests");
+  cy.intercept("GET", /.*\/pulls\?state=closed$/, {
+    fixture: "repo/rest/repoPullRequestsClosed.json",
+  }).as("PullRequestsClosed");
+  cy.intercept("GET", /.*\/issues$/, {
+    fixture: "repo/rest/issues.json",
+  }).as("Issues");
+  cy.intercept("GET", /.*\/contents$/, {
+    fixture: "repo/rest/contents.json",
+  }).as("RepoTree");
+  cy.intercept("GET", /.*\/topics$/, {
+    fixture: "repo/rest/repo.json",
+  }).as("Topics");
+}
+
 describe("When there is proper repository page responses", () => {
   beforeEach(() => {
-    cy.intercept("POST", "/graphql", (req) => {
+    cy.intercept("POST", /.*\graphql/, (req) => {
       if (handleGqlRequest(req)) {
         return;
       }
 
       req.continue();
     });
+    handleRestRequests();
 
     cy.visit("/thisdot/starter.dev-github-showcases");
   });
 
   it("should display correct nav header names and information", () => {
-    cy.wait("@gqlCurrentUserQuery")
-      .wait("@gqlRepoPageQuery")
-      .wait("@gqlRepoTreeQuery")
-      .wait("@gqlRepoReadMeQuery")
+    cy.wait("@CurrentUserQuery")
+      .wait("@RepoPageQuery")
+      .wait("@RepoTreeQuery")
+      .wait("@RepoReadMeQuery")
       .get(`[data-testid="header owner name"]`)
       .should("contain.text", "thisdot")
       .get(`[data-testid="header repo name"]`)
@@ -149,7 +174,7 @@ describe("When there is proper repository page responses", () => {
   it("should be able to navigate to issues and pull requests tabs", () => {
     cy.get(`[data-testid="repo issues tab"]`)
       .click()
-      .wait("@gqlRepoIssuesQuery")
+      .wait("@RepoIssuesQuery")
       .get(`[data-testid="repo issues"]`)
       .should("be.visible")
       .get(`[data-testid="repo pull requests tab"]`)
@@ -162,7 +187,7 @@ describe("When there is proper repository page responses", () => {
   it("should be able to see open issues with valid data", () => {
     cy.get(`[data-testid="repo issues tab"]`)
       .click()
-      .wait("@gqlRepoIssuesQuery")
+      .wait("@RepoIssuesQuery")
       .get(`[data-testid="issue"]`)
       .should("have.length", "24")
       .should("be.visible")
@@ -186,7 +211,7 @@ describe("When there is proper repository page responses", () => {
   it("should be able to see closed issues with valid data", () => {
     cy.get(`[data-testid="repo issues tab"]`)
       .click()
-      .wait("@gqlRepoIssuesQuery")
+      .wait("@RepoIssuesQuery")
       .get(`[data-testid="closedIssuesButton"]`)
       .click()
       .get(`[data-testid="issue"]`)
@@ -211,7 +236,7 @@ describe("When there is proper repository page responses", () => {
   it("should be able to see open pull requests with valid data", () => {
     cy.get(`[data-testid="repo pull requests tab"]`)
       .click()
-      .wait("@gqlRepoPullRequestsQuery")
+      .wait("@RepoPullRequestsQuery")
       .get(`[data-testid="pr"]`)
       .should("have.length", "12")
       .get(`[data-testid="pull request title"]`)
@@ -234,7 +259,7 @@ describe("When there is proper repository page responses", () => {
   it("should be able to see closed pull requests with valid data", () => {
     cy.get(`[data-testid="repo pull requests tab"]`)
       .click()
-      .wait("@gqlRepoPullRequestsQuery")
+      .wait("@RepoPullRequestsQuery")
       .get(`[data-testid="closedIssuesButton"]`)
       .click()
       .get(`[data-testid="pr"]`)
