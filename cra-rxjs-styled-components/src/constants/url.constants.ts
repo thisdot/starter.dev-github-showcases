@@ -1,3 +1,5 @@
+import { IssueType, State } from '../types/types';
+
 export const API_URL_BASE = process.env.REACT_APP_API_URL;
 export const APP_BASE_URL = process.env.REACT_APP_BASE_URL;
 export const GITHUB_URL_BASE = `https://api.github.com`;
@@ -28,3 +30,13 @@ export const USER_REPO_LIST = (user: string) =>
 
 export const GISTS_URL = (user: string) =>
   `${GITHUB_URL_BASE}/users/${user}/gists?per_page=10`;
+
+export const ISSUE_PR_SEARCH = (
+  user: string,
+  repo: string,
+  type: IssueType,
+  state: State,
+  per_page: number,
+  page: number
+) =>
+  `${GITHUB_URL_BASE}/search/issues?q=repo:${user}/${repo}%20is:${type}%20state:${state}&per_page=${per_page}&page=${page}`;
