@@ -191,7 +191,7 @@ export const TabNavigationLink = styled(NavLink)`
   font-weight: 500;
   text-decoration: none;
 
-  &.active {
+  &.active-tab {
     border-bottom: 2px solid rgb(234 179 8 / var(--tw-border-opacity));
     font-weight: 600;
     --tw-text-opacity: 1;
@@ -201,36 +201,6 @@ export const TabNavigationLink = styled(NavLink)`
   &:hover {
     border-bottom: 2px solid var(--gray-300);
   }
-`;
-
-export const TabNavigationInactiveLinks = styled(NavLink)`
-  cursor: pointer;
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-  display: inline-flex;
-  align-items: center;
-  padding: 1rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-
-  &:hover {
-    border-bottom: 2px solid var(--gray-300);
-  }
-`;
-
-export const TabNavigationActive = styled(NavLink)`
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  --tw-border-opacity: 1;
-  border-bottom: 2px solid rgb(234 179 8 / var(--tw-border-opacity));
-  padding: 1rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 600;
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
 `;
 
 export const TabNavigationIcon = styled.div`

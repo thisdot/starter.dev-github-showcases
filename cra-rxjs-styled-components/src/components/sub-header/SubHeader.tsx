@@ -32,6 +32,7 @@ import { useRepo } from '../../context/RepoContext';
 
 export default function SubHeader() {
   const repo = useRepo();
+  const pathname = window.location.pathname;
 
   const btnArr = [
     { label: 'Watch', icon: <EyeIcon />, count: repo.data?.watcherCount },
@@ -54,6 +55,16 @@ export default function SubHeader() {
       to: `/pull-requests`,
     },
   ];
+
+
+  const isCurrentTab = (path?: string): boolean => {
+    const matchPath = path === '' ? repo.basePath : `${repo.basePath}${path}`;
+    if (path === '') {
+      return pathname === repo.basePath || pathname.includes('tree');
+    }
+    console.log(pathname.includes(matchPath))
+    return pathname.includes(matchPath);
+  };
 
   return (
     <SubHeaderWrapper>
@@ -90,7 +101,7 @@ export default function SubHeader() {
       <SubHeaderBottomRow>
         <TabNavigation>
           {tabArr.map((tabInfo, index) => (
-            <TabNavigationLink key={index} to={`${repo.basePath}${tabInfo.to}`}>
+            <TabNavigationLink key={index} to={`${repo.basePath}${tabInfo.to}`} className={isCurrentTab(tabInfo.to) ? 'active-tab' : ''}>
               <TabNavigationIcon>{tabInfo.icon}</TabNavigationIcon>
               <span>{tabInfo.label}</span>
               {tabInfo.count ? (
