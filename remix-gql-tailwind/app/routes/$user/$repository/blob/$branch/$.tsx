@@ -38,7 +38,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   );
 
   const formattedPath = Array.isArray(path) ? path.join('/') : path;
-  console.log(formattedPath)
   const defaultBranch = 'HEAD';
 
   const context: RepoContext = {
@@ -75,9 +74,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 export default function Repository() {
-  const { context, data } = useLoaderData<LoaderData>()
+  const { context, data } = useLoaderData<LoaderData>();
   return (
-    <RepoProvider value= {context}>
+    <RepoProvider value={context}>
       <RepoHeader />
       <div className="max-w-screen-2xl mx-auto py-8 px-4">
         <div className="grid grid-cols-12 gap-8">
@@ -90,4 +89,3 @@ export default function Repository() {
     </RepoProvider>
   );
 }
-

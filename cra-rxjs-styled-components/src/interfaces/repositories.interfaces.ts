@@ -21,7 +21,7 @@ export interface Repository {
 }
 
 export interface RepositoryWithBranchCount extends Repository {
-  branches_count: number;
+  branches_count?: number;
 }
 
 export type RepositoryOwnerType = 'User' | 'Organization';

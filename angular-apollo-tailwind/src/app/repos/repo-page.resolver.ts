@@ -27,6 +27,7 @@ export class RepoPageResolver implements Resolve<RepoPage | boolean> {
           path: '',
           repository: {
             isPrivate: res.data.repository?.isPrivate,
+            description: res.data.repository?.description,
             stargazerCount: res.data.repository?.stargazerCount,
             forkCount: res.data.repository?.forkCount,
             watcherCount: res.data.repository?.watchers.totalCount,

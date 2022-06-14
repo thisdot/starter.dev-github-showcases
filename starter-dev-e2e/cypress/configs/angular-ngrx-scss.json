@@ -1,0 +1,8 @@
+{
+  "baseUrl": "http://localhost:4200",
+  "startCommand": "yarn start",
+  "integrationFolder": "cypress/integration",
+  "env": {
+    "authUrl": "/"
+  }
+}
