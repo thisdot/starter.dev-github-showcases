@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { tap, forkJoin } from 'rxjs';
+import { tap } from 'rxjs';
 import { SINGLE_USER_REPO } from '../../constants/url.constants';
 import { fromFetchWithAuth } from '../../hooks/auth/from-fetch-with-auth';
 import RepoAbout from '../../components/repo-about/RepoAbout';
@@ -15,16 +15,14 @@ import { useRepo } from '../../context/RepoContext';
 
 type RepositoryDetails = {
   rootFileInfo: any[];
-  topics: string[];
 };
 
 export default function RepoDetails() {
   const repo = useRepo();
   const [repoDetails, setRepoDetails] = useState<RepositoryDetails>({
     rootFileInfo: [],
-    topics: [],
   });
-  const { rootFileInfo, topics } = repoDetails;
+  const { rootFileInfo } = repoDetails;
   const listOfDirectoryNames = rootFileInfo
     ?.filter((obj) => obj.type === 'dir')
     .map((obj) => obj.name);
@@ -41,16 +39,12 @@ export default function RepoDetails() {
     });
 
   useEffect(() => {
-    forkJoin([
-      request(`${SINGLE_USER_REPO(repo.owner, repo.name)}/contents`),
-      request(`${SINGLE_USER_REPO(repo.owner, repo.name)}/topics`),
-    ])
+      request(`${SINGLE_USER_REPO(repo.owner, repo.name)}/contents`)
       .pipe(
         tap((val) => {
           if (val) {
             setRepoDetails({
-              rootFileInfo: val[0],
-              topics: val[1].names,
+              rootFileInfo: val
             });
           }
         })
@@ -76,7 +70,7 @@ export default function RepoDetails() {
           </RepoMain>
           <RepoAside>
             <RepoAbout
-              topics={topics}
+              topics={repo.data?.topics}
               description={repo.data?.description}
               websiteLink={repo.data?.homepageUrl}
             />

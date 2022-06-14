@@ -13,7 +13,7 @@ export type Props = {
   };
 };
 
-export function useFormatDistance({
+export function FormatDistance({
   date,
   dateToCompare,
   options,

@@ -21,13 +21,13 @@ type RepositoryDetails = {
   prs?: IssueDetails;
   rootFileInfo?: any[];
   issues?: IssueDetails;
-  topics?: string[];
+  topics?: { names: string[] };
 };
 
 interface RepoPageProps {
-  name: string;
-  owner: string;
-  branch: string;
+  name?: string | null;
+  owner?: string | null;
+  branch?: string | null;
   path?: string;
   children: ReactNode;
 }
@@ -57,7 +57,11 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
     });
 
   useEffect(() => {
-    forkJoin([
+    if (!isOwnerAndNameValid) {
+      return 
+    }
+
+    const subscription = forkJoin([
       request(SINGLE_USER_REPO(owner, name)),
       request(`${ISSUE_PR_SEARCH(owner, name, 'pr', 'open', 1, 0)}`),
       request(`${ISSUE_PR_SEARCH(owner, name, 'issue', 'open', 1, 0)}`),
@@ -77,13 +81,15 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
         })
       )
       .subscribe();
-  }, [owner, name]);
+      return () => {
+        subscription.unsubscribe();
+      };
+  }, [owner, name, isOwnerAndNameValid]);
 
   // we're not server rendering, need to wait for client to hydrate
   if (!isOwnerAndNameValid) {
     return null;
   }
-
   const context: RepoContextInterface = {
     owner,
     name,
@@ -103,7 +109,7 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
           openPullRequestCount: prs?.total_count ?? 0,
           description: repository.description,
           homepageUrl: repository.homepage,
-          topics: topics ?? [],
+          topics: topics?.names ?? [],
         }
       : undefined,
   };

@@ -1,4 +1,4 @@
-import { useFormatDistance } from '../../../hooks/formatDistance/use-format-distance';
+import { FormatDistance } from '../../../helpers/format-distance';
 import { Issue } from '../Issues/Issue.type';
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 
 export default function IssueCardIssueInfo({ issue }: Props) {
   const baseDate = new Date();
-  const formatDistance = useFormatDistance;
+  const formatDistance = FormatDistance;
 
   return (
     <div className="info">

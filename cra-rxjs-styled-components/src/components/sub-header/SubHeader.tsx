@@ -45,13 +45,13 @@ export default function SubHeader() {
       label: 'Issues',
       icon: <IssuesIcon />,
       count: repo.data?.openIssueCount,
-      to: `issues`,
+      to: `/issues`,
     },
     {
       label: 'Pull Requests',
       icon: <PrIcon />,
       count: repo.data?.openPullRequestCount,
-      to: `pull-requests`,
+      to: `/pull-requests`,
     },
   ];
 
@@ -92,7 +92,7 @@ export default function SubHeader() {
           {tabArr.map((tabInfo, index) => (
             <TabNavigationLink
               key={index}
-              to={`${repo.basePath}/${tabInfo.to}`}
+              to={`${repo.basePath}${tabInfo.to}`}
             >
               <TabNavigationIcon>{tabInfo.icon}</TabNavigationIcon>
               <span>{tabInfo.label}</span>

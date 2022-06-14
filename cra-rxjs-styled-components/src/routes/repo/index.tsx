@@ -10,7 +10,7 @@ function Repo() {
   return (
     <>
       <Header />
-      <RepoPage name={repo!} owner={username!} branch={branch!}>
+      <RepoPage name={repo} owner={username} branch={branch}>
         <RepoLayout>
           <SubHeader />
           <Outlet />
