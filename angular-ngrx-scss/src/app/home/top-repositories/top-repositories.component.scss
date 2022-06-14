@@ -1,0 +1,11 @@
+@use '../../shared/styles/variables';
+
+.top-repositories-container {
+  padding: 3rem;
+  h2 {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+}

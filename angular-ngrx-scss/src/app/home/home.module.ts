@@ -11,6 +11,7 @@ import { ProfileReposComponent } from './profile/profile-repos/profile-repos.com
 import { RelativeTimePipe } from '../shared/pipes/relative-time.pipe';
 import { RepoCardComponent } from '../shared/components/repo-card/repo-card.component';
 import { UserGistsComponent } from './user-gists/user-gists.component';
+import { TopRepositoriesComponent } from './top-repositories/top-repositories.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { UserGistsComponent } from './user-gists/user-gists.component';
     RepoCardComponent,
     RelativeTimePipe,
     UserGistsComponent,
+    TopRepositoriesComponent,
   ],
   imports: [CommonModule, HomeRoutingModule],
 })
