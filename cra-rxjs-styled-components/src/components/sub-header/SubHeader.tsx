@@ -61,7 +61,6 @@ export default function SubHeader() {
     if (path === '') {
       return pathname === repo.basePath || pathname.includes('tree');
     }
-    console.log(pathname.includes(matchPath));
     return pathname.includes(matchPath);
   };
 
