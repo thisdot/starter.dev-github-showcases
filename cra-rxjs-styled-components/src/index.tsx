@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import Redirect from './routes/redirect';
 import RepoDetails from './routes/repo/repository-code';
 import SignIn from './routes/sign-in';
-import TopRepos from './routes/top-repos';
+import TopRepos from './routes/user-top-repos';
 import RepoPullRequest from './routes/repo/repository-pull-request';
 import RepoIssues from './routes/repo/repository-issues';
 import Repo from './routes/repo';
@@ -23,7 +23,7 @@ ReactDOM.render(
             path=""
             element={
               <AuthGuard>
-                <TopRepos />
+                <TopRepos /> 
               </AuthGuard>
             }
           />
