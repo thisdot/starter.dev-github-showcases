@@ -39,12 +39,12 @@ export default function RepoDetails() {
     });
 
   useEffect(() => {
-      request(`${SINGLE_USER_REPO(repo.owner, repo.name)}/contents`)
+    request(`${SINGLE_USER_REPO(repo.owner, repo.name)}/contents`)
       .pipe(
         tap((val) => {
           if (val) {
             setRepoDetails({
-              rootFileInfo: val
+              rootFileInfo: val,
             });
           }
         })

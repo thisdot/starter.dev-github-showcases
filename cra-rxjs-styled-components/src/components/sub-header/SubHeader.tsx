@@ -90,10 +90,7 @@ export default function SubHeader() {
       <SubHeaderBottomRow>
         <TabNavigation>
           {tabArr.map((tabInfo, index) => (
-            <TabNavigationLink
-              key={index}
-              to={`${repo.basePath}${tabInfo.to}`}
-            >
+            <TabNavigationLink key={index} to={`${repo.basePath}${tabInfo.to}`}>
               <TabNavigationIcon>{tabInfo.icon}</TabNavigationIcon>
               <span>{tabInfo.label}</span>
               {tabInfo.count ? (

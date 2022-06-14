@@ -58,7 +58,7 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
 
   useEffect(() => {
     if (!isOwnerAndNameValid) {
-      return 
+      return;
     }
 
     const subscription = forkJoin([
@@ -81,9 +81,9 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
         })
       )
       .subscribe();
-      return () => {
-        subscription.unsubscribe();
-      };
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [owner, name, isOwnerAndNameValid]);
 
   // we're not server rendering, need to wait for client to hydrate
