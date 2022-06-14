@@ -23,7 +23,7 @@ ReactDOM.render(
             path=""
             element={
               <AuthGuard>
-                <TopRepos /> 
+                <TopRepos />
               </AuthGuard>
             }
           />
