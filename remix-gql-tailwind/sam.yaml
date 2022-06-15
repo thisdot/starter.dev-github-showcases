@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Exported by architect/package@8.1.3 on 2022-06-08T21:21:22.926Z
+Description: Exported by architect/package@8.1.3 on 2022-06-14T19:41:52.999Z
 Resources:
   Role:
     Type: AWS::IAM::Role
@@ -130,7 +130,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: s3://remix-gql-tailwind-cfn-deployments-a96b2/a542b0c791e1e9e6e03b4e47adb85861
+      CodeUri: s3://remix-gql-tailwind-cfn-deployments-a96b2/4b907a3fafed861e204b9f4178cc01c3
       Runtime: nodejs14.x
       Architectures:
       - x86_64
@@ -141,7 +141,7 @@ Resources:
       Environment:
         Variables:
           ARC_APP_NAME: remix-gql-tailwind
-          ARC_ENV: staging
+          ARC_ENV: production
           ARC_ROLE:
             Ref: Role
           ARC_SESSION_TABLE_NAME: jwe
@@ -150,7 +150,6 @@ Resources:
           ARC_STATIC_BUCKET:
             Ref: StaticBucket
           ARC_STATIC_SPA: false
-          SESSION_SECRET: 36bbf98c12098e385b4ba332c8fe4fce4a587a9a4055326d45bffd7cd21f8c1e
       Role:
         Fn::Sub:
         - arn:aws:iam::${AWS::AccountId}:role/${roleName}
