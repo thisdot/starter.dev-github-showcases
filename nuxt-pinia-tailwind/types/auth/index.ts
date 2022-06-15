@@ -1,5 +1,5 @@
 import { Auth as NuxtAuth } from '@nuxtjs/auth-next'
-import { IUserApiResponse } from './interfaces'
+import { IUser } from './interfaces'
 
 /**
  * Nuxt/auth doesn't have a proper way to type our user yet
@@ -7,18 +7,18 @@ import { IUserApiResponse } from './interfaces'
  */
 declare module 'vue/types/vue' {
   interface Auth extends NuxtAuth {
-    user: IUserApiResponse & typeof NuxtAuth.prototype.user
+    user: IUser & typeof NuxtAuth.prototype.user
   }
 }
 
 declare module '@nuxt/types' {
   interface Auth extends NuxtAuth {
-    user: IUserApiResponse & typeof NuxtAuth.prototype.user
+    user: IUser & typeof NuxtAuth.prototype.user
   }
 }
 
 declare module 'vuex/types/index' {
   interface Auth extends NuxtAuth {
-    user: IUserApiResponse & typeof NuxtAuth.prototype.user
+    user: IUser & typeof NuxtAuth.prototype.user
   }
 }
