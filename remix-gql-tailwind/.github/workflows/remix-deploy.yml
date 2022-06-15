@@ -2,11 +2,11 @@ name: Remix GQL Tailwind
 
 on:
   push:
-    branches: [main]
+    branches: [feat-deployment-strat-spike]
     paths:
       - "remix-gql-tailwind/**"
   pull_request:
-    branches: [main]
+    branches: [feat-deployment-strat-spike]
     paths:
       - "remix-gql-tailwind/**"
 
