@@ -1,7 +1,10 @@
 <template>
   <div>
     <h1>Pull Request</h1>
-    <PullRequests />
+    <PullRequests
+      :username="route.params.username"
+      :reponame="route.params.reponame"
+    />
   </div>
 </template>
 
@@ -14,5 +17,8 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
+import { useRoute } from 'vue-router';
 import { PullRequests } from '@/components';
+
+const route = useRoute();
 </script>

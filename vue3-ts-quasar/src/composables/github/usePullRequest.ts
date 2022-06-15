@@ -3,7 +3,7 @@ import { Ref } from 'vue';
 import { PULL_REQUEST_QUERY } from './queries';
 import { PullRequest } from './types';
 
-interface usePullRequest {
+interface UsePullRequest {
   getPullRequests: (
     owner: string,
     name: string,
@@ -13,7 +13,7 @@ interface usePullRequest {
   };
 }
 
-export const usePullRequest = (): usePullRequest => {
+export const usePullRequest = (): UsePullRequest => {
   const getPullRequests = (owner: string, name: string) => {
     const { result, loading } = useQuery(PULL_REQUEST_QUERY, {
       owner,

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineProps, toRef } from 'vue';
 
 export default defineComponent({
   name: 'PullRequests',
@@ -17,8 +17,20 @@ import { usePullRequest } from '@/composables';
 
 const { getPullRequests } = usePullRequest();
 
-const { data: pullRequestsData, loading: pullRequestsLoading } = getPullRequests('thisdot', 'starter.dev');
+const props = defineProps({
+  username: {
+    type: String,
+    required: true,
+  },
+  reponame: {
+    type: String,
+    required: true,
+  },
+});
 
-console.log(pullRequestsData);
+const username = toRef(props, 'username');
+const reponame = toRef(props, 'reponame');
+
+const { data: pullRequestsData, loading: pullRequestsLoading } = getPullRequests(username.value, reponame.value);
 
 </script>
