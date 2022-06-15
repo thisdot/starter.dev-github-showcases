@@ -1,6 +1,6 @@
 import { LocalScheme } from '@nuxtjs/auth-next/dist/runtime'
 import { HTTPRequest, HTTPResponse } from '@nuxtjs/auth-next'
-import { IUser } from '~/types/auth/interfaces'
+import { IUser } from '~/types/user/interfaces'
 
 export default class CustomLoginScheme extends LocalScheme {
   //  Add any custom options

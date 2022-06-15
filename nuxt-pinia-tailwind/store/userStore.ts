@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
-import { IUserRepository, UserGist } from '~/types/user/interfaces'
+import { IRepository } from '~/types/common/interfaces'
+import { UserGist } from '~/types/user/interfaces'
 
 interface IUserRootState {
-  topRepos: IUserRepository[]
+  topRepos: IRepository[]
   gists: UserGist[]
-  repos: IUserRepository[]
+  repos: IRepository[]
 }
 
 export const useUserStore = defineStore('userStore ', {
@@ -23,7 +24,7 @@ export const useUserStore = defineStore('userStore ', {
 
         const url = `${GITHUB_API_URL}/user/repos`
 
-        const { data } = await $axios.get<IUserRepository[]>(url, {
+        const { data } = await $axios.get<IRepository[]>(url, {
           params: {
             sort: 'updated',
             affiliation: 'owner, collaborator, organization_member',
@@ -66,7 +67,7 @@ export const useUserStore = defineStore('userStore ', {
 
         const url = `${GITHUB_API_URL}/user/repos`
 
-        const { data } = await $axios.get<IUserRepository[]>(url, {
+        const { data } = await $axios.get<IRepository[]>(url, {
           params: {
             sort: 'updated',
             per_page: '10',
