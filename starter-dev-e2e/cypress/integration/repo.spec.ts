@@ -1,147 +1,9 @@
-import {
-  hasOperationName,
-  aliasQuery,
-  hasExpression,
-} from "../utils/graphql-test-utils";
-
-function handleGqlRequest(req): Boolean {
-  if (hasOperationName(req, "CurrentUser")) {
-    aliasQuery(req, "CurrentUser");
-    req.reply({
-      fixture: "user/currentUser.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoPage")) {
-    aliasQuery(req, "RepoPage");
-    req.reply({
-      fixture: "repo/repoPage.graphql.json",
-    });
-    return true;
-  }
-
-  if (
-    hasOperationName(req, "RepoTree") &&
-    hasExpression(req, "main:angular-apollo-tailwind")
-  ) {
-    aliasQuery(req, "RepoTreeFolder1");
-    req.reply({
-      fixture: "repo/repoTree-folder1.graphql.json",
-    });
-    return true;
-  }
-
-  if (
-    hasOperationName(req, "RepoTree") &&
-    hasExpression(req, "main:angular-apollo-tailwind/src")
-  ) {
-    aliasQuery(req, "RepoTreeFolder2");
-    req.reply({
-      fixture: "repo/repoTree-folder2.graphql.json",
-    });
-    return true;
-  }
-
-  if (
-    hasOperationName(req, "RepoTree") &&
-    hasExpression(req, "main:angular-apollo-tailwind/src/app")
-  ) {
-    aliasQuery(req, "RepoTreeFolder3");
-    req.reply({
-      fixture: "repo/repoTree-folder3.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoTree")) {
-    aliasQuery(req, "RepoTree");
-    req.reply({
-      fixture: "repo/repoTree.graphql.json",
-    });
-    return true;
-  }
-
-  if (
-    hasOperationName(req, "RepoReadMe") &&
-    hasExpression(req, "HEAD:angular-apollo-tailwind/README.md")
-  ) {
-    aliasQuery(req, "RepoReadMeFolder1");
-    req.reply({
-      fixture: "repo/repoReadMe-folder1.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoReadMe")) {
-    aliasQuery(req, "RepoReadMe");
-    req.reply({
-      fixture: "repo/repoReadMe.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoIssues")) {
-    aliasQuery(req, "RepoIssues");
-    req.reply({
-      fixture: "repo/repoIssues.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoPullRequests")) {
-    aliasQuery(req, "RepoPullRequests");
-    req.reply({
-      fixture: "repo/repoPullRequests.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoFile")) {
-    aliasQuery(req, "RepoFile");
-    req.reply({
-      fixture: "repo/repoFile.graphql.json",
-    });
-    return true;
-  }
-
-  return false;
-}
-
-function handleRestRequests() {
-  cy.intercept("GET", /.*\/user$/, {
-    fixture: "user/currentUser.json",
-  }).as("CurrentUser");
-  cy.intercept("GET", /.*\/repos\/thisdot\/starter.dev-github-showcases$/, {
-    fixture: "repo/rest/repo.json",
-  }).as("Repo");
-  cy.intercept("GET", /.*\/pulls$/, {
-    fixture: "repo/rest/repoPullRequests.json",
-  }).as("PullRequests");
-  cy.intercept("GET", /.*\/pulls\?state=closed$/, {
-    fixture: "repo/rest/repoPullRequestsClosed.json",
-  }).as("PullRequestsClosed");
-  cy.intercept("GET", /.*\/issues$/, {
-    fixture: "repo/rest/issues.json",
-  }).as("Issues");
-  cy.intercept("GET", /.*\/contents$/, {
-    fixture: "repo/rest/contents.json",
-  }).as("RepoTree");
-  cy.intercept("GET", /.*\/topics$/, {
-    fixture: "repo/rest/repo.json",
-  }).as("Topics");
-}
+import { View } from "../utils/view";
 
 describe("When there is proper repository page responses", () => {
   beforeEach(() => {
-    cy.intercept("POST", /.*\graphql/, (req) => {
-      if (handleGqlRequest(req)) {
-        return;
-      }
-
-      req.continue();
-    });
-    handleRestRequests();
+    cy.interceptGraphQLCalls(View.Repository);
+    cy.interceptRestCalls(View.Repository);
 
     cy.visit("/thisdot/starter.dev-github-showcases");
   });
@@ -179,7 +41,7 @@ describe("When there is proper repository page responses", () => {
       .should("be.visible")
       .get(`[data-testid="repo pull requests tab"]`)
       .click()
-      .wait("@gqlRepoPullRequestsQuery")
+      .wait("@RepoPullRequestsQuery")
       .get(`[data-testid="repo pull requests"]`)
       .should("be.visible");
   });

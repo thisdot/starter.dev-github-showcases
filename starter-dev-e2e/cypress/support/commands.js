@@ -1,3 +1,10 @@
+import {
+  hasOperationName,
+  aliasQuery,
+  hasExpression,
+} from "../utils/graphql-test-utils";
+import * as interceptors from "../utils/interceptors.json";
+
 Cypress.Commands.add("mockNextAuthCookie", () => {
   const signingKey = Cypress.env("JWT_SIGNING_KEY");
   const encryptionKey = Cypress.env("JWT_ENCRYPTION_KEY");
@@ -42,4 +49,45 @@ Cypress.Commands.add("mockRemixAuthCookie", () => {
     });
 
   Cypress.Cookies.preserveOnce("__session");
+});
+
+Cypress.Commands.add("interceptGraphQLCalls", (view) => {
+  cy.intercept("POST", /.*\/graphql/, (req) => {
+    var requestHandled = false;
+
+    let viewCalls = interceptors[view]?.graphql;
+    viewCalls?.forEach((interceptor) => {
+      if (requestHandled || !hasOperationName(req, interceptor.name)) {
+        return;
+      }
+
+      let variables = interceptor.variables;
+      if (variables && !hasExpression(req, interceptor.variables)) {
+        return;
+      }
+
+      aliasQuery(req, interceptor.alias);
+      req.reply({
+        fixture: interceptor.fixture,
+      });
+      requestHandled = true;
+    });
+
+    if (!requestHandled) {
+      req.continue();
+    }
+  });
+});
+
+Cypress.Commands.add("interceptRestCalls", (view) => {
+  let restCalls = interceptors[view]?.rest;
+
+  restCalls.forEach((interceptor) => {
+    cy.intercept("GET", new RegExp(interceptor.url), (req) => {
+      aliasQuery(req, interceptor.alias);
+      req.reply({
+        fixture: interceptor.fixture,
+      });
+    });
+  });
 });
