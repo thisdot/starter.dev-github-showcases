@@ -11,7 +11,7 @@ import { useRepo } from '../../../../context/RepoContext';
 import { useRepoExplorer } from '../../../../hooks/repo-explorer/use-repo-explorer';
 
 export default function RepoBranchRoot() {
-  const { owner, name, branch, data } = useRepo();
+  const { owner, name, branch, path, basePath, data } = useRepo();
   const { files, directories } = useRepoExplorer();
 
   return (
@@ -21,6 +21,8 @@ export default function RepoBranchRoot() {
           <RepoMain>
             <FileExplorer
               branch={branch}
+              path={path}
+              basePath={basePath}
               directories={directories}
               files={files}
             />
