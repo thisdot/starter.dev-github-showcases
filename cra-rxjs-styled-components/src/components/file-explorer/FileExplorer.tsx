@@ -13,14 +13,15 @@ import {
 } from './FileExplorer.styles';
 
 import { ForkIcon, DirectoryIcon, FileIcon } from '../icons/index';
+import { FileItem } from '../../types/types';
 
 type Props = {
   branch: string;
-  dirNames: string[];
-  fileNames: string[];
+  directories: Array<FileItem>;
+  files: Array<FileItem>;
 };
 
-export default function FileExplorer({ branch, dirNames, fileNames }: Props) {
+export default function FileExplorer({ branch, directories, files }: Props) {
   return (
     <FileExplorerWrapper>
       <FileExplorerButtonNav>
@@ -34,17 +35,17 @@ export default function FileExplorer({ branch, dirNames, fileNames }: Props) {
       </FileExplorerButtonNav>
 
       <FileExplorerContainer>
-        {dirNames.map((folder, index) => (
+        {directories.map((folder, index) => (
           <FileExplorerCell key={index}>
             <FileExplorerInnerCell>
               <FileExplorerDirContainer>
                 <DirectoryIcon />
               </FileExplorerDirContainer>
-              <FileExplorerLink>{folder}</FileExplorerLink>
+              <FileExplorerLink>{folder.name}</FileExplorerLink>
             </FileExplorerInnerCell>
           </FileExplorerCell>
         ))}
-        {fileNames.map((file, index) => (
+        {files.map((file, index) => (
           <FileExplorerCell key={index}>
             <FileExplorerInnerCell>
               <FileExplorerFileContainer>
