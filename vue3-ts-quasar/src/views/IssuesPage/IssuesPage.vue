@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>Issues</h1>
     <Issues
       :username="route.params.username"
-      :reponame="route.params.reponame"
+      :issuename="route.params.issuename"
     />
   </div>
 </template>

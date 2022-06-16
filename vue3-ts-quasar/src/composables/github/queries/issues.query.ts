@@ -1,10 +1,9 @@
 import { gql } from '@apollo/client';
 
 export const ISSUES_QUERY = gql`
-  query Issues($owner: String!, $name: String!, $fisrt: Int!) {
+  query IssuesQuery($owner: String!, $name: String!, $first: Int!) {
     repository(owner: $owner, name: $name) {
-      openIssues
-      issues(first: $first, states: [OPEN]) {
+      openIssues: issues(first: $first, states: [OPEN]) {
         edges {
           node {
             state

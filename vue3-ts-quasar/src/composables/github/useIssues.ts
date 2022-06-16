@@ -18,7 +18,7 @@ export const useIssues = (): UseIssues => {
     const { result, loading } = useQuery(ISSUES_QUERY, {
       owner,
       name,
-      first: 10,
+      first: 2,
     });
 
     const data = useResult(result, [], ({ repository }) => ({

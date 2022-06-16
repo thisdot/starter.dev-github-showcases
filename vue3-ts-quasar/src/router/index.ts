@@ -18,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
 
-  { path: '/:username/:reponame/issues', component: IssuesPage, props: true },
+  { path: '/:username/:issuename/issues', component: IssuesPage, props: true },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
 
