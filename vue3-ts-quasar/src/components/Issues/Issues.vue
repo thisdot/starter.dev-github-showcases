@@ -33,7 +33,4 @@ const issuename = toRef(props, 'issuename');
 const user = useUserStore();
 
 const { data: IssuesData, loading: IssuesLoading } = getIssues(username.value, issuename.value);
-console.log(IssuesData);
-
-
 </script>
