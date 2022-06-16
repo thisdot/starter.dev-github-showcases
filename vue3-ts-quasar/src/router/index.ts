@@ -4,8 +4,14 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import SiteLayout from '@/layouts/SiteLayout.vue';
 
 //* Pages
-import { Auth, Home, Profile, Redirect, NotFound } from '../views';
-import { PullRequests } from '@/components';
+import {
+  Auth,
+  Home,
+  Profile,
+  Redirect,
+  NotFound,
+  PullRequestsPage,
+} from '../views';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -22,7 +28,11 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
-  { path: '/:username/:reponame/pulls', component: PullRequests, props: true },
+  {
+    path: '/:username/:reponame/pulls',
+    component: PullRequestsPage,
+    props: true,
+  },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
 
