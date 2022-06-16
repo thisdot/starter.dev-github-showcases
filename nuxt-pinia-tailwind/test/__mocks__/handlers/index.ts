@@ -1,3 +1,1 @@
-import { greetingMock } from './greeting'
-
-export const handlers = [greetingMock]
+export const handlers = []
