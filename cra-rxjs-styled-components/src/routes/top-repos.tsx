@@ -1,5 +1,4 @@
 import { Layout } from '../components/layouts/Layout';
-import ReactPaginate from 'react-paginate';
 import RepositoryCard from '../components/top-repositories/RepositoryCard';
 import Sidebar from '../components/layouts/Sidebar';
 import styled from 'styled-components';
@@ -36,7 +35,8 @@ const RepositoriesContainer = styled.section`
 `;
 
 export default function TopRepos() {
-  const { repositories, prevPage, nextPage, paginationPages } = useRepos();
+  const { repositories, prevPage, nextPage, hasNextPage, hasPrevPage } =
+    useRepos();
   const gists = useGists();
 
   return (
@@ -50,7 +50,6 @@ export default function TopRepos() {
             href: gist.html_url,
           }))}
         />
-        {console.log(paginationPages)}
         <Main>
           <Page>
             <Heading>Top Repositories</Heading>
@@ -61,10 +60,10 @@ export default function TopRepos() {
             </RepositoriesContainer>
 
             <div className="flex">
-              <button onClick={prevPage} disabled={!paginationPages.prevPage}>
+              <button onClick={prevPage} disabled={!hasPrevPage}>
                 Prev
               </button>
-              <button onClick={nextPage} disabled={!paginationPages.nextPage}>
+              <button onClick={nextPage} disabled={!hasNextPage}>
                 Next
               </button>
             </div>

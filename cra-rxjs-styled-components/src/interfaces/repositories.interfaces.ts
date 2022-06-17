@@ -24,11 +24,17 @@ export interface RepositoryWithBranchCount extends Repository {
   branches_count: number;
 }
 
-export interface PaginationPages {
-  lastPage: number | undefined;
-  nextPage: number | undefined;
+export interface Pagination {
+  prevPage: string | undefined;
+  nextPage: string | undefined;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
 }
 
-export interface ParsedHeaderLinks {
-  [x: string]: string;
+export interface UseRepo {
+  repositories: RepositoryWithBranchCount[];
+  prevPage: () => void;
+  nextPage: () => void;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
 }

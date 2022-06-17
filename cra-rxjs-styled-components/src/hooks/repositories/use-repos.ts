@@ -8,10 +8,10 @@ import {
   zip,
 } from 'rxjs';
 import {
-  PaginationPages,
-  ParsedHeaderLinks,
+  Pagination,
   Repository,
   RepositoryWithBranchCount,
+  UseRepo,
 } from '../../interfaces/repositories.interfaces';
 import {
   extractBranchCount,
@@ -23,19 +23,13 @@ import { REPOS_URL } from '../../constants/url.constants';
 import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 import parse from 'parse-link-header';
 
-export function useRepos(): {
-  repositories: RepositoryWithBranchCount[];
-  prevPage: () => void;
-  nextPage: () => void;
-  paginationPages: any;
-} {
+export function useRepos(): UseRepo {
   const [state, setState] = useState<RepositoryWithBranchCount[]>([]);
-  const [paginationPages, setPaginationPages] = useState<{
-    prevPage: string | undefined;
-    nextPage: string | undefined;
-  }>({
+  const [paginationPages, setPaginationPages] = useState<Pagination>({
     prevPage: '',
     nextPage: '1',
+    hasPrevPage: false,
+    hasNextPage: false,
   });
   const [currentPage, setCurrentPage] = useState<string | undefined>('1');
 
@@ -45,11 +39,14 @@ export function useRepos(): {
       {
         selector: (response: Response) => {
           const links = parse(response.headers.get('Link'));
+          const hasPrevPage = links?.prev;
+          const hasNextPage = links?.next;
 
-          // @ts-ignore
           setPaginationPages({
             prevPage: links?.prev?.page,
             nextPage: links?.next?.page,
+            hasPrevPage: hasPrevPage !== undefined,
+            hasNextPage: hasNextPage !== undefined,
           });
 
           return response.json();
@@ -85,7 +82,8 @@ export function useRepos(): {
     repositories: state,
     prevPage,
     nextPage,
-    paginationPages,
+    hasNextPage: paginationPages.hasNextPage,
+    hasPrevPage: paginationPages.hasPrevPage,
   };
 }
 
