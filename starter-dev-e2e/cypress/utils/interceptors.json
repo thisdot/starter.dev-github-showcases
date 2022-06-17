@@ -171,5 +171,40 @@
         "fixture": "repo/rest/repo.json"
       }
     ]
+  },
+  "organization": {
+    "graphql": [
+      {
+        "name": "CurrentUser",
+        "alias": "CurrentUser",
+        "variables": null,
+        "fixture": "user/currentUser.graphql.json"
+      },
+      {
+        "name": "UserTopRepos",
+        "alias": "UserTopRepos",
+        "variables": null,
+        "fixture": "user/userTopRepos.graphql.json"
+      },
+      {
+        "name": "UserGists",
+        "alias": "UserGists",
+        "variables": null,
+        "fixture": "user/userGist.graphql.json"
+      },
+      {
+        "name": "OrgRepos",
+        "alias": "OrgRepos",
+        "variables": null,
+        "fixture": "org/orgRepos.graphql.json"
+      },
+      {
+        "name": "OrgProfile",
+        "alias": "OrgProfile",
+        "variables": null,
+        "fixture": "org/orgProfile.graphql.json"
+      }
+    ],
+    "rest": []
   }
 }

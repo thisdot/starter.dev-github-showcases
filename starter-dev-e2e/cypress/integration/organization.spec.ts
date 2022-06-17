@@ -1,70 +1,16 @@
-import {
-  hasOperationName,
-  aliasQuery,
-  hasExpression,
-} from "../utils/graphql-test-utils";
-
-function handleGqlRequest(req): Boolean {
-  if (hasOperationName(req, "UserTopRepos")) {
-    aliasQuery(req, "UserTopRepos");
-    req.reply({
-      fixture: "user/userTopRepos.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "UserGists")) {
-    aliasQuery(req, "UserGists");
-    req.reply({
-      fixture: "user/userGist.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "CurrentUser")) {
-    aliasQuery(req, "CurrentUser");
-    req.reply({
-      fixture: "user/currentUser.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "OrgRepos")) {
-    aliasQuery(req, "OrgRepos");
-    req.reply({
-      fixture: "org/orgRepos.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "OrgProfile")) {
-    aliasQuery(req, "OrgProfile");
-    req.reply({
-      fixture: "org/orgProfile.graphql.json",
-    });
-    return true;
-  }
-
-  return false;
-}
+import { View } from "../utils/view";
 
 describe("When there is proper repository page responses", () => {
   beforeEach(() => {
-    cy.intercept("POST", "/graphql", (req) => {
-      if (handleGqlRequest(req)) {
-        return;
-      }
-
-      req.continue();
-    });
+    cy.interceptGraphQLCalls(View.Organization);
 
     cy.visit("/orgs/thisdot");
   });
 
   it("should display correct organization name and avatar", () => {
-    cy.wait("@gqlCurrentUserQuery")
-      .wait("@gqlOrgReposQuery")
-      .wait("@gqlOrgProfileQuery")
+    cy.wait("@CurrentUserQuery")
+      .wait("@OrgReposQuery")
+      .wait("@OrgProfileQuery")
       .get(`[data-testid="org about name"]`)
       .should("be.visible")
       .and("contain.text", "This Dot")
@@ -78,9 +24,9 @@ describe("When there is proper repository page responses", () => {
   });
 
   it("should display repository list and data", () => {
-    cy.wait("@gqlCurrentUserQuery")
-      .wait("@gqlOrgReposQuery")
-      .wait("@gqlOrgProfileQuery")
+    cy.wait("@CurrentUserQuery")
+      .wait("@OrgReposQuery")
+      .wait("@OrgProfileQuery")
       .get(`[data-testid="repository list item"]`)
       .should("have.length", "10")
       .and("be.visible")
@@ -105,9 +51,9 @@ describe("When there is proper repository page responses", () => {
   });
 
   it("should be able to search for and see valid repositories", () => {
-    cy.wait("@gqlCurrentUserQuery")
-      .wait("@gqlOrgReposQuery")
-      .wait("@gqlOrgProfileQuery")
+    cy.wait("@CurrentUserQuery")
+      .wait("@OrgReposQuery")
+      .wait("@OrgProfileQuery")
       .get(`[data-testid="repository filters search input"]`)
       .type("starter.dev")
       .get(`[data-testid="repository list item"]`)
@@ -116,9 +62,9 @@ describe("When there is proper repository page responses", () => {
   });
 
   it("should be able to search an invalid repository and see no results", () => {
-    cy.wait("@gqlCurrentUserQuery")
-      .wait("@gqlOrgReposQuery")
-      .wait("@gqlOrgProfileQuery")
+    cy.wait("@CurrentUserQuery")
+      .wait("@OrgReposQuery")
+      .wait("@OrgProfileQuery")
       .get(`[data-testid="repository filters search input"]`)
       .type("not a valid repository")
       .get(`[data-testid="repository list item"]`)
@@ -126,9 +72,9 @@ describe("When there is proper repository page responses", () => {
   });
 
   it("should be populate filter dropdown buttons and menu with correct items", () => {
-    cy.wait("@gqlCurrentUserQuery")
-      .wait("@gqlOrgReposQuery")
-      .wait("@gqlOrgProfileQuery")
+    cy.wait("@CurrentUserQuery")
+      .wait("@OrgReposQuery")
+      .wait("@OrgProfileQuery")
       .get(`[data-testid="filters dropdown Type items"]`)
       .should("not.exist")
       .get(`[data-testid="filters dropdown Language items"]`)
