@@ -4,7 +4,14 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import SiteLayout from '@/layouts/SiteLayout.vue';
 
 //* Pages
-import { Auth, Home, Profile, Redirect, NotFound } from '../views';
+import {
+  Auth,
+  Home,
+  Profile,
+  Redirect,
+  NotFound,
+  OrganizationReposPage,
+} from '../views';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -16,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
       { path: 'redirect', component: Redirect },
       { path: ':username', component: Profile, props: true },
     ],
+  },
+  {
+    path: '/orgs/:orgname/repositories',
+    component: OrganizationReposPage,
+    props: true,
   },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
