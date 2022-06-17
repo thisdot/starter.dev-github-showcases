@@ -19,7 +19,7 @@ match each other closely when it comes to features, behavior, and styling. If yo
 ### REST API reference
 
 If the showcase that you're working on is using the GitHub REST API, you should refer
-to the **[angular-ngrx](/angular-ngrx)** showcase as a reference for fetching the data required to implement each feature.
+to the **[angular-ngrx-scss](./angular-ngrx-scss)** showcase as a reference for fetching the data required to implement each feature.
 
 ## Contributing
 
