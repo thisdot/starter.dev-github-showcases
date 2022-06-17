@@ -23,3 +23,12 @@ export interface Repository {
 export interface RepositoryWithBranchCount extends Repository {
   branches_count: number;
 }
+
+export interface PaginationPages {
+  lastPage: number | undefined;
+  nextPage: number | undefined;
+}
+
+export interface ParsedHeaderLinks {
+  [x: string]: string;
+}

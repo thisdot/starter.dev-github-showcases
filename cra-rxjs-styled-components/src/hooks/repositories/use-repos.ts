@@ -8,6 +8,8 @@ import {
   zip,
 } from 'rxjs';
 import {
+  PaginationPages,
+  ParsedHeaderLinks,
   Repository,
   RepositoryWithBranchCount,
 } from '../../interfaces/repositories.interfaces';
@@ -19,16 +21,37 @@ import { useEffect, useState } from 'react';
 
 import { REPOS_URL } from '../../constants/url.constants';
 import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
+import parse from 'parse-link-header';
 
-export function useRepos(): RepositoryWithBranchCount[] {
+export function useRepos(): {
+  repositories: RepositoryWithBranchCount[];
+  prevPage: () => void;
+  nextPage: () => void;
+  paginationPages: any;
+} {
   const [state, setState] = useState<RepositoryWithBranchCount[]>([]);
-  const [repoPage, setRepoPage] = useState<number>(1);
+  const [paginationPages, setPaginationPages] = useState<{
+    prevPage: string | undefined;
+    nextPage: string | undefined;
+  }>({
+    prevPage: '',
+    nextPage: '1',
+  });
+  const [currentPage, setCurrentPage] = useState<string | undefined>('1');
 
   useEffect(() => {
     const subscription: Subscription = fromFetchWithAuth<Repository[]>(
-      REPOS_URL(),
+      REPOS_URL(currentPage),
       {
         selector: (response: Response) => {
+          const links = parse(response.headers.get('Link'));
+
+          // @ts-ignore
+          setPaginationPages({
+            prevPage: links?.prev?.page,
+            nextPage: links?.next?.page,
+          });
+
           return response.json();
         },
       }
@@ -48,9 +71,22 @@ export function useRepos(): RepositoryWithBranchCount[] {
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [currentPage]);
 
-  return state;
+  const nextPage = () => {
+    setCurrentPage(paginationPages.nextPage);
+  };
+
+  const prevPage = () => {
+    setCurrentPage(paginationPages.prevPage);
+  };
+
+  return {
+    repositories: state,
+    prevPage,
+    nextPage,
+    paginationPages,
+  };
 }
 
 function createBranchCountRequest(repo: Repository): Observable<number> {
