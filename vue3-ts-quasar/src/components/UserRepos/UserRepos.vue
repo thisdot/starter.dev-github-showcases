@@ -1,46 +1,32 @@
 <template>
-    <div>
-      {repos.map(
-        ({
-          id,
-          name,
-          description,
-          stargazerCount,
-          forkCount,
-          language,
-          languageColor,
-          updatedAt,
-          isPrivate,
-        }) => (
-          <div key={id} className={styles.container}>
+    <div v-for="repo in repos" :key="repo.id">
+        <div className={styles.container}>
             <div className={styles.content}>
-              <h3 className="mb-2">
+                <h3 className="mb-2">
                 <Link href={`/${owner}/${name}`}>
-                  <a className={styles.headingLink}>{name}</a>
+                    <a className={styles.headingLink}>{{repo.name}}</a>
                 </Link>
                 <PrivacyBadge
-                  isPrivate={isPrivate}
-                  className="relative bottom-0.5"
+                    :isPrivate="repo.isPrivate"
+                    className="relative bottom-0.5"
                 />
-              </h3>
-              <div className={styles.description}>{description}</div>
-              <RepoMeta
-                language={language}
-                languageColor={languageColor}
-                forkCount={forkCount}
-                stargazerCount={stargazerCount}
-                updatedAt={updatedAt}
-              />
+                </h3>
+                <div className={styles.description}>{{repo.description}}</div>
+                <RepoMeta
+                :language="repo.language"
+                :languageColor="repo.languageColor"
+                :forkCount="repo.forkCount"
+                :stargazerCount="repo.stargazerCount"
+                :updatedAt="repo.updatedAt"
+                />
             </div>
             <div className={styles.aside}>
-              <button className={styles.starBtn}>
+                <button className={styles.starBtn}>
                 <StarIcon className={styles.starIcon} />
                 Star
-              </button>
+                </button>
             </div>
-          </div>
-        )
-      )}
+        </div>
     </div>
 </template>
 
@@ -55,7 +41,6 @@ export default defineComponent({
 <script lang="ts" setup>
 // NEW WIP FROM OLD NEXTJS USERREPOS
 // import type { Repo } from './types';
-// import Link from 'next/link';
 // import { StarIcon } from '@heroicons/react/outline';
 // import PrivacyBadge from '@components/PrivacyBadge';
 // import RepoMeta from '@components/RepoMeta';
@@ -66,12 +51,13 @@ export default defineComponent({
 //   owner: string;
 // }
 
-//                                 |
-// info passed into above template V
-// UserReposView({ repos, owner }
+import { getUserRepos } from '@/composables';
+const props = defineProps({
+  username: String,
+});
 
-
-
+const { repos, loading } = getUserRepos(props.username, false);
+console.log(`HERE BE REPOS ${repos}`);
 // taken from USERPROFILECARD
 // import { useUser } from '@/composables';
 // import { useUserStore } from '@/store/userStore';
