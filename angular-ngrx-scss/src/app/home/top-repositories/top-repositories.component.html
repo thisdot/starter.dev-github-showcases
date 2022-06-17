@@ -1,3 +1,15 @@
 <div class="top-repositories-container">
   <h2>Top Repositories</h2>
+  <div class="repo-container">
+    <ng-container *ngIf="repos$ | async as repos">
+      <ng-container *ngFor="let repo of repos; last as isLast">
+        <div class="repo-section">
+          <app-repo-card [repo]="repo"></app-repo-card>
+        </div>
+        <div class="view-all-link" *ngIf="isLast">
+          <a routerLink="/{{ username$ | async }}">View all repositories</a>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
 </div>

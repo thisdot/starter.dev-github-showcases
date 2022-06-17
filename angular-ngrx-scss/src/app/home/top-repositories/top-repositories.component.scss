@@ -8,4 +8,24 @@
     font-weight: 500;
     margin-bottom: 16px;
   }
+  .repo-container {
+    background-color: variables.$white;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    padding-left: 2rem;
+  }
+  .repo-section {
+    padding: 2rem 0;
+    border-bottom: 1px solid variables.$gray300;
+  }
+  .view-all-link {
+    padding: 1.25rem;
+    background-color: variables.$gray200;
+    display: grid;
+    place-items: center;
+    a {
+      color: inherit;
+      font-weight: 600;
+    }
+  }
 }

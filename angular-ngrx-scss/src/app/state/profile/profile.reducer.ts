@@ -1,5 +1,4 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { getUserGistsSuccess } from '../user/user.actions';
 import { fetchProfileSuccess } from './profile.actions';
 import { ProfileState } from './profile.state';
 
@@ -11,10 +10,6 @@ const reducer = createReducer(
   on(fetchProfileSuccess, (state, { data }) => ({
     ...state,
     ...data,
-  })),
-  on(getUserGistsSuccess, (state, { userData }) => ({
-    ...state,
-    gists: userData,
   })),
 );
 

@@ -13,7 +13,7 @@ export interface UserGistsState {
 }
 
 interface Files {
-  filename: string;
+  [key: string]: { filename: string };
 }
 export interface UserGist {
   comments: number;

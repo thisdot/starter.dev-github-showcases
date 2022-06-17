@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import { selectGists } from 'src/app/state/profile/profile.selectors';
+import { selectGists } from 'src/app/state/user';
 
 @Component({
   selector: 'app-user-gists',
