@@ -7,15 +7,15 @@
     class="row container--home q-pb-lg"
     style="background-color: rgba(243, 244, 246)"
   >
-    <div class="col-12 col-sm-3 col-lg-2">
+    <div class="col">
       <!--  -->
       <GistsPanel class="card--gists" />
     </div>
-    <div class="col-12 col-sm-8 col-xl-6 q-px-lg q-pt-xl">
+    <div class="col col-md-9 col-lg-10 q-px-xl q-pt-xl">
       <h1 class="text-weight-bold text-h5 text-dark q-mb-md">
         Top repositories
       </h1>
-      <q-card>
+      <q-card flat>
         <template v-if="!reposLoading">
           <q-list v-if="repoList" separator>
             <q-item v-for="repo in repoList" :key="repo.id">
@@ -63,7 +63,7 @@ const repoList = computed(() => repoData.value?.topRepositories ?? null);
 </script>
 
 <style lang="scss" scoped>
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
   .container--home {
     flex-direction: column-reverse !important;
 

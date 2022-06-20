@@ -1,18 +1,6 @@
 <template>
   <q-toolbar class="bg-dark row">
     <Logo />
-
-    <div class="col-7 col-sm-4">
-      <q-input
-        class="q-ml-lg"
-        v-model="searchText"
-        type="search"
-        standout
-        dark
-        dense
-        placeholder="Search through stuff"
-      ></q-input>
-    </div>
     <q-space></q-space>
 
     <q-btn class="text-white" flat icon-right="expand_more">
