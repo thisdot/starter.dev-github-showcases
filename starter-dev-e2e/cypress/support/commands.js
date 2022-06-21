@@ -1,7 +1,7 @@
 import {
   hasOperationName,
   aliasQuery,
-  hasExpression,
+  hasVariables,
 } from "../utils/graphql-test-utils";
 import * as interceptors from "../utils/interceptors.json";
 
@@ -62,7 +62,7 @@ Cypress.Commands.add("interceptGraphQLCalls", (view) => {
       }
 
       let variables = interceptor.variables;
-      if (variables && !hasExpression(req, interceptor.variables)) {
+      if (variables && !hasVariables(req, variables)) {
         return;
       }
 

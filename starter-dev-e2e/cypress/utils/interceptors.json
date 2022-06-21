@@ -16,19 +16,19 @@
       {
         "name": "RepoTree",
         "alias": "RepoTreeFolder1",
-        "variables": "main:angular-apollo-tailwind",
+        "variables": { "expression": "main:angular-apollo-tailwind" },
         "fixture": "repo/repoTree-folder1.graphql.json"
       },
       {
         "name": "RepoTree",
         "alias": "RepoTreeFolder2",
-        "variables": "main:angular-apollo-tailwind/src",
+        "variables": { "expression": "main:angular-apollo-tailwind/src" },
         "fixture": "repo/repoTree-folder2.graphql.json"
       },
       {
         "name": "RepoTree",
         "alias": "RepoTreeFolder3",
-        "variables": "main:angular-apollo-tailwind/src/app",
+        "variables": { "expression": "main:angular-apollo-tailwind/src/app" },
         "fixture": "repo/repoTree-folder3.graphql.json"
       },
       {
@@ -40,7 +40,9 @@
       {
         "name": "RepoReadMe",
         "alias": "RepoReadMeFolder1",
-        "variables": "HEAD:angular-apollo-tailwind/README.md",
+        "variables": {
+          "expression": "HEAD:angular-apollo-tailwind/README.md"
+        },
         "fixture": "repo/repoReadMe-folder1.graphql.json"
       },
       {
@@ -51,9 +53,21 @@
       },
       {
         "name": "RepoIssues",
+        "alias": "RepoIssuesPage2",
+        "variables": { "after": "issues-page1-endCursor" },
+        "fixture": "repo/repoIssues-page2.graphql.json"
+      },
+      {
+        "name": "RepoIssues",
         "alias": "RepoIssues",
         "variables": null,
         "fixture": "repo/repoIssues.graphql.json"
+      },
+      {
+        "name": "RepoPullRequests",
+        "alias": "RepoPullRequests2",
+        "variables": { "after": "pullRequests-page1-endCursosr" },
+        "fixture": "repo/repoPullRequests-page2.graphql.json"
       },
       {
         "name": "RepoPullRequests",
@@ -70,37 +84,37 @@
     ],
     "rest": [
       {
-        "url": "^.*\/user$",
+        "url": "^.*/user$",
         "alias": "CurrentUser",
         "fixture": "user/currentUser.json"
       },
       {
-        "url": "^.*\/repos\/thisdot\/starter.dev-github-showcases$",
+        "url": "^.*/repos/thisdot/starter.dev-github-showcases$",
         "alias": "Repo",
         "fixture": "repo/rest/repo.json"
       },
       {
-        "url": "^.*\/pulls$",
+        "url": "^.*/pulls$",
         "alias": "PullRequests",
         "fixture": "repo/rest/repoPullRequests.json"
       },
       {
-        "url": "^.*\/pulls\\?state=closed$",
+        "url": "^.*/pulls\\?state=closed$",
         "alias": "PullRequestsClosed",
         "fixture": "repo/rest/repoPullRequestsClosed.json"
       },
       {
-        "url": "^.*\/issues$",
+        "url": "^.*/issues$",
         "alias": "Issues",
         "fixture": "repo/rest/issues.json"
       },
       {
-        "url": "^.*\/contents$",
+        "url": "^.*/contents$",
         "alias": "RepoTree",
         "fixture": "repo/rest/contents.json"
       },
       {
-        "url": "^.*\/topics$",
+        "url": "^.*/topics$",
         "alias": "Topics",
         "fixture": "repo/rest/repo.json"
       }

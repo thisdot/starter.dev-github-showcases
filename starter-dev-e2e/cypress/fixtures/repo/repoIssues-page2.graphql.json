@@ -67,504 +67,36 @@
             "number": 8,
             "title": "E2E Cypress Testing",
             "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Aep35",
+            "closed": false,
+            "description": "",
+            "number": 9,
+            "title": "Nuxt.js + Pinia + Tailwind",
+            "__typename": "Milestone"
           }
         ],
         "pageInfo": {
           "startCursor": "Y3Vyc29yOnYyOpHOAHJpwg==",
-          "endCursor": "Y3Vyc29yOnYyOpHOAHmLlQ==",
+          "endCursor": "Y3Vyc29yOnYyOpHOAHqd-Q==",
           "hasNextPage": false,
           "hasPreviousPage": false,
           "__typename": "PageInfo"
         },
-        "totalCount": 8,
+        "totalCount": 9,
         "__typename": "MilestoneConnection"
       },
       "closedIssues": {
         "pageInfo": {
           "hasNextPage": true,
-          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wMi0yMVQxMDoxMTowMi0wNjowMM5ETmox",
-          "hasPreviousPage": false,
-          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNS0xOFQwOTo0MDowMy0wNTowMM5J6fub",
+          "endCursor": "closedIssues-page2-endCursor",
+          "hasPreviousPage": true,
+          "startCursor": "closedIssues-page2-startCursor",
           "__typename": "PageInfo"
         },
         "totalCount": 95,
         "nodes": [
-          {
-            "id": "I_kwDOGd0nu85J6fub",
-            "author": { "login": "vyktoremario", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [
-                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
-              ],
-              "totalCount": 1,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-24T17:33:57Z",
-            "title": "[Next + React Query + Tailwind] Tab focus lost when not at root level of repo",
-            "number": 292,
-            "createdAt": "2022-05-18T14:40:03Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85J6cMk",
-            "author": { "login": "vyktoremario", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [
-                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
-              ],
-              "totalCount": 1,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-24T17:23:09Z",
-            "title": "[Next + React Query + Tailwind] Remove Empty README Component from sub-pages",
-            "number": 291,
-            "createdAt": "2022-05-18T14:29:39Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85J0FKj",
-            "author": { "login": "iansamz", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-19T16:08:20Z",
-            "title": "[Angular + Apollo + Tailwind] Fix User Gists",
-            "number": 288,
-            "createdAt": "2022-05-17T09:59:05Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JuOJW",
-            "author": { "login": "iansamz", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-23T19:32:09Z",
-            "title": "[Angular + Apollo + Tailwind] Fix Previous Navigation",
-            "number": 286,
-            "createdAt": "2022-05-16T09:10:43Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JuMLD",
-            "author": { "login": "iansamz", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-18T19:17:12Z",
-            "title": "[Angular + Apollo + Tailwind] PR Page not loading properly",
-            "number": 285,
-            "createdAt": "2022-05-16T09:04:19Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JgBt-",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 1,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-23T14:49:18Z",
-            "title": "[Remix + GraphQL + Tailwind] User profile sort does not work",
-            "number": 272,
-            "createdAt": "2022-05-11T20:10:55Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JgBW7",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-17T07:54:57Z",
-            "title": "[Remix + GraphQL + Tailwind] Language menu on user profile loses all languages when filtered",
-            "number": 271,
-            "createdAt": "2022-05-11T20:09:15Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JgAi3",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [
-                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
-              ],
-              "totalCount": 1,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-12T15:18:54Z",
-            "title": "[Remix + GraphQL + Tailwind] Tab focus lost when not at root level of repo",
-            "number": 270,
-            "createdAt": "2022-05-11T20:05:30Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jf_yN",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-13T16:27:09Z",
-            "title": "[Remix + GraphQL + Tailwind] Issues & Pull Requests should open tab on GitHub",
-            "number": 269,
-            "createdAt": "2022-05-11T20:03:41Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jf-3Y",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [
-                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
-              ],
-              "totalCount": 1,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-12T15:20:58Z",
-            "title": "[Remix + GraphQL + Tailwind] UI: caret icon in branch dropdown menu is too big",
-            "number": 268,
-            "createdAt": "2022-05-11T19:59:41Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jf-2r",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 2,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [
-                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
-              ],
-              "totalCount": 1,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-11T20:13:54Z",
-            "title": "[Remix + GraphQL + Tailwind] Remove \"Edit Profile\" from user/org pages",
-            "number": 267,
-            "createdAt": "2022-05-11T19:59:38Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jf-2G",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [
-                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
-              ],
-              "totalCount": 1,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-17T07:55:17Z",
-            "title": "[Remix + GraphQL + Tailwind] BUG: Gists don't open correctly",
-            "number": 266,
-            "createdAt": "2022-05-11T19:59:35Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jaxem",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 1,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-10T22:41:28Z",
-            "title": "[angular-apollo-tailwind] Fix build issues",
-            "number": 260,
-            "createdAt": "2022-05-10T22:10:32Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jap7u",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-19T16:18:11Z",
-            "title": "[CRA-RxJS-SC] Update login page to match other apps' design",
-            "number": 254,
-            "createdAt": "2022-05-10T21:30:26Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JJa-Q",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-09T15:21:18Z",
-            "title": "[Angular + Apollo + Tailwind] Bug: clicking 2 levels into file explorer does not work",
-            "number": 247,
-            "createdAt": "2022-05-05T21:47:07Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85I66NV",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-12T15:18:53Z",
-            "title": "[Remix + GraphQL + Tailwind] Set the user profile \"repositories\" tab to active",
-            "number": 244,
-            "createdAt": "2022-05-02T21:56:28Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85I66EO",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-12T20:59:49Z",
-            "title": "[Remix + GraphQL + Tailwind] update user profile info",
-            "number": 243,
-            "createdAt": "2022-05-02T21:55:32Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85I65mi",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-18T16:36:05Z",
-            "title": "[Remix + GraphQL + Tailwind] remove README from sub-pages on repo view",
-            "number": 242,
-            "createdAt": "2022-05-02T21:52:36Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85I6gBf",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-06T19:30:27Z",
-            "title": "[Remix + GraphQL + Tailwind] move directory to `remix-gql-tailwind`",
-            "number": 241,
-            "createdAt": "2022-05-02T20:00:36Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85I6faw",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-06T19:44:29Z",
-            "title": "[Remix + GraphQL + Tailwind] Update login homepage",
-            "number": 240,
-            "createdAt": "2022-05-02T19:58:58Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85I6dsc",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 1,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [
-                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
-              ],
-              "totalCount": 1,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-09T14:55:50Z",
-            "title": "[Next + React Query + Tailwind] Deployed site not loading queries",
-            "number": 239,
-            "createdAt": "2022-05-02T19:54:08Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85IgZ0m",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-04-29T16:05:00Z",
-            "title": "[next-react-query-tailwind] Deploy project to Amplify and setup DNS",
-            "number": 236,
-            "createdAt": "2022-04-26T20:39:28Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85HIMs9",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 2,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [],
-              "totalCount": 0,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-05-09T23:43:10Z",
-            "title": "[angular-apollo-tailwind] Add loading indicators",
-            "number": 216,
-            "createdAt": "2022-04-05T15:22:49Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85FVxd3",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": {
-              "nodes": [
-                {
-                  "color": "FA3C07",
-                  "name": "WIP DO NOT MERGE",
-                  "__typename": "Label"
-                }
-              ],
-              "totalCount": 1,
-              "__typename": "LabelConnection"
-            },
-            "closed": true,
-            "closedAt": "2022-03-10T16:13:23Z",
-            "title": "Add basic endpoints for kits to starter-dev-backend",
-            "number": 205,
-            "createdAt": "2022-03-08T23:57:59Z",
-            "__typename": "Issue"
-          },
           {
             "id": "I_kwDOGd0nu85ETmox",
             "author": { "login": "morgnism", "__typename": "User" },
@@ -583,314 +115,478 @@
             "number": 160,
             "createdAt": "2022-02-21T16:11:02Z",
             "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85ETgVX",
+            "author": { "login": "morgnism", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-11T21:07:25Z",
+            "title": "[Angular + Apollo + Tailwind] Fix Tailwind Pseudo Class Issues",
+            "number": 158,
+            "createdAt": "2022-02-21T15:47:46Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85ETgU4",
+            "author": { "login": "morgnism", "__typename": "User" },
+            "comments": {
+              "totalCount": 3,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-16T17:05:12Z",
+            "title": "[Angular + Apollo + Tailwind] Convert Redirect Component to Auth Guard",
+            "number": 157,
+            "createdAt": "2022-02-21T15:47:44Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85ETgR9",
+            "author": { "login": "morgnism", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-16T22:29:05Z",
+            "title": "[Angular + Apollo + Tailwind] Fix Input Drilling",
+            "number": 156,
+            "createdAt": "2022-02-21T15:47:32Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85ETeNO",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-10T21:19:19Z",
+            "title": "[CRA+sdjs] title",
+            "number": 155,
+            "createdAt": "2022-02-21T15:39:05Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIgsi",
+            "author": { "login": "jdwilkin4", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-04-29T16:05:22Z",
+            "title": "[next-apollo-tailwind] Markdown not rendering links and images properly in READMEs for Demo App",
+            "number": 233,
+            "createdAt": "2022-02-17T22:55:36Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIgnX",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-13T20:08:39Z",
+            "title": "[CRA-RXJS-SC] Get Gists from GitHub API",
+            "number": 230,
+            "createdAt": "2022-02-17T09:07:46Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIglf",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-05T20:49:45Z",
+            "title": "[CRA-RXJS-SC] Setup App deployment",
+            "number": 229,
+            "createdAt": "2022-02-17T09:02:12Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D-all",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [
+                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
+              ],
+              "totalCount": 1,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-04-05T16:24:12Z",
+            "title": "[starter-dev-backend] Fix CD deploys",
+            "number": 146,
+            "createdAt": "2022-02-16T18:57:28Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8aHI",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-28T14:11:26Z",
+            "title": "[VUE + TS + Quasar] Create login page and OAuth functionality",
+            "number": 145,
+            "createdAt": "2022-02-16T11:48:27Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8ZIi",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-28T14:19:02Z",
+            "title": "[VUE + TS + Quasar] Setup app deployment for new project",
+            "number": 144,
+            "createdAt": "2022-02-16T11:44:13Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8XOK",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-28T14:18:42Z",
+            "title": "[VUE + TS + Quasar] Setup CI for new project",
+            "number": 143,
+            "createdAt": "2022-02-16T11:35:59Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8Vok",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-06-13T09:45:13Z",
+            "title": "[VUE + TS + Quasar] Get Profile information from GitHub API",
+            "number": 137,
+            "createdAt": "2022-02-16T11:29:12Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8Vb-",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-06-03T16:24:58Z",
+            "title": "[VUE + TS + Quasar] Get Gists from GitHub API",
+            "number": 136,
+            "createdAt": "2022-02-16T11:28:23Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8VPO",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-11T06:26:57Z",
+            "title": "[VUE + TS + Quasar] Get Top repositories from GitHub API",
+            "number": 135,
+            "createdAt": "2022-02-16T11:27:35Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8Uzd",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:22:22Z",
+            "title": "[VUE + TS + Quasar] Setup organization page layout",
+            "number": 134,
+            "createdAt": "2022-02-16T11:25:50Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8UbA",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:22:19Z",
+            "title": "[VUE + TS + Quasar] Create profile page layout",
+            "number": 133,
+            "createdAt": "2022-02-16T11:24:16Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8ULO",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:22:17Z",
+            "title": "[VUE + TS + Quasar] Create component for search input and filter / sort buttons",
+            "number": 132,
+            "createdAt": "2022-02-16T11:23:18Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8Ql9",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:22:15Z",
+            "title": "[VUE + TS + Quasar] Create user profile card",
+            "number": 131,
+            "createdAt": "2022-02-16T11:09:20Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D3B-C",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:21:31Z",
+            "title": "[VUE + TS + Quasar] Create main page layout",
+            "number": 127,
+            "createdAt": "2022-02-15T10:38:01Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D291E",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:21:16Z",
+            "title": "[VUE + TS + Quasar]  Create repository card",
+            "number": 126,
+            "createdAt": "2022-02-15T10:24:26Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D29Xg",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:21:14Z",
+            "title": "[VUE + TS + Quasar]  Create gists panel",
+            "number": 125,
+            "createdAt": "2022-02-15T10:22:43Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D28ih",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:20:39Z",
+            "title": "[VUE + TS + Quasar]  Create navigation header",
+            "number": 124,
+            "createdAt": "2022-02-15T10:19:43Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85Dzhc-",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:21:11Z",
+            "title": "[Vue + TS + Quasar] Scaffold initial project setup",
+            "number": 123,
+            "createdAt": "2022-02-14T16:56:49Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85DYQnt",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-11T23:58:41Z",
+            "title": "[Angular - NgRx - SCSS] Update Authentication setup to work with updated backend",
+            "number": 121,
+            "createdAt": "2022-02-10T16:35:52Z",
+            "__typename": "Issue"
           }
         ],
         "__typename": "IssueConnection"
       },
       "openIssues": {
         "pageInfo": {
-          "hasNextPage": true,
-          "endCursor": "issues-page1-endCursor",
-          "hasPreviousPage": false,
-          "startCursor": "issues-page1-startCursor",
+          "hasNextPage": false,
+          "endCursor": "issues-page2-endCursor",
+          "hasPreviousPage": true,
+          "startCursor": "issues-page2-startCursor",
           "__typename": "PageInfo"
         },
         "totalCount": 68,
         "nodes": [
-          {
-            "id": "I_kwDOGd0nu85KT8JI",
-            "author": { "login": "BrettZeidler", "__typename": "User" },
-            "comments": {
-              "totalCount": 32,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Cypress] Write test coverage for organization page",
-            "number": 308,
-            "createdAt": "2022-05-24T15:32:35Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85KT7VR",
-            "author": { "login": "BrettZeidler", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Cypress] Write test coverage for profile page",
-            "number": 307,
-            "createdAt": "2022-05-24T15:30:10Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85KS5Ct",
-            "author": { "login": "iansamz", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Next + React Query + Tailwind] Add Organisations to Profile Page",
-            "number": 306,
-            "createdAt": "2022-05-24T12:21:48Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85KS4YP",
-            "author": { "login": "iansamz", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Next + React Query + Tailwind] Fix Previous Pagination Button Issue",
-            "number": 305,
-            "createdAt": "2022-05-24T12:19:38Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85KSzvA",
-            "author": { "login": "iansamz", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Next + React Query + Tailwind] Update Readme for setup issue",
-            "number": 303,
-            "createdAt": "2022-05-24T12:05:22Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jpmcv",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[CRA-RxJS-SC] Create global user context",
-            "number": 281,
-            "createdAt": "2022-05-13T20:07:12Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JgPMm",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 2,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Remix + GraphQL + Tailwind] SPIKE: determine deployment strategy using grunge stack",
-            "number": 274,
-            "createdAt": "2022-05-11T21:09:05Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JazrP",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Cypress] Write repo page test",
-            "number": 265,
-            "createdAt": "2022-05-10T22:22:39Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jazqs",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Cypress] Write dashboard page test",
-            "number": 264,
-            "createdAt": "2022-05-10T22:22:36Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JazqR",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Cypress] Stub auth and create helpers for future tests",
-            "number": 263,
-            "createdAt": "2022-05-10T22:22:33Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jazpn",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Cypress] Init cypress project",
-            "number": 262,
-            "createdAt": "2022-05-10T22:22:30Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jasw2",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[CRA-RxJS-SC] Get issue information from GitHub API",
-            "number": 259,
-            "createdAt": "2022-05-10T21:45:54Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jaswi",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[CRA-RxJS-SC] Get single repo information from GitHub API",
-            "number": 258,
-            "createdAt": "2022-05-10T21:45:51Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JaswF",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[CRA-RxJS-SC] Get Organization repositories from GitHub API",
-            "number": 257,
-            "createdAt": "2022-05-10T21:45:49Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jasvh",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 2,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[CRA-RxJS-SC] Get all repositories from GitHub API",
-            "number": 256,
-            "createdAt": "2022-05-10T21:45:46Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Jaq5P",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[CRA-RxJS-SC] Update styles on repo landing page",
-            "number": 255,
-            "createdAt": "2022-05-10T21:35:28Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85Japmb",
-            "author": { "login": "dustinsgoodman", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[CRA-RxJS-SC] Fix background color on dashboard page",
-            "number": 253,
-            "createdAt": "2022-05-10T21:28:44Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85JUo0q",
-            "author": { "login": "WillHutt", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Remix] Enhance root session check",
-            "number": 251,
-            "createdAt": "2022-05-09T19:20:47Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85FJeg_",
-            "author": { "login": "lindakatcodes", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Angular - NgRx - SCSS] Create file view",
-            "number": 204,
-            "createdAt": "2022-03-04T22:43:47Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85FJeeZ",
-            "author": { "login": "lindakatcodes", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Angular - NgRx - SCSS] Create folder navigation",
-            "number": 203,
-            "createdAt": "2022-03-04T22:43:25Z",
-            "__typename": "Issue"
-          },
-          {
-            "id": "I_kwDOGd0nu85FJeb3",
-            "author": { "login": "lindakatcodes", "__typename": "User" },
-            "comments": {
-              "totalCount": 0,
-              "__typename": "IssueCommentConnection"
-            },
-            "labels": { "nodes": [], "__typename": "LabelConnection" },
-            "closed": false,
-            "title": "[Angular - NgRx - SCSS] Create single repo pull request tab view",
-            "number": 202,
-            "createdAt": "2022-03-04T22:43:02Z",
-            "__typename": "Issue"
-          },
           {
             "id": "I_kwDOGd0nu85FJeY8",
             "author": { "login": "lindakatcodes", "__typename": "User" },
@@ -931,6 +627,314 @@
             "title": "[Angular - NgRx - SCSS] Create single repo readme view",
             "number": 199,
             "createdAt": "2022-03-04T22:41:45Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJePu",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create single repo code tab view",
+            "number": 198,
+            "createdAt": "2022-03-04T22:41:21Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJeNQ",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create single repo view about section",
+            "number": 197,
+            "createdAt": "2022-03-04T22:40:58Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJeKB",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create single repo view sub header",
+            "number": 196,
+            "createdAt": "2022-03-04T22:40:29Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJeG7",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Implement search / filter / sort result text",
+            "number": 195,
+            "createdAt": "2022-03-04T22:40:06Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJeDY",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Implement sort functionality",
+            "number": 194,
+            "createdAt": "2022-03-04T22:39:36Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJd_B",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Implement language filter functionality",
+            "number": 193,
+            "createdAt": "2022-03-04T22:38:57Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJd7u",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Implement type filter functionality",
+            "number": 192,
+            "createdAt": "2022-03-04T22:38:31Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJd3f",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Implement search functionality",
+            "number": 191,
+            "createdAt": "2022-03-04T22:37:52Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJd0P",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Setup organization page layout",
+            "number": 190,
+            "createdAt": "2022-03-04T22:37:27Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdtV",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create component for search input and filter / sort buttons",
+            "number": 189,
+            "createdAt": "2022-03-04T22:36:51Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdpK",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create user profile card",
+            "number": 188,
+            "createdAt": "2022-03-04T22:36:22Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdkz",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create repository card",
+            "number": 187,
+            "createdAt": "2022-03-04T22:35:47Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdfY",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create gists panel",
+            "number": 186,
+            "createdAt": "2022-03-04T22:35:12Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdbW",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Get pull request information from GitHub API",
+            "number": 185,
+            "createdAt": "2022-03-04T22:34:38Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdX_",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Get issue information from GitHub API",
+            "number": 184,
+            "createdAt": "2022-03-04T22:34:08Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdTF",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Get single repo information from GitHub API",
+            "number": 183,
+            "createdAt": "2022-03-04T22:33:26Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdMf",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Get Organization repositories from GitHub API",
+            "number": 182,
+            "createdAt": "2022-03-04T22:32:31Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIgun",
+            "author": { "login": "jdwilkin4", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[CRA-RXJS-SC] Need to fix inaccuracies with the updated_at field for RxJS App",
+            "number": 234,
+            "createdAt": "2022-02-18T16:32:31Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIgqk",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[CRA-RXJS-SC]  Create single repo issues tab view",
+            "number": 232,
+            "createdAt": "2022-02-17T09:18:21Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIgpA",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[CRA-RXJS-SC] Get Profile information from GitHub API",
+            "number": 231,
+            "createdAt": "2022-02-17T09:10:28Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8W04",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[VUE + TS + Quasar] Get pull request information from GitHub API",
+            "number": 142,
+            "createdAt": "2022-02-16T11:34:18Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8Wk3",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[VUE + TS + Quasar] Get issue information from GitHub API",
+            "number": 141,
+            "createdAt": "2022-02-16T11:33:14Z",
             "__typename": "Issue"
           }
         ],

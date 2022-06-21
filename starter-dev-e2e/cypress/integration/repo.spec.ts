@@ -95,6 +95,37 @@ describe("When there is proper repository page responses", () => {
       .should("contain.text", "0");
   });
 
+  it("should be able to paginate forward and backwards on issues tab", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      )
+      .get(`[data-testid="pagination button next"]`)
+      .click()
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Angular - NgRx - SCSS] Create single repo issues tab view"
+      )
+      .get(`[data-testid="pagination button next"]`)
+      .should("be.disabled")
+      .get(`[data-testid="pagination button previous"]`)
+      .click()
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      )
+      .get(`[data-testid="pagination button next"]`)
+      .should("be.enabled")
+      .get(`[data-testid="pagination button previous"]`)
+      .should("be.disabled");
+  });
+
   it("should be able to see open pull requests with valid data", () => {
     cy.get(`[data-testid="repo pull requests tab"]`)
       .click()
@@ -138,6 +169,33 @@ describe("When there is proper repository page responses", () => {
       .should("contain.text", "lindakatcodes")
       .get(`[data-testid="pull request comment count"]`)
       .should("contain.text", "0");
+  });
+
+  it("should be able to paginate forward and backwards on pull requests tab", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@RepoPullRequestsQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="pull request title"]`)
+      .should("contain.text", "fix: fix dist folder for angular ngrx")
+      .get(`[data-testid="pagination button next"]`)
+      .click()
+      .get(`[data-testid="pull request title"]`)
+      .should(
+        "contain.text",
+        "[Angular-Apollo-Tailwind] Run yarn generate in amplify deploy"
+      )
+      .get(`[data-testid="pagination button next"]`)
+      .should("be.disabled")
+      .get(`[data-testid="pagination button previous"]`)
+      .click()
+      .get(`[data-testid="pull request title"]`)
+      .should("contain.text", "fix: fix dist folder for angular ngrx")
+      .get(`[data-testid="pagination button next"]`)
+      .should("be.enabled")
+      .get(`[data-testid="pagination button previous"]`)
+      .should("be.disabled");
   });
 
   it("should be able to navigate down and up three folders deep", () => {

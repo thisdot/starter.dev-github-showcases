@@ -7,14 +7,24 @@ export const hasOperationName = (req, operationName) => {
   );
 };
 
-export const hasExpression = (req, expression) => {
+export const hasVariables = (req, variables) => {
   const { body } = req;
+  var handled = true;
 
-  return (
-    (body.hasOwnProperty("variables") &&
-      body.variables.expression === expression) ||
-    body.query?.includes(`expression=${expression}`)
-  );
+  Object.keys(variables).forEach((key) => {
+    if (
+      handled &&
+      !(
+        (body.hasOwnProperty("variables") &&
+          body.variables[key] === variables[key]) ||
+        body.query?.includes(`${key}=${variables[key]}`)
+      )
+    ) {
+      handled = false;
+    }
+  });
+
+  return handled;
 };
 
 export const aliasQuery = (req, operationName) => {
