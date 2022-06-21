@@ -3,15 +3,19 @@ import { RepoState } from './repository.state';
 import * as RepositoryActions from './repository.actions';
 
 export const initialRepoState: RepoState = {
-  repoName: '',
   description: '',
-  website: '',
-  visibility: '',
-  watchCount: 0,
-  starCount: 0,
   forkCount: 0,
   issueCount: 0,
+  ownerName: '',
+  prCount: 0,
+  readme: '',
+  repoName: '',
+  starCount: 0,
   tags: [],
+  tree: [],
+  visibility: '',
+  watchCount: 0,
+  website: '',
 };
 
 const reducer = createReducer(

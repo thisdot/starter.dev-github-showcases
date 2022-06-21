@@ -1,21 +1,21 @@
 import { UserApiResponse } from '../user';
 
 export interface RepoState {
-  repoName: string;
   description: string;
-  website: string;
-  visibility: string;
-  watchCount: number;
-  starCount: number;
   forkCount: number;
   issueCount: number;
+  ownerName: string;
+  prCount: number;
+  readme: string;
+  repoName: string;
+  starCount: number;
   tags: string[];
-  // ownerName: string;
-  // 'readme'?: fetch,
-  // 'prCount': fetch
-  // 'tree': fetch
-  // 'branchNames': fetch
+  tree: RepoContents[];
+  visibility: string;
+  watchCount: number;
+  website: string;
 }
+
 export interface RepoApiResponse {
   id: number;
   node_id: string;
@@ -111,5 +111,46 @@ export interface RepoApiResponse {
     spdx_id: string;
     url: string;
     node_id: string;
+  };
+}
+
+export interface RepoContents {
+  name: string;
+  type: string;
+}
+
+export interface RepoContentsApiResponse {
+  name: string;
+  path: string;
+  sha: string;
+  size: number;
+  url: string;
+  html_url: string;
+  git_url: string;
+  download_url: string;
+  type: string;
+  _links: {
+    self: string;
+    git: string;
+    html: string;
+  };
+}
+
+export interface ReadmeApiResponse {
+  name: string;
+  path: string;
+  sha: string;
+  size: number;
+  url: string;
+  html_url: string;
+  git_url: string;
+  download_url: string;
+  type: string;
+  content: string;
+  encoding: string;
+  _links: {
+    self: string;
+    git: string;
+    html: string;
   };
 }
