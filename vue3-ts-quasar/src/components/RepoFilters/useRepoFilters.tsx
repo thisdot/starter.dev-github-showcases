@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer } from '../../composables/reducer';
 
 export enum OrderDirection {
   Asc = 'ASC',

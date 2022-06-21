@@ -1,2 +1,2 @@
-import UserRepos from './UserProfileCard.vue';
+import UserRepos from './UserRepos.vue';
 export default UserRepos;
