@@ -11,7 +11,12 @@
           class="my-1"
           *ngFor="let gist of gists"
         >
-          <a [href]="gist?.url" class="link" target="_blank">
+          <a
+            [href]="gist?.url"
+            class="link"
+            target="_blank"
+            [attr.data-testid]="'user gist list item ' + gist?.files?.[0]?.name || gist?.name"
+          >
             {{ gist?.files?.[0]?.name || gist?.name }}
           </a>
         </div>

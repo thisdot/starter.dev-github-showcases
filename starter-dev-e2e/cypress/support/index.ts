@@ -28,7 +28,7 @@ declare global {
        * Custom command to intercept Rest calls for a given view.
        * @example cy.interceptGraphQLCalls(View.Repository)
        */
-       interceptRestCalls(view: View): Chainable;
+      interceptRestCalls(view: View): Chainable;
     }
   }
 }
@@ -39,5 +39,7 @@ beforeEach(() => {
   }).as("token");
   cy.mockNextAuthCookie();
   cy.mockRemixAuthCookie();
+  cy.interceptGraphQLCalls(View.Dashboard);
+  cy.interceptRestCalls(View.Dashboard);
   cy.visit(Cypress.env("authUrl"));
 });
