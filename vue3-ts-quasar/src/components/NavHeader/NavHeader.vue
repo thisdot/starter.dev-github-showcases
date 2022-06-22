@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar class="bg-dark row">
+  <q-toolbar class="bg-dark row q-py-sm">
     <Logo />
     <q-space></q-space>
 

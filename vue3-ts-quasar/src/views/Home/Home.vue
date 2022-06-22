@@ -66,7 +66,6 @@ const repoList = computed(() => repoData.value?.topRepositories ?? null);
 @media (max-width: 1024px) {
   .container--home {
     flex-direction: column-reverse !important;
-
     .card--gists {
       margin-top: 3rem;
     }
