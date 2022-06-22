@@ -4,7 +4,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import SiteLayout from '@/layouts/SiteLayout.vue';
 
 //* Pages
-import { Auth, Home, Profile, Redirect, NotFound, IssuesPage } from '../views';
+import { Auth, Home, Profile, Redirect, NotFound } from '../views';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,7 +18,6 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
 
-  { path: '/:username/:issuename/issues', component: IssuesPage, props: true },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
 
