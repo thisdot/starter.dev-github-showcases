@@ -1,0 +1,176 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "branches": {
+        "nodes": [
+          { "name": "vue3-ts-quasar/documentation", "__typename": "Ref" },
+          {
+            "name": "vue3-ts-quasar/feat/get-profile-info",
+            "__typename": "Ref"
+          },
+          { "name": "vue3-ts-quasar/feat/get-user-gists", "__typename": "Ref" },
+          {
+            "name": "vue3-ts-quasar/feat/get-user-top-repositories",
+            "__typename": "Ref"
+          },
+          {
+            "name": "vue3-ts-quasar/refactoring/aggregator-cleanup",
+            "__typename": "Ref"
+          }
+        ],
+        "__typename": "RefConnection"
+      },
+      "tree": {
+        "entries": [
+          {
+            "name": ".browserslistrc",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/.browserslistrc",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": ".editorconfig",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/.editorconfig",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": ".env.example",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/.env.example",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": ".eslintignore",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/.eslintignore",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": ".eslintrc.js",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/.eslintrc.js",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": ".gitignore",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/.gitignore",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": ".husky",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/.husky",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": ".prettierignore",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/.prettierignore",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": ".prettierrc",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/.prettierrc",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "README.md",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/README.md",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "angular.json",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/angular.json",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "codegen.yml",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/codegen.yml",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "github-schema-loader.js",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/github-schema-loader.js",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "karma.conf.js",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/karma.conf.js",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "package.json",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/package.json",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "projects",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/projects",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "src",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "tailwind.config.js",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/tailwind.config.js",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "tools",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/tools",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "tsconfig.app.json",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/tsconfig.app.json",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "tsconfig.eslint.json",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/tsconfig.eslint.json",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "tsconfig.json",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/tsconfig.json",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "tsconfig.spec.json",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/tsconfig.spec.json",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "yarn.lock",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/yarn.lock",
+            "__typename": "TreeEntry"
+          }
+        ],
+        "__typename": "Tree"
+      },
+      "__typename": "Repository"
+    }
+  }
+}
