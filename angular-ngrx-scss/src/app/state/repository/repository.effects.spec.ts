@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 import { RepositoryEffects } from './repository.effects';
 import { RepositoryService } from '../../repository/services/repository.service';
@@ -18,11 +18,12 @@ describe('RepositoryEffects', () => {
   let repoServiceMock: any;
 
   beforeEach(() => {
-    repoServiceMock = jasmine.createSpyObj('RepoService', {
-      getRepositoryInfo: () => {
-        return of();
-      },
-    });
+    repoServiceMock = jasmine.createSpyObj('RepoService', [
+      'getRepositoryInfo',
+      'getPullRequestList',
+      'getRepositoryContents',
+      'getReadmeContent',
+    ]);
     TestBed.configureTestingModule({
       providers: [
         {
@@ -45,18 +46,25 @@ describe('RepositoryEffects', () => {
       }),
     );
     const expectedResponseData: RepoState = {
-      repoName: 'starter.dev-github-showcases',
       description: 'A collection of GitHub clone implementations.',
-      website: 'starter.dev',
-      visibility: 'public',
-      watchCount: 100,
+      forkCount: 20,
+      issueCount: 30,
+      ownerName: 'thisdot',
+      prCount: 40,
+      readme: 'some readme text',
+      repoName: 'starter.dev-github-showcases',
       starCount: 100,
-      forkCount: 5,
-      issueCount: 0,
       tags: ['react', 'angular', 'vue', 'github'],
+      tree: [],
+      visibility: 'public',
+      watchCount: 10,
+      website: 'https://starter.dev',
     };
 
     repoServiceMock.getRepositoryInfo.and.returnValue(of(expectedResponseData));
+    repoServiceMock.getPullRequestList.and.returnValue(of(40));
+    repoServiceMock.getRepositoryContents.and.returnValue(of([]));
+    repoServiceMock.getReadmeContent.and.returnValue(of('some readme text'));
 
     effects.fetchRepository$.subscribe((action) => {
       expect(action).toEqual(
@@ -66,25 +74,25 @@ describe('RepositoryEffects', () => {
     });
   });
 
-  // it('should call the repoService and return a failure action on a failed call', (done) => {
-  //   actions$ = of(
-  //     fetchRepository({
-  //       owner: '',
-  //       repoName: '',
-  //     }),
-  //   );
+  it('should call the repoService and return a failure action on a failed call', (done) => {
+    actions$ = of(
+      fetchRepository({
+        owner: 'notthisdot',
+        repoName: 'null',
+      }),
+    );
 
-  //   const expectedError: object = {
-  //     message: 'Not Found',
-  //     documentation_url:
-  //       'https://docs.github.com/rest/reference/repos#get-a-repository',
-  //   };
+    const expectedError = {
+      message: 'error',
+    };
 
-  //   repoServiceMock.getRepositoryInfo.and.returnValue(expectedError);
+    repoServiceMock.getRepositoryInfo.and.returnValue(
+      throwError(() => expectedError),
+    );
 
-  //   effects.fetchRepository$.subscribe((action) => {
-  //     expect(action).toEqual(fetchRepositoryFailure({ error: expectedError }));
-  //     done();
-  //   });
-  // });
+    effects.fetchRepository$.subscribe((action) => {
+      expect(action).toEqual(fetchRepositoryFailure({ error: expectedError }));
+      done();
+    });
+  });
 });

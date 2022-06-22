@@ -3,9 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, zip } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
-import { Store } from '@ngrx/store';
 import { RepositoryService } from 'src/app/repository/services/repository.service';
-import { selectUserLoginName } from '../user';
 import {
   fetchRepository,
   fetchRepositoryFailure,
@@ -56,6 +54,5 @@ export class RepositoryEffects {
   constructor(
     private actions$: Actions,
     private repoService: RepositoryService,
-    private store: Store,
   ) {}
 }

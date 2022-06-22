@@ -39,6 +39,7 @@ export class RepositoryService {
   }
 
   // TODO: set this method up to return the data as well as the count (issue #185)
+  // TODO: write test for this function when it's updated
   getPullRequestList(owner: string, repoName: string): Observable<number> {
     const url = `${environment.githubUrl}/repos/${owner}/${repoName}/pulls`;
 
@@ -67,6 +68,7 @@ export class RepositoryService {
   }
 
   // TODO: readme file is currently an encoded string - this method should be improved to either return the raw data, or include the fields needed to de-code the string when ready to display it
+  // TODO: write test for this function when it's updated
   getReadmeContent(owner: string, repoName: string): Observable<string> {
     const url = `${environment.githubUrl}/repos/${owner}/${repoName}/readme`;
 
