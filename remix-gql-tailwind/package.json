@@ -10,6 +10,7 @@
     "dev": "concurrently -c magenta,cyan \"npm:dev:*\"",
     "dev:remix": "node -r dotenv/config ./node_modules/@remix-run/dev/cli.js",
     "dev:css": "npm run build:css -- --w",
+    "lint": "eslint --fix",
     "mock": "concurrently -c magenta,cyan \"npm:mock:*\"",
     "mock:remix": "node -r dotenv/config --require ./mocks ./node_modules/@remix-run/dev/cli.js",
     "mock:css": "npm run build:css -- --w",
@@ -65,16 +66,9 @@
   },
   "lint-staged": {
     "app/**/*{.js,.ts,.tsx}": [
+      "yarn run lint",
       "prettier --write"
     ]
-  },
-  "lint-prepush": {
-    "base": "main",
-    "tasks": {
-      "app/**/*{.js,.ts,.tsx}": [
-        "eslint"
-      ]
-    }
   },
   "engines": {
     "node": ">=14"
