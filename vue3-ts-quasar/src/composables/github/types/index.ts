@@ -6,5 +6,8 @@ export * from './PullRequest';
 
 export * from './Issues';
 
+
+export * from './OrganizationRepositories';
+
 export * from './OrderBy';
 export * from './Label';
