@@ -26,8 +26,8 @@ function UserReposView({ repos, owner }: UserReposViewProps) {
           isPrivate,
         }) => (
           <div key={id} className={styles.container}>
-            <div className={styles.content}>
-              <h3 className="mb-2">
+            <div data-testid="profile repos" className={styles.content}>
+              <h3 data-testid="profile repo list heading" className="mb-2">
                 <Link href={`/${owner}/${name}`}>
                   <a className={styles.headingLink}>{name}</a>
                 </Link>

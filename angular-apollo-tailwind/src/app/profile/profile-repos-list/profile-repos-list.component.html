@@ -16,7 +16,7 @@
       (clearFilters)="clearFilters()"
     ></app-repos-filters>
     <div *ngFor="let repo of userRepos">
-      <div class="profile-repos-container">
+      <div data-testid="profile repos" class="profile-repos-container">
         <div data-testid="profile repo list heading" class="content">
           <h3 class="mb-2">
             <a

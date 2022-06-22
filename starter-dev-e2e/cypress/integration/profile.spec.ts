@@ -65,16 +65,16 @@ describe("Profile Page", () => {
   });
 
   it("should display same profile and header avatar", () => {
+    cy.wait("@gqlUserProfileQuery");
     cy.get(`[data-testid="profile header avatar"]`).should("be.visible");
     cy.get(
       `[data-testid="profile page avatar"], [data-testid="profile header avatar"]`
     )
       .should("have.attr", "src")
-      .then((src) => {
-        expect(src).to.contain(
-          "https://avatars.githubusercontent.com/u/22839396?v=4"
-        );
-      });
+      .and(
+        "match",
+        /.*(https).*(avatars\.githubusercontent\.com).*(22839396).*/
+      );
   });
 
   it("should display orgs in profile", () => {
@@ -88,12 +88,13 @@ describe("Profile Page", () => {
   });
 
   it("should display correct repos", () => {
-    cy.get('[data-testid="profile repo list heading"] h3')
+    cy.wait("@gqlUserReposQuery");
+    cy.get(`[data-testid="profile repo list heading"]`)
       .should("have.length", 6)
       .and(($h3) => {
-        expect($h3.get(0).textContent, "first item").to.equal("sentry Public ");
-        expect($h3.get(5).textContent, "last item").to.equal(
-          "javascript-marathon-vue-js Public "
+        expect($h3.get(0).textContent, "first item").to.contain("sentry");
+        expect($h3.get(5).textContent, "last item").to.contain(
+          "javascript-marathon-vue-js"
         );
       });
   });
@@ -101,42 +102,67 @@ describe("Profile Page", () => {
   it("should be able to search for specific repo", () => {
     cy.get("input#search")
       .type("sentry{enter}")
-      .get(".content")
+      .get(`[data-testid="profile repos"]`)
       .contains("sentry")
       .should("have.length", 1);
   });
 
   it("should have working sort options, type, and language selection", () => {
-    cy.get(`[data-testid="profile repos selection"]`)
-      .find("button")
-      .should("have.length", 3)
-      .and(($btn) => {
-        expect($btn.get(0).textContent, "first button").to.equal(" Type ");
-        expect($btn.get(2).textContent, "last button").to.equal(" Sort ");
-      });
-    cy.get(`[data-testid="profile type button"]`)
+    cy.wait("@gqlCurrentUserQuery")
+      .wait("@gqlUserReposQuery")
+      .wait("@gqlUserProfileQuery")
+      .get(`[data-testid="filters dropdown Type"]`)
       .click()
-      .should("contain", "All")
-      .and("contain", "Forks")
-      .and("contain", "Archived");
-    cy.get(`[data-testid="profile language button"]`)
+      .get(`[data-testid="filters dropdown Type items"]`)
+      .should("be.visible")
+      .get(`[data-testid="filters dropdown item All"]`)
+      .should("exist")
+      .and("be.visible")
+      .get(`[data-testid="filters dropdown item Forks"]`)
+      .should("exist")
+      .and("be.visible")
+      .get(`[data-testid="filters dropdown item Archived"]`)
+      .should("exist")
+      .and("be.visible")
+      .get(`[data-testid="filters dropdown Language"]`)
       .click()
-      .should("contain", "All")
-      .and("contain", "Python")
-      .and("contain", "JavaScript")
-      .and("contain", "TypeScript");
-    cy.get(`[data-testid="profile sort button"]`)
+      .get(`[data-testid="filters dropdown Language items"]`)
+      .should("be.visible")
+      .get(`[data-testid="filters dropdown item All"]`)
+      .should("exist")
+      .and("be.visible")
+      .get(`[data-testid="filters dropdown item TypeScript"]`)
+      .should("exist")
+      .and("be.visible")
+      .get(`[data-testid="filters dropdown item JavaScript"]`)
+      .should("exist")
+      .and("be.visible")
+      .get(`[data-testid="filters dropdown item Python"]`)
+      .should("exist")
+      .and("be.visible")
+      .get(`[data-testid="filters dropdown Sort"]`)
       .click()
-      .should("contain", "Last updated")
-      .and("contain", "Name")
-      .and("contain", "Stars");
+      .get(`[data-testid="filters dropdown Sort items"]`)
+      .should("be.visible")
+      .get(`[data-testid="filters dropdown item Last updated"]`)
+      .should("exist")
+      .and("be.visible")
+      .get(`[data-testid="filters dropdown item Name"]`)
+      .should("exist")
+      .and("be.visible")
+      .and("contain.text", "Name")
+      .get(`[data-testid="filters dropdown item Stars"]`)
+      .should("exist")
+      .and("be.visible");
   });
 
   it("should be able to click into repository", () => {
+    cy.wait("@gqlCurrentUserQuery")
+      .wait("@gqlUserReposQuery")
+      .wait("@gqlUserProfileQuery");
     cy.get(`[data-testid="profile repo list heading"]`)
       .contains("starter.dev-github-showcases")
       .click()
-      .wait("@gqlCurrentUserQuery")
       .wait("@gqlRepoPageQuery")
       .wait("@gqlRepoReadMeQuery")
       .get(`[data-testid="readme"]`)
