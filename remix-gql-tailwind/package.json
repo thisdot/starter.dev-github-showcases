@@ -39,6 +39,7 @@
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@remix-run/dev": "^1.1.1",
+    "@remix-run/eslint-config": "^1.6.1",
     "@storybook/addon-actions": "^6.5.0-alpha.4",
     "@storybook/addon-essentials": "^6.5.0-alpha.4",
     "@storybook/addon-links": "^6.5.0-alpha.4",
@@ -51,6 +52,7 @@
     "babel-loader": "^8.2.3",
     "concurrently": "^6.5.1",
     "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-storybook": "^0.5.5",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.2",
