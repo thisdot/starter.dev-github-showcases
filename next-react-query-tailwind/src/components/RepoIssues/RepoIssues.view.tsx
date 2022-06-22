@@ -32,7 +32,9 @@ function RepoIssuesView({ issues }: RepoIssuesViewProps) {
               </div>
               <div>
                 <div className={styles.content}>
-                  <span className={styles.title}>{issue.title}</span>
+                  <span className={styles.title} data-testid="issue title">
+                    {issue.title}
+                  </span>
                   <span className="inline">
                     {issue.labels.map(({ color, name }) => (
                       <span
@@ -41,24 +43,28 @@ function RepoIssuesView({ issues }: RepoIssuesViewProps) {
                           backgroundColor: `#${color}`,
                         }}
                         className={styles.label}
+                        data-testid="issue label name"
                       >
                         {name}
                       </span>
                     ))}
                   </span>
                 </div>
-                <div className={styles.meta}>
+                <div className={styles.meta} data-testid="issue number">
                   #{issue.number}{' '}
                   {issue.closed === false && (
-                    <span>
+                    <span data-testid="issue created at">
                       opened{' '}
                       {formatDistance(new Date(), new Date(issue.createdAt))}{' '}
                       ago{' '}
                     </span>
                   )}
-                  by <span className={styles.link}>{issue.login}</span>
+                  by{' '}
+                  <span className={styles.link} data-testid="issue created by">
+                    {issue.login}
+                  </span>
                   {issue.closedAt && (
-                    <span>
+                    <span data-testid="issue closed at">
                       {' '}
                       was closed{' '}
                       {formatDistance(new Date(), new Date(issue.closedAt))} ago
@@ -68,7 +74,10 @@ function RepoIssuesView({ issues }: RepoIssuesViewProps) {
               </div>
             </div>
             <div className="mt-1">
-              <span className={styles.comments}>
+              <span
+                className={styles.comments}
+                data-testid="issue comment count"
+              >
                 <ChatAltIcon className={styles.commentsIcon} />
                 {issue.commentCount}
               </span>

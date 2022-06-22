@@ -10,7 +10,6 @@ import {
   Profile,
   Redirect,
   NotFound,
-  OrganizationReposPage,
 } from '../views';
 
 const routes: Array<RouteRecordRaw> = [
@@ -23,11 +22,6 @@ const routes: Array<RouteRecordRaw> = [
       { path: 'redirect', component: Redirect },
       { path: ':username', component: Profile, props: true },
     ],
-  },
-  {
-    path: '/orgs/:orgname/repositories',
-    component: OrganizationReposPage,
-    props: true,
   },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];

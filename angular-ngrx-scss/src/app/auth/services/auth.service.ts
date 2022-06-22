@@ -25,6 +25,10 @@ export class AuthService {
     window.location.href = `${environment.apiUrl}/api/auth/signin?redirect_url=${environment.redirectUrl}`;
   }
 
+  signOut(): void {
+    this.tokenService.removeToken();
+  }
+
   /**
    * Calls the server to get the user's access token and saves it
    *

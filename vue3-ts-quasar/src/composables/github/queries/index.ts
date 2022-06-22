@@ -5,3 +5,4 @@ export * from './profile.query';
 
 
 export * from './organization-repos.query';
+export * from './user-repos.query';
