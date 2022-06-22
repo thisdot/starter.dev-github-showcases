@@ -1,4 +1,56 @@
 {
+  "dashboard": {
+    "graphql": [
+      {
+        "name": "CurrentUser",
+        "alias": "CurrentUser",
+        "variables": null,
+        "fixture": "user/currentUser.graphql.json"
+      },
+      {
+        "name": "UserTopRepos",
+        "alias": "UserTopRepos",
+        "variables": null,
+        "fixture": "user/userTopRepos.graphql.json"
+      },
+      {
+        "name": "UserGists",
+        "alias": "UserGists",
+        "variables": null,
+        "fixture": "user/userGist.graphql.json"
+      },
+      {
+        "name": "RepoPage",
+        "alias": "RepoPage",
+        "variables": null,
+        "fixture": "repo/repoPage.graphql.json"
+      },
+      {
+        "name": "RepoTree",
+        "alias": "RepoTree",
+        "variables": null,
+        "fixture": "repo/repoTree.graphql.json"
+      },
+      {
+        "name": "RepoReadMe",
+        "alias": "RepoReadMe",
+        "variables": null,
+        "fixture": "repo/repoReadMe.graphql.json"
+      }
+    ],
+    "rest": [
+      {
+        "url": "^.*/user$",
+        "alias": "CurrentUser",
+        "fixture": "user/currentUser.json"
+      },
+      {
+        "url": "^.*/user/repos?sort=updated&affiliation=owner,collaborator,organization_member&per_page=20$",
+        "alias": "UserTopRepos",
+        "fixture": "user/userTopRepos.json"
+      }
+    ]
+  },
   "repo": {
     "graphql": [
       {
