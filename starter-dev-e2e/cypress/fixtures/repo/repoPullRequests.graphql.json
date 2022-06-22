@@ -16,12 +16,18 @@
             "id": "PR_kwDOGd0nu844W-RM",
             "author": { "login": "iansamz", "__typename": "User" },
             "comments": {
-              "totalCount": 0,
+              "totalCount": 12,
               "__typename": "IssueCommentConnection"
             },
             "labels": {
-              "totalCount": 0,
-              "nodes": [],
+              "totalCount": 1,
+              "nodes": [
+                {
+                  "color": "FA3C07",
+                  "name": "WIP DO NOT MERGE",
+                  "__typename": "Label"
+                }
+              ],
               "__typename": "LabelConnection"
             },
             "closed": false,
@@ -486,14 +492,8 @@
               "__typename": "IssueCommentConnection"
             },
             "labels": {
-              "totalCount": 1,
-              "nodes": [
-                {
-                  "color": "FA3C07",
-                  "name": "WIP DO NOT MERGE",
-                  "__typename": "Label"
-                }
-              ],
+              "totalCount": 0,
+              "nodes": [],
               "__typename": "LabelConnection"
             },
             "closed": true,

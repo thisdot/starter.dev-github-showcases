@@ -17,7 +17,7 @@ function IssuesContainer({
   clearFilters,
 }: IssuesContainerProps) {
   return (
-    <>
+    <div data-testid="repo issues">
       {hasActiveFilters && (
         <button
           className={cn(styles.clearButton, 'group')}
@@ -42,7 +42,7 @@ function IssuesContainer({
         {filtersEl}
         {children}
       </div>
-    </>
+    </div>
   );
 }
 
