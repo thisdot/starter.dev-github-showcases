@@ -44,6 +44,7 @@ function RepoFilters({
             className={styles.searchInput}
             placeholder="Find a repository.."
             onChange={(e) => setQuery(e.target.value)}
+            data-testid="repository filters search input"
           />
         </div>
         <div className={styles.filters}>

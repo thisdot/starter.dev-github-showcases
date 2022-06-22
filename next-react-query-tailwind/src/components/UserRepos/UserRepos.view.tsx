@@ -25,18 +25,22 @@ function UserReposView({ repos, owner }: UserReposViewProps) {
           updatedAt,
           isPrivate,
         }) => (
-          <div key={id} className={styles.container}>
+          <div
+            key={id}
+            className={styles.container}
+            data-testid="repository list item"
+          >
             <div className={styles.content}>
               <h3 className="mb-2">
                 <Link href={`/${owner}/${name}`}>
-                  <a className={styles.headingLink}>{name}</a>
+                  <a className={styles.headingLink} data-testid="repository name">{name}</a>
                 </Link>
                 <PrivacyBadge
                   isPrivate={isPrivate}
                   className="relative bottom-0.5"
                 />
               </h3>
-              <div className={styles.description}>{description}</div>
+              <div className={styles.description} data-testid="repository description">{description}</div>
               <RepoMeta
                 language={language}
                 languageColor={languageColor}
