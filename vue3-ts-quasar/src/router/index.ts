@@ -10,7 +10,6 @@ import {
   Profile,
   Redirect,
   NotFound,
-  PullRequestsPage,
 } from '../views';
 
 const routes: Array<RouteRecordRaw> = [
@@ -27,11 +26,6 @@ const routes: Array<RouteRecordRaw> = [
         props: true,
       },
     ],
-  },
-  {
-    path: '/:username/:reponame/pulls',
-    component: PullRequestsPage,
-    props: true,
   },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
