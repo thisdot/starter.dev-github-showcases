@@ -10,7 +10,7 @@
     "dev": "concurrently -c magenta,cyan \"npm:dev:*\"",
     "dev:remix": "node -r dotenv/config ./node_modules/@remix-run/dev/cli.js",
     "dev:css": "npm run build:css -- --w",
-    "lint": "eslint --fix",
+    "lint": "eslint --ext \".js,.jsx,.ts,.tsx\" --ignore-path .gitignore .",
     "mock": "concurrently -c magenta,cyan \"npm:mock:*\"",
     "mock:remix": "node -r dotenv/config --require ./mocks ./node_modules/@remix-run/dev/cli.js",
     "mock:css": "npm run build:css -- --w",
@@ -64,9 +64,13 @@
     "typescript": "^4.1.2",
     "vite": "^2.7.6"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "CI=1 lint-staged"
+    }
+  },
   "lint-staged": {
-    "app/**/*{.js,.ts,.tsx}": [
-      "yarn run lint",
+    "*.+(js|mjs|ts|tsx|css|md|yml)": [
       "prettier --write"
     ]
   },
