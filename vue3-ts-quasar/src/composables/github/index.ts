@@ -5,4 +5,6 @@
 export { useGists } from './useGists';
 export { useRepository } from './useRepository';
 export { useUser } from './useUser';
+
+export { useIssues } from './useIssues';
 export { usePullRequest } from './usePullRequest';

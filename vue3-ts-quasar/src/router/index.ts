@@ -27,6 +27,7 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
 
