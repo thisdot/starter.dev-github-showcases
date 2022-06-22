@@ -9,22 +9,22 @@ export const hasOperationName = (req, operationName) => {
 
 export const hasVariables = (req, variables) => {
   const { body } = req;
-  var handled = true;
+  var hasVariable = true;
 
   Object.keys(variables).forEach((key) => {
     if (
-      handled &&
+      hasVariable &&
       !(
         (body.hasOwnProperty("variables") &&
           body.variables[key] === variables[key]) ||
         body.query?.includes(`${key}=${variables[key]}`)
       )
     ) {
-      handled = false;
+      hasVariable = false;
     }
   });
 
-  return handled;
+  return hasVariable;
 };
 
 export const aliasQuery = (req, operationName) => {

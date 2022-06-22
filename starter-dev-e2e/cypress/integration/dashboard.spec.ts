@@ -1,50 +1,49 @@
-import { hasOperationName, aliasQuery } from "../utils/graphql-test-utils";
+import { View } from "../utils/view";
 
-describe("Sign in", () => {
+describe("When there is proper dashboard page responses", () => {
   beforeEach(() => {
-    cy.intercept("POST", "/graphql", (req) => {
-      if (hasOperationName(req, "CurrentUser")) {
-        aliasQuery(req, "CurrentUser");
-        req.reply({
-          fixture: "user/currentUser.graphql.json",
-        });
-        return;
-      }
-
-      if (hasOperationName(req, "UserTopRepos")) {
-        aliasQuery(req, "UserTopRepos");
-        req.reply({
-          fixture: "user/userTopRepos.graphql.json",
-        });
-        return;
-      }
-
-      if (hasOperationName(req, "UserGists")) {
-        aliasQuery(req, "UserGists");
-        req.reply({
-          fixture: "user/userGist.graphql.json",
-        });
-        return;
-      }
-
-      req.continue();
-    });
-    cy.intercept("GET", "/user", {
-      fixture: "user/currentUser.json",
-    }).as("restCurrentUser");
-    cy.intercept(
-      "GET",
-      "/user/repos?sort=updated&affiliation=owner,collaborator,organization_member&per_page=20",
-      {
-        fixture: "user/userTopRepos.json",
-      }
-    ).as("restUserTopRepos");
+    cy.interceptGraphQLCalls(View.Dashboard);
+    cy.interceptRestCalls(View.Dashboard);
   });
 
-  describe("My First Test", () => {
-    it("top repos should be listed", () => {
-      //TODO: In #264, we should properly look for elements using `[data-testid="some-test-id"]`
-      cy.get("h2").should("be.visible");
-    });
+  it("should display list of gists", () => {
+    cy.get(`[data-testid="show gists list"]`)
+      .should("be.visible")
+      .wait("@CurrentUserQuery")
+      .wait("@UserGistsQuery")
+      .get(`[data-testid="user gist list item gist example 1"]`)
+      .should("be.visible")
+      .and("have.attr", "href")
+      .then((href) => {
+        expect(href).to.match(/https:\/\/gist\.github\.com/);
+      });
+  });
+
+  it("top repos should be listed with valid repo links", () => {
+    cy.get(`[data-testid="show repo list"]`)
+      .should(`be.visible`)
+      .get(
+        `[data-testid="user top repos starter.dev-github-showcases list item"]`
+      )
+      .should("contain.text", "starter.dev-github-showcases")
+      .get(`[data-testid="user top repos starter.dev-github-showcases link"]`)
+      .click()
+      .wait("@RepoPageQuery")
+      .wait("@RepoTreeQuery")
+      .wait("@RepoReadMeQuery")
+      .url()
+      .should("include", "/thisdot/starter.dev-github-showcases")
+      .get(`[data-testid="readme"]`)
+      .should("be.visible");
+  });
+
+  it("should be able to see user's avatar in header", () => {
+    cy.get(`[data-testid="user avatar header"]`)
+      .should(`be.visible`)
+      .and("have.attr", "src")
+      .and(
+        "match",
+        /.*(https).*(avatars\.githubusercontent\.com).*(22839396).*/
+      );
   });
 });
