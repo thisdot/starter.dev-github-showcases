@@ -17,6 +17,3 @@ export { default as UserProfileCard } from './UserProfileCard';
 export { default as TabHeader } from './TabHeader';
 export { default as ProfilePageLayout } from './ProfilePageLayout';
 export { default as OrganizationPageLayout } from './OrganizationPageLayout';
-
-
-export { default as OrganizationRepos } from './OrganizationRepos';
