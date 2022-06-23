@@ -7,16 +7,6 @@ export const hasOperationName = (req, operationName) => {
   );
 };
 
-// export const hasExpression = (req, expression) => {
-//   const { body } = req;
-
-//   return (
-//     (body.hasOwnProperty("variables") &&
-//       body.variables.expression === expression) ||
-//     body.query?.includes(`expression=${expression}`)
-//   );
-// };
-
 export const hasVariables = (req, variables) => {
   const { body } = req;
   var hasVariable = true;

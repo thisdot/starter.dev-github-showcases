@@ -1,61 +1,10 @@
-import { hasOperationName, aliasQuery } from "../utils/graphql-test-utils";
+import { View } from "../utils/view";
 
 describe("Profile Page", () => {
   beforeEach(() => {
-    cy.intercept("POST", "/graphql", (req) => {
-      if (hasOperationName(req, "CurrentUser")) {
-        aliasQuery(req, "CurrentUser");
-        req.reply({
-          fixture: "user/currentUser.graphql.json",
-        });
-        return;
-      }
+    cy.interceptGraphQLCalls(View.Profile);
+    cy.interceptRestCalls(View.Profile);
 
-      if (hasOperationName(req, "UserProfile")) {
-        aliasQuery(req, "UserProfile");
-        req.reply({
-          fixture: "user/userProfile.graphql.json",
-        });
-        return;
-      }
-
-      if (hasOperationName(req, "UserRepos")) {
-        aliasQuery(req, "UserRepos");
-        req.reply({
-          fixture: "user/userRepos.graphql.json",
-        });
-        return;
-      }
-
-      if (hasOperationName(req, "RepoTree")) {
-        aliasQuery(req, "RepoTree");
-        req.reply({
-          fixture: "repo/repoTree.graphql.json",
-        });
-        return true;
-      }
-
-      if (hasOperationName(req, "RepoPage")) {
-        aliasQuery(req, "RepoPage");
-        req.reply({
-          fixture: "repo/repoPage.graphql.json",
-        });
-        return true;
-      }
-
-      if (hasOperationName(req, "RepoReadMe")) {
-        aliasQuery(req, "RepoReadMe");
-        req.reply({
-          fixture: "repo/repoReadMe.graphql.json",
-        });
-        return true;
-      }
-
-      req.continue();
-    });
-    cy.intercept("GET", "/user", {
-      fixture: "user/currentUser.json",
-    }).as("restCurrentUser");
     cy.visit("/thisdot");
   });
 
@@ -65,10 +14,10 @@ describe("Profile Page", () => {
   });
 
   it("should display same profile and header avatar", () => {
-    cy.wait("@gqlUserProfileQuery");
-    cy.get(`[data-testid="profile header avatar"]`).should("be.visible");
+    cy.wait("@UserProfileQuery");
+    cy.get(`[data-testid="user avatar header"]`).should("be.visible");
     cy.get(
-      `[data-testid="profile page avatar"], [data-testid="profile header avatar"]`
+      `[data-testid="profile page avatar"], [data-testid="user avatar header"]`
     )
       .should("have.attr", "src")
       .and(
@@ -88,7 +37,7 @@ describe("Profile Page", () => {
   });
 
   it("should display correct repos", () => {
-    cy.wait("@gqlUserReposQuery");
+    cy.wait("@UserReposQuery");
     cy.get(`[data-testid="profile repo list heading"]`)
       .should("have.length", 6)
       .and(($h3) => {
@@ -102,15 +51,15 @@ describe("Profile Page", () => {
   it("should be able to search for specific repo", () => {
     cy.get("input#search")
       .type("sentry{enter}")
-      .get(`[data-testid="profile repos"]`)
+      .get(`[data-testid="repository list item"`)
       .contains("sentry")
       .should("have.length", 1);
   });
 
   it("should have working sort options, type, and language selection", () => {
-    cy.wait("@gqlCurrentUserQuery")
-      .wait("@gqlUserReposQuery")
-      .wait("@gqlUserProfileQuery")
+    cy.wait("@CurrentUserQuery")
+      .wait("@UserReposQuery")
+      .wait("@UserProfileQuery")
       .get(`[data-testid="filters dropdown Type"]`)
       .click()
       .get(`[data-testid="filters dropdown Type items"]`)
@@ -157,14 +106,15 @@ describe("Profile Page", () => {
   });
 
   it("should be able to click into repository", () => {
-    cy.wait("@gqlCurrentUserQuery")
-      .wait("@gqlUserReposQuery")
-      .wait("@gqlUserProfileQuery");
+    cy.wait("@CurrentUserQuery")
+      .wait("@UserReposQuery")
+      .wait("@UserProfileQuery");
     cy.get(`[data-testid="profile repo list heading"]`)
       .contains("starter.dev-github-showcases")
       .click()
-      .wait("@gqlRepoPageQuery")
-      .wait("@gqlRepoReadMeQuery")
+      .wait("@RepoPageQuery")
+      .wait("@RepoTreeQuery")
+      .wait("@RepoReadMeQuery")
       .get(`[data-testid="readme"]`)
       .should("be.visible");
   });
