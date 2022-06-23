@@ -1,4 +1,4 @@
-import type { GistItem } from "./types";
+import type { GistItem } from './types';
 
 type GistDataGQL = {
   viewer: {

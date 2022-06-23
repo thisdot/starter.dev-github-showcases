@@ -1,20 +1,20 @@
-import { createCookieSessionStorage, Session } from "@remix-run/node";
-import { auth } from "./auth.server";
+import { createCookieSessionStorage, Session } from '@remix-run/node';
+import { auth } from './auth.server';
 
 export let sessionStorage = createCookieSessionStorage({
   cookie: {
-    name: "__session",
+    name: '__session',
     httpOnly: true,
-    path: "/",
-    sameSite: "lax",
+    path: '/',
+    sameSite: 'lax',
     secrets: [process.env.SESSION_SECRET], // TODO: replace this with an actual secret
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === 'production',
   },
 });
 
 export async function getSession(request: Request) {
   const session = await sessionStorage.getSession(
-    request.headers.get("Cookie")
+    request.headers.get('Cookie')
   );
   return {
     session,

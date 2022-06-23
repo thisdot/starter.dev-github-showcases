@@ -1,7 +1,7 @@
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon, XIcon, CheckIcon } from "@heroicons/react/solid";
-import * as styles from "./FilterDropdown.classNames";
+import { Fragment } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { ChevronDownIcon, XIcon, CheckIcon } from '@heroicons/react/solid';
+import * as styles from './FilterDropdown.classNames';
 
 interface Option {
   label: string;
@@ -67,7 +67,7 @@ function Dropdown({
                 >
                   {value === current && (
                     <CheckIcon className={styles.itemActiveIcon} />
-                  )}{" "}
+                  )}{' '}
                   {label}
                 </button>
               </Menu.Item>

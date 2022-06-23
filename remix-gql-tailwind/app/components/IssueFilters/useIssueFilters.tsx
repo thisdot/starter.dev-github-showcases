@@ -1,22 +1,22 @@
-import { useReducer } from "react";
-import { OrderDirection } from "../RepoFilters/useRepoFilters";
+import { useReducer } from 'react';
+import { OrderDirection } from '../RepoFilters/useRepoFilters';
 
 export enum IssueOrderField {
-  Comments = "COMMENTS",
-  CreatedAt = "CREATED_AT",
-  UpdatedAt = "UPDATED_AT",
+  Comments = 'COMMENTS',
+  CreatedAt = 'CREATED_AT',
+  UpdatedAt = 'UPDATED_AT',
 }
 
 export enum IssueState {
-  Closed = "CLOSED",
-  Open = "OPEN",
+  Closed = 'CLOSED',
+  Open = 'OPEN',
 }
 
 export type IssueFilterAPI = ReturnType<typeof useIssueFilters>;
 
 export enum IssueType {
-  Issue = "issue",
-  PullRequest = "pull",
+  Issue = 'issue',
+  PullRequest = 'pull',
 }
 
 enum ActionType {
@@ -129,7 +129,7 @@ export function useIssueFilters(type: IssueType = IssueType.Issue) {
   }
 
   function setSort(sort: string) {
-    const [field, direction] = sort.split("^");
+    const [field, direction] = sort.split('^');
     dispatch({
       type: ActionType.SET_SORT,
       payload: {
@@ -161,8 +161,8 @@ export function useIssueFilters(type: IssueType = IssueType.Issue) {
   }
 
   const hasActiveFilters =
-    typeof state.label === "string" ||
-    typeof state.milestone === "string" ||
+    typeof state.label === 'string' ||
+    typeof state.milestone === 'string' ||
     state.sort.direction !== OrderDirection.Desc ||
     state.sort.field !== IssueOrderField.CreatedAt;
 

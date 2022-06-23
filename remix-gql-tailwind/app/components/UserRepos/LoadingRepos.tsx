@@ -1,5 +1,5 @@
-import ContentLoader from "react-content-loader";
-import * as styles from "./UserRepos.classNames";
+import ContentLoader from 'react-content-loader';
+import * as styles from './UserRepos.classNames';
 
 function LoadingRepos() {
   return (

@@ -1,16 +1,16 @@
-import { MinusCircleIcon } from "@heroicons/react/outline";
-import { useRepo } from "../../context/RepoContext";
-import IssuesContainer from "../IssuesContainer/IssuesContainer";
-import IssuesEmpty from "../IssuesEmpty/IssuesEmpty";
-import RepoIssuesView from "./RepoIssues.view";
-import { Label } from "./types";
+import { MinusCircleIcon } from '@heroicons/react/outline';
+import { useRepo } from '../../context/RepoContext';
+import IssuesContainer from '../IssuesContainer/IssuesContainer';
+import IssuesEmpty from '../IssuesEmpty/IssuesEmpty';
+import RepoIssuesView from './RepoIssues.view';
+import { Label } from './types';
 import {
   IssueState,
   IssueType,
   useIssueFilters,
-} from "../IssueFilters/useIssueFilters";
-import IssueFilters from "../IssueFilters/IssueFilters";
-import Pagination from "../IssueFilters/Pagination";
+} from '../IssueFilters/useIssueFilters';
+import IssueFilters from '../IssueFilters/IssueFilters';
+import Pagination from '../IssueFilters/Pagination';
 
 interface RepoIssuesProps {
   openIssues: {

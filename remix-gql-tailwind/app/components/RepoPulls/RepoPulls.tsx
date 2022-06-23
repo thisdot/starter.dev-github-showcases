@@ -1,15 +1,15 @@
-import { useRepo } from "~/context/RepoContext";
-import { PullRequestIcon } from "../Icons";
-import IssueFilters from "../IssueFilters/IssueFilters";
-import Pagination from "../IssueFilters/Pagination";
+import { useRepo } from '~/context/RepoContext';
+import { PullRequestIcon } from '../Icons';
+import IssueFilters from '../IssueFilters/IssueFilters';
+import Pagination from '../IssueFilters/Pagination';
 import {
   IssueState,
   IssueType,
   useIssueFilters,
-} from "../IssueFilters/useIssueFilters";
-import IssuesContainer from "../IssuesContainer/IssuesContainer";
-import IssuesEmpty from "../IssuesEmpty/IssuesEmpty";
-import RepoPullsView from "./RepoPulls.view";
+} from '../IssueFilters/useIssueFilters';
+import IssuesContainer from '../IssuesContainer/IssuesContainer';
+import IssuesEmpty from '../IssuesEmpty/IssuesEmpty';
+import RepoPullsView from './RepoPulls.view';
 
 export type RepoPullProps = {
   openPullRequests: any;

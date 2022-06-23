@@ -1,24 +1,24 @@
-import { useReducer } from "react";
+import { useReducer } from 'react';
 
 export enum RepositoryOrderField {
-  CreatedAt = "CREATED_AT",
-  Name = "NAME",
-  PushedAt = "PUSHED_AT",
-  Stargazers = "STARGAZERS",
-  UpdatedAt = "UPDATED_AT",
+  CreatedAt = 'CREATED_AT',
+  Name = 'NAME',
+  PushedAt = 'PUSHED_AT',
+  Stargazers = 'STARGAZERS',
+  UpdatedAt = 'UPDATED_AT',
 }
 
 export enum OrderDirection {
-  Asc = "ASC",
-  Desc = "DESC",
+  Asc = 'ASC',
+  Desc = 'DESC',
 }
 
 export type FiltersAPI = ReturnType<typeof useRepoFilters>;
 
 export enum TypeFilter {
-  ALL = "all",
-  FORKS = "forked",
-  ARCHIVED = "archived",
+  ALL = 'all',
+  FORKS = 'forked',
+  ARCHIVED = 'archived',
 }
 
 export interface LanguageFilter {
@@ -71,8 +71,8 @@ type FilterAction =
 const initialState: FilterState = {
   sort: RepositoryOrderField.UpdatedAt,
   type: TypeFilter.ALL,
-  language: "all",
-  query: "",
+  language: 'all',
+  query: '',
   languages: undefined,
 };
 
@@ -103,8 +103,8 @@ const reducer = (state: FilterState, action: FilterAction) => {
         ...state,
         sort: RepositoryOrderField.UpdatedAt,
         type: TypeFilter.ALL,
-        language: "all",
-        query: "",
+        language: 'all',
+        query: '',
       };
     default:
       return state;
@@ -155,9 +155,9 @@ export function useRepoFilters() {
     });
   };
 
-  const isQueryActive = state.query !== "";
+  const isQueryActive = state.query !== '';
   const isTypeActive = state.type !== TypeFilter.ALL;
-  const isLanguageActive = state.language !== "all";
+  const isLanguageActive = state.language !== 'all';
   const isSortActive = state.sort !== RepositoryOrderField.UpdatedAt;
   const isFiltersActive =
     isQueryActive || isTypeActive || isLanguageActive || isSortActive;

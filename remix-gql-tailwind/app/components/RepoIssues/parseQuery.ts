@@ -1,18 +1,18 @@
-import type { Issue, Label, Milestone } from "./types";
+import type { Issue, Label, Milestone } from './types';
 
 export type RepoIssuesQuery = {
-  __typename?: "Query";
+  __typename?: 'Query';
   repository?:
     | {
-        __typename?: "Repository";
+        __typename?: 'Repository';
         milestones?:
           | {
-              __typename?: "MilestoneConnection";
+              __typename?: 'MilestoneConnection';
               totalCount: number;
               nodes?:
                 | Array<
                     | {
-                        __typename?: "Milestone";
+                        __typename?: 'Milestone';
                         id: string;
                         closed: boolean;
                         description?: string | null | undefined;
@@ -25,7 +25,7 @@ export type RepoIssuesQuery = {
                 | null
                 | undefined;
               pageInfo: {
-                __typename?: "PageInfo";
+                __typename?: 'PageInfo';
                 startCursor?: string | null | undefined;
                 endCursor?: string | null | undefined;
                 hasNextPage: boolean;
@@ -35,10 +35,10 @@ export type RepoIssuesQuery = {
           | null
           | undefined;
         closedIssues: {
-          __typename?: "IssueConnection";
+          __typename?: 'IssueConnection';
           totalCount: number;
           pageInfo: {
-            __typename?: "PageInfo";
+            __typename?: 'PageInfo';
             hasNextPage: boolean;
             endCursor?: string | null | undefined;
             hasPreviousPage: boolean;
@@ -47,7 +47,7 @@ export type RepoIssuesQuery = {
           nodes?:
             | Array<
                 | {
-                    __typename?: "Issue";
+                    __typename?: 'Issue';
                     id: string;
                     closed: boolean;
                     closedAt?: any | null | undefined;
@@ -55,25 +55,25 @@ export type RepoIssuesQuery = {
                     number: number;
                     createdAt: any;
                     author?:
-                      | { __typename?: "Bot"; login: string }
-                      | { __typename?: "EnterpriseUserAccount"; login: string }
-                      | { __typename?: "Mannequin"; login: string }
-                      | { __typename?: "Organization"; login: string }
-                      | { __typename?: "User"; login: string }
+                      | { __typename?: 'Bot'; login: string }
+                      | { __typename?: 'EnterpriseUserAccount'; login: string }
+                      | { __typename?: 'Mannequin'; login: string }
+                      | { __typename?: 'Organization'; login: string }
+                      | { __typename?: 'User'; login: string }
                       | null
                       | undefined;
                     comments: {
-                      __typename?: "IssueCommentConnection";
+                      __typename?: 'IssueCommentConnection';
                       totalCount: number;
                     };
                     labels?:
                       | {
-                          __typename?: "LabelConnection";
+                          __typename?: 'LabelConnection';
                           totalCount: number;
                           nodes?:
                             | Array<
                                 | {
-                                    __typename?: "Label";
+                                    __typename?: 'Label';
                                     color: string;
                                     name: string;
                                   }
@@ -93,10 +93,10 @@ export type RepoIssuesQuery = {
             | undefined;
         };
         openIssues: {
-          __typename?: "IssueConnection";
+          __typename?: 'IssueConnection';
           totalCount: number;
           pageInfo: {
-            __typename?: "PageInfo";
+            __typename?: 'PageInfo';
             hasNextPage: boolean;
             endCursor?: string | null | undefined;
             hasPreviousPage: boolean;
@@ -105,31 +105,31 @@ export type RepoIssuesQuery = {
           nodes?:
             | Array<
                 | {
-                    __typename?: "Issue";
+                    __typename?: 'Issue';
                     id: string;
                     closed: boolean;
                     title: string;
                     number: number;
                     createdAt: any;
                     author?:
-                      | { __typename?: "Bot"; login: string }
-                      | { __typename?: "EnterpriseUserAccount"; login: string }
-                      | { __typename?: "Mannequin"; login: string }
-                      | { __typename?: "Organization"; login: string }
-                      | { __typename?: "User"; login: string }
+                      | { __typename?: 'Bot'; login: string }
+                      | { __typename?: 'EnterpriseUserAccount'; login: string }
+                      | { __typename?: 'Mannequin'; login: string }
+                      | { __typename?: 'Organization'; login: string }
+                      | { __typename?: 'User'; login: string }
                       | null
                       | undefined;
                     comments: {
-                      __typename?: "IssueCommentConnection";
+                      __typename?: 'IssueCommentConnection';
                       totalCount: number;
                     };
                     labels?:
                       | {
-                          __typename?: "LabelConnection";
+                          __typename?: 'LabelConnection';
                           nodes?:
                             | Array<
                                 | {
-                                    __typename?: "Label";
+                                    __typename?: 'Label';
                                     color: string;
                                     name: string;
                                   }

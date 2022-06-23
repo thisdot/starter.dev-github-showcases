@@ -1,10 +1,10 @@
-import { RepoContext, RepoProvider } from "../../context/RepoContext";
-import { Story, Meta } from "@storybook/react";
-import RepoActionButtons from "./RepoActionButtons";
+import { RepoContext, RepoProvider } from '../../context/RepoContext';
+import { Story, Meta } from '@storybook/react';
+import RepoActionButtons from './RepoActionButtons';
 
 export default {
   component: RepoActionButtons,
-  title: "RepoPage/RepoActionButtons",
+  title: 'RepoPage/RepoActionButtons',
 } as Meta;
 
 const Template: Story<RepoContext> = (args) => (
@@ -15,8 +15,8 @@ const Template: Story<RepoContext> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  name: "starter.dev",
-  owner: "thisdot",
+  name: 'starter.dev',
+  owner: 'thisdot',
   isRepoLoading: false,
   data: {
     isPrivate: false,
@@ -32,8 +32,8 @@ Default.args = {
 
 export const BigNumbers = Template.bind({});
 BigNumbers.args = {
-  name: "react",
-  owner: "facebook",
+  name: 'react',
+  owner: 'facebook',
   isRepoLoading: false,
   data: {
     isPrivate: false,

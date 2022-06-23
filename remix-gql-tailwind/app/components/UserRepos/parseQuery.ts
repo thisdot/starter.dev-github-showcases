@@ -1,16 +1,16 @@
-import type { Repo } from "./types";
+import type { Repo } from './types';
 
 export type UserReposQuery = {
-  __typename?: "Query";
+  __typename?: 'Query';
   user?:
     | {
-        __typename?: "User";
+        __typename?: 'User';
         repositories: {
-          __typename?: "RepositoryConnection";
+          __typename?: 'RepositoryConnection';
           nodes?:
             | Array<
                 | {
-                    __typename?: "Repository";
+                    __typename?: 'Repository';
                     id: string;
                     name: string;
                     description?: string | null | undefined;
@@ -22,7 +22,7 @@ export type UserReposQuery = {
                     updatedAt: any;
                     primaryLanguage?:
                       | {
-                          __typename?: "Language";
+                          __typename?: 'Language';
                           id: string;
                           color?: string | null | undefined;
                           name: string;
@@ -36,7 +36,7 @@ export type UserReposQuery = {
             | null
             | undefined;
           pageInfo: {
-            __typename?: "PageInfo";
+            __typename?: 'PageInfo';
             endCursor?: string | null | undefined;
             startCursor?: string | null | undefined;
             hasNextPage: boolean;
@@ -48,16 +48,16 @@ export type UserReposQuery = {
     | undefined;
 };
 export type OrgReposQuery = {
-  __typename?: "Query";
+  __typename?: 'Query';
   user?:
     | {
-        __typename?: "Organization";
+        __typename?: 'Organization';
         repositories: {
-          __typename?: "RepositoryConnection";
+          __typename?: 'RepositoryConnection';
           nodes?:
             | Array<
                 | {
-                    __typename?: "Repository";
+                    __typename?: 'Repository';
                     id: string;
                     name: string;
                     description?: string | null | undefined;
@@ -69,7 +69,7 @@ export type OrgReposQuery = {
                     updatedAt: any;
                     primaryLanguage?:
                       | {
-                          __typename?: "Language";
+                          __typename?: 'Language';
                           id: string;
                           color?: string | null | undefined;
                           name: string;
@@ -83,7 +83,7 @@ export type OrgReposQuery = {
             | null
             | undefined;
           pageInfo: {
-            __typename?: "PageInfo";
+            __typename?: 'PageInfo';
             endCursor?: string | null | undefined;
             startCursor?: string | null | undefined;
             hasNextPage: boolean;

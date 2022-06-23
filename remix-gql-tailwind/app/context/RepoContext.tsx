@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import { createContext, useContext } from "react";
+import type { ReactNode } from 'react';
+import { createContext, useContext } from 'react';
 
 export interface RepoContext {
   name: string;
@@ -45,7 +45,7 @@ export function RepoProvider({ children, value }: RepoProviderProps) {
 export function useRepo() {
   const context = useContext(RepoContext);
   if (context === undefined) {
-    throw new Error("useRepo must be used within a RepoPage");
+    throw new Error('useRepo must be used within a RepoPage');
   }
   return context;
 }

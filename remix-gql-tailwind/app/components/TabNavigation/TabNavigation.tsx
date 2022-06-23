@@ -1,7 +1,7 @@
-import type { TabItem } from "./types";
-import cn from "classnames";
-import { Link } from "@remix-run/react";
-import * as styles from "./TabNavigation.classNames";
+import type { TabItem } from './types';
+import cn from 'classnames';
+import { Link } from '@remix-run/react';
+import * as styles from './TabNavigation.classNames';
 
 interface TabNavigationProps {
   tabs: TabItem[];
@@ -14,14 +14,14 @@ interface TabNavigationProps {
 function TabNavigation({
   tabs,
   className,
-  basePath = "",
+  basePath = '',
   pathname,
 }: TabNavigationProps) {
   const isCurrentTab = (pathName?: string) => {
     const otherPaths = tabs
       .filter(({ path }) => path !== pathName)
       .map(({ path }) => path);
-    return pathName !== ""
+    return pathName !== ''
       ? pathname.includes(pathName!)
       : otherPaths.every((path) => !pathname.includes(path!));
   };
@@ -30,7 +30,7 @@ function TabNavigation({
     <div className={cn(styles.container, className)}>
       <nav className={styles.nav} aria-label="Tabs">
         {tabs.map(({ title, path, Icon, count }, index) => {
-          let href = path === "" ? `/${basePath}` : `/${basePath}/${path}`;
+          let href = path === '' ? `/${basePath}` : `/${basePath}/${path}`;
           return (
             <Link
               to={href}
@@ -47,7 +47,7 @@ function TabNavigation({
                 )}
               />
               <span>{title}</span>
-              {typeof count === "number" && (
+              {typeof count === 'number' && (
                 <span className="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">
                   {count}
                 </span>

@@ -1,5 +1,5 @@
-import TabNavigation from "../TabNavigation/TabNavigation";
-import { tabList } from "./tabList";
+import TabNavigation from '../TabNavigation/TabNavigation';
+import { tabList } from './tabList';
 
 interface ProfileNavProps {
   className?: string;

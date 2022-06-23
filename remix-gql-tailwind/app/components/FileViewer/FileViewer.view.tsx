@@ -1,7 +1,7 @@
-import type { Language } from "prism-react-renderer";
-import FileCode from "./FileCode";
-import FileText from "./FileText";
-import * as styles from "./FileViewer.classNames";
+import type { Language } from 'prism-react-renderer';
+import FileCode from './FileCode';
+import FileText from './FileText';
+import * as styles from './FileViewer.classNames';
 
 interface FileViewerViewProps {
   text: string;

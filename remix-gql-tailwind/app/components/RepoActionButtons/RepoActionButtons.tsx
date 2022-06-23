@@ -1,8 +1,8 @@
-import { EyeIcon, GitBranchIcon } from "../Icons";
-import { StarIcon } from "@heroicons/react/outline";
-import { useRepo } from "../../context/RepoContext";
-import CountButtonGroup from "./CountButtonGroup";
-import * as styles from "./RepoActionButtons.classNames";
+import { EyeIcon, GitBranchIcon } from '../Icons';
+import { StarIcon } from '@heroicons/react/outline';
+import { useRepo } from '../../context/RepoContext';
+import CountButtonGroup from './CountButtonGroup';
+import * as styles from './RepoActionButtons.classNames';
 
 function RepoActionButtons() {
   const { data } = useRepo();

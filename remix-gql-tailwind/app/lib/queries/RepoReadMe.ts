@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
 export const REPO_README_QUERY = gql`
   query RepoReadMe($owner: String!, $name: String!, $expression: String!) {

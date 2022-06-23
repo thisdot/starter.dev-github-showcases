@@ -1,4 +1,4 @@
-import { parseQuery } from "./parseQuery";
+import { parseQuery } from './parseQuery';
 export interface Repo {
   id: string;
   name: string;

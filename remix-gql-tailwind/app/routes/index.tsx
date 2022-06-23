@@ -1,16 +1,16 @@
-import { useLoaderData } from "@remix-run/react";
-import { json, LoaderFunction } from "@remix-run/node";
-import type { GitHubProfile } from "remix-auth-github";
-import { auth } from "~/services/auth.server";
-import gqlClient from "~/lib/graphql-client";
-import { parseQuery } from "~/components/UserTopRepos/parseQuery";
-import { parseQueryUserGists } from "~/components/UserGists/parseQuery";
-import { USER_TOP_REPOS_QUERY } from "~/lib/queries/UserTopRepos";
-import { USER_GISTS_QUERY } from "~/lib/queries/UserGists";
-import UserTopReposView from "~/components/UserTopRepos/UserTopRepos.view";
-import UserGistsView from "~/components/UserGists/UserGists.view";
-import { TopRepo } from "~/components/UserTopRepos/types";
-import { GistItem } from "~/components/UserGists/types";
+import { useLoaderData } from '@remix-run/react';
+import { json, LoaderFunction } from '@remix-run/node';
+import type { GitHubProfile } from 'remix-auth-github';
+import { auth } from '~/services/auth.server';
+import gqlClient from '~/lib/graphql-client';
+import { parseQuery } from '~/components/UserTopRepos/parseQuery';
+import { parseQueryUserGists } from '~/components/UserGists/parseQuery';
+import { USER_TOP_REPOS_QUERY } from '~/lib/queries/UserTopRepos';
+import { USER_GISTS_QUERY } from '~/lib/queries/UserGists';
+import UserTopReposView from '~/components/UserTopRepos/UserTopRepos.view';
+import UserGistsView from '~/components/UserGists/UserGists.view';
+import { TopRepo } from '~/components/UserTopRepos/types';
+import { GistItem } from '~/components/UserGists/types';
 
 type LoaderData = {
   profile: GitHubProfile;
@@ -25,7 +25,7 @@ export function ErrorBoundary({ error }: any) {
 
 export const loader: LoaderFunction = async ({ request }) => {
   const { profile, accessToken } = await auth.isAuthenticated(request, {
-    failureRedirect: "/login",
+    failureRedirect: '/login',
   });
   const repos = await gqlClient.request(USER_TOP_REPOS_QUERY, undefined, {
     authorization: `Bearer ${accessToken}`,

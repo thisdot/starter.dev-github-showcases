@@ -1,9 +1,9 @@
-import ProfileNav from "../ProfileNav/ProfileNav";
+import ProfileNav from '../ProfileNav/ProfileNav';
 import UserProfileView, {
   UserProfileViewProps,
-} from "../UserProfile/UserProfile.view";
-import UserReposView, { Repositories } from "../UserRepos/UserRepos.view";
-import * as styles from "./ProfilePage.classNames";
+} from '../UserProfile/UserProfile.view';
+import UserReposView, { Repositories } from '../UserRepos/UserRepos.view';
+import * as styles from './ProfilePage.classNames';
 
 interface ProfilePageProps {
   userProfileData: any;

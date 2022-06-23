@@ -1,5 +1,5 @@
-import cn from "classnames";
-import * as styles from "./PrivacyBadge.classNames";
+import cn from 'classnames';
+import * as styles from './PrivacyBadge.classNames';
 
 interface PrivacyBadgeProps {
   isPrivate: boolean;
@@ -9,7 +9,7 @@ interface PrivacyBadgeProps {
 function PrivacyBadge({ isPrivate, className }: PrivacyBadgeProps) {
   return (
     <span className={cn(styles.badge, className)}>
-      {isPrivate ? "Private" : "Public"}
+      {isPrivate ? 'Private' : 'Public'}
     </span>
   );
 }

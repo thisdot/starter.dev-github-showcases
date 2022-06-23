@@ -1,10 +1,10 @@
 import {
   FilterState,
   RepositoryOrderField,
-} from "../RepoFilters/useRepoFilters";
+} from '../RepoFilters/useRepoFilters';
 
-import type { Repo } from "./types";
-import { TypeFilter } from "../RepoFilters/useRepoFilters";
+import type { Repo } from './types';
+import { TypeFilter } from '../RepoFilters/useRepoFilters';
 
 export function filterRepos(repos: Repo[], state: FilterState) {
   return repos.reduce((acc: Repo[], repo: Repo) => {
@@ -21,14 +21,14 @@ export function filterRepos(repos: Repo[], state: FilterState) {
     }
 
     if (
-      state.language !== "all" &&
+      state.language !== 'all' &&
       repo.language?.toLocaleLowerCase() !== state.language
     ) {
       return acc;
     }
 
     if (
-      state.query !== "" &&
+      state.query !== '' &&
       !repo.name.toLocaleLowerCase().includes(state.query.toLocaleLowerCase())
     ) {
       return acc;

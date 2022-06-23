@@ -1,14 +1,14 @@
-import { json, LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import RepoHeader from "~/components/RepoHeader/RepoHeader";
-import { parseQuery } from "~/components/RepoIssues/parseQuery";
-import RepoIssues from "~/components/RepoIssues/RepoIssues";
-import { parseTopics } from "~/components/RepoPage/parseTopics";
-import { RepoContext, RepoProvider } from "~/context/RepoContext";
-import gqlClient from "~/lib/graphql-client";
-import { REPO_ISSUES_QUERY } from "~/lib/queries/RepoIssues";
-import { REPO_PAGE_QUERY } from "~/lib/queries/RepoPage";
-import { auth } from "~/services/auth.server";
+import { json, LoaderFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import RepoHeader from '~/components/RepoHeader/RepoHeader';
+import { parseQuery } from '~/components/RepoIssues/parseQuery';
+import RepoIssues from '~/components/RepoIssues/RepoIssues';
+import { parseTopics } from '~/components/RepoPage/parseTopics';
+import { RepoContext, RepoProvider } from '~/context/RepoContext';
+import gqlClient from '~/lib/graphql-client';
+import { REPO_ISSUES_QUERY } from '~/lib/queries/RepoIssues';
+import { REPO_PAGE_QUERY } from '~/lib/queries/RepoPage';
+import { auth } from '~/services/auth.server';
 type LoaderData = {
   context: RepoContext;
   openIssues: any;
@@ -19,21 +19,21 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const { accessToken } = await auth.isAuthenticated(request, {
-    failureRedirect: "/login",
+    failureRedirect: '/login',
   });
 
   let url = new URL(request.url);
   const searchParams = url.searchParams;
 
-  const label = searchParams.get("Label");
-  const milestone = searchParams.get("Milestones");
-  const after = searchParams.get("after");
-  const before = searchParams.get("before");
-  const orderBy = searchParams.get("Sort");
-  const orderByArr = orderBy?.split("^");
+  const label = searchParams.get('Label');
+  const milestone = searchParams.get('Milestones');
+  const after = searchParams.get('after');
+  const before = searchParams.get('before');
+  const orderBy = searchParams.get('Sort');
+  const orderByArr = orderBy?.split('^');
 
   const pathname = url.pathname;
-  const basePath = pathname.split("/");
+  const basePath = pathname.split('/');
   const index = basePath.lastIndexOf(`${params.repository}`);
   const path = basePath.splice(index + 1);
 
@@ -48,8 +48,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     }
   );
 
-  const formattedPath = Array.isArray(path) ? path.join("/") : path;
-  const defaultBranch = "HEAD";
+  const formattedPath = Array.isArray(path) ? path.join('/') : path;
+  const defaultBranch = 'HEAD';
 
   const context: RepoContext = {
     owner: params.user!,
@@ -60,7 +60,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     data: repository
       ? {
           ...repository,
-          isOrg: typeof repository.owner?.orgName === "string",
+          isOrg: typeof repository.owner?.orgName === 'string',
           watcherCount: repository.watchers.totalCount,
           openIssueCount: repository.issues.totalCount,
           openPullRequestCount: repository.pullRequests.totalCount,
@@ -75,8 +75,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       owner: params.user,
       name: params.repository,
       orderBy: {
-        field: orderByArr ? orderByArr[0] : "CREATED_AT",
-        direction: orderByArr ? orderByArr[1] : "DESC",
+        field: orderByArr ? orderByArr[0] : 'CREATED_AT',
+        direction: orderByArr ? orderByArr[1] : 'DESC',
       },
       filterBy:
         label || milestone

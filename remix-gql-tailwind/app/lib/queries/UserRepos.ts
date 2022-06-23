@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
 export const USER_REPOS_FRAGMENT = gql`
   fragment userRepos on User {

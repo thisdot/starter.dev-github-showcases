@@ -7,7 +7,7 @@ export interface Milestone {
 }
 
 export type PageInfo = {
-  __typename?: "PageInfo";
+  __typename?: 'PageInfo';
   endCursor?: string;
   hasNextPage: boolean;
   hasPreviousPage: boolean;

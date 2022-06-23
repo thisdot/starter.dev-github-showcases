@@ -1,9 +1,9 @@
-import FileViewerView from "./FileViewer.view";
-import { mapExtensionToLanguage } from "./mapExtensionToLanguage";
-import { useRepo } from "~/context/RepoContext";
+import FileViewerView from './FileViewer.view';
+import { mapExtensionToLanguage } from './mapExtensionToLanguage';
+import { useRepo } from '~/context/RepoContext';
 
 export type Blob = {
-  __typename?: "Blob";
+  __typename?: 'Blob';
   abbreviatedOid: string;
   byteSize: number;
   commitResourcePath: any;
@@ -22,14 +22,14 @@ function FileViewer({ data }: any) {
   const file = data?.repository?.blob as Blob | undefined;
 
   if (!file) {
-    const err = new Error("Repository path not found");
+    const err = new Error('Repository path not found');
     throw err;
   }
 
-  const extension = path.split(".").pop();
+  const extension = path.split('.').pop();
   const language = mapExtensionToLanguage(extension);
-  const text = file.text ? file.text : "";
-  const lines = text.split("\n").length;
+  const text = file.text ? file.text : '';
+  const lines = text.split('\n').length;
 
   return (
     <FileViewerView

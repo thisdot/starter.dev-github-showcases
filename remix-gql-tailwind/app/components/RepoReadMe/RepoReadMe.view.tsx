@@ -1,7 +1,7 @@
-import ReactMarkdown from "react-markdown";
-import { TOCIcon } from "../Icons";
-import Empty from "./Empty";
-import * as styles from "./RepoReadMe.classNames";
+import ReactMarkdown from 'react-markdown';
+import { TOCIcon } from '../Icons';
+import Empty from './Empty';
+import * as styles from './RepoReadMe.classNames';
 
 interface RepoReadMeViewProps {
   readme: string;

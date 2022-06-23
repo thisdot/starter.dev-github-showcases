@@ -1,8 +1,8 @@
-import { Fragment, useEffect, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon, XIcon, CheckIcon } from "@heroicons/react/solid";
-import * as styles from "./FilterDropdown.classNames";
-import { useSearchParams } from "@remix-run/react";
+import { Fragment, useEffect, useState } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { ChevronDownIcon, XIcon, CheckIcon } from '@heroicons/react/solid';
+import * as styles from './FilterDropdown.classNames';
+import { useSearchParams } from '@remix-run/react';
 
 interface Option {
   label: string;
@@ -26,11 +26,11 @@ function FilterDropdown({
   onChange,
   buttonClassName,
 }: FilterDropdownProps) {
-  const [width, setWidth] = useState("0");
+  const [width, setWidth] = useState('0');
   const [searchParams, setSearchParams] = useSearchParams({});
 
   const handleAppendQuery = (name: string, value: string | number | null) => {
-    let str = "";
+    let str = '';
     const key = searchParams.get(name);
 
     if (key !== null) {
@@ -44,7 +44,7 @@ function FilterDropdown({
     } else {
       str = searchParams.toString();
       if (value && value !== null) {
-        if (str !== "") {
+        if (str !== '') {
           str = str + `&${name}=${value}`;
         } else {
           str = str + `${name}=${value}`;
@@ -56,9 +56,9 @@ function FilterDropdown({
 
   useEffect(() => {
     if (window.screen.width > 768) {
-      setWidth("inherit");
+      setWidth('inherit');
     } else {
-      setWidth("0");
+      setWidth('0');
     }
   }, [width]);
   return (
@@ -113,7 +113,7 @@ function FilterDropdown({
                 >
                   {value === current && (
                     <CheckIcon className={styles.itemActiveIcon} />
-                  )}{" "}
+                  )}{' '}
                   {label}
                 </button>
               </Menu.Item>

@@ -1,18 +1,18 @@
-import { json, LoaderFunction } from "@remix-run/node";
-import { useLoaderData, useOutletContext } from "@remix-run/react";
-import { parseQueryData } from "~/components/FileExplorer/parseQueryData";
-import FileExplorerNav from "~/components/FileExplorerNav/FileExplorerNav";
-import RepoHeader from "~/components/RepoHeader/RepoHeader";
-import FileExplorer from "~/components/FileExplorer/FileExplorer.view";
-import { parseTopics } from "~/components/RepoPage/parseTopics";
-import { parseQuery } from "~/components/RepoReadMe/parseQuery";
-import RepoReadMe from "~/components/RepoReadMe/RepoReadMe.view";
-import { RepoContext, RepoProvider } from "~/context/RepoContext";
-import gqlClient from "~/lib/graphql-client";
-import { auth } from "~/services/auth.server";
-import { REPO_PAGE_QUERY } from "~/lib/queries/RepoPage";
-import { REPO_TREE_QUERY } from "~/lib/queries/FileExplorer";
-import { REPO_README_QUERY } from "~/lib/queries/RepoReadMe";
+import { json, LoaderFunction } from '@remix-run/node';
+import { useLoaderData, useOutletContext } from '@remix-run/react';
+import { parseQueryData } from '~/components/FileExplorer/parseQueryData';
+import FileExplorerNav from '~/components/FileExplorerNav/FileExplorerNav';
+import RepoHeader from '~/components/RepoHeader/RepoHeader';
+import FileExplorer from '~/components/FileExplorer/FileExplorer.view';
+import { parseTopics } from '~/components/RepoPage/parseTopics';
+import { parseQuery } from '~/components/RepoReadMe/parseQuery';
+import RepoReadMe from '~/components/RepoReadMe/RepoReadMe.view';
+import { RepoContext, RepoProvider } from '~/context/RepoContext';
+import gqlClient from '~/lib/graphql-client';
+import { auth } from '~/services/auth.server';
+import { REPO_PAGE_QUERY } from '~/lib/queries/RepoPage';
+import { REPO_TREE_QUERY } from '~/lib/queries/FileExplorer';
+import { REPO_README_QUERY } from '~/lib/queries/RepoReadMe';
 type LoaderData = {
   context: any;
   items: any;
@@ -20,12 +20,12 @@ type LoaderData = {
 };
 export const loader: LoaderFunction = async ({ params, request }) => {
   const { accessToken } = await auth.isAuthenticated(request, {
-    failureRedirect: "/login",
+    failureRedirect: '/login',
   });
 
   let url = new URL(request.url);
   const pathname = url.pathname;
-  const basePath = pathname.split("/");
+  const basePath = pathname.split('/');
   const index = basePath.indexOf(`${params.branch}`);
   const path = basePath.splice(index + 1);
 
@@ -40,8 +40,8 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     }
   );
 
-  const formattedPath = Array.isArray(path) ? path.join("/") : path;
-  const defaultBranch = "HEAD";
+  const formattedPath = Array.isArray(path) ? path.join('/') : path;
+  const defaultBranch = 'HEAD';
 
   const context: RepoContext = {
     owner: params.user!,
@@ -53,7 +53,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
       ? {
           // @ts-ignore - generated types be like that
           ...repository,
-          isOrg: typeof repository.owner?.orgName === "string",
+          isOrg: typeof repository.owner?.orgName === 'string',
           watcherCount: repository.watchers.totalCount,
           openIssueCount: repository.issues.totalCount,
           openPullRequestCount: repository.pullRequests.totalCount,
@@ -77,7 +77,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   const items = parseQueryData(data);
 
   if (items.length < 1)
-    throw new Response("Not Found", {
+    throw new Response('Not Found', {
       status: 404,
     });
 
@@ -88,7 +88,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
       name: params.repository,
       expression: context.path
         ? `HEAD:${context.path}/README.md`
-        : "HEAD:README.md",
+        : 'HEAD:README.md',
     },
     {
       authorization: `Bearer ${accessToken}`,

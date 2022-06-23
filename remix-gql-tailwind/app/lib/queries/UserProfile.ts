@@ -1,5 +1,5 @@
-import { gql } from "graphql-request";
-import { USER_REPOS_FRAGMENT } from "./UserRepos";
+import { gql } from 'graphql-request';
+import { USER_REPOS_FRAGMENT } from './UserRepos';
 
 // might be unnecessary due to Profile return from GitHubStrategy
 

@@ -1,13 +1,13 @@
-import type { IssueFilterAPI } from "./useIssueFilters";
-import type { PageInfo } from "./types";
-import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/outline";
-import * as styles from "./Pagination.classNames";
-import { useRepo } from "~/context/RepoContext";
-import { Link } from "@remix-run/react";
+import type { IssueFilterAPI } from './useIssueFilters';
+import type { PageInfo } from './types';
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/outline';
+import * as styles from './Pagination.classNames';
+import { useRepo } from '~/context/RepoContext';
+import { Link } from '@remix-run/react';
 
 interface PaginationProps {
   pageInfo?: PageInfo;
-  changePage: IssueFilterAPI["changePage"];
+  changePage: IssueFilterAPI['changePage'];
 }
 
 const Previous = () => {

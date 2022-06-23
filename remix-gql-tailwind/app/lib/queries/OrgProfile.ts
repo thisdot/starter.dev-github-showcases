@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
 export const ORG_PROFILE_QUERY = gql`
   query OrgProfile($username: String!) {

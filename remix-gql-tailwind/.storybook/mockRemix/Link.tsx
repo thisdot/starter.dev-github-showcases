@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface MockLinkProps extends React.ComponentPropsWithoutRef<"a"> {
+interface MockLinkProps extends React.ComponentPropsWithoutRef<'a'> {
   to: string;
 }
 

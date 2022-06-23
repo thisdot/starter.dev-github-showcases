@@ -1,4 +1,4 @@
-import OrgProfileView from "./OrgProfile.view";
+import OrgProfileView from './OrgProfile.view';
 
 interface OrgProfileProps {
   data: any;

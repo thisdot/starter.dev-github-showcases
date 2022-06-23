@@ -3,7 +3,7 @@ function TwitterIcon({ className }: { className?: string }) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      className={className || "h-6 w-6"}
+      className={className || 'h-6 w-6'}
       fill="currentColor"
     >
       <path fill="none" d="M0 0h24v24H0z" />

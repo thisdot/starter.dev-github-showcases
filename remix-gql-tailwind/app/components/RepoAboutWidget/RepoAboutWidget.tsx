@@ -1,10 +1,10 @@
-import { BookOpenIcon } from "@heroicons/react/outline";
-import { useRepo } from "../../context/RepoContext";
-import Description from "./Description";
-import HomepageUrl from "./HomepageUrl";
-import Topics from "./Topics";
+import { BookOpenIcon } from '@heroicons/react/outline';
+import { useRepo } from '../../context/RepoContext';
+import Description from './Description';
+import HomepageUrl from './HomepageUrl';
+import Topics from './Topics';
 // import { LoadingTextLine } from '@components/Loading';
-import * as styles from "./RepoAboutWidget.classNames";
+import * as styles from './RepoAboutWidget.classNames';
 
 function RepoAboutWidget() {
   const { data, isRepoLoading } = useRepo();

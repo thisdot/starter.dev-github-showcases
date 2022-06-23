@@ -10,14 +10,14 @@ import {
   ScrollRestoration,
   useCatch,
   useLoaderData,
-} from "@remix-run/react";
-import { json, LoaderFunction, MetaFunction } from "@remix-run/node";
-import styles from "./styles/tailwind.css";
-import NavBar from "./components/Navbar/NavBar";
-import { auth } from "./services/auth.server";
-import { CURRENT_USER_QUERY } from "./lib/queries/UserDropdown";
-import gqlClient from "./lib/graphql-client";
-import { getSession } from "./services/session.server";
+} from '@remix-run/react';
+import { json, LoaderFunction, MetaFunction } from '@remix-run/node';
+import styles from './styles/tailwind.css';
+import NavBar from './components/Navbar/NavBar';
+import { auth } from './services/auth.server';
+import { CURRENT_USER_QUERY } from './lib/queries/UserDropdown';
+import gqlClient from './lib/graphql-client';
+import { getSession } from './services/session.server';
 
 type DocumentProps = {
   children: React.ReactNode;
@@ -25,11 +25,11 @@ type DocumentProps = {
 };
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 export const meta: MetaFunction = () => {
-  return { title: "GitHub Demo App" };
+  return { title: 'GitHub Demo App' };
 };
 
 // Global ErrorBoundary
@@ -76,7 +76,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   if (session) {
     const { accessToken } = await auth.isAuthenticated(request, {
-      failureRedirect: "/login",
+      failureRedirect: '/login',
     });
     ({ viewer } = await gqlClient.request(CURRENT_USER_QUERY, undefined, {
       authorization: `Bearer ${accessToken}`,
@@ -101,7 +101,7 @@ export function Document({ children, title }: DocumentProps) {
   return (
     <html lang="en">
       <head>
-        <title>{title ? title : "GitHub Demo App"}</title>
+        <title>{title ? title : 'GitHub Demo App'}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
@@ -109,7 +109,7 @@ export function Document({ children, title }: DocumentProps) {
       </head>
       <body>
         {children}
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
-import type { TabItem } from "../TabNavigation/types";
-import { CodeIcon, InformationCircleIcon } from "@heroicons/react/outline";
-import { PullRequestIcon } from "../Icons";
+import type { TabItem } from '../TabNavigation/types';
+import { CodeIcon, InformationCircleIcon } from '@heroicons/react/outline';
+import { PullRequestIcon } from '../Icons';
 
 export function createTabList({
   issueCount = 0,
@@ -11,19 +11,19 @@ export function createTabList({
 }): TabItem[] {
   return [
     {
-      title: "Code",
-      path: "",
+      title: 'Code',
+      path: '',
       Icon: CodeIcon,
     },
     {
-      title: "Issues",
-      path: "issues",
+      title: 'Issues',
+      path: 'issues',
       Icon: InformationCircleIcon,
       count: issueCount,
     },
     {
-      title: "Pull Requests",
-      path: "pulls",
+      title: 'Pull Requests',
+      path: 'pulls',
       Icon: PullRequestIcon,
       count: pullRequestCount,
     },

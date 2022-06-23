@@ -1,1 +1,1 @@
-export const container = "py-8 border-t border-b";
+export const container = 'py-8 border-t border-b';

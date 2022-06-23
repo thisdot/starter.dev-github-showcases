@@ -1,17 +1,17 @@
-import { GitBranchIcon } from "../Icons";
-import { Link } from "@remix-run/react";
-import { useRepo } from "../../context/RepoContext";
-import * as styles from "./FileExplorerNav.classNames";
-import { removePathPart } from "../../lib/pathUtils";
+import { GitBranchIcon } from '../Icons';
+import { Link } from '@remix-run/react';
+import { useRepo } from '../../context/RepoContext';
+import * as styles from './FileExplorerNav.classNames';
+import { removePathPart } from '../../lib/pathUtils';
 
 function RepoNavigation() {
   const { name, owner, path, branch } = useRepo();
-  const crumbs = path.split("/").filter(Boolean);
+  const crumbs = path.split('/').filter(Boolean);
   return (
     <nav className={styles.container}>
       <button className={styles.btn}>
-        <GitBranchIcon className={styles.btnIcon} /> {branch}{" "}
-        <span className={styles.btnCaret}>{"\u25BC"}</span>
+        <GitBranchIcon className={styles.btnIcon} /> {branch}{' '}
+        <span className={styles.btnCaret}>{'\u25BC'}</span>
       </button>
       {crumbs.length > 0 && (
         <div className={styles.crumbs}>

@@ -1,4 +1,4 @@
-import type { Label } from "@components/RepoIssues/types";
+import type { Label } from '@components/RepoIssues/types';
 
 export interface PullRequest {
   id: string;

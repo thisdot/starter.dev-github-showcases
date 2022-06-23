@@ -1,4 +1,4 @@
-import * as styles from "./RepoAboutWidget.classNames";
+import * as styles from './RepoAboutWidget.classNames';
 
 interface TopicsProps {
   topics?: string[];

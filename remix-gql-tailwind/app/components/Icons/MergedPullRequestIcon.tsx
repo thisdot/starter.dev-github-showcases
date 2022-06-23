@@ -1,6 +1,6 @@
 function MergedPullRequestIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 20 20" className={className || "h-6 w-6"}>
+    <svg viewBox="0 0 20 20" className={className || 'h-6 w-6'}>
       <path
         fill="currentColor"
         fillRule="evenodd"

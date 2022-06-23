@@ -1,13 +1,13 @@
-import type { PullRequest } from "./types";
-import cn from "classnames";
-import { ChatAltIcon } from "@heroicons/react/outline";
-import { formatDistance } from "date-fns";
+import type { PullRequest } from './types';
+import cn from 'classnames';
+import { ChatAltIcon } from '@heroicons/react/outline';
+import { formatDistance } from 'date-fns';
 import {
   PullRequestIcon,
   MergedPullRequestIcon,
   ClosedPullRequestIcon,
-} from "../Icons";
-import * as styles from "../RepoIssues/RepoIssues.classNames";
+} from '../Icons';
+import * as styles from '../RepoIssues/RepoIssues.classNames';
 
 interface RepoPullsViewProps {
   pullRequests: PullRequest[];
@@ -20,18 +20,18 @@ function RepoPullsView({ pullRequests, name, owner }: RepoPullsViewProps) {
     <>
       {pullRequests.map((pullRequest) => {
         let icon = (
-          <PullRequestIcon className={cn(styles.stateIcon, "text-green-600")} />
+          <PullRequestIcon className={cn(styles.stateIcon, 'text-green-600')} />
         );
         if (pullRequest.merged) {
           icon = (
             <MergedPullRequestIcon
-              className={cn(styles.stateIcon, "text-purple-600")}
+              className={cn(styles.stateIcon, 'text-purple-600')}
             />
           );
         } else if (pullRequest.closed) {
           icon = (
             <ClosedPullRequestIcon
-              className={cn(styles.stateIcon, "text-red-600")}
+              className={cn(styles.stateIcon, 'text-red-600')}
             />
           );
         }
@@ -65,26 +65,26 @@ function RepoPullsView({ pullRequests, name, owner }: RepoPullsViewProps) {
                     </span>
                   </div>
                   <div className={styles.meta}>
-                    #{pullRequest.number}{" "}
+                    #{pullRequest.number}{' '}
                     {pullRequest.closed === false && (
                       <span>
-                        opened{" "}
+                        opened{' '}
                         {formatDistance(
                           new Date(),
                           new Date(pullRequest.createdAt)
-                        )}{" "}
-                        ago{" "}
+                        )}{' '}
+                        ago{' '}
                       </span>
                     )}
                     by <span className={styles.link}>{pullRequest.login}</span>
                     {pullRequest.closedAt && (
                       <span>
-                        {" "}
-                        was {pullRequest.merged ? "merged" : "closed"}{" "}
+                        {' '}
+                        was {pullRequest.merged ? 'merged' : 'closed'}{' '}
                         {formatDistance(
                           new Date(),
                           new Date(pullRequest.closedAt)
-                        )}{" "}
+                        )}{' '}
                         ago
                       </span>
                     )}

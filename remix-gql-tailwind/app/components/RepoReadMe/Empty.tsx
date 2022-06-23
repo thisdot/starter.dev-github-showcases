@@ -1,4 +1,4 @@
-import * as styles from "./RepoReadMe.classNames";
+import * as styles from './RepoReadMe.classNames';
 
 function Empty() {
   return (

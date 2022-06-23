@@ -1,5 +1,5 @@
-import cn from "classnames";
-import * as styles from "./Pagination.classNames";
+import cn from 'classnames';
+import * as styles from './Pagination.classNames';
 
 interface PaginationProps {
   pageInfo?: any;

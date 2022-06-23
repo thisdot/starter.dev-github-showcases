@@ -1,13 +1,13 @@
-import { IssueFilterAPI, IssueOrderField, IssueState } from "./useIssueFilters";
-import type { Label } from "../RepoIssues/types";
-import type { Milestone } from "./types";
-import cn from "classnames";
-import { CheckIcon, MinusCircleIcon } from "@heroicons/react/outline";
-import { PullRequestIcon } from "../Icons";
-import FilterDropdown from "../FilterDropdown/FilterDropdown";
-import { IssueType } from "./useIssueFilters";
-import * as styles from "./IssueFilters.classNames";
-import { OrderDirection } from "../RepoFilters/useRepoFilters";
+import { IssueFilterAPI, IssueOrderField, IssueState } from './useIssueFilters';
+import type { Label } from '../RepoIssues/types';
+import type { Milestone } from './types';
+import cn from 'classnames';
+import { CheckIcon, MinusCircleIcon } from '@heroicons/react/outline';
+import { PullRequestIcon } from '../Icons';
+import FilterDropdown from '../FilterDropdown/FilterDropdown';
+import { IssueType } from './useIssueFilters';
+import * as styles from './IssueFilters.classNames';
+import { OrderDirection } from '../RepoFilters/useRepoFilters';
 
 type IssueFiltersProps = {
   type?: IssueType;
@@ -37,10 +37,10 @@ function IssueFilters({
         <button
           data-testid="openIssuesButton"
           className={cn(
-            "text-sm",
+            'text-sm',
             state.state === IssueState.Open
-              ? "font-semibold text-gray-900"
-              : "text-gray-600"
+              ? 'font-semibold text-gray-900'
+              : 'text-gray-600'
           )}
           onClick={() => changeState(IssueState.Open)}
         >
@@ -54,10 +54,10 @@ function IssueFilters({
         <button
           data-testid="closedIssuesButton"
           className={cn(
-            "text-sm",
+            'text-sm',
             state.state === IssueState.Closed
-              ? "font-semibold text-gray-900"
-              : "text-gray-600"
+              ? 'font-semibold text-gray-900'
+              : 'text-gray-600'
           )}
           onClick={() => changeState(IssueState.Closed)}
         >
@@ -85,7 +85,7 @@ function IssueFilters({
             description="Filter by milestone"
             current={state.milestone}
             items={[
-              { label: "Issue with no milestone", value: null },
+              { label: 'Issue with no milestone', value: null },
               ...milestones.map((milestone) => ({
                 label: milestone.title,
                 value: milestone.id,
@@ -101,27 +101,27 @@ function IssueFilters({
           current={`${state.sort.field}^${state.sort.direction}`}
           items={[
             {
-              label: "Newest",
+              label: 'Newest',
               value: `${IssueOrderField.CreatedAt}^${OrderDirection.Desc}`,
             },
             {
-              label: "Oldest",
+              label: 'Oldest',
               value: `${IssueOrderField.CreatedAt}^${OrderDirection.Asc}`,
             },
             {
-              label: "Most commented",
+              label: 'Most commented',
               value: `${IssueOrderField.Comments}^${OrderDirection.Desc}`,
             },
             {
-              label: "Least commented",
+              label: 'Least commented',
               value: `${IssueOrderField.Comments}^${OrderDirection.Asc}`,
             },
             {
-              label: "Recently updated",
+              label: 'Recently updated',
               value: `${IssueOrderField.UpdatedAt}^${OrderDirection.Desc}`,
             },
             {
-              label: "Least recently updated",
+              label: 'Least recently updated',
               value: `${IssueOrderField.UpdatedAt}^${OrderDirection.Asc}`,
             },
           ]}

@@ -1,7 +1,7 @@
-import { IssueOrderField } from "../IssueFilters/useIssueFilters";
-import { OrderDirection } from "../RepoFilters/useRepoFilters";
-import { Label } from "../RepoIssues/types";
-import type { PullRequest } from "./types";
+import { IssueOrderField } from '../IssueFilters/useIssueFilters';
+import { OrderDirection } from '../RepoFilters/useRepoFilters';
+import { Label } from '../RepoIssues/types';
+import type { PullRequest } from './types';
 
 export type RepoPullRequestsQueryVariables = {
   owner: string;
@@ -18,15 +18,15 @@ export type IssueOrder = {
 };
 
 export type RepoPullRequestsQuery = {
-  __typename?: "Query";
+  __typename?: 'Query';
   repository?:
     | {
-        __typename?: "Repository";
+        __typename?: 'Repository';
         openPullRequests: {
-          __typename?: "PullRequestConnection";
+          __typename?: 'PullRequestConnection';
           totalCount: number;
           pageInfo: {
-            __typename?: "PageInfo";
+            __typename?: 'PageInfo';
             hasPreviousPage: boolean;
             hasNextPage: boolean;
             startCursor?: string | null | undefined;
@@ -35,7 +35,7 @@ export type RepoPullRequestsQuery = {
           nodes?:
             | Array<
                 | {
-                    __typename?: "PullRequest";
+                    __typename?: 'PullRequest';
                     id: string;
                     closed: boolean;
                     closedAt?: any | null | undefined;
@@ -45,25 +45,25 @@ export type RepoPullRequestsQuery = {
                     number: number;
                     createdAt: any;
                     author?:
-                      | { __typename?: "Bot"; login: string }
-                      | { __typename?: "EnterpriseUserAccount"; login: string }
-                      | { __typename?: "Mannequin"; login: string }
-                      | { __typename?: "Organization"; login: string }
-                      | { __typename?: "User"; login: string }
+                      | { __typename?: 'Bot'; login: string }
+                      | { __typename?: 'EnterpriseUserAccount'; login: string }
+                      | { __typename?: 'Mannequin'; login: string }
+                      | { __typename?: 'Organization'; login: string }
+                      | { __typename?: 'User'; login: string }
                       | null
                       | undefined;
                     comments: {
-                      __typename?: "IssueCommentConnection";
+                      __typename?: 'IssueCommentConnection';
                       totalCount: number;
                     };
                     labels?:
                       | {
-                          __typename?: "LabelConnection";
+                          __typename?: 'LabelConnection';
                           totalCount: number;
                           nodes?:
                             | Array<
                                 | {
-                                    __typename?: "Label";
+                                    __typename?: 'Label';
                                     color: string;
                                     name: string;
                                   }
@@ -83,10 +83,10 @@ export type RepoPullRequestsQuery = {
             | undefined;
         };
         closedPullRequests: {
-          __typename?: "PullRequestConnection";
+          __typename?: 'PullRequestConnection';
           totalCount: number;
           pageInfo: {
-            __typename?: "PageInfo";
+            __typename?: 'PageInfo';
             hasPreviousPage: boolean;
             hasNextPage: boolean;
             startCursor?: string | null | undefined;
@@ -95,7 +95,7 @@ export type RepoPullRequestsQuery = {
           nodes?:
             | Array<
                 | {
-                    __typename?: "PullRequest";
+                    __typename?: 'PullRequest';
                     id: string;
                     closed: boolean;
                     closedAt?: any | null | undefined;
@@ -105,25 +105,25 @@ export type RepoPullRequestsQuery = {
                     number: number;
                     createdAt: any;
                     author?:
-                      | { __typename?: "Bot"; login: string }
-                      | { __typename?: "EnterpriseUserAccount"; login: string }
-                      | { __typename?: "Mannequin"; login: string }
-                      | { __typename?: "Organization"; login: string }
-                      | { __typename?: "User"; login: string }
+                      | { __typename?: 'Bot'; login: string }
+                      | { __typename?: 'EnterpriseUserAccount'; login: string }
+                      | { __typename?: 'Mannequin'; login: string }
+                      | { __typename?: 'Organization'; login: string }
+                      | { __typename?: 'User'; login: string }
                       | null
                       | undefined;
                     comments: {
-                      __typename?: "IssueCommentConnection";
+                      __typename?: 'IssueCommentConnection';
                       totalCount: number;
                     };
                     labels?:
                       | {
-                          __typename?: "LabelConnection";
+                          __typename?: 'LabelConnection';
                           totalCount: number;
                           nodes?:
                             | Array<
                                 | {
-                                    __typename?: "Label";
+                                    __typename?: 'Label';
                                     color: string;
                                     name: string;
                                   }

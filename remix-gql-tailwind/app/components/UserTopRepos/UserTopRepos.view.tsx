@@ -1,8 +1,8 @@
-import type { TopRepo } from "./types";
-import { Link } from "@remix-run/react";
-import * as styles from "./UserTopRepos.classNames";
-import RepoMeta from "../RepoMeta/RepoMeta";
-import PrivacyBadge from "../PrivacyBadge/PrivacyBadge";
+import type { TopRepo } from './types';
+import { Link } from '@remix-run/react';
+import * as styles from './UserTopRepos.classNames';
+import RepoMeta from '../RepoMeta/RepoMeta';
+import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
 
 interface UserTopReposViewProps {
   login: string;

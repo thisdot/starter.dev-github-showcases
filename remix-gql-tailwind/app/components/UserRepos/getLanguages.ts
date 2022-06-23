@@ -1,9 +1,9 @@
-import type { Repo } from "./types";
+import type { Repo } from './types';
 
 type LanguageMap = { [key: string]: string };
 
 export function getLanguages(repos: Repo[]) {
-  const initialValue: LanguageMap = { all: "All" };
+  const initialValue: LanguageMap = { all: 'All' };
 
   const languageMap = repos.reduce(
     (acc: LanguageMap, repo: Repo) =>

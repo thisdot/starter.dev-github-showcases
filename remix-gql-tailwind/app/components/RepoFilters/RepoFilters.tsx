@@ -1,16 +1,16 @@
-import * as styles from "./RepoFilters.classNames";
+import * as styles from './RepoFilters.classNames';
 
 import {
   FiltersAPI,
   LanguageFilter,
   RepositoryOrderField,
-} from "./useRepoFilters";
+} from './useRepoFilters';
 
-import FilterDropdown from "./FilterDropdown";
-import { TypeFilter } from "./useRepoFilters";
-import { XIcon } from "@heroicons/react/solid";
-import cn from "classnames";
-import { useEffect } from "react";
+import FilterDropdown from './FilterDropdown';
+import { TypeFilter } from './useRepoFilters';
+import { XIcon } from '@heroicons/react/solid';
+import cn from 'classnames';
+import { useEffect } from 'react';
 
 type RepoFiltersProps = {
   languages: LanguageFilter[];
@@ -59,15 +59,15 @@ function RepoFilters({
               current={state.type}
               items={[
                 {
-                  label: "All",
+                  label: 'All',
                   value: TypeFilter.ALL,
                 },
                 {
-                  label: "Forks",
+                  label: 'Forks',
                   value: TypeFilter.FORKS,
                 },
                 {
-                  label: "Archived",
+                  label: 'Archived',
                   value: TypeFilter.ARCHIVED,
                 },
               ]}
@@ -91,10 +91,10 @@ function RepoFilters({
               items={[
                 {
                   value: RepositoryOrderField.UpdatedAt,
-                  label: "Last updated",
+                  label: 'Last updated',
                 },
-                { value: RepositoryOrderField.Name, label: "Name" },
-                { value: RepositoryOrderField.Stargazers, label: "Stars" },
+                { value: RepositoryOrderField.Name, label: 'Name' },
+                { value: RepositoryOrderField.Stargazers, label: 'Stars' },
               ]}
               onChange={changeSort}
             />
@@ -106,45 +106,45 @@ function RepoFilters({
           <div className="text-sm">
             <span className="font-semibold" data-testid="filterText">
               {resultCount}
-            </span>{" "}
-            results for{" "}
+            </span>{' '}
+            results for{' '}
             {isTypeActive && (
               <span className="font-semibold">{state.type}</span>
-            )}{" "}
-            repositories{" "}
+            )}{' '}
+            repositories{' '}
             {isQueryActive && (
               <>
                 matching <span className="font-semibold">{state.query}</span>
               </>
-            )}{" "}
+            )}{' '}
             {isLanguageActive && (
               <>
-                written in{" "}
+                written in{' '}
                 <span className="font-semibold capitalize">
                   {state.language}
                 </span>
               </>
-            )}{" "}
-            sorted by{" "}
+            )}{' '}
+            sorted by{' '}
             <span className="font-semibold">
-              {state.sort.split("_").join(" ").toLowerCase()}
+              {state.sort.split('_').join(' ').toLowerCase()}
             </span>
           </div>
           <div>
             <button
               onClick={resetFilters}
-              className={cn(styles.clearBtn, "group")}
+              className={cn(styles.clearBtn, 'group')}
             >
               <span
                 className={cn(
                   styles.clearBtnIconContainer,
-                  "group-hover:bg-blue-500"
+                  'group-hover:bg-blue-500'
                 )}
               >
                 <XIcon className={styles.clearBtnIcon} />
               </span>
               <span
-                className={cn(styles.clearBtnText, "group-hover:text-blue-500")}
+                className={cn(styles.clearBtnText, 'group-hover:text-blue-500')}
               >
                 Clear filter
               </span>

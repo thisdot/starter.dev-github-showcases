@@ -1,18 +1,18 @@
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useLoaderData } from '@remix-run/react';
 
-import { json, LoaderFunction } from "@remix-run/node";
-import { auth } from "~/services/auth.server";
-import { sessionStorage } from "~/services/session.server";
+import { json, LoaderFunction } from '@remix-run/node';
+import { auth } from '~/services/auth.server';
+import { sessionStorage } from '~/services/session.server';
 type LoaderData = {
   error: { message: string } | null;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  await auth.isAuthenticated(request, { successRedirect: "/private" });
+  await auth.isAuthenticated(request, { successRedirect: '/private' });
   const session = await sessionStorage.getSession(
-    request.headers.get("Cookie")
+    request.headers.get('Cookie')
   );
-  const error = session.get(auth.sessionErrorKey) as LoaderData["error"];
+  const error = session.get(auth.sessionErrorKey) as LoaderData['error'];
   return json<LoaderData>({ error });
 };
 
