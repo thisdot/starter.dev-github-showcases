@@ -2,7 +2,7 @@
   <q-card class="card--gists-panel full-height q-pt-lg q-px-lg" flat square>
     <q-separator></q-separator>
     <q-card-section>
-      <h6 class="text-weight-bold text-dark ">Gists</h6>
+      <h6 class="text-weight-bold text-dark">Gists</h6>
     </q-card-section>
     <q-separator></q-separator>
     <q-card-section v-if="!loading">
