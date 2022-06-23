@@ -14,7 +14,9 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: remix-gql-tailwind
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
@@ -28,9 +30,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: 🏗 Build
-        run: |
-        cd remix-gql-tailwind
-        yarn run build
+        run: yarn run build
 
       - name: 🛠 Install Arc
         run: yarn i -g @architect/architect
