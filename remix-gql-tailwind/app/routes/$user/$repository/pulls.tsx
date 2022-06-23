@@ -1,5 +1,5 @@
-import { LoaderFunction } from 'remix';
-import { json, useLoaderData } from 'remix';
+import { json, LoaderFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import RepoHeader from '~/components/RepoHeader/RepoHeader';
 import { parseTopics } from '~/components/RepoPage/parseTopics';
 import { parseQuery } from '~/components/RepoPulls/parseQuery';
