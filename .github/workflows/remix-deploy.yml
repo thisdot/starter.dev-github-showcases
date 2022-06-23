@@ -33,7 +33,7 @@ jobs:
         run: yarn run build
 
       - name: 🛠 Install Arc
-        run: yarn i -g @architect/architect
+        run: yarn add -g @architect/architect
 
       - name: 🚀 Deploy
         run: arc deploy --production
