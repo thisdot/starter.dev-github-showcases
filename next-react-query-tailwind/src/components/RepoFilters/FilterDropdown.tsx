@@ -26,7 +26,10 @@ function Dropdown({
   return (
     <Menu as="div" className={styles.container}>
       <div>
-        <Menu.Button className={styles.menuButton}>
+        <Menu.Button
+          className={styles.menuButton}
+          data-testid={'filters dropdown ' + name}
+        >
           {name}
           <ChevronDownIcon
             className={styles.menuButtonIcon}
@@ -43,7 +46,10 @@ function Dropdown({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className={styles.menu}>
+        <Menu.Items
+          className={styles.menu}
+          data-testid={'filters dropdown ' + name + ' items'}
+        >
           <div>
             {description && (
               <div className={styles.menuHeader}>
@@ -64,6 +70,7 @@ function Dropdown({
                   onClick={() => {
                     onChange(value);
                   }}
+                  data-testid={'filters dropdown item ' + label}
                 >
                   {value === current && (
                     <CheckIcon className={styles.itemActiveIcon} />

@@ -6,13 +6,17 @@
     <app-user-gists></app-user-gists>
   </aside>
   <main class="max-w-screen-lg w-full">
-    <div class="p-12">
+    <div class="p-12" data-testid="show repo list">
       <h2 class="text-lg font-medium mb-4">Top Repositories</h2>
       <div class="w-full border rounded-lg relative bg-white">
         <div *ngFor="let repo of repos">
-          <div class="p-4 border-b">
+          <div
+            class="p-4 border-b"
+            [attr.data-testid]="'user top repos ' + repo.name + ' list item'"
+          >
             <h3 class="mb-2">
               <a
+                [attr.data-testid]="'user top repos ' + repo.name + ' link'"
                 [routerLink]="[repo.owner, repo.name]"
                 class="text-xl text-blue-600 font-semibold hover:underline mr-3"
                 >{{ repo.name }}</a

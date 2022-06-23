@@ -1,0 +1,122 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "branches": {
+        "nodes": [
+          { "name": "vue3-ts-quasar/documentation", "__typename": "Ref" },
+          {
+            "name": "vue3-ts-quasar/feat/get-profile-info",
+            "__typename": "Ref"
+          },
+          { "name": "vue3-ts-quasar/feat/get-user-gists", "__typename": "Ref" },
+          {
+            "name": "vue3-ts-quasar/feat/get-user-top-repositories",
+            "__typename": "Ref"
+          },
+          {
+            "name": "vue3-ts-quasar/refactoring/aggregator-cleanup",
+            "__typename": "Ref"
+          }
+        ],
+        "__typename": "RefConnection"
+      },
+      "tree": {
+        "entries": [
+          {
+            "name": ".github",
+            "type": "tree",
+            "path": ".github",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": ".gitignore",
+            "type": "blob",
+            "path": ".gitignore",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": ".nvmrc",
+            "type": "blob",
+            "path": ".nvmrc",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "CODE_OF_CONDUCT.md",
+            "type": "blob",
+            "path": "CODE_OF_CONDUCT.md",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "CONTRIBUTING.md",
+            "type": "blob",
+            "path": "CONTRIBUTING.md",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "README.md",
+            "type": "blob",
+            "path": "README.md",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "amplify.yml",
+            "type": "blob",
+            "path": "amplify.yml",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "angular-apollo-tailwind",
+            "type": "tree",
+            "path": "angular-apollo-tailwind",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "angular-ngrx-scss",
+            "type": "tree",
+            "path": "angular-ngrx-scss",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "cra-rxjs-styled-components",
+            "type": "tree",
+            "path": "cra-rxjs-styled-components",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "next-react-query-tailwind",
+            "type": "tree",
+            "path": "next-react-query-tailwind",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "remix-gql-tailwind",
+            "type": "tree",
+            "path": "remix-gql-tailwind",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "starter-dev-backend",
+            "type": "tree",
+            "path": "starter-dev-backend",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "vite-apollo-vanilla",
+            "type": "tree",
+            "path": "vite-apollo-vanilla",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "vue3-ts-quasar",
+            "type": "tree",
+            "path": "vue3-ts-quasar",
+            "__typename": "TreeEntry"
+          }
+        ],
+        "__typename": "Tree"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

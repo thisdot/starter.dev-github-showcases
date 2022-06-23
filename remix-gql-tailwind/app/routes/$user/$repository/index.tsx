@@ -1,5 +1,6 @@
+import type { LoaderFunction } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import { useLoaderData, useOutletContext } from '@remix-run/react';
-import { json, LoaderFunction } from '@remix-run/node';
 import { auth } from '~/services/auth.server';
 import gqlClient from '~/lib/graphql-client';
 import { RepoContext, RepoProvider } from '~/context/RepoContext';

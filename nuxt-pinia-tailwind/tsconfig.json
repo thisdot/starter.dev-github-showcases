@@ -22,7 +22,8 @@
       "@pinia/nuxt",
       "jest",
       "@testing-library/jest-dom",
-      "@testing-library/vue"
+      "@testing-library/vue",
+      "@nuxtjs/auth-next"
     ],
     "jsx": "preserve"
   },

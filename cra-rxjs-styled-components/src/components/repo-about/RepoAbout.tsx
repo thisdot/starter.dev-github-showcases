@@ -15,8 +15,8 @@ import {
 } from './RepoAbout.styles';
 
 type Props = {
-  description?: string;
-  websiteLink?: string;
+  description?: string | null;
+  websiteLink?: string | null;
   topics?: string[];
 };
 

@@ -4,8 +4,12 @@
   class="file-viewer-container"
 >
   <div class="fileHeader">
-    <span class="fileHeaderLines">{{ file.lines }} lines</span>
-    <span class="fileHeaderBytes">{{ file.byteSize }} Bytes</span>
+    <span data-testid="file viewer line count" class="fileHeaderLines"
+      >{{ file.lines }} lines</span
+    >
+    <span data-testid="file viewer byte size" class="fileHeaderBytes"
+      >{{ file.byteSize }} Bytes</span
+    >
   </div>
   <ng-container *ngIf="file.language; else unknownLanguage">
     <app-file-code
