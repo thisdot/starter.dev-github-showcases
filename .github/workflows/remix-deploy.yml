@@ -28,9 +28,8 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: 🏗 Build
-        paths:
-          - "remix-gql-tailwind/"
-        run: yarn run build
+        run: cd remix-gql-tailwind
+        yarn run build
 
       - name: 🛠 Install Arc
         run: yarn i -g @architect/architect
