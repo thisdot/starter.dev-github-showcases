@@ -1,4 +1,4 @@
-import * as styles from './NavBar.classNames';
+import * as styles from './Navbar.classNames';
 import UserDropdownView from '../UserDropdown/UserDropdown.view';
 import { Link } from '@remix-run/react';
 import { GitHubLogo } from '../Icons/GitHubLogo';
