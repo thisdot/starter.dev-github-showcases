@@ -11,26 +11,6 @@ on:
       - "remix-gql-tailwind/**"
 
 jobs:
-  lint:
-    name: ⬣ ESLint
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14
-
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
-
-      - name: 🔬 Lint
-        run: yarn run lint
-
   deploy:
     runs-on: ubuntu-latest
 
@@ -43,8 +23,8 @@ jobs:
         with:
           node-version: 14
 
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
+      - name: 📥 Install dependencies
+        uses: yarn install
         with:
           useLockFile: false
 
