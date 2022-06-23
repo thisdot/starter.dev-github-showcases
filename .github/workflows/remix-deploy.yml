@@ -12,6 +12,7 @@ on:
 
 jobs:
   deploy:
+    name: deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +24,8 @@ jobs:
         with:
           node-version: 14
 
-      - name: 📥 Install dependencies
-        uses: yarn install
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
 
