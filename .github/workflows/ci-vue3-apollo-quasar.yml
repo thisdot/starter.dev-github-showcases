@@ -1,0 +1,95 @@
+
+name: Vue3 Apollo Quasar CI
+
+on:
+  push:
+    brranchs: [main]
+    paths:
+      - "vue3-apollo-quasar/**"
+  pull_request:
+    branchs: [main]
+    paths:
+      - "vue3-apollo-quasar/**"
+
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+          cache-dependency-path: vue3-apollo-quasar/yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: vue3-apollo-quasar
+
+      - name: Lint files
+        run: yarn lint
+        working-directory: vue3-apollo-quasar
+  
+
+  run-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+          cache-dependency-path: vue3-apollo-quasar/yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: vue3-apollo-quasar
+
+      - name: Run tests
+        run: yarn test
+        working-directory: vue3-apollo-quasar
+
+  
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, run-unit-tests]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [14.x, 16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+          cache-dependency-path: vue3-apollo-quasar/yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: vue3-apollo-quasar
+
+      - name: Build Project
+        run: yarn build
+        working-directory: vue3-apollo-quasar
