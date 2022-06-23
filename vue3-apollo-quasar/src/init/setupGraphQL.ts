@@ -3,9 +3,8 @@ import {
   createHttpLink,
   InMemoryCache,
 } from '@apollo/client/core';
-import { DefaultApolloClient, provideApolloClient } from '@vue/apollo-composable';
+import { provideApolloClient } from '@vue/apollo-composable';
 import { setContext } from '@apollo/client/link/context';
-import { provide } from 'vue';
 
 import { useToken } from '@/composables';
 
@@ -36,5 +35,4 @@ const apolloClient = new ApolloClient({
 
 export const setupGraphQL = (): void => {
   provideApolloClient(apolloClient);
-  // provide(DefaultApolloClient, apolloClient);
 };

@@ -86,7 +86,6 @@ const primaryNavItems = computed(() => [
   },
 ]);
 
-
 const { goToExternal } = useNav();
 const { signOut } = useAuth();
 

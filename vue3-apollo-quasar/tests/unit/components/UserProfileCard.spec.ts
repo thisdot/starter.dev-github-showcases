@@ -15,12 +15,14 @@ jest.mock('@vue/apollo-composable', () => {
       organizations: [
         {
           name: 'This Dot',
-          avatar: 'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
+          avatar:
+            'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
           url: '',
         },
         {
           name: 'This Dot',
-          avatar: 'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
+          avatar:
+            'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
           url: '',
         },
       ],

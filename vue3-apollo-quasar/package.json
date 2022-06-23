@@ -10,8 +10,8 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
-    "lint": "yarn lint:js  && yarn lint:prettier",
     "lint:fix": "prettier --write --list-different . && yarn lint:js --fix",
+    "lint": "yarn lint:js  && yarn lint:prettier",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -62,7 +62,7 @@
     "node-sass": "^7.0.1",
     "postcss-rtl": "^1.2.3",
     "prettier": "^2.2.1",
-    "sass": "^1.49.7",
+    "sass": "~1.32.12",
     "sass-loader": "^10.0.2",
     "style-loader": "^1.3.0",
     "typescript": "~4.1.5",
