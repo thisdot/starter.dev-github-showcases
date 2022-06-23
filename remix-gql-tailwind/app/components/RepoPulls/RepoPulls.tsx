@@ -1,20 +1,27 @@
-
-import { useRepo } from '~/context/RepoContext';
-import { PullRequestIcon } from '../Icons';
-import IssueFilters from '../IssueFilters/IssueFilters';
-import Pagination from '../IssueFilters/Pagination';
-import { IssueState, IssueType, useIssueFilters } from '../IssueFilters/useIssueFilters';
-import IssuesContainer from '../IssuesContainer/IssuesContainer';
-import IssuesEmpty from '../IssuesEmpty/IssuesEmpty';
-import RepoPullsView from './RepoPulls.view';
+import { useRepo } from "~/context/RepoContext";
+import { PullRequestIcon } from "../Icons";
+import IssueFilters from "../IssueFilters/IssueFilters";
+import Pagination from "../IssueFilters/Pagination";
+import {
+  IssueState,
+  IssueType,
+  useIssueFilters,
+} from "../IssueFilters/useIssueFilters";
+import IssuesContainer from "../IssuesContainer/IssuesContainer";
+import IssuesEmpty from "../IssuesEmpty/IssuesEmpty";
+import RepoPullsView from "./RepoPulls.view";
 
 export type RepoPullProps = {
   openPullRequests: any;
   closedPullRequests: any;
   labels: any;
-}
+};
 
-function RepoPulls({ openPullRequests, closedPullRequests, labels }: RepoPullProps) {
+function RepoPulls({
+  openPullRequests,
+  closedPullRequests,
+  labels,
+}: RepoPullProps) {
   const { name, owner } = useRepo();
   const filters = useIssueFilters();
 
@@ -41,12 +48,17 @@ function RepoPulls({ openPullRequests, closedPullRequests, labels }: RepoPullPro
         hasActiveFilters={filters.hasActiveFilters}
       >
         {activePullRequests.pullRequests.length > 0 ? (
-          <RepoPullsView pullRequests={activePullRequests.pullRequests} name={name} owner={owner} />
+          <RepoPullsView
+            pullRequests={activePullRequests.pullRequests}
+            name={name}
+            owner={owner}
+          />
         ) : (
           <IssuesEmpty Icon={PullRequestIcon} />
         )}
       </IssuesContainer>
-      {(activePullRequests.pageInfo.hasNextPage || activePullRequests.pageInfo?.hasPreviousPage) && (
+      {(activePullRequests.pageInfo.hasNextPage ||
+        activePullRequests.pageInfo?.hasPreviousPage) && (
         <Pagination
           pageInfo={activePullRequests.pageInfo}
           changePage={filters.changePage}

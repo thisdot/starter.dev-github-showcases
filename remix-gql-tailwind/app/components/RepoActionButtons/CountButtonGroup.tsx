@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import * as styles from './RepoActionButtons.classNames';
+import type { ReactNode } from "react";
+import * as styles from "./RepoActionButtons.classNames";
 
 interface CountButtonGroupProps {
   children: ReactNode;
@@ -9,9 +9,9 @@ interface CountButtonGroupProps {
 const formatCountString = (count: number) => {
   let countText = `${count}`;
   if (count && count > 1000) {
-    let digits = countText.split('');
+    let digits = countText.split("");
     digits.splice(digits.length - 3, 3);
-    countText = `${digits.join('')}k`;
+    countText = `${digits.join("")}k`;
   }
   return countText;
 };

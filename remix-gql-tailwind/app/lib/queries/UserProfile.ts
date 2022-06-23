@@ -1,5 +1,5 @@
-import { gql } from 'graphql-request';
-import { USER_REPOS_FRAGMENT } from './UserRepos';
+import { gql } from "graphql-request";
+import { USER_REPOS_FRAGMENT } from "./UserRepos";
 
 // might be unnecessary due to Profile return from GitHubStrategy
 
@@ -31,7 +31,6 @@ const USER_PROFILE_FRAGMENT = gql`
   }
 `;
 
-
 export const USER_PROFILE_QUERY = gql`
   ${USER_PROFILE_FRAGMENT}
 
@@ -41,7 +40,6 @@ export const USER_PROFILE_QUERY = gql`
     }
   }
 `;
-
 
 export const FULL_USER_PROFILE_QUERY = gql`
   ${USER_PROFILE_FRAGMENT}

@@ -1,12 +1,12 @@
-import type { Issue } from './types';
-import cn from 'classnames';
+import type { Issue } from "./types";
+import cn from "classnames";
 import {
   MinusCircleIcon,
   CheckCircleIcon,
   ChatAltIcon,
-} from '@heroicons/react/outline';
-import { formatDistance } from 'date-fns';
-import * as styles from './RepoIssues.classNames';
+} from "@heroicons/react/outline";
+import { formatDistance } from "date-fns";
+import * as styles from "./RepoIssues.classNames";
 
 interface RepoIssuesViewProps {
   issues: Issue[];
@@ -23,11 +23,11 @@ function RepoIssuesView({ issues, pathname }: RepoIssuesViewProps) {
               <div>
                 {issue.closed ? (
                   <CheckCircleIcon
-                    className={cn(styles.stateIcon, 'text-purple-600')}
+                    className={cn(styles.stateIcon, "text-purple-600")}
                   />
                 ) : (
                   <MinusCircleIcon
-                    className={cn(styles.stateIcon, 'text-green-600')}
+                    className={cn(styles.stateIcon, "text-green-600")}
                   />
                 )}
               </div>
@@ -56,19 +56,19 @@ function RepoIssuesView({ issues, pathname }: RepoIssuesViewProps) {
                   </span>
                 </div>
                 <div className={styles.meta}>
-                  #{issue.number}{' '}
+                  #{issue.number}{" "}
                   {issue.closed === false && (
                     <span>
-                      opened{' '}
-                      {formatDistance(new Date(), new Date(issue.createdAt))}{' '}
-                      ago{' '}
+                      opened{" "}
+                      {formatDistance(new Date(), new Date(issue.createdAt))}{" "}
+                      ago{" "}
                     </span>
                   )}
                   by <span className={styles.link}>{issue.login}</span>
                   {issue.closedAt && (
                     <span>
-                      {' '}
-                      was closed{' '}
+                      {" "}
+                      was closed{" "}
                       {formatDistance(new Date(), new Date(issue.closedAt))} ago
                     </span>
                   )}

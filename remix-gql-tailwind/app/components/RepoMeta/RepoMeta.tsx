@@ -1,7 +1,7 @@
-import { formatDistance } from 'date-fns';
-import { StarIcon } from '@heroicons/react/outline';
-import * as styles from './RepoMeta.classNames';
-import { GitBranchIcon } from '../Icons';
+import { formatDistance } from "date-fns";
+import { StarIcon } from "@heroicons/react/outline";
+import * as styles from "./RepoMeta.classNames";
+import { GitBranchIcon } from "../Icons";
 
 interface RepoMetaProps {
   language?: string | null;
@@ -24,7 +24,7 @@ function RepoMeta({
         <div>
           <span
             style={{
-              backgroundColor: languageColor || '#ccc',
+              backgroundColor: languageColor || "#ccc",
             }}
             className={styles.languageColor}
           />
@@ -46,7 +46,7 @@ function RepoMeta({
         </div>
       )}
       <div>
-        Updated{' '}
+        Updated{" "}
         {formatDistance(new Date(updatedAt), Date.now(), {
           addSuffix: true,
         })}

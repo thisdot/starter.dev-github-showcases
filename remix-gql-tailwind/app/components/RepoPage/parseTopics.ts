@@ -1,10 +1,10 @@
 type TopicNodes =
   | (
       | {
-          __typename?: 'RepositoryTopic' | undefined;
+          __typename?: "RepositoryTopic" | undefined;
           id: string;
           topic: {
-            __typename?: 'Topic' | undefined;
+            __typename?: "Topic" | undefined;
             name: string;
           };
         }

@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   async viteFinal(config, { configType }) {
@@ -6,22 +6,22 @@ module.exports = {
       ...config,
       resolve: {
         alias: {
-          remix: path.resolve(__dirname, './mockRemix'),
+          remix: path.resolve(__dirname, "./mockRemix"),
         },
       },
     };
   },
   stories: [
-    '../app/components/**/*.stories.mdx',
-    '../app/components/**/*.stories.@(js|jsx|ts|tsx)',
+    "../app/components/**/*.stories.mdx",
+    "../app/components/**/*.stories.@(js|jsx|ts|tsx)",
   ],
   addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-postcss',
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-postcss",
   ],
-  framework: '@storybook/react',
+  framework: "@storybook/react",
   core: {
-    builder: 'storybook-builder-vite',
+    builder: "storybook-builder-vite",
   },
 };

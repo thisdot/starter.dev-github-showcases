@@ -1,7 +1,7 @@
-import type { GistItem } from './types';
-import Container from './container';
+import type { GistItem } from "./types";
+import Container from "./container";
 
-import * as styles from './UserGists.classNames';
+import * as styles from "./UserGists.classNames";
 
 interface UserGistsProps {
   gists?: GistItem[];

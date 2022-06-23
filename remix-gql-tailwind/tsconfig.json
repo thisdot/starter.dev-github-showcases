@@ -1,6 +1,12 @@
 {
   "exclude": ["./cypress", "node_modules"],
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "tailwind.config.js", "app/routes/$user/$repository/tree/$branch/...$path.tsx"],
+  "include": [
+    "remix.env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "tailwind.config.js",
+    "app/routes/$user/$repository/tree/$branch/...$path.tsx"
+  ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "types": ["vitest/globals"],

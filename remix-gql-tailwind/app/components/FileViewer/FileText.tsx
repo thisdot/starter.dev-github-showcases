@@ -1,11 +1,11 @@
-import * as styles from './FileViewer.classNames';
+import * as styles from "./FileViewer.classNames";
 
 interface FileTextProps {
   text: string;
 }
 
 function FileText({ text }: FileTextProps) {
-  const lines = text.split('\n');
+  const lines = text.split("\n");
   return (
     <pre data-testid="text-block" className={styles.codeBlock}>
       {lines.map((line, i) => (

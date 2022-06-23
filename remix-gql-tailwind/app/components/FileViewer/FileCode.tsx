@@ -1,8 +1,8 @@
-import type { Language } from 'prism-react-renderer';
-import cn from 'classnames';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-import theme from 'prism-react-renderer/themes/nightOwlLight';
-import * as styles from './FileViewer.classNames';
+import type { Language } from "prism-react-renderer";
+import cn from "classnames";
+import Highlight, { defaultProps } from "prism-react-renderer";
+import theme from "prism-react-renderer/themes/nightOwlLight";
+import * as styles from "./FileViewer.classNames";
 
 interface FileCodeProps {
   text: string;
@@ -25,7 +25,7 @@ function FileCode({ text, language }: FileCodeProps) {
             });
             return (
               <div
-                className={cn('table-row', defaultClassName)}
+                className={cn("table-row", defaultClassName)}
                 key={i}
                 {...lineProps}
               >

@@ -1,5 +1,5 @@
-import type { OrganizationNodes } from './types';
-import * as styles from './OrgList.classNames';
+import type { OrganizationNodes } from "./types";
+import * as styles from "./OrgList.classNames";
 
 interface OrgListProps {
   organizations: OrganizationNodes[];
@@ -15,7 +15,7 @@ function OrgList({ organizations }: OrgListProps) {
             <img
               src={avatarUrl}
               alt="Organization"
-              style={{ objectFit: 'fill' }}
+              style={{ objectFit: "fill" }}
             />
           </div>
         ))}

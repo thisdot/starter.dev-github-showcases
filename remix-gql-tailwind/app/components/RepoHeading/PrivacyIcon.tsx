@@ -1,6 +1,6 @@
-import { LockClosedIcon } from '@heroicons/react/outline';
-import { GitRepoIcon } from '../Icons';
-import * as styles from './RepoHeading.classNames';
+import { LockClosedIcon } from "@heroicons/react/outline";
+import { GitRepoIcon } from "../Icons";
+import * as styles from "./RepoHeading.classNames";
 
 interface PrivacyIconProps {
   isPrivate?: boolean;

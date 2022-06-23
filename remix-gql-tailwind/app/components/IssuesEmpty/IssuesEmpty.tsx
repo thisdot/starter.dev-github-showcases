@@ -1,5 +1,5 @@
-import type { ComponentType } from 'react';
-import * as styles from './IssuesEmpty.classNames';
+import type { ComponentType } from "react";
+import * as styles from "./IssuesEmpty.classNames";
 
 interface IssuesEmptyProps {
   Icon?: ComponentType<{ className: string }>;

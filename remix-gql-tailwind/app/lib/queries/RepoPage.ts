@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 
 export const REPO_PAGE_QUERY = gql`
   query RepoPage($owner: String!, $name: String!) {

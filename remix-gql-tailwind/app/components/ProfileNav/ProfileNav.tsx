@@ -1,5 +1,5 @@
-import TabNavigation from '../TabNavigation/TabNavigation';
-import { tabList } from './tabList';
+import TabNavigation from "../TabNavigation/TabNavigation";
+import { tabList } from "./tabList";
 
 interface ProfileNavProps {
   className?: string;
@@ -9,7 +9,9 @@ interface ProfileNavProps {
 }
 
 function ProfileNav({ className, pathname }: ProfileNavProps) {
-  return <TabNavigation tabs={tabList} className={className} pathname={pathname} />;
+  return (
+    <TabNavigation tabs={tabList} className={className} pathname={pathname} />
+  );
 }
 
 export default ProfileNav;

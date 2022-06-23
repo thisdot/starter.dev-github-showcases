@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 
 export const REPO_FILE_QUERY = gql`
   query RepoFile($owner: String!, $name: String!, $expression: String!) {

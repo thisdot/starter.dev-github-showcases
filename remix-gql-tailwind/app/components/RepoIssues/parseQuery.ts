@@ -1,7 +1,157 @@
-import type { Issue, Label, Milestone } from './types';
+import type { Issue, Label, Milestone } from "./types";
 
-export type RepoIssuesQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', milestones?: { __typename?: 'MilestoneConnection', totalCount: number, nodes?: Array<{ __typename?: 'Milestone', id: string, closed: boolean, description?: string | null | undefined, number: number, title: string } | null | undefined> | null | undefined, pageInfo: { __typename?: 'PageInfo', startCursor?: string | null | undefined, endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean } } | null | undefined, closedIssues: { __typename?: 'IssueConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null | undefined, hasPreviousPage: boolean, startCursor?: string | null | undefined }, nodes?: Array<{ __typename?: 'Issue', id: string, closed: boolean, closedAt?: any | null | undefined, title: string, number: number, createdAt: any, author?: { __typename?: 'Bot', login: string } | { __typename?: 'EnterpriseUserAccount', login: string } | { __typename?: 'Mannequin', login: string } | { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } | null | undefined, comments: { __typename?: 'IssueCommentConnection', totalCount: number }, labels?: { __typename?: 'LabelConnection', totalCount: number, nodes?: Array<{ __typename?: 'Label', color: string, name: string } | null | undefined> | null | undefined } | null | undefined } | null | undefined> | null | undefined }, openIssues: { __typename?: 'IssueConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null | undefined, hasPreviousPage: boolean, startCursor?: string | null | undefined }, nodes?: Array<{ __typename?: 'Issue', id: string, closed: boolean, title: string, number: number, createdAt: any, author?: { __typename?: 'Bot', login: string } | { __typename?: 'EnterpriseUserAccount', login: string } | { __typename?: 'Mannequin', login: string } | { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } | null | undefined, comments: { __typename?: 'IssueCommentConnection', totalCount: number }, labels?: { __typename?: 'LabelConnection', nodes?: Array<{ __typename?: 'Label', color: string, name: string } | null | undefined> | null | undefined } | null | undefined } | null | undefined> | null | undefined } } | null | undefined };
-
+export type RepoIssuesQuery = {
+  __typename?: "Query";
+  repository?:
+    | {
+        __typename?: "Repository";
+        milestones?:
+          | {
+              __typename?: "MilestoneConnection";
+              totalCount: number;
+              nodes?:
+                | Array<
+                    | {
+                        __typename?: "Milestone";
+                        id: string;
+                        closed: boolean;
+                        description?: string | null | undefined;
+                        number: number;
+                        title: string;
+                      }
+                    | null
+                    | undefined
+                  >
+                | null
+                | undefined;
+              pageInfo: {
+                __typename?: "PageInfo";
+                startCursor?: string | null | undefined;
+                endCursor?: string | null | undefined;
+                hasNextPage: boolean;
+                hasPreviousPage: boolean;
+              };
+            }
+          | null
+          | undefined;
+        closedIssues: {
+          __typename?: "IssueConnection";
+          totalCount: number;
+          pageInfo: {
+            __typename?: "PageInfo";
+            hasNextPage: boolean;
+            endCursor?: string | null | undefined;
+            hasPreviousPage: boolean;
+            startCursor?: string | null | undefined;
+          };
+          nodes?:
+            | Array<
+                | {
+                    __typename?: "Issue";
+                    id: string;
+                    closed: boolean;
+                    closedAt?: any | null | undefined;
+                    title: string;
+                    number: number;
+                    createdAt: any;
+                    author?:
+                      | { __typename?: "Bot"; login: string }
+                      | { __typename?: "EnterpriseUserAccount"; login: string }
+                      | { __typename?: "Mannequin"; login: string }
+                      | { __typename?: "Organization"; login: string }
+                      | { __typename?: "User"; login: string }
+                      | null
+                      | undefined;
+                    comments: {
+                      __typename?: "IssueCommentConnection";
+                      totalCount: number;
+                    };
+                    labels?:
+                      | {
+                          __typename?: "LabelConnection";
+                          totalCount: number;
+                          nodes?:
+                            | Array<
+                                | {
+                                    __typename?: "Label";
+                                    color: string;
+                                    name: string;
+                                  }
+                                | null
+                                | undefined
+                              >
+                            | null
+                            | undefined;
+                        }
+                      | null
+                      | undefined;
+                  }
+                | null
+                | undefined
+              >
+            | null
+            | undefined;
+        };
+        openIssues: {
+          __typename?: "IssueConnection";
+          totalCount: number;
+          pageInfo: {
+            __typename?: "PageInfo";
+            hasNextPage: boolean;
+            endCursor?: string | null | undefined;
+            hasPreviousPage: boolean;
+            startCursor?: string | null | undefined;
+          };
+          nodes?:
+            | Array<
+                | {
+                    __typename?: "Issue";
+                    id: string;
+                    closed: boolean;
+                    title: string;
+                    number: number;
+                    createdAt: any;
+                    author?:
+                      | { __typename?: "Bot"; login: string }
+                      | { __typename?: "EnterpriseUserAccount"; login: string }
+                      | { __typename?: "Mannequin"; login: string }
+                      | { __typename?: "Organization"; login: string }
+                      | { __typename?: "User"; login: string }
+                      | null
+                      | undefined;
+                    comments: {
+                      __typename?: "IssueCommentConnection";
+                      totalCount: number;
+                    };
+                    labels?:
+                      | {
+                          __typename?: "LabelConnection";
+                          nodes?:
+                            | Array<
+                                | {
+                                    __typename?: "Label";
+                                    color: string;
+                                    name: string;
+                                  }
+                                | null
+                                | undefined
+                              >
+                            | null
+                            | undefined;
+                        }
+                      | null
+                      | undefined;
+                  }
+                | null
+                | undefined
+              >
+            | null
+            | undefined;
+        };
+      }
+    | null
+    | undefined;
+};
 
 // sorry, couldn't get a type for issueConnection that made ts happy :(
 function parseIssues(issueConnection?: any) {

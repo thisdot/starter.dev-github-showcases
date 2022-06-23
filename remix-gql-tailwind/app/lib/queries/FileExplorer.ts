@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 
 export const REPO_TREE_QUERY = gql`
   query RepoTree($owner: String!, $name: String!, $expression: String!) {

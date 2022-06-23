@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import * as styles from './container.classNames';
+import type { ReactNode } from "react";
+import * as styles from "./container.classNames";
 
 interface ContainerProps {
   children: ReactNode;

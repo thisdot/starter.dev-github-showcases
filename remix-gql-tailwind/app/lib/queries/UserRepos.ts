@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 
 export const USER_REPOS_FRAGMENT = gql`
   fragment userRepos on User {
@@ -34,7 +34,7 @@ export const USER_REPOS_FRAGMENT = gql`
       }
     }
   }
-`
+`;
 
 export const USER_REPOS_QUERY = gql`
   ${USER_REPOS_FRAGMENT}

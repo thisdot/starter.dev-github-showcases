@@ -1,14 +1,14 @@
-import { Follow, Nodes } from './types';
+import { Follow, Nodes } from "./types";
 import {
   UsersIcon,
   StarIcon,
   OfficeBuildingIcon,
   LocationMarkerIcon,
   LinkIcon,
-} from '@heroicons/react/outline';
-import { TwitterIcon } from '../Icons';
-import OrgList from './OrgList';
-import * as styles from './UserProfile.classNames';
+} from "@heroicons/react/outline";
+import { TwitterIcon } from "../Icons";
+import OrgList from "./OrgList";
+import * as styles from "./UserProfile.classNames";
 
 export interface UserProfileViewProps {
   avatarUrl: any;
@@ -67,7 +67,7 @@ function UserProfileView({
         <span className="mx-1">·</span>
         <StarIcon className={styles.icon} />
         <span className="inline-block">
-          <span className={styles.count}>{starredRepositories.totalCount}</span>{' '}
+          <span className={styles.count}>{starredRepositories.totalCount}</span>{" "}
         </span>
       </div>
       <div className={styles.fields}>

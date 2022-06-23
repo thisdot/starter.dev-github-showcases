@@ -1,10 +1,10 @@
-import { RepoContext, RepoProvider } from '../../context/RepoContext';
-import { Story, Meta } from '@storybook/react';
-import RepoHeader from './RepoHeader';
+import { RepoContext, RepoProvider } from "../../context/RepoContext";
+import { Story, Meta } from "@storybook/react";
+import RepoHeader from "./RepoHeader";
 
 export default {
   component: RepoHeader,
-  title: 'RepoPage/RepoHeader',
+  title: "RepoPage/RepoHeader",
 } as Meta;
 
 const Template: Story<RepoContext> = (args) => (
@@ -15,9 +15,9 @@ const Template: Story<RepoContext> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  name: 'starter.dev',
-  owner: 'thisdot',
-  pathname: '/thisdot/starter.dev',
+  name: "starter.dev",
+  owner: "thisdot",
+  pathname: "/thisdot/starter.dev",
   isRepoLoading: false,
   data: {
     isPrivate: false,

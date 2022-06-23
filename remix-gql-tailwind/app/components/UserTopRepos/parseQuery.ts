@@ -1,4 +1,4 @@
-import type { TopRepo } from './types';
+import type { TopRepo } from "./types";
 
 export function parseQuery(data: any) {
   const repos = data.viewer.topRepositories.nodes ?? [];
