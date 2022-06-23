@@ -13,7 +13,9 @@
     "lint": "yarn lint:js  && yarn lint:prettier",
     "lint:fix": "prettier --write --list-different . && yarn lint:js --fix",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "validate": "yarn lint && yarn test",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@apollo/client": "^3.5.9",
@@ -59,6 +61,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",
+    "husky": "^8.0.1",
     "node-sass": "^7.0.1",
     "postcss-rtl": "^1.2.3",
     "prettier": "^2.2.1",
