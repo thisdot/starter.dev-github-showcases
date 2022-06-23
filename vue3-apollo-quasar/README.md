@@ -1,4 +1,4 @@
-# vue3-ts-quasar
+# vue3-apollo-quasar
 
 ## Project setup
 
@@ -21,7 +21,7 @@ yarn build
 ### Run your unit tests
 
 ```
-yarn test:unit
+yarn test
 ```
 
 ### Run your end-to-end tests
@@ -30,11 +30,19 @@ yarn test:unit
 yarn test:e2e
 ```
 
-### Lints and fixes files
+### Check formatting
 
 ```
 yarn lint
 ```
+
+### Fix formatting
+
+```
+yarn lint:fix
+```
+
+### Fix for error
 
 ### Fix for StoryBook
 
