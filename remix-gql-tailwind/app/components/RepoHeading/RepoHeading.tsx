@@ -1,4 +1,4 @@
-import { Link } from 'remix';
+import { Link } from "@remix-run/react";
 import { useRepo } from '../../context/RepoContext';
 import PrivacyIcon from './PrivacyIcon';
 import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';

@@ -1,6 +1,6 @@
 import * as styles from './UserRepos.classNames';
 
-import { Link } from 'remix';
+import { Link } from "@remix-run/react";
 import Pagination from '../Pagination/Pagination';
 import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
 import type { Repo } from './types';

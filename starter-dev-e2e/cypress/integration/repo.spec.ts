@@ -1,131 +1,18 @@
-import {
-  hasOperationName,
-  aliasQuery,
-  hasExpression,
-} from "../utils/graphql-test-utils";
-
-function handleGqlRequest(req): Boolean {
-  if (hasOperationName(req, "CurrentUser")) {
-    aliasQuery(req, "CurrentUser");
-    req.reply({
-      fixture: "user/currentUser.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoPage")) {
-    aliasQuery(req, "RepoPage");
-    req.reply({
-      fixture: "repo/repoPage.graphql.json",
-    });
-    return true;
-  }
-
-  if (
-    hasOperationName(req, "RepoTree") &&
-    hasExpression(req, "main:angular-apollo-tailwind")
-  ) {
-    aliasQuery(req, "RepoTreeFolder1");
-    req.reply({
-      fixture: "repo/repoTree-folder1.graphql.json",
-    });
-    return true;
-  }
-
-  if (
-    hasOperationName(req, "RepoTree") &&
-    hasExpression(req, "main:angular-apollo-tailwind/src")
-  ) {
-    aliasQuery(req, "RepoTreeFolder2");
-    req.reply({
-      fixture: "repo/repoTree-folder2.graphql.json",
-    });
-    return true;
-  }
-
-  if (
-    hasOperationName(req, "RepoTree") &&
-    hasExpression(req, "main:angular-apollo-tailwind/src/app")
-  ) {
-    aliasQuery(req, "RepoTreeFolder3");
-    req.reply({
-      fixture: "repo/repoTree-folder3.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoTree")) {
-    aliasQuery(req, "RepoTree");
-    req.reply({
-      fixture: "repo/repoTree.graphql.json",
-    });
-    return true;
-  }
-
-  if (
-    hasOperationName(req, "RepoReadMe") &&
-    hasExpression(req, "HEAD:angular-apollo-tailwind/README.md")
-  ) {
-    aliasQuery(req, "RepoReadMeFolder1");
-    req.reply({
-      fixture: "repo/repoReadMe-folder1.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoReadMe")) {
-    aliasQuery(req, "RepoReadMe");
-    req.reply({
-      fixture: "repo/repoReadMe.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoIssues")) {
-    aliasQuery(req, "RepoIssues");
-    req.reply({
-      fixture: "repo/repoIssues.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoPullRequests")) {
-    aliasQuery(req, "RepoPullRequests");
-    req.reply({
-      fixture: "repo/repoPullRequests.graphql.json",
-    });
-    return true;
-  }
-
-  if (hasOperationName(req, "RepoFile")) {
-    aliasQuery(req, "RepoFile");
-    req.reply({
-      fixture: "repo/repoFile.graphql.json",
-    });
-    return true;
-  }
-
-  return false;
-}
+import { View } from "../utils/view";
 
 describe("When there is proper repository page responses", () => {
   beforeEach(() => {
-    cy.intercept("POST", "/graphql", (req) => {
-      if (handleGqlRequest(req)) {
-        return;
-      }
-
-      req.continue();
-    });
+    cy.interceptGraphQLCalls(View.Repository);
+    cy.interceptRestCalls(View.Repository);
 
     cy.visit("/thisdot/starter.dev-github-showcases");
   });
 
   it("should display correct nav header names and information", () => {
-    cy.wait("@gqlCurrentUserQuery")
-      .wait("@gqlRepoPageQuery")
-      .wait("@gqlRepoTreeQuery")
-      .wait("@gqlRepoReadMeQuery")
+    cy.wait("@CurrentUserQuery")
+      .wait("@RepoPageQuery")
+      .wait("@RepoTreeQuery")
+      .wait("@RepoReadMeQuery")
       .get(`[data-testid="header owner name"]`)
       .should("contain.text", "thisdot")
       .get(`[data-testid="header repo name"]`)
@@ -149,12 +36,12 @@ describe("When there is proper repository page responses", () => {
   it("should be able to navigate to issues and pull requests tabs", () => {
     cy.get(`[data-testid="repo issues tab"]`)
       .click()
-      .wait("@gqlRepoIssuesQuery")
+      .wait("@RepoIssuesQuery")
       .get(`[data-testid="repo issues"]`)
       .should("be.visible")
       .get(`[data-testid="repo pull requests tab"]`)
       .click()
-      .wait("@gqlRepoPullRequestsQuery")
+      .wait("@RepoPullRequestsQuery")
       .get(`[data-testid="repo pull requests"]`)
       .should("be.visible");
   });
@@ -162,7 +49,7 @@ describe("When there is proper repository page responses", () => {
   it("should be able to see open issues with valid data", () => {
     cy.get(`[data-testid="repo issues tab"]`)
       .click()
-      .wait("@gqlRepoIssuesQuery")
+      .wait("@RepoIssuesQuery")
       .get(`[data-testid="issue"]`)
       .should("have.length", "24")
       .should("be.visible")
@@ -186,7 +73,7 @@ describe("When there is proper repository page responses", () => {
   it("should be able to see closed issues with valid data", () => {
     cy.get(`[data-testid="repo issues tab"]`)
       .click()
-      .wait("@gqlRepoIssuesQuery")
+      .wait("@RepoIssuesQuery")
       .get(`[data-testid="closedIssuesButton"]`)
       .click()
       .get(`[data-testid="issue"]`)
@@ -208,10 +95,41 @@ describe("When there is proper repository page responses", () => {
       .should("contain.text", "0");
   });
 
+  it("should be able to paginate forward and backwards on issues tab", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      )
+      .get(`[data-testid="pagination button next"]`)
+      .click()
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Angular - NgRx - SCSS] Create single repo issues tab view"
+      )
+      .get(`[data-testid="pagination button next"]`)
+      .should("be.disabled")
+      .get(`[data-testid="pagination button previous"]`)
+      .click()
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      )
+      .get(`[data-testid="pagination button next"]`)
+      .should("be.enabled")
+      .get(`[data-testid="pagination button previous"]`)
+      .should("be.disabled");
+  });
+
   it("should be able to see open pull requests with valid data", () => {
     cy.get(`[data-testid="repo pull requests tab"]`)
       .click()
-      .wait("@gqlRepoPullRequestsQuery")
+      .wait("@RepoPullRequestsQuery")
       .get(`[data-testid="pr"]`)
       .should("have.length", "12")
       .get(`[data-testid="pull request title"]`)
@@ -234,7 +152,7 @@ describe("When there is proper repository page responses", () => {
   it("should be able to see closed pull requests with valid data", () => {
     cy.get(`[data-testid="repo pull requests tab"]`)
       .click()
-      .wait("@gqlRepoPullRequestsQuery")
+      .wait("@RepoPullRequestsQuery")
       .get(`[data-testid="closedIssuesButton"]`)
       .click()
       .get(`[data-testid="pr"]`)
@@ -251,6 +169,33 @@ describe("When there is proper repository page responses", () => {
       .should("contain.text", "lindakatcodes")
       .get(`[data-testid="pull request comment count"]`)
       .should("contain.text", "0");
+  });
+
+  it("should be able to paginate forward and backwards on pull requests tab", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@RepoPullRequestsQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="pull request title"]`)
+      .should("contain.text", "fix: fix dist folder for angular ngrx")
+      .get(`[data-testid="pagination button next"]`)
+      .click()
+      .get(`[data-testid="pull request title"]`)
+      .should(
+        "contain.text",
+        "[Angular-Apollo-Tailwind] Run yarn generate in amplify deploy"
+      )
+      .get(`[data-testid="pagination button next"]`)
+      .should("be.disabled")
+      .get(`[data-testid="pagination button previous"]`)
+      .click()
+      .get(`[data-testid="pull request title"]`)
+      .should("contain.text", "fix: fix dist folder for angular ngrx")
+      .get(`[data-testid="pagination button next"]`)
+      .should("be.enabled")
+      .get(`[data-testid="pagination button previous"]`)
+      .should("be.disabled");
   });
 
   it("should be able to navigate down and up three folders deep", () => {

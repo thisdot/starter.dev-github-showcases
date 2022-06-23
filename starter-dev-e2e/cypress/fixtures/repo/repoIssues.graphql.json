@@ -590,9 +590,9 @@
       "openIssues": {
         "pageInfo": {
           "hasNextPage": true,
-          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wMy0wNFQxNjo0MTo0NS0wNjowMM5FJeSZ",
+          "endCursor": "issues-page1-endCursor",
           "hasPreviousPage": false,
-          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNS0yNVQwOToyODozOC0wNTowMM5KZc6g",
+          "startCursor": "issues-page1-startCursor",
           "__typename": "PageInfo"
         },
         "totalCount": 68,

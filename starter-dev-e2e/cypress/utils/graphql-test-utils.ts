@@ -7,18 +7,38 @@ export const hasOperationName = (req, operationName) => {
   );
 };
 
-export const hasExpression = (req, expression) => {
-  const { body } = req;
+// export const hasExpression = (req, expression) => {
+//   const { body } = req;
 
-  return (
-    (body.hasOwnProperty("variables") &&
-      body.variables.expression === expression) ||
-    body.query?.includes(`expression=${expression}`)
-  );
+//   return (
+//     (body.hasOwnProperty("variables") &&
+//       body.variables.expression === expression) ||
+//     body.query?.includes(`expression=${expression}`)
+//   );
+// };
+
+export const hasVariables = (req, variables) => {
+  const { body } = req;
+  var hasVariable = true;
+
+  Object.keys(variables).forEach((key) => {
+    if (
+      hasVariable &&
+      !(
+        (body.hasOwnProperty("variables") &&
+          body.variables[key] === variables[key]) ||
+        body.query?.includes(`${key}=${variables[key]}`)
+      )
+    ) {
+      hasVariable = false;
+    }
+  });
+
+  return hasVariable;
 };
 
 export const aliasQuery = (req, operationName) => {
   if (hasOperationName(req, operationName)) {
-    req.alias = `gql${operationName}Query`;
+    req.alias = `${operationName}Query`;
   }
 };

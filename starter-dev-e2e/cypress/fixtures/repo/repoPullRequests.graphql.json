@@ -290,8 +290,8 @@
         "pageInfo": {
           "hasPreviousPage": false,
           "hasNextPage": true,
-          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNS0yNVQxMDoyOToyMi0wNTowMM44dHcg",
-          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNS0wNlQxMjoyODo1OS0wNTowMM43bZ9K",
+          "startCursor": "pullRequests-page1-startcursor",
+          "endCursor": "pullRequests-page1-endCursosr",
           "__typename": "PageInfo"
         },
         "nodes": [

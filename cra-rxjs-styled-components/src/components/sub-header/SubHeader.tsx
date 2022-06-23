@@ -15,10 +15,9 @@ import {
   SubHeaderMainButtonCount,
   SubHeaderButtonsActionsIcon,
   TabNavigation,
-  TabNavigationInactiveLinks,
-  TabNavigationActive,
   TabNavigationIcon,
   TabNavigationCount,
+  TabNavigationLink,
 } from './SubHeader.styles';
 import {
   BookIcon,
@@ -29,33 +28,41 @@ import {
   PrIcon,
   IssuesIcon,
 } from '../icons/index';
+import { useRepo } from '../../context/RepoContext';
 
-type Props = {
-  user: string;
-  repo: string;
-  privacy: boolean;
-  watchCount: number;
-  starCount: number;
-  forkCount: number;
-  issuesCount: number;
-  prCount: number;
-};
+export default function SubHeader() {
+  const repo = useRepo();
+  const pathname = window.location.pathname;
 
-export default function SubHeader({
-  user,
-  repo,
-  privacy,
-  watchCount,
-  starCount,
-  forkCount,
-  issuesCount,
-  prCount,
-}: Props) {
   const btnArr = [
-    { label: 'Watch', icon: <EyeIcon />, count: watchCount },
-    { label: 'Star', icon: <StarIcon />, count: starCount },
-    { label: 'Fork', icon: <ForkIcon />, count: forkCount },
+    { label: 'Watch', icon: <EyeIcon />, count: repo.data?.watcherCount },
+    { label: 'Star', icon: <StarIcon />, count: repo.data?.stargazerCount },
+    { label: 'Fork', icon: <ForkIcon />, count: repo.data?.forkCount },
   ];
+
+  const tabArr = [
+    { label: 'Code', icon: <CodeIcon />, count: '', to: `` },
+    {
+      label: 'Issues',
+      icon: <IssuesIcon />,
+      count: repo.data?.openIssueCount,
+      to: `/issues`,
+    },
+    {
+      label: 'Pull Requests',
+      icon: <PrIcon />,
+      count: repo.data?.openPullRequestCount,
+      to: `/pull-requests`,
+    },
+  ];
+
+  const isCurrentTab = (path?: string): boolean => {
+    const matchPath = path === '' ? repo.basePath : `${repo.basePath}${path}`;
+    if (path === '') {
+      return pathname === repo.basePath || pathname.includes('tree');
+    }
+    return pathname.includes(matchPath);
+  };
 
   return (
     <SubHeaderWrapper>
@@ -65,12 +72,12 @@ export default function SubHeader({
             <BookIcon />
           </BookIconStyles>
           <SubHeaderSpanContainer>
-            <SubHeaderUserLink>{user}</SubHeaderUserLink>
+            <SubHeaderUserLink>{repo.owner}</SubHeaderUserLink>
             <SubHeaderSeperator>/</SubHeaderSeperator>
-            <SubHeaderRepoLink>{repo}</SubHeaderRepoLink>
+            <SubHeaderRepoLink>{repo?.name}</SubHeaderRepoLink>
           </SubHeaderSpanContainer>
           <SubHeaderPrivacyBadge>
-            {privacy ? 'Private' : 'Public'}
+            {repo.data?.isPrivate ? 'Private' : 'Public'}
           </SubHeaderPrivacyBadge>
         </SubHeaderH1Section>
         <SubHeaderButtonsActionsContainer>
@@ -91,26 +98,21 @@ export default function SubHeader({
       </SubHeaderTopRow>
       <SubHeaderBottomRow>
         <TabNavigation>
-          <TabNavigationActive>
-            <TabNavigationIcon>
-              <CodeIcon />
-            </TabNavigationIcon>
-            <span>Code</span>
-          </TabNavigationActive>
-          <TabNavigationInactiveLinks>
-            <TabNavigationIcon>
-              <IssuesIcon />
-            </TabNavigationIcon>
-            <span>Issues</span>
-            <TabNavigationCount>{issuesCount}</TabNavigationCount>
-          </TabNavigationInactiveLinks>
-          <TabNavigationInactiveLinks>
-            <TabNavigationIcon>
-              <PrIcon />
-            </TabNavigationIcon>
-            <span>Pull Requests</span>
-            <TabNavigationCount>{prCount}</TabNavigationCount>
-          </TabNavigationInactiveLinks>
+          {tabArr.map((tabInfo, index) => (
+            <TabNavigationLink
+              key={index}
+              to={`${repo.basePath}${tabInfo.to}`}
+              className={isCurrentTab(tabInfo.to) ? 'active-tab' : ''}
+            >
+              <TabNavigationIcon>{tabInfo.icon}</TabNavigationIcon>
+              <span>{tabInfo.label}</span>
+              {tabInfo.count ? (
+                <TabNavigationCount>{tabInfo.count}</TabNavigationCount>
+              ) : (
+                ''
+              )}
+            </TabNavigationLink>
+          ))}
         </TabNavigation>
       </SubHeaderBottomRow>
     </SubHeaderWrapper>

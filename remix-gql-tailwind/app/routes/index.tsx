@@ -1,5 +1,5 @@
-import { LoaderFunction } from 'remix';
-import { json, useLoaderData } from 'remix';
+import { json, LoaderFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import type { GitHubProfile } from 'remix-auth-github';
 import { auth } from '~/services/auth.server';
 import gqlClient from '~/lib/graphql-client';

@@ -5,6 +5,10 @@
       "login": "TestUser",
       "__typename": "User"
     },
+    "owner": {
+      "orgName": "This Dot",
+      "orgAvatarUrl": "https://avatars.githubusercontent.com/u/22839396?v=4"
+    },
     "repository": {
       "id": "R_kgDOGd0nuw",
       "defaultBranchRef": { "name": "main", "__typename": "Ref" },

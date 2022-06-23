@@ -2,7 +2,7 @@ export interface Repository {
   id: number;
   name: string;
   full_name: string;
-  owner: { login: string };
+  owner: { login: string; type: RepositoryOwnerType };
   description: string;
   private: boolean;
   html_url: string;
@@ -21,5 +21,7 @@ export interface Repository {
 }
 
 export interface RepositoryWithBranchCount extends Repository {
-  branches_count: number;
+  branches_count?: number;
 }
+
+export type RepositoryOwnerType = 'User' | 'Organization';

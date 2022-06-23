@@ -1,6 +1,6 @@
 import type { TabItem } from './types';
 import cn from 'classnames';
-import { Link } from 'remix';
+import { Link } from "@remix-run/react";
 import * as styles from './TabNavigation.classNames';
 
 interface TabNavigationProps {
