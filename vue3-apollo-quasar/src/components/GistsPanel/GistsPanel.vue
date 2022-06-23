@@ -25,7 +25,6 @@ export default defineComponent({
 <script lang="ts" setup>
 import { useGists } from '@/composables';
 
-const searchText = ref('');
 const { getUserGists } = useGists();
 const { data: gistList, loading } = getUserGists();
 </script>
