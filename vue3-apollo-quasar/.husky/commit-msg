@@ -1,5 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
+. "$(dirname "$0")/common.sh"
 
 cd vue3-apollo-quasar
-yarn validate
+# yarn commitlint --edit $1
