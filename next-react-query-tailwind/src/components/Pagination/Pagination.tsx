@@ -34,6 +34,7 @@ function Pagination({ pageInfo, link }: PaginationProps) {
           disabled={!pageInfo.hasPreviousPage || !pageInfo.startCursor}
           onClick={handlePreviousClick}
           className={cn(styles.button, styles.buttonPrev)}
+          data-testid="pagination button previous"
         >
           Previous
         </button>
@@ -42,6 +43,7 @@ function Pagination({ pageInfo, link }: PaginationProps) {
           onClick={handleNextClick}
           disabled={!pageInfo.hasNextPage || !pageInfo.endCursor}
           className={cn(styles.button, styles.buttonNext)}
+          data-testid="pagination button next"
         >
           Next
         </button>

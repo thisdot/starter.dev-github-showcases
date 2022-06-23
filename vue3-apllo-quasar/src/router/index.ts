@@ -14,9 +14,14 @@ const routes: Array<RouteRecordRaw> = [
       { path: '', component: Home },
       { path: 'auth', component: Auth },
       { path: 'redirect', component: Redirect },
-      { path: ':username', component: Profile, props: true },
+      {
+        path: ':username',
+        component: Profile,
+        props: true,
+      },
     ],
   },
+
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
 

@@ -1,0 +1,274 @@
+[
+  {
+    "name": ".github",
+    "path": ".github",
+    "sha": "bc989c5d334c41f48dcf428243abfa37aea214bc",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/.github?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/.github",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/bc989c5d334c41f48dcf428243abfa37aea214bc",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/.github?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/bc989c5d334c41f48dcf428243abfa37aea214bc",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/.github"
+    }
+  },
+  {
+    "name": ".gitignore",
+    "path": ".gitignore",
+    "sha": "790f3e52fc35a5c02ab5275e1b08f2f4cd5b59d1",
+    "size": 255,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/.gitignore?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/.gitignore",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/790f3e52fc35a5c02ab5275e1b08f2f4cd5b59d1",
+    "download_url": "https://raw.githubusercontent.com/thisdot/starter.dev-github-showcases/main/.gitignore",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/.gitignore?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/790f3e52fc35a5c02ab5275e1b08f2f4cd5b59d1",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/.gitignore"
+    }
+  },
+  {
+    "name": ".nvmrc",
+    "path": ".nvmrc",
+    "sha": "19c7bdba7b1e9bfe80365a50420a6d538ca503c3",
+    "size": 2,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/.nvmrc?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/.nvmrc",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/19c7bdba7b1e9bfe80365a50420a6d538ca503c3",
+    "download_url": "https://raw.githubusercontent.com/thisdot/starter.dev-github-showcases/main/.nvmrc",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/.nvmrc?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/19c7bdba7b1e9bfe80365a50420a6d538ca503c3",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/.nvmrc"
+    }
+  },
+  {
+    "name": "CODE_OF_CONDUCT.md",
+    "path": "CODE_OF_CONDUCT.md",
+    "sha": "fa3ec4978e72b701e647e3c560025aab602c72ac",
+    "size": 3241,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/CODE_OF_CONDUCT.md?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/CODE_OF_CONDUCT.md",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/fa3ec4978e72b701e647e3c560025aab602c72ac",
+    "download_url": "https://raw.githubusercontent.com/thisdot/starter.dev-github-showcases/main/CODE_OF_CONDUCT.md",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/CODE_OF_CONDUCT.md?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/fa3ec4978e72b701e647e3c560025aab602c72ac",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/CODE_OF_CONDUCT.md"
+    }
+  },
+  {
+    "name": "CONTRIBUTING.md",
+    "path": "CONTRIBUTING.md",
+    "sha": "2b2bcef5ed0c18d0e975e40dc7e60b9a561bcc9e",
+    "size": 3595,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/CONTRIBUTING.md?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/CONTRIBUTING.md",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/2b2bcef5ed0c18d0e975e40dc7e60b9a561bcc9e",
+    "download_url": "https://raw.githubusercontent.com/thisdot/starter.dev-github-showcases/main/CONTRIBUTING.md",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/CONTRIBUTING.md?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/2b2bcef5ed0c18d0e975e40dc7e60b9a561bcc9e",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/CONTRIBUTING.md"
+    }
+  },
+  {
+    "name": "README.md",
+    "path": "README.md",
+    "sha": "8fef502c452681547eedf352c84074838d5a2b6f",
+    "size": 1306,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/README.md?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/README.md",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/8fef502c452681547eedf352c84074838d5a2b6f",
+    "download_url": "https://raw.githubusercontent.com/thisdot/starter.dev-github-showcases/main/README.md",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/README.md?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/8fef502c452681547eedf352c84074838d5a2b6f",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/README.md"
+    }
+  },
+  {
+    "name": "amplify.yml",
+    "path": "amplify.yml",
+    "sha": "3b91c666f9b247bee5933f208aa4d0752e8893a3",
+    "size": 2715,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/amplify.yml?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/amplify.yml",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/3b91c666f9b247bee5933f208aa4d0752e8893a3",
+    "download_url": "https://raw.githubusercontent.com/thisdot/starter.dev-github-showcases/main/amplify.yml",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/amplify.yml?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/blobs/3b91c666f9b247bee5933f208aa4d0752e8893a3",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/blob/main/amplify.yml"
+    }
+  },
+  {
+    "name": "angular-apollo-tailwind",
+    "path": "angular-apollo-tailwind",
+    "sha": "fc0e53551e7a23312b89feed7d5af84a46fd1286",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/angular-apollo-tailwind?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/angular-apollo-tailwind",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/fc0e53551e7a23312b89feed7d5af84a46fd1286",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/angular-apollo-tailwind?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/fc0e53551e7a23312b89feed7d5af84a46fd1286",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/angular-apollo-tailwind"
+    }
+  },
+  {
+    "name": "angular-ngrx-scss",
+    "path": "angular-ngrx-scss",
+    "sha": "f36224cf648e5353b6fc11c49010d5da00152497",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/angular-ngrx-scss?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/angular-ngrx-scss",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/f36224cf648e5353b6fc11c49010d5da00152497",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/angular-ngrx-scss?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/f36224cf648e5353b6fc11c49010d5da00152497",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/angular-ngrx-scss"
+    }
+  },
+  {
+    "name": "cra-rxjs-styled-components",
+    "path": "cra-rxjs-styled-components",
+    "sha": "5638ce9aa6ae858fdc8d404d8afb2a6ec4d09794",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/cra-rxjs-styled-components?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/cra-rxjs-styled-components",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/5638ce9aa6ae858fdc8d404d8afb2a6ec4d09794",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/cra-rxjs-styled-components?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/5638ce9aa6ae858fdc8d404d8afb2a6ec4d09794",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/cra-rxjs-styled-components"
+    }
+  },
+  {
+    "name": "next-react-query-tailwind",
+    "path": "next-react-query-tailwind",
+    "sha": "bf5deb641c1f11786f58976e836a99f80ecd1ff5",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/next-react-query-tailwind?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/next-react-query-tailwind",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/bf5deb641c1f11786f58976e836a99f80ecd1ff5",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/next-react-query-tailwind?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/bf5deb641c1f11786f58976e836a99f80ecd1ff5",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/next-react-query-tailwind"
+    }
+  },
+  {
+    "name": "nuxt-pinia-tailwind",
+    "path": "nuxt-pinia-tailwind",
+    "sha": "6822aeba91984837253771c6adbe8a7ea873634f",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/nuxt-pinia-tailwind?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/nuxt-pinia-tailwind",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/6822aeba91984837253771c6adbe8a7ea873634f",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/nuxt-pinia-tailwind?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/6822aeba91984837253771c6adbe8a7ea873634f",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/nuxt-pinia-tailwind"
+    }
+  },
+  {
+    "name": "remix-gql-tailwind",
+    "path": "remix-gql-tailwind",
+    "sha": "34f8f2d58cbf4ba88ad02ac981eaada71ad19eb4",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/remix-gql-tailwind?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/remix-gql-tailwind",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/34f8f2d58cbf4ba88ad02ac981eaada71ad19eb4",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/remix-gql-tailwind?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/34f8f2d58cbf4ba88ad02ac981eaada71ad19eb4",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/remix-gql-tailwind"
+    }
+  },
+  {
+    "name": "starter-dev-backend",
+    "path": "starter-dev-backend",
+    "sha": "e8f4765a0b93d597c2d252fb339264fd12fe06cd",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/starter-dev-backend?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/starter-dev-backend",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/e8f4765a0b93d597c2d252fb339264fd12fe06cd",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/starter-dev-backend?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/e8f4765a0b93d597c2d252fb339264fd12fe06cd",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/starter-dev-backend"
+    }
+  },
+  {
+    "name": "starter-dev-e2e",
+    "path": "starter-dev-e2e",
+    "sha": "5d38fdc4bd9850ff56a4d203a8b294faf618d7ac",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/starter-dev-e2e?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/starter-dev-e2e",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/5d38fdc4bd9850ff56a4d203a8b294faf618d7ac",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/starter-dev-e2e?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/5d38fdc4bd9850ff56a4d203a8b294faf618d7ac",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/starter-dev-e2e"
+    }
+  },
+  {
+    "name": "vite-apollo-vanilla",
+    "path": "vite-apollo-vanilla",
+    "sha": "9155990c582e93cb02dc481ca20aae793651138d",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/vite-apollo-vanilla?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/vite-apollo-vanilla",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/9155990c582e93cb02dc481ca20aae793651138d",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/vite-apollo-vanilla?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/9155990c582e93cb02dc481ca20aae793651138d",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/vite-apollo-vanilla"
+    }
+  },
+  {
+    "name": "vue3-ts-quasar",
+    "path": "vue3-ts-quasar",
+    "sha": "ba8f1006d81f5f01ba9a5afbcb1fa8cb266eeb06",
+    "size": 0,
+    "url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/vue3-ts-quasar?ref=main",
+    "html_url": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/vue3-ts-quasar",
+    "git_url": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/ba8f1006d81f5f01ba9a5afbcb1fa8cb266eeb06",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/vue3-ts-quasar?ref=main",
+      "git": "https://api.github.com/repos/thisdot/starter.dev-github-showcases/git/trees/ba8f1006d81f5f01ba9a5afbcb1fa8cb266eeb06",
+      "html": "https://github.com/thisdot/starter.dev-github-showcases/tree/main/vue3-ts-quasar"
+    }
+  }
+]

@@ -16,13 +16,14 @@
       (clearFilters)="clearFilters()"
     ></app-repos-filters>
     <div *ngFor="let repo of userRepos">
-      <div class="profile-repos-container">
+      <div class="profile-repos-container" data-testid="repository list item">
         <div class="content">
           <h3 class="mb-2">
             <a
               [routerLink]="repo.routePath"
               routerLinkActive="router-link-active"
               class="headingLink"
+              data-testid="repository name"
               >{{ repo.name }}</a
             >
             <sd-privacy-badge
@@ -30,7 +31,9 @@
               class="relative bottom-0.5"
             ></sd-privacy-badge>
           </h3>
-          <div class="description">{{ repo.description }}</div>
+          <div class="description" data-testid="repository description">
+            {{ repo.description }}
+          </div>
           <app-repo-meta
             [language]="repo.language"
             [languageColor]="repo.languageColor!"
