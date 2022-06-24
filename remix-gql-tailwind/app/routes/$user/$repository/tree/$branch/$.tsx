@@ -1,5 +1,5 @@
-import { LoaderFunction, useOutletContext } from 'remix';
-import { json, useLoaderData } from 'remix';
+import { json, LoaderFunction } from "@remix-run/node";
+import { useLoaderData, useOutletContext } from "@remix-run/react";
 import { parseQueryData } from '~/components/FileExplorer/parseQueryData';
 import FileExplorerNav from '~/components/FileExplorerNav/FileExplorerNav';
 import RepoHeader from '~/components/RepoHeader/RepoHeader';

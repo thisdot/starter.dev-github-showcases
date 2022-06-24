@@ -38,7 +38,7 @@ applications:
         paths:
           - node_modules/**/*
 
-  - appRoot: vue3-ts-quasar
+  - appRoot: vue3-apollo-quasar
     frontend:
       phases:
         preBuild:

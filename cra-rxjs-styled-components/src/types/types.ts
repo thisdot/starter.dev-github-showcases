@@ -13,3 +13,13 @@ export type IssueTypes = {
   closed: IssueDetails;
   open: IssueDetails;
 };
+
+export type FileItem = {
+  name: string;
+  path: string;
+};
+
+export type FileInfo = {
+  files: FileItem[];
+  directories: FileItem[];
+};

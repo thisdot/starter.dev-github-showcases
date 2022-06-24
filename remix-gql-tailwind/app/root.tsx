@@ -1,17 +1,18 @@
+import type { MetaFunction } from "@remix-run/node";
+import { json, LoaderFunction } from "@remix-run/node";
+
 import {
-  json,
   Link,
   Links,
   LiveReload,
-  LoaderFunction,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
   useCatch,
   useLoaderData,
-} from 'remix';
-import type { MetaFunction } from 'remix';
+} from "@remix-run/react";
+
 import styles from './styles/tailwind.css';
 import NavBar from './components/Navbar/NavBar';
 import { auth } from './services/auth.server';
