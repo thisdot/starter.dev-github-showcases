@@ -26,8 +26,8 @@ export const SINGLE_USER_REPO = (user: string, repo: string) =>
 export const ORG_REPO_LIST = (user: string) =>
   `${GITHUB_URL_BASE}/orgs/${user}/repos?sort=updated&per_page=10`;
 
-export const USER_REPO_LIST = (user: string) =>
-  `${GITHUB_URL_BASE}/users/${user}/repos?sort=updated&per_page=10`;
+export const USER_REPO_LIST = (user: string, page: string = '1') =>
+  `${GITHUB_URL_BASE}/users/${user}/repos?sort=updated&page=${page}&type=all`;
 
 export const GISTS_URL = (user: string) =>
   `${GITHUB_URL_BASE}/users/${user}/gists?per_page=10`;

@@ -1,7 +1,10 @@
 import { Layout } from '../components/layouts/Layout';
+import RepoCard from '../components/repo-card';
+import UserGists from '../components/user-gists';
 import styled from 'styled-components';
 import { useGists } from '../hooks/gists/use-gists';
 import { useRepos } from '../hooks/repositories/use-repos';
+import { useUser } from '../context/UserProvider';
 
 const Page = styled.div`
   width: 100%;
@@ -33,8 +36,9 @@ const RepositoriesContainer = styled.section`
 `;
 
 export default function TopRepos() {
+  const user = useUser();
   const { repositories, prevPage, nextPage, hasNextPage, hasPrevPage } =
-    useRepos();
+    useRepos(user?.login);
   const gists = useGists();
 
   return (

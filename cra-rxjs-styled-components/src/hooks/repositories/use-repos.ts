@@ -13,17 +13,17 @@ import {
   RepositoryWithBranchCount,
   UseRepo,
 } from '../../interfaces/repositories.interfaces';
+import { REPOS_URL, USER_REPO_LIST } from '../../constants/url.constants';
 import {
   extractBranchCount,
   sanitizeBranchesUrl,
 } from '../../helpers/extract-branch-count';
 import { useEffect, useState } from 'react';
 
-import { REPOS_URL } from '../../constants/url.constants';
 import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 import parse from 'parse-link-header';
 
-export function useRepos(): UseRepo {
+export function useRepos(username: string | undefined): UseRepo {
   const [state, setState] = useState<RepositoryWithBranchCount[]>([]);
   const [paginationPages, setPaginationPages] = useState<Pagination>({
     prevPage: '',
@@ -31,51 +31,53 @@ export function useRepos(): UseRepo {
     hasPrevPage: false,
     hasNextPage: false,
   });
-  const [currentPage, setCurrentPage] = useState<string | undefined>('1');
+  const [page, setPage] = useState<string | undefined>('1');
 
   useEffect(() => {
-    const subscription: Subscription = fromFetchWithAuth<Repository[]>(
-      REPOS_URL(currentPage),
-      {
-        selector: (response: Response) => {
-          const links = parse(response.headers.get('Link'));
-          const hasPrevPage = links?.prev;
-          const hasNextPage = links?.next;
+    if (username) {
+      const subscription: Subscription = fromFetchWithAuth<Repository[]>(
+        USER_REPO_LIST(username, page),
+        {
+          selector: (response: Response) => {
+            const links = parse(response.headers.get('Link'));
+            const hasPrevPage = links?.prev;
+            const hasNextPage = links?.next;
 
-          setPaginationPages({
-            prevPage: links?.prev?.page,
-            nextPage: links?.next?.page,
-            hasPrevPage: hasPrevPage !== undefined,
-            hasNextPage: hasNextPage !== undefined,
-          });
+            setPaginationPages({
+              prevPage: links?.prev?.page,
+              nextPage: links?.next?.page,
+              hasPrevPage: hasPrevPage !== undefined,
+              hasNextPage: hasNextPage !== undefined,
+            });
 
-          return response.json();
-        },
-      }
-    )
-      .pipe(
-        filter((repos) => !!repos.length),
-        switchMap((repositories: Repository[]) => {
-          const requests = repositories.map(createBranchCountRequest);
-          return zip(...requests).pipe(
-            map(mergeRepositoriesWithBranchCount(repositories))
-          );
-        }),
-        tap(setState)
+            return response.json();
+          },
+        }
       )
-      .subscribe();
+        .pipe(
+          filter((repos) => !!repos.length),
+          switchMap((repositories: Repository[]) => {
+            const requests = repositories.map(createBranchCountRequest);
+            return zip(...requests).pipe(
+              map(mergeRepositoriesWithBranchCount(repositories))
+            );
+          }),
+          tap(setState)
+        )
+        .subscribe();
 
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [currentPage]);
+      return () => {
+        subscription.unsubscribe();
+      };
+    }
+  }, [username, page]);
 
   const nextPage = () => {
-    setCurrentPage(paginationPages.nextPage);
+    setPage(paginationPages.nextPage);
   };
 
   const prevPage = () => {
-    setCurrentPage(paginationPages.prevPage);
+    setPage(paginationPages.prevPage);
   };
 
   return {
