@@ -1,8 +1,6 @@
 import { Layout } from '../components/layouts/Layout';
 import PaginateButton from '../components/paginate-button';
 import { PaginateWrapper } from '../components/paginate-button/PaginateButton.style';
-import Pagination from '../components/pagination';
-import { PaginationContainer } from '../components/pagination/Pagination.styles';
 import RepoCard from '../components/repo-card';
 import UserGists from '../components/user-gists';
 import styled from 'styled-components';
