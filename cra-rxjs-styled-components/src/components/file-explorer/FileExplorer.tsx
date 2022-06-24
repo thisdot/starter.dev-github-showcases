@@ -19,8 +19,8 @@ type Props = {
   branch: string;
   path: string;
   basePath: string;
-  directories: Array<FileItem>;
-  files: Array<FileItem>;
+  directories: FileItem[];
+  files: FileItem[];
 };
 
 export default function FileExplorer({
