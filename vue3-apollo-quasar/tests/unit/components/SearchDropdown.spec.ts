@@ -3,7 +3,6 @@ import { QItem, QSeparator, QList, QBtnDropdown, ClosePopup } from 'quasar';
 import { SearchDropdowns } from '@/components';
 
 describe('SearchDropdown', () => {
-  it.todo('should mount without error');
   it('should mount', async () => {
     const wrapper = shallowMount(SearchDropdowns, {
       props: {
