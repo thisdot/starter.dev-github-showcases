@@ -13,13 +13,13 @@ import {
   RepositoryWithBranchCount,
   UseRepo,
 } from '../../interfaces/repositories.interfaces';
-import { REPOS_URL, USER_REPO_LIST } from '../../constants/url.constants';
 import {
   extractBranchCount,
   sanitizeBranchesUrl,
 } from '../../helpers/extract-branch-count';
 import { useEffect, useState } from 'react';
 
+import { USER_REPO_LIST } from '../../constants/url.constants';
 import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 import parse from 'parse-link-header';
 

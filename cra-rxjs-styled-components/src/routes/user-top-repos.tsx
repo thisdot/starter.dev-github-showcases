@@ -1,4 +1,8 @@
 import { Layout } from '../components/layouts/Layout';
+import PaginateButton from '../components/paginate-button';
+import { PaginateWrapper } from '../components/paginate-button/PaginateButton.style';
+import Pagination from '../components/pagination';
+import { PaginationContainer } from '../components/pagination/Pagination.styles';
 import RepoCard from '../components/repo-card';
 import UserGists from '../components/user-gists';
 import styled from 'styled-components';
@@ -54,21 +58,21 @@ export default function TopRepos() {
         />
         <Main>
           <Page>
-            <Heading>Top Repositories</Heading>
+            <Heading>Repositories</Heading>
             <RepositoriesContainer>
               {repositories.map((repo) => (
                 <RepoCard repo={repo} key={repo.id} />
               ))}
             </RepositoriesContainer>
 
-            <div className="flex">
-              <button onClick={prevPage} disabled={!hasPrevPage}>
-                Prev
-              </button>
-              <button onClick={nextPage} disabled={!hasNextPage}>
-                Next
-              </button>
-            </div>
+            <PaginateWrapper>
+              <PaginateButton onClick={prevPage} disabled={!hasPrevPage}>
+                <span className="prev"></span> Previous
+              </PaginateButton>
+              <PaginateButton onClick={nextPage} disabled={!hasNextPage}>
+                Next <span className="next"></span>
+              </PaginateButton>
+            </PaginateWrapper>
           </Page>
         </Main>
       </Layout>
