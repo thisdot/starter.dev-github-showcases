@@ -9,16 +9,21 @@ describe("Profile Page", () => {
   });
 
   it("should display correct name and username", () => {
-    cy.get(`[data-testid="profile page name"]`).should("be.visible");
-    cy.get(`[data-testid="profile page username"]`).should("be.visible");
+    cy.get(`[data-testid="profile page name"]`)
+      .should("be.visible")
+      .and("contain.text", "thisdotlabs")
+      .get(`[data-testid="profile page username"]`)
+      .should("be.visible")
+      .and("contain.text", "thisdot");
   });
 
   it("should display same profile and header avatar", () => {
-    cy.wait("@UserProfileQuery");
-    cy.get(`[data-testid="user avatar header"]`).should("be.visible");
-    cy.get(
-      `[data-testid="profile page avatar"], [data-testid="user avatar header"]`
-    )
+    cy.wait("@UserProfileQuery")
+      .get(`[data-testid="user avatar header"]`)
+      .should("be.visible")
+      .get(
+        `[data-testid="profile page avatar"], [data-testid="user avatar header"]`
+      )
       .should("have.attr", "src")
       .and(
         "match",
@@ -27,22 +32,27 @@ describe("Profile Page", () => {
   });
 
   it("should display orgs in profile", () => {
-    cy.get(`[data-testid="profile page orgs"]`).should("have.length", 1);
+    cy.get(`[data-testid="profile page orgs"]`)
+    .should("have.length", 1);
   });
 
   it("should display correct count", () => {
-    cy.get(`[data-testid="profile followers count"]`).contains("10");
-    cy.get(`[data-testid="profile following count"]`).contains("12");
-    cy.get(`[data-testid="profile starred count"]`).contains("5");
+    cy.get(`[data-testid="profile followers count"]`)
+      .contains("10")
+      .get(`[data-testid="profile following count"]`)
+      .contains("12")
+      .get(`[data-testid="profile starred count"]`)
+      .contains("5");
   });
 
   it("should display correct repos", () => {
-    cy.wait("@UserReposQuery");
-    cy.get(`[data-testid="profile repo list heading"]`)
+    cy.wait("@UserReposQuery")
+      .get(`[data-testid="profile repo list heading"]`)
       .should("have.length", 6)
-      .and(($h3) => {
-        expect($h3.get(0).textContent, "first item").to.contain("sentry");
-        expect($h3.get(5).textContent, "last item").to.contain(
+      .get(`[data-testid="repository name"]`)
+      .and(($a) => {
+        expect($a.get(0).textContent, "first item").to.contain("sentry");
+        expect($a.get(5).textContent, "last item").to.contain(
           "javascript-marathon-vue-js"
         );
       });
@@ -108,8 +118,8 @@ describe("Profile Page", () => {
   it("should be able to click into repository", () => {
     cy.wait("@CurrentUserQuery")
       .wait("@UserReposQuery")
-      .wait("@UserProfileQuery");
-    cy.get(`[data-testid="profile repo list heading"]`)
+      .wait("@UserProfileQuery")
+      .get(`[data-testid="profile repo list heading"]`)
       .contains("starter.dev-github-showcases")
       .click()
       .wait("@RepoPageQuery")
