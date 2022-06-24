@@ -20,3 +20,4 @@ export { default as OrganizationPageLayout } from './OrganizationPageLayout';
 export { default as RepoSubHeader } from './RepoSubHeader';
 export { default as TextWithIconAndCount } from './TextWithIconAndCount';
 export { default as ForkIcon } from './ForkIcon';
+export { default as CodeIcon } from './CodeIcon';
