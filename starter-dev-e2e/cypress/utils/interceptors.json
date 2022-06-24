@@ -206,5 +206,46 @@
       }
     ],
     "rest": []
+  },
+  "profile": {
+    "graphql": [
+      {
+        "name": "CurrentUser",
+        "alias": "CurrentUser",
+        "variables": null,
+        "fixture": "user/currentUser.graphql.json"
+      },
+      {
+        "name": "UserProfile",
+        "alias": "UserProfile",
+        "variables": null,
+        "fixture": "user/userProfile.graphql.json"
+      },
+      {
+        "name": "UserRepos",
+        "alias": "UserRepos",
+        "variables": null,
+        "fixture": "user/userRepos.graphql.json"
+      },
+      {
+        "name": "RepoPage",
+        "alias": "RepoPage",
+        "variables": null,
+        "fixture": "repo/repoPage.graphql.json"
+      },
+      {
+        "name": "RepoTree",
+        "alias": "RepoTree",
+        "variables": null,
+        "fixture": "repo/repoTree.graphql.json"
+      },
+      {
+        "name": "RepoReadMe",
+        "alias": "RepoReadMe",
+        "variables": null,
+        "fixture": "repo/repoReadMe.graphql.json"
+      }
+    ],
+    "rest": []
   }
 }
