@@ -56,8 +56,6 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-
 //* Composables
 import { useAuth, useNav } from '@/composables';
 
@@ -87,9 +85,6 @@ const primaryNavItems = computed(() => [
     to: '#',
   },
 ]);
-
-//* Reactive values
-const searchText = ref('');
 
 const { goToExternal } = useNav();
 const { signOut } = useAuth();

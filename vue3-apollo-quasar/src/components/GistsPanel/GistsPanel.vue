@@ -2,7 +2,7 @@
   <q-card class="card--gists-panel full-height q-pt-lg q-px-lg" flat square>
     <q-separator></q-separator>
     <q-card-section>
-      <h6 class="text-weight-bold text-dark ">Gists</h6>
+      <h6 class="text-weight-bold text-dark">Gists</h6>
     </q-card-section>
     <q-separator></q-separator>
     <q-card-section v-if="!loading">
@@ -15,7 +15,7 @@
   </q-card>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'GistsPanel',
@@ -25,7 +25,6 @@ export default defineComponent({
 <script lang="ts" setup>
 import { useGists } from '@/composables';
 
-const searchText = ref('');
 const { getUserGists } = useGists();
 const { data: gistList, loading } = getUserGists();
 </script>
