@@ -1,0 +1,6 @@
+{
+  "angular_apollo_tailwind": {
+    "responseUrl": "http://localhost:4200",
+    "startCommand": "yarn start"
+  }
+}

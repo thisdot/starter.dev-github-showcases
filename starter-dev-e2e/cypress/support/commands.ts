@@ -1,9 +1,48 @@
+/// <reference types="cypress" />
+// ***********************************************
+// This example commands.ts shows you how to
+// create various custom commands and overwrite
+// existing commands.
+//
+// For more comprehensive examples of custom
+// commands please read more here:
+// https://on.cypress.io/custom-commands
+// ***********************************************
+//
+//
+// -- This is a parent command --
+// Cypress.Commands.add('login', (email, password) => { ... })
+//
+//
+// -- This is a child command --
+// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
+//
+//
+// -- This is a dual command --
+// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
+//
+//
+// -- This will overwrite an existing command --
+// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+//
+// declare global {
+//   namespace Cypress {
+//     interface Chainable {
+//       login(email: string, password: string): Chainable<void>
+//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
+//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
+//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
+//     }
+//   }
+// }
+
 import {
   hasOperationName,
   aliasQuery,
   hasVariables,
 } from "../utils/graphql-test-utils";
 import * as interceptors from "../utils/interceptors.json";
+import { View } from "../utils/view";
 
 Cypress.Commands.add("mockNextAuthCookie", () => {
   const signingKey = Cypress.env("JWT_SIGNING_KEY");
@@ -24,7 +63,7 @@ Cypress.Commands.add("mockNextAuthCookie", () => {
         token: sessionJSON,
       })
     )
-    .then((encryptedToken) =>
+    .then((encryptedToken: string) =>
       cy.setCookie("next-auth.session-token", encryptedToken)
     );
 
@@ -44,7 +83,7 @@ Cypress.Commands.add("mockRemixAuthCookie", () => {
         options,
       })
     )
-    .then((encryptedToken) => {
+    .then((encryptedToken: string) => {
       cy.setCookie("__session", encryptedToken, options);
     });
 
@@ -91,3 +130,30 @@ Cypress.Commands.add("interceptRestCalls", (view) => {
     });
   });
 });
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Custom command to mock NextAuth's Session cookie.
+       * @example cy.mockNextAuthCookie()
+       */
+      mockNextAuthCookie(): Chainable;
+      /**
+       * Custom command to mock RemixAuth's Session cookie.
+       * @example cy.mockRemixAuthCookie()
+       */
+      mockRemixAuthCookie(): Chainable;
+      /**
+       * Custom command to intercept GraphQL calls for a given view.
+       * @example cy.interceptGraphQLCalls(View.Repository)
+       */
+      interceptGraphQLCalls(view: View): Chainable;
+      /**
+       * Custom command to intercept Rest calls for a given view.
+       * @example cy.interceptGraphQLCalls(View.Repository)
+       */
+      interceptRestCalls(view: View): Chainable;
+    }
+  }
+}
