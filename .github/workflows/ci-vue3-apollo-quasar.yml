@@ -3,11 +3,11 @@ name: Vue3 Apollo Quasar CI
 
 on:
   push:
-    brranchs: [main]
+    branches: [main]
     paths:
       - "vue3-apollo-quasar/**"
   pull_request:
-    branchs: [main]
+    branches: [main]
     paths:
       - "vue3-apollo-quasar/**"
 
