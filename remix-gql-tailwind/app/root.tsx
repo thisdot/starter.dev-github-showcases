@@ -47,16 +47,16 @@ export function ErrorBoundary({ error }: any) {
 export function CatchBoundary() {
   const caught = useCatch();
   return (
-    <Document title="Error">
-      <div className="text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className=" text-9xl mb-8">{caught.status}</div>
-        <div className="text-2xl mb-5">
-          <span className="">Ooops...</span>
+    <Document title='Error'>
+      <div className='text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+        <div className=' text-9xl mb-8'>{caught.status}</div>
+        <div className='text-2xl mb-5'>
+          <span className=''>Ooops...</span>
           <br />
           {caught.statusText}
         </div>
-        <div className=" bg-gray-900 text-white rounded px-7 py-2">
-          <Link to={`/`} className=" ">
+        <div className=' bg-gray-900 text-white rounded px-7 py-2'>
+          <Link to={`/`} className=' '>
             Go to Home
           </Link>
         </div>
@@ -99,11 +99,11 @@ export default function App() {
 
 export function Document({ children, title }: DocumentProps) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
         <title>{title ? title : 'GitHub Demo App'}</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
         <Meta />
         <Links />
       </head>
