@@ -1,5 +1,5 @@
-import { json, LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { json, LoaderFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 import RepoHeader from '~/components/RepoHeader/RepoHeader';
 import { parseQuery } from '~/components/RepoIssues/parseQuery';
 import RepoIssues from '~/components/RepoIssues/RepoIssues';
@@ -112,7 +112,7 @@ export default function Issues() {
   return (
     <RepoProvider value={context}>
       <RepoHeader />
-      <div className="md:py-12 max-w-screen-xl mx-auto">
+      <div className="mx-auto max-w-screen-xl md:py-12">
         <RepoIssues
           openIssues={openIssues}
           closedIssues={closedIssues}

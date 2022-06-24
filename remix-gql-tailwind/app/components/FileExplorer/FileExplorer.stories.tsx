@@ -9,8 +9,8 @@ const main = [
   { name: 'package.json', path: 'package.json', type: 'blob' },
   { name: 'README.md', path: 'README.md', type: 'blob' },
   { name: 'tsconfig.json', path: 'tsconfig.json', type: 'blob' },
-  { name: 'yarn.lock', path: 'yarn.lock', type: 'blob' }
-]
+  { name: 'yarn.lock', path: 'yarn.lock', type: 'blob' },
+];
 
 const src = [
   { name: 'components', path: 'src/components', type: 'tree' },
@@ -21,9 +21,9 @@ const src = [
   {
     name: 'react-app-env.d.ts',
     path: 'src/react-app-env.d.ts',
-    type: 'blob'
-  }
-]
+    type: 'blob',
+  },
+];
 
 export default {
   component: FileExplorerView,
@@ -36,16 +36,16 @@ const Template: Story<ComponentProps<typeof FileExplorerView>> = (args) => (
 
 export const RootDir = Template.bind({});
 RootDir.args = {
-  branch: "main",
-  basePath: "mark/reactQuiz",
-  repoPath: "",
-  items: main
+  branch: 'main',
+  basePath: 'mark/reactQuiz',
+  repoPath: '',
+  items: main,
 };
 
 export const SrcDir = Template.bind({});
 SrcDir.args = {
-  branch: "main",
-  basePath: "mark/reactQuiz",
-  repoPath: "src",
-  items: src
+  branch: 'main',
+  basePath: 'mark/reactQuiz',
+  repoPath: 'src',
+  items: src,
 };

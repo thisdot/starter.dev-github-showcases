@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Link } from '@remix-run/react';
 import { useRepo } from '../../context/RepoContext';
 import PrivacyIcon from './PrivacyIcon';
 import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
@@ -10,7 +10,10 @@ function RepoHeading() {
     <h1 className={styles.heading}>
       <PrivacyIcon isPrivate={data?.isPrivate} />
       <span className={styles.navContainer}>
-        <Link to={data?.isOrg ? `/orgs/${owner}` : `/${owner}`} className={styles.ownerLink}>
+        <Link
+          to={data?.isOrg ? `/orgs/${owner}` : `/${owner}`}
+          className={styles.ownerLink}
+        >
           {owner}
         </Link>
         <span className={styles.separator}>/</span>

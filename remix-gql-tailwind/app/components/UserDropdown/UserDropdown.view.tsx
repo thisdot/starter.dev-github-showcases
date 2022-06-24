@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import * as styles from './UserDropdown.classNames';
-import { Form, Link } from "@remix-run/react";
+import { Form, Link } from '@remix-run/react';
 
 interface UserDropdownViewProps {
   image?: string | null;

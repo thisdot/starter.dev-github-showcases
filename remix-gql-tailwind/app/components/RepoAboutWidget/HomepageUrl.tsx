@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Link } from '@remix-run/react';
 import { LinkIcon } from '@heroicons/react/outline';
 import * as styles from './RepoAboutWidget.classNames';
 
