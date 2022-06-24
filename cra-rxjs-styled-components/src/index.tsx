@@ -6,13 +6,14 @@ import App from './App';
 import AuthGuard from './components/AuthGuard';
 import reportWebVitals from './reportWebVitals';
 import Redirect from './routes/redirect';
-import RepoDetails from './routes/repo/repository-code';
 import SignIn from './routes/sign-in';
 import TopRepos from './routes/user-top-repos';
 import RepoPullRequest from './routes/repo/repository-pull-request';
 import RepoIssues from './routes/repo/repository-issues';
 import Repo from './routes/repo';
 import UserRepos from './components/user-repos';
+import RepoBranchRoot from './routes/repo/repository-code';
+import RepoBranchTreePath from './routes/repo/repository-code/repository-tree/repository-tree';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -44,7 +45,8 @@ ReactDOM.render(
             </AuthGuard>
           }
         >
-          <Route path="" element={<RepoDetails />} />
+          <Route path="" element={<RepoBranchRoot />} />
+          <Route path="tree/:branch/*" element={<RepoBranchTreePath />} />
           <Route path="issues" element={<RepoIssues />} />
           <Route path="pull-requests" element={<RepoPullRequest />} />
         </Route>
