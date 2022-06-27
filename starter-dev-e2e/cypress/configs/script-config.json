@@ -2,5 +2,29 @@
   "angular_apollo_tailwind": {
     "responseUrl": "http://localhost:4200",
     "startCommand": "yarn start"
+  },
+  "angular_ngrx_scss": {
+    "responseUrl": "http://localhost:4200",
+    "startCommand": "yarn start"
+  },
+  "cra_rxjs_styled_components": {
+    "responseUrl": "http://localhost:3000",
+    "startCommand": "npm dev"
+  },
+  "next_react_query_tailwind": {
+    "responseUrl": "http://localhost:3000",
+    "startCommand": "yarn start"
+  },
+  "remix_gql_tailwind": {
+    "responseUrl": "http://localhost:3000",
+    "startCommand": "yarn mock"
+  },
+  "vite_apollo_vanilla": {
+    "responseUrl": "http://localhost:3000",
+    "startCommand": "yarn dev"
+  },
+  "vue3_ts_quasar": {
+    "responseUrl": "http://localhost:8080",
+    "startCommand": "yarn dev"
   }
 }

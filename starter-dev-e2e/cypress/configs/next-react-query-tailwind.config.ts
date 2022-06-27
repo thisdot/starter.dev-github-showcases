@@ -1,11 +1,18 @@
 import { defineConfig } from "cypress";
 import * as jose from "jose";
-import * as cookieSignature from "cookie-signature";
-//const jose = require("jose");
-//const cookieSignature = require("cookie-signature");
 
 export default defineConfig({
+  env: {
+    authUrl: "/",
+    JWT_SECRET:
+      "7ZkCMuD69N2WBBDCDzxTTYvsNG8qPJHWeNYe37iZTkmQLUmujZUZ3RnkqP6yfxTU",
+    JWT_SIGNING_KEY:
+      '{"kty":"oct","kid":"6f3fzrvXzvbJ66XfW3QbeU6WfNWm3Z5KwKt5fDSOsdI","alg":"HS512","k":"mq_ZTza3MtzKDyy7r47-bOeZcvzfsy3VfIsdfT-n5W-KA4mxUy-6Yy9GjISuo3aNfPpzXRDIsM0mS-tFdCuULg"}',
+    JWT_ENCRYPTION_KEY:
+      '{"kty":"oct","kid":"noSwokthOcoRCtufQ3Eyp_x_cIshHpKBRanEVreZwnc","alg":"A256GCM","k":"GdCtl3XPLxKfdUQOFyWEPbe27tOPOJ9Z7-RPAdz_Vrc"}',
+  },
   e2e: {
+    baseUrl: "http://localhost:3000",
     setupNodeEvents(on, config) {
       on("task", {
         // Adapted from: https://github.com/nextauthjs/next-auth/blob/dda4e0a7d8121b50f9cc9f1810424020427ef5de/packages/next-auth/src/jwt/index.ts#L17-L26
@@ -24,22 +31,6 @@ export default defineConfig({
             zip: "DEF",
           });
           return encryptedJWT;
-        },
-
-        // Adapted from: https://github.com/remix-run/remix/blob/dce27e2664de022f183f34f7a1e3034fa0e6d414/packages/remix-server-runtime/cookies.ts#L146-L158
-        generateRemixAuthJWT(jwtOptions) {
-          const value = jwtOptions.value;
-          const secrets = jwtOptions.options.secrets;
-
-          let encoded = Buffer.from(JSON.stringify(value), "binary").toString(
-            "base64"
-          );
-
-          if (secrets.length > 0) {
-            encoded = cookieSignature.sign(encoded, secrets[0]);
-          }
-
-          return encoded;
         },
       });
     },
