@@ -12,8 +12,8 @@
     "startCommand": "npm dev"
   },
   "next_react_query_tailwind": {
-    "responseUrl": "http://localhost:3000",
-    "startCommand": "yarn start"
+    "responseUrl": "http-get://localhost:3000",
+    "startCommand": "yarn dev"
   },
   "remix_gql_tailwind": {
     "responseUrl": "http://localhost:3000",
