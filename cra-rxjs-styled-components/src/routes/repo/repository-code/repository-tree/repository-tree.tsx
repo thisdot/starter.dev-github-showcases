@@ -9,7 +9,7 @@ import { useRepo } from '../../../../context/RepoContext';
 import { useRepoExplorer } from '../../../../hooks/repo-explorer/use-repo-explorer';
 
 export default function RepoBranchTreePath() {
-  const { owner, name, branch, path, basePath, data } = useRepo();
+  const { owner, name, branch, path, basePath } = useRepo();
   const { files, directories } = useRepoExplorer();
 
   return (
