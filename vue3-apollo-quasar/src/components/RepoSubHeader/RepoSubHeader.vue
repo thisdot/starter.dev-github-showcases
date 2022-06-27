@@ -1,28 +1,33 @@
 <template>
   <div class="subheader q-pt-sm">
     <div class="container">
-      <!-- Top of the sub header -->
-      <div class="row justify-between items-center">
+      <div class="row justify-between items-center no-wrap">
+        <!-- Top left of the sub header -->
         <div class="row items-baseline">
-          <!-- book icon -->
           <span class="book-icon">
-            <q-icon name="fa fa-book"></q-icon>
+            <q-icon>
+              <BookIcon />
+            </q-icon>
           </span>
-          <!-- username/reponame -->
           <span class="q-mx-sm user-reponame text-subtitle1">
-            <a :href="profileUrl">{{ username }}</a>
-            <small class="q-mx-sm">/</small>
+            <a :href="profile_url">{{ username }}</a>
+            <span class="q-mx-sm">/</span>
             <strong>
-              <a :href="repoUrl">{{ repoName }}</a>
+              <a :href="repo_url">{{ repoName }}</a>
             </strong>
           </span>
-          <!-- visibility -->
-          <q-chip class="text-caption text-weight-medium q-pa-sm visibility text-capitalize" outline>
+          <q-chip
+            class="text-caption text-weight-medium q-pa-sm visibility text-capitalize"
+            outline
+          >
             {{ visibilityTag }}
           </q-chip>
         </div>
+        <!-- Top right of the sub header -->
         <div class="row items-center">
-          <button class="git-btn text-capitalize row justify-between items-center relative-position">
+          <button
+            class="git-btn text-capitalize row justify-between items-center relative-position"
+          >
             <TextWithIconAndCount>
               <template v-slot:icon>
                 <q-icon class="far fa-eye"></q-icon>
@@ -31,24 +36,124 @@
                 <span class="q-mr-xs q-ml-sm text-caption">watch</span>
               </template>
               <template v-if="watch > 0" v-slot:count>
-                <q-badge rounded :label="watchCount" class="count-badge" />
+                <q-badge rounded :label="watch_count" class="count-badge" />
               </template>
             </TextWithIconAndCount>
-            <span class="q-ml-xm">
+            <span class="q-ml-xs">
               <q-icon class="fa fa-caret-down"></q-icon>
-              <q-menu style="min-width: 10.5rem">
-                <q-list>
-                  <q-item>Happy Teddy show</q-item>
-                  <q-item>Teddy</q-item>
-                  <q-item>Happy</q-item>
-                </q-list>
-              </q-menu>
             </span>
+            <q-menu
+              class="dropdown_menu"
+              max-width="21rem"
+              max-height="50rem"
+              :offset="[0, 10]"
+              style="min-width: 10.5rem"
+            >
+              <q-list>
+                <q-item
+                  class="row justify-between items-center q-py-xs q-px-md options-heading text-caption"
+                >
+                  <strong>Notifications</strong>
+                  <button class="close-btn" v-close-popup>
+                    <q-icon class="fa fa-times" v-close-popup></q-icon>
+                  </button>
+                </q-item>
+                <q-separator></q-separator>
+                <ListItem clickable @click="selectNotification('mentions')">
+                  <template v-slot:icon>
+                    <q-icon class="text-h6">
+                      <CorrectIcon v-show="notify === 'mentions'" />
+                    </q-icon>
+                  </template>
+                  <div>
+                    <div class="text-bold">Participating and @mentions</div>
+                    <div class="text-caption overview">
+                      Only receive notifications from this repository when
+                      participating or @mentioned.
+                    </div>
+                  </div>
+                </ListItem>
+                <q-separator></q-separator>
+                <ListItem clickable @click="selectNotification('all')">
+                  <template v-slot:icon>
+                    <q-icon class="text-h6">
+                      <CorrectIcon v-show="notify === 'all'" />
+                    </q-icon>
+                  </template>
+                  <div>
+                    <div class="text-bold">All Activity</div>
+                    <div class="text-caption overview">
+                      Notified of all notifications on this repository.
+                    </div>
+                  </div>
+                </ListItem>
+                <q-separator></q-separator>
+                <ListItem clickable @click="selectNotification('ignore')">
+                  <template v-slot:icon>
+                    <q-icon class="text-h6">
+                      <CorrectIcon v-show="notify === 'ignore'" />
+                    </q-icon>
+                  </template>
+                  <div>
+                    <div class="text-bold">Ignore</div>
+                    <div class="text-caption overview">Never be notified.</div>
+                  </div>
+                </ListItem>
+                <q-separator></q-separator>
+                <ListItem clickable @click="selectNotification('custom')">
+                  <template v-slot:icon>
+                    <q-icon class="text-h6">
+                      <CorrectIcon v-show="notify === 'custom'" />
+                    </q-icon>
+                  </template>
+                  <div>
+                    <div class="row items-start justify-between">
+                      <div class="text-bold">Custom</div>
+                      <q-icon>
+                        <ArrowRightIcon />
+                      </q-icon>
+                    </div>
+                    <div class="text-caption overview">
+                      Select events you want to be notified of in addition to
+                      participating and @mentions.
+                    </div>
+                  </div>
+                </ListItem>
+                <q-separator></q-separator>
+                <ListItem className="item-bottom">
+                  <template v-slot:icon>
+                    <q-icon>
+                      <MobilePhoneIcon />
+                    </q-icon>
+                  </template>
+                  <span
+                    classname="text-caption color-fg-muted text-normal pb-1"
+                  >
+                    Get push notifications on
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://apps.apple.com/app/apple-store/id1477376905?ct=watch-dropdown&amp;mt=8&amp;pt=524675"
+                      >iOS</a
+                    >
+                    or
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://play.google.com/store/apps/details?id=com.github.android&amp;referrer=utm_campaign%3Dwatch-dropdown%26utm_medium%3Dweb%26utm_source%3Dgithub"
+                      >Android</a
+                    >.
+                  </span>
+                </ListItem>
+              </q-list>
+            </q-menu>
           </button>
-          <button class="git-btn text-capitalize row justify-between items-center">
+          <button
+            class="git-btn text-capitalize row justify-between items-center"
+          >
             <TextWithIconAndCount>
               <template v-slot:icon>
-                <q-icon class="custome-icon text-subtitle1">
+                <q-icon class="custome-icon text-body1">
                   <ForkIcon />
                 </q-icon>
               </template>
@@ -56,11 +161,13 @@
                 <span class="q-mr-xs q-ml-sm text-caption">fork</span>
               </template>
               <template v-if="forks > 0" v-slot:count>
-                <q-badge rounded :label="forksCount" class="count-badge" />
+                <q-badge rounded :label="forks_count" class="count-badge" />
               </template>
             </TextWithIconAndCount>
           </button>
-          <button class="git-btn text-capitalize row justify-between items-center relative-position">
+          <button
+            class="git-btn text-capitalize row justify-between items-center relative-position"
+          >
             <TextWithIconAndCount>
               <template v-slot:icon>
                 <q-icon class="far fa-star"></q-icon>
@@ -69,49 +176,54 @@
                 <span class="q-mr-xs q-ml-sm text-caption">Star</span>
               </template>
               <template v-if="stars > 0" v-slot:count>
-                <q-badge rounded :label="starCount" class="count-badge" />
+                <q-badge rounded :label="stars_count" class="count-badge" />
               </template>
             </TextWithIconAndCount>
 
             <span class="star_dropdown q-ml-md">
               <q-icon class="fa fa-caret-down"></q-icon>
-              <q-menu style="min-width: 10.5rem">
-                <q-list>
-                  <q-item>Happy Teddy show</q-item>
-                  <q-item>Teddy</q-item>
-                  <q-item>Happy</q-item>
-                </q-list>
-              </q-menu>
             </span>
           </button>
+          <q-menu
+            class="dropdown_menu"
+            max-width="21rem"
+            max-height="50rem"
+            :offset="[-50, 10]"
+            style="min-width: 20.5rem"
+          >
+            <q-list>
+              <q-item
+                class="row justify-between items-center q-py-xs q-px-md options-heading text-caption"
+              >
+                <strong>Suggested lists</strong>
+                <button class="close-btn" v-close-popup>
+                  <q-icon class="fa fa-times" v-close-popup></q-icon>
+                </button>
+              </q-item>
+              <q-separator></q-separator>
+              <ListItem>
+                <template v-slot:icon>
+                  <q-icon class="fa fa-plus"></q-icon>
+                </template>
+                <span class="text-caption"> Create list </span>
+              </ListItem>
+            </q-list>
+          </q-menu>
         </div>
       </div>
-      <!-- bottom of the sub header -->
 
-      <diiv class="row items-center q-mt-xl">
-        <q-tabs v-model="activeTab" style="color: #586069" indicator-color="orange" dense no-caps inline-label>
-          <q-tab name="code" class="repo-tab">
-            <TextWithIconAndCount>
-              <template v-slot:icon>
-                <q-icon class="custome-icon">
-                  <CodeIcon />
-                </q-icon>
-              </template>
-              <template v-slot:title>
-                <span class="q-mr-xs q-ml-sm text-caption">Code</span>
-              </template>
-            </TextWithIconAndCount>
-          </q-tab>
-          <q-tab name="issues" class="repo-tab"> Issues </q-tab>
-          <q-tab name="pullrequest" class="repo-tab"> Pull Requests </q-tab>
-        </q-tabs>
-      </diiv>
+      <!-- bottom of the sub header -->
+      <RepoTabHeader
+        :issuesCount="issuesCount"
+        :pullRequestsCount="pullRequestsCount"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, defineProps, ref, defineEmits } from 'vue';
+import { computed, defineComponent, defineProps, ref } from 'vue';
+import { countsCalc } from '@/helpers';
 
 export default defineComponent({
   name: 'RepoSubHeader',
@@ -119,8 +231,19 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { TextWithIconAndCount, ForkIcon, CodeIcon } from '@/components';
-const tab = ref('code');
+import {
+  TextWithIconAndCount,
+  ForkIcon,
+  ArrowRightIcon,
+  CorrectIcon,
+  MobilePhoneIcon,
+  BookIcon,
+} from '@/components';
+
+import RepoTabHeader from './RepoTabHeader.vue';
+import ListItem from './ListItem.vue';
+
+const notify = ref('all');
 
 const props = defineProps({
   username: {
@@ -147,28 +270,23 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-});
-
-const emit = defineEmits(['triggerTab']);
-
-const countsCalc = (count) => (count > 99 ? `99+` : count);
-
-const repoUrl = computed(() => `/${props.username}/${props.repoName}`);
-const profileUrl = computed(() => `/${props.username}`);
-const starCount = computed(() => countsCalc(props.stars));
-const watchCount = computed(() => countsCalc(props.watch));
-const forksCount = computed(() => countsCalc(props.forks));
-
-const activeTab = computed({
-  get() {
-    emit('triggerTab', tab.value);
-    return tab.value;
+  issuesCount: {
+    type: Number,
+    required: true,
   },
-  set(val: string) {
-    tab.value = val;
-    emit('triggerTab', tab.value);
+  pullRequestsCount: {
+    type: Number,
+    required: true,
   },
 });
+
+const selectNotification = (value: string) => (notify.value = value);
+
+const repo_url = computed(() => `/${props.username}/${props.repoName}`);
+const profile_url = computed(() => `/${props.username}`);
+const stars_count = computed(() => countsCalc(props.stars));
+const watch_count = computed(() => countsCalc(props.watch));
+const forks_count = computed(() => countsCalc(props.forks));
 </script>
 
 <style lang="scss" scoped>
@@ -179,13 +297,14 @@ const activeTab = computed({
 }
 
 .user-reponame {
-  a:link {
-    color: $primary;
+  span {
+    color: $secondary-200;
   }
 }
 
 a:link {
   text-decoration: none;
+  color: $primary;
 }
 a:hover {
   text-decoration: underline;
@@ -210,6 +329,12 @@ a:hover {
 .star_dropdown {
   color: $secondary-200;
 }
+
+.fa-caret-down,
+.fa-times,
+button {
+  cursor: pointer;
+}
 .count-badge {
   background: #1b1f2414;
   color: inherit;
@@ -223,8 +348,23 @@ a:hover {
 .custome-icon {
   transform: translateY(0.2rem);
 }
-.repo-tab {
-  gap: 0;
-  height: 40px;
+.options-heading {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 10;
+  min-height: unset;
+}
+.item-bottom {
+  background-color: $primary-100;
+}
+
+.text-caption.overview {
+  color: $secondary-200;
+}
+button.close-btn {
+  background-color: transparent;
+  border: none;
 }
 </style>

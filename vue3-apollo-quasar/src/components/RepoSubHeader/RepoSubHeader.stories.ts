@@ -10,6 +10,8 @@ export default {
     stars: {},
     watch: {},
     forks: {},
+    issuesCount: {},
+    pullRequestsCount: {},
   },
   parameters: {
     layout: 'fullscreen',
@@ -33,4 +35,6 @@ Default.args = {
   stars: 100,
   watch: 30,
   forks: 1,
+  issuesCount: 10,
+  pullRequestsCount: 10,
 };
