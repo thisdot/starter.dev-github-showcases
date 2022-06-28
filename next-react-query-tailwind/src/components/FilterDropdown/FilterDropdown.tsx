@@ -28,7 +28,10 @@ function FilterDropdown({
   return (
     <Menu as="div" className={styles.container}>
       <div>
-        <Menu.Button className={buttonClassName || styles.menuButton}>
+        <Menu.Button
+          className={buttonClassName || styles.menuButton}
+          data-testid={'filters dropdown ' + name}
+        >
           {name}
           <ChevronDownIcon
             className={styles.menuButtonIcon}
@@ -72,6 +75,7 @@ function FilterDropdown({
                   onClick={() => {
                     onChange(value);
                   }}
+                  data-testid={'filters dropdown item ' + label}
                 >
                   {value === current && (
                     <CheckIcon className={styles.itemActiveIcon} />

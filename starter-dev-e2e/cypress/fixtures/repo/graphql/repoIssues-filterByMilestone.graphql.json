@@ -1,0 +1,201 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "milestones": {
+        "nodes": [
+          {
+            "id": "MI_kwDOGd0nu84AcmnC",
+            "closed": false,
+            "description": "",
+            "number": 1,
+            "title": "Angular Apollo Tailwind",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84AdGEs",
+            "closed": false,
+            "description": null,
+            "number": 2,
+            "title": "Angular + NgRx + SCSS",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84AdSA7",
+            "closed": false,
+            "description": "",
+            "number": 3,
+            "title": "Vue + TS + Quasar",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6g-",
+            "closed": false,
+            "description": "",
+            "number": 4,
+            "title": "Vite + Apollo + Vanilla Extract",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6g_",
+            "closed": false,
+            "description": "",
+            "number": 5,
+            "title": "Remix + Tailwind",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6hW",
+            "closed": false,
+            "description": "",
+            "number": 6,
+            "title": "CRA + RxJS + Styled Components",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6hX",
+            "closed": false,
+            "description": "",
+            "number": 7,
+            "title": "Next.js + React Query + Tailwind",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84AeYuV",
+            "closed": false,
+            "description": "",
+            "number": 8,
+            "title": "E2E Cypress Testing",
+            "__typename": "Milestone"
+          }
+        ],
+        "pageInfo": {
+          "startCursor": "Y3Vyc29yOnYyOpHOAHJpwg==",
+          "endCursor": "Y3Vyc29yOnYyOpHOAHmLlQ==",
+          "hasNextPage": false,
+          "hasPreviousPage": false,
+          "__typename": "PageInfo"
+        },
+        "totalCount": 8,
+        "__typename": "MilestoneConnection"
+      },
+      "closedIssues": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wMi0yMVQxMDoxMTowMi0wNjowMM5ETmox",
+          "hasPreviousPage": false,
+          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNS0xOFQwOTo0MDowMy0wNTowMM5J6fub",
+          "__typename": "PageInfo"
+        },
+        "totalCount": 4,
+        "nodes": [
+          {
+            "id": "I_kwDOGd0nu85J0FKj",
+            "author": { "login": "iansamz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-19T16:08:20Z",
+            "title": "[Angular + Apollo + Tailwind] Fix User Gists",
+            "number": 288,
+            "createdAt": "2022-05-17T09:59:05Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85JuOJW",
+            "author": { "login": "iansamz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-23T19:32:09Z",
+            "title": "[Angular + Apollo + Tailwind] Fix Previous Navigation",
+            "number": 286,
+            "createdAt": "2022-05-16T09:10:43Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85JuMLD",
+            "author": { "login": "iansamz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-18T19:17:12Z",
+            "title": "[Angular + Apollo + Tailwind] PR Page not loading properly",
+            "number": 285,
+            "createdAt": "2022-05-16T09:04:19Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85ETmox",
+            "author": { "login": "morgnism", "__typename": "User" },
+            "comments": {
+              "totalCount": 2,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-16T22:34:41Z",
+            "title": "[Angular + Apollo + Tailwind] Fix Tailwind Prod Bundle Size",
+            "number": 160,
+            "createdAt": "2022-02-21T16:11:02Z",
+            "__typename": "Issue"
+          }
+        ],
+        "__typename": "IssueConnection"
+      },
+      "openIssues": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "issues-page1-endCursor",
+          "hasPreviousPage": false,
+          "startCursor": "issues-page1-startCursor",
+          "__typename": "PageInfo"
+        },
+        "totalCount": 1,
+        "nodes": [
+          {
+            "id": "I_kwDOGd0nu85KT8JI",
+            "author": { "login": "BrettZeidler", "__typename": "User" },
+            "comments": {
+              "totalCount": 32,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular + Apollo + Tailwind] Closed angular-apollo-tailwind issue",
+            "number": 123,
+            "createdAt": "2022-05-24T15:32:35Z",
+            "__typename": "Issue"
+          }
+        ],
+        "__typename": "IssueConnection"
+      },
+      "__typename": "Repository"
+    }
+  }
+}
