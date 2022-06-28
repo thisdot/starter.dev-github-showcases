@@ -27,6 +27,7 @@
         <div class="row items-center">
           <button
             class="git-btn text-capitalize row justify-between items-center relative-position"
+            @click="!!showingWatchOption"
           >
             <TextWithIconAndCount>
               <template v-slot:icon>
@@ -48,14 +49,18 @@
               max-height="50rem"
               :offset="[0, 10]"
               style="min-width: 10.5rem"
+              v-model="showingWatchOption"
             >
               <q-list>
                 <q-item
                   class="row justify-between items-center q-py-xs q-px-md options-heading text-caption"
                 >
                   <strong>Notifications</strong>
-                  <button class="close-btn" v-close-popup>
-                    <q-icon class="fa fa-times" v-close-popup></q-icon>
+                  <button
+                    class="close-btn"
+                    @click="() => (showingWatchOption = false)"
+                  >
+                    <q-icon class="fa fa-times"></q-icon>
                   </button>
                 </q-item>
                 <q-separator></q-separator>
@@ -126,9 +131,7 @@
                       <MobilePhoneIcon />
                     </q-icon>
                   </template>
-                  <span
-                    classname="text-caption color-fg-muted text-normal pb-1"
-                  >
+                  <span class="text-caption color-fg-muted text-normal pb-1">
                     Get push notifications on
                     <a
                       target="_blank"
@@ -167,6 +170,7 @@
           </button>
           <button
             class="git-btn text-capitalize row justify-between items-center relative-position"
+            @click="!!showingStarsOption"
           >
             <TextWithIconAndCount>
               <template v-slot:icon>
@@ -183,32 +187,33 @@
             <span class="star_dropdown q-ml-md">
               <q-icon class="fa fa-caret-down"></q-icon>
             </span>
+            <q-menu
+              class="dropdown_menu"
+              max-width="21rem"
+              max-height="50rem"
+              :offset="[-50, 10]"
+              style="min-width: 20.5rem"
+              v-model="showingStarsOption"
+            >
+              <q-list>
+                <q-item
+                  class="row justify-between items-center q-py-xs q-px-md options-heading text-caption"
+                >
+                  <strong>Suggested lists</strong>
+                  <button class="close-btn" @click="showingStarsOption = false">
+                    <q-icon class="fa fa-times"></q-icon>
+                  </button>
+                </q-item>
+                <q-separator></q-separator>
+                <ListItem>
+                  <template v-slot:icon>
+                    <q-icon class="fa fa-plus"></q-icon>
+                  </template>
+                  <span class="text-caption"> Create list </span>
+                </ListItem>
+              </q-list>
+            </q-menu>
           </button>
-          <q-menu
-            class="dropdown_menu"
-            max-width="21rem"
-            max-height="50rem"
-            :offset="[-50, 10]"
-            style="min-width: 20.5rem"
-          >
-            <q-list>
-              <q-item
-                class="row justify-between items-center q-py-xs q-px-md options-heading text-caption"
-              >
-                <strong>Suggested lists</strong>
-                <button class="close-btn" v-close-popup>
-                  <q-icon class="fa fa-times" v-close-popup></q-icon>
-                </button>
-              </q-item>
-              <q-separator></q-separator>
-              <ListItem>
-                <template v-slot:icon>
-                  <q-icon class="fa fa-plus"></q-icon>
-                </template>
-                <span class="text-caption"> Create list </span>
-              </ListItem>
-            </q-list>
-          </q-menu>
         </div>
       </div>
 
@@ -244,6 +249,8 @@ import RepoTabHeader from './RepoTabHeader.vue';
 import ListItem from './ListItem.vue';
 
 const notify = ref('all');
+const showingWatchOption = ref(false);
+const showingStarsOption = ref(false);
 
 const props = defineProps({
   username: {
