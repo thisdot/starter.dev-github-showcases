@@ -63,7 +63,10 @@
         "name": "RepoPage",
         "alias": "RepoPage",
         "variables": null,
-        "fixture": "repo/graphql/repoPage.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoPage.graphql.json",
+          "empty": "repo/graphql/empty/repoPage.empty.graphql.json"
+        }
       },
       {
         "name": "RepoTree",
@@ -87,7 +90,10 @@
         "name": "RepoTree",
         "alias": "RepoTree",
         "variables": null,
-        "fixture": "repo/graphql/repoTree.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoTree.graphql.json",
+          "empty": "repo/graphql/empty/repoTree.empty.graphql.json"
+        }
       },
       {
         "name": "RepoReadMe",
@@ -101,7 +107,10 @@
         "name": "RepoReadMe",
         "alias": "RepoReadMe",
         "variables": null,
-        "fixture": "repo/graphql/repoReadMe.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoReadMe.graphql.json",
+          "empty": "repo/graphql/empty/repoReadMe.empty.graphql.json"
+        }
       },
       {
         "name": "RepoIssues",
@@ -113,7 +122,10 @@
         "name": "RepoIssues",
         "alias": "RepoIssues",
         "variables": null,
-        "fixture": "repo/graphql/repoIssues.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoIssues.graphql.json",
+          "empty": "repo/graphql/empty/repoIssues.empty.graphql.json"
+        }
       },
       {
         "name": "RepoPullRequests",
@@ -125,13 +137,19 @@
         "name": "RepoPullRequests",
         "alias": "RepoPullRequests",
         "variables": null,
-        "fixture": "repo/graphql/repoPullRequests.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoPullRequests.graphql.json",
+          "empty": "repo/graphql/empty/repoPullRequests.empty.graphql.json"
+        }
       },
       {
         "name": "RepoFile",
         "alias": "RepoFile",
         "variables": null,
-        "fixture": "repo/graphql/repoFile.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoFile.graphql.json",
+          "empty": "repo/graphql/empty/repoFile.empty.graphql.json"
+        }
       }
     ],
     "rest": [

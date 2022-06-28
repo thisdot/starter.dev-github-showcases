@@ -43,6 +43,7 @@ import {
 } from "../utils/graphql-test-utils";
 import * as interceptors from "../utils/interceptors.json";
 import { View } from "../utils/view";
+import { InterceptResponse } from "../utils/intercept-response";
 
 Cypress.Commands.add("mockNextAuthCookie", () => {
   const signingKey = Cypress.env("JWT_SIGNING_KEY");
@@ -90,7 +91,7 @@ Cypress.Commands.add("mockRemixAuthCookie", () => {
   Cypress.Cookies.preserveOnce("__session");
 });
 
-Cypress.Commands.add("interceptGraphQLCalls", (view) => {
+Cypress.Commands.add("interceptGraphQLCalls", (view, response) => {
   cy.intercept("POST", /.*\/graphql/, (req) => {
     var requestHandled = false;
 
@@ -107,7 +108,7 @@ Cypress.Commands.add("interceptGraphQLCalls", (view) => {
 
       aliasQuery(req, interceptor.alias);
       req.reply({
-        fixture: interceptor.fixture,
+        fixture: interceptor.fixture[response] ?? interceptor.fixture,
       });
       requestHandled = true;
     });
@@ -118,14 +119,14 @@ Cypress.Commands.add("interceptGraphQLCalls", (view) => {
   });
 });
 
-Cypress.Commands.add("interceptRestCalls", (view) => {
+Cypress.Commands.add("interceptRestCalls", (view, response) => {
   let restCalls = interceptors[view]?.rest;
 
   restCalls.forEach((interceptor) => {
     cy.intercept("GET", new RegExp(interceptor.url), (req) => {
       aliasQuery(req, interceptor.alias);
       req.reply({
-        fixture: interceptor.fixture,
+        fixture: interceptor.fixture[response] ?? interceptor.fixture,
       });
     });
   });
@@ -145,15 +146,15 @@ declare global {
        */
       mockRemixAuthCookie(): Chainable;
       /**
-       * Custom command to intercept GraphQL calls for a given view.
-       * @example cy.interceptGraphQLCalls(View.Repository)
+       * Custom command to intercept GraphQL calls for a given view and response type.
+       * @example cy.interceptGraphQLCalls(View.Repository, InterceptResponse.Full)
        */
-      interceptGraphQLCalls(view: View): Chainable;
+      interceptGraphQLCalls(view: View, response: InterceptResponse): Chainable;
       /**
-       * Custom command to intercept Rest calls for a given view.
-       * @example cy.interceptGraphQLCalls(View.Repository)
+       * Custom command to intercept Rest calls for a given view and response type.
+       * @example cy.interceptGraphQLCalls(View.Repository, InterceptResponse.Full)
        */
-      interceptRestCalls(view: View): Chainable;
+      interceptRestCalls(view: View, response: InterceptResponse): Chainable;
     }
   }
 }

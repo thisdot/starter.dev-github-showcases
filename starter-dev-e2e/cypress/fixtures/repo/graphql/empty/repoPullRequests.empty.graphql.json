@@ -1,0 +1,32 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "openPullRequests": {
+        "totalCount": 0,
+        "pageInfo": {
+          "hasPreviousPage": false,
+          "hasNextPage": false,
+          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNS0yNVQwMzowOTozMC0wNTowMM44bRAe",
+          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wMi0xNlQxNzozNToxNi0wNjowMM4y9R9y",
+          "__typename": "PageInfo"
+        },
+        "nodes": [],
+        "__typename": "PullRequestConnection"
+      },
+      "closedPullRequests": {
+        "totalCount": 0,
+        "pageInfo": {
+          "hasPreviousPage": false,
+          "hasNextPage": false,
+          "startCursor": "pullRequests-page1-startcursor",
+          "endCursor": "pullRequests-page1-endCursosr",
+          "__typename": "PageInfo"
+        },
+        "nodes": [],
+        "__typename": "PullRequestConnection"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

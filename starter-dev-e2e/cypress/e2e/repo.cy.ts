@@ -1,9 +1,10 @@
 import { View } from "../utils/view";
+import { InterceptResponse } from "../utils/intercept-response";
 
 describe("When there is proper repository page responses", () => {
   beforeEach(() => {
-    cy.interceptGraphQLCalls(View.Repository);
-    cy.interceptRestCalls(View.Repository);
+    cy.interceptGraphQLCalls(View.Repository, InterceptResponse.Full);
+    cy.interceptRestCalls(View.Repository, InterceptResponse.Full);
 
     cy.visit("/thisdot/starter.dev-github-showcases");
   });
@@ -257,5 +258,105 @@ describe("When there is proper repository page responses", () => {
       .should("contain.text", "1234")
       .get(`[data-testid="code-block"]`)
       .should("be.visible");
+  });
+});
+
+describe("When there is proper empty repository page responses", () => {
+  beforeEach(() => {
+    cy.interceptGraphQLCalls(View.Repository, InterceptResponse.Empty);
+    cy.interceptRestCalls(View.Repository, InterceptResponse.Empty);
+
+    cy.visit("/thisdot/starter.dev-github-showcases");
+  });
+
+  it("should display correct nav header names and empty information", () => {
+    cy.wait("@CurrentUserQuery")
+      .wait("@RepoPageQuery")
+      .wait("@RepoTreeQuery")
+      .get(`[data-testid="header owner name"]`)
+      .should("contain.text", "thisdot")
+      .get(`[data-testid="header repo name"]`)
+      .should("contain.text", "starter.dev-github-showcases")
+      .get(`[data-testid="repo watch count"]`)
+      .should("contain.text", "0")
+      .get(`[data-testid="repo star count"]`)
+      .should("contain.text", "0")
+      .get(`[data-testid="repo fork count"]`)
+      .should("contain.text", "0")
+      .get(`[data-testid="repo issues count"]`)
+      .should("contain.text", "0")
+      .get(`[data-testid="repo pull requests count"]`)
+      .should("contain.text", "0")
+      .get(`[data-testid="repo file explorer description"]`)
+      .should("contain.text", "No description, website, or topics provided.")
+      .get(`[data-testid="readme empty"]`)
+      .should("be.visible");
+  });
+
+  it("should be able to navigate to issues and pull requests tabs", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@RepoPullRequestsQuery");
+  });
+
+  it("should see no open issues on issues tab", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="issues-empty"]`)
+      .should("be.visible");
+  });
+
+  it("should see no closed issues on issues tab", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="issues-empty"]`)
+      .should("be.visible");
+  });
+
+  it("should not be able to paginate forward and backwards on issues tab", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="pagination button next"]`)
+      .should("not.exist")
+      .get(`[data-testid="pagination button previous"]`)
+      .should("not.exist");
+  });
+
+  it("should see no open pull requests on pull requests tab", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@RepoPullRequestsQuery")
+      .get(`[data-testid="issues-empty"]`)
+      .should("be.visible");
+  });
+
+  it("should see no closed pull requests on pull requests tab", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@RepoPullRequestsQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="issues-empty"]`)
+      .should("be.visible");
+  });
+
+  it("should not be able to paginate forward and backwards on pull requests tab", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@RepoPullRequestsQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="pagination button next"]`)
+      .should("not.exist")
+      .get(`[data-testid="pagination button previous"]`)
+      .should("not.exist");
   });
 });

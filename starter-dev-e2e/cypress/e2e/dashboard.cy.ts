@@ -1,9 +1,10 @@
 import { View } from "../utils/view";
+import { InterceptResponse } from "../utils/intercept-response";
 
 describe("When there is proper dashboard page responses", () => {
   beforeEach(() => {
-    cy.interceptGraphQLCalls(View.Dashboard);
-    cy.interceptRestCalls(View.Dashboard);
+    cy.interceptGraphQLCalls(View.Dashboard, InterceptResponse.Full);
+    cy.interceptRestCalls(View.Dashboard, InterceptResponse.Full);
   });
 
   it("should display list of gists", () => {
