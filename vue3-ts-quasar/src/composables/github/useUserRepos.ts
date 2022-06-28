@@ -5,20 +5,16 @@ import {
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { USER_REPOS_QUERY } from './queries';
 import { Repo } from './types/userRepos';
-
-// interface UserReposProps {
-//   username: string;
-//   isOrg?: boolean;
-// }
+import { useRoute } from 'vue-router';
 
 export const useUserRepos = () => {
   const getUserRepos = (username, isOrg = false) => {
-    // figure out query for vue router
-    //   const { query } = useRouter();
+    const { query } = useRoute();
 
-    //   const afterCursor = typeof query.after === 'string' ? query.after : undefined;
-    //   const beforeCursor =
-    //     typeof query.before === 'string' ? query.before : undefined;
+    const afterCursor =
+      typeof query.after === 'string' ? query.after : undefined;
+    const beforeCursor =
+      typeof query.before === 'string' ? query.before : undefined;
 
     const repoFilters = useRepoFilters();
     let pageInfo;
@@ -28,8 +24,8 @@ export const useUserRepos = () => {
         field: repoFilters.state.sort,
         direction: OrderDirection.Desc,
       },
-      // afterCursor: afterCursor,
-      // beforeCursor: beforeCursor,
+      afterCursor: afterCursor,
+      beforeCursor: beforeCursor,
       first: repoFilters.state.first,
       last: repoFilters.state.last,
     });

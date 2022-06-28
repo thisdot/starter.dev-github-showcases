@@ -17,8 +17,3 @@ export { default as UserProfileCard } from './UserProfileCard';
 export { default as TabHeader } from './TabHeader';
 export { default as ProfilePageLayout } from './ProfilePageLayout';
 export { default as OrganizationPageLayout } from './OrganizationPageLayout';
-export { default as UserRepos } from './UserRepos';
-export { default as PrivacyBadge } from './PrivacyBadge';
-export { default as RepoMeta } from './RepoMeta';
-export { default as ProfileNav } from './ProfileNav';
-export { default as TabNavigation } from './TabNavigation';
