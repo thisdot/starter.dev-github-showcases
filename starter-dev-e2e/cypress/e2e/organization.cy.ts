@@ -1,8 +1,9 @@
 import { View } from "../utils/view";
+import { InterceptResponse } from "../utils/intercept-response";
 
 describe("When there is proper repository page responses", () => {
   beforeEach(() => {
-    cy.interceptGraphQLCalls(View.Organization);
+    cy.interceptGraphQLCalls(View.Organization, InterceptResponse.Full);
 
     cy.visit("/orgs/thisdot");
   });

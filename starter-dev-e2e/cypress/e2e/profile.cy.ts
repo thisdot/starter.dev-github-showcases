@@ -1,9 +1,10 @@
 import { View } from "../utils/view";
+import { InterceptResponse } from "../utils/intercept-response";
 
 describe("Profile Page", () => {
   beforeEach(() => {
-    cy.interceptGraphQLCalls(View.Profile);
-    cy.interceptRestCalls(View.Profile);
+    cy.interceptGraphQLCalls(View.Profile, InterceptResponse.Full);
+    cy.interceptRestCalls(View.Profile, InterceptResponse.Full);
 
     cy.visit("/thisdot");
   });
