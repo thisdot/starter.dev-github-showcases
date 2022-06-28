@@ -114,6 +114,30 @@
       },
       {
         "name": "RepoIssues",
+        "alias": "RepoIssues-FilterByLabel",
+        "variables": {
+          "filterBy": { "labels": ["bug"] }
+        },
+        "fixture": "repo/graphql/repoIssues-filterByLabel.graphql.json"
+      },
+      {
+        "name": "RepoIssues",
+        "alias": "RepoIssues-FilterByMilestone",
+        "variables": {
+          "filterBy": { "milestone": "MI_kwDOGd0nu84AcmnC" }
+        },
+        "fixture": "repo/graphql/repoIssues-filterByMilestone.graphql.json"
+      },
+      {
+        "name": "RepoIssues",
+        "alias": "RepoIssues-SortByAsc",
+        "variables": {
+          "orderBy": { "field": "CREATED_AT", "direction": "ASC" }
+        },
+        "fixture": "repo/graphql/repoIssues-sortByAsc.graphql.json"
+      },
+      {
+        "name": "RepoIssues",
         "alias": "RepoIssuesPage2",
         "variables": { "after": "issues-page1-endCursor" },
         "fixture": "repo/graphql/repoIssues-page2.graphql.json"
@@ -126,6 +150,22 @@
           "full": "repo/graphql/repoIssues.graphql.json",
           "empty": "repo/graphql/empty/repoIssues.empty.graphql.json"
         }
+      },
+      {
+        "name": "RepoPullRequests",
+        "alias": "RepoPullRequests-SortByAsc",
+        "variables": {
+          "orderBy": { "field": "CREATED_AT", "direction": "ASC" }
+        },
+        "fixture": "repo/graphql/repoPullRequests-sortByAsc.graphql.json"
+      },
+      {
+        "name": "RepoPullRequests",
+        "alias": "RepoPullRequests-FilterByLabel",
+        "variables": {
+          "labels": ["WIP DO NOT MERGE"]
+        },
+        "fixture": "repo/graphql/repoPullRequests-filterByLabel.graphql.json"
       },
       {
         "name": "RepoPullRequests",

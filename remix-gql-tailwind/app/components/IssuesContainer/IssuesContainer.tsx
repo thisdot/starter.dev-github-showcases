@@ -38,6 +38,7 @@ function IssuesContainer({
           </span>
           <span
             className={cn(styles.clearButtonText, 'group-hover:text-blue-500')}
+            data-testid="clear filters button"
           >
             Clear current search query, filters, and sorts
           </span>

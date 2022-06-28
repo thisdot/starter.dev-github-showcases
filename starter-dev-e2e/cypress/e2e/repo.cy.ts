@@ -259,6 +259,352 @@ describe("When there is proper repository page responses", () => {
       .get(`[data-testid="code-block"]`)
       .should("be.visible");
   });
+
+  it("should be able to filter valid open issues list by label", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "68")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "95")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      )
+      .get(`[data-testid="filters dropdown Label"]`)
+      .click()
+      .get(`[data-testid="filters dropdown item bug"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "0")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "7")
+      .get(`[data-testid="issues-empty"]`)
+      .should("be.visible")
+      .get(`[data-testid="clear filters button"]`)
+      .click()
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      );
+  });
+
+  it("should be able to filter valid closed issues list by label", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "68")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "95")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Tab focus lost when not at root level of repo"
+      )
+      .get(`[data-testid="filters dropdown Label"]`)
+      .click()
+      .get(`[data-testid="filters dropdown item bug"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "0")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "7")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Tab focus lost when not at root level of repo"
+      )
+      .get(`[data-testid="clear filters button"]`)
+      .click()
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Tab focus lost when not at root level of repo"
+      );
+  });
+
+  it("should be able to filter valid open issues list by milestone", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "68")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "95")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      )
+      .get(`[data-testid="filters dropdown Milestones"]`)
+      .click()
+      .get(`[data-testid="filters dropdown item Angular Apollo Tailwind"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "1")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "4")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Angular + Apollo + Tailwind] Closed angular-apollo-tailwind issue"
+      )
+      .get(`[data-testid="clear filters button"]`)
+      .click()
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      );
+  });
+
+  it("should be able to filter valid closed issues list by milestone", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "68")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "95")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Tab focus lost when not at root level of repo"
+      )
+      .get(`[data-testid="filters dropdown Milestones"]`)
+      .click()
+      .get(`[data-testid="filters dropdown item Angular Apollo Tailwind"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "1")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "4")
+      .get(`[data-testid="issue title"]`)
+      .should("contain.text", "[Angular + Apollo + Tailwind] Fix User Gists")
+      .get(`[data-testid="clear filters button"]`)
+      .click()
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Tab focus lost when not at root level of repo"
+      );
+  });
+
+  it("should be able to sort valid open issues list by oldest", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "68")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "95")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      )
+      .get(`[data-testid="filters dropdown Sort"]`)
+      .click()
+      .get(`[data-testid="filters dropdown item Oldest"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "68")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "95")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Angular - NgRx - SCSS] Create single repo readme view"
+      )
+      .get(`[data-testid="clear filters button"]`)
+      .click()
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Cypress] Write test coverage for organization page"
+      );
+  });
+
+  it("should be able to sort valid closed issues list by oldest", () => {
+    cy.get(`[data-testid="repo issues tab"]`)
+      .click()
+      .wait("@RepoIssuesQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "68")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "95")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Tab focus lost when not at root level of repo"
+      )
+      .get(`[data-testid="filters dropdown Sort"]`)
+      .click()
+      .get(`[data-testid="filters dropdown item Oldest"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "68")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "95")
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Angular + Apollo + Tailwind] Fix Tailwind Prod Bundle Size"
+      )
+      .get(`[data-testid="clear filters button"]`)
+      .click()
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="issue title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Tab focus lost when not at root level of repo"
+      );
+  });
+
+  it("should be able to filter valid open pull requests list by label", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@RepoPullRequestsQuery")
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "12")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "134")
+      .get(`[data-testid="pull request title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Update readme for local and deployment"
+      )
+      .get(`[data-testid="filters dropdown Label"]`)
+      .click()
+      .get(`[data-testid="filters dropdown item WIP DO NOT MERGE"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "1")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "0")
+      .get(`[data-testid="pull request title"]`)
+      .should(
+        "contain.text",
+        "[WIP] Vue3 ts quasar/feat/get profile info (#137)"
+      )
+      .get(`[data-testid="clear filters button"]`)
+      .click()
+      .get(`[data-testid="pull request title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Update readme for local and deployment"
+      );
+  });
+
+  it("should be able to filter valid closed issues list by label", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@RepoPullRequestsQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "12")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "134")
+      .get(`[data-testid="pull request title"]`)
+      .should("contain.text", "fix: fix dist folder for angular ngrx")
+      .get(`[data-testid="filters dropdown Label"]`)
+      .click()
+      .get(`[data-testid="filters dropdown item WIP DO NOT MERGE"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "1")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "0")
+      .get(`[data-testid="issues-empty"]`)
+      .should("be.visible")
+      .get(`[data-testid="clear filters button"]`)
+      .click()
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="pull request title"]`)
+      .should("contain.text", "fix: fix dist folder for angular ngrx");
+  });
+
+  it("should be able to sort valid open pull requests list by oldest", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@RepoPullRequestsQuery")
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "12")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "134")
+      .get(`[data-testid="pull request title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Update readme for local and deployment"
+      )
+      .get(`[data-testid="filters dropdown Sort"]`)
+      .click()
+      .get(`[data-testid="filters dropdown item Oldest"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "12")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "134")
+      .get(`[data-testid="pull request title"]`)
+      .should("contain.text", "fix environment variables and CORS issues")
+      .get(`[data-testid="clear filters button"]`)
+      .click()
+      .get(`[data-testid="pull request title"]`)
+      .should(
+        "contain.text",
+        "[Next + React Query + Tailwind] Update readme for local and deployment"
+      );
+  });
+
+  it("should be able to filter valid closed issues list by oldest", () => {
+    cy.get(`[data-testid="repo pull requests tab"]`)
+      .click()
+      .wait("@RepoPullRequestsQuery")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "12")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "134")
+      .get(`[data-testid="pull request title"]`)
+      .should("contain.text", "fix: fix dist folder for angular ngrx")
+      .get(`[data-testid="filters dropdown Sort"]`)
+      .click()
+      .get(`[data-testid="filters dropdown item Oldest"]`)
+      .click()
+      .get(`[data-testid="openIssuesButton"]`)
+      .should("contain.text", "12")
+      .get(`[data-testid="closedIssuesButton"]`)
+      .should("contain.text", "134")
+      .get(`[data-testid="pull request title"]`)
+      .should(
+        "contain.text",
+        "[Angular-Apollo-Tailwind] Resolve second level and beyond file tree rendering issues"
+      )
+      .get(`[data-testid="clear filters button"]`)
+      .click()
+      .get(`[data-testid="closedIssuesButton"]`)
+      .click()
+      .get(`[data-testid="pull request title"]`)
+      .should("contain.text", "fix: fix dist folder for angular ngrx");
+  });
 });
 
 describe("When there is proper empty repository page responses", () => {
