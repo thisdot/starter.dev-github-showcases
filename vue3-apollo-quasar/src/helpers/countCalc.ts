@@ -1,4 +1,4 @@
-const countsCalc = (count: number): number | string =>
+const countCalc = (count: number): number | string =>
   count > 99 ? `99+` : count;
 
-export default countsCalc;
+export default countCalc;

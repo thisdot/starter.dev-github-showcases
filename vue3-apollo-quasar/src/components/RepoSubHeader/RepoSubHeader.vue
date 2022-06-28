@@ -228,7 +228,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, defineProps, ref } from 'vue';
-import { countsCalc } from '@/helpers';
+import { countCalc } from '@/helpers';
 
 export default defineComponent({
   name: 'RepoSubHeader',
@@ -291,9 +291,9 @@ const selectNotification = (value: string) => (notify.value = value);
 
 const repo_url = computed(() => `/${props.username}/${props.repoName}`);
 const profile_url = computed(() => `/${props.username}`);
-const stars_count = computed(() => countsCalc(props.stars));
-const watch_count = computed(() => countsCalc(props.watch));
-const forks_count = computed(() => countsCalc(props.forks));
+const stars_count = computed(() => countCalc(props.stars));
+const watch_count = computed(() => countCalc(props.watch));
+const forks_count = computed(() => countCalc(props.forks));
 </script>
 
 <style lang="scss" scoped>

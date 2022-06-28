@@ -1,4 +1,4 @@
-import countsCalc from './countCalc';
+import countCalc from './countCalc';
 
 export { useApi } from './useApi';
-export { countsCalc };
+export { countCalc };
