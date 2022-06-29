@@ -1,9 +1,7 @@
 <ng-container *ngIf="repo">
   <h3 class="name-container">
-    <a class="name" href="/{{ repo.owner.login }}/{{ repo.name }}">{{
-      repo.name
-    }}</a>
-    <span class="visibility">{{ repo.private ? 'Private' : 'Public' }}</span>
+    <a class="name" href="{{ href }}">{{ repo.name }}</a>
+    <span class="visibility">{{ visibility }}</span>
   </h3>
   <p class="description">{{ repo.description }}</p>
   <div class="subline">
