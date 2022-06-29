@@ -35,7 +35,9 @@ describe('AuthEffects', () => {
     mockHttpClient = jasmine.createSpyObj('http', ['get', 'put']);
     TestBed.configureTestingModule({
       // the name ('http') goes as the first argument and an array of public methods you want to spyOn
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule.withRoutes([{ path: 'signin', redirectTo: '' }]),
+      ],
       providers: [
         AuthEffects,
         provideMockActions(() => actions$),
