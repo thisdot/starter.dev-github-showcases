@@ -48,16 +48,17 @@ export const useUserRepos = () => {
                 description: repo.description,
                 stargazerCount: repo.stargazerCount,
                 forkCount: repo.forkCount,
-                languageColor: repo.primaryLanguage?.color,
-                language: repo.primaryLanguage?.name,
-                isPrivate: repo.isPrivate,
-                isArchived: repo.isArchived,
-                isFork: repo.isFork,
+                primaryLanguage: {
+                  name: repo.primaryLanguage?.name,
+                  color: repo.primaryLanguage?.color,
+                },
+                visibility: repo.isPrivate,
                 updatedAt: repo.updatedAt,
               },
             ]
           : acc;
       }, []);
+      return nodes;
     });
 
     return {

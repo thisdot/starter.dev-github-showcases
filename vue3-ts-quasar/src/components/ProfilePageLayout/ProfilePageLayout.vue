@@ -26,9 +26,17 @@
             </q-tab-panel>
 
             <q-tab-panel name="repositories">
-              <q-list separator>
+              <q-list v-if="repos" separator>
                 <q-item v-for="repo in repos" :key="repo.id">
-                  <RepoCard v-bind="repo" />
+                  <RepoCard
+                    :name="repo.name"
+                    :visibility="repo.visibility"
+                    :description="repo.description"
+                    :primaryLanguage="repo.primaryLanguage"
+                    :stargazerCount="repo.stargazerCount"
+                    :forkCount="repo.forkCount"
+                    :updatedAt="repo.updatedAt"
+                  />
                 </q-item>
               </q-list>
               <slot name="repositories"></slot>
@@ -73,10 +81,13 @@ const getUserRepos = useUserRepos();
 const props = defineProps({
   username: String,
 });
+const tab = ref('');
+function changeTab(val) {
+  tab.value = val;
+}
 
 const user = useUserStore();
 const { repos, loading } = getUserRepos(props.username, false);
-console.log(repos);
 </script>
 
 <style lang="scss" scoped>
