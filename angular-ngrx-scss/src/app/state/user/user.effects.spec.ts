@@ -10,7 +10,7 @@ import { UserState } from './user.state';
 describe('UserEffects', () => {
   let actions$: Observable<Action>;
   let effects: UserEffects;
-  let userServiceMock: any;
+  let userServiceMock: jasmine.SpyObj<UserService>;
 
   beforeEach(() => {
     userServiceMock = jasmine.createSpyObj('UserService', {
