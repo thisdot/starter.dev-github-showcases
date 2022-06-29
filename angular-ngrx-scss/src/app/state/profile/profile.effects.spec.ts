@@ -8,8 +8,7 @@ import { ProfileEffects } from './profile.effects';
 describe('ProfileEffects', () => {
   let actions$: Observable<unknown>;
   let effects: ProfileEffects;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let userServiceMock: any;
+  let userServiceMock: jasmine.SpyObj<UserService>;
 
   beforeEach(() => {
     userServiceMock = jasmine.createSpyObj('UserService', {
