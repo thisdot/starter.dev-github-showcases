@@ -25,7 +25,11 @@ export class RepoCardComponent {
     }
   }
 
-  getColor(language: string): string {
-    return languageColors[language] ?? DEFAULT_COLOR;
+  get languageColor(): string {
+    if (this.repo?.language) {
+      return languageColors[this.repo.language] ?? DEFAULT_COLOR;
+    } else {
+      return DEFAULT_COLOR;
+    }
   }
 }

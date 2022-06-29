@@ -1,15 +1,12 @@
 <ng-container *ngIf="repo">
   <h3 class="name-container">
-    <a class="name" href="{{ href }}">{{ repo.name }}</a>
+    <a class="name" [href]="href">{{ repo.name }}</a>
     <span class="visibility">{{ visibility }}</span>
   </h3>
   <p class="description">{{ repo.description }}</p>
   <div class="subline">
     <div *ngIf="repo.language" class="language">
-      <div
-        class="language-color"
-        [style.backgroundColor]="getColor(repo.language)"
-      ></div>
+      <div class="language-color" [style.backgroundColor]="languageColor"></div>
       <div class="language-label">{{ repo.language }}</div>
     </div>
     <div *ngIf="repo.stargazers_count" class="stars">
