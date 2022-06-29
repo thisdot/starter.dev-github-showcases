@@ -10,6 +10,7 @@ import { UserState } from './user.state';
 describe('UserEffects', () => {
   let actions$: Observable<Action>;
   let effects: UserEffects;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let userServiceMock: any;
 
   beforeEach(() => {

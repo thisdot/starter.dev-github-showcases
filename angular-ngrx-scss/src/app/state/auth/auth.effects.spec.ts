@@ -18,6 +18,7 @@ describe('AuthEffects', () => {
   let actions$: Actions;
   let effects: AuthEffects;
   let mockHttpClient;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let authService: any;
 
   beforeEach(() => {

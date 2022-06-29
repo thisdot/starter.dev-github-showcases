@@ -6,8 +6,9 @@ import { UserService } from 'src/app/user/services/user.service';
 import { ProfileEffects } from './profile.effects';
 
 describe('ProfileEffects', () => {
-  let actions$: Observable<any>;
+  let actions$: Observable<unknown>;
   let effects: ProfileEffects;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let userServiceMock: any;
 
   beforeEach(() => {

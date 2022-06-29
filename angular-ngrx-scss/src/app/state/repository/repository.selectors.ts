@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector } from '@ngrx/store';
 import { RepoState } from './repository.state';
 
 export const repositoryFeatureKey = 'repository';

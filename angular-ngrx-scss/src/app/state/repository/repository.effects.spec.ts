@@ -15,6 +15,7 @@ import { RepoState } from './repository.state';
 describe('RepositoryEffects', () => {
   let actions$: Observable<Action>;
   let effects: RepositoryEffects;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let repoServiceMock: any;
 
   beforeEach(() => {
