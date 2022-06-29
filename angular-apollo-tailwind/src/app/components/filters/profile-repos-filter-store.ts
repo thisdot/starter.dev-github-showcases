@@ -45,7 +45,6 @@ const TYPES_DICT: { [key: string]: TypeFilter } = {
 const ORDER_BY_DICT: { [key: string]: RepositoryOrderField } = {
   CREATED_AT: RepositoryOrderField.CreatedAt,
   UPDATED_AT: RepositoryOrderField.UpdatedAt,
-  // PUSHED_AT: RepositoryOrderField.PushedAt,
   NAME: RepositoryOrderField.Name,
   STARGAZERS: RepositoryOrderField.Stargazers,
 };
