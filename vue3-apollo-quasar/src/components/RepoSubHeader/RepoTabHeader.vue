@@ -69,7 +69,7 @@ import {
   IssuesIcon,
   PullRequestsIcon,
 } from '@/components';
-import { countsCalc } from '@/helpers';
+import { countCalc } from '@/helpers';
 const tab = ref('code');
 
 const props = defineProps({
@@ -85,8 +85,8 @@ const props = defineProps({
 
 const emit = defineEmits(['triggerTab']);
 
-const issues_count = computed(() => countsCalc(props.issuesCount));
-const pull_requests_count = computed(() => countsCalc(props.pullRequestsCount));
+const issues_count = computed(() => countCalc(props.issuesCount));
+const pull_requests_count = computed(() => countCalc(props.pullRequestsCount));
 
 const activeTab = computed({
   get() {

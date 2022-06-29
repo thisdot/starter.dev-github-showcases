@@ -26,8 +26,8 @@
         <!-- Top right of the sub header -->
         <div class="row items-center">
           <button
-            class="git-btn text-capitalize row justify-between items-center relative-position"
-            @click="!!showingWatchOption"
+            class="git-btn menu__btn text-capitalize row justify-between items-center relative-position"
+            @click="!!refWatchMenu"
           >
             <TextWithIconAndCount>
               <template v-slot:icon>
@@ -43,114 +43,112 @@
             <span class="q-ml-xs">
               <q-icon class="fa fa-caret-down"></q-icon>
             </span>
-            <q-menu
-              class="dropdown_menu"
-              max-width="21rem"
-              max-height="50rem"
-              :offset="[0, 10]"
-              style="min-width: 10.5rem"
-              v-model="showingWatchOption"
-            >
-              <q-list>
-                <q-item
-                  class="row justify-between items-center q-py-xs q-px-md options-heading text-caption"
-                >
-                  <strong>Notifications</strong>
-                  <button
-                    class="close-btn"
-                    @click="() => (showingWatchOption = false)"
-                  >
-                    <q-icon class="fa fa-times"></q-icon>
-                  </button>
-                </q-item>
-                <q-separator></q-separator>
-                <ListItem clickable @click="selectNotification('mentions')">
-                  <template v-slot:icon>
-                    <q-icon class="text-h6">
-                      <CorrectIcon v-show="notify === 'mentions'" />
-                    </q-icon>
-                  </template>
-                  <div>
-                    <div class="text-bold">Participating and @mentions</div>
-                    <div class="text-caption overview">
-                      Only receive notifications from this repository when
-                      participating or @mentioned.
-                    </div>
-                  </div>
-                </ListItem>
-                <q-separator></q-separator>
-                <ListItem clickable @click="selectNotification('all')">
-                  <template v-slot:icon>
-                    <q-icon class="text-h6">
-                      <CorrectIcon v-show="notify === 'all'" />
-                    </q-icon>
-                  </template>
-                  <div>
-                    <div class="text-bold">All Activity</div>
-                    <div class="text-caption overview">
-                      Notified of all notifications on this repository.
-                    </div>
-                  </div>
-                </ListItem>
-                <q-separator></q-separator>
-                <ListItem clickable @click="selectNotification('ignore')">
-                  <template v-slot:icon>
-                    <q-icon class="text-h6">
-                      <CorrectIcon v-show="notify === 'ignore'" />
-                    </q-icon>
-                  </template>
-                  <div>
-                    <div class="text-bold">Ignore</div>
-                    <div class="text-caption overview">Never be notified.</div>
-                  </div>
-                </ListItem>
-                <q-separator></q-separator>
-                <ListItem clickable @click="selectNotification('custom')">
-                  <template v-slot:icon>
-                    <q-icon class="text-h6">
-                      <CorrectIcon v-show="notify === 'custom'" />
-                    </q-icon>
-                  </template>
-                  <div>
-                    <div class="row items-start justify-between">
-                      <div class="text-bold">Custom</div>
-                      <q-icon>
-                        <ArrowRightIcon />
-                      </q-icon>
-                    </div>
-                    <div class="text-caption overview">
-                      Select events you want to be notified of in addition to
-                      participating and @mentions.
-                    </div>
-                  </div>
-                </ListItem>
-                <q-separator></q-separator>
-                <ListItem className="item-bottom">
-                  <template v-slot:icon>
-                    <q-icon>
-                      <MobilePhoneIcon />
-                    </q-icon>
-                  </template>
-                  <span class="text-caption color-fg-muted text-normal pb-1">
-                    Get push notifications on
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="https://apps.apple.com/app/apple-store/id1477376905?ct=watch-dropdown&amp;mt=8&amp;pt=524675"
-                      >iOS</a
-                    >
-                    or
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="https://play.google.com/store/apps/details?id=com.github.android&amp;referrer=utm_campaign%3Dwatch-dropdown%26utm_medium%3Dweb%26utm_source%3Dgithub"
-                      >Android</a
-                    >.
-                  </span>
-                </ListItem>
-              </q-list>
-            </q-menu>
+
           </button>
+          <q-menu
+            class="dropdown_menu"
+            max-width="21rem"
+            max-height="50rem"
+            :offset="[0, 10]"
+            style="min-width: 10.5rem"
+            v-model="refWatchMenu"
+          >
+            <q-list>
+              <q-item
+                class="row justify-between items-center q-py-xs q-px-md options-heading text-caption"
+              >
+                <strong>Notifications</strong>
+                <button class="close-btn" @click="refWatchMenu = false">
+                  <q-icon class="fa fa-times"></q-icon>
+                </button>
+              </q-item>
+              <q-separator></q-separator>
+              <ListItem clickable @click="selectNotification('mentions')">
+                <template v-slot:icon>
+                  <q-icon class="text-h6">
+                    <CorrectIcon v-show="notify === 'mentions'" />
+                  </q-icon>
+                </template>
+                <div>
+                  <div class="text-bold">Participating and @mentions</div>
+                  <div class="text-caption overview">
+                    Only receive notifications from this repository when
+                    participating or @mentioned.
+                  </div>
+                </div>
+              </ListItem>
+              <q-separator></q-separator>
+              <ListItem clickable @click="selectNotification('all')">
+                <template v-slot:icon>
+                  <q-icon class="text-h6">
+                    <CorrectIcon v-show="notify === 'all'" />
+                  </q-icon>
+                </template>
+                <div>
+                  <div class="text-bold">All Activity</div>
+                  <div class="text-caption overview">
+                    Notified of all notifications on this repository.
+                  </div>
+                </div>
+              </ListItem>
+              <q-separator></q-separator>
+              <ListItem clickable @click="selectNotification('ignore')">
+                <template v-slot:icon>
+                  <q-icon class="text-h6">
+                    <CorrectIcon v-show="notify === 'ignore'" />
+                  </q-icon>
+                </template>
+                <div>
+                  <div class="text-bold">Ignore</div>
+                  <div class="text-caption overview">Never be notified.</div>
+                </div>
+              </ListItem>
+              <q-separator></q-separator>
+              <ListItem clickable @click="selectNotification('custom')">
+                <template v-slot:icon>
+                  <q-icon class="text-h6">
+                    <CorrectIcon v-show="notify === 'custom'" />
+                  </q-icon>
+                </template>
+                <div>
+                  <div class="row items-start justify-between">
+                    <div class="text-bold">Custom</div>
+                    <q-icon>
+                      <ArrowRightIcon />
+                    </q-icon>
+                  </div>
+                  <div class="text-caption overview">
+                    Select events you want to be notified of in addition to
+                    participating and @mentions.
+                  </div>
+                </div>
+              </ListItem>
+              <q-separator></q-separator>
+              <ListItem className="item-bottom">
+                <template v-slot:icon>
+                  <q-icon>
+                    <MobilePhoneIcon />
+                  </q-icon>
+                </template>
+                <span class="text-caption color-fg-muted text-normal pb-1">
+                  Get push notifications on
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://apps.apple.com/app/apple-store/id1477376905?ct=watch-dropdown&amp;mt=8&amp;pt=524675"
+                    >iOS</a
+                  >
+                  or
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://play.google.com/store/apps/details?id=com.github.android&amp;referrer=utm_campaign%3Dwatch-dropdown%26utm_medium%3Dweb%26utm_source%3Dgithub"
+                    >Android</a
+                  >.
+                </span>
+              </ListItem>
+            </q-list>
+          </q-menu>
           <button
             class="git-btn text-capitalize row justify-between items-center"
           >
@@ -169,8 +167,7 @@
             </TextWithIconAndCount>
           </button>
           <button
-            class="git-btn text-capitalize row justify-between items-center relative-position"
-            @click="!!showingStarsOption"
+            class="git-btn menu__btn text-capitalize row justify-between items-center relative-position"
           >
             <TextWithIconAndCount>
               <template v-slot:icon>
@@ -193,14 +190,14 @@
               max-height="50rem"
               :offset="[-50, 10]"
               style="min-width: 20.5rem"
-              v-model="showingStarsOption"
+              ref="refStarsMenu"
             >
               <q-list>
                 <q-item
                   class="row justify-between items-center q-py-xs q-px-md options-heading text-caption"
                 >
                   <strong>Suggested lists</strong>
-                  <button class="close-btn" @click="showingStarsOption = false">
+                  <button class="close-btn" @click="refStarsMenu.hide">
                     <q-icon class="fa fa-times"></q-icon>
                   </button>
                 </q-item>
@@ -229,6 +226,7 @@
 <script lang="ts">
 import { computed, defineComponent, defineProps, ref } from 'vue';
 import { countCalc } from '@/helpers';
+import { QMenu } from 'quasar';
 
 export default defineComponent({
   name: 'RepoSubHeader',
@@ -249,8 +247,8 @@ import RepoTabHeader from './RepoTabHeader.vue';
 import ListItem from './ListItem.vue';
 
 const notify = ref('all');
-const showingWatchOption = ref(false);
-const showingStarsOption = ref(false);
+const refStarsMenu = ref<QMenu>();
+const refWatchMenu = ref(false);
 
 const props = defineProps({
   username: {
