@@ -7,7 +7,7 @@ export function GitHubLogo() {
       version="1.1"
       width="32"
       data-view-component="true"
-      className="overflow-visible inline-block text-white align-middle"
+      className="inline-block overflow-visible align-middle text-white"
       fill="currentColor"
     >
       <path

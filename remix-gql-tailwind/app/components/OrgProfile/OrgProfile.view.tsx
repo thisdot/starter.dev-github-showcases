@@ -5,17 +5,17 @@ interface OrgProfileViewProps {
 
 function OrgProfileView({ avatarUrl, name }: OrgProfileViewProps) {
   return (
-    <div className="flex items-center my-2">
+    <div className="my-2 flex items-center">
       {avatarUrl && (
         <img
           src={avatarUrl}
           width={28}
           height={28}
           alt="Org Avatar"
-          className="border rounded"
+          className="rounded border"
         />
       )}
-      <span className="text-xl font-semibold text-gray-700 ml-2">{name}</span>
+      <span className="ml-2 text-xl font-semibold text-gray-700">{name}</span>
     </div>
   );
 }

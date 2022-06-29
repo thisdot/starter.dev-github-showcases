@@ -1,13 +1,13 @@
 <div class="flex space-x-4">
-  <sd-count-button-group [count]="watchers">
+  <sd-count-button-group data-testid="repo watch count" [count]="watchers">
     <sd-eye-icon class="btnIcon"></sd-eye-icon>
     Watch
   </sd-count-button-group>
-  <sd-count-button-group [count]="stargazers">
+  <sd-count-button-group data-testid="repo star count" [count]="stargazers">
     <hero-icon name="star" type="outline" class="btnIcon"></hero-icon>
     Star
   </sd-count-button-group>
-  <sd-count-button-group [count]="forks">
+  <sd-count-button-group data-testid="repo fork count" [count]="forks">
     <sd-git-branch-icon class="btnIcon"></sd-git-branch-icon>
     Fork
   </sd-count-button-group>

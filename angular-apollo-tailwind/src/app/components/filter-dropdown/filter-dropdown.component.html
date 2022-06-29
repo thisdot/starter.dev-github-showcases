@@ -1,6 +1,11 @@
 <ul class="filter-dropdown-container">
   <div>
-    <button role="button" class="filterButton" (click)="toggleMenu()">
+    <button
+      role="button"
+      class="filterButton"
+      (click)="toggleMenu()"
+      [attr.data-testid]="'filters dropdown ' + name"
+    >
       {{ name }}
       <hero-icon
         name="chevron-down"
@@ -29,6 +34,7 @@
           type="button"
           class="itemButton"
           (click)="handleSetFilterClick(item.value)"
+          [attr.data-testid]="'filters dropdown item ' + item.label"
         >
           <hero-icon
             *ngIf="item.value === current"

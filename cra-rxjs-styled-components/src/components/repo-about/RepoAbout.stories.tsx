@@ -26,9 +26,9 @@ UserRepoDescription.args = {
     'This is version 2 of my Black Excellence Music Project. This will have all new games, more artists and educational resources.',
 };
 
-export const WebsiteLink = Template.bind({});
-WebsiteLink.args = {
-  websiteLink: 'https://black-excellence-music-project.netlify.app/',
+export const HomePageUrl = Template.bind({});
+HomePageUrl.args = {
+  homepageUrl: 'https://black-excellence-music-project.netlify.app/',
 };
 
 export const Topics = Template.bind({});

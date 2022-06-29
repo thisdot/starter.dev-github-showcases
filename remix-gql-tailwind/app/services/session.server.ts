@@ -1,4 +1,4 @@
-import { createCookieSessionStorage, Session } from 'remix';
+import { createCookieSessionStorage, Session } from '@remix-run/node';
 import { auth } from './auth.server';
 
 export let sessionStorage = createCookieSessionStorage({
@@ -7,7 +7,7 @@ export let sessionStorage = createCookieSessionStorage({
     httpOnly: true,
     path: '/',
     sameSite: 'lax',
-    secrets: ['s3cr3t'], // TODO: replace this with an actual secret
+    secrets: [process.env.SESSION_SECRET], // TODO: replace this with an actual secret
     secure: process.env.NODE_ENV === 'production',
   },
 });

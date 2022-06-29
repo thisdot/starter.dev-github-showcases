@@ -1,5 +1,5 @@
-import { LoaderFunction, useOutletContext } from 'remix';
-import { json, useLoaderData } from 'remix';
+import { json, LoaderFunction } from '@remix-run/node';
+import { useLoaderData, useOutletContext } from '@remix-run/react';
 import { parseQueryData } from '~/components/FileExplorer/parseQueryData';
 import FileExplorerNav from '~/components/FileExplorerNav/FileExplorerNav';
 import RepoHeader from '~/components/RepoHeader/RepoHeader';
@@ -105,7 +105,7 @@ export default function Screen() {
   return (
     <RepoProvider value={context}>
       <RepoHeader />
-      <div className="max-w-screen-2xl mx-auto py-8 px-4">
+      <div className="mx-auto max-w-screen-2xl py-8 px-4">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12">
             <FileExplorerNav />

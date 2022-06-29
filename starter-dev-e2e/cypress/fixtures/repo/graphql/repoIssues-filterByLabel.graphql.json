@@ -1,0 +1,257 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "milestones": {
+        "nodes": [
+          {
+            "id": "MI_kwDOGd0nu84AcmnC",
+            "closed": false,
+            "description": "",
+            "number": 1,
+            "title": "Angular Apollo Tailwind",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84AdGEs",
+            "closed": false,
+            "description": null,
+            "number": 2,
+            "title": "Angular + NgRx + SCSS",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84AdSA7",
+            "closed": false,
+            "description": "",
+            "number": 3,
+            "title": "Vue + TS + Quasar",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6g-",
+            "closed": false,
+            "description": "",
+            "number": 4,
+            "title": "Vite + Apollo + Vanilla Extract",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6g_",
+            "closed": false,
+            "description": "",
+            "number": 5,
+            "title": "Remix + Tailwind",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6hW",
+            "closed": false,
+            "description": "",
+            "number": 6,
+            "title": "CRA + RxJS + Styled Components",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6hX",
+            "closed": false,
+            "description": "",
+            "number": 7,
+            "title": "Next.js + React Query + Tailwind",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84AeYuV",
+            "closed": false,
+            "description": "",
+            "number": 8,
+            "title": "E2E Cypress Testing",
+            "__typename": "Milestone"
+          }
+        ],
+        "pageInfo": {
+          "startCursor": "Y3Vyc29yOnYyOpHOAHJpwg==",
+          "endCursor": "Y3Vyc29yOnYyOpHOAHmLlQ==",
+          "hasNextPage": false,
+          "hasPreviousPage": false,
+          "__typename": "PageInfo"
+        },
+        "totalCount": 8,
+        "__typename": "MilestoneConnection"
+      },
+      "closedIssues": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wMi0yMVQxMDoxMTowMi0wNjowMM5ETmox",
+          "hasPreviousPage": false,
+          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNS0xOFQwOTo0MDowMy0wNTowMM5J6fub",
+          "__typename": "PageInfo"
+        },
+        "totalCount": 7,
+        "nodes": [
+          {
+            "id": "I_kwDOGd0nu85J6fub",
+            "author": { "login": "vyktoremario", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [
+                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
+              ],
+              "totalCount": 1,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-24T17:33:57Z",
+            "title": "[Next + React Query + Tailwind] Tab focus lost when not at root level of repo",
+            "number": 292,
+            "createdAt": "2022-05-18T14:40:03Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85J6cMk",
+            "author": { "login": "vyktoremario", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [
+                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
+              ],
+              "totalCount": 1,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-24T17:23:09Z",
+            "title": "[Next + React Query + Tailwind] Remove Empty README Component from sub-pages",
+            "number": 291,
+            "createdAt": "2022-05-18T14:29:39Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85JgAi3",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [
+                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
+              ],
+              "totalCount": 1,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-12T15:18:54Z",
+            "title": "[Remix + GraphQL + Tailwind] Tab focus lost when not at root level of repo",
+            "number": 270,
+            "createdAt": "2022-05-11T20:05:30Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85Jf-3Y",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [
+                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
+              ],
+              "totalCount": 1,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-12T15:20:58Z",
+            "title": "[Remix + GraphQL + Tailwind] UI: caret icon in branch dropdown menu is too big",
+            "number": 268,
+            "createdAt": "2022-05-11T19:59:41Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85Jf-2r",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 2,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [
+                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
+              ],
+              "totalCount": 1,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-11T20:13:54Z",
+            "title": "[Remix + GraphQL + Tailwind] Remove \"Edit Profile\" from user/org pages",
+            "number": 267,
+            "createdAt": "2022-05-11T19:59:38Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85Jf-2G",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [
+                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
+              ],
+              "totalCount": 1,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-17T07:55:17Z",
+            "title": "[Remix + GraphQL + Tailwind] BUG: Gists don't open correctly",
+            "number": 266,
+            "createdAt": "2022-05-11T19:59:35Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85I6dsc",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [
+                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
+              ],
+              "totalCount": 1,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-09T14:55:50Z",
+            "title": "[Next + React Query + Tailwind] Deployed site not loading queries",
+            "number": 239,
+            "createdAt": "2022-05-02T19:54:08Z",
+            "__typename": "Issue"
+          }
+        ],
+        "__typename": "IssueConnection"
+      },
+      "openIssues": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "issues-page1-endCursor",
+          "hasPreviousPage": false,
+          "startCursor": "issues-page1-startCursor",
+          "__typename": "PageInfo"
+        },
+        "totalCount": 0,
+        "nodes": [],
+        "__typename": "IssueConnection"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

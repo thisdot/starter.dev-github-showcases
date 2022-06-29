@@ -1,4 +1,4 @@
-<div class="repos-filters-container">
+<div data-testid="profile repos selection" class="repos-filters-container">
   <div class="grow">
     <input
       role="search"
@@ -8,11 +8,13 @@
       id="search"
       class="searchInput"
       placeholder="Find a repository.."
+      data-testid="repository filters search input"
     />
   </div>
   <div class="filters">
     <div>
       <app-repos-filter-dropdown
+        data-testid="profile type button"
         name="Type"
         description="Select type"
         [current]="state.type"
@@ -22,6 +24,7 @@
     </div>
     <div>
       <app-repos-filter-dropdown
+        data-testid="profile language button"
         name="Language"
         description="Select language"
         [current]="state.language"
@@ -31,6 +34,7 @@
     </div>
     <div>
       <app-repos-filter-dropdown
+        data-testid="profile sort button"
         name="Sort"
         description="Select order"
         [current]="state.sort.field"

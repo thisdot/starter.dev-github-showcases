@@ -1,8 +1,17 @@
 node_modules
 
+/server/index.js
+/public/build
+preferences.arc
+sam.json
+sam.yaml
+.env
+
+/cypress/screenshots
+/cypress/videos
+
+/app/styles/tailwind.css
 /.cache
 /build
-/public/build
-.env
 .vscode
 /app/styles/*.css

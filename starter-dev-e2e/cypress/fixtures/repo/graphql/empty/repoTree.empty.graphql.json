@@ -1,0 +1,16 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "branches": {
+        "nodes": [],
+        "__typename": "RefConnection"
+      },
+      "tree": {
+        "entries": [],
+        "__typename": "Tree"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

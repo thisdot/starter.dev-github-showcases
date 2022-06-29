@@ -1,0 +1,853 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "openPullRequests": {
+        "totalCount": 12,
+        "pageInfo": {
+          "hasPreviousPage": false,
+          "hasNextPage": false,
+          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNS0yNVQwMzowOTozMC0wNTowMM44bRAe",
+          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wMi0xNlQxNzozNToxNi0wNjowMM4y9R9y",
+          "__typename": "PageInfo"
+        },
+        "nodes": [
+          {
+            "id": "PR_kwDOGd0nu844W-RM",
+            "author": { "login": "iansamz", "__typename": "User" },
+            "comments": {
+              "totalCount": 12,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 1,
+              "nodes": [
+                {
+                  "color": "FA3C07",
+                  "name": "WIP DO NOT MERGE",
+                  "__typename": "Label"
+                }
+              ],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "[Next + React Query + Tailwind] Update readme for local and deployment",
+            "number": 304,
+            "createdAt": "2022-05-24T12:10:08Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu844Noy2",
+            "author": { "login": "vyktoremario", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "Update style repo landing page",
+            "number": 300,
+            "createdAt": "2022-05-20T20:17:44Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu844Mx1D",
+            "author": { "login": "markshenouda", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "feat: setup react context",
+            "number": 299,
+            "createdAt": "2022-05-20T15:34:10Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu844JiDC",
+            "author": { "login": "WillHutt", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "feat: initial deployment for spike",
+            "number": 296,
+            "createdAt": "2022-05-19T21:11:06Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu843znB5",
+            "author": { "login": "jhmsly", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "feat: Extended sidebar component to accept array of links and title p…",
+            "number": 282,
+            "createdAt": "2022-05-13T20:11:41Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu843u7rA",
+            "author": { "login": "BrettZeidler", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "[Cypress] Add Cypress and stub auth for further e2e testing",
+            "number": 280,
+            "createdAt": "2022-05-12T16:31:25Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu841gBLo",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "Cra rxjs/issue tab view",
+            "number": 215,
+            "createdAt": "2022-04-01T16:10:58Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu840l-V8",
+            "author": { "login": "AllanJeremy", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "Improved Documentation for Vue3 + TS + Quasar",
+            "number": 212,
+            "createdAt": "2022-03-17T11:39:56Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu840TjqE",
+            "author": { "login": "AllanJeremy", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 1,
+              "nodes": [
+                {
+                  "color": "FA3C07",
+                  "name": "WIP DO NOT MERGE",
+                  "__typename": "Label"
+                }
+              ],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "[WIP] Vue3 ts quasar/feat/get profile info (#137)",
+            "number": 211,
+            "createdAt": "2022-03-11T15:10:42Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu840NPgp",
+            "author": { "login": "WillHutt", "__typename": "User" },
+            "comments": {
+              "totalCount": 3,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "feat: adds user gists",
+            "number": 207,
+            "createdAt": "2022-03-10T00:59:46Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu84z47NX",
+            "author": { "login": "AllanJeremy", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 1,
+              "nodes": [
+                {
+                  "color": "a2eeef",
+                  "name": "enhancement",
+                  "__typename": "Label"
+                }
+              ],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "Vue3 + TS + Quasar - Get user top repos",
+            "number": 180,
+            "createdAt": "2022-03-03T12:54:32Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu84y9R9y",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "fix environment variables and CORS issues",
+            "number": 149,
+            "createdAt": "2022-02-16T23:35:16Z",
+            "__typename": "PullRequest"
+          }
+        ],
+        "__typename": "PullRequestConnection"
+      },
+      "closedPullRequests": {
+        "totalCount": 134,
+        "pageInfo": {
+          "hasPreviousPage": true,
+          "hasNextPage": false,
+          "startCursor": "pullRequests-page2-startcursor",
+          "endCursor": "pullRequests-page2-endCursosr",
+          "__typename": "PageInfo"
+        },
+        "nodes": [
+          {
+            "id": "PR_kwDOGd0nu843m3cG",
+            "author": { "login": "BrettZeidler", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-10T22:35:58Z",
+            "merged": true,
+            "mergedAt": "2022-05-10T22:35:58Z",
+            "title": "[Angular-Apollo-Tailwind] Run yarn generate in amplify deploy",
+            "number": 261,
+            "createdAt": "2022-05-10T22:14:25Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu843knwb",
+            "author": { "login": "iansamz", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-13T18:22:53Z",
+            "merged": true,
+            "mergedAt": "2022-05-13T18:22:53Z",
+            "title": "[Angular-Apollo-Tailwind]: Pagination ",
+            "number": 252,
+            "createdAt": "2022-05-10T12:19:55Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu843bzBz",
+            "author": { "login": "tyrelchambers", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-06T19:44:30Z",
+            "merged": true,
+            "mergedAt": "2022-05-06T19:44:29Z",
+            "title": "update login page",
+            "number": 250,
+            "createdAt": "2022-05-06T19:39:12Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu843bp3V",
+            "author": { "login": "tyrelchambers", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-06T19:30:27Z",
+            "merged": true,
+            "mergedAt": "2022-05-06T19:30:26Z",
+            "title": "rename remix folder to remix-gql-tailwind",
+            "number": 249,
+            "createdAt": "2022-05-06T18:42:18Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu843bZ9K",
+            "author": { "login": "BrettZeidler", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-09T15:21:18Z",
+            "merged": true,
+            "mergedAt": "2022-05-09T15:21:18Z",
+            "title": "[Angular-Apollo-Tailwind] Resolve second level and beyond file tree rendering issues",
+            "number": 248,
+            "createdAt": "2022-05-06T17:28:59Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu843UK6c",
+            "author": { "login": "WillHutt", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-12T15:47:34Z",
+            "merged": true,
+            "mergedAt": "2022-05-12T15:47:34Z",
+            "title": "feat: adds userdropdown component",
+            "number": 246,
+            "createdAt": "2022-05-04T20:12:10Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu843UABj",
+            "author": { "login": "jhmsly", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 1,
+              "nodes": [
+                {
+                  "color": "a2eeef",
+                  "name": "enhancement",
+                  "__typename": "Label"
+                }
+              ],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-05T20:49:46Z",
+            "merged": true,
+            "mergedAt": "2022-05-05T20:49:45Z",
+            "title": "feat: add cra-rxjs-sc deployment config to amplify",
+            "number": 245,
+            "createdAt": "2022-05-04T19:35:25Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu843GGtz",
+            "author": { "login": "jhmsly", "__typename": "User" },
+            "comments": {
+              "totalCount": 3,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 1,
+              "nodes": [
+                {
+                  "color": "a2eeef",
+                  "name": "enhancement",
+                  "__typename": "Label"
+                }
+              ],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-13T20:08:39Z",
+            "merged": true,
+            "mergedAt": "2022-05-13T20:08:38Z",
+            "title": "Add Currently Authenticated User's Gists to Sidebar",
+            "number": 238,
+            "createdAt": "2022-04-29T19:11:17Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu8429q3i",
+            "author": { "login": "danecando", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-04-29T16:05:00Z",
+            "merged": true,
+            "mergedAt": "2022-04-29T16:05:00Z",
+            "title": "Add next-react-query-tailwind to README.md",
+            "number": 237,
+            "createdAt": "2022-04-28T17:34:34Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu842uRNy",
+            "author": { "login": "danecando", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-04-29T16:05:22Z",
+            "merged": true,
+            "mergedAt": "2022-04-29T16:05:22Z",
+            "title": "Improved repo readme #233",
+            "number": 235,
+            "createdAt": "2022-04-25T12:34:22Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu841eTVk",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-04-01T17:40:11Z",
+            "merged": true,
+            "mergedAt": "2022-04-01T17:40:11Z",
+            "title": "Chore/merge repos",
+            "number": 214,
+            "createdAt": "2022-04-01T09:13:30Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu841Bdmm",
+            "author": { "login": "morgnism", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-25T14:54:18Z",
+            "merged": true,
+            "mergedAt": "2022-03-25T14:54:17Z",
+            "title": "Feat/apollo codegen",
+            "number": 213,
+            "createdAt": "2022-03-25T14:52:20Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu840TjqE",
+            "author": { "login": "AllanJeremy", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-06-13T09:45:13Z",
+            "merged": true,
+            "mergedAt": "2022-06-13T09:45:13Z",
+            "title": "feat: adds get profile info ",
+            "number": 211,
+            "createdAt": "2022-03-11T15:10:42Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu840QIHk",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-10T17:44:27Z",
+            "merged": true,
+            "mergedAt": "2022-03-10T17:44:27Z",
+            "title": "[starter-dev-backend] add --profile back to credentials config",
+            "number": 210,
+            "createdAt": "2022-03-10T17:08:28Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu840QB1g",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-10T17:03:33Z",
+            "merged": true,
+            "mergedAt": "2022-03-10T17:03:33Z",
+            "title": "[starter-dev-backend] fix serverless bundle issues",
+            "number": 209,
+            "createdAt": "2022-03-10T16:41:38Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu840P9uW",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-10T16:30:07Z",
+            "merged": true,
+            "mergedAt": "2022-03-10T16:30:07Z",
+            "title": "update backend deploy script to install secrets correctly",
+            "number": 208,
+            "createdAt": "2022-03-10T16:24:14Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu840NPgp",
+            "author": { "login": "WillHutt", "__typename": "User" },
+            "comments": {
+              "totalCount": 3,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-06-03T16:24:58Z",
+            "merged": true,
+            "mergedAt": "2022-06-03T16:24:58Z",
+            "title": "feat: adds user gists",
+            "number": 207,
+            "createdAt": "2022-03-10T00:59:46Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu840Lw1k",
+            "author": { "login": "jdwilkin4", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 1,
+              "nodes": [
+                {
+                  "color": "FA3C07",
+                  "name": "WIP DO NOT MERGE",
+                  "__typename": "Label"
+                }
+              ],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-10T16:13:23Z",
+            "merged": true,
+            "mergedAt": "2022-03-10T16:13:23Z",
+            "title": "Add basic endpoints for kits to starter-dev-backend - Rest and GraphQL",
+            "number": 206,
+            "createdAt": "2022-03-09T16:25:49Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu84z-jYr",
+            "author": { "login": "Reshurum", "__typename": "User" },
+            "comments": {
+              "totalCount": 3,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-30T22:41:29Z",
+            "merged": true,
+            "mergedAt": "2022-03-30T22:41:28Z",
+            "title": "[Angular - NgRx - SCSS] #118: Implement User Profile Page",
+            "number": 181,
+            "createdAt": "2022-03-04T21:45:36Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu84z47NX",
+            "author": { "login": "AllanJeremy", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 1,
+              "nodes": [
+                {
+                  "color": "a2eeef",
+                  "name": "enhancement",
+                  "__typename": "Label"
+                }
+              ],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-06-03T13:36:59Z",
+            "merged": true,
+            "mergedAt": "2022-06-03T13:36:59Z",
+            "title": "Vue3 + TS + Quasar - Get user top repos",
+            "number": 180,
+            "createdAt": "2022-03-03T12:54:32Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu84z0QLp",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-02T10:05:57Z",
+            "merged": true,
+            "mergedAt": "2022-03-02T10:05:57Z",
+            "title": "Vue/component/fix props names tab header repo card",
+            "number": 179,
+            "createdAt": "2022-03-02T09:59:44Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu84zuJWF",
+            "author": { "login": "AllanJeremy", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-01T14:00:06Z",
+            "merged": false,
+            "mergedAt": null,
+            "title": "Vue3 ts quasar/refactoring/aggregator cleanup",
+            "number": 178,
+            "createdAt": "2022-03-01T10:58:16Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu84zqxvv",
+            "author": { "login": "AllanJeremy", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-02T09:56:13Z",
+            "merged": false,
+            "mergedAt": null,
+            "title": "Vue3+ TS + Quasar - Setup apollo",
+            "number": 177,
+            "createdAt": "2022-02-28T14:31:20Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu84zqv9n",
+            "author": { "login": "AllanJeremy", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-01T14:46:03Z",
+            "merged": true,
+            "mergedAt": "2022-03-01T14:46:03Z",
+            "title": "Vue3 + TS + Quasar - Implemented Auth functionality (Login & Signout)",
+            "number": 176,
+            "createdAt": "2022-02-28T14:23:41Z",
+            "__typename": "PullRequest"
+          },
+          {
+            "id": "PR_kwDOGd0nu84zfMqt",
+            "author": { "login": "morgnism", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 0,
+              "nodes": [],
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-25T21:23:21Z",
+            "merged": true,
+            "mergedAt": "2022-02-25T21:23:21Z",
+            "title": "Feat/oauth server",
+            "number": 175,
+            "createdAt": "2022-02-25T21:23:10Z",
+            "__typename": "PullRequest"
+          }
+        ],
+        "__typename": "PullRequestConnection"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

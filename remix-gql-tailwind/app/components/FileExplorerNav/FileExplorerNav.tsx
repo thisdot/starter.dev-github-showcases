@@ -1,5 +1,5 @@
 import { GitBranchIcon } from '../Icons';
-import { Link } from 'remix';
+import { Link } from '@remix-run/react';
 import { useRepo } from '../../context/RepoContext';
 import * as styles from './FileExplorerNav.classNames';
 import { removePathPart } from '../../lib/pathUtils';
