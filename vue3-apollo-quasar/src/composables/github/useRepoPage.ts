@@ -86,7 +86,11 @@ export const useRepo = () => {
     }
 
     // TODO: add better typing for repository
-    const repository: any = useResult(result, [], (data) => data?.repository);
+    const repository: any = useResult(
+      result,
+      undefined,
+      (data) => data?.repository,
+    );
 
     const context: RepoContext = {
       owner,
