@@ -215,7 +215,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, PropType } from 'vue';
 import RepoTabHeader from './RepoTabHeader.vue';
 import ListItem from './ListItem.vue';
 import TextWithIconAndCount from '@/components/TextWithIconAndCount';
@@ -230,35 +230,35 @@ export default defineComponent({
   name: 'RepoSubHeader',
   props: {
     username: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
     repoName: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
     visibilityTag: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
     stars: {
-      type: Number,
+      type: Number as PropType<number>,
       required: true,
     },
     watch: {
-      type: Number,
+      type: Number as PropType<number>,
       required: true,
     },
     forks: {
-      type: Number,
+      type: Number as PropType<number>,
       required: true,
     },
     issuesCount: {
-      type: Number,
+      type: Number as PropType<number>,
       required: true,
     },
     pullRequestsCount: {
-      type: Number,
+      type: Number as PropType<number>,
       required: true,
     },
   },
@@ -272,13 +272,7 @@ export default defineComponent({
     RepoTabHeader,
     ListItem,
   },
-  setup(props: {
-    stars: number;
-    forks: number;
-    watch: number;
-    username: string;
-    repoName: string;
-  }) {
+  setup(props) {
     const refStarsMenu = ref(false);
     const refWatchMenu = ref(false);
 
