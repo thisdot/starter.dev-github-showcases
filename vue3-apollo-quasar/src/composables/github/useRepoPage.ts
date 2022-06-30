@@ -112,7 +112,7 @@ export const useRepo = () => {
           }
         : undefined,
     };
-    return context;
+    return { context, loading };
   };
   return { getRepoPage };
 };
