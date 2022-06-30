@@ -24,6 +24,25 @@ type TopicNodes =
   | null
   | undefined;
 
+interface RepoContext {
+  name: string;
+  owner: string;
+  branch: string;
+  path: string;
+  data?: {
+    isPrivate: boolean;
+    stargazerCount: number;
+    forkCount: number;
+    watcherCount: number;
+    openIssueCount: number;
+    openPullRequestCount: number;
+    description?: string | null;
+    homepageUrl?: string | null;
+    topics: string[];
+    isOrg: boolean;
+  };
+}
+
 function parseTopics(topics: TopicNodes): string[] {
   if (!topics) {
     return [];
@@ -66,17 +85,16 @@ export const useRepo = () => {
       return null;
     }
 
-    const repository = useResult(result, [], (data) => data?.repository);
+    // TODO: add better typing for repository
+    const repository: any = useResult(result, [], (data) => data?.repository);
 
-    const context = {
+    const context: RepoContext = {
       owner,
       name,
       branch: repository?.defaultBranchRef?.name ?? defaultBranch,
       path: formattedPath,
-      isRepoLoading: loading,
       data: repository
         ? {
-            // @ts-ignore - generated types be like that
             isOrg: typeof repository.owner?.orgName === 'string',
             isPrivate: repository.isPrivate,
             stargazerCount: repository.stargazerCount,
