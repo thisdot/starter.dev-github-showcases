@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 
 import { AuthResponse } from '../interfaces/auth';
 import { TokenService } from './token.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient,
     private tokenService: TokenService,
+    private route: ActivatedRoute,
   ) {}
 
   /**
@@ -22,7 +24,8 @@ export class AuthService {
    */
   signIn(): void {
     this.tokenService.removeToken();
-    window.location.href = `${environment.apiUrl}/api/auth/signin?redirect_url=${environment.redirectUrl}`;
+    const redirectUrl = this.getRedirectUrl();
+    window.location.href = `${environment.apiUrl}/api/auth/signin?redirect_url=${redirectUrl}`;
   }
 
   signOut(): void {
@@ -43,5 +46,21 @@ export class AuthService {
         map((data) => data.access_token),
         tap((token) => token && this.tokenService.saveToken(token)),
       );
+  }
+
+  /**
+   * Determines the host of the page, and uses that to create a redirect url
+   */
+  getRedirectUrl() {
+    const prPreviewRegex = /pr-(?:\d+)+.(?:[a-z0-9]+)+.amplifyapp.com/;
+    const currentUrlHost = window.location.host;
+    const prMatch = prPreviewRegex.test(currentUrlHost);
+    let redirectUrl: string;
+    if (prMatch) {
+      redirectUrl = `https://${currentUrlHost}/redirect`;
+    } else {
+      redirectUrl = environment.redirectUrl;
+    }
+    return redirectUrl;
   }
 }
