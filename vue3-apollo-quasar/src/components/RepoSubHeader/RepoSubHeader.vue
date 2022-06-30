@@ -289,7 +289,6 @@ export default defineComponent({
 
     document.body.addEventListener('click', (e: Event) => {
       const target = e.target.localName;
-      console.log(target);
       if (target == 'body') {
         refWatchMenu.value = false;
         refStarsMenu.value = false;

@@ -10,7 +10,7 @@ describe('RepoSubHeader', () => {
       repoName: 'starter.dev-github-showcases',
       visibilityTag: 'Public',
       stars: 100,
-      watches: 30,
+      watch: 30,
       forks: 1,
       issuesCount: 10,
       pullRequestsCount: 10,

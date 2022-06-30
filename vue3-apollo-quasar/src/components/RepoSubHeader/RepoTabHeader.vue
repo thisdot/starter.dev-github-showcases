@@ -1,5 +1,5 @@
 <template>
-  <diiv class="row items-center q-mt-md">
+  <div class="row items-center q-mt-md">
     <q-tabs
       v-model="activeTab"
       style="color: #586069"
@@ -7,8 +7,9 @@
       dense
       no-caps
       inline-label
+      class="tabs"
     >
-      <q-tab name="code" class="repo-tab">
+      <q-tab name="code" class="repo-tab" @click="tab = 'code'">
         <TextWithIconAndCount>
           <template v-slot:icon>
             <q-icon class="custome-icon">
@@ -20,7 +21,7 @@
           </template>
         </TextWithIconAndCount>
       </q-tab>
-      <q-tab name="issues" class="repo-tab">
+      <q-tab name="issues" class="repo-tab" @click="tab = 'issues'">
         <TextWithIconAndCount>
           <template v-slot:icon>
             <q-icon class="custome-icon">
@@ -35,7 +36,7 @@
           </template>
         </TextWithIconAndCount>
       </q-tab>
-      <q-tab name="pullrequests" class="repo-tab">
+      <q-tab name="pullrequests" class="repo-tab" @click="tab = 'pullrequests'">
         <TextWithIconAndCount>
           <template v-slot:icon>
             <q-icon class="custome-icon">
@@ -51,11 +52,12 @@
         </TextWithIconAndCount>
       </q-tab>
     </q-tabs>
-  </diiv>
+  </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, defineProps, ref, defineEmits } from 'vue';
+import { countCalc } from '@/helpers';
 
 export default defineComponent({
   name: 'RepoTabHeader',
@@ -69,7 +71,7 @@ import {
   IssuesIcon,
   PullRequestsIcon,
 } from '@/components';
-import { countCalc } from '@/helpers';
+
 const tab = ref('code');
 
 const props = defineProps({
