@@ -2,10 +2,10 @@ import { REPO_PAGE_QUERY } from './queries';
 import { useQuery, useResult } from '@vue/apollo-composable';
 
 interface RepoPageProps {
-  name?: string | string[];
-  owner?: string | string[];
-  branch?: string | string[];
-  path?: string | string[];
+  name?: string;
+  owner?: string;
+  branch?: string;
+  path?: string;
 }
 
 type TopicNodes =
