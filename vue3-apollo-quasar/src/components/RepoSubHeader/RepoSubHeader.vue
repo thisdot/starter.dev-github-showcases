@@ -287,9 +287,10 @@ export default defineComponent({
       refStarsMenu.value = !refStarsMenu.value;
     };
 
-    document.body.addEventListener('click', (e: Event) => {
-      const target = e.target.localName;
-      if (target == 'body') {
+    document.body.addEventListener('click', (e) => {
+      const target = e.target as Element;
+      const value = target.localName;
+      if (value == 'body') {
         refWatchMenu.value = false;
         refStarsMenu.value = false;
       }
