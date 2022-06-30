@@ -162,7 +162,7 @@
           </button>
           <button
             class="git-btn menu__btn text-capitalize row justify-between items-center no-wrap"
-            @click="toggleStarsMenu"
+            @click="toggleStarsMenu()"
           >
             <TextWithIconAndCount>
               <template v-slot:icon>
@@ -215,7 +215,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, defineProps, defineExpose } from 'vue';
 import RepoTabHeader from './RepoTabHeader.vue';
 import ListItem from './ListItem.vue';
 import TextWithIconAndCount from '@/components/TextWithIconAndCount';
@@ -228,40 +228,6 @@ import { countCalc } from '@/helpers';
 
 export default defineComponent({
   name: 'RepoSubHeader',
-  props: {
-    username: {
-      type: String,
-      required: true,
-    },
-    repoName: {
-      type: String,
-      required: true,
-    },
-    visibilityTag: {
-      type: String,
-      required: true,
-    },
-    stars: {
-      type: Number,
-      required: true,
-    },
-    watch: {
-      type: Number,
-      required: true,
-    },
-    forks: {
-      type: Number,
-      required: true,
-    },
-    issuesCount: {
-      type: Number,
-      required: true,
-    },
-    pullRequestsCount: {
-      type: Number,
-      required: true,
-    },
-  },
   components: {
     TextWithIconAndCount,
     ForkIcon,
@@ -272,53 +238,80 @@ export default defineComponent({
     RepoTabHeader,
     ListItem,
   },
-  setup(props) {
-    const refStarsMenu = ref(false);
-    const refWatchMenu = ref(false);
+});
+</script>
 
-    const notify = ref('all');
+<script lang="ts" setup>
+const refStarsMenu = ref(false);
+const refWatchMenu = ref(false);
 
-    const toggleWatchMenu = () => {
-      refStarsMenu.value = false;
-      refWatchMenu.value = !refWatchMenu.value;
-    };
-    const toggleStarsMenu = () => {
-      refWatchMenu.value = false;
-      refStarsMenu.value = !refStarsMenu.value;
-    };
+const notify = ref('all');
 
-    document.body.addEventListener('click', (e: Event) => {
-      const target = e.target.localName;
-      console.log(target);
-      if (target == 'body') {
-        refWatchMenu.value = false;
-        refStarsMenu.value = false;
-      }
-    });
+const toggleWatchMenu = () => {
+  refStarsMenu.value = false;
+  refWatchMenu.value = !refWatchMenu.value;
+};
+const toggleStarsMenu = () => {
+  refWatchMenu.value = false;
+  refStarsMenu.value = !refStarsMenu.value;
+};
 
-    const selectNotification = (value: string) => (notify.value = value);
+defineExpose({
+  toggleWatchMenu,
+  toggleStarsMenu,
+});
 
-    const repo_url = computed(() => `/${props.username}/${props.repoName}`);
-    const profile_url = computed(() => `/${props.username}`);
-    const stars_count = computed(() => countCalc(props.stars));
-    const watch_count = computed(() => countCalc(props.watch));
-    const forks_count = computed(() => countCalc(props.forks));
-
-    return {
-      repo_url,
-      profile_url,
-      stars_count,
-      watch_count,
-      forks_count,
-      refStarsMenu,
-      refWatchMenu,
-      notify,
-      selectNotification,
-      toggleWatchMenu,
-      toggleStarsMenu,
-    };
+const props = defineProps({
+  username: {
+    type: String,
+    required: true,
+  },
+  repoName: {
+    type: String,
+    required: true,
+  },
+  visibilityTag: {
+    type: String,
+    required: true,
+  },
+  stars: {
+    type: Number,
+    required: true,
+  },
+  watch: {
+    type: Number,
+    required: true,
+  },
+  forks: {
+    type: Number,
+    required: true,
+  },
+  issuesCount: {
+    type: Number,
+    required: true,
+  },
+  pullRequestsCount: {
+    type: Number,
+    required: true,
   },
 });
+
+document.body.addEventListener('click', (e: Event) => {
+  const target = e.target.localName;
+  console.log(target);
+  if (target == 'body') {
+    refWatchMenu.value = false;
+    refStarsMenu.value = false;
+  }
+});
+
+const selectNotification = (value: string) => (notify.value = value);
+
+const repo_url = computed(() => `/${props.username}/${props.repoName}`);
+const profile_url = computed(() => `/${props.username}`);
+const stars_count = computed(() => countCalc(props.stars));
+const watch_count = computed(() => countCalc(props.watch));
+const forks_count = computed(() => countCalc(props.forks));
 </script>
 
 <style lang="scss" scoped>
