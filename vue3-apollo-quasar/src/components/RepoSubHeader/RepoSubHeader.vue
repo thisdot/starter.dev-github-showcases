@@ -225,40 +225,46 @@ import CorrectIcon from '@/components/CorrectIcon';
 import MobilePhoneIcon from '@/components/MobilePhoneIcon';
 import BookIcon from '@/components/BookIcon';
 import { countCalc } from '@/helpers';
-
+type Props = {
+  username: string;
+  repoName: string;
+  stars: number;
+  watch: number;
+  forks: number;
+};
 export default defineComponent({
   name: 'RepoSubHeader',
   props: {
     username: {
-      type: String as PropType<string>,
+      type: String,
       required: true,
     },
     repoName: {
-      type: String as PropType<string>,
+      type: String,
       required: true,
     },
     visibilityTag: {
-      type: String as PropType<string>,
+      type: String,
       required: true,
     },
     stars: {
-      type: Number as PropType<number>,
+      type: Number,
       required: true,
     },
     watch: {
-      type: Number as PropType<number>,
+      type: Number,
       required: true,
     },
     forks: {
-      type: Number as PropType<number>,
+      type: Number,
       required: true,
     },
     issuesCount: {
-      type: Number as PropType<number>,
+      type: Number,
       required: true,
     },
     pullRequestsCount: {
-      type: Number as PropType<number>,
+      type: Number,
       required: true,
     },
   },
@@ -272,7 +278,7 @@ export default defineComponent({
     RepoTabHeader,
     ListItem,
   },
-  setup(props) {
+  setup(props: Props) {
     const refStarsMenu = ref(false);
     const refWatchMenu = ref(false);
 
