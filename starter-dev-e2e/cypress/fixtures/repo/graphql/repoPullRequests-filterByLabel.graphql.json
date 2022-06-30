@@ -1,0 +1,60 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "openPullRequests": {
+        "totalCount": 1,
+        "pageInfo": {
+          "hasPreviousPage": false,
+          "hasNextPage": false,
+          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNS0yNVQwMzowOTozMC0wNTowMM44bRAe",
+          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wMi0xNlQxNzozNToxNi0wNjowMM4y9R9y",
+          "__typename": "PageInfo"
+        },
+        "nodes": [
+          {
+            "id": "PR_kwDOGd0nu840TjqE",
+            "author": { "login": "AllanJeremy", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "totalCount": 1,
+              "nodes": [
+                {
+                  "color": "FA3C07",
+                  "name": "WIP DO NOT MERGE",
+                  "__typename": "Label"
+                }
+              ],
+              "__typename": "LabelConnection"
+            },
+            "closed": false,
+            "closedAt": null,
+            "merged": false,
+            "mergedAt": null,
+            "title": "[WIP] Vue3 ts quasar/feat/get profile info (#137)",
+            "number": 211,
+            "createdAt": "2022-03-11T15:10:42Z",
+            "__typename": "PullRequest"
+          }
+        ],
+        "__typename": "PullRequestConnection"
+      },
+      "closedPullRequests": {
+        "totalCount": 0,
+        "pageInfo": {
+          "hasPreviousPage": false,
+          "hasNextPage": false,
+          "startCursor": "pullRequests-page1-startcursor",
+          "endCursor": "pullRequests-page1-endCursosr",
+          "__typename": "PageInfo"
+        },
+        "nodes": [],
+        "__typename": "PullRequestConnection"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

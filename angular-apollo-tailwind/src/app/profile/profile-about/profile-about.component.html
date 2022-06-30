@@ -1,6 +1,7 @@
 <ng-container *ngIf="user$ | async as user; else loading">
   <div>
     <img
+      data-testid="profile page avatar"
       [src]="user.avatarUrl"
       alt="Avatar"
       [width]="260"
@@ -8,8 +9,10 @@
       class="avatar"
     />
     <h1 class="mt-2">
-      <div class="name">{{ user.name }}</div>
-      <div class="username">{{ user.username }}</div>
+      <div data-testid="profile page name" class="name">{{ user.name }}</div>
+      <div data-testid="profile page username" class="username">
+        {{ user.username }}
+      </div>
     </h1>
     <div class="bio">{{ user.bio }}</div>
     <div class="socials">
@@ -19,12 +22,15 @@
         class="w-4 h-4 mb-0.5 mr-1 inline"
         aria-hidden="true"
       ></hero-icon>
-      <span class="inline-block">
+      <span data-testid="profile followers count" class="inline-block">
         <span class="count">{{ user.followers }}</span> followers
       </span>
       <span class="mx-1">·</span>
       <span class="inline-block">
-        <span class="count">{{ user.following }}</span> following
+        <span data-testid="profile following count" class="count">{{
+          user.following
+        }}</span>
+        following
       </span>
       <span class="mx-1">·</span>
       <hero-icon
@@ -34,7 +40,9 @@
         aria-hidden="true"
       ></hero-icon>
       <span class="inline-block">
-        <span class="count">{{ user.starredRepos }}</span>
+        <span data-testid="profile starred count" class="count">{{
+          user.starredRepos
+        }}</span>
       </span>
     </div>
     <div class="fields">

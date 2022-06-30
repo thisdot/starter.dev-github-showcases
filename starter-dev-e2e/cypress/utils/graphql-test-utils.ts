@@ -9,22 +9,35 @@ export const hasOperationName = (req, operationName) => {
 
 export const hasVariables = (req, variables) => {
   const { body } = req;
-  var hasVariable = true;
+  var allVariablesValid = true;
 
   Object.keys(variables).forEach((key) => {
-    if (
-      hasVariable &&
-      !(
-        (body.hasOwnProperty("variables") &&
-          body.variables[key] === variables[key]) ||
-        body.query?.includes(`${key}=${variables[key]}`)
-      )
-    ) {
-      hasVariable = false;
+    const bodyHasVariable =
+      body.hasOwnProperty("variables") &&
+      body.variables[key] === variables[key];
+    const queryHasVariable = body.query?.includes(`${key}=${variables[key]}`);
+    const subKeys = variables[key];
+
+    if (allVariablesValid && typeof subKeys !== "string") {
+      const bodyVariables = body.variables[key];
+
+      Object.keys(subKeys).forEach((subKey) => {
+        const bodyContainsSubKeys =
+          subKeys &&
+          bodyVariables &&
+          JSON.stringify(bodyVariables[subKey]) ===
+            JSON.stringify(subKeys[subKey]);
+
+        if (allVariablesValid && !bodyContainsSubKeys) {
+          allVariablesValid = false;
+        }
+      });
+    } else if (allVariablesValid && !(bodyHasVariable || queryHasVariable)) {
+      allVariablesValid = false;
     }
   });
 
-  return hasVariable;
+  return allVariablesValid;
 };
 
 export const aliasQuery = (req, operationName) => {

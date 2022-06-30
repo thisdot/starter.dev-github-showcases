@@ -5,49 +5,49 @@
         "name": "CurrentUser",
         "alias": "CurrentUser",
         "variables": null,
-        "fixture": "user/currentUser.graphql.json"
+        "fixture": "user/graphql/currentUser.graphql.json"
       },
       {
         "name": "UserTopRepos",
         "alias": "UserTopRepos",
         "variables": null,
-        "fixture": "user/userTopRepos.graphql.json"
+        "fixture": "user/graphql/userTopRepos.graphql.json"
       },
       {
         "name": "UserGists",
         "alias": "UserGists",
         "variables": null,
-        "fixture": "user/userGist.graphql.json"
+        "fixture": "user/graphql/userGist.graphql.json"
       },
       {
         "name": "RepoPage",
         "alias": "RepoPage",
         "variables": null,
-        "fixture": "repo/repoPage.graphql.json"
+        "fixture": "repo/graphql/repoPage.graphql.json"
       },
       {
         "name": "RepoTree",
         "alias": "RepoTree",
         "variables": null,
-        "fixture": "repo/repoTree.graphql.json"
+        "fixture": "repo/graphql/repoTree.graphql.json"
       },
       {
         "name": "RepoReadMe",
         "alias": "RepoReadMe",
         "variables": null,
-        "fixture": "repo/repoReadMe.graphql.json"
+        "fixture": "repo/graphql/repoReadMe.graphql.json"
       }
     ],
     "rest": [
       {
         "url": "^.*/user$",
         "alias": "CurrentUser",
-        "fixture": "user/currentUser.json"
+        "fixture": "user/rest/currentUser.json"
       },
       {
         "url": "^.*/user/repos?sort=updated&affiliation=owner,collaborator,organization_member&per_page=20$",
         "alias": "UserTopRepos",
-        "fixture": "user/userTopRepos.json"
+        "fixture": "user/rest/userTopRepos.json"
       }
     ]
   },
@@ -57,37 +57,43 @@
         "name": "CurrentUser",
         "alias": "CurrentUser",
         "variables": null,
-        "fixture": "user/currentUser.graphql.json"
+        "fixture": "user/graphql/currentUser.graphql.json"
       },
       {
         "name": "RepoPage",
         "alias": "RepoPage",
         "variables": null,
-        "fixture": "repo/repoPage.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoPage.graphql.json",
+          "empty": "repo/graphql/empty/repoPage.empty.graphql.json"
+        }
       },
       {
         "name": "RepoTree",
         "alias": "RepoTreeFolder1",
         "variables": { "expression": "main:angular-apollo-tailwind" },
-        "fixture": "repo/repoTree-folder1.graphql.json"
+        "fixture": "repo/graphql/repoTree-folder1.graphql.json"
       },
       {
         "name": "RepoTree",
         "alias": "RepoTreeFolder2",
         "variables": { "expression": "main:angular-apollo-tailwind/src" },
-        "fixture": "repo/repoTree-folder2.graphql.json"
+        "fixture": "repo/graphql/repoTree-folder2.graphql.json"
       },
       {
         "name": "RepoTree",
         "alias": "RepoTreeFolder3",
         "variables": { "expression": "main:angular-apollo-tailwind/src/app" },
-        "fixture": "repo/repoTree-folder3.graphql.json"
+        "fixture": "repo/graphql/repoTree-folder3.graphql.json"
       },
       {
         "name": "RepoTree",
         "alias": "RepoTree",
         "variables": null,
-        "fixture": "repo/repoTree.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoTree.graphql.json",
+          "empty": "repo/graphql/empty/repoTree.empty.graphql.json"
+        }
       },
       {
         "name": "RepoReadMe",
@@ -95,50 +101,102 @@
         "variables": {
           "expression": "HEAD:angular-apollo-tailwind/README.md"
         },
-        "fixture": "repo/repoReadMe-folder1.graphql.json"
+        "fixture": "repo/graphql/repoReadMe-folder1.graphql.json"
       },
       {
         "name": "RepoReadMe",
         "alias": "RepoReadMe",
         "variables": null,
-        "fixture": "repo/repoReadMe.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoReadMe.graphql.json",
+          "empty": "repo/graphql/empty/repoReadMe.empty.graphql.json"
+        }
+      },
+      {
+        "name": "RepoIssues",
+        "alias": "RepoIssues-FilterByLabel",
+        "variables": {
+          "filterBy": { "labels": ["bug"] }
+        },
+        "fixture": "repo/graphql/repoIssues-filterByLabel.graphql.json"
+      },
+      {
+        "name": "RepoIssues",
+        "alias": "RepoIssues-FilterByMilestone",
+        "variables": {
+          "filterBy": { "milestone": "MI_kwDOGd0nu84AcmnC" }
+        },
+        "fixture": "repo/graphql/repoIssues-filterByMilestone.graphql.json"
+      },
+      {
+        "name": "RepoIssues",
+        "alias": "RepoIssues-SortByAsc",
+        "variables": {
+          "orderBy": { "field": "CREATED_AT", "direction": "ASC" }
+        },
+        "fixture": "repo/graphql/repoIssues-sortByAsc.graphql.json"
       },
       {
         "name": "RepoIssues",
         "alias": "RepoIssuesPage2",
         "variables": { "after": "issues-page1-endCursor" },
-        "fixture": "repo/repoIssues-page2.graphql.json"
+        "fixture": "repo/graphql/repoIssues-page2.graphql.json"
       },
       {
         "name": "RepoIssues",
         "alias": "RepoIssues",
         "variables": null,
-        "fixture": "repo/repoIssues.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoIssues.graphql.json",
+          "empty": "repo/graphql/empty/repoIssues.empty.graphql.json"
+        }
+      },
+      {
+        "name": "RepoPullRequests",
+        "alias": "RepoPullRequests-SortByAsc",
+        "variables": {
+          "orderBy": { "field": "CREATED_AT", "direction": "ASC" }
+        },
+        "fixture": "repo/graphql/repoPullRequests-sortByAsc.graphql.json"
+      },
+      {
+        "name": "RepoPullRequests",
+        "alias": "RepoPullRequests-FilterByLabel",
+        "variables": {
+          "labels": ["WIP DO NOT MERGE"]
+        },
+        "fixture": "repo/graphql/repoPullRequests-filterByLabel.graphql.json"
       },
       {
         "name": "RepoPullRequests",
         "alias": "RepoPullRequests2",
         "variables": { "after": "pullRequests-page1-endCursosr" },
-        "fixture": "repo/repoPullRequests-page2.graphql.json"
+        "fixture": "repo/graphql/repoPullRequests-page2.graphql.json"
       },
       {
         "name": "RepoPullRequests",
         "alias": "RepoPullRequests",
         "variables": null,
-        "fixture": "repo/repoPullRequests.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoPullRequests.graphql.json",
+          "empty": "repo/graphql/empty/repoPullRequests.empty.graphql.json"
+        }
       },
       {
         "name": "RepoFile",
         "alias": "RepoFile",
         "variables": null,
-        "fixture": "repo/repoFile.graphql.json"
+        "fixture": {
+          "full": "repo/graphql/repoFile.graphql.json",
+          "empty": "repo/graphql/empty/repoFile.empty.graphql.json"
+        }
       }
     ],
     "rest": [
       {
         "url": "^.*/user$",
         "alias": "CurrentUser",
-        "fixture": "user/currentUser.json"
+        "fixture": "user/rest/currentUser.json"
       },
       {
         "url": "^.*/repos/thisdot/starter.dev-github-showcases$",
@@ -178,31 +236,72 @@
         "name": "CurrentUser",
         "alias": "CurrentUser",
         "variables": null,
-        "fixture": "user/currentUser.graphql.json"
+        "fixture": "user/graphql/currentUser.graphql.json"
       },
       {
         "name": "UserTopRepos",
         "alias": "UserTopRepos",
         "variables": null,
-        "fixture": "user/userTopRepos.graphql.json"
+        "fixture": "user/graphql/userTopRepos.graphql.json"
       },
       {
         "name": "UserGists",
         "alias": "UserGists",
         "variables": null,
-        "fixture": "user/userGist.graphql.json"
+        "fixture": "user/graphql/userGist.graphql.json"
       },
       {
         "name": "OrgRepos",
         "alias": "OrgRepos",
         "variables": null,
-        "fixture": "org/orgRepos.graphql.json"
+        "fixture": "org/graphql/orgRepos.graphql.json"
       },
       {
         "name": "OrgProfile",
         "alias": "OrgProfile",
         "variables": null,
-        "fixture": "org/orgProfile.graphql.json"
+        "fixture": "org/graphql/orgProfile.graphql.json"
+      }
+    ],
+    "rest": []
+  },
+  "profile": {
+    "graphql": [
+      {
+        "name": "CurrentUser",
+        "alias": "CurrentUser",
+        "variables": null,
+        "fixture": "user/graphql/currentUser.graphql.json"
+      },
+      {
+        "name": "UserProfile",
+        "alias": "UserProfile",
+        "variables": null,
+        "fixture": "user/graphql/userProfile.graphql.json"
+      },
+      {
+        "name": "UserRepos",
+        "alias": "UserRepos",
+        "variables": null,
+        "fixture": "user/graphql/userRepos.graphql.json"
+      },
+      {
+        "name": "RepoPage",
+        "alias": "RepoPage",
+        "variables": null,
+        "fixture": "repo/graphql/repoPage.graphql.json"
+      },
+      {
+        "name": "RepoTree",
+        "alias": "RepoTree",
+        "variables": null,
+        "fixture": "repo/graphql/repoTree.graphql.json"
+      },
+      {
+        "name": "RepoReadMe",
+        "alias": "RepoReadMe",
+        "variables": null,
+        "fixture": "repo/graphql/repoReadMe.graphql.json"
       }
     ],
     "rest": []

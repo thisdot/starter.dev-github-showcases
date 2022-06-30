@@ -1,15 +1,14 @@
-import * as styles from './UserRepos.classNames';
-
-import { Link } from "@remix-run/react";
-import Pagination from '../Pagination/Pagination';
-import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
 import type { Repo } from './types';
-import RepoFilters from '../RepoFilters/RepoFilters';
-import RepoMeta from '../RepoMeta/RepoMeta';
+import { Link } from '@remix-run/react';
 import { StarIcon } from '@heroicons/react/outline';
+import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
+import RepoMeta from '../RepoMeta/RepoMeta';
+import * as styles from './UserRepos.classNames';
+import Pagination from '../Pagination/Pagination';
 import { filterRepos } from './filterRepos';
 import { getLanguages } from './getLanguages';
 import { useRepoFilters } from '../RepoFilters/useRepoFilters';
+import RepoFilters from '../RepoFilters/RepoFilters';
 
 export interface UserReposViewProps {
   repos: Repositories;

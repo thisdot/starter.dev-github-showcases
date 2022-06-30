@@ -1,5 +1,5 @@
-import { json, LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { json, LoaderFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 import type { GitHubProfile } from 'remix-auth-github';
 import { auth } from '~/services/auth.server';
 import gqlClient from '~/lib/graphql-client';
@@ -44,13 +44,13 @@ export default function Screen() {
   const { profile, userRepos, userGists } = useLoaderData<LoaderData>();
 
   return (
-    <div className="w-full  min-h-[calc(100vh-70px)] flex flex-col-reverse lg:flex-row bg-gray-100">
-      <aside className="w-full lg:w-96 bg-white p-8">
+    <div className="flex  min-h-[calc(100vh-70px)] w-full flex-col-reverse bg-gray-100 lg:flex-row">
+      <aside className="w-full bg-white p-8 lg:w-96">
         <UserGistsView gists={userGists} />
       </aside>
-      <main className="max-w-screen-lg w-full">
+      <main className="w-full max-w-screen-lg">
         <div className="p-12">
-          <h2 className="text-lg font-medium mb-4">Top Repositories</h2>
+          <h2 className="mb-4 text-lg font-medium">Top Repositories</h2>
           <UserTopReposView repos={userRepos} login={profile._json.login} />
         </div>
       </main>

@@ -1,4 +1,5 @@
 {
+  "exclude": ["./cypress", "node_modules"],
   "include": [
     "remix.env.d.ts",
     "**/*.ts",
@@ -6,23 +7,26 @@
     "tailwind.config.js",
     "app/routes/$user/$repository/tree/$branch/...$path.tsx"
   ],
-  "exclude": ["node_modules"],
   "compilerOptions": {
-    "module": "esnext",
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "types": ["vitest/globals"],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "target": "ES2019",
     "strict": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"]
     },
-    "noEmit": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true
+    "skipLibCheck": true,
+
+    // Remix takes care of building everything in `remix build`.
+    "noEmit": true
   }
 }

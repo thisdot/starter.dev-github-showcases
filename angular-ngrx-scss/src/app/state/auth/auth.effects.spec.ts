@@ -18,6 +18,7 @@ describe('AuthEffects', () => {
   let actions$: Actions;
   let effects: AuthEffects;
   let mockHttpClient;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let authService: any;
 
   beforeEach(() => {
@@ -35,7 +36,9 @@ describe('AuthEffects', () => {
     mockHttpClient = jasmine.createSpyObj('http', ['get', 'put']);
     TestBed.configureTestingModule({
       // the name ('http') goes as the first argument and an array of public methods you want to spyOn
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule.withRoutes([{ path: 'signin', redirectTo: '' }]),
+      ],
       providers: [
         AuthEffects,
         provideMockActions(() => actions$),

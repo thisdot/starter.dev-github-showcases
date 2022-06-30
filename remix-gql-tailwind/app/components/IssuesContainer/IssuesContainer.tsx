@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import cn from 'classnames';
 import { XIcon } from '@heroicons/react/outline';
 import * as styles from './IssuesContainer.classNames';
-import { useSearchParams } from "@remix-run/react";
+import { useSearchParams } from '@remix-run/react';
 
 interface IssuesContainerProps {
   filtersEl: JSX.Element;
@@ -38,6 +38,7 @@ function IssuesContainer({
           </span>
           <span
             className={cn(styles.clearButtonText, 'group-hover:text-blue-500')}
+            data-testid="clear filters button"
           >
             Clear current search query, filters, and sorts
           </span>

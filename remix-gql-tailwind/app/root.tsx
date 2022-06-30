@@ -1,5 +1,5 @@
-import type { MetaFunction } from "@remix-run/node";
-import { json, LoaderFunction } from "@remix-run/node";
+import type { MetaFunction } from '@remix-run/node';
+import { json, LoaderFunction } from '@remix-run/node';
 
 import {
   Link,
@@ -11,7 +11,7 @@ import {
   ScrollRestoration,
   useCatch,
   useLoaderData,
-} from "@remix-run/react";
+} from '@remix-run/react';
 
 import styles from './styles/tailwind.css';
 import NavBar from './components/Navbar/NavBar';
@@ -49,14 +49,14 @@ export function CatchBoundary() {
   const caught = useCatch();
   return (
     <Document title="Error">
-      <div className="text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className=" text-9xl mb-8">{caught.status}</div>
-        <div className="text-2xl mb-5">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+        <div className=" mb-8 text-9xl">{caught.status}</div>
+        <div className="mb-5 text-2xl">
           <span className="">Ooops...</span>
           <br />
           {caught.statusText}
         </div>
-        <div className=" bg-gray-900 text-white rounded px-7 py-2">
+        <div className=" rounded bg-gray-900 px-7 py-2 text-white">
           <Link to={`/`} className=" ">
             Go to Home
           </Link>
@@ -72,7 +72,7 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async ({ request }) => {
   const { getUser } = await getSession(request);
-  const session = await getUser(request);
+  const session = await getUser();
   let viewer;
 
   if (session) {

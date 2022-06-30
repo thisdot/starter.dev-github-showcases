@@ -1,5 +1,5 @@
-import { json, LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { json, LoaderFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 import RepoHeader from '~/components/RepoHeader/RepoHeader';
 import { parseTopics } from '~/components/RepoPage/parseTopics';
 import { parseQuery } from '~/components/RepoPulls/parseQuery';
@@ -26,7 +26,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   const label = searchParams.get('Label');
   const after = searchParams.get('after');
-  const before = searchParams.get('before')
+  const before = searchParams.get('before');
   const orderBy = searchParams.get('Sort');
   const orderByArr = orderBy?.split('^');
 
@@ -78,9 +78,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       },
       labels: label ? [label] : undefined,
       last: before ? 25 : undefined,
-      first: (!before || after) ? 25 : undefined,
+      first: !before || after ? 25 : undefined,
       after,
-      before
+      before,
     },
     {
       authorization: `Bearer ${accessToken}`,
@@ -104,7 +104,7 @@ export default function Pulls() {
   return (
     <RepoProvider value={context}>
       <RepoHeader />
-      <div className="md:py-12 max-w-screen-xl mx-auto">
+      <div className="mx-auto max-w-screen-xl md:py-12">
         <RepoPulls
           openPullRequests={openPullRequests}
           closedPullRequests={closedPullRequests}

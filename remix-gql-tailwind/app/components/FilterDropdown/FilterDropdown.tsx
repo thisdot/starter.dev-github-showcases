@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, XIcon, CheckIcon } from '@heroicons/react/solid';
 import * as styles from './FilterDropdown.classNames';
-import { useSearchParams } from "@remix-run/react";
+import { useSearchParams } from '@remix-run/react';
 
 interface Option {
   label: string;
