@@ -228,9 +228,12 @@ import { countCalc } from '@/helpers';
 type Props = {
   username: string;
   repoName: string;
+  visibilityTag: string;
   stars: number;
   watch: number;
   forks: number;
+  issuesCount: number;
+  pullRequestsCount: number;
 };
 export default defineComponent({
   name: 'RepoSubHeader',
