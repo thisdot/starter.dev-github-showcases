@@ -272,7 +272,13 @@ export default defineComponent({
     RepoTabHeader,
     ListItem,
   },
-  setup(props) {
+  setup(props: {
+    stars: number;
+    forks: number;
+    watch: number;
+    username: string;
+    repoName: string;
+  }) {
     const refStarsMenu = ref(false);
     const refWatchMenu = ref(false);
 
