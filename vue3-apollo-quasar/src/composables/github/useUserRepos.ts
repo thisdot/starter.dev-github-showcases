@@ -9,13 +9,6 @@ import { useRoute } from 'vue-router';
 
 export const useUserRepos = () => {
   const getUserRepos = (username, isOrg = false) => {
-    const { query } = useRoute();
-
-    const afterCursor =
-      typeof query.after === 'string' ? query.after : undefined;
-    const beforeCursor =
-      typeof query.before === 'string' ? query.before : undefined;
-
     const repoFilters = useRepoFilters();
     let pageInfo;
     const { result, loading } = useQuery(USER_REPOS_QUERY, {
@@ -24,8 +17,6 @@ export const useUserRepos = () => {
         field: repoFilters.state.sort,
         direction: OrderDirection.Desc,
       },
-      afterCursor: afterCursor,
-      beforeCursor: beforeCursor,
       first: repoFilters.state.first,
       last: repoFilters.state.last,
     });

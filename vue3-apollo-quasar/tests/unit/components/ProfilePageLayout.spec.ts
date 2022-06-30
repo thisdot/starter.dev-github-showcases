@@ -28,6 +28,7 @@ jest.mock('@vue/apollo-composable', () => {
     },
     loading: false,
   };
+
   return {
     useQuery: jest.fn(() => data),
     useResult: jest.fn(() => testData),
