@@ -31,10 +31,13 @@ describe('AuthEffects', () => {
       saveUserToken: () => {
         return of();
       },
+      getRedirectUrl: () => {
+        return of();
+      },
     });
+    // the name ('http') goes as the first argument and an array of public methods you want to spyOn
     mockHttpClient = jasmine.createSpyObj('http', ['get', 'put']);
     TestBed.configureTestingModule({
-      // the name ('http') goes as the first argument and an array of public methods you want to spyOn
       imports: [
         RouterTestingModule.withRoutes([{ path: 'signin', redirectTo: '' }]),
       ],
@@ -51,7 +54,6 @@ describe('AuthEffects', () => {
 
     actions$ = TestBed.inject(Actions);
     effects = TestBed.inject(AuthEffects);
-    // authService = TestBed.inject(AuthService);
   });
 
   it('should be created', () => {

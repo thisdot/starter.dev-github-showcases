@@ -5,7 +5,6 @@ import { environment } from 'src/environments/environment';
 
 import { AuthResponse } from '../interfaces/auth';
 import { TokenService } from './token.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +13,6 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient,
     private tokenService: TokenService,
-    private route: ActivatedRoute,
   ) {}
 
   /**
