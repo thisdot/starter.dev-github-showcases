@@ -48,3 +48,38 @@ describe("When there is proper dashboard page responses", () => {
       );
   });
 });
+
+describe("When there is proper empty dashboard page responses", () => {
+  beforeEach(() => {
+    cy.interceptGraphQLCalls(View.Dashboard, InterceptResponse.Empty);
+    cy.interceptRestCalls(View.Dashboard, InterceptResponse.Empty);
+  });
+
+  // Error displayed instead of empty list.
+  // Angular-Apollo has empty message but displays error; Next-React empty & error msg displays same
+  // it("should display empty list of gists", () => {
+  //   cy.get(`[data-testid="show gists list"]`)
+  //     .should("not.be.visible")
+  //     .wait("@CurrentUserQuery")
+  //     .wait("@UserGistsQuery")
+  //     .get(`[data-testid="empty gist list"]`)
+  //     .should("contain.text", "User does not have any gists");
+  // });
+
+  it("top repos should not be listed", () => {
+    cy.get(`[data-testid="show repo list"]`)
+      .should("have.lengthOf", 0)
+      .get(`[data-testid="empty top repos"]`)
+      .should("contain.text", "No repositories found");
+  });
+
+  it("should be able to see user's avatar in header", () => {
+    cy.get(`[data-testid="user avatar header"]`)
+      .should(`be.visible`)
+      .and("have.attr", "src")
+      .and(
+        "match",
+        /.*(https).*(avatars\.githubusercontent\.com).*(22839396).*/
+      );
+  });
+});
