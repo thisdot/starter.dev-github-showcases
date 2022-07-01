@@ -1,6 +1,7 @@
 <template>
   <div class="search_container">
     <form>
+      <!-- search will be a query -->
       <AppInput v-model="search" placeholder="Find a repository..." />
     </form>
   </div>

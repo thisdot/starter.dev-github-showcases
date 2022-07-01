@@ -76,7 +76,7 @@ import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
 import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
-
+import { useFilter } from '@/ccomposables';
 const getUserRepos = useUserRepos();
 const props = defineProps({
   username: String,
@@ -87,7 +87,9 @@ function changeTab(val) {
 }
 
 const user = useUserStore();
+// TODO: filter repo against search input
 const { repos, loading } = getUserRepos(props.username, false);
+// const filteredRepos = useFilter(repos, state);
 </script>
 
 <style lang="scss" scoped>
