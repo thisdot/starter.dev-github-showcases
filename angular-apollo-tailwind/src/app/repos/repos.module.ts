@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RepoRoutingModule } from './repo-routing.module';
 import { ReposComponent } from './repos.component';
 import { RepoListComponent } from './components/repo-list/repo-list.component';
+import { RepoListItemComponent } from './components/repo-list-item/repo-list-item.component';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import { RepoHeaderComponent } from './repo-header/repo-header.component';
 import { RepoActionButtonsComponent } from './repo-header/repo-action-buttons/repo-action-buttons.component';
@@ -17,11 +18,14 @@ import {
   PipesModule,
 } from '@shared';
 import { ContainerComponentModule } from '@shared';
+import { RepoListItemSkeletonComponent } from './components/repo-list-item-skeleton/repo-list-item-skeleton.component';
 
 @NgModule({
   declarations: [
     ReposComponent,
     RepoListComponent,
+    RepoListItemComponent,
+    RepoListItemSkeletonComponent,
     RepoDetailsComponent,
     RepoHeaderComponent,
     RepoActionButtonsComponent,
