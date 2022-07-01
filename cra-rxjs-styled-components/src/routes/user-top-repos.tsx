@@ -1,9 +1,12 @@
-import styled from 'styled-components';
-import { useTopRepos } from '../hooks/top-repositories/use-top-repos';
-import { useGists } from '../hooks/gists/use-gists';
 import { Layout } from '../components/layouts/Layout';
-import UserGists from '../components/user-gists';
+import PaginateButton from '../components/paginate-button';
+import { PaginateWrapper } from '../components/paginate-button/PaginateButton.style';
 import RepoCard from '../components/repo-card';
+import UserGists from '../components/user-gists';
+import styled from 'styled-components';
+import { useGists } from '../hooks/gists/use-gists';
+import { useRepos } from '../hooks/repositories/use-repos';
+import { useUser } from '../context/UserProvider';
 
 const Page = styled.div`
   width: 100%;
@@ -35,7 +38,9 @@ const RepositoriesContainer = styled.section`
 `;
 
 export default function TopRepos() {
-  const repositories = useTopRepos();
+  const user = useUser();
+  const { repositories, prevPage, nextPage, hasNextPage, hasPrevPage } =
+    useRepos(user?.login);
   const gists = useGists();
 
   return (
@@ -51,12 +56,21 @@ export default function TopRepos() {
         />
         <Main>
           <Page>
-            <Heading>Top Repositories</Heading>
+            <Heading>Repositories</Heading>
             <RepositoriesContainer>
               {repositories.map((repo) => (
                 <RepoCard repo={repo} key={repo.id} />
               ))}
             </RepositoriesContainer>
+
+            <PaginateWrapper>
+              <PaginateButton onClick={prevPage} disabled={!hasPrevPage}>
+                <span className="prev"></span> Previous
+              </PaginateButton>
+              <PaginateButton onClick={nextPage} disabled={!hasNextPage}>
+                Next <span className="next"></span>
+              </PaginateButton>
+            </PaginateWrapper>
           </Page>
         </Main>
       </Layout>
