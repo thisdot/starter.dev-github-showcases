@@ -4,6 +4,7 @@ import type { PRTabValues } from '../types';
 import type { PullRequest } from './PullRequest.type';
 import PullRequestCard from '../PullRequestCard';
 import PullRequestTabHeader from '../PRTabHeader';
+import { getPullsState } from '../../../helpers/getPullsState';
 
 type PullRequestProps = {
   pullRequests: PullRequest[];
@@ -18,8 +19,6 @@ export default function PullRequestView({
   openPRCount,
   closedPRCount,
 }: PullRequestProps) {
-  console.log('PullRequestView: ', pullRequests);
-
   return (
     <Wrapper>
       <Content>
@@ -31,11 +30,11 @@ export default function PullRequestView({
         {pullRequests.map((pr, index) => (
           <PullRequestCard
             title={pr.title}
-            openedNum={pr.openedNum}
-            openedDay={pr.openedDay}
-            openedBy={pr.openedBy}
-            state={pr.state}
-            messageCount={pr.messageCount}
+            number={pr.number}
+            created_at={pr.created_at}
+            openedBy={pr.user.login}
+            state={getPullsState(pr)}
+            messageCount={pr.comments.length}
             key={index}
           />
         ))}

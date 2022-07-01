@@ -1,5 +1,13 @@
+import {
+  Observable,
+  Subscription,
+  filter,
+  map,
+  switchMap,
+  tap,
+  zip,
+} from 'rxjs';
 import React, { useEffect, useState } from 'react';
-import { Subscription, filter, tap } from 'rxjs';
 
 import type { PRTabValues } from '../types';
 import { PULLS_URL } from '../../../constants/url.constants';
@@ -25,6 +33,12 @@ export default function PullRequestCtrl() {
       )
         .pipe(
           filter((pulls) => !!pulls.length),
+          switchMap((pulls: PullRequest[]) => {
+            const requests = pulls.map(createCommentCountRequest);
+            return zip(...requests).pipe(
+              map(mergePullRequestsWithCommentCount(pulls))
+            );
+          }),
           tap(setPullRequests)
         )
         .subscribe();
@@ -50,4 +64,21 @@ export default function PullRequestCtrl() {
       changeActiveTab={setActiveTab}
     />
   );
+}
+
+function createCommentCountRequest(pr: PullRequest): Observable<number> {
+  return fromFetchWithAuth<number>(pr.review_comments_url, {
+    selector: (response: Response) => {
+      return response.json();
+    },
+  });
+}
+
+function mergePullRequestsWithCommentCount(pulls: PullRequest[]) {
+  return (counts: number[]): PullRequest[] => {
+    return pulls.map((p: PullRequest, index: number) => ({
+      ...p,
+      comments: counts[index],
+    }));
+  };
 }

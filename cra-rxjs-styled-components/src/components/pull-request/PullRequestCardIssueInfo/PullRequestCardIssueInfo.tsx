@@ -1,15 +1,20 @@
+import { buildPrIssueResolution } from '../../../helpers/buildPrIssueResolution';
+import { format } from 'date-fns';
+
 interface Props {
   title: string;
-  openedNum: string;
-  openedDay: string;
+  number: string;
+  created_at: string;
   openedBy: string;
+  state: string;
 }
 
 export default function PullRequestCardIssueInfo({
   title,
-  openedNum,
+  number,
   openedBy,
-  openedDay,
+  created_at,
+  state,
 }: Props) {
   return (
     <div className="info">
@@ -17,9 +22,12 @@ export default function PullRequestCardIssueInfo({
         {title}
       </a>
       <div className="sub_heading">
-        <span className="opened_num">{openedNum}</span>
-        <span className="opened_day">{openedDay}</span>
-        <span className="opened_by">{openedBy}</span>
+        <span className="opened_num">#{number}</span>
+        <span className="opened_by">by {openedBy}</span>
+        <span className="opened_day">
+          {buildPrIssueResolution(state)}{' '}
+          {format(new Date(created_at), 'MMM dd')}
+        </span>
       </div>
     </div>
   );

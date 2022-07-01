@@ -1,17 +1,14 @@
-import ClosedPRIcon from '../../icons/ClosedPRIcon';
-import MergedPRIcon from '../../icons/MergedPRIcon';
 import MessageIcon from '../../icons/MessageIcon';
-import OpenPRIcon from '../../icons/OpenPRIcon';
 import PullRequestCardIssueInfo from '../PullRequestCardIssueInfo';
 import { PullRequestCardWrapper } from './PullRequestCard.style';
-import React from 'react';
 import type { State } from '../types';
+import { getPRIcon } from '../getPRIcon';
 
 interface Props {
   state: State;
   title: string;
-  openedNum: string;
-  openedDay: string;
+  number: string;
+  created_at: string;
   openedBy: string;
   messageCount: number;
 }
@@ -20,37 +17,27 @@ export default function PullRequestCard({
   state,
   title,
   openedBy,
-  openedDay,
-  openedNum,
+  created_at,
+  number,
   messageCount,
 }: Props) {
-  const getPRIcon = (state: State) => {
-    switch (state) {
-      case 'merged':
-        return <MergedPRIcon />;
-      case 'closed':
-        return <ClosedPRIcon />;
-      case 'open':
-      default:
-        return <OpenPRIcon />;
-    }
-  };
   return (
     <PullRequestCardWrapper>
       <div className="left">
         {getPRIcon(state)}
         <PullRequestCardIssueInfo
           title={title}
-          openedNum={openedNum}
+          number={number}
           openedBy={openedBy}
-          openedDay={openedDay}
+          created_at={created_at}
+          state={state}
         />
       </div>
       <div className="right">
         {messageCount > 0 && (
           <a href="/" className="message">
             <MessageIcon />
-            <span className="count">8</span>
+            <span className="count">{messageCount}</span>
           </a>
         )}
       </div>

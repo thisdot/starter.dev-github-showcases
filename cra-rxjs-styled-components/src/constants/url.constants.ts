@@ -35,6 +35,8 @@ export const GISTS_URL = (user: string) =>
 export const PULLS_URL = (owner: string, repoName: string) =>
   `${GITHUB_URL_BASE}/repos/${owner}/${repoName}/pulls?state=all`;
 
+export const PULLS_COMMENTS_URL = (url: string) => url;
+
 export const ISSUE_PR_SEARCH = (
   user: string,
   repo: string,
