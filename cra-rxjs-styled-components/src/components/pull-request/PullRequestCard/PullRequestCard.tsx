@@ -1,14 +1,14 @@
-import React from 'react';
 import ClosedPRIcon from '../../icons/ClosedPRIcon';
 import MergedPRIcon from '../../icons/MergedPRIcon';
 import MessageIcon from '../../icons/MessageIcon';
 import OpenPRIcon from '../../icons/OpenPRIcon';
 import PullRequestCardIssueInfo from '../PullRequestCardIssueInfo';
 import { PullRequestCardWrapper } from './PullRequestCard.style';
-import type { Status } from '../types';
+import React from 'react';
+import type { State } from '../types';
 
 interface Props {
-  status: Status;
+  state: State;
   title: string;
   openedNum: string;
   openedDay: string;
@@ -17,15 +17,15 @@ interface Props {
 }
 
 export default function PullRequestCard({
-  status,
+  state,
   title,
   openedBy,
   openedDay,
   openedNum,
   messageCount,
 }: Props) {
-  const getPRIcon = (status: Status) => {
-    switch (status) {
+  const getPRIcon = (state: State) => {
+    switch (state) {
       case 'merged':
         return <MergedPRIcon />;
       case 'closed':
@@ -38,7 +38,7 @@ export default function PullRequestCard({
   return (
     <PullRequestCardWrapper>
       <div className="left">
-        {getPRIcon(status)}
+        {getPRIcon(state)}
         <PullRequestCardIssueInfo
           title={title}
           openedNum={openedNum}

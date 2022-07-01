@@ -3,6 +3,6 @@ export type PullRequest = {
   openedNum: string;
   openedDay: string;
   openedBy: string;
-  status: 'open' | 'closed' | 'merged';
+  state: 'open' | 'closed' | 'merged';
   messageCount: number;
 };
