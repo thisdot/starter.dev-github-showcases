@@ -24,4 +24,18 @@ export interface RepositoryWithBranchCount extends Repository {
   branches_count?: number;
 }
 
+export interface Pagination {
+  prevPage: string | undefined;
+  nextPage: string | undefined;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+}
+
+export interface UseRepo {
+  repositories: RepositoryWithBranchCount[];
+  prevPage: () => void;
+  nextPage: () => void;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
 export type RepositoryOwnerType = 'User' | 'Organization';
