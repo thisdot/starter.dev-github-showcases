@@ -9,12 +9,13 @@ import { useRepos } from '../hooks/repositories/use-repos';
 import { useUser } from '../context/UserProvider';
 
 const Page = styled.div`
-  width: 100%;
+  padding: 3rem;
 `;
 
 const Main = styled.main`
+  width: 100%;
   background-color: rgb(243, 244, 246);
-  padding: 3rem;
+  max-width: 1024px;
   min-height: calc(100vh - 70px);
   @media (max-width: 850px) {
     padding: 2rem;
@@ -35,6 +36,22 @@ const RepositoriesContainer = styled.section`
   width: 100%;
   border-radius: 0.5rem;
   border: 1px solid rgb(229, 231, 235);
+`;
+
+const ViewRepositoriesContainer = styled.div`
+  background-color: rgb(249 250 251);
+  padding: 1.25rem;
+  text-align: center;
+`;
+
+const ViewRepositoriesLink = styled.a`
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  color: rgb(75 85 99);
+  &:hover {
+    color: rgb(59 130 246);
+  }
 `;
 
 export default function TopRepos() {
@@ -61,6 +78,11 @@ export default function TopRepos() {
               {repositories.map((repo) => (
                 <RepoCard repo={repo} key={repo.id} />
               ))}
+              <ViewRepositoriesContainer>
+                <ViewRepositoriesLink href={`/${user?.login}`}>
+                  View all Repositories
+                </ViewRepositoriesLink>
+              </ViewRepositoriesContainer>
             </RepositoriesContainer>
 
             <PaginateWrapper>
