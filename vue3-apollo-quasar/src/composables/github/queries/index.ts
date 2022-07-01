@@ -8,3 +8,5 @@ export * from './issues.query';
 export * from './pull-request.query';
 export * from './user-repos.query';
 export * from './repo-page.query';
+export * from './repo-tree.query';
+export * from './repo-readme.query';
