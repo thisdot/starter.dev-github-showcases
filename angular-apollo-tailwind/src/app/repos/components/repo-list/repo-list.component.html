@@ -21,10 +21,7 @@
             </div>
           </ng-container>
         </ng-container>
-        <div
-          *ngIf="displayItems.length"
-          class="bg-gray-50 p-5 w-full text-center"
-        >
+        <div *ngIf="repos?.length" class="bg-gray-50 p-5 w-full text-center">
           <a
             [routerLink]="[login]"
             class="font-semibold text-gray-600 hover:text-blue-500"
