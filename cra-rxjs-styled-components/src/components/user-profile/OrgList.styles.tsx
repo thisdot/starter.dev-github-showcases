@@ -2,9 +2,7 @@ import styles from 'styled-components';
 
 export const ContainerWrapper = styles.div`
 margin-top: 1.25rem;
-border-top-width: 1px;
-border-color: rgb(229 231 235);
-
+border-top: 1px solid rgb(229 231 235);
 `;
 
 export const Heading = styles.h2`
