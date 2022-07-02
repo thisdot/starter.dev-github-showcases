@@ -12,6 +12,8 @@ import { RelativeTimePipe } from '../shared/pipes/relative-time.pipe';
 import { RepoCardComponent } from '../shared/components/repo-card/repo-card.component';
 import { UserGistsComponent } from './user-gists/user-gists.component';
 import { TopRepositoriesComponent } from './top-repositories/top-repositories.component';
+import { RepoControlsComponent } from '../shared/components/repo-controls/repo-controls.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { TopRepositoriesComponent } from './top-repositories/top-repositories.co
     RelativeTimePipe,
     UserGistsComponent,
     TopRepositoriesComponent,
+    RepoControlsComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule],
+  imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule],
 })
 export class HomeModule {}
