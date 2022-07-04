@@ -1,23 +1,27 @@
 // It's highly recommended to change the default colors
 // to match your app's branding.
 
-$primary: #4078c0;
+$primary: #0969da;
+$primary-100: #f6f8fa;
 $secondary: #586069;
+$secondary-100: #d0d7de;
+$secondary-200: #57606a;
 $accent: #6e5494;
 $success: #2ea44f;
+$subheader: #f6f8fa;
+$danger-100: #ffebe9;
+$danger-800: #cf222e;
+
+$purple-700: #8250df;
 
 $dark: #111827;
-
-$positive: #2ea44f;
-$negative: #bd2c00;
-$info: #719fdb;
-$warning: #c9510c;
-
-$shadow-color: #000;
-$elevation-umbra: rgba($shadow-color, 0.15);
-$elevation-penumbra: rgba($shadow-color, 0.1);
-$elevation-ambient: rgba($shadow-color, 0.05);
+$dark-800: #24292f;
 
 $color-border-default: #d0d7de;
 $color-fg-muted: #57606a;
 $color-accent-fg: #0969da;
+
+$xs-breakpoint: 718px;
+$sm-breakpoint: 1024px;
+$md-breakpoint: 1439px;
+$lg-breakpoint: 1920px;
