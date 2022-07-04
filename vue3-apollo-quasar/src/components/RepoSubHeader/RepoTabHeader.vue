@@ -2,7 +2,6 @@
   <div class="row items-center q-mt-md">
     <q-tabs
       v-model="activeTab"
-      style="color: #586069"
       indicator-color="orange"
       dense
       no-caps
@@ -105,7 +104,7 @@ const activeTab = computed({
 <style lang="scss" scoped>
 @import '@/styles/quasar.variables.scss';
 .count-badge {
-  background: #1b1f2414;
+  background: $dark-300;
   color: inherit;
 }
 
@@ -119,7 +118,11 @@ const activeTab = computed({
 }
 .repo-tab {
   gap: 0;
-  height: 40px;
+  height: unset;
   padding: 0 6px !important;
+}
+
+.tabs {
+  color: $secondary;
 }
 </style>
