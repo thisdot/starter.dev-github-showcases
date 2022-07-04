@@ -1,7 +1,7 @@
 import type { Language } from 'prism-react-renderer';
 import FileCode from './FileCode';
 import FileText from './FileText';
-import styles from './FileViewer.module.css';
+import { FileHeader, FileHeaderBytes, FileHeaderLines, FileViewContainer } from './FileViewer.styles';
 
 interface FileViewerViewProps {
   text: string;
@@ -17,17 +17,17 @@ function FileViewerView({
   language,
 }: FileViewerViewProps) {
   return (
-    <div className={styles.container}>
-      <div className={styles.fileHeader}>
-        <span className={styles.fileHeaderLines}>{lines} lines</span>
-        <span className={styles.fileHeaderBytes}>{byteSize} Bytes</span>
-      </div>
+    <FileViewContainer>
+      <FileHeader>
+        <FileHeaderLines>{lines} lines</FileHeaderLines>
+        <FileHeaderBytes>{byteSize} Bytes</FileHeaderBytes>
+      </FileHeader>
       {language ? (
         <FileCode text={text} language={language} />
       ) : (
         <FileText text={text} />
       )}
-    </div>
+    </FileViewContainer>
   );
 }
 

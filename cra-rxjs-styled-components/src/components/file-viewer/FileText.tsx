@@ -1,4 +1,4 @@
-import styles from './FileViewer.module.css';
+import { CodeBlock, LineNumber, LineText, TableRow } from "./FileViewer.styles";
 
 interface FileTextProps {
   text: string;
@@ -7,14 +7,14 @@ interface FileTextProps {
 function FileText({ text }: FileTextProps) {
   const lines = text.split('\n');
   return (
-    <pre data-testid="text-block" className={styles.codeBlock}>
+    <CodeBlock data-testid="text-block" >
       {lines.map((line, i) => (
-        <div key={i} className="table-row">
-          <span className={styles.lineNumber}>{i + 1}</span>
-          <span className="table-cell">{line}</span>
-        </div>
+        <TableRow key={i} className="table-row">
+          <LineNumber>{i + 1}</LineNumber>
+          <LineText>{line}</LineText>
+        </TableRow>
       ))}
-    </pre>
+    </CodeBlock>
   );
 }
 
