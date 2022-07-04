@@ -135,8 +135,16 @@ defineProps({
   color: $danger-800;
 }
 
-a,
+.description,
 .comment a {
+  color: $secondary-200;
+}
+
+.title {
+  width: fit-content;
+}
+
+a {
   color: $dark-800;
   text-decoration: none;
   cursor: pointer;
@@ -144,14 +152,5 @@ a,
     color: $primary;
   }
   transition: all 0.2s ease-in-out;
-}
-
-.title {
-  width: fit-content;
-}
-
-.description,
-.comment a {
-  color: $secondary-200;
 }
 </style>
