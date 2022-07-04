@@ -409,9 +409,8 @@ h4 {
   clip-path: polygon(100% 0, 0 0, 50% 100%);
 }
 
-
 .container {
-  width: 100%;
+  width: 90%;
   margin-right: auto;
   margin-left: auto;
   max-width: 80rem;

@@ -8,7 +8,7 @@
       inline-label
       class="tabs"
     >
-      <q-tab name="code" class="repo-tab" @click="updateTab('code')">
+      <q-tab name="code" class="repo-tab" @click="updateTab(TABS.CODE)">
         <TextWithIconAndCount>
           <template v-slot:icon>
             <q-icon class="custome-icon">
@@ -18,13 +18,13 @@
           <template v-slot:title>
             <span
               class="q-mr-xs q-ml-sm text-caption"
-              :class="{ 'text-weight-bold active': tab === 'code' }"
+              :class="{ 'text-weight-bold active': isTab(TABS.CODE) }"
               >Code</span
             >
           </template>
         </TextWithIconAndCount>
       </q-tab>
-      <q-tab name="issues" class="repo-tab" @click="updateTab('issues')">
+      <q-tab name="issues" class="repo-tab" @click="updateTab(TABS.ISSUES)">
         <TextWithIconAndCount>
           <template v-slot:icon>
             <q-icon class="custome-icon">
@@ -34,7 +34,7 @@
           <template v-slot:title>
             <span
               class="q-mr-xs q-ml-sm text-caption"
-              :class="{ 'text-weight-bold active': tab === 'issues' }"
+              :class="{ 'text-weight-bold active': isTab(TABS.ISSUES) }"
               >Issues</span
             >
           </template>
@@ -46,7 +46,7 @@
       <q-tab
         name="pullrequests"
         class="repo-tab"
-        @click="updateTab('pullrequests')"
+        @click="updateTab(TABS.PULL_REQUESTS)"
       >
         <TextWithIconAndCount>
           <template v-slot:icon>
@@ -57,7 +57,7 @@
           <template v-slot:title>
             <span
               class="q-mr-xs q-ml-sm text-caption"
-              :class="{ 'text-weight-bold active': tab === 'pullrequests' }"
+              :class="{ 'text-weight-bold active': isTab(TABS.PULL_REQUESTS) }"
               >Pull Requests</span
             >
           </template>
@@ -73,6 +73,7 @@
 <script lang="ts">
 import { computed, defineComponent, defineProps, ref, defineEmits } from 'vue';
 import { countCalc } from '@/helpers';
+import { TABS } from './data';
 
 export default defineComponent({
   name: 'RepoTabHeader',
@@ -87,7 +88,7 @@ import {
   PullRequestsIcon,
 } from '@/components';
 
-const tab = ref('code');
+const tab = ref(TABS.CODE);
 
 const props = defineProps({
   issuesCount: {
@@ -108,6 +109,7 @@ const updateTab = (val: string) => {
 
 const issues_count = computed(() => countCalc(props.issuesCount));
 const pull_requests_count = computed(() => countCalc(props.pullRequestsCount));
+const isTab = (value) => value === tab.value;
 
 const activeTab = computed({
   get() {

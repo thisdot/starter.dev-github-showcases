@@ -376,7 +376,7 @@ button {
   cursor: pointer;
 }
 .count-badge {
-  background: #1b1f2414;
+  background: $dark-300;
   color: inherit;
 }
 

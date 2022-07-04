@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import RepoTabHeader from '@/components/RepoSubHeader/RepoTabHeader.vue';
+import { TABS } from '@/components/RepoSubHeader/data';
 
 describe('RepoTabHeader', () => {
   const wrapper = mount(RepoTabHeader, {
@@ -17,7 +18,7 @@ describe('RepoTabHeader', () => {
   let count = 0;
 
   it.each(tabs)('should change active tab', async (tab) => {
-    const tabList = ['code', 'issues', 'pullrequests']; //arranged according the display on the UI
+    const tabList = Object.values(TABS); //arranged according the display on the UI
     await tab.trigger('click');
 
     expect(wrapper.vm.activeTab).toEqual(tabList[count]);
