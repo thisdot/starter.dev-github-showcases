@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 import { RouteConfigService } from '@this-dot/route-config';
-import { Observable, withLatestFrom, map } from 'rxjs';
+import { Observable, withLatestFrom, map, delay } from 'rxjs';
 import { RepoPage } from '../gql';
 
 @Component({
@@ -24,6 +24,7 @@ export class FileExplorerRootComponent {
         homepageUrl: res.repository?.homepageUrl,
         topics: res.repository?.topics,
       })),
+      delay(2000),
     );
 
   constructor(

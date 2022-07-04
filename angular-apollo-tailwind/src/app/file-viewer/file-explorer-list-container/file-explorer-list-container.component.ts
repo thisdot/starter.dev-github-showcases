@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { FileExplorer, RepoTreeGQL } from '../../gql';
+import { FileExplorer, RepoPage, RepoTreeGQL } from '../../gql';
 import { getReadMeFileName, parseTree } from '../parse-tree';
 
 const removeLastPathPart = (path: string) => {
@@ -21,10 +21,23 @@ const removeLastPathPart = (path: string) => {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileExplorerListContainerComponent implements OnInit, OnChanges {
-  @Input() owner = '';
-  @Input() name = '';
-  @Input() branch = '';
-  @Input() path = '';
+  @Input() repoPage?: RepoPage | null;
+
+  public get owner(): string {
+    return this.repoPage?.owner || '';
+  }
+
+  public get name(): string {
+    return this.repoPage?.name || '';
+  }
+
+  public get branch(): string {
+    return this.repoPage?.branch || '';
+  }
+
+  public get path(): string {
+    return this.repoPage?.path || '';
+  }
 
   repoTree$!: Observable<FileExplorer>;
   queryRef = this.repoTreeGQL.watch(this.getVariables());
@@ -49,7 +62,8 @@ export class FileExplorerListContainerComponent implements OnInit, OnChanges {
     this.queryRef.setVariables(this.getVariables());
   }
 
-  getBackLink(path: string) {
+  getBackLink(path: string): string | undefined {
+    if (!this.repoPage) return;
     const basePath = `/${this.owner}/${this.name}`;
     const backPath = removeLastPathPart(path);
     const treePath = `${basePath}/tree/${this.branch}`;

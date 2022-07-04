@@ -16,7 +16,7 @@ import { RepoReadMeGQL } from 'src/app/gql';
 export class RepoReadMeComponent implements OnInit {
   @Input() owner = '';
   @Input() name = '';
-  @Input() fileName = '';
+  @Input() fileName? = '';
   @Input() path = '';
 
   readme$!: Observable<{ text?: string | null }>;

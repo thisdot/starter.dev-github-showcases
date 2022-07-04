@@ -1,18 +1,27 @@
 <div *ngFor="let item of items" class="cell">
   <div class="flex items-center">
     <div class="mr-2.5">
-      <ng-container *ngIf="item.type === 'tree'; else file">
-        <sd-folder-icon class="iconDir"></sd-folder-icon>
+      <ng-container *ngIf="item; else itemIconSkeleton">
+        <ng-container *ngIf="item.type === 'tree'; else file">
+          <sd-folder-icon class="iconDir"></sd-folder-icon>
+        </ng-container>
+        <ng-template #file>
+          <sd-document-icon class="iconFile"></sd-document-icon>
+        </ng-template>
       </ng-container>
-      <ng-template #file>
-        <sd-document-icon class="iconFile"></sd-document-icon>
+      <ng-template #itemIconSkeleton>
+        <div class="inline-block w-28 h-8 bg-gray-200 rounded mr-3"></div>
       </ng-template>
     </div>
     <a
+      *ngIf="item; else linkSkeleton"
       [routerLink]="getPathHref(item)"
       class="link"
       [attr.data-testid]="'file explorer list ' + item.name"
       >{{ item.name }}</a
     >
+    <ng-template #linkSkeleton>
+      <div class="inline-block w-28 h-8 bg-gray-200 rounded mr-3"></div>
+    </ng-template>
   </div>
 </div>

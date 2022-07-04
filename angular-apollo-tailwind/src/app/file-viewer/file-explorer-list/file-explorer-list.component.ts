@@ -11,7 +11,7 @@ export class FileExplorerListComponent {
   @Input() owner = '';
   @Input() name = '';
   @Input() branch = '';
-  @Input() items: TreeEntry[] = [];
+  @Input() items?: TreeEntry[];
 
   getPathHref(item: TreeEntry): string {
     const basePath = `/${this.owner}/${this.name}`;

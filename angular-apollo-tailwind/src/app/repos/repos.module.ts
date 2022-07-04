@@ -19,6 +19,7 @@ import {
 } from '@shared';
 import { ContainerComponentModule } from '@shared';
 import { RepoListItemSkeletonComponent } from './components/repo-list-item-skeleton/repo-list-item-skeleton.component';
+import { RepoHeaderSkeletonComponent } from './repo-header/repo-header-skeleton/repo-header-skeleton.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RepoListItemSkeletonComponent } from './components/repo-list-item-skele
     RepoListItemSkeletonComponent,
     RepoDetailsComponent,
     RepoHeaderComponent,
+    RepoHeaderSkeletonComponent,
     RepoActionButtonsComponent,
     RepoHeadingComponent,
     RepoTabNavigationComponent,
