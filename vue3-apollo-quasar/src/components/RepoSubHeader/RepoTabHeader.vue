@@ -8,7 +8,7 @@
       inline-label
       class="tabs"
     >
-      <q-tab name="code" class="repo-tab" @click="tab = 'code'">
+      <q-tab name="code" class="repo-tab" @click="updateTab('code')">
         <TextWithIconAndCount>
           <template v-slot:icon>
             <q-icon class="custome-icon">
@@ -20,7 +20,7 @@
           </template>
         </TextWithIconAndCount>
       </q-tab>
-      <q-tab name="issues" class="repo-tab" @click="tab = 'issues'">
+      <q-tab name="issues" class="repo-tab" @click="updateTab('issues')">
         <TextWithIconAndCount>
           <template v-slot:icon>
             <q-icon class="custome-icon">
@@ -35,7 +35,11 @@
           </template>
         </TextWithIconAndCount>
       </q-tab>
-      <q-tab name="pullrequests" class="repo-tab" @click="tab = 'pullrequests'">
+      <q-tab
+        name="pullrequests"
+        class="repo-tab"
+        @click="updateTab('pullrequests')"
+      >
         <TextWithIconAndCount>
           <template v-slot:icon>
             <q-icon class="custome-icon">
@@ -86,6 +90,10 @@ const props = defineProps({
 
 const emit = defineEmits(['triggerTab']);
 
+const updateTab = (val: string) => {
+  tab.value = val;
+};
+
 const issues_count = computed(() => countCalc(props.issuesCount));
 const pull_requests_count = computed(() => countCalc(props.pullRequestsCount));
 
@@ -95,7 +103,7 @@ const activeTab = computed({
     return tab.value;
   },
   set(val: string) {
-    tab.value = val;
+    updateTab(val);
     emit('triggerTab', tab.value);
   },
 });
