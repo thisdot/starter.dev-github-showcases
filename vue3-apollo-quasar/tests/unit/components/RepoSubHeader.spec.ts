@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { RepoSubHeader } from '@/components';
 import ListItem from '@/components/RepoSubHeader/ListItem.vue';
-// import RepoSubHeaderExperiment from '@/components/RepoSubHeader/RepoSubHeaderExperiment.vue';
 
 describe('RepoSubHeader', () => {
   const wrapper = mount(RepoSubHeader, {
