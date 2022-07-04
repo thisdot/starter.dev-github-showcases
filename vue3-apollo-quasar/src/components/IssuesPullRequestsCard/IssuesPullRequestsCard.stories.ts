@@ -1,5 +1,5 @@
 import IssuesPullRequestsCard from './IssuesPullRequestsCard.vue';
-import { cardTypes, states } from './data';
+import { CARD_TYPES, STATES } from './data';
 
 export default {
   title: 'component/IssuesPullRequestsCard',
@@ -8,13 +8,13 @@ export default {
     cardType: {
       control: {
         type: 'select',
-        options: cardTypes,
+        options: Object.values(CARD_TYPES),
       },
     },
     state: {
       control: {
         type: 'select',
-        options: states,
+        options: Object.values(STATES),
       },
     },
     author: {},

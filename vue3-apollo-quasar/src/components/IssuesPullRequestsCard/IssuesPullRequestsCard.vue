@@ -3,19 +3,25 @@
     <q-card-section class="row no-wrap q-pa-sm">
       <span :class="cardType">
         <q-icon class="text-body1" :class="state">
-          <IssuesIcon v-if="cardType === 'issue' && state === 'open'" />
+          <IssuesIcon
+            v-if="cardType === CARD_TYPES.ISSUE && state === STATES.OPEN"
+          />
           <ClosedIssuesIcon
-            v-else-if="cardType === 'issue' && state === 'closed'"
+            v-else-if="cardType === CARD_TYPES.ISSUE && state === STATES.CLOSED"
           />
 
           <PullRequestsIcon
-            v-if="cardType === 'pullrequest' && state === 'open'"
+            v-if="cardType === CARD_TYPES.PULL_REQUEST && state === STATES.OPEN"
           />
           <MergedPullRequestsIcon
-            v-else-if="cardType === 'pullrequest' && state === 'merged'"
+            v-else-if="
+              cardType === CARD_TYPES.PULL_REQUEST && state === STATES.MERGED
+            "
           />
           <ClosedPullRequestsIcon
-            v-else-if="cardType === 'pullrequest' && state === 'closed'"
+            v-else-if="
+              cardType === CARD_TYPES.PULL_REQUEST && state === STATES.CLOSED
+            "
           />
         </q-icon>
       </span>
@@ -54,7 +60,7 @@
 
 <script lang="ts">
 import { defineComponent, defineProps } from 'vue';
-import { cardTypes, states } from './data';
+import { CARD_TYPES, STATES } from './data';
 import { useFormatter } from '@/composables';
 
 const { getFriendlyDate } = useFormatter();
@@ -77,12 +83,12 @@ import {
 defineProps({
   cardType: {
     type: String,
-    validator: (prop: string) => cardTypes.includes(prop),
+    validator: (prop: string) => Object.values(CARD_TYPES).includes(prop),
     required: true,
   },
   state: {
     type: String,
-    validator: (prop: string) => states.includes(prop),
+    validator: (prop: string) => Object.values(STATES).includes(prop),
     required: true,
   },
   author: {
