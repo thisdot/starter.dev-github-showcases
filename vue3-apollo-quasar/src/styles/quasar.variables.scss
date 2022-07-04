@@ -17,13 +17,17 @@ $positive: #2ea44f;
 $negative: #bd2c00;
 $info: #719fdb;
 $warning: #c9510c;
+$danger-100: #ffebe9;
+$danger-800: #cf222e;
 
-$shadow-color: #000;
-$elevation-umbra: rgba($shadow-color, 0.15);
-$elevation-penumbra: rgba($shadow-color, 0.1);
-$elevation-ambient: rgba($shadow-color, 0.05);
+$purple-700: #8250df;
+
+$dark: #111827;
+$dark-800: #24292f;
 
 $color-border-default: #d0d7de;
+$color-fg-muted: #57606a;
+$color-accent-fg: #0969da;
 
 $xs-breakpoint: 718px;
 $sm-breakpoint: 1024px;

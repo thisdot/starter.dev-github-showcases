@@ -8,23 +8,20 @@
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
       fill="currentColor"
+      d="M11.28 6.78a.75.75 0 00-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l3.5-3.5z"
     ></path>
     <path
-      d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"
+      fill-rule="evenodd"
       fill="currentColor"
+      d="M16 8A8 8 0 110 8a8 8 0 0116 0zm-1.5 0a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
     ></path>
   </svg>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-<<<<<<< HEAD
-
-=======
->>>>>>> fd62c6392a00e26801a2f471e550a7ab5f7d822c
 export default defineComponent({
-  name: 'IssuesIcon',
+  name: 'ClosedIssuesIcon',
 });
 </script>

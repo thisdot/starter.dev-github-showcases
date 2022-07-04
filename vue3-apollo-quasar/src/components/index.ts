@@ -27,3 +27,8 @@ export { default as ArrowRightIcon } from './ArrowRightIcon';
 export { default as CorrectIcon } from './CorrectIcon';
 export { default as MobilePhoneIcon } from './MobilePhoneIcon';
 export { default as BookIcon } from './BookIcon';
+export { default as IssuesPullRequestsCard } from './IssuesPullRequestsCard';
+export { default as ClosedPullRequestsIcon } from './ClosedPullRequestsIcon';
+export { default as CommentIcon } from './CommentIcon';
+export { default as MergedPullRequestsIcon } from './MergedPullRequestsIcon';
+export { default as ClosedIssuesIcon } from './ClosedIssuesIcon';
