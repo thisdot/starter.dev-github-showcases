@@ -30,7 +30,7 @@
           <template v-slot:title>
             <span class="q-mr-xs q-ml-sm text-caption">Issues</span>
           </template>
-          <template v-if="issuesCount > 0" v-slot:count>
+          <template v-if="issuesCount" v-slot:count>
             <q-badge rounded :label="issues_count" class="count-badge" />
           </template>
         </TextWithIconAndCount>
@@ -49,7 +49,7 @@
           <template v-slot:title>
             <span class="q-mr-xs q-ml-sm text-caption">Pull Requests</span>
           </template>
-          <template v-if="pullRequestsCount > 0" v-slot:count>
+          <template v-if="pullRequestsCount" v-slot:count>
             <q-badge rounded :label="pull_requests_count" class="count-badge" />
           </template>
         </TextWithIconAndCount>
