@@ -26,11 +26,13 @@
         </q-icon>
       </span>
       <div class="row column q-ml-sm col">
-        <a :href="url" class="text-body1 title">
-          {{ title }}
-        </a>
+        <div>
+          <a :href="url" class="text-body1 title">
+            {{ title }}
+          </a>
+        </div>
 
-        <p class="text-caption description">
+        <div class="text-caption description">
           <span>#{{ number }}</span>
           <span class="q-mx-xs">by</span>
           <span>{{ author }}</span>
@@ -39,7 +41,7 @@
           <span class="q-mx-xs">
             {{ getFriendlyDate(createdAt.toLocaleDateString()) }}
           </span>
-        </p>
+        </div>
       </div>
 
       <div>
@@ -138,10 +140,6 @@ defineProps({
 .description,
 .comment a {
   color: $secondary-200;
-}
-
-.title {
-  width: fit-content;
 }
 
 a {
