@@ -20,10 +20,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-<<<<<<< HEAD
-
-=======
->>>>>>> fd62c6392a00e26801a2f471e550a7ab5f7d822c
 export default defineComponent({
   name: 'IssuesIcon',
 });
