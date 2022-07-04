@@ -9,7 +9,7 @@ function FileText({ text }: FileTextProps) {
   return (
     <CodeBlock data-testid="text-block" >
       {lines.map((line, i) => (
-        <TableRow key={i} className="table-row">
+        <TableRow key={i}>
           <LineNumber>{i + 1}</LineNumber>
           <LineText>{line}</LineText>
         </TableRow>
