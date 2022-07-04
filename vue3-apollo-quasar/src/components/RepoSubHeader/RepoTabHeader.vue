@@ -16,7 +16,11 @@
             </q-icon>
           </template>
           <template v-slot:title>
-            <span class="q-mr-xs q-ml-sm text-caption">Code</span>
+            <span
+              class="q-mr-xs q-ml-sm text-caption"
+              :class="{ 'text-weight-bold active': tab === 'code' }"
+              >Code</span
+            >
           </template>
         </TextWithIconAndCount>
       </q-tab>
@@ -28,7 +32,11 @@
             </q-icon>
           </template>
           <template v-slot:title>
-            <span class="q-mr-xs q-ml-sm text-caption">Issues</span>
+            <span
+              class="q-mr-xs q-ml-sm text-caption"
+              :class="{ 'text-weight-bold active': tab === 'issues' }"
+              >Issues</span
+            >
           </template>
           <template v-if="issuesCount" v-slot:count>
             <q-badge rounded :label="issues_count" class="count-badge" />
@@ -47,7 +55,11 @@
             </q-icon>
           </template>
           <template v-slot:title>
-            <span class="q-mr-xs q-ml-sm text-caption">Pull Requests</span>
+            <span
+              class="q-mr-xs q-ml-sm text-caption"
+              :class="{ 'text-weight-bold active': tab === 'pullrequests' }"
+              >Pull Requests</span
+            >
           </template>
           <template v-if="pullRequestsCount" v-slot:count>
             <q-badge rounded :label="pull_requests_count" class="count-badge" />
@@ -128,6 +140,10 @@ const activeTab = computed({
   gap: 0;
   height: unset;
   padding: 0 6px !important;
+
+  .active {
+    color: $dark;
+  }
 }
 
 .tabs {
