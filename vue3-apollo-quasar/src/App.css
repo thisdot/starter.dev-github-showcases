@@ -408,3 +408,11 @@ h4 {
   -webkit-clip-path: polygon(100% 0, 0 0, 50% 100%);
   clip-path: polygon(100% 0, 0 0, 50% 100%);
 }
+
+
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 80rem;
+}
