@@ -5,8 +5,9 @@
         <!-- Top left of the sub header -->
         <div class="row items-baseline">
           <span class="book-icon">
-            <q-icon>
-              <BookIcon />
+            <q-icon name="bookicon">
+              <!-- <img src="@/assets/logo.svg" alt="logo" /> -->
+              <!-- <BookIcon /> -->
             </q-icon>
           </span>
           <span class="q-mx-sm user-reponame text-subtitle1">
@@ -216,6 +217,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
+import { useQuasar } from 'quasar';
 import RepoTabHeader from './RepoTabHeader.vue';
 import ListItem from './ListItem.vue';
 import TextWithIconAndCount from '@/components/TextWithIconAndCount';
@@ -286,6 +288,26 @@ export default defineComponent({
     const refWatchMenu = ref(false);
 
     const notify = ref('all');
+
+    const $q = useQuasar();
+
+    const iconPath = '~assets/';
+    const myIcons: { [key: string]: string } = {
+      'bookicon': 'book.svg',
+    };
+
+    $q.iconMapFn = (iconName) => {
+      console.log(iconName);
+      
+      const icon = myIcons[iconName];
+      console.log(icon);
+      
+      if (icon !== void 0) {
+        console.log({icon: iconPath + icon});
+        return { icon: iconPath + icon };
+      }
+      return void 0;
+    };
 
     const toggleWatchMenu = () => {
       refStarsMenu.value = false;
