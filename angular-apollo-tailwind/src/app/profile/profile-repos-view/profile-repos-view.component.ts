@@ -6,13 +6,13 @@ import { LanguageFilter } from 'src/app/components/filters/filter.models';
 import { Repo, PaginationEvent } from 'src/app/gql';
 
 @Component({
-  selector: 'app-profile-repos-list',
-  templateUrl: './profile-repos-list.component.html',
-  styleUrls: ['./profile-repos-list.component.css'],
+  selector: 'app-profile-repos-view',
+  templateUrl: './profile-repos-view.component.html',
   providers: [ProfileReposFilterStore, ProfileReposStore],
 })
-export class ProfileReposListComponent implements OnInit {
-  readonly userRepos$: Observable<Repo[]> = this.profileReposStore.repos$;
+export class ProfileReposViewComponent implements OnInit {
+  readonly userRepos$: Observable<Repo[] | undefined> =
+    this.profileReposStore.repos$;
   readonly resultCount$ = this.profileReposStore.resultCount$;
   readonly pageInfo$ = this.profileReposStore.pageInfo$;
 

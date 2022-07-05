@@ -16,5 +16,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileExplorerAboutDescriptionComponent {
-  @Input() description = '';
+  @Input() description?: string | null;
 }

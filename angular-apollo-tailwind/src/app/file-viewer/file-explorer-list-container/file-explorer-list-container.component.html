@@ -1,4 +1,4 @@
-<ng-container *ngIf="repoTree$ | async as repoTree; else loading">
+<ng-container>
   <div>
     <div class="file-explorer-list-container">
       <a *ngIf="path" [routerLink]="getBackLink(path)" class="cellBack">
@@ -8,15 +8,14 @@
         [owner]="owner"
         [name]="name"
         [branch]="branch"
-        [items]="repoTree.items"
+        [items]="(repoTree$ | async)?.items"
       ></app-file-explorer-list>
     </div>
     <app-repo-read-me
-      *ngIf="repoTree.readme"
       [owner]="owner"
       [name]="name"
       [path]="path"
-      [fileName]="repoTree.readme"
+      [fileName]="(repoTree$ | async)?.readme"
     ></app-repo-read-me>
   </div>
 </ng-container>

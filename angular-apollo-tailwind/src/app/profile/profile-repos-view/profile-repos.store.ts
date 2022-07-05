@@ -16,7 +16,7 @@ import {
 
 export interface ProfileReposState {
   owner: string;
-  repos: Repo[];
+  repos?: Repo[];
   pageInfo: {
     hasNextPage: boolean;
     hasPreviousPage: boolean;
@@ -27,7 +27,7 @@ export interface ProfileReposState {
 
 const INITIAL_PROFILE_REPOS_STATE: ProfileReposState = {
   owner: '',
-  repos: [],
+  repos: undefined,
   pageInfo: {
     hasNextPage: false,
     hasPreviousPage: false,
@@ -47,7 +47,7 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     owner,
   }));
 
-  readonly setRepos = this.updater((state, repos: Repo[]) => ({
+  readonly setRepos = this.updater((state, repos: Repo[] | undefined) => ({
     ...state,
     repos,
   }));
@@ -96,7 +96,7 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     target$.pipe(
       withLatestFrom(this.repos$),
       map(([state, repos]) => {
-        const filteredRepos = filterRepos(repos, state);
+        const filteredRepos = repos ? filterRepos(repos, state) : undefined;
         this.setRepos(filteredRepos);
       }),
     ),
