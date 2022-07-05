@@ -4,8 +4,9 @@ import {
   Input,
   OnChanges,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { FileExplorer, RepoPage, RepoTreeGQL } from '../../gql';
 import { getReadMeFileName, parseTree } from '../parse-tree';
 
@@ -21,6 +22,7 @@ const removeLastPathPart = (path: string) => {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileExplorerListContainerComponent implements OnInit, OnChanges {
+  private initialized = false;
   @Input() repoPage?: RepoPage | null;
 
   public get owner(): string {
@@ -39,27 +41,24 @@ export class FileExplorerListContainerComponent implements OnInit, OnChanges {
     return this.repoPage?.path || '';
   }
 
-  repoTree$!: Observable<FileExplorer>;
-  queryRef = this.repoTreeGQL.watch(this.getVariables());
+  repoTree$: Observable<FileExplorer> = of({
+    items: undefined,
+    readme: undefined,
+  });
 
   constructor(private repoTreeGQL: RepoTreeGQL) {}
 
   ngOnInit(): void {
-    this.repoTree$ = this.queryRef.valueChanges.pipe(
-      map((res) => {
-        const items = parseTree(res?.data);
-        const readme = getReadMeFileName(items);
-
-        return {
-          items,
-          readme,
-        };
-      }),
-    );
+    this.initialized = true;
   }
 
-  ngOnChanges(): void {
-    this.queryRef.setVariables(this.getVariables());
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.initialized) {
+      const repoPageChange = changes['repoPage'];
+      if (repoPageChange) {
+        this.loadRepoTree();
+      }
+    }
   }
 
   getBackLink(path: string): string | undefined {
@@ -71,10 +70,26 @@ export class FileExplorerListContainerComponent implements OnInit, OnChanges {
   }
 
   getVariables() {
+    if (!this.repoPage) return { owner: '', name: '', expression: '' };
     return {
       owner: this.owner,
       name: this.name,
       expression: `${this.branch}:${this.path ?? ''}`,
     };
+  }
+
+  private loadRepoTree(): void {
+    const vars = this.getVariables();
+    this.repoTree$ = this.repoTreeGQL.fetch(vars).pipe(
+      map((res) => {
+        const items = parseTree(res?.data);
+        const readme = getReadMeFileName(items);
+
+        return {
+          items,
+          readme,
+        };
+      }),
+    );
   }
 }

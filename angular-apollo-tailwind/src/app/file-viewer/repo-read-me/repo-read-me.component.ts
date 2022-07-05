@@ -2,9 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { RepoReadMeGQL } from 'src/app/gql';
 
 @Component({
@@ -13,24 +15,44 @@ import { RepoReadMeGQL } from 'src/app/gql';
   styleUrls: ['./repo-read-me.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RepoReadMeComponent implements OnInit {
+export class RepoReadMeComponent implements OnInit, OnChanges {
   @Input() owner = '';
   @Input() name = '';
   @Input() fileName? = '';
   @Input() path = '';
+  private initialized = false;
 
-  readme$!: Observable<{ text?: string | null }>;
+  readme$?: Observable<{ text?: string | null }>;
 
   constructor(private repoReadMeGQL: RepoReadMeGQL) {}
 
   ngOnInit(): void {
+    this.initialized = true;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.initialized) {
+      const pathChange = changes['path'];
+      const fileNameChanges = changes['fileName'];
+      if (pathChange || fileNameChanges) {
+        console.log('changes', changes);
+        this.loadReadme();
+      }
+    }
+  }
+
+  private loadReadme(): void {
+    if (!this.path && !this.fileName) {
+      this.readme$ = of({});
+      return;
+    }
     this.readme$ = this.repoReadMeGQL
-      .watch({
+      .fetch({
         owner: this.owner,
         name: this.name,
         expression: this.buildPathExpression(),
       })
-      .valueChanges.pipe(
+      .pipe(
         map((res) => {
           const readMeNode = res?.data?.repository?.readme;
           const text =
@@ -44,7 +66,9 @@ export class RepoReadMeComponent implements OnInit {
   }
 
   private buildPathExpression(): string {
-    const path = this.path ? `${this.path}/${this.fileName}` : this.fileName;
+    const path = this.path
+      ? `${this.path}/${this.fileName}`
+      : this.fileName || '';
     return `HEAD:${path}`;
   }
 }

@@ -12,6 +12,15 @@ export class FileExplorerListComponent {
   @Input() name = '';
   @Input() branch = '';
   @Input() items?: TreeEntry[];
+  @Input() skeletonCount = 10;
+
+  private get skeletons(): undefined[] {
+    return Array(this.skeletonCount).fill(undefined);
+  }
+
+  get displayItems(): (TreeEntry | undefined)[] {
+    return this.items || this.skeletons;
+  }
 
   getPathHref(item: TreeEntry): string {
     const basePath = `/${this.owner}/${this.name}`;

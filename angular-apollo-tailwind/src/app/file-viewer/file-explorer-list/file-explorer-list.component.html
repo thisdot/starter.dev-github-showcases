@@ -1,4 +1,8 @@
-<div *ngFor="let item of items" class="cell">
+<div
+  *ngFor="let item of displayItems"
+  class="cell"
+  [class.animate-pulse]="!item"
+>
   <div class="flex items-center">
     <div class="mr-2.5">
       <ng-container *ngIf="item; else itemIconSkeleton">
@@ -10,7 +14,7 @@
         </ng-template>
       </ng-container>
       <ng-template #itemIconSkeleton>
-        <div class="inline-block w-28 h-8 bg-gray-200 rounded mr-3"></div>
+        <div class="w-6 h-6 bg-gray-200 rounded mr-3"></div>
       </ng-template>
     </div>
     <a
@@ -21,7 +25,7 @@
       >{{ item.name }}</a
     >
     <ng-template #linkSkeleton>
-      <div class="inline-block w-28 h-8 bg-gray-200 rounded mr-3"></div>
+      <div class="flex-1 h-6 bg-gray-200 rounded"></div>
     </ng-template>
   </div>
 </div>
