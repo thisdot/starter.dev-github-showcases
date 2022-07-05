@@ -35,7 +35,6 @@ export class RepoReadMeComponent implements OnInit, OnChanges {
       const pathChange = changes['path'];
       const fileNameChanges = changes['fileName'];
       if (pathChange || fileNameChanges) {
-        console.log('changes', changes);
         this.loadReadme();
       }
     }
