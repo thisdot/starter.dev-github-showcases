@@ -10,7 +10,7 @@
       @triggerTab="changeTab"
     />
     <div class="wrapper">
-      <div class="row" style="--gap: 0">
+      <div class="row">
         <!-- Left side -->
         <div class="usercard">
           <UserProfileCard :username="username" />
@@ -25,7 +25,7 @@
               <slot name="overview"></slot>
             </q-tab-panel>
 
-            <q-tab-panel name="repositories">
+            <q-tab-panel name="repositories" class="repos">
               <q-list v-if="repos" separator>
                 <q-item v-for="repo in repos" :key="repo.id">
                   <RepoCard
@@ -94,13 +94,54 @@ const { repos, loading } = getUserRepos(props.username, false);
 @import '../../App.css';
 .tab-contents {
   flex-grow: 1;
+  grid-column: span 6 / span 6;
+
+  @media (min-width: 768px) {
+    grid-column: span 8 / span 8;
+  }
+  @media (min-width: 1280px) {
+    grid-column: span 9 / span 9;
+  }
+}
+
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1536px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: none;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+.repos {
+  @media (min-width: 768px) {
+    width: max-content;
+  }
 }
 
 .usercard {
-  display: none;
+  display: block;
+  position: relative;
+  z-index: 20;
+  grid-column: span 12 / span 12;
 
-  @media (min-width: 1024px) {
-    display: block;
+  @media (min-width: 768px) {
+    top: -3rem;
+    grid-column: span 4 / span 4;
+  }
+  @media (min-width: 1280px) {
+    grid-column: span 3 / span 3;
   }
 }
 </style>

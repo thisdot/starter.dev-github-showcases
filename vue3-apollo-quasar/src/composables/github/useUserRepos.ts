@@ -5,7 +5,6 @@ import {
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { USER_REPOS_QUERY } from './queries';
 import { Repo } from './types/userRepos';
-import { useRoute } from 'vue-router';
 
 export const useUserRepos = () => {
   const getUserRepos = (username, isOrg = false) => {
