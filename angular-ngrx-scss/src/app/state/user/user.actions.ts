@@ -14,16 +14,6 @@ export const fetchUserDataError = createAction(
   props<{ error: object }>(),
 );
 
-export const fetchUserGists = createAction(
-  '[User API] User gists requested',
-  props<{ username: string }>(),
-);
-
-export const fetchUserTopRepos = createAction(
-  '[User API] User top repos requested',
-  props<{ username: string }>(),
-);
-
 export const fetchUserTopReposSuccess = createAction(
   '[User API] User top repos successfully received',
   props<{ topRepos: UserReposState[] }>(),

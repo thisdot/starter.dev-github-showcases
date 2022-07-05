@@ -13,7 +13,7 @@ import { UserEffects } from './user.effects';
 import { UserState } from './user.state';
 import { UserGistsState, UserReposState } from '../profile/profile.state';
 
-const userStateMock: UserState = {
+const USER_STATE_MOCK: UserState = {
   username: 'thisdot',
   avatar: '',
   bio: '',
@@ -92,7 +92,7 @@ describe('UserEffects', () => {
   });
 
   it('should get the user gists from the Github API', (done) => {
-    actions$ = of(fetchUserDataSuccess({ userData: userStateMock }));
+    actions$ = of(fetchUserDataSuccess({ userData: USER_STATE_MOCK }));
     const expectedUserData: UserGistsState[] = [
       {
         url: 'github.com/gists',
@@ -111,7 +111,7 @@ describe('UserEffects', () => {
   });
 
   it('should get the top repositories from the Github API', (done) => {
-    actions$ = of(fetchUserDataSuccess({ userData: userStateMock }));
+    actions$ = of(fetchUserDataSuccess({ userData: USER_STATE_MOCK }));
     const expectedUserData: UserReposState[] = [
       {
         name: 'Repo-test',
