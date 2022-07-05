@@ -1,7 +1,20 @@
 <template>
   <div class="row items-center no-wrap q-py-xs q-px-sm">
     <div class="row items-center">
-      <span></span>
+      <div>
+        <q-icon>
+          <PullRequestsIcon />
+        </q-icon>
+        <span>{{ openCounts }}</span>
+        Open
+      </div>
+      <div>
+        <q-icon>
+          <CorrectIcon />
+        </q-icon>
+        <span>{{ closedCounts }}</span>
+        Closed
+      </div>
     </div>
     <div class="col"></div>
   </div>
@@ -15,11 +28,12 @@ export default defineComponent({
 </script>
 
 <script lnag="ts" setup>
-const tabs = {
+import { PullRequestsIcon, CorrectIcon } from '@/components';
+const TABS = {
   OPEN: 'open',
   CLOSED: 'closed',
 };
-const activeTab = ref(tabs.OPEN);
+const activeTab = ref(TABS.OPEN);
 
 defineProps({
   openCounts: {
