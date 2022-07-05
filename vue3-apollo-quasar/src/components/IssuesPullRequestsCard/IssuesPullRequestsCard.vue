@@ -2,28 +2,38 @@
   <q-card flat>
     <q-card-section class="row no-wrap q-pa-sm">
       <span :class="cardType">
-        <q-icon class="text-body1" :class="state">
-          <IssuesIcon
+        <span class="text-body1" :class="state">
+          <q-icon
+            class="text-h6 custom-icon"
+            name="svguse:app-icons/issue.svg#issue"
             v-if="cardType === CARD_TYPES.ISSUE && state === STATES.OPEN"
           />
-          <ClosedIssuesIcon
+          <q-icon
+            class="text-h6 custom custom-icon-icon"
+            name="svguse:app-icons/closed-issue.svg#closed-issue"
             v-else-if="cardType === CARD_TYPES.ISSUE && state === STATES.CLOSED"
           />
 
-          <PullRequestsIcon
+          <q-icon
+            class="text-h6 custom-icon"
+            name="svguse:app-icons/pull-request.svg#pull-request"
             v-if="cardType === CARD_TYPES.PULL_REQUEST && state === STATES.OPEN"
           />
-          <MergedPullRequestsIcon
+          <q-icon
+            class="text-h6 custom-icon"
+            name="svguse:app-icons/closed-pull-request.svg#closed-pull-request"
             v-else-if="
               cardType === CARD_TYPES.PULL_REQUEST && state === STATES.MERGED
             "
           />
-          <ClosedPullRequestsIcon
+          <q-icon
+            class="text-h6 custom-icon"
+            name="svguse:app-icons/merged-pull-request.svg#merged-pull-request"
             v-else-if="
               cardType === CARD_TYPES.PULL_REQUEST && state === STATES.CLOSED
             "
           />
-        </q-icon>
+        </span>
       </span>
       <div class="row column q-ml-sm col">
         <div>
@@ -47,9 +57,10 @@
       <div>
         <span class="comment">
           <a :href="url" class="text-caption">
-            <q-icon class="q-mx-xs text-body1">
-              <CommentIcon />
-            </q-icon>
+            <q-icon
+              class="q-mx-xs text-h6 custom-icon"
+              name="svguse:app-icons/comment.svg#comment"
+            />
             <span>
               {{ commentCount }}
             </span>
@@ -73,15 +84,6 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import {
-  IssuesIcon,
-  PullRequestsIcon,
-  ClosedPullRequestsIcon,
-  ClosedIssuesIcon,
-  MergedPullRequestsIcon,
-  CommentIcon,
-} from '@/components';
-
 defineProps({
   cardType: {
     type: String,
@@ -150,5 +152,9 @@ a {
     color: $primary;
   }
   transition: all 0.2s ease-in-out;
+}
+
+.custom-icon {
+  transform: translate(0, 0.1rem);
 }
 </style>

@@ -6,7 +6,7 @@ import router from './router';
 import { createPinia } from 'pinia';
 
 // Quasar
-import { Quasar, useQuasar } from 'quasar';
+import { Quasar } from 'quasar';
 import quasarUserOptions from './quasar-user-options';
 
 //
@@ -19,20 +19,6 @@ const pinia = createPinia();
 createApp({
   setup() {
     setupGraphQL();
-    const $q = useQuasar();
-
-    const iconPath = '@/assets/';
-    const myIcons: { [key: string]: string } = {
-      'app:bookicon': 'book.svg',
-    };
-
-    $q.iconMapFn = (iconName) => {
-      const icon = myIcons[iconName];
-      if (icon !== void 0) {
-        return { icon: iconPath + icon };
-      }
-      return void 0;
-    };
   },
   render: () => h(App),
 })
