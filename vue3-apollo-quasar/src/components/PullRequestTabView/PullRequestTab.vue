@@ -23,7 +23,7 @@ export default defineComponent({
 });
 </script>
 
-<script lnag="ts" setup>
+<script lang="ts" setup>
 const TABS = {
   OPEN: 'open',
   CLOSED: 'closed',

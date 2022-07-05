@@ -3,7 +3,7 @@ import PullRequestTab from './PullRequestTab.vue';
 export default {
   title: 'component/Pull Request Tab',
   component: PullRequestTab,
-  argTypes: {
+  argType: {
     openCounts: {},
     closedCounts: {},
   },
