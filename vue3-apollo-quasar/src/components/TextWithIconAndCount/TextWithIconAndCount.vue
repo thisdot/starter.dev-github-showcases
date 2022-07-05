@@ -1,5 +1,5 @@
 <template>
-  <span class="row justify-around items-baseline q-pa-xs">
+  <span class="row justify-around items-center q-pa-xs">
     <slot name="icon" />
     <slot name="title" />
     <slot name="count" />

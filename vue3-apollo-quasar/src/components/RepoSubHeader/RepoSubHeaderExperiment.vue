@@ -5,9 +5,10 @@
         <!-- Top left of the sub header -->
         <div class="row items-baseline">
           <span class="book-icon">
-            <q-icon>
-              <BookIcon />
-            </q-icon>
+            <q-icon
+              class="text-h5"
+              name="svguse:app-icons/book.svg#book"
+            ></q-icon>
           </span>
           <span class="q-mx-sm user-reponame text-subtitle1">
             <a :href="profile_url">{{ username }}</a>
@@ -33,7 +34,7 @@
           >
             <TextWithIconAndCount>
               <template v-slot:icon>
-                <q-icon class="far fa-eye"></q-icon>
+                <q-icon class="far fa-eye text-caption"></q-icon>
               </template>
               <template v-slot:title>
                 <span class="q-mr-xs q-ml-sm text-caption">watch</span>
@@ -57,11 +58,21 @@
                 </button>
               </q-item>
               <q-separator></q-separator>
-              <ListItem clickable @click="selectNotification('mentions')">
+              <ListItem
+                clickable
+                @click="selectNotification(NOTIFICATIONS.mentions)"
+              >
                 <template v-slot:icon>
-                  <q-icon class="text-h6">
-                    <CorrectIcon v-show="notify === 'mentions'" />
-                  </q-icon>
+                  <span
+                    class="text-h6"
+                    :class="{ 'q-mr-md': isNotActive(NOTIFICATIONS.mentions) }"
+                  >
+                    <q-icon
+                      v-show="notify === NOTIFICATIONS.mentions"
+                      name="svguse:app-icons/correct.svg#correct"
+                    >
+                    </q-icon>
+                  </span>
                 </template>
                 <div>
                   <div class="text-bold">Participating and @mentions</div>
@@ -72,11 +83,21 @@
                 </div>
               </ListItem>
               <q-separator></q-separator>
-              <ListItem clickable @click="selectNotification('all')">
+              <ListItem
+                clickable
+                @click="selectNotification(NOTIFICATIONS.all)"
+              >
                 <template v-slot:icon>
-                  <q-icon class="text-h6">
-                    <CorrectIcon v-show="notify === 'all'" />
-                  </q-icon>
+                  <span
+                    class="text-h6"
+                    :class="{ 'q-mr-md': isNotActive(NOTIFICATIONS.all) }"
+                  >
+                    <q-icon
+                      v-show="notify === NOTIFICATIONS.all"
+                      name="svguse:app-icons/correct.svg#correct"
+                    >
+                    </q-icon>
+                  </span>
                 </template>
                 <div>
                   <div class="text-bold">All Activity</div>
@@ -86,11 +107,21 @@
                 </div>
               </ListItem>
               <q-separator></q-separator>
-              <ListItem clickable @click="selectNotification('ignore')">
+              <ListItem
+                clickable
+                @click="selectNotification(NOTIFICATIONS.ignore)"
+              >
                 <template v-slot:icon>
-                  <q-icon class="text-h6">
-                    <CorrectIcon v-show="notify === 'ignore'" />
-                  </q-icon>
+                  <span
+                    class="text-h6"
+                    :class="{ 'q-mr-md': isNotActive(NOTIFICATIONS.ignore) }"
+                  >
+                    <q-icon
+                      v-show="notify === NOTIFICATIONS.ignore"
+                      name="svguse:app-icons/correct.svg#correct"
+                    >
+                    </q-icon>
+                  </span>
                 </template>
                 <div>
                   <div class="text-bold">Ignore</div>
@@ -98,18 +129,29 @@
                 </div>
               </ListItem>
               <q-separator></q-separator>
-              <ListItem clickable @click="selectNotification('custom')">
+              <ListItem
+                clickable
+                @click="selectNotification(NOTIFICATIONS.custom)"
+              >
                 <template v-slot:icon>
-                  <q-icon class="text-h6">
-                    <CorrectIcon v-show="notify === 'custom'" />
-                  </q-icon>
+                  <span
+                    class="text-h6"
+                    :class="{ 'q-mr-md': isNotActive(NOTIFICATIONS.custom) }"
+                  >
+                    <q-icon
+                      v-show="notify === NOTIFICATIONS.custom"
+                      name="svguse:app-icons/correct.svg#correct"
+                    >
+                    </q-icon>
+                  </span>
                 </template>
                 <div>
                   <div class="row items-start justify-between">
                     <div class="text-bold">Custom</div>
-                    <q-icon>
-                      <ArrowRightIcon />
-                    </q-icon>
+                    <q-icon
+                      class="text-h6"
+                      name="svguse:app-icons/arrow-right.svg#arrow-right"
+                    ></q-icon>
                   </div>
                   <div class="text-caption overview">
                     Select events you want to be notified of in addition to
@@ -120,9 +162,10 @@
               <q-separator></q-separator>
               <ListItem className="item-bottom">
                 <template v-slot:icon>
-                  <q-icon>
-                    <MobilePhoneIcon />
-                  </q-icon>
+                  <q-icon
+                    name="svguse:app-icons/mobile.svg#mobile"
+                    class="text-h6"
+                  ></q-icon>
                 </template>
                 <span class="text-caption color-fg-muted text-normal pb-1">
                   Get push notifications on
@@ -148,12 +191,13 @@
           >
             <TextWithIconAndCount>
               <template v-slot:icon>
-                <q-icon class="custome-icon text-body1">
-                  <ForkIcon />
-                </q-icon>
+                <q-icon
+                  class="custom-icon text-h6"
+                  name="svguse:app-icons/fork.svg#fork"
+                ></q-icon>
               </template>
               <template v-slot:title>
-                <span class="q-mr-xs q-ml-sm text-caption">fork</span>
+                <span class="q-mx-xs text-caption">fork</span>
               </template>
               <template v-if="forks > 0" v-slot:count>
                 <q-badge rounded :label="forks_count" class="count-badge" />
@@ -162,11 +206,11 @@
           </button>
           <button
             class="git-btn menu__btn text-capitalize row justify-between items-center no-wrap"
-            @click="toggleStarsMenu()"
+            @click="toggleStarsMenu"
           >
             <TextWithIconAndCount>
               <template v-slot:icon>
-                <q-icon class="far fa-star"></q-icon>
+                <q-icon class="far fa-star text-caption"></q-icon>
               </template>
               <template v-slot:title>
                 <span class="q-mr-xs q-ml-sm text-caption">Star</span>
@@ -219,22 +263,11 @@ import { defineComponent, ref, computed, defineProps, defineExpose } from 'vue';
 import RepoTabHeader from './RepoTabHeader.vue';
 import ListItem from './ListItem.vue';
 import TextWithIconAndCount from '@/components/TextWithIconAndCount';
-import ForkIcon from '@/components/ForkIcon';
-import ArrowRightIcon from '@/components/ArrowRightIcon';
-import CorrectIcon from '@/components/CorrectIcon';
-import MobilePhoneIcon from '@/components/MobilePhoneIcon';
-import BookIcon from '@/components/BookIcon';
 import { countCalc } from '@/helpers';
 
 export default defineComponent({
   name: 'RepoSubHeader',
   components: {
-    TextWithIconAndCount,
-    ForkIcon,
-    ArrowRightIcon,
-    CorrectIcon,
-    MobilePhoneIcon,
-    BookIcon,
     RepoTabHeader,
     ListItem,
   },
@@ -245,6 +278,12 @@ export default defineComponent({
 const refStarsMenu = ref(false);
 const refWatchMenu = ref(false);
 
+const NOTIFICATIONS = {
+  mentions: 'mentions',
+  all: 'all',
+  ignore: 'ignore',
+  custom: 'custom',
+};
 const notify = ref('all');
 
 const toggleWatchMenu = () => {
@@ -297,9 +336,9 @@ const props = defineProps({
 });
 
 document.body.addEventListener('click', (e: Event) => {
-  const target = e.target.localName;
-  console.log(target);
-  if (target == 'body') {
+  const target = e.target as Element;
+  const value = target.localName;
+  if (value == 'body') {
     refWatchMenu.value = false;
     refStarsMenu.value = false;
   }
@@ -312,6 +351,8 @@ const profile_url = computed(() => `/${props.username}`);
 const stars_count = computed(() => countCalc(props.stars));
 const watch_count = computed(() => countCalc(props.watch));
 const forks_count = computed(() => countCalc(props.forks));
+
+const isNotActive = (value) => notify.value !== value;
 </script>
 
 <style lang="scss" scoped>
@@ -366,11 +407,11 @@ button {
 }
 
 .fa,
-.custome-icon {
+.custom-icon {
   color: $secondary-200;
 }
 
-.custome-icon {
+.custom-icon {
   transform: translateY(0.2rem);
 }
 .options-heading {

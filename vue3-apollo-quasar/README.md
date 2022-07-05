@@ -57,6 +57,14 @@ so these are the versions that worked:
 "css-loader": "^4.3.0",
 ```
 
+### Custom Icon with quasar
+
+Ensure the svg is saved in the public folder and attach an id to the svg.
+
+```vue
+<q-icon name="svguse:iconName.svg#svgid" />
+```
+
 also another dependency `@storybook/preset-scss` is required which is to be added in the “**addons**” array in the `main.js` file inside the `.storybook` folder after successfully installing it using `yarn` or `npm`.
 
 ### Customize configuration

@@ -11,9 +11,10 @@
       <q-tab name="code" class="repo-tab" @click="updateTab(TABS.CODE)">
         <TextWithIconAndCount>
           <template v-slot:icon>
-            <q-icon class="custome-icon">
-              <CodeIcon />
-            </q-icon>
+            <q-icon
+              class="custom-icon text-h6"
+              name="svguse:app-icons/code.svg#code"
+            ></q-icon>
           </template>
           <template v-slot:title>
             <span
@@ -27,9 +28,10 @@
       <q-tab name="issues" class="repo-tab" @click="updateTab(TABS.ISSUES)">
         <TextWithIconAndCount>
           <template v-slot:icon>
-            <q-icon class="custome-icon">
-              <IssuesIcon />
-            </q-icon>
+            <q-icon
+              class="custom-icon text-h6"
+              name="svguse:app-icons/issue.svg#issue"
+            ></q-icon>
           </template>
           <template v-slot:title>
             <span
@@ -50,9 +52,10 @@
       >
         <TextWithIconAndCount>
           <template v-slot:icon>
-            <q-icon class="custome-icon">
-              <PullRequestsIcon />
-            </q-icon>
+            <q-icon
+              class="custom-icon text-h6"
+              name="svguse:app-icons/pull-request.svg#pull-request"
+            ></q-icon>
           </template>
           <template v-slot:title>
             <span
@@ -81,12 +84,7 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import {
-  TextWithIconAndCount,
-  CodeIcon,
-  IssuesIcon,
-  PullRequestsIcon,
-} from '@/components';
+import { TextWithIconAndCount } from '@/components';
 
 const tab = ref(TABS.CODE);
 
@@ -131,11 +129,11 @@ const activeTab = computed({
 }
 
 .fa,
-.custome-icon {
+.custom-icon {
   color: $secondary-200;
 }
 
-.custome-icon {
+.custom-icon {
   transform: translateY(0.2rem);
 }
 .repo-tab {
