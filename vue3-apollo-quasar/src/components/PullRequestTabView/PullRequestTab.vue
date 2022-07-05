@@ -2,16 +2,12 @@
   <div class="row items-center no-wrap q-py-xs q-px-sm">
     <div class="row items-center">
       <div>
-        <q-icon>
-          <PullRequestsIcon />
-        </q-icon>
+        <q-icon name="svguse:app-icons/pull-request.svg#pull-request" />
         <span>{{ openCounts }}</span>
         Open
       </div>
       <div>
-        <q-icon>
-          <CorrectIcon />
-        </q-icon>
+        <q-icon name="svguse:app-icons/correct.svg#correct" />
         <span>{{ closedCounts }}</span>
         Closed
       </div>
@@ -28,7 +24,6 @@ export default defineComponent({
 </script>
 
 <script lnag="ts" setup>
-import { PullRequestsIcon, CorrectIcon } from '@/components';
 const TABS = {
   OPEN: 'open',
   CLOSED: 'closed',
