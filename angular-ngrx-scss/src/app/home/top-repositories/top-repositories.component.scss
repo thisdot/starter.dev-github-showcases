@@ -12,10 +12,10 @@
     background-color: variables.$white;
     border-radius: 0.5rem;
     border-width: 1px;
-    padding-left: 2rem;
   }
   .repo-section {
     padding: 2rem 0;
+    padding-left: 2rem;
     border-bottom: 1px solid variables.$gray300;
   }
   .view-all-link {
@@ -26,6 +26,10 @@
     a {
       color: inherit;
       font-weight: 600;
+      &.disabled {
+        color: variables.$gray300;
+        cursor: not-allowed;
+      }
     }
   }
 }
