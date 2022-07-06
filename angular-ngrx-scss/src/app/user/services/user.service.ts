@@ -110,7 +110,7 @@ export class UserService {
   }
 
   getUserTopRepos(): Observable<UserReposState[]> {
-    const url = `${environment.githubUrl}/user/repos?sort=updated&affiliation=owner,collaborator,organization_member&per_page=20'}`;
+    const url = `${environment.githubUrl}/user/repos?sort=updated&per_page=20'}`;
 
     return this.http.get<UserReposApiResponse>(url).pipe(
       map((data) =>
