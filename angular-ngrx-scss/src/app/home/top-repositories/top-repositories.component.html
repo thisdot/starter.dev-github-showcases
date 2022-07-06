@@ -8,7 +8,9 @@
         </div>
         <div class="view-all-link" *ngIf="isLast">
           <ng-container *ngIf="username$ | async as username">
-            <a routerLink="/{{ username }}" [class.disabled]="!username">View all repositories</a>
+            <a routerLink="/{{ username }}" [class.disabled]="!username"
+              >View all repositories</a
+            >
           </ng-container>
         </div>
       </ng-container>
