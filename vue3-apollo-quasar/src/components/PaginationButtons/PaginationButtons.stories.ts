@@ -22,7 +22,7 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: '<PaginationButtons v-bind="args" />',
+  template: '<PaginationButtons v-bind="args" @paginate="()=>  {}" />',
 });
 
 export const Default = Template.bind({});

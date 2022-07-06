@@ -49,6 +49,7 @@
       v-if="showPagination(tabRef)"
       :isPrevActive="false"
       :isNextActive="true"
+      @paginate="paginate"
     />
   </div>
 </template>
@@ -67,12 +68,15 @@ import {
   PaginationButtons,
 } from '@/components';
 import { PULL_REQUESTS, TABS } from './data';
+
 const tabRef = ref(TABS.OPEN);
 const card_type = 'pullrequest';
 
 const changeTab = (tab) => {
   tabRef.value = tab;
 };
+const paginate = (value) => null;
+
 const toLowerCase = (value: string) => value.toLowerCase();
 const countList = (array) => array.length;
 const showPagination = (tab) =>

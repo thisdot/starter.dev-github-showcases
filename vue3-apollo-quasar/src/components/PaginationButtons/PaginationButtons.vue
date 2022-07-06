@@ -4,33 +4,37 @@
       flat
       no-caps
       align="around"
-      class="btn-fixed-width text-caption pagination_btn"
+      class="btn-fixed-width text-caption pagination_btn text-capitalize"
       :disabled="!isPrevActive"
+      @click="prev"
     >
       <q-icon class="fa fa-chevron-left q-mr-xs" />
-      <span>Prev</span>
+      <span>{{ PAGINATIONS.PREV }}</span>
     </q-btn>
     <q-btn
       flat
       no-caps
       align="around"
-      class="btn-fixed-width text-caption pagination_btn"
+      class="btn-fixed-width text-caption pagination_btn text-capitalize"
       :disabled="!isNextActive"
+      @click="next"
     >
-      <span>Next</span>
+      <span>{{ PAGINATIONS.NEXT }}</span>
       <q-icon class="fa fa-chevron-right q-ml-xs" />
     </q-btn>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, defineProps } from 'vue';
+import { defineComponent, defineProps, defineEmits } from 'vue';
 export default defineComponent({
   name: 'PaginationButtons',
 });
 </script>
 
 <script lang="ts" setup>
+import { PAGINATION_EVENT, PAGINATIONS } from './data';
+
 defineProps({
   isPrevActive: {
     type: Boolean,
@@ -41,6 +45,10 @@ defineProps({
     required: true,
   },
 });
+const emit = defineEmits([PAGINATION_EVENT]);
+
+const prev = () => emit(PAGINATION_EVENT, PAGINATIONS.PREV);
+const next = () => emit(PAGINATION_EVENT, PAGINATIONS.NEXT);
 </script>
 
 <style lang="scss" scoped>
