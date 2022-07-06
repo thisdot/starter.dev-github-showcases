@@ -22,6 +22,12 @@ export class RepoReadMeComponent implements OnInit, OnChanges {
   @Input() path = '';
   private initialized = false;
 
+  private _errorLoadReadme?: unknown;
+
+  get errorLoadReadme(): unknown | undefined {
+    return this._errorLoadReadme;
+  }
+
   readme$?: Observable<{ text?: string | null }>;
 
   constructor(private repoReadMeGQL: RepoReadMeGQL) {}

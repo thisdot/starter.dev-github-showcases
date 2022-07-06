@@ -1,45 +1,51 @@
-<div *ngIf="readme$ | async as readme; else loading">
-  <ng-container *ngIf="readme.text as text; else empty">
-    <div class="read-me-container" data-testid="readme">
-      <header class="header">
-        <span class="tocIconContainer">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            width="16"
-            height="16"
-            class="tocIcon"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"
-            ></path>
-          </svg>
-        </span>
-        <span class="filename">README.md</span>
-      </header>
-      <article
-        class="prose py-6 px-10 max-w-none prose-headings:font-medium prose-p:my-3 prose-p:leading-6 prose-headings:border-b prose-headings:my-1 prose-headings:pb-2 prose-h1:my-4 prose-h2:my-4 prose-h3:border-none prose-h4:border-none prose-h5:border-none prose-img:inline prose-img:m-0 prose-a:text-blue-600 prose-a:no-underline prose-a:font-normal hover:prose-a:underline prose-li:my-0.5 prose-pre:bg-gray-100 prose-code:text-gray-800 text-gray-800"
-      >
-        <app-read-me [text]="text"></app-read-me>
-      </article>
-    </div>
-  </ng-container>
-
-  <ng-template #empty>
-    <div class="emptyContainer">
-      <div class="emptyText">
-        Help people interested in this repository understand your project by
-        adding a README.
+<ng-container *ngIf="!errorLoadReadme; else errorLoadReadmeTmpl">
+  <div *ngIf="readme$ | async as readme; else loading">
+    <ng-container *ngIf="readme.text as text; else empty">
+      <div class="read-me-container" data-testid="readme">
+        <header class="header">
+          <span class="tocIconContainer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              width="16"
+              height="16"
+              class="tocIcon"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"
+              ></path>
+            </svg>
+          </span>
+          <span class="filename">README.md</span>
+        </header>
+        <article
+          class="prose py-6 px-10 max-w-none prose-headings:font-medium prose-p:my-3 prose-p:leading-6 prose-headings:border-b prose-headings:my-1 prose-headings:pb-2 prose-h1:my-4 prose-h2:my-4 prose-h3:border-none prose-h4:border-none prose-h5:border-none prose-img:inline prose-img:m-0 prose-a:text-blue-600 prose-a:no-underline prose-a:font-normal hover:prose-a:underline prose-li:my-0.5 prose-pre:bg-gray-100 prose-code:text-gray-800 text-gray-800"
+        >
+          <app-read-me [text]="text"></app-read-me>
+        </article>
       </div>
-      <button class="addReadmeBtn">Add a README</button>
+    </ng-container>
+
+    <ng-template #empty>
+      <div class="emptyContainer">
+        <div class="emptyText">
+          Help people interested in this repository understand your project by
+          adding a README.
+        </div>
+        <button class="addReadmeBtn">Add a README</button>
+      </div>
+    </ng-template>
+  </div>
+
+  <ng-template #loading>
+    <div class="emptyContainer animate-pulse">
+      <div class="h-12 bg-gray-200 rounded"></div>
     </div>
   </ng-template>
-</div>
+</ng-container>
 
-<ng-template #loading>
-  <div class="emptyContainer animate-pulse">
-    <div class="h-12 bg-gray-200 rounded"></div>
-  </div>
+<ng-template #errorLoadReadmeTmpl>
+  <sd-error-block>An error occured while loading README.</sd-error-block>
 </ng-template>

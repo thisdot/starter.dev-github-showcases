@@ -14,6 +14,11 @@ export class FileViewerComponent {
   @Input() name = '';
   @Input() branch = '';
 
+  private _errorLoadFile?: unknown;
+  get errorLoadFile(): unknown | undefined {
+    return this._errorLoadFile;
+  }
+
   file$: Observable<FileDetails> = this.route.paramMap.pipe(
     map((params: ParamMap) => params.get('path') as string),
     switchMap((path: string) =>
