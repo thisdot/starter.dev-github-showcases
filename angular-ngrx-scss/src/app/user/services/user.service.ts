@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
@@ -110,33 +110,44 @@ export class UserService {
   }
 
   getUserTopRepos(): Observable<UserReposState[]> {
-    const url = `${environment.githubUrl}/user/repos?sort=updated&per_page=20'}`;
+    const defaultParams = {
+      sort: 'updated',
+      per_page: 20,
+    };
 
-    return this.http.get<UserReposApiResponse>(url).pipe(
-      map((data) =>
-        data.map((repo) => ({
-          name: repo.name,
-          description: repo.description,
-          language: repo.language,
-          stargazers_count: repo.stargazers_count,
-          forks_count: repo.forks_count,
-          private: repo.private,
-          updated_at: repo.updated_at,
-          license: repo.license
-            ? {
-                key: repo.license.key,
-                name: repo.license.name,
-                spdx_id: repo.license.spdx_id,
-                url: repo.license.url,
-                node_id: repo.license.node_id,
-              }
-            : null,
-          owner: {
-            login: repo.owner.login,
-          },
-        })),
-      ),
-    );
+    const url = `${environment.githubUrl}/user/repos`;
+
+    return this.http
+      .get<UserReposApiResponse>(url, {
+        params: new HttpParams({
+          fromObject: { ...Object.assign(defaultParams) },
+        }),
+      })
+      .pipe(
+        map((data) =>
+          data.map((repo) => ({
+            name: repo.name,
+            description: repo.description,
+            language: repo.language,
+            stargazers_count: repo.stargazers_count,
+            forks_count: repo.forks_count,
+            private: repo.private,
+            updated_at: repo.updated_at,
+            license: repo.license
+              ? {
+                  key: repo.license.key,
+                  name: repo.license.name,
+                  spdx_id: repo.license.spdx_id,
+                  url: repo.license.url,
+                  node_id: repo.license.node_id,
+                }
+              : null,
+            owner: {
+              login: repo.owner.login,
+            },
+          })),
+        ),
+      );
   }
 
   getUserGists(username: string): Observable<UserGistsState[]> {
