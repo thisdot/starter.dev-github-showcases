@@ -1,5 +1,5 @@
 <template>
-  <q-card flat>
+  <q-card flat class="card">
     <q-card-section class="row no-wrap q-pa-sm">
       <span :class="cardType">
         <span class="text-body1" :class="state">
@@ -23,21 +23,21 @@
             class="text-h6 custom-icon"
             name="svguse:app-icons/closed-pull-request.svg#closed-pull-request"
             v-else-if="
-              cardType === CARD_TYPES.PULL_REQUEST && state === STATES.MERGED
+              cardType === CARD_TYPES.PULL_REQUEST && state === STATES.CLOSED
             "
           />
           <q-icon
             class="text-h6 custom-icon"
             name="svguse:app-icons/merged-pull-request.svg#merged-pull-request"
             v-else-if="
-              cardType === CARD_TYPES.PULL_REQUEST && state === STATES.CLOSED
+              cardType === CARD_TYPES.PULL_REQUEST && state === STATES.MERGED
             "
           />
         </span>
       </span>
       <div class="row column q-ml-sm col">
         <div>
-          <a :href="url" class="text-body1 title">
+          <a :href="url" class="text-body2 title">
             {{ title }}
           </a>
         </div>
@@ -68,6 +68,7 @@
         </span>
       </div>
     </q-card-section>
+    <slot />
   </q-card>
 </template>
 
@@ -156,5 +157,12 @@ a {
 
 .custom-icon {
   transform: translate(0, 0.1rem);
+}
+
+.card {
+  &:hover {
+    background: $primary-100;
+  }
+  transition: all 0.2s ease-in-out;
 }
 </style>

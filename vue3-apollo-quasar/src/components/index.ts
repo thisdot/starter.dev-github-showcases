@@ -21,3 +21,5 @@ export { default as PullRequestTabView } from './PullRequestTabView';
 export { default as RepoSubHeader } from './RepoSubHeader';
 export { default as TextWithIconAndCount } from './TextWithIconAndCount';
 export { default as IssuesPullRequestsCard } from './IssuesPullRequestsCard';
+export { default as IssuePullRequestTab } from './IssuePullRequestTab';
+export { default as PaginationButtons } from './PaginationButtons';
