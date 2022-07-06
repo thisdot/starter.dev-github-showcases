@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileExplorerRoutingModule } from './file-explorer-routing.module';
-import { FileExplorerNavComponent } from './file-explorer-nav/file-explorer-nav.component';
+import {
+  FileExplorerNavComponent,
+  FileExplorerNavSkeletonComponent,
+} from './file-explorer-nav';
 import { FileExplorerListComponent } from './file-explorer-list/file-explorer-list.component';
-import { FileExplorerViewComponent } from './file-explorer-view/file-explorer-view.component';
 import { FileExplorerAboutComponent } from './components/file-explorer-about/file-explorer-about.component';
 import { FileExplorerAboutDescriptionComponent } from './components/file-explorer-about/file-explorer-about-description/file-explorer-about-description.component';
 import { FileExplorerRootComponent } from './file-explorer-root.component';
@@ -23,12 +25,14 @@ import { TopicsComponent } from './components/file-explorer-about/topics/topics.
 import { RepoReadMeComponent } from './repo-read-me/repo-read-me.component';
 import { ReadMeComponent } from './repo-read-me/read-me/read-me.component';
 import { FileExplorerListContainerComponent } from './file-explorer-list-container/file-explorer-list-container.component';
+import { FileExplorerViewComponent } from './file-explorer-view/file-explorer-view.component';
 
 @NgModule({
   declarations: [
     FileExplorerRootComponent,
     FileExplorerViewComponent,
     FileExplorerNavComponent,
+    FileExplorerNavSkeletonComponent,
     FileExplorerListContainerComponent,
     FileExplorerListComponent,
     FileExplorerAboutComponent,
