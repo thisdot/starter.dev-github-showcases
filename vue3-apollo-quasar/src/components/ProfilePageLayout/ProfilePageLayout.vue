@@ -16,7 +16,7 @@
           <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div class="tab-contents">
+        <div class="tab-contents col">
           <SearchFilter />
 
           <q-tab-panels v-model="tab">
@@ -98,8 +98,21 @@ const { repos, loading } = getUserRepos(props.username, false);
 
 .usercard {
   display: none;
+  position: relative;
+  z-index: 20;
+
+  grid-column: span 12 / span 12;
+  @media (min-width: 768px) {
+    top: -3rem;
+    grid-column: span 4 / span 4;
+  }
+
   @media (min-width: 1024px) {
     display: block;
+  }
+
+  @media (min-width: 1280px) {
+    grid-column: span 3 / span 3;
   }
 }
 </style>
