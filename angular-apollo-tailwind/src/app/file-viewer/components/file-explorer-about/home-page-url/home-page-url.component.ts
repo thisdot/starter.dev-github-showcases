@@ -24,5 +24,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./home-page-url.component.css'],
 })
 export class HomePageUrlComponent {
-  @Input() homepageUrl = '';
+  @Input() homepageUrl?: string | null;
 }

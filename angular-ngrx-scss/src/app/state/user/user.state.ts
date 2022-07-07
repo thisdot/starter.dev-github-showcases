@@ -1,3 +1,5 @@
+import { UserGistsState, UserReposState } from '../profile/profile.state';
+
 export interface UserState {
   avatar: string;
   bio: string;
@@ -10,6 +12,8 @@ export interface UserState {
   name: string;
   twitter_username: string;
   username: string;
+  topRepos?: UserReposState[];
+  gists?: UserGistsState[];
 }
 
 export interface UserApiResponse {

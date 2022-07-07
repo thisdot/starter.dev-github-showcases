@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 import { RouteConfigService } from '@this-dot/route-config';
-import { Observable, withLatestFrom, map } from 'rxjs';
+import { Observable, withLatestFrom, map, catchError, of, tap } from 'rxjs';
 import { RepoPage } from '../gql';
 
 @Component({
@@ -9,9 +9,16 @@ import { RepoPage } from '../gql';
   templateUrl: './file-explorer-root.component.html',
 })
 export class FileExplorerRootComponent {
+  private _repoPageError?: unknown;
+
+  get repoPageError(): unknown | undefined {
+    return this._repoPageError;
+  }
+
   repoPage$: Observable<RepoPage> = this.routeConfigService
     .getLeafConfig<RepoPage>('repoPageData')
     .pipe(
+      tap(() => (this._repoPageError = undefined)),
       withLatestFrom(
         this.route.paramMap.pipe(map((params: ParamMap) => params.get('path'))),
       ),
@@ -24,6 +31,11 @@ export class FileExplorerRootComponent {
         homepageUrl: res.repository?.homepageUrl,
         topics: res.repository?.topics,
       })),
+      catchError((err) => {
+        console.error(err);
+        this._repoPageError = err;
+        return of();
+      }),
     );
 
   constructor(

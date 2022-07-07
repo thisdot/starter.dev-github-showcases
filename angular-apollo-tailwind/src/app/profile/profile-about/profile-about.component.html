@@ -1,108 +1,112 @@
-<ng-container *ngIf="user$ | async as user; else loading">
-  <div>
-    <img
-      data-testid="profile page avatar"
-      [src]="user.avatarUrl"
-      alt="Avatar"
-      [width]="260"
-      [height]="260"
-      class="avatar"
-    />
-    <h1 class="mt-2">
-      <div data-testid="profile page name" class="name">{{ user.name }}</div>
-      <div data-testid="profile page username" class="username">
-        {{ user.username }}
+<ng-container *ngIf="!userError; else userErrorTmpl">
+  <ng-container *ngIf="user$ | async as user; else loading">
+    <div>
+      <img
+        data-testid="profile page avatar"
+        [src]="user.avatarUrl"
+        alt="Avatar"
+        [width]="260"
+        [height]="260"
+        class="avatar"
+      />
+      <h1 class="mt-2">
+        <div data-testid="profile page name" class="name">{{ user.name }}</div>
+        <div data-testid="profile page username" class="username">
+          {{ user.username }}
+        </div>
+      </h1>
+      <div class="bio">{{ user.bio }}</div>
+      <div class="socials">
+        <hero-icon
+          name="users"
+          type="outline"
+          class="w-4 h-4 mb-0.5 mr-1 inline"
+          aria-hidden="true"
+        ></hero-icon>
+        <span data-testid="profile followers count" class="inline-block">
+          <span class="count">{{ user.followers }}</span> followers
+        </span>
+        <span class="mx-1">·</span>
+        <span class="inline-block">
+          <span data-testid="profile following count" class="count">{{
+            user.following
+          }}</span>
+          following
+        </span>
+        <span class="mx-1">·</span>
+        <hero-icon
+          name="star"
+          type="outline"
+          class="w-4 h-4 mb-0.5 mr-1 inline"
+          aria-hidden="true"
+        ></hero-icon>
+        <span class="inline-block">
+          <span data-testid="profile starred count" class="count">{{
+            user.starredRepos
+          }}</span>
+        </span>
       </div>
-    </h1>
-    <div class="bio">{{ user.bio }}</div>
-    <div class="socials">
-      <hero-icon
-        name="users"
-        type="outline"
-        class="w-4 h-4 mb-0.5 mr-1 inline"
-        aria-hidden="true"
-      ></hero-icon>
-      <span data-testid="profile followers count" class="inline-block">
-        <span class="count">{{ user.followers }}</span> followers
-      </span>
-      <span class="mx-1">·</span>
-      <span class="inline-block">
-        <span data-testid="profile following count" class="count">{{
-          user.following
-        }}</span>
-        following
-      </span>
-      <span class="mx-1">·</span>
-      <hero-icon
-        name="star"
-        type="outline"
-        class="w-4 h-4 mb-0.5 mr-1 inline"
-        aria-hidden="true"
-      ></hero-icon>
-      <span class="inline-block">
-        <span data-testid="profile starred count" class="count">{{
-          user.starredRepos
-        }}</span>
-      </span>
+      <div class="fields">
+        <div *ngIf="user.company">
+          <hero-icon
+            name="office-building"
+            type="outline"
+            class="w-4 h-4 mb-0.5 mr-1 inline"
+            aria-hidden="true"
+          ></hero-icon>
+          {{ user.company }}
+        </div>
+        <div *ngIf="user.location" class="flex">
+          <hero-icon
+            name="location-marker"
+            type="outline"
+            class="w-4 h-4 mb-0.5 mr-1 inline"
+            aria-hidden="true"
+          ></hero-icon>
+          {{ user.location }}
+        </div>
+        <div *ngIf="user.websiteUrl">
+          <hero-icon
+            name="link"
+            type="outline"
+            class="w-4 h-4 mb-0.5 mr-1 inline"
+            aria-hidden="true"
+          ></hero-icon>
+          <a
+            class="link"
+            [href]="user.websiteUrl"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {{ user.websiteUrl }}
+          </a>
+        </div>
+        <div *ngIf="user.twitterUsername" class="flex items-center">
+          <sd-twitter-icon
+            class="mr-1 inline"
+            aria-hidden="true"
+          ></sd-twitter-icon>
+          <a
+            class="link"
+            [href]="'https:/twitter.com/' + user.twitterUsername"
+            target="_blank"
+            rel="noreferrer"
+          >
+            @{{ user.twitterUsername }}
+          </a>
+        </div>
+      </div>
+      <ng-container *ngIf="user?.organizations?.length">
+        <app-orgs-list [organizations]="user?.organizations!"></app-orgs-list>
+      </ng-container>
     </div>
-    <div class="fields">
-      <div *ngIf="user.company">
-        <hero-icon
-          name="office-building"
-          type="outline"
-          class="w-4 h-4 mb-0.5 mr-1 inline"
-          aria-hidden="true"
-        ></hero-icon>
-        {{ user.company }}
-      </div>
-      <div *ngIf="user.location" class="flex">
-        <hero-icon
-          name="location-marker"
-          type="outline"
-          class="w-4 h-4 mb-0.5 mr-1 inline"
-          aria-hidden="true"
-        ></hero-icon>
-        {{ user.location }}
-      </div>
-      <div *ngIf="user.websiteUrl">
-        <hero-icon
-          name="link"
-          type="outline"
-          class="w-4 h-4 mb-0.5 mr-1 inline"
-          aria-hidden="true"
-        ></hero-icon>
-        <a
-          class="link"
-          [href]="user.websiteUrl"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {{ user.websiteUrl }}
-        </a>
-      </div>
-      <div *ngIf="user.twitterUsername" class="flex items-center">
-        <sd-twitter-icon
-          class="mr-1 inline"
-          aria-hidden="true"
-        ></sd-twitter-icon>
-        <a
-          class="link"
-          [href]="'https:/twitter.com/' + user.twitterUsername"
-          target="_blank"
-          rel="noreferrer"
-        >
-          @{{ user.twitterUsername }}
-        </a>
-      </div>
-    </div>
-    <ng-container *ngIf="user?.organizations?.length">
-      <app-orgs-list [organizations]="user?.organizations!"></app-orgs-list>
-    </ng-container>
-  </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-profile-loading></app-profile-loading>
+  </ng-template>
 </ng-container>
 
-<!-- TODO: fix loading/error states -->
-<!-- <p error>User not found</p> -->
-<ng-template #loading>
-  <app-profile-loading></app-profile-loading>
+<ng-template #userErrorTmpl>
+  <sd-error-block>User error</sd-error-block>
 </ng-template>
