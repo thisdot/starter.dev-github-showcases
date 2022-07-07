@@ -3,10 +3,9 @@ import {
   Component,
   Input,
   OnChanges,
-  OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { FileExplorer, RepoPage, RepoTreeGQL } from '../../gql';
 import { getReadMeFileName, parseTree } from '../parse-tree';
 
@@ -15,15 +14,25 @@ const removeLastPathPart = (path: string) => {
   return pathParts.slice(0, pathParts.length - 1).join('/');
 };
 
+const DEFAULT_REPO_TREE_STATE = Object.freeze({
+  items: undefined,
+  readme: undefined,
+});
+
 @Component({
   selector: 'app-file-explorer-list-container',
   templateUrl: './file-explorer-list-container.component.html',
   styleUrls: ['./file-explorer-list-container.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileExplorerListContainerComponent implements OnInit, OnChanges {
-  private initialized = false;
+export class FileExplorerListContainerComponent implements OnChanges {
   @Input() repoPage?: RepoPage | null;
+
+  _repoTreeLoadError?: unknown;
+
+  get repoTreeLoadError(): unknown | undefined {
+    return this._repoTreeLoadError;
+  }
 
   public get owner(): string {
     return this.repoPage?.owner || '';
@@ -41,23 +50,16 @@ export class FileExplorerListContainerComponent implements OnInit, OnChanges {
     return this.repoPage?.path || '';
   }
 
-  repoTree$: Observable<FileExplorer> = of({
-    items: undefined,
-    readme: undefined,
-  });
+  repoTree$!: Observable<FileExplorer>;
 
-  constructor(private repoTreeGQL: RepoTreeGQL) {}
-
-  ngOnInit(): void {
-    this.initialized = true;
+  constructor(private repoTreeGQL: RepoTreeGQL) {
+    this.resetRepoTree();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.initialized) {
-      const repoPageChange = changes['repoPage'];
-      if (repoPageChange) {
-        this.loadRepoTree();
-      }
+    const repoPageChange = changes['repoPage'];
+    if (repoPageChange) {
+      this.loadRepoTree();
     }
   }
 
@@ -79,6 +81,7 @@ export class FileExplorerListContainerComponent implements OnInit, OnChanges {
   }
 
   private loadRepoTree(): void {
+    this.resetRepoTree();
     const vars = this.getVariables();
     this.repoTree$ = this.repoTreeGQL.fetch(vars).pipe(
       map((res) => {
@@ -90,6 +93,16 @@ export class FileExplorerListContainerComponent implements OnInit, OnChanges {
           readme,
         };
       }),
+      catchError((err) => {
+        console.error(err);
+        this._repoTreeLoadError = err;
+        return of(DEFAULT_REPO_TREE_STATE);
+      }),
     );
+  }
+
+  private resetRepoTree(): void {
+    this._repoTreeLoadError = undefined;
+    this.repoTree$ = of(DEFAULT_REPO_TREE_STATE);
   }
 }

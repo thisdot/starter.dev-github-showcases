@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile.component';
 import { ProfileNavComponent } from './profile-nav/profile-nav.component';
 import { ProfileRoutingModule } from './profile-routing.module';
-import { DataContainerComponentModule, IconsModule } from '@shared';
+import { ErrorBlockComponentModule, IconsModule } from '@shared';
 import { ProfileAboutComponent } from './profile-about/profile-about.component';
 import { ProfileLoadingComponent } from './components/profile-loading/profile-loading.component';
 import { ContentLoaderModule } from '@ngneat/content-loader';
@@ -44,7 +44,7 @@ import {
     ProfileRoutingModule,
     IconsModule,
     ContentLoaderModule,
-    DataContainerComponentModule,
+    ErrorBlockComponentModule,
     ReposModule,
     FormsModule,
     ReactiveFormsModule,

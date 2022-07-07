@@ -1,40 +1,34 @@
 <div>
-  <app-repos-filters
-    [state]="(filterState$ | async)!"
-    [resultCount]="resultCount$ | async"
-    [hasActiveFilters]="hasActiveFilters$ | async"
-    [isQueryActive]="isQueryActive$ | async"
-    [isTypeActive]="isTypeActive$ | async"
-    [isLanguageActive]="isLanguageActive$ | async"
-    (search)="search($event)"
-    (setType)="setType($event)"
-    (setLanguage)="setLanguage($event)"
-    (setLanguages)="setLanguages($event)"
-    (setSort)="setSort($event)"
-    (setQuery)="setQuery($event)"
-    (clearFilters)="clearFilters()"
-  ></app-repos-filters>
-
-  <app-profile-repo-list [items]="userRepos$ | async"></app-profile-repo-list>
-
-  <app-pagination
-    [pageInfo]="(pageInfo$ | async)!"
-    (changePage)="changePage($event)"
-  ></app-pagination>
-</div>
-
-<!-- <div
-  data-testid="errorMsg"
-  class="py-4 text-lg font-medium text-gray-800"
->
-  Error Loading Repositories. Check console / network tab for more
-  information.
-</div> -->
-<!-- 
-<ng-template #loading>
-  <div
-    class="py-8 border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4"
+  <ng-container
+    *ngIf="reposLoadError$ | async as reposLoadError; else noRepoLoadErrorTmpl"
   >
-    <app-profile-repos-loading></app-profile-repos-loading>
-  </div>
-</ng-template> -->
+    <sd-error-block
+      >An error occured while loading repositories.</sd-error-block
+    >
+  </ng-container>
+
+  <ng-template #noRepoLoadErrorTmpl>
+    <app-repos-filters
+      [state]="(filterState$ | async)!"
+      [resultCount]="resultCount$ | async"
+      [hasActiveFilters]="hasActiveFilters$ | async"
+      [isQueryActive]="isQueryActive$ | async"
+      [isTypeActive]="isTypeActive$ | async"
+      [isLanguageActive]="isLanguageActive$ | async"
+      (search)="search($event)"
+      (setType)="setType($event)"
+      (setLanguage)="setLanguage($event)"
+      (setLanguages)="setLanguages($event)"
+      (setSort)="setSort($event)"
+      (setQuery)="setQuery($event)"
+      (clearFilters)="clearFilters()"
+    ></app-repos-filters>
+
+    <app-profile-repo-list [items]="userRepos$ | async"></app-profile-repo-list>
+
+    <app-pagination
+      [pageInfo]="(pageInfo$ | async)!"
+      (changePage)="changePage($event)"
+    ></app-pagination>
+  </ng-template>
+</div>

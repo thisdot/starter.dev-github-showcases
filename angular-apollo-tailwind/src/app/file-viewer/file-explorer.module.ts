@@ -14,6 +14,7 @@ import { FileExplorerBlobComponent } from './file-explorer-blob/file-explorer-bl
 import {
   ContentLoadingModule,
   DataContainerComponentModule,
+  ErrorBlockComponentModule,
   IconsModule,
   PipesModule,
 } from '@shared';
@@ -52,6 +53,7 @@ import { FileExplorerViewComponent } from './file-explorer-view/file-explorer-vi
     IconsModule,
     ContentLoadingModule,
     DataContainerComponentModule,
+    ErrorBlockComponentModule,
     PrismModule,
     PipesModule,
   ],
