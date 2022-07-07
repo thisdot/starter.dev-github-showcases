@@ -72,7 +72,7 @@ import { PULL_REQUESTS, TABS } from './data';
 const tabRef = ref(TABS.OPEN);
 const card_type = 'pullrequest';
 
-const changeTab = (tab) => {
+const changeTab = (tab: string) => {
   tabRef.value = tab;
 };
 const paginate = (value) => null;

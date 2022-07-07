@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import { PaginationButtons } from '@/components';
-import { PAGINATIONS } from '@/components/PaginationButtons/data';
 
 describe('PaginationButtons', () => {
   const wrapper = mount(PaginationButtons, {
