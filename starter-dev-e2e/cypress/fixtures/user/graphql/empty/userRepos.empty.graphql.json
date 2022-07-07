@@ -1,0 +1,33 @@
+{
+  "data": {
+    "user": {
+      "id": "MDQ6VXNlcjkwMzYyOTEx",
+      "repositories": {
+        "nodes": [],
+        "pageInfo": {
+          "endCursor": "2YNHY4MMwoDMx0yM1oDOyoDMwQFNy0SOw0SMyAjM5KpOyYnOy92cyV3Y",
+          "startCursor": "z9hAc4MMwoDMx0SM0ozN0ojMwQ1My0yMw0iMyAjM5KpOyYnOy92cyV3Y",
+          "hasNextPage": false,
+          "hasPreviousPage": false,
+          "__typename": "PageInfo"
+        },
+        "__typename": "RepositoryConnection"
+      },
+      "__typename": "User"
+    },
+    "owner": {
+      "repositories": {
+        "nodes": [],
+        "pageInfo": {
+          "endCursor": "2YNHY4MMwoDMx0yM1oDOyoDMwQFNy0SOw0SMyAjM5KpOyYnOy92cyV3Y",
+          "startCursor": "z9hAc4MMwoDMx0SM0ozN0ojMwQ1My0yMw0iMyAjM5KpOyYnOy92cyV3Y",
+          "hasNextPage": false,
+          "hasPreviousPage": false,
+          "__typename": "PageInfo"
+        },
+        "__typename": "RepositoryConnection"
+      },
+      "__typename": "User"
+    }
+  }
+}

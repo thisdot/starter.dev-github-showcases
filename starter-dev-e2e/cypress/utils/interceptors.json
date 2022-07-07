@@ -277,13 +277,19 @@
         "name": "UserProfile",
         "alias": "UserProfile",
         "variables": null,
-        "fixture": "user/graphql/userProfile.graphql.json"
+        "fixture": {
+          "full": "profile/graphql/userProfile.graphql.json",
+          "empty": "profile/graphql/empty/userProfile.empty.graphql.json"
+        }
       },
       {
         "name": "UserRepos",
         "alias": "UserRepos",
         "variables": null,
-        "fixture": "user/graphql/userRepos.graphql.json"
+        "fixture": {
+          "full": "user/graphql/userRepos.graphql.json",
+          "empty": "user/graphql/empty/userRepos.empty.graphql.json"
+        }
       },
       {
         "name": "RepoPage",
