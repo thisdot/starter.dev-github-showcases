@@ -47,6 +47,7 @@ export class RepoReadMeComponent implements OnInit, OnChanges {
   }
 
   private loadReadme(): void {
+    this._errorLoadReadme = undefined;
     if (!this.path && !this.fileName) {
       this.readme$ = of({});
       return;

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { map, Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { FileDetails, RepoFileGQL } from 'src/app/gql';
 import { mapLanguageExt } from '../utils/map-language-ext';
 
@@ -20,6 +20,7 @@ export class FileViewerComponent {
   }
 
   file$: Observable<FileDetails> = this.route.paramMap.pipe(
+    tap(() => (this._errorLoadFile = undefined)),
     map((params: ParamMap) => params.get('path') as string),
     switchMap((path: string) =>
       this.repoFileGQL
