@@ -5,9 +5,8 @@
 export { useGists } from './useGists';
 export { useRepository } from './useRepository';
 export { useUser } from './useUser';
-
+export { useUserRepos } from './useUserRepos';
 export { useOrganizationRepositories } from './useOrganizationRepositories';
-
 export { useIssues } from './useIssues';
 export { usePullRequest } from './usePullRequest';
 export { useRepo } from './useRepoPage';
