@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { RouteConfigService } from '@this-dot/route-config';
-import { map, Observable, switchMap, withLatestFrom } from 'rxjs';
+import {
+  map,
+  Observable,
+  switchMap,
+  withLatestFrom,
+  tap,
+  catchError,
+} from 'rxjs';
 import {
   ProfileFilterState,
   ProfileReposFilterStore,
@@ -23,6 +30,7 @@ export interface ProfileReposState {
   };
   resultCount: number;
   reposLoaded: boolean;
+  reposLoadError?: unknown;
 }
 
 const INITIAL_PROFILE_REPOS_STATE: ProfileReposState = {
@@ -34,6 +42,7 @@ const INITIAL_PROFILE_REPOS_STATE: ProfileReposState = {
   },
   resultCount: 0,
   reposLoaded: false,
+  reposLoadError: undefined,
 };
 
 @Injectable({
@@ -62,6 +71,13 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     reposLoaded,
   }));
 
+  readonly setReposLoadError = this.updater(
+    (state, reposLoadError?: unknown) => ({
+      ...state,
+      reposLoadError,
+    }),
+  );
+
   // *********** Selectors *********** //
 
   readonly owner$ = this.select(({ repos }) => repos);
@@ -72,22 +88,29 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
 
   readonly reposLoaded$ = this.select(({ reposLoaded }) => reposLoaded);
 
+  readonly reposLoadError$ = this.select(
+    ({ reposLoadError }) => reposLoadError,
+  );
+
   readonly pageInfo$ = this.select(({ pageInfo }) => pageInfo);
 
   // *********** Effects *********** //
 
   readonly getRepos = this.effect((target$: Observable<ProfileFilterState>) =>
     target$.pipe(
+      tap(() => this.setReposLoadError(undefined)),
       switchMap((state) =>
-        this.routeConfigService
-          .getLeafConfig<ProfileDetails>('profile')
-          .pipe(
-            switchMap(({ owner, isOrg }: ProfileDetails) =>
-              isOrg
-                ? this.getOrgProfileRepos(owner, state)
-                : this.getProfileRepos(owner, state),
-            ),
+        this.routeConfigService.getLeafConfig<ProfileDetails>('profile').pipe(
+          switchMap(({ owner, isOrg }: ProfileDetails) =>
+            isOrg
+              ? this.getOrgProfileRepos(owner, state)
+              : this.getProfileRepos(owner, state),
           ),
+          catchError((err: unknown) => {
+            this.setReposLoadError(err);
+            throw err;
+          }),
+        ),
       ),
     ),
   );

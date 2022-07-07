@@ -13,6 +13,8 @@ import { Repo, PaginationEvent } from 'src/app/gql';
 export class ProfileReposViewComponent implements OnInit {
   readonly userRepos$: Observable<Repo[] | undefined> =
     this.profileReposStore.repos$;
+  readonly reposLoadError$: Observable<unknown | undefined> =
+    this.profileReposStore.reposLoadError$;
   readonly resultCount$ = this.profileReposStore.resultCount$;
   readonly pageInfo$ = this.profileReposStore.pageInfo$;
 
