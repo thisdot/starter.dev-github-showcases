@@ -2,9 +2,8 @@
   <div>
     <div class="row items-center no-wrap q-pa-sm tab-container">
       <div class="row items-center">
-        <q-btn
-          flat
-          class="tab text-capitalize text-caption q-px-xs"
+        <button
+          class="tab text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
           :class="{ 'text-weight-medium active': isTab(TABS.OPEN) }"
           @click="updateActiveTab(TABS.OPEN)"
         >
@@ -20,10 +19,9 @@
           />
           <span class="q-mr-xs">{{ openCounts }}</span>
           Open
-        </q-btn>
-        <q-btn
-          flat
-          class="tab text-capitalize text-caption q-px-xs"
+        </button>
+        <button
+          class="tab text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
           :class="{ 'text-weight-medium active': isTab(TABS.CLOSED) }"
           @click="updateActiveTab(TABS.CLOSED)"
         >
@@ -33,19 +31,18 @@
           />
           <span class="q-mr-xs">{{ closedCounts }}</span>
           Closed
-        </q-btn>
+        </button>
       </div>
       <div class="col row justify-end items-center relative-position">
-        <q-btn
-          flat
-          class="text-capitalize q-px-xs dropdown-label text-caption"
+        <button
+          class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
           @click="toggleLabelMenu"
         >
           <span>Label</span>
           <span class="q-ml-xs">
             <q-icon class="fa fa-caret-down"></q-icon>
           </span>
-        </q-btn>
+        </button>
         <div class="dropdown_menu q-menu" v-if="labelRef">
           <slot name="label-list">
             <p class="text-center text-caption text-primary text-bold q-py-xs">
@@ -53,16 +50,15 @@
             </p>
           </slot>
         </div>
-        <q-btn
-          flat
-          class="text-capitalize q-px-xs dropdown-label text-caption"
+        <button
+          class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
           @click="toggleSortMenu"
         >
           <span>Sort</span>
           <span class="q-ml-xs">
             <q-icon class="fa fa-caret-down"></q-icon>
           </span>
-        </q-btn>
+        </button>
         <div class="dropdown_menu q-menu" v-if="sortRef">
           <slot name="sort-list">
             <p class="text-center text-caption text-primary text-bold q-py-xs">

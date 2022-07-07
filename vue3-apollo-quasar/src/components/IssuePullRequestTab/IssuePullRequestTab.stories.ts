@@ -28,5 +28,5 @@ export const Default = Template.bind({});
 Default.args = {
   openCounts: 16,
   closedCounts: 196,
-  tabType: 'pullrequest',
+  tabType: TAB_TYPE.PULL_REQUEST,
 };

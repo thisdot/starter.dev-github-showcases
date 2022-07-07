@@ -1,27 +1,21 @@
 <template>
   <div class="row justify-center items-center q-my-md">
-    <q-btn
-      flat
-      no-caps
-      align="around"
-      class="btn-fixed-width text-caption pagination_btn text-capitalize"
+    <button
+      class="row justify-center items-center btn-fixed-width text-caption pagination_btn text-capitalize bg-transparent no-border"
       :disabled="!isPrevActive"
-      @click="prev"
+      @click="prev()"
     >
       <q-icon class="fa fa-chevron-left q-mr-xs" />
       <span>{{ PAGINATIONS.PREV }}</span>
-    </q-btn>
-    <q-btn
-      flat
-      no-caps
-      align="around"
-      class="btn-fixed-width text-caption pagination_btn text-capitalize"
+    </button>
+    <button
+      class="row justify-center items-center btn-fixed-width text-caption pagination_btn text-capitalize bg-transparent no-border"
       :disabled="!isNextActive"
-      @click="next"
+      @click="next()"
     >
       <span>{{ PAGINATIONS.NEXT }}</span>
       <q-icon class="fa fa-chevron-right q-ml-xs" />
-    </q-btn>
+    </button>
   </div>
 </template>
 
