@@ -5,6 +5,7 @@ describe("When there is proper dashboard page responses", () => {
   beforeEach(() => {
     cy.interceptGraphQLCalls(View.Dashboard, InterceptResponse.Full);
     cy.interceptRestCalls(View.Dashboard, InterceptResponse.Full);
+    cy.visit("/");
   });
 
   it("should display list of gists", () => {
@@ -54,16 +55,15 @@ describe("When there is proper empty dashboard page responses", () => {
   beforeEach(() => {
     cy.interceptGraphQLCalls(View.Dashboard, InterceptResponse.Empty);
     cy.interceptRestCalls(View.Dashboard, InterceptResponse.Empty);
+    cy.visit("/");
   });
 
-  // Error displayed instead of empty list.
-  // Angular-Apollo has empty message but displays error; Next-React empty & error msg displays same
   it("should display empty list of gists", () => {
     cy.get(`[data-testid="show gists list"]`)
       .children()
-      .should("have.length", 0);
-    // .get(`[data-testid="empty gist list"]`)
-    // .should("contain.text", "User does not have any gists");
+      .should("have.length", 0)
+      .get(`[data-testid="empty gist list"]`)
+      .should("contain.text", "User does not have any gists");
   });
 
   it("top repos should not be listed", () => {
