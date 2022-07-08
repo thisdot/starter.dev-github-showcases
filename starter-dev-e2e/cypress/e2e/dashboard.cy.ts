@@ -21,7 +21,8 @@ describe("When there is proper dashboard page responses", () => {
   });
 
   it("top repos should be listed with valid repo links", () => {
-    cy.get(`[data-testid="show repo list"]`)
+    cy.wait("@UserTopReposQuery")
+      .get(`[data-testid="show repo list"]`)
       .should(`be.visible`)
       .get(
         `[data-testid="user top repos starter.dev-github-showcases list item"]`
@@ -57,20 +58,18 @@ describe("When there is proper empty dashboard page responses", () => {
 
   // Error displayed instead of empty list.
   // Angular-Apollo has empty message but displays error; Next-React empty & error msg displays same
-  // it("should display empty list of gists", () => {
-  //   cy.get(`[data-testid="show gists list"]`)
-  //     .should("not.be.visible")
-  //     .wait("@CurrentUserQuery")
-  //     .wait("@UserGistsQuery")
-  //     .get(`[data-testid="empty gist list"]`)
-  //     .should("contain.text", "User does not have any gists");
-  // });
+  it("should display empty list of gists", () => {
+    cy.get(`[data-testid="show gists list"]`)
+      .children()
+      .should("have.length", 0);
+    // .get(`[data-testid="empty gist list"]`)
+    // .should("contain.text", "User does not have any gists");
+  });
 
   it("top repos should not be listed", () => {
-    cy.get(`[data-testid="show repo list"]`)
-      .should("have.lengthOf", 0)
-      .get(`[data-testid="empty top repos"]`)
-      .should("contain.text", "No repositories found");
+    cy.get(
+      `[data-testid="user top repos starter.dev-github-showcases list item"]`
+    ).should("not.exist");
   });
 
   it("should be able to see user's avatar in header", () => {
