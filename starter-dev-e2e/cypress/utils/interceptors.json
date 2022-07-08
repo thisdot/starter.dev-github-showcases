@@ -11,13 +11,19 @@
         "name": "UserTopRepos",
         "alias": "UserTopRepos",
         "variables": null,
-        "fixture": "user/graphql/userTopRepos.graphql.json"
+        "fixture": {
+          "full": "user/graphql/userTopRepos.graphql.json",
+          "empty": "user/graphql/empty/userTopRepos.empty.graphql.json"
+        }
       },
       {
         "name": "UserGists",
         "alias": "UserGists",
         "variables": null,
-        "fixture": "user/graphql/userGist.graphql.json"
+        "fixture": {
+          "full": "user/graphql/userGist.graphql.json",
+          "empty": "user/graphql/empty/userGist.empty.graphql.json"
+        }
       },
       {
         "name": "RepoPage",
