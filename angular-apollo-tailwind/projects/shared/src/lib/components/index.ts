@@ -19,3 +19,4 @@ export * from './icons/pull-request-icon.component';
 export * from './icons/twitter-icon.component';
 export * from './icons/toc.component';
 export * from './icons/icons.module';
+export * from './error-block';

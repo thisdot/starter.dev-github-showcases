@@ -1,5 +1,4 @@
 <div
-  *ngIf="repos.length; else noRepos"
   class="w-full min-h-[calc(100vh-70px)] flex flex-col-reverse lg:flex-row bg-gray-100"
 >
   <aside class="w-full lg:w-96 bg-white p-8">
@@ -9,36 +8,20 @@
     <div class="p-12" data-testid="show repo list">
       <h2 class="text-lg font-medium mb-4">Top Repositories</h2>
       <div class="w-full border rounded-lg relative bg-white">
-        <div *ngFor="let repo of repos">
-          <div
-            class="p-4 border-b"
-            [attr.data-testid]="'user top repos ' + repo.name + ' list item'"
-          >
-            <h3 class="mb-2">
-              <a
-                [attr.data-testid]="'user top repos ' + repo.name + ' link'"
-                [routerLink]="[repo.owner, repo.name]"
-                class="text-xl text-blue-600 font-semibold hover:underline mr-3"
-                >{{ repo.name }}</a
-              >
-              <sd-privacy-badge
-                [isPrivate]="repo.isPrivate"
-                class="relative bottom-0.5"
-              ></sd-privacy-badge>
-            </h3>
-            <div class="text-gray-600 text-sm max-w-prose -mb-1 -mt-1">
-              {{ repo.description }}
+        <ng-container *ngIf="displayItems.length; else noRepos">
+          <ng-container *ngFor="let item of displayItems">
+            <div class="p-4 border-b">
+              <app-repo-list-item
+                *ngIf="item; else skeleton"
+                [repo]="item"
+              ></app-repo-list-item>
+              <ng-template #skeleton>
+                <app-repo-list-item-skeleton></app-repo-list-item-skeleton>
+              </ng-template>
             </div>
-            <app-repo-meta
-              [language]="repo.language!"
-              [languageColor]="repo.languageColor!"
-              [forkCount]="repo.forkCount"
-              [stargazerCount]="repo.stargazerCount"
-              [updatedAt]="repo.updatedAt"
-            ></app-repo-meta>
-          </div>
-        </div>
-        <div class="bg-gray-50 p-5 w-full text-center">
+          </ng-container>
+        </ng-container>
+        <div *ngIf="repos?.length" class="bg-gray-50 p-5 w-full text-center">
           <a
             [routerLink]="[login]"
             class="font-semibold text-gray-600 hover:text-blue-500"
@@ -51,5 +34,5 @@
 </div>
 
 <ng-template #noRepos>
-  <div data-testid="empty top repos">No repositories found</div>
+  <div class="p-4 flex justify-center items-center">No repositories found</div>
 </ng-template>

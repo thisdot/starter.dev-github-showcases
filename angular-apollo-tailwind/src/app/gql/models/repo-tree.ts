@@ -13,6 +13,6 @@ export interface ReportHeader {
 }
 
 export interface FileExplorer {
-  items: TreeEntry[];
-  readme: string;
+  items?: TreeEntry[];
+  readme?: string;
 }

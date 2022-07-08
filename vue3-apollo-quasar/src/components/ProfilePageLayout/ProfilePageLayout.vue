@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <Auth v-if="!user?.isLoggedIn" />
+  <div v-else-if="!loading">
     <TabHeader
       :overview="true"
       :repositories="true"
@@ -12,22 +13,10 @@
       <div class="row" style="--gap: 0">
         <!-- Left side -->
         <div class="usercard">
-          <UserProfileCard
-            :avatarUrl="avatarUrl"
-            :name="name"
-            :login="login"
-            :bio="bio"
-            :following="following"
-            :follower="follower"
-            :organizations="organizations"
-            :location="location"
-            :bioLink="bioLink"
-            :organization="organization"
-            :stars="stars"
-          />
+          <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div class="tab-contents">
+        <div class="tab-contents col">
           <SearchFilter />
 
           <q-tab-panels v-model="tab">
@@ -37,7 +26,19 @@
             </q-tab-panel>
 
             <q-tab-panel name="repositories">
-              <div class="text-h6">Repositories</div>
+              <q-list v-if="repos" separator>
+                <q-item v-for="repo in repos" :key="repo.id">
+                  <RepoCard
+                    :name="repo.name"
+                    :visibility="repo.visibility"
+                    :description="repo.description"
+                    :primaryLanguage="repo.primaryLanguage"
+                    :stargazerCount="repo.stargazerCount"
+                    :forkCount="repo.forkCount"
+                    :updatedAt="repo.updatedAt"
+                  />
+                </q-item>
+              </q-list>
               <slot name="repositories"></slot>
             </q-tab-panel>
 
@@ -63,81 +64,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { UserProfileCard, SearchFilter, TabHeader } from '..';
+import { defineComponent, defineProps, ref } from 'vue';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
-  components: {
-    TabHeader,
-    UserProfileCard,
-    SearchFilter,
-  },
-  setup() {
-    const tab = ref('');
-    function changeTab(val) {
-      tab.value = val;
-    }
-    return {
-      tab,
-      changeTab,
-      avatarUrl: 'https://avatars.githubusercontent.com/u/28502531?v=4',
-      name: 'Jerry Hogan',
-      login: 'hdjerry',
-      bio: 'I am a Front-End Developer with about 3 years plus of experience and with a very good knowledge of JavaScript, Vue, React, Tailwind, Styled component',
-      following: 17,
-      follower: 7,
-      organizations: [
-        {
-          name: 'This Dot',
-          avatar:
-            'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
-          url: '',
-        },
-        {
-          name: 'This Dot',
-          avatar:
-            'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
-          url: '',
-        },
-        {
-          name: 'This Dot',
-          avatar:
-            'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
-          url: '',
-        },
-        {
-          name: 'This Dot',
-          avatar:
-            'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
-          url: '',
-        },
-        {
-          name: 'This Dot',
-          avatar:
-            'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
-          url: '',
-        },
-        {
-          name: 'This Dot',
-          avatar:
-            'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
-          url: '',
-        },
-        {
-          name: 'This Dot',
-          avatar:
-            'https://avatars.githubusercontent.com/u/22839396?s=64&amp;v=4',
-          url: '',
-        },
-      ],
-      location: 'Lagos, Nigeria',
-      bioLink: 'https://music-jerryhogan.vercel.app/',
-      organization: 'This Dot',
-      stars: 5,
-    };
-  },
 });
+</script>
+
+<script lang="ts" setup>
+import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
+import { useUserStore } from '@/store/userStore';
+import { Auth } from '@/views';
+import { useUserRepos } from '@/composables';
+
+const getUserRepos = useUserRepos();
+const props = defineProps({
+  username: String,
+});
+const tab = ref('');
+function changeTab(val) {
+  tab.value = val;
+}
+
+const user = useUserStore();
+const { repos, loading } = getUserRepos(props.username, false);
 </script>
 
 <style lang="scss" scoped>
@@ -148,9 +98,21 @@ export default defineComponent({
 
 .usercard {
   display: none;
+  position: relative;
+  z-index: 20;
+
+  grid-column: span 12 / span 12;
+  @media (min-width: 768px) {
+    top: -3rem;
+    grid-column: span 4 / span 4;
+  }
 
   @media (min-width: 1024px) {
     display: block;
+  }
+
+  @media (min-width: 1280px) {
+    grid-column: span 3 / span 3;
   }
 }
 </style>
