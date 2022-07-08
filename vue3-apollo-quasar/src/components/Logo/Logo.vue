@@ -24,10 +24,10 @@ const props = defineProps({
   to: { type: String, default: '/' },
   dark: { type: Boolean, default: true }, //? Is the logo on a dark background?
   size: { type: Number, default: DEFAULT_LOGO_SIZE_PX },
-  darkImg: { type: String, default: 'logos/gh-logo-dark-bg.svg' },
-  darkLgImg: { type: String, default: 'logos/gh-logo-lg-dark-bg.svg' },
-  lightLgImg: { type: String, default: 'logos/gh-logo-lg-light-bg.svg' },
-  lightImg: { type: String, default: 'logos/gh-logo-light-bg.svg' },
+  darkImg: { type: String, default: '/logos/gh-logo-dark-bg.svg' },
+  darkLgImg: { type: String, default: '/logos/gh-logo-lg-dark-bg.svg' },
+  lightLgImg: { type: String, default: '/logos/gh-logo-lg-light-bg.svg' },
+  lightImg: { type: String, default: '/logos/gh-logo-light-bg.svg' },
 });
 const assetUrl = computed(() => {
   const sizePx = props.size || DEFAULT_LOGO_SIZE_PX;
