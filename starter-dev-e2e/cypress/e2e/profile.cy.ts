@@ -161,7 +161,6 @@ describe("When there is proper empty profile page responses", () => {
     cy.wait("@UserReposQuery")
       .get(`[data-testid="profile repo list heading"]`)
       .should("have.length", 0)
-      // next 4 lines does fails on angular-apollo due to disabled buttons
       .get(`[data-testid="pagination button previous"]`)
       .should("not.exist")
       .get(`[data-testid="pagination button next"]`)
