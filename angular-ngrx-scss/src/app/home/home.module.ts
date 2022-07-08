@@ -5,9 +5,9 @@ import { HomeRoutingModule } from './home-routing.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { OcticonsDirective } from '../shared/directives/octicons.directive';
 import { ProfileComponent } from './profile/profile.component';
-import { ProfileNavComponent } from './profile/profile-nav/profile-nav.component';
+import { TabNavComponent } from '../shared/components/tab-nav/tab-nav.component';
 import { ProfileAboutComponent } from './profile/profile-about/profile-about.component';
-import { ProfileReposComponent } from './profile/profile-repos/profile-repos.component';
+import { RepoListComponent } from '../shared/components/repo-list/repo-list.component';
 import { RelativeTimePipe } from '../shared/pipes/relative-time.pipe';
 import { RepoCardComponent } from '../shared/components/repo-card/repo-card.component';
 import { UserGistsComponent } from './user-gists/user-gists.component';
@@ -21,9 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     OcticonsDirective,
     HomeComponent,
     ProfileComponent,
-    ProfileNavComponent,
+    TabNavComponent,
     ProfileAboutComponent,
-    ProfileReposComponent,
+    RepoListComponent,
     RepoCardComponent,
     RelativeTimePipe,
     UserGistsComponent,

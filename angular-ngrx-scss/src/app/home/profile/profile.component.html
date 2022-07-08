@@ -7,10 +7,7 @@
     <div class="profile-header">
       <div class="grid grid-cols-12 container">
         <div class="col-span-3"></div>
-        <app-profile-nav
-          class="col-span-9"
-          [profile$]="profile$"
-        ></app-profile-nav>
+        <app-tab-nav class="col-span-9" [profile$]="profile$"></app-tab-nav>
       </div>
     </div>
 
@@ -18,11 +15,7 @@
       <div class="subpage col-span-3">
         <app-profile-about [profile$]="profile$"></app-profile-about>
       </div>
-      <app-repo-controls class="col-span-9"></app-repo-controls>
-      <app-profile-repos
-        class="col-span-9"
-        [repos$]="repos$"
-      ></app-profile-repos>
+      <app-repo-list class="col-span-9" [repos$]="repos$"></app-repo-list>
     </div>
   </main>
 </div>
