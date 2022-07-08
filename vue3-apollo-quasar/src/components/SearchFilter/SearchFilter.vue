@@ -2,7 +2,45 @@
   <div class="repo_search_header">
     <SearchInput />
     <SearchDropdowns dropdownType="type" />
-    <SearchDropdowns dropdownType="language" />
+    <SearchDropdowns dropdownType="language">
+      <template v-slot:languages>
+        <q-item
+          clickable
+          @click="updateLanguageRef(defaultLanguageSort)"
+          v-close-popup
+          class="row items-center m-list text-capitalize"
+        >
+          <span
+            class="text-h6"
+          >
+            <q-icon
+              v-show="languageRef === defaultLanguageSort"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ defaultLanguageSort }}
+        </q-item>
+        <q-item
+          v-for="(language, index) in languages"
+          :key="index"
+          clickable
+          v-close-popup
+          @click="updateLanguageRef(language.name)"
+          class="row items-center text-capitalize"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': languageRef !== language.name }"
+          >
+            <q-icon
+              v-show="languageRef === language.name"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ language.name }}
+        </q-item>
+      </template>
+    </SearchDropdowns>
     <SearchDropdowns dropdownType="sort" />
     <div>
       <a href="https://github.com/new" class="flexbox new_repo">
@@ -27,7 +65,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 import { SearchDropdowns, SearchInput } from '@/components';
 
@@ -38,22 +76,37 @@ export default defineComponent({
       type: String,
       default: 'New',
     },
+    languages: {
+      type: Array,
+      default: () => [],
+    },
   },
   components: {
     SearchInput,
     SearchDropdowns,
+  },
+  setup() {
+    const defaultLanguageSort = 'all';
+    const languageRef = ref(defaultLanguageSort);
+    const updateLanguageRef = (language) => (languageRef.value = language);
+    return {
+      languageRef,
+      defaultLanguageSort,
+      updateLanguageRef,
+    };
   },
 });
 </script>
 
 <style lang="scss" scoped>
 @import '../../App.css';
+@import '@/styles/quasar.variables.scss';
 
 .repo_search_header {
   display: flex;
   flex-flow: column;
   padding: 16px 0;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid $secondary-300;
 
   @media (min-width: 1024px) {
     flex-flow: row;
@@ -93,11 +146,6 @@ export default defineComponent({
       width: unset;
       justify-content: space-between;
     }
-    /* transform: translateY(-130px);
-    -webkit-transform: translateY(-130px);
-    -moz-transform: translateY(-130px);
-    -ms-transform: translateY(-130px);
-    -o-transform: translateY(-130px); */
     margin-left: unset;
     text-decoration: none;
 
@@ -119,5 +167,9 @@ export default defineComponent({
       margin-left: 10px;
     }
   }
+}
+
+.m-list {
+  border-bottom: 1px solid $secondary-300;
 }
 </style>

@@ -17,7 +17,7 @@
         </div>
         <!-- Right side -->
         <div class="tab-contents col">
-          <SearchFilter />
+          <SearchFilter :languages="getLanguages(repos)" />
 
           <q-tab-panels v-model="tab">
             <q-tab-panel name="overview">
@@ -88,6 +88,26 @@ function changeTab(val) {
 
 const user = useUserStore();
 const { repos, loading } = getUserRepos(props.username, false);
+
+const inArray = (array, target) => {
+  return array.find((arr) => arr.name === target);
+};
+
+const getLanguages = (repos) => {
+  const languages = [];
+  repos.forEach((repo) => {
+    if (
+      repo.primaryLanguage &&
+      !inArray(languages, repo.primaryLanguage.name)
+    ) {
+      languages.push({
+        name: repo.primaryLanguage.name,
+      });
+    }
+  });
+  languages.sort((a, b) => (a.name > b.name ? 1 : -1));
+  return languages;
+};
 </script>
 
 <style lang="scss" scoped>

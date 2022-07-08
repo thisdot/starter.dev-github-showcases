@@ -7,7 +7,7 @@
         class="no-shadow repo_star_button search_b"
         tabindex="-2"
       >
-        <q-list class="dropdown-x search_dropdown-x">
+        <q-list class="dropdown-x search_dropdown-x" separator>
           <q-item class="close_container">
             <strong>Select type</strong>
             <button
@@ -34,26 +34,23 @@
               </svg>
             </button>
           </q-item>
-          <q-separator />
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >All</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center">All</q-item>
+          <q-item clickable v-close-popup class="row items-center"
             >Public</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Private</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Sources</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Forks</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Archived</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Mirrors</q-item
           >
         </q-list>
@@ -66,7 +63,7 @@
         class="no-shadow repo_star_button search_b"
         tabindex="-3"
       >
-        <q-list class="dropdown-x search_dropdown-x">
+        <q-list class="dropdown-x search_dropdown-x" separator>
           <q-item class="close_container">
             <strong>Select Language</strong>
             <button
@@ -92,29 +89,7 @@
               </svg>
             </button>
           </q-item>
-          <q-separator />
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >All</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >Js</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >Vue</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >CSS</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >HTML</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >PHP</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >Object-C</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center">Ruby</q-item>
+          <slot name="languages" />
         </q-list>
       </q-btn-dropdown>
     </div>
@@ -125,7 +100,7 @@
         class="no-shadow repo_star_button search_b"
         tabindex="-4"
       >
-        <q-list class="dropdown-x search_dropdown-x">
+        <q-list class="dropdown-x search_dropdown-x" separator>
           <q-item class="flexbox close_container">
             <strong>Sort By</strong>
             <button
@@ -151,11 +126,10 @@
               </svg>
             </button>
           </q-item>
-          <q-separator />
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Last Updated</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Stars</q-item
           >
         </q-list>
@@ -181,6 +155,7 @@ export default defineComponent({
 
 <style lang="scss">
 @import '../../App.css';
+@import '@/styles/quasar.variables.scss';
 
 .repo_star_button {
   & .q-btn__content {
@@ -217,7 +192,7 @@ export default defineComponent({
     &:hover {
       background-color: #fff !important;
       svg {
-        color: var(--color-border) !important;
+        color: $secondary-300 !important;
       }
     }
   }
@@ -232,9 +207,5 @@ export default defineComponent({
   @media (min-width: 1024px) {
     width: 300px;
   }
-}
-
-.m-list {
-  border-bottom: 1px solid var(--color-border);
 }
 </style>
