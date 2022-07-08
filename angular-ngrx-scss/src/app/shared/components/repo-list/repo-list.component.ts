@@ -3,11 +3,11 @@ import { Observable } from 'rxjs';
 import { UserReposState } from 'src/app/state/profile/profile.state';
 
 @Component({
-  selector: 'app-profile-repos',
-  templateUrl: './profile-repos.component.html',
-  styleUrls: ['./profile-repos.component.scss'],
+  selector: 'app-repo-list',
+  templateUrl: './repo-list.component.html',
+  styleUrls: ['./repo-list.component.scss'],
 })
-export class ProfileReposComponent {
+export class RepoListComponent {
   @Input()
   repos$?: Observable<UserReposState[]>;
 }

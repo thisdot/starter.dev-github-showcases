@@ -3,8 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ProfileAboutComponent } from './profile-about/profile-about.component';
-import { ProfileNavComponent } from './profile-nav/profile-nav.component';
-import { ProfileReposComponent } from './profile-repos/profile-repos.component';
+import { TabNavComponent } from '../../shared/components/tab-nav/tab-nav.component';
+import { RepoListComponent } from '../../shared/components/repo-list/repo-list.component';
 
 import { ProfileComponent } from './profile.component';
 
@@ -18,9 +18,9 @@ describe('ProfileComponent', () => {
       declarations: [
         ProfileComponent,
         NavBarComponent,
-        ProfileNavComponent,
+        TabNavComponent,
         ProfileAboutComponent,
-        ProfileReposComponent,
+        RepoListComponent,
       ],
       providers: [provideMockStore()],
     }).compileComponents();
