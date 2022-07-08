@@ -259,6 +259,18 @@
       {
         "name": "OrgRepos",
         "alias": "OrgRepos",
+        "variables": { "orderBy": { "field": "NAME", "direction": "DESC" } },
+        "fixture": "org/graphql/orgRepos-orderByName.graphql.json"
+      },
+      {
+        "name": "OrgRepos",
+        "alias": "OrgRepos",
+        "variables": { "orderBy": { "field": "STARGAZERS", "direction": "DESC" } },
+        "fixture": "org/graphql/orgRepos-orderByStars.graphql.json"
+      },
+      {
+        "name": "OrgRepos",
+        "alias": "OrgRepos",
         "variables": null,
         "fixture": "org/graphql/orgRepos.graphql.json"
       },
