@@ -6,31 +6,31 @@
           <q-icon
             class="text-h6 custom-icon"
             name="svguse:app-icons/issue.svg#issue"
-            v-if="cardType === CARD_TYPES.ISSUE && state === STATES.OPEN"
+            v-if="cardType === CARD_TYPE.ISSUE && state === STATE.OPEN"
           />
           <q-icon
             class="text-h6 custom custom-icon-icon"
             name="svguse:app-icons/closed-issue.svg#closed-issue"
-            v-else-if="cardType === CARD_TYPES.ISSUE && state === STATES.CLOSED"
+            v-else-if="cardType === CARD_TYPE.ISSUE && state === STATE.CLOSED"
           />
 
           <q-icon
             class="text-h6 custom-icon"
             name="svguse:app-icons/pull-request.svg#pull-request"
-            v-if="cardType === CARD_TYPES.PULL_REQUEST && state === STATES.OPEN"
+            v-if="cardType === CARD_TYPE.PULL_REQUEST && state === STATE.OPEN"
           />
           <q-icon
             class="text-h6 custom-icon"
             name="svguse:app-icons/closed-pull-request.svg#closed-pull-request"
             v-else-if="
-              cardType === CARD_TYPES.PULL_REQUEST && state === STATES.CLOSED
+              cardType === CARD_TYPE.PULL_REQUEST && state === STATE.CLOSED
             "
           />
           <q-icon
             class="text-h6 custom-icon"
             name="svguse:app-icons/merged-pull-request.svg#merged-pull-request"
             v-else-if="
-              cardType === CARD_TYPES.PULL_REQUEST && state === STATES.MERGED
+              cardType === CARD_TYPE.PULL_REQUEST && state === STATE.MERGED
             "
           />
         </span>
@@ -74,7 +74,7 @@
 
 <script lang="ts">
 import { defineComponent, defineProps } from 'vue';
-import { CARD_TYPES, STATES } from './data';
+import { CARD_TYPE, STATE } from './data';
 import { useFormatter } from '@/composables';
 
 const { getFriendlyDate } = useFormatter();
@@ -88,12 +88,12 @@ export default defineComponent({
 defineProps({
   cardType: {
     type: String,
-    validator: (prop: string) => Object.values(CARD_TYPES).includes(prop),
+    validator: (prop: string) => Object.values(CARD_TYPE).includes(prop),
     required: true,
   },
   state: {
     type: String,
-    validator: (prop: string) => Object.values(STATES).includes(prop),
+    validator: (prop: string) => Object.values(STATE).includes(prop),
     required: true,
   },
   author: {

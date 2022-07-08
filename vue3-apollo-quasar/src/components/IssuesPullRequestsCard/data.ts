@@ -1,8 +1,8 @@
-export const CARD_TYPES = {
+export const CARD_TYPE = {
   ISSUE: 'issue',
   PULL_REQUEST: 'pullrequest',
 };
-export const STATES = {
+export const STATE = {
   OPEN: 'open',
   CLOSED: 'closed',
   MERGED: 'merged',
