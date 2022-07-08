@@ -303,6 +303,18 @@
       {
         "name": "UserRepos",
         "alias": "UserRepos",
+        "variables": { "orderBy": { "field": "NAME", "direction": "DESC" } },
+        "fixture": "user/graphql/userRepos-orderByName.graphql.json"
+      },
+      {
+        "name": "UserRepos",
+        "alias": "UserRepos",
+        "variables": { "orderBy": { "field": "STARGAZERS", "direction": "DESC" } },
+        "fixture": "user/graphql/userRepos-orderByStars.graphql.json"
+      },
+      {
+        "name": "UserRepos",
+        "alias": "UserRepos",
         "variables": null,
         "fixture": {
           "full": "user/graphql/userRepos.graphql.json",
