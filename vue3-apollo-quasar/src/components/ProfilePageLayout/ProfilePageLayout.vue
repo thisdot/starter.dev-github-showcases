@@ -72,10 +72,16 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
+import {
+  UserProfileCard,
+  SearchFilter,
+  TabHeader,
+  RepoCard,
+} from '@/components';
 import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
+import { defaultLanguageSort } from '@/components/SearchFilter/data';
 
 const getUserRepos = useUserRepos();
 const user = useUserStore();
@@ -102,12 +108,12 @@ const { repos, loading } = getUserRepos(props.username, false);
 
 const sortedData = computed(() => {
   let resp: any = [];
-  const language = languageData.value.language;
-  if (repos.value && language.toLowerCase() !== 'all') {
+  const language = languageData.value?.language;
+  if (repos.value && language !== defaultLanguageSort) {
     resp = repos.value.filter(
       (repo) => repo?.primaryLanguage?.name === language,
     );
-  } else if (language.toLowerCase() === 'all') {
+  } else if (language === defaultLanguageSort) {
     resp = repos.value;
   }
 
