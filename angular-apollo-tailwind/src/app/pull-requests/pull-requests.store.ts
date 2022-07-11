@@ -16,6 +16,7 @@ import {
   RepoPullRequestsGQL,
 } from '../gql';
 import { parsePullRequestsQuery } from './parse-pull-requests';
+import { ActivatedRoute } from '@angular/router';
 
 export interface FilterState {
   label: string;
@@ -70,6 +71,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   constructor(
     private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private repoPullRequestsGQL: RepoPullRequestsGQL,
+    private activatedRoute: ActivatedRoute,
   ) {
     super(INITIAL_STATE);
   }
@@ -217,10 +219,20 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly getPullRequests$ = this.effect((target$: Observable<void>) =>
     target$.pipe(
       withLatestFrom(this.state$),
-      switchMap(([, { label, sort, endCursor, startCursor, first, last }]) =>
+      switchMap(([, { label, sort }]) =>
         this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
-          switchMap(({ owner, name }) =>
-            this.repoPullRequestsGQL
+          switchMap(({ owner, name }) => {
+            const endCursor =
+              this.activatedRoute.snapshot.queryParams['after'] ?? undefined;
+            const startCursor =
+              this.activatedRoute.snapshot.queryParams['before'] ?? undefined;
+            const last = endCursor ? 25 : undefined;
+            let first = startCursor ? 25 : undefined;
+
+            if (endCursor == undefined && startCursor == undefined) {
+              first = 25;
+            }
+            return this.repoPullRequestsGQL
               .watch({
                 owner,
                 name,
@@ -245,8 +257,8 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
                     console.log(error);
                   },
                 ),
-              ),
-          ),
+              );
+          }),
         ),
       ),
     ),
