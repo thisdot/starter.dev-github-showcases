@@ -16,9 +16,8 @@
           <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div class="tab-contents col">
-          <SearchFilter :languages="getLanguages(repos)" />
-
+        <div class="tab-contents col" v-if="!loadingLanguage">
+          <SearchFilter :languages="getLanguages" />
           <q-tab-panels v-model="tab">
             <q-tab-panel name="overview">
               <div class="text-h6">Overview</div>
@@ -27,7 +26,7 @@
 
             <q-tab-panel name="repositories">
               <q-list v-if="repos" separator>
-                <q-item v-for="repo in repos" :key="repo.id">
+                <q-item v-for="repo in sortedData" :key="repo.id">
                   <RepoCard
                     :name="repo.name"
                     :visibility="repo.visibility"
@@ -64,8 +63,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineProps, ref } from 'vue';
-
+import { computed, defineComponent, defineProps, ref } from 'vue';
+import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
 export default defineComponent({
   name: 'ProfilePageLayout',
 });
@@ -78,24 +78,49 @@ import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
 
 const getUserRepos = useUserRepos();
+const user = useUserStore();
+const tab = ref('');
+
 const props = defineProps({
   username: String,
 });
-const tab = ref('');
+
 function changeTab(val) {
   tab.value = val;
 }
 
-const user = useUserStore();
+const LANGUAGE_QUERY = gql`
+  query Language {
+    language @client
+  }
+`;
+
+const { result: languageData, loading: loadingLanguage } =
+  useQuery(LANGUAGE_QUERY);
+
 const { repos, loading } = getUserRepos(props.username, false);
+
+const sortedData = computed(() => {
+  let resp: any = [];
+  const language = languageData.value.language;
+  if (repos.value && language.toLowerCase() !== 'all') {
+    resp = repos.value.filter(
+      (repo) => repo?.primaryLanguage?.name === language,
+    );
+  } else if (language.toLowerCase() === 'all') {
+    resp = repos.value;
+  }
+
+  return resp;
+});
 
 const inArray = (array, target) => {
   return array.find((arr) => arr.name === target);
 };
 
-const getLanguages = (repos) => {
+const getLanguages = computed(() => {
   const languages = [];
-  repos.forEach((repo) => {
+  repos.value.forEach((repo) => {
     if (
       repo.primaryLanguage &&
       !inArray(languages, repo.primaryLanguage.name)
@@ -107,7 +132,7 @@ const getLanguages = (repos) => {
   });
   languages.sort((a, b) => (a.name > b.name ? 1 : -1));
   return languages;
-};
+});
 </script>
 
 <style lang="scss" scoped>

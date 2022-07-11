@@ -7,6 +7,7 @@ import { provideApolloClient } from '@vue/apollo-composable';
 import { setContext } from '@apollo/client/link/context';
 
 import { useToken } from '@/composables';
+import { filteredLanguage } from '@/globals/filteredLanguage';
 
 const { getAuthToken } = useToken();
 
@@ -25,7 +26,20 @@ const authLink = setContext((_, { headers }) => {
 });
 
 // Cache implementation
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        language: {
+          //The name we will be querying
+          read() {
+            return filteredLanguage(); //Returns the updated value of counts
+          },
+        },
+      },
+    },
+  },
+});
 
 // Create the apollo client
 const apolloClient = new ApolloClient({
