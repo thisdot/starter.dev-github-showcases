@@ -69,7 +69,6 @@
           </span>
         </div>
       </q-card-section>
-      <slot />
     </q-card>
   </q-item>
 </template>

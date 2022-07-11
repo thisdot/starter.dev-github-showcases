@@ -7,7 +7,7 @@
         :closedCounts="countList(ISSUES.closedIssue)"
         :tabType="card_type"
       />
-      <div v-if="tabRef === TABS.OPEN">
+      <q-list separator v-if="tabRef === TABS.OPEN">
         <IssuesPullRequestsCard
           v-for="(data, index) in ISSUES.openIssue"
           :key="index"
@@ -20,9 +20,8 @@
           :number="data.number"
           :createdAt="data.createdAt"
         >
-          <q-separator v-if="index !== ISSUES.openIssue.length - 1" />
         </IssuesPullRequestsCard>
-      </div>
+      </q-list>
 
       <q-list separator v-else>
         <IssuesPullRequestsCard
@@ -37,7 +36,6 @@
           :number="data.number"
           :createdAt="data.createdAt"
         >
-          <!-- <q-separator v-if="index !== ISSUES.closedIssue.length - 1" /> -->
         </IssuesPullRequestsCard>
       </q-list>
     </div>
