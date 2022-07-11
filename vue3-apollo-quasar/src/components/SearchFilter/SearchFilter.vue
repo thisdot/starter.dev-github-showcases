@@ -17,7 +17,6 @@
         />
       </form>
     </div>
-
     <SearchDropdowns dropdownType="type" />
     <SearchDropdowns dropdownType="language" />
     <SearchDropdowns dropdownType="sort" />

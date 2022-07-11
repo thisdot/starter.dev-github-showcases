@@ -1,7 +1,7 @@
 <template>
   <div class="search_container">
     <form>
-      <AppInput v-on="$lisenter" placeholder="Find a repository..." />
+      <AppInput v-model="search" placeholder="Find a repository..." />
     </form>
   </div>
 </template>
@@ -15,6 +15,7 @@ export default defineComponent({
   components: { AppInput },
   setup() {
     const search = ref('');
+
     return { search };
   },
 });

@@ -63,7 +63,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, defineProps, ref, watch } from 'vue';
+import { computed, defineComponent, defineProps, ref } from 'vue';
 
 export default defineComponent({
   name: 'ProfilePageLayout',

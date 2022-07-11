@@ -26,10 +26,10 @@ export default defineComponent({
       default: '',
     },
   },
-
   setup() {
     const handleInputChange = (event: Event) =>
       (event.target as HTMLInputElement).value;
+
     return { handleInputChange };
   },
 });
