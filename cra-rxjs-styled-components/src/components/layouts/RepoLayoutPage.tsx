@@ -49,3 +49,10 @@ export const RepoAside = styled.div`
 export const RepoReadme = styled.div`
   grid-area: readme;
 `;
+
+export const RepoCenterWrapper = styled.div`
+  margin-inline: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  max-width: 80rem;
+`;
