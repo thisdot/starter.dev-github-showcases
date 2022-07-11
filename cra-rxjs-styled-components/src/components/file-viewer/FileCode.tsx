@@ -10,8 +10,9 @@ interface FileCodeProps {
 
 function FileCode({ text, language }: FileCodeProps) {
   return (
+    // @ts-ignore
     <Highlight {...defaultProps} theme={theme} code={text} language={language}>
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+      {({ style, tokens, getLineProps, getTokenProps }) => (
         <CodeBlock
           data-testid="code-block"
           style={style}
