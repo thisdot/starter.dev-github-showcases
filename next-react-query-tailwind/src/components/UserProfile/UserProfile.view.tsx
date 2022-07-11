@@ -43,6 +43,7 @@ function UserProfileView({
   return (
     <div>
       <Image
+        data-testid="profile page avatar"
         src={avatarUrl}
         alt="Avatar"
         width={260}
@@ -50,23 +51,23 @@ function UserProfileView({
         className={styles.avatar}
       />
       <h1 className="mt-2">
-        <div className={styles.name}>{name}</div>
-        <div className={styles.username}>{username}</div>
+        <div data-testid="profile page name" className={styles.name}>{name}</div>
+        <div data-testid="profile page username" className={styles.username}>{username}</div>
       </h1>
       <div className={styles.bio}>{bio}</div>
       <div className={styles.socials}>
         <UsersIcon className={styles.icon} />
         <span className="inline-block">
-          <span className={styles.count}>{followers}</span> followers
+          <span data-testid="profile followers count" className={styles.count}>{followers}</span> followers
         </span>
         <span className="mx-1">·</span>
         <span className="inline-block">
-          <span className={styles.count}>{following}</span> following
+          <span data-testid="profile following count" className={styles.count}>{following}</span> following
         </span>
         <span className="mx-1">·</span>
         <StarIcon className={styles.icon} />
         <span className="inline-block">
-          <span className={styles.count}>{starredRepos}</span>{' '}
+          <span data-testid="profile starred count" className={styles.count}>{starredRepos}</span>{' '}
         </span>
       </div>
       <div className={styles.fields}>

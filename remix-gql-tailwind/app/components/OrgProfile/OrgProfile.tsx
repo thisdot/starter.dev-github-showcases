@@ -5,7 +5,6 @@ interface OrgProfileProps {
 }
 
 function OrgProfile({ data }: OrgProfileProps) {
-
   return <OrgProfileView {...data.organization} />;
 }
 

@@ -5,6 +5,7 @@ import {
   ContainerComponentModule,
   DataContainerComponentModule,
   IconsModule,
+  ErrorBlockComponentModule,
 } from './components';
 import { PipesModule } from './pipes';
 
@@ -13,6 +14,7 @@ import { PipesModule } from './pipes';
   imports: [
     ContainerComponentModule,
     DataContainerComponentModule,
+    ErrorBlockComponentModule,
     ContentLoadingModule,
     IconsModule,
     CountButtonGroupComponentModule,

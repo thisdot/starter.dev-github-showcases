@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Aside = styled.aside`
+  background-color: rgb(255, 255, 255);
   grid-area: aside;
   padding: 2rem;
 `;

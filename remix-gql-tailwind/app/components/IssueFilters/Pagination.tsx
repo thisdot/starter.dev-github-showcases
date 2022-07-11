@@ -3,18 +3,17 @@ import type { PageInfo } from './types';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/outline';
 import * as styles from './Pagination.classNames';
 import { useRepo } from '~/context/RepoContext';
-import { Link } from 'remix';
+import { Link } from '@remix-run/react';
 
 interface PaginationProps {
   pageInfo?: PageInfo;
   changePage: IssueFilterAPI['changePage'];
 }
 
-
 const Previous = () => {
   return (
     <>
-      <ChevronLeftIcon className="w-4 h-4 inline mr-1.5" />
+      <ChevronLeftIcon className="mr-1.5 inline h-4 w-4" />
       Previous
     </>
   );
@@ -24,7 +23,7 @@ const Next = () => {
   return (
     <>
       Next
-      <ChevronRightIcon className="w-4 h-4 inline ml-1.5" />
+      <ChevronRightIcon className="ml-1.5 inline h-4 w-4" />
     </>
   );
 };

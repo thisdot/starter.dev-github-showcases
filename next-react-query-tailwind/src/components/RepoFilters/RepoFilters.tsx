@@ -44,6 +44,7 @@ function RepoFilters({
             className={styles.searchInput}
             placeholder="Find a repository.."
             onChange={(e) => setQuery(e.target.value)}
+            data-testid="repository filters search input"
           />
         </div>
         <div className={styles.filters}>
@@ -129,6 +130,7 @@ function RepoFilters({
             <button
               onClick={resetFilters}
               className={cn(styles.clearBtn, 'group')}
+              data-testid="clear filters button"
             >
               <span
                 className={cn(

@@ -1,0 +1,44 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "milestones": {
+        "nodes": [],
+        "pageInfo": {
+          "startCursor": "Y3Vyc29yOnYyOpHOAHJpwg==",
+          "endCursor": "Y3Vyc29yOnYyOpHOAHmLlQ==",
+          "hasNextPage": false,
+          "hasPreviousPage": false,
+          "__typename": "PageInfo"
+        },
+        "totalCount": 8,
+        "__typename": "MilestoneConnection"
+      },
+      "closedIssues": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wMi0yMVQxMDoxMTowMi0wNjowMM5ETmox",
+          "hasPreviousPage": false,
+          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNS0xOFQwOTo0MDowMy0wNTowMM5J6fub",
+          "__typename": "PageInfo"
+        },
+        "totalCount": 0,
+        "nodes": [],
+        "__typename": "IssueConnection"
+      },
+      "openIssues": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "issues-page1-endCursor",
+          "hasPreviousPage": false,
+          "startCursor": "issues-page1-startCursor",
+          "__typename": "PageInfo"
+        },
+        "totalCount": 0,
+        "nodes": [],
+        "__typename": "IssueConnection"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

@@ -2,7 +2,6 @@ import { RepoContext, RepoProvider } from '../../context/RepoContext';
 import { Story, Meta } from '@storybook/react';
 import FileExplorerNav from './FileExplorerNav';
 
-
 export default {
   component: FileExplorerNav,
   title: 'RepoPage/FileExplorerNav',

@@ -36,16 +36,25 @@ SHOWCASE_APP=angular-apollo-tailwind yarn test
 If there's a new showcase app and you need to add a new configuration to point to that app, run:
 
 ```shell
-cp config.example.json cypress/configs/[new showcase app name].json
+cp config.example.config.ts cypress/configs/[new showcase app name].config.ts
 ```
+
+Open the newly created `config.ts` file, copy the commented out JSON snippet, open the `script-config.json`, and paste a new entry for your new app with updated fields as needed (below is the same snippet found in the config file you just created -- make sure to keep the underscores here, it's important for the CLI script to work!):
+
+```json
+"your_app_name": {
+    "responseUrl": "http://localhost:4200",
+    "startCommand": "yarn start"
+}
+```
+
+### Explanations of config values
 
 `baseUrl` is the URL where the app starts locally.
 
 `startCommand` is the specific command needed to start the app.
 
-`integrationFolder` likely will not need to be changed as we are striving to use one set of tests against all apps, but in an extremely rare scenario where a specific integration set is needed for an app, set that path here.
-
-`env` can be used for a number of Cypress sepcific environment variables, but you can also add anything here that will possibly need to be mocked for specific pieces of the app code that needs to be controlled.
+`env` can be used for a number of Cypress sepcific environment variables, but you can also add anything here that will possibly need to be mocked for specific pieces of the app code that needs to be controlled (such as Node events).
 
 `env.authUrl` is the path the app needs to visit where an authentication check is performed and the test set will try to mock authentication, typically mosts apps `/` is sufficient enough as a route check is performed there.
 

@@ -34,7 +34,7 @@ export const USER_REPOS_FRAGMENT = gql`
       }
     }
   }
-`
+`;
 
 export const USER_REPOS_QUERY = gql`
   ${USER_REPOS_FRAGMENT}
