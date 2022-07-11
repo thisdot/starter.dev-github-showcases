@@ -1,6 +1,23 @@
 <template>
   <div class="repo_search_header">
-    <SearchInput />
+    <!-- If using SearchInput component the event needs to be emitted
+    from AppInput -> SearchInput -> SearchFilter -> ProfilePageLayout -->
+    <!-- <SearchInput /> -->
+    <div class="search_container">
+      <form>
+        <input
+          :type="inputType"
+          v-bind="$attrs"
+          :value="modelValue"
+          :class="inputClass"
+          autocomplete="new-value"
+          autocorrect="false"
+          placeholder="Find a repository..."
+          @input="$emit('update:modelValue', handleInputChange($event))"
+        />
+      </form>
+    </div>
+
     <SearchDropdowns dropdownType="type" />
     <SearchDropdowns dropdownType="language" />
     <SearchDropdowns dropdownType="sort" />
@@ -27,9 +44,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
-import { SearchDropdowns, SearchInput } from '@/components';
+import {
+  SearchDropdowns,
+  // , SearchInput
+} from '@/components';
 
 export default defineComponent({
   name: 'SearchFilter',
@@ -38,10 +58,24 @@ export default defineComponent({
       type: String,
       default: 'New',
     },
+    inputClass: String,
+    inputType: {
+      type: String,
+      default: 'text',
+    },
+    modelValue: {
+      type: String,
+      default: '',
+    },
   },
   components: {
-    SearchInput,
+    // SearchInput,
     SearchDropdowns,
+  },
+  setup() {
+    const handleInputChange = (event: Event) =>
+      (event.target as HTMLInputElement).value;
+    return { handleInputChange };
   },
 });
 </script>
@@ -117,6 +151,42 @@ export default defineComponent({
 
     @media (min-width: 1024px) {
       margin-left: 10px;
+    }
+  }
+  .search_container {
+    width: 100%;
+    @media (min-width: 1024px) {
+      margin-right: 20px !important;
+    }
+    input {
+      padding: 6px 12px;
+      border: 1px solid var(--color-border);
+      width: 100%;
+      border-radius: 6px;
+      background: #fff;
+      -webkit-transition: 0.1s ease-out;
+      transition: 0.1s ease-out;
+      &::-webkit-input-placeholder {
+        color: #6a737d;
+        font-family: inherit;
+      }
+      &:-ms-input-placeholder {
+        color: #6a737d;
+        font-family: inherit;
+      }
+      &::-ms-input-placeholder {
+        color: #6a737d;
+        font-family: inherit;
+      }
+      &::placeholder {
+        color: #6a737d;
+        font-family: inherit;
+      }
+      &:focus {
+        border: 1px solid #0366d6;
+        -webkit-box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.3);
+        box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.3);
+      }
     }
   }
 }

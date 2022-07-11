@@ -17,17 +17,16 @@
         </div>
         <!-- Right side -->
         <div class="tab-contents col">
-          <SearchFilter />
+          <SearchFilter v-model="search" />
 
           <q-tab-panels v-model="tab">
             <q-tab-panel name="overview">
               <div class="text-h6">Overview</div>
               <slot name="overview"></slot>
             </q-tab-panel>
-
             <q-tab-panel name="repositories">
               <q-list v-if="repos" separator>
-                <q-item v-for="repo in repos" :key="repo.id">
+                <q-item v-for="repo in filteredRepos" :key="repo.id">
                   <RepoCard
                     :name="repo.name"
                     :visibility="repo.visibility"
@@ -64,7 +63,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineProps, ref } from 'vue';
+import { computed, defineComponent, defineProps, ref, watch } from 'vue';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
@@ -76,21 +75,22 @@ import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
 import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
-import { useFilter } from '@/ccomposables';
+import { useFilter } from '@/composables';
 
 const getUserRepos = useUserRepos();
 const props = defineProps({
   username: String,
 });
+
 const tab = ref('');
 function changeTab(val) {
   tab.value = val;
 }
+const search = ref('');
 
 const user = useUserStore();
-// TODO: filter repo against search input
 const { repos, loading } = getUserRepos(props.username, false);
-// const filteredRepos = useFilter(repos, state);
+const filteredRepos = useFilter(repos, search);
 </script>
 
 <style lang="scss" scoped>
