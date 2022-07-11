@@ -52,7 +52,7 @@
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-  name: 'PullRequestTabView',
+  name: 'IssueTabView',
 });
 </script>
 <script lang="ts" setup>

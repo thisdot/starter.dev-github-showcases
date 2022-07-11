@@ -13,7 +13,7 @@
             v-if="tabType === TAB_TYPE.PULL_REQUEST"
           />
           <q-icon
-            class="text-h5 custom-icon"
+            class="text-h6 custom-icon"
             name="svguse:app-icons/issue.svg#issue"
             v-else
           />
@@ -34,38 +34,38 @@
         </button>
       </div>
       <div class="col row justify-end items-center relative-position">
-        <button
+        <q-btn-dropdown
+          label="Label"
+          flat
           class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
           @click="toggleLabelMenu"
         >
-          <span>Label</span>
-          <span class="q-ml-xs">
-            <q-icon class="fa fa-caret-down"></q-icon>
-          </span>
-        </button>
-        <div class="dropdown_menu q-menu" v-if="labelRef">
+        </q-btn-dropdown>
+        <q-list class="dropdown_menu q-menu" v-if="labelRef">
           <slot name="label-list">
-            <p class="text-center text-caption text-primary text-bold q-py-xs">
+            <q-item
+              class="text-center text-caption text-primary text-bold q-py-xs"
+            >
               Label options
-            </p>
+            </q-item>
           </slot>
-        </div>
-        <button
+        </q-list>
+        <q-btn-dropdown
+          label="Sort"
+          flat
           class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
           @click="toggleSortMenu"
         >
-          <span>Sort</span>
-          <span class="q-ml-xs">
-            <q-icon class="fa fa-caret-down"></q-icon>
-          </span>
-        </button>
-        <div class="dropdown_menu q-menu" v-if="sortRef">
+        </q-btn-dropdown>
+        <q-list separator class="dropdown_menu q-menu" v-if="sortRef">
           <slot name="sort-list">
-            <p class="text-center text-caption text-primary text-bold q-py-xs">
+            <q-item
+              class="text-center text-caption text-primary text-bold q-py-xs"
+            >
               Sort options
-            </p>
+            </q-item>
           </slot>
-        </div>
+        </q-list>
       </div>
     </div>
     <q-separator />
