@@ -33,7 +33,7 @@ describe('IssuePullRequestTab', () => {
     },
   );
 
-  it.each(dropdown_labels)('should show and hide dropdown\\s', async (btn) => {
+  it.each(dropdown_labels)('should show and hide dropdowns', async (btn) => {
     const toggleLabelMenu = jest.spyOn(wrapper.vm, 'toggleLabelMenu');
     const toggleSortMenu = jest.spyOn(wrapper.vm, 'toggleSortMenu');
     await btn.trigger('click');

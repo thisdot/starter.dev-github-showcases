@@ -4,7 +4,7 @@
       <div class="row items-center">
         <button
           class="tab text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
-          :class="{ 'text-weight-medium active': isTab(TABS.OPEN) }"
+          :class="{ 'text-weight-bold active': isTab(TABS.OPEN) }"
           @click="updateActiveTab(TABS.OPEN)"
         >
           <q-icon
@@ -22,7 +22,7 @@
         </button>
         <button
           class="tab text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
-          :class="{ 'text-weight-medium active': isTab(TABS.CLOSED) }"
+          :class="{ 'text-weight-bold active': isTab(TABS.CLOSED) }"
           @click="updateActiveTab(TABS.CLOSED)"
         >
           <q-icon
@@ -38,13 +38,13 @@
           label="Label"
           flat
           class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
-          @click="toggleLabelMenu"
+          @click="toggleLabelMenu()"
         >
         </q-btn-dropdown>
         <q-list class="dropdown_menu q-menu" v-if="labelRef">
           <slot name="label-list">
             <q-item
-              class="text-center text-caption text-primary text-bold q-py-xs"
+              class="text-center text-caption text-primary text-bold q-py-xs block"
             >
               Label options
             </q-item>
@@ -54,13 +54,13 @@
           label="Sort"
           flat
           class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
-          @click="toggleSortMenu"
+          @click="toggleSortMenu()"
         >
         </q-btn-dropdown>
         <q-list separator class="dropdown_menu q-menu" v-if="sortRef">
           <slot name="sort-list">
             <q-item
-              class="text-center text-caption text-primary text-bold q-py-xs"
+              class="text-center text-caption text-primary text-bold q-py-xs block"
             >
               Sort options
             </q-item>
