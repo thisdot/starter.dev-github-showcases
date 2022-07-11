@@ -106,12 +106,14 @@ const { result: languageData, loading: loadingLanguage } =
 
 const { repos, loading } = getUserRepos(props.username, false);
 
+const matchText = (target, value) => target?.match(new RegExp(value, 'i'));
+
 const filterRepoData = computed(() => {
   let resp: any = [];
   const language = languageData.value?.language;
-  if (repos.value && language !== defaultLanguageSort) {
-    resp = repos.value.filter(
-      (repo) => repo?.primaryLanguage?.name === language,
+  if (repos.value && language && language !== defaultLanguageSort) {
+    resp = repos.value.filter((repo) =>
+      matchText(repo?.primaryLanguage?.name, language),
     );
   } else if (language === defaultLanguageSort) {
     resp = repos.value;
