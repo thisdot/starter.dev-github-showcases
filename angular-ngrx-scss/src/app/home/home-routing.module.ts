@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/services/auth.guard';
 import { HomeComponent } from './home.component';
+import { OrganizationComponent } from './organization/organization.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
@@ -13,6 +14,11 @@ const routes: Routes = [
   {
     path: ':username',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'orgs/:owner',
+    component: OrganizationComponent,
     canActivate: [AuthGuard],
   },
 ];

@@ -16,7 +16,7 @@ export class ProfileEffects {
       switchMap(({ username }) =>
         combineLatest([
           this.userService.getUserInfo(username),
-          this.userService.getUserOrganizations(username),
+          this.userService.getUserOrganizations(),
           this.userService.getUserRepos(username),
         ]).pipe(
           map(([user, orgs, repos]) =>

@@ -1,0 +1,22 @@
+<div class="page">
+  <header>
+    <app-nav-bar></app-nav-bar>
+  </header>
+
+  <main>
+    <div class="organization-header">
+      <div class="grid grid-cols-12 container">
+        <div class="col-span-3"></div>
+        <div class="col-span-9">
+          <app-org-info></app-org-info>
+          <app-tab-nav [profile$]="profile$"></app-tab-nav>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 container">
+      <div class="col-span-3"></div>
+      <app-repo-list class="col-span-9" [repos$]="repos$"></app-repo-list>
+    </div>
+  </main>
+</div>

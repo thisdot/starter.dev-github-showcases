@@ -12,6 +12,8 @@ import { RelativeTimePipe } from '../shared/pipes/relative-time.pipe';
 import { RepoCardComponent } from '../shared/components/repo-card/repo-card.component';
 import { UserGistsComponent } from './user-gists/user-gists.component';
 import { TopRepositoriesComponent } from './top-repositories/top-repositories.component';
+import { OrganizationComponent } from './organization/organization.component';
+import { OrganizationInfoComponent } from './organization/org-info/org-info.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { TopRepositoriesComponent } from './top-repositories/top-repositories.co
     RelativeTimePipe,
     UserGistsComponent,
     TopRepositoriesComponent,
+    OrganizationComponent,
+    OrganizationInfoComponent,
   ],
   imports: [CommonModule, HomeRoutingModule],
 })
