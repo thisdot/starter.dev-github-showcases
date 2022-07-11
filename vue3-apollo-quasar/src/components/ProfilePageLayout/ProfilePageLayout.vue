@@ -26,7 +26,7 @@
 
             <q-tab-panel name="repositories">
               <q-list v-if="repos" separator>
-                <q-item v-for="repo in sortedData" :key="repo.id">
+                <q-item v-for="repo in filterRepoData" :key="repo.id">
                   <RepoCard
                     :name="repo.name"
                     :visibility="repo.visibility"
@@ -106,7 +106,7 @@ const { result: languageData, loading: loadingLanguage } =
 
 const { repos, loading } = getUserRepos(props.username, false);
 
-const sortedData = computed(() => {
+const filterRepoData = computed(() => {
   let resp: any = [];
   const language = languageData.value?.language;
   if (repos.value && language !== defaultLanguageSort) {
