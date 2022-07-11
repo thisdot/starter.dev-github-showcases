@@ -63,7 +63,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, defineProps, ref } from 'vue';
+import { defineComponent, defineProps, ref } from 'vue';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
@@ -81,7 +81,6 @@ const getUserRepos = useUserRepos();
 const props = defineProps({
   username: String,
 });
-
 const tab = ref('');
 function changeTab(val) {
   tab.value = val;
