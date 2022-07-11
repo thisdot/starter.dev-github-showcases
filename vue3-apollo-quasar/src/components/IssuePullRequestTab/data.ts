@@ -1,9 +1,9 @@
-export const CARD_TYPE = {
+export const TAB_TYPE = {
   ISSUE: 'issue',
   PULL_REQUEST: 'pullrequest',
 };
-export const STATE = {
+
+export const TABS = {
   OPEN: 'open',
   CLOSED: 'closed',
-  MERGED: 'merged',
 };

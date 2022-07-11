@@ -130,6 +130,7 @@ function RepoFilters({
             <button
               onClick={resetFilters}
               className={cn(styles.clearBtn, 'group')}
+              data-testid="clear filters button"
             >
               <span
                 className={cn(

@@ -67,7 +67,11 @@
     </span>
   </div>
   <div>
-    <button (click)="handleClearFiltersClick()" class="clearBtn group">
+    <button
+      (click)="handleClearFiltersClick()"
+      class="clearBtn group"
+      data-testid="clear filters button"
+    >
       <span class="clearBtnIconContainer group-hover:bg-blue-500">
         <hero-icon
           name="x"
