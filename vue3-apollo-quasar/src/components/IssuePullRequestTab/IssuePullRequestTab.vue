@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row items-center no-wrap q-pa-sm tab-container">
+    <div class="row items-center no-wrap q-px-xs q-py-sm tab-container">
       <div class="row items-center">
         <button
           class="tab text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
@@ -8,7 +8,7 @@
           @click="updateActiveTab(TABS.OPEN)"
         >
           <q-icon
-            class="text-h5 custom-icon"
+            class="text-h6 custom-icon"
             name="svguse:app-icons/pull-request.svg#pull-request"
             v-if="tabType === TAB_TYPE.PULL_REQUEST"
           />

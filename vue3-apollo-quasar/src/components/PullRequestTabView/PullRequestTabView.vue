@@ -7,7 +7,7 @@
         :closedCounts="countList(PULL_REQUESTS.closedPullRequest)"
         :tabType="card_type"
       />
-      <div v-if="tabRef === TABS.OPEN">
+      <q-list separator v-if="tabRef === TABS.OPEN">
         <IssuesPullRequestsCard
           v-for="(data, index) in PULL_REQUESTS.openPullRequest"
           :key="index"
@@ -20,13 +20,10 @@
           :number="data.number"
           :createdAt="data.createdAt"
         >
-          <q-separator
-            v-if="index !== PULL_REQUESTS.openPullRequest.length - 1"
-          />
         </IssuesPullRequestsCard>
-      </div>
+      </q-list>
 
-      <div v-else>
+      <q-list separator v-else>
         <IssuesPullRequestsCard
           v-for="(data, index) in PULL_REQUESTS.closedPullRequest"
           :key="index"
@@ -39,11 +36,8 @@
           :number="data.number"
           :createdAt="data.createdAt"
         >
-          <q-separator
-            v-if="index !== PULL_REQUESTS.closedPullRequest.length - 1"
-          />
         </IssuesPullRequestsCard>
-      </div>
+      </q-list>
     </div>
     <PaginationButtons
       v-if="showPagination(tabRef)"
