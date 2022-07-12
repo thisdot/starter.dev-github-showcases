@@ -104,7 +104,7 @@ const filteredRepos = computed(() => {
       searchData?.value?.search !== '' &&
       !repo.name
         .toLocaleLowerCase()
-        .includes(searchData?.value?.search.toLocaleLowerCase())
+        .includes(searchData?.value?.search?.toLocaleLowerCase())
     ) {
       return acc;
     }
