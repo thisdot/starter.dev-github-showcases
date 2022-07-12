@@ -8,5 +8,4 @@ import { FormControl } from '@angular/forms';
 })
 export class RepoControlsComponent {
   searchInput = new FormControl('');
-  // constructor() {}
 }
