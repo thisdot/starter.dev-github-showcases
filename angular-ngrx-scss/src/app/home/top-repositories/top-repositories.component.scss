@@ -2,7 +2,7 @@
 
 .top-repositories-container {
   padding: 1.5rem;
-  @media (min-width: 768px) {
+  @media (min-width: variables.$md) {
     padding: 3rem;
   }
   h2 {
@@ -19,9 +19,8 @@
   .repo-section {
     padding: 1rem;
     border-bottom: 1px solid variables.$gray300;
-    @media (min-width: 768px) {
-      padding: 2rem 0;
-      padding-left: 2rem;
+    @media (min-width: variables.$md) {
+      padding: 2rem 0 2rem 2rem;
     }
   }
   .view-all-link {
