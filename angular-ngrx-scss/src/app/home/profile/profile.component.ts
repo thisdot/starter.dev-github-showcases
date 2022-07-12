@@ -3,7 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { fetchProfile } from 'src/app/state/profile/profile.actions';
-import { selectProfileState } from 'src/app/state/profile/profile.selectors';
+import {
+  selectProfileState,
+  selectRepos,
+} from 'src/app/state/profile/profile.selectors';
 import {
   ProfileState,
   UserReposState,
@@ -33,7 +36,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
 
     this.profile$ = this.store.select(selectProfileState);
-    this.repos$ = this.profile$.pipe(map((profile) => profile.repos ?? []));
+    this.repos$ = this.store
+      .select(selectRepos)
+      .pipe(map((repos) => repos ?? []));
   }
 
   ngOnDestroy(): void {

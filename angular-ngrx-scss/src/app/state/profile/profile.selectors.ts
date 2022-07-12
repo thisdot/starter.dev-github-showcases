@@ -9,3 +9,26 @@ export const selectProfile = createSelector(
   selectProfileState,
   (state: ProfileState) => state,
 );
+
+export const selectSortAndFilter = createSelector(
+  selectProfileState,
+  (state: ProfileState) => state.sortAndFilter,
+);
+
+export const selectFilterBySearch = createSelector(
+  selectProfileState,
+  (state: ProfileState) => state.sortAndFilter?.search,
+);
+
+export const selectRepos = createSelector(
+  selectProfileState,
+  selectFilterBySearch,
+  (state: ProfileState, search?: string) => {
+    if (search && search !== '') {
+      return state.repos?.filter((item) =>
+        item.name.toLowerCase().includes(search),
+      );
+    }
+    return state.repos;
+  },
+);
