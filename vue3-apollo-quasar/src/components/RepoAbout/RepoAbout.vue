@@ -101,10 +101,9 @@ export default defineComponent({
   cursor: pointer;
   line-height: 1.375;
   margin-top: 0.5rem;
-}
-
-.readmeLink:hover {
-  color: rgba(59, 130, 246, 1);
+  &:hover {
+    color: rgba(59, 130, 246, 1);
+  }
 }
 
 .readmeIcon {

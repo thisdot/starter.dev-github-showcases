@@ -54,9 +54,8 @@ export default defineComponent({
   color: rgba(37, 99, 235, 1);
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.link:hover {
-  text-decoration: underline;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 </style>

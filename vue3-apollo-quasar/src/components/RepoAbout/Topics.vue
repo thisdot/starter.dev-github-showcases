@@ -24,7 +24,6 @@ export default defineComponent({
 }
 
 .topic {
-  //   display: inline-block;
   background-color: rgb(221, 244, 255);
   color: rgb(9, 105, 218);
   margin: 0 0.375rem 0.333em 0;
@@ -43,10 +42,9 @@ export default defineComponent({
   transition-property: background-color, border-color, color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-}
-
-.topic:hover {
-  color: rgba(255, 255, 255, 1);
-  background-color: rgba(37, 99, 235, 1);
+  &:hover {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(37, 99, 235, 1);
+  }
 }
 </style>
