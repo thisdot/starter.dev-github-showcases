@@ -4,8 +4,8 @@
     <ul *ngIf="gists?.length; else noGists">
       <li *ngFor="let gist of gists">
         <a class="link" [href]="gist.url" target="_blank">
-          {{ gist.fileName }}</a
-        >
+          {{ gist.fileName }}
+        </a>
       </li>
     </ul>
   </ng-container>
