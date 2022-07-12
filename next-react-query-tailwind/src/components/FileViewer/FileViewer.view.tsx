@@ -19,8 +19,18 @@ function FileViewerView({
   return (
     <div className={styles.container}>
       <div className={styles.fileHeader}>
-        <span className={styles.fileHeaderLines}>{lines} lines</span>
-        <span className={styles.fileHeaderBytes}>{byteSize} Bytes</span>
+        <span
+          data-testid="file viewer line count"
+          className={styles.fileHeaderLines}
+        >
+          {lines} lines
+        </span>
+        <span
+          data-testid="file viewer byte size"
+          className={styles.fileHeaderBytes}
+        >
+          {byteSize} Bytes
+        </span>
       </div>
       {language ? (
         <FileCode text={text} language={language} />

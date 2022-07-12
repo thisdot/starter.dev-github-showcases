@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { signOut } from 'src/app/state/auth';
 import { selectUserAvatar, selectUserLoginName } from '../../state/user';
 
 @Component({
@@ -32,5 +33,10 @@ export class NavBarComponent {
 
   closeDropdown() {
     this.dropdownMenuIsOpen = false;
+  }
+
+  signOut() {
+    this.closeDropdown();
+    this.store.dispatch(signOut());
   }
 }

@@ -21,7 +21,7 @@ function RepoMeta({
   return (
     <div className={styles.metadata}>
       {language && (
-        <div>
+        <div data-testid="repository language">
           <span
             style={{
               backgroundColor: languageColor || '#ccc',
@@ -34,12 +34,18 @@ function RepoMeta({
       {(stargazerCount > 0 || forkCount > 0) && (
         <div className="space-x-4">
           {stargazerCount > 0 && (
-            <span className={styles.socialCount}>
+            <span
+              className={styles.socialCount}
+              data-testid="repository star count"
+            >
               <StarIcon className={styles.socialIcon} /> {stargazerCount}
             </span>
           )}
           {forkCount > 0 && (
-            <span className={styles.socialCount}>
+            <span
+              className={styles.socialCount}
+              data-testid="repository fork count"
+            >
               <GitBranchIcon className={styles.socialIcon} /> {forkCount}
             </span>
           )}

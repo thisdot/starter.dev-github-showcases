@@ -1,0 +1,134 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "branches": {
+        "nodes": [
+          { "name": "vue3-ts-quasar/documentation", "__typename": "Ref" },
+          {
+            "name": "vue3-ts-quasar/feat/get-profile-info",
+            "__typename": "Ref"
+          },
+          { "name": "vue3-ts-quasar/feat/get-user-gists", "__typename": "Ref" },
+          {
+            "name": "vue3-ts-quasar/feat/get-user-top-repositories",
+            "__typename": "Ref"
+          },
+          {
+            "name": "vue3-ts-quasar/refactoring/aggregator-cleanup",
+            "__typename": "Ref"
+          }
+        ],
+        "__typename": "RefConnection"
+      },
+      "tree": {
+        "entries": [
+          {
+            "name": "app-routing.module.ts",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/app/app-routing.module.ts",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "app.component.css",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/app/app.component.css",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "app.component.html",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/app/app.component.html",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "app.component.spec.ts",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/app/app.component.spec.ts",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "app.component.ts",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/app/app.component.ts",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "app.module.ts",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/app/app.module.ts",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "auth",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/auth",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "components",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/components",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "file-viewer",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/file-viewer",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "gql",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/gql",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "home",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/home",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "issues",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/issues",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "profile",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/profile",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "provider",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/provider",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "pull-requests",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/pull-requests",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "repos",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/repos",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "utils",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app/utils",
+            "__typename": "TreeEntry"
+          }
+        ],
+        "__typename": "Tree"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

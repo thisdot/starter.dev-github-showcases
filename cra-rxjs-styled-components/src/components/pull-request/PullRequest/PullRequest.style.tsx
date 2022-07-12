@@ -3,8 +3,9 @@ import colors from '../../../constants/colors';
 
 export const Wrapper = styled.div`
   margin-inline: auto;
-  margin-top: 16px;
-  max-width: 60rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  max-width: 80rem;
 `;
 
 export const Content = styled.div`

@@ -13,14 +13,34 @@ import {
 } from './FileExplorer.styles';
 
 import { ForkIcon, DirectoryIcon, FileIcon } from '../icons/index';
+import { FileItem } from '../../types/types';
 
 type Props = {
   branch: string;
-  dirNames: string[];
-  fileNames: string[];
+  path: string;
+  basePath: string;
+  directories: FileItem[];
+  files: FileItem[];
 };
 
-export default function FileExplorer({ branch, dirNames, fileNames }: Props) {
+export default function FileExplorer({
+  branch,
+  directories,
+  basePath,
+  path,
+  files,
+}: Props) {
+  const removeLastPathPart = (path: string) => {
+    const pathParts = path.split('/');
+    return pathParts.slice(0, pathParts.length - 1).join('/');
+  };
+
+  const getUrl = (path: string) => {
+    if (path === '') {
+      return `${basePath}`;
+    }
+    return `${basePath}/tree/${branch}/${path}`;
+  };
   return (
     <FileExplorerWrapper>
       <FileExplorerButtonNav>
@@ -34,23 +54,32 @@ export default function FileExplorer({ branch, dirNames, fileNames }: Props) {
       </FileExplorerButtonNav>
 
       <FileExplorerContainer>
-        {dirNames.map((folder, index) => (
+        {path !== '' ? (
+          <FileExplorerCell>
+            <FileExplorerLink href={getUrl(removeLastPathPart(path))}>
+              ..
+            </FileExplorerLink>
+          </FileExplorerCell>
+        ) : null}
+        {directories.map((folder, index) => (
           <FileExplorerCell key={index}>
             <FileExplorerInnerCell>
               <FileExplorerDirContainer>
                 <DirectoryIcon />
               </FileExplorerDirContainer>
-              <FileExplorerLink>{folder}</FileExplorerLink>
+              <FileExplorerLink href={getUrl(folder.path)}>
+                {folder.name}
+              </FileExplorerLink>
             </FileExplorerInnerCell>
           </FileExplorerCell>
         ))}
-        {fileNames.map((file, index) => (
+        {files.map((file, index) => (
           <FileExplorerCell key={index}>
             <FileExplorerInnerCell>
               <FileExplorerFileContainer>
                 <FileIcon />
               </FileExplorerFileContainer>
-              <FileExplorerLink>{file}</FileExplorerLink>
+              <FileExplorerLink>{file.name}</FileExplorerLink>
             </FileExplorerInnerCell>
           </FileExplorerCell>
         ))}

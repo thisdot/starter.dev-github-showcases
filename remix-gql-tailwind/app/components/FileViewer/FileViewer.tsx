@@ -16,9 +16,8 @@ export type Blob = {
   text?: string;
 };
 
-function FileViewer({ data }: any ) {
+function FileViewer({ data }: any) {
   const { path } = useRepo();
-
 
   const file = data?.repository?.blob as Blob | undefined;
 

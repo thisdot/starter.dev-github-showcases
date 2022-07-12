@@ -6,9 +6,9 @@ import { UserService } from 'src/app/user/services/user.service';
 import { ProfileEffects } from './profile.effects';
 
 describe('ProfileEffects', () => {
-  let actions$: Observable<any>;
+  let actions$: Observable<unknown>;
   let effects: ProfileEffects;
-  let userServiceMock: any;
+  let userServiceMock: jasmine.SpyObj<UserService>;
 
   beforeEach(() => {
     userServiceMock = jasmine.createSpyObj('UserService', {

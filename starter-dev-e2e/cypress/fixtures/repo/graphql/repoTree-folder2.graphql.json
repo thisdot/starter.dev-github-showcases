@@ -1,0 +1,86 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "branches": {
+        "nodes": [
+          { "name": "vue3-ts-quasar/documentation", "__typename": "Ref" },
+          {
+            "name": "vue3-ts-quasar/feat/get-profile-info",
+            "__typename": "Ref"
+          },
+          { "name": "vue3-ts-quasar/feat/get-user-gists", "__typename": "Ref" },
+          {
+            "name": "vue3-ts-quasar/feat/get-user-top-repositories",
+            "__typename": "Ref"
+          },
+          {
+            "name": "vue3-ts-quasar/refactoring/aggregator-cleanup",
+            "__typename": "Ref"
+          }
+        ],
+        "__typename": "RefConnection"
+      },
+      "tree": {
+        "entries": [
+          {
+            "name": "app",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/app",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "assets",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/assets",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "environments",
+            "type": "tree",
+            "path": "angular-apollo-tailwind/src/environments",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "favicon.ico",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/favicon.ico",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "index.html",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/index.html",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "main.ts",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/main.ts",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "polyfills.ts",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/polyfills.ts",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "styles.css",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/styles.css",
+            "__typename": "TreeEntry"
+          },
+          {
+            "name": "test.ts",
+            "type": "blob",
+            "path": "angular-apollo-tailwind/src/test.ts",
+            "__typename": "TreeEntry"
+          }
+        ],
+        "__typename": "Tree"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

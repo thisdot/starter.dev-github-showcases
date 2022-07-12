@@ -10,7 +10,7 @@ function OrgList({ organizations }: OrgListProps) {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Organizations</h2>
-      <div className={styles.list}>
+      <div data-testid="profile page orgs" className={styles.list}>
         {organizations.map(({ avatarUrl, login }) => (
           <div key={login} className={styles.listItem}>
             <Image src={avatarUrl} alt="Organization" layout="fill" />

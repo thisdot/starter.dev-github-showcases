@@ -1,5 +1,5 @@
 import type { ExplorerItem } from './types';
-import { Link } from 'remix';
+import { Link } from '@remix-run/react';
 import { removeLastPathPart } from '../../lib/pathUtils';
 import { FolderIcon } from '@heroicons/react/solid';
 import { DocumentIcon } from '@heroicons/react/outline';

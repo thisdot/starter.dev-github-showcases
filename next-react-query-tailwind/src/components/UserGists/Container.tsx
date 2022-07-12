@@ -8,7 +8,7 @@ interface ContainerProps {
 function Container({ children }: ContainerProps) {
   return (
     <div className={styles.container}>
-      <h3 className="font-semibold">Gists</h3>
+      <h3 data-testid="show gists list" className="font-semibold">Gists</h3>
       {children}
     </div>
   );

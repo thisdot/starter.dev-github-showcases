@@ -1,0 +1,13 @@
+{
+  "data": {
+    "viewer": {
+      "id": "TESTUSERID",
+      "login": "TestUSer",
+      "topRepositories": {
+        "nodes": [],
+        "__typename": "RepositoryConnection"
+      },
+      "__typename": "User"
+    }
+  }
+}

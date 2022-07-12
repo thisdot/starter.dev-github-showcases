@@ -12,6 +12,10 @@ const FlexBox = css`
 export const DropdownContainer = styled.div`
   position: relative;
   margin-inline: 1rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 export const Details = styled.details`

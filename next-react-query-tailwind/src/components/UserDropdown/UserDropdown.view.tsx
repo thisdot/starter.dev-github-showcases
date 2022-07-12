@@ -25,7 +25,7 @@ function UserDropdownView({ image, username }: UserDropdownViewProps) {
       <Menu.Button role="button" className={styles.dropdownBtn}>
         <div className={styles.avatarContainer}>
           {image && (
-            <Image src={image} alt="Profile Photo" width={32} height={32} />
+            <Image data-testid="user avatar header" src={image} alt="Profile Photo" width={32} height={32} />
           )}
         </div>
         <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />

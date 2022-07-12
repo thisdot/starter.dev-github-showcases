@@ -1,5 +1,5 @@
 import type { TopRepo } from './types';
-import { Link } from 'remix';
+import { Link } from '@remix-run/react';
 import * as styles from './UserTopRepos.classNames';
 import RepoMeta from '../RepoMeta/RepoMeta';
 import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';

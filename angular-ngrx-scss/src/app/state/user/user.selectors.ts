@@ -13,3 +13,13 @@ export const selectUserLoginName = createSelector(
   selectUserState,
   (state: UserState) => state.username,
 );
+
+export const selectGists = createSelector(
+  selectUserState,
+  (state: UserState) => state.gists,
+);
+
+export const selectTopRepos = createSelector(
+  selectUserState,
+  (state: UserState) => state.topRepos,
+);

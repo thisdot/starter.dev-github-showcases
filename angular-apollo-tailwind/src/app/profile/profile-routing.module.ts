@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { ProfileReposListComponent } from './profile-repos-list/profile-repos-list.component';
+import { ProfileReposViewComponent } from './profile-repos-view';
 import { ProfileComponent } from './profile.component';
 
 const routes: Route[] = [
@@ -10,7 +10,7 @@ const routes: Route[] = [
     children: [
       {
         path: '',
-        component: ProfileReposListComponent,
+        component: ProfileReposViewComponent,
       },
       {
         path: 'repositories',

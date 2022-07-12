@@ -15,7 +15,12 @@ function RepoNavigation() {
       {crumbs.length > 0 && (
         <div className={styles.crumbs}>
           <Link href={`/${owner}/${name}`}>
-            <a className={styles.rootLink}>{name}</a>
+            <a
+              data-testid={`file explorer nav root ${name}`}
+              className={styles.rootLink}
+            >
+              {name}
+            </a>
           </Link>
           <span className={styles.separator}>/</span>
           {crumbs.map((crumb, i) => {
@@ -28,11 +33,21 @@ function RepoNavigation() {
             return (
               <>
                 {isLast ? (
-                  <span className={styles.crumbEnd}>{crumb}</span>
+                  <span
+                    data-testid={`file explorer nav end ${crumb}`}
+                    className={styles.crumbEnd}
+                  >
+                    {crumb}
+                  </span>
                 ) : (
                   <>
                     <Link href={`/${href}`}>
-                      <a className={styles.crumbLink}>{crumb}</a>
+                      <a
+                        data-testid={`file explorer nav crumb ${crumb}`}
+                        className={styles.crumbLink}
+                      >
+                        {crumb}
+                      </a>
                     </Link>
                     <span className={styles.separator}>/</span>
                   </>

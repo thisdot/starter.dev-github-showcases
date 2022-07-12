@@ -13,7 +13,7 @@ const Template: Story<ComponentProps<typeof RepoReadMe>> = (args) => (
 
 export const NoReadMe = Template.bind({});
 NoReadMe.args = {
-  readme: ''
+  readme: '',
 };
 
 export const HasReadMe = Template.bind({});
@@ -47,5 +47,5 @@ HasReadMe.args = {
   #### Authenticating with GitHub
 
   This app uses an OAuth flow to authenticate with GitHub and use their API. You will need to create an OAuth GitHub app and use the provided client and secret IDs in
-  .env. While developing locally, you will need to tunnel your webserver so that webhooks are available.`
+  .env. While developing locally, you will need to tunnel your webserver so that webhooks are available.`,
 };

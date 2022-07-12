@@ -1,4 +1,4 @@
-import type { TabItem }  from '../TabNavigation/types';
+import type { TabItem } from '../TabNavigation/types';
 import { CodeIcon, InformationCircleIcon } from '@heroicons/react/outline';
 import { PullRequestIcon } from '../Icons';
 

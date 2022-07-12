@@ -1,0 +1,46 @@
+<div class="grid grid-cols-12 gap-x-4">
+  <div
+    data-testid="profile repo list heading"
+    class="col-span-12 md:col-span-7"
+  >
+    <h3 class="mb-2">
+      <a
+        [routerLink]="item.routePath"
+        routerLinkActive="router-link-active"
+        class="text-xl text-blue-600 font-semibold hover:underline mr-3"
+        data-testid="repository name"
+        >{{ item.name }}</a
+      >
+      <sd-privacy-badge
+        [isPrivate]="item.isPrivate"
+        class="relative bottom-0.5"
+      ></sd-privacy-badge>
+    </h3>
+    <div
+      class="text-gray-600 text-sm max-w-prose"
+      data-testid="repository description"
+    >
+      {{ item.description }}
+    </div>
+    <app-repo-meta
+      [language]="item.language"
+      [languageColor]="item.languageColor!"
+      [forkCount]="item.forkCount"
+      [stargazerCount]="item.stargazerCount"
+      [updatedAt]="item.updatedAt"
+    ></app-repo-meta>
+  </div>
+  <div class="col-span-12 md:col-span-5 flex items-start justify-end">
+    <button
+      class="relative inline-flex items-center px-3 py-1 rounded-md bg-gray-100 bg-opacity-75 border border-gray-300 text-sm font-medium text-gray-800 hover:bg-gray-200 hover:bg-opacity-50"
+    >
+      <hero-icon
+        name="star"
+        type="outline"
+        class="w-4 h-4 text-gray-600 mr-1"
+        aria-hidden="true"
+      ></hero-icon>
+      Star
+    </button>
+  </div>
+</div>

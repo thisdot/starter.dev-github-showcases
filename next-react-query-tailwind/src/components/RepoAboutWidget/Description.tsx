@@ -4,9 +4,11 @@ interface DescriptionProps {
 
 function Description({ text }: DescriptionProps) {
   return text ? (
-    <span>{text}</span>
+    <span data-testid="repo file explorer description">{text}</span>
   ) : (
-    <span className="italic">No description, website, or topics provided.</span>
+    <span className="italic" data-testid="repo file explorer description">
+      No description, website, or topics provided.
+    </span>
   );
 }
 

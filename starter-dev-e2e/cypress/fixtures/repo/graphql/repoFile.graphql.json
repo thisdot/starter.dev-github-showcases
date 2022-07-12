@@ -1,0 +1,13 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "blob": {
+        "byteSize": 1234,
+        "text": "# This is a test README\n\nIt has three lines (including a newline)",
+        "__typename": "Blob"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

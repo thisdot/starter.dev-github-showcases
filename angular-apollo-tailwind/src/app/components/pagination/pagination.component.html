@@ -5,6 +5,7 @@
       [disabled]="!pageInfo?.hasPreviousPage"
       (click)="handlePreviousPageClick()"
       class="button"
+      data-testid="pagination button previous"
     >
       Previous
     </button>
@@ -13,6 +14,7 @@
       [disabled]="!pageInfo?.hasNextPage"
       (click)="handleNextPageClick()"
       class="button"
+      data-testid="pagination button next"
     >
       Next
     </button>

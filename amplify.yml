@@ -38,7 +38,7 @@ applications:
         paths:
           - node_modules/**/*
 
-  - appRoot: vue3-ts-quasar
+  - appRoot: vue3-apollo-quasar
     frontend:
       phases:
         preBuild:
@@ -105,6 +105,24 @@ applications:
             - npm run build
       artifacts:
         baseDirectory: dist/angular-ngrx-scss
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+
+  - appRoot: nuxt-pinia-tailwind
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - yarn install
+        build:
+          commands:
+            - yarn run build
+      artifacts:
+        baseDirectory: .nuxt
         files:
           - "**/*"
       cache:

@@ -11,3 +11,4 @@ export { StarIcon } from './StarIcon';
 export { ReadmeListIcon } from './ReadmeListIcon';
 export { DirectoryIcon } from './DirectoryIcon';
 export { FileIcon } from './FileIcon';
+export { TwitterIcon } from './TwitterIcon';

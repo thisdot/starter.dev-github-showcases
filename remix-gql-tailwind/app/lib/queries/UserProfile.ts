@@ -31,7 +31,6 @@ const USER_PROFILE_FRAGMENT = gql`
   }
 `;
 
-
 export const USER_PROFILE_QUERY = gql`
   ${USER_PROFILE_FRAGMENT}
 
@@ -41,7 +40,6 @@ export const USER_PROFILE_QUERY = gql`
     }
   }
 `;
-
 
 export const FULL_USER_PROFILE_QUERY = gql`
   ${USER_PROFILE_FRAGMENT}

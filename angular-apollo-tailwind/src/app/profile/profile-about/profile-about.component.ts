@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, tap } from 'rxjs';
 import { ProfileDetails, UserProfile, UserProfileGQL } from '../../gql';
 import { parseUserQuery } from './parse-profile';
 
@@ -12,6 +12,10 @@ export class ProfileAboutComponent implements OnInit {
   @Input() profile!: ProfileDetails;
 
   user$!: Observable<UserProfile | undefined>;
+  private _userError?: unknown;
+  get userError(): unknown | undefined {
+    return this._userError;
+  }
 
   constructor(private userProfileGQL: UserProfileGQL) {}
 
@@ -20,6 +24,13 @@ export class ProfileAboutComponent implements OnInit {
       .watch({
         username: this.profile.owner,
       })
-      .valueChanges.pipe(map((res) => parseUserQuery(res.data)));
+      .valueChanges.pipe(
+        tap(() => (this._userError = undefined)),
+        map((res) => parseUserQuery(res.data)),
+        catchError((err: unknown) => {
+          this._userError = err;
+          throw err;
+        }),
+      );
   }
 }

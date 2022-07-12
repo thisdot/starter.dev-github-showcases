@@ -2,9 +2,11 @@ export const container = 'border-b border-gray-200';
 
 export const nav = '-mb-px flex';
 
-export const tab = 'inline-flex items-center p-4 border-b-2 font-medium text-sm';
+export const tab =
+  'inline-flex items-center p-4 border-b-2 font-medium text-sm';
 
-export const tabInactive = 'border-transparent text-gray-600 hover:border-gray-300';
+export const tabInactive =
+  'border-transparent text-gray-600 hover:border-gray-300';
 
 export const tabActive = 'border-yellow-500 text-gray-900 font-semibold';
 

@@ -1,0 +1,251 @@
+{
+  "data": {
+    "user": {
+      "id": "TESTUSERID",
+      "repositories": {
+        "nodes": [
+          {
+            "id": "MDEwOlJlcG9zaXRvcnkyNTIzNzczMDM=",
+            "name": "javascript-marathon-vue-js",
+            "description": "Repository used to support the Javascript marathon videos on Vue JS",
+            "stargazerCount": 6,
+            "forkCount": 7,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "xxxx",
+              "color": "#f1e05a",
+              "name": "JavaScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-02-07T10:39:32Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "MDEwOlJlcG9zaXRvcnkyMTE4MTMxNjQ=",
+            "name": "angular-enterprise-tutorial",
+            "description": "angular-enterprise-tutorial",
+            "stargazerCount": 5,
+            "forkCount": 6,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UyODc=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-05-29T16:16:05Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOGRjsSg",
+            "name": "starter.dev",
+            "description": null,
+            "stargazerCount": 4,
+            "forkCount": 5,
+            "isArchived": false,
+            "isFork": true,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UxNDA=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-06-08T18:38:43Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOGd0nuw",
+            "name": "starter.dev-github-showcases",
+            "description": "A collection of GitHub clone implementations.",
+            "stargazerCount": 3,
+            "forkCount": 4,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UxNDA=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-02-18T01:10:11Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOGRodQQ",
+            "name": "framework.dev",
+            "description": "A set of websites that act as collections of popular libraries and learning content for the web ecosystem.",
+            "stargazerCount": 2,
+            "forkCount": 3,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UxNDA=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-05-18T04:16:54Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOHKfVxA",
+            "name": "sentry",
+            "description": "Sentry is cross-platform application monitoring, with a focus on error reporting.",
+            "stargazerCount": 1,
+            "forkCount": 2,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2U0ODM=",
+              "color": "#3572a5",
+              "name": "Python",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-04-12T20:14:54Z",
+            "__typename": "Repository"
+          }
+        ],
+        "pageInfo": {
+          "endCursor": "2YNHY4MMwoDMx0yM1oDOyoDMwQFNy0SOw0SMyAjM5KpOyYnOy92cyV3Y",
+          "startCursor": "z9hAc4MMwoDMx0SM0ozN0ojMwQ1My0yMw0iMyAjM5KpOyYnOy92cyV3Y",
+          "hasNextPage": false,
+          "hasPreviousPage": false,
+          "__typename": "PageInfo"
+        },
+        "__typename": "RepositoryConnection"
+      },
+      "__typename": "User"
+    },
+    "owner": {
+      "repositories": {
+        "nodes": [
+          {
+            "id": "MDEwOlJlcG9zaXRvcnkyNTIzNzczMDM=",
+            "name": "javascript-marathon-vue-js",
+            "description": "Repository used to support the Javascript marathon videos on Vue JS",
+            "stargazerCount": 6,
+            "forkCount": 7,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "xxxx",
+              "color": "#f1e05a",
+              "name": "JavaScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-02-07T10:39:32Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "MDEwOlJlcG9zaXRvcnkyMTE4MTMxNjQ=",
+            "name": "angular-enterprise-tutorial",
+            "description": "angular-enterprise-tutorial",
+            "stargazerCount": 5,
+            "forkCount": 6,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UyODc=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-05-29T16:16:05Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOGRjsSg",
+            "name": "starter.dev",
+            "description": null,
+            "stargazerCount": 4,
+            "forkCount": 5,
+            "isArchived": false,
+            "isFork": true,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UxNDA=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-06-08T18:38:43Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOGd0nuw",
+            "name": "starter.dev-github-showcases",
+            "description": "A collection of GitHub clone implementations.",
+            "stargazerCount": 3,
+            "forkCount": 4,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UxNDA=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-02-18T01:10:11Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOGRodQQ",
+            "name": "framework.dev",
+            "description": "A set of websites that act as collections of popular libraries and learning content for the web ecosystem.",
+            "stargazerCount": 2,
+            "forkCount": 3,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UxNDA=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-05-18T04:16:54Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOHKfVxA",
+            "name": "sentry",
+            "description": "Sentry is cross-platform application monitoring, with a focus on error reporting.",
+            "stargazerCount": 1,
+            "forkCount": 2,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2U0ODM=",
+              "color": "#3572a5",
+              "name": "Python",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-04-12T20:14:54Z",
+            "__typename": "Repository"
+          }
+        ],
+        "pageInfo": {
+          "endCursor": "2YNHY4MMwoDMx0yM1oDOyoDMwQFNy0SOw0SMyAjM5KpOyYnOy92cyV3Y",
+          "startCursor": "z9hAc4MMwoDMx0SM0ozN0ojMwQ1My0yMw0iMyAjM5KpOyYnOy92cyV3Y",
+          "hasNextPage": false,
+          "hasPreviousPage": false,
+          "__typename": "PageInfo"
+        },
+        "__typename": "RepositoryConnection"
+      },
+      "__typename": "User"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <div *ngFor="let pullRequest of pullRequests">
-  <div class="pull-request" data-testid="pull-request">
+  <div class="pull-request" data-testid="pr">
     <div class="pull-requests-list-container">
       <div class="flex">
         <ng-container *ngIf="pullRequest.closed; else open">
@@ -20,9 +20,12 @@
         </ng-template>
         <div>
           <div class="content">
-            <span class="title">{{ pullRequest.title }}</span>
+            <span class="title" data-testid="pull request title">{{
+              pullRequest.title
+            }}</span>
             <span class="inline" *ngFor="let label of pullRequest.labels">
               <span
+                data-testid="pull request label name"
                 [style.background-color]="colorMap(label.color)"
                 class="label"
               >
@@ -30,15 +33,24 @@
               </span>
             </span>
           </div>
-          <div class="meta">
+          <div class="meta" data-testid="pull request number">
             #{{ pullRequest.number }}
-            <span *ngIf="pullRequest.closed === false">
+            <span
+              data-testid="pull request created at"
+              *ngIf="pullRequest.closed === false"
+            >
               opened
               {{ pullRequest.createdAt | formatDistance: baseDate }}
               ago
             </span>
-            by <span class="link">{{ pullRequest.login }}</span>
-            <span *ngIf="pullRequest.closedAt">
+            by
+            <span class="link" data-testid="pull request created by">{{
+              pullRequest.login
+            }}</span>
+            <span
+              data-testid="pull request closed at"
+              *ngIf="pullRequest.closedAt"
+            >
               was closed
               {{ pullRequest.closedAt | formatDistance: baseDate }}
               ago
@@ -53,7 +65,7 @@
           class="commentsIcon"
           aria-hidden="true"
         ></hero-icon>
-        <span>
+        <span data-testid="pull request comment count">
           {{ pullRequest.commentCount }}
         </span>
       </div>

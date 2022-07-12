@@ -1,6 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { loadUserToken } from '.';
-import { loadUserTokenFailure, loadUserTokenSuccess } from './auth.actions';
+import {
+  loadUserTokenFailure,
+  loadUserTokenSuccess,
+  removeUserToken,
+} from './auth.actions';
 import { AuthState } from './auth.state';
 
 export const initialState: AuthState = {
@@ -21,6 +25,11 @@ const reducer = createReducer(
     loading: false,
   })),
   on(loadUserTokenFailure, (state) => ({
+    ...state,
+    isAuthenticated: false,
+    loading: false,
+  })),
+  on(removeUserToken, (state) => ({
     ...state,
     isAuthenticated: false,
     loading: false,

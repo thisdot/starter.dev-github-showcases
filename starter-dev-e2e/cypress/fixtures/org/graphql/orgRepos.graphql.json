@@ -1,0 +1,386 @@
+{
+  "data": {
+    "organization": {
+      "id": "MDEyOk9yZ2FuaXphdGlvbjIyODM5Mzk2",
+      "repositories": {
+        "nodes": [
+          {
+            "id": "R_kgDOGRjsSg",
+            "name": "starter.dev",
+            "description": "A test description for starter.dev",
+            "stargazerCount": 123,
+            "forkCount": 456,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UyODc=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-06-07T17:13:49Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "MDEwOlJlcG9zaXRvcnkzODk2NjMxODk=",
+            "name": "ngrx-training",
+            "description": null,
+            "stargazerCount": 26,
+            "forkCount": 25,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UyODc=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-06-07T17:10:16Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "MDEwOlJlcG9zaXRvcnk5Nzc1MjA4MQ==",
+            "name": "tech-community-slacks",
+            "description": "Here is a list of all the tech community slacks!",
+            "stargazerCount": 914,
+            "forkCount": 260,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": null,
+            "isPrivate": false,
+            "updatedAt": "2022-06-02T21:48:59Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "MDEwOlJlcG9zaXRvcnkyMTE4MTMxNjQ=",
+            "name": "angular-enterprise-tutorial",
+            "description": "angular-enterprise-tutorial",
+            "stargazerCount": 1,
+            "forkCount": 0,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UyODc=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-05-29T16:16:05Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "MDEwOlJlcG9zaXRvcnkzNjA0OTMyNjU=",
+            "name": "open-source",
+            "description": "Repository for open source packages",
+            "stargazerCount": 24,
+            "forkCount": 4,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UyODc=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-05-27T16:34:15Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOGRodQQ",
+            "name": "framework.dev",
+            "description": "A set of websites that act as collections of popular libraries and learning content for the web ecosystem.",
+            "stargazerCount": 28,
+            "forkCount": 7,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UyODc=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-05-18T04:16:54Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOGd0nuw",
+            "name": "starter.dev-github-showcases",
+            "description": "A collection of GitHub clone implementations.",
+            "stargazerCount": 30,
+            "forkCount": 5,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UyODc=",
+              "color": "#2b7489",
+              "name": "TypeScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-05-17T08:34:09Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "MDEwOlJlcG9zaXRvcnkyMTE0MjE3Mjg=",
+            "name": "node-enterprise-setup-shell",
+            "description": "This is the shell project to get you started with NodeJS in Enterprise",
+            "stargazerCount": 12,
+            "forkCount": 11,
+            "isArchived": false,
+            "isFork": false,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UxNDA=",
+              "color": "#f1e05a",
+              "name": "JavaScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-04-22T05:45:27Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOHKfVxA",
+            "name": "sentry",
+            "description": "Sentry is cross-platform application monitoring, with a focus on error reporting.",
+            "stargazerCount": 0,
+            "forkCount": 0,
+            "isArchived": false,
+            "isFork": true,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UxNDU=",
+              "color": "#3572A5",
+              "name": "Python",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-04-12T20:14:54Z",
+            "__typename": "Repository"
+          },
+          {
+            "id": "R_kgDOHH4cjQ",
+            "name": "blockchain-developer-hub",
+            "description": "Dive into blockchain and smart contract development.",
+            "stargazerCount": 0,
+            "forkCount": 1,
+            "isArchived": false,
+            "isFork": true,
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UxNDA=",
+              "color": "#f1e05a",
+              "name": "JavaScript",
+              "__typename": "Language"
+            },
+            "isPrivate": false,
+            "updatedAt": "2022-04-05T06:57:11Z",
+            "__typename": "Repository"
+          }
+        ],
+        "pageInfo": {
+          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNC0wNVQwMTo1NzoxMS0wNTowMM4cfhyN",
+          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNi0wN1QxMjoxMzo0OS0wNTowMM4ZGOxK",
+          "hasNextPage": true,
+          "hasPreviousPage": false,
+          "__typename": "PageInfo"
+        },
+        "__typename": "RepositoryConnection"
+      },
+      "__typename": "Organization"
+    },
+    "owner": {
+        "id": "MDEyOk9yZ2FuaXphdGlvbjIyODM5Mzk2",
+        "repositories": {
+          "nodes": [
+            {
+              "id": "R_kgDOGRjsSg",
+              "name": "starter.dev",
+              "description": "A test description for starter.dev",
+              "stargazerCount": 123,
+              "forkCount": 456,
+              "isArchived": false,
+              "isFork": false,
+              "primaryLanguage": {
+                "id": "MDg6TGFuZ3VhZ2UyODc=",
+                "color": "#2b7489",
+                "name": "TypeScript",
+                "__typename": "Language"
+              },
+              "isPrivate": false,
+              "updatedAt": "2022-06-07T17:13:49Z",
+              "__typename": "Repository"
+            },
+            {
+              "id": "MDEwOlJlcG9zaXRvcnkzODk2NjMxODk=",
+              "name": "ngrx-training",
+              "description": null,
+              "stargazerCount": 26,
+              "forkCount": 25,
+              "isArchived": false,
+              "isFork": false,
+              "primaryLanguage": {
+                "id": "MDg6TGFuZ3VhZ2UyODc=",
+                "color": "#2b7489",
+                "name": "TypeScript",
+                "__typename": "Language"
+              },
+              "isPrivate": false,
+              "updatedAt": "2022-06-07T17:10:16Z",
+              "__typename": "Repository"
+            },
+            {
+              "id": "MDEwOlJlcG9zaXRvcnk5Nzc1MjA4MQ==",
+              "name": "tech-community-slacks",
+              "description": "Here is a list of all the tech community slacks!",
+              "stargazerCount": 914,
+              "forkCount": 260,
+              "isArchived": false,
+              "isFork": false,
+              "primaryLanguage": null,
+              "isPrivate": false,
+              "updatedAt": "2022-06-02T21:48:59Z",
+              "__typename": "Repository"
+            },
+            {
+              "id": "MDEwOlJlcG9zaXRvcnkyMTE4MTMxNjQ=",
+              "name": "angular-enterprise-tutorial",
+              "description": "angular-enterprise-tutorial",
+              "stargazerCount": 1,
+              "forkCount": 0,
+              "isArchived": false,
+              "isFork": false,
+              "primaryLanguage": {
+                "id": "MDg6TGFuZ3VhZ2UyODc=",
+                "color": "#2b7489",
+                "name": "TypeScript",
+                "__typename": "Language"
+              },
+              "isPrivate": false,
+              "updatedAt": "2022-05-29T16:16:05Z",
+              "__typename": "Repository"
+            },
+            {
+              "id": "MDEwOlJlcG9zaXRvcnkzNjA0OTMyNjU=",
+              "name": "open-source",
+              "description": "Repository for open source packages",
+              "stargazerCount": 24,
+              "forkCount": 4,
+              "isArchived": false,
+              "isFork": false,
+              "primaryLanguage": {
+                "id": "MDg6TGFuZ3VhZ2UyODc=",
+                "color": "#2b7489",
+                "name": "TypeScript",
+                "__typename": "Language"
+              },
+              "isPrivate": false,
+              "updatedAt": "2022-05-27T16:34:15Z",
+              "__typename": "Repository"
+            },
+            {
+              "id": "R_kgDOGRodQQ",
+              "name": "framework.dev",
+              "description": "A set of websites that act as collections of popular libraries and learning content for the web ecosystem.",
+              "stargazerCount": 28,
+              "forkCount": 7,
+              "isArchived": false,
+              "isFork": false,
+              "primaryLanguage": {
+                "id": "MDg6TGFuZ3VhZ2UyODc=",
+                "color": "#2b7489",
+                "name": "TypeScript",
+                "__typename": "Language"
+              },
+              "isPrivate": false,
+              "updatedAt": "2022-05-18T04:16:54Z",
+              "__typename": "Repository"
+            },
+            {
+              "id": "R_kgDOGd0nuw",
+              "name": "starter.dev-github-showcases",
+              "description": "A collection of GitHub clone implementations.",
+              "stargazerCount": 30,
+              "forkCount": 5,
+              "isArchived": false,
+              "isFork": false,
+              "primaryLanguage": {
+                "id": "MDg6TGFuZ3VhZ2UyODc=",
+                "color": "#2b7489",
+                "name": "TypeScript",
+                "__typename": "Language"
+              },
+              "isPrivate": false,
+              "updatedAt": "2022-05-17T08:34:09Z",
+              "__typename": "Repository"
+            },
+            {
+              "id": "MDEwOlJlcG9zaXRvcnkyMTE0MjE3Mjg=",
+              "name": "node-enterprise-setup-shell",
+              "description": "This is the shell project to get you started with NodeJS in Enterprise",
+              "stargazerCount": 12,
+              "forkCount": 11,
+              "isArchived": false,
+              "isFork": false,
+              "primaryLanguage": {
+                "id": "MDg6TGFuZ3VhZ2UxNDA=",
+                "color": "#f1e05a",
+                "name": "JavaScript",
+                "__typename": "Language"
+              },
+              "isPrivate": false,
+              "updatedAt": "2022-04-22T05:45:27Z",
+              "__typename": "Repository"
+            },
+            {
+              "id": "R_kgDOHKfVxA",
+              "name": "sentry",
+              "description": "Sentry is cross-platform application monitoring, with a focus on error reporting.",
+              "stargazerCount": 0,
+              "forkCount": 0,
+              "isArchived": false,
+              "isFork": true,
+              "primaryLanguage": {
+                "id": "MDg6TGFuZ3VhZ2UxNDU=",
+                "color": "#3572A5",
+                "name": "Python",
+                "__typename": "Language"
+              },
+              "isPrivate": false,
+              "updatedAt": "2022-04-12T20:14:54Z",
+              "__typename": "Repository"
+            },
+            {
+              "id": "R_kgDOHH4cjQ",
+              "name": "blockchain-developer-hub",
+              "description": "Dive into blockchain and smart contract development.",
+              "stargazerCount": 0,
+              "forkCount": 1,
+              "isArchived": false,
+              "isFork": true,
+              "primaryLanguage": {
+                "id": "MDg6TGFuZ3VhZ2UxNDA=",
+                "color": "#f1e05a",
+                "name": "JavaScript",
+                "__typename": "Language"
+              },
+              "isPrivate": false,
+              "updatedAt": "2022-04-05T06:57:11Z",
+              "__typename": "Repository"
+            }
+          ],
+          "pageInfo": {
+            "endCursor": "Y3Vyc29yOnYyOpK5MjAxNy0wMy0zMFQxNjoxMjo0MC0wNTowMM4Ec7r5",
+            "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNi0wOVQxNDoyNTo1OC0wNTowMM4XOcnV",
+            "hasNextPage": false,
+            "hasPreviousPage": false,
+            "__typename": "PageInfo"
+          },
+          "__typename": "RepositoryConnection"
+        },
+        "__typename": "Organization"
+      }
+  }
+}

@@ -42,7 +42,12 @@ function FileExplorerView({
               )}
             </div>
             <Link href={`${basePath}/${item.type}/${branch}/${item.path}`}>
-              <a className={styles.link}>{item.name}</a>
+              <a
+                data-testid={`file explorer list ${item.name}`}
+                className={styles.link}
+              >
+                {item.name}
+              </a>
             </Link>
           </div>
         </div>

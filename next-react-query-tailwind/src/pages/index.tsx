@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         </aside>
         <main className="max-w-screen-lg w-full">
           <div className="p-12">
-            <h2 className="text-lg font-medium mb-4">Top Repositories</h2>
+            <h2 data-testid="show repo list" className="text-lg font-medium mb-4">Top Repositories</h2>
             <UserTopRepos />
           </div>
         </main>

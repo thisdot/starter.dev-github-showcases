@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-pull-request-empty',
   template: `<div
     class="pull-request-empty-container"
-    data-testid="pull-request-empty"
+    data-testid="issues-empty"
   >
     <hero-icon
       name="minus-circle"

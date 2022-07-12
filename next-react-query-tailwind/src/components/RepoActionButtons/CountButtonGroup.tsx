@@ -18,12 +18,20 @@ const formatCountString = (count: number) => {
 
 function CountButtonGroup({ children, count = 0 }: CountButtonGroupProps) {
   let countText = formatCountString(count);
+  let buttonText = children
+    ?.toString()
+    .replace('[object Object],', '')
+    .toLowerCase();
   return (
     <span className={styles.btnGroup}>
       <button type="button" className={styles.btnMain}>
         {children}
       </button>
-      <button type="button" className={styles.btnSide}>
+      <button
+        data-testid={`repo ${buttonText} count`}
+        type="button"
+        className={styles.btnSide}
+      >
         {countText}
       </button>
     </span>

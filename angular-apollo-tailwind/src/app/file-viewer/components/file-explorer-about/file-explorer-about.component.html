@@ -1,7 +1,7 @@
 <div class="container">
   <h3 class="heading">About</h3>
   <div class="description">
-    <ng-container *ngIf="isRepoLoading; else loading">
+    <ng-container *ngIf="isLoaded; else loading">
       <app-description [description]="description"></app-description>
       <app-home-page-url [homepageUrl]="homepageUrl"></app-home-page-url>
       <app-topics [topics]="topics"></app-topics>

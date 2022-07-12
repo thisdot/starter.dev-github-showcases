@@ -1,0 +1,66 @@
+{
+  "user": {
+    "profile": {
+      "provider": "github",
+      "displayName": "TestUser",
+      "id": "12345678",
+      "name": {
+        "familyName": "Test",
+        "givenName": "Test",
+        "middleName": "Test"
+      },
+      "emails": [{ "value": null }],
+      "photos": [
+        { "value": "https://avatars.githubusercontent.com/u/22839396?v=4" }
+      ],
+      "_json": {
+        "login": "TestUser",
+        "id": 12345678,
+        "node_id": "TESTNODEID",
+        "avatar_url": "https://avatars.githubusercontent.com/u/22839396?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/TestUserNotARealUser",
+        "html_url": "https://github.com/TestUserNotARealUser",
+        "followers_url": "https://api.github.com/users/TestUserNotARealUser/followers",
+        "following_url": "https://api.github.com/users/TestUserNotARealUser/following{/other_user}",
+        "gists_url": "https://api.github.com/users/TestUserNotARealUser/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/TestUserNotARealUser/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/TestUserNotARealUser/subscriptions",
+        "organizations_url": "https://api.github.com/users/TestUserNotARealUser/orgs",
+        "repos_url": "https://api.github.com/users/TestUserNotARealUser/repos",
+        "events_url": "https://api.github.com/users/TestUserNotARealUser/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/TestUserNotARealUser/received_events",
+        "type": "User",
+        "site_admin": false,
+        "name": "Test User",
+        "company": null,
+        "blog": "",
+        "location": null,
+        "email": null,
+        "hireable": null,
+        "bio": null,
+        "twitter_username": null,
+        "public_repos": 1,
+        "public_gists": 0,
+        "followers": 1,
+        "following": 0,
+        "created_at": "2019-08-11T20:25:15Z",
+        "updated_at": "2022-05-03T18:39:55Z",
+        "private_gists": 0,
+        "total_private_repos": 2,
+        "owned_private_repos": 2,
+        "disk_usage": 5561,
+        "collaborators": 0,
+        "two_factor_authentication": false,
+        "plan": {
+          "name": "free",
+          "space": 976562499,
+          "collaborators": 0,
+          "private_repos": 10000
+        }
+      }
+    },
+    "accessToken": "gho_not-a-real-token",
+    "extraParams": { "tokenType": "bearer" }
+  }
+}

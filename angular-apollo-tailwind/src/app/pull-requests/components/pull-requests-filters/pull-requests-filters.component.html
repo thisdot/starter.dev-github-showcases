@@ -1,7 +1,7 @@
 <div class="filters-container">
   <div class="flex space-x-4">
     <button
-      data-testid="openPullRequestsButton"
+      data-testid="openIssuesButton"
       class="flex text-sm"
       [ngClass]="getOpenStyle()"
       (click)="handleOpenPullRequestClick()"
@@ -15,7 +15,7 @@
       {{ openCount }} Open
     </button>
     <button
-      data-testid="closedPullRequestsButton"
+      data-testid="closedIssuesButton"
       class="flex text-sm"
       [ngClass]="getClosedStyle()"
       (click)="handleClosePullRequestClick()"

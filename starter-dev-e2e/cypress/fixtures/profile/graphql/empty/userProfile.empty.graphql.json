@@ -1,0 +1,32 @@
+{
+  "data": {
+    "user": {
+      "id": "MDEyOk9yZ2FuaXphdGlvbjIyODM5Mzk2",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/22839396?v=4",
+      "bio": null,
+      "company": null,
+      "followers": {
+        "totalCount": 0,
+        "__typename": "FollowerConnection"
+      },
+      "following": {
+        "totalCount": 0,
+        "__typename": "FollowingConnection"
+      },
+      "location": null,
+      "login": "thisdot",
+      "name": "thisdotlabs",
+      "organizations": {
+        "nodes": [],
+        "__typename": "OrganizationConnection"
+      },
+      "starredRepositories": {
+        "totalCount": 0,
+        "__typename": "StarredRepositoryConnection"
+      },
+      "twitterUsername": null,
+      "websiteUrl": null,
+      "__typename": "User"
+    }
+  }
+}

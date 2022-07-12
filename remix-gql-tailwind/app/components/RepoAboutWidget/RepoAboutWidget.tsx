@@ -12,11 +12,11 @@ function RepoAboutWidget() {
     <div className={styles.container}>
       <h3 className={styles.heading}>About</h3>
       <div className={styles.description}>
-          <div className="space-y-4">
-            <Description text={data?.description} />
-            <HomepageUrl homepageUrl={data?.homepageUrl} />
-            <Topics topics={data?.topics} />
-          </div>
+        <div className="space-y-4">
+          <Description text={data?.description} />
+          <HomepageUrl homepageUrl={data?.homepageUrl} />
+          <Topics topics={data?.topics} />
+        </div>
       </div>
       <div>
         <a className={styles.readmeLink}>

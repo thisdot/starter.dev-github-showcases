@@ -1,6 +1,11 @@
 <ul class="filter-dropdown-container">
   <div>
-    <button role="button" class="menuButton" (click)="toggleMenu()">
+    <button
+      role="button"
+      class="menuButton"
+      (click)="toggleMenu()"
+      [attr.data-testid]="'filters dropdown ' + name"
+    >
       {{ name }}
       <hero-icon
         name="chevron-down"
@@ -12,7 +17,10 @@
   </div>
 
   <div @openClose *ngIf="isOpen" class="menu" data-testid="filterDropdown">
-    <div *ngIf="description">
+    <div
+      *ngIf="description"
+      [attr.data-testid]="'filters dropdown ' + name + ' items'"
+    >
       <div class="menuHeader">
         <div class="description">{{ description }}</div>
         <button class="flex" (click)="handleClearFilterClick()">
@@ -29,6 +37,7 @@
           type="button"
           class="itemButton"
           (click)="handleSetFilterClick(item.value)"
+          [attr.data-testid]="'filters dropdown item ' + item.label"
         >
           <hero-icon
             *ngIf="item.value === current"

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, map, tap } from 'rxjs/operators';
+import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { loadUserToken, loadUserTokenFailure, loadUserTokenSuccess } from '.';
 import { AuthService } from '../../auth/services/auth.service';
-import { startSignIn } from './auth.actions';
+import { removeUserToken, signOut, startSignIn } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -22,6 +23,18 @@ export class AuthEffects {
   );
 
   /**
+   *   Start the sign out process for the user
+   */
+  signOut$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(signOut),
+      tap(() => this.authService.signOut()),
+      tap(() => this.router.navigate(['/signin'])),
+      switchMap(() => of(removeUserToken({ isAuthenticated: false }))),
+    );
+  });
+
+  /**
    * Saves the resulting access_token for the user
    */
   saveUserToken$ = createEffect(() => {
@@ -36,5 +49,9 @@ export class AuthEffects {
     );
   });
 
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 }

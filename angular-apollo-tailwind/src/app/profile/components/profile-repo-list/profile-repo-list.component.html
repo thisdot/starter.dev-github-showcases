@@ -1,0 +1,15 @@
+<div data-testid="repository list">
+  <div
+    class="py-8 border-b first-of-type:border-t border-gray-200"
+    data-testid="repository list item"
+    *ngFor="let item of displayItems"
+  >
+    <app-profile-repo-list-item
+      *ngIf="item; else skeleton"
+      [item]="item"
+    ></app-profile-repo-list-item>
+    <ng-template #skeleton>
+      <app-profile-repo-list-item-skeleton></app-profile-repo-list-item-skeleton>
+    </ng-template>
+  </div>
+</div>

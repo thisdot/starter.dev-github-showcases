@@ -1,13 +1,14 @@
 <ng-container *ngIf="org$ | async as org">
   <div content>
     <a class="text-black" routerLink="./">
-      <h1 class="flex text-2xl font-bold">
+      <h1 class="flex text-2xl font-bold" data-testid="org about name">
         <img
           class="mr-1"
           [src]="org.avatarUrl"
           [alt]="org.name + 'logo'"
           width="30"
           height="30"
+          data-testid="org about avatar"
         />
         {{ org.name }}
       </h1>

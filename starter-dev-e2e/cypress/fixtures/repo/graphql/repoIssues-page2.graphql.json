@@ -1,0 +1,946 @@
+{
+  "data": {
+    "repository": {
+      "id": "R_kgDOGd0nuw",
+      "milestones": {
+        "nodes": [
+          {
+            "id": "MI_kwDOGd0nu84AcmnC",
+            "closed": false,
+            "description": "",
+            "number": 1,
+            "title": "Angular Apollo Tailwind",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84AdGEs",
+            "closed": false,
+            "description": null,
+            "number": 2,
+            "title": "Angular + NgRx + SCSS",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84AdSA7",
+            "closed": false,
+            "description": "",
+            "number": 3,
+            "title": "Vue + TS + Quasar",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6g-",
+            "closed": false,
+            "description": "",
+            "number": 4,
+            "title": "Vite + Apollo + Vanilla Extract",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6g_",
+            "closed": false,
+            "description": "",
+            "number": 5,
+            "title": "Remix + Tailwind",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6hW",
+            "closed": false,
+            "description": "",
+            "number": 6,
+            "title": "CRA + RxJS + Styled Components",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Ad6hX",
+            "closed": false,
+            "description": "",
+            "number": 7,
+            "title": "Next.js + React Query + Tailwind",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84AeYuV",
+            "closed": false,
+            "description": "",
+            "number": 8,
+            "title": "E2E Cypress Testing",
+            "__typename": "Milestone"
+          },
+          {
+            "id": "MI_kwDOGd0nu84Aep35",
+            "closed": false,
+            "description": "",
+            "number": 9,
+            "title": "Nuxt.js + Pinia + Tailwind",
+            "__typename": "Milestone"
+          }
+        ],
+        "pageInfo": {
+          "startCursor": "Y3Vyc29yOnYyOpHOAHJpwg==",
+          "endCursor": "Y3Vyc29yOnYyOpHOAHqd-Q==",
+          "hasNextPage": false,
+          "hasPreviousPage": false,
+          "__typename": "PageInfo"
+        },
+        "totalCount": 9,
+        "__typename": "MilestoneConnection"
+      },
+      "closedIssues": {
+        "pageInfo": {
+          "hasNextPage": true,
+          "endCursor": "closedIssues-page2-endCursor",
+          "hasPreviousPage": true,
+          "startCursor": "closedIssues-page2-startCursor",
+          "__typename": "PageInfo"
+        },
+        "totalCount": 95,
+        "nodes": [
+          {
+            "id": "I_kwDOGd0nu85ETmox",
+            "author": { "login": "morgnism", "__typename": "User" },
+            "comments": {
+              "totalCount": 2,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-16T22:34:41Z",
+            "title": "[Angular + Apollo + Tailwind] Fix Tailwind Prod Bundle Size",
+            "number": 160,
+            "createdAt": "2022-02-21T16:11:02Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85ETgVX",
+            "author": { "login": "morgnism", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-11T21:07:25Z",
+            "title": "[Angular + Apollo + Tailwind] Fix Tailwind Pseudo Class Issues",
+            "number": 158,
+            "createdAt": "2022-02-21T15:47:46Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85ETgU4",
+            "author": { "login": "morgnism", "__typename": "User" },
+            "comments": {
+              "totalCount": 3,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-16T17:05:12Z",
+            "title": "[Angular + Apollo + Tailwind] Convert Redirect Component to Auth Guard",
+            "number": 157,
+            "createdAt": "2022-02-21T15:47:44Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85ETgR9",
+            "author": { "login": "morgnism", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-16T22:29:05Z",
+            "title": "[Angular + Apollo + Tailwind] Fix Input Drilling",
+            "number": 156,
+            "createdAt": "2022-02-21T15:47:32Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85ETeNO",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-10T21:19:19Z",
+            "title": "[CRA+sdjs] title",
+            "number": 155,
+            "createdAt": "2022-02-21T15:39:05Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIgsi",
+            "author": { "login": "jdwilkin4", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-04-29T16:05:22Z",
+            "title": "[next-apollo-tailwind] Markdown not rendering links and images properly in READMEs for Demo App",
+            "number": 233,
+            "createdAt": "2022-02-17T22:55:36Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIgnX",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-13T20:08:39Z",
+            "title": "[CRA-RXJS-SC] Get Gists from GitHub API",
+            "number": 230,
+            "createdAt": "2022-02-17T09:07:46Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIglf",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-05-05T20:49:45Z",
+            "title": "[CRA-RXJS-SC] Setup App deployment",
+            "number": 229,
+            "createdAt": "2022-02-17T09:02:12Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D-all",
+            "author": { "login": "dustinsgoodman", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [
+                { "color": "d73a4a", "name": "bug", "__typename": "Label" }
+              ],
+              "totalCount": 1,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-04-05T16:24:12Z",
+            "title": "[starter-dev-backend] Fix CD deploys",
+            "number": 146,
+            "createdAt": "2022-02-16T18:57:28Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8aHI",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-28T14:11:26Z",
+            "title": "[VUE + TS + Quasar] Create login page and OAuth functionality",
+            "number": 145,
+            "createdAt": "2022-02-16T11:48:27Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8ZIi",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-28T14:19:02Z",
+            "title": "[VUE + TS + Quasar] Setup app deployment for new project",
+            "number": 144,
+            "createdAt": "2022-02-16T11:44:13Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8XOK",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-28T14:18:42Z",
+            "title": "[VUE + TS + Quasar] Setup CI for new project",
+            "number": 143,
+            "createdAt": "2022-02-16T11:35:59Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8Vok",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-06-13T09:45:13Z",
+            "title": "[VUE + TS + Quasar] Get Profile information from GitHub API",
+            "number": 137,
+            "createdAt": "2022-02-16T11:29:12Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8Vb-",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-06-03T16:24:58Z",
+            "title": "[VUE + TS + Quasar] Get Gists from GitHub API",
+            "number": 136,
+            "createdAt": "2022-02-16T11:28:23Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8VPO",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-11T06:26:57Z",
+            "title": "[VUE + TS + Quasar] Get Top repositories from GitHub API",
+            "number": 135,
+            "createdAt": "2022-02-16T11:27:35Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8Uzd",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:22:22Z",
+            "title": "[VUE + TS + Quasar] Setup organization page layout",
+            "number": 134,
+            "createdAt": "2022-02-16T11:25:50Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8UbA",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:22:19Z",
+            "title": "[VUE + TS + Quasar] Create profile page layout",
+            "number": 133,
+            "createdAt": "2022-02-16T11:24:16Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8ULO",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:22:17Z",
+            "title": "[VUE + TS + Quasar] Create component for search input and filter / sort buttons",
+            "number": 132,
+            "createdAt": "2022-02-16T11:23:18Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8Ql9",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:22:15Z",
+            "title": "[VUE + TS + Quasar] Create user profile card",
+            "number": 131,
+            "createdAt": "2022-02-16T11:09:20Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D3B-C",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:21:31Z",
+            "title": "[VUE + TS + Quasar] Create main page layout",
+            "number": 127,
+            "createdAt": "2022-02-15T10:38:01Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D291E",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:21:16Z",
+            "title": "[VUE + TS + Quasar]  Create repository card",
+            "number": 126,
+            "createdAt": "2022-02-15T10:24:26Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D29Xg",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:21:14Z",
+            "title": "[VUE + TS + Quasar]  Create gists panel",
+            "number": 125,
+            "createdAt": "2022-02-15T10:22:43Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D28ih",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:20:39Z",
+            "title": "[VUE + TS + Quasar]  Create navigation header",
+            "number": 124,
+            "createdAt": "2022-02-15T10:19:43Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85Dzhc-",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-02-24T11:21:11Z",
+            "title": "[Vue + TS + Quasar] Scaffold initial project setup",
+            "number": 123,
+            "createdAt": "2022-02-14T16:56:49Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85DYQnt",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": {
+              "nodes": [],
+              "totalCount": 0,
+              "__typename": "LabelConnection"
+            },
+            "closed": true,
+            "closedAt": "2022-03-11T23:58:41Z",
+            "title": "[Angular - NgRx - SCSS] Update Authentication setup to work with updated backend",
+            "number": 121,
+            "createdAt": "2022-02-10T16:35:52Z",
+            "__typename": "Issue"
+          }
+        ],
+        "__typename": "IssueConnection"
+      },
+      "openIssues": {
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "issues-page2-endCursor",
+          "hasPreviousPage": true,
+          "startCursor": "issues-page2-startCursor",
+          "__typename": "PageInfo"
+        },
+        "totalCount": 68,
+        "nodes": [
+          {
+            "id": "I_kwDOGd0nu85FJeY8",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create single repo issues tab view",
+            "number": 201,
+            "createdAt": "2022-03-04T22:42:37Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJeVr",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create issue / pull request cards",
+            "number": 200,
+            "createdAt": "2022-03-04T22:42:13Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJeSZ",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create single repo readme view",
+            "number": 199,
+            "createdAt": "2022-03-04T22:41:45Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJePu",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create single repo code tab view",
+            "number": 198,
+            "createdAt": "2022-03-04T22:41:21Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJeNQ",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create single repo view about section",
+            "number": 197,
+            "createdAt": "2022-03-04T22:40:58Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJeKB",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create single repo view sub header",
+            "number": 196,
+            "createdAt": "2022-03-04T22:40:29Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJeG7",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Implement search / filter / sort result text",
+            "number": 195,
+            "createdAt": "2022-03-04T22:40:06Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJeDY",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Implement sort functionality",
+            "number": 194,
+            "createdAt": "2022-03-04T22:39:36Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJd_B",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Implement language filter functionality",
+            "number": 193,
+            "createdAt": "2022-03-04T22:38:57Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJd7u",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Implement type filter functionality",
+            "number": 192,
+            "createdAt": "2022-03-04T22:38:31Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJd3f",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Implement search functionality",
+            "number": 191,
+            "createdAt": "2022-03-04T22:37:52Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJd0P",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Setup organization page layout",
+            "number": 190,
+            "createdAt": "2022-03-04T22:37:27Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdtV",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create component for search input and filter / sort buttons",
+            "number": 189,
+            "createdAt": "2022-03-04T22:36:51Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdpK",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create user profile card",
+            "number": 188,
+            "createdAt": "2022-03-04T22:36:22Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdkz",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create repository card",
+            "number": 187,
+            "createdAt": "2022-03-04T22:35:47Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdfY",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Create gists panel",
+            "number": 186,
+            "createdAt": "2022-03-04T22:35:12Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdbW",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Get pull request information from GitHub API",
+            "number": 185,
+            "createdAt": "2022-03-04T22:34:38Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdX_",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Get issue information from GitHub API",
+            "number": 184,
+            "createdAt": "2022-03-04T22:34:08Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdTF",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Get single repo information from GitHub API",
+            "number": 183,
+            "createdAt": "2022-03-04T22:33:26Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85FJdMf",
+            "author": { "login": "lindakatcodes", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[Angular - NgRx - SCSS] Get Organization repositories from GitHub API",
+            "number": 182,
+            "createdAt": "2022-03-04T22:32:31Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIgun",
+            "author": { "login": "jdwilkin4", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[CRA-RXJS-SC] Need to fix inaccuracies with the updated_at field for RxJS App",
+            "number": 234,
+            "createdAt": "2022-02-18T16:32:31Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIgqk",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[CRA-RXJS-SC]  Create single repo issues tab view",
+            "number": 232,
+            "createdAt": "2022-02-17T09:18:21Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85HIgpA",
+            "author": { "login": "ktrz", "__typename": "User" },
+            "comments": {
+              "totalCount": 1,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[CRA-RXJS-SC] Get Profile information from GitHub API",
+            "number": 231,
+            "createdAt": "2022-02-17T09:10:28Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8W04",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[VUE + TS + Quasar] Get pull request information from GitHub API",
+            "number": 142,
+            "createdAt": "2022-02-16T11:34:18Z",
+            "__typename": "Issue"
+          },
+          {
+            "id": "I_kwDOGd0nu85D8Wk3",
+            "author": { "login": "hdJerry", "__typename": "User" },
+            "comments": {
+              "totalCount": 0,
+              "__typename": "IssueCommentConnection"
+            },
+            "labels": { "nodes": [], "__typename": "LabelConnection" },
+            "closed": false,
+            "title": "[VUE + TS + Quasar] Get issue information from GitHub API",
+            "number": 141,
+            "createdAt": "2022-02-16T11:33:14Z",
+            "__typename": "Issue"
+          }
+        ],
+        "__typename": "IssueConnection"
+      },
+      "__typename": "Repository"
+    }
+  }
+}

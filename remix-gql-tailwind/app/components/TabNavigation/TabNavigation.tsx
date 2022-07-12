@@ -1,6 +1,6 @@
 import type { TabItem } from './types';
 import cn from 'classnames';
-import { Link } from 'remix';
+import { Link } from '@remix-run/react';
 import * as styles from './TabNavigation.classNames';
 
 interface TabNavigationProps {
@@ -18,8 +18,12 @@ function TabNavigation({
   pathname,
 }: TabNavigationProps) {
   const isCurrentTab = (pathName?: string) => {
-    const otherPaths = tabs.filter(({ path }) => path !== pathName).map(({ path }) => path);
-    return pathName !== '' ? pathname.includes(pathName!) : (otherPaths.every(path => !pathname.includes(path!)))
+    const otherPaths = tabs
+      .filter(({ path }) => path !== pathName)
+      .map(({ path }) => path);
+    return pathName !== ''
+      ? pathname.includes(pathName!)
+      : otherPaths.every((path) => !pathname.includes(path!));
   };
 
   return (
@@ -44,7 +48,7 @@ function TabNavigation({
               />
               <span>{title}</span>
               {typeof count === 'number' && (
-                <span className="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl">
+                <span className="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">
                   {count}
                 </span>
               )}

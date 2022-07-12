@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
+    "lint:styles": "npx stylelint \"{src,projects}/**/*.{css,less,sass,scss,sss}\"",
     "prestart": "yarn run config && yarn build:libs",
     "config": "node ./tools/set-env.js",
     "config:prod": "node ./tools/set-env.prod.js",
@@ -92,6 +93,8 @@
     "ng-packagr": "^13.0.0",
     "postcss": "^7",
     "prettier": "^2.5.1",
+    "stylelint": "^14.9.1",
+    "stylelint-config-standard": "^26.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "~4.4.3"
   },

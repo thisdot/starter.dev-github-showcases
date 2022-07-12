@@ -1,5 +1,6 @@
-import { json, useLoaderData, useOutletContext } from 'remix';
-import type { LoaderFunction } from 'remix';
+import type { LoaderFunction } from '@remix-run/node';
+import { json } from '@remix-run/node';
+import { useLoaderData, useOutletContext } from '@remix-run/react';
 import { auth } from '~/services/auth.server';
 import gqlClient from '~/lib/graphql-client';
 import { RepoContext, RepoProvider } from '~/context/RepoContext';
@@ -101,7 +102,7 @@ export default function Repository() {
   return (
     <RepoProvider value={context}>
       <RepoHeader />
-      <div className="max-w-screen-2xl mx-auto md:py-8 px-4">
+      <div className="mx-auto max-w-screen-2xl px-4 md:py-8">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-7 xl:col-span-9">
             <FileExplorerNav />

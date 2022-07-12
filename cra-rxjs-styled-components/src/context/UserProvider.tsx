@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { createContext, useContext, useState, useEffect } from 'react';
 import { fromFetchWithAuth } from '../hooks/auth/from-fetch-with-auth';
 import { GITHUB_URL_BASE } from '../constants/url.constants';
-import { tap } from 'rxjs';
+import { tap, forkJoin } from 'rxjs';
 
 export interface IUserContext {
   avatar_url: string;
@@ -34,8 +34,17 @@ export interface IUserContext {
   starred_url: string;
   subscriptions_url: string;
   type: string;
+  twitter_username: string;
   updated_at: string;
   url: string;
+  website_url?: string;
+  starredRepos: number;
+  organizations: IOrganization[];
+}
+
+export interface IOrganization {
+  login: string;
+  avatar_url: string;
 }
 
 interface UserProviderProps {
@@ -55,10 +64,20 @@ export function UserProvider({ children }: UserProviderProps) {
     });
 
   useEffect(() => {
-    const subscription = request(`${GITHUB_URL_BASE}/user`)
+    const subscription = forkJoin([
+      request(`${GITHUB_URL_BASE}/user`),
+      request(`${GITHUB_URL_BASE}/user/orgs`),
+      request(`${GITHUB_URL_BASE}/user/starred`),
+    ])
       .pipe(
         tap((val) => {
-          setUser(val as IUserContext);
+          if (val) {
+          }
+          setUser({
+            ...val[0],
+            organizations: val[1],
+            starredRepos: val[2].length,
+          });
         })
       )
       .subscribe();

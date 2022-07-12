@@ -5,3 +5,4 @@ tailwind.config.js
 dist
 dist-ssr
 *.local
+server/

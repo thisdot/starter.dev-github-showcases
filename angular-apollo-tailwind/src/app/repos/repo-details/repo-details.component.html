@@ -1,15 +1,20 @@
-<ng-container *ngIf="headerStats$ | async as stats">
-  <app-repo-header
-    [owner]="stats.owner"
-    [name]="stats.name"
-    [login]="stats.login"
-    [isPrivate]="stats.isPrivate!"
-    [watchers]="stats.watchers!"
-    [stargazers]="stats.stargazers!"
-    [forks]="stats.forks!"
-    [issuesCount]="stats.openIssueCount!"
-    [pullsCount]="stats.openPullRequestCount!"
-  ></app-repo-header>
+<ng-container>
+  <ng-container *ngIf="headerStats$ | async as stats; else repoHeaderSkeleton">
+    <app-repo-header
+      [owner]="stats.owner"
+      [name]="stats.name"
+      [login]="stats.login"
+      [isPrivate]="stats.isPrivate!"
+      [watchers]="stats.watchers!"
+      [stargazers]="stats.stargazers!"
+      [forks]="stats.forks!"
+      [issuesCount]="stats.openIssueCount!"
+      [pullsCount]="stats.openPullRequestCount!"
+    ></app-repo-header>
+  </ng-container>
+  <ng-template #repoHeaderSkeleton>
+    <app-repo-header-skeleton></app-repo-header-skeleton>
+  </ng-template>
 
   <router-outlet></router-outlet>
 </ng-container>

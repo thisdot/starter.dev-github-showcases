@@ -38,7 +38,7 @@ export default function Dropdown() {
       {openDropdown ? (
         <UserDropdownMenuItems>
           <UserDropdownMenuItemsPaddingDiv>
-            <UserDropdownMenuItemAnchorTag href="">
+            <UserDropdownMenuItemAnchorTag href={`/${user?.login}`}>
               Profile
             </UserDropdownMenuItemAnchorTag>
             <UserDropdownMenuItemSignoutBtn onClick={signOutHandler}>
