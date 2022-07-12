@@ -101,10 +101,10 @@ const filteredRepos = computed(() => {
   }
   return repos.value.reduce((acc, repo) => {
     if (
-      searchData.value.search !== '' &&
+      searchData?.value?.search !== '' &&
       !repo.name
         .toLocaleLowerCase()
-        .includes(searchData.value.search.toLocaleLowerCase())
+        .includes(searchData?.value?.search.toLocaleLowerCase())
     ) {
       return acc;
     }
