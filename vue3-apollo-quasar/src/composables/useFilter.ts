@@ -7,8 +7,10 @@ export function useFilter(repos, state) {
     }
     return repos.value.reduce((acc, repo) => {
       if (
-        state.value !== '' &&
-        !repo.name.toLocaleLowerCase().includes(state.value.toLocaleLowerCase())
+        state.search !== '' &&
+        !repo.name
+          .toLocaleLowerCase()
+          .includes(state.search.toLocaleLowerCase())
       ) {
         return acc;
       }

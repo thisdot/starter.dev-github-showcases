@@ -1,7 +1,7 @@
 <template>
   <div class="search_container">
     <form>
-      <AppInput v-model="search" placeholder="Find a repository..." />
+      <AppInput v-model="searchRef" placeholder="Find a repository..." />
     </form>
   </div>
 </template>
@@ -9,15 +9,15 @@
 <script lang="ts">
 import { defineComponent, ref, watchEffect } from 'vue';
 import { AppInput } from '../';
-// import { store } from '@/globals/search';
+import { search } from '@/globals/search';
 
 export default defineComponent({
   name: 'SearchInput',
   components: { AppInput },
   setup() {
-    const search = ref('');
-    // store.increment(search);
-    watchEffect(() => console.log(search.value));
+    const searchRef = ref('');
+
+    watchEffect(() => search(searchRef.value));
 
     return { search };
   },

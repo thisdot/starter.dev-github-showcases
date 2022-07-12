@@ -16,9 +16,10 @@
           <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div class="tab-contents col">
-          <SearchFilter v-model="search" />
-
+        <div v-if="!loadingSearch" class="tab-contents col">
+          <SearchFilter />
+          {{ searchData }}
+          test
           <q-tab-panels v-model="tab">
             <q-tab-panel name="overview">
               <div class="text-h6">Overview</div>
@@ -63,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineProps, ref } from 'vue';
+import { computed, defineComponent, defineProps, ref } from 'vue';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
@@ -76,7 +77,8 @@ import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
 import { useFilter } from '@/composables';
-// import { store } from '@/globals/search';
+import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
 
 const getUserRepos = useUserRepos();
 const props = defineProps({
@@ -86,11 +88,36 @@ const tab = ref('');
 function changeTab(val) {
   tab.value = val;
 }
-const search = ref('');
+
+const SEARCH_QUERY = gql`
+  query Search {
+    search @client
+  }
+`;
+
+// get search value, not updating
+const { result: searchData, loading: loadingSearch } = useQuery(SEARCH_QUERY);
 
 const user = useUserStore();
 const { repos, loading } = getUserRepos(props.username, false);
-const filteredRepos = useFilter(repos, search);
+
+const filteredRepos = computed(() => {
+  if (repos.value.length < 1) {
+    return repos;
+  }
+  return repos.value.reduce((acc, repo) => {
+    if (
+      searchData.value.search !== '' &&
+      !repo.name
+        .toLocaleLowerCase()
+        .includes(searchData.value.search.toLocaleLowerCase())
+    ) {
+      return acc;
+    }
+
+    return [...acc, repo];
+  }, []);
+});
 </script>
 
 <style lang="scss" scoped>

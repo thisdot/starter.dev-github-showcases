@@ -1,6 +1,5 @@
-import { ref } from 'vue';
-
-export const search = ref('');
+import { makeVar } from '@apollo/client';
+export const search = makeVar('');
 
 // store.js
 // import { reactive } from 'vue';
