@@ -33,8 +33,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../../App.css';
-
 .linkContainer {
   max-width: 100%;
   overflow: hidden;
@@ -48,7 +46,7 @@ export default defineComponent({
   height: 1rem;
   color: rgba(55, 65, 81, 1);
   margin-right: 0.5rem;
-  margin-top: -0.125rem;
+  margin-top: 0.25rem;
 }
 
 .link {

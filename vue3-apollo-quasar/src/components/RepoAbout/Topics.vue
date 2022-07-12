@@ -1,5 +1,5 @@
 <template>
-  <div v-if="topics" class="topicWrap">
+  <div v-if="topics" class="wrapper">
     <span v-for="topic in topics" :key="topic" class="topic">
       {{ topic }}
     </span>
@@ -18,29 +18,31 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../../App.css';
-
-.topicWrap {
-  margin-top: 0.25rem;
+.wrapper {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .topic {
+  //   display: inline-block;
+  background-color: rgb(221, 244, 255);
+  color: rgb(9, 105, 218);
+  margin: 0 0.375rem 0.333em 0;
+  cursor: pointer;
   display: inline-block;
-  background-color: rgba(219, 234, 254, 1);
-  color: rgba(37, 99, 235, 1);
+  padding: 0 7px;
   font-size: 0.75rem;
-  line-height: 1rem;
   font-weight: 500;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  border-radius: 0.75rem;
-  margin-right: 0.375rem;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 2rem;
+  padding: 0 0.625rem 0 0.625rem;
+  padding-right: 10px;
+  padding-left: 10px;
+  line-height: 1.375rem;
   transition-property: background-color, border-color, color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-  cursor: pointer;
 }
 
 .topic:hover {
