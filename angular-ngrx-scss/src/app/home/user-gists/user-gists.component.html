@@ -1,13 +1,13 @@
 <div class="container">
   <h3>Gists</h3>
   <ng-container *ngIf="userGists$ | async as gists">
-      <ul *ngIf="gists?.length; else noGists">
-        <li *ngFor="let gist of gists">
-          <a class="link" [href]="gist.url" target="_blank">
-            {{ gist.fileName }}</a
-          >
-        </li>
-      </ul>
+    <ul *ngIf="gists?.length; else noGists">
+      <li *ngFor="let gist of gists">
+        <a class="link" [href]="gist.url" target="_blank">
+          {{ gist.fileName }}</a
+        >
+      </li>
+    </ul>
   </ng-container>
 </div>
 
