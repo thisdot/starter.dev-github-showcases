@@ -27,7 +27,7 @@
 aside {
   background: variables.$white;
   padding: 2rem;
-  @media (max-width: Variables.$md) {
+  @media (max-width: variables.$md) {
     order: 2;
   }
 }
