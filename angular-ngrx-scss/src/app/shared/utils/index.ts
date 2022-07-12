@@ -15,11 +15,11 @@ const MINUTE = 60,
 export function relativeTimeFmt(dt: string): string {
   const localizedDt = new Date(dt);
   const secondsAgo = Math.round(
-    (+new Date().getTime() - localizedDt.getTime()) / 1000,
+    (new Date().getTime() - localizedDt.getTime()) / 1000,
   );
 
-  let divisor = null;
-  let unit = null;
+  let divisor = 1;
+  let unit = '?';
 
   if (secondsAgo < MINUTE) {
     return secondsAgo + ' seconds ago';
@@ -33,10 +33,8 @@ export function relativeTimeFmt(dt: string): string {
     [divisor, unit] = [WEEK, 'week'];
   } else if (secondsAgo < YEAR) {
     [divisor, unit] = [MONTH, 'month'];
-  } else if (secondsAgo > YEAR) {
+  } else if (secondsAgo >= YEAR) {
     [divisor, unit] = [YEAR, 'year'];
-  } else {
-    throw new Error(`Unhandled case: ${secondsAgo} seconds`);
   }
 
   const count = Math.floor(secondsAgo / divisor);

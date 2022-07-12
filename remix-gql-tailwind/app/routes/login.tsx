@@ -1,6 +1,6 @@
-import { Form, json, useLoaderData } from 'remix';
-
-import type { LoaderFunction } from 'remix';
+import type { LoaderFunction } from '@remix-run/node';
+import { json } from '@remix-run/node';
+import { Form, useLoaderData } from '@remix-run/react';
 import { auth } from '~/services/auth.server';
 import { sessionStorage } from '~/services/session.server';
 type LoaderData = {
@@ -20,10 +20,10 @@ export default function Screen() {
   const { error } = useLoaderData<LoaderData>();
 
   return (
-    <section className="h-screen w-full flex items-center justify-center bg-black">
+    <section className="flex h-screen w-full items-center justify-center bg-black">
       <Form method="post" action="/auth/github">
         {error && <div>{error.message}</div>}
-        <button className="border-2 border-zinc-700 text-zinc-100 px-20 py-2 rounded-md hover:bg-zinc-100 hover:border-zinc-100 hover:text-zinc-900 transition-all">
+        <button className="rounded-md border-2 border-zinc-700 px-20 py-2 text-zinc-100 transition-all hover:border-zinc-100 hover:bg-zinc-100 hover:text-zinc-900">
           Sign In with GitHub
         </button>
       </Form>

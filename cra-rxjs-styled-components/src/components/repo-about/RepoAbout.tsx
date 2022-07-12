@@ -15,12 +15,12 @@ import {
 } from './RepoAbout.styles';
 
 type Props = {
-  description?: string;
-  websiteLink?: string;
+  description?: string | null;
+  homepageUrl?: string | null;
   topics?: string[];
 };
 
-export default function RepoAbout({ description, websiteLink, topics }: Props) {
+export default function RepoAbout({ description, homepageUrl, topics }: Props) {
   return (
     <AboutContainer>
       <Header>About</Header>
@@ -33,11 +33,11 @@ export default function RepoAbout({ description, websiteLink, topics }: Props) {
           </DefaultRepoText>
         )}
 
-        {websiteLink ? (
+        {homepageUrl ? (
           <LinkContainer>
             <LinkIcon />
-            <WebsiteLink href={websiteLink} rel="noopener" target="_blank">
-              {websiteLink}
+            <WebsiteLink href={homepageUrl} rel="noopener" target="_blank">
+              {homepageUrl}
             </WebsiteLink>
           </LinkContainer>
         ) : null}

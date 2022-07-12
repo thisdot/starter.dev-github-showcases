@@ -6,10 +6,14 @@ import App from './App';
 import AuthGuard from './components/AuthGuard';
 import reportWebVitals from './reportWebVitals';
 import Redirect from './routes/redirect';
-import RepoDetails from './routes/repo-details';
 import SignIn from './routes/sign-in';
-import TopRepos from './routes/top-repos';
-import RepoPullRequest from './routes/repository-pull-request';
+import TopRepos from './routes/user-top-repos';
+import RepoPullRequest from './routes/repo/repository-pull-request';
+import RepoIssues from './routes/repo/repository-issues';
+import Repo from './routes/repo';
+import UserRepos from './components/user-repos';
+import RepoBranchRoot from './routes/repo/repository-code';
+import RepoBranchTreePath from './routes/repo/repository-code/repository-tree/repository-tree';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,23 +28,28 @@ ReactDOM.render(
               </AuthGuard>
             }
           />
-          <Route
-            path="/:username/:repo/*"
-            element={
-              <AuthGuard>
-                <RepoDetails />
-              </AuthGuard>
-            }
-          />
         </Route>
         <Route
-          path="pulls"
+          path="/orgs/:username"
           element={
             <AuthGuard>
-              <RepoPullRequest />
+              <UserRepos isOrg />
             </AuthGuard>
           }
         />
+        <Route
+          path="/:username/:repo"
+          element={
+            <AuthGuard>
+              <Repo />
+            </AuthGuard>
+          }
+        >
+          <Route path="" element={<RepoBranchRoot />} />
+          <Route path="tree/:branch/*" element={<RepoBranchTreePath />} />
+          <Route path="issues" element={<RepoIssues />} />
+          <Route path="pull-requests" element={<RepoPullRequest />} />
+        </Route>
         <Route path="signin" element={<SignIn />} />
         <Route path="redirect" element={<Redirect />} />
       </Routes>

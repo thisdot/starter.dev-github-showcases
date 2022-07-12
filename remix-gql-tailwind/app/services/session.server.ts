@@ -1,4 +1,5 @@
-import { createCookieSessionStorage, Session } from 'remix';
+import { createCookieSessionStorage, Session } from '@remix-run/node';
+import { auth } from './auth.server';
 
 export let sessionStorage = createCookieSessionStorage({
   cookie: {
@@ -6,13 +7,23 @@ export let sessionStorage = createCookieSessionStorage({
     httpOnly: true,
     path: '/',
     sameSite: 'lax',
-    secrets: ['s3cr3t'], // TODO: replace this with an actual secret
+    secrets: [process.env.SESSION_SECRET], // TODO: replace this with an actual secret
     secure: process.env.NODE_ENV === 'production',
   },
 });
 
-export function getSession(request: Request): Promise<Session> {
-  return sessionStorage.getSession(request.headers.get('Cookie'));
+export async function getSession(request: Request) {
+  const session = await sessionStorage.getSession(
+    request.headers.get('Cookie')
+  );
+  return {
+    session,
+    getUser: async () => {
+      const token = session.get(auth.sessionKey);
+      if (!token) return null;
+      return token;
+    },
+  };
 }
 
 export let { commitSession, destroySession } = sessionStorage;

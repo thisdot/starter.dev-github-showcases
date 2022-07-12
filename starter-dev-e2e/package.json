@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "cy:run": "cypress run --config-file $CYPRESS_CONFIG",
+    "start": "START_COMMAND=`node -p \"require('./cypress/configs/script-config.json').$SCRIPT_ENTRY.startCommand\"` && cd ../$SHOWCASE_APP && $START_COMMAND",
+    "test": "CYPRESS_CONFIG=./cypress/configs/$SHOWCASE_APP.config.ts SCRIPT_ENTRY=`node -p \"'$SHOWCASE_APP'.replaceAll('-', '_');\"` RESPONSE_URL=`node -p \"require('./cypress/configs/script-config.json').$SCRIPT_ENTRY.responseUrl\"` && CYPRESS_CONFIG=$CYPRESS_CONFIG SCRIPT_ENTRY=$SCRIPT_ENTRY start-server-and-test start $RESPONSE_URL cy:run",
+    "test:watch": "yarn run cypress open --config-file cypress/configs/$SHOWCASE_APP.config.ts"
+  },
+  "devDependencies": {
+    "cypress": "^10.2.0"
+  },
+  "dependencies": {
+    "cookie-signature": "1.0.6",
+    "jose": "1.28.1",
+    "start-server-and-test": "^1.14.0",
+    "typescript": "^4.6.4"
+  }
+}

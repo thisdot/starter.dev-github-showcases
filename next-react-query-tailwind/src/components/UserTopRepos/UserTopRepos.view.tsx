@@ -25,10 +25,19 @@ function UserTopReposView({ repos, login }: UserTopReposViewProps) {
           updatedAt,
           isPrivate,
         }) => (
-          <div key={id} className={styles.item}>
+          <div
+            key={id}
+            className={styles.item}
+            data-testid={`user top repos ${name} list item`}
+          >
             <h3 className="mb-2">
               <Link href={`/${owner}/${name}`}>
-                <a className={styles.headingLink}>{name}</a>
+                <a
+                  data-testid={`user top repos ${name} link`}
+                  className={styles.headingLink}
+                >
+                  {name}
+                </a>
               </Link>
               <PrivacyBadge
                 isPrivate={isPrivate}

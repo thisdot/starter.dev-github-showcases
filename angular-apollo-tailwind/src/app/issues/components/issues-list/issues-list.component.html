@@ -20,9 +20,12 @@
         </ng-template>
         <div>
           <div class="content">
-            <span class="title">{{ issue.title }}</span>
+            <span data-testid="issue title" class="title">{{
+              issue.title
+            }}</span>
             <span class="inline" *ngFor="let label of issue.labels">
               <span
+                data-testid="issue label name"
                 [style.background-color]="colorMap(label.color)"
                 class="label"
               >
@@ -30,15 +33,18 @@
               </span>
             </span>
           </div>
-          <div class="meta">
+          <div class="meta" data-testid="issue number">
             #{{ issue.number }}
-            <span *ngIf="issue.closed === false">
+            <span data-testid="issue created at" *ngIf="issue.closed === false">
               opened
               {{ issue.createdAt | formatDistance: baseDate }}
               ago
             </span>
-            by <span class="link">{{ issue.login }}</span>
-            <span *ngIf="issue.closedAt">
+            by
+            <span class="link" data-testid="issue created by">{{
+              issue.login
+            }}</span>
+            <span data-testid="issue closed at" *ngIf="issue.closedAt">
               was closed
               {{ issue.closedAt | formatDistance: baseDate }}
               ago
@@ -53,7 +59,7 @@
           class="commentsIcon"
           aria-hidden="true"
         ></hero-icon>
-        <span>
+        <span data-testid="issue comment count">
           {{ issue.commentCount }}
         </span>
       </div>

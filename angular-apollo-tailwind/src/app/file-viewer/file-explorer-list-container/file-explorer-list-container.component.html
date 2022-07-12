@@ -1,30 +1,23 @@
-<ng-container *ngIf="repoTree$ | async as repoTree; else loading">
-  <div>
-    <div class="file-explorer-list-container">
-      <a *ngIf="path" [routerLink]="getBackLink(path)" class="cellBack">
-        <span class="text-blue-600">..</span>
-      </a>
-      <app-file-explorer-list
-        [owner]="owner"
-        [name]="name"
-        [branch]="branch"
-        [items]="repoTree.items"
-      ></app-file-explorer-list>
-    </div>
-    <app-repo-read-me
-      *ngIf="repoTree.readme"
+<ng-container *ngIf="!repoTreeLoadError; else repoTreeLoadErrorTmpl">
+  <div class="file-explorer-list-container">
+    <a *ngIf="path" [routerLink]="getBackLink(path)" class="cellBack">
+      <span class="text-blue-600">..</span>
+    </a>
+    <app-file-explorer-list
       [owner]="owner"
       [name]="name"
-      [path]="path"
-      [fileName]="repoTree.readme"
-    ></app-repo-read-me>
+      [branch]="branch"
+      [items]="(repoTree$ | async)?.items"
+    ></app-file-explorer-list>
   </div>
+  <app-repo-read-me
+    [owner]="owner"
+    [name]="name"
+    [path]="path"
+    [fileName]="(repoTree$ | async)?.readme"
+  ></app-repo-read-me>
 </ng-container>
 
-<ng-template #loading>
-  <div class="file-explorer-list-container py-2">
-    <sd-loading-bullet-list></sd-loading-bullet-list>
-  </div>
+<ng-template #repoTreeLoadErrorTmpl>
+  <sd-error-block>An error occured while loading files.</sd-error-block>
 </ng-template>
-
-<!-- <p error>Repository path not found</p> -->

@@ -4,7 +4,11 @@ import IssuesContainer from '../IssuesContainer/IssuesContainer';
 import IssuesEmpty from '../IssuesEmpty/IssuesEmpty';
 import RepoIssuesView from './RepoIssues.view';
 import { Label } from './types';
-import { IssueState, IssueType, useIssueFilters } from '../IssueFilters/useIssueFilters';
+import {
+  IssueState,
+  IssueType,
+  useIssueFilters,
+} from '../IssueFilters/useIssueFilters';
 import IssueFilters from '../IssueFilters/IssueFilters';
 import Pagination from '../IssueFilters/Pagination';
 
@@ -18,23 +22,28 @@ interface RepoIssuesProps {
     issues: any;
     totalCount: any;
     pageInfo: any;
-};
-milestones: any;
-labels: Label[]
+  };
+  milestones: any;
+  labels: Label[];
 }
 
 export const stateFilter = () => {
   const filters = useIssueFilters();
-  return filters
-}
+  return filters;
+};
 
-
-function RepoIssues({ openIssues, closedIssues, milestones, labels }: RepoIssuesProps ) {
+function RepoIssues({
+  openIssues,
+  closedIssues,
+  milestones,
+  labels,
+}: RepoIssuesProps) {
   const { pathname } = useRepo();
 
   const filters = useIssueFilters();
 
-  const activeIssues = filters.state.state === IssueState.Open ? openIssues : closedIssues;
+  const activeIssues =
+    filters.state.state === IssueState.Open ? openIssues : closedIssues;
 
   const filtersElement = (
     <IssueFilters
@@ -60,7 +69,8 @@ function RepoIssues({ openIssues, closedIssues, milestones, labels }: RepoIssues
           <IssuesEmpty Icon={MinusCircleIcon} />
         )}
       </IssuesContainer>
-      {(activeIssues.pageInfo.hasNextPage || activeIssues.pageInfo?.hasPreviousPage) && (
+      {(activeIssues.pageInfo.hasNextPage ||
+        activeIssues.pageInfo?.hasPreviousPage) && (
         <Pagination
           pageInfo={activeIssues.pageInfo}
           changePage={filters.changePage}

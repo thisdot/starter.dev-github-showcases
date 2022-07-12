@@ -22,9 +22,9 @@ function ProfilePage({ userProfileData, owner, pathname }: ProfilePageProps) {
           </div>
         </div>
       </div>
-      <div className="max-w-screen-2xl mx-auto py-8 px-4">
+      <div className="mx-auto max-w-screen-2xl py-8 px-4">
         <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 md:col-span-4 xl:col-span-3 relative md:-top-20 z-20">
+          <div className="relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
             <UserProfileView {...userProfileData} />
           </div>
           <div className="col-span-12 md:col-span-8 xl:col-span-9">

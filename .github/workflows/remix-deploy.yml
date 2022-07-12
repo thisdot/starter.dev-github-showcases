@@ -1,0 +1,43 @@
+name: Remix GQL Tailwind
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "remix-gql-tailwind/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "remix-gql-tailwind/**"
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: remix-gql-tailwind
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: 📥 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: 🏗 Build
+        run: yarn run build
+
+      - name: 🛠 Install Arc
+        run: yarn global add @architect/architect
+
+      - name: 🚀 Deploy
+        run: arc deploy --production
+        env:
+          CI: true
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

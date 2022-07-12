@@ -1,6 +1,6 @@
 <div class="flex mt-4 text-xs text-gray-600 space-x-4">
   <ng-container *ngIf="language">
-    <div>
+    <div data-testid="repository language">
       <span
         [ngStyle]="{
           backgroundColor: languageColor || '#ccc'
@@ -14,7 +14,10 @@
   <ng-container *ngIf="stargazerCount > 0 || forkCount > 0">
     <div class="flex space-x-4">
       <ng-container *ngIf="stargazerCount > 0">
-        <span class="hover:cursor-pointer hover:text-blue-600">
+        <span
+          class="hover:cursor-pointer hover:text-blue-600"
+          data-testid="repository star count"
+        >
           <hero-icon
             name="star"
             type="outline"
@@ -24,7 +27,10 @@
         </span>
       </ng-container>
       <ng-container *ngIf="forkCount > 0">
-        <span class="flex hover:cursor-pointer hover:text-blue-600">
+        <span
+          class="flex hover:cursor-pointer hover:text-blue-600"
+          data-testid="repository fork count"
+        >
           <sd-git-branch-icon
             class="w-4 h-4 inline mb-0.5"
           ></sd-git-branch-icon>
@@ -33,7 +39,7 @@
       </ng-container>
     </div>
   </ng-container>
-  <div>
+  <div data-testid="repository updated at">
     Updated {{ updatedAt | formatDistance: baseDate:{ addSuffix: true } }}
   </div>
 </div>
