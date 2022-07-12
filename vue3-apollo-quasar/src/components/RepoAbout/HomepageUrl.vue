@@ -1,6 +1,5 @@
 <template>
   <div v-if="homepageUrl" class="linkContainer">
-    <!-- <LinkIcon class="linkIcon" /> -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="linkIcon"
