@@ -1,7 +1,12 @@
 import type { Language } from 'prism-react-renderer';
 import FileCode from './FileCode';
 import FileText from './FileText';
-import { FileHeader, FileHeaderBytes, FileHeaderLines, FileViewContainer } from './FileViewer.styles';
+import {
+  FileHeader,
+  FileHeaderBytes,
+  FileHeaderLines,
+  FileViewContainer,
+} from './FileViewer.styles';
 
 interface FileViewerViewProps {
   text: string;

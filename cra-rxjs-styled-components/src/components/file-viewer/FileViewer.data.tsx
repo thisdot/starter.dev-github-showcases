@@ -6,13 +6,7 @@ import { useRepoBlob } from '../../hooks/repo-blob/use-repo-blob';
 
 function FileViewer() {
   const { path, isRepoLoading } = useRepo();
-  const {
-    code,
-    file,
-    error,
-    isLoading,
-  } = useRepoBlob();
-
+  const { code, file, error, isLoading } = useRepoBlob();
 
   // wait on base repo data to display file
   if (isRepoLoading) {
@@ -33,7 +27,7 @@ function FileViewer() {
     const err = error ? error : new Error('Repository path not found');
     throw err;
   }
-  
+
   const extension = path.split('.').pop();
   const language = mapExtensionToLanguage(extension);
   const text = code ? code : '';

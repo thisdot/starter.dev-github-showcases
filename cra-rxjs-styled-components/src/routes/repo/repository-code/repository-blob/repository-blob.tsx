@@ -1,7 +1,7 @@
 import FileViewer from '../../../../components/file-viewer';
 import {
   RepoContainer,
-  RepoCenterWrapper
+  RepoCenterWrapper,
 } from '../../../../components/layouts/RepoLayoutPage';
 
 export default function RepoBranchBlobPath() {

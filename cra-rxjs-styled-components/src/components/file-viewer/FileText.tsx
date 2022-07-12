@@ -1,4 +1,4 @@
-import { CodeBlock, LineNumber, LineText, TableRow } from "./FileViewer.styles";
+import { CodeBlock, LineNumber, LineText, TableRow } from './FileViewer.styles';
 
 interface FileTextProps {
   text: string;
@@ -7,7 +7,7 @@ interface FileTextProps {
 function FileText({ text }: FileTextProps) {
   const lines = text.split('\n');
   return (
-    <CodeBlock data-testid="text-block" >
+    <CodeBlock data-testid="text-block">
       {lines.map((line, i) => (
         <TableRow key={i}>
           <LineNumber>{i + 1}</LineNumber>

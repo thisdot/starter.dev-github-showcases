@@ -17,7 +17,7 @@ type FileData = {
   size: number;
   type: string;
   url: string;
-}
+};
 
 export function useRepoBlob() {
   const { owner, name, branch, path } = useRepo();
@@ -54,18 +54,16 @@ export function useRepoBlob() {
             setIsLoading(false);
           }
         }),
-        catchError(
-            (error): Observable<any> => {
-                // we expect 404, it's not a failure for us.
-                if (error.status === 404) {
-                    return of(null); // or any other stream like of('') etc.
-                }
-    
-                // other errors we don't know how to handle and throw them further.
-                setError(error);
-                return throwError(() => new Error(error));
-            },
-        ),
+        catchError((error): Observable<any> => {
+          // we expect 404, it's not a failure for us.
+          if (error.status === 404) {
+            return of(null); // or any other stream like of('') etc.
+          }
+
+          // other errors we don't know how to handle and throw them further.
+          setError(error);
+          return throwError(() => new Error(error));
+        })
       )
       .subscribe();
     return () => {
@@ -73,11 +71,10 @@ export function useRepoBlob() {
     };
   }, [repoUrl]);
 
-
   return {
     file,
     code,
     isLoading,
-    error
+    error,
   };
 }

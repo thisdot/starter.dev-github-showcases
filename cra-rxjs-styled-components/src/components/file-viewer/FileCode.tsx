@@ -13,20 +13,14 @@ function FileCode({ text, language }: FileCodeProps) {
     // @ts-ignore
     <Highlight {...defaultProps} theme={theme} code={text} language={language}>
       {({ style, tokens, getLineProps, getTokenProps }) => (
-        <CodeBlock
-          data-testid="code-block"
-          style={style}
-        >
+        <CodeBlock data-testid="code-block" style={style}>
           {tokens.map((line, i) => {
             const { className: defaultClassName, ...lineProps } = getLineProps({
               line,
               key: i,
             });
             return (
-              <TableRow
-                key={i}
-                {...lineProps}
-              >
+              <TableRow key={i} {...lineProps}>
                 <LineNumber>{i + 1}</LineNumber>
                 <LineText>
                   {line.map((token, key) => (
