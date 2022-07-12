@@ -19,7 +19,7 @@ export default defineComponent({
 
     watchEffect(() => search(searchRef.value));
 
-    return { search };
+    return { searchRef };
   },
 });
 </script>

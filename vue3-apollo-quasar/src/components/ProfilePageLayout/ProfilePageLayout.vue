@@ -18,8 +18,6 @@
         <!-- Right side -->
         <div v-if="!loadingSearch" class="tab-contents col">
           <SearchFilter />
-          {{ searchData }}
-          test
           <q-tab-panels v-model="tab">
             <q-tab-panel name="overview">
               <div class="text-h6">Overview</div>
@@ -76,7 +74,6 @@ import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
 import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
-import { useFilter } from '@/composables';
 import { useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
 
@@ -95,12 +92,9 @@ const SEARCH_QUERY = gql`
   }
 `;
 
-// get search value, not updating
 const { result: searchData, loading: loadingSearch } = useQuery(SEARCH_QUERY);
-
 const user = useUserStore();
 const { repos, loading } = getUserRepos(props.username, false);
-
 const filteredRepos = computed(() => {
   if (repos.value.length < 1) {
     return repos;

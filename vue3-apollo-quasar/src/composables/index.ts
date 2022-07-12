@@ -6,4 +6,3 @@ export * from './auth';
 export * from './github';
 export { useFormatter } from './useFormatter';
 export { useNav } from './useNav';
-export { useFilter } from './useFilter';
