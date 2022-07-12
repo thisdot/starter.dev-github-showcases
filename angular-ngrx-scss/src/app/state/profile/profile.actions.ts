@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ProfileState } from './profile.state';
+import { ProfileState, SortAndFilterState } from './profile.state';
 
 export const fetchProfile = createAction(
   '[Profile] Fetch Profile',
@@ -14,4 +14,9 @@ export const fetchProfileSuccess = createAction(
 export const fetchProfileFailure = createAction(
   '[Profile] Fetch Profile Failure',
   props<{ error: object }>(),
+);
+
+export const setSortAndFilterProperties = createAction(
+  '[Profile] Set Sort and Filter Properties',
+  props<{ filters: SortAndFilterState }>(),
 );

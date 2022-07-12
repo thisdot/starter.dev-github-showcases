@@ -65,7 +65,14 @@ section {
     place-items: center;
   }
 
-  &__clear {
+  &__clear-container {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     color: $gray500;
+    &:hover {
+      color: $blue600;
+    }
   }
 }
