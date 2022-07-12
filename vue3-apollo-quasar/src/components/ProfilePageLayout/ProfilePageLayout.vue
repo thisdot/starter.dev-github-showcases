@@ -76,6 +76,7 @@ import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
 import { useFilter } from '@/composables';
+// import { store } from '@/globals/search';
 
 const getUserRepos = useUserRepos();
 const props = defineProps({

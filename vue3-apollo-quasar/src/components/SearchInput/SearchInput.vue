@@ -7,14 +7,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watchEffect } from 'vue';
 import { AppInput } from '../';
+// import { store } from '@/globals/search';
 
 export default defineComponent({
   name: 'SearchInput',
   components: { AppInput },
   setup() {
     const search = ref('');
+    // store.increment(search);
+    watchEffect(() => console.log(search.value));
 
     return { search };
   },
