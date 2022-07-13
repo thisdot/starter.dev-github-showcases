@@ -36,11 +36,11 @@
     <div class="results">
       <p class="results__text">
         <ng-container *ngIf="selectReposCount$ | async as count">
-          <span class="bold">{{count}}</span>
+          <span class="bold">{{ count }}</span>
         </ng-container>
         results
         <ng-container *ngIf="selectFilterBySearch$ | async as search">
-          matching <span class="bold">{{search}}</span>
+          matching <span class="bold">{{ search }}</span>
         </ng-container>
         sorted by updated at
       </p>
