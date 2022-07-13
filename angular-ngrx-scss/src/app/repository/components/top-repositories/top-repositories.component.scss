@@ -2,12 +2,18 @@
 
 :host {
   display: grid;
-  grid-template-columns: 24rem 1fr;
+  grid-template-columns: 1fr;
+  @media (min-width: variables.$md) {
+    grid-template-columns: 24rem 1fr;
+  }
 }
 
 aside {
   background: variables.$white;
   padding: 2rem;
+  @media (max-width: variables.$md) {
+    order: 2;
+  }
 }
 
 .top-repositories-container {
@@ -15,6 +21,7 @@ aside {
   @media (min-width: variables.$md) {
     padding: 3rem;
   }
+
   h2 {
     font-size: 18px;
     line-height: 28px;
