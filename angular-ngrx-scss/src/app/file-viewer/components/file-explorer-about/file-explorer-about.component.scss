@@ -1,0 +1,29 @@
+a {
+  color: rgba(107, 114, 128, 1);
+}
+
+a > span, .link {
+  margin-right: 0.5rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.topic {
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.375rem;
+  background-color: #DBEAFE;
+  transition-property: background-color, border-color, color, fill, stroke;
+  color: #2563EB;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  border-radius: 0.75rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #2563EB;
+    color: #ffffff;
+  }
+}

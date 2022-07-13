@@ -1,0 +1,31 @@
+<div class="container border-bottom-2">
+  <h2>About</h2>
+  <div class="description mt-1">
+      <span data-testid="repo file explorer description">
+        {{description ?? "No description, website, or topics provided."}}
+      </span>
+
+    <div *ngIf="homepageUrl" class="linkContainer mt-1">
+      <span class="icon" appOcticon="link"></span>
+      <a [href]="homepageUrl" class="link" target="_blank">
+        {{ homepageUrl }}
+      </a>
+    </div>
+
+    <ng-container *ngIf="topics">
+      <div class="mt-1">
+        <span *ngFor="let topic of topics" class="topic">{{ topic }}</span>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="mt-1">
+    <a class="readMeLink" routerLink="./" fragment="readme">
+      <span class="icon" appOcticon="book"></span> Readme
+    </a>
+  </div>
+</div>
+
+
+
+
