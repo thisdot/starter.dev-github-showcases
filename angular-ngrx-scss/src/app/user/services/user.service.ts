@@ -64,7 +64,9 @@ export class UserService {
   }
 
   getUserOrganizations(username: string): Observable<UserOrgsState[]> {
-    const url = `${environment.githubUrl}/user/orgs`;
+    const url = `${environment.githubUrl}/users/${encodeURIComponent(
+      username,
+    )}/orgs`;
 
     return this.http.get<UserOrgsApiResponse>(url).pipe(
       map((data) =>

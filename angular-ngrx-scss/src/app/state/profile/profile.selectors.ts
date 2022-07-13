@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ProfileType, UserState } from '../user';
+import { ProfileType } from '../user';
 import { ProfileState } from './profile.state';
 
 export const profileFeatureKey = 'profile';
