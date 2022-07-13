@@ -5,7 +5,7 @@
   <main>
     <ng-container *ngIf="profile$ | async as profile">
       <ng-container
-        [ngTemplateOutlet]="profile.isOrg ? org : user"
+        [ngTemplateOutlet]="(isOrgProfile$ | async) ? org : user"
       ></ng-container>
     </ng-container>
   </main>

@@ -5,7 +5,6 @@ export interface ProfileState {
   orgs?: UserOrgsState[];
   repos?: UserReposState[];
   gists?: UserGistsState[];
-  isOrg?: boolean;
 }
 
 export interface UserGistsState {
