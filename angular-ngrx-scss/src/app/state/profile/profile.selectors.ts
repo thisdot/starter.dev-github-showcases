@@ -13,5 +13,5 @@ export const selectProfile = createSelector(
 
 export const isOrgProfile = createSelector(
   selectProfile,
-  (state: ProfileState) => state?.user?.type === ProfileType.ORGANIZATION,
+  (state: ProfileState) => state?.user?.type === ProfileType.Organization,
 );

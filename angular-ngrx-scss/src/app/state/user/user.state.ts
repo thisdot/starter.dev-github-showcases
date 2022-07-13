@@ -53,6 +53,6 @@ export interface UserApiResponse {
 }
 
 export enum ProfileType {
-  ORGANIZATION = 'Organization',
-  USER = 'User',
+  Organization = 'Organization',
+  User = 'User',
 }
