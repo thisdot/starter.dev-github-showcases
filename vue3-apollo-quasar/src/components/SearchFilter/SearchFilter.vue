@@ -93,11 +93,6 @@ export default defineComponent({
       width: unset;
       justify-content: space-between;
     }
-    /* transform: translateY(-130px);
-    -webkit-transform: translateY(-130px);
-    -moz-transform: translateY(-130px);
-    -ms-transform: translateY(-130px);
-    -o-transform: translateY(-130px); */
     margin-left: unset;
     text-decoration: none;
 
