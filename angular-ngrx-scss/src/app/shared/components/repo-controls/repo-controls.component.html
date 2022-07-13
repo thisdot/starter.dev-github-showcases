@@ -1,0 +1,45 @@
+<section>
+  <div class="controls">
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Find a repository..."
+      [formControl]="searchInput"
+    />
+    <button class="control-dropdown" role="button">
+      <span class="control-dropdown__name">Type</span>
+      <span
+        class="control-dropdown__caret"
+        appOcticon="chevron-down"
+        size="14"
+      ></span>
+    </button>
+    <button class="control-dropdown" role="button">
+      <span class="control-dropdown__name">Language</span>
+      <span
+        class="control-dropdown__caret"
+        appOcticon="chevron-down"
+        size="14"
+      ></span>
+    </button>
+    <button class="control-dropdown" role="button">
+      <span class="control-dropdown__name">Sort</span>
+      <span
+        class="control-dropdown__caret"
+        appOcticon="chevron-down"
+        size="14"
+      ></span>
+    </button>
+  </div>
+  <div class="divider"></div>
+  <div class="results">
+    <p class="results__text">
+      12 results for forked repositories sorted by updated at
+    </p>
+    <div class="close-background">
+      <span appOcticon="x" color="white" size="13"></span>
+    </div>
+    <p class="results__clear">Clear filter</p>
+  </div>
+  <div class="divider"></div>
+</section>

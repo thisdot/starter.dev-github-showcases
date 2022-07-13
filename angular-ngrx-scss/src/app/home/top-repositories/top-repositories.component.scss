@@ -1,7 +1,10 @@
 @use '../../shared/styles/variables';
 
 .top-repositories-container {
-  padding: 3rem;
+  padding: 1.5rem;
+  @media (min-width: variables.$md) {
+    padding: 3rem;
+  }
   h2 {
     font-size: 18px;
     line-height: 28px;
@@ -14,9 +17,11 @@
     border-width: 1px;
   }
   .repo-section {
-    padding: 2rem 0;
-    padding-left: 2rem;
+    padding: 1rem;
     border-bottom: 1px solid variables.$gray300;
+    @media (min-width: variables.$md) {
+      padding: 2rem 0 2rem 2rem;
+    }
   }
   .view-all-link {
     padding: 1.25rem;
