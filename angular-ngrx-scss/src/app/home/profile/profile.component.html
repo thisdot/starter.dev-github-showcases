@@ -1,11 +1,12 @@
-
 <div class="page">
   <header>
     <app-nav-bar></app-nav-bar>
   </header>
   <main>
     <ng-container *ngIf="profile$ | async as profile">
-      <ng-container [ngTemplateOutlet]="profile.isOrg ? org : user"></ng-container>
+      <ng-container
+        [ngTemplateOutlet]="profile.isOrg ? org : user"
+      ></ng-container>
     </ng-container>
   </main>
 </div>
