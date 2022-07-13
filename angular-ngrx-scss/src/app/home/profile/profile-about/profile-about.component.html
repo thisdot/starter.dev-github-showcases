@@ -13,14 +13,10 @@
     <div class="bio">{{ profile.user.bio }}</div>
     <div class="socials">
       <span class="icon" appOcticon="people" color="black" size="16"></span>
-      <span class="social-label">
-        {{ profile.user.followers }} Followers
-      </span>
+      <span class="social-label"> {{ profile.user.followers }} Followers </span>
       ·
       <span class="icon" appOcticon="people" color="black" size="16"></span>
-      <span class="social-label">
-        {{ profile.user.following }} Following
-      </span>
+      <span class="social-label"> {{ profile.user.following }} Following </span>
     </div>
     <div class="fields">
       <div *ngIf="profile.user.company">
@@ -33,9 +29,7 @@
       </div>
       <div *ngIf="profile.user.email">
         <span class="icon" appOcticon="mail"></span>
-        <a href="mailto:{{ profile.user.email }}">{{
-          profile.user?.email
-        }}</a>
+        <a href="mailto:{{ profile.user.email }}">{{ profile.user?.email }}</a>
       </div>
       <div *ngIf="profile.user.blog">
         <span class="icon" appOcticon="link"></span>
