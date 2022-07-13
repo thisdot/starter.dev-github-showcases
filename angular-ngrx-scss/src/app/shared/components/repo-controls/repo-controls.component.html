@@ -31,15 +31,24 @@
       ></span>
     </button>
   </div>
-  <div class="divider"></div>
-  <div class="results">
-    <p class="results__text">
-      12 results for forked repositories sorted by updated at
-    </p>
-    <div class="close-background">
-      <span appOcticon="x" color="white" size="13"></span>
+  <ng-container *ngIf="hasActiveSortAndFilters$ | async">
+    <div class="divider"></div>
+    <div class="results">
+      <p class="results__text">
+        <ng-container *ngIf="selectReposCount$ | async as count">
+          <span class="bold">{{count}}</span>
+        </ng-container>
+        results
+        <ng-container *ngIf="selectFilterBySearch$ | async as search">
+          matching <span class="bold">{{search}}</span>
+        </ng-container>
+        sorted by updated at
+      </p>
+      <div class="close-background">
+        <span appOcticon="x" color="white" size="13"></span>
+      </div>
+      <p class="results__clear">Clear filter</p>
     </div>
-    <p class="results__clear">Clear filter</p>
-  </div>
-  <div class="divider"></div>
+    <div class="divider"></div>
+  </ng-container>
 </section>

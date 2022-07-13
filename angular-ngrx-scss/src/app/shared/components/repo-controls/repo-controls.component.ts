@@ -1,14 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  combineLatest,
-  Observable,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, combineLatest } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { setSortAndFilterProperties } from 'src/app/state/profile/profile.actions';
+import {
+  hasActiveSortAndFilters,
+  selectFilterBySearch,
+  selectReposCount,
+} from 'src/app/state/profile/profile.selectors';
 import { SortAndFilterState } from 'src/app/state/profile/profile.state';
 
 @Component({
@@ -18,11 +18,10 @@ import { SortAndFilterState } from 'src/app/state/profile/profile.state';
 })
 export class RepoControlsComponent implements OnInit {
   searchInput = new FormControl('');
-  // form: FormGroup = new FormGroup({
-  //   searchInput: new FormControl(''),
-  // });
+  hasActiveSortAndFilters$ = this.store.select(hasActiveSortAndFilters);
+  selectReposCount$ = this.store.select(selectReposCount);
 
-  // @Output() setSearch = new EventEmitter<string>();
+  selectFilterBySearch$ = this.store.select(selectFilterBySearch);
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -38,7 +37,6 @@ export class RepoControlsComponent implements OnInit {
       language: '',
       sort: '',
     })).subscribe((criteria: SortAndFilterState) => {
-      console.log('searching with ' + JSON.stringify(criteria));
       this.store.dispatch(setSortAndFilterProperties({ filters: criteria }));
     });
   }
