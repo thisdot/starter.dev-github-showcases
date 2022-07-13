@@ -1,8 +1,8 @@
 <template>
-  <div class="repo_search_header" v-if="!changing">
+  <div class="repo_search_header">
     <SearchInput />
     <SearchDropdowns dropdownType="type" />
-    <SearchDropdowns dropdownType="language">
+    <SearchDropdowns dropdownType="language" v-if="!changingLanguage">
       <template v-slot:languages>
         <q-item
           clickable
@@ -79,17 +79,17 @@ export default defineComponent({
     SearchDropdowns,
   },
   setup() {
-    const changing = ref(false);
+    const changingLanguage = ref(false);
     const updateLanguageRef = (value) => {
-      changing.value = true;
+      changingLanguage.value = true;
 
       filteredLanguage(value);
-      changing.value = false;
+      changingLanguage.value = false;
     };
     return {
       defaultLanguageSort,
       updateLanguageRef,
-      changing,
+      changingLanguage,
       filteredLanguage,
     };
   },
