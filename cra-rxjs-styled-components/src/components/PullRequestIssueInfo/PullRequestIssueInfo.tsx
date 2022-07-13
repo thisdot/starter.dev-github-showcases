@@ -5,7 +5,7 @@ interface Props {
   openedBy: string;
 }
 
-export default function PullRequestCardIssueInfo({
+export default function PullRequestIssueInfo({
   title,
   openedNum,
   openedBy,
