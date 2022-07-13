@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { debounceTime, distinctUntilChanged, combineLatest } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  combineLatest,
+  Subject,
+} from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 import { setSortAndFilterProperties } from 'src/app/state/profile/profile.actions';
 import {
   hasActiveSortAndFilters,
@@ -16,12 +21,14 @@ import { SortAndFilterState } from 'src/app/state/profile/profile.state';
   templateUrl: './repo-controls.component.html',
   styleUrls: ['./repo-controls.component.scss'],
 })
-export class RepoControlsComponent implements OnInit {
+export class RepoControlsComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject();
+
   searchInput = new FormControl('');
   hasActiveSortAndFilters$ = this.store.select(hasActiveSortAndFilters);
   selectReposCount$ = this.store.select(selectReposCount);
-
   selectFilterBySearch$ = this.store.select(selectFilterBySearch);
+
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -36,8 +43,15 @@ export class RepoControlsComponent implements OnInit {
       type: '',
       language: '',
       sort: '',
-    })).subscribe((criteria: SortAndFilterState) => {
-      this.store.dispatch(setSortAndFilterProperties({ filters: criteria }));
-    });
+    }))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((criteria: SortAndFilterState) => {
+        this.store.dispatch(setSortAndFilterProperties({ filters: criteria }));
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }
