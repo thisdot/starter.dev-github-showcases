@@ -3,7 +3,46 @@
     <SearchInput />
     <SearchDropdowns dropdownType="type" />
     <SearchDropdowns dropdownType="language" />
-    <SearchDropdowns dropdownType="sort" />
+    <SearchDropdowns dropdownType="sort">
+      <template v-slot:sortby>
+        <q-item clickable v-close-popup class="row items-center">
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': sortBy() !== defaultSortBy }"
+          >
+            <q-icon
+              v-show="sortBy() === defaultSortBy"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ SORT_OPIONS.default }}
+        </q-item>
+        <q-item clickable v-close-popup class="row items-center">
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': sortBy() !== SORT_OPIONS.name }"
+          >
+            <q-icon
+              v-show="sortBy() === SORT_OPIONS.name"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ SORT_OPIONS.name }}
+        </q-item>
+        <q-item clickable v-close-popup class="row items-center">
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': sortBy() !== SORT_OPIONS.stars }"
+          >
+            <q-icon
+              v-show="sortBy() === SORT_OPIONS.stars"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ SORT_OPIONS.stars }}
+        </q-item>
+      </template>
+    </SearchDropdowns>
     <div>
       <a href="https://github.com/new" class="flexbox new_repo">
         <svg
@@ -30,6 +69,8 @@
 import { defineComponent } from 'vue';
 
 import { SearchDropdowns, SearchInput } from '@/components';
+import { defaultSortBy, SORT_OPIONS } from './data';
+import { sortBy } from '@/globals/sortby';
 
 export default defineComponent({
   name: 'SearchFilter',
@@ -42,6 +83,9 @@ export default defineComponent({
   components: {
     SearchInput,
     SearchDropdowns,
+  },
+  setup() {
+    return { defaultSortBy, sortBy, SORT_OPIONS };
   },
 });
 </script>
