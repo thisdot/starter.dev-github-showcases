@@ -378,7 +378,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import '@/styles/quasar.variables.scss';
 .subheader {
-  background-color: $subheader;
+  background-color: $primary-100;
 }
 
 .user-reponame {
