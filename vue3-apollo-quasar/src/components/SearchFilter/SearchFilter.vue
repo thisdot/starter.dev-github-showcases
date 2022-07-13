@@ -3,9 +3,14 @@
     <SearchInput />
     <SearchDropdowns dropdownType="type" />
     <SearchDropdowns dropdownType="language" />
-    <SearchDropdowns dropdownType="sort">
+    <SearchDropdowns dropdownType="sort" v-if="!changingSortBy">
       <template v-slot:sortby>
-        <q-item clickable v-close-popup class="row items-center">
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center"
+          @click="updateSortByRef(SORT_OPTIONS.default)"
+        >
           <span
             class="text-h6"
             :class="{ 'q-mr-md': sortBy() !== defaultSortBy }"
@@ -15,31 +20,41 @@
               name="svguse:app-icons/correct.svg#correct"
             />
           </span>
-          {{ SORT_OPIONS.default }}
+          {{ SORT_OPTIONS.default }}
         </q-item>
-        <q-item clickable v-close-popup class="row items-center">
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center"
+          @click="updateSortByRef(SORT_OPTIONS.name)"
+        >
           <span
             class="text-h6"
-            :class="{ 'q-mr-md': sortBy() !== SORT_OPIONS.name }"
+            :class="{ 'q-mr-md': sortBy() !== SORT_OPTIONS.name }"
           >
             <q-icon
-              v-show="sortBy() === SORT_OPIONS.name"
+              v-show="sortBy() === SORT_OPTIONS.name"
               name="svguse:app-icons/correct.svg#correct"
             />
           </span>
-          {{ SORT_OPIONS.name }}
+          {{ SORT_OPTIONS.name }}
         </q-item>
-        <q-item clickable v-close-popup class="row items-center">
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center"
+          @click="updateSortByRef(SORT_OPTIONS.stars)"
+        >
           <span
             class="text-h6"
-            :class="{ 'q-mr-md': sortBy() !== SORT_OPIONS.stars }"
+            :class="{ 'q-mr-md': sortBy() !== SORT_OPTIONS.stars }"
           >
             <q-icon
-              v-show="sortBy() === SORT_OPIONS.stars"
+              v-show="sortBy() === SORT_OPTIONS.stars"
               name="svguse:app-icons/correct.svg#correct"
             />
           </span>
-          {{ SORT_OPIONS.stars }}
+          {{ SORT_OPTIONS.stars }}
         </q-item>
       </template>
     </SearchDropdowns>
@@ -66,10 +81,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 import { SearchDropdowns, SearchInput } from '@/components';
-import { defaultSortBy, SORT_OPIONS } from './data';
+import { defaultSortBy, SORT_OPTIONS } from './data';
 import { sortBy } from '@/globals/sortby';
 
 export default defineComponent({
@@ -85,13 +100,31 @@ export default defineComponent({
     SearchDropdowns,
   },
   setup() {
-    return { defaultSortBy, sortBy, SORT_OPIONS };
+    const changingSortBy = ref(false);
+
+    const updateSortByRef = (value) => {
+      changingSortBy.value = true;
+      sortBy(value);
+      changingSortBy.value = false;
+    };
+
+    return {
+      defaultSortBy,
+      sortBy,
+      SORT_OPTIONS,
+      changingSortBy,
+      updateSortByRef,
+    };
   },
 });
 </script>
 
 <style lang="scss" scoped>
 @import '../../App.css';
+.q-item {
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+}
 
 .repo_search_header {
   display: flex;
@@ -137,11 +170,6 @@ export default defineComponent({
       width: unset;
       justify-content: space-between;
     }
-    /* transform: translateY(-130px);
-    -webkit-transform: translateY(-130px);
-    -moz-transform: translateY(-130px);
-    -ms-transform: translateY(-130px);
-    -o-transform: translateY(-130px); */
     margin-left: unset;
     text-decoration: none;
 

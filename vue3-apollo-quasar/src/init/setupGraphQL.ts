@@ -7,6 +7,7 @@ import { provideApolloClient } from '@vue/apollo-composable';
 import { setContext } from '@apollo/client/link/context';
 
 import { useToken } from '@/composables';
+import { sortBy } from '@/globals/sortby';
 
 const { getAuthToken } = useToken();
 
@@ -25,7 +26,19 @@ const authLink = setContext((_, { headers }) => {
 });
 
 // Cache implementation
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        sortby: {
+          read() {
+            return sortBy();
+          },
+        },
+      },
+    },
+  },
+});
 
 // Create the apollo client
 const apolloClient = new ApolloClient({

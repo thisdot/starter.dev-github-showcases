@@ -16,7 +16,7 @@
           <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div class="tab-contents col">
+        <div class="tab-contents col" v-if="!loadingSortBy">
           <SearchFilter />
 
           <q-tab-panels v-model="tab">
@@ -27,7 +27,7 @@
 
             <q-tab-panel name="repositories">
               <q-list v-if="repos" separator>
-                <q-item v-for="repo in repos" :key="repo.id">
+                <q-item v-for="repo in sortedRepoData" :key="repo.id">
                   <RepoCard
                     :name="repo.name"
                     :visibility="repo.visibility"
@@ -64,30 +64,61 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineProps, ref } from 'vue';
-
+import { computed, defineComponent, defineProps, ref } from 'vue';
+import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
+import { SORT_OPTIONS } from '@/components/SearchFilter/data';
 export default defineComponent({
   name: 'ProfilePageLayout',
 });
 </script>
 
 <script lang="ts" setup>
-import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
+import {
+  UserProfileCard,
+  SearchFilter,
+  TabHeader,
+  RepoCard,
+} from '@/components';
 import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
 
 const getUserRepos = useUserRepos();
+const user = useUserStore();
+const tab = ref('');
+
 const props = defineProps({
   username: String,
 });
-const tab = ref('');
+
 function changeTab(val) {
   tab.value = val;
 }
 
-const user = useUserStore();
+const SORT_BY_QUERY = gql`
+  query SorBy {
+    sortby @cient
+  }
+`;
+const { result: sortByData, loading: loadingSortBy } = useQuery(SORT_BY_QUERY);
+
 const { repos, loading } = getUserRepos(props.username, false);
+
+const getTime = (time) => new Date(time).getTime();
+
+const sortedRepoData = computed(() => {
+  let resp = repos.value.slice(); //need because repos.value is a read only and can't bemodified.
+  if (sortByData.value?.sortby === SORT_OPTIONS.name) {
+    resp.sort((a, b) => (b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1));
+  } else if (sortByData.value?.sortby === SORT_OPTIONS.stars) {
+    resp.sort((a, b) => (b.stargazerCount > a.stargazerCount ? 1 : -1));
+  } else {
+    resp.sort((a, b) => (getTime(b.updatedAt) - getTime(a.updatedAt) ? 1 : -1));
+  }
+
+  return resp;
+});
 </script>
 
 <style lang="scss" scoped>
