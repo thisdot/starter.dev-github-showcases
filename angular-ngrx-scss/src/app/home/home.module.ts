@@ -14,6 +14,7 @@ import { UserGistsComponent } from './user-gists/user-gists.component';
 import { TopRepositoriesComponent } from './top-repositories/top-repositories.component';
 import { RepoControlsComponent } from '../shared/components/repo-controls/repo-controls.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserProfileComponent } from './profile/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserGistsComponent,
     TopRepositoriesComponent,
     RepoControlsComponent,
+    UserProfileComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule],
 })

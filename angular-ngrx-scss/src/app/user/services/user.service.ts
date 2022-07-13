@@ -35,6 +35,7 @@ export class UserService {
         name: data.name,
         twitter_username: data.twitter_username,
         username: data.login,
+        type: data.type,
       })),
     );
   }
@@ -57,14 +58,13 @@ export class UserService {
         name: data.name,
         twitter_username: data.twitter_username,
         username: data.login,
+        type: data.type,
       })),
     );
   }
 
   getUserOrganizations(username: string): Observable<UserOrgsState[]> {
-    const url = `${environment.githubUrl}/users/${encodeURIComponent(
-      username,
-    )}/orgs`;
+    const url = `${environment.githubUrl}/user/orgs`;
 
     return this.http.get<UserOrgsApiResponse>(url).pipe(
       map((data) =>

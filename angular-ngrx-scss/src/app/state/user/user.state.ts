@@ -12,6 +12,7 @@ export interface UserState {
   name: string;
   twitter_username: string;
   username: string;
+  type: string;
   topRepos?: UserReposState[];
   gists?: UserGistsState[];
 }
@@ -49,4 +50,9 @@ export interface UserApiResponse {
   following: number;
   created_at: string;
   updated_at: string;
+}
+
+export enum ProfileType {
+  ORGANIZATION = 'Organization',
+  USER = 'User',
 }

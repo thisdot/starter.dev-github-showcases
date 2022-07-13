@@ -5,7 +5,7 @@
     [src]="profile?.user?.avatar"
   />
 
-  <div class="content">
+  <div class="content" *ngIf="profile?.user">
     <h1>
       <div class="name">{{ profile?.user?.name }}</div>
       <div class="username">{{ profile?.user?.username }}</div>
