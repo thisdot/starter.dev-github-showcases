@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ProfileAboutComponent } from './profile-about/profile-about.component';
-import { TabNavComponent } from './tab-nav/tab-nav.component';
+import { TabNavComponent } from './profile-nav/profile-nav.component';
 import { RepoListComponent } from '../../shared/components/repo-list/repo-list.component';
 
 import { ProfileComponent } from './profile.component';
