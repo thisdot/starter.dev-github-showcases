@@ -5,7 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { OcticonsDirective } from '../shared/directives/octicons.directive';
 import { ProfileComponent } from './profile/profile.component';
-import { TabNavComponent } from './profile/profile-nav/profile-nav.component';
+import { ProfileNavComponent } from './profile/profile-nav/profile-nav.component';
 import { ProfileAboutComponent } from './profile/profile-about/profile-about.component';
 import { RepoListComponent } from '../shared/components/repo-list/repo-list.component';
 import { RelativeTimePipe } from '../shared/pipes/relative-time.pipe';
@@ -22,7 +22,7 @@ import { UserProfileComponent } from './profile/user-profile/user-profile.compon
     OcticonsDirective,
     HomeComponent,
     ProfileComponent,
-    TabNavComponent,
+    ProfileNavComponent,
     ProfileAboutComponent,
     RepoListComponent,
     RepoCardComponent,
