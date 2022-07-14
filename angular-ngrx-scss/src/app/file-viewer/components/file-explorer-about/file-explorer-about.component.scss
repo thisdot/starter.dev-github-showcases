@@ -1,5 +1,7 @@
+@use '../../../shared/styles/variables';
+
 a {
-  color: rgba(107, 114, 128, 1);
+  color: variables.$gray500;
 }
 
 a > span,
@@ -14,9 +16,9 @@ a > span,
 .topic {
   padding: 0.25rem 0.5rem;
   margin-right: 0.375rem;
-  background-color: #dbeafe;
+  background-color: variables.$blue100;
   transition-property: background-color, border-color, color, fill, stroke;
-  color: #2563eb;
+  color: variables.$blue600;
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
@@ -24,7 +26,7 @@ a > span,
   cursor: pointer;
 
   &:hover {
-    background-color: #2563eb;
-    color: #ffffff;
+    background-color: variables.$blue600;
+    color: variables.$white;
   }
 }
