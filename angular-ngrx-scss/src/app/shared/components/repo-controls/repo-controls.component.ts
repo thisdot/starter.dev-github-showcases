@@ -6,6 +6,8 @@ import {
   distinctUntilChanged,
   combineLatest,
   Subject,
+  of,
+  Observable,
 } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { setSortAndFilterProperties } from 'src/app/state/profile/profile.actions';
@@ -23,27 +25,6 @@ import {
   SortAndFilterState,
   TypeFilter,
 } from 'src/app/state/profile/profile.state';
-
-const TYPE_FILTERS = [
-  {
-    label: 'All',
-    value: TypeFilter.All,
-  },
-  {
-    label: 'Forks',
-    value: TypeFilter.Forked,
-  },
-  {
-    label: 'Archived',
-    value: TypeFilter.Archived,
-  },
-];
-
-enum TypeFilter {
-  All = 'all',
-  Forked = 'forked',
-  Archived = 'archived',
-}
 
 const TYPE_FILTERS = [
   {
@@ -87,8 +68,6 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
   readonly typeFilters = TYPE_FILTERS;
 
-  readonly typeFilters = TYPE_FILTERS;
-
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -118,6 +97,8 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
     )
       .pipe(takeUntil(this.destroy$))
       .subscribe((filters: SortAndFilterState) => {
+        console.log(filters);
+        console.log(this);
         this.store.dispatch(setSortAndFilterProperties({ filters }));
       });
   }
