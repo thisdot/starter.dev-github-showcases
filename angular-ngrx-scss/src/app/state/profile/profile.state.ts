@@ -194,7 +194,4 @@ export type UserReposApiResponse = UserRepo[];
 
 export interface SortAndFilterState {
   search: string;
-  type: string;
-  language: string;
-  sort: string;
 }

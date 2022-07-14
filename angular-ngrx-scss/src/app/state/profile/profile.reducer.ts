@@ -18,9 +18,6 @@ const reducer = createReducer(
     ...state,
     sortAndFilter: {
       search,
-      type: '',
-      language: '',
-      sort: '',
     },
   })),
 );

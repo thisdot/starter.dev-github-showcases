@@ -45,8 +45,8 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
       sort: '',
     }))
       .pipe(takeUntil(this.destroy$))
-      .subscribe((criteria: SortAndFilterState) => {
-        this.store.dispatch(setSortAndFilterProperties({ filters: criteria }));
+      .subscribe((filters: SortAndFilterState) => {
+        this.store.dispatch(setSortAndFilterProperties({ filters }));
       });
   }
 
