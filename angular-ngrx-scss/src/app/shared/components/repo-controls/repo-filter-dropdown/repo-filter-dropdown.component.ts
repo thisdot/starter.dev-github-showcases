@@ -32,7 +32,7 @@ export interface FilterOption {
 export class RepoFilterDropdownComponent {
   @Input() name = '';
   @Input() description = '';
-  @Input() current: string | null = '';
+  @Input() current?: string | null = '';
   @Input() items: FilterOption[] = [];
   @Input() toggle? = false;
 
