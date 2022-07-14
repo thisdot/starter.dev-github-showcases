@@ -38,11 +38,8 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
       startWith(''),
     );
 
-    combineLatest([searchInput$], (text: string) => ({
-      search: text,
-      type: '',
-      language: '',
-      sort: '',
+    combineLatest([searchInput$], (search: string) => ({
+      search,
     }))
       .pipe(takeUntil(this.destroy$))
       .subscribe((filters: SortAndFilterState) => {
