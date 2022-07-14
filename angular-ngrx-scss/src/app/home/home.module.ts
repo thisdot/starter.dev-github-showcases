@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './profile/user-profile/user-profile.component';
 import { OrgProfileComponent } from './profile/org-profile/org-profile.component';
 import { OrganizationInfoComponent } from './profile/org-profile/org-info/org-info.component';
+import { RepoFilterDropdownComponent } from '../shared/components/repo-controls/repo-filter-dropdown/repo-filter-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { OrganizationInfoComponent } from './profile/org-profile/org-info/org-in
     UserProfileComponent,
     OrgProfileComponent,
     OrganizationInfoComponent,
+    RepoFilterDropdownComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, SharedModule, ReactiveFormsModule],
 })

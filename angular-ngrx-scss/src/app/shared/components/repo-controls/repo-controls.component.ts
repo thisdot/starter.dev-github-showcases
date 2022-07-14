@@ -16,6 +16,27 @@ import {
 } from 'src/app/state/profile/profile.selectors';
 import { SortAndFilterState } from 'src/app/state/profile/profile.state';
 
+enum TypeFilter {
+  All = 'all',
+  Forked = 'forked',
+  Archived = 'archived',
+}
+
+const TYPE_FILTERS = [
+  {
+    label: 'All',
+    value: TypeFilter.All,
+  },
+  {
+    label: 'Forks',
+    value: TypeFilter.Forked,
+  },
+  {
+    label: 'Archived',
+    value: TypeFilter.Archived,
+  },
+];
+
 @Component({
   selector: 'app-repo-controls',
   templateUrl: './repo-controls.component.html',
@@ -28,6 +49,8 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   hasActiveSortAndFilters$ = this.store.select(hasActiveSortAndFilters);
   selectReposCount$ = this.store.select(selectReposCount);
   selectFilterBySearch$ = this.store.select(selectFilterBySearch);
+
+  readonly typeFilters = TYPE_FILTERS;
 
   constructor(private store: Store) {}
 
@@ -54,5 +77,9 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
   handleClearFiltersClick(): void {
     this.searchInput.reset();
+  }
+
+  handleTypeClick(type: string) {
+    console.log(type);
   }
 }
