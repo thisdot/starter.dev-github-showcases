@@ -56,6 +56,6 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   }
 
   handleClearFiltersClick(): void {
-    this.searchInput.setValue('');
+    this.searchInput.reset();
   }
 }
