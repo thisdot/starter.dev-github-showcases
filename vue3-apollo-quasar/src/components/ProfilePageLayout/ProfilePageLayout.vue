@@ -16,7 +16,7 @@
           <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div class="tab-contents col">
+        <div class="tab-contents col" v-if="!loadingFilterType">
           <SearchFilter />
 
           <q-tab-panels v-model="tab">
@@ -27,7 +27,7 @@
 
             <q-tab-panel name="repositories">
               <q-list v-if="repos" separator>
-                <q-item v-for="repo in repos" :key="repo.id">
+                <q-item v-for="repo in filteredTypeRepoData" :key="repo.id">
                   <RepoCard
                     :name="repo.name"
                     :visibility="repo.visibility"
@@ -64,7 +64,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineProps, ref } from 'vue';
+import { computed, defineComponent, defineProps, ref } from 'vue';
+import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
+
+import {
+  FILTER_TYPE_OPTIONS,
+  defaultFilterType,
+} from '@/components/SearchFilter/data';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
@@ -72,22 +79,51 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
+import {
+  UserProfileCard,
+  SearchFilter,
+  TabHeader,
+  RepoCard,
+} from '@/components';
 import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
 
 const getUserRepos = useUserRepos();
+const user = useUserStore();
+const tab = ref('');
+
 const props = defineProps({
   username: String,
 });
-const tab = ref('');
+
 function changeTab(val) {
   tab.value = val;
 }
 
-const user = useUserStore();
+const FILTER_TYPE_QUERY = gql`
+  query FilterType {
+    filterType @client
+  }
+`;
+
+const { result: filterTypeData, loading: loadingFilterType } =
+  useQuery(FILTER_TYPE_QUERY);
+
 const { repos, loading } = getUserRepos(props.username, false);
+
+const filteredTypeRepoData = computed(() => {
+  let resp: any = [];
+  const filterType = filterTypeData.value?.filterType;
+  if (filterType === FILTER_TYPE_OPTIONS.forks) {
+    resp = repos.value.filter((repo) => repo.isFork);
+  } else if (filterType === FILTER_TYPE_OPTIONS.archived) {
+    resp = repos.value.filter((repo) => repo.isArchived);
+  } else if (filterType === defaultFilterType) {
+    resp = repos.value;
+  }
+  return resp;
+});
 </script>
 
 <style lang="scss" scoped>

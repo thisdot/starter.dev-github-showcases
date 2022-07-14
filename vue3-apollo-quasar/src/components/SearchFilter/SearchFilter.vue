@@ -1,7 +1,63 @@
 <template>
   <div class="repo_search_header">
     <SearchInput />
-    <SearchDropdowns dropdownType="type" />
+    <SearchDropdowns dropdownType="type" v-if="!changingFilterType">
+      <template v-slot:filtertype>
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center m-list"
+          @click="updateFilterTypeRef(FILTER_TYPE_OPTIONS.default)"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': filterType() !== defaultFilterType }"
+          >
+            <q-icon
+              v-show="filterType() === defaultFilterType"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ defaultFilterType }}</q-item
+        >
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center m-list"
+          @click="updateFilterTypeRef(FILTER_TYPE_OPTIONS.forks)"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': filterType() !== FILTER_TYPE_OPTIONS.forks }"
+          >
+            <q-icon
+              v-show="filterType() === FILTER_TYPE_OPTIONS.forks"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ FILTER_TYPE_OPTIONS.forks }}</q-item
+        >
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center m-list"
+          @click="updateFilterTypeRef(FILTER_TYPE_OPTIONS.archived)"
+        >
+          <span
+            class="text-h6"
+            :class="{
+              'q-mr-md': filterType() !== FILTER_TYPE_OPTIONS.archived,
+            }"
+          >
+            <q-icon
+              v-show="filterType() === FILTER_TYPE_OPTIONS.archived"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ FILTER_TYPE_OPTIONS.archived }}</q-item
+        >
+      </template>
+    </SearchDropdowns>
     <SearchDropdowns dropdownType="language" />
     <SearchDropdowns dropdownType="sort" />
     <div>
@@ -27,9 +83,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 import { SearchDropdowns, SearchInput } from '@/components';
+import { FILTER_TYPE_OPTIONS, defaultFilterType } from './data';
+import { filterType } from '@/globals/filtertype';
 
 export default defineComponent({
   name: 'SearchFilter',
@@ -43,12 +101,33 @@ export default defineComponent({
     SearchInput,
     SearchDropdowns,
   },
+  setup() {
+    const changingFilterType = ref(false);
+
+    const updateFilterTypeRef = (value) => {
+      changingFilterType.value = true;
+      filterType(value);
+      changingFilterType.value = false;
+    };
+
+    return {
+      defaultFilterType,
+      FILTER_TYPE_OPTIONS,
+      changingFilterType,
+      updateFilterTypeRef,
+      filterType,
+    };
+  },
 });
 </script>
 
 <style lang="scss" scoped>
 @import '../../App.css';
 
+.q-item {
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+}
 .repo_search_header {
   display: flex;
   flex-flow: column;
