@@ -31,7 +31,7 @@ export const selectRepos = createSelector(
   (state: ProfileState, search?: string) => {
     if (search) {
       return state.repos?.filter((item) =>
-        item.name.toLowerCase().includes(search),
+        item.name.toLowerCase().includes(search.toLowerCase()),
       );
     }
     return state.repos ?? [];
