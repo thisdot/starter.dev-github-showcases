@@ -92,6 +92,8 @@ export class UserService {
           forks_count: repo.forks_count,
           private: repo.private,
           updated_at: repo.updated_at,
+          fork: repo.fork,
+          archived: repo.archived,
           license: repo.license
             ? {
                 key: repo.license.key,
