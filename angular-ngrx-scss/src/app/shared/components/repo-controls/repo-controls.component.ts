@@ -6,21 +6,21 @@ import {
   distinctUntilChanged,
   combineLatest,
   Subject,
+  of,
+  Observable,
 } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { setSortAndFilterProperties } from 'src/app/state/profile/profile.actions';
 import {
   hasActiveSortAndFilters,
   selectFilterBySearch,
+  selectFilterByType,
   selectReposCount,
 } from 'src/app/state/profile/profile.selectors';
-import { SortAndFilterState } from 'src/app/state/profile/profile.state';
-
-enum TypeFilter {
-  All = 'all',
-  Forked = 'forked',
-  Archived = 'archived',
-}
+import {
+  SortAndFilterState,
+  TypeFilter,
+} from 'src/app/state/profile/profile.state';
 
 const TYPE_FILTERS = [
   {
@@ -46,9 +46,11 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<boolean>();
 
   searchInput = new FormControl('');
+  typeFilter = new FormControl(TypeFilter.All);
   hasActiveSortAndFilters$ = this.store.select(hasActiveSortAndFilters);
   selectReposCount$ = this.store.select(selectReposCount);
   selectFilterBySearch$ = this.store.select(selectFilterBySearch);
+  selectFilterByType$ = this.store.select(selectFilterByType);
 
   readonly typeFilters = TYPE_FILTERS;
 
@@ -61,11 +63,22 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
       startWith(''),
     );
 
-    combineLatest([searchInput$], (search: string) => ({
-      search,
-    }))
+    const typeFilter$ = this.typeFilter.valueChanges.pipe(
+      distinctUntilChanged(),
+      startWith(null),
+    );
+
+    combineLatest(
+      [searchInput$, typeFilter$],
+      (search: string, type: string) => ({
+        search,
+        type,
+      }),
+    )
       .pipe(takeUntil(this.destroy$))
       .subscribe((filters: SortAndFilterState) => {
+        console.log(filters);
+        console.log(this);
         this.store.dispatch(setSortAndFilterProperties({ filters }));
       });
   }
@@ -80,6 +93,8 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   }
 
   handleTypeClick(type: string) {
-    console.log(type);
+    console.log(this);
+    this.typeFilter.setValue(type);
+    console.log(this.typeFilter);
   }
 }

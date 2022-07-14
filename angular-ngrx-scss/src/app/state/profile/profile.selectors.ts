@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ProfileType } from '../user';
-import { ProfileState, UserReposState } from './profile.state';
+import { ProfileState, TypeFilter, UserReposState } from './profile.state';
 
 export const profileFeatureKey = 'profile';
 export const selectProfileState =
@@ -26,21 +26,40 @@ export const selectFilterBySearch = createSelector(
   (state: ProfileState) => state.sortAndFilter?.search,
 );
 
+export const selectFilterByType = createSelector(
+  selectProfileState,
+  (state: ProfileState) => state.sortAndFilter?.type,
+);
+
 export const hasActiveSortAndFilters = createSelector(
   selectFilterBySearch,
-  Boolean,
+  selectFilterByType,
+  (search, type) => !!search || !!type,
 );
 
 export const selectRepos = createSelector(
   selectProfileState,
   selectFilterBySearch,
-  (state: ProfileState, search?: string) => {
+  selectFilterByType,
+  (state: ProfileState, search?: string, type?: string) => {
+    const repos = state.repos;
+    console.log(search);
+    console.log(type);
     if (search) {
-      return state.repos?.filter((item) =>
+      repos?.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()),
       );
     }
-    return state.repos ?? [];
+    if (type !== TypeFilter.All) {
+      if (type === TypeFilter.Archived) {
+        console.log('si');
+        return repos?.filter((item) => item.archived);
+      }
+      if (type === TypeFilter.Forked) {
+        repos?.filter((item) => item.fork);
+      }
+    }
+    return repos ?? [];
   },
 );
 
