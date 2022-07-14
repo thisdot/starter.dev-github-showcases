@@ -2,7 +2,7 @@
   <div class="controls">
     <input
       id="searchInput"
-      type="text"
+      type="search"
       placeholder="Find a repository..."
       [formControl]="searchInput"
     />
@@ -44,10 +44,12 @@
         </ng-container>
         sorted by updated at
       </p>
-      <div class="close-background">
-        <span appOcticon="x" color="white" size="13"></span>
-      </div>
-      <p class="results__clear">Clear filter</p>
+      <span class="results__clear-container" (click)="handleClearFiltersClick()">
+        <div class="close-background">
+          <span appOcticon="x" color="white" size="13"></span>
+        </div>
+        <p class="results__clear">Clear filter</p>
+      </span>
     </div>
     <div class="divider"></div>
   </ng-container>

@@ -38,7 +38,7 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
       startWith(''),
     );
 
-    combineLatest([searchInput$], (text) => ({
+    combineLatest([searchInput$], (text: string) => ({
       search: text,
       type: '',
       language: '',
@@ -53,5 +53,9 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
+  }
+
+  handleClearFiltersClick(): void {
+    this.searchInput.setValue('');
   }
 }
