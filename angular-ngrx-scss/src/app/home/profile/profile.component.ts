@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
   profile$?: Observable<ProfileState>;
-  repos$?: Observable<UserReposState[]>;
+  repos$ = this.store.select(selectRepos).pipe(map((repos) => repos));
 
   constructor(private store: Store, private route: ActivatedRoute) {}
 
@@ -36,9 +36,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
 
     this.profile$ = this.store.select(selectProfileState);
-    this.repos$ = this.store
-      .select(selectRepos)
-      .pipe(map((repos) => repos ?? []));
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { UserReposState } from 'src/app/state/profile/profile.state';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectRepos } from 'src/app/state/profile/profile.selectors';
 
 @Component({
   selector: 'app-profile-repos',
@@ -8,6 +8,7 @@ import { UserReposState } from 'src/app/state/profile/profile.state';
   styleUrls: ['./profile-repos.component.scss'],
 })
 export class ProfileReposComponent {
-  @Input()
-  repos$?: Observable<UserReposState[]>;
+  repos$ = this.store.select(selectRepos);
+
+  constructor(private store: Store) {}
 }

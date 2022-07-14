@@ -14,10 +14,10 @@ const reducer = createReducer(
     ...state,
     ...data,
   })),
-  on(setSortAndFilterProperties, (state, { filters }) => ({
+  on(setSortAndFilterProperties, (state, { filters: { search } }) => ({
     ...state,
     sortAndFilter: {
-      search: filters.search,
+      search,
       type: '',
       language: '',
       sort: '',

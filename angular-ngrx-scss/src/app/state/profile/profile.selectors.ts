@@ -22,19 +22,19 @@ export const selectFilterBySearch = createSelector(
 
 export const hasActiveSortAndFilters = createSelector(
   selectFilterBySearch,
-  (search) => !!search,
+  Boolean,
 );
 
 export const selectRepos = createSelector(
   selectProfileState,
   selectFilterBySearch,
   (state: ProfileState, search?: string) => {
-    if (search && search !== '') {
+    if (search) {
       return state.repos?.filter((item) =>
         item.name.toLowerCase().includes(search),
       );
     }
-    return state.repos;
+    return state.repos ?? [];
   },
 );
 

@@ -15,6 +15,10 @@ import {
 } from 'src/app/state/profile/profile.selectors';
 import { RepoControlsComponent } from './repo-controls.component';
 
+const MOCK_VALUE_SELECT_FILTER_BY_SEARCH = 'Test Search';
+const MOCK_VALUE_SELECT_REPOS_COUNT = 2;
+const MOCK_VALUE_SELECT_HAS_ACTIVE_FILTERS = false;
+
 describe('RepoControlsComponent', () => {
   let component: RepoControlsComponent;
   let fixture: ComponentFixture<RepoControlsComponent>;
@@ -27,9 +31,18 @@ describe('RepoControlsComponent', () => {
       providers: [
         provideMockStore({
           selectors: [
-            { selector: selectFilterBySearch, value: 'Test Search' },
-            { selector: selectReposCount, value: 2 },
-            { selector: hasActiveSortAndFilters, value: false },
+            {
+              selector: selectFilterBySearch,
+              value: MOCK_VALUE_SELECT_FILTER_BY_SEARCH,
+            },
+            {
+              selector: selectReposCount,
+              value: MOCK_VALUE_SELECT_REPOS_COUNT,
+            },
+            {
+              selector: hasActiveSortAndFilters,
+              value: MOCK_VALUE_SELECT_HAS_ACTIVE_FILTERS,
+            },
           ],
         }),
       ],
@@ -66,7 +79,7 @@ describe('RepoControlsComponent', () => {
   });
 
   it(
-    'should not shown the label if has not active filters',
+    'should not show the label if has not active filters',
     waitForAsync(() => {
       component.ngOnInit();
       fixture.detectChanges();
