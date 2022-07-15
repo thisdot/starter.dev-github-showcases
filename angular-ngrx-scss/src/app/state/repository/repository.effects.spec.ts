@@ -56,6 +56,7 @@ describe('RepositoryEffects', () => {
       starCount: 100,
       tags: ['react', 'angular', 'vue', 'github'],
       tree: [],
+      selectedFile: null,
       visibility: 'public',
       watchCount: 10,
       website: 'https://starter.dev',

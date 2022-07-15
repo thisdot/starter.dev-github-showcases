@@ -5,10 +5,14 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { RepositoryService } from 'src/app/repository/services/repository.service';
 import {
+  fetchFileContents,
+  fetchFileContentsFailure,
+  fetchFileContentsSuccess,
   fetchRepository,
   fetchRepositoryFailure,
   fetchRepositorySuccess,
 } from './repository.actions';
+
 @Injectable()
 export class RepositoryEffects {
   fetchRepository$ = createEffect(() => {
@@ -39,6 +43,7 @@ export class RepositoryEffects {
               starCount: info.starCount,
               tags: info.tags,
               tree: contents,
+              selectedFile: null,
               visibility: info.visibility,
               watchCount: info.watchCount,
               website: info.website,
@@ -47,6 +52,20 @@ export class RepositoryEffects {
           }),
           catchError((error) => of(fetchRepositoryFailure({ error }))),
         );
+      }),
+    );
+  });
+
+  fetchFileContents$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fetchFileContents),
+      switchMap(({ owner, repoName, path, commitOrBranchOrTagName }) => {
+        return this.repoService
+          .getFileContents(owner, repoName, path, commitOrBranchOrTagName)
+          .pipe(
+            map((fileContents) => fetchFileContentsSuccess({ fileContents })),
+            catchError((error) => of(fetchFileContentsFailure({ error }))),
+          );
       }),
     );
   });

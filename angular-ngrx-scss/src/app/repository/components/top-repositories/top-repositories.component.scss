@@ -3,6 +3,7 @@
 :host {
   display: grid;
   grid-template-columns: 1fr;
+  background: variables.$gray100;
   @media (min-width: variables.$md) {
     grid-template-columns: 24rem 1fr;
   }
