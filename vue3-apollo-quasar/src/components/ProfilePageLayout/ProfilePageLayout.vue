@@ -26,7 +26,10 @@
 
             <q-tab-panel name="repositories">
               <q-list v-if="repos" separator>
-                <q-item v-for="repo in filterRepoDataByLanguage" :key="repo.id">
+                <q-item
+                  v-for="repo in repoDataFilteredByLanguage"
+                  :key="repo.id"
+                >
                   <RepoCard
                     :name="repo.name"
                     :visibility="repo.visibility"
@@ -108,7 +111,7 @@ const { repos, loading } = getUserRepos(props.username, false);
 
 const matchText = (target, value) => target?.match(new RegExp(value, 'i'));
 
-const filterRepoDataByLanguage = computed(() => {
+const repoDataFilteredByLanguage = computed(() => {
   let resp: any = [];
   const language = languageData.value?.language;
   if (repos.value && language && language !== defaultLanguageSort) {
