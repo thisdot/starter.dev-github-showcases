@@ -1,5 +1,5 @@
 <template>
-  <div class="repo_search_header">
+  <div class="repo_search_header q-pt-lg">
     <SearchInput />
     <SearchDropdowns dropdownType="type" />
     <SearchDropdowns dropdownType="language" />
@@ -52,8 +52,6 @@ export default defineComponent({
 .repo_search_header {
   display: flex;
   flex-flow: column;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--color-border);
 
   @media (min-width: 1024px) {
     flex-flow: row;

@@ -18,6 +18,13 @@
         <!-- Right side -->
         <div class="tab-contents col">
           <SearchFilter />
+          <div class="text-caption q-my-sm row justify-between items-center">
+            <div class="col">
+              <small class="text-caption"> Text here... </small>
+            </div>
+            <div>clear button here</div>
+          </div>
+          <q-separator />
 
           <q-tab-panels v-model="tab">
             <q-tab-panel name="overview">
