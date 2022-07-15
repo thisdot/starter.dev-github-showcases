@@ -15,6 +15,8 @@ import { TopRepositoriesComponent } from './top-repositories/top-repositories.co
 import { RepoControlsComponent } from '../shared/components/repo-controls/repo-controls.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './profile/user-profile/user-profile.component';
+import { OrgProfileComponent } from './profile/org-profile/org-profile.component';
+import { OrganizationInfoComponent } from './profile/org-profile/org-info/org-info.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { UserProfileComponent } from './profile/user-profile/user-profile.compon
     TopRepositoriesComponent,
     RepoControlsComponent,
     UserProfileComponent,
+    OrgProfileComponent,
+    OrganizationInfoComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule],
 })
