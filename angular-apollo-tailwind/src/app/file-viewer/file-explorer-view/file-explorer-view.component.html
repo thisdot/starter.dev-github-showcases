@@ -1,18 +1,19 @@
-<ng-container *ngIf="repoPage$ | async as repoPage">
+<ng-container>
   <div content class="max-w-screen-2xl mx-auto py-8 px-4">
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-12">
         <app-file-explorer-nav
+          *ngIf="repoPage$ | async as repoPage; else fileExplorerNavSkeleton"
           [owner]="repoPage.owner"
           [name]="repoPage.name"
           [branch]="repoPage.branch"
           [path]="repoPage.path"
         ></app-file-explorer-nav>
+        <ng-template #fileExplorerNavSkeleton>
+          <app-file-explorer-nav-skeleton></app-file-explorer-nav-skeleton>
+        </ng-template>
         <app-file-explorer-list-container
-          [owner]="repoPage.owner"
-          [name]="repoPage.name"
-          [branch]="repoPage.branch"
-          [path]="repoPage.path"
+          [repoPage]="repoPage$ | async"
         ></app-file-explorer-list-container>
       </div>
     </div>

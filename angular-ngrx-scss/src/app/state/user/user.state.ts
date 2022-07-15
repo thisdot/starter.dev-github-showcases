@@ -1,3 +1,5 @@
+import { UserGistsState, UserReposState } from '../profile/profile.state';
+
 export interface UserState {
   avatar: string;
   bio: string;
@@ -10,6 +12,9 @@ export interface UserState {
   name: string;
   twitter_username: string;
   username: string;
+  type: string;
+  topRepos?: UserReposState[];
+  gists?: UserGistsState[];
 }
 
 export interface UserApiResponse {
@@ -45,4 +50,9 @@ export interface UserApiResponse {
   following: number;
   created_at: string;
   updated_at: string;
+}
+
+export enum ProfileType {
+  Organization = 'Organization',
+  User = 'User',
 }

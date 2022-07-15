@@ -1,6 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { UserState } from './user.state';
-import { fetchUserDataSuccess } from './user.actions';
+import {
+  fetchUserDataSuccess,
+  fetchUserGistsSuccess,
+  fetchUserTopReposSuccess,
+} from './user.actions';
 
 const initialUserState: UserState = {
   avatar: '',
@@ -14,6 +18,7 @@ const initialUserState: UserState = {
   name: '',
   twitter_username: '',
   username: '',
+  type: '',
 };
 
 const reducer = createReducer(
@@ -22,6 +27,14 @@ const reducer = createReducer(
   on(fetchUserDataSuccess, (state, { userData }) => ({
     ...state,
     ...userData,
+  })),
+  on(fetchUserGistsSuccess, (state, { gists }) => ({
+    ...state,
+    gists,
+  })),
+  on(fetchUserTopReposSuccess, (state, { topRepos }) => ({
+    ...state,
+    topRepos,
   })),
 );
 
