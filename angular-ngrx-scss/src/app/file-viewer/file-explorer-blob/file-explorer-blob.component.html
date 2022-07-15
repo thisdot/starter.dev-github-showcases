@@ -1,0 +1,19 @@
+<ng-container *ngIf="selectedFile$ | async as selectedFile">
+  <div class="grid container">
+    <div class="grid-cols-12">
+      <!--      TODO: fix horizontal responsiveness on monday-->
+      <app-file-explorer-nav
+        [owner]="owner"
+        [name]="repoName"
+        [branch]="commitOrBranchOrTagName"
+        [path]="path"
+      ></app-file-explorer-nav>
+    </div>
+    <div class="grid-cols-12">
+      <app-file-viewer
+        [fileContent]="selectedFile"
+      >
+      </app-file-viewer>
+    </div>
+  </div>
+</ng-container>
