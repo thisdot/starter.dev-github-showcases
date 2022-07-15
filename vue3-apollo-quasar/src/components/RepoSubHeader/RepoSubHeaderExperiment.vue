@@ -357,9 +357,8 @@ const isNotActive = (value) => notify.value !== value;
 
 <style lang="scss" scoped>
 @import '@/styles/quasar.variables.scss';
-@import '@/styles/quasar.mediaquery.scss';
 .subheader {
-  background-color: $subheader;
+  background-color: $primary-100;
 }
 
 .user-reponame {

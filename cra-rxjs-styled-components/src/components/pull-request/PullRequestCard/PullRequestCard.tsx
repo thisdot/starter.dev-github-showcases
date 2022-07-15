@@ -3,7 +3,7 @@ import ClosedPRIcon from '../../icons/ClosedPRIcon';
 import MergedPRIcon from '../../icons/MergedPRIcon';
 import MessageIcon from '../../icons/MessageIcon';
 import OpenPRIcon from '../../icons/OpenPRIcon';
-import PullRequestCardIssueInfo from '../PullRequestCardIssueInfo';
+import PullRequestIssueInfo from '../../PullRequestIssueInfo';
 import { PullRequestCardWrapper } from './PullRequestCard.style';
 import type { Status } from '../types';
 
@@ -39,7 +39,7 @@ export default function PullRequestCard({
     <PullRequestCardWrapper>
       <div className="left">
         {getPRIcon(status)}
-        <PullRequestCardIssueInfo
+        <PullRequestIssueInfo
           title={title}
           openedNum={openedNum}
           openedBy={openedBy}

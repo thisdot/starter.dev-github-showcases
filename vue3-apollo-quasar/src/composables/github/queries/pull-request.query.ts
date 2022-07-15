@@ -18,6 +18,7 @@ export const PULL_REQUEST_QUERY = gql`
             }
             headRefName
             title
+            url
           }
         }
       }
@@ -37,6 +38,7 @@ export const PULL_REQUEST_QUERY = gql`
             }
             headRefName
             title
+            url
           }
         }
       }

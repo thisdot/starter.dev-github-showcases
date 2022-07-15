@@ -7,11 +7,14 @@ import { OcticonsDirective } from '../shared/directives/octicons.directive';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileNavComponent } from './profile/profile-nav/profile-nav.component';
 import { ProfileAboutComponent } from './profile/profile-about/profile-about.component';
-import { ProfileReposComponent } from './profile/profile-repos/profile-repos.component';
+import { RepoListComponent } from '../shared/components/repo-list/repo-list.component';
 import { RelativeTimePipe } from '../shared/pipes/relative-time.pipe';
 import { RepoCardComponent } from '../shared/components/repo-card/repo-card.component';
 import { UserGistsComponent } from './user-gists/user-gists.component';
 import { TopRepositoriesComponent } from './top-repositories/top-repositories.component';
+import { RepoControlsComponent } from '../shared/components/repo-controls/repo-controls.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserProfileComponent } from './profile/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +24,14 @@ import { TopRepositoriesComponent } from './top-repositories/top-repositories.co
     ProfileComponent,
     ProfileNavComponent,
     ProfileAboutComponent,
-    ProfileReposComponent,
+    RepoListComponent,
     RepoCardComponent,
     RelativeTimePipe,
     UserGistsComponent,
     TopRepositoriesComponent,
+    RepoControlsComponent,
+    UserProfileComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule],
+  imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule],
 })
 export class HomeModule {}

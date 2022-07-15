@@ -35,6 +35,7 @@ export class UserService {
         name: data.name,
         twitter_username: data.twitter_username,
         username: data.login,
+        type: data.type,
       })),
     );
   }
@@ -57,6 +58,7 @@ export class UserService {
         name: data.name,
         twitter_username: data.twitter_username,
         username: data.login,
+        type: data.type,
       })),
     );
   }
