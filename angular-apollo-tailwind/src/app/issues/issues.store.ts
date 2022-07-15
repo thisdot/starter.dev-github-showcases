@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { RouteConfigService } from '@this-dot/route-config';
-import { first, Observable, switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import {
   FilterState,
   ReposFilterStore,
