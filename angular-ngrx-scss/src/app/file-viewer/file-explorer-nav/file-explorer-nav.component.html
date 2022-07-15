@@ -1,0 +1,35 @@
+<nav class="file-explorer-container">
+  <button class="btn">
+    <span class="icon" appOcticon="git-branch"></span>
+    {{ branch }}
+    <span class="btnCaret">&#9660;</span>
+  </button>
+  <div *ngIf="crumbs.length" class="crumbs">
+    <a
+      [attr.data-testid]="'file explorer nav root ' + name"
+      [routerLink]="[basePath]"
+      class="rootLink"
+    >{{ name }}</a
+    >
+    <span class="separator">/</span>
+    <div *ngFor="let crumb of crumbs; let i = index">
+      <ng-container *ngIf="i === crumbs.length - 1; else hasCrumb">
+        <span
+          [attr.data-testid]="'file explorer nav end ' + crumb"
+          class="crumbEnd"
+        >{{ crumb }}</span
+        >
+      </ng-container>
+
+      <ng-template #hasCrumb>
+        <a
+          [attr.data-testid]="'file explorer nav crumb ' + crumb"
+          [routerLink]="getHref(i)"
+          class="crumbLink"
+        >{{ crumb }}</a
+        >
+        <span class="separator">/</span>
+      </ng-template>
+    </div>
+  </div>
+</nav>

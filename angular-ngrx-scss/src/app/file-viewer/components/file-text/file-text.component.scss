@@ -1,0 +1,20 @@
+@use '../../../shared/styles/variables';
+
+.codeBlock {
+  border-spacing: 5px;
+  background-color: variables.$white;
+  overflow: auto;
+  padding: 0.25rem 2rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  text-align: left;
+
+}
+
+.lineNumber {
+  display: table-cell;
+  padding-right: 1rem;
+  color: variables.$gray500;
+  text-align: right;
+  user-select: none;
+}
