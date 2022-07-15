@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const FileViewContainer = styled.div`
-    border: 1px solid rgb(209 213 219);
-    border-radius: 0.5rem
-    overflow: hidden;
+  border: 1px solid rgb(209 213 219);
+  border-radius: 0.5rem;
+  overflow: hidden;
 `;
 
 export const FileHeader = styled.div`
