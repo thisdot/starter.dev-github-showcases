@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+
 import colors from '../../../constants/colors';
 
 const flex = css`
@@ -53,8 +54,9 @@ export const PullRequestCardWrapper = styled.div`
        ${flex};
        & .icon {
          font-size: 1.1rem;
+         margin-right: 5px;
        }
-      flex-direction: column;
+      flex-direction: row;
     }
   }
 
@@ -75,4 +77,6 @@ export const PullRequestCardWrapper = styled.div`
       color: ${colors.blue800};
     }
   }
+
+
 `;
