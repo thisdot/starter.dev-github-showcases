@@ -45,6 +45,10 @@ a {
   grid-column: span 9 / span 9;
 }
 
+.col-span-12 {
+  grid-column: span 12 / span 12;
+}
+
 .subpage {
   padding: 2rem 1rem;
 }

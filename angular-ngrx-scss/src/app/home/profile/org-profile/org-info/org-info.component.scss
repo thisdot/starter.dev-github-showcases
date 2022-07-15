@@ -1,0 +1,23 @@
+.org-info-container {
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    .title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+    img {
+      display: block;
+      width: 32px;
+      height: 32px;
+      margin-right: 0.25rem;
+      aspect-ratio: 1/1;
+      border-radius: 0.25rem;
+      box-sizing: content-box;
+      background-color: white;
+    }
+  }
+}

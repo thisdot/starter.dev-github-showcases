@@ -60,7 +60,7 @@
       <h2>Organizations</h2>
       <ul>
         <li *ngFor="let org of profile?.orgs">
-          <a href="/orgs/{{ org.login }}">
+          <a routerLink="/{{ org.login }}">
             <img [src]="org.avatar_url" />
           </a>
         </li>
