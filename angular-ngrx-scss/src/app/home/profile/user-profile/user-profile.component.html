@@ -10,5 +10,5 @@
     <app-profile-about></app-profile-about>
   </div>
   <app-repo-controls class="col-span-9"></app-repo-controls>
-  <app-repo-list class="col-span-9" [repos$]="repos$"></app-repo-list>
+  <app-repo-list class="col-span-9" [repos]="repos$|async"></app-repo-list>
 </div>

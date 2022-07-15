@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserReposState } from 'src/app/state/profile/profile.state';
 
@@ -6,8 +6,9 @@ import { UserReposState } from 'src/app/state/profile/profile.state';
   selector: 'app-repo-list',
   templateUrl: './repo-list.component.html',
   styleUrls: ['./repo-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RepoListComponent {
   @Input()
-  repos$?: Observable<UserReposState[]>;
+  repos!: UserReposState[] | null;
 }
