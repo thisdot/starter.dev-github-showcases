@@ -61,7 +61,7 @@
       <ul>
         <li *ngFor="let org of profile?.orgs">
           <a routerLink="/{{ org.login }}">
-            <img [src]="org.avatar_url" />
+            <img [src]="org.avatar_url" alt="organization logo"/>
           </a>
         </li>
       </ul>
