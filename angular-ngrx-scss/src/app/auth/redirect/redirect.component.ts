@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
-import { loadUserToken, selectIsAuthenticated } from 'src/app/state/auth';
+import { saveUserToken, selectIsAuthenticated } from 'src/app/state/auth';
 @Component({
   selector: 'app-redirect',
   template: `<div>Redirecting...</div>`,
@@ -12,7 +12,7 @@ export class RedirectComponent implements OnInit {
   constructor(private router: Router, private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(loadUserToken());
+    this.store.dispatch(saveUserToken());
     this.isAuthenticated$.pipe(take(2)).subscribe((val) => {
       if (val) {
         this.router.navigate(['/']);
