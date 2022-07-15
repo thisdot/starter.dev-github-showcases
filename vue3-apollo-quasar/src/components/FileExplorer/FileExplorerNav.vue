@@ -1,14 +1,14 @@
 <template>
-  <div class="row text-dark">
+  <div class="full-width row text-dark">
     <div class="col-4 items-center flex">
       <q-icon :name="iconName" :color="iconColor" size="1.2rem"></q-icon>
-      <router-link class="file-explorer-link" :to="props.to">
-        {{ props.name }}
+      <router-link class="file-explorer-link" :to="content.to">
+        {{ content.name }}
       </router-link>
     </div>
-    <div class="col-4 text-grey">{{ props.latestCommitMessage }}</div>
+    <div class="col-4 text-grey">{{ content.latestCommitMessage }}</div>
     <div class="col-4 text-grey text-right">
-      {{ getFriendlyDate(props.lastUpdated) }}
+      {{ getFriendlyDate(content.lastUpdated) }}
     </div>
   </div>
 </template>
@@ -22,45 +22,44 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
+export type ExplorerContent = {
+  isDirectory: boolean;
+  name: string;
+  latestCommitMessage: string;
+  lastUpdated: string;
+  to?: string;
+};
+
 import { defineProps, computed } from 'vue';
 import { useFormatter } from '@/composables';
 
 const { getFriendlyDate } = useFormatter();
 
 const props = defineProps({
-  isDirectory: {
-    type: Boolean,
+  content: {
+    type: Object as () => ExplorerContent,
     required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  latestCommitMessage: {
-    type: String,
-    required: true,
-  },
-  lastUpdated: {
-    type: String,
-    required: true,
-  },
-  to: {
-    type: String,
-    default: '#!',
   },
 });
 
+const content = computed(() => props.content);
+
 const iconName = computed(() =>
-  props.isDirectory ? 'folder' : 'svguse:app-icons/file.svg#file',
+  content.value.isDirectory ? 'folder' : 'svguse:/app-icons/file.svg#file',
 );
 
-const iconColor = computed(() => (props.isDirectory ? 'info' : 'secondary'));
+const iconColor = computed(() =>
+  content.value.isDirectory ? 'info' : 'secondary',
+);
 </script>
 
 <style lang="scss">
 @import '@/styles/quasar.variables.scss';
 
 .file-explorer-link {
+  text-decoration: none;
+  color: $dark;
+
   &:hover {
     text-decoration: underline;
     color: $primary;
