@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import { UserReposState } from 'src/app/state/profile/profile.state';
 
 @Component({
