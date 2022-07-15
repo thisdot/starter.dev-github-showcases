@@ -1,4 +1,4 @@
-import { buildPrIssueResolution } from '../../../helpers/buildPrIssueResolution';
+import { buildPrIssueResolution } from '../../helpers/buildPrIssueResolution';
 import { format } from 'date-fns';
 
 interface Props {

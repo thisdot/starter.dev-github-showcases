@@ -1,8 +1,8 @@
 import MessageIcon from '../../icons/MessageIcon';
-import PullRequestCardIssueInfo from '../PullRequestCardIssueInfo';
 import { PullRequestCardWrapper } from './PullRequestCard.style';
 import type { State } from '../types';
 import { getPRIcon } from '../getPRIcon';
+import PullRequestCardIssueInfo from '../../PullRequestIssueInfo/PullRequestIssueInfo';
 
 interface Props {
   state: State;
