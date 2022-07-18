@@ -42,28 +42,25 @@ export const selectRepos = createSelector(
   selectFilterBySearch,
   selectFilterByType,
   (state: ProfileState, search?: string, type?: string) => {
-    const repos = state.repos;
-    console.log(search);
-    console.log(type);
+    let filteredRepos = state.repos;
     if (search) {
-      repos?.filter((item) =>
+      filteredRepos = filteredRepos?.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()),
       );
     }
     if (type !== TypeFilter.All) {
       if (type === TypeFilter.Archived) {
-        console.log('si');
-        return repos?.filter((item) => item.archived);
+        filteredRepos = filteredRepos?.filter((item) => item.archived === true);
       }
       if (type === TypeFilter.Forked) {
-        repos?.filter((item) => item.fork);
+        filteredRepos = filteredRepos?.filter((item) => item.fork === true);
       }
     }
-    return repos ?? [];
+    return filteredRepos ?? [];
   },
 );
 
 export const selectReposCount = createSelector(
   selectRepos,
-  (repos?: UserReposState[]) => repos?.length ?? 0,
+  (repos?: UserReposState[]) => repos?.length,
 );

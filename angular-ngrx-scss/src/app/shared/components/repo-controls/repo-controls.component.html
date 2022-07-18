@@ -31,8 +31,8 @@
     <div class="divider"></div>
     <div class="results">
       <p class="results__text">
-        <ng-container *ngIf="selectReposCount$ | async as count">
-          <span class="bold">{{ count }}</span>
+        <ng-container *ngIf="{ data: selectReposCount$ | async } as count">
+          <span class="bold">{{ count.data }}</span>
         </ng-container>
         results
         <ng-container *ngIf="selectFilterByType$ | async as type">
