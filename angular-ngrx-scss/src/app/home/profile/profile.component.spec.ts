@@ -4,7 +4,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ProfileAboutComponent } from './profile-about/profile-about.component';
 import { ProfileNavComponent } from './profile-nav/profile-nav.component';
-import { ProfileReposComponent } from './profile-repos/profile-repos.component';
+import { RepoListComponent } from '../../shared/components/repo-list/repo-list.component';
 
 import { ProfileComponent } from './profile.component';
 
@@ -20,7 +20,7 @@ describe('ProfileComponent', () => {
         NavBarComponent,
         ProfileNavComponent,
         ProfileAboutComponent,
-        ProfileReposComponent,
+        RepoListComponent,
       ],
       providers: [provideMockStore()],
     }).compileComponents();

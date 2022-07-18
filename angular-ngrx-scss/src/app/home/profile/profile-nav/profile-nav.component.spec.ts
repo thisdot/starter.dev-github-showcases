@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { ProfileNavComponent } from './profile-nav.component';
 
-describe('ProfileNavComponent', () => {
+describe('TabNavComponent', () => {
   let component: ProfileNavComponent;
   let fixture: ComponentFixture<ProfileNavComponent>;
 
@@ -11,6 +12,7 @@ describe('ProfileNavComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [ProfileNavComponent],
+      providers: [provideMockStore()],
     }).compileComponents();
   });
 

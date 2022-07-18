@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
@@ -9,6 +9,7 @@ import {
   RepoState,
 } from 'src/app/state/repository';
 import { environment } from 'src/environments/environment';
+import { Issues, RepositoryIssuesApiParams } from './repository.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -75,5 +76,32 @@ export class RepositoryService {
     return this.http
       .get<ReadmeApiResponse>(url)
       .pipe(map((file) => file.content));
+  }
+
+  getRepositoryIssues(
+    owner: string,
+    repoName: string,
+    params?: RepositoryIssuesApiParams,
+  ): Observable<Issues> {
+    const defaultParams = {
+      state: 'all',
+      sort: 'created',
+      direction: 'desc',
+      per_page: 30,
+      page: 1,
+    };
+
+    const url = `${environment.githubUrl}/repos/${encodeURIComponent(
+      owner,
+    )}/${encodeURIComponent(repoName)}/issues`;
+
+    return this.http.get<Issues>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+      params: new HttpParams({
+        fromObject: { ...Object.assign(defaultParams, params) },
+      }),
+    });
   }
 }
