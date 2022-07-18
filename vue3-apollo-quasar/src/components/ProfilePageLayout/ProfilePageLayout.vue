@@ -26,7 +26,7 @@
             <div class="col">
               <small class="text-caption text-lowercase">
                 <!-- length of filtered array -->
-                <strong>{{ repos.length }}</strong>
+                <strong>{{ filteredAndSortedRepos.length }}</strong>
                 results for
                 <!-- repo type -->
                 <strong
@@ -69,8 +69,8 @@
             </q-tab-panel>
 
             <q-tab-panel name="repositories">
-              <q-list v-if="repos" separator>
-                <q-item v-for="repo in repos" :key="repo.id">
+              <q-list v-if="filteredAndSortedRepos" separator>
+                <q-item v-for="repo in filteredAndSortedRepos" :key="repo.id">
                   <RepoCard
                     :name="repo.name"
                     :visibility="repo.visibility"
@@ -167,21 +167,16 @@ const modifyFilterTypeText = (filterText) => {
 
 const searchFilter = (value) => repos.value.filter((repo) => repo.name.match(new RegExp(value, 'i')));
 const typeFilter = (array, value) => {
-  switch (value) {
-    case filterTypeOption[1]:
-      array = array.filter((repo) => repo.isForked);
-      break;
-    case filterTypeOption[3]:
-      array = array.filter((repo) => repo.isArchived);
-      break;
-    default:
-      break;
+  if (value === filterTypeOption[1]) {
+    array = array.filter((repo) => repo.isForked);
+  } else if (value === filterTypeOption[3]) {
+    array = array.filter((repo) => repo.isArchived);
   }
-
   return array;
-}
+};
+const languageFilter = (array, value) => null;
 
-const filteredRepo = computed(() => {
+const filteredAndSortedRepos = computed(() => {
   let resp = [];
   /*****
    *TODO:
@@ -191,8 +186,12 @@ const filteredRepo = computed(() => {
    - then finaly sort
    * *****/
   resp = searchFilter(search.value);
-  if (filterType.value === filterTypeOption[0]) {
+  if (filterType.value !== filterTypeOption[0]) {
     resp = typeFilter(resp, filterType.value);
+  }
+
+  if (language.value !== languageOption[0]) {
+    resp = languageFilter(resp, language.value);
   }
 
   return resp;
