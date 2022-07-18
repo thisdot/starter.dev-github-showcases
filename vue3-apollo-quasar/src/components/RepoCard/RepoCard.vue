@@ -3,10 +3,9 @@
     <q-card-section class="row q-pb-none">
       <div class="col-auto flex">
         <h3 class="text-h6 q-my-none">
-          <!-- TODO: Add redirect to specific repo details page -->
-          <a href="#!" class="q-mr-sm">
-            {{ name }}
-          </a>
+          <router-link :to="`/${repoNameWithOwner}`" class="q-mr-sm">
+            {{ repoNameWithOwner }}
+          </router-link>
           <q-chip
             class="text-caption text-weight-bold text-secondary q-pa-sm"
             outline
@@ -69,6 +68,7 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
 import { useFormatter } from '@/composables';
 
 const props = defineProps({
@@ -86,6 +86,10 @@ const props = defineProps({
     type: String,
     default: '',
     required: false,
+  },
+  owner: {
+    type: Object as () => { __typename: string; login: string },
+    required: true,
   },
   primaryLanguage: {
     type: [Object, null],
@@ -109,6 +113,8 @@ const props = defineProps({
 
 const { getFriendlyDate, upperFirst } = useFormatter();
 const friendlyUpdatedAt = getFriendlyDate(props.updatedAt);
+
+const repoNameWithOwner = computed(() => `${props.owner.login}/${props.name}`);
 </script>
 
 <style lang="scss" scoped>
