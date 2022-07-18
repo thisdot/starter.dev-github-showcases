@@ -16,18 +16,16 @@
           <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div class="tab-contents col">
+        <div v-if="!loadingSearch" class="tab-contents col">
           <SearchFilter />
-
           <q-tab-panels v-model="tab">
             <q-tab-panel name="overview">
               <div class="text-h6">Overview</div>
               <slot name="overview"></slot>
             </q-tab-panel>
-
             <q-tab-panel name="repositories">
               <q-list v-if="repos" separator>
-                <q-item v-for="repo in repos" :key="repo.id">
+                <q-item v-for="repo in filteredRepos" :key="repo.id">
                   <RepoCard
                     :name="repo.name"
                     :visibility="repo.visibility"
@@ -64,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineProps, ref } from 'vue';
+import { computed, defineComponent, defineProps, ref } from 'vue';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
@@ -76,6 +74,8 @@ import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
 import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
+import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
 
 const getUserRepos = useUserRepos();
 const props = defineProps({
@@ -86,8 +86,32 @@ function changeTab(val) {
   tab.value = val;
 }
 
+const SEARCH_QUERY = gql`
+  query Search {
+    search @client
+  }
+`;
+
+const { result: searchData, loading: loadingSearch } = useQuery(SEARCH_QUERY);
 const user = useUserStore();
 const { repos, loading } = getUserRepos(props.username, false);
+const filteredRepos = computed(() => {
+  if (repos.value.length < 1) {
+    return repos;
+  }
+  return repos.value.reduce((acc, repo) => {
+    if (
+      searchData?.value?.search !== '' &&
+      !repo?.name
+        ?.toLocaleLowerCase()
+        .includes(searchData?.value?.search?.toLocaleLowerCase())
+    ) {
+      return acc;
+    }
+
+    return [...acc, repo];
+  }, []);
+});
 </script>
 
 <style lang="scss" scoped>
