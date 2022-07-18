@@ -98,7 +98,7 @@ function changeTab(val) {
 
 const SORT_BY_QUERY = gql`
   query SorBy {
-    sortby @cient
+    sortby @client
   }
 `;
 const { result: sortByData, loading: loadingSortBy } = useQuery(SORT_BY_QUERY);
