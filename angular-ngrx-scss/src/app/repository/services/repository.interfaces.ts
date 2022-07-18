@@ -1,4 +1,4 @@
-export interface IssueUser {
+export interface User {
   login: string;
   avatar_url: string;
   gravatar_id: string;
@@ -18,17 +18,17 @@ export interface Issue {
   state: string;
   title: string;
   body: string;
-  user: IssueUser;
+  user: User;
   labels: IssueLabel[];
-  assignee: IssueUser;
-  assignees: IssueUser[];
+  assignee: User;
+  assignees: User[];
   locked: boolean;
   active_lock_reason: string;
   comments: number;
   closed_at?: string;
   created_at: string;
   updated_at: string;
-  closed_by: IssueUser;
+  closed_by: User;
 }
 
 export type Issues = Array<Issue>;
@@ -45,4 +45,12 @@ export interface RepositoryIssuesApiParams {
   since?: string;
   per_page?: number;
   page?: number;
+}
+
+export interface PullRequest {
+  title: string;
+  number: number;
+  user: User;
+  closed_at?: string;
+  created_at: string;
 }

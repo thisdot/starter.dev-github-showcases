@@ -5,7 +5,7 @@ import {
   RepoContents,
   RepoState,
 } from 'src/app/state/repository';
-import { Issues } from './repository.interfaces';
+import { Issues, PullRequest } from './repository.interfaces';
 
 import { RepositoryService } from './repository.service';
 
@@ -124,6 +124,22 @@ const MOCK_ISSUES: Issues = [
   },
 ];
 
+const MOCK_PULL_REQUEST_NUMBER = 11814;
+
+const MOCK_PULL_REQUEST: PullRequest = {
+  title: 'Et quis culpa ex sapiente dolores qui quo qui.',
+  number: MOCK_PULL_REQUEST_NUMBER,
+  user: {
+    login: 'user',
+    avatar_url: 'http://localhost',
+    gravatar_id: 'user',
+    type: '',
+    site_admin: false,
+  },
+  closed_at: '2022-07-01T23:46:12Z',
+  created_at: '2022-07-01T23:46:12Z',
+};
+
 describe('RepositoryService', () => {
   let repoService: RepositoryService;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
@@ -196,6 +212,13 @@ describe('RepositoryService', () => {
       });
 
     expect(httpClientSpy.get.calls.count()).withContext('called once').toBe(1);
+  });
+
+  it('should return a pull request when given a pull request number', (done) => {
+    // MOCK_PULL_REQUEST_NUMBER
+    // MOCK_PULL_REQUEST
+
+    done();
   });
 
   it('should return issues associated with a provided repository with default parameters', (done) => {
