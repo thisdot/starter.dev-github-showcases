@@ -18,13 +18,49 @@
         <!-- Right side -->
         <div class="tab-contents col">
           <SearchFilter />
-          <div class="text-caption q-my-sm row justify-between items-center">
+          <q-separator class="q-mt-sm" />
+          <div
+            class="text-caption q-my-md row justify-between items-center"
+            v-show="!isOnlySorted"
+          >
             <div class="col">
-              <small class="text-caption"> Text here... </small>
+              <small class="text-caption text-lowercase">
+                <!-- length of filtered array -->
+                <strong>{{ repos.length }}</strong>
+                results for
+                <!-- repo type -->
+                <strong
+                  v-show="filterType && filterType !== filterTypeOption[0]"
+                >
+                  {{ modifyFilterTypeText(filterType) }}
+                </strong>
+                repositories
+                <!-- search text -->
+                <span v-show="search"
+                  >matching <strong> {{ search }} </strong></span
+                >
+                <!-- Language -->
+                <span v-show="language && language !== languageOption[0]">
+                  written in <strong> {{ language }} </strong></span
+                >
+                sorted by
+                <!-- Sorted text -->
+                <strong>
+                  {{ sortBy }}
+                </strong>
+              </small>
             </div>
-            <div>clear button here</div>
+            <div>
+              <a :href="'/' + username" class="row items-center clear_filter">
+                <q-icon
+                  name="fa fa-times"
+                  class="text-white rounded-borders clear_filter_icon q-mx-sm"
+                />
+                Clear filter
+              </a>
+            </div>
           </div>
-          <q-separator />
+          <q-separator v-show="!isOnlySorted" />
 
           <q-tab-panels v-model="tab">
             <q-tab-panel name="overview">
@@ -71,7 +107,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineProps, ref } from 'vue';
+import { computed, defineComponent, defineProps, ref } from 'vue';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
@@ -85,20 +121,87 @@ import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
 
 const getUserRepos = useUserRepos();
+const user = useUserStore();
+const tab = ref('');
+
+// Test Variables
+const filterTypeOption = ['All', 'Forks', 'Mirrors', 'Archived'];
+const sortOption = ['Last update', 'Name', 'Stars'];
+const languageOption = ['All', 'CSS', 'HTML'];
+const search = ref('0');
+const filterType = ref(filterTypeOption[0]);
+const sortBy = ref(sortOption[2]);
+const language = ref(languageOption[0]);
+// Test variables ends here
+
 const props = defineProps({
   username: String,
 });
-const tab = ref('');
+
 function changeTab(val) {
   tab.value = val;
 }
 
-const user = useUserStore();
 const { repos, loading } = getUserRepos(props.username, false);
+
+const isOnlySorted = computed(
+  () =>
+    sortBy.value &&
+    !(
+      search.value ||
+      language.value !== languageOption[0] ||
+      filterType.value !== filterTypeOption[0]
+    ),
+);
+
+const modifyFilterTypeText = (filterText) => {
+  if (filterText.endsWith('s')) {
+    if (filterText.match(new RegExp('forks', 'i'))) {
+      filterText = filterText.replace('s', 'ed');
+    } else {
+      filterText = filterText.replace('s', '');
+    }
+  }
+  return filterText;
+};
+
+const searchFilter = (value) => repos.value.filter((repo) => repo.name.match(new RegExp(value, 'i')));
+const typeFilter = (array, value) => {
+  switch (value) {
+    case filterTypeOption[1]:
+      array = array.filter((repo) => repo.isForked);
+      break;
+    case filterTypeOption[3]:
+      array = array.filter((repo) => repo.isArchived);
+      break;
+    default:
+      break;
+  }
+
+  return array;
+}
+
+const filteredRepo = computed(() => {
+  let resp = [];
+  /*****
+   *TODO:
+   - filter using search text
+   - filter using filter type value provided value not All
+   - filter using language value provided value not All
+   - then finaly sort
+   * *****/
+  resp = searchFilter(search.value);
+  if (filterType.value === filterTypeOption[0]) {
+    resp = typeFilter(resp, filterType.value);
+  }
+
+  return resp;
+});
 </script>
 
 <style lang="scss" scoped>
-@import '../../App.css';
+@import '@/App.css';
+@import '@/styles/quasar.variables.scss';
 .tab-contents {
   flex-grow: 1;
 }
@@ -121,5 +224,22 @@ const { repos, loading } = getUserRepos(props.username, false);
   @media (min-width: 1280px) {
     grid-column: span 3 / span 3;
   }
+}
+
+.clear_filter {
+  text-decoration: none;
+  color: $secondary-200;
+  & > &_icon {
+    padding: 0.1rem;
+    background-color: $secondary-200;
+    transition: all 0.3s ease-in-out;
+  }
+  &:hover {
+    color: $primary;
+    .clear_filter_icon {
+      background-color: $primary;
+    }
+  }
+  transition: all 0.3s ease-in-out;
 }
 </style>
