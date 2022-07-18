@@ -73,7 +73,7 @@ describe('RepoControlsComponent', () => {
   });
 
   it(
-    'should not show the label if has not active filters',
+    'should not show the label if has no active filters',
     waitForAsync(() => {
       component.ngOnInit();
       fixture.detectChanges();
