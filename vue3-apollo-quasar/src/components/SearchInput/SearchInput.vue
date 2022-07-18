@@ -1,22 +1,25 @@
 <template>
   <div class="search_container">
     <form>
-      <AppInput v-model="search" placeholder="Find a repository..." />
+      <AppInput v-model="searchRef" placeholder="Find a repository..." />
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watchEffect } from 'vue';
 import { AppInput } from '../';
+import { search } from '@/globals/search';
 
 export default defineComponent({
   name: 'SearchInput',
   components: { AppInput },
   setup() {
-    const search = ref('');
+    const searchRef = ref('');
 
-    return { search };
+    watchEffect(() => search(searchRef.value));
+
+    return { searchRef };
   },
 });
 </script>

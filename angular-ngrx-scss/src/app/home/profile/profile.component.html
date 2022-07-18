@@ -2,27 +2,19 @@
   <header>
     <app-nav-bar></app-nav-bar>
   </header>
-
   <main>
-    <div class="profile-header">
-      <div class="grid grid-cols-12 container">
-        <div class="col-span-3"></div>
-        <app-profile-nav
-          class="col-span-9"
-          [profile$]="profile$"
-        ></app-profile-nav>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-12 profile-body container">
-      <div class="subpage col-span-3">
-        <app-profile-about [profile$]="profile$"></app-profile-about>
-      </div>
-      <app-repo-controls class="col-span-9"></app-repo-controls>
-      <app-profile-repos
-        class="col-span-9"
-        [repos$]="repos$"
-      ></app-profile-repos>
-    </div>
+    <ng-container *ngIf="profile$ | async as profile">
+      <ng-container
+        [ngTemplateOutlet]="(isOrgProfile$ | async) ? org : user"
+      ></ng-container>
+    </ng-container>
   </main>
 </div>
+
+<ng-template #org>
+  <app-org-profile></app-org-profile>
+</ng-template>
+
+<ng-template #user>
+  <app-user-profile></app-user-profile>
+</ng-template>

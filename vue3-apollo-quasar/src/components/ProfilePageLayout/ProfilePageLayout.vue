@@ -16,7 +16,7 @@
           <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div class="tab-contents col">
+        <div v-if="!loadingSearch" class="tab-contents col">
           <SearchFilter />
           <q-separator class="q-mt-sm" />
           <div
@@ -36,8 +36,8 @@
                 </strong>
                 repositories
                 <!-- search text -->
-                <span v-show="search"
-                  >matching <strong> {{ search }} </strong></span
+                <span v-show="searchData.search"
+                  >matching <strong> {{ searchData.search }} </strong></span
                 >
                 <!-- Language -->
                 <span v-show="language && language !== languageOption[0]">
@@ -67,7 +67,6 @@
               <div class="text-h6">Overview</div>
               <slot name="overview"></slot>
             </q-tab-panel>
-
             <q-tab-panel name="repositories">
               <q-list v-if="filteredAndSortedRepos" separator>
                 <q-item v-for="repo in filteredAndSortedRepos" :key="repo.id">
@@ -119,6 +118,8 @@ import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
 import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
+import { useQuery } from '@vue/apollo-composable';
+import { SEARCH_QUERY } from './query';
 
 const getUserRepos = useUserRepos();
 const user = useUserStore();
@@ -128,8 +129,7 @@ const tab = ref('');
 const filterTypeOption = ['All', 'Forks', 'Mirrors', 'Archived'];
 const sortOption = ['Last update', 'Name', 'Stars'];
 const languageOption = ['All', 'CSS', 'HTML'];
-const search = ref('0');
-const filterType = ref(filterTypeOption[0]);
+const filterType = ref(filterTypeOption[1]);
 const sortBy = ref(sortOption[2]);
 const language = ref(languageOption[0]);
 // Test variables ends here
@@ -144,11 +144,28 @@ function changeTab(val) {
 
 const { repos, loading } = getUserRepos(props.username, false);
 
+const { result: searchData, loading: loadingSearch } = useQuery(SEARCH_QUERY);
+const searchFilter = (search) => {
+  if (repos.value.length < 1) {
+    return repos;
+  }
+  return repos.value.reduce((acc, repo) => {
+    if (
+      search !== '' &&
+      !repo?.name?.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+    ) {
+      return acc;
+    }
+
+    return [...acc, repo];
+  }, []);
+};
+
 const isOnlySorted = computed(
   () =>
     sortBy.value &&
     !(
-      search.value ||
+      searchData?.value.search ||
       language.value !== languageOption[0] ||
       filterType.value !== filterTypeOption[0]
     ),
@@ -165,10 +182,9 @@ const modifyFilterTypeText = (filterText) => {
   return filterText;
 };
 
-const searchFilter = (value) => repos.value.filter((repo) => repo.name.match(new RegExp(value, 'i')));
 const typeFilter = (array, value) => {
   if (value === filterTypeOption[1]) {
-    array = array.filter((repo) => repo.isForked);
+    array = array.filter((repo) => repo.isFork);
   } else if (value === filterTypeOption[3]) {
     array = array.filter((repo) => repo.isArchived);
   }
@@ -185,7 +201,7 @@ const filteredAndSortedRepos = computed(() => {
    - filter using language value provided value not All
    - then finaly sort
    * *****/
-  resp = searchFilter(search.value);
+  resp = searchFilter(searchData?.value.search);
   if (filterType.value !== filterTypeOption[0]) {
     resp = typeFilter(resp, filterType.value);
   }
@@ -199,7 +215,7 @@ const filteredAndSortedRepos = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/App.css';
+@import '../../App.css';
 @import '@/styles/quasar.variables.scss';
 .tab-contents {
   flex-grow: 1;

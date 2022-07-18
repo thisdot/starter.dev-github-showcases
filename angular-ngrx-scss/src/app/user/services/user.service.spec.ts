@@ -36,6 +36,7 @@ describe('UserService', () => {
       name: '',
       twitter_username: '',
       username: 'lindakatcodes',
+      type: 'User',
     };
 
     const expectedHttpResponse: Partial<UserApiResponse> = {
@@ -50,6 +51,7 @@ describe('UserService', () => {
       login: 'lindakatcodes',
       name: '',
       twitter_username: '',
+      type: 'User',
     };
 
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));

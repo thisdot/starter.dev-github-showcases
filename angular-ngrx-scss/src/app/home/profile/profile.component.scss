@@ -1,25 +1,3 @@
 main {
   padding-top: 2rem;
-
-  .profile-header {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    background-color: white;
-    border-bottom: 1px solid rgb(229, 231, 235, 1);
-  }
-}
-
-.profile-body {
-  .subpage {
-    grid-row: 1 / 3;
-  }
-
-  app-profile-about {
-    box-sizing: border-box;
-  }
-
-  app-repo-controls {
-    grid-row: 1 / 2;
-  }
 }

@@ -36,9 +36,10 @@ export default function IssueCard({
         {getPRIcon(status)}
         <PullRequestIssueInfo
           title={title}
-          openedNum={openedNum}
+          number={openedNum}
           openedBy={openedBy}
-          openedDay={openedDay}
+          created_at={openedDay}
+          state={status}
         />
       </div>
       <div className="right">
