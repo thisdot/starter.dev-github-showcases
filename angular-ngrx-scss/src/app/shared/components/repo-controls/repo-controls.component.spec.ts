@@ -65,7 +65,7 @@ describe('RepoControlsComponent', () => {
     });
   });
 
-  it('should get the repos count from selector', (done) => {
+  it('should get the repo count from the selector', (done) => {
     store.select(selectReposCount).subscribe((search) => {
       expect(search).toEqual(2);
       done();
