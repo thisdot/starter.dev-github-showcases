@@ -28,13 +28,13 @@ export const selectFilterBySearch = createSelector(
 
 export const selectFilterByType = createSelector(
   selectProfileState,
-  (state: ProfileState) => state.sortAndFilter?.type,
+  (state: ProfileState) => state.sortAndFilter?.type || TypeFilter.All,
 );
 
 export const hasActiveSortAndFilters = createSelector(
   selectFilterBySearch,
   selectFilterByType,
-  (search, type) => !!search || !!type,
+  (search, type) => !!search || type !== TypeFilter.All,
 );
 
 export const selectRepos = createSelector(

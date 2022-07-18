@@ -6,8 +6,6 @@ import {
   distinctUntilChanged,
   combineLatest,
   Subject,
-  of,
-  Observable,
 } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { setSortAndFilterProperties } from 'src/app/state/profile/profile.actions';
@@ -77,8 +75,6 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
     )
       .pipe(takeUntil(this.destroy$))
       .subscribe((filters: SortAndFilterState) => {
-        console.log(filters);
-        console.log(this);
         this.store.dispatch(setSortAndFilterProperties({ filters }));
       });
   }
@@ -93,8 +89,6 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   }
 
   handleTypeClick(type: string) {
-    console.log(this);
     this.typeFilter.setValue(type);
-    console.log(this.typeFilter);
   }
 }
