@@ -32,7 +32,7 @@
     transform-origin: top right;
     width: 18rem;
     border-radius: 0.375rem;
-    border: 1px solid #D1D5DB;
+    border: 1px solid #d1d5db;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
     &__header {
@@ -42,7 +42,7 @@
 
       &__description {
         padding: 0.625rem 1rem;
-        font-size: .75rem;
+        font-size: 0.75rem;
         line-height: 1rem;
         font-weight: 600;
       }
@@ -66,10 +66,10 @@
       text-align: left;
       text-transform: capitalize;
       width: 100%;
-      border-top: 1px solid #D1D5DB;
+      border-top: 1px solid #d1d5db;
 
       &:hover {
-        background-color: #F3F4F6;
+        background-color: #f3f4f6;
       }
     }
 
