@@ -165,7 +165,7 @@ const isOnlySorted = computed(
   () =>
     sortBy.value &&
     !(
-      searchData?.value.search ||
+      searchData?.value?.search ||
       language.value !== languageOption[0] ||
       filterType.value !== filterTypeOption[0]
     ),
@@ -201,7 +201,7 @@ const filteredAndSortedRepos = computed(() => {
    - filter using language value provided value not All
    - then finaly sort
    * *****/
-  resp = searchFilter(searchData?.value.search);
+  resp = searchFilter(searchData?.value?.search || '');
   if (filterType.value !== filterTypeOption[0]) {
     resp = typeFilter(resp, filterType.value);
   }
