@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-center items-center q-my-md">
     <button
-      class="row justify-center items-center btn-fixed-width text-caption pagination_btn text-capitalize bg-transparent no-border"
+      class="row justify-center items-center btn-fixed-width text-caption pagination_btn text-capitalize bg-transparent no-border prev_btn"
       :disabled="!isPrevActive"
       @click="prev()"
     >
@@ -9,7 +9,7 @@
       <span>{{ PAGINATIONS.PREV }}</span>
     </button>
     <button
-      class="row justify-center items-center btn-fixed-width text-caption pagination_btn text-capitalize bg-transparent no-border"
+      class="row justify-center items-center btn-fixed-width text-caption pagination_btn text-capitalize bg-transparent no-border next_btn"
       :disabled="!isNextActive"
       @click="next()"
     >
