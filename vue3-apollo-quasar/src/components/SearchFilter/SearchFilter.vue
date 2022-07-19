@@ -2,6 +2,62 @@
   <div class="repo_search_header">
     <SearchInput />
     <SearchDropdowns dropdownType="type" />
+    <SearchDropdowns dropdownType="language" />
+    <SearchDropdowns dropdownType="sort" v-if="!changingSortBy">
+      <template v-slot:sortby>
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center"
+          @click="updateSortByRef(SORT_OPTIONS.default)"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': sortBy() !== defaultSortBy }"
+          >
+            <q-icon
+              v-show="sortBy() === defaultSortBy"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ SORT_OPTIONS.default }}
+        </q-item>
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center"
+          @click="updateSortByRef(SORT_OPTIONS.name)"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': sortBy() !== SORT_OPTIONS.name }"
+          >
+            <q-icon
+              v-show="sortBy() === SORT_OPTIONS.name"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ SORT_OPTIONS.name }}
+        </q-item>
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center"
+          @click="updateSortByRef(SORT_OPTIONS.stars)"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': sortBy() !== SORT_OPTIONS.stars }"
+          >
+            <q-icon
+              v-show="sortBy() === SORT_OPTIONS.stars"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ SORT_OPTIONS.stars }}
+        </q-item>
+      </template>
+    </SearchDropdowns>
     <SearchDropdowns dropdownType="language" v-if="!changingLanguage">
       <template #languages>
         <q-item
@@ -59,6 +115,8 @@
 import { defineComponent, ref } from 'vue';
 
 import { SearchDropdowns, SearchInput } from '@/components';
+import { defaultSortBy, SORT_OPTIONS } from './data';
+import { sortBy } from '@/globals/sortby';
 import { defaultLanguageSort } from './data';
 import { filteredLanguage } from '@/globals/filteredLanguage';
 
@@ -79,6 +137,13 @@ export default defineComponent({
     SearchDropdowns,
   },
   setup() {
+    const changingSortBy = ref(false);
+
+    const updateSortByRef = (value) => {
+      changingSortBy.value = true;
+      sortBy(value);
+      changingSortBy.value = false;
+    };
     const changingLanguage = ref(false);
     const updateLanguageRef = (value) => {
       changingLanguage.value = true;
@@ -86,7 +151,13 @@ export default defineComponent({
       filteredLanguage(value);
       changingLanguage.value = false;
     };
+
     return {
+      defaultSortBy,
+      sortBy,
+      SORT_OPTIONS,
+      changingSortBy,
+      updateSortByRef,
       defaultLanguageSort,
       updateLanguageRef,
       changingLanguage,
@@ -98,6 +169,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import '../../App.css';
+.q-item {
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+}
 @import '@/styles/quasar.variables.scss';
 
 .repo_search_header {

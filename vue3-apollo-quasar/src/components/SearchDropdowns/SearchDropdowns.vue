@@ -73,7 +73,7 @@
       >
         <q-list class="dropdown-x search_dropdown-x" separator>
           <q-item class="flexbox close_container">
-            <strong>Sort By</strong>
+            <strong>Select order</strong>
             <button
               v-close-popup
               class="SelectMenu-closeButton"
@@ -83,12 +83,7 @@
               <q-icon class="fa fa-times"></q-icon>
             </button>
           </q-item>
-          <q-item clickable v-close-popup class="row items-center"
-            >Last Updated</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center"
-            >Stars</q-item
-          >
+          <slot name="sortby" />
         </q-list>
       </q-btn-dropdown>
     </div>

@@ -7,6 +7,7 @@ import { provideApolloClient } from '@vue/apollo-composable';
 import { setContext } from '@apollo/client/link/context';
 
 import { useToken } from '@/composables';
+import { sortBy } from '@/globals/sortby';
 import { filteredLanguage } from '@/globals/filteredLanguage';
 import { search } from '@/globals/search';
 
@@ -31,6 +32,11 @@ const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
+        sortby: {
+          read() {
+            return sortBy();
+          },
+        },
         language: {
           //The name we will be querying
           read() {

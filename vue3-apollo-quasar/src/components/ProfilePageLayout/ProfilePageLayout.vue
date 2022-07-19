@@ -68,6 +68,7 @@
 import { computed, defineComponent, defineProps, ref } from 'vue';
 import { useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
+import { SORT_OPTIONS } from '@/components/SearchFilter/data';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
@@ -98,6 +99,28 @@ function changeTab(val) {
   tab.value = val;
 }
 
+const SORT_BY_QUERY = gql`
+  query SorBy {
+    sortby @client
+  }
+`;
+const { result: sortByData, loading: loadingSortBy } = useQuery(SORT_BY_QUERY);
+
+const { repos, loading } = getUserRepos(props.username, false);
+
+const getTime = (time) => new Date(time).getTime();
+
+const sortedRepoData = computed(() => {
+  let resp = repos.value.slice(); //need because repos.value is a read only and can't bemodified.
+  if (sortByData.value?.sortby === SORT_OPTIONS.name) {
+    resp.sort((a, b) => (b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1));
+  } else if (sortByData.value?.sortby === SORT_OPTIONS.stars) {
+    resp.sort((a, b) => (b.stargazerCount > a.stargazerCount ? 1 : -1));
+  } else {
+    resp.sort((a, b) => (getTime(b.updatedAt) - getTime(a.updatedAt) ? 1 : -1));
+  }
+  return resp;
+});
 const LANGUAGE_QUERY = gql`
   query Language {
     language @client
@@ -106,8 +129,6 @@ const LANGUAGE_QUERY = gql`
 
 const { result: languageData, loading: loadingLanguage } =
   useQuery(LANGUAGE_QUERY);
-
-const { repos, loading } = getUserRepos(props.username, false);
 
 const matchText = (target, value) => target?.match(new RegExp(value, 'i'));
 
