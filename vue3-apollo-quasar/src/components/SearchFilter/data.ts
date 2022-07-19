@@ -4,3 +4,4 @@ export const SORT_OPTIONS = {
   name: 'Name',
   stars: 'Stars',
 };
+export const defaultLanguageSort = 'all';
