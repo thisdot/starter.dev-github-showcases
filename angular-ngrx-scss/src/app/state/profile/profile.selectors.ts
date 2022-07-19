@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { filter, pipe, scan } from 'rxjs';
 import { ProfileType } from '../user';
 import { ProfileState, TypeFilter, UserReposState } from './profile.state';
 
@@ -63,4 +64,28 @@ export const selectRepos = createSelector(
 export const selectReposCount = createSelector(
   selectRepos,
   (repos?: UserReposState[]) => repos?.length,
+);
+
+type LanguageMap = { [key: string]: string };
+
+export const filteredLanguages = createSelector(
+  selectRepos,
+  (repos?: UserReposState[]) => {
+    const initialValue: LanguageMap = { all: 'All' };
+
+    if (repos) {
+      const languageMap = repos.reduce(
+        (acc: LanguageMap, repo: UserReposState) =>
+          repo.language
+            ? { ...acc, [repo.language.toLowerCase()]: repo.language }
+            : acc,
+        initialValue,
+      );
+
+      return Object.entries(languageMap).map(([key, value]) => ({
+        value: key,
+        label: value,
+      }));
+    } else return [{ value: 'All', label: 'All' }];
+  },
 );

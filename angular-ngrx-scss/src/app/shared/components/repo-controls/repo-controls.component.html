@@ -16,8 +16,8 @@
     ></app-filter-dropdown>
     <app-filter-dropdown
       name="Language"
-      description="Select language"
-      [items]="typeFilters"
+      description="Select Language"
+      [items]="(filteredLanguages$ | async) || []"
       (setFilter)="handleTypeClick($event)"
     ></app-filter-dropdown>
     <app-filter-dropdown

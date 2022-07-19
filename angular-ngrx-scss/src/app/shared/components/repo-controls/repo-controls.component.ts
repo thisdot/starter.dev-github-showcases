@@ -10,6 +10,7 @@ import {
 import { startWith, takeUntil } from 'rxjs/operators';
 import { setSortAndFilterProperties } from 'src/app/state/profile/profile.actions';
 import {
+  filteredLanguages,
   hasActiveSortAndFilters,
   selectFilterBySearch,
   selectFilterByType,
@@ -70,6 +71,9 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   selectReposCount$ = this.store.select(selectReposCount);
   selectFilterBySearch$ = this.store.select(selectFilterBySearch);
   selectFilterByType$ = this.store.select(selectFilterByType);
+  filteredLanguages$ = this.store
+    .select(filteredLanguages)
+    .pipe((languages) => languages ?? []);
 
   readonly typeFilters = TYPE_FILTERS;
 
