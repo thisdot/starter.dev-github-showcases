@@ -12,6 +12,7 @@ import { setSortAndFilterProperties } from 'src/app/state/profile/profile.action
 import {
   filteredLanguages,
   hasActiveSortAndFilters,
+  selectFilterByLanguage,
   selectFilterBySearch,
   selectFilterByType,
   selectReposCount,
@@ -67,10 +68,12 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
   searchInput = new FormControl('');
   typeFilter = new FormControl(TypeFilter.All);
+  languageFilter = new FormControl(TypeFilter.All);
   hasActiveSortAndFilters$ = this.store.select(hasActiveSortAndFilters);
   selectReposCount$ = this.store.select(selectReposCount);
   selectFilterBySearch$ = this.store.select(selectFilterBySearch);
   selectFilterByType$ = this.store.select(selectFilterByType);
+  selectFilterByLanguage$ = this.store.select(selectFilterByLanguage);
   filteredLanguages$ = this.store
     .select(filteredLanguages)
     .pipe((languages) => languages ?? []);
@@ -93,11 +96,17 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
       startWith(null),
     );
 
+    const languageFilter$ = this.languageFilter.valueChanges.pipe(
+      distinctUntilChanged(),
+      startWith(null),
+    );
+
     combineLatest(
-      [searchInput$, typeFilter$],
-      (search: string, type: string) => ({
+      [searchInput$, typeFilter$, languageFilter$],
+      (search: string, type: string, language: string) => ({
         search,
         type,
+        language,
       }),
     )
       .pipe(takeUntil(this.destroy$))
@@ -117,5 +126,9 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
   handleTypeClick(type: string) {
     this.typeFilter.setValue(type);
+  }
+
+  handleLanguageClick(language: string) {
+    this.languageFilter.setValue(language);
   }
 }

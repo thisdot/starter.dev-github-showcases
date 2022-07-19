@@ -32,6 +32,11 @@ export const selectFilterByType = createSelector(
   (state: ProfileState) => state.sortAndFilter?.type || TypeFilter.All,
 );
 
+export const selectFilterByLanguage = createSelector(
+  selectProfileState,
+  (state: ProfileState) => state.sortAndFilter?.language || TypeFilter.All,
+);
+
 export const hasActiveSortAndFilters = createSelector(
   selectFilterBySearch,
   selectFilterByType,
