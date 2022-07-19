@@ -1,8 +1,103 @@
 <template>
   <div class="repo_search_header">
     <SearchInput />
-    <SearchDropdowns dropdownType="type" />
-    <SearchDropdowns dropdownType="language" />
+    <SearchDropdowns dropdownType="type" v-if="!changingFilterType">
+      <template v-slot:filtertype>
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center"
+          @click="updateFilterTypeRef(FILTER_TYPE_OPTIONS.default)"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': filterType() !== defaultFilterType }"
+          >
+            <q-icon
+              v-show="filterType() === defaultFilterType"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ defaultFilterType }}</q-item
+        >
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center"
+          @click="updateFilterTypeRef(FILTER_TYPE_OPTIONS.forks)"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': filterType() !== FILTER_TYPE_OPTIONS.forks }"
+          >
+            <q-icon
+              v-show="filterType() === FILTER_TYPE_OPTIONS.forks"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ FILTER_TYPE_OPTIONS.forks }}</q-item
+        >
+        <q-item
+          clickable
+          v-close-popup
+          class="row items-center"
+          @click="updateFilterTypeRef(FILTER_TYPE_OPTIONS.archived)"
+        >
+          <span
+            class="text-h6"
+            :class="{
+              'q-mr-md': filterType() !== FILTER_TYPE_OPTIONS.archived,
+            }"
+          >
+            <q-icon
+              v-show="filterType() === FILTER_TYPE_OPTIONS.archived"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ FILTER_TYPE_OPTIONS.archived }}</q-item
+        >
+      </template>
+    </SearchDropdowns>
+    <SearchDropdowns dropdownType="language" v-if="!changingLanguage">
+      <template #languages>
+        <q-item
+          clickable
+          @click="updateLanguageRef(defaultLanguageSort)"
+          v-close-popup
+          class="row items-center text-capitalize"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': filteredLanguage() !== defaultLanguageSort }"
+          >
+            <q-icon
+              v-show="filteredLanguage() === defaultLanguageSort"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ defaultLanguageSort }}
+        </q-item>
+        <q-item
+          v-for="(language, index) in languages"
+          :key="index"
+          clickable
+          v-close-popup
+          @click="updateLanguageRef(language.name)"
+          class="row items-center text-capitalize"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': filteredLanguage() !== language.name }"
+          >
+            <q-icon
+              v-show="filteredLanguage() === language.name"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ language.name }}
+        </q-item>
+      </template>
+    </SearchDropdowns>
     <SearchDropdowns dropdownType="sort" v-if="!changingSortBy">
       <template v-slot:sortby>
         <q-item
@@ -58,47 +153,6 @@
         </q-item>
       </template>
     </SearchDropdowns>
-    <SearchDropdowns dropdownType="language" v-if="!changingLanguage">
-      <template #languages>
-        <q-item
-          clickable
-          @click="updateLanguageRef(defaultLanguageSort)"
-          v-close-popup
-          class="row items-center m-list text-capitalize"
-        >
-          <span
-            class="text-h6"
-            :class="{ 'q-mr-md': filteredLanguage() !== defaultLanguageSort }"
-          >
-            <q-icon
-              v-show="filteredLanguage() === defaultLanguageSort"
-              name="svguse:app-icons/correct.svg#correct"
-            />
-          </span>
-          {{ defaultLanguageSort }}
-        </q-item>
-        <q-item
-          v-for="(language, index) in languages"
-          :key="index"
-          clickable
-          v-close-popup
-          @click="updateLanguageRef(language.name)"
-          class="row items-center text-capitalize"
-        >
-          <span
-            class="text-h6"
-            :class="{ 'q-mr-md': filteredLanguage() !== language.name }"
-          >
-            <q-icon
-              v-show="filteredLanguage() === language.name"
-              name="svguse:app-icons/correct.svg#correct"
-            />
-          </span>
-          {{ language.name }}
-        </q-item>
-      </template>
-    </SearchDropdowns>
-    <SearchDropdowns dropdownType="sort" />
     <div>
       <a href="https://github.com/new" class="flexbox new_repo">
         <q-icon
@@ -115,8 +169,10 @@
 import { defineComponent, ref } from 'vue';
 
 import { SearchDropdowns, SearchInput } from '@/components';
+import { FILTER_TYPE_OPTIONS, defaultFilterType } from './data';
+import { filterType } from '@/globals/filterType';
 import { defaultSortBy, SORT_OPTIONS } from './data';
-import { sortBy } from '@/globals/sortby';
+import { sortBy } from '@/globals/sortBy';
 import { defaultLanguageSort } from './data';
 import { filteredLanguage } from '@/globals/filteredLanguage';
 
@@ -137,6 +193,13 @@ export default defineComponent({
     SearchDropdowns,
   },
   setup() {
+    const changingFilterType = ref(false);
+
+    const updateFilterTypeRef = (value) => {
+      changingFilterType.value = true;
+      filterType(value);
+      changingFilterType.value = false;
+    };
     const changingSortBy = ref(false);
 
     const updateSortByRef = (value) => {
@@ -153,6 +216,11 @@ export default defineComponent({
     };
 
     return {
+      defaultFilterType,
+      FILTER_TYPE_OPTIONS,
+      changingFilterType,
+      updateFilterTypeRef,
+      filterType,
       defaultSortBy,
       sortBy,
       SORT_OPTIONS,
@@ -175,6 +243,10 @@ export default defineComponent({
 }
 @import '@/styles/quasar.variables.scss';
 
+.q-item {
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+}
 .repo_search_header {
   display: flex;
   flex-flow: column;
@@ -242,9 +314,5 @@ export default defineComponent({
       margin-left: 10px;
     }
   }
-}
-
-.m-list {
-  border-bottom: 1px solid $secondary-300;
 }
 </style>

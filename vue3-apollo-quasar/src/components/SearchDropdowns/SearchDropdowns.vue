@@ -19,25 +19,7 @@
               <q-icon class="fa fa-times"></q-icon>
             </button>
           </q-item>
-          <q-item clickable v-close-popup class="row items-center">All</q-item>
-          <q-item clickable v-close-popup class="row items-center"
-            >Public</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center"
-            >Private</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center"
-            >Sources</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center"
-            >Forks</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center"
-            >Archived</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center"
-            >Mirrors</q-item
-          >
+          <slot name="filtertype" />
         </q-list>
       </q-btn-dropdown>
     </div>
