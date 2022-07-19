@@ -7,7 +7,7 @@
         class="no-shadow repo_star_button search_b"
         tabindex="-2"
       >
-        <q-list class="dropdown-x search_dropdown-x">
+        <q-list class="dropdown-x search_dropdown-x" separator>
           <q-item class="close_container">
             <strong>Select type</strong>
             <button
@@ -16,44 +16,26 @@
               type="button"
               data-toggle-for="type-options"
             >
-              <svg
-                aria-label="Close menu"
-                aria-hidden="false"
-                role="img"
-                viewBox="0 0 16 16"
-                version="1.1"
-                data-view-component="true"
-                height="16"
-                width="16"
-                class="allSvgx"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"
-                ></path>
-              </svg>
+              <q-icon class="fa fa-times"></q-icon>
             </button>
           </q-item>
-          <q-separator />
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >All</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center">All</q-item>
+          <q-item clickable v-close-popup class="row items-center"
             >Public</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Private</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Sources</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Forks</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Archived</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Mirrors</q-item
           >
         </q-list>
@@ -66,7 +48,7 @@
         class="no-shadow repo_star_button search_b"
         tabindex="-3"
       >
-        <q-list class="dropdown-x search_dropdown-x">
+        <q-list class="dropdown-x search_dropdown-x" separator>
           <q-item class="close_container">
             <strong>Select Language</strong>
             <button
@@ -75,46 +57,10 @@
               type="button"
               data-toggle-for="type-options"
             >
-              <svg
-                aria-label="Close menu"
-                aria-hidden="false"
-                role="img"
-                viewBox="0 0 16 16"
-                version="1.1"
-                data-view-component="true"
-                height="16"
-                width="16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"
-                ></path>
-              </svg>
+              <q-icon class="fa fa-times"></q-icon>
             </button>
           </q-item>
-          <q-separator />
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >All</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >Js</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >Vue</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >CSS</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >HTML</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >PHP</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center m-list"
-            >Object-C</q-item
-          >
-          <q-item clickable v-close-popup class="row items-center">Ruby</q-item>
+          <slot name="languages" />
         </q-list>
       </q-btn-dropdown>
     </div>
@@ -125,7 +71,7 @@
         class="no-shadow repo_star_button search_b"
         tabindex="-4"
       >
-        <q-list class="dropdown-x search_dropdown-x">
+        <q-list class="dropdown-x search_dropdown-x" separator>
           <q-item class="flexbox close_container">
             <strong>Sort By</strong>
             <button
@@ -134,28 +80,13 @@
               type="button"
               data-toggle-for="type-options"
             >
-              <svg
-                aria-label="Close menu"
-                aria-hidden="false"
-                role="img"
-                viewBox="0 0 16 16"
-                version="1.1"
-                data-view-component="true"
-                height="16"
-                width="16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"
-                ></path>
-              </svg>
+              <q-icon class="fa fa-times"></q-icon>
             </button>
           </q-item>
-          <q-separator />
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Last Updated</q-item
           >
-          <q-item clickable v-close-popup class="row items-center m-list"
+          <q-item clickable v-close-popup class="row items-center"
             >Stars</q-item
           >
         </q-list>
@@ -181,6 +112,7 @@ export default defineComponent({
 
 <style lang="scss">
 @import '../../App.css';
+@import '@/styles/quasar.variables.scss';
 
 .repo_star_button {
   & .q-btn__content {
@@ -217,7 +149,7 @@ export default defineComponent({
     &:hover {
       background-color: #fff !important;
       svg {
-        color: var(--color-border) !important;
+        color: $secondary-300 !important;
       }
     }
   }
@@ -232,9 +164,5 @@ export default defineComponent({
   @media (min-width: 1024px) {
     width: 300px;
   }
-}
-
-.m-list {
-  border-bottom: 1px solid var(--color-border);
 }
 </style>

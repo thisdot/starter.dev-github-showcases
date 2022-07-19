@@ -2,24 +2,53 @@
   <div class="repo_search_header">
     <SearchInput />
     <SearchDropdowns dropdownType="type" />
-    <SearchDropdowns dropdownType="language" />
+    <SearchDropdowns dropdownType="language" v-if="!changingLanguage">
+      <template #languages>
+        <q-item
+          clickable
+          @click="updateLanguageRef(defaultLanguageSort)"
+          v-close-popup
+          class="row items-center m-list text-capitalize"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': filteredLanguage() !== defaultLanguageSort }"
+          >
+            <q-icon
+              v-show="filteredLanguage() === defaultLanguageSort"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ defaultLanguageSort }}
+        </q-item>
+        <q-item
+          v-for="(language, index) in languages"
+          :key="index"
+          clickable
+          v-close-popup
+          @click="updateLanguageRef(language.name)"
+          class="row items-center text-capitalize"
+        >
+          <span
+            class="text-h6"
+            :class="{ 'q-mr-md': filteredLanguage() !== language.name }"
+          >
+            <q-icon
+              v-show="filteredLanguage() === language.name"
+              name="svguse:app-icons/correct.svg#correct"
+            />
+          </span>
+          {{ language.name }}
+        </q-item>
+      </template>
+    </SearchDropdowns>
     <SearchDropdowns dropdownType="sort" />
     <div>
       <a href="https://github.com/new" class="flexbox new_repo">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 16 16"
-          version="1.1"
-          data-view-component="true"
-          height="16"
-          width="16"
-          class="allSvg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"
-          ></path>
-        </svg>
+        <q-icon
+          class="text-h5 custom-icon"
+          name="svguse:app-icons/book.svg#book"
+        ></q-icon>
         <span class="new_repo_btn"> {{ repoBtnText }} </span>
       </a>
     </div>
@@ -27,9 +56,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 import { SearchDropdowns, SearchInput } from '@/components';
+import { defaultLanguageSort } from './data';
+import { filteredLanguage } from '@/globals/filteredLanguage';
 
 export default defineComponent({
   name: 'SearchFilter',
@@ -38,22 +69,42 @@ export default defineComponent({
       type: String,
       default: 'New',
     },
+    languages: {
+      type: Array,
+      default: () => [],
+    },
   },
   components: {
     SearchInput,
     SearchDropdowns,
+  },
+  setup() {
+    const changingLanguage = ref(false);
+    const updateLanguageRef = (value) => {
+      changingLanguage.value = true;
+
+      filteredLanguage(value);
+      changingLanguage.value = false;
+    };
+    return {
+      defaultLanguageSort,
+      updateLanguageRef,
+      changingLanguage,
+      filteredLanguage,
+    };
   },
 });
 </script>
 
 <style lang="scss" scoped>
 @import '../../App.css';
+@import '@/styles/quasar.variables.scss';
 
 .repo_search_header {
   display: flex;
   flex-flow: column;
   padding: 16px 0;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid $secondary-300;
 
   @media (min-width: 1024px) {
     flex-flow: row;
@@ -64,7 +115,9 @@ export default defineComponent({
       margin-right: 4px;
     }
   }
-
+  .custom-icon {
+    transform: translate(0, 0.3rem);
+  }
   .new_repo {
     background-color: #2ea44f;
     color: #fff;
@@ -93,11 +146,6 @@ export default defineComponent({
       width: unset;
       justify-content: space-between;
     }
-    /* transform: translateY(-130px);
-    -webkit-transform: translateY(-130px);
-    -moz-transform: translateY(-130px);
-    -ms-transform: translateY(-130px);
-    -o-transform: translateY(-130px); */
     margin-left: unset;
     text-decoration: none;
 
@@ -119,5 +167,9 @@ export default defineComponent({
       margin-left: 10px;
     }
   }
+}
+
+.m-list {
+  border-bottom: 1px solid $secondary-300;
 }
 </style>

@@ -16,8 +16,8 @@
           <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div v-if="!loadingSearch" class="tab-contents col">
-          <SearchFilter />
+        <div class="tab-contents col" v-if="!loadingLanguage">
+          <SearchFilter :languages="getLanguages" />
           <q-tab-panels v-model="tab">
             <q-tab-panel name="overview">
               <div class="text-h6">Overview</div>
@@ -25,7 +25,10 @@
             </q-tab-panel>
             <q-tab-panel name="repositories">
               <q-list v-if="repos" separator>
-                <q-item v-for="repo in filteredRepos" :key="repo.id">
+                <q-item
+                  v-for="repo in repoDataFilteredByLanguage"
+                  :key="repo.id"
+                >
                   <RepoCard
                     :name="repo.name"
                     :visibility="repo.visibility"
@@ -63,6 +66,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, defineProps, ref } from 'vue';
+import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
@@ -70,22 +75,75 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
+import {
+  UserProfileCard,
+  SearchFilter,
+  TabHeader,
+  RepoCard,
+} from '@/components';
 import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
-import { useQuery } from '@vue/apollo-composable';
-import gql from 'graphql-tag';
+import { defaultLanguageSort } from '@/components/SearchFilter/data';
 
 const getUserRepos = useUserRepos();
+const user = useUserStore();
+const tab = ref('');
+
 const props = defineProps({
   username: String,
 });
-const tab = ref('');
+
 function changeTab(val) {
   tab.value = val;
 }
 
+const LANGUAGE_QUERY = gql`
+  query Language {
+    language @client
+  }
+`;
+
+const { result: languageData, loading: loadingLanguage } =
+  useQuery(LANGUAGE_QUERY);
+
+const { repos, loading } = getUserRepos(props.username, false);
+
+const matchText = (target, value) => target?.match(new RegExp(value, 'i'));
+
+const repoDataFilteredByLanguage = computed(() => {
+  let resp: any = [];
+  const language = languageData.value?.language;
+  if (repos.value && language && language !== defaultLanguageSort) {
+    resp = repos.value.filter((repo) =>
+      matchText(repo?.primaryLanguage?.name, language),
+    );
+  } else if (language === defaultLanguageSort) {
+    resp = repos.value;
+  }
+
+  return resp;
+});
+
+const inArray = (array, target) => {
+  return array.find((arr) => arr.name === target);
+};
+
+const getLanguages = computed(() => {
+  const languages = [];
+  repos.value.forEach((repo) => {
+    if (
+      repo.primaryLanguage &&
+      !inArray(languages, repo.primaryLanguage.name)
+    ) {
+      languages.push({
+        name: repo.primaryLanguage.name,
+      });
+    }
+  });
+  languages.sort((a, b) => (a.name > b.name ? 1 : -1));
+  return languages;
+});
 const SEARCH_QUERY = gql`
   query Search {
     search @client
@@ -93,8 +151,6 @@ const SEARCH_QUERY = gql`
 `;
 
 const { result: searchData, loading: loadingSearch } = useQuery(SEARCH_QUERY);
-const user = useUserStore();
-const { repos, loading } = getUserRepos(props.username, false);
 const filteredRepos = computed(() => {
   if (repos.value.length < 1) {
     return repos;
