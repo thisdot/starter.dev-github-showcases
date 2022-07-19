@@ -7,6 +7,7 @@ import {
   selectFilterByLanguage,
   selectFilterBySearch,
   selectFilterByType,
+  selectRepos,
   selectReposCount,
 } from 'src/app/state/profile/profile.selectors';
 import { TypeFilter } from 'src/app/state/profile/profile.state';
@@ -50,6 +51,10 @@ describe('RepoControlsComponent', () => {
             {
               selector: hasActiveSortAndFilters,
               value: MOCK_VALUE_SELECT_HAS_ACTIVE_FILTERS,
+            },
+            {
+              selector: selectRepos,
+              value: [],
             },
           ],
         }),
