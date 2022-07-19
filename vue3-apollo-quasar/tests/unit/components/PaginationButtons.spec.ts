@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { PaginationButtons } from '@/components';
 
-describe('PaginationButtons', () => {
+describe('PaginationButtons mounting', () => {
   let wrapper;
 
   beforeEach(() => {
@@ -13,31 +13,88 @@ describe('PaginationButtons', () => {
     });
   });
 
-  // const pagination_btns = wrapper.findAll('.pagination_btn');
   it('should mount', () => {
     expect(wrapper.exists()).toBeTruthy();
   });
+});
 
-  it('should not be clickable', async () => {
-    const prev_btn = wrapper.find('.prev_btn');
-    await prev_btn.trigger('click');
-    expect(prev_btn).toBe(false);
+describe('PaginationButtons when only prev button is disabled', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = mount(PaginationButtons, {
+      props: {
+        isPrevActive: false,
+        isNextActive: true,
+      },
+    });
   });
 
-  // let count = 0;
-  // it.each(pagination_btns)(
-  //   'should be either clickable or not pending the diabled state',
-  //   async (btn) => {
-  //     const prev = (wrapper.vm.prev = jest.fn());
-  //     const next = (wrapper.vm.next = jest.fn());
-  //     await btn.trigger('click');
-  //     if (count === 0) {
-  //       expect(prev).toBeCalledTimes(0);
-  //     } else {
-  //       expect(next).toBeCalledTimes(1);
-  //     }
-  //     count++;
-  //   },
-  // );
-  // count = 0;
+  it('should not be able to click the prev button', async () => {
+    const prev_btn = wrapper.find('.prev_btn');
+    const prev = (wrapper.vm.prev = jest.fn());
+    await prev_btn.trigger('click');
+    expect(prev.mock.calls.length).toBe(0);
+  });
+
+  it('should be able to click next button', async () => {
+    const next_btn = wrapper.find('.next_btn');
+    const next = (wrapper.vm.next = jest.fn());
+    await next_btn.trigger('click');
+    expect(next.mock.calls.length).toBe(1);
+  });
+});
+
+describe('PaginationButtons when both prev and next button are enabled', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = mount(PaginationButtons, {
+      props: {
+        isPrevActive: true,
+        isNextActive: true,
+      },
+    });
+  });
+
+  it('should not be able to click the prev button', async () => {
+    const prev_btn = wrapper.find('.prev_btn');
+    const prev = (wrapper.vm.prev = jest.fn());
+    await prev_btn.trigger('click');
+    expect(prev.mock.calls.length).toBe(1);
+  });
+
+  it('should be able to click next button', async () => {
+    const next_btn = wrapper.find('.next_btn');
+    const next = (wrapper.vm.next = jest.fn());
+    await next_btn.trigger('click');
+    expect(next.mock.calls.length).toBe(1);
+  });
+});
+
+describe('PaginationButtons when only next button is disabled', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = mount(PaginationButtons, {
+      props: {
+        isPrevActive: true,
+        isNextActive: false,
+      },
+    });
+  });
+
+  it('should not be able to click the prev button', async () => {
+    const prev_btn = wrapper.find('.prev_btn');
+    const prev = (wrapper.vm.prev = jest.fn());
+    await prev_btn.trigger('click');
+    expect(prev.mock.calls.length).toBe(1);
+  });
+
+  it('should be able to click next button', async () => {
+    const next_btn = wrapper.find('.next_btn');
+    const next = (wrapper.vm.next = jest.fn());
+    await next_btn.trigger('click');
+    expect(next.mock.calls.length).toBe(0);
+  });
 });
