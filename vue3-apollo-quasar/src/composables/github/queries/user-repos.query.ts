@@ -32,6 +32,13 @@ export const USER_REPOS_QUERY = gql`
             color
             name
           }
+          languages(first: 10, orderBy: { direction: ASC, field: SIZE }) {
+            nodes {
+              color
+              name
+              id
+            }
+          }
           isPrivate
           updatedAt
         }
