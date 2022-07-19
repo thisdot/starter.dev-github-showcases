@@ -32,15 +32,27 @@ export const selectFilterByType = createSelector(
   (state: ProfileState) => state.sortAndFilter?.type || TypeFilter.All,
 );
 
+export const isActiveFilterByType = createSelector(
+  selectFilterByType,
+  (type) => type !== TypeFilter.All,
+);
+
 export const selectFilterByLanguage = createSelector(
   selectProfileState,
   (state: ProfileState) => state.sortAndFilter?.language || TypeFilter.All,
 );
 
+export const isActiveFilterByLanguage = createSelector(
+  selectFilterByLanguage,
+  (language) => language !== TypeFilter.All,
+);
+
 export const hasActiveSortAndFilters = createSelector(
   selectFilterBySearch,
   selectFilterByType,
-  (search, type) => !!search || type !== TypeFilter.All,
+  selectFilterByLanguage,
+  (search, type, language) =>
+    !!search || type !== TypeFilter.All || language !== TypeFilter.All,
 );
 
 export const selectRepos = createSelector(

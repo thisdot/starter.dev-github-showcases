@@ -12,6 +12,8 @@ import { setSortAndFilterProperties } from 'src/app/state/profile/profile.action
 import {
   filteredLanguages,
   hasActiveSortAndFilters,
+  isActiveFilterByLanguage,
+  isActiveFilterByType,
   selectFilterByLanguage,
   selectFilterBySearch,
   selectFilterByType,
@@ -70,7 +72,12 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   typeFilter = new FormControl(TypeFilter.All);
   languageFilter = new FormControl(TypeFilter.All);
   hasActiveSortAndFilters$ = this.store.select(hasActiveSortAndFilters);
+
   selectReposCount$ = this.store.select(selectReposCount);
+
+  isActiveFilterByType$ = this.store.select(isActiveFilterByType);
+  isActiveFilterByLanguage$ = this.store.select(isActiveFilterByLanguage);
+
   selectFilterBySearch$ = this.store.select(selectFilterBySearch);
   selectFilterByType$ = this.store.select(selectFilterByType);
   selectFilterByLanguage$ = this.store.select(selectFilterByLanguage);
@@ -86,7 +93,7 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const searchInput$ = this.searchInput.valueChanges.pipe(
-      debounceTime(400),
+      debounceTime(200),
       distinctUntilChanged(),
       startWith(''),
     );
@@ -122,6 +129,8 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
   handleClearFiltersClick(): void {
     this.searchInput.reset();
+    this.typeFilter.setValue(TypeFilter.All);
+    this.languageFilter.setValue(TypeFilter.All);
   }
 
   handleTypeClick(type: string) {

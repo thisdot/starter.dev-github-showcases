@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import {
   hasActiveSortAndFilters,
+  selectFilterByLanguage,
   selectFilterBySearch,
   selectFilterByType,
   selectReposCount,
@@ -14,6 +15,7 @@ import { RepoControlsComponent } from './repo-controls.component';
 
 const MOCK_VALUE_SELECT_FILTER_BY_SEARCH = 'Test Search';
 const MOCK_VALUE_SELECT_FILTER_BY_TYPE = TypeFilter.Forked;
+const MOCK_VALUE_SELECT_FILTER_BY_LANGUAGE = 'typescript';
 const MOCK_VALUE_SELECT_REPOS_COUNT = 2;
 const MOCK_VALUE_SELECT_HAS_ACTIVE_FILTERS = false;
 
@@ -36,6 +38,10 @@ describe('RepoControlsComponent', () => {
             {
               selector: selectFilterByType,
               value: MOCK_VALUE_SELECT_FILTER_BY_TYPE,
+            },
+            {
+              selector: selectFilterByLanguage,
+              value: MOCK_VALUE_SELECT_FILTER_BY_LANGUAGE,
             },
             {
               selector: selectReposCount,
@@ -97,6 +103,13 @@ describe('RepoControlsComponent', () => {
   it('should get filter by type from selector', (done) => {
     store.select(selectFilterByType).subscribe((search) => {
       expect(search).toEqual(TypeFilter.Forked);
+      done();
+    });
+  });
+
+  it('should get filter by language from selector', (done) => {
+    store.select(selectFilterByLanguage).subscribe((language) => {
+      expect(language).toEqual('typescript');
       done();
     });
   });
