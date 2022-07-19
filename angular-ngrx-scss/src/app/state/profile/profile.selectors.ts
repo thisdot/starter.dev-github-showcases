@@ -50,10 +50,10 @@ export const selectRepos = createSelector(
     }
     if (type !== TypeFilter.All) {
       if (type === TypeFilter.Archived) {
-        filteredRepos = filteredRepos?.filter((item) => item.archived === true);
+        filteredRepos = filteredRepos?.filter((item) => Boolean(item.archived));
       }
       if (type === TypeFilter.Forked) {
-        filteredRepos = filteredRepos?.filter((item) => item.fork === true);
+        filteredRepos = filteredRepos?.filter((item) => Boolean(item.fork));
       }
     }
     return filteredRepos ?? [];

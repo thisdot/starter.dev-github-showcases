@@ -76,8 +76,8 @@ export interface UserReposState {
     url: string;
     node_id: string;
   } | null;
-  fork?: boolean;
-  archived?: boolean;
+  fork: boolean;
+  archived: boolean;
 }
 
 export interface UserRepo {
