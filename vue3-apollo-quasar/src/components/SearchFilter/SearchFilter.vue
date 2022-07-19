@@ -6,7 +6,7 @@
         <q-item
           clickable
           v-close-popup
-          class="row items-center m-list"
+          class="row items-center"
           @click="updateFilterTypeRef(FILTER_TYPE_OPTIONS.default)"
         >
           <span
@@ -23,7 +23,7 @@
         <q-item
           clickable
           v-close-popup
-          class="row items-center m-list"
+          class="row items-center"
           @click="updateFilterTypeRef(FILTER_TYPE_OPTIONS.forks)"
         >
           <span
@@ -40,7 +40,7 @@
         <q-item
           clickable
           v-close-popup
-          class="row items-center m-list"
+          class="row items-center"
           @click="updateFilterTypeRef(FILTER_TYPE_OPTIONS.archived)"
         >
           <span
@@ -64,7 +64,7 @@
           clickable
           @click="updateLanguageRef(defaultLanguageSort)"
           v-close-popup
-          class="row items-center m-list text-capitalize"
+          class="row items-center text-capitalize"
         >
           <span
             class="text-h6"
@@ -314,9 +314,5 @@ export default defineComponent({
       margin-left: 10px;
     }
   }
-}
-
-.m-list {
-  border-bottom: 1px solid $secondary-300;
 }
 </style>
