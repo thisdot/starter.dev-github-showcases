@@ -116,37 +116,44 @@ const { result: filterTypeData, loading: loadingFilterType } =
 const { repos, loading } = getUserRepos(props.username, false);
 
 const filteredTypeRepoData = computed(() => {
-  let resp: any = [];
+  let response = repos.value.slice();
   const filterType = filterTypeData.value?.filterType;
   if (filterType === FILTER_TYPE_OPTIONS.forks) {
-    resp = repos.value.filter((repo) => repo.isFork);
+    response = repos.value.filter((repo) => repo.isFork);
   } else if (filterType === FILTER_TYPE_OPTIONS.archived) {
-    resp = repos.value.filter((repo) => repo.isArchived);
+    response = repos.value.filter((repo) => repo.isArchived);
   } else if (filterType === defaultFilterType) {
-    resp = repos.value;
+    response = repos.value;
   }
-  return resp;
+  return response;
 });
+
 const SORT_BY_QUERY = gql`
   query SorBy {
     sortby @client
   }
 `;
+
 const { result: sortByData, loading: loadingSortBy } = useQuery(SORT_BY_QUERY);
 
 const getTime = (time) => new Date(time).getTime();
 
 const sortedRepoData = computed(() => {
-  let resp = repos.value.slice(); //need because repos.value is a read only and can't bemodified.
+  let response = repos.value.slice(); //need because repos.value is a read only and can't bemodified.
   if (sortByData.value?.sortby === SORT_OPTIONS.name) {
-    resp.sort((a, b) => (b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1));
+    response.sort((a, b) =>
+      b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1,
+    );
   } else if (sortByData.value?.sortby === SORT_OPTIONS.stars) {
-    resp.sort((a, b) => (b.stargazerCount > a.stargazerCount ? 1 : -1));
+    response.sort((a, b) => (b.stargazerCount > a.stargazerCount ? 1 : -1));
   } else {
-    resp.sort((a, b) => (getTime(b.updatedAt) - getTime(a.updatedAt) ? 1 : -1));
+    response.sort((a, b) =>
+      getTime(b.updatedAt) - getTime(a.updatedAt) ? 1 : -1,
+    );
   }
-  return resp;
+  return response;
 });
+
 const LANGUAGE_QUERY = gql`
   query Language {
     language @client
@@ -159,17 +166,17 @@ const { result: languageData, loading: loadingLanguage } =
 const matchText = (target, value) => target?.match(new RegExp(value, 'i'));
 
 const repoDataFilteredByLanguage = computed(() => {
-  let resp: any = [];
+  let response = repos.value.slice();
   const language = languageData.value?.language;
   if (repos.value && language && language !== defaultLanguageSort) {
-    resp = repos.value.filter((repo) =>
+    response = repos.value.filter((repo) =>
       matchText(repo?.primaryLanguage?.name, language),
     );
   } else if (language === defaultLanguageSort) {
-    resp = repos.value;
+    response = repos.value;
   }
 
-  return resp;
+  return response;
 });
 
 const inArray = (array, target) => {
@@ -191,6 +198,7 @@ const getLanguages = computed(() => {
   languages.sort((a, b) => (a.name > b.name ? 1 : -1));
   return languages;
 });
+
 const SEARCH_QUERY = gql`
   query Search {
     search @client
