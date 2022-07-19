@@ -3,7 +3,7 @@
     <SearchInput />
     <SearchDropdowns dropdownType="type" />
     <SearchDropdowns dropdownType="language" v-if="!changingLanguage">
-      <template v-slot:languages>
+      <template #languages>
         <q-item
           clickable
           @click="updateLanguageRef(defaultLanguageSort)"
