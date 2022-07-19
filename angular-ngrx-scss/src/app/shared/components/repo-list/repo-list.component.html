@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let repo of repos$ | async">
+  <li *ngFor="let repo of repos">
     <app-repo-card [repo]="repo"></app-repo-card>
   </li>
 </ul>

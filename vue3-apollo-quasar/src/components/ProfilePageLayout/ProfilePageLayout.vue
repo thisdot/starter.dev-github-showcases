@@ -23,7 +23,6 @@
               <div class="text-h6">Overview</div>
               <slot name="overview"></slot>
             </q-tab-panel>
-
             <q-tab-panel name="repositories">
               <q-list v-if="repos" separator>
                 <q-item
@@ -69,6 +68,7 @@
 import { computed, defineComponent, defineProps, ref } from 'vue';
 import { useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
+
 export default defineComponent({
   name: 'ProfilePageLayout',
 });
@@ -143,6 +143,30 @@ const getLanguages = computed(() => {
   });
   languages.sort((a, b) => (a.name > b.name ? 1 : -1));
   return languages;
+});
+const SEARCH_QUERY = gql`
+  query Search {
+    search @client
+  }
+`;
+
+const { result: searchData, loading: loadingSearch } = useQuery(SEARCH_QUERY);
+const filteredRepos = computed(() => {
+  if (repos.value.length < 1) {
+    return repos;
+  }
+  return repos.value.reduce((acc, repo) => {
+    if (
+      searchData?.value?.search !== '' &&
+      !repo?.name
+        ?.toLocaleLowerCase()
+        .includes(searchData?.value?.search?.toLocaleLowerCase())
+    ) {
+      return acc;
+    }
+
+    return [...acc, repo];
+  }, []);
 });
 </script>
 
