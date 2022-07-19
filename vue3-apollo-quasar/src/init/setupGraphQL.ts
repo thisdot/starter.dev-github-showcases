@@ -7,8 +7,8 @@ import { provideApolloClient } from '@vue/apollo-composable';
 import { setContext } from '@apollo/client/link/context';
 
 import { useToken } from '@/composables';
-import { filterType } from '@/globals/filtertype';
-import { sortBy } from '@/globals/sortby';
+import { filterType } from '@/globals/filterType';
+import { sortBy } from '@/globals/sortBy';
 import { filteredLanguage } from '@/globals/filteredLanguage';
 import { search } from '@/globals/search';
 

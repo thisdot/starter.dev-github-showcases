@@ -170,9 +170,9 @@ import { defineComponent, ref } from 'vue';
 
 import { SearchDropdowns, SearchInput } from '@/components';
 import { FILTER_TYPE_OPTIONS, defaultFilterType } from './data';
-import { filterType } from '@/globals/filtertype';
+import { filterType } from '@/globals/filterType';
 import { defaultSortBy, SORT_OPTIONS } from './data';
-import { sortBy } from '@/globals/sortby';
+import { sortBy } from '@/globals/sortBy';
 import { defaultLanguageSort } from './data';
 import { filteredLanguage } from '@/globals/filteredLanguage';
 
