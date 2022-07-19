@@ -1,6 +1,7 @@
 @use '../shared/styles/variables';
 
 .page {
+  position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -9,8 +10,8 @@
 }
 
 .form {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   display: grid;
   place-items: center;
 }

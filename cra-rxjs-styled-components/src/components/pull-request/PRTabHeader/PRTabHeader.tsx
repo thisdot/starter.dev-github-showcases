@@ -1,14 +1,16 @@
-import { useCallback, useState } from 'react';
-import DetailsDropdown from '../../DetailsDropdown';
-import CorrectIcon from '../../icons/CorrectIcon';
-import PullRequestIcon from '../../icons/PullRequestIcon';
-import type { PRTabValues } from '../types';
-
 import { Container, StatusLabel, StatusTab } from './PRTabHeader.style';
+import { useCallback, useState } from 'react';
+
+import CorrectIcon from '../../icons/CorrectIcon';
+import DetailsDropdown from '../../DetailsDropdown';
 import type { DropdownTitle } from '../types';
+import type { PRTabValues } from '../types';
+import PullRequestIcon from '../../icons/PullRequestIcon';
 
 interface Props {
   toggleTab: any;
+  openPRCount: number;
+  closedPRCount: number;
 }
 
 export default function PullRequestTabHeader(props: Props) {
@@ -36,7 +38,7 @@ export default function PullRequestTabHeader(props: Props) {
           active={activeTab === 'open'}
         >
           <PullRequestIcon />
-          <span>10</span>
+          <span>{props.openPRCount}</span>
           <span>Open</span>
         </StatusLabel>
         <StatusLabel
@@ -44,7 +46,7 @@ export default function PullRequestTabHeader(props: Props) {
           active={activeTab === 'close'}
         >
           <CorrectIcon />
-          <span>14</span>
+          <span>{props.closedPRCount}</span>
           <span>Close</span>
         </StatusLabel>
       </StatusTab>

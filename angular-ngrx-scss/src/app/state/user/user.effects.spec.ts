@@ -25,6 +25,7 @@ const USER_STATE_MOCK: UserState = {
   location: '',
   name: '',
   twitter_username: '',
+  type: '',
 };
 
 describe('UserEffects', () => {
@@ -77,6 +78,7 @@ describe('UserEffects', () => {
       name: '',
       twitter_username: '',
       username: 'lindakatcodes',
+      type: 'User',
     };
 
     userServiceMock.getAuthenticatedUserInfo.and.returnValue(

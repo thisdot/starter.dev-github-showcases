@@ -29,6 +29,10 @@ a {
   overflow: visible;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .grid {
   display: grid;
 }
@@ -43,6 +47,10 @@ a {
 
 .col-span-9 {
   grid-column: span 9 / span 9;
+}
+
+.col-span-12 {
+  grid-column: span 12 / span 12;
 }
 
 .subpage {

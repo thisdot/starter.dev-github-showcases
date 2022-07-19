@@ -16,7 +16,12 @@ app.use(
   cors({
     credentials: true,
     origin: new RegExp(
-      ['localhost', process.env.SERVER_BASE_URL, process.env.CORS_REGEXP]
+      [
+        'localhost',
+        process.env.SERVER_BASE_URL,
+        process.env.CORS_REGEXP,
+        process.env.PR_PREVIEW_REGEXP,
+      ]
         .filter(Boolean)
         .join('|'),
     ),

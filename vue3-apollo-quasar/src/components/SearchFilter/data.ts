@@ -4,3 +4,10 @@ export const FILTER_TYPE_OPTIONS = {
   forks: 'Forks',
   archived: 'Archived',
 };
+export const defaultSortBy = 'Last updated';
+export const SORT_OPTIONS = {
+  default: defaultSortBy,
+  name: 'Name',
+  stars: 'Stars',
+};
+export const defaultLanguageSort = 'all';

@@ -5,6 +5,7 @@ export interface ProfileState {
   orgs?: UserOrgsState[];
   repos?: UserReposState[];
   gists?: UserGistsState[];
+  sortAndFilter?: SortAndFilterState;
 }
 
 export interface UserGistsState {
@@ -190,3 +191,7 @@ export interface UserRepo {
 }
 
 export type UserReposApiResponse = UserRepo[];
+
+export interface SortAndFilterState {
+  search: string;
+}
