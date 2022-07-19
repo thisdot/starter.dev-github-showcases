@@ -1,6 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ProfileType } from '../user';
-import { ProfileState, TypeFilter, UserReposState } from './profile.state';
+import {
+  OrderField,
+  ProfileState,
+  TypeFilter,
+  UserReposState,
+} from './profile.state';
 
 export const profileFeatureKey = 'profile';
 export const selectProfileState =
@@ -46,12 +51,21 @@ export const isActiveFilterByLanguage = createSelector(
   (language) => language !== TypeFilter.All,
 );
 
+export const selectSortFilter = createSelector(
+  selectProfileState,
+  (state: ProfileState) => state.sortAndFilter?.sort || OrderField.UpdatedAt,
+);
+
 export const hasActiveSortAndFilters = createSelector(
   selectFilterBySearch,
   selectFilterByType,
   selectFilterByLanguage,
-  (search, type, language) =>
-    !!search || type !== TypeFilter.All || language !== TypeFilter.All,
+  selectSortFilter,
+  (search, type, language, sort) =>
+    !!search ||
+    type !== TypeFilter.All ||
+    language !== TypeFilter.All ||
+    sort !== OrderField.UpdatedAt,
 );
 
 export const selectRepos = createSelector(

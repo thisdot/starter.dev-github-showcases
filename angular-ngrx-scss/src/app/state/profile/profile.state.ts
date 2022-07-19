@@ -198,10 +198,17 @@ export interface SortAndFilterState {
   search: string;
   type: string;
   language: string;
+  sort: string;
 }
 
 export enum TypeFilter {
   All = 'all',
   Forked = 'forked',
   Archived = 'archived',
+}
+
+export enum OrderField {
+  UpdatedAt = 'update_at',
+  Name = 'name',
+  Stargazers = 'stargazers_count',
 }

@@ -22,9 +22,10 @@
     ></app-filter-dropdown>
     <app-filter-dropdown
       name="Sort"
-      description="Select type"
-      [items]="typeFilters"
-      (setFilter)="handleTypeClick($event)"
+      description="Select sort"
+      [items]="sortItems"
+      [current]="selectSortFilter$ | async"
+      (setFilter)="handleSortClick($event)"
     ></app-filter-dropdown>
   </div>
   <ng-container *ngIf="hasActiveSortAndFilters$ | async">

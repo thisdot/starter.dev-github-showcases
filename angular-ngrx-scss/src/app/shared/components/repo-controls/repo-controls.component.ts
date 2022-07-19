@@ -18,8 +18,10 @@ import {
   selectFilterBySearch,
   selectFilterByType,
   selectReposCount,
+  selectSortFilter,
 } from 'src/app/state/profile/profile.selectors';
 import {
+  OrderField,
   SortAndFilterState,
   TypeFilter,
 } from 'src/app/state/profile/profile.state';
@@ -39,6 +41,15 @@ const TYPE_FILTERS = [
   },
 ];
 
+const SORT_ITEMS = [
+  {
+    label: 'Last updated',
+    value: OrderField.UpdatedAt,
+  },
+  { value: OrderField.Name, label: 'Name' },
+  { value: OrderField.Stargazers, label: 'Stars' },
+];
+
 @Component({
   selector: 'app-repo-controls',
   templateUrl: './repo-controls.component.html',
@@ -50,6 +61,7 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   searchInput = new FormControl('');
   typeFilter = new FormControl(TypeFilter.All);
   languageFilter = new FormControl(TypeFilter.All);
+  sortFilter = new FormControl(OrderField.UpdatedAt);
   hasActiveSortAndFilters$ = this.store.select(hasActiveSortAndFilters);
 
   selectReposCount$ = this.store.select(selectReposCount);
@@ -63,8 +75,10 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   filteredLanguages$ = this.store
     .select(filteredLanguages)
     .pipe((languages) => languages ?? []);
+  selectSortFilter$ = this.store.select(selectSortFilter);
 
   readonly typeFilters = TYPE_FILTERS;
+  readonly sortItems = SORT_ITEMS;
 
   constructor(private store: Store) {}
 
@@ -85,12 +99,18 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
       startWith(null),
     );
 
+    const sortFilter$ = this.sortFilter.valueChanges.pipe(
+      distinctUntilChanged(),
+      startWith(null),
+    );
+
     combineLatest(
-      [searchInput$, typeFilter$, languageFilter$],
-      (search: string, type: string, language: string) => ({
+      [searchInput$, typeFilter$, languageFilter$, sortFilter$],
+      (search: string, type: string, language: string, sort: string) => ({
         search,
         type,
         language,
+        sort,
       }),
     )
       .pipe(takeUntil(this.destroy$))
@@ -110,5 +130,9 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
   handleLanguageClick(language: string) {
     this.languageFilter.setValue(language);
+  }
+
+  handleSortClick(sort: string) {
+    this.typeFilter.setValue(sort);
   }
 }
