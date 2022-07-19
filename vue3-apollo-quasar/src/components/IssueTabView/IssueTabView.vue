@@ -3,13 +3,13 @@
     <div class="tab_view">
       <IssuePullRequestTab
         @changeTab="changeTab"
-        :openCounts="countList(PULL_REQUESTS.openPullRequest)"
-        :closedCounts="countList(PULL_REQUESTS.closedPullRequest)"
+        :openCounts="countList(ISSUES.openIssue)"
+        :closedCounts="countList(ISSUES.closedIssue)"
         :tabType="card_type"
       />
-      <q-list class="open-pr" separator v-if="tabRef === TABS.OPEN">
+      <q-list class="open-issue" separator v-if="tabRef === TABS.OPEN">
         <IssuesPullRequestsCard
-          v-for="(data, index) in PULL_REQUESTS.openPullRequest"
+          v-for="(data, index) in ISSUES.openIssue"
           :key="index"
           :state="toLowerCase(data.state)"
           :cardType="card_type"
@@ -23,9 +23,9 @@
         </IssuesPullRequestsCard>
       </q-list>
 
-      <q-list class="closed-pr" separator v-else>
+      <q-list class="closed-issue" separator v-else>
         <IssuesPullRequestsCard
-          v-for="(data, index) in PULL_REQUESTS.closedPullRequest"
+          v-for="(data, index) in ISSUES.closedIssue"
           :key="index"
           :state="toLowerCase(data.state)"
           :cardType="card_type"
@@ -52,7 +52,7 @@
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-  name: 'PullRequestTabView',
+  name: 'IssueTabView',
 });
 </script>
 <script lang="ts" setup>
@@ -61,10 +61,10 @@ import {
   IssuesPullRequestsCard,
   PaginationButtons,
 } from '@/components';
-import { PULL_REQUESTS, TABS } from './data';
+import { ISSUES, TABS } from './data';
 
 const tabRef = ref(TABS.OPEN);
-const card_type = 'pullrequest';
+const card_type = 'issue';
 
 const changeTab = (tab: string) => {
   tabRef.value = tab;
@@ -74,7 +74,7 @@ const paginate = (value) => null;
 const toLowerCase = (value: string) => value.toLowerCase();
 const countList = (array) => array.length;
 const showPagination = (tab) =>
-  tab === tabRef.value && PULL_REQUESTS[`${tab}PullRequest`].length > 6;
+  tab === tabRef.value && ISSUES[`${tab}Issue`].length > 6;
 </script>
 
 <style lang="scss" scoped>

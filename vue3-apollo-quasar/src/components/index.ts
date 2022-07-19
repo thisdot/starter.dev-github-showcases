@@ -18,6 +18,7 @@ export { default as TabHeader } from './TabHeader';
 export { default as ProfilePageLayout } from './ProfilePageLayout';
 export { default as OrganizationPageLayout } from './OrganizationPageLayout';
 export { default as PullRequestTabView } from './PullRequestTabView';
+export { default as IssueTabView } from './IssueTabView';
 export { default as RepoSubHeader } from './RepoSubHeader';
 export { default as TextWithIconAndCount } from './TextWithIconAndCount';
 export { default as IssuesPullRequestsCard } from './IssuesPullRequestsCard';
