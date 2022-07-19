@@ -1,4 +1,5 @@
 <nav class="file-explorer-container">
+  <!--  TODO: this should actually be a functional dropdown list-->
   <button class="btn">
     <span class="icon" appOcticon="git-branch"></span>
     {{ branch }}
@@ -9,7 +10,7 @@
       [attr.data-testid]="'file explorer nav root ' + name"
       [routerLink]="[basePath]"
       class="rootLink"
-    >{{ name }}</a
+      >{{ name }}</a
     >
     <span class="separator">/</span>
     <div *ngFor="let crumb of crumbs; let i = index">
@@ -17,7 +18,7 @@
         <span
           [attr.data-testid]="'file explorer nav end ' + crumb"
           class="crumbEnd"
-        >{{ crumb }}</span
+          >{{ crumb }}</span
         >
       </ng-container>
 
@@ -26,7 +27,7 @@
           [attr.data-testid]="'file explorer nav crumb ' + crumb"
           [routerLink]="getHref(i)"
           class="crumbLink"
-        >{{ crumb }}</a
+          >{{ crumb }}</a
         >
         <span class="separator">/</span>
       </ng-template>

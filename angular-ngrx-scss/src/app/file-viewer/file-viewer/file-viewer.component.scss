@@ -10,8 +10,9 @@
 .fileHeader {
   padding: 0.75rem 1rem;
   background-color: variables.$gray100;
-  color: #1F2937;
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: variables.$gray800;
+  font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
   font-size: 0.75rem;
   line-height: 1rem;
   border-bottom-width: 1px;

@@ -1,5 +1,14 @@
 @use '../../../shared/styles/variables';
 
+:host {
+  border: 1px solid variables.$gray100;
+  display: block;
+}
+
+.table-row {
+  display: table-row;
+}
+
 .codeBlock {
   border-spacing: 5px;
   background-color: variables.$white;
@@ -8,7 +17,6 @@
   font-size: 0.75rem;
   line-height: 1rem;
   text-align: left;
-
 }
 
 .lineNumber {
