@@ -9,8 +9,11 @@ import {
   fetchRepository,
   fetchRepositorySuccess,
   fetchRepositoryFailure,
+  fetchFileContents,
+  fetchFileContentsSuccess,
+  fetchFileContentsFailure,
 } from './repository.actions';
-import { RepoState } from './repository.state';
+import { FileContents, RepoState } from './repository.state';
 
 describe('RepositoryEffects', () => {
   let actions$: Observable<Action>;
@@ -23,6 +26,7 @@ describe('RepositoryEffects', () => {
       'getPullRequestList',
       'getRepositoryContents',
       'getReadmeContent',
+      'getFileContents',
     ]);
     TestBed.configureTestingModule({
       providers: [
@@ -94,6 +98,63 @@ describe('RepositoryEffects', () => {
     effects.fetchRepository$.subscribe((action) => {
       expect(action).toEqual(fetchRepositoryFailure({ error: expectedError }));
       done();
+    });
+  });
+
+  describe('fetchFileContents$', () => {
+    it('should dispatch "fetchFileContentsSuccess" action if call to fetch file content is successful', (done) => {
+      actions$ = of(
+        fetchFileContents({
+          owner: 'thisdot',
+          repoName: 'starter.dev-github-showcases',
+          path: 'README.md',
+          commitOrBranchOrTagName: 'main',
+        }),
+      );
+
+      const expectedResponseData: FileContents = {
+        content: 'This is a readme file',
+        name: 'starter.dev-github-showcases',
+        type: 'file',
+        size: 223,
+      };
+
+      repoServiceMock.getFileContents.and.returnValue(of(expectedResponseData));
+
+      effects.fetchFileContents$.subscribe((action) => {
+        expect(action).toEqual(
+          fetchFileContentsSuccess({ fileContents: expectedResponseData }),
+        );
+        done();
+      });
+    });
+
+    it('should dispatch "fetchFileContentsFailure" action if call to fetch file content is unsuccessful', (done) => {
+      actions$ = of(
+        fetchFileContents({
+          owner: 'thisdot',
+          repoName: 'starter.dev-github-showcases',
+          path: 'README.md',
+          commitOrBranchOrTagName: 'main',
+        }),
+      );
+
+      const expectedError = {
+        message: 'error',
+      };
+
+      repoServiceMock.getFileContents.and.returnValue(
+        throwError(() => expectedError),
+      );
+
+      effects.fetchFileContents$.subscribe((action) => {
+        expect(action).toEqual(
+          fetchFileContentsFailure({
+            error: expectedError,
+          }),
+        );
+        done();
+      });
     });
   });
 });
