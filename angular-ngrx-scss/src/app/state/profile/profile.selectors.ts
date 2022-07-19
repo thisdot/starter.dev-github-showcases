@@ -59,8 +59,10 @@ export const selectRepos = createSelector(
   selectProfileState,
   selectFilterBySearch,
   selectFilterByType,
-  (state: ProfileState, search?: string, type?: string) => {
+  selectFilterByLanguage,
+  (state: ProfileState, search?: string, type?: string, language?: string) => {
     let filteredRepos = state.repos;
+    console.log(language);
     if (search) {
       filteredRepos = filteredRepos?.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()),
@@ -73,6 +75,11 @@ export const selectRepos = createSelector(
       if (type === TypeFilter.Forked) {
         filteredRepos = filteredRepos?.filter((item) => Boolean(item.fork));
       }
+    }
+    if (language !== TypeFilter.All) {
+      filteredRepos = filteredRepos?.filter(
+        (item) => item.language?.toLowerCase() === language,
+      );
     }
     return filteredRepos ?? [];
   },
