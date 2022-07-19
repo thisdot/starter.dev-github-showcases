@@ -8,6 +8,7 @@ import { ProfileNavComponent } from './profile/profile-nav/profile-nav.component
 import { ProfileAboutComponent } from './profile/profile-about/profile-about.component';
 import { RepoListComponent } from '../shared/components/repo-list/repo-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { ProfileReposComponent } from './profile/profile-repos/profile-repos.component';
 import { RepoControlsComponent } from '../shared/components/repo-controls/repo-controls.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './profile/user-profile/user-profile.component';
@@ -22,6 +23,7 @@ import { OrganizationInfoComponent } from './profile/org-profile/org-info/org-in
     ProfileNavComponent,
     ProfileAboutComponent,
     RepoListComponent,
+    ProfileReposComponent,
     RepoControlsComponent,
     UserProfileComponent,
     OrgProfileComponent,
