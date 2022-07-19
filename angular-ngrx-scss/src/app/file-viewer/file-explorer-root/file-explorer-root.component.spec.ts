@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FileExplorerRootComponent } from './file-explorer-root.component';
-import { FileExplorerAboutComponent } from './components/file-explorer-about/file-explorer-about.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('FileExplorerRootComponent', () => {
   let component: FileExplorerRootComponent;
@@ -9,7 +10,9 @@ describe('FileExplorerRootComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FileExplorerRootComponent, FileExplorerAboutComponent],
+      imports: [RouterTestingModule],
+      declarations: [FileExplorerRootComponent],
+      providers: [provideMockStore()],
     }).compileComponents();
   });
 
