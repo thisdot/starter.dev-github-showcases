@@ -1,4 +1,14 @@
-@use '../../shared/styles/variables';
+@use '../../../shared/styles/variables';
+
+:host {
+  display: grid;
+  grid-template-columns: 24rem 1fr;
+}
+
+aside {
+  background: variables.$white;
+  padding: 2rem;
+}
 
 .top-repositories-container {
   padding: 1.5rem;
@@ -11,11 +21,13 @@
     font-weight: 500;
     margin-bottom: 16px;
   }
+
   .repo-container {
     background-color: variables.$white;
     border-radius: 0.5rem;
     border-width: 1px;
   }
+
   .repo-section {
     padding: 1rem;
     border-bottom: 1px solid variables.$gray300;
@@ -23,14 +35,17 @@
       padding: 2rem 0 2rem 2rem;
     }
   }
+
   .view-all-link {
     padding: 1.25rem;
     background-color: variables.$gray200;
     display: grid;
     place-items: center;
+
     a {
       color: inherit;
       font-weight: 600;
+
       &.disabled {
         color: variables.$gray300;
         cursor: not-allowed;

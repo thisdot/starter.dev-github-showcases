@@ -9,6 +9,8 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('../repository/repository.module').then((m) => m.RepositoryModule),
   },
   {
     path: ':username',
