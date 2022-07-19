@@ -125,6 +125,8 @@ describe('UserService', () => {
         stargazers_count: 0,
         forks_count: 0,
         updated_at: '2022-06-17T09:54:38Z',
+        fork: false,
+        archived: false,
         owner: {
           avatar_url: 'https://avatars.githubusercontent.com/u/22839396?v=4',
           events_url: 'https://api.github.com/users/thisdot/events{/privacy}',
@@ -159,6 +161,8 @@ describe('UserService', () => {
         stargazers_count: 0,
         forks_count: 0,
         updated_at: '2022-06-17T09:54:38Z',
+        fork: false,
+        archived: false,
         owner: {
           avatar_url: 'https://avatars.githubusercontent.com/u/22839396?v=4',
           events_url: 'https://api.github.com/users/thisdot/events{/privacy}',
@@ -192,6 +196,8 @@ describe('UserService', () => {
         stargazers_count: 0,
         forks_count: 0,
         updated_at: '2022-06-17T09:54:38Z',
+        fork: false,
+        archived: false,
         owner: {
           avatar_url: 'https://avatars.githubusercontent.com/u/22839396?v=4',
           events_url: 'https://api.github.com/users/thisdot/events{/privacy}',
