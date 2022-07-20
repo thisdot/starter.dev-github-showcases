@@ -9,5 +9,5 @@ import { UserReposState } from 'src/app/state/profile/profile.state';
 })
 export class RepoListComponent {
   @Input()
-  repos!: UserReposState[] | null;
+  repos?: UserReposState[] | null;
 }

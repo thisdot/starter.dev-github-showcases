@@ -3,48 +3,32 @@ import { IssuePullRequestTab } from '@/components';
 import { TAB_TYPE, TABS } from '@/components/IssuePullRequestTab/data';
 
 describe('IssuePullRequestTab', () => {
-  const wrapper = mount(IssuePullRequestTab, {
-    props: {
-      openCounts: 16,
-      closedCounts: 196,
-      tabType: TAB_TYPE.PULL_REQUEST,
-    },
-  });
+  let wrapper;
 
-  const tabs = wrapper.findAll('.tab');
-  const dropdown_labels = wrapper.findAll('.dropdown-label');
+  beforeEach(() => {
+    wrapper = mount(IssuePullRequestTab, {
+      props: {
+        openCounts: 16,
+        closedCounts: 196,
+        tabType: TAB_TYPE.PULL_REQUEST,
+      },
+    });
+  });
 
   it('should mount', () => {
-    expect(wrapper.vm).toBeTruthy();
+    expect(wrapper.exists()).toBeTruthy();
   });
 
-  it.each(tabs)(
-    'should toggle between tabs open and closed pull requests',
-    async (tab) => {
-      const updateActiveTab = jest.spyOn(wrapper.vm, 'updateActiveTab');
-      await tab.trigger('click');
-      const index = tabs.indexOf(tab);
-      expect(updateActiveTab).toHaveBeenCalled();
-      if (index === 0) {
-        expect(wrapper.vm.activeTab).toBe(TABS.OPEN);
-      } else {
-        expect(wrapper.vm.activeTab).toBe(TABS.CLOSED);
-      }
-    },
-  );
+  it('should show closed pr or issue on close tab click', async () => {
+    const tabs = wrapper.findAll('.tab');
+    await tabs[1].trigger('click');
+    expect(wrapper.vm.activeTab).toBe(TABS.CLOSED);
+  });
 
-  it.each(dropdown_labels)('should show and hide dropdown\\s', async (btn) => {
-    const toggleLabelMenu = jest.spyOn(wrapper.vm, 'toggleLabelMenu');
-    const toggleSortMenu = jest.spyOn(wrapper.vm, 'toggleSortMenu');
-    await btn.trigger('click');
-    const index = dropdown_labels.indexOf(btn);
+  it('should show label menu', async () => {
+    const dropdown_labels = wrapper.findAll('.dropdown-label');
+    await dropdown_labels[0].trigger('click');
     const dropdown_menu = wrapper.find('.dropdown_menu');
-
-    if (index === 0) {
-      expect(toggleLabelMenu).toHaveBeenCalled();
-    } else {
-      expect(toggleSortMenu).toHaveBeenCalled();
-    }
-    expect(dropdown_menu).toBeTruthy();
+    expect(dropdown_menu.exists()).toBeTruthy();
   });
 });

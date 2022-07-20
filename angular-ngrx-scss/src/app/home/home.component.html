@@ -4,10 +4,7 @@
   </header>
   <ng-container *ngIf="user$ | async as user">
     <main class="main">
-      <aside>
-        <app-user-gists></app-user-gists>
-      </aside>
-      <app-top-repositories></app-top-repositories>
+      <router-outlet></router-outlet>
     </main>
   </ng-container>
 </div>

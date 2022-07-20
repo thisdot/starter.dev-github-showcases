@@ -7,6 +7,9 @@ import { provideApolloClient } from '@vue/apollo-composable';
 import { setContext } from '@apollo/client/link/context';
 
 import { useToken } from '@/composables';
+import { filterType } from '@/globals/filterType';
+import { sortBy } from '@/globals/sortBy';
+import { filteredLanguage } from '@/globals/filteredLanguage';
 import { search } from '@/globals/search';
 
 const { getAuthToken } = useToken();
@@ -30,6 +33,22 @@ const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
+        filterType: {
+          read() {
+            return filterType();
+          },
+        },
+        sortby: {
+          read() {
+            return sortBy();
+          },
+        },
+        language: {
+          //The name we will be querying
+          read() {
+            return filteredLanguage(); //Returns the updated value of counts
+          },
+        },
         search: {
           read() {
             return search();

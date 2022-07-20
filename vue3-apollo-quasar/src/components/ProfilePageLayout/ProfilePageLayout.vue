@@ -16,8 +16,8 @@
           <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div v-if="!loadingSearch" class="tab-contents col">
-          <SearchFilter />
+        <div v-if="!!isQuerying" class="tab-contents col">
+          <SearchFilter :languages="getLanguages" />
           <q-separator class="q-mt-sm" />
           <div
             class="text-caption q-my-md row justify-between items-center"
@@ -30,9 +30,12 @@
                 results for
                 <!-- repo type -->
                 <strong
-                  v-show="filterType && filterType !== filterTypeOption[0]"
+                  v-show="
+                    filterTypeData.filterType &&
+                    filterTypeData.filterType !== defaultFilterType
+                  "
                 >
-                  {{ modifyFilterTypeText(filterType) }}
+                  {{ modifyFilterTypeText(filterTypeData.filterType) }}
                 </strong>
                 repositories
                 <!-- search text -->
@@ -40,13 +43,19 @@
                   >matching <strong> {{ searchData.search }} </strong></span
                 >
                 <!-- Language -->
-                <span v-show="language && language !== languageOption[0]">
-                  written in <strong> {{ language }} </strong></span
+                <span
+                  v-show="
+                    languageData.language &&
+                    languageData.language !== defaultLanguage
+                  "
+                >
+                  written in
+                  <strong> {{ languageData.language }} </strong></span
                 >
                 sorted by
                 <!-- Sorted text -->
                 <strong>
-                  {{ sortBy }}
+                  {{ sortByData.sortby }}
                 </strong>
               </small>
             </div>
@@ -68,7 +77,7 @@
               <slot name="overview"></slot>
             </q-tab-panel>
             <q-tab-panel name="repositories">
-              <q-list v-if="filteredAndSortedRepos" separator>
+              <q-list separator>
                 <q-item v-for="repo in filteredAndSortedRepos" :key="repo.id">
                   <RepoCard
                     :name="repo.name"
@@ -79,6 +88,11 @@
                     :forkCount="repo.forkCount"
                     :updatedAt="repo.updatedAt"
                   />
+                </q-item>
+                <q-item v-if="!filteredAndSortedRepos.length" class="q-mt-xl">
+                  <span class="text-h5 block q-mx-auto text-weight-bold">
+                    {{ username }} doesn't have any repositories that match.
+                  </span>
                 </q-item>
               </q-list>
               <slot name="repositories"></slot>
@@ -107,6 +121,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, defineProps, ref } from 'vue';
+import { useQuery } from '@vue/apollo-composable';
 
 export default defineComponent({
   name: 'ProfilePageLayout',
@@ -114,25 +129,31 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { UserProfileCard, SearchFilter, TabHeader, RepoCard } from '..';
+import {
+  UserProfileCard,
+  SearchFilter,
+  TabHeader,
+  RepoCard,
+} from '@/components';
 import { useUserStore } from '@/store/userStore';
 import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
-import { useQuery } from '@vue/apollo-composable';
-import { SEARCH_QUERY } from './query';
+import {
+  SEARCH_QUERY,
+  FILTER_TYPE_QUERY,
+  LANGUAGE_QUERY,
+  SORT_BY_QUERY,
+} from './query';
+import {
+  FILTER_TYPE_OPTIONS,
+  defaultFilterType,
+  SORT_OPTIONS,
+  defaultLanguage,
+} from '@/components/SearchFilter/data';
 
 const getUserRepos = useUserRepos();
 const user = useUserStore();
 const tab = ref('');
-
-// Test Variables
-const filterTypeOption = ['All', 'Forks', 'Mirrors', 'Archived'];
-const sortOption = ['Last update', 'Name', 'Stars'];
-const languageOption = ['All', 'CSS', 'HTML'];
-const filterType = ref(filterTypeOption[1]);
-const sortBy = ref(sortOption[2]);
-const language = ref(languageOption[0]);
-// Test variables ends here
 
 const props = defineProps({
   username: String,
@@ -145,7 +166,97 @@ function changeTab(val) {
 const { repos, loading } = getUserRepos(props.username, false);
 
 const { result: searchData, loading: loadingSearch } = useQuery(SEARCH_QUERY);
-const searchFilter = (search) => {
+
+const { result: filterTypeData, loading: loadingFilterType } =
+  useQuery(FILTER_TYPE_QUERY);
+
+const { result: sortByData, loading: loadingSortBy } = useQuery(SORT_BY_QUERY);
+
+const { result: languageData, loading: loadingLanguage } =
+  useQuery(LANGUAGE_QUERY);
+
+const isOnlySorted = computed(
+  () =>
+    sortByData.value?.sortby &&
+    !(
+      searchData?.value?.search ||
+      languageData?.value?.language !== defaultLanguage ||
+      filterTypeData?.value?.filterType !== defaultFilterType
+    ),
+);
+
+// Function to filter repos by type
+const repoDataFilteredByType = (repos) => {
+  let response = repos.slice();
+  const filterType = filterTypeData.value?.filterType;
+  if (filterType === FILTER_TYPE_OPTIONS.forks) {
+    response = repos.filter((repo) => repo.isFork);
+  } else if (filterType === FILTER_TYPE_OPTIONS.archived) {
+    response = repos.filter((repo) => repo.isArchived);
+  } else if (filterType === defaultFilterType) {
+    response = repos;
+  }
+  return response;
+};
+
+const getTime = (time) => new Date(time).getTime();
+
+// Function to sort filtered repos
+const sortedRepoData = (repos) => {
+  let response = repos.slice(); //need because repos.value is a read only and can't bemodified.
+  if (sortByData.value?.sortby === SORT_OPTIONS.name) {
+    response.sort((a, b) =>
+      b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1,
+    );
+  } else if (sortByData.value?.sortby === SORT_OPTIONS.stars) {
+    response.sort((a, b) => (b.stargazerCount > a.stargazerCount ? 1 : -1));
+  } else {
+    response.sort((a, b) =>
+      getTime(b.updatedAt) - getTime(a.updatedAt) ? 1 : -1,
+    );
+  }
+  return response;
+};
+
+const inArray = (array, target) => {
+  return array.find((arr) => arr.name === target);
+};
+
+const getLanguages = computed(() => {
+  const languages = [];
+  repos.value.forEach((repo) => {
+    if (
+      repo.primaryLanguage &&
+      !inArray(languages, repo.primaryLanguage.name)
+    ) {
+      languages.push({
+        name: repo.primaryLanguage.name,
+      });
+    }
+  });
+  languages.sort((a, b) => (a.name > b.name ? 1 : -1));
+  return languages;
+});
+
+const matchText = (target, value) => target?.match(new RegExp(value, 'i'));
+
+// Function to filter repos by language
+const repoDataFilteredByLanguage = (repos) => {
+  let response = repos.slice();
+  const language = languageData.value?.language;
+  if (repos && language && language !== defaultLanguage) {
+    response = repos.filter((repo) =>
+      matchText(repo?.primaryLanguage?.name, language),
+    );
+  } else if (language === defaultLanguage) {
+    response = repos;
+  }
+
+  return response;
+};
+
+// Function to filter repos by search
+const repoDataFilteredBySearch = (search) => {
   if (repos.value.length < 1) {
     return repos;
   }
@@ -161,16 +272,6 @@ const searchFilter = (search) => {
   }, []);
 };
 
-const isOnlySorted = computed(
-  () =>
-    sortBy.value &&
-    !(
-      searchData?.value?.search ||
-      language.value !== languageOption[0] ||
-      filterType.value !== filterTypeOption[0]
-    ),
-);
-
 const modifyFilterTypeText = (filterText) => {
   if (filterText.endsWith('s')) {
     if (filterText.match(new RegExp('forks', 'i'))) {
@@ -182,35 +283,25 @@ const modifyFilterTypeText = (filterText) => {
   return filterText;
 };
 
-const typeFilter = (array, value) => {
-  if (value === filterTypeOption[1]) {
-    array = array.filter((repo) => repo.isFork);
-  } else if (value === filterTypeOption[3]) {
-    array = array.filter((repo) => repo.isArchived);
-  }
-  return array;
-};
-const languageFilter = (array, value) => null;
+const isQuerying = computed(
+  () => loadingLanguage || loadingFilterType || loadingSearch || loadingSortBy,
+);
 
 const filteredAndSortedRepos = computed(() => {
-  let resp = [];
-  /*****
-   *TODO:
-   - filter using search text
-   - filter using filter type value provided value not All
-   - filter using language value provided value not All
-   - then finaly sort
-   * *****/
-  resp = searchFilter(searchData?.value?.search || '');
-  if (filterType.value !== filterTypeOption[0]) {
-    resp = typeFilter(resp, filterType.value);
+  let response;
+  response = repoDataFilteredBySearch(searchData?.value?.search || '');
+
+  if (filterTypeData.value?.filterType !== defaultFilterType) {
+    response = repoDataFilteredByType(response);
   }
 
-  if (language.value !== languageOption[0]) {
-    resp = languageFilter(resp, language.value);
+  if (languageData.value?.language !== defaultLanguage) {
+    response = repoDataFilteredByLanguage(response);
   }
 
-  return resp;
+  response = sortedRepoData(response);
+
+  return response;
 });
 </script>
 
