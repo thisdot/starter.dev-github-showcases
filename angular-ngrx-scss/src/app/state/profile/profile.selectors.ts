@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { filter, pipe, scan } from 'rxjs';
 import { ProfileType } from '../user';
 import { ProfileState, TypeFilter, UserReposState } from './profile.state';
 
