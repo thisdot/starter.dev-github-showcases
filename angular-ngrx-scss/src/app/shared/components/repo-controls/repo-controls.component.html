@@ -42,7 +42,7 @@
         <ng-container *ngIf="isActiveFilterByLanguage$ | async as language">
           written in
           <span class="bold">
-            {{ (selectFilterByLanguage$ | async) | titlecase }}
+            {{ selectFilterByLanguage$ | async | titlecase }}
           </span>
         </ng-container>
         sorted by updated at

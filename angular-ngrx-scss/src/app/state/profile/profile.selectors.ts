@@ -62,7 +62,6 @@ export const selectRepos = createSelector(
   selectFilterByLanguage,
   (state: ProfileState, search?: string, type?: string, language?: string) => {
     let filteredRepos = state.repos;
-    console.log(language);
     if (search) {
       filteredRepos = filteredRepos?.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()),
