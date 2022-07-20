@@ -5,11 +5,15 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import {
   hasActiveSortAndFilters,
   selectFilterBySearch,
+  selectFilterByType,
   selectReposCount,
 } from 'src/app/state/profile/profile.selectors';
+import { TypeFilter } from 'src/app/state/profile/profile.state';
+import { FilterDropdownComponent } from '../filter-dropdown/filter-dropdown.component';
 import { RepoControlsComponent } from './repo-controls.component';
 
 const MOCK_VALUE_SELECT_FILTER_BY_SEARCH = 'Test Search';
+const MOCK_VALUE_SELECT_FILTER_BY_TYPE = TypeFilter.Forked;
 const MOCK_VALUE_SELECT_REPOS_COUNT = 2;
 const MOCK_VALUE_SELECT_HAS_ACTIVE_FILTERS = false;
 
@@ -20,7 +24,7 @@ describe('RepoControlsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RepoControlsComponent],
+      declarations: [RepoControlsComponent, FilterDropdownComponent],
       imports: [ReactiveFormsModule],
       providers: [
         provideMockStore({
@@ -28,6 +32,10 @@ describe('RepoControlsComponent', () => {
             {
               selector: selectFilterBySearch,
               value: MOCK_VALUE_SELECT_FILTER_BY_SEARCH,
+            },
+            {
+              selector: selectFilterByType,
+              value: MOCK_VALUE_SELECT_FILTER_BY_TYPE,
             },
             {
               selector: selectReposCount,
@@ -85,4 +93,11 @@ describe('RepoControlsComponent', () => {
       });
     }),
   );
+
+  it('should get filter by type from selector', (done) => {
+    store.select(selectFilterByType).subscribe((search) => {
+      expect(search).toEqual(TypeFilter.Forked);
+      done();
+    });
+  });
 });

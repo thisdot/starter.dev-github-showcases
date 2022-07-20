@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ProfileType } from '../user';
-import { ProfileState, UserReposState } from './profile.state';
+import { ProfileState, TypeFilter, UserReposState } from './profile.state';
 
 export const profileFeatureKey = 'profile';
 export const selectProfileState =
@@ -26,25 +26,41 @@ export const selectFilterBySearch = createSelector(
   (state: ProfileState) => state.sortAndFilter?.search,
 );
 
+export const selectFilterByType = createSelector(
+  selectProfileState,
+  (state: ProfileState) => state.sortAndFilter?.type || TypeFilter.All,
+);
+
 export const hasActiveSortAndFilters = createSelector(
   selectFilterBySearch,
-  Boolean,
+  selectFilterByType,
+  (search, type) => !!search || type !== TypeFilter.All,
 );
 
 export const selectRepos = createSelector(
   selectProfileState,
   selectFilterBySearch,
-  (state: ProfileState, search?: string) => {
+  selectFilterByType,
+  (state: ProfileState, search?: string, type?: string) => {
+    let filteredRepos = state.repos;
     if (search) {
-      return state.repos?.filter((item) =>
+      filteredRepos = filteredRepos?.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()),
       );
     }
-    return state.repos ?? [];
+    if (type !== TypeFilter.All) {
+      if (type === TypeFilter.Archived) {
+        filteredRepos = filteredRepos?.filter((item) => Boolean(item.archived));
+      }
+      if (type === TypeFilter.Forked) {
+        filteredRepos = filteredRepos?.filter((item) => Boolean(item.fork));
+      }
+    }
+    return filteredRepos ?? [];
   },
 );
 
 export const selectReposCount = createSelector(
   selectRepos,
-  (repos?: UserReposState[]) => repos?.length ?? 0,
+  (repos?: UserReposState[]) => repos?.length,
 );
