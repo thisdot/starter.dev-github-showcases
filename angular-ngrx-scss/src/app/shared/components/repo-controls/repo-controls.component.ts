@@ -104,12 +104,6 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  handleClearFiltersClick(): void {
-    this.searchInput.reset();
-    this.typeFilter.setValue(TypeFilter.All);
-    this.languageFilter.setValue(TypeFilter.All);
-  }
-
   handleTypeClick(type: string) {
     this.typeFilter.setValue(type);
   }
