@@ -39,27 +39,6 @@ const TYPE_FILTERS = [
   },
 ];
 
-enum TypeFilter {
-  All = 'all',
-  Forked = 'forked',
-  Archived = 'archived',
-}
-
-const TYPE_FILTERS = [
-  {
-    label: 'All',
-    value: TypeFilter.All,
-  },
-  {
-    label: 'Forks',
-    value: TypeFilter.Forked,
-  },
-  {
-    label: 'Archived',
-    value: TypeFilter.Archived,
-  },
-];
-
 @Component({
   selector: 'app-repo-controls',
   templateUrl: './repo-controls.component.html',
@@ -84,8 +63,6 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   filteredLanguages$ = this.store
     .select(filteredLanguages)
     .pipe((languages) => languages ?? []);
-
-  readonly typeFilters = TYPE_FILTERS;
 
   readonly typeFilters = TYPE_FILTERS;
 
