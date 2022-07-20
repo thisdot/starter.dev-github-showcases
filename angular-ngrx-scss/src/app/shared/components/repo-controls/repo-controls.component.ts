@@ -133,6 +133,6 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   }
 
   handleSortClick(sort: string) {
-    this.typeFilter.setValue(sort);
+    this.sortFilter.setValue(sort);
   }
 }

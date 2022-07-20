@@ -46,7 +46,10 @@
             {{ selectFilterByLanguage$ | async | titlecase }}
           </span>
         </ng-container>
-        sorted by updated at
+        sorted by
+        <span class="bold">
+          {{ (selectSortFilter$|async)?.split('_')?.join(' ') | lowercase }}
+        </span>
       </p>
       <span class="results__clear-container">
         <div class="close-background">

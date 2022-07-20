@@ -73,7 +73,14 @@ export const selectRepos = createSelector(
   selectFilterBySearch,
   selectFilterByType,
   selectFilterByLanguage,
-  (state: ProfileState, search?: string, type?: string, language?: string) => {
+  selectSortFilter,
+  (
+    state: ProfileState,
+    search?: string,
+    type?: string,
+    language?: string,
+    sort?: string,
+  ) => {
     let filteredRepos = state.repos;
     if (search) {
       filteredRepos = filteredRepos?.filter((item) =>
@@ -92,6 +99,18 @@ export const selectRepos = createSelector(
       filteredRepos = filteredRepos?.filter(
         (item) => item.language?.toLowerCase() === language,
       );
+    }
+    if (sort !== OrderField.UpdatedAt) {
+      if (sort === OrderField.Name) {
+        filteredRepos = filteredRepos
+          ?.slice()
+          .sort((a, b) => (a.name > b.name ? 1 : -1));
+      }
+      if (sort === OrderField.Stargazers) {
+        filteredRepos = filteredRepos
+          ?.slice()
+          .sort((a, b) => a.stargazers_count - b.stargazers_count);
+      }
     }
     return filteredRepos ?? [];
   },
