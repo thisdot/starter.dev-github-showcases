@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -14,9 +15,10 @@ export interface FilterOption {
 }
 
 @Component({
-  selector: 'app-repos-filter-dropdown',
-  templateUrl: './repo-filter-dropdown.component.html',
-  styleUrls: ['./repo-filter-dropdown.component.scss'],
+  selector: 'app-filter-dropdown',
+  templateUrl: './filter-dropdown.component.html',
+  styleUrls: ['./filter-dropdown.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('openClose', [
       transition(':enter', [
@@ -29,7 +31,7 @@ export interface FilterOption {
     ]),
   ],
 })
-export class RepoFilterDropdownComponent {
+export class FilterDropdownComponent {
   @Input() name = '';
   @Input() description = '';
   @Input() current?: string | null = '';

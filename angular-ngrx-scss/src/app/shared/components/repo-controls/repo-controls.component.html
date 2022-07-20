@@ -7,25 +7,25 @@
       placeholder="Find a repository..."
       [formControl]="searchInput"
     />
-    <app-repos-filter-dropdown
+    <app-filter-dropdown
       name="Type"
       description="Select type"
       [items]="typeFilters"
       [current]="selectFilterByType$ | async"
       (setFilter)="handleTypeClick($event)"
-    ></app-repos-filter-dropdown>
-    <app-repos-filter-dropdown
+    ></app-filter-dropdown>
+    <app-filter-dropdown
       name="Language"
       description="Select type"
       [items]="typeFilters"
       (setFilter)="handleTypeClick($event)"
-    ></app-repos-filter-dropdown>
-    <app-repos-filter-dropdown
+    ></app-filter-dropdown>
+    <app-filter-dropdown
       name="Sort"
       description="Select type"
       [items]="typeFilters"
       (setFilter)="handleTypeClick($event)"
-    ></app-repos-filter-dropdown>
+    ></app-filter-dropdown>
   </div>
   <ng-container *ngIf="hasActiveSortAndFilters$ | async">
     <div class="divider"></div>
