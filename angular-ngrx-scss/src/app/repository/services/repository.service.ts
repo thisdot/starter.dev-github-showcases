@@ -34,6 +34,7 @@ export class RepositoryService {
         issueCount: data.open_issues_count,
         tags: data.topics,
         selectedFile: null,
+        activeBranch: data.default_branch,
         ownerName: '',
         prCount: 0,
         readme: '',
@@ -61,12 +62,11 @@ export class RepositoryService {
 
     return this.http.get<RepoContentsApiResponse[]>(url).pipe(
       map((data) => {
-        const files = data.map((value) => ({
+        return data.map((value) => ({
           name: value.name,
           type: value.type,
+          path: value.path,
         }));
-
-        return files;
       }),
     );
   }

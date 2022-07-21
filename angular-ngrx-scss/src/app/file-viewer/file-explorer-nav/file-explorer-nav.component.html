@@ -5,7 +5,7 @@
     {{ branch }}
     <span class="btnCaret">&#9660;</span>
   </button>
-  <div *ngIf="crumbs.length" class="crumbs">
+  <div *ngIf="showCrumbs && crumbs.length" class="crumbs">
     <a
       [attr.data-testid]="'file explorer nav root ' + name"
       [routerLink]="[basePath]"

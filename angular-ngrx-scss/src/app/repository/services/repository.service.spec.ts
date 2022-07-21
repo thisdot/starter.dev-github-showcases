@@ -146,6 +146,7 @@ describe('RepositoryService', () => {
       starCount: 100,
       tags: ['react', 'angular', 'vue', 'github'],
       tree: [],
+      activeBranch: 'main',
       visibility: 'public',
       selectedFile: null,
       watchCount: 10,
@@ -162,6 +163,7 @@ describe('RepositoryService', () => {
       forks_count: 20,
       open_issues_count: 30,
       topics: ['react', 'angular', 'vue', 'github'],
+      default_branch: 'main',
     };
 
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse).pipe(delay(0)));
@@ -181,10 +183,12 @@ describe('RepositoryService', () => {
       {
         name: '.github',
         type: 'file',
+        path: '.github',
       },
       {
         name: 'angular-ngrx-scss',
         type: 'dir',
+        path: 'angular-ngrx-scss',
       },
     ];
     beforeEach(() => {

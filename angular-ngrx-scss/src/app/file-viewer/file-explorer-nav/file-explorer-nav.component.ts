@@ -15,6 +15,7 @@ export class FileExplorerNavComponent implements OnInit {
   @Input() owner = '';
   @Input() name = '';
   @Input() branch = 'master';
+  @Input() showCrumbs = true;
 
   @Input() set path(val: string | undefined) {
     this.crumbs = val?.split('/').filter(Boolean) as string[];
