@@ -15,8 +15,8 @@ describe('PrismComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PrismComponent);
     component = fixture.componentInstance;
-    component.language = 'javascript'
-    component.code = ''
+    component.language = 'javascript';
+    component.code = '';
     fixture.detectChanges();
   });
 
