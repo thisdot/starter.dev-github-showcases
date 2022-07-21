@@ -10,7 +10,11 @@ import {
 import { startWith, takeUntil } from 'rxjs/operators';
 import { setSortAndFilterProperties } from 'src/app/state/profile/profile.actions';
 import {
+  filteredLanguages,
   hasActiveSortAndFilters,
+  isActiveFilterByLanguage,
+  isActiveFilterByType,
+  selectFilterByLanguage,
   selectFilterBySearch,
   selectFilterByType,
   selectReposCount,
@@ -45,10 +49,20 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
   searchInput = new FormControl('');
   typeFilter = new FormControl(TypeFilter.All);
+  languageFilter = new FormControl(TypeFilter.All);
   hasActiveSortAndFilters$ = this.store.select(hasActiveSortAndFilters);
+
   selectReposCount$ = this.store.select(selectReposCount);
+
+  isActiveFilterByType$ = this.store.select(isActiveFilterByType);
+  isActiveFilterByLanguage$ = this.store.select(isActiveFilterByLanguage);
+
   selectFilterBySearch$ = this.store.select(selectFilterBySearch);
   selectFilterByType$ = this.store.select(selectFilterByType);
+  selectFilterByLanguage$ = this.store.select(selectFilterByLanguage);
+  filteredLanguages$ = this.store
+    .select(filteredLanguages)
+    .pipe((languages) => languages ?? []);
 
   readonly typeFilters = TYPE_FILTERS;
 
@@ -56,7 +70,7 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const searchInput$ = this.searchInput.valueChanges.pipe(
-      debounceTime(400),
+      debounceTime(200),
       distinctUntilChanged(),
       startWith(''),
     );
@@ -66,11 +80,17 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
       startWith(null),
     );
 
+    const languageFilter$ = this.languageFilter.valueChanges.pipe(
+      distinctUntilChanged(),
+      startWith(null),
+    );
+
     combineLatest(
-      [searchInput$, typeFilter$],
-      (search: string, type: string) => ({
+      [searchInput$, typeFilter$, languageFilter$],
+      (search: string, type: string, language: string) => ({
         search,
         type,
+        language,
       }),
     )
       .pipe(takeUntil(this.destroy$))
@@ -84,11 +104,11 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  handleClearFiltersClick(): void {
-    this.searchInput.reset();
-  }
-
   handleTypeClick(type: string) {
     this.typeFilter.setValue(type);
+  }
+
+  handleLanguageClick(language: string) {
+    this.languageFilter.setValue(language);
   }
 }

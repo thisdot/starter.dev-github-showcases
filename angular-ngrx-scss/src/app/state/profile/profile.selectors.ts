@@ -31,17 +31,35 @@ export const selectFilterByType = createSelector(
   (state: ProfileState) => state.sortAndFilter?.type || TypeFilter.All,
 );
 
+export const isActiveFilterByType = createSelector(
+  selectFilterByType,
+  (type) => type !== TypeFilter.All,
+);
+
+export const selectFilterByLanguage = createSelector(
+  selectProfileState,
+  (state: ProfileState) => state.sortAndFilter?.language || TypeFilter.All,
+);
+
+export const isActiveFilterByLanguage = createSelector(
+  selectFilterByLanguage,
+  (language) => language !== TypeFilter.All,
+);
+
 export const hasActiveSortAndFilters = createSelector(
   selectFilterBySearch,
   selectFilterByType,
-  (search, type) => !!search || type !== TypeFilter.All,
+  selectFilterByLanguage,
+  (search, type, language) =>
+    !!search || type !== TypeFilter.All || language !== TypeFilter.All,
 );
 
 export const selectRepos = createSelector(
   selectProfileState,
   selectFilterBySearch,
   selectFilterByType,
-  (state: ProfileState, search?: string, type?: string) => {
+  selectFilterByLanguage,
+  (state: ProfileState, search?: string, type?: string, language?: string) => {
     let filteredRepos = state.repos;
     if (search) {
       filteredRepos = filteredRepos?.filter((item) =>
@@ -56,6 +74,11 @@ export const selectRepos = createSelector(
         filteredRepos = filteredRepos?.filter((item) => Boolean(item.fork));
       }
     }
+    if (language !== TypeFilter.All) {
+      filteredRepos = filteredRepos?.filter(
+        (item) => item.language?.toLowerCase() === language,
+      );
+    }
     return filteredRepos ?? [];
   },
 );
@@ -63,4 +86,28 @@ export const selectRepos = createSelector(
 export const selectReposCount = createSelector(
   selectRepos,
   (repos?: UserReposState[]) => repos?.length,
+);
+
+type LanguageMap = { [key: string]: string };
+
+export const filteredLanguages = createSelector(
+  selectRepos,
+  (repos?: UserReposState[]) => {
+    const initialValue: LanguageMap = { all: 'All' };
+
+    if (repos) {
+      const languageMap = repos.reduce(
+        (acc: LanguageMap, repo: UserReposState) =>
+          repo.language
+            ? { ...acc, [repo.language.toLowerCase()]: repo.language }
+            : acc,
+        initialValue,
+      );
+
+      return Object.entries(languageMap).map(([key, value]) => ({
+        value: key,
+        label: value,
+      }));
+    } else return [{ value: 'All', label: 'All' }];
+  },
 );
