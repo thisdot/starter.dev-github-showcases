@@ -91,12 +91,12 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
     const typeFilter$ = this.typeFilter.valueChanges.pipe(
       distinctUntilChanged(),
-      startWith(null),
+      startWith(TypeFilter.All),
     );
 
     const languageFilter$ = this.languageFilter.valueChanges.pipe(
       distinctUntilChanged(),
-      startWith(null),
+      startWith(TypeFilter.All),
     );
 
     const sortFilter$ = this.sortFilter.valueChanges.pipe(
@@ -134,5 +134,12 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
 
   handleSortClick(sort: string) {
     this.sortFilter.setValue(sort);
+  }
+
+  handleClearClick(): void {
+    this.searchInput.reset();
+    this.typeFilter.setValue(TypeFilter.All);
+    this.languageFilter.setValue(TypeFilter.All);
+    this.sortFilter.setValue(OrderField.UpdatedAt);
   }
 }

@@ -60,8 +60,8 @@ section {
   .close-background {
     background: variables.$gray500;
     border-radius: 0.3rem;
-    width: 1.2rem;
-    height: 1.3rem;
+    width: 1.4rem;
+    height: 1.4rem;
     display: grid;
     place-items: center;
   }
@@ -74,6 +74,9 @@ section {
     color: variables.$gray500;
     &:hover {
       color: variables.$blue600;
+      .close-background {
+        background: variables.$blue600;
+      }
     }
   }
 }
