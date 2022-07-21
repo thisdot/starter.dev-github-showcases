@@ -17,8 +17,8 @@
     <app-filter-dropdown
       name="Language"
       description="Select Language"
-      [items]="(filteredLanguages$ | async) || []"
       [current]="selectFilterByLanguage$ | async"
+      [items]="(filteredLanguages$ | async) || []"
       (setFilter)="handleLanguageClick($event)"
     ></app-filter-dropdown>
     <app-filter-dropdown
@@ -52,7 +52,7 @@
           {{ (selectSortFilter$ | async)?.split('_')?.join(' ') | lowercase }}
         </span>
       </p>
-      <span class="results__clear-container">
+      <span class="results__clear-container" (click)="handleClearClick()">
         <div class="close-background">
           <span appOcticon="x" color="white" size="13"></span>
         </div>
