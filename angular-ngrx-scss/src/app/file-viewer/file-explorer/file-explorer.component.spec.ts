@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FileExplorerComponent } from './file-explorer.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '../../state';
 import { RepoState } from '../../state/repository';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,6 @@ import { By } from '@angular/platform-browser';
 describe('FileExplorerComponent', () => {
   let component: FileExplorerComponent;
   let fixture: ComponentFixture<FileExplorerComponent>;
-  let store: MockStore;
   const initialState: AppState = {
     repo: {
       tree: [
@@ -55,8 +54,6 @@ describe('FileExplorerComponent', () => {
         { provide: ActivatedRoute, useValue: activatedRouteStub },
       ],
     }).compileComponents();
-
-    store = TestBed.inject(MockStore);
   });
 
   beforeEach(() => {
