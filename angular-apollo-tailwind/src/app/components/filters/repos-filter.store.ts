@@ -7,7 +7,6 @@ import {
   Label,
   Milestone,
   OrderDirection,
-  PaginationEvent,
 } from '../../gql';
 
 export interface FilterState {
@@ -21,8 +20,6 @@ export interface FilterState {
   endCursor?: string;
   labelsLoaded: boolean;
   milestonesLoaded: boolean;
-  first?: number;
-  last?: number;
 }
 
 const INITIAL_STATE: FilterState = {
@@ -37,8 +34,6 @@ const INITIAL_STATE: FilterState = {
   },
   labelsLoaded: false,
   milestonesLoaded: false,
-  first: 25,
-  last: undefined,
 };
 
 const ORDER_DICT: { [key: string]: IssueOrderField } = {
@@ -63,8 +58,6 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
   readonly setLabel = this.updater((state, value: string) => ({
     ...state,
     label: value,
-    startCursor: undefined,
-    endCursor: undefined,
   }));
 
   readonly setLabels = this.updater((state, values: Label[]) => ({
@@ -76,8 +69,6 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
   readonly setMilestone = this.updater((state, value: string) => ({
     ...state,
     milestone: value,
-    startCursor: undefined,
-    endCursor: undefined,
   }));
 
   readonly setMilestones = this.updater((state, values: Milestone[]) => ({
@@ -89,8 +80,6 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
   readonly changeState = this.updater((state, value: IssueState) => ({
     ...state,
     state: value,
-    startCursor: undefined,
-    endCursor: undefined,
   }));
 
   readonly setSort = this.updater((state, value: string) => {
@@ -101,20 +90,8 @@ export class ReposFilterStore extends ComponentStore<FilterState> {
         field: ORDER_DICT[field],
         direction: DIRECTION_DICT[direction],
       },
-      startCursor: undefined,
-      endCursor: undefined,
     };
   });
-
-  readonly changePage = this.updater(
-    (state, { before, after }: PaginationEvent) => ({
-      ...state,
-      startCursor: before as string,
-      endCursor: after as string,
-      first: after ? 25 : undefined,
-      last: before ? 25 : undefined,
-    }),
-  );
 
   readonly clearFilters = this.updater(() => ({
     ...INITIAL_STATE,

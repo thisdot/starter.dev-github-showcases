@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ReposFilterStore } from '../components/filters/repos-filter.store';
 import { Observable } from 'rxjs';
-import { IssueState, PaginationEvent } from '../gql';
+import { IssueState } from '../gql';
 import { IssuesStore } from './issues.store';
 import { Issues } from '../gql/models/repo-issues';
 
@@ -60,11 +60,6 @@ export class IssuesComponent implements OnInit {
 
   closeIssue() {
     this.reposFilterStore.changeState(IssueState.Closed);
-    this.issuesStore.getIssues$(this.filterState$);
-  }
-
-  changePage(page: PaginationEvent) {
-    this.reposFilterStore.changePage(page);
     this.issuesStore.getIssues$(this.filterState$);
   }
 
