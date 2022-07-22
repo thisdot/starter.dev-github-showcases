@@ -54,3 +54,21 @@ export interface PullRequest {
   closed_at?: string;
   created_at: string;
 }
+
+export interface IssueComment {
+  body: string;
+  user: User;
+  created_at: string;
+  updated_at: string;
+  author_association:
+    | 'COLLABORATOR'
+    | 'CONTRIBUTOR'
+    | 'FIRST_TIMER'
+    | 'FIRST_TIME_CONTRIBUTOR'
+    | 'MANNEQUIN'
+    | 'MEMBER'
+    | 'NONE'
+    | 'OWNER';
+}
+
+export type IssueComments = Array<IssueComment>;
