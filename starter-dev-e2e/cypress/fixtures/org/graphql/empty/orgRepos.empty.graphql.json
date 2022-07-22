@@ -7,7 +7,7 @@
         "pageInfo": {
           "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNC0wNVQwMTo1NzoxMS0wNTowMM4cfhyN",
           "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNi0wN1QxMjoxMzo0OS0wNTowMM4ZGOxK",
-          "hasNextPage": true,
+          "hasNextPage": false,
           "hasPreviousPage": false,
           "__typename": "PageInfo"
         },
