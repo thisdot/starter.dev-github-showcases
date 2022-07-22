@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { of, delay } from 'rxjs';
 import {
+  FileContents,
   RepoApiResponse,
   RepoContents,
   RepoState,
@@ -146,6 +147,7 @@ describe('RepositoryService', () => {
       tags: ['react', 'angular', 'vue', 'github'],
       tree: [],
       visibility: 'public',
+      selectedFile: null,
       watchCount: 10,
       website: 'https://starter.dev',
     };
@@ -174,7 +176,7 @@ describe('RepositoryService', () => {
     expect(httpClientSpy.get.calls.count()).withContext('called once').toBe(1);
   });
 
-  it('should return the root file tree for the provided repository', (done) => {
+  describe('getRepositoryContents', () => {
     const expectedResponse: RepoContents[] = [
       {
         name: '.github',
@@ -185,17 +187,71 @@ describe('RepositoryService', () => {
         type: 'dir',
       },
     ];
+    beforeEach(() => {
+      httpClientSpy.get.and.returnValue(of(expectedResponse).pipe(delay(0)));
+    });
+    it('should return the root file tree for the provided repository', (done) => {
+      repoService
+        .getRepositoryContents('thisdot', 'starter.dev-github-showcases')
+        .subscribe((res) => {
+          expect(res).toEqual(expectedResponse);
+          done();
+        });
 
-    httpClientSpy.get.and.returnValue(of(expectedResponse).pipe(delay(0)));
+      expect(httpClientSpy.get.calls.count())
+        .withContext('called once')
+        .toBe(1);
+    });
 
-    repoService
-      .getRepositoryContents('thisdot', 'starter.dev-github-showcases')
-      .subscribe((res) => {
-        expect(res).toEqual(expectedResponse);
-        done();
-      });
+    it('should make request with appropriate url if "path" argument is supplied', (done) => {
+      repoService
+        .getRepositoryContents(
+          'thisdot',
+          'starter.dev-github-showcases',
+          'README.md',
+        )
+        .subscribe(() => {
+          done();
+        });
 
-    expect(httpClientSpy.get.calls.count()).withContext('called once').toBe(1);
+      expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
+        'https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/README.md',
+      );
+    });
+  });
+
+  describe('getFileContents', () => {
+    it('should make request and return file content response', (done) => {
+      const expectedResponse: FileContents = {
+        content: btoa('This is a readme file'),
+        name: 'starter.dev-github-showcases',
+        type: 'file',
+        size: 223,
+      };
+
+      httpClientSpy.get.and.returnValue(of(expectedResponse).pipe(delay(0)));
+      repoService
+        .getFileContents(
+          'thisdot',
+          'starter.dev-github-showcases',
+          'README.md',
+          'main',
+        )
+        .subscribe((res) => {
+          expect(res).toEqual({
+            ...expectedResponse,
+            content: 'This is a readme file',
+          });
+          done();
+        });
+
+      expect(httpClientSpy.get.calls.count())
+        .withContext('called once')
+        .toBe(1);
+      expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
+        'https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/README.md?ref=main',
+      );
+    });
   });
 
   it('should return issues associated with a provided repository with default parameters', (done) => {

@@ -2,6 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
+  FileContents,
+  FileContentsApiResponse,
   ReadmeApiResponse,
   RepoApiResponse,
   RepoContents,
@@ -31,6 +33,7 @@ export class RepositoryService {
         forkCount: data.forks_count,
         issueCount: data.open_issues_count,
         tags: data.topics,
+        selectedFile: null,
         ownerName: '',
         prCount: 0,
         readme: '',
@@ -64,6 +67,26 @@ export class RepositoryService {
         }));
 
         return files;
+      }),
+    );
+  }
+
+  getFileContents(
+    owner: string,
+    repoName: string,
+    path: string,
+    commitOrBranchOrTagName: string,
+  ): Observable<FileContents> {
+    const url = `${environment.githubUrl}/repos/${owner}/${repoName}/contents/${path}?ref=${commitOrBranchOrTagName}`;
+    return this.http.get<FileContentsApiResponse>(url).pipe(
+      map((data) => {
+        return {
+          name: data.name,
+          type: data.type,
+          // TODO: consider using a function that also takes encoding format to decode this
+          content: atob(data.content),
+          size: data.size,
+        };
       }),
     );
   }
