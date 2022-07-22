@@ -91,26 +91,6 @@ export class RepositoryService {
     );
   }
 
-  getFileContents(
-    owner: string,
-    repoName: string,
-    path: string,
-    commitOrBranchOrTagName: string,
-  ): Observable<FileContents> {
-    const url = `${environment.githubUrl}/repos/${owner}/${repoName}/contents/${path}?ref=${commitOrBranchOrTagName}`;
-    return this.http.get<FileContentsApiResponse>(url).pipe(
-      map((data) => {
-        return {
-          name: data.name,
-          type: data.type,
-          // TODO: consider using a function that also takes encoding format to decode this
-          content: atob(data.content),
-          size: data.size,
-        };
-      }),
-    );
-  }
-
   // TODO: readme file is currently an encoded string - this method should be improved to either return the raw data, or include the fields needed to de-code the string when ready to display it
   // TODO: write test for this function when it's updated
   getReadmeContent(owner: string, repoName: string): Observable<string> {
