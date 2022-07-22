@@ -18,7 +18,7 @@
       name="Language"
       description="Select Language"
       [items]="(filteredLanguages$ | async) || []"
-      (setFilter)="handleTypeClick($event)"
+      (setFilter)="handleLanguageClick($event)"
     ></app-filter-dropdown>
     <app-filter-dropdown
       name="Sort"
