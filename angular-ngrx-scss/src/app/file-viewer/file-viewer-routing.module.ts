@@ -39,6 +39,15 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'blob/:branch',
+    children: [
+      {
+        matcher: pathMatcher,
+        component: FileExplorerBlobComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({

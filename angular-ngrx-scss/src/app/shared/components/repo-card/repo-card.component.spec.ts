@@ -25,6 +25,8 @@ describe('RepoCardComponent', () => {
       owner: {
         login: '',
       },
+      fork: false,
+      archived: false,
     };
     fixture.detectChanges();
   });
