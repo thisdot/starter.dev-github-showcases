@@ -18,7 +18,7 @@ export class RepositoryEffects {
   fetchRepository$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(fetchRepository),
-      switchMap(({ owner, repoName }) => {
+      switchMap(({ owner, repoName, path, branch }) => {
         const repoInfo$ = this.repoService.getRepositoryInfo(owner, repoName);
         const repoPRCount$ = this.repoService.getPullRequestList(
           owner,
@@ -27,6 +27,7 @@ export class RepositoryEffects {
         const repoContents$ = this.repoService.getRepositoryContents(
           owner,
           repoName,
+          path,
         );
         const repoReadme$ = this.repoService.getReadmeContent(owner, repoName);
 
@@ -43,6 +44,7 @@ export class RepositoryEffects {
               starCount: info.starCount,
               tags: info.tags,
               tree: contents,
+              activeBranch: branch ?? info.activeBranch,
               selectedFile: null,
               visibility: info.visibility,
               watchCount: info.watchCount,

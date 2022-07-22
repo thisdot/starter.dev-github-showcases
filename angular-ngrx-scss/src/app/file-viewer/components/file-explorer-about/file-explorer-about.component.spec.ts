@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FileExplorerAboutComponent } from './file-explorer-about.component';
 import { By } from '@angular/platform-browser';
-import { RepoState } from '../../../state/repository';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('FileExplorerAboutComponent', () => {
@@ -48,9 +47,7 @@ describe('FileExplorerAboutComponent', () => {
     });
 
     it('should render description text if it exists', () => {
-      component.repo = {
-        description: 'this is a piece of dummy test',
-      } as RepoState;
+      component.description = 'this is a piece of dummy test';
 
       fixture.detectChanges();
 
@@ -72,9 +69,7 @@ describe('FileExplorerAboutComponent', () => {
     });
 
     it('should render homepageUrl link if it exists', () => {
-      component.repo = {
-        website: 'dummy url',
-      } as RepoState;
+      component.homepageUrl = 'dummy url';
 
       fixture.detectChanges();
 
@@ -92,9 +87,7 @@ describe('FileExplorerAboutComponent', () => {
     });
 
     it('should render topic tags if they exist', () => {
-      component.repo = {
-        tags: ['dummy tag'],
-      } as RepoState;
+      component.topics = ['dummy tag'];
 
       fixture.detectChanges();
 

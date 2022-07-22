@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, UrlSegment } from '@angular/router';
-import { FileExplorerRootComponent } from './file-explorer-root/file-explorer-root.component';
+import { FileExplorerComponent } from './file-explorer/file-explorer.component';
 import { FileExplorerBlobComponent } from './file-explorer-blob/file-explorer-blob.component';
 
 const pathMatcher = (url: UrlSegment[]) => {
@@ -13,14 +13,31 @@ const pathMatcher = (url: UrlSegment[]) => {
       },
     };
   }
-
   return null;
 };
 
 const routes: Routes = [
   {
     path: '',
-    component: FileExplorerRootComponent,
+    component: FileExplorerComponent,
+  },
+  {
+    path: 'tree/:branch',
+    children: [
+      {
+        matcher: pathMatcher,
+        component: FileExplorerComponent,
+      },
+    ],
+  },
+  {
+    path: 'blob/:branch',
+    children: [
+      {
+        matcher: pathMatcher,
+        component: FileExplorerBlobComponent,
+      },
+    ],
   },
   {
     path: 'blob/:branch',

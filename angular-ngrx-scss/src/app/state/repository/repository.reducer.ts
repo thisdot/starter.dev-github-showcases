@@ -14,6 +14,7 @@ export const initialRepoState: RepoState = {
   tags: [],
   tree: [],
   selectedFile: null,
+  activeBranch: '',
   visibility: '',
   watchCount: 0,
   website: '',

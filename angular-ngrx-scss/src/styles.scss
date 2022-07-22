@@ -1,3 +1,5 @@
+@use "./app/shared/styles/variables";
+
 html,
 body {
   margin: 0;
@@ -51,6 +53,62 @@ a {
 
 .col-span-12 {
   grid-column: span 12 / span 12;
+}
+
+@media (max-width: variables.$sm) {
+  .col-sm-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
+  .col-sm-span-9 {
+    grid-column: span 9 / span 9;
+  }
+
+  .col-sm-span-12 {
+    grid-column: span 12 / span 12;
+  }
+}
+
+@media (max-width: variables.$md) {
+  .col-md-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
+  .col-md-span-9 {
+    grid-column: span 9 / span 9;
+  }
+
+  .col-md-span-12 {
+    grid-column: span 12 / span 12;
+  }
+}
+
+@media (max-width: variables.$lg) {
+  .col-lg-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
+  .col-lg-span-9 {
+    grid-column: span 9 / span 9;
+  }
+
+  .col-lg-span-12 {
+    grid-column: span 12 / span 12;
+  }
+}
+
+@media (min-width: variables.$xl + 1) {
+  .col-xl-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
+  .col-xl-span-9 {
+    grid-column: span 9 / span 9;
+  }
+
+  .col-xl-span-12 {
+    grid-column: span 12 / span 12;
+  }
 }
 
 .subpage {

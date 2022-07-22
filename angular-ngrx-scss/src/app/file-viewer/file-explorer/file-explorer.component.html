@@ -1,0 +1,28 @@
+<ng-container *ngIf="repo$ | async as repo">
+  <div class="container grid grid-cols-12 subpage">
+    <section class="col-span-9 col-sm-span-12">
+      <app-file-explorer-nav
+        [owner]="owner"
+        [name]="repoName"
+        [branch]="branch ?? repo.activeBranch"
+        [path]="path"
+        [showCrumbs]="!!path"
+      ></app-file-explorer-nav>
+
+      <app-file-explorer-container
+        [repoPage]="repo.tree"
+        [branch]="branch ?? repo.activeBranch"
+        [owner]="owner"
+        [name]="repoName"
+      ></app-file-explorer-container>
+    </section>
+
+    <section class="col-span-3 col-sm-span-12">
+      <app-file-explorer-about
+        [description]="repo.description"
+        [homepageUrl]="repo.website"
+        [topics]="repo.tags"
+      ></app-file-explorer-about>
+    </section>
+  </div>
+</ng-container>

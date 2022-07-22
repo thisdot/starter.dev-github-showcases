@@ -1,0 +1,32 @@
+@use '../../shared/styles/variables';
+
+.file-list {
+  border: 1px solid variables.$gray300;
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  border-bottom: 1px solid variables.$gray300;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.octicon {
+  color: variables.$gray500;
+
+  &.file {
+    color: variables.$gray500;
+  }
+
+  &.dir {
+    color: variables.$blue400;
+  }
+}

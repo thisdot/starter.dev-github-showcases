@@ -3,7 +3,7 @@ import { FileContents, RepoState } from './repository.state';
 
 export const fetchRepository = createAction(
   '[Repository API] Fetch Repository',
-  props<{ owner: string; repoName: string }>(),
+  props<{ owner: string; repoName: string; path?: string; branch?: string }>(),
 );
 
 export const fetchRepositorySuccess = createAction(
