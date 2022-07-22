@@ -1,6 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ProfileType } from '../user';
-import { ProfileState, TypeFilter, UserReposState } from './profile.state';
+import {
+  OrderField,
+  ProfileState,
+  TypeFilter,
+  UserReposState,
+} from './profile.state';
 
 export const profileFeatureKey = 'profile';
 export const selectProfileState =
@@ -46,12 +51,21 @@ export const isActiveFilterByLanguage = createSelector(
   (language) => language !== TypeFilter.All,
 );
 
+export const selectSortFilter = createSelector(
+  selectProfileState,
+  (state: ProfileState) => state.sortAndFilter?.sort || OrderField.UpdatedAt,
+);
+
 export const hasActiveSortAndFilters = createSelector(
   selectFilterBySearch,
   selectFilterByType,
   selectFilterByLanguage,
-  (search, type, language) =>
-    !!search || type !== TypeFilter.All || language !== TypeFilter.All,
+  selectSortFilter,
+  (search, type, language, sort) =>
+    !!search ||
+    type !== TypeFilter.All ||
+    language !== TypeFilter.All ||
+    sort !== OrderField.UpdatedAt,
 );
 
 export const selectRepos = createSelector(
@@ -59,7 +73,14 @@ export const selectRepos = createSelector(
   selectFilterBySearch,
   selectFilterByType,
   selectFilterByLanguage,
-  (state: ProfileState, search?: string, type?: string, language?: string) => {
+  selectSortFilter,
+  (
+    state: ProfileState,
+    search?: string,
+    type?: string,
+    language?: string,
+    sort?: string,
+  ) => {
     let filteredRepos = state.repos;
     if (search) {
       filteredRepos = filteredRepos?.filter((item) =>
@@ -78,6 +99,18 @@ export const selectRepos = createSelector(
       filteredRepos = filteredRepos?.filter(
         (item) => item.language?.toLowerCase() === language,
       );
+    }
+    if (sort !== OrderField.UpdatedAt) {
+      if (sort === OrderField.Name) {
+        filteredRepos = filteredRepos
+          ?.slice()
+          .sort((a, b) => (a.name > b.name ? 1 : -1));
+      }
+      if (sort === OrderField.Stargazers) {
+        filteredRepos = filteredRepos
+          ?.slice()
+          .sort((a, b) => a.stargazers_count - b.stargazers_count);
+      }
     }
     return filteredRepos ?? [];
   },

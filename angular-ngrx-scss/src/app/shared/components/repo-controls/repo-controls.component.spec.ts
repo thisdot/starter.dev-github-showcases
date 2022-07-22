@@ -9,14 +9,16 @@ import {
   selectFilterByType,
   selectRepos,
   selectReposCount,
+  selectSortFilter,
 } from 'src/app/state/profile/profile.selectors';
-import { TypeFilter } from 'src/app/state/profile/profile.state';
+import { OrderField, TypeFilter } from 'src/app/state/profile/profile.state';
 import { FilterDropdownComponent } from '../filter-dropdown/filter-dropdown.component';
 import { RepoControlsComponent } from './repo-controls.component';
 
 const MOCK_VALUE_SELECT_FILTER_BY_SEARCH = 'Test Search';
 const MOCK_VALUE_SELECT_FILTER_BY_TYPE = TypeFilter.Forked;
 const MOCK_VALUE_SELECT_FILTER_BY_LANGUAGE = 'typescript';
+const MOCK_VALUE_SELECT_SORT = OrderField.Name;
 const MOCK_VALUE_SELECT_REPOS_COUNT = 2;
 const MOCK_VALUE_SELECT_HAS_ACTIVE_FILTERS = false;
 
@@ -43,6 +45,10 @@ describe('RepoControlsComponent', () => {
             {
               selector: selectFilterByLanguage,
               value: MOCK_VALUE_SELECT_FILTER_BY_LANGUAGE,
+            },
+            {
+              selector: selectSortFilter,
+              value: MOCK_VALUE_SELECT_SORT,
             },
             {
               selector: selectReposCount,
@@ -115,6 +121,13 @@ describe('RepoControlsComponent', () => {
   it('should get filter by language from selector', (done) => {
     store.select(selectFilterByLanguage).subscribe((language) => {
       expect(language).toEqual('typescript');
+      done();
+    });
+  });
+
+  it('should get sort item from selector', (done) => {
+    store.select(selectSortFilter).subscribe((search) => {
+      expect(search).toEqual(OrderField.Name);
       done();
     });
   });
