@@ -6,7 +6,7 @@ import {
   RepoContents,
   RepoState,
 } from 'src/app/state/repository';
-import { Issues } from './repository.interfaces';
+import { IssueComments, Issues, PullRequest } from './repository.interfaces';
 
 import { RepositoryService } from './repository.service';
 
@@ -124,6 +124,51 @@ const MOCK_ISSUES: Issues = [
     },
   },
 ];
+
+const MOCK_PULL_REQUEST_NUMBER = 11814;
+
+const MOCK_PULL_REQUEST_COMMENTS: IssueComments = [
+  {
+    body: 'I am a comment!',
+    user: {
+      login: 'user',
+      avatar_url: 'http://localhost',
+      gravatar_id: 'user',
+      type: '',
+      site_admin: false,
+    },
+    created_at: '2022-07-01T23:46:12Z',
+    updated_at: '2022-07-01T23:46:12Z',
+    author_association: 'OWNER',
+  },
+  {
+    body: 'I am also a comment!',
+    user: {
+      login: 'jack',
+      avatar_url: 'http://localhost',
+      gravatar_id: 'jack',
+      type: '',
+      site_admin: false,
+    },
+    created_at: '2022-07-01T23:46:12Z',
+    updated_at: '2022-07-01T23:46:12Z',
+    author_association: 'FIRST_TIMER',
+  },
+];
+
+const MOCK_PULL_REQUEST: PullRequest = {
+  title: 'Et quis culpa ex sapiente dolores qui quo qui.',
+  number: MOCK_PULL_REQUEST_NUMBER,
+  user: {
+    login: 'user',
+    avatar_url: 'http://localhost',
+    gravatar_id: 'user',
+    type: '',
+    site_admin: false,
+  },
+  closed_at: '2022-07-01T23:46:12Z',
+  created_at: '2022-07-01T23:46:12Z',
+};
 
 describe('RepositoryService', () => {
   let repoService: RepositoryService;
@@ -256,6 +301,54 @@ describe('RepositoryService', () => {
         'https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/README.md?ref=main',
       );
     });
+  });
+
+  it('should return a pull request when given a pull request number', (done) => {
+    httpClientSpy.get.and.returnValue(of(MOCK_PULL_REQUEST));
+
+    repoService
+      .getRepositoryPullRequest('FakeCo', 'fake-repo', MOCK_PULL_REQUEST_NUMBER)
+      .subscribe({
+        next: (pullRequest) => {
+          expect(pullRequest).toBe(MOCK_PULL_REQUEST);
+
+          expect(httpClientSpy.get).toHaveBeenCalledWith(
+            `https://api.github.com/repos/FakeCo/fake-repo/pulls/${MOCK_PULL_REQUEST_NUMBER}`,
+            jasmine.objectContaining({
+              headers: {
+                Accept: 'application/vnd.github.v3+json',
+              },
+            }),
+          );
+        },
+        complete: done,
+      });
+  });
+
+  it('should return pull request comments when given a pull request number', (done) => {
+    httpClientSpy.get.and.returnValue(of(MOCK_PULL_REQUEST_COMMENTS));
+
+    repoService
+      .getRepositoryPullRequestComments(
+        'FakeCo',
+        'fake-repo',
+        MOCK_PULL_REQUEST_NUMBER,
+      )
+      .subscribe({
+        next: (comments) => {
+          expect(comments).toBe(MOCK_PULL_REQUEST_COMMENTS);
+
+          expect(httpClientSpy.get).toHaveBeenCalledWith(
+            `https://api.github.com/repos/FakeCo/fake-repo/issues/${MOCK_PULL_REQUEST_NUMBER}/comments`,
+            jasmine.objectContaining({
+              headers: {
+                Accept: 'application/vnd.github.v3+json',
+              },
+            }),
+          );
+        },
+        complete: done,
+      });
   });
 
   it('should return issues associated with a provided repository with default parameters', (done) => {
