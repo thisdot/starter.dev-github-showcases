@@ -112,7 +112,7 @@
       {
         "name": "RepoReadMe",
         "alias": "RepoReadMe",
-        "variables": null,
+        "variables": { "expression": "HEAD:README.md" },
         "fixture": {
           "full": "repo/graphql/repoReadMe.graphql.json",
           "empty": "repo/graphql/empty/repoReadMe.empty.graphql.json"
@@ -265,7 +265,9 @@
       {
         "name": "OrgRepos",
         "alias": "OrgRepos",
-        "variables": { "orderBy": { "field": "STARGAZERS", "direction": "DESC" } },
+        "variables": {
+          "orderBy": { "field": "STARGAZERS", "direction": "DESC" }
+        },
         "fixture": "org/graphql/orgRepos-orderByStars.graphql.json"
       },
       {
@@ -309,7 +311,9 @@
       {
         "name": "UserRepos",
         "alias": "UserRepos",
-        "variables": { "orderBy": { "field": "STARGAZERS", "direction": "DESC" } },
+        "variables": {
+          "orderBy": { "field": "STARGAZERS", "direction": "DESC" }
+        },
         "fixture": "user/graphql/userRepos-orderByStars.graphql.json"
       },
       {

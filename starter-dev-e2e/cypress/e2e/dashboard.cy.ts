@@ -59,11 +59,10 @@ describe("When there is proper empty dashboard page responses", () => {
   });
 
   it("should display empty list of gists", () => {
-    cy.get(`[data-testid="show gists list"]`)
-      .children()
-      .should("have.length", 0)
-      .get(`[data-testid="empty gist list"]`)
-      .should("contain.text", "User does not have any gists");
+    cy.get(`[data-testid="empty gist list"]`).should(
+      "contain.text",
+      "User does not have any gists"
+    );
   });
 
   it("top repos should not be listed", () => {
