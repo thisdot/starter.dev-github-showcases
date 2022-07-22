@@ -77,19 +77,25 @@
       {
         "name": "RepoTree",
         "alias": "RepoTreeFolder1",
-        "variables": { "expression": "main:angular-apollo-tailwind" },
+        "variables": {
+          "expression": "main:angular-apollo-tailwind"
+        },
         "fixture": "repo/graphql/repoTree-folder1.graphql.json"
       },
       {
         "name": "RepoTree",
         "alias": "RepoTreeFolder2",
-        "variables": { "expression": "main:angular-apollo-tailwind/src" },
+        "variables": {
+          "expression": "main:angular-apollo-tailwind/src"
+        },
         "fixture": "repo/graphql/repoTree-folder2.graphql.json"
       },
       {
         "name": "RepoTree",
         "alias": "RepoTreeFolder3",
-        "variables": { "expression": "main:angular-apollo-tailwind/src/app" },
+        "variables": {
+          "expression": "main:angular-apollo-tailwind/src/app"
+        },
         "fixture": "repo/graphql/repoTree-folder3.graphql.json"
       },
       {
@@ -122,7 +128,11 @@
         "name": "RepoIssues",
         "alias": "RepoIssues-FilterByLabel",
         "variables": {
-          "filterBy": { "labels": ["bug"] }
+          "filterBy": {
+            "labels": [
+              "bug"
+            ]
+          }
         },
         "fixture": "repo/graphql/repoIssues-filterByLabel.graphql.json"
       },
@@ -130,7 +140,9 @@
         "name": "RepoIssues",
         "alias": "RepoIssues-FilterByMilestone",
         "variables": {
-          "filterBy": { "milestone": "MI_kwDOGd0nu84AcmnC" }
+          "filterBy": {
+            "milestone": "MI_kwDOGd0nu84AcmnC"
+          }
         },
         "fixture": "repo/graphql/repoIssues-filterByMilestone.graphql.json"
       },
@@ -138,14 +150,19 @@
         "name": "RepoIssues",
         "alias": "RepoIssues-SortByAsc",
         "variables": {
-          "orderBy": { "field": "CREATED_AT", "direction": "ASC" }
+          "orderBy": {
+            "field": "CREATED_AT",
+            "direction": "ASC"
+          }
         },
         "fixture": "repo/graphql/repoIssues-sortByAsc.graphql.json"
       },
       {
         "name": "RepoIssues",
         "alias": "RepoIssuesPage2",
-        "variables": { "after": "issues-page1-endCursor" },
+        "variables": {
+          "after": "issues-page1-endCursor"
+        },
         "fixture": "repo/graphql/repoIssues-page2.graphql.json"
       },
       {
@@ -161,7 +178,10 @@
         "name": "RepoPullRequests",
         "alias": "RepoPullRequests-SortByAsc",
         "variables": {
-          "orderBy": { "field": "CREATED_AT", "direction": "ASC" }
+          "orderBy": {
+            "field": "CREATED_AT",
+            "direction": "ASC"
+          }
         },
         "fixture": "repo/graphql/repoPullRequests-sortByAsc.graphql.json"
       },
@@ -169,14 +189,18 @@
         "name": "RepoPullRequests",
         "alias": "RepoPullRequests-FilterByLabel",
         "variables": {
-          "labels": ["WIP DO NOT MERGE"]
+          "labels": [
+            "WIP DO NOT MERGE"
+          ]
         },
         "fixture": "repo/graphql/repoPullRequests-filterByLabel.graphql.json"
       },
       {
         "name": "RepoPullRequests",
         "alias": "RepoPullRequests2",
-        "variables": { "after": "pullRequests-page1-endCursosr" },
+        "variables": {
+          "after": "pullRequests-page1-endCursosr"
+        },
         "fixture": "repo/graphql/repoPullRequests-page2.graphql.json"
       },
       {
@@ -274,7 +298,10 @@
         "name": "OrgRepos",
         "alias": "OrgRepos",
         "variables": null,
-        "fixture": "org/graphql/orgRepos.graphql.json"
+        "fixture": {
+          "full": "org/graphql/orgRepos.graphql.json",
+          "empty": "org/graphql/empty/orgRepos.empty.graphql.json"
+        }
       },
       {
         "name": "OrgProfile",
