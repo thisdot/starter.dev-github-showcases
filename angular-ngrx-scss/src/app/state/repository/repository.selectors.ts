@@ -9,3 +9,8 @@ export const selectCurrentlySelectedFile = createSelector(
   selectRepositoryState,
   (state: RepoState) => state.selectedFile,
 );
+
+export const selectPullRequests = createSelector(
+  selectRepositoryState,
+  (state: RepoState) => state.pullRequests,
+);
