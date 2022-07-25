@@ -225,6 +225,7 @@ describe('RepositoryService', () => {
       starCount: 100,
       tags: ['react', 'angular', 'vue', 'github'],
       tree: [],
+      pullRequests: [],
       activeBranch: 'main',
       visibility: 'public',
       selectedFile: null,
