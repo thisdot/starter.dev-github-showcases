@@ -5,6 +5,7 @@ import { RelativeTimePipe } from './pipes/relative-time.pipe';
 import { RouterModule } from '@angular/router';
 import { OcticonsDirective } from './directives/octicons.directive';
 import { FilterDropdownComponent } from './components/filter-dropdown/filter-dropdown.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { FilterDropdownComponent } from './components/filter-dropdown/filter-dro
     RelativeTimePipe,
     OcticonsDirective,
     FilterDropdownComponent,
+    PaginationComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -19,6 +21,7 @@ import { FilterDropdownComponent } from './components/filter-dropdown/filter-dro
     RelativeTimePipe,
     OcticonsDirective,
     FilterDropdownComponent,
+    PaginationComponent,
   ],
 })
 export class SharedModule {}

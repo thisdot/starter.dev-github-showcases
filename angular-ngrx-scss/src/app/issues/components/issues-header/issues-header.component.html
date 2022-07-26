@@ -1,0 +1,29 @@
+<div class="filters-container">
+  <div class="issue-status">
+    <a href="" class="active">
+      <span class="icon" appOcticon="no-entry" size="16"></span>
+      <span>412 Open</span>
+    </a>
+    <a href="">
+      <span class="icon" appOcticon="check" size="16"></span
+      ><span>4877 Open</span></a
+    >
+  </div>
+  <div class="issue-filters">
+    <app-filter-dropdown
+      name="Label"
+      description="Select label"
+      [isRepo]="true"
+    ></app-filter-dropdown>
+    <app-filter-dropdown
+      name="Milestones"
+      description="Select milestone"
+      [isRepo]="true"
+    ></app-filter-dropdown>
+    <app-filter-dropdown
+      name="Sort"
+      description="Select sort"
+      [isRepo]="true"
+    ></app-filter-dropdown>
+  </div>
+</div>

@@ -19,6 +19,11 @@ const routes: Routes = [
             (m) => m.FileViewerModule,
           ),
       },
+      {
+        path: 'issues',
+        loadChildren: () =>
+          import('../issues/issues.module').then((m) => m.IssuesModule),
+      },
     ],
   },
 ];
