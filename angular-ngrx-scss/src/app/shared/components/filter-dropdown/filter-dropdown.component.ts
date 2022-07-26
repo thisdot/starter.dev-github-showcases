@@ -37,6 +37,7 @@ export class FilterDropdownComponent {
   @Input() current?: string | null = '';
   @Input() items: FilterOption[] = [];
   @Input() toggle? = false;
+  @Input() isRepo? = false;
 
   @Output() setFilter: EventEmitter<string> = new EventEmitter();
 
