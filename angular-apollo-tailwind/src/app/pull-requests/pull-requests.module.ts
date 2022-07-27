@@ -26,6 +26,6 @@ import { IconsModule, PipesModule } from '@shared';
     PaginationModule,
     PipesModule,
   ],
-  exports: [PullRequestsComponent, PullRequestsListComponent],
+  exports: [PullRequestsComponent],
 })
 export class PullRequestsModule {}
