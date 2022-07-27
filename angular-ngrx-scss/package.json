@@ -71,7 +71,7 @@
     "yaml": "^1.10.2"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md,html}": [
+    "*": [
       "npm run format"
     ]
   }
