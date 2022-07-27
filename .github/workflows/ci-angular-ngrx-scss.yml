@@ -141,8 +141,8 @@ jobs:
             # Diff HEAD with the previous commit
             $diff = git diff --name-only HEAD^ HEAD
 
-            # Check if a file under docs/ or with the .md extension has changed (added, modified, deleted)
-            $SourceDiff = $diff | Where-Object { $_ -match '^/'}
+            # Check if a file under / (added, modified, deleted)
+            $SourceDiff = $diff | Where-Object { $_ -notmatch '^angular-ngrx-scss/*'}
             $HasDiff = $SourceDiff.Length -gt 0
 
             # Set the output named "docs_changed"
