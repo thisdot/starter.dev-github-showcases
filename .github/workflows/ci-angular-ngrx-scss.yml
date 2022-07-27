@@ -125,7 +125,7 @@ jobs:
       - name: Test Project
         run: npm run test:ci
         working-directory: angular-ngrx-scss
-  check:
+  conditional_job_check_files:
       name: Check files
       outputs:
         run_job: ${{ steps.check_files.outputs.run_job }}
