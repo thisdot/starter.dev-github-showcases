@@ -154,12 +154,3 @@ jobs:
                 echo "::set-output name=run_job::true"
               fi
             done &lt; files.txt
-
-job_for_db:
-  name: Job for 'db' folder
-    needs: check
-    if: needs.check.outputs.run_job == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: run for 'db' folder
-      run: echo "This job runs only when all the modified files are under the 'db' folder."
