@@ -125,41 +125,34 @@ jobs:
       - name: Test Project
         run: npm run test:ci
         working-directory: angular-ngrx-scss
-  check:
-      name: Check files
-      outputs:
-        run_job: ${{ steps.check_files.outputs.run_job }}
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: 2
-        - name: check modified files
-          id: check_files
-          run: |
-            echo "=============== list modified files ==============="
-            git diff --name-only HEAD^ HEAD
-            
-            echo "========== check paths of modified files =========="
-            git diff --name-only HEAD^ HEAD &gt; files.txt
-            while IFS= read -r file
-            do
-              echo $file
-              if [[ $file != angular-ngrx-scss/* ]]; then
-                echo "This modified file is not under the 'db' folder."
-                echo "::set-output name=run_job::false"
-                break
-              else
-                echo "::set-output name=run_job::true"
-              fi
-            done &lt; files.txt
-
-  job_for_db:
-    name: Job for 'db' folder
-    needs: check
-    if: needs.check.outputs.run_job == 'true'
-    runs-on: ubuntu-latest
+  conditional_job_check_files:
+    runs-on: 'ubuntu-20.04'
+    # Declare outputs for next jobs
+    outputs:
+      docs_changed: ${{ steps.check_file_changed.outputs.docs_changed }}
     steps:
-      - name: run for 'db' folder
-        run: echo "This job runs only when all the modified files are under the 'db' folder."
+    - uses: actions/checkout@v2
+      with:
+        # Checkout as many commits as needed for the diff
+        fetch-depth: 2
+    - shell: pwsh
+      id: check_file_changed
+      run: |
+        # Diff HEAD with the previous commit
+        $diff = git diff --name-only HEAD^ HEAD
+
+        # Check if a file under docs/ or with the .md extension has changed (added, modified, deleted)
+        $SourceDiff = $diff | Where-Object { $_ -match '^docs/' -or $_ -match '.md$' }
+        $HasDiff = $SourceDiff.Length -gt 0
+
+        # Set the output named "docs_changed"
+        Write-Host "::set-output name=docs_changed::$HasDiff"
+
+  # Run the job only with "docs_changed" equals "True"
+  conditional_job:
+    runs-on: 'ubuntu-20.04'
+    needs: [ conditional_job_check_files ]
+    if: needs.conditional_job_check_files.outputs.docs_changed == 'True'
+    steps:
+    - shell: pwsh
+      run: echo publish docs
