@@ -146,7 +146,7 @@ jobs:
             while IFS= read -r file
             do
               echo $file
-              if [[ $file != db/* ]]; then
+              if [[ $file != /* ]]; then
                 echo "This modified file is not under the 'db' folder."
                 echo "::set-output name=run_job::false"
                 break
