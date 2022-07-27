@@ -72,7 +72,7 @@
   },
   "lint-staged": {
     "*": [
-        "format"
+        "format", "git add"
     ]
   }
 }
