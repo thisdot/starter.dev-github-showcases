@@ -12,6 +12,7 @@ import { FileCodeComponent } from './components/file-code/file-code.component';
 import { FileTextComponent } from './components/file-text/file-text.component';
 import { FileExplorerNavComponent } from './file-explorer-nav/file-explorer-nav.component';
 import { FileExplorerContainerComponent } from './file-explorer-container/file-explorer-container.component';
+import { ReadMeComponent } from './read-me/read-me.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FileExplorerContainerComponent } from './file-explorer-container/file-e
     FileTextComponent,
     FileExplorerNavComponent,
     FileExplorerContainerComponent,
+    ReadMeComponent,
   ],
   imports: [CommonModule, FileViewerRoutingModule, SharedModule, PrismModule],
 })

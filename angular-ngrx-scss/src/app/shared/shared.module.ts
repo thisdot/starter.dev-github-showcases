@@ -5,11 +5,13 @@ import { RelativeTimePipe } from './pipes/relative-time.pipe';
 import { RouterModule } from '@angular/router';
 import { OcticonsDirective } from './directives/octicons.directive';
 import { FilterDropdownComponent } from './components/filter-dropdown/filter-dropdown.component';
+import { MarkdownPipe } from './pipes/markdown.pipe';
 
 @NgModule({
   declarations: [
     RepoCardComponent,
     RelativeTimePipe,
+    MarkdownPipe,
     OcticonsDirective,
     FilterDropdownComponent,
   ],
@@ -17,6 +19,7 @@ import { FilterDropdownComponent } from './components/filter-dropdown/filter-dro
   exports: [
     RepoCardComponent,
     RelativeTimePipe,
+    MarkdownPipe,
     OcticonsDirective,
     FilterDropdownComponent,
   ],

@@ -1,0 +1,9 @@
+<div class="readme-me-container" *ngIf="readme">
+  <div class="header">
+    <span class="icon" appOcticon="list-unordered"></span>
+    <span class="filename">README.md</span>
+  </div>
+  <div class="content">
+    <span [innerHTML]="myEncodeURIComponent(readme) | markdown"></span>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+@use '../../shared/styles/variables.scss';
+
+
+.read-me-container {
+  
+  .header {
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    background-color: variables.$white;
+    font-weight: 600;
+    padding: 0.625rem;
+    border: 1px solid variables.$gray300;
+    border-radius: 0.25rem;
+
+    .icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .content {
+    padding: 0.625rem;
+    border: 1px solid variables.$gray300;
+    border-radius: 0.25rem;
+    border-top: none;
+  }
+
+}
