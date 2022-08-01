@@ -1,8 +1,6 @@
 @use '../../shared/styles/variables.scss';
 
-
 .read-me-container {
-  
   .header {
     position: sticky;
     z-index: 3;
@@ -24,5 +22,4 @@
     border-radius: 0.25rem;
     border-top: none;
   }
-
 }
