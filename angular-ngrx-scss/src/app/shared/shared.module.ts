@@ -7,6 +7,7 @@ import { OcticonsDirective } from './directives/octicons.directive';
 import { FilterDropdownComponent } from './components/filter-dropdown/filter-dropdown.component';
 import { MarkdownPipe } from './pipes/markdown.pipe';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { IssuePullItemComponent } from './components/issue-pull-item/issue-pull-item.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     OcticonsDirective,
     FilterDropdownComponent,
     PaginationComponent,
+    IssuePullItemComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -25,6 +27,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     OcticonsDirective,
     FilterDropdownComponent,
     PaginationComponent,
+    IssuePullItemComponent,
   ],
 })
 export class SharedModule {}
