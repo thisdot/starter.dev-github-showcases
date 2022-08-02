@@ -1,7 +1,7 @@
 import { json, LoaderFunction } from '@remix-run/node';
 import { useLoaderData, useOutletContext } from '@remix-run/react';
 import { parseQueryData } from '~/components/FileExplorer/parseQueryData';
-import FileExplorerNav from '~/components/FileExplorerNav/FileExplorerNav';
+import RepoNavigation from '~/components/RepoNavigation/RepoNavigation';
 import RepoHeader from '~/components/RepoHeader/RepoHeader';
 import FileExplorer from '~/components/FileExplorer/FileExplorer.view';
 import { parseTopics } from '~/components/RepoPage/parseTopics';
@@ -108,7 +108,7 @@ export default function Screen() {
       <div className="mx-auto max-w-screen-2xl py-8 px-4">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12">
-            <FileExplorerNav />
+            <RepoNavigation />
             <FileExplorer
               items={items}
               branch={context.branch}

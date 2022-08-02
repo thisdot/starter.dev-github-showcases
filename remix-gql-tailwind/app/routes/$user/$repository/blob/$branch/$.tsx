@@ -9,7 +9,7 @@ import { REPO_PAGE_QUERY } from '~/lib/queries/RepoPage';
 import { REPO_FILE_QUERY } from '~/lib/queries/FileViewer';
 import FileViewer from '~/components/FileViewer/FileViewer';
 import RepoHeader from '~/components/RepoHeader/RepoHeader';
-import FileExplorerNav from '~/components/FileExplorerNav/FileExplorerNav';
+import RepoNavigation from '~/components/RepoNavigation/RepoNavigation';
 
 type LoaderData = {
   context: RepoContext;
@@ -82,7 +82,7 @@ export default function Repository() {
       <div className="mx-auto max-w-screen-2xl py-8 px-4">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12">
-            <FileExplorerNav />
+            <RepoNavigation />
             <FileViewer data={data} />
           </div>
         </div>

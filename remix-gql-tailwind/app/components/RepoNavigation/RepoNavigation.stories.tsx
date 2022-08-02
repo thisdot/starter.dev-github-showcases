@@ -1,15 +1,15 @@
 import { RepoContext, RepoProvider } from '../../context/RepoContext';
 import { Story, Meta } from '@storybook/react';
-import FileExplorerNav from './FileExplorerNav';
+import RepoNavigation from './RepoNavigation';
 
 export default {
-  component: FileExplorerNav,
-  title: 'RepoPage/FileExplorerNav',
+  component: RepoNavigation,
+  title: 'RepoPage/RepoNavigation',
 } as Meta;
 
 const Template: Story<RepoContext> = (args) => (
   <RepoProvider value={args}>
-    <FileExplorerNav />
+    <RepoNavigation />
   </RepoProvider>
 );
 
@@ -36,6 +36,6 @@ DeepPathFile.args = {
   name: 'starter.dev',
   owner: 'thisdot',
   branch: 'main',
-  path: 'remix/src/components/FileExplorerNav.tsx',
+  path: 'remix/src/components/RepoNavigation.tsx',
   isRepoLoading: true,
 };
