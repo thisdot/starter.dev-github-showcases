@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class ReadMeComponent {
   @Input() readme = '';
 
-  myEncodeURIComponent(text: string): string {
+  encodeReadmeURI(text: string): string {
     return atob(text);
   }
 }
