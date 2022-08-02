@@ -1,5 +1,8 @@
 @use '../../styles/variables.scss';
 
+$color-open: variables.$green100;
+$color-closed: variables.$purple100;
+
 .item {
   padding: 1.125rem;
   border-bottom: 1px solid variables.$gray200;
@@ -28,11 +31,11 @@
   margin-right: 0.5rem;
 
   &.open {
-    color: variables.$green100
+    color: $color-open;
   }
 
   &.closed {
-    color: variables.$purple100
+    color: $color-closed;
   }
 }
 
@@ -49,6 +52,7 @@
   }
 
   .label {
+    font-weight: 500;
     font-size: 0.875rem;
     margin: 0 0.385rem;
     padding: 0.125rem 0.5rem;
@@ -62,4 +66,12 @@
   font-size: 0.875rem;
   margin-top: 0.325rem;
   color: variables.$gray600;
+
+  .created-by {
+    cursor: pointer;
+
+    &:hover {
+      color: variables.$blue300;
+    }
+  }
 }
