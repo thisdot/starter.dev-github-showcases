@@ -35,11 +35,11 @@ export default function FileExplorer({
     return pathParts.slice(0, pathParts.length - 1).join('/');
   };
 
-  const getUrl = (path: string) => {
+  const getUrl = (path: string, type: string) => {
     if (path === '') {
       return `${basePath}`;
     }
-    return `${basePath}/tree/${branch}/${path}`;
+    return `${basePath}/${type}/${branch}/${path}`;
   };
   return (
     <FileExplorerWrapper>
@@ -56,7 +56,7 @@ export default function FileExplorer({
       <FileExplorerContainer>
         {path !== '' ? (
           <FileExplorerCell>
-            <FileExplorerLink href={getUrl(removeLastPathPart(path))}>
+            <FileExplorerLink href={getUrl(removeLastPathPart(path), 'tree')}>
               ..
             </FileExplorerLink>
           </FileExplorerCell>
@@ -67,7 +67,7 @@ export default function FileExplorer({
               <FileExplorerDirContainer>
                 <DirectoryIcon />
               </FileExplorerDirContainer>
-              <FileExplorerLink href={getUrl(folder.path)}>
+              <FileExplorerLink href={getUrl(folder.path, 'tree')}>
                 {folder.name}
               </FileExplorerLink>
             </FileExplorerInnerCell>
@@ -79,7 +79,9 @@ export default function FileExplorer({
               <FileExplorerFileContainer>
                 <FileIcon />
               </FileExplorerFileContainer>
-              <FileExplorerLink>{file.name}</FileExplorerLink>
+              <FileExplorerLink href={getUrl(file.path, 'blob')}>
+                {file.name}
+              </FileExplorerLink>
             </FileExplorerInnerCell>
           </FileExplorerCell>
         ))}
