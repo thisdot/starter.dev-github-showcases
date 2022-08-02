@@ -1,8 +1,7 @@
 <template>
   <!-- Actual content -->
-  <Auth v-if="!user?.isLoggedIn" />
   <q-card
-    v-else-if="!userLoading"
+    v-if="!userLoading"
     class="full-height"
     flat
     square
@@ -215,14 +214,11 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { useUser } from '@/composables';
-import { useUserStore } from '@/store/userStore';
-import { Auth } from '@/views';
 
 const { getUserProfile } = useUser();
 const props = defineProps({
   username: String,
 });
-const user = useUserStore();
 const { data: userData, loading: userLoading } = getUserProfile(props.username);
 </script>
 

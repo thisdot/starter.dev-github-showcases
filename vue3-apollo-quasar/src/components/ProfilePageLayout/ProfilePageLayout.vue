@@ -1,6 +1,5 @@
 <template>
-  <Auth v-if="!user?.isLoggedIn" />
-  <div v-else-if="!loading">
+  <div v-if="!loading">
     <TabHeader
       :overview="true"
       :repositories="true"
@@ -87,13 +86,10 @@ import {
   TabHeader,
   RepoCard,
 } from '@/components';
-import { useUserStore } from '@/store/userStore';
-import { Auth } from '@/views';
 import { useUserRepos } from '@/composables';
 import { defaultLanguageSort } from '@/components/SearchFilter/data';
 
 const getUserRepos = useUserRepos();
-const user = useUserStore();
 const tab = ref('');
 
 const props = defineProps({
