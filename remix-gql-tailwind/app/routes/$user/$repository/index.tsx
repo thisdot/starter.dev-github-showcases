@@ -5,7 +5,7 @@ import { auth } from '~/services/auth.server';
 import gqlClient from '~/lib/graphql-client';
 import { RepoContext, RepoProvider } from '~/context/RepoContext';
 import RepoHeader from '../../../components/RepoHeader/RepoHeader';
-import FileExplorerNav from '../../../components/FileExplorerNav/FileExplorerNav';
+import RepoNavigation from '../../../components/RepoNavigation/RepoNavigation';
 import FileExplorer from '../../../components/FileExplorer/FileExplorer.view';
 import RepoReadMe from '../../../components/RepoReadMe/RepoReadMe.view';
 import RepoAboutWidget from '~/components/RepoAboutWidget/RepoAboutWidget';
@@ -105,7 +105,7 @@ export default function Repository() {
       <div className="mx-auto max-w-screen-2xl px-4 md:py-8">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-7 xl:col-span-9">
-            <FileExplorerNav />
+            <RepoNavigation />
             <FileExplorer
               items={items}
               branch={context.branch}

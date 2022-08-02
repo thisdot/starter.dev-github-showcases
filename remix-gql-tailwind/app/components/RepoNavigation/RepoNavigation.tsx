@@ -1,7 +1,7 @@
 import { GitBranchIcon } from '../Icons';
 import { Link } from '@remix-run/react';
 import { useRepo } from '../../context/RepoContext';
-import * as styles from './FileExplorerNav.classNames';
+import * as styles from './RepoNavigation.classNames';
 import { removePathPart } from '../../lib/pathUtils';
 
 function RepoNavigation() {
