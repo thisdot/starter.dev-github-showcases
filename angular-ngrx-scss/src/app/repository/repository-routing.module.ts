@@ -19,6 +19,13 @@ const routes: Routes = [
             (m) => m.FileViewerModule,
           ),
       },
+      {
+        path: 'pull-requests',
+        loadChildren: () =>
+          import('../pull-requests/pull-requests.module').then(
+            (m) => m.PullRequestsModule,
+          ),
+      },
     ],
   },
 ];
