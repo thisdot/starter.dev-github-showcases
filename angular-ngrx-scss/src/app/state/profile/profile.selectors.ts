@@ -124,8 +124,9 @@ export const selectReposCount = createSelector(
 type LanguageMap = { [key: string]: string };
 
 export const filteredLanguages = createSelector(
-  selectRepos,
-  (repos?: UserReposState[]) => {
+  selectProfileState,
+  (state: ProfileState) => {
+    const { repos } = state;
     const initialValue: LanguageMap = { all: 'All' };
 
     if (repos) {

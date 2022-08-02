@@ -7,6 +7,7 @@ import {
   selectFilterByLanguage,
   selectFilterBySearch,
   selectFilterByType,
+  selectProfileState,
   selectRepos,
   selectReposCount,
   selectSortFilter,
@@ -57,6 +58,10 @@ describe('RepoControlsComponent', () => {
             {
               selector: hasActiveSortAndFilters,
               value: MOCK_VALUE_SELECT_HAS_ACTIVE_FILTERS,
+            },
+            {
+              selector: selectProfileState,
+              value: { repos: [] },
             },
             {
               selector: selectRepos,
