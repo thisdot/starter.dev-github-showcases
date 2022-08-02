@@ -1,5 +1,5 @@
 <template>
-  <div class="repo_search_header">
+  <div class="repo_search_header q-pt-lg">
     <SearchInput />
     <SearchDropdowns dropdownType="type" v-if="!changingFilterType">
       <template v-slot:filtertype>
@@ -62,20 +62,20 @@
       <template #languages>
         <q-item
           clickable
-          @click="updateLanguageRef(defaultLanguageSort)"
+          @click="updateLanguageRef(defaultLanguage)"
           v-close-popup
           class="row items-center text-capitalize"
         >
           <span
             class="text-h6"
-            :class="{ 'q-mr-md': filteredLanguage() !== defaultLanguageSort }"
+            :class="{ 'q-mr-md': filteredLanguage() !== defaultLanguage }"
           >
             <q-icon
-              v-show="filteredLanguage() === defaultLanguageSort"
+              v-show="filteredLanguage() === defaultLanguage"
               name="svguse:app-icons/correct.svg#correct"
             />
           </span>
-          {{ defaultLanguageSort }}
+          {{ defaultLanguage }}
         </q-item>
         <q-item
           v-for="(language, index) in languages"
@@ -173,7 +173,7 @@ import { FILTER_TYPE_OPTIONS, defaultFilterType } from './data';
 import { filterType } from '@/globals/filterType';
 import { defaultSortBy, SORT_OPTIONS } from './data';
 import { sortBy } from '@/globals/sortBy';
-import { defaultLanguageSort } from './data';
+import { defaultLanguage } from './data';
 import { filteredLanguage } from '@/globals/filteredLanguage';
 
 export default defineComponent({
@@ -226,7 +226,7 @@ export default defineComponent({
       SORT_OPTIONS,
       changingSortBy,
       updateSortByRef,
-      defaultLanguageSort,
+      defaultLanguage,
       updateLanguageRef,
       changingLanguage,
       filteredLanguage,
@@ -250,8 +250,6 @@ export default defineComponent({
 .repo_search_header {
   display: flex;
   flex-flow: column;
-  padding: 16px 0;
-  border-bottom: 1px solid $secondary-300;
 
   @media (min-width: 1024px) {
     flex-flow: row;
