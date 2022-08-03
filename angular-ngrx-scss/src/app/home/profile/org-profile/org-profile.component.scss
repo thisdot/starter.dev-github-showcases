@@ -1,3 +1,5 @@
+@use '../../../shared/styles/variables.scss';
+
 .profile-header {
   position: sticky;
   top: 0;
@@ -20,4 +22,8 @@
   app-repo-controls {
     grid-row: 1 / 2;
   }
+}
+
+.container {
+  max-width: variables.$lg;
 }
