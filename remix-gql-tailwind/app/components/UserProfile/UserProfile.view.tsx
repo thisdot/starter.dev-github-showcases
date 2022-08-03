@@ -101,7 +101,7 @@ function UserProfileView({
             <TwitterIcon className={styles.icon} />
             <a
               className={styles.link}
-              href={`https:/twitter.com/${twitterUsername}`}
+              href={`//twitter.com/${twitterUsername}`}
               target="_blank"
               rel="noreferrer"
             >
