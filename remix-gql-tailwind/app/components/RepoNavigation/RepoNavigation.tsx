@@ -4,6 +4,7 @@ import { Fragment } from 'react';
 import { removePathPart } from '~/lib/pathUtils';
 import { useRepo } from '~/context/RepoContext';
 import { GitBranchIcon } from '../Shared/Icons';
+import cuid from 'cuid';
 
 function RepoNavigation() {
   const { name, owner, path, branch } = useRepo();
@@ -27,7 +28,9 @@ function RepoNavigation() {
             return (
               <Fragment key={href}>
                 {isLast ? (
-                  <span key={i} className={styles.crumbEnd}>{crumb}</span>
+                  <span key={cuid()} className={styles.crumbEnd}>
+                    {crumb}
+                  </span>
                 ) : (
                   <>
                     <Link
@@ -37,7 +40,9 @@ function RepoNavigation() {
                     >
                       {crumb}
                     </Link>
-                    <span key={i} className={styles.separator}>/</span>
+                    <span key={i} className={styles.separator}>
+                      /
+                    </span>
                   </>
                 )}
               </Fragment>
