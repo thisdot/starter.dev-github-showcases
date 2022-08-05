@@ -1,0 +1,15 @@
+<ng-container *ngIf="selectedFile$ | async as selectedFile">
+  <div class="grid container subpage">
+    <div class="grid-cols-12">
+      <app-file-explorer-nav
+        [owner]="owner"
+        [name]="repoName"
+        [branch]="commitOrBranchOrTagName"
+        [path]="path"
+      ></app-file-explorer-nav>
+    </div>
+    <div class="grid-cols-12 file-viewer">
+      <app-file-viewer [fileContent]="selectedFile"> </app-file-viewer>
+    </div>
+  </div>
+</ng-container>

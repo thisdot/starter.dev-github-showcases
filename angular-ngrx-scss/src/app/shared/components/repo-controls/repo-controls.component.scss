@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables.scss';
 
 section {
   margin: 1.3em 0 0 2.5em;
@@ -7,6 +7,7 @@ section {
 .controls {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 0.6em;
   margin-bottom: 1.2em;
 
@@ -15,7 +16,7 @@ section {
     margin-right: 0.6em;
     padding: 0.4rem;
     border-radius: 0.4rem;
-    border: 1px solid $gray200;
+    border: 1px solid variables.$gray200;
     line-height: 1.5rem;
   }
 
@@ -23,11 +24,11 @@ section {
     display: inline-flex;
     align-items: center;
     border-radius: 0.375rem;
-    border: 1px solid $gray300;
-    background-color: $gray100;
+    border: 1px solid variables.$gray300;
+    background-color: variables.$gray100;
     padding: 0.375rem 1rem;
     line-height: 1.25rem;
-    color: $gray900;
+    color: variables.$gray900;
 
     &__name {
       font-weight: 600;
@@ -42,7 +43,7 @@ section {
 .divider {
   width: 100%;
   height: 2px;
-  background: $gray100;
+  background: variables.$gray100;
 }
 
 .results {
@@ -57,7 +58,7 @@ section {
   }
 
   .close-background {
-    background: $gray500;
+    background: variables.$gray500;
     border-radius: 0.3rem;
     width: 1.2rem;
     height: 1.3rem;
@@ -65,7 +66,14 @@ section {
     place-items: center;
   }
 
-  &__clear {
-    color: $gray500;
+  &__clear-container {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: variables.$gray500;
+    &:hover {
+      color: variables.$blue600;
+    }
   }
 }

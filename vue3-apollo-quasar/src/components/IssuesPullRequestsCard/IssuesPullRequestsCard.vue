@@ -1,75 +1,76 @@
 <template>
-  <q-card flat class="card">
-    <q-card-section class="row no-wrap q-pa-sm">
-      <span :class="cardType">
-        <span class="text-body1" :class="state">
-          <q-icon
-            class="text-h6 custom-icon"
-            name="svguse:app-icons/issue.svg#issue"
-            v-if="cardType === CARD_TYPE.ISSUE && state === STATE.OPEN"
-          />
-          <q-icon
-            class="text-h6 custom custom-icon-icon"
-            name="svguse:app-icons/closed-issue.svg#closed-issue"
-            v-else-if="cardType === CARD_TYPE.ISSUE && state === STATE.CLOSED"
-          />
+  <q-item class="block q-pa-none">
+    <q-card flat class="card">
+      <q-card-section class="row no-wrap q-pa-sm">
+        <span :class="cardType">
+          <span class="text-body1" :class="state">
+            <q-icon
+              class="text-h6 custom-icon"
+              name="svguse:app-icons/issue.svg#issue"
+              v-if="cardType === CARD_TYPE.ISSUE && state === STATE.OPEN"
+            />
+            <q-icon
+              class="text-h6 custom custom-icon-icon"
+              name="svguse:app-icons/closed-issue.svg#closed-issue"
+              v-else-if="cardType === CARD_TYPE.ISSUE && state === STATE.CLOSED"
+            />
 
-          <q-icon
-            class="text-h6 custom-icon"
-            name="svguse:app-icons/pull-request.svg#pull-request"
-            v-if="cardType === CARD_TYPE.PULL_REQUEST && state === STATE.OPEN"
-          />
-          <q-icon
-            class="text-h6 custom-icon"
-            name="svguse:app-icons/closed-pull-request.svg#closed-pull-request"
-            v-else-if="
-              cardType === CARD_TYPE.PULL_REQUEST && state === STATE.CLOSED
-            "
-          />
-          <q-icon
-            class="text-h6 custom-icon"
-            name="svguse:app-icons/merged-pull-request.svg#merged-pull-request"
-            v-else-if="
-              cardType === CARD_TYPE.PULL_REQUEST && state === STATE.MERGED
-            "
-          />
+            <q-icon
+              class="text-h6 custom-icon"
+              name="svguse:app-icons/pull-request.svg#pull-request"
+              v-if="cardType === CARD_TYPE.PULL_REQUEST && state === STATE.OPEN"
+            />
+            <q-icon
+              class="text-h6 custom-icon"
+              name="svguse:app-icons/closed-pull-request.svg#closed-pull-request"
+              v-else-if="
+                cardType === CARD_TYPE.PULL_REQUEST && state === STATE.CLOSED
+              "
+            />
+            <q-icon
+              class="text-h6 custom-icon"
+              name="svguse:app-icons/merged-pull-request.svg#merged-pull-request"
+              v-else-if="
+                cardType === CARD_TYPE.PULL_REQUEST && state === STATE.MERGED
+              "
+            />
+          </span>
         </span>
-      </span>
-      <div class="row column q-ml-sm col">
-        <div>
-          <a :href="url" class="text-body2 title">
-            {{ title }}
-          </a>
+        <div class="row column q-ml-sm col">
+          <div>
+            <a :href="url" class="text-body2 title">
+              {{ title }}
+            </a>
+          </div>
+
+          <div class="text-caption description">
+            <span>#{{ number }}</span>
+            <span class="q-mx-xs">by</span>
+            <span>{{ author }}</span>
+            <span class="q-mx-xs">was</span>
+            <span>{{ state }}</span>
+            <span class="q-mx-xs">
+              {{ getFriendlyDate(createdAt.toLocaleDateString()) }}
+            </span>
+          </div>
         </div>
 
-        <div class="text-caption description">
-          <span>#{{ number }}</span>
-          <span class="q-mx-xs">by</span>
-          <span>{{ author }}</span>
-          <span class="q-mx-xs">was</span>
-          <span>{{ state }}</span>
-          <span class="q-mx-xs">
-            {{ getFriendlyDate(createdAt.toLocaleDateString()) }}
+        <div>
+          <span class="comment">
+            <a :href="url" class="text-caption">
+              <q-icon
+                class="q-mx-xs text-h6 custom-icon"
+                name="svguse:app-icons/comment.svg#comment"
+              />
+              <span>
+                {{ commentCount }}
+              </span>
+            </a>
           </span>
         </div>
-      </div>
-
-      <div>
-        <span class="comment">
-          <a :href="url" class="text-caption">
-            <q-icon
-              class="q-mx-xs text-h6 custom-icon"
-              name="svguse:app-icons/comment.svg#comment"
-            />
-            <span>
-              {{ commentCount }}
-            </span>
-          </a>
-        </span>
-      </div>
-    </q-card-section>
-    <slot />
-  </q-card>
+      </q-card-section>
+    </q-card>
+  </q-item>
 </template>
 
 <script lang="ts">

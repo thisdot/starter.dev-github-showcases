@@ -63,10 +63,8 @@ export class UserService {
     );
   }
 
-  getUserOrganizations(username: string): Observable<UserOrgsState[]> {
-    const url = `${environment.githubUrl}/users/${encodeURIComponent(
-      username,
-    )}/orgs`;
+  getUserOrganizations(): Observable<UserOrgsState[]> {
+    const url = `${environment.githubUrl}/user/orgs`;
 
     return this.http.get<UserOrgsApiResponse>(url).pipe(
       map((data) =>
@@ -94,6 +92,8 @@ export class UserService {
           forks_count: repo.forks_count,
           private: repo.private,
           updated_at: repo.updated_at,
+          fork: repo.fork,
+          archived: repo.archived,
           license: repo.license
             ? {
                 key: repo.license.key,
@@ -135,6 +135,8 @@ export class UserService {
             forks_count: repo.forks_count,
             private: repo.private,
             updated_at: repo.updated_at,
+            fork: repo.fork,
+            archived: repo.archived,
             license: repo.license
               ? {
                   key: repo.license.key,

@@ -5,16 +5,20 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { RepositoryService } from 'src/app/repository/services/repository.service';
 import {
+  fetchFileContents,
+  fetchFileContentsFailure,
+  fetchFileContentsSuccess,
   fetchRepository,
   fetchRepositoryFailure,
   fetchRepositorySuccess,
 } from './repository.actions';
+
 @Injectable()
 export class RepositoryEffects {
   fetchRepository$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(fetchRepository),
-      switchMap(({ owner, repoName }) => {
+      switchMap(({ owner, repoName, path, branch }) => {
         const repoInfo$ = this.repoService.getRepositoryInfo(owner, repoName);
         const repoPRCount$ = this.repoService.getPullRequestList(
           owner,
@@ -23,6 +27,7 @@ export class RepositoryEffects {
         const repoContents$ = this.repoService.getRepositoryContents(
           owner,
           repoName,
+          path,
         );
         const repoReadme$ = this.repoService.getReadmeContent(owner, repoName);
 
@@ -39,6 +44,8 @@ export class RepositoryEffects {
               starCount: info.starCount,
               tags: info.tags,
               tree: contents,
+              activeBranch: branch ?? info.activeBranch,
+              selectedFile: null,
               visibility: info.visibility,
               watchCount: info.watchCount,
               website: info.website,
@@ -47,6 +54,20 @@ export class RepositoryEffects {
           }),
           catchError((error) => of(fetchRepositoryFailure({ error }))),
         );
+      }),
+    );
+  });
+
+  fetchFileContents$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fetchFileContents),
+      switchMap(({ owner, repoName, path, commitOrBranchOrTagName }) => {
+        return this.repoService
+          .getFileContents(owner, repoName, path, commitOrBranchOrTagName)
+          .pipe(
+            map((fileContents) => fetchFileContentsSuccess({ fileContents })),
+            catchError((error) => of(fetchFileContentsFailure({ error }))),
+          );
       }),
     );
   });

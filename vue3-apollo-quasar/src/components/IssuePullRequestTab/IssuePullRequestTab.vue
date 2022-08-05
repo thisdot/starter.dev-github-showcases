@@ -1,19 +1,19 @@
 <template>
   <div>
-    <div class="row items-center no-wrap q-pa-sm tab-container">
+    <div class="row items-center no-wrap q-px-xs q-py-sm tab-container">
       <div class="row items-center">
         <button
-          class="tab text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
-          :class="{ 'text-weight-medium active': isTab(TABS.OPEN) }"
+          class="tab tab--open text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
+          :class="{ 'text-weight-bold active': isTab(TABS.OPEN) }"
           @click="updateActiveTab(TABS.OPEN)"
         >
           <q-icon
-            class="text-h5 custom-icon"
+            class="text-h6 custom-icon"
             name="svguse:app-icons/pull-request.svg#pull-request"
             v-if="tabType === TAB_TYPE.PULL_REQUEST"
           />
           <q-icon
-            class="text-h5 custom-icon"
+            class="text-h6 custom-icon"
             name="svguse:app-icons/issue.svg#issue"
             v-else
           />
@@ -21,8 +21,8 @@
           Open
         </button>
         <button
-          class="tab text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
-          :class="{ 'text-weight-medium active': isTab(TABS.CLOSED) }"
+          class="tab tab--closed text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
+          :class="{ 'text-weight-bold active': isTab(TABS.CLOSED) }"
           @click="updateActiveTab(TABS.CLOSED)"
         >
           <q-icon
@@ -34,38 +34,55 @@
         </button>
       </div>
       <div class="col row justify-end items-center relative-position">
-        <button
-          class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
-          @click="toggleLabelMenu"
+        <q-btn-dropdown
+          label="Label"
+          flat
+          class="text-capitalize q-px-xs dropdown-label dropdown-label--label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
+          @click="toggleLabelMenu()"
         >
-          <span>Label</span>
-          <span class="q-ml-xs">
-            <q-icon class="fa fa-caret-down"></q-icon>
-          </span>
-        </button>
-        <div class="dropdown_menu q-menu" v-if="labelRef">
-          <slot name="label-list">
-            <p class="text-center text-caption text-primary text-bold q-py-xs">
-              Label options
-            </p>
-          </slot>
-        </div>
-        <button
-          class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
-          @click="toggleSortMenu"
+          <q-list class="dropdown_menu q-menu" v-if="labelRef">
+            <slot name="label-list">
+              <q-item
+                class="text-center text-caption text-primary text-bold q-py-xs block"
+              >
+                Label options
+              </q-item>
+            </slot>
+          </q-list>
+        </q-btn-dropdown>
+        <q-btn-dropdown
+          v-if="tabType === TAB_TYPE.ISSUE"
+          label="Milestones"
+          flat
+          class="text-capitalize q-px-xs dropdown-label dropdown-label--milestones text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
+          @click="toggleMilestonesMenu()"
         >
-          <span>Sort</span>
-          <span class="q-ml-xs">
-            <q-icon class="fa fa-caret-down"></q-icon>
-          </span>
-        </button>
-        <div class="dropdown_menu q-menu" v-if="sortRef">
-          <slot name="sort-list">
-            <p class="text-center text-caption text-primary text-bold q-py-xs">
-              Sort options
-            </p>
-          </slot>
-        </div>
+          <q-list separator class="dropdown_menu q-menu" v-if="milestonesRef">
+            <slot name="sort-list">
+              <q-item
+                class="text-center text-caption text-primary text-bold q-py-xs block"
+              >
+                Milestones options
+              </q-item>
+            </slot>
+          </q-list>
+        </q-btn-dropdown>
+        <q-btn-dropdown
+          label="Sort"
+          flat
+          class="text-capitalize q-px-xs dropdown-label dropdown-label--sort text-caption row justify-center items-center bg-transparent no-border cursor-pointer posi"
+          @click="toggleSortMenu()"
+        >
+          <q-list separator class="dropdown_menu q-menu" v-if="sortRef">
+            <slot name="sort-list">
+              <q-item
+                class="text-center text-caption text-primary text-bold q-py-xs block"
+              >
+                Sort options
+              </q-item>
+            </slot>
+          </q-list>
+        </q-btn-dropdown>
       </div>
     </div>
     <q-separator />
@@ -98,16 +115,24 @@ export default defineComponent({
     const activeTab = ref(TABS.OPEN);
     const labelRef = ref(false);
     const sortRef = ref(false);
+    const milestonesRef = ref(false);
 
     const isTab = (value) => value === activeTab.value;
 
     const toggleLabelMenu = () => {
       sortRef.value = false;
+      milestonesRef.value = false;
       labelRef.value = !labelRef.value;
     };
     const toggleSortMenu = () => {
       labelRef.value = false;
+      milestonesRef.value = false;
       sortRef.value = !sortRef.value;
+    };
+    const toggleMilestonesMenu = () => {
+      labelRef.value = false;
+      sortRef.value = false;
+      milestonesRef.value = !milestonesRef.value;
     };
 
     document.body.addEventListener('click', (e) => {
@@ -117,6 +142,7 @@ export default defineComponent({
       if (!exemptedLocalNames.includes(value)) {
         labelRef.value = false;
         sortRef.value = false;
+        milestonesRef.value = false;
       }
     });
 
@@ -129,12 +155,14 @@ export default defineComponent({
       TABS,
       activeTab,
       labelRef,
+      milestonesRef,
       sortRef,
       TAB_TYPE,
       isTab,
       toggleLabelMenu,
       toggleSortMenu,
       updateActiveTab,
+      toggleMilestonesMenu,
     };
   },
 });
@@ -171,14 +199,5 @@ export default defineComponent({
   .custom-icon {
     transform: translateY(0.1rem);
   }
-}
-
-.dropdown_menu {
-  max-width: 21rem;
-  max-height: fit-content;
-  top: 2rem;
-  position: absolute !important;
-  min-width: 10.5rem;
-  min-height: 2rem;
 }
 </style>

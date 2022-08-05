@@ -94,6 +94,11 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
     startCursor: undefined,
   }));
 
+  readonly setLabels = this.updater((state, values: Label[]) => ({
+    ...state,
+    labels: values,
+  }));
+
   readonly changeState = this.updater((state, value: PullRequestState) => ({
     ...state,
     state: value,
@@ -229,9 +234,10 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
               .valueChanges.pipe(
                 tapResponse(
                   (res) => {
-                    const { openPullRequests, closedPullRequests } =
+                    const { openPullRequests, closedPullRequests, labels } =
                       parsePullRequestsQuery(res.data);
 
+                    this.setLabels(labels);
                     this.setOpenPullRequests(openPullRequests);
                     this.setClosedPullRequests(closedPullRequests);
                   },

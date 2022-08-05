@@ -238,3 +238,115 @@ describe("When there is proper repository page responses", () => {
       .should("contain.text", "starter.dev");
   });
 });
+
+describe("When there is proper empty organization page responses", () => {
+  beforeEach(() => {
+    cy.interceptGraphQLCalls(View.Organization, InterceptResponse.Empty);
+
+    cy.visit("/orgs/thisdot");
+  });
+
+  it("should display correct organization name and avatar", () => {
+    cy.wait("@CurrentUserQuery")
+      .wait("@OrgReposQuery")
+      .wait("@OrgProfileQuery")
+      .get(`[data-testid="org about name"]`)
+      .should("be.visible")
+      .and("contain.text", "This Dot")
+      .get(`[data-testid="org about avatar"]`)
+      .should("be.visible")
+      .and("have.attr", "src")
+      .and(
+        "match",
+        /.*(https).*(avatars\.githubusercontent\.com).*(22839396).*/
+      );
+  });
+
+  it("should display repository list and empty data", () => {
+    cy.wait("@CurrentUserQuery")
+      .wait("@OrgReposQuery")
+      .wait("@OrgProfileQuery")
+      .get(`[data-testid="repository list item"]`)
+      .should("not.exist")
+      .get(`[data-testid="repository name"]`)
+      .should("not.exist")
+      .get(`[data-testid="repository description"]`)
+      .should("not.exist")
+      .get(`[data-testid="repository language"]`)
+      .should("not.exist")
+      .get(`[data-testid="repository star count"]`)
+      .should("not.exist")
+      .get(`[data-testid="repository fork count"]`)
+      .should("not.exist");
+  });
+
+  it("should have no results when searching for a repository", () => {
+    cy.wait("@CurrentUserQuery")
+      .wait("@OrgReposQuery")
+      .get(`[data-testid="repository filters search input"]`)
+      .type("starter.dev")
+      .get(`[data-testid="repository list item"]`)
+      .should("not.exist")
+      .get(`[data-testid="filterText"]`)
+      .should("be.visible")
+      .and("contain", 0);
+  });
+
+  it("should have working filter dropdown buttons and menu with no populated data after selection", () => {
+    cy.wait("@CurrentUserQuery")
+      .wait("@OrgReposQuery")
+      .wait("@OrgProfileQuery")
+      .get(`[data-testid="filters dropdown Type items"]`)
+      .should("not.exist")
+      .get(`[data-testid="filters dropdown Language items"]`)
+      .should("not.exist")
+      .get(`[data-testid="filters dropdown Sort items"]`)
+      .should("not.exist")
+      .get(`[data-testid="filters dropdown Type"]`)
+      .click()
+      .get(`[data-testid="filters dropdown Type items"]`)
+      .should("be.visible")
+      .get(`[data-testid="repository list item"]`)
+      .should("not.exist")
+      .get(`[data-testid="filters dropdown item All"]`)
+      .should("exist")
+      .and("be.visible")
+      .and("contain.text", "All")
+      .get(`[data-testid="filters dropdown item Forks"]`)
+      .should("exist")
+      .and("be.visible")
+      .and("contain.text", "Forks")
+      .get(`[data-testid="filters dropdown item Archived"]`)
+      .should("exist")
+      .and("be.visible")
+      .and("contain.text", "Archived")
+      .get(`[data-testid="filters dropdown Language"]`)
+      .click()
+      .get(`[data-testid="filters dropdown Language items"]`)
+      .should("be.visible")
+      .get(`[data-testid="repository list item"]`)
+      .should("not.exist")
+      .get(`[data-testid="filters dropdown item All"]`)
+      .should("exist")
+      .and("be.visible")
+      .and("contain.text", "All")
+      .get(`[data-testid="filters dropdown Sort"]`)
+      .click()
+      .get(`[data-testid="filters dropdown Sort items"]`)
+      .should("be.visible")
+      .get(`[data-testid="repository list item"]`)
+      .should("not.exist")
+      .get(`[data-testid="filters dropdown item Last updated"]`)
+      .should("exist")
+      .and("be.visible")
+      .and("contain.text", "Last updated")
+      .get(`[data-testid="filters dropdown item Name"]`)
+      .should("exist")
+      .and("be.visible")
+      .and("contain.text", "Name")
+      .get(`[data-testid="filters dropdown item Stars"]`)
+      .should("exist")
+      .and("be.visible")
+      .and("contain.text", "Stars");
+  });
+});

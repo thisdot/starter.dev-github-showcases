@@ -13,6 +13,8 @@ export const initialRepoState: RepoState = {
   starCount: 0,
   tags: [],
   tree: [],
+  selectedFile: null,
+  activeBranch: '',
   visibility: '',
   watchCount: 0,
   website: '',
@@ -24,6 +26,11 @@ const reducer = createReducer(
     ...state,
     ...repoData,
   })),
+  on(RepositoryActions.fetchFileContentsSuccess, (state, { fileContents }) => ({
+    ...state,
+    selectedFile: fileContents,
+  })),
+  // TODO: handle fetchFileError case
 );
 
 export function repoReducer(state: RepoState | undefined, action: Action) {

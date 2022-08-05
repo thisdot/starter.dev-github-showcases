@@ -1,0 +1,32 @@
+@use '../../../shared/styles/variables';
+
+a {
+  color: variables.$gray500;
+}
+
+a > span,
+.link {
+  margin-right: 0.5rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.topic {
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.375rem;
+  background-color: variables.$blue100;
+  transition-property: background-color, border-color, color, fill, stroke;
+  color: variables.$blue600;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  border-radius: 0.75rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: variables.$blue600;
+    color: variables.$white;
+  }
+}

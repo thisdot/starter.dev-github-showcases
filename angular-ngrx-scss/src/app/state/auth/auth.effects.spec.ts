@@ -6,8 +6,8 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { of } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import {
-  loadUserToken,
-  loadUserTokenSuccess,
+  saveUserToken,
+  saveUserTokenSuccess,
   signOut,
   startSignIn,
 } from './auth.actions';
@@ -17,12 +17,11 @@ import { AuthEffects } from './auth.effects';
 describe('AuthEffects', () => {
   let actions$: Actions;
   let effects: AuthEffects;
-  let mockHttpClient;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let authService: any;
+  let mockHttpClient: jasmine.SpyObj<HttpClient>;
+  let authService: jasmine.SpyObj<AuthService>;
 
   beforeEach(() => {
-    authService = jasmine.createSpyObj('UserService', {
+    authService = jasmine.createSpyObj('AuthService', {
       signIn: () => {
         return of();
       },
@@ -32,10 +31,13 @@ describe('AuthEffects', () => {
       saveUserToken: () => {
         return of();
       },
+      getRedirectUrl: () => {
+        return of();
+      },
     });
+    // the name ('http') goes as the first argument and an array of public methods you want to spyOn
     mockHttpClient = jasmine.createSpyObj('http', ['get', 'put']);
     TestBed.configureTestingModule({
-      // the name ('http') goes as the first argument and an array of public methods you want to spyOn
       imports: [
         RouterTestingModule.withRoutes([{ path: 'signin', redirectTo: '' }]),
       ],
@@ -52,7 +54,6 @@ describe('AuthEffects', () => {
 
     actions$ = TestBed.inject(Actions);
     effects = TestBed.inject(AuthEffects);
-    authService = TestBed.inject(AuthService);
   });
 
   it('should be created', () => {
@@ -72,12 +73,12 @@ describe('AuthEffects', () => {
   });
 
   it('should save the access_Token for the user', (done) => {
-    actions$ = of(loadUserToken());
+    actions$ = of(saveUserToken());
 
     authService.saveUserToken.and.returnValue(of('access_token_valid'));
 
     effects.saveUserToken$.subscribe((action) => {
-      expect(action).toEqual(loadUserTokenSuccess({ isAuthenticated: true }));
+      expect(action).toEqual(saveUserTokenSuccess({ isAuthenticated: true }));
       done();
     });
   });

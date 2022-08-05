@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
-import { loadUserToken, loadUserTokenFailure, loadUserTokenSuccess } from '.';
+import { saveUserToken, saveUserTokenFailure, saveUserTokenSuccess } from '.';
 import { AuthService } from '../../auth/services/auth.service';
 import { removeUserToken, signOut, startSignIn } from './auth.actions';
 
@@ -39,11 +39,11 @@ export class AuthEffects {
    */
   saveUserToken$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(loadUserToken),
+      ofType(saveUserToken),
       concatMap(() =>
         this.authService.saveUserToken().pipe(
-          map(() => loadUserTokenSuccess({ isAuthenticated: true })),
-          catchError((error) => of(loadUserTokenFailure({ error }))),
+          map(() => saveUserTokenSuccess({ isAuthenticated: true })),
+          catchError((error) => of(saveUserTokenFailure({ error }))),
         ),
       ),
     );

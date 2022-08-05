@@ -1,0 +1,11 @@
+<div
+  *ngFor="let line of tokens; let i = index"
+  class="table-row"
+  [ngClass]="lineStyles.className"
+  [ngStyle]="lineStyles.style"
+>
+  <span class="lineNumber">{{ i + 1 }}</span>
+  <span class="table-cell">
+    <td-token [line]="line" [themeDict]="themeDict"></td-token>
+  </span>
+</div>

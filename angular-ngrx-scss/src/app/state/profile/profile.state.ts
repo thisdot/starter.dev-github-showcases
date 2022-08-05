@@ -5,6 +5,7 @@ export interface ProfileState {
   orgs?: UserOrgsState[];
   repos?: UserReposState[];
   gists?: UserGistsState[];
+  sortAndFilter?: SortAndFilterState;
 }
 
 export interface UserGistsState {
@@ -75,6 +76,8 @@ export interface UserReposState {
     url: string;
     node_id: string;
   } | null;
+  fork: boolean;
+  archived: boolean;
 }
 
 export interface UserRepo {
@@ -190,3 +193,22 @@ export interface UserRepo {
 }
 
 export type UserReposApiResponse = UserRepo[];
+
+export interface SortAndFilterState {
+  search: string;
+  type: string;
+  language: string;
+  sort: string;
+}
+
+export enum TypeFilter {
+  All = 'all',
+  Forked = 'forked',
+  Archived = 'archived',
+}
+
+export enum OrderField {
+  UpdatedAt = 'update_at',
+  Name = 'name',
+  Stargazers = 'stargazers_count',
+}
