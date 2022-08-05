@@ -13,6 +13,7 @@ import {
   IssueComments,
   Issues,
   PullRequest,
+  PullRequests,
   RepositoryIssuesApiParams,
 } from './repository.interfaces';
 
@@ -62,6 +63,21 @@ export class RepositoryService {
     )}/${encodeURIComponent(repoName)}/pulls/${encodeURIComponent(pullNumber)}`;
 
     return this.http.get<PullRequest>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  getRepositoryPullRequests(
+    owner: string,
+    repoName: string,
+  ): Observable<PullRequests> {
+    const url = `${environment.githubUrl}/repos/${encodeURIComponent(
+      owner,
+    )}/${encodeURIComponent(repoName)}/pulls`;
+
+    return this.http.get<PullRequests>(url, {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },

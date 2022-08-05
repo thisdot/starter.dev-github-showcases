@@ -55,6 +55,8 @@ export interface PullRequest {
   created_at: string;
 }
 
+export type PullRequests = Array<PullRequest>;
+
 export interface IssueComment {
   body: string;
   user: User;
