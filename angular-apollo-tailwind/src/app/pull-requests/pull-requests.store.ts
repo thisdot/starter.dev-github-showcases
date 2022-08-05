@@ -17,6 +17,7 @@ import {
 } from '../gql';
 import { parsePullRequestsQuery } from './parse-pull-requests';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 export interface FilterState {
   label: string;
@@ -72,6 +73,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
     private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private repoPullRequestsGQL: RepoPullRequestsGQL,
     private activatedRoute: ActivatedRoute,
+    private location: Location,
   ) {
     super(INITIAL_STATE);
   }
@@ -226,12 +228,15 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
               this.activatedRoute.snapshot.queryParams['after'] ?? undefined;
             const startCursor =
               this.activatedRoute.snapshot.queryParams['before'] ?? undefined;
-            const last = endCursor ? 25 : undefined;
-            let first = startCursor ? 25 : undefined;
+            const last = startCursor ? 25 : undefined;
+            let first = endCursor ? 25 : undefined;
 
-            if (endCursor == undefined && startCursor == undefined) {
+            if (endCursor === undefined && startCursor === undefined) {
               first = 25;
             }
+
+            this.location.replaceState(this.location.path().split('?')[0]);
+
             return this.repoPullRequestsGQL
               .watch({
                 owner,

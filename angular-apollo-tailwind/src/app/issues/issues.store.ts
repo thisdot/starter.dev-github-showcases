@@ -1,5 +1,6 @@
+import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { RouteConfigService } from '@this-dot/route-config';
 import { Observable, switchMap } from 'rxjs';
@@ -99,12 +100,14 @@ export class IssuesStore extends ComponentStore<IssuesState> {
               this.activatedRoute.snapshot.queryParams['after'] ?? undefined;
             const startCursor =
               this.activatedRoute.snapshot.queryParams['before'] ?? undefined;
-            const last = endCursor ? 25 : undefined;
-            let first = startCursor ? 25 : undefined;
+            const last = startCursor ? 25 : undefined;
+            let first = endCursor ? 25 : undefined;
 
             if (endCursor == undefined && startCursor == undefined) {
               first = 25;
             }
+
+            this.location.replaceState(this.location.path().split('?')[0]);
 
             return this.repoIssuesGQL
               .watch({
@@ -154,6 +157,7 @@ export class IssuesStore extends ComponentStore<IssuesState> {
     private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private repoIssuesGQL: RepoIssuesGQL,
     private activatedRoute: ActivatedRoute,
+    private location: Location,
   ) {
     super(INITIAL_STATE);
   }
