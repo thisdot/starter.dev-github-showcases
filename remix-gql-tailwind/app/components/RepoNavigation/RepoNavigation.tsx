@@ -27,7 +27,7 @@ function RepoNavigation() {
             return (
               <Fragment key={href}>
                 {isLast ? (
-                  <span key={cuid()} className={styles.crumbEnd}>{crumb}</span>
+                  <span className={styles.crumbEnd}>{crumb}</span>
                 ) : (
                   <>
                     <Link

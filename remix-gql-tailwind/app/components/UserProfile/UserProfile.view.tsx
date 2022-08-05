@@ -88,7 +88,7 @@ function UserProfileView({
             <LinkIcon className={styles.icon} />
             <a
               className={styles.link}
-              href={`//${websiteUrl}`}
+              href={`https://${websiteUrl}`}
               target="_blank"
               rel="noreferrer"
             >
@@ -101,7 +101,7 @@ function UserProfileView({
             <TwitterIcon className={styles.icon} />
             <a
               className={styles.link}
-              href={`//twitter.com/${twitterUsername}`}
+              href={`https://twitter.com/${twitterUsername}`}
               target="_blank"
               rel="noreferrer"
             >
