@@ -15,7 +15,7 @@
           <UserProfileCard :username="username" />
         </div>
         <!-- Right side -->
-        <div v-if="!!isQuerying" class="tab-contents col">
+        <div v-if="isQuerying" class="tab-contents col">
           <SearchFilter :languages="getLanguages" />
           <q-separator class="q-mt-sm" />
           <div
@@ -59,7 +59,7 @@
               </small>
             </div>
             <div>
-              <a :href="'/' + username" class="row items-center clear_filter">
+              <a :href="'/' + username" class="row items-center clear-filter">
                 <q-icon
                   name="fa fa-times"
                   class="text-white rounded-borders clear-filter-icon q-mx-sm"
@@ -280,7 +280,8 @@ const modifyFilterTypeText = (filterText) => {
 };
 
 const isQuerying = computed(
-  () => loadingLanguage || loadingFilterType || loadingSearch || loadingSortBy,
+  () =>
+    !!(loadingLanguage || loadingFilterType || loadingSearch || loadingSortBy),
 );
 
 const filteredAndSortedRepos = computed(() => {
@@ -328,10 +329,10 @@ const filteredAndSortedRepos = computed(() => {
   }
 }
 
-.clear_filter {
+.clear-filter {
   text-decoration: none;
   color: $secondary-200;
-  & > &_icon {
+  & > &-icon {
     padding: 0.1rem;
     background-color: $secondary-200;
     transition: all 0.3s ease-in-out;
