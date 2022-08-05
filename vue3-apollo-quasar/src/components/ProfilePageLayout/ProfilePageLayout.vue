@@ -63,7 +63,7 @@
               <a :href="'/' + username" class="row items-center clear_filter">
                 <q-icon
                   name="fa fa-times"
-                  class="text-white rounded-borders clear_filter_icon q-mx-sm"
+                  class="text-white rounded-borders clear-filter-icon q-mx-sm"
                 />
                 Clear filter
               </a>
@@ -342,7 +342,7 @@ const filteredAndSortedRepos = computed(() => {
   }
   &:hover {
     color: $primary;
-    .clear_filter_icon {
+    .clear-filter-icon {
       background-color: $primary;
     }
   }
