@@ -1,6 +1,6 @@
-import { GitBranchIcon } from '../Icons';
+import { GitBranchIcon } from '../../shared/Icons';
 import { Link } from '@remix-run/react';
-import { useRepo } from '../../context/RepoContext';
+import { useRepo } from '../../../context/RepoContext';
 import * as styles from './RepoNavigation.classNames';
 import { removePathPart } from '../../lib/pathUtils';
 
@@ -24,7 +24,7 @@ function RepoNavigation() {
             const crumbPath = removePathPart(crumbs, i);
             const href = `${owner}/${name}/tree/${branch}/${crumbPath}`;
             return (
-              <React.Fragment key={href}>
+              < React.Fragment key={href}>
                 {isLast ? (
                   <span className={styles.crumbEnd}>{crumb}</span>
                 ) : (
@@ -36,7 +36,7 @@ function RepoNavigation() {
                     >
                       {crumb}
                     </Link>
-                    <span key={i} className={styles.separator}>/</span>
+                    <span className={styles.separator}>/</span>
                   </>
                 )}
               </ React.Fragment>
