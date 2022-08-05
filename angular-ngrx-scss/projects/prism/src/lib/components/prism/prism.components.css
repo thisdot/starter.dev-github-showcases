@@ -1,0 +1,21 @@
+.codeBlock {
+  border-spacing: 5px;
+  background-color: #ffffff !important;
+  text-align: left;
+  font-size: 0.75rem /* 12px */;
+  line-height: 1rem /* 16px */;
+  padding-top: 0.25rem /* 4px */;
+  padding-bottom: 0.25rem /* 4px */;
+  padding-left: 2rem /* 32px */;
+  padding-right: 2rem /* 32px */;
+  overflow: auto;
+}
+
+.lineNumber {
+  display: table-cell;
+  text-align: right;
+  padding-right: 1rem /* 16px */;
+  user-select: none;
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}

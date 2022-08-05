@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
+  FileContents,
+  FileContentsApiResponse,
   ReadmeApiResponse,
   RepoApiResponse,
   RepoContents,
@@ -9,6 +11,7 @@ import {
   RepoState,
 } from 'src/app/state/repository';
 import { environment } from 'src/environments/environment';
+import { Issues, RepositoryIssuesApiParams } from './repository.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +33,8 @@ export class RepositoryService {
         forkCount: data.forks_count,
         issueCount: data.open_issues_count,
         tags: data.topics,
+        selectedFile: null,
+        activeBranch: data.default_branch,
         ownerName: '',
         prCount: 0,
         readme: '',
@@ -57,12 +62,31 @@ export class RepositoryService {
 
     return this.http.get<RepoContentsApiResponse[]>(url).pipe(
       map((data) => {
-        const files = data.map((value) => ({
+        return data.map((value) => ({
           name: value.name,
           type: value.type,
+          path: value.path,
         }));
+      }),
+    );
+  }
 
-        return files;
+  getFileContents(
+    owner: string,
+    repoName: string,
+    path: string,
+    commitOrBranchOrTagName: string,
+  ): Observable<FileContents> {
+    const url = `${environment.githubUrl}/repos/${owner}/${repoName}/contents/${path}?ref=${commitOrBranchOrTagName}`;
+    return this.http.get<FileContentsApiResponse>(url).pipe(
+      map((data) => {
+        return {
+          name: data.name,
+          type: data.type,
+          // TODO: consider using a function that also takes encoding format to decode this
+          content: atob(data.content),
+          size: data.size,
+        };
       }),
     );
   }
@@ -75,5 +99,32 @@ export class RepositoryService {
     return this.http
       .get<ReadmeApiResponse>(url)
       .pipe(map((file) => file.content));
+  }
+
+  getRepositoryIssues(
+    owner: string,
+    repoName: string,
+    params?: RepositoryIssuesApiParams,
+  ): Observable<Issues> {
+    const defaultParams = {
+      state: 'all',
+      sort: 'created',
+      direction: 'desc',
+      per_page: 30,
+      page: 1,
+    };
+
+    const url = `${environment.githubUrl}/repos/${encodeURIComponent(
+      owner,
+    )}/${encodeURIComponent(repoName)}/issues`;
+
+    return this.http.get<Issues>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+      params: new HttpParams({
+        fromObject: { ...Object.assign(defaultParams, params) },
+      }),
+    });
   }
 }

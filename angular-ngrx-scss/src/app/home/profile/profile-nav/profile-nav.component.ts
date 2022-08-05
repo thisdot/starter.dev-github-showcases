@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ProfileState } from 'src/app/state/profile/profile.state';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectProfileState } from 'src/app/state/profile/profile.selectors';
 
 @Component({
   selector: 'app-profile-nav',
@@ -8,6 +8,7 @@ import { ProfileState } from 'src/app/state/profile/profile.state';
   styleUrls: ['./profile-nav.component.scss'],
 })
 export class ProfileNavComponent {
-  @Input()
-  profile$?: Observable<ProfileState>;
+  profile$ = this.store.select(selectProfileState);
+
+  constructor(private store: Store) {}
 }

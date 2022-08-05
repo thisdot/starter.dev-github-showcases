@@ -18,6 +18,7 @@ const initialUserState: UserState = {
   name: '',
   twitter_username: '',
   username: '',
+  type: '',
 };
 
 const reducer = createReducer(

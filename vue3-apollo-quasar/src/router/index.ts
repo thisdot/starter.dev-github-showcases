@@ -5,6 +5,7 @@ import SiteLayout from '@/layouts/SiteLayout.vue';
 
 //* Pages
 import { Auth, Home, Profile, Redirect, NotFound } from '../views';
+import { requiresAuth, requiresNoAuth } from './utils';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,16 +13,16 @@ const routes: Array<RouteRecordRaw> = [
     component: SiteLayout,
     children: [
       { path: '', component: Home },
-      { path: 'auth', component: Auth },
-      { path: 'redirect', component: Redirect },
       {
         path: ':username',
         component: Profile,
         props: true,
       },
     ],
+    beforeEnter: requiresAuth,
   },
-
+  { path: '/auth', component: Auth, beforeEnter: requiresNoAuth },
+  { path: '/redirect', component: Redirect, beforeEnter: requiresNoAuth },
   { path: '/:pathMatch(.*)*', component: NotFound },
 ];
 

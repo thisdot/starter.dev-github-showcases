@@ -1,3 +1,4 @@
+import { setupGraphQL } from '@/init';
 import ProfilePageLayout from '.';
 
 export default {
@@ -9,6 +10,7 @@ export default {
 const Template = (args) => ({
   components: { ProfilePageLayout },
   setup() {
+    setupGraphQL();
     return { args };
   },
   template: '<ProfilePageLayout v-bind="args" />',

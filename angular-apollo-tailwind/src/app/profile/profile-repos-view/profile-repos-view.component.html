@@ -27,6 +27,9 @@
     <app-profile-repo-list [items]="userRepos$ | async"></app-profile-repo-list>
 
     <app-pagination
+      *ngIf="
+        (pageInfo$ | async)?.hasPreviousPage || (pageInfo$ | async)?.hasNextPage
+      "
       [pageInfo]="(pageInfo$ | async)!"
       (changePage)="changePage($event)"
     ></app-pagination>

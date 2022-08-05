@@ -1,5 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { fetchProfileSuccess } from './profile.actions';
+import {
+  fetchProfileSuccess,
+  setSortAndFilterProperties,
+} from './profile.actions';
 import { ProfileState } from './profile.state';
 
 export const initialState: ProfileState = {};
@@ -10,6 +13,10 @@ const reducer = createReducer(
   on(fetchProfileSuccess, (state, { data }) => ({
     ...state,
     ...data,
+  })),
+  on(setSortAndFilterProperties, (state, { filters }) => ({
+    ...state,
+    sortAndFilter: filters,
   })),
 );
 

@@ -3,28 +3,28 @@ import RepoTabHeader from '@/components/RepoSubHeader/RepoTabHeader.vue';
 import { TABS } from '@/components/RepoSubHeader/data';
 
 describe('RepoTabHeader', () => {
-  const wrapper = mount(RepoTabHeader, {
-    props: {
-      issuesCount: 10,
-      pullRequestsCount: 10,
-    },
+  let wrapper;
+
+  beforeAll(async () => {
+    wrapper = mount(RepoTabHeader, {
+      props: {
+        issuesCount: 10,
+        pullRequestsCount: 10,
+      },
+    });
   });
 
   it('should mount without errors', () => {
-    expect(wrapper.vm).toBeTruthy();
+    expect(wrapper.exists()).toBeTruthy();
   });
 
-  const tabs = wrapper.findAll('.repo-tab');
-  let count = 0;
-
-  it.each(tabs)('should change active tab', async (tab) => {
-    const tabList = Object.values(TABS); //arranged according the display on the UI
+  it.each([
+    ['.repo-tab_code', TABS.CODE],
+    ['.repo-tab_issues', TABS.ISSUES],
+    ['.repo-tab_pull-requests', TABS.PULL_REQUESTS],
+  ])('should change active tab', async (accessor, expectation) => {
+    const tab = await wrapper.find(accessor);
     await tab.trigger('click');
-
-    expect(wrapper.vm.activeTab).toEqual(tabList[count]);
-
-    count = count + 1;
+    expect(wrapper.vm.activeTab).toEqual(expectation);
   });
-
-  count = 0;
 });
