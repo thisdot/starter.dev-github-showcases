@@ -36,10 +36,10 @@ function RepoNavigation() {
                     >
                       {crumb}
                     </Link>
-                    <span key={i} className={styles.separator}>/</span>
+                    <span className={styles.separator}>/</span>
                   </>
                 )}
-              </ React.Fragment>
+              </React.Fragment>
             );
           })}
         </div>
