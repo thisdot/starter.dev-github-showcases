@@ -13,7 +13,7 @@ function OrgList({ organizations }: OrgListProps) {
         {organizations.map(({ avatarUrl, login }) => (
           <div key={login} className={styles.listItem}>
             <img
-              src={avatarUrl}
+              src={`http://${avatarUrl}`}
               alt="Organization"
               style={{ objectFit: 'fill' }}
             />
