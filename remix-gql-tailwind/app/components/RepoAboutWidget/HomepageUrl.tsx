@@ -14,7 +14,7 @@ function HomepageUrl({ homepageUrl }: HomepageUrlProps) {
   return (
     <div className={styles.linkContainer}>
       <LinkIcon className={styles.linkIcon} />
-      <a href={`https://${homepageUrl}`}className={styles.link} target="_blank">
+      <a href={homepageUrl} className={styles.link} target="_blank">
         {homepageUrl}
       </a>
     </div>
