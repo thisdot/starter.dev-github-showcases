@@ -28,7 +28,7 @@ describe('IssuePullRequestTab', () => {
   it('should show label menu', async () => {
     const dropdown_labels = wrapper.findAll('.dropdown-label');
     await dropdown_labels[0].trigger('click');
-    const dropdown_menu = wrapper.find('.dropdown_menu');
+    const dropdown_menu = wrapper.find('.dropdown-menu');
     expect(dropdown_menu.exists()).toBeTruthy();
   });
 });

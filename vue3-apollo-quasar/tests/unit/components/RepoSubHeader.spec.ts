@@ -22,8 +22,8 @@ describe('RepoSubHeader', () => {
   });
 
   const btnWithOptions = [
-    ['.menu_btn--watch', '.dropdown_menu--watch'],
-    ['.menu_btn--star', '.dropdown_menu--star'],
+    ['.menu-btn--watch', '.dropdown-menu--watch'],
+    ['.menu-btn--star', '.dropdown-menu--star'],
   ];
 
   it('should mount without errors', () => {
@@ -56,10 +56,10 @@ describe('RepoSubHeader', () => {
   );
 
   it('should select an item from the watch option list', async () => {
-    const watchBtn = wrapper.find('.menu_btn--watch');
+    const watchBtn = wrapper.find('.menu-btn--watch');
     await watchBtn.trigger('click');
 
-    const menu = await wrapper.find('.dropdown_menu--watch');
+    const menu = await wrapper.find('.dropdown-menu--watch');
     expect(wrapper.vm.notify).toBe(NOTIFICATIONS.all);
     const listItems = menu.findAllComponents(ListItem);
     await listItems[0].trigger('click');

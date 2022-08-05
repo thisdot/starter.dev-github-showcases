@@ -29,7 +29,7 @@
           class="row col col-md-5 col-lg-4 items-center no-wrap justify-between relative-position"
         >
           <button
-            class="git-btn menu_btn--watch text-capitalize row justify-between items-center"
+            class="git-btn menu-btn--watch text-capitalize row justify-between items-center"
             @click="toggleWatchMenu()"
           >
             <TextWithIconAndCount>
@@ -48,7 +48,7 @@
             </span>
           </button>
           <div
-            class="dropdown_menu q-menu dropdown_menu--watch"
+            class="dropdown-menu q-menu dropdown-menu--watch"
             v-if="refWatchMenu"
           >
             <q-list>
@@ -208,7 +208,7 @@
             </TextWithIconAndCount>
           </button>
           <button
-            class="git-btn menu_btn--star text-capitalize row justify-between items-center no-wrap"
+            class="git-btn menu-btn--star text-capitalize row justify-between items-center no-wrap"
             @click="toggleStarsMenu()"
           >
             <TextWithIconAndCount>
@@ -228,7 +228,7 @@
             </span>
           </button>
           <div
-            class="dropdown_menu q-menu dropdown_menu--star"
+            class="dropdown-menu q-menu dropdown-menu--star"
             v-if="refStarsMenu"
           >
             <q-list>
@@ -453,7 +453,7 @@ button.close-btn {
   border: none;
 }
 
-.dropdown_menu {
+.dropdown-menu {
   max-width: 21rem;
   max-height: fit-content;
   top: 3rem;
