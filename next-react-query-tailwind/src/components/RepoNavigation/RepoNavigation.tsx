@@ -1,7 +1,7 @@
 import { GitBranchIcon } from '@components/Icons';
 import Link from 'next/link';
 import { useRepo } from '@context/RepoContext';
-import styles from './FileExplorerNav.module.css';
+import styles from './RepoNavigation.module.css';
 
 function RepoNavigation() {
   const { name, owner, path, branch } = useRepo();
