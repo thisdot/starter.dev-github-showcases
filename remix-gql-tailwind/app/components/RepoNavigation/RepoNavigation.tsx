@@ -3,6 +3,7 @@ import { Link } from '@remix-run/react';
 import { useRepo } from '../../context/RepoContext';
 import * as styles from './RepoNavigation.classNames';
 import { removePathPart } from '../../lib/pathUtils';
+import {Fragment} from 'react'
 
 function RepoNavigation() {
   const { name, owner, path, branch } = useRepo();
@@ -24,7 +25,7 @@ function RepoNavigation() {
             const crumbPath = removePathPart(crumbs, i);
             const href = `${owner}/${name}/tree/${branch}/${crumbPath}`;
             return (
-              <React.Fragment key={href}>
+              <Fragment key={href}>
                 {isLast ? (
                   <span className={styles.crumbEnd}>{crumb}</span>
                 ) : (
@@ -39,7 +40,7 @@ function RepoNavigation() {
                     <span className={styles.separator}>/</span>
                   </>
                 )}
-              </React.Fragment>
+              </Fragment>
             );
           })}
         </div>
