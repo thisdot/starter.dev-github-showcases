@@ -1,0 +1,34 @@
+{
+  "data": {
+    "organization": {
+      "id": "MDEyOk9yZ2FuaXphdGlvbjIyODM5Mzk2",
+      "repositories": {
+        "nodes": [],
+        "pageInfo": {
+          "endCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNC0wNVQwMTo1NzoxMS0wNTowMM4cfhyN",
+          "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNi0wN1QxMjoxMzo0OS0wNTowMM4ZGOxK",
+          "hasNextPage": false,
+          "hasPreviousPage": false,
+          "__typename": "PageInfo"
+        },
+        "__typename": "RepositoryConnection"
+      },
+      "__typename": "Organization"
+    },
+    "owner": {
+        "id": "MDEyOk9yZ2FuaXphdGlvbjIyODM5Mzk2",
+        "repositories": {
+          "nodes": [],
+          "pageInfo": {
+            "endCursor": "Y3Vyc29yOnYyOpK5MjAxNy0wMy0zMFQxNjoxMjo0MC0wNTowMM4Ec7r5",
+            "startCursor": "Y3Vyc29yOnYyOpK5MjAyMi0wNi0wOVQxNDoyNTo1OC0wNTowMM4XOcnV",
+            "hasNextPage": false,
+            "hasPreviousPage": false,
+            "__typename": "PageInfo"
+          },
+          "__typename": "RepositoryConnection"
+        },
+        "__typename": "Organization"
+      }
+  }
+}

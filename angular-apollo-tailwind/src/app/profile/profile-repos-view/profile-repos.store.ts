@@ -78,6 +78,11 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     }),
   );
 
+  readonly setResultCount = this.updater((state, resultCount: number) => ({
+    ...state,
+    resultCount,
+  }));
+
   // *********** Selectors *********** //
 
   readonly owner$ = this.select(({ repos }) => repos);
@@ -167,6 +172,7 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
             this.setRepos(filteredRepos);
             this.setReposLoaded(true);
             this.setPageInfo(res.data.user?.repositories.pageInfo);
+            this.setResultCount(filteredRepos.length);
           },
           (err) => {
             console.log(err);
@@ -208,6 +214,7 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
             this.setRepos(filteredRepos);
             this.setReposLoaded(true);
             this.setPageInfo(res.data.organization?.repositories.pageInfo);
+            this.setResultCount(filteredRepos.length);
           },
           (err) => {
             console.log(err);

@@ -7,48 +7,52 @@
       placeholder="Find a repository..."
       [formControl]="searchInput"
     />
-    <button class="control-dropdown" role="button">
-      <span class="control-dropdown__name">Type</span>
-      <span
-        class="control-dropdown__caret"
-        appOcticon="chevron-down"
-        size="14"
-      ></span>
-    </button>
-    <button class="control-dropdown" role="button">
-      <span class="control-dropdown__name">Language</span>
-      <span
-        class="control-dropdown__caret"
-        appOcticon="chevron-down"
-        size="14"
-      ></span>
-    </button>
-    <button class="control-dropdown" role="button">
-      <span class="control-dropdown__name">Sort</span>
-      <span
-        class="control-dropdown__caret"
-        appOcticon="chevron-down"
-        size="14"
-      ></span>
-    </button>
+    <app-filter-dropdown
+      name="Type"
+      description="Select type"
+      [items]="typeFilters"
+      [current]="selectFilterByType$ | async"
+      (setFilter)="handleTypeClick($event)"
+    ></app-filter-dropdown>
+    <app-filter-dropdown
+      name="Language"
+      description="Select Language"
+      [items]="(filteredLanguages$ | async) || []"
+      [current]="selectFilterByLanguage$ | async"
+      (setFilter)="handleLanguageClick($event)"
+    ></app-filter-dropdown>
+    <app-filter-dropdown
+      name="Sort"
+      description="Select sort"
+      [items]="sortItems"
+      [current]="selectSortFilter$ | async"
+      (setFilter)="handleSortClick($event)"
+    ></app-filter-dropdown>
   </div>
   <ng-container *ngIf="hasActiveSortAndFilters$ | async">
     <div class="divider"></div>
     <div class="results">
       <p class="results__text">
-        <ng-container *ngIf="selectReposCount$ | async as count">
-          <span class="bold">{{ count }}</span>
-        </ng-container>
+        <span class="bold">{{ selectReposCount$ | async }}</span>
         results
+        <ng-container *ngIf="isActiveFilterByType$ | async">
+          for <span class="bold">{{ selectFilterByType$ | async }}</span>
+        </ng-container>
         <ng-container *ngIf="selectFilterBySearch$ | async as search">
           matching <span class="bold">{{ search }}</span>
         </ng-container>
-        sorted by updated at
+        <ng-container *ngIf="isActiveFilterByLanguage$ | async as language">
+          written in
+          <span class="bold">
+            {{ selectFilterByLanguage$ | async | titlecase }}
+          </span>
+        </ng-container>
+        sorted by
+        <span class="bold">
+          {{ (selectSortFilter$ | async)?.split('_')?.join(' ') | lowercase }}
+        </span>
       </p>
-      <span
-        class="results__clear-container"
-        (click)="handleClearFiltersClick()"
-      >
+      <span class="results__clear-container">
         <div class="close-background">
           <span appOcticon="x" color="white" size="13"></span>
         </div>
