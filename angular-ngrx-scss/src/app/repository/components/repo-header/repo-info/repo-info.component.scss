@@ -1,0 +1,28 @@
+@use '../../../../shared/styles/variables.scss';
+
+.info-container {
+  display: flex;
+  gap: 0.9rem;
+  .watch,
+  .star,
+  .fork {
+    display: flex;
+    border: 2px solid variables.$gray200;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    .icon-container {
+      display: flex;
+      align-items: center;
+      line-height: 0.5rem;
+      padding: 0.125rem 0.9rem;
+      gap: 0.5rem;
+      border-right: 2px solid variables.$gray200;
+    }
+    .count {
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+      background-color: variables.$white;
+      padding: 0.125rem 0.9rem;
+    }
+  }
+}
