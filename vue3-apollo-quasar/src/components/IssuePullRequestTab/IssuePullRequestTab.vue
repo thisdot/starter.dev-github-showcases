@@ -3,7 +3,7 @@
     <div class="row items-center no-wrap q-px-xs q-py-sm tab-container">
       <div class="row items-center">
         <button
-          class="tab text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
+          class="tab tab--open text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
           :class="{ 'text-weight-bold active': isTab(TABS.OPEN) }"
           @click="updateActiveTab(TABS.OPEN)"
         >
@@ -21,7 +21,7 @@
           Open
         </button>
         <button
-          class="tab text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
+          class="tab tab--closed text-capitalize text-caption q-px-xs row justify-center items-center bg-transparent no-border cursor-pointer"
           :class="{ 'text-weight-bold active': isTab(TABS.CLOSED) }"
           @click="updateActiveTab(TABS.CLOSED)"
         >
@@ -37,7 +37,7 @@
         <q-btn-dropdown
           label="Label"
           flat
-          class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
+          class="text-capitalize q-px-xs dropdown-label dropdown-label--label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
           @click="toggleLabelMenu()"
         >
           <q-list class="dropdown-menu q-menu" v-if="labelRef">
@@ -51,10 +51,10 @@
           </q-list>
         </q-btn-dropdown>
         <q-btn-dropdown
-          v-show="tabType === TAB_TYPE.ISSUE"
+          v-if="tabType === TAB_TYPE.ISSUE"
           label="Milestones"
           flat
-          class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
+          class="text-capitalize q-px-xs dropdown-label dropdown-label--milestones text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
           @click="toggleMilestonesMenu()"
         >
           <q-list separator class="dropdown-menu q-menu" v-if="milestonesRef">
@@ -70,7 +70,7 @@
         <q-btn-dropdown
           label="Sort"
           flat
-          class="text-capitalize q-px-xs dropdown-label text-caption row justify-center items-center bg-transparent no-border cursor-pointer posi"
+          class="text-capitalize q-px-xs dropdown-label dropdown-label--sort text-caption row justify-center items-center bg-transparent no-border cursor-pointer posi"
           @click="toggleSortMenu()"
         >
           <q-list separator class="dropdown-menu q-menu" v-if="sortRef">

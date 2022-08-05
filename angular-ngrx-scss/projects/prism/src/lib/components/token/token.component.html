@@ -1,0 +1,5 @@
+<span *ngFor="let token of line; let i = index">
+  <span [ngClass]="tokens[i].className" [ngStyle]="tokens[i].style">{{
+    tokens[i].content
+  }}</span>
+</span>

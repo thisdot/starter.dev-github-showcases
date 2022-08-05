@@ -1,0 +1,9 @@
+<div class="container file-list">
+  <div class="item" *ngFor="let item of repoPage">
+    <span
+      class="octicon {{ item.type }}"
+      [appOcticon]="item.type === 'file' ? 'file' : 'file-directory'"
+    ></span>
+    <a [routerLink]="getPathHref(item)" class="link">{{ item.name }}</a>
+  </div>
+</div>

@@ -124,6 +124,8 @@ describe('UserEffects', () => {
         private: false,
         updated_at: '2022-06-17T09:54:38Z',
         license: null,
+        fork: false,
+        archived: false,
         owner: {
           login: 'thisdot',
         },
@@ -137,6 +139,8 @@ describe('UserEffects', () => {
         private: false,
         updated_at: '2022-06-17T09:54:38Z',
         license: null,
+        fork: false,
+        archived: false,
         owner: {
           login: 'thisdot',
         },
@@ -150,6 +154,8 @@ describe('UserEffects', () => {
         private: false,
         updated_at: '2022-06-17T09:54:38Z',
         license: null,
+        fork: false,
+        archived: false,
         owner: {
           login: 'thisdot',
         },
