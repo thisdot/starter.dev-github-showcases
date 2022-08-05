@@ -356,13 +356,6 @@ describe("When there is proper repository page responses", () => {
       .should(
         "contain.text",
         "[Angular + Apollo + Tailwind] Closed angular-apollo-tailwind issue"
-      )
-      .get(`[data-testid="clear filters button"]`)
-      .click()
-      .get(`[data-testid="issue title"]`)
-      .should(
-        "contain.text",
-        "[Cypress] Write test coverage for organization page"
       );
   });
 
@@ -511,7 +504,7 @@ describe("When there is proper repository page responses", () => {
       );
   });
 
-  it("should be able to filter valid closed issues list by label", () => {
+  it("should be able to filter valid closed pull requests list by label", () => {
     cy.get(`[data-testid="repo pull requests tab"]`)
       .click()
       .wait("@RepoPullRequestsQuery")

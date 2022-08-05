@@ -8,7 +8,11 @@
       inline-label
       class="tabs"
     >
-      <q-tab name="code" class="repo-tab" @click="updateTab(TABS.CODE)">
+      <q-tab
+        name="code"
+        class="repo-tab repo-tab_code"
+        @click="updateTab(TABS.CODE)"
+      >
         <TextWithIconAndCount>
           <template v-slot:icon>
             <q-icon
@@ -25,7 +29,11 @@
           </template>
         </TextWithIconAndCount>
       </q-tab>
-      <q-tab name="issues" class="repo-tab" @click="updateTab(TABS.ISSUES)">
+      <q-tab
+        name="issues"
+        class="repo-tab repo-tab_issues"
+        @click="updateTab(TABS.ISSUES)"
+      >
         <TextWithIconAndCount>
           <template v-slot:icon>
             <q-icon
@@ -47,7 +55,7 @@
       </q-tab>
       <q-tab
         name="pullrequests"
-        class="repo-tab"
+        class="repo-tab repo-tab_pull-requests"
         @click="updateTab(TABS.PULL_REQUESTS)"
       >
         <TextWithIconAndCount>

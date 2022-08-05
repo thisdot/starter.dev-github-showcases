@@ -43,6 +43,9 @@
       <ng-template #empty><app-issues-empty></app-issues-empty></ng-template>
     </div>
     <app-pagination
+      *ngIf="
+        (pageInfo$ | async)?.hasPreviousPage || (pageInfo$ | async)?.hasNextPage
+      "
       [pageInfo]="pageInfo$ | async"
       (changePage)="changePage($event)"
     ></app-pagination>

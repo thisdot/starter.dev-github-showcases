@@ -11,6 +11,8 @@ export interface RepoState {
   starCount: number;
   tags: string[];
   tree: RepoContents[];
+  activeBranch: string;
+  selectedFile: FileContents | null;
   visibility: string;
   watchCount: number;
   website: string;
@@ -117,6 +119,7 @@ export interface RepoApiResponse {
 export interface RepoContents {
   name: string;
   type: string;
+  path: string;
 }
 
 export interface RepoContentsApiResponse {
@@ -135,6 +138,16 @@ export interface RepoContentsApiResponse {
     html: string;
   };
 }
+
+export interface FileContentsApiResponse extends RepoContentsApiResponse {
+  content: string;
+  encoding: string;
+}
+
+export type FileContents = Pick<
+  FileContentsApiResponse,
+  'content' | 'name' | 'type' | 'size'
+>;
 
 export interface ReadmeApiResponse {
   name: string;

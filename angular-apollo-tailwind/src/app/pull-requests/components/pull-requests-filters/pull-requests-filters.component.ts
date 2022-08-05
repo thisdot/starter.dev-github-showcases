@@ -63,7 +63,7 @@ export class PullRequestFiltersComponent {
     }
   }
   @Input() currentLabel: string | null = '';
-  @Input() set labels(val: Label[]) {
+  @Input() set labels(val: Label[] | null) {
     const a = val as Label[];
     this.labelOptions = a.map((label) => ({
       label: label.name,

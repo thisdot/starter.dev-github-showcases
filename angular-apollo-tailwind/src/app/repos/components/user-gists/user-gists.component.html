@@ -1,10 +1,10 @@
 <ng-container *ngIf="gists$ | async as gists; else loading">
   <sd-container title="Gists">
-    <ng-template *ngIf="gists.length === 0">
-      <p>User does not have any gists</p>
-    </ng-template>
+    <ng-container *ngIf="gists.length === 0">
+      <p data-testid="empty gist list">User does not have any gists</p>
+    </ng-container>
 
-    <ng-container *ngIf="!!gists.length; else error">
+    <ng-container *ngIf="!!gists; else error">
       <div class="mt-3">
         <div
           data-testid="show gists list"

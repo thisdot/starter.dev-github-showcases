@@ -29,6 +29,16 @@ function UserGists() {
     );
   }
 
+  if (data.viewer.gists.nodes?.length === 0) {
+    return (
+      <Container>
+        <p className={styles.error} data-testid="empty gist list">
+          User does not have any gists
+        </p>
+      </Container>
+    );
+  }
+
   const gists = parseQuery(data);
 
   return <UserGistsView gists={gists} />;

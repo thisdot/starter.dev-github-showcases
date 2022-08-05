@@ -106,6 +106,46 @@
           }
         }
       }
+    },
+    "prism": {
+      "projectType": "library",
+      "root": "projects/prism",
+      "sourceRoot": "projects/prism/src",
+      "prefix": "td",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/prism/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/prism/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/prism/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/prism/src/test.ts",
+            "tsConfig": "projects/prism/tsconfig.spec.json",
+            "karmaConfig": "projects/prism/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/prism/**/*.ts",
+              "projects/prism/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angular-ngrx-scss"
