@@ -30,4 +30,4 @@ Remix's `<Link>` component does not play nice with Storybook, so we include an a
 
 #### Authenticating with GitHub
 
-This app uses an OAuth flow to authenticate with GitHub and use their API. You will need to create an OAuth GitHub app and use the provided client and secret IDs in `.env`. While developing locally, you will need to tunnel your webserver so that webhooks are available. Your GitHub app will need to point to `{{tunnel URL}}/auth/github/callback`.
+This app uses an OAuth flow to authenticate with GitHub and use their API. You will need to create an OAuth GitHub app and use the provided client and secret IDs in `.env`. Your GitHub app will need to point to `{{you app's URL or localhost}}/auth/github/callback`.
