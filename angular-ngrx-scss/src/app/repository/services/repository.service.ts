@@ -11,7 +11,13 @@ import {
   RepoState,
 } from 'src/app/state/repository';
 import { environment } from 'src/environments/environment';
-import { Issues, RepositoryIssuesApiParams } from './repository.interfaces';
+import {
+  IssueComments,
+  Issues,
+  PullRequest,
+  PullRequests,
+  RepositoryIssuesApiParams,
+} from './repository.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +55,55 @@ export class RepositoryService {
     const url = `${environment.githubUrl}/repos/${owner}/${repoName}/pulls`;
 
     return this.http.get<[]>(url).pipe(map((data) => data.length));
+  }
+
+  getRepositoryPullRequest(
+    owner: string,
+    repoName: string,
+    pullNumber: number,
+  ): Observable<PullRequest> {
+    const url = `${environment.githubUrl}/repos/${encodeURIComponent(
+      owner,
+    )}/${encodeURIComponent(repoName)}/pulls/${encodeURIComponent(pullNumber)}`;
+
+    return this.http.get<PullRequest>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  getRepositoryPullRequests(
+    owner: string,
+    repoName: string,
+  ): Observable<PullRequests> {
+    const url = `${environment.githubUrl}/repos/${encodeURIComponent(
+      owner,
+    )}/${encodeURIComponent(repoName)}/pulls`;
+
+    return this.http.get<PullRequests>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  getRepositoryPullRequestComments(
+    owner: string,
+    repoName: string,
+    pullNumber: number,
+  ): Observable<IssueComments> {
+    const url = `${environment.githubUrl}/repos/${encodeURIComponent(
+      owner,
+    )}/${encodeURIComponent(repoName)}/issues/${encodeURIComponent(
+      pullNumber,
+    )}/comments`;
+
+    return this.http.get<IssueComments>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
   }
 
   getRepositoryContents(
