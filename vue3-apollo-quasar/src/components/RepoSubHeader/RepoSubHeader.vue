@@ -7,7 +7,7 @@
           <span class="book-icon">
             <q-icon
               class="text-h5"
-              name="svguse:app-icons/book.svg#book"
+              name="svguse:/app-icons/book.svg#book"
             ></q-icon>
           </span>
           <span class="q-mx-sm user-reponame text-subtitle1">
@@ -69,7 +69,7 @@
                   >
                     <q-icon
                       v-show="notify === NOTIFICATIONS.mentions"
-                      name="svguse:app-icons/correct.svg#correct"
+                      name="svguse:/app-icons/correct.svg#correct"
                     >
                     </q-icon>
                   </span>
@@ -94,7 +94,7 @@
                   >
                     <q-icon
                       v-show="notify === NOTIFICATIONS.all"
-                      name="svguse:app-icons/correct.svg#correct"
+                      name="svguse:/app-icons/correct.svg#correct"
                     >
                     </q-icon>
                   </span>
@@ -118,7 +118,7 @@
                   >
                     <q-icon
                       v-show="notify === NOTIFICATIONS.ignore"
-                      name="svguse:app-icons/correct.svg#correct"
+                      name="svguse:/app-icons/correct.svg#correct"
                     >
                     </q-icon>
                   </span>
@@ -140,7 +140,7 @@
                   >
                     <q-icon
                       v-show="notify === NOTIFICATIONS.custom"
-                      name="svguse:app-icons/correct.svg#correct"
+                      name="svguse:/app-icons/correct.svg#correct"
                     >
                     </q-icon>
                   </span>
@@ -150,7 +150,7 @@
                     <div class="text-bold">Custom</div>
                     <q-icon
                       class="text-h6"
-                      name="svguse:app-icons/arrow-right.svg#arrow-right"
+                      name="svguse:/app-icons/arrow-right.svg#arrow-right"
                     ></q-icon>
                   </div>
                   <div class="text-caption overview">
@@ -163,7 +163,7 @@
               <ListItem className="item-bottom">
                 <template v-slot:icon>
                   <q-icon
-                    name="svguse:app-icons/mobile.svg#mobile"
+                    name="svguse:/app-icons/mobile.svg#mobile"
                     class="text-h6"
                   ></q-icon>
                 </template>
@@ -193,7 +193,7 @@
               <template v-slot:icon>
                 <q-icon
                   class="custom-icon text-h6"
-                  name="svguse:app-icons/fork.svg#fork"
+                  name="svguse:/app-icons/fork.svg#fork"
                 ></q-icon>
               </template>
               <template v-slot:title>

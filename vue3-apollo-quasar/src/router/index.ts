@@ -26,9 +26,16 @@ const routes: Array<RouteRecordRaw> = [
         props: true,
       },
       {
-        path: ':owner/:repo/',
+        path: ':owner/:repo',
         component: RepositoryDetails,
         props: true,
+        children: [
+          {
+            path: ':dirpath(.*)',
+            component: RepositoryDetails,
+            props: true,
+          },
+        ],
       },
     ],
     beforeEnter: requiresAuth,

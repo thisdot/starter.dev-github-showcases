@@ -9,14 +9,19 @@ interface ExplorerItem {
 
 export const useRepoTree = () => {
   const getRepoTree = ({ owner, name, branch, path }) => {
-    const { result, loading } = useQuery(REPO_TREE_QUERY, {
+    const queryData = {
       owner,
       name,
       expression: `${branch}:${path}`,
-    });
+    };
+
+    const { result, loading } = useQuery(REPO_TREE_QUERY, queryData);
 
     const data = useResult(result, [], (data) => {
       const fileTree = data?.repository?.tree;
+      if (fileTree.text) {
+        return fileTree.text;
+      }
       const items: ExplorerItem[] =
         fileTree?.entries?.map(({ name, path, type }) => {
           return {

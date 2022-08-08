@@ -1,10 +1,10 @@
 <template>
-  <div class="full-width row text-dark">
+  <div class="full-width row text-dark items-center">
     <div class="col-4 items-center flex">
       <q-icon :name="iconName" :color="iconColor" size="1.2rem"></q-icon>
-      <router-link class="file-explorer-link" :to="content.to">
+      <a class="file-explorer-link" :href="$router.resolve(content.to).href">
         {{ content.name }}
-      </router-link>
+      </a>
     </div>
     <div class="col-4 text-grey">{{ content.latestCommitMessage }}</div>
     <div class="col-4 text-grey text-right">
