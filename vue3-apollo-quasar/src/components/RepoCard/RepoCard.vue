@@ -114,7 +114,7 @@ const props = defineProps({
 const { getFriendlyDate, upperFirst } = useFormatter();
 const friendlyUpdatedAt = getFriendlyDate(props.updatedAt);
 
-const repoNameWithOwner = computed(() => `${props.owner.login}/${props.name}`);
+const repoNameWithOwner = computed(() => `${props.owner?.login}/${props.name}`);
 </script>
 
 <style lang="scss" scoped>
