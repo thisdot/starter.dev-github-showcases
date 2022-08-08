@@ -26,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
         props: true,
       },
       {
-        path: ':owner/:repo',
+        path: ':owner/:repo/',
         component: RepositoryDetails,
         props: true,
       },

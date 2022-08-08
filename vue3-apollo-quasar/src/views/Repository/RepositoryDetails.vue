@@ -63,7 +63,7 @@ const fileTree = computed(() =>
     name: treeBranch.name,
     latestCommitMessage: 'Test commit', //TODO: Get this
     lastUpdated: 'Jul 15 2022', //TODO: Get this
-    to: `${repo}/${treeBranch.path}`,
+    to: `${repo}/tree/main/${treeBranch.path}`,
   })),
 );
 </script>
