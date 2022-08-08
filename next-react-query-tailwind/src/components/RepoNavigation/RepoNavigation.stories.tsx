@@ -1,12 +1,12 @@
 import type { RepoContext } from '../../context/RepoContext';
 import { Story, Meta } from '@storybook/react';
-import FileExplorerNav from './FileExplorerNav';
+import RepoNavigation from './RepoNavigation';
 import { createWrapper } from '@lib/testUtils';
 import { RepoProvider } from '@context/RepoContext';
 
 export default {
-  component: FileExplorerNav,
-  title: 'RepoPage/FileExplorerNav',
+  component: RepoNavigation,
+  title: 'RepoPage/RepoNavigation',
   decorators: [
     (Story: Story) => {
       const Wrapper = createWrapper();
@@ -28,7 +28,7 @@ export default {
 
 const Template: Story<RepoContext> = (args) => (
   <RepoProvider value={args}>
-    <FileExplorerNav />
+    <RepoNavigation />
   </RepoProvider>
 );
 
@@ -55,6 +55,6 @@ DeepPathFile.args = {
   name: 'starter.dev',
   owner: 'thisdot',
   branch: 'main',
-  path: 'next-react-query/src/components/FileExplorerNav.tsx',
+  path: 'next-react-query/src/components/RepoNavigation.tsx',
   isRepoLoading: true,
 };
