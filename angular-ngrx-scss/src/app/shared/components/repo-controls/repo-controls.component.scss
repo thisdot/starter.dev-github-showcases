@@ -57,16 +57,12 @@ section {
     flex-grow: 1;
   }
 
-  .close-background {
-    background: variables.$gray500;
-    border-radius: 0.3rem;
-    width: 1.2rem;
-    height: 1.3rem;
-    display: grid;
-    place-items: center;
-  }
-
-  &__clear-container {
+  &__clear {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -74,6 +70,17 @@ section {
     color: variables.$gray500;
     &:hover {
       color: variables.$blue600;
+    }
+    &__icon {
+      background: variables.$gray500;
+      border-radius: 0.3rem;
+      width: 1.4rem;
+      height: 1.4rem;
+      display: grid;
+      place-items: center;
+    }
+    &:hover &__icon {
+      background: variables.$blue600;
     }
   }
 }

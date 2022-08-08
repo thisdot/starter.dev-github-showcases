@@ -40,7 +40,7 @@
           class="text-capitalize q-px-xs dropdown-label dropdown-label--label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
           @click="toggleLabelMenu()"
         >
-          <q-list class="dropdown_menu q-menu" v-if="labelRef">
+          <q-list class="dropdown-menu q-menu" v-if="labelRef">
             <slot name="label-list">
               <q-item
                 class="text-center text-caption text-primary text-bold q-py-xs block"
@@ -57,7 +57,7 @@
           class="text-capitalize q-px-xs dropdown-label dropdown-label--milestones text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
           @click="toggleMilestonesMenu()"
         >
-          <q-list separator class="dropdown_menu q-menu" v-if="milestonesRef">
+          <q-list separator class="dropdown-menu q-menu" v-if="milestonesRef">
             <slot name="sort-list">
               <q-item
                 class="text-center text-caption text-primary text-bold q-py-xs block"
@@ -73,7 +73,7 @@
           class="text-capitalize q-px-xs dropdown-label dropdown-label--sort text-caption row justify-center items-center bg-transparent no-border cursor-pointer posi"
           @click="toggleSortMenu()"
         >
-          <q-list separator class="dropdown_menu q-menu" v-if="sortRef">
+          <q-list separator class="dropdown-menu q-menu" v-if="sortRef">
             <slot name="sort-list">
               <q-item
                 class="text-center text-caption text-primary text-bold q-py-xs block"
