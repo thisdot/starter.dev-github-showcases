@@ -1,9 +1,9 @@
 import { json, LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import RepoHeader from '~/components/RepoHeader/RepoHeader';
-import { parseTopics } from '~/components/RepoPage/parseTopics';
-import { parseQuery } from '~/components/RepoPulls/parseQuery';
-import RepoPulls from '~/components/RepoPulls/RepoPulls';
+import RepoHeader from '~/components/Repositories/RepoHeader/RepoHeader';
+import { parseTopics } from '~/components/Repositories/RepoPage/parseTopics';
+import { parseQuery } from '~/components/Repositories/RepoPulls/parseQuery';
+import RepoPulls from '~/components/Repositories/RepoPulls/RepoPulls';
 import { RepoContext, RepoProvider } from '~/context/RepoContext';
 import gqlClient from '~/lib/graphql-client';
 import { REPO_PAGE_QUERY } from '~/lib/queries/RepoPage';
