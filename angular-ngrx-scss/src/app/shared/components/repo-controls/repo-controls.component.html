@@ -17,8 +17,8 @@
     <app-filter-dropdown
       name="Language"
       description="Select Language"
-      [items]="(filteredLanguages$ | async) || []"
       [current]="selectFilterByLanguage$ | async"
+      [items]="(filteredLanguages$ | async) || []"
       (setFilter)="handleLanguageClick($event)"
     ></app-filter-dropdown>
     <app-filter-dropdown
@@ -37,6 +37,7 @@
         results
         <ng-container *ngIf="isActiveFilterByType$ | async">
           for <span class="bold">{{ selectFilterByType$ | async }}</span>
+          repositories
         </ng-container>
         <ng-container *ngIf="selectFilterBySearch$ | async as search">
           matching <span class="bold">{{ search }}</span>
@@ -52,12 +53,12 @@
           {{ (selectSortFilter$ | async)?.split('_')?.join(' ') | lowercase }}
         </span>
       </p>
-      <span class="results__clear-container">
-        <div class="close-background">
+      <button type="button" class="results__clear" (click)="handleClearClick()">
+        <div class="results__clear__icon">
           <span appOcticon="x" color="white" size="13"></span>
         </div>
-        <p class="results__clear">Clear filter</p>
-      </span>
+        <p class="results__clear__text">Clear filter</p>
+      </button>
     </div>
     <div class="divider"></div>
   </ng-container>

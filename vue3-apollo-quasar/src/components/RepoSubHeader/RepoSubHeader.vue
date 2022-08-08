@@ -29,8 +29,8 @@
           class="row col col-md-5 col-lg-4 items-center no-wrap justify-between relative-position"
         >
           <button
-            class="git-btn menu__btn text-capitalize row justify-between items-center"
-            @click="toggleWatchMenu"
+            class="git-btn menu-btn--watch text-capitalize row justify-between items-center"
+            @click="toggleWatchMenu()"
           >
             <TextWithIconAndCount>
               <template v-slot:icon>
@@ -47,7 +47,10 @@
               <q-icon class="fa fa-caret-down"></q-icon>
             </span>
           </button>
-          <div class="dropdown_menu q-menu" v-if="refWatchMenu">
+          <div
+            class="dropdown-menu q-menu dropdown-menu--watch"
+            v-if="refWatchMenu"
+          >
             <q-list>
               <q-item
                 class="row justify-between items-center q-py-xs q-px-md options-heading text-caption"
@@ -205,8 +208,8 @@
             </TextWithIconAndCount>
           </button>
           <button
-            class="git-btn menu__btn text-capitalize row justify-between items-center no-wrap"
-            @click="toggleStarsMenu"
+            class="git-btn menu-btn--star text-capitalize row justify-between items-center no-wrap"
+            @click="toggleStarsMenu()"
           >
             <TextWithIconAndCount>
               <template v-slot:icon>
@@ -225,7 +228,7 @@
             </span>
           </button>
           <div
-            class="dropdown_menu q-menu dropdown_menu--star"
+            class="dropdown-menu q-menu dropdown-menu--star"
             v-if="refStarsMenu"
           >
             <q-list>
@@ -264,6 +267,8 @@ import RepoTabHeader from './RepoTabHeader.vue';
 import ListItem from './ListItem.vue';
 import TextWithIconAndCount from '@/components/TextWithIconAndCount';
 import { countCalc } from '@/helpers';
+import { NOTIFICATIONS } from './data';
+
 type Props = {
   username: string;
   repoName: string;
@@ -274,6 +279,7 @@ type Props = {
   issuesCount: number;
   pullRequestsCount: number;
 };
+
 export default defineComponent({
   name: 'RepoSubHeader',
   props: {
@@ -319,14 +325,7 @@ export default defineComponent({
     const refStarsMenu = ref(false);
     const refWatchMenu = ref(false);
 
-    const NOTIFICATIONS = {
-      mentions: 'mentions',
-      all: 'all',
-      ignore: 'ignore',
-      custom: 'custom',
-    };
-
-    const notify = ref('all');
+    const notify = ref(NOTIFICATIONS.all);
 
     const toggleWatchMenu = () => {
       refStarsMenu.value = false;
@@ -454,7 +453,7 @@ button.close-btn {
   border: none;
 }
 
-.dropdown_menu {
+.dropdown-menu {
   max-width: 21rem;
   max-height: fit-content;
   top: 3rem;

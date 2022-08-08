@@ -47,7 +47,7 @@
               <q-icon class="fa fa-caret-down"></q-icon>
             </span>
           </button>
-          <div class="dropdown_menu q-menu" v-if="refWatchMenu">
+          <div class="dropdown-menu q-menu" v-if="refWatchMenu">
             <q-list>
               <q-item
                 class="row justify-between items-center q-py-xs q-px-md options-heading text-caption"
@@ -225,7 +225,7 @@
             </span>
           </button>
           <div
-            class="dropdown_menu q-menu dropdown_menu--star"
+            class="dropdown-menu q-menu dropdown-menu--star"
             v-if="refStarsMenu"
           >
             <q-list>
@@ -433,7 +433,7 @@ button.close-btn {
   border: none;
 }
 
-.dropdown_menu {
+.dropdown-menu {
   max-width: 21rem;
   max-height: fit-content;
   top: 3rem;

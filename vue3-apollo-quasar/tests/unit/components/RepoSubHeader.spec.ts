@@ -1,81 +1,68 @@
 import { mount } from '@vue/test-utils';
 import { RepoSubHeader } from '@/components';
 import ListItem from '@/components/RepoSubHeader/ListItem.vue';
+import { NOTIFICATIONS } from '@/components/RepoSubHeader/data';
 
 describe('RepoSubHeader', () => {
-  const wrapper = mount(RepoSubHeader, {
-    props: {
-      username: 'thisdot',
-      repoName: 'starter.dev-github-showcases',
-      visibilityTag: 'Public',
-      stars: 100,
-      watch: 30,
-      forks: 1,
-      issuesCount: 10,
-      pullRequestsCount: 10,
-    },
+  let wrapper;
+
+  beforeAll(() => {
+    wrapper = mount(RepoSubHeader, {
+      props: {
+        username: 'thisdot',
+        repoName: 'starter.dev-github-showcases',
+        visibilityTag: 'Public',
+        stars: 100,
+        watch: 30,
+        forks: 1,
+        issuesCount: 10,
+        pullRequestsCount: 10,
+      },
+    });
   });
 
-  const btnWithOptions = wrapper.findAll('.menu__btn');
+  const btnWithOptions = [
+    ['.menu-btn--watch', '.dropdown-menu--watch'],
+    ['.menu-btn--star', '.dropdown-menu--star'],
+  ];
 
   it('should mount without errors', () => {
-    expect(wrapper.vm).toBeTruthy();
+    expect(wrapper.exists()).toBeTruthy();
   });
-  let count = 0;
+
   it.each(btnWithOptions)(
     'should show options on button click',
-    async (btn) => {
-      const toggleWatchMenu = jest.spyOn(wrapper.vm, 'toggleWatchMenu');
-      const toggleStarsMenu = jest.spyOn(wrapper.vm, 'toggleStarsMenu');
-      if (count === 0) {
-        expect(wrapper.vm.refWatchMenu).toBe(false);
-      } else {
-        expect(wrapper.vm.refStarsMenu).toBe(false);
-      }
-      await btn.trigger('click');
-      if (count === 0) {
-        expect(toggleWatchMenu).toHaveBeenCalled();
-        expect(wrapper.vm.refWatchMenu).toBe(true);
-      } else {
-        expect(toggleStarsMenu).toHaveBeenCalled();
-        expect(wrapper.vm.refStarsMenu).toBe(true);
-      }
-
-      const menu = await wrapper.find('.dropdown_menu.q-menu');
-      expect(menu).toBeTruthy();
-      count = count + 1;
+    async (accessor, target) => {
+      const menu_btn = await wrapper.find(accessor);
+      let dropdown_menu = await wrapper.find(target);
+      expect(dropdown_menu.exists()).toBeFalsy();
+      await menu_btn.trigger('click');
+      dropdown_menu = await wrapper.find(target);
+      expect(dropdown_menu.exists()).toBeTruthy();
     },
   );
-  count = 0;
 
   it.each(btnWithOptions)(
     'should close option when closed button is clicked',
-    async (btn) => {
-      await btn.trigger('click');
-
-      const menu = await wrapper.find('.dropdown_menu.q-menu');
-      const closeBtn = menu.find('.close-btn');
+    async (accessor, target) => {
+      const menu_btn = await wrapper.find(accessor);
+      await menu_btn.trigger('click');
+      let dropdown_menu = await wrapper.find(target);
+      const closeBtn = dropdown_menu.find('.close-btn');
       await closeBtn.trigger('click');
-      if (count === 0) {
-        expect(wrapper.vm.refWatchMenu).toBe(false);
-      } else {
-        expect(wrapper.vm.refStarsMenu).toBe(false);
-      }
-      count = count + 1;
+      dropdown_menu = await wrapper.find(target);
+      expect(dropdown_menu.exists()).toBeFalsy();
     },
   );
 
-  count = 0;
-
-  it('should select an item from the fork option list', async () => {
-    const notifyOptioons = ['mentions', 'all', 'ignore', 'custom'];
-    const watchBtn = wrapper.find('.menu__btn');
+  it('should select an item from the watch option list', async () => {
+    const watchBtn = wrapper.find('.menu-btn--watch');
     await watchBtn.trigger('click');
 
-    const menu = await wrapper.find('.dropdown_menu.q-menu');
-    expect(wrapper.vm.notify).toBe(notifyOptioons[1]);
+    const menu = await wrapper.find('.dropdown-menu--watch');
+    expect(wrapper.vm.notify).toBe(NOTIFICATIONS.all);
     const listItems = menu.findAllComponents(ListItem);
     await listItems[0].trigger('click');
-    expect(wrapper.vm.notify).toBe(notifyOptioons[0]);
+    expect(wrapper.vm.notify).toBe(NOTIFICATIONS.mentions);
   });
 });
