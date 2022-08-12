@@ -13,7 +13,12 @@ import {
   RepoPullRequests,
   RepoState,
 } from 'src/app/state/repository';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import {
+  RepoApiResponse,
+  RepoContentsApiResponse,
+} from 'src/app/state/repository';
 import {
   IssueComments,
   Issues,
@@ -28,63 +33,40 @@ import {
 export class RepositoryService {
   constructor(private http: HttpClient) {}
 
-  getRepositoryInfo(owner: string, repoName: string): Observable<RepoState> {
-    const url = `${environment.githubUrl}/repos/${owner}/${repoName}`;
-
-    return this.http.get<RepoApiResponse>(url).pipe(
-      map((data) => ({
-        repoName: data.name,
-        description: data.description,
-        website: data.homepage,
-        visibility: data.visibility,
-        watchCount: data.watchers_count,
-        starCount: data.stargazers_count,
-        forkCount: data.forks_count,
-        issueCount: data.open_issues_count,
-        tags: data.topics,
-        selectedFile: null,
-        openPullRequests: null,
-        closedPullRequests: null,
-        activeBranch: data.default_branch,
-        ownerName: '',
-        prCount: 0,
-        readme: '',
-        tree: [],
-      })),
-    );
-  }
-
-  // TODO: set this method up to return the data as well as the count (issue #185)
-  // TODO: write test for this function when it's updated
-  getPullRequestList(owner: string, repoName: string): Observable<number> {
-    const url = `${environment.githubUrl}/repos/${owner}/${repoName}/pulls`;
-
-    return this.http.get<[]>(url).pipe(map((data) => data.length));
-  }
-
-  getRepositoryPullRequest(
-    owner: string,
+  /**
+   * Gets information on a single repository
+   * @param repoOwner who the repo belongs to
+   * @param repoName name of the repo
+   * @returns the full GH response with information on the specified repository
+   */
+  getRepositoryInfo(
+    repoOwner: string,
     repoName: string,
-    pullNumber: number,
-  ): Observable<PullRequest> {
-    const url = `${environment.githubUrl}/repos/${encodeURIComponent(
-      owner,
-    )}/${encodeURIComponent(repoName)}/pulls/${encodeURIComponent(pullNumber)}`;
+  ): Observable<RepoApiResponse> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}`;
 
-    return this.http.get<PullRequest>(url, {
+    return this.http.get<RepoApiResponse>(url, {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },
     });
   }
 
+  /**
+   * Gets a list of all the pull requests for the specified repository
+   * @param repoOwner who the repo belongs to
+   * @param repoName name of the repo
+   * @returns the full GH response with the list of associated pull requests
+   */
   getRepositoryPullRequests(
-    owner: string,
+    repoOwner: string,
     repoName: string,
   ): Observable<PullRequests> {
-    const url = `${environment.githubUrl}/repos/${encodeURIComponent(
-      owner,
-    )}/${encodeURIComponent(repoName)}/pulls`;
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/pulls`;
 
     return this.http.get<PullRequests>(url, {
       headers: {
@@ -93,16 +75,46 @@ export class RepositoryService {
     });
   }
 
+  /**
+   * Gets pull request information for a single pull request
+   * @param repoOwner who the repo belongs to
+   * @param repoName name of the repo
+   * @param pullNumber the pull request identifier
+   * @returns the full GH response with info on the specified pull request
+   */
+  getRepositoryPullRequest(
+    repoOwner: string,
+    repoName: string,
+    pullNumber: number,
+  ): Observable<PullRequest> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const pullId = encodeURIComponent(pullNumber);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/pulls/${pullId}`;
+
+    return this.http.get<PullRequest>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  /**
+   * Gets comments on a specified pull request
+   * @param owner who it belongs to
+   * @param repoName name of repo
+   * @param pullNumber pull request identifier
+   * @returns the full GH response of comments on specified pull request
+   */
   getRepositoryPullRequestComments(
-    owner: string,
+    repoOwner: string,
     repoName: string,
     pullNumber: number,
   ): Observable<IssueComments> {
-    const url = `${environment.githubUrl}/repos/${encodeURIComponent(
-      owner,
-    )}/${encodeURIComponent(repoName)}/issues/${encodeURIComponent(
-      pullNumber,
-    )}/comments`;
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const pullId = encodeURIComponent(pullNumber);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/issues/${pullId}/comments`;
 
     return this.http.get<IssueComments>(url, {
       headers: {
@@ -191,8 +203,15 @@ export class RepositoryService {
       .pipe(map((file) => file.content));
   }
 
+  /**
+   * Get a list of issues for the specified repository
+   * @param owner who the repo belongs to
+   * @param repoName name of repo
+   * @param params any filter or sort parameters
+   * @returns the full GH response of the issues associated with the specified repository
+   */
   getRepositoryIssues(
-    owner: string,
+    repoOwner: string,
     repoName: string,
     params?: RepositoryIssuesApiParams,
   ): Observable<Issues> {
@@ -204,9 +223,9 @@ export class RepositoryService {
       page: 1,
     };
 
-    const url = `${environment.githubUrl}/repos/${encodeURIComponent(
-      owner,
-    )}/${encodeURIComponent(repoName)}/issues`;
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/issues`;
 
     return this.http.get<Issues>(url, {
       headers: {
@@ -215,6 +234,40 @@ export class RepositoryService {
       params: new HttpParams({
         fromObject: { ...Object.assign(defaultParams, params) },
       }),
+    });
+  }
+
+  /**
+   * Gets the contents of a file or directory for the specified repository
+   * @param owner who the repo belongs to
+   * @param repoName name of the repo
+   * @param path (optional) if provided, the path to retrieve; defaults to the root directory
+   * @param commitOrBranchOrTagName (optional) if provided, the specific commit / branch / tag to retrieve; defaults to the main branch
+   * @returns the full GH response containing the repository contents
+   */
+  getRepositoryContents(
+    repoOwner: string,
+    repoName: string,
+    pathName?: string,
+    commitOrBranchOrTagName?: string,
+  ): Observable<RepoContentsApiResponse[]> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const path = pathName && encodeURIComponent(pathName);
+    const refPath =
+      commitOrBranchOrTagName && encodeURIComponent(commitOrBranchOrTagName);
+    let url = `${environment.githubUrl}/repos/${owner}/${name}/contents`;
+    if (path) {
+      url += `/${path}`;
+    }
+    if (refPath) {
+      url += `?ref=${refPath}`;
+    }
+
+    return this.http.get<RepoContentsApiResponse[]>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
     });
   }
 }
