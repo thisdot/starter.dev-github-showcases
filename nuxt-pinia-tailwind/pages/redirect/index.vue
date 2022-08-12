@@ -3,7 +3,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, useContext } from '@nuxtjs/composition-api'
-import { LoginStrategies } from '~/types/auth/enums'
+import { LoginStrategies } from '@/types/auth/enums'
 
 export default defineComponent({
   name: 'Redirect',

@@ -5,7 +5,7 @@ import {
   IReadme,
   IRepoContents,
   IRepository,
-} from '~/types/repository/interfaces'
+} from '@/types/repository/interfaces'
 
 interface IRepositoryInfo {
   owner: string

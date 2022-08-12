@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue'
 import Redirect from './index.vue'
-import { LoginStrategies } from '~/types/auth/enums'
+import { LoginStrategies } from '@/types/auth/enums'
 
 describe('<Redirect />', () => {
   it('Should obtain the token', () => {

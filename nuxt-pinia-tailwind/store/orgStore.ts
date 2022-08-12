@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { IRepository } from '~/types/repository/interfaces'
+import { IRepository } from '@/types/repository/interfaces'
 
 interface IOrgRootState {
   repos: IRepository[]

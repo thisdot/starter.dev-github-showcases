@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { useContext, defineComponent } from '@nuxtjs/composition-api'
-import { SIGN_IN_URL } from '~/constants/url.constants'
+import { SIGN_IN_URL } from '@/constants/url.constants'
 
 export default defineComponent({
   name: 'SignIn',

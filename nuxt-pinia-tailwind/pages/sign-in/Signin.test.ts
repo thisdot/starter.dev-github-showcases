@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/vue'
 import SignIn from './index.vue'
-import { SIGN_IN_URL } from '~/constants/url.constants'
+import { SIGN_IN_URL } from '@/constants/url.constants'
 
 describe('<SignIn />', () => {
   it('Should redirect the user when clicking at the signin button', async () => {
