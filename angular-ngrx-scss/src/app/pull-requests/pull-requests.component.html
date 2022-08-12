@@ -1,4 +1,6 @@
 <div class="container pull-requests-container">
   <app-pull-requests-header></app-pull-requests-header>
-  <app-pull-requests-list></app-pull-requests-list>
+  <app-pull-requests-list
+    [pullRequests]="pullRequests$ | async"
+  ></app-pull-requests-list>
 </div>

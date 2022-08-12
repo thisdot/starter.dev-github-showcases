@@ -7,4 +7,7 @@ import { PullRequestAPIResponse } from '../../../state/repository';
   styleUrls: ['./pull-requests-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PullRequestsListComponent {}
+export class PullRequestsListComponent {
+  // TODO: update this type
+  @Input() pullRequests!: Partial<PullRequestAPIResponse[]> | any;
+}

@@ -1,3 +1,11 @@
 <div class="pull-requests">
-  <div class="pull-requests-list-container"></div>
+  <div class="pull-requests-list-container">
+    <div class="item" *ngFor="let item of pullRequests">
+      {{ item.state }}
+      {{ item.title }}
+      {{ item.number }}
+      {{ item.labels }}
+      {{ item.user.login }}
+    </div>
+  </div>
 </div>

@@ -9,16 +9,16 @@ import { fetchPullRequests, selectPullRequests } from '../state/repository';
   styleUrls: ['./pull-requests.component.scss'],
 })
 export class PullRequestsComponent implements OnInit {
-  owner = '';
-  repoName = '';
+  owner!: string;
+  repoName!: string;
   pullRequests$ = this.store.select(selectPullRequests);
 
   constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit() {
-    //TODO: for some weird reason, this is not getting the params successfully; investigate
     this.owner = this.route.snapshot.paramMap.get('owner') as string;
     this.repoName = this.route.snapshot.paramMap.get('repo') as string;
+
     this.store.dispatch(
       fetchPullRequests({
         owner: this.owner,
