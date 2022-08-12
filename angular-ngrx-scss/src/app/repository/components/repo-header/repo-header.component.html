@@ -7,7 +7,11 @@
         [repo]="repo"
       ></app-repo-heading>
     </ng-container>
-    <app-repo-info></app-repo-info>
+    <app-repo-info
+      [watch]="(repo$ | async)!.watchCount"
+      [stars]="(repo$ | async)!.starCount"
+      [forks]="(repo$ | async)!.forkCount"
+    ></app-repo-info>
   </div>
   <app-repo-navigation
     [basePath]="basePath"
