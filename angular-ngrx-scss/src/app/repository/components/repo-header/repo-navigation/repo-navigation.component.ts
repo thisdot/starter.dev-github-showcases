@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class RepositoryNavigationComponent {
   @Input() basePath = '';
-  @Input() issuesCount = 123;
-  @Input() pullsCount = 321;
+  @Input() issuesCount = 0;
+  @Input() pullsCount = 0;
 }

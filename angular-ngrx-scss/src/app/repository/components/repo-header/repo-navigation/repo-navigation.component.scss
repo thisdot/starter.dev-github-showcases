@@ -11,22 +11,25 @@
       padding: 0;
       margin: 0;
 
-      a {
+      li {
+        cursor: pointer;
         display: inline-flex;
         align-items: center;
         text-decoration: none;
         font-size: 1rem;
         padding: 16px;
         color: variables.$gray600;
-        &.active-tab {
-          border-bottom: 2px solid rgba(245, 158, 11, 1);
+        &.tab {
+          &--active {
+            border-bottom: 2px solid rgba(245, 158, 11, 1);
 
-          span {
-            font-weight: 600;
-            color: black;
+            span {
+              font-weight: 600;
+              color: black;
 
-            &.icon {
-              color: variables.$gray600;
+              &.icon {
+                color: variables.$gray600;
+              }
             }
           }
         }
@@ -34,6 +37,8 @@
           border-bottom: 2px solid variables.$gray300;
         }
         .count {
+          display: inline-block;
+          text-align: center;
           padding: 0.125rem 0.5rem;
           margin-left: 0.5rem;
           background-color: #e5e7eb;

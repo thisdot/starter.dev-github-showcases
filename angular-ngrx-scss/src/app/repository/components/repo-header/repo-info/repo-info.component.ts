@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./repo-info.component.scss'],
 })
 export class RepositoryInfoComponent {
-  @Input() watch = 675;
-  @Input() stars = 31;
-  @Input() forks = 75;
+  @Input() watch = 0;
+  @Input() stars = 0;
+  @Input() forks = 0;
 }
