@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { IRepository } from '~/types/common/interfaces'
+import { IRepository } from '~/types/repository/interfaces'
 import { UserGist } from '~/types/user/interfaces'
 
 interface IUserRootState {

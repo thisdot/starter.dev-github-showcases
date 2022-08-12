@@ -3,7 +3,7 @@ import { IUser } from '../user/interfaces'
 
 /**
  * Nuxt/auth doesn't have a proper way to type our user yet
- * hence we do this approach:
+ * hence we do this workaround:
  */
 declare module 'vue/types/vue' {
   interface Auth extends NuxtAuth {
