@@ -1,13 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { fakeAsync, tick } from '@angular/core/testing';
 import { of } from 'rxjs';
-import {
-  UserGist,
-  UserGistsState,
-  UserRepo,
-  UserReposState,
-} from 'src/app/state/profile/profile.state';
-import { UserApiResponse, UserState } from 'src/app/state/user';
+import { UserGist, UserRepo } from 'src/app/state/profile/profile.state';
+import { UserApiResponse } from 'src/app/state/user';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -23,24 +17,9 @@ describe('UserService', () => {
     expect(userService).toBeTruthy();
   });
 
-  it('should return user data from the GitHub API', fakeAsync(() => {
-    const expectedResponse: UserState = {
-      avatar: 'lindakatcodes_url',
-      bio: '',
-      blog: '',
-      company: '',
-      email: '',
-      followers: 0,
-      following: 0,
-      location: '',
-      name: '',
-      twitter_username: '',
-      username: 'lindakatcodes',
-      type: 'User',
-    };
-
+  it('should return user data from the GitHub API', (done) => {
     const expectedHttpResponse: Partial<UserApiResponse> = {
-      avatar_url: 'lindakatcodes_url',
+      avatar_url: 'testuser_url',
       bio: '',
       blog: '',
       company: '',
@@ -48,7 +27,7 @@ describe('UserService', () => {
       followers: 0,
       following: 0,
       location: '',
-      login: 'lindakatcodes',
+      login: 'testuser',
       name: '',
       twitter_username: '',
       type: 'User',
@@ -56,65 +35,24 @@ describe('UserService', () => {
 
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
-    const result = {};
+    userService.getAuthenticatedUserInfo().subscribe({
+      next: (userInfo) => {
+        expect(userInfo).toContain(expectedHttpResponse);
 
-    userService.getAuthenticatedUserInfo().subscribe((res) => {
-      Object.assign(result, res);
+        expect(httpClientSpy.get).toHaveBeenCalledWith(
+          `https://api.github.com/user`,
+          jasmine.objectContaining({
+            headers: {
+              Accept: 'application/vnd.github.v3+json',
+            },
+          }),
+        );
+      },
+      complete: done,
     });
-    tick(1000);
+  });
 
-    expect(result).toEqual(expectedResponse);
-    expect(httpClientSpy.get.calls.count()).withContext('called once').toBe(1);
-  }));
-
-  it('should return the top repositories from the Github API', fakeAsync(() => {
-    const expectedResponse: UserReposState[] = [
-      {
-        name: 'Repo-test',
-        description: 'This is a repo test',
-        language: 'TypeScript',
-        stargazers_count: 0,
-        forks_count: 0,
-        private: false,
-        updated_at: '2022-06-17T09:54:38Z',
-        license: null,
-        fork: false,
-        archived: false,
-        owner: {
-          login: 'thisdot',
-        },
-      },
-      {
-        name: 'Repo-test-2',
-        description: 'This is a repo test 2',
-        language: 'Javascript',
-        stargazers_count: 0,
-        forks_count: 0,
-        private: false,
-        updated_at: '2022-06-17T09:54:38Z',
-        license: null,
-        fork: false,
-        archived: false,
-        owner: {
-          login: 'thisdot',
-        },
-      },
-      {
-        name: 'Repo-test-3',
-        description: 'This is a repo test 2',
-        language: 'Javascript',
-        stargazers_count: 0,
-        forks_count: 0,
-        private: false,
-        updated_at: '2022-06-17T09:54:38Z',
-        license: null,
-        fork: false,
-        archived: false,
-        owner: {
-          login: 'thisdot',
-        },
-      },
-    ];
+  it('should return the top repositories from the Github API', (done) => {
     const expectedHttpResponse: Partial<UserRepo>[] = [
       {
         name: 'Repo-test',
@@ -226,26 +164,22 @@ describe('UserService', () => {
     ];
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
-    const result: UserReposState[] = [];
-
-    userService.getUserTopRepos().subscribe((res) => {
-      Object.assign(result, res);
-    });
-    tick(1000);
-
-    expect(result).toEqual(expectedResponse);
-    expect(httpClientSpy.get.calls.count()).withContext('called once').toBe(1);
-  }));
-
-  it('should return the gists from the user', fakeAsync(() => {
-    const username = 'thisDot';
-    const expectedResponse: UserGistsState[] = [
-      {
-        url: 'github.com/gists',
-        fileName: 'textfile1.txt',
+    userService.getUserTopRepos().subscribe({
+      next: () => {
+        expect(httpClientSpy.get).toHaveBeenCalledWith(
+          `https://api.github.com/user/repos?sort=updated&per_page=20`,
+          jasmine.objectContaining({
+            headers: {
+              Accept: 'application/vnd.github.v3+json',
+            },
+          }),
+        );
       },
-    ];
+      complete: done,
+    });
+  });
 
+  it('should return the gists from the user', (done) => {
     const expectedHttpResponse: Partial<UserGist>[] = [
       {
         html_url: 'github.com/gists',
@@ -255,13 +189,18 @@ describe('UserService', () => {
 
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
-    const result: UserGistsState[] = [];
-
-    userService.getUserGists(username).subscribe((res) => {
-      Object.assign(result, res);
+    userService.getUserGists().subscribe({
+      next: () => {
+        expect(httpClientSpy.get).toHaveBeenCalledWith(
+          `https://api.github.com/gists`,
+          jasmine.objectContaining({
+            headers: {
+              Accept: 'application/vnd.github.v3+json',
+            },
+          }),
+        );
+      },
+      complete: done,
     });
-    tick(1000);
-
-    expect(result).toEqual(expectedResponse);
-  }));
+  });
 });
