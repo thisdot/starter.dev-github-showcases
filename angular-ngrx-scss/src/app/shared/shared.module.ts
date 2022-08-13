@@ -8,6 +8,7 @@ import { FilterDropdownComponent } from './components/filter-dropdown/filter-dro
 import { MarkdownPipe } from './pipes/markdown.pipe';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { RepoIssuePullCardComponent } from './components/repo-issue-pull-card/repo-issue-pull-card.component';
+import { ClickAwayDirective } from './directives/click-away.directive';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { RepoIssuePullCardComponent } from './components/repo-issue-pull-card/re
     FilterDropdownComponent,
     PaginationComponent,
     RepoIssuePullCardComponent,
+    ClickAwayDirective,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
