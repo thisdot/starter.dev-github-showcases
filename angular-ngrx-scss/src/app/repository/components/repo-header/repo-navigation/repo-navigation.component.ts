@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { RepoState } from 'src/app/state/repository';
 
 @Component({
   selector: 'app-repo-navigation',
@@ -6,7 +7,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./repo-navigation.component.scss'],
 })
 export class RepositoryNavigationComponent {
-  @Input() basePath = '';
+  @Input() repo?: RepoState;
   @Input() issuesCount = 0;
   @Input() pullsCount = 0;
+
+  get basePath(): string {
+    return `/${this.repo?.ownerName}/${this.repo?.repoName}`;
+  }
 }

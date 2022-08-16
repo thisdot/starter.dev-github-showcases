@@ -1,11 +1,7 @@
 <div class="wrapper">
   <ng-container *ngIf="repo$ | async as repo">
     <div class="top">
-      <app-repo-heading
-        [owner]="owner"
-        [name]="name"
-        [repo]="repo"
-      ></app-repo-heading>
+      <app-repo-heading [repo]="repo"></app-repo-heading>
       <app-repo-info
         [watch]="repo.watchCount"
         [stars]="repo.starCount"
@@ -13,7 +9,7 @@
       ></app-repo-info>
     </div>
     <app-repo-navigation
-      [basePath]="basePath"
+      [repo]="repo"
       [issuesCount]="repo.issueCount"
       [pullsCount]="repo.prCount"
     ></app-repo-navigation>

@@ -9,11 +9,9 @@ import { RepoState } from 'src/app/state/repository';
 export class RepositoryHeadingComponent {
   @Input()
   repo?: RepoState;
-  @Input() owner = '';
-  @Input() name = '';
 
   get ownerPath(): string {
-    return `/${this.owner}`;
+    return `/${this.repo?.ownerName}`;
   }
 
   get visibility(): string {
