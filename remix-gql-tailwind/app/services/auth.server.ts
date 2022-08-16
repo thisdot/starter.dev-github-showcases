@@ -3,12 +3,12 @@ import type { GitHubExtraParams, GitHubProfile } from 'remix-auth-github';
 import { GitHubStrategy } from 'remix-auth-github';
 import { sessionStorage } from '~/services/session.server';
 
-if (!process.env.GITHUB_CLIENT_ID) {
-  throw new Error('GITHUB_CLIENT_ID is required');
+if (!process.env.APP_GITHUB_CLIENT_ID) {
+  throw new Error('APP_GITHUB_CLIENT_ID is required');
 }
 
-if (!process.env.GITHUB_CLIENT_SECRET) {
-  throw new Error('GITHUB_CLIENT_SECRET is required');
+if (!process.env.APP_GITHUB_CLIENT_SECRET) {
+  throw new Error('APP_GITHUB_CLIENT_SECRET is required');
 }
 
 if (!process.env.BASE_URL) {
@@ -26,8 +26,8 @@ export const auth = new Authenticator<{
 auth.use(
   new GitHubStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      clientID: process.env.APP_GITHUB_CLIENT_ID!,
+      clientSecret: process.env.APP_GITHUB_CLIENT_SECRET!,
       callbackURL: new URL('/auth/github/callback', BASE_URL).toString(),
       scope:
         'user read:user public_repo repo repo_deployment repo:status read:repo_hook read:org read:public_key read:gpg_key',
