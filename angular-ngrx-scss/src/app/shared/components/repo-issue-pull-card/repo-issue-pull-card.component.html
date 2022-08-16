@@ -1,0 +1,46 @@
+<div class="item" *ngIf="item">
+  <div class="item-container">
+    <div class="info">
+      <ng-container *ngIf="item.state === 'open'; else closed">
+        <!-- no-entry -->
+        <span class="icon {{ item.state }}" appOcticon="no-entry"></span>
+      </ng-container>
+      <ng-template #closed>
+        <!-- issue-closed -->
+        <span class="icon {{ item.state }}" appOcticon="issue-closed"></span>
+      </ng-template>
+      <div>
+        <div class="content">
+          <span class="title">{{ item.title }}</span>
+          <span class="inline" *ngFor="let label of item.labels">
+            <span
+              [style.background-color]="colorMap(label.color)"
+              class="label"
+            >
+              {{ label.name }}
+            </span>
+          </span>
+        </div>
+        <div class="meta">
+          #{{ item.number }}
+          <span *ngIf="item.state === 'open'">
+            opened
+            {{ item.created_at | relativeTime }}
+          </span>
+          by
+          <span class="created-by">{{ item.user.login }}</span>
+          <span *ngIf="item.closed_at">
+            was closed
+            {{ item.closed_at | relativeTime }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="comments" *ngIf="item.comments">
+      <span class="icon" appOcticon="comment"></span>
+      <span data-testid="comment count">
+        {{ item.comments }}
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,7 @@
 <div class="issue">
   <div class="issues-list-container">
-    <app-issue-pull-item></app-issue-pull-item>
+    <ng-container *ngFor="let issue of issues">
+      <app-repo-issue-pull-card [item]="issue"></app-repo-issue-pull-card>
+    </ng-container>
   </div>
 </div>

@@ -7,7 +7,7 @@ import { OcticonsDirective } from './directives/octicons.directive';
 import { FilterDropdownComponent } from './components/filter-dropdown/filter-dropdown.component';
 import { MarkdownPipe } from './pipes/markdown.pipe';
 import { PaginationComponent } from './components/pagination/pagination.component';
-import { IssuePullItemComponent } from './components/issue-pull-item/issue-pull-item.component';
+import { RepoIssuePullCardComponent } from './components/repo-issue-pull-card/repo-issue-pull-card.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { IssuePullItemComponent } from './components/issue-pull-item/issue-pull-
     OcticonsDirective,
     FilterDropdownComponent,
     PaginationComponent,
-    IssuePullItemComponent,
+    RepoIssuePullCardComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -27,7 +27,7 @@ import { IssuePullItemComponent } from './components/issue-pull-item/issue-pull-
     OcticonsDirective,
     FilterDropdownComponent,
     PaginationComponent,
-    IssuePullItemComponent,
+    RepoIssuePullCardComponent,
   ],
 })
 export class SharedModule {}
