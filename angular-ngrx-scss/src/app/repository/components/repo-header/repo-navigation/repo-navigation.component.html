@@ -5,7 +5,7 @@
         [routerLink]="[basePath, 'code']"
         routerLinkActive="tab--active"
         class="tab tab--active"
-        [ngClass]="{ 'active-tab': !issuesLink.isActive && !prLink.isActive }"
+        [ngClass]="{ 'tab--active': !issuesLink.isActive && !prLink.isActive }"
         #codeLink="routerLinkActive"
       >
         <span class="icon" appOcticon="code"></span>

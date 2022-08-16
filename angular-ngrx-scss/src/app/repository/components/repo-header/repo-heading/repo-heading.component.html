@@ -6,6 +6,6 @@
     <a routerLink="./" class="bold">{{ name }}</a>
   </div>
   <div class="heading__privacy" *ngIf="repo?.visibility">
-    <span>{{ visibility }}</span>
+    <span>{{ visibility | titlecase }}</span>
   </div>
 </div>

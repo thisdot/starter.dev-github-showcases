@@ -17,10 +17,6 @@ export class RepositoryHeadingComponent {
   }
 
   get visibility(): string {
-    if (this.repo) {
-      return this.repo.visibility ? 'Private' : 'Public';
-    } else {
-      return '';
-    }
+    return this.repo?.visibility || '';
   }
 }
