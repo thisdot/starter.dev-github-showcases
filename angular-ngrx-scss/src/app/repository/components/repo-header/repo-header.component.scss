@@ -1,0 +1,14 @@
+@use '../../../shared/styles/variables.scss';
+
+.wrapper {
+  padding: 1.5rem 3rem 0;
+  background-color: variables.$gray100;
+  border-bottom: 1px solid variables.$gray300;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+}

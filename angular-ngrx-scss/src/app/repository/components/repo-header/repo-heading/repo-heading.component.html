@@ -1,0 +1,11 @@
+<div class="heading" *ngIf="repo?.ownerName">
+  <span class="icon" size="24" appOcticon="repo"></span>
+  <div class="heading__breadcrumb">
+    <a [routerLink]="ownerPath">{{ repo?.ownerName }}</a>
+    <span>/</span>
+    <a routerLink="./" class="bold">{{ repo?.repoName }}</a>
+  </div>
+  <div class="heading__privacy" *ngIf="repo?.visibility">
+    <span>{{ visibility | titlecase }}</span>
+  </div>
+</div>

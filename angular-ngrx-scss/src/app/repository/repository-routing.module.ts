@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () =>
           import('../issues/issues.module').then((m) => m.IssuesModule),
       },
+      {
+        path: 'code',
+        redirectTo: '',
+      },
     ],
   },
 ];

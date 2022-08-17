@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <ng-container *ngIf="repo$ | async as repo">
+    <div class="top">
+      <app-repo-heading [repo]="repo"></app-repo-heading>
+      <app-repo-info
+        [watch]="repo.watchCount"
+        [stars]="repo.starCount"
+        [forks]="repo.forkCount"
+      ></app-repo-info>
+    </div>
+    <app-repo-navigation
+      [repo]="repo"
+      [issuesCount]="repo.issueCount"
+      [pullsCount]="repo.prCount"
+    ></app-repo-navigation>
+  </ng-container>
+</div>
