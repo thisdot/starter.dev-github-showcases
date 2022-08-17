@@ -1,7 +1,7 @@
 <div class="item" *ngIf="item">
   <div class="item-container">
     <div class="info">
-      <ng-container *ngIf="item.state === 'open'; else closed">
+      <ng-container *ngIf="isOpen; else closed">
         <!-- no-entry -->
         <span class="icon {{ item.state }}" appOcticon="no-entry"></span>
       </ng-container>
@@ -23,15 +23,15 @@
         </div>
         <div class="meta">
           #{{ item.number }}
-          <span *ngIf="item.state === 'open'">
+          <span *ngIf="isOpen">
             opened
             {{ item.created_at | relativeTime }}
           </span>
           by
           <span class="created-by">{{ item.user.login }}</span>
-          <span *ngIf="item.closed_at">
+          <span *ngIf="!isOpen">
             was closed
-            {{ item.closed_at | relativeTime }}
+            {{ item.closed_at! | relativeTime }}
           </span>
         </div>
       </div>
