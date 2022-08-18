@@ -4,7 +4,7 @@
       <div class="col-auto flex">
         <h3 class="text-h6 q-my-none">
           <!-- TODO: Add redirect to specific repo details page -->
-          <a href="#!" class="q-mr-sm">
+          <a :href="`${owner.login}/${name}`" class="q-mr-sm">
             {{ name }}
           </a>
           <q-chip
@@ -105,7 +105,13 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  owner: {
+    type: [Object, null],
+    required: true,
+  },
 });
+
+console.log(props.owner);
 
 const { getFriendlyDate, upperFirst } = useFormatter();
 const friendlyUpdatedAt = getFriendlyDate(props.updatedAt);

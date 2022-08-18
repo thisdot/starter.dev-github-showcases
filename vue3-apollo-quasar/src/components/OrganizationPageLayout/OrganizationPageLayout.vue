@@ -13,7 +13,7 @@
         <h3 class="">Company Name</h3>
       </div>
       <TabHeader
-        :repositories="true"
+        :tabConfig="tabConfig"
         @triggerTab="changeTab"
         classNames="org_tab"
       />
@@ -75,6 +75,16 @@ export default defineComponent({
     };
   },
 });
+</script>
+
+<script lang="ts" setup>
+const tabConfig = [
+  {
+    name: 'repositories',
+    icon: 'RepositoriesIcon',
+    title: 'Repositories',
+  },
+];
 </script>
 
 <style lang="scss">
