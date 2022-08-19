@@ -16,3 +16,4 @@ sam.yaml
 /build
 .vscode
 /app/styles/*.css
+/server/index.js.map
