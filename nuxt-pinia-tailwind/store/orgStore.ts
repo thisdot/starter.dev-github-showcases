@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia'
-import { IRepository } from '@/types/repository/interfaces'
+import { defineStore } from 'pinia';
+import { IRepository } from '@/types/repository/interfaces';
 
 interface IOrgRootState {
-  repos: IRepository[]
+  repos: IRepository[];
 }
 
 export const useOrgStore = defineStore('orgStore ', {
@@ -15,21 +15,21 @@ export const useOrgStore = defineStore('orgStore ', {
         const {
           $config: { GITHUB_API_URL },
           $axios,
-        } = this.$nuxt
+        } = this.$nuxt;
 
-        const url = `${GITHUB_API_URL}/orgs/${org}/repos`
+        const url = `${GITHUB_API_URL}/orgs/${org}/repos`;
 
         const { data } = await $axios.get<IRepository[]>(url, {
           params: {
             sort: 'updated',
             per_page: '10',
           },
-        })
+        });
 
-        this.repos = data
+        this.repos = data;
       } catch (error) {
-        return error
+        return error;
       }
     },
   },
-})
+});

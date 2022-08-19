@@ -1,11 +1,11 @@
-import { render } from '@testing-library/vue'
-import Redirect from './index.vue'
-import { LoginStrategies } from '@/types/auth/enums'
+import { render } from '@testing-library/vue';
+import Redirect from './index.vue';
+import { LoginStrategies } from '@/types/auth/enums';
 
 describe('<Redirect />', () => {
   it('Should obtain the token', () => {
     // Arrange
-    const loginWith = jest.fn()
+    const loginWith = jest.fn();
 
     render(Redirect, {
       mocks: {
@@ -17,14 +17,14 @@ describe('<Redirect />', () => {
           },
         },
       },
-    })
+    });
 
-    expect(loginWith).toBeCalledWith(LoginStrategies.CustomLogin)
-  })
+    expect(loginWith).toBeCalledWith(LoginStrategies.CustomLogin);
+  });
 
   it('Should redirect to the sign-in page if an error occurs', () => {
     // Arrange
-    const redirect = jest.fn()
+    const redirect = jest.fn();
 
     render(Redirect, {
       mocks: {
@@ -34,8 +34,8 @@ describe('<Redirect />', () => {
           },
         },
       },
-    })
+    });
 
-    expect(redirect).toBeCalledWith('/sign-in')
-  })
-})
+    expect(redirect).toBeCalledWith('/sign-in');
+  });
+});

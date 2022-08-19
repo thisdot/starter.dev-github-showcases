@@ -1,4 +1,4 @@
-import { LoginStrategies } from './types/auth/enums'
+import { LoginStrategies } from './types/auth/enums';
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -114,4 +114,4 @@ export default {
       },
     },
   },
-}
+};

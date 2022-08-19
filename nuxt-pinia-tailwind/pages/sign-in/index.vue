@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts">
-import { useContext, defineComponent } from '@nuxtjs/composition-api'
-import { SIGN_IN_URL } from '@/constants/url.constants'
+import { useContext, defineComponent } from '@nuxtjs/composition-api';
+import { SIGN_IN_URL } from '@/constants/url.constants';
 
 export default defineComponent({
   name: 'SignIn',
@@ -22,17 +22,17 @@ export default defineComponent({
   setup() {
     const {
       $config: { STARTER_API_URL, BASE_URL },
-    } = useContext()
+    } = useContext();
 
     const handleSignIn = (event: Event): void => {
-      event.preventDefault()
-      window.location.href = SIGN_IN_URL(STARTER_API_URL, BASE_URL)
-    }
+      event.preventDefault();
+      window.location.href = SIGN_IN_URL(STARTER_API_URL, BASE_URL);
+    };
 
-    return { handleSignIn }
+    return { handleSignIn };
   },
   head: {
     titleTemplate: '%s - Sign-in',
   },
-})
+});
 </script>

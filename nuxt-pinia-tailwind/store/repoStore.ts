@@ -1,30 +1,30 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 import {
   IBranch,
   IPullRequest,
   IReadme,
   IRepoContents,
   IRepository,
-} from '@/types/repository/interfaces'
+} from '@/types/repository/interfaces';
 
 interface IRepositoryInfo {
-  owner: string
-  name: string
-  visibility: string
-  watchersCount: number
-  stargazersCount: number
-  forksCount: number
-  openIssuesCount: number
-  description: string
-  url: string
-  branches: IBranch[]
-  readme: IReadme | null
-  rootContent: IRepoContents[]
-  pullsRequests: IPullRequest[]
+  owner: string;
+  name: string;
+  visibility: string;
+  watchersCount: number;
+  stargazersCount: number;
+  forksCount: number;
+  openIssuesCount: number;
+  description: string;
+  url: string;
+  branches: IBranch[];
+  readme: IReadme | null;
+  rootContent: IRepoContents[];
+  pullsRequests: IPullRequest[];
 }
 
 interface IRepoRootState {
-  selectedRepository: IRepositoryInfo | null
+  selectedRepository: IRepositoryInfo | null;
 }
 
 export const useRepoStore = defineStore('repositoryStore ', {
@@ -37,25 +37,26 @@ export const useRepoStore = defineStore('repositoryStore ', {
         const {
           $config: { GITHUB_API_URL },
           $axios,
-        } = this.$nuxt
+        } = this.$nuxt;
 
         // Define all the urls
-        const url = `${GITHUB_API_URL}/repos/${owner}/${repoId}`
-        const branchesUrl = `${url}/branches`
-        const pullRequestsUrl = `${url}/pulls`
-        const repoContentsUrl = `${url}/contents`
-        const repoReadmeUrl = `${url}/readme`
+        const url = `${GITHUB_API_URL}/repos/${owner}/${repoId}`;
+        const branchesUrl = `${url}/branches`;
+        const pullRequestsUrl = `${url}/pulls`;
+        const repoContentsUrl = `${url}/contents`;
+        const repoReadmeUrl = `${url}/readme`;
 
         // Prepare the promises to be fetched
-        const getRepoInfo = $axios.get<IRepository>(url)
-        const getRepoBranches = $axios.get<IBranch[]>(branchesUrl)
+        const getRepoInfo = $axios.get<IRepository>(url);
+        const getRepoBranches = $axios.get<IBranch[]>(branchesUrl);
         const getPullRequests = $axios.get<IPullRequest[]>(pullRequestsUrl, {
           params: {
             state: 'all',
           },
-        })
-        const getRepoRootContents = $axios.get<IRepoContents[]>(repoContentsUrl)
-        const getRepoReadme = $axios.get<IReadme>(repoReadmeUrl)
+        });
+        const getRepoRootContents =
+          $axios.get<IRepoContents[]>(repoContentsUrl);
+        const getRepoReadme = $axios.get<IReadme>(repoReadmeUrl);
 
         // Fetch all the data
         const [
@@ -70,7 +71,7 @@ export const useRepoStore = defineStore('repositoryStore ', {
           getPullRequests,
           getRepoRootContents,
           getRepoReadme,
-        ])
+        ]);
 
         this.selectedRepository = {
           owner: repoInfo.owner.login,
@@ -86,10 +87,10 @@ export const useRepoStore = defineStore('repositoryStore ', {
           pullsRequests: repoPullRequests,
           rootContent: repoRootContent,
           readme: repoReadme,
-        }
+        };
       } catch (error) {
-        return error
+        return error;
       }
     },
   },
-})
+});
