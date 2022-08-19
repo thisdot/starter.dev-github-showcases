@@ -1,5 +1,5 @@
-import { RepoContext, RepoProvider } from '../../context/RepoContext';
 import { Story, Meta } from '@storybook/react';
+import { RepoContext, RepoProvider } from '~/context/RepoContext';
 import RepoActionButtons from './RepoActionButtons';
 
 export default {

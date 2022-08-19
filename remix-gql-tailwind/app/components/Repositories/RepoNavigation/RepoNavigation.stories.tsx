@@ -1,4 +1,4 @@
-import { RepoContext, RepoProvider } from '../../context/RepoContext';
+import { RepoContext, RepoProvider } from '~/context/RepoContext';
 import { Story, Meta } from '@storybook/react';
 import RepoNavigation from './RepoNavigation';
 
