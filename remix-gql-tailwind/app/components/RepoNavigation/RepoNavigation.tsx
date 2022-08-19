@@ -1,9 +1,9 @@
-import { GitBranchIcon } from '../../Shared/Icons';
 import { Link } from '@remix-run/react';
-import { useRepo } from '../../../context/RepoContext';
 import * as styles from './RepoNavigation.classNames';
-import { removePathPart } from '../../../lib/pathUtils';
 import { Fragment } from 'react';
+import { removePathPart } from '~/lib/pathUtils';
+import { useRepo } from '~/context/RepoContext';
+import { GitBranchIcon } from '../Shared/Icons';
 
 function RepoNavigation() {
   const { name, owner, path, branch } = useRepo();

@@ -1,5 +1,5 @@
 import { json, LoaderFunction } from '@remix-run/node';
-import { useLoaderData, useOutletContext } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { parseQueryData } from '~/components/Repositories/FileExplorer/parseQueryData';
 import RepoNavigation from '~/components/Repositories/RepoNavigation/RepoNavigation';
 import RepoHeader from '~/components/Repositories/RepoHeader/RepoHeader';
@@ -7,6 +7,7 @@ import FileExplorer from '~/components/Repositories/FileExplorer/FileExplorer.vi
 import { parseTopics } from '~/components/Repositories/RepoPage/parseTopics';
 import { parseQuery } from '~/components/Repositories/RepoReadMe/parseQuery';
 import RepoReadMe from '~/components/Repositories/RepoReadMe/RepoReadMe.view';
+
 import { RepoContext, RepoProvider } from '~/context/RepoContext';
 import gqlClient from '~/lib/graphql-client';
 import { auth } from '~/services/auth.server';

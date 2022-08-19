@@ -6,6 +6,7 @@ preferences.arc
 sam.json
 sam.yaml
 .env
+/storybook-static
 
 /cypress/screenshots
 /cypress/videos
