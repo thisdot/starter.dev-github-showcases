@@ -1,0 +1,40 @@
+<div class="container">
+  <nav class="nav" aria-label="Tabs">
+    <ul>
+      <li
+        [routerLink]="[basePath, 'code']"
+        routerLinkActive="tab--active"
+        class="tab tab--active"
+        [ngClass]="{ 'tab--active': !issuesLink.isActive && !prLink.isActive }"
+        #codeLink="routerLinkActive"
+      >
+        <span class="icon" appOcticon="code"></span>
+        <span>Code</span>
+      </li>
+      <li
+        [routerLink]="[basePath, 'issues']"
+        routerLinkActive="tab--active"
+        class="tab tab--inactive"
+        #issuesLink="routerLinkActive"
+      >
+        <span class="icon" appOcticon="issue-opened"></span>
+        <span>Issues</span>
+        <span class="count">
+          {{ issuesCount }}
+        </span>
+      </li>
+      <li
+        [routerLink]="[basePath, 'pull-requests']"
+        routerLinkActive="tab--active"
+        class="tab tab--inactive"
+        #prLink="routerLinkActive"
+      >
+        <span class="icon" appOcticon="git-pull-request"></span>
+        <span>Pull Requests</span>
+        <span class="count">
+          {{ pullsCount }}
+        </span>
+      </li>
+    </ul>
+  </nav>
+</div>

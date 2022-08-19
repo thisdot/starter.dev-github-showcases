@@ -40,3 +40,10 @@ export const RepoAside = styled.div`
     grid-column: span 3 / span 3;
   }
 `;
+
+export const RepoCenterWrapper = styled.div`
+  margin-inline: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  max-width: 80rem;
+`;

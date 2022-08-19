@@ -16,6 +16,10 @@ function Repo() {
     path = location.pathname.split(`${basePath}/tree/${branch}/`).pop()!;
   }
 
+  if (location.pathname.includes('/blob/')) {
+    path = location.pathname.split(`${basePath}/blob/${branch}/`).pop()!;
+  }
+
   return (
     <>
       <Header />

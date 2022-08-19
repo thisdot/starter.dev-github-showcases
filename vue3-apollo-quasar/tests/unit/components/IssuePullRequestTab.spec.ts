@@ -22,8 +22,8 @@ describe('IssuePullRequestTab', () => {
 
 describe('IssuePullRequestTab for Pull Request', () => {
   const labels = [
-    ['.dropdown-label--label', '.dropdown_menu'],
-    ['.dropdown-label--sort', '.dropdown_menu'],
+    ['.dropdown-label--label', '.dropdown-menu'],
+    ['.dropdown-label--sort', '.dropdown-menu'],
   ];
 
   it('should show closed pr or issue on close tab click', async () => {
@@ -53,9 +53,9 @@ describe('IssuePullRequestTab for Issue', () => {
   });
 
   const labels = [
-    ['.dropdown-label--label', '.dropdown_menu'],
-    ['.dropdown-label--milestones', '.dropdown_menu'],
-    ['.dropdown-label--sort', '.dropdown_menu'],
+    ['.dropdown-label--label', '.dropdown-menu'],
+    ['.dropdown-label--milestones', '.dropdown-menu'],
+    ['.dropdown-label--sort', '.dropdown-menu'],
   ];
 
   it('should show closed pr or issue on close tab click', async () => {
