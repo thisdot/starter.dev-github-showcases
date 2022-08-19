@@ -9,8 +9,8 @@ import PullRequestIcon from '../../icons/PullRequestIcon';
 
 interface Props {
   toggleTab: any;
-  openPRCount: number;
-  closedPRCount: number;
+  openPRCount?: number;
+  closedPRCount?: number;
 }
 
 export default function PullRequestTabHeader(props: Props) {

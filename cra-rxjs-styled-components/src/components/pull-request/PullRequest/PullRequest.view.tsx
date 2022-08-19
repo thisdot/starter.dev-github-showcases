@@ -7,10 +7,10 @@ import PullRequestTabHeader from '../PRTabHeader';
 import { getPullsState } from '../../../helpers/getPullsState';
 
 type PullRequestProps = {
-  pullRequests: PullRequest[];
+  pullRequests?: PullRequest[];
   changeActiveTab: (value: PRTabValues) => void;
-  openPRCount: number;
-  closedPRCount: number;
+  openPRCount?: number;
+  closedPRCount?: number;
 };
 
 export default function PullRequestView({
@@ -27,7 +27,7 @@ export default function PullRequestView({
           closedPRCount={closedPRCount}
           toggleTab={changeActiveTab}
         />
-        {pullRequests.map((pr, index) => (
+        {pullRequests?.map((pr, index) => (
           <PullRequestCard
             title={pr.title}
             number={pr.number}

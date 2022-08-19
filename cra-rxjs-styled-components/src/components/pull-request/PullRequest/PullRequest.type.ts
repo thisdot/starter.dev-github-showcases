@@ -1,3 +1,9 @@
+export type PullRequests = {
+  total_count: number;
+  incomplete_results: boolean;
+  items: PullRequest[];
+};
+
 export type PullRequest = {
   title: string;
   number: string;

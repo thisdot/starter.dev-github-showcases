@@ -32,8 +32,12 @@ export const USER_REPO_LIST = (user: string, page: string = '1') =>
 export const GISTS_URL = (user: string) =>
   `${GITHUB_URL_BASE}/users/${user}/gists?per_page=10`;
 
-export const PULLS_URL = (owner: string, repoName: string) =>
-  `${GITHUB_URL_BASE}/repos/${owner}/${repoName}/pulls?state=all`;
+export const PULLS_URL = (
+  owner: string,
+  repoName: string,
+  state: 'open' | 'closed'
+) =>
+  `${GITHUB_URL_BASE}/search/issues?q=test+is:pr+repo:${owner}/${repoName}+is:${state}`;
 
 export const ISSUE_PR_SEARCH = (
   user: string,
