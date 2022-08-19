@@ -47,6 +47,8 @@ const INITIAL_PROFILE_REPOS_STATE: ProfileReposState = {
   reposLoadError: undefined,
 };
 
+const DEFAULT_CURSOR = 25;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -144,18 +146,21 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
   }
 
   private getProfileRepos(owner: string, state: ProfileFilterState) {
-    const endCursor =
-      this.activatedRoute.snapshot.queryParams['after'] ?? undefined;
-    const startCursor =
-      this.activatedRoute.snapshot.queryParams['before'] ?? undefined;
-    const last = startCursor ? 10 : undefined;
-    let first = endCursor ? 10 : undefined;
+    const endCursor = this.activatedRoute.snapshot.queryParams['after'];
+    const startCursor = this.activatedRoute.snapshot.queryParams['before'];
+    const last = startCursor ? DEFAULT_CURSOR : undefined;
+    let first = endCursor ? DEFAULT_CURSOR : undefined;
 
     if (endCursor === undefined && startCursor === undefined) {
-      first = 10;
+      first = DEFAULT_CURSOR;
     }
 
-    this.location.replaceState(this.location.path().split('?')[0]);
+    this.location.replaceState(
+      this.location
+        .path()
+        .replace(`after=${endCursor}`, '')
+        .replace(`before=${startCursor}`, ''),
+    );
 
     return this.userReposGQL
       .watch({

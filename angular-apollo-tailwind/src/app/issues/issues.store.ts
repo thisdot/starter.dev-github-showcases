@@ -33,6 +33,8 @@ const INITIAL_STATE: IssuesState = {
   issuesLoaded: false,
 };
 
+const DEFAULT_CURSOR = 25;
+
 @Injectable()
 export class IssuesStore extends ComponentStore<IssuesState> {
   // *********** Updaters *********** //
@@ -96,18 +98,22 @@ export class IssuesStore extends ComponentStore<IssuesState> {
       switchMap(({ label, milestone, sort, milestonesLoaded, labelsLoaded }) =>
         this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
           switchMap(({ owner, name }) => {
-            const endCursor =
-              this.activatedRoute.snapshot.queryParams['after'] ?? undefined;
+            const endCursor = this.activatedRoute.snapshot.queryParams['after'];
             const startCursor =
-              this.activatedRoute.snapshot.queryParams['before'] ?? undefined;
-            const last = startCursor ? 25 : undefined;
-            let first = endCursor ? 25 : undefined;
+              this.activatedRoute.snapshot.queryParams['before'];
+            const last = startCursor ? DEFAULT_CURSOR : undefined;
+            let first = endCursor ? DEFAULT_CURSOR : undefined;
 
             if (endCursor == undefined && startCursor == undefined) {
-              first = 25;
+              first = DEFAULT_CURSOR;
             }
 
-            this.location.replaceState(this.location.path().split('?')[0]);
+            this.location.replaceState(
+              this.location
+                .path()
+                .replace(`after=${endCursor}`, '')
+                .replace(`before=${startCursor}`, ''),
+            );
 
             return this.repoIssuesGQL
               .watch({

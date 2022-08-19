@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageInfo, PaginationEvent } from '../../gql';
 import { Router } from '@angular/router';
 
@@ -8,31 +8,27 @@ import { Router } from '@angular/router';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css'],
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent {
   @Input() pageInfo: PageInfo | null = null;
-  link: string | null = null;
 
   @Output() changePage: EventEmitter<PaginationEvent> = new EventEmitter();
 
-  constructor(private router: Router, private readonly location: Location) {}
-
-  ngOnInit(): void {
-    this.link = this.location.path();
+  private get link(): string {
+    return this.location.path();
   }
 
-  prevUrl = `${this.link}?before=${this.pageInfo?.startCursor}`;
-  nextUrl = `${this.link}?after=${this.pageInfo?.endCursor}`;
+  constructor(private router: Router, private readonly location: Location) {}
 
-  handlePreviousPageClick() {
-    this.router.navigate([this.link], {
+  async handlePreviousPageClick(): Promise<boolean> {
+    return await this.router.navigate([this.link], {
       queryParams: {
         before: this.pageInfo?.startCursor,
       },
     });
   }
 
-  handleNextPageClick() {
-    this.router.navigate([this.link], {
+  async handleNextPageClick(): Promise<boolean> {
+    return await this.router.navigate([this.link], {
       queryParams: {
         after: this.pageInfo?.endCursor,
       },

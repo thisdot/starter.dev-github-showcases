@@ -63,6 +63,8 @@ const DIRECTION_DICT: { [key: string]: OrderDirection } = {
   DESC: OrderDirection.Desc,
 };
 
+const DEFAULT_CURSOR = 25;
+
 interface GenericLabel {
   [key: string]: Label;
 }
@@ -128,8 +130,8 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
       ...state,
       startCursor: before as string,
       endCursor: after as string,
-      first: after ? 25 : undefined,
-      last: before ? 25 : undefined,
+      first: after ? DEFAULT_CURSOR : undefined,
+      last: before ? DEFAULT_CURSOR : undefined,
     }),
   );
 
@@ -224,18 +226,22 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
       switchMap(([, { label, sort }]) =>
         this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
           switchMap(({ owner, name }) => {
-            const endCursor =
-              this.activatedRoute.snapshot.queryParams['after'] ?? undefined;
+            const endCursor = this.activatedRoute.snapshot.queryParams['after'];
             const startCursor =
-              this.activatedRoute.snapshot.queryParams['before'] ?? undefined;
-            const last = startCursor ? 25 : undefined;
-            let first = endCursor ? 25 : undefined;
+              this.activatedRoute.snapshot.queryParams['before'];
+            const last = startCursor ? DEFAULT_CURSOR : undefined;
+            let first = endCursor ? DEFAULT_CURSOR : undefined;
 
             if (endCursor === undefined && startCursor === undefined) {
-              first = 25;
+              first = DEFAULT_CURSOR;
             }
 
-            this.location.replaceState(this.location.path().split('?')[0]);
+            this.location.replaceState(
+              this.location
+                .path()
+                .replace(`after=${endCursor}`, '')
+                .replace(`before=${startCursor}`, ''),
+            );
 
             return this.repoPullRequestsGQL
               .watch({
