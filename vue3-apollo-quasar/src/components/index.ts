@@ -25,4 +25,3 @@ export { default as IssuesPullRequestsCard } from './IssuesPullRequestsCard';
 export { default as IssuePullRequestTab } from './IssuePullRequestTab';
 export { default as PaginationButtons } from './PaginationButtons';
 export { default as BranchMenu } from './BranchMenu';
-export { default as RepoPageLayout } from './RepoPageLayout';

@@ -22,29 +22,9 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  tabConfig: [
-    { name: 'overview', icon: 'OverviewIcon', title: 'Overview' },
-    {
-      name: 'repositories',
-      icon: 'RepositoriesIcon',
-      title: 'Repositories',
-      active: true,
-    },
-    {
-      name: 'projects',
-      icon: 'ProjectsIcon',
-      title: 'Projects',
-    },
-    {
-      name: 'packages',
-      icon: 'PackagesIcon',
-      title: 'Packages',
-    },
-    {
-      name: 'stars',
-      icon: 'StarsIcon',
-      title: 'Stars',
-      counter: 14,
-    },
-  ],
+  overview: true,
+  repositories: true,
+  projects: true,
+  packages: true,
+  stars: true,
 };

@@ -1,6 +1,13 @@
 <template>
   <div v-if="!loading">
-    <TabHeader :tabConfig="tabConfig" @triggerTab="changeTab" />
+    <TabHeader
+      :overview="true"
+      :repositories="true"
+      :projects="true"
+      :packages="true"
+      :stars="true"
+      @triggerTab="changeTab"
+    />
     <div class="wrapper">
       <div class="row" style="--gap: 0">
         <!-- Left side -->
@@ -84,32 +91,6 @@ import { defaultLanguageSort } from '@/components/SearchFilter/data';
 
 const getUserRepos = useUserRepos();
 const tab = ref('');
-
-const tabConfig = [
-  { name: 'overview', icon: 'OverviewIcon', title: 'Overview' },
-  {
-    name: 'repositories',
-    icon: 'RepositoriesIcon',
-    title: 'Repositories',
-    active: true,
-  },
-  {
-    name: 'projects',
-    icon: 'ProjectsIcon',
-    title: 'Projects',
-  },
-  {
-    name: 'packages',
-    icon: 'PackagesIcon',
-    title: 'Packages',
-  },
-  {
-    name: 'stars',
-    icon: 'StarsIcon',
-    title: 'Stars',
-    counter: 14,
-  },
-];
 
 const props = defineProps({
   username: String,
