@@ -56,7 +56,7 @@ function parseTopics(topics: TopicNodes): string[] {
   }, []);
 }
 
-export const useRepo = () => {
+export const useRepoPage = () => {
   const getRepoPage = ({ name, owner, branch, path = '' }: RepoPageProps) => {
     const isOwnerAndNameValid =
       typeof owner === 'string' && typeof name === 'string';
@@ -103,9 +103,9 @@ export const useRepo = () => {
             isPrivate: repository.isPrivate,
             stargazerCount: repository.stargazerCount,
             forkCount: repository.forkCount,
-            watcherCount: repository.watchers.totalCount,
-            openIssueCount: repository.issues.totalCount,
-            openPullRequestCount: repository.pullRequests.totalCount,
+            watcherCount: repository.watchers?.totalCount || 0,
+            openIssueCount: repository.issues?.totalCount || 0,
+            openPullRequestCount: repository.pullRequests?.totalCount || 0,
             description: repository.description,
             homepageUrl: repository.homepageUrl,
             topics: parseTopics(repository.topics?.nodes),

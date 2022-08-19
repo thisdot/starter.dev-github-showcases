@@ -16,6 +16,9 @@ export const REPO_TREE_QUERY = gql`
             path
           }
         }
+        ... on Blob {
+          text
+        }
       }
     }
   }
