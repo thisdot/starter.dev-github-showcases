@@ -12,7 +12,8 @@
       :pullRequestsCount="currentRepo?.data.openPullRequestCount"
     />
     <section class="q-mx-auto q-my-xl code-section">
-      <q-card flat bordered>
+      <BranchMenu :branches="branches" />
+      <q-card flat bordered class="q-mt-md">
         <FileExplorer v-if="Array.isArray(fileTree)" :content-list="fileTree" />
         <pre class="file-text" v-else>{{ fileTree }}</pre>
       </q-card>
@@ -32,7 +33,8 @@ export default defineComponent({
 import { ExplorerContent } from '@/components/FileExplorer/FileExplorerNav.vue';
 import { FileExplorer, RepoSubHeader } from '@/components';
 import { useRoute } from 'vue-router';
-import { useRepoPage, useRepoTree } from '@/composables';
+import { useRepoPage, useRepoTree, useRepoBranches } from '@/composables';
+import BranchMenu from '../../components/BranchMenu/BranchMenu.vue';
 const $route = useRoute();
 
 //? This structure is defined in the route for this 👇 in routes/index.ts
@@ -72,6 +74,12 @@ const fileTree = computed(() => {
       to: `${!dirpath ? `${repo}/` : `/${owner}/${repo}/`}${treeBranch.path}`,
     }),
   );
+});
+
+const { getRepoBranches } = useRepoBranches();
+const { data: branches } = getRepoBranches({
+  owner,
+  name: repo,
 });
 </script>
 
