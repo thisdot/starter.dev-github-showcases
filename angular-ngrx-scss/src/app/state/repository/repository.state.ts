@@ -1,6 +1,6 @@
 import { UserApiResponse } from '../user';
 
-export interface RepoState {
+export interface RepositoryState {
   description: string;
   forkCount: number;
   issueCount: number;

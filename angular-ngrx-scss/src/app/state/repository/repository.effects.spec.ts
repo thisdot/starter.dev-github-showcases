@@ -13,7 +13,7 @@ import {
   fetchFileContentsSuccess,
   fetchFileContentsFailure,
 } from './repository.actions';
-import { FileContents, RepoState } from './repository.state';
+import { FileContents, RepositoryState } from './repository.state';
 
 describe('RepositoryEffects', () => {
   let actions$: Observable<Action>;
@@ -49,7 +49,7 @@ describe('RepositoryEffects', () => {
         repoName: 'starter.dev-github-showcases',
       }),
     );
-    const expectedResponseData: RepoState = {
+    const expectedResponseData: RepositoryState = {
       description: 'A collection of GitHub clone implementations.',
       forkCount: 20,
       issueCount: 30,

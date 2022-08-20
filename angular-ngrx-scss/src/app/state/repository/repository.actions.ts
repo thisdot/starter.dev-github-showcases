@@ -5,6 +5,7 @@ import {
   RepoPullRequests,
   RepoState,
 } from './repository.state';
+import { FileContents, RepositoryState } from './repository.state';
 
 export const fetchRepository = createAction(
   '[Repository API] Fetch Repository',
@@ -13,7 +14,7 @@ export const fetchRepository = createAction(
 
 export const fetchRepositorySuccess = createAction(
   '[Repository API] Fetch Repository Success',
-  props<{ repoData: RepoState }>(),
+  props<{ repoData: RepositoryState }>(),
 );
 
 export const fetchRepositoryFailure = createAction(

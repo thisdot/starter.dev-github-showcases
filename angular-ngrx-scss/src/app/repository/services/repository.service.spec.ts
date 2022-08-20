@@ -7,7 +7,7 @@ import {
   RepoContents,
   RepoPullRequests,
   RepoContentsApiResponse,
-  RepoState,
+  RepositoryState,
 } from 'src/app/state/repository';
 import {
   IssueComments,

@@ -1,18 +1,18 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { RepoState } from './repository.state';
+import { RepositoryState } from './repository.state';
 
 export const repositoryFeatureKey = 'repo';
 export const selectRepositoryState =
-  createFeatureSelector<RepoState>(repositoryFeatureKey);
+  createFeatureSelector<RepositoryState>(repositoryFeatureKey);
 
 export const selectedRepository = createSelector(
   selectRepositoryState,
-  (state: RepoState) => state,
+  (state: RepositoryState) => state,
 );
 
 export const selectCurrentlySelectedFile = createSelector(
   selectRepositoryState,
-  (state: RepoState) => state.selectedFile,
+  (state: RepositoryState) => state.selectedFile,
 );
 
 export const selectOpenPullRequests = createSelector(
