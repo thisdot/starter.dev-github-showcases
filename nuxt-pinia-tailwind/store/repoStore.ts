@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import {
   IBranch,
+  IIssue,
   IPullRequest,
   IReadme,
   IRepoContents,
@@ -21,6 +22,7 @@ interface IRepositoryInfo {
   readme: IReadme | null;
   rootContent: IRepoContents[];
   pullsRequests: IPullRequest[];
+  issues?: IIssue[];
 }
 
 interface IRepoRootState {
@@ -32,7 +34,7 @@ export const useRepoStore = defineStore('repositoryStore ', {
     selectedRepository: null,
   }),
   actions: {
-    async getRepoInfo(owner: string, repoId: string) {
+    async getRepoInfo(owner: string, repoName: string) {
       try {
         const {
           $config: { GITHUB_API_URL },
@@ -40,7 +42,7 @@ export const useRepoStore = defineStore('repositoryStore ', {
         } = this.$nuxt;
 
         // Define all the urls
-        const url = `${GITHUB_API_URL}/repos/${owner}/${repoId}`;
+        const url = `${GITHUB_API_URL}/repos/${owner}/${repoName}`;
         const branchesUrl = `${url}/branches`;
         const pullRequestsUrl = `${url}/pulls`;
         const repoContentsUrl = `${url}/contents`;
@@ -94,6 +96,33 @@ export const useRepoStore = defineStore('repositoryStore ', {
         }
 
         throw new Error('Error fetching repository info');
+      }
+    },
+    async getRepoIssues(owner?: string, repoName?: string) {
+      try {
+        const {
+          $config: { GITHUB_API_URL },
+          $axios,
+        } = this.$nuxt;
+
+        const url = `${GITHUB_API_URL}/repos/${
+          owner || this.selectedRepository?.owner
+        }/${repoName || this.selectedRepository?.name}/issues`;
+
+        const { data } = await $axios.get<IIssue[]>(url, {
+          params: {
+            state: 'all',
+          },
+        });
+
+        if (this.selectedRepository) {
+          this.selectedRepository = {
+            ...this.selectedRepository,
+            issues: data,
+          };
+        }
+      } catch (error) {
+        return error;
       }
     },
   },
