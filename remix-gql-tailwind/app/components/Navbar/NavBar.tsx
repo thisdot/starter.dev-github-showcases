@@ -1,7 +1,7 @@
 import * as styles from './Navbar.classNames';
-import UserDropdownView from '../UserDropdown/UserDropdown.view';
+import UserDropdownView from '../User/UserDropdown/UserDropdown.view';
 import { Link } from '@remix-run/react';
-import { GitHubLogo } from '../Icons/GitHubLogo';
+import { GitHubLogo } from '../Shared/Icons/GitHubLogo';
 
 type NavBarProps = {
   user: {

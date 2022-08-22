@@ -4,12 +4,12 @@ import { useLoaderData, useLocation } from '@remix-run/react';
 import gqlClient from '~/lib/graphql-client';
 import { FULL_USER_PROFILE_QUERY } from '~/lib/queries/UserProfile';
 import { auth } from '~/services/auth.server';
-import { parseQuery } from '~/components/UserRepos/parseQuery';
-import ProfilePage from '~/components/ProfilePage/ProfilePage.view';
+import { parseQuery } from '~/components/User/UserRepos/parseQuery';
+import ProfilePage from '~/components/Profiles/ProfilePage/ProfilePage.view';
 import {
   OrderDirection,
   RepositoryOrderField,
-} from '~/components/RepoFilters/useRepoFilters';
+} from '~/components/Repositories/RepoFilters/useRepoFilters';
 
 type LoaderData = {
   userProfileData: any;
