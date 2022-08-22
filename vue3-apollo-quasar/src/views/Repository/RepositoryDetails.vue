@@ -4,7 +4,7 @@
     <RepoSubHeader
       :username="owner"
       :repoName="repo"
-      :visibilityTag="currentRepo?.data.isPrivate ? 'Private' : 'Public'"
+      :visibilityTag="visibilityTag(currentRepo?.data.isPrivate)"
       :stars="currentRepo?.data.stargazerCount"
       :watch="currentRepo?.data.watcherCount"
       :forks="currentRepo?.data.forkCount"
@@ -13,8 +13,8 @@
     />
     <section class="q-mx-auto q-my-xl code-section">
       <q-card flat bordered>
-        <FileExplorer v-if="Array.isArray(fileTree)" :content-list="fileTree" />
-        <pre class="file-text" v-else>{{ fileTree }}</pre>
+        <FileExplorer v-if="!fileTree.isBlob" :content-list="fileTree" />
+        <pre class="file-text" v-else>{{ fileTree.text }}</pre>
       </q-card>
     </section>
   </q-page>
@@ -60,7 +60,7 @@ const { data: tree } = getRepoTree({
 const fileTree = computed(() => {
   const treeType = typeof tree.value;
   if (treeType === 'string') {
-    return tree.value;
+    return { text: tree.value, isBlob: true };
   }
 
   return tree.value.map(
@@ -73,6 +73,9 @@ const fileTree = computed(() => {
     }),
   );
 });
+
+const visibilityTag = (value: boolean): string =>
+  value ? 'Private' : 'Public';
 </script>
 
 <style lang="scss" scoped>
