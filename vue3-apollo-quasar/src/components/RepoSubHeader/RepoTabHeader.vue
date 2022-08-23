@@ -17,7 +17,7 @@
           <template v-slot:icon>
             <q-icon
               class="custom-icon text-h6"
-              name="svguse:app-icons/code.svg#code"
+              name="svguse:/app-icons/code.svg#code"
             ></q-icon>
           </template>
           <template v-slot:title>
@@ -38,7 +38,7 @@
           <template v-slot:icon>
             <q-icon
               class="custom-icon text-h6"
-              name="svguse:app-icons/issue.svg#issue"
+              name="svguse:/app-icons/issue.svg#issue"
             ></q-icon>
           </template>
           <template v-slot:title>
@@ -62,7 +62,7 @@
           <template v-slot:icon>
             <q-icon
               class="custom-icon text-h6"
-              name="svguse:app-icons/pull-request.svg#pull-request"
+              name="svguse:/app-icons/pull-request.svg#pull-request"
             ></q-icon>
           </template>
           <template v-slot:title>
