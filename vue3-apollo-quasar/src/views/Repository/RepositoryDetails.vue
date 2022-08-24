@@ -1,10 +1,10 @@
 <template>
-  <q-page>
+  <q-page v-if="!loading">
     <!-- TODO: Instead of using currentRepo?.data.isPrivate to determine visibility tag, use the actual visibility tag from GitHub (there's more than just "Public" & "Private". We also have "Internal" and potentially others)  -->
     <RepoSubHeader
       :username="owner"
       :repoName="repo"
-      :visibilityTag="visibilityTag(currentRepo?.data.isPrivate)"
+      :visibilityTag="currentRepo?.data.visibility"
       :stars="currentRepo?.data.stargazerCount"
       :watch="currentRepo?.data.watcherCount"
       :forks="currentRepo?.data.forkCount"
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, watch, ref } from 'vue';
 
 export default defineComponent({
   name: 'PageRepositoryDetails',
@@ -35,6 +35,9 @@ import { useRoute } from 'vue-router';
 import { useRepoPage, useRepoTree } from '@/composables';
 const $route = useRoute();
 
+const branch = ref('main');
+const repoDirPath = ref('');
+
 //? This structure is defined in the route for this 👇 in routes/index.ts
 const { owner, repo, dirpath } = $route.params as {
   owner: string;
@@ -44,22 +47,26 @@ const { owner, repo, dirpath } = $route.params as {
 
 const { getRepoPage } = useRepoPage();
 
-const { context: currentRepo } = getRepoPage({
+const { context: currentRepo, loading } = getRepoPage({
   name: repo,
   owner,
+});
+
+watch(currentRepo, (data) => {
+  branch.value = data.branch;
+  repoDirPath.value = data.path;
 });
 
 const { getRepoTree } = useRepoTree();
 const { data: tree } = getRepoTree({
   owner,
   name: repo,
-  branch: currentRepo.branch,
-  path: dirpath ? dirpath : currentRepo.path,
+  branch: branch.value,
+  path: dirpath ? dirpath : repoDirPath.value,
 });
 
 const fileTree = computed(() => {
-  const treeType = typeof tree.value;
-  if (treeType === 'string') {
+  if (!Array.isArray(tree.value)) {
     return { text: tree.value, isBlob: true };
   }
 
@@ -73,9 +80,6 @@ const fileTree = computed(() => {
     }),
   );
 });
-
-const visibilityTag = (value: boolean): string =>
-  value ? 'Private' : 'Public';
 </script>
 
 <style lang="scss" scoped>

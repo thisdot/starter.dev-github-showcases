@@ -2,7 +2,7 @@
   <q-list separator>
     <q-item
       v-for="content in contentList"
-      :key="`${content.name}-${directoryCheck(content.isDirectory)}`"
+      :key="ItemKey(content.name, content.isDirectory)"
     >
       <FileExplorerNav :content="content" />
     </q-item>
@@ -29,4 +29,6 @@ defineProps({
 });
 
 const directoryCheck = (value: boolean): string => (value ? 'dir' : 'file');
+const ItemKey = (name: string, isDirectory: boolean): string =>
+  `${name}-${directoryCheck(isDirectory)}`;
 </script>

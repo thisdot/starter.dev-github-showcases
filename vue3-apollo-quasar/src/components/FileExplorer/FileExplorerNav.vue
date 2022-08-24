@@ -2,7 +2,7 @@
   <div class="full-width row text-dark items-center">
     <div class="col-4 items-center flex">
       <q-icon :name="iconName" :color="iconColor" size="1.2rem"></q-icon>
-      <a class="file-explorer-link" :href="$router.resolve(content.to).href">
+      <a class="file-explorer-link" :href="content.to">
         {{ content.name }}
       </a>
     </div>

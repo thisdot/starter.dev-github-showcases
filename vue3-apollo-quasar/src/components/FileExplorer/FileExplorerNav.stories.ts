@@ -12,7 +12,15 @@ export default {
   },
 };
 
-const Template = (args) => ({
+type ArgType = {
+  isDirectory: boolean;
+  name: string;
+  latestCommitMessage: string;
+  lastUpdated: string;
+  to: string;
+};
+
+const Template = (args: ArgType) => ({
   components: { FileExplorerNav },
   setup() {
     return { args };
