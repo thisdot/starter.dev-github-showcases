@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { ExplorerContent } from './types';
 
 export default defineComponent({
   name: 'FileExplorerNav',
@@ -22,14 +23,6 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-export type ExplorerContent = {
-  isDirectory: boolean;
-  name: string;
-  latestCommitMessage: string;
-  lastUpdated: string;
-  to?: string;
-};
-
 import { defineProps, computed } from 'vue';
 import { useFormatter } from '@/composables';
 

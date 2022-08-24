@@ -11,6 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { ExplorerContent } from './types';
 
 export default defineComponent({
   name: 'FileExplorer',
@@ -19,7 +20,7 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { defineProps } from 'vue';
-import FileExplorerNav, { ExplorerContent } from './FileExplorerNav.vue';
+import FileExplorerNav from './FileExplorerNav.vue';
 
 defineProps({
   contentList: {

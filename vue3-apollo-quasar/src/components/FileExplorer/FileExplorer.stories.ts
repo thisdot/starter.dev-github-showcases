@@ -1,5 +1,6 @@
 import FileExplorer from './FileExplorer.vue';
 import FileExplorerNav from './FileExplorerNav.vue';
+import { ExplorerContent } from './types';
 
 export default {
   title: 'component/FileExplorer/Explorer',
@@ -9,15 +10,7 @@ export default {
   },
 };
 
-type ArgType = {
-  isDirectory: boolean;
-  name: string;
-  latestCommitMessage: string;
-  lastUpdated: string;
-  to: string;
-};
-
-const Template = (args: ArgType[]) => ({
+const Template = (args: ExplorerContent[]) => ({
   components: { FileExplorer, FileExplorerNav },
   setup() {
     return { args };
