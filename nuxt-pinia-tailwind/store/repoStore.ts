@@ -121,8 +121,12 @@ export const useRepoStore = defineStore('repositoryStore ', {
             issues: data,
           };
         }
-      } catch (error) {
-        return error;
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching repository issues');
       }
     },
   },

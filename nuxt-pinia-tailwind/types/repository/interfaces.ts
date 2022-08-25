@@ -1,4 +1,5 @@
-import { IUser } from '../user/interfaces';
+import { IUser } from '@/types/user/interfaces';
+import { DirectionEnum, SortEnum, StateEnum } from '@/types/repository/enums';
 
 export interface IRepository {
   id: number;
@@ -30,7 +31,7 @@ export interface IPullRequest {
   user: {
     login: string;
   };
-  state: 'open' | 'closed' | 'merged';
+  state: StateEnum;
   messageCount: number;
   isMerged?: boolean;
   merged_at: string | null;
@@ -74,13 +75,13 @@ export interface IReadme {
 
 export interface IRepositoryIssuesApiParams {
   milestone?: string;
-  state?: 'open' | 'closed' | 'all';
+  state?: StateEnum;
   assignee?: string;
   creator?: string;
   mentioned?: string;
   labels?: string;
-  sort?: 'created' | 'updated' | 'comments';
-  direction?: 'asc' | 'desc';
+  sort?: SortEnum;
+  direction?: DirectionEnum;
   since?: string;
   per_page?: number;
   page?: number;

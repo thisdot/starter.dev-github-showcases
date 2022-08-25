@@ -1,3 +1,5 @@
-export type IssueType = 'issue' | 'pr';
+import { IssueTypeEnum, IssueStateEnum } from '@/types/repository/enums';
 
-export type IssueState = 'open' | 'closed';
+export type IssueType = IssueTypeEnum;
+
+export type IssueState = IssueStateEnum;
