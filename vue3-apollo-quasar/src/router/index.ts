@@ -4,7 +4,14 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import SiteLayout from '@/layouts/SiteLayout.vue';
 
 //* Pages
-import { Auth, Home, Profile, Redirect, NotFound } from '../views';
+import {
+  Auth,
+  Home,
+  Profile,
+  RepositoryDetails,
+  Redirect,
+  NotFound,
+} from '../views';
 import { requiresAuth, requiresNoAuth } from './utils';
 
 const routes: Array<RouteRecordRaw> = [
@@ -17,6 +24,18 @@ const routes: Array<RouteRecordRaw> = [
         path: ':username',
         component: Profile,
         props: true,
+      },
+      {
+        path: ':owner/:repo',
+        component: RepositoryDetails,
+        props: true,
+        children: [
+          {
+            path: ':dirpath(.*)',
+            component: RepositoryDetails,
+            props: true,
+          },
+        ],
       },
     ],
     beforeEnter: requiresAuth,

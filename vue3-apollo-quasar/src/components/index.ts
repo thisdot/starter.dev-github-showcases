@@ -4,6 +4,7 @@
 */
 export { default as AppInput } from './AppInput';
 export { default as EmptyContainer } from './EmptyContainer';
+export { FileExplorer, FileExplorerNav } from './FileExplorer';
 export { default as GistsPanel } from './GistsPanel';
 export { default as Loading } from './Loading';
 export { default as Logo } from './Logo';
