@@ -88,8 +88,12 @@ export const useRepoStore = defineStore('repositoryStore ', {
           rootContent: repoRootContent,
           readme: repoReadme,
         };
-      } catch (error) {
-        return error;
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching repository info');
       }
     },
   },

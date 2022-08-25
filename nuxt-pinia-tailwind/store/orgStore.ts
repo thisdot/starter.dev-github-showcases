@@ -27,8 +27,12 @@ export const useOrgStore = defineStore('orgStore ', {
         });
 
         this.repos = data;
-      } catch (error) {
-        return error;
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching org repos');
       }
     },
   },

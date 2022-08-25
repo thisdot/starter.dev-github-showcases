@@ -33,8 +33,12 @@ export const useUserStore = defineStore('userStore ', {
         });
 
         this.topRepos = data;
-      } catch (error) {
-        return error;
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching user top repos');
       }
     },
     async getUserGists() {
@@ -54,8 +58,12 @@ export const useUserStore = defineStore('userStore ', {
         });
 
         this.gists = data;
-      } catch (error) {
-        return error;
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching user gists');
       }
     },
     async getUserRepos() {
@@ -75,8 +83,12 @@ export const useUserStore = defineStore('userStore ', {
         });
 
         this.repos = data;
-      } catch (error) {
-        return error;
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching user repos');
       }
     },
   },
