@@ -2,7 +2,7 @@
   <q-list separator>
     <q-item
       v-for="content in contentList"
-      :key="ItemKey(content.name, content.isDirectory)"
+      :key="itemKey(content.name, content.isDirectory)"
     >
       <FileExplorerNav :content="content" />
     </q-item>
@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineProps } from 'vue';
 import { ExplorerContent } from './types';
 
 export default defineComponent({
@@ -19,7 +19,6 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue';
 import FileExplorerNav from './FileExplorerNav.vue';
 
 defineProps({
@@ -30,6 +29,6 @@ defineProps({
 });
 
 const directoryCheck = (value: boolean): string => (value ? 'dir' : 'file');
-const ItemKey = (name: string, isDirectory: boolean): string =>
+const itemKey = (name: string, isDirectory: boolean): string =>
   `${name}-${directoryCheck(isDirectory)}`;
 </script>

@@ -4,16 +4,16 @@
     <RepoSubHeader
       :username="owner"
       :repoName="repo"
-      :visibilityTag="currentRepo?.data.visibility"
-      :stars="currentRepo?.data.stargazerCount"
-      :watch="currentRepo?.data.watcherCount"
-      :forks="currentRepo?.data.forkCount"
-      :issuesCount="currentRepo?.data.openIssueCount"
-      :pullRequestsCount="currentRepo?.data.openPullRequestCount"
+      :visibilityTag="visibility"
+      :stars="stargazerCount"
+      :watch="watcherCount"
+      :forks="forkCount"
+      :issuesCount="openIssueCount"
+      :pullRequestsCount="openPullRequestCount"
     />
     <section class="q-mx-auto q-my-xl code-section">
       <q-card flat bordered>
-        <FileExplorer v-if="!fileTree.isBlob" :content-list="fileTree" />
+        <FileExplorer v-if="!fileTree.isBlob" :content-list="fileTree.data" />
         <pre class="file-text" v-else>{{ fileTree.text }}</pre>
       </q-card>
     </section>
@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, watch, ref } from 'vue';
+import { ExplorerContent } from '@/components/FileExplorer/types';
 
 export default defineComponent({
   name: 'PageRepositoryDetails',
@@ -29,7 +30,6 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { ExplorerContent } from '@/components/FileExplorer/FileExplorerNav.vue';
 import { FileExplorer, RepoSubHeader } from '@/components';
 import { useRoute } from 'vue-router';
 import { useRepoPage, useRepoTree } from '@/composables';
@@ -37,6 +37,12 @@ const $route = useRoute();
 
 const branch = ref('main');
 const repoDirPath = ref('');
+const visibility = ref('');
+const stargazerCount = ref(0);
+const watcherCount = ref(0);
+const forkCount = ref(0);
+const openIssueCount = ref(0);
+const openPullRequestCount = ref(0);
 
 //? This structure is defined in the route for this 👇 in routes/index.ts
 const { owner, repo, dirpath } = $route.params as {
@@ -52,9 +58,15 @@ const { context: currentRepo, loading } = getRepoPage({
   owner,
 });
 
-watch(currentRepo, (data) => {
-  branch.value = data.branch;
-  repoDirPath.value = data.path;
+watch(currentRepo, (res) => {
+  branch.value = res?.branch || 'main';
+  repoDirPath.value = res?.path || '';
+  visibility.value = res?.data?.visibility || 'public';
+  stargazerCount.value = res?.data?.stargazerCount || 0;
+  watcherCount.value = res?.data?.watcherCount || 0;
+  forkCount.value = res?.data?.forkCount || 0;
+  openIssueCount.value = res?.data?.openIssueCount || 0;
+  openPullRequestCount.value = res?.data?.openPullRequestCount || 0;
 });
 
 const { getRepoTree } = useRepoTree();
@@ -65,12 +77,17 @@ const { data: tree } = getRepoTree({
   path: dirpath ? dirpath : repoDirPath.value,
 });
 
-const fileTree = computed(() => {
-  if (!Array.isArray(tree.value)) {
-    return { text: tree.value, isBlob: true };
-  }
+type FileTree = {
+  text?: string | number | unknown;
+  data?: ExplorerContent[];
+  isBlob: boolean;
+};
 
-  return tree.value.map(
+const fileTree = computed((): FileTree => {
+  if (!Array.isArray(tree?.value)) {
+    return { text: tree?.value, isBlob: true };
+  }
+  const result = tree.value.map(
     (treeBranch): ExplorerContent => ({
       isDirectory: treeBranch.type === 'tree',
       name: treeBranch.name,
@@ -79,6 +96,10 @@ const fileTree = computed(() => {
       to: `${!dirpath ? `${repo}/` : `/${owner}/${repo}/`}${treeBranch.path}`,
     }),
   );
+  return {
+    isBlob: false,
+    data: result,
+  };
 });
 </script>
 

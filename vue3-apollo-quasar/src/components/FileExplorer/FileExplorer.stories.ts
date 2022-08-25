@@ -1,6 +1,6 @@
 import FileExplorer from './FileExplorer.vue';
 import FileExplorerNav from './FileExplorerNav.vue';
-import { ExplorerContent } from './types';
+import { ExplorerContent, Templates } from './types';
 
 export default {
   title: 'component/FileExplorer/Explorer',
@@ -10,9 +10,9 @@ export default {
   },
 };
 
-const Template = (args: ExplorerContent[]) => ({
+const Template: Templates = (args: ExplorerContent[]) => ({
   components: { FileExplorer, FileExplorerNav },
-  setup() {
+  setup(): { args: ExplorerContent[] } {
     return { args };
   },
   template: '<FileExplorer v-bind="args" />',
