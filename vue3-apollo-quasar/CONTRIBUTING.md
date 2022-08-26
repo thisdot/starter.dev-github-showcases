@@ -23,10 +23,16 @@ If you were instead looking to just run the application, then please read our [R
 
 ## Project structure
 
+This project uses the [standard Quasar project directory structure](https://quasar.dev/quasar-cli-vite/directory-structure) with a few additional directories.
+
+```
 ├── public/ # pure static assets (directly copied)
 ├── src/
 │ ├── assets/ # dynamic assets (processed by webpack)
 │ ├── components/ # .vue components used in pages & layouts
+| |  ├── *.stories.ts # Storybook files
+| |  ├── /index.ts # Re-exports our components for cleaner imports in other areas
+| |── composables/ # vue composables
 │ ├── css/ # CSS/Sass/... files for your app
 | | ├── app.sass
 | │ └── quasar.variables.sass # Quasar Sass variables for you to tweak
@@ -40,17 +46,10 @@ If you were instead looking to just run the application, then please read our [R
 | | ├── index.js # Pinia initialization
 | │ ├── <store> # Pinia stores...
 | │ └── <store>...
-│ ├── store/ # Vuex Store (if not using Pinia)
-| | ├── index.js # Vuex Store definition
-| │ ├── <folder> # Vuex Store Module...
-| │ └── <folder> # Vuex Store Module...
 │ ├── App.vue # root Vue component of your App
 │ └── index.template.html # Template for index.html
 ├── src-ssr/ # SSR specific code (like production Node webserver)
 ├── src-pwa/ # PWA specific code (like Service Worker)
-├── src-cordova/ # Cordova generated folder used to create Mobile Apps
-├── src-electron/ # Electron specific code (like "main" thread)
-├── src-bex/ # BEX (browser extension) specific code (like "main" thread)
 ├── dist/ # where production builds go
 │ ├── spa/ # example when building SPA
 │ ├── ssr/ # example when building SSR
@@ -58,22 +57,50 @@ If you were instead looking to just run the application, then please read our [R
 │ └── ....
 ├── quasar.config.js # Quasar App Config file
 ├── babel.config.js # Babeljs config
-├── .editorconfig # editor config
+├── jest.config.js # Jest config
 ├── .eslintignore # ESlint ignore paths
 ├── .eslintrc.js # ESlint config
 ├── .postcssrc.js # PostCSS config
 ├── .gitignore # GIT ignore paths
+├── .prettierignore # prettier ignore paths
+├── .prettierrc # prettier config
 ├── package.json # npm scripts and dependencies
-└── README.md # readme for your website/App
+├── CONTRIBUTION.md` # contribution guide for this showcase
+└── README.md # readme for this showcase
+```
 
 ## Architectural decisions
 
---
+### Why Quasar?
 
-## Process for adding a feature
+[Quasar](https://quasar.dev) has a large number of prebuilt vue components that are easily customizable. This saves us time by allowing us to focus on our app's functionality rather than the components and CSS required to make that happen.
 
---
+### Relevant interactions in the codebase
+
+Who can access what is an important consideration when trying to build a maintainable codebase.
+
+- Composables should not call each other. If a composable needs another composable, then it must accept that composable through it's creator arguments
+- Custom CSS should be avoided in favour of Quasar CSS classes whenever possible. This makes it easier for a new entrant into the codebase to get up to speed.
+- Tests should ideally test the core functionality of whatever they are testing and not just check if a component is being mounted.
+
+### Naming conventions
+
+#### Vue
+
+- Component names should use `TitleCase`
+- Each component should have a `name` attached to it when declaring it with `defineComponent()`
+
+#### CSS
+
+- All class names should be in `kebab-case`
+- Custom styling should only be used in absence of an equivalent quasar class
+
+#### JS/TS
+
+- `ref` s should be in `camelCase`
+- constants (non-reactive values) are in `UPPERCASE_SNAKE_CASE`
+- Every ref or variaible that does not have its type automatically inferred should have explicit types
 
 ## Reporting bugs
 
---
+> TODO
