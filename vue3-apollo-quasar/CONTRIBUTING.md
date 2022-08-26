@@ -25,6 +25,8 @@ If you were instead looking to just run the application, then please read our [R
 
 This project uses the [standard Quasar project directory structure](https://quasar.dev/quasar-cli-vite/directory-structure) with a few additional directories.
 
+> TODO: Clean this up
+
 ```
 ├── public/ # pure static assets (directly copied)
 ├── src/
