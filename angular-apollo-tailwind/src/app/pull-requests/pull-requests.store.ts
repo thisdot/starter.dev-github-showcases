@@ -232,7 +232,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
             const last = startCursor ? DEFAULT_CURSOR : undefined;
             let first = endCursor ? DEFAULT_CURSOR : undefined;
 
-            if (endCursor === undefined && startCursor === undefined) {
+            if (!endCursor && !startCursor) {
               first = DEFAULT_CURSOR;
             }
 

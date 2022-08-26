@@ -47,7 +47,8 @@ const INITIAL_PROFILE_REPOS_STATE: ProfileReposState = {
   reposLoadError: undefined,
 };
 
-const DEFAULT_CURSOR = 25;
+const CURSOR_TWENTY_FIVE = 25;
+const CURSOR_TEN = 10;
 
 @Injectable({
   providedIn: 'root',
@@ -148,11 +149,11 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
   private getProfileRepos(owner: string, state: ProfileFilterState) {
     const endCursor = this.activatedRoute.snapshot.queryParams['after'];
     const startCursor = this.activatedRoute.snapshot.queryParams['before'];
-    const last = startCursor ? DEFAULT_CURSOR : undefined;
-    let first = endCursor ? DEFAULT_CURSOR : undefined;
+    const last = startCursor ? CURSOR_TWENTY_FIVE : undefined;
+    let first = endCursor ? CURSOR_TWENTY_FIVE : undefined;
 
-    if (endCursor === undefined && startCursor === undefined) {
-      first = DEFAULT_CURSOR;
+    if (!endCursor && !startCursor) {
+      first = CURSOR_TWENTY_FIVE;
     }
 
     this.location.replaceState(
@@ -204,18 +205,21 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
   }
 
   private getOrgProfileRepos(owner: string, state: ProfileFilterState) {
-    const endCursor =
-      this.activatedRoute.snapshot.queryParams['after'] ?? undefined;
-    const startCursor =
-      this.activatedRoute.snapshot.queryParams['before'] ?? undefined;
-    const last = startCursor ? 10 : undefined;
-    let first = endCursor ? 10 : undefined;
+    const endCursor = this.activatedRoute.snapshot.queryParams['after'];
+    const startCursor = this.activatedRoute.snapshot.queryParams['before'];
+    const last = startCursor ? CURSOR_TEN : undefined;
+    let first = endCursor ? CURSOR_TEN : undefined;
 
-    if (endCursor === undefined && startCursor === undefined) {
-      first = 10;
+    if (!endCursor && !startCursor) {
+      first = CURSOR_TEN;
     }
 
-    this.location.replaceState(this.location.path().split('?')[0]);
+    this.location.replaceState(
+      this.location
+        .path()
+        .replace(`after=${endCursor}`, '')
+        .replace(`before=${startCursor}`, ''),
+    );
 
     return this.orgReposGQL
       .watch({
