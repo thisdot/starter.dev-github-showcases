@@ -197,7 +197,6 @@ const isOnlySorted = computed(
     ),
 );
 
-// Function to filter repos by type
 const repoDataFilteredByType = (repos: Repo[]) => {
   let response = repos.slice();
   const filterType = filterTypeData.value?.filterType;
