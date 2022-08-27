@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { tap } from 'rxjs';
 import { selectUserLoginName } from '../state/user';
 import { fetchUserData } from '../state/user/user.actions';
 
@@ -14,6 +15,10 @@ export class HomeComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(fetchUserData());
+    this.user$.pipe(
+      tap((user) => {
+        this.store.dispatch(fetchUserData({ username: user }));
+      }),
+    );
   }
 }

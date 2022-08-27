@@ -16,11 +16,12 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Gets details on the signed in user
-   * @returns the full GH response with the authenticated user's account info
+   * Gets details on the provided user
+   * @returns the full GH response with the user's account info
+   * @param username (string)
    */
-  getAuthenticatedUserInfo(): Observable<UserApiResponse> {
-    const url = `${environment.githubUrl}/user`;
+  getUserInfo(username: string): Observable<UserApiResponse> {
+    const url = `${environment.githubUrl}/users/${username}`;
 
     return this.http.get<UserApiResponse>(url, {
       headers: {
@@ -34,13 +35,14 @@ export class UserService {
    */
 
   /**
-   * Gets a list of organizations the authenticated user is part of
+   * Gets a list of organizations the user is part of
    * @returns the full GH response containing a list of the user's organizations
+   * @param username (string)
    */
-  getUserOrganizations(): Observable<UserOrgsApiResponse[]> {
-    const url = `${environment.githubUrl}/user/orgs`;
+  getUserOrganizations(username: string): Observable<UserOrgsApiResponse> {
+    const url = `${environment.githubUrl}/users/${username}/orgs`;
 
-    return this.http.get<UserOrgsApiResponse[]>(url, {
+    return this.http.get<UserOrgsApiResponse>(url, {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },
@@ -48,13 +50,14 @@ export class UserService {
   }
 
   /**
-   * Gets a list of repositories belonging to the authenticated user
+   * Gets a list of repositories belonging to the user
    * @returns the full GH response of a list of associated repositories
+   * @param username (string)
    */
-  getUserRepos(): Observable<UserReposApiResponse[]> {
-    const url = `${environment.githubUrl}/user/repos`;
+  getUserRepos(username: string): Observable<UserReposApiResponse> {
+    const url = `${environment.githubUrl}/users/${username}/repos`;
 
-    return this.http.get<UserReposApiResponse[]>(url, {
+    return this.http.get<UserReposApiResponse>(url, {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },
@@ -66,18 +69,19 @@ export class UserService {
    */
 
   /**
-   * Gets the authenticated user's "top repositories" - the first 20 most recently updated repositories they have access to
+   * Gets the user's "top repositories" - the first 20 most recently updated repositories they have access to
    * @returns the full GH response of the user's repositories, sorted by update time
+   * @param username (string)
    */
-  getUserTopRepos(): Observable<UserReposApiResponse[]> {
+  getUserTopRepos(username: string): Observable<UserReposApiResponse> {
     const defaultParams = {
       sort: 'updated',
       per_page: 20,
     };
 
-    const url = `${environment.githubUrl}/user/repos`;
+    const url = `${environment.githubUrl}/users/${username}/repos`;
 
-    return this.http.get<UserReposApiResponse[]>(url, {
+    return this.http.get<UserReposApiResponse>(url, {
       params: new HttpParams({
         fromObject: { ...Object.assign(defaultParams) },
       }),
@@ -88,13 +92,14 @@ export class UserService {
   }
 
   /**
-   * Gets the authenticated user's gists
+   * Gets the user's gists
    * @returns the full GH response of an array of gists the user has created
+   * @param username (string)
    */
-  getUserGists(): Observable<UserGistsApiResponse[]> {
-    const url = `${environment.githubUrl}/gists`;
+  getUserGists(username: string): Observable<UserGistsApiResponse> {
+    const url = `${environment.githubUrl}/users/${username}/gists`;
 
-    return this.http.get<UserGistsApiResponse[]>(url, {
+    return this.http.get<UserGistsApiResponse>(url, {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },

@@ -16,6 +16,11 @@ import {
   fetchRepositorySuccess,
 } from './repository.actions';
 import { RepoState } from './repository.state';
+import {
+  FileContents,
+  RepoContents,
+  RepositoryState,
+} from './repository.state';
 
 @Injectable()
 export class RepositoryEffects {
@@ -24,7 +29,7 @@ export class RepositoryEffects {
       ofType(fetchRepository),
       switchMap(({ owner, repoName, path, branch }) => {
         const repoInfo$ = this.repoService.getRepositoryInfo(owner, repoName);
-        const repoPRCount$ = this.repoService.getPullRequestList(
+        const repoPRList$ = this.repoService.getRepositoryPullRequests(
           owner,
           repoName,
         );
@@ -33,28 +38,35 @@ export class RepositoryEffects {
           repoName,
           path,
         );
-        const repoReadme$ = this.repoService.getReadmeContent(owner, repoName);
 
         return zip(repoInfo$, repoPRCount$, repoContents$, repoReadme$).pipe(
           map(([info, prCount, contents, readme]) => {
             const allData: RepoState = {
+        const repoReadme$ = this.repoService.getRepositoryReadme(
+          owner,
+          repoName,
+        );
+
+        return zip(repoInfo$, repoPRList$, repoContents$, repoReadme$).pipe(
+          map(([info, prList, contents, readme]) => {
+            const allData: RepositoryState = {
               description: info.description,
-              forkCount: info.forkCount,
-              issueCount: info.issueCount,
+              forkCount: info.forks_count,
+              issueCount: info.open_issues_count,
               ownerName: owner,
-              prCount: prCount,
-              readme: readme,
-              repoName: info.repoName,
-              starCount: info.starCount,
-              tags: info.tags,
+              prCount: prList.length,
+              repoName: info.name,
+              starCount: info.stargazers_count,
+              tags: info.topics,
               tree: contents,
-              activeBranch: branch ?? info.activeBranch,
+              activeBranch: branch ?? info.default_branch,
               selectedFile: null,
               openPullRequests: null,
               closedPullRequests: null,
               visibility: info.visibility,
-              watchCount: info.watchCount,
-              website: info.website,
+              watchCount: info.watchers_count,
+              website: info.homepage,
+              readme: atob(readme.content),
             };
             return fetchRepositorySuccess({ repoData: allData });
           }),
@@ -71,7 +83,15 @@ export class RepositoryEffects {
         return this.repoService
           .getFileContents(owner, repoName, path, commitOrBranchOrTagName)
           .pipe(
-            map((fileContents) => fetchFileContentsSuccess({ fileContents })),
+            map((contents) => {
+              const fileContents: FileContents = {
+                name: contents.name,
+                type: contents.type,
+                content: atob(contents.content),
+                size: contents.size,
+              };
+              return fetchFileContentsSuccess({ fileContents });
+            }),
             catchError((error) => of(fetchFileContentsFailure({ error }))),
           );
       }),

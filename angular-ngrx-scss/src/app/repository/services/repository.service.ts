@@ -16,6 +16,8 @@ import {
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
+  FileContentsApiResponse,
+  ReadmeApiResponse,
   RepoApiResponse,
   RepoContentsApiResponse,
 } from 'src/app/state/repository';
@@ -238,7 +240,7 @@ export class RepositoryService {
   }
 
   /**
-   * Gets the contents of a file or directory for the specified repository
+   * Gets the contents of a directory for the specified repository
    * @param owner who the repo belongs to
    * @param repoName name of the repo
    * @param path (optional) if provided, the path to retrieve; defaults to the root directory
@@ -265,6 +267,58 @@ export class RepositoryService {
     }
 
     return this.http.get<RepoContentsApiResponse[]>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  /**
+   * Gets the contents of a file for the specified repository
+   * @param owner who the repo belongs to
+   * @param repoName name of the repo
+   * @param path the path to retrieve
+   * @param commitOrBranchOrTagName (optional) if provided, the specific commit / branch / tag to retrieve; defaults to the main branch
+   * @returns the full GH response containing the repository contents
+   */
+  getFileContents(
+    repoOwner: string,
+    repoName: string,
+    pathName: string,
+    commitOrBranchOrTagName?: string,
+  ): Observable<FileContentsApiResponse> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const path = encodeURIComponent(pathName);
+    const refPath =
+      commitOrBranchOrTagName && encodeURIComponent(commitOrBranchOrTagName);
+    let url = `${environment.githubUrl}/repos/${owner}/${name}/contents/${path}`;
+    if (refPath) {
+      url += `?ref=${refPath}`;
+    }
+
+    return this.http.get<FileContentsApiResponse>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  /**
+   * Gets the contents of the repository's readme file
+   * @param owner who the repo belongs to
+   * @param repoName name of the repo
+   * @returns the readme file for the repository
+   */
+  getRepositoryReadme(
+    repoOwner: string,
+    repoName: string,
+  ): Observable<ReadmeApiResponse> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/readme`;
+
+    return this.http.get<ReadmeApiResponse>(url, {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },

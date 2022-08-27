@@ -1,1 +1,3 @@
-export interface DashboardState {}
+export interface DashboardState {
+  temp: string;
+}

@@ -122,6 +122,9 @@ export interface RepoContents {
   name: string;
   type: string;
   path: string;
+  content: string;
+  encoding: string;
+  size: number;
 }
 
 export interface RepoContentsApiResponse {
@@ -134,6 +137,8 @@ export interface RepoContentsApiResponse {
   git_url: string;
   download_url: string;
   type: string;
+  encoding: string;
+  content: string;
   _links: {
     self: string;
     git: string;
