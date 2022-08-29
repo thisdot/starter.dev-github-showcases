@@ -10,7 +10,7 @@ export const useOrgStore = defineStore('orgStore ', {
     repos: [],
   }),
   actions: {
-    async getUserTopRepos(org: string) {
+    async getOrgRepos(org: string) {
       try {
         const {
           $config: { GITHUB_API_URL },

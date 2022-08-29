@@ -1,3 +1,6 @@
+import { IUser } from '@/types/user/interfaces';
+import { DirectionEnum, SortEnum, StateEnum } from '@/types/repository/enums';
+
 export interface IRepository {
   id: number;
   name: string;
@@ -28,7 +31,7 @@ export interface IPullRequest {
   user: {
     login: string;
   };
-  state: 'open' | 'closed' | 'merged';
+  state: StateEnum;
   messageCount: number;
   isMerged?: boolean;
   merged_at: string | null;
@@ -70,6 +73,41 @@ export interface IReadme {
   };
 }
 
-export type IssueType = 'issue' | 'pr';
+export interface IRepositoryIssuesApiParams {
+  milestone?: string;
+  state?: StateEnum;
+  assignee?: string;
+  creator?: string;
+  mentioned?: string;
+  labels?: string;
+  sort?: SortEnum;
+  direction?: DirectionEnum;
+  since?: string;
+  per_page?: number;
+  page?: number;
+}
 
-export type IssueState = 'open' | 'closed';
+export interface IIssueLabel {
+  name: string;
+  description: string;
+  color: string;
+  default: boolean;
+}
+
+export interface IIssue {
+  number: number;
+  state: string;
+  title: string;
+  body: string;
+  user: Partial<IUser>;
+  labels: IIssueLabel[];
+  assignee: Partial<IUser>;
+  assignees: Partial<IUser>[];
+  locked: boolean;
+  active_lock_reason: string;
+  comments: number;
+  closed_at?: string;
+  created_at: string;
+  updated_at: string;
+  closed_by: Partial<IUser>;
+}
