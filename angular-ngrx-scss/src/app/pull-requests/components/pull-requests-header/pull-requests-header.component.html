@@ -1,13 +1,21 @@
 <div class="filters-container">
   <div class="pull-requests-status">
-    <a href="" class="active">
-      <span class="icon" appOcticon="no-entry" size="16"></span>
-      <span>412 Open</span>
-    </a>
-    <a href="">
-      <span class="icon" appOcticon="check" size="16"></span
-      ><span>4877 Open</span></a
+    <button
+      class="tab-button"
+      [ngClass]="{ active: viewState === 'open' }"
+      (click)="changeViewState('open')"
     >
+      <span class="icon" appOcticon="no-entry" size="16"></span>
+      <span>{{ openPullRequests?.totalCount ?? 0 }} Open</span>
+    </button>
+    <button
+      class="tab-button"
+      [ngClass]="{ active: viewState === 'closed' }"
+      (click)="changeViewState('closed')"
+    >
+      <span class="icon" appOcticon="check" size="16"></span
+      ><span>{{ closedPullRequests?.totalCount ?? 0 }} closed</span>
+    </button>
   </div>
   <div class="pull-requests-filters">
     <app-filter-dropdown

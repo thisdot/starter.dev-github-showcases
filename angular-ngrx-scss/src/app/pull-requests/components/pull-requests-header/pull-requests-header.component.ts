@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { PR_STATE, RepoPullRequests } from '../../../state/repository';
 
 @Component({
   selector: 'app-pull-requests-header',
@@ -6,4 +13,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./pull-requests-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PullRequestsHeaderComponent {}
+export class PullRequestsHeaderComponent {
+  @Input() openPullRequests!: RepoPullRequests | null;
+  @Input() closedPullRequests!: RepoPullRequests | null;
+  @Input() viewState: PR_STATE = 'open';
+  @Output() viewStateChange = new EventEmitter<PR_STATE>();
+
+  changeViewState(state: PR_STATE) {
+    this.viewState = state;
+    this.viewStateChange.emit(this.viewState);
+  }
+}

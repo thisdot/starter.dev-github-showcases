@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { PullRequestAPIResponse } from '../../../state/repository';
+import { RepoPullRequests } from '../../../state/repository';
 
 @Component({
   selector: 'app-pull-requests-list',
@@ -8,6 +8,5 @@ import { PullRequestAPIResponse } from '../../../state/repository';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PullRequestsListComponent {
-  // TODO: update this type
-  @Input() pullRequests!: Partial<PullRequestAPIResponse[]> | any;
+  @Input() pullRequests!: RepoPullRequests | null;
 }

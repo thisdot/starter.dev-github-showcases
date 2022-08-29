@@ -2,7 +2,6 @@
 
 .filters-container {
   display: flex;
-  align-items: center;
   align-items: flex-start;
   flex-direction: column;
   padding: 1rem;
@@ -21,8 +20,13 @@
     gap: 1rem;
     color: variables.$gray600;
 
-    a {
+    .tab-button {
       color: inherit;
+      display: flex;
+      border: none;
+      align-items: center;
+      cursor: pointer;
+      background: inherit;
 
       .icon {
         margin-right: 0.375rem;

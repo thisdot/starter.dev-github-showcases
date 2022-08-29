@@ -1,11 +1,17 @@
 <div class="pull-requests">
   <div class="pull-requests-list-container">
-    <div class="item" *ngFor="let item of pullRequests">
-      {{ item.state }}
-      {{ item.title }}
-      {{ item.number }}
-      {{ item.labels }}
-      {{ item.user.login }}
-    </div>
+    <ng-container
+      *ngIf="(pullRequests?.pullRequests ?? []).length >= 1; else emptyList"
+    >
+      <app-pull-request-card
+        *ngFor="let item of pullRequests?.pullRequests ?? []"
+        [pullRequest]="item"
+      ></app-pull-request-card>
+    </ng-container>
+    <ng-template #emptyList>
+      <div class="empty-list">
+        <strong>No results matched your search.</strong>
+      </div>
+    </ng-template>
   </div>
 </div>
