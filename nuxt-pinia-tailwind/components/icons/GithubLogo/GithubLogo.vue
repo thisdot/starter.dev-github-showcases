@@ -54,7 +54,7 @@ export default {
       default: 'h-10',
     },
   },
-}
+};
 </script>
 
 <style scoped>

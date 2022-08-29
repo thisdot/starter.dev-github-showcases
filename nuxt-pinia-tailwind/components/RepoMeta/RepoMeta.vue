@@ -59,5 +59,5 @@ export default {
       default: new Date(),
     },
   },
-}
+};
 </script>
