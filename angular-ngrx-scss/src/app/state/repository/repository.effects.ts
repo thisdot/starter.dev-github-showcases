@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of, zip } from 'rxjs';
+import { mergeMap, of, zip } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { RepositoryService } from 'src/app/repository/services/repository.service';
@@ -15,6 +15,7 @@ import {
   fetchRepositoryFailure,
   fetchRepositorySuccess,
 } from './repository.actions';
+import { RepoState } from './repository.state';
 
 @Injectable()
 export class RepositoryEffects {
@@ -36,7 +37,7 @@ export class RepositoryEffects {
 
         return zip(repoInfo$, repoPRCount$, repoContents$, repoReadme$).pipe(
           map(([info, prCount, contents, readme]) => {
-            const allData = {
+            const allData: RepoState = {
               description: info.description,
               forkCount: info.forkCount,
               issueCount: info.issueCount,
@@ -49,7 +50,8 @@ export class RepositoryEffects {
               tree: contents,
               activeBranch: branch ?? info.activeBranch,
               selectedFile: null,
-              pullRequests: [],
+              openPullRequests: null,
+              closedPullRequests: null,
               visibility: info.visibility,
               watchCount: info.watchCount,
               website: info.website,
@@ -79,9 +81,11 @@ export class RepositoryEffects {
   fetchPullRequests$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(fetchPullRequests),
-      switchMap(({ owner, repoName }) => {
-        return this.repoService.getPullRequests(owner, repoName).pipe(
-          map((pullRequests) => fetchPullRequestsSuccess({ pullRequests })),
+      mergeMap(({ owner, repoName, prState }) => {
+        return this.repoService.getPullRequests(owner, repoName, prState).pipe(
+          map((pullRequests) =>
+            fetchPullRequestsSuccess({ pullRequests, prState }),
+          ),
           catchError((error) => of(fetchPullRequestsFailure({ error }))),
         );
       }),

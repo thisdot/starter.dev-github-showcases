@@ -11,8 +11,8 @@ export interface RepoState {
   starCount: number;
   tags: string[];
   tree: RepoContents[];
-  // TODO: update this type
-  pullRequests: Partial<PullRequestAPIResponse[]>;
+  openPullRequests: RepoPullRequests | null;
+  closedPullRequests: RepoPullRequests | null;
   activeBranch: string;
   selectedFile: FileContents | null;
   visibility: string;
@@ -170,51 +170,99 @@ export interface ReadmeApiResponse {
   };
 }
 
-export interface PullRequestAPIResponse {
-  url: string;
+export interface PullRequestLabel {
   id: number;
   node_id: string;
+  url: string;
+  name: string;
+  description: string;
+  color: string;
+  default: boolean;
+}
+
+export interface PullRequestItemAPIResponse {
+  url: string;
+  repository_url: string;
+  labels_url: string;
+  comments_url: string;
+  events_url: string;
   html_url: string;
+  id: number;
+  node_id: string;
+  number: number;
+  title: string;
+  user: Partial<UserApiResponse>;
+  labels: PullRequestLabel[];
+  state: string;
+  locked: boolean;
+  assignee: string | null;
+  assignees: unknown[];
+  milestone: null;
+  comments: number;
+  created_at: string;
+  updated_at: string;
+  closed_at: string | null;
+  author_association: AUTHOR_ASSOCIATION;
+  active_lock_reason: string | null;
+  draft: boolean;
+  pull_request: {
+    url: string;
+    html_url: string;
+    diff_url: string;
+    patch_url: string;
+    merged_at: string | null;
+  };
+  body: string;
+
   diff_url: string;
   patch_url: string;
   issue_url: string;
   commits_url: string;
   review_comments_url: string;
   review_comment_url: string;
-  comments_url: string;
   statuses_url: string;
-  number: number;
-  state: string;
-  locked: true;
+}
+
+export interface PullRequestAPIResponse {
+  total_count: number;
+  incomplete_results: boolean;
+  items: PullRequestItemAPIResponse[];
+}
+
+export interface RepoPullRequests {
+  totalCount: number;
+  pullRequests: RepoPullRequest[];
+}
+
+export interface RepoPullRequest {
+  id: number;
+  login?: string | null;
   title: string;
-  user: {
-    login: string;
-    id: 1;
-    node_id: string;
-    avatar_url: string;
-    gravatar_id: string;
-    url: string;
-    html_url: string;
-    followers_url: string;
-    following_url: string;
-    gists_url: string;
-    starred_url: string;
-    subscriptions_url: string;
-    organizations_url: string;
-    repos_url: string;
-    events_url: string;
-    received_events_url: string;
-    type: string;
-    site_admin: boolean;
-  };
-  body: string;
+  number: number;
+  closedAt?: Date | null;
+  mergedAt?: Date | null;
+  state: string;
+  createdAt: Date;
   labels: Array<{
     id: number;
     node_id: string;
     url: string;
     name: string;
-    description: string;
     color: string;
-    default: boolean;
   }>;
+  commentCount: number;
+  labelCount: number;
+}
+
+export type PR_STATE = 'open' | 'closed';
+
+export enum AUTHOR_ASSOCIATION {
+  COLLABORATOR = 'COLLABORATOR',
+  CONTRIBUTOR = 'CONTRIBUTOR',
+  FIRST_TIMER = 'FIRST_TIMER',
+  FIRST_TIME_CONTRIBUTOR = 'FIRST_TIME_CONTRIBUTOR',
+  MANNEQUIN = 'MANNEQUIN',
+  MEMBER = 'MEMBER',
+  NONE = 'NONE',
+  OWNER = 'OWNER',
 }

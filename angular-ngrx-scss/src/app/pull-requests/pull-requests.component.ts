@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { fetchPullRequests, selectPullRequests } from '../state/repository';
+import {
+  fetchPullRequests,
+  PR_STATE,
+  selectClosedPullRequests,
+  selectOpenPullRequests,
+} from '../state/repository';
 
 @Component({
   selector: 'app-pull-requests',
@@ -11,7 +16,9 @@ import { fetchPullRequests, selectPullRequests } from '../state/repository';
 export class PullRequestsComponent implements OnInit {
   owner!: string;
   repoName!: string;
-  pullRequests$ = this.store.select(selectPullRequests);
+  openPullRequests$ = this.store.select(selectOpenPullRequests);
+  closedPullRequests$ = this.store.select(selectClosedPullRequests);
+  viewState: PR_STATE = 'open';
 
   constructor(private route: ActivatedRoute, private store: Store) {}
 
@@ -23,6 +30,15 @@ export class PullRequestsComponent implements OnInit {
       fetchPullRequests({
         owner: this.owner,
         repoName: this.repoName,
+        prState: 'open',
+      }),
+    );
+
+    this.store.dispatch(
+      fetchPullRequests({
+        owner: this.owner,
+        repoName: this.repoName,
+        prState: 'closed',
       }),
     );
   }

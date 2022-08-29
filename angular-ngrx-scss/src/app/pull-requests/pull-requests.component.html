@@ -1,6 +1,15 @@
 <div class="container pull-requests-container">
-  <app-pull-requests-header></app-pull-requests-header>
+  <app-pull-requests-header
+    [openPullRequests]="openPullRequests$ | async"
+    [closedPullRequests]="closedPullRequests$ | async"
+    [(viewState)]="viewState"
+  ></app-pull-requests-header>
   <app-pull-requests-list
-    [pullRequests]="pullRequests$ | async"
+    [pullRequests]="
+      viewState === 'open'
+        ? (openPullRequests$ | async)
+        : (closedPullRequests$ | async)
+    "
   ></app-pull-requests-list>
 </div>
+<app-pagination></app-pagination>

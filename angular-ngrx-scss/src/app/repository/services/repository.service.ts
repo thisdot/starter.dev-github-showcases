@@ -4,11 +4,13 @@ import { map, Observable } from 'rxjs';
 import {
   FileContents,
   FileContentsApiResponse,
+  PR_STATE,
   PullRequestAPIResponse,
   ReadmeApiResponse,
   RepoApiResponse,
   RepoContents,
   RepoContentsApiResponse,
+  RepoPullRequests,
   RepoState,
 } from 'src/app/state/repository';
 import { environment } from 'src/environments/environment';
@@ -41,7 +43,8 @@ export class RepositoryService {
         issueCount: data.open_issues_count,
         tags: data.topics,
         selectedFile: null,
-        pullRequests: [],
+        openPullRequests: null,
+        closedPullRequests: null,
         activeBranch: data.default_branch,
         ownerName: '',
         prCount: 0,
@@ -151,16 +154,29 @@ export class RepositoryService {
   getPullRequests(
     owner: string,
     repoName: string,
-    /*
-     * TODO: update the return type of this method. Create an interface that has just the
-     *  needed props from the response, use it here and in other relevant places in the
-     * repo state slice
-     * */
-  ): Observable<Partial<PullRequestAPIResponse[]>> {
-    const url = `${environment.githubUrl}/repos/${owner}/${repoName}/pulls`;
-    return this.http.get<PullRequestAPIResponse[]>(url).pipe(
+    prState: PR_STATE,
+  ): Observable<RepoPullRequests> {
+    const url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${repoName}+type:pr+state:${prState}`;
+    return this.http.get<PullRequestAPIResponse>(url).pipe(
       map((data) => {
-        return data;
+        return {
+          totalCount: data.total_count,
+          pullRequests: data.items.map((item) => ({
+            id: item.id,
+            login: item.user.login,
+            title: item.title,
+            number: item.number,
+            state: item.state,
+            closedAt: item.closed_at ? new Date(item.closed_at) : null,
+            mergedAt: item.pull_request.merged_at
+              ? new Date(item.pull_request.merged_at)
+              : null,
+            createdAt: new Date(item.created_at),
+            labels: item.labels,
+            commentCount: item.comments,
+            labelCount: item.labels.length,
+          })),
+        };
       }),
     );
   }

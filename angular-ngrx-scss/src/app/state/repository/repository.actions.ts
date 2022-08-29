@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import {
   FileContents,
-  PullRequestAPIResponse,
+  PR_STATE,
+  RepoPullRequests,
   RepoState,
 } from './repository.state';
 
@@ -45,13 +46,16 @@ export const fetchPullRequests = createAction(
   props<{
     owner: string;
     repoName: string;
+    prState: PR_STATE;
   }>(),
 );
 
 export const fetchPullRequestsSuccess = createAction(
   '[Repository API] Fetch Pull Requests Success',
-  //TODO: update the type below
-  props<{ pullRequests: Partial<PullRequestAPIResponse[]> }>(),
+  props<{
+    pullRequests: RepoPullRequests;
+    prState: PR_STATE;
+  }>(),
 );
 
 export const fetchPullRequestsFailure = createAction(

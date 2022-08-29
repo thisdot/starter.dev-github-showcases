@@ -2,8 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { of, delay } from 'rxjs';
 import {
   FileContents,
+  PullRequestAPIResponse,
   RepoApiResponse,
   RepoContents,
+  RepoPullRequests,
   RepoState,
 } from 'src/app/state/repository';
 import {
@@ -14,6 +16,10 @@ import {
 } from './repository.interfaces';
 
 import { RepositoryService } from './repository.service';
+import {
+  generatePullRequestAPIResponseFixture,
+  pullRequestFixture,
+} from '../../fixtures/repository.fixtures';
 
 const MOCK_ISSUES: Issues = [
   {
@@ -225,7 +231,8 @@ describe('RepositoryService', () => {
       starCount: 100,
       tags: ['react', 'angular', 'vue', 'github'],
       tree: [],
-      pullRequests: [],
+      openPullRequests: null,
+      closedPullRequests: null,
       activeBranch: 'main',
       visibility: 'public',
       selectedFile: null,
@@ -464,5 +471,28 @@ describe('RepositoryService', () => {
         },
         complete: done,
       });
+  });
+
+  describe('getPullRequests', () => {
+    it('should return pull request for given repository', (done) => {
+      const apiResponse: PullRequestAPIResponse =
+        generatePullRequestAPIResponseFixture();
+      const expectedResponse: RepoPullRequests = pullRequestFixture;
+
+      httpClientSpy.get.and.returnValue(of(apiResponse).pipe(delay(0)));
+      repoService
+        .getPullRequests('thisdot', 'starter.dev-github-showcases', 'open')
+        .subscribe((res) => {
+          expect(res).toEqual(expectedResponse);
+          done();
+        });
+
+      expect(httpClientSpy.get.calls.count())
+        .withContext('called once')
+        .toBe(1);
+      expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
+        'https://api.github.com/search/issues?q=repo:thisdot/starter.dev-github-showcases+type:pr+state:open',
+      );
+    });
   });
 });

@@ -13,7 +13,8 @@ export const initialRepoState: RepoState = {
   starCount: 0,
   tags: [],
   tree: [],
-  pullRequests: [],
+  openPullRequests: null,
+  closedPullRequests: null,
   selectedFile: null,
   activeBranch: '',
   visibility: '',
@@ -32,10 +33,18 @@ const reducer = createReducer(
     selectedFile: fileContents,
   })),
   // TODO: handle fetchFileError case
-  on(RepositoryActions.fetchPullRequestsSuccess, (state, { pullRequests }) => ({
-    ...state,
-    pullRequests,
-  })),
+  on(
+    RepositoryActions.fetchPullRequestsSuccess,
+    (state, { pullRequests, prState }) => {
+      return {
+        ...state,
+        openPullRequests:
+          prState === 'open' ? pullRequests : state.openPullRequests,
+        closedPullRequests:
+          prState === 'closed' ? pullRequests : state.closedPullRequests,
+      };
+    },
+  ),
   // TODO: handle fetchPullRequestsError case
 );
 
