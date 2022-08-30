@@ -35,10 +35,6 @@ import { FileExplorer, RepoSubHeader, BranchMenu } from '@/components';
 import { useRoute } from 'vue-router';
 import { useRepoPage, useRepoTree, useRepoBranches } from '@/composables';
 const $route = useRoute();
-// import { FileExplorer, RepoSubHeader } from '@/components';
-// import { useRoute } from 'vue-router';
-// import { useRepoPage, useRepoTree } from '@/composables';
-// const $route = useRoute();
 
 const branch = ref('main');
 const repoDirPath = ref('');
@@ -64,7 +60,7 @@ const { context: currentRepo, loading } = getRepoPage({
 });
 
 watch(currentRepo, (res) => {
-  branch.value = res?.branch || 'main';
+  branch.value = res?.branch || branch.value;
   repoDirPath.value = res?.path || '';
   visibility.value = res?.data?.visibility || 'public';
   stargazerCount.value = res?.data?.stargazerCount || 0;

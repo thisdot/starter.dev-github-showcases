@@ -16,15 +16,17 @@ export const useRepoBranches = () => {
       if (!branches) {
         return [];
       }
+      const isDefaultBranch = (branch): boolean =>
+        data?.repository?.defaultBranchRef.name === branch;
 
       const mappedBranches = branches.map((b) => {
-        return { name: b.name, default: false };
+        return {
+          name: b.name,
+          default: isDefaultBranch(b.name) ? true : false,
+        };
       });
 
-      return [
-        { name: data?.repository?.defaultBranchRef.name, default: true },
-        ...mappedBranches,
-      ];
+      return mappedBranches;
     });
     return { data, loading };
   };

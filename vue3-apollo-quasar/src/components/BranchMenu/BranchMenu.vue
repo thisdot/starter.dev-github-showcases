@@ -46,9 +46,21 @@
           class="row items-center"
           @click="selectBranch(branch.name)"
         >
-          <span>
+          <span class="selected-branch-container row items-center q-mr-xs">
+            <q-icon
+              name="svguse:/app-icons/correct.svg#correct"
+              class="selected-branch text-h5 q-mt-sm"
+              v-show="branchName === branch.name"
+            />
+          </span>
+          <span class="text-weight-medium text-caption col">
             {{ branch.name }}
           </span>
+          <span
+            v-if="branch.default"
+            class="default-tag q-px-sm text-no-wrap text-weight-medium text-caption"
+            >default</span
+          >
         </q-item>
       </q-list>
     </q-btn-dropdown>
@@ -123,5 +135,19 @@ const sortedBranches = computed(() => {
       border-color: $primary-200;
     }
   }
+}
+
+.default-tag {
+  color: $secondary-200;
+  border: 1px solid $secondary-100;
+  border-radius: 2em;
+}
+
+.selected-branch {
+  color: $dark-800;
+}
+
+.selected-branch-container {
+  width: 16px;
 }
 </style>

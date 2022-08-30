@@ -23,7 +23,6 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-
 import { useFormatter } from '@/composables';
 
 const { getFriendlyDate } = useFormatter();

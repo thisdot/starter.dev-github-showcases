@@ -1,7 +1,6 @@
 import { BranchMenu } from '@/components';
 import { mount } from '@vue/test-utils';
 
-
 describe('Branch Menu', () => {
   let wrapper;
 
