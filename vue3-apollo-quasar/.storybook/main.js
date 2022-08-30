@@ -6,7 +6,6 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/preset-scss',
-    'storybook-addon-apollo-client',
   ],
   framework: '@storybook/vue3',
   staticDirs: ['../public'],

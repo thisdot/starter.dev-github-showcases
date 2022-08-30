@@ -11,8 +11,6 @@ import { app } from '@storybook/vue3';
 import { Quasar } from 'quasar';
 import { createPinia } from 'pinia';
 
-import { MockedProvider } from '@apollo/client/testing';
-
 const pinia = createPinia();
 
 app.use(Quasar, {}).use(pinia);
@@ -24,8 +22,5 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
-  },
-  apolloClient: {
-    MockedProvider,
   },
 };
