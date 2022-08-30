@@ -1,1 +1,1 @@
-export { default as default } from './RepoNavigation';
+export { default as default } from './FileExplorerNav';

@@ -1,0 +1,76 @@
+@use '../../styles/variables.scss';
+
+$color-open: variables.$green100;
+$color-closed: variables.$purple100;
+
+.item {
+  padding: 1.125rem;
+  border-bottom: 1px solid variables.$gray200;
+
+  &:hover {
+    background-color: variables.$gray100;
+  }
+}
+
+.item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .info {
+    display: flex;
+  }
+
+  .comments {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.icon {
+  margin-right: 0.5rem;
+
+  &.open {
+    color: $color-open;
+  }
+
+  &.closed {
+    color: $color-closed;
+  }
+}
+
+.content {
+  .title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-right: 0.25rem;
+
+    &:hover {
+      color: variables.$blue300;
+    }
+  }
+
+  .label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin: 0 0.385rem;
+    padding: 0.125rem 0.5rem;
+    cursor: pointer;
+    border-radius: 0.875rem;
+  }
+}
+
+.meta {
+  line-height: 0.875rem;
+  font-size: 0.875rem;
+  margin-top: 0.325rem;
+  color: variables.$gray600;
+
+  .created-by {
+    cursor: pointer;
+
+    &:hover {
+      color: variables.$blue300;
+    }
+  }
+}

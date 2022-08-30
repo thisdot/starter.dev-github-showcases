@@ -19,7 +19,7 @@ export const useRepoTree = () => {
 
     const data = useResult(result, [], (data) => {
       const fileTree = data?.repository?.tree;
-      if (fileTree.text) {
+      if (fileTree?.text) {
         return fileTree.text;
       }
       const items: ExplorerItem[] =

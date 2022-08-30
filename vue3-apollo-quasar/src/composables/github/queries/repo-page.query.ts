@@ -6,6 +6,7 @@ export const REPO_PAGE_QUERY = gql`
       defaultBranchRef {
         name
       }
+      visibility
       isPrivate
       stargazerCount
       forkCount

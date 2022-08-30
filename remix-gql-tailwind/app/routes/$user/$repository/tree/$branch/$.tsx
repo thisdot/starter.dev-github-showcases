@@ -1,12 +1,13 @@
 import { json, LoaderFunction } from '@remix-run/node';
-import { useLoaderData, useOutletContext } from '@remix-run/react';
-import { parseQueryData } from '~/components/FileExplorer/parseQueryData';
-import RepoNavigation from '~/components/RepoNavigation/RepoNavigation';
-import RepoHeader from '~/components/RepoHeader/RepoHeader';
-import FileExplorer from '~/components/FileExplorer/FileExplorer.view';
-import { parseTopics } from '~/components/RepoPage/parseTopics';
-import { parseQuery } from '~/components/RepoReadMe/parseQuery';
-import RepoReadMe from '~/components/RepoReadMe/RepoReadMe.view';
+import { useLoaderData } from '@remix-run/react';
+import { parseQueryData } from '~/components/Repositories/FileExplorer/parseQueryData';
+import RepoNavigation from '~/components/Repositories/RepoNavigation/RepoNavigation';
+import RepoHeader from '~/components/Repositories/RepoHeader/RepoHeader';
+import FileExplorer from '~/components/Repositories/FileExplorer/FileExplorer.view';
+import { parseTopics } from '~/components/Repositories/RepoPage/parseTopics';
+import { parseQuery } from '~/components/Repositories/RepoReadMe/parseQuery';
+import RepoReadMe from '~/components/Repositories/RepoReadMe/RepoReadMe.view';
+
 import { RepoContext, RepoProvider } from '~/context/RepoContext';
 import gqlClient from '~/lib/graphql-client';
 import { auth } from '~/services/auth.server';

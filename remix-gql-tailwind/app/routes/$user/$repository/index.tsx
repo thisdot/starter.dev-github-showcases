@@ -1,17 +1,18 @@
 import type { LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData, useOutletContext } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { auth } from '~/services/auth.server';
 import gqlClient from '~/lib/graphql-client';
 import { RepoContext, RepoProvider } from '~/context/RepoContext';
-import RepoHeader from '../../../components/RepoHeader/RepoHeader';
-import RepoNavigation from '../../../components/RepoNavigation/RepoNavigation';
-import FileExplorer from '../../../components/FileExplorer/FileExplorer.view';
-import RepoReadMe from '../../../components/RepoReadMe/RepoReadMe.view';
-import RepoAboutWidget from '~/components/RepoAboutWidget/RepoAboutWidget';
-import { parseTopics } from '~/components/RepoPage/parseTopics';
-import { parseQueryData } from '~/components/FileExplorer/parseQueryData';
-import { parseQuery } from '~/components/RepoReadMe/parseQuery';
+import RepoHeader from '../../../components/Repositories/RepoHeader/RepoHeader';
+import RepoNavigation from '../../../components/Repositories/RepoNavigation/RepoNavigation';
+import FileExplorer from '../../../components/Repositories/FileExplorer/FileExplorer.view';
+import RepoReadMe from '../../../components/Repositories/RepoReadMe/RepoReadMe.view';
+import RepoAboutWidget from '~/components/Repositories/RepoAboutWidget/RepoAboutWidget';
+import { parseTopics } from '~/components/Repositories/RepoPage/parseTopics';
+import { parseQueryData } from '~/components/Repositories/FileExplorer/parseQueryData';
+import { parseQuery } from '~/components/Repositories/RepoReadMe/parseQuery';
+
 import { REPO_PAGE_QUERY } from '~/lib/queries/RepoPage';
 import { REPO_TREE_QUERY } from '~/lib/queries/FileExplorer';
 import { REPO_README_QUERY } from '~/lib/queries/RepoReadMe';

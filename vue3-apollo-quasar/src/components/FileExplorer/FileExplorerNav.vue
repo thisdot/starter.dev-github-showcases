@@ -2,19 +2,20 @@
   <div class="full-width row text-dark items-center">
     <div class="col-4 items-center flex">
       <q-icon :name="iconName" :color="iconColor" size="1.2rem"></q-icon>
-      <a class="file-explorer-link" :href="$router.resolve(content.to).href">
-        {{ content.name }}
+      <a class="file-explorer-link" :href="href">
+        {{ name }}
       </a>
     </div>
-    <div class="col-4 text-grey">{{ content.latestCommitMessage }}</div>
+    <div class="col-4 text-grey">{{ latestCommitMessage }}</div>
     <div class="col-4 text-grey text-right">
-      {{ getFriendlyDate(content.lastUpdated) }}
+      {{ getFriendlyDate(lastUpdated) }}
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, defineProps, computed, toRef, ref } from 'vue';
+import { ExplorerContent } from './types';
 
 export default defineComponent({
   name: 'FileExplorerNav',
@@ -22,15 +23,7 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-export type ExplorerContent = {
-  isDirectory: boolean;
-  name: string;
-  latestCommitMessage: string;
-  lastUpdated: string;
-  to?: string;
-};
 
-import { defineProps, computed } from 'vue';
 import { useFormatter } from '@/composables';
 
 const { getFriendlyDate } = useFormatter();
@@ -42,7 +35,12 @@ const props = defineProps({
   },
 });
 
-const content = computed(() => props.content);
+const content = toRef(props, 'content');
+
+const name = ref(content.value.name);
+const href = ref(content.value.to);
+const latestCommitMessage = ref(content.value.latestCommitMessage);
+const lastUpdated = ref(content.value.lastUpdated);
 
 const iconName = computed(() =>
   content.value.isDirectory ? 'folder' : 'svguse:/app-icons/file.svg#file',

@@ -4,12 +4,12 @@ import { useLoaderData } from '@remix-run/react';
 import { auth } from '~/services/auth.server';
 import gqlClient from '~/lib/graphql-client';
 import { RepoContext, RepoProvider } from '~/context/RepoContext';
-import { parseTopics } from '~/components/RepoPage/parseTopics';
+import { parseTopics } from '~/components/Repositories/RepoPage/parseTopics';
 import { REPO_PAGE_QUERY } from '~/lib/queries/RepoPage';
 import { REPO_FILE_QUERY } from '~/lib/queries/FileViewer';
-import FileViewer from '~/components/FileViewer/FileViewer';
-import RepoHeader from '~/components/RepoHeader/RepoHeader';
-import RepoNavigation from '~/components/RepoNavigation/RepoNavigation';
+import FileViewer from '~/components/Repositories/FileViewer/FileViewer';
+import RepoHeader from '~/components/Repositories/RepoHeader/RepoHeader';
+import RepoNavigation from '~/components/Repositories/RepoNavigation/RepoNavigation';
 
 type LoaderData = {
   context: RepoContext;

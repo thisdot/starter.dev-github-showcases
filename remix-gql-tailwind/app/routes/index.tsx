@@ -3,14 +3,14 @@ import { useLoaderData } from '@remix-run/react';
 import type { GitHubProfile } from 'remix-auth-github';
 import { auth } from '~/services/auth.server';
 import gqlClient from '~/lib/graphql-client';
-import { parseQuery } from '~/components/UserTopRepos/parseQuery';
-import { parseQueryUserGists } from '~/components/UserGists/parseQuery';
+import { parseQuery } from '~/components/User/UserTopRepos/parseQuery';
+import { parseQueryUserGists } from '~/components/User/UserGists/parseQuery';
 import { USER_TOP_REPOS_QUERY } from '~/lib/queries/UserTopRepos';
 import { USER_GISTS_QUERY } from '~/lib/queries/UserGists';
-import UserTopReposView from '~/components/UserTopRepos/UserTopRepos.view';
-import UserGistsView from '~/components/UserGists/UserGists.view';
-import { TopRepo } from '~/components/UserTopRepos/types';
-import { GistItem } from '~/components/UserGists/types';
+import UserTopReposView from '~/components/User/UserTopRepos/UserTopRepos.view';
+import UserGistsView from '~/components/User/UserGists/UserGists.view';
+import { TopRepo } from '~/components/User/UserTopRepos/types';
+import { GistItem } from '~/components/User/UserGists/types';
 
 type LoaderData = {
   profile: GitHubProfile;
