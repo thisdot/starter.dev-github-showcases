@@ -4,10 +4,10 @@ import { UserProvider } from './context/UserProvider';
 
 function App() {
   return (
-    <UserProvider>
+    <>
       <Header />
       <Outlet />
-    </UserProvider>
+    </>
   );
 }
 

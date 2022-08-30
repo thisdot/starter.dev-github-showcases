@@ -1,4 +1,4 @@
 import { makeVar } from '@apollo/client';
-import { defaultLanguageSort } from '@/components/SearchFilter/data';
+import { defaultLanguage } from '@/components/SearchFilter/data';
 
-export const filteredLanguage = makeVar(defaultLanguageSort);
+export const filteredLanguage = makeVar(defaultLanguage);

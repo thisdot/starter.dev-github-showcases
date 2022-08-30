@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 module.exports = {
   moduleNameMapper: {
@@ -19,4 +19,4 @@ module.exports = {
   ],
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-}
+};

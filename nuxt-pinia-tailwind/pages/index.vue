@@ -18,18 +18,18 @@
 </template>
 
 <script lang="ts">
-import { useContext } from '@nuxtjs/composition-api'
-import Vue from 'vue'
+import { useContext } from '@nuxtjs/composition-api';
+import Vue from 'vue';
 
 export default Vue.extend({
   name: 'IndexPage',
   setup() {
-    const { $auth } = useContext()
+    const { $auth } = useContext();
 
     const handleClick = async () => {
-      await $auth.logout()
-    }
-    return { handleClick }
+      await $auth.logout();
+    };
+    return { handleClick };
   },
-})
+});
 </script>
