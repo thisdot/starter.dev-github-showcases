@@ -43,7 +43,7 @@
           clickable
           v-for="(branch, i) in sortedBranches"
           :key="i"
-          class="row items-center"
+          class="row items-center branches"
           @click="selectBranch(branch.name)"
         >
           <span class="selected-branch-container row items-center q-mr-xs">
