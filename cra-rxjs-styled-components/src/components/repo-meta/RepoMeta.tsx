@@ -1,4 +1,3 @@
-import { count } from 'console';
 import { formatDistance } from 'date-fns';
 import { getColourForLanguage } from '../../helpers/colours';
 import { BranchLogo } from '../misc/BranchLogo';
