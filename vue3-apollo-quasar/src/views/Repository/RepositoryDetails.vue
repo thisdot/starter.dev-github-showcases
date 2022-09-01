@@ -17,6 +17,7 @@
         <pre class="file-text" v-else>{{ fileTree.text }}</pre>
       </q-card>
     </section>
+    <Issues :owner="owner" :repo="repo" />
   </q-page>
 </template>
 
@@ -31,6 +32,7 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { FileExplorer, RepoSubHeader } from '@/components';
+import { Issues } from './Issues';
 import { useRoute } from 'vue-router';
 import { useRepoPage, useRepoTree } from '@/composables';
 const $route = useRoute();

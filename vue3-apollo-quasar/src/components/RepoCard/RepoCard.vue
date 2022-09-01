@@ -88,7 +88,7 @@ const props = defineProps({
     required: false,
   },
   owner: {
-    type: Object as () => { __typename: string; login: string },
+    type: Object as () => { login: string },
     required: true,
   },
   primaryLanguage: {

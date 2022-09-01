@@ -16,6 +16,7 @@ export const ISSUES_QUERY = gql`
             author {
               login
             }
+            url
             title
           }
         }
@@ -34,6 +35,8 @@ export const ISSUES_QUERY = gql`
             author {
               login
             }
+            url
+            title
           }
         }
       }
