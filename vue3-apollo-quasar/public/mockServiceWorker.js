@@ -1,13 +1,3 @@
-/* eslint-disable */
-/* tslint:disable */
-
-/**
- * Mock Service Worker (0.45.0).
- * @see https://github.com/mswjs/msw
- * - Please do NOT modify this file.
- * - Please do NOT serve this file on production.
- */
-
 const INTEGRITY_CHECKSUM = 'b3066ef78c2f9090b4ce87e874965995';
 const activeClientIds = new Set();
 
