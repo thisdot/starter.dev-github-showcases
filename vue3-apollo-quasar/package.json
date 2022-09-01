@@ -9,7 +9,7 @@
     "test:unit": "vue-cli-service test:unit --watch",
     "test:e2e": "vue-cli-service test:e2e",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
-    "lint:prettier": "prettier --check .",
+    "lint:prettier": "prettier --check ./src",
     "lint:fix": "prettier --write ./src --list-different . && yarn lint:js --fix",
     "lint": "yarn lint:js  && yarn lint:prettier",
     "storybook": "start-storybook -p 6006",
