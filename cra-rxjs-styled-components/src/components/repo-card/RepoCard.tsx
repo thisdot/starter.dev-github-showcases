@@ -1,6 +1,6 @@
 import { Star } from '@styled-icons/heroicons-outline';
 import { Repository } from '../../interfaces/repositories.interfaces';
-import PrivacyBadge from '../misc/Privacy-badge';
+import PrivacyBadge from '../misc/privacy-badge';
 import RepoMeta from '../repo-meta';
 import {
   Aside,
