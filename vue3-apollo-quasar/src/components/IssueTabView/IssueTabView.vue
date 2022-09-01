@@ -58,7 +58,7 @@ import {
   IssuesPullRequestsCard,
   PaginationButtons,
 } from '@/components';
-import { ISSUES, TABS } from './data';
+import { TABS } from './data';
 
 type Edges = {
   edges: IssuesData[];
@@ -89,20 +89,20 @@ const closedIssuesData = computed(() => {
   return result || [];
 });
 
-const issues = {
-  openIssue: openIssuesData.value,
-  closedIssue: closedIssuesData.value,
-};
-
 const changeTab = (tab: string) => {
   tabRef.value = tab;
 };
-const paginate = (value) => null;
+const paginate = (value: number) => null;
 
 const toLowerCase = (value: string) => value.toLowerCase();
 const countList = (array) => array.length;
-const showPagination = (tab) =>
-  tab === tabRef.value && issues[`${tab}Issue`].length > 6;
+const showPagination = (tab: string): boolean => {
+  const issues = {
+    openIssue: openIssuesData.value,
+    closedIssue: closedIssuesData.value,
+  };
+  return tab === tabRef.value && issues[`${tab}Issue`].length > 6;
+};
 </script>
 
 <style lang="scss" scoped>

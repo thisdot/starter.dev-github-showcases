@@ -16,8 +16,8 @@
         <FileExplorer v-if="!fileTree.isBlob" :content-list="fileTree.data" />
         <pre class="file-text" v-else>{{ fileTree.text }}</pre>
       </q-card>
+      <Issues :owner="owner" :repo="repo" />
     </section>
-    <Issues :owner="owner" :repo="repo" />
   </q-page>
 </template>
 
