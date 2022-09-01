@@ -1,7 +1,19 @@
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { REPO_BRANCHES_QUERY } from './queries';
 
-export const useRepoBranches = () => {
+type Branches = {
+  name: string;
+  default: boolean;
+};
+
+interface UseRepoBranches {
+  getRepoBranches: (data: { owner: string; name: string }) => {
+    data: Branches[];
+    loading: boolean;
+  };
+}
+
+export const useRepoBranches = (): UseRepoBranches => {
   const getRepoBranches = ({ owner, name }) => {
     const queryData = {
       owner,

@@ -1,6 +1,11 @@
 import { reactive } from 'vue';
 
-export const useReducer = (reducer, iState) => {
+interface UseReducer {
+  state: boolean;
+  dispatch: (data: unknown) => unknown;
+}
+
+export const useReducer = (reducer, iState): UseReducer[] => {
   const state = reactive(iState);
   const dispatch = (action) => {
     reducer(state, action);

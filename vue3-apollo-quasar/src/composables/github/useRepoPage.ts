@@ -45,6 +45,13 @@ interface RepoContext {
   };
 }
 
+interface UseRepoPage {
+  getRepoPage: (data: RepoPageProps) => {
+    context: RepoContext | undefined;
+    loading: boolean;
+  };
+}
+
 function parseTopics(topics: TopicNodes): string[] {
   if (!topics) {
     return [];
@@ -58,7 +65,7 @@ function parseTopics(topics: TopicNodes): string[] {
   }, []);
 }
 
-export const useRepoPage = () => {
+export const useRepoPage = (): UseRepoPage => {
   const getRepoPage = ({ name, owner, branch, path = '' }: RepoPageProps) => {
     const isOwnerAndNameValid =
       typeof owner === 'string' && typeof name === 'string';

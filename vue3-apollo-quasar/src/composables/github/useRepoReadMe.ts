@@ -1,7 +1,13 @@
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { REPO_README_QUERY } from './queries';
 
-export const useRepoReadMe = () => {
+interface UseRepoReadMe {
+  getRepoReadMe: (data: { owner: string; name: string; path: string }) => {
+    readme: string | null;
+    loading: boolean;
+  };
+}
+export const useRepoReadMe = (): UseRepoReadMe => {
   const getRepoReadMe = ({ owner, name, path }) => {
     const { result, loading } = useQuery(REPO_README_QUERY, {
       owner: owner,

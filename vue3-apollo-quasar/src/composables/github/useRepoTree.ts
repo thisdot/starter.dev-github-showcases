@@ -7,7 +7,18 @@ interface ExplorerItem {
   type: string;
 }
 
-export const useRepoTree = () => {
+interface UseRepoTree {
+  getRepoTree: (data: {
+    name: string;
+    path: string;
+    owner: string;
+    branch: string;
+  }) => {
+    data: ExplorerItem[];
+    loading: boolean;
+  };
+}
+export const useRepoTree = (): UseRepoTree => {
   const getRepoTree = ({ owner, name, branch, path }) => {
     const queryData = {
       owner,
