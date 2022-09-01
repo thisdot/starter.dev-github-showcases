@@ -1,3 +1,4 @@
+import { count } from 'console';
 import { formatDistance } from 'date-fns';
 import { getColourForLanguage } from '../../helpers/colours';
 import { BranchLogo } from '../misc/BranchLogo';
@@ -18,15 +19,16 @@ function RepoMeta({
   forkCount,
   updatedAt,
 }: RepoMetaProps) {
-  const socialIcons = [];
-  if (stargazerCount > 0) {
-    socialIcons.push(
-      <MetaIcon text={stargazerCount} children={<StarLogo />} />
-    );
-  }
-  if (forkCount > 0) {
-    socialIcons.push(<MetaIcon text={forkCount} children={<BranchLogo />} />);
-  }
+  const socialIcons = [
+    {
+      count: stargazerCount,
+      icon: <StarLogo />,
+    },
+    {
+      count: forkCount,
+      icon: <BranchLogo />,
+    },
+  ].filter((o) => o.count > 0);
 
   return (
     <Metadata>
@@ -40,7 +42,13 @@ function RepoMeta({
           {language}
         </div>
       )}
-      {socialIcons.length > 0 && <SocialWrapper>{socialIcons}</SocialWrapper>}
+      {socialIcons.length > 0 && (
+        <SocialWrapper>
+          {socialIcons.map(({ count, icon }, i) => (
+            <MetaIcon key={i} text={count} children={icon} />
+          ))}
+        </SocialWrapper>
+      )}
       <div>
         Updated{' '}
         {formatDistance(new Date(updatedAt), Date.now(), {
