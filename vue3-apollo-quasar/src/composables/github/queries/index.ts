@@ -10,3 +10,4 @@ export * from './user-repos.query';
 export * from './repo-page.query';
 export * from './repo-tree.query';
 export * from './repo-readme.query';
+export * from './repo-branches.query';

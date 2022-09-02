@@ -48,7 +48,7 @@ export interface FilterState {
   last?: number;
 }
 
-type FilterAction =
+export type FilterAction =
   | {
       type: ActionType.CHANGE_SORT;
       payload: { sort: RepositoryOrderField };
@@ -82,7 +82,7 @@ type FilterAction =
       type: ActionType.RESET_FILTERS;
     };
 
-const initialState: FilterState = {
+export const initialState: FilterState = {
   sort: RepositoryOrderField.UpdatedAt,
   type: TypeFilter.ALL,
   language: 'all',

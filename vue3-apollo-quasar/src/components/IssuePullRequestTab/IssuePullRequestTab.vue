@@ -17,7 +17,7 @@
             name="svguse:app-icons/issue.svg#issue"
             v-else
           />
-          <span class="q-mr-xs">{{ openCounts }}</span>
+          <span class="q-mr-xs" v-if="openCounts">{{ openCounts }}</span>
           Open
         </button>
         <button
@@ -29,7 +29,7 @@
             class="text-h6 custom-icon"
             name="svguse:app-icons/correct.svg#correct"
           />
-          <span class="q-mr-xs">{{ closedCounts }}</span>
+          <span class="q-mr-xs" v-if="closedCounts">{{ closedCounts }}</span>
           Closed
         </button>
       </div>

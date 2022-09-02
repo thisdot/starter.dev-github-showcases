@@ -150,7 +150,7 @@ import {
   defaultLanguage,
 } from '@/components/SearchFilter/data';
 
-const getUserRepos = useUserRepos();
+const { getUserRepos } = useUserRepos();
 const tab = ref<string>('');
 
 const props = defineProps({

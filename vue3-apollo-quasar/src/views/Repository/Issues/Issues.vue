@@ -1,13 +1,12 @@
 <template>
-  <section>
+  <section class="q-mx-auto q-my-xl issues-section">
     <issue-tab-view :openIssues="openIssues" :closedIssues="closedIssues" />
   </section>
 </template>
 
 <script lang="ts">
 import { useIssues } from '@/composables';
-import { Issues } from '@/composables/github/types';
-import { defineComponent, defineProps, watch, ref } from 'vue';
+import { defineComponent, defineProps, computed } from 'vue';
 
 export default defineComponent({
   name: 'Issues',
@@ -27,14 +26,16 @@ const props = defineProps({
     default: '',
   },
 });
-const openIssues = ref(null);
-const closedIssues = ref(null);
 const { getIssues } = useIssues();
 
 const { data: issueData } = getIssues(props.owner, props.repo);
 
-watch(issueData, (res: Issues) => {
-  openIssues.value = res?.openIssues;
-  closedIssues.value = res?.closedIssues;
-});
+const openIssues = computed(() => issueData?.value.openIssues || null);
+const closedIssues = computed(() => issueData.value.closedIssues || null);
 </script>
+
+<style lang="scss" scoped>
+.issues-section {
+  max-width: 70rem;
+}
+</style>
