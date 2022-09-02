@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components';
 import colors from '../../../constants/colors';
 
 const flex = css`
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 `;
 export const IssueCardWrapper = styled.div`
   ${flex};
