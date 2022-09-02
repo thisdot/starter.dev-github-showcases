@@ -16,6 +16,7 @@ import {
   RepoPullRequestsGQL,
 } from '../gql';
 import { parsePullRequestsQuery } from './parse-pull-requests';
+import { ActivatedRoute } from '@angular/router';
 
 export interface FilterState {
   label: string;
@@ -61,6 +62,8 @@ const DIRECTION_DICT: { [key: string]: OrderDirection } = {
   DESC: OrderDirection.Desc,
 };
 
+const DEFAULT_CURSOR = 25;
+
 interface GenericLabel {
   [key: string]: Label;
 }
@@ -70,6 +73,7 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   constructor(
     private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private repoPullRequestsGQL: RepoPullRequestsGQL,
+    private activatedRoute: ActivatedRoute,
   ) {
     super(INITIAL_STATE);
   }
@@ -124,8 +128,8 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
       ...state,
       startCursor: before as string,
       endCursor: after as string,
-      first: after ? 25 : undefined,
-      last: before ? 25 : undefined,
+      first: after ? DEFAULT_CURSOR : undefined,
+      last: before ? DEFAULT_CURSOR : undefined,
     }),
   );
 
@@ -217,10 +221,20 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
   readonly getPullRequests$ = this.effect((target$: Observable<void>) =>
     target$.pipe(
       withLatestFrom(this.state$),
-      switchMap(([, { label, sort, endCursor, startCursor, first, last }]) =>
+      switchMap(([, { label, sort }]) =>
         this.routeConfigService.getLeafConfig<RepoPage>('repoPageData').pipe(
-          switchMap(({ owner, name }) =>
-            this.repoPullRequestsGQL
+          switchMap(({ owner, name }) => {
+            const endCursor = this.activatedRoute.snapshot.queryParams['after'];
+            const startCursor =
+              this.activatedRoute.snapshot.queryParams['before'];
+            const last = startCursor ? DEFAULT_CURSOR : undefined;
+            let first = endCursor ? DEFAULT_CURSOR : undefined;
+
+            if (!endCursor && !startCursor) {
+              first = DEFAULT_CURSOR;
+            }
+
+            return this.repoPullRequestsGQL
               .watch({
                 owner,
                 name,
@@ -245,8 +259,8 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
                     console.log(error);
                   },
                 ),
-              ),
-          ),
+              );
+          }),
         ),
       ),
     ),
