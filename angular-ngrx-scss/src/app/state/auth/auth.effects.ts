@@ -1,11 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
-import { saveUserToken, saveUserTokenFailure, saveUserTokenSuccess } from '.';
+import { UserService } from 'src/app/user/services/user.service';
+import { AuthUserData } from './auth.state';
 import { AuthService } from '../../auth/services/auth.service';
-import { removeUserToken, signOut, startSignIn } from './auth.actions';
+import {
+  saveUserToken,
+  saveUserTokenFailure,
+  saveUserTokenSuccess,
+  removeUserToken,
+  signOutUser,
+  signInUser,
+  fetchAuthenticatedUserDataSuccess,
+  fetchAuthenticatedUserDataFailure,
+  userTokenExists,
+  authUserSaved,
+} from './auth.actions';
+import { selectAuthUserName } from './auth.selectors';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthEffects {
@@ -16,7 +30,7 @@ export class AuthEffects {
   signIn$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(startSignIn),
+        ofType(signInUser),
         tap(() => this.authService.signIn()),
       ),
     { dispatch: false },
@@ -27,7 +41,7 @@ export class AuthEffects {
    */
   signOut$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(signOut),
+      ofType(signOutUser),
       tap(() => this.authService.signOut()),
       tap(() => this.router.navigate(['/signin'])),
       switchMap(() => of(removeUserToken({ isAuthenticated: false }))),
@@ -49,9 +63,36 @@ export class AuthEffects {
     );
   });
 
+  fetchAuthUserData$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(saveUserTokenSuccess, userTokenExists),
+      concatLatestFrom(() => this.store.select(selectAuthUserName)),
+      switchMap(([_, username]) => {
+        if (username) {
+          return of(authUserSaved());
+        }
+        return this.userService.getAuthenticatedUserInfo().pipe(
+          map((userData) => {
+            const user: AuthUserData = {
+              avatar: userData.avatar_url,
+              email: userData.email,
+              username: userData.login,
+            };
+            return fetchAuthenticatedUserDataSuccess({ userData: user });
+          }),
+          catchError((error) =>
+            of(fetchAuthenticatedUserDataFailure({ error })),
+          ),
+        );
+      }),
+    );
+  });
+
   constructor(
     private actions$: Actions,
+    private store: Store,
     private authService: AuthService,
+    private userService: UserService,
     private router: Router,
   ) {}
 }

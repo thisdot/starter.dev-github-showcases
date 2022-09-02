@@ -5,12 +5,18 @@ import {
   saveUserTokenSuccess,
   removeUserToken,
   userTokenExists,
+  fetchAuthenticatedUserDataSuccess,
 } from './auth.actions';
 import { AuthState } from './auth.state';
 
 export const initialState: AuthState = {
   isAuthenticated: false,
   loading: false,
+  authUser: {
+    avatar: '',
+    email: '',
+    username: '',
+  },
 };
 
 const reducer = createReducer(
@@ -38,6 +44,14 @@ const reducer = createReducer(
   on(userTokenExists, (state) => ({
     ...state,
     isAuthenticated: true,
+  })),
+  on(fetchAuthenticatedUserDataSuccess, (state, { userData }) => ({
+    ...state,
+    authUser: {
+      avatar: userData.avatar,
+      email: userData.email,
+      username: userData.username,
+    },
   })),
 );
 

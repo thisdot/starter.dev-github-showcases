@@ -1,8 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { signOut } from 'src/app/state/auth';
-import { selectUserAvatar, selectUserLoginName } from '../../state/user';
+import { signOutUser } from 'src/app/state/auth';
+import { selectAuthUserName, selectAuthUserAvatar } from '../../state/auth';
 
 @Component({
   selector: 'app-nav-bar',
@@ -22,8 +22,8 @@ import { selectUserAvatar, selectUserLoginName } from '../../state/user';
 })
 export class NavBarComponent {
   dropdownMenuIsOpen = false;
-  userAvatar$ = this.store.select(selectUserAvatar);
-  username$ = this.store.select(selectUserLoginName);
+  userAvatar$ = this.store.select(selectAuthUserAvatar);
+  username$ = this.store.select(selectAuthUserName);
 
   constructor(private store: Store) {}
 
@@ -37,6 +37,6 @@ export class NavBarComponent {
 
   signOut() {
     this.closeDropdown();
-    this.store.dispatch(signOut());
+    this.store.dispatch(signOutUser());
   }
 }

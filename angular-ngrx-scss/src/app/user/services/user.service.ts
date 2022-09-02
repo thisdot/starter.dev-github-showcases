@@ -16,6 +16,21 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   /**
+   * Gets details for the authenticated user
+   * Important to note that this is specifically for the currently authenticated user
+   * @returns the full GH response with the user's account info
+   */
+  getAuthenticatedUserInfo(): Observable<UserApiResponse> {
+    const url = `${environment.githubUrl}/user`;
+
+    return this.http.get<UserApiResponse>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  /**
    * Gets details on the provided user
    * @returns the full GH response with the user's account info
    * @param username (string)

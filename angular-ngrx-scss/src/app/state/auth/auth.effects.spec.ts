@@ -8,8 +8,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import {
   saveUserToken,
   saveUserTokenSuccess,
-  signOut,
-  startSignIn,
+  signOutUser,
+  signInUser,
 } from './auth.actions';
 
 import { AuthEffects } from './auth.effects';
@@ -61,13 +61,13 @@ describe('AuthEffects', () => {
   });
 
   it('should initiate the signIn process for the user', () => {
-    actions$ = of(startSignIn());
+    actions$ = of(signInUser());
     effects.signIn$.subscribe();
     expect(authService.signIn).toHaveBeenCalled();
   });
 
   it('should call the signOut method to initiate the signout process', () => {
-    actions$ = of(signOut());
+    actions$ = of(signOutUser());
     effects.signOut$.subscribe();
     expect(authService.signOut).toHaveBeenCalled();
   });
