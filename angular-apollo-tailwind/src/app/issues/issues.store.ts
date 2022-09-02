@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { RouteConfigService } from '@this-dot/route-config';
 import { Observable, switchMap } from 'rxjs';
@@ -108,13 +108,6 @@ export class IssuesStore extends ComponentStore<IssuesState> {
               first = DEFAULT_CURSOR;
             }
 
-            this.location.replaceState(
-              this.location
-                .path()
-                .replace(`after=${endCursor}`, '')
-                .replace(`before=${startCursor}`, ''),
-            );
-
             return this.repoIssuesGQL
               .watch({
                 owner,
@@ -163,7 +156,6 @@ export class IssuesStore extends ComponentStore<IssuesState> {
     private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private repoIssuesGQL: RepoIssuesGQL,
     private activatedRoute: ActivatedRoute,
-    private location: Location,
   ) {
     super(INITIAL_STATE);
   }

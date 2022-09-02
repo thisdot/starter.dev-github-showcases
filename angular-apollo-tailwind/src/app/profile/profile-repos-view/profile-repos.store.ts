@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
@@ -141,7 +140,6 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     private userReposGQL: UserReposGQL,
     private orgReposGQL: OrgReposGQL,
     private activatedRoute: ActivatedRoute,
-    private location: Location,
   ) {
     super(INITIAL_PROFILE_REPOS_STATE);
   }
@@ -155,13 +153,6 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     if (!endCursor && !startCursor) {
       first = CURSOR_TWENTY_FIVE;
     }
-
-    this.location.replaceState(
-      this.location
-        .path()
-        .replace(`after=${endCursor}`, '')
-        .replace(`before=${startCursor}`, ''),
-    );
 
     return this.userReposGQL
       .watch({
@@ -213,13 +204,6 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     if (!endCursor && !startCursor) {
       first = CURSOR_TEN;
     }
-
-    this.location.replaceState(
-      this.location
-        .path()
-        .replace(`after=${endCursor}`, '')
-        .replace(`before=${startCursor}`, ''),
-    );
 
     return this.orgReposGQL
       .watch({

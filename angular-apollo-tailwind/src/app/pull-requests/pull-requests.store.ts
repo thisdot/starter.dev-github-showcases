@@ -17,7 +17,6 @@ import {
 } from '../gql';
 import { parsePullRequestsQuery } from './parse-pull-requests';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 export interface FilterState {
   label: string;
@@ -75,7 +74,6 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
     private routeConfigService: RouteConfigService<string, 'repoPageData'>,
     private repoPullRequestsGQL: RepoPullRequestsGQL,
     private activatedRoute: ActivatedRoute,
-    private location: Location,
   ) {
     super(INITIAL_STATE);
   }
@@ -235,13 +233,6 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
             if (!endCursor && !startCursor) {
               first = DEFAULT_CURSOR;
             }
-
-            this.location.replaceState(
-              this.location
-                .path()
-                .replace(`after=${endCursor}`, '')
-                .replace(`before=${startCursor}`, ''),
-            );
 
             return this.repoPullRequestsGQL
               .watch({

@@ -1,5 +1,4 @@
-import { Location } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PageInfo, PaginationEvent } from '../../gql';
 import { Router } from '@angular/router';
 
@@ -8,29 +7,39 @@ import { Router } from '@angular/router';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css'],
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnInit {
   @Input() pageInfo: PageInfo | null = null;
 
   @Output() changePage: EventEmitter<PaginationEvent> = new EventEmitter();
 
-  private get link(): string {
-    return this.location.path();
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.router.navigate([], {
+      queryParamsHandling: 'merge',
+      queryParams: {
+        after: null,
+        before: null,
+      },
+    });
   }
 
-  constructor(private router: Router, private readonly location: Location) {}
-
   async handlePreviousPageClick(): Promise<boolean> {
-    return await this.router.navigate([this.link], {
+    return await this.router.navigate([], {
+      queryParamsHandling: 'merge',
       queryParams: {
+        after: null,
         before: this.pageInfo?.startCursor,
       },
     });
   }
 
   async handleNextPageClick(): Promise<boolean> {
-    return await this.router.navigate([this.link], {
+    return await this.router.navigate([], {
+      queryParamsHandling: 'merge',
       queryParams: {
         after: this.pageInfo?.endCursor,
+        before: null,
       },
     });
   }
