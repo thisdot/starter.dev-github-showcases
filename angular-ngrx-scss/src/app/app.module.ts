@@ -10,7 +10,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TokenInterceptor } from './auth/services/token.interceptor';
-import { ClickAwayDirective } from './shared/directives/click-away.directive';
 import { reducers } from './state';
 import { ProfileEffects } from './state/profile/profile.effects';
 import { RepositoryEffects } from './state/repository/repository.effects';
