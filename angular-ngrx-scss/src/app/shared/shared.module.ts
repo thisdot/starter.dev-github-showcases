@@ -30,6 +30,7 @@ import { ClickAwayDirective } from './directives/click-away.directive';
     FilterDropdownComponent,
     PaginationComponent,
     RepoIssuePullCardComponent,
+    ClickAwayDirective,
   ],
 })
 export class SharedModule {}
