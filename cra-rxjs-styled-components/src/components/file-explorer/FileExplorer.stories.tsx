@@ -3,7 +3,7 @@ import { Routes, Route, MemoryRouter } from 'react-router-dom';
 import FileExplorer from './FileExplorer';
 
 export default {
-  title: 'Navbar/Header',
+  title: 'Navbar/FileExplorer',
   component: FileExplorer,
 } as ComponentMeta<typeof FileExplorer>;
 
@@ -15,13 +15,76 @@ const Template: ComponentStory<typeof FileExplorer> = (args) => (
   </MemoryRouter>
 );
 
-export const LoggedIn = Template.bind({});
-LoggedIn.args = {};
+export const RootDirectory = Template.bind({});
+RootDirectory.args = {
+  branch: 'main',
+  path: '',
+  files: [
+    {
+      name: 'README.md',
+      path: 'README.md',
+    },
+    {
+      name: 'package.json',
+      path: 'package.json',
+    },
+    {
+      name: 'CONTRIBUTING.md',
+      path: 'CONTRIBUTING.md',
+    },
+  ],
+  directories: [
+    {
+      name: 'src',
+      path: 'src',
+    },
+    {
+      name: 'public',
+      path: 'public',
+    },
+    {
+      name: '.storybook',
+      path: '.storybook',
+    },
+  ],
+  basePath: '/thisdot/starter.dev-github-showcases',
+};
 
-/**
- * branch: string;
-  path: string;
-  basePath: string;
-  directories: FileItem[];
-  files: FileItem[];
- */
+export const SrcDirectory = Template.bind({});
+SrcDirectory.args = {
+  branch: 'main',
+  path: 'src',
+  files: [
+    {
+      name: 'App.tsx',
+      path: 'App.tsx',
+    },
+    {
+      name: 'Index.tsx',
+      path: 'Index.tsx',
+    },
+    {
+      name: 'tsconfig.json',
+      path: 'tsconfig.json',
+    },
+  ],
+  directories: [
+    {
+      name: 'components',
+      path: 'components',
+    },
+    {
+      name: 'routes',
+      path: 'routes',
+    },
+    {
+      name: 'pages',
+      path: 'pages',
+    },
+    {
+      name: 'styles',
+      path: 'styles',
+    },
+  ],
+  basePath: '/thisdot/starter.dev-github-showcases',
+};
