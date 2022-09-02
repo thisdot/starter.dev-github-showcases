@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@storybook/addons": "^6.5.10"
+  }
+}
