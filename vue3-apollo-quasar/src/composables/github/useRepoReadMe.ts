@@ -1,10 +1,11 @@
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { REPO_README_QUERY } from './queries';
+import { Ref } from 'vue';
 
 interface UseRepoReadMe {
   getRepoReadMe: (data: { owner: string; name: string; path: string }) => {
-    readme: string | null;
-    loading: boolean;
+    readme: Ref<string | null>;
+    loading: Ref<boolean>;
   };
 }
 export const useRepoReadMe = (): UseRepoReadMe => {
@@ -19,7 +20,7 @@ export const useRepoReadMe = (): UseRepoReadMe => {
       const readme = data.repository?.readme as Blob;
       return readme?.text ?? undefined;
     });
-    return { readme, loading };
+    return { readme: readme as Ref<string | null>, loading };
   };
   return { getRepoReadMe };
 };

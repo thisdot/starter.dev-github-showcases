@@ -1,5 +1,6 @@
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { REPO_BRANCHES_QUERY } from './queries';
+import { Ref } from 'vue';
 
 type Branches = {
   name: string;
@@ -8,8 +9,8 @@ type Branches = {
 
 interface UseRepoBranches {
   getRepoBranches: (data: { owner: string; name: string }) => {
-    data: Branches[];
-    loading: boolean;
+    data: Ref<Branches[]>;
+    loading: Ref<boolean>;
   };
 }
 
@@ -40,7 +41,7 @@ export const useRepoBranches = (): UseRepoBranches => {
 
       return mappedBranches;
     });
-    return { data, loading };
+    return { data: data as Ref<Branches[]>, loading };
   };
   return { getRepoBranches };
 };

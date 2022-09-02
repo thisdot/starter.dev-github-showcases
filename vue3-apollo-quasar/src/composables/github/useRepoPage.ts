@@ -47,8 +47,8 @@ interface RepoContext {
 
 interface UseRepoPage {
   getRepoPage: (data: RepoPageProps) => {
-    context: RepoContext | undefined;
-    loading: boolean;
+    context: Ref<RepoContext | undefined>;
+    loading: Ref<boolean>;
   };
 }
 

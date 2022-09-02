@@ -1,5 +1,6 @@
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { REPO_TREE_QUERY } from './queries';
+import { Ref } from 'vue';
 
 interface ExplorerItem {
   name: string;
@@ -14,8 +15,8 @@ interface UseRepoTree {
     owner: string;
     branch: string;
   }) => {
-    data: ExplorerItem[];
-    loading: boolean;
+    data: Ref<ExplorerItem | undefined>;
+    loading: Ref<boolean>;
   };
 }
 export const useRepoTree = (): UseRepoTree => {
@@ -51,7 +52,7 @@ export const useRepoTree = (): UseRepoTree => {
         return a.name.localeCompare(b.name);
       });
     });
-    return { data, loading };
+    return { data: data as Ref<ExplorerItem | undefined>, loading };
   };
   return { getRepoTree };
 };
