@@ -10,10 +10,22 @@ import 'quasar/dist/quasar.css';
 import { app } from '@storybook/vue3';
 import { Quasar } from 'quasar';
 import { createPinia } from 'pinia';
+import { initialize, mswDecorator } from 'msw-storybook-addon';
+
+import { setupGraphQL } from '@/init';
 
 const pinia = createPinia();
 
 app.use(Quasar, {}).use(pinia);
+
+// Initialize MSW
+initialize();
+
+// Initialize graphql setup
+setupGraphQL();
+
+// Provide the MSW addon decorator globally
+export const decorators = [mswDecorator];
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
