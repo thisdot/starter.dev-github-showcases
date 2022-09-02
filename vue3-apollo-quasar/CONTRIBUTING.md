@@ -103,6 +103,21 @@ Who can access what is an important consideration when trying to build a maintai
 - constants (non-reactive values) are in `UPPERCASE_SNAKE_CASE`
 - Every ref or variaible that does not have its type automatically inferred should have explicit types
 
-## Reporting bugs
+## Reporting bugs / Suggesting features
 
-> TODO
+When reporting bugs or suggesting new features, please [create an issue](https://github.com/thisdot/starter.dev-github-showcases/issues/new/choose) using the GitHub issue tracker.
+
+### Useful information to include
+
+- What operating system are you running on?
+- What version of NodeJS & package managers (`npm`, `pnpm`, `yarn`, etc)?
+- Which showcase are you having trouble with?
+- Branch you are experiencing the issue on
+- Description of the issue
+- Steps to reproduce the issue
+- Screenshots of the issue if the issue is visually observable
+
+### Best practices
+
+- Ensure that the issue you are creating has not yet been created or resolved
+- If your issue has been created but not resolved, leave a comment in the existing issue and upvote it to direct more attention towards it.
