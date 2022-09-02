@@ -5,7 +5,6 @@ import Dropdown from './Dropdown';
 export default {
   title: 'Navbar/Dropdown',
   component: Dropdown,
-  argTypes: { onClick: { action: 'clicked' } },
 } as ComponentMeta<typeof Dropdown>;
 
 const Template: ComponentStory<typeof Dropdown> = (args) => (
@@ -16,5 +15,5 @@ const Template: ComponentStory<typeof Dropdown> = (args) => (
   </MemoryRouter>
 );
 
-export const DropdownClose = Template.bind({});
-DropdownClose.args = {};
+export const DefaultValue = Template.bind({});
+DefaultValue.args = {};
