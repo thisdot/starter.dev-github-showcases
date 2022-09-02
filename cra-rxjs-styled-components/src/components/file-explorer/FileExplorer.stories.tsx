@@ -3,7 +3,7 @@ import { Routes, Route, MemoryRouter } from 'react-router-dom';
 import FileExplorer from './FileExplorer';
 
 export default {
-  title: 'Navbar/FileExplorer',
+  title: 'Repo/FileExplorer',
   component: FileExplorer,
 } as ComponentMeta<typeof FileExplorer>;
 
