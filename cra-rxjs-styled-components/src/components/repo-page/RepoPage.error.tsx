@@ -1,9 +1,9 @@
 interface RepoPageErrorProps {
-  error: Error;
+	error: Error;
 }
 
 function RepoPageError({ error }: RepoPageErrorProps) {
-  return <div>Error: {error.message}</div>;
+	return <div>Error: {error.message}</div>;
 }
 
 export default RepoPageError;

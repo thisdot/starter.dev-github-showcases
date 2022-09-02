@@ -3,12 +3,12 @@ import Header from './components/header';
 import { UserProvider } from './context/UserProvider';
 
 function App() {
-  return (
-    <>
-      <Header />
-      <Outlet />
-    </>
-  );
+	return (
+		<>
+			<Header />
+			<Outlet />
+		</>
+	);
 }
 
 export default App;
