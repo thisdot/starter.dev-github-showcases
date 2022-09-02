@@ -21,27 +21,29 @@ export default function PullRequestCtrl() {
 	const [pullRequests, setPullRequests] = useState<PullRequest[]>([]);
 	const { username, repo } = useParams();
 
-	useEffect(() => {
-		if (username && repo) {
-			const subscription: Subscription = fromFetchWithAuth<PullRequest[]>(
-				PULLS_URL(username, repo),
-				{
-					selector: (response: Response) => {
-						return response.json();
-					},
-				}
-			)
-				.pipe(
-					filter((pulls) => !!pulls.length),
-					switchMap((pulls: PullRequest[]) => {
-						const requests = pulls.map(createCommentCountRequest);
-						return zip(...requests).pipe(
-							map(mergePullRequestsWithCommentCount(pulls))
-						);
-					}),
-					tap(setPullRequests)
-				)
-				.subscribe();
+  useEffect(() => {
+    if (username && repo) {
+      const subscription: Subscription = fromFetchWithAuth<PullRequest[]>(
+        PULLS_URL(username, repo),
+        {
+          selector: async (response: Response) => {
+            const res = await response.json();
+            console.log(res);
+            return (res as any).items;
+          },
+        }
+      )
+        .pipe(
+          filter((pulls) => !!pulls.length),
+          switchMap((pulls: PullRequest[]) => {
+            const requests = pulls.map(createCommentCountRequest);
+            return zip(...requests).pipe(
+              map(mergePullRequestsWithCommentCount(pulls))
+            );
+          }),
+          tap(setPullRequests)
+        )
+        .subscribe();
 
 			return () => {
 				subscription.unsubscribe();
