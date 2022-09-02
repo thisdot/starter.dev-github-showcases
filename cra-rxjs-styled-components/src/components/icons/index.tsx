@@ -1,5 +1,9 @@
 export { BookIcon } from './BookIcon';
 export { CodeIcon } from './CodeIcon';
+export { default as ClosedIssueIcon } from './ClosedIssueIcon';
+export { default as ClosedPRIcon } from './ClosedPRIcon';
+export { default as CloseIcon } from './CloseIcon';
+export { default as CorrectIcon } from './CorrectIcon';
 export { DropdownIcon } from './DropdownIcon';
 export { EyeIcon } from './EyeIcon';
 export { ForkIcon } from './ForkIcon';
