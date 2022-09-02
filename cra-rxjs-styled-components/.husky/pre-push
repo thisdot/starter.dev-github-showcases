@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd "$(dirname -- "$0")" && npm run test:ci
+# causes issues related to testing at an individual library level. Perhaps an investigation needed
+# cd "$(dirname -- "$0")" && npm run test:ci
