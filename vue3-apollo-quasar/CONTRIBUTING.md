@@ -20,6 +20,7 @@ If you were instead looking to just run the application, then please read our [R
 
 - [Pinia](https://pinia.vuejs.org/) - Pinia the official Vue3 recommended **state management** solution that offers a cleaner API and simpler API than [VueX](https://vuex.vuejs.org/), it's predecessor. It is useful for managing global state in our application such as storing information about our currently logged in user.
 - [Storybook](https://storybook.js.org/) - Storybook provides us with **an interface that can be used by non-developers to make design decisions** without needing to code. Each storybook acts as a sort of design document for the entire application and can further streamline the interactions between stakeholders/designers and the engineers that do the actual building of the product.
+  - [MSW storybook addon](https://storybook.js.org/addons/msw-storybook-addon) - Allows us to mock service workers which allows us to fix [apollo storybook issues.](https://github.com/thisdot/starter.dev-github-showcases/issues/533)
 
 ## Project structure
 

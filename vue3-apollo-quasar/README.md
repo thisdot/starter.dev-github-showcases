@@ -17,10 +17,6 @@ A demo for this version of the application can be found at [vue3-apollo-quasar.s
 - [Quasar 2.x](https://quasar.dev) - A Vue.js based framework, which allows you as a web developer to quickly create responsive websites/apps in many flavours. It also contains several ready-made UI components that accelerate the development of this project.
 - [Yarn](https://yarnpkg.com/) - We'll be using this to manage our dependencies.
 
-#### Other technologies
-
-- [MSW storybook addon](https://storybook.js.org/addons/msw-storybook-addon) - Allows us to mock service workers which allows us to fix [apollo storybook issues.](https://github.com/thisdot/starter.dev-github-showcases/issues/533)
-
 ## Pre-requisites
 
 Before being able to run this project, you will need to have a few things installed
