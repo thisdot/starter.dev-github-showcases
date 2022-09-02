@@ -21,6 +21,10 @@ function FileViewerView({
   lines,
   language,
 }: FileViewerViewProps) {
+  console.log('text', text);
+  console.log('byteSize', byteSize);
+  console.log('lines', lines);
+  console.log('language', language);
   return (
     <FileViewContainer>
       <FileHeader>
