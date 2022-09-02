@@ -2,8 +2,8 @@ import { Content, PaginationContainer, Wrapper } from './PullRequest.style';
 
 import type { PRTabValues } from '../types';
 import type { PullRequest } from './PullRequest.type';
-import PullRequestCard from '../PullRequestCard';
-import PullRequestTabHeader from '../PRTabHeader';
+import PullRequestCard from '../pull-request-card';
+import PullRequestTabHeader from '../pr-tab-header';
 import { getPullsState } from '../../../helpers/getPullsState';
 
 type PullRequestProps = {

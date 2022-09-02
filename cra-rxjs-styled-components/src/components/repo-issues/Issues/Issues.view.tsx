@@ -1,5 +1,5 @@
-import IssueTabHeader from '../IssueTabHeader';
-import IssueCard from '../IssueCard';
+import IssueTabHeader from '../issue-tab-header';
+import IssueCard from '../issue-card';
 import { Content, Wrapper } from './Issues.view.styles';
 import type { Issue } from './Issue.type';
 import { IssueTabValues } from '../../../types/types';
