@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs';
-import { selectUserLoginName } from '../state/user';
+import { BehaviorSubject, tap } from 'rxjs';
+import { selectAuthUserName } from '../state/auth';
 import { fetchUserData } from '../state/user/user.actions';
 
 @Component({
@@ -10,15 +10,15 @@ import { fetchUserData } from '../state/user/user.actions';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  user$ = this.store.select(selectUserLoginName);
+  user$ = this.store.select(selectAuthUserName);
+  username = '';
 
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.user$.pipe(
-      tap((user) => {
-        this.store.dispatch(fetchUserData({ username: user }));
-      }),
-    );
+    this.user$.subscribe((user) => {
+      this.username = user;
+      this.store.dispatch(fetchUserData({ username: this.username }));
+    });
   }
 }

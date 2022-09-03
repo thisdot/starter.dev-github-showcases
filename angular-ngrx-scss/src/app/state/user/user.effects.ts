@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import {
+  catchError,
+  map,
+  skipWhile,
+  switchMap,
+  mergeMap,
+} from 'rxjs/operators';
 import { UserService } from 'src/app/user/services/user.service';
+import { selectAuthUserName } from '../auth';
 import { UserGistsState, UserReposState } from '../profile';
 import {
   fetchUserData,
@@ -21,25 +29,30 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(fetchUserData),
       switchMap(({ username }) =>
-        this.userService.getUserInfo(username).pipe(
-          map((userData) => {
-            const user: UserState = {
-              avatar: userData.avatar_url,
-              bio: userData.bio,
-              blog: userData.blog,
-              company: userData.company,
-              email: userData.email,
-              followers: userData.followers,
-              following: userData.following,
-              location: userData.location,
-              name: userData.name,
-              twitter_username: userData.twitter_username,
-              username: userData.login,
-              type: userData.type,
-            };
-            return fetchUserDataSuccess({ userData: user });
-          }),
-          catchError((error) => of(fetchUserDataError({ error }))),
+        this.store.select(selectAuthUserName).pipe(
+          skipWhile((name) => name === ''),
+          mergeMap(() =>
+            this.userService.getUserInfo(username).pipe(
+              map((userData) => {
+                const user: UserState = {
+                  avatar: userData.avatar_url,
+                  bio: userData.bio,
+                  blog: userData.blog,
+                  company: userData.company,
+                  email: userData.email,
+                  followers: userData.followers,
+                  following: userData.following,
+                  location: userData.location,
+                  name: userData.name,
+                  twitter_username: userData.twitter_username,
+                  username: userData.login,
+                  type: userData.type,
+                };
+                return fetchUserDataSuccess({ userData: user });
+              }),
+              catchError((error) => of(fetchUserDataError({ error }))),
+            ),
+          ),
         ),
       ),
     );
@@ -100,5 +113,9 @@ export class UserEffects {
     );
   });
 
-  constructor(public actions$: Actions, private userService: UserService) {}
+  constructor(
+    public actions$: Actions,
+    private userService: UserService,
+    private store: Store,
+  ) {}
 }

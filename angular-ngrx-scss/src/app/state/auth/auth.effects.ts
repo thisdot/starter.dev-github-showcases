@@ -2,7 +2,15 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  map,
+  mergeMap,
+  skipWhile,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import { UserService } from 'src/app/user/services/user.service';
 import { AuthUserData } from './auth.state';
 import { AuthService } from '../../auth/services/auth.service';
@@ -18,7 +26,7 @@ import {
   userTokenExists,
   authUserSaved,
 } from './auth.actions';
-import { selectAuthUserName } from './auth.selectors';
+import { selectAuthUserName, selectIsAuthenticated } from './auth.selectors';
 import { Store } from '@ngrx/store';
 
 @Injectable()
@@ -66,27 +74,53 @@ export class AuthEffects {
   fetchAuthUserData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(saveUserTokenSuccess, userTokenExists),
-      concatLatestFrom(() => this.store.select(selectAuthUserName)),
-      switchMap(([_, username]) => {
-        if (username) {
-          return of(authUserSaved());
-        }
-        return this.userService.getAuthenticatedUserInfo().pipe(
-          map((userData) => {
-            const user: AuthUserData = {
-              avatar: userData.avatar_url,
-              email: userData.email,
-              username: userData.login,
-            };
-            return fetchAuthenticatedUserDataSuccess({ userData: user });
-          }),
-          catchError((error) =>
-            of(fetchAuthenticatedUserDataFailure({ error })),
+      switchMap(() =>
+        this.store.select(selectAuthUserName).pipe(
+          skipWhile((name) => name.length > 0),
+          mergeMap(() =>
+            this.userService.getAuthenticatedUserInfo().pipe(
+              map((userData) => {
+                const user: AuthUserData = {
+                  avatar: userData.avatar_url,
+                  email: userData.email,
+                  username: userData.login,
+                };
+                return fetchAuthenticatedUserDataSuccess({ userData: user });
+              }),
+              catchError((error) =>
+                of(fetchAuthenticatedUserDataFailure({ error })),
+              ),
+            ),
           ),
-        );
-      }),
+        ),
+      ),
     );
   });
+
+  // fetchAuthUserData$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(saveUserTokenSuccess, userTokenExists),
+  //     concatLatestFrom(() => this.store.select(selectAuthUserName)),
+  //     switchMap(([_, username]) => {
+  //       if (username) {
+  //         return of(authUserSaved());
+  //       }
+  //       return this.userService.getAuthenticatedUserInfo().pipe(
+  //         map((userData) => {
+  //           const user: AuthUserData = {
+  //             avatar: userData.avatar_url,
+  //             email: userData.email,
+  //             username: userData.login,
+  //           };
+  //           return fetchAuthenticatedUserDataSuccess({ userData: user });
+  //         }),
+  //         catchError((error) =>
+  //           of(fetchAuthenticatedUserDataFailure({ error })),
+  //         ),
+  //       );
+  //     }),
+  //   );
+  // });
 
   constructor(
     private actions$: Actions,
