@@ -129,5 +129,32 @@ export const useRepoStore = defineStore('repositoryStore ', {
         throw new Error('Error fetching repository issues');
       }
     },
+    async getPullRequestsComments(pullRequest: IPullRequest[]) {
+      try {
+        const { $axios } = this.$nuxt;
+
+        const commentsPromises = pullRequest.map((p: IPullRequest) => {
+          return $axios.get(`${p.review_comments_url}`);
+        });
+
+        const comments = await Promise.all(commentsPromises);
+
+        // Merge the comments with the pull requests
+        const pullRequestsWithComments = pullRequest.map(
+          (p: IPullRequest, index: number) => ({
+            ...p,
+            comments: comments[index].data,
+          })
+        );
+
+        return pullRequestsWithComments;
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching pull request comments');
+      }
+    },
   },
 });

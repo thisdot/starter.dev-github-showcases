@@ -37,6 +37,9 @@ export interface IPullRequest {
   merged_at: string | null;
   review_comments_url: string;
   comments: any;
+  base: {
+    repo: IRepository;
+  };
 }
 
 export interface IRepoContents {
