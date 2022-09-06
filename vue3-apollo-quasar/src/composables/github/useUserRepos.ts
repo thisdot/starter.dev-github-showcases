@@ -19,6 +19,7 @@ export const useUserRepos = () => {
       first: repoFilters.state.first,
       last: repoFilters.state.last,
     });
+
     const repos = useResult(result, [], (data) => {
       const nodes = data?.owner?.repositories?.nodes;
       pageInfo = data?.owner?.repositories?.pageInfo;

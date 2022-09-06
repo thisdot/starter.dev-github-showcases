@@ -1,4 +1,4 @@
-import OrganizationPageLayout from '.';
+import OrganizationPageLayout from './OrganizationPageLayout.vue';
 
 export default {
   title: 'component/Organization Page Layout',
@@ -11,7 +11,13 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: '<OrganizationPageLayout v-bind="args" />',
+  template: `
+  <OrganizationPageLayout v-bind="args">
+  <template #repositories>
+    Repositories data here
+  </template>
+  </OrganizationPageLayout>
+  `,
 });
 
 export const Default = Template.bind({});

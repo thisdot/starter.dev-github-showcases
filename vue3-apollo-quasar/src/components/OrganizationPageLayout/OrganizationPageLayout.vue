@@ -25,28 +25,33 @@
 
         <q-tab-panels v-model="tab">
           <q-tab-panel name="overview">
-            <div class="text-h6">Overview</div>
-            <slot name="overview"></slot>
+            <slot name="overview">
+              <div class="text-h6">Overview</div>
+            </slot>
           </q-tab-panel>
 
           <q-tab-panel name="repositories">
-            <div class="text-h6">Repositories</div>
-            <slot name="repositories"></slot>
+            <slot name="repositories">
+              <div class="text-h6">Repositories</div>
+            </slot>
           </q-tab-panel>
 
           <q-tab-panel name="projects">
-            <div class="text-h6">Projects</div>
-            <slot name="projects"></slot>
+            <slot name="projects">
+              <div class="text-h6">Projects</div>
+            </slot>
           </q-tab-panel>
 
           <q-tab-panel name="packages">
-            <div class="text-h6">Packages</div>
-            <slot name="packages"></slot>
+            <slot name="packages">
+              <div class="text-h6">Packages</div>
+            </slot>
           </q-tab-panel>
 
           <q-tab-panel name="stars">
-            <div class="text-h6">Stars</div>
-            <slot name="stars"></slot>
+            <slot name="stars">
+              <div class="text-h6">Stars</div>
+            </slot>
           </q-tab-panel>
         </q-tab-panels>
       </div>

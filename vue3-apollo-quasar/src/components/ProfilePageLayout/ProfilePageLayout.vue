@@ -78,15 +78,7 @@
             <q-tab-panel name="repositories">
               <q-list separator>
                 <q-item v-for="repo in filteredAndSortedRepos" :key="repo.id">
-                  <RepoCard
-                    :name="repo.name"
-                    :visibility="repo.visibility"
-                    :description="repo.description"
-                    :primaryLanguage="repo.primaryLanguage"
-                    :stargazerCount="repo.stargazerCount"
-                    :forkCount="repo.forkCount"
-                    :updatedAt="repo.updatedAt"
-                  />
+                  <slot name="repositories" :repo="repo"></slot>
                 </q-item>
                 <q-item v-if="!filteredAndSortedRepos.length" class="q-mt-xl">
                   <span class="text-h5 block q-mx-auto text-weight-bold">
@@ -94,7 +86,6 @@
                   </span>
                 </q-item>
               </q-list>
-              <slot name="repositories"></slot>
             </q-tab-panel>
 
             <q-tab-panel name="projects">
@@ -129,12 +120,7 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import {
-  UserProfileCard,
-  SearchFilter,
-  TabHeader,
-  RepoCard,
-} from '@/components';
+import { UserProfileCard, SearchFilter, TabHeader } from '@/components';
 import { useUserRepos } from '@/composables';
 import {
   SEARCH_QUERY,
@@ -217,7 +203,7 @@ const sortedRepoData = (repos: Repo[]) => {
   let response = repos.slice(); //need because repos.value is a read only and can't bemodified.
   if (sortByData.value?.sortby === SORT_OPTIONS.name) {
     response.sort((a, b) =>
-      b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1,
+      b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 1,
     );
   } else if (sortByData.value?.sortby === SORT_OPTIONS.stars) {
     response.sort((a, b) => (b.stargazerCount > a.stargazerCount ? 1 : -1));
