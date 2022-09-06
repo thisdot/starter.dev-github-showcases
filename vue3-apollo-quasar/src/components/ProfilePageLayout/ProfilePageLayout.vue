@@ -79,6 +79,7 @@
               <q-list separator>
                 <q-item v-for="repo in filteredAndSortedRepos" :key="repo.id">
                   <RepoCard
+                    :owner="owner"
                     :name="repo.name"
                     :visibility="repo.visibility"
                     :description="repo.description"
@@ -149,7 +150,7 @@ import {
   defaultLanguage,
 } from '@/components/SearchFilter/data';
 
-const getUserRepos = useUserRepos();
+const { getUserRepos } = useUserRepos();
 const tab = ref<string>('');
 
 const props = defineProps({
@@ -164,6 +165,12 @@ interface Repo extends UserTopRepo {
   isFork: boolean;
   isArchived: boolean;
 }
+
+const owner = computed(() => {
+  return {
+    login: props.username,
+  };
+});
 
 const { repos, loading } = getUserRepos(props.username, false);
 

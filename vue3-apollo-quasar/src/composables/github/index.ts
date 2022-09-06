@@ -12,3 +12,4 @@ export { usePullRequest } from './usePullRequest';
 export { useRepoPage } from './useRepoPage';
 export { useRepoTree } from './useRepoTree';
 export { useRepoReadMe } from './useRepoReadMe';
+export { useRepoBranches } from './useRepoBranches';
