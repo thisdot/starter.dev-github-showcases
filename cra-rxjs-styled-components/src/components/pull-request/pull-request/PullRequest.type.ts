@@ -9,7 +9,6 @@ export type PullRequest = {
   messageCount: number;
   isMerged?: boolean;
   merged_at: string | null;
-  review_comments_url: string;
   repository_url: string;
   comments: any;
 };

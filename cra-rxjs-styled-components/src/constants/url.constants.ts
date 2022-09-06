@@ -3,6 +3,7 @@ import { IssueType, State } from '../types/types';
 export const API_URL_BASE = process.env.REACT_APP_API_URL;
 export const APP_BASE_URL = process.env.REACT_APP_BASE_URL;
 export const GITHUB_URL_BASE = `https://api.github.com`;
+export const PULLS_PER_PAGE = 25;
 
 export const REDIRECT_URL = `${APP_BASE_URL}/redirect`;
 
@@ -32,15 +33,18 @@ export const USER_REPO_LIST = (user: string, page: string = '1') =>
 export const GISTS_URL = (user: string) =>
 	`${GITHUB_URL_BASE}/users/${user}/gists?per_page=10`;
 
-// export const PULLS_URL = (owner: string, repoName: string) =>
-//   `${GITHUB_URL_BASE}/repos/${owner}/${repoName}/pulls?state=all`;
-
 export const PULLS_URL = (
   owner: string,
   repoName: string,
   page: string = '1'
 ) =>
   `${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}&per_page=30&page=${page}`;
+
+export const OPEN_PULLS_URL = (owner: string, repoName: string, page = 1) =>
+  `${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}+is:open+is:pr&page=${page}&per_page=${PULLS_PER_PAGE}`;
+
+export const CLOSED_PULLS_URL = (owner: string, repoName: string, page = 1) =>
+  `${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}+is:closed+is:pr&page=${page}&per_page=${PULLS_PER_PAGE}`;
 
 export const ISSUE_PR_SEARCH = (
 	user: string,
