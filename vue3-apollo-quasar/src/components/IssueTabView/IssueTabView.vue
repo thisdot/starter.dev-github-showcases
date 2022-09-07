@@ -19,7 +19,6 @@
           :commentCount="data.comments.totalCount"
           :number="data.number"
           :createdAt="data.createdAt"
-          :closedAt="data.closedAt"
         >
         </IssuesPullRequestsCard>
       </q-list>
@@ -36,6 +35,7 @@
           :commentCount="data.comments.totalCount"
           :number="data.number"
           :createdAt="data.createdAt"
+          :closedAt="data.closedAt"
         >
         </IssuesPullRequestsCard>
       </q-list>
