@@ -266,6 +266,9 @@
       <q-tab-panel :name="TABS.ISSUES">
         <slot :name="TABS.ISSUES" />
       </q-tab-panel>
+      <q-tab-panel :name="TABS.PULL_REQUESTS">
+        <slot :name="TABS.PULL_REQUESTS" />
+      </q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
