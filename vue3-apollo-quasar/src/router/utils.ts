@@ -11,8 +11,8 @@ function isLoggedIn() {
 }
 
 export const requiresAuth = (
-  to: { name: string },
-  from: { fullPath: string },
+  to: { path: string },
+  from: { path: string },
   next: Next,
 ): void => {
   if (isLoggedIn()) {
@@ -22,8 +22,8 @@ export const requiresAuth = (
   }
 };
 export const requiresNoAuth = (
-  to: { name: string },
-  from: { fullPath: string },
+  to: { path: string },
+  from: { path: string },
   next: Next,
 ): void => {
   if (isLoggedIn()) {

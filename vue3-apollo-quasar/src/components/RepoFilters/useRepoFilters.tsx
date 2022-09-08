@@ -144,7 +144,22 @@ const reducer = (state: FilterState, action: FilterAction) => {
   }
 };
 
-export function useRepoFilters() {
+interface UseRepoFilters {
+  state: FilterState;
+  changeSort: (value: RepositoryOrderField) => void;
+  changeLanguage: (value: string) => void;
+  changeType: (value: string) => void;
+  setQuery: (value: string) => void;
+  setLanguages: (value: LanguageFilter[]) => void;
+  resetFilters: () => void;
+  changePage: (data: { after: string; before: string }) => void;
+  isQueryActive: boolean;
+  isTypeActive: boolean;
+  isLanguageActive: boolean;
+  isFiltersActive: boolean;
+}
+
+export function useRepoFilters(): UseRepoFilters {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const changeSort = (sort: RepositoryOrderField) => {
