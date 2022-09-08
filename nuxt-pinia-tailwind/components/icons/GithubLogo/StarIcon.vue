@@ -24,5 +24,5 @@ export default {
       default: 'h-6',
     },
   },
-}
+};
 </script>

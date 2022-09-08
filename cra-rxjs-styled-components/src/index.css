@@ -1,57 +1,56 @@
 :root {
-  --gray-100: rgb(243 244 246);
-  --gray-200: rgb(229 231 235);
-  --gray-300: rgb(209 213 219);
-  --gray-400: rgb(156 163 175);
-  --gray-500: rgb(107 114 128);
-  --gray-600: rgb(75 85 99);
-  --gray-700: rgb(55 65 81);
-  --gray-800: rgb(31 41 55);
-  --gray-900: rgb(17 24 39);
-  --blue-100: rgb(191 219 254);
-  --blue-200: rgb(147 197 253);
-  --blue-300: rgb(96 165 250);
-  --blue-400: rgb(59 130 246);
-  --blue-500: rgb(37 99 235);
-  --blue-600: rgb(29 78 216);
-  --blue-700: rgb(30 64 175);
-  --blue-800: rgb(30 58 138);
-  --blue-900: rgb(17, 24, 39);
-  --transparent-background: transparent;
-  --border-none: none;
-  --cursor-pointer: pointer;
-  --box-sizing-border-box: border-box;
-  --flex: flex;
-  --display-block: block;
-  --inline-flex: inline-flex;
-  --inline-block: inline-block;
-  --align-items-center: center;
-  --flex-space-between: space-between;
-  --tw-border-opacity: 1;
-  --tw-bg-opacity: 1;
-  --tw-text-opacity-1: 1;
-  --tw-black-shadow: 0 10px 15px -3px rgb(0 0 0/0.1),
-    0 4px 6px -4px rgb(0 0 0/0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-black-shadow),
-    0 4px 6px -4px var(--tw-black-shadow);
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
-    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+	--gray-100: rgb(243 244 246);
+	--gray-200: rgb(229 231 235);
+	--gray-300: rgb(209 213 219);
+	--gray-400: rgb(156 163 175);
+	--gray-500: rgb(107 114 128);
+	--gray-600: rgb(75 85 99);
+	--gray-700: rgb(55 65 81);
+	--gray-800: rgb(31 41 55);
+	--gray-900: rgb(17 24 39);
+	--blue-100: rgb(191 219 254);
+	--blue-200: rgb(147 197 253);
+	--blue-300: rgb(96 165 250);
+	--blue-400: rgb(59 130 246);
+	--blue-500: rgb(37 99 235);
+	--blue-600: rgb(29 78 216);
+	--blue-700: rgb(30 64 175);
+	--blue-800: rgb(30 58 138);
+	--blue-900: rgb(17, 24, 39);
+	--transparent-background: transparent;
+	--border-none: none;
+	--cursor-pointer: pointer;
+	--box-sizing-border-box: border-box;
+	--flex: flex;
+	--display-block: block;
+	--inline-flex: inline-flex;
+	--inline-block: inline-block;
+	--align-items-center: center;
+	--flex-space-between: space-between;
+	--tw-border-opacity: 1;
+	--tw-bg-opacity: 1;
+	--tw-text-opacity-1: 1;
+	--tw-black-shadow: 0 10px 15px -3px rgb(0 0 0/0.1),
+		0 4px 6px -4px rgb(0 0 0/0.1);
+	--tw-shadow-colored: 0 10px 15px -3px var(--tw-black-shadow),
+		0 4px 6px -4px var(--tw-black-shadow);
+	--tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width)
+		var(--tw-ring-offset-color);
+	--tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+		calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
 }
 
 body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	margin: 0;
+	font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+		'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 * {
-  margin: 0;
+	margin: 0;
 }

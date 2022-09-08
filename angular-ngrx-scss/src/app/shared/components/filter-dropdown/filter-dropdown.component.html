@@ -1,4 +1,7 @@
-<ul class="filter-dropdown-container">
+<ul
+  [appClickAway]="handleCloseDropdown.bind(this)"
+  class="filter-dropdown-container"
+>
   <div>
     <button
       role="button"

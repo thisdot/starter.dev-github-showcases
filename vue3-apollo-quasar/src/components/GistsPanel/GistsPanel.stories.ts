@@ -1,4 +1,5 @@
 import GistsPanel from './GistsPanel.vue';
+import { mockedUserGistsQuery } from './mockedUserGists';
 
 export default {
   title: 'component/GistsPanel',
@@ -15,4 +16,10 @@ const Template = (args) => ({
 });
 
 export const Default = Template.bind({});
+
+Default.parameters = {
+  msw: {
+    handlers: [mockedUserGistsQuery],
+  },
+};
 Default.args = {};

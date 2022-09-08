@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia'
-import { IRepository } from '~/types/common/interfaces'
-import { UserGist } from '~/types/user/interfaces'
+import { defineStore } from 'pinia';
+import { IRepository } from '@/types/repository/interfaces';
+import { UserGist } from '@/types/user/interfaces';
 
 interface IUserRootState {
-  topRepos: IRepository[]
-  gists: UserGist[]
-  repos: IRepository[]
+  topRepos: IRepository[];
+  gists: UserGist[];
+  repos: IRepository[];
 }
 
 export const useUserStore = defineStore('userStore ', {
@@ -20,9 +20,9 @@ export const useUserStore = defineStore('userStore ', {
         const {
           $config: { GITHUB_API_URL },
           $axios,
-        } = this.$nuxt
+        } = this.$nuxt;
 
-        const url = `${GITHUB_API_URL}/user/repos`
+        const url = `${GITHUB_API_URL}/user/repos`;
 
         const { data } = await $axios.get<IRepository[]>(url, {
           params: {
@@ -30,11 +30,15 @@ export const useUserStore = defineStore('userStore ', {
             affiliation: 'owner, collaborator, organization_member',
             per_page: '20',
           },
-        })
+        });
 
-        this.topRepos = data
-      } catch (error) {
-        return error
+        this.topRepos = data;
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching user top repos');
       }
     },
     async getUserGists() {
@@ -43,19 +47,23 @@ export const useUserStore = defineStore('userStore ', {
           $config: { GITHUB_API_URL },
           $auth: { user },
           $axios,
-        } = this.$nuxt
+        } = this.$nuxt;
 
-        const url = `${GITHUB_API_URL}/users/${user.login}/gists`
+        const url = `${GITHUB_API_URL}/users/${user.login}/gists`;
 
         const { data } = await $axios.get<UserGist[]>(url, {
           params: {
             per_page: '10',
           },
-        })
+        });
 
-        this.gists = data
-      } catch (error) {
-        return error
+        this.gists = data;
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching user gists');
       }
     },
     async getUserRepos() {
@@ -63,21 +71,25 @@ export const useUserStore = defineStore('userStore ', {
         const {
           $config: { GITHUB_API_URL },
           $axios,
-        } = this.$nuxt
+        } = this.$nuxt;
 
-        const url = `${GITHUB_API_URL}/user/repos`
+        const url = `${GITHUB_API_URL}/user/repos`;
 
         const { data } = await $axios.get<IRepository[]>(url, {
           params: {
             sort: 'updated',
             per_page: '10',
           },
-        })
+        });
 
-        this.repos = data
-      } catch (error) {
-        return error
+        this.repos = data;
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching user repos');
       }
     },
   },
-})
+});

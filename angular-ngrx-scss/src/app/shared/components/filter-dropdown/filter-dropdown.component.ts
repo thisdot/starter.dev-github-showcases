@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
   Output,
 } from '@angular/core';
@@ -67,11 +66,7 @@ export class FilterDropdownComponent {
     this.isOpen = false;
   }
 
-  // TODO: maybe convert to directive
-  @HostListener('document:click', ['$event'])
-  onClick(event: PointerEvent) {
-    if (!this.elRef.nativeElement.contains(event.target)) {
-      this.isOpen = false;
-    }
+  handleCloseDropdown() {
+    this.isOpen = false;
   }
 }

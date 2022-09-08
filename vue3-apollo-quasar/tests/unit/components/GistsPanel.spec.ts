@@ -13,7 +13,7 @@ jest.mock('@vue/apollo-composable', () => {
 
   const data = {
     result: {
-      viewers: testData,
+      viewer: testData.value,
     },
     loading: false,
   };
