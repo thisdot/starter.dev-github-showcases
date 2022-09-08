@@ -37,6 +37,8 @@ And... That's it! Once you have these down, you're ready to get this up and runn
 
 ## Setting up
 
+Please note that the project is setup as a mono-repo, which means that the different versions of GitHub showcases using different technologies each belong in a separate directory in the root directory of the project.
+
 Clone this project by running
 
 ```git
@@ -48,8 +50,6 @@ Once cloned, enter the project directory like so
 ```
 cd .\starter.dev-github-showcases\vue3-ts-quasar
 ```
-
-Please not that the project is setup as a mono-repo, which means that the different versions of GitHub showcases using different technologies each belong in a separate directory in the root directory of the project.
 
 For more information on how the Vue3 + TS + Quasar version of the project is structured, please refer to the [contribution guide](CONTRIBUTING.md)
 
