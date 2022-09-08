@@ -16,7 +16,11 @@ export function useSetToken() {
 				'Content-Type': 'application/json; charset=UTF-8',
 			}),
 			credentials: 'include',
-			selector: (response: Response) => response.json(),
+			selector: (response: Response) => {
+				const t = response.json();
+				console.log(t); // empty object on non-chromium browser (e.g Firefox)
+				return t;
+			},
 		})
 			.pipe(
 				tap(({ access_token }) => {
@@ -24,7 +28,8 @@ export function useSetToken() {
 						throw new Error(`Error: could not retrieve token`);
 					}
 				}),
-				catchError(() => {
+				catchError((e) => {
+					alert(e);
 					navigate('/signin', { replace: true });
 					return EMPTY;
 				})
