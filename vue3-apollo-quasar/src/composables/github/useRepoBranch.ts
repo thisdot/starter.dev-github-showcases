@@ -7,14 +7,14 @@ type Branches = {
   default: boolean;
 };
 
-interface UseRepoBranches {
+interface UseRepoBranch {
   getRepoBranches: (data: { owner: string; name: string }) => {
     data: Ref<Branches[]>;
     loading: Ref<boolean>;
   };
 }
 
-export const useRepoBranches = (): UseRepoBranches => {
+export const useRepoBranch = (): UseRepoBranch => {
   const getRepoBranches = ({ owner, name }) => {
     const queryData = {
       owner,

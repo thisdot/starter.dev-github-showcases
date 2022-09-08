@@ -165,7 +165,7 @@ interface Repo extends UserTopRepo {
   isArchived: boolean;
 }
 
-const { repos, loading } = getUserRepos(props.username, false);
+const { repos, loading } = getUserRepos(props.username);
 
 const { result: searchData, loading: loadingSearch } = useQuery<{
   search: string;

@@ -19,7 +19,7 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { FileExplorer, BranchMenu } from '@/components';
-import { useRepoTree, useRepoBranches } from '@/composables';
+import { useRepoTree, useRepoBranch } from '@/composables';
 
 const props = defineProps({
   owner: {
@@ -79,7 +79,7 @@ const fileTree = computed((): FileTree => {
   };
 });
 
-const { getRepoBranches } = useRepoBranches();
+const { getRepoBranches } = useRepoBranch();
 const { data: branches } = getRepoBranches({
   owner: props.owner,
   name: props.repo,
