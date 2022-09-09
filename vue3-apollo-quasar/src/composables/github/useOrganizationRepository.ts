@@ -3,14 +3,14 @@ import { Ref } from 'vue';
 import { ORGANIZATION_REPOS_QUERY } from './queries';
 import { OrganizationRepositories } from './types';
 
-interface UseOrganizationRepositories {
+interface UseOrganizationRepository {
   getOrganizationRepositories: (organization: string) => {
     data: Ref<OrganizationRepositories | null>;
     loading: Ref<boolean>;
   };
 }
 
-export const useOrganizationRepositories = (): UseOrganizationRepositories => {
+export const useOrganizationRepository = (): UseOrganizationRepository => {
   const getOrganizationRepositories = (organization: string) => {
     const { result, loading } = useQuery(ORGANIZATION_REPOS_QUERY, {
       organization,

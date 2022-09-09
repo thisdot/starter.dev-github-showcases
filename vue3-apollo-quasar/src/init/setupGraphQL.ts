@@ -11,6 +11,7 @@ import { filterType } from '@/globals/filterType';
 import { sortBy } from '@/globals/sortBy';
 import { filteredLanguage } from '@/globals/filteredLanguage';
 import { search } from '@/globals/search';
+import { branch } from '@/globals/branch';
 
 const { getAuthToken } = useToken();
 
@@ -52,6 +53,11 @@ const cache = new InMemoryCache({
         search: {
           read() {
             return search();
+          },
+        },
+        branch: {
+          read() {
+            return branch();
           },
         },
       },
