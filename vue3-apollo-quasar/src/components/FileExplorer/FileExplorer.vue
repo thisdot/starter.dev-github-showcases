@@ -27,7 +27,6 @@ defineProps({
     required: true,
   },
 });
-
 const directoryCheck = (value: boolean): string => (value ? 'dir' : 'file');
 const itemKey = (name: string, isDirectory: boolean): string =>
   `${name}-${directoryCheck(isDirectory)}`;

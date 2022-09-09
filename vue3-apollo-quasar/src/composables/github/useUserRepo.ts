@@ -5,9 +5,23 @@ import {
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { USER_REPOS_QUERY } from './queries';
 import { Repo } from './types/userRepos';
+import { Ref } from 'vue';
 
-export const useUserRepos = () => {
-  const getUserRepos = (username, isOrg = false) => {
+interface UseUserRepo {
+  getUserRepos: (username: string) => {
+    repos: Ref<Repo[]>;
+    pageInfo: Ref<{
+      endCursor: string;
+      startCursor: string;
+      hasNextPage: string;
+      hasPreviousPage: string;
+    }>;
+    loading: Ref<boolean>;
+  };
+}
+
+export const useUserRepo = (): UseUserRepo => {
+  const getUserRepos = (username) => {
     const repoFilters = useRepoFilters();
     let pageInfo;
     const { result, loading } = useQuery(USER_REPOS_QUERY, {
@@ -51,11 +65,16 @@ export const useUserRepos = () => {
     });
 
     return {
-      repos,
-      pageInfo,
+      repos: repos as Ref<Repo[]>,
+      pageInfo: pageInfo as Ref<{
+        endCursor: string;
+        startCursor: string;
+        hasNextPage: string;
+        hasPreviousPage: string;
+      }>,
       loading,
     };
   };
 
-  return getUserRepos;
+  return { getUserRepos };
 };

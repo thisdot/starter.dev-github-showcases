@@ -3,7 +3,7 @@
     <li>
       <a routerLink="/" appOcticon="mark-github" size="32" color="white"></a>
     </li>
-    <li class="dropdown">
+    <li [appClickAway]="closeDropdown.bind(this)" class="dropdown">
       <button
         type="button"
         class="dropdown-title"
