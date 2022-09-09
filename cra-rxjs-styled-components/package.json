@@ -13,13 +13,13 @@
 		"@types/react-dom": "^17.0.11",
 		"date-fns": "^2.28.0",
 		"markdown-to-jsx": "^7.1.6",
-		"prism-react-renderer": "^1.3.3",
 		"parse-link-header": "^2.0.0",
+		"prism-react-renderer": "^1.3.3",
 		"react": "^17.0.2",
 		"react-content-loader": "^6.2.0",
 		"react-dom": "^17.0.2",
 		"react-router-dom": "^6.2.1",
-		"react-scripts": "4.0.3",
+		"react-scripts": "^5.0.1",
 		"rxjs": "^7.5.2",
 		"styled-components": "^5.3.3",
 		"typescript": "^4.5.5",
@@ -85,10 +85,10 @@
 		"@storybook/testing-library": "^0.0.9",
 		"@types/parse-link-header": "^2.0.0",
 		"@types/styled-components": "^5.1.21",
-		"eslint-plugin-react-hooks": "^4.3.0",
-		"prettier": "^2.5.1",
-		"webpack": "^5.70.0",
 		"eslint": "7.11.0",
-		"husky": "8.0.1"
+		"eslint-plugin-react-hooks": "^4.3.0",
+		"husky": "8.0.1",
+		"prettier": "^2.5.1",
+		"webpack": "^5.70.0"
 	}
 }
