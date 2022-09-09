@@ -77,9 +77,9 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { AppInput } from '@/components';
-import { defaultBranch, branch } from '@/globals/branch';
+import { DEFAULT_BRANCH, branch } from '@/globals/branch';
 const searchRef = ref('');
-const branchName = ref(defaultBranch);
+const branchName = ref(DEFAULT_BRANCH);
 const showOptions = ref(false);
 type Branches = {
   name: string;

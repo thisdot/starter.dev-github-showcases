@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { RouteConfigService } from '@this-dot/route-config';
 import {
@@ -44,6 +45,9 @@ const INITIAL_PROFILE_REPOS_STATE: ProfileReposState = {
   reposLoaded: false,
   reposLoadError: undefined,
 };
+
+const CURSOR_TWENTY_FIVE = 25;
+const CURSOR_TEN = 10;
 
 @Injectable({
   providedIn: 'root',
@@ -135,19 +139,29 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
     private routeConfigService: RouteConfigService<string, 'profile'>,
     private userReposGQL: UserReposGQL,
     private orgReposGQL: OrgReposGQL,
+    private activatedRoute: ActivatedRoute,
   ) {
     super(INITIAL_PROFILE_REPOS_STATE);
   }
 
   private getProfileRepos(owner: string, state: ProfileFilterState) {
+    const endCursor = this.activatedRoute.snapshot.queryParams['after'];
+    const startCursor = this.activatedRoute.snapshot.queryParams['before'];
+    const last = startCursor ? CURSOR_TWENTY_FIVE : undefined;
+    let first = endCursor ? CURSOR_TWENTY_FIVE : undefined;
+
+    if (!endCursor && !startCursor) {
+      first = CURSOR_TWENTY_FIVE;
+    }
+
     return this.userReposGQL
       .watch({
         username: owner,
         orderBy: state.sort,
-        afterCursor: state.afterCursor ?? undefined,
-        beforeCursor: state.beforeCursor ?? undefined,
-        first: state.first,
-        last: state.last,
+        afterCursor: endCursor,
+        beforeCursor: startCursor,
+        first: first,
+        last: last,
       })
       .valueChanges.pipe(
         tapResponse(
@@ -182,14 +196,23 @@ export class ProfileReposStore extends ComponentStore<ProfileReposState> {
   }
 
   private getOrgProfileRepos(owner: string, state: ProfileFilterState) {
+    const endCursor = this.activatedRoute.snapshot.queryParams['after'];
+    const startCursor = this.activatedRoute.snapshot.queryParams['before'];
+    const last = startCursor ? CURSOR_TEN : undefined;
+    let first = endCursor ? CURSOR_TEN : undefined;
+
+    if (!endCursor && !startCursor) {
+      first = CURSOR_TEN;
+    }
+
     return this.orgReposGQL
       .watch({
         orgname: owner,
         orderBy: state.sort,
-        afterCursor: state.afterCursor ?? undefined,
-        beforeCursor: state.beforeCursor ?? undefined,
-        first: state.first,
-        last: state.last,
+        afterCursor: endCursor,
+        beforeCursor: startCursor,
+        first: first,
+        last: last,
       })
       .valueChanges.pipe(
         tapResponse(

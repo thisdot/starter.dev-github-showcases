@@ -136,7 +136,7 @@ import {
   TabHeader,
   RepoCard,
 } from '@/components';
-import { useUserRepos } from '@/composables';
+import { useUserRepo } from '@/composables';
 import {
   SEARCH_QUERY,
   FILTER_TYPE_QUERY,
@@ -150,7 +150,7 @@ import {
   defaultLanguage,
 } from '@/components/SearchFilter/data';
 
-const { getUserRepos } = useUserRepos();
+const { getUserRepos } = useUserRepo();
 const tab = ref<string>('');
 
 const props = defineProps({
@@ -172,7 +172,7 @@ const owner = computed(() => {
   };
 });
 
-const { repos, loading } = getUserRepos(props.username, false);
+const { repos, loading } = getUserRepos(props.username);
 
 const { result: searchData, loading: loadingSearch } = useQuery<{
   search: string;

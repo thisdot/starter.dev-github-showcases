@@ -7,42 +7,42 @@ import PullRequestTabHeader from '../pr-tab-header';
 import { getPullsState } from '../../../helpers/getPullsState';
 
 type PullRequestProps = {
-  pullRequests: PullRequest[];
-  changeActiveTab: (value: PRTabValues) => void;
-  openPRCount: number;
-  closedPRCount: number;
+	pullRequests: PullRequest[];
+	changeActiveTab: (value: PRTabValues) => void;
+	openPRCount: number;
+	closedPRCount: number;
 };
 
 export default function PullRequestView({
-  pullRequests,
-  changeActiveTab,
-  openPRCount,
-  closedPRCount,
+	pullRequests,
+	changeActiveTab,
+	openPRCount,
+	closedPRCount,
 }: PullRequestProps) {
-  return (
-    <Wrapper>
-      <Content>
-        <PullRequestTabHeader
-          openPRCount={openPRCount}
-          closedPRCount={closedPRCount}
-          toggleTab={changeActiveTab}
-        />
-        {pullRequests.map((pr, index) => (
-          <PullRequestCard
-            title={pr.title}
-            number={pr.number}
-            created_at={pr.created_at}
-            openedBy={pr.user.login}
-            state={getPullsState(pr)}
-            messageCount={pr.comments.length}
-            key={index}
-          />
-        ))}
-      </Content>
-      <PaginationContainer>
-        <span className="prev">Previous</span>
-        <span className="next">Next</span>
-      </PaginationContainer>
-    </Wrapper>
-  );
+	return (
+		<Wrapper>
+			<Content>
+				<PullRequestTabHeader
+					openPRCount={openPRCount}
+					closedPRCount={closedPRCount}
+					toggleTab={changeActiveTab}
+				/>
+				{pullRequests.map((pr, index) => (
+					<PullRequestCard
+						title={pr.title}
+						number={pr.number}
+						created_at={pr.created_at}
+						openedBy={pr.user.login}
+						state={getPullsState(pr)}
+						messageCount={pr.comments.length}
+						key={index}
+					/>
+				))}
+			</Content>
+			<PaginationContainer>
+				<span className="prev">Previous</span>
+				<span className="next">Next</span>
+			</PaginationContainer>
+		</Wrapper>
+	);
 }

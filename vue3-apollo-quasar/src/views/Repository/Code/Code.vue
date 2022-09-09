@@ -19,7 +19,7 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { FileExplorer, BranchMenu } from '@/components';
-import { useRepoTree, useRepoBranches } from '@/composables';
+import { useRepoTree, useRepoBranch } from '@/composables';
 
 const props = defineProps({
   owner: {
@@ -30,7 +30,7 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  dirpath: {
+  dirPath: {
     type: String,
     default: '',
   },
@@ -49,7 +49,7 @@ const { data: tree } = getRepoTree({
   owner: props.owner,
   name: props.repo,
   branch: props.branch,
-  path: props.dirpath ? props.dirpath : props.repoDirPath,
+  path: props.dirPath ? props.dirPath : props.repoDirPath,
 });
 
 type FileTree = {
@@ -69,7 +69,7 @@ const fileTree = computed((): FileTree => {
       latestCommitMessage: 'Test commit', //TODO: Get this
       lastUpdated: 'Jul 15 2022', //TODO: Get this
       to: `${
-        !props.dirpath ? `${props.repo}/` : `/${props.owner}/${props.repo}/`
+        !props.dirPath ? `${props.repo}/` : `/${props.owner}/${props.repo}/`
       }${treeBranch.path}`,
     }),
   );
@@ -79,7 +79,7 @@ const fileTree = computed((): FileTree => {
   };
 });
 
-const { getRepoBranches } = useRepoBranches();
+const { getRepoBranches } = useRepoBranch();
 const { data: branches } = getRepoBranches({
   owner: props.owner,
   name: props.repo,

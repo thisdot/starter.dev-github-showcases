@@ -7,33 +7,33 @@ import { Issue } from '../Issues/Issue.type';
 import { State } from '../../../types/types';
 
 interface Props {
-  issue: Issue;
+	issue: Issue;
 }
 
 export default function IssueCard({ issue }: Props) {
-  const getIssueIcon = (state: State) => {
-    switch (state) {
-      case 'closed':
-        return <ClosedIssueIcon />;
-      case 'open':
-      default:
-        return <OpenIssueIcon />;
-    }
-  };
-  return (
-    <IssueCardWrapper>
-      <div className="left">
-        {getIssueIcon(issue.state)}
-        <IssueCardIssueInfo issue={issue} />
-      </div>
-      <div className="right">
-        {issue.comments > 0 && (
-          <div className="message">
-            <MessageIcon />
-            <span className="count">{issue.comments}</span>
-          </div>
-        )}
-      </div>
-    </IssueCardWrapper>
-  );
+	const getIssueIcon = (state: State) => {
+		switch (state) {
+			case 'closed':
+				return <ClosedIssueIcon />;
+			case 'open':
+			default:
+				return <OpenIssueIcon />;
+		}
+	};
+	return (
+		<IssueCardWrapper>
+			<div className="left">
+				{getIssueIcon(issue.state)}
+				<IssueCardIssueInfo issue={issue} />
+			</div>
+			<div className="right">
+				{issue.comments > 0 && (
+					<div className="message">
+						<MessageIcon />
+						<span className="count">{issue.comments}</span>
+					</div>
+				)}
+			</div>
+		</IssueCardWrapper>
+	);
 }

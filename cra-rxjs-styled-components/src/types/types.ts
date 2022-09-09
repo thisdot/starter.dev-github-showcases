@@ -4,22 +4,22 @@ export type IssueTabValues = 'open' | 'closed';
 export type DropdownTitle = 'Label' | 'Sort' | 'Milestones';
 
 export type IssueDetails = {
-  total_count: number;
-  incomplete_results: boolean;
-  items: any[];
+	total_count: number;
+	incomplete_results: boolean;
+	items: any[];
 };
 
 export type IssueTypes = {
-  closed: IssueDetails;
-  open: IssueDetails;
+	closed: IssueDetails;
+	open: IssueDetails;
 };
 
 export type FileItem = {
-  name: string;
-  path: string;
+	name: string;
+	path: string;
 };
 
 export type FileInfo = {
-  files: FileItem[];
-  directories: FileItem[];
+	files: FileItem[];
+	directories: FileItem[];
 };
