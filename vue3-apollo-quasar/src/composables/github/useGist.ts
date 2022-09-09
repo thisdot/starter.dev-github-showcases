@@ -1,9 +1,9 @@
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { USER_GISTS_QUERY } from './queries';
-import { GistItem, UseGists } from '../github/types';
+import { GistItem, UseGist } from './types';
 import { Ref } from 'vue';
 
-export const useGists = (): UseGists => {
+export const useGist = (): UseGist => {
   const getUserGists = () => {
     const { result, loading } = useQuery(USER_GISTS_QUERY);
     const gists = useResult(result, [], (data) =>

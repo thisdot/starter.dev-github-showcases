@@ -23,9 +23,9 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { useGists } from '@/composables';
+import { useGist } from '@/composables';
 
-const { getUserGists } = useGists();
+const { getUserGists } = useGist();
 const { data: gistList, loading } = getUserGists();
 </script>
 

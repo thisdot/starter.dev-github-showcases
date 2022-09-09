@@ -3,7 +3,7 @@ import { Ref } from 'vue';
 import { ISSUES_QUERY } from './queries';
 import { Issues } from './types';
 
-interface UseIssues {
+interface UseIssue {
   getIssues: (
     owner: string,
     name: string,
@@ -13,7 +13,7 @@ interface UseIssues {
   };
 }
 
-export const useIssues = (): UseIssues => {
+export const useIssue = (): UseIssue => {
   const getIssues = (owner: string, name: string) => {
     const { result, loading } = useQuery(ISSUES_QUERY, {
       owner,
