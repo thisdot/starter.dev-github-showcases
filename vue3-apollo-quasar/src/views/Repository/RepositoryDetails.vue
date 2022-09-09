@@ -2,19 +2,19 @@
   <q-page v-if="!loading">
     <RepoSubHeader
       :username="owner"
-      :repoName="repo"
-      :visibilityTag="visibility"
+      :repo-name="repo"
+      :visibility-tag="visibility"
       :stars="stargazerCount"
       :watch="watcherCount"
       :forks="forkCount"
-      :issuesCount="openIssueCount"
-      :pullRequestsCount="openPullRequestCount"
+      :issues-count="openIssueCount"
+      :pull-requests-count="openPullRequestCount"
     >
       <template #code>
         <Code
           :owner="owner"
           :repo="repo"
-          :dirpath="dirpath"
+          :dir-path="dirpath"
           :branch="branch"
           :repo-dir-path="repoDirPath"
         />

@@ -1,3 +1,3 @@
 import { makeVar } from '@apollo/client';
-export const defaultBranch = 'main';
-export const branch = makeVar(defaultBranch);
+export const DEFAULT_BRANCH = 'main';
+export const branch = makeVar(DEFAULT_BRANCH);

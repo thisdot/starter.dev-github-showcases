@@ -9,5 +9,5 @@ export interface Repo {
   isFork: boolean;
   stargazerCount: number;
   forkCount: number;
-  updatedAt: string | null;
+  updatedAt?: string | null;
 }

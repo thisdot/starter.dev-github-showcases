@@ -7,11 +7,8 @@ import { USER_REPOS_QUERY } from './queries';
 import { Repo } from './types/userRepos';
 import { Ref } from 'vue';
 
-interface UseUserRepos {
-  getUserRepos: (
-    username: string,
-    isOrg: boolean,
-  ) => {
+interface UseUserRepo {
+  getUserRepos: (username: string) => {
     repos: Ref<Repo[]>;
     pageInfo: Ref<{
       endCursor: string;
@@ -23,8 +20,8 @@ interface UseUserRepos {
   };
 }
 
-export const useUserRepos = (): UseUserRepos => {
-  const getUserRepos = (username, isOrg = false) => {
+export const useUserRepo = (): UseUserRepo => {
+  const getUserRepos = (username) => {
     const repoFilters = useRepoFilters();
     let pageInfo;
     const { result, loading } = useQuery(USER_REPOS_QUERY, {

@@ -3,13 +3,29 @@
     <div class="tab_view">
       <IssuePullRequestTab
         @changeTab="changeTab"
-        :openCounts="countList(openIssuesData)"
-        :closedCounts="countList(closedIssuesData)"
+        :openCounts="countList(openIssuesList)"
+        :closedCounts="countList(closedIssuesList)"
         :tabType="card_type"
       />
       <q-list class="open-issue" separator v-if="tabRef === TABS.OPEN">
         <IssuesPullRequestsCard
-          v-for="(data, index) in openIssuesData"
+          v-for="(data, index) in openIssuesList"
+          :key="index"
+          :state="toLowerCase(data.state)"
+          :cardType="card_type"
+          :author="data.author.login"
+          :title="data.title"
+          :url="data.url"
+          :commentCount="data.comments.totalCount"
+          :number="data.number"
+          :createdAt="data.createdAt"
+        >
+        </IssuesPullRequestsCard>
+      </q-list>
+
+      <q-list class="closed-issue" separator v-else>
+        <IssuesPullRequestsCard
+          v-for="(data, index) in closedIssuesList"
           :key="index"
           :state="toLowerCase(data.state)"
           :cardType="card_type"
@@ -20,22 +36,6 @@
           :number="data.number"
           :createdAt="data.createdAt"
           :closedAt="data.closedAt"
-        >
-        </IssuesPullRequestsCard>
-      </q-list>
-
-      <q-list class="closed-issue" separator v-else>
-        <IssuesPullRequestsCard
-          v-for="(data, index) in closedIssuesData"
-          :key="index"
-          :state="toLowerCase(data.state)"
-          :cardType="card_type"
-          :author="data.author.login"
-          :title="data.title"
-          :url="data.url"
-          :commentCount="data.comments.totalCount"
-          :number="data.number"
-          :createdAt="data.createdAt"
         >
         </IssuesPullRequestsCard>
       </q-list>
@@ -78,12 +78,12 @@ const props = defineProps({
 const tabRef = ref(TABS.OPEN);
 const card_type = 'issue';
 
-const openIssuesData = computed(() => {
+const openIssuesList = computed(() => {
   const data = props.openIssues?.edges?.slice() || [];
   const result = data.map((res) => res.node);
   return result || [];
 });
-const closedIssuesData = computed(() => {
+const closedIssuesList = computed(() => {
   const data = props.closedIssues?.edges?.slice() || [];
   const result = data.map((res) => res.node);
   return result || [];
@@ -98,8 +98,8 @@ const toLowerCase = (value: string) => value.toLowerCase();
 const countList = (array) => array.length;
 const showPagination = (tab: string): boolean => {
   const issues = {
-    openIssue: openIssuesData.value,
-    closedIssue: closedIssuesData.value,
+    openIssue: openIssuesList.value,
+    closedIssue: closedIssuesList.value,
   };
   return tab === tabRef.value && issues[`${tab}Issue`].length > 6;
 };
