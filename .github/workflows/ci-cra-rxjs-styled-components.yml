@@ -61,7 +61,7 @@ jobs:
           cache-dependency-path: cra-rxjs-styled-components/package-lock.json
 
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
         working-directory: cra-rxjs-styled-components
 
       - name: Check formatting
