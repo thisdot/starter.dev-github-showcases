@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { useIssues } from '@/composables';
+import { useIssue } from '@/composables';
 import { defineComponent, defineProps, computed } from 'vue';
 
 export default defineComponent({
@@ -26,7 +26,7 @@ const props = defineProps({
     default: '',
   },
 });
-const { getIssues } = useIssues();
+const { getIssues } = useIssue();
 
 const { data: issueData } = getIssues(props.owner, props.repo);
 
