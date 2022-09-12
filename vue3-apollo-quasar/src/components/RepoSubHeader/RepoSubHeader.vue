@@ -264,7 +264,7 @@
         <slot :name="TABS.CODE" />
       </q-tab-panel>
       <q-tab-panel :name="TABS.ISSUES">
-        <div>ISSUES</div>
+        <slot :name="TABS.ISSUES" />
       </q-tab-panel>
     </q-tab-panels>
   </div>

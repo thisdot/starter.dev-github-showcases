@@ -151,6 +151,12 @@ interface Repo extends UserTopRepo {
   isArchived: boolean;
 }
 
+const owner = computed(() => {
+  return {
+    login: props.username,
+  };
+});
+
 const { repos, loading } = getUserRepos(props.username);
 
 const { result: searchData, loading: loadingSearch } = useQuery<{

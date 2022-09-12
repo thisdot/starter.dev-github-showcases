@@ -1,3 +1,4 @@
+import { ISSUES } from './data';
 import IssueTabView from './IssueTabView.vue';
 
 export default {
@@ -15,4 +16,11 @@ const Template = (args) => ({
 });
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  openIssues: {
+    edges: ISSUES.openIssue,
+  },
+  closedIssues: {
+    edges: ISSUES.closedIssue,
+  },
+};

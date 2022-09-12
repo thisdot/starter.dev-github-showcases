@@ -19,6 +19,9 @@
           :repo-dir-path="repoDirPath"
         />
       </template>
+      <template #issues>
+        <Issues :owner="owner" :repo="repo" />
+      </template>
     </RepoSubHeader>
   </q-page>
 </template>
@@ -32,6 +35,7 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
+import { Issues } from './Issues';
 import { RepoSubHeader } from '@/components';
 import { Code } from './Code';
 import { useRoute } from 'vue-router';
