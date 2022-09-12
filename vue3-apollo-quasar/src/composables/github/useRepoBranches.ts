@@ -35,7 +35,7 @@ export const useRepoBranches = (): UseRepoBranches => {
       const mappedBranches = branches.map((b) => {
         return {
           name: b.name,
-          default: isDefaultBranchName(b.name) ? true : false,
+          default: isDefaultBranchName(b.name),
         };
       });
 
