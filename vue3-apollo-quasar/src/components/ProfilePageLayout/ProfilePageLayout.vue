@@ -203,7 +203,7 @@ const sortedRepoData = (repos: Repo[]) => {
   let response = repos.slice(); //need because repos.value is a read only and can't bemodified.
   if (sortByData.value?.sortby === SORT_OPTIONS.name) {
     response.sort((a, b) =>
-      b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 1,
+      a.name.toLowerCase().localeCompare(b.name.toLowerCase()),
     );
   } else if (sortByData.value?.sortby === SORT_OPTIONS.stars) {
     response.sort((a, b) => (b.stargazerCount > a.stargazerCount ? 1 : -1));
@@ -256,7 +256,7 @@ const repoDataFilteredByLanguage = (repos: Repo[]) => {
 // Function to filter repos by search
 const repoDataFilteredBySearch = (search: string) => {
   if (repos.value.length < 1) {
-    return repos;
+    return repos.value;
   }
   return repos.value.reduce((acc, repo) => {
     if (

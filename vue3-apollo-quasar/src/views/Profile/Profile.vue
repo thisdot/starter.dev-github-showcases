@@ -3,13 +3,13 @@
     <ProfilePageLayout :username="username">
       <template #repositories="{ repo }">
         <RepoCard
-          :name="repo.name"
-          :visibility="repo.visibility"
-          :description="repo.description"
-          :primaryLanguage="repo.primaryLanguage"
-          :stargazerCount="repo.stargazerCount"
-          :forkCount="repo.forkCount"
-          :updatedAt="repo.updatedAt"
+          :name="repo?.name"
+          :visibility="repo?.visibility"
+          :description="repo?.description"
+          :primaryLanguage="repo?.primaryLanguage"
+          :stargazerCount="repo?.stargazerCount"
+          :forkCount="repo?.forkCount"
+          :updatedAt="repo?.updatedAt"
         />
       </template>
     </ProfilePageLayout>

@@ -115,7 +115,8 @@ const { getFriendlyDate, upperFirst } = useFormatter();
 const friendlyUpdatedAt = getFriendlyDate(props.updatedAt);
 
 const repoNameWithOwner = computed(
-  () => `${props.owner?.login ? `${props.owner?.login}/` : ''}${props.name}`,
+  () =>
+    `${props.owner?.login ? `${props.owner?.login}/` : ''}${props.name || ''}`,
 );
 </script>
 
