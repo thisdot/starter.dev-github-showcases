@@ -22,6 +22,9 @@
       <template #issues>
         <Issues :owner="owner" :repo="repo" />
       </template>
+      <template #pullrequests>
+        <PullRequests :owner="owner" :repo="repo" />
+      </template>
     </RepoSubHeader>
   </q-page>
 </template>
@@ -38,6 +41,7 @@ export default defineComponent({
 import { Issues } from './Issues';
 import { RepoSubHeader } from '@/components';
 import { Code } from './Code';
+import { PullRequests } from './PullRequests';
 import { useRoute } from 'vue-router';
 import { useRepoPage } from '@/composables';
 const $route = useRoute();
