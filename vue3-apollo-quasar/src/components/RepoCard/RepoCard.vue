@@ -29,9 +29,9 @@
         {{ description }}
       </p>
 
-      <div class="text-dark q-mt-md row">
+      <div class="text-dark q-mt-md row items-center">
         <!-- Language -->
-        <div v-if="primaryLanguage" class="q-pr-md">
+        <div v-if="primaryLanguage" class="q-pr-md row items-baseline">
           <span
             class="circle q-mr-xs"
             :style="{ backgroundColor: primaryLanguage.color }"
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Star count -->
-        <span v-if="stargazerCount" class="q-pr-md">
+        <span v-if="stargazerCount" class="q-pr-md row items-baseline">
           <q-icon name="far fa-star" class="q-mr-xs"></q-icon>
           <span>
             {{ stargazerCount?.toLocaleString() }}
@@ -88,8 +88,8 @@ const props = defineProps({
     required: false,
   },
   owner: {
-    type: Object as () => { login: string },
-    required: true,
+    type: Object as () => { __typename: string; login: string },
+    required: false,
   },
   primaryLanguage: {
     type: [Object, null],
@@ -114,7 +114,10 @@ const props = defineProps({
 const { getFriendlyDate, upperFirst } = useFormatter();
 const friendlyUpdatedAt = getFriendlyDate(props.updatedAt);
 
-const repoNameWithOwner = computed(() => `${props.owner?.login}/${props.name}`);
+const repoNameWithOwner = computed(
+  () =>
+    `${props.owner?.login ? `${props.owner?.login}/` : ''}${props.name || ''}`,
+);
 </script>
 
 <style lang="scss" scoped>
