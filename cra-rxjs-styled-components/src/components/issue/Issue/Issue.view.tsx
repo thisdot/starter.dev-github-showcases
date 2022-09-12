@@ -10,10 +10,11 @@ type IssueProps = {
 };
 
 export default function IssuesView({ issues, changeActiveTab }: IssueProps) {
+	const changeTab = changeActiveTab || (() => {});
 	return (
 		<Wrapper>
 			<Content>
-				<IssueTabHeader toggleTab={changeActiveTab} />
+				<IssueTabHeader toggleTab={changeTab} />
 				{issues.map((issue, index) => (
 					<IssueCard
 						title={issue.title}

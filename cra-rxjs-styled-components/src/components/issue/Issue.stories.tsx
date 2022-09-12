@@ -16,9 +16,9 @@ const Template: ComponentStory<typeof Issue> = (args) => (
 );
 
 const openDate = new Date().toISOString();
-export const Issues = Template.bind({});
-Issues.args = {
-	changeActiveTab: () => null,
+
+export const OpenIssues = Template.bind({});
+OpenIssues.args = {
 	issues: [
 		{
 			title: 'Remix/Feature/125 individual repo page',
@@ -60,6 +60,12 @@ Issues.args = {
 			status: 'open',
 			messageCount: 3,
 		},
+	],
+};
+
+export const ClosedIssues = Template.bind({});
+ClosedIssues.args = {
+	issues: [
 		{
 			title: 'Remix/Feature/125 individual repo page',
 			openedNum: '#134 opened',
