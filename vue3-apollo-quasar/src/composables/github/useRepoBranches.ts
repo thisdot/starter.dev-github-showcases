@@ -29,13 +29,13 @@ export const useRepoBranches = (): UseRepoBranches => {
       if (!branches) {
         return [];
       }
-      const isDefaultBranch = (branch): boolean =>
-        data?.repository?.defaultBranchRef.name === branch;
+      const isDefaultBranchName = (branchName: string): boolean =>
+        data?.repository?.defaultBranchRef.name === branchName;
 
       const mappedBranches = branches.map((b) => {
         return {
           name: b.name,
-          default: isDefaultBranch(b.name) ? true : false,
+          default: isDefaultBranchName(b.name) ? true : false,
         };
       });
 
