@@ -1,6 +1,6 @@
 export type PullRequestData = {
   node: {
-    author: { login: string | null };
+    author: { login: string };
     title: string;
     url: string;
     number: number;
