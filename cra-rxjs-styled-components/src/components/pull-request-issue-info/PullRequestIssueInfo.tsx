@@ -23,7 +23,9 @@ export default function PullRequestIssueInfo({
 			</a>
 			<div className="sub_heading">
 				<span className="opened_num">#{number}</span>
+				{" "}
 				<span className="opened_by">by {openedBy}</span>
+				{" "}
 				<span className="opened_day">
 					{buildPrIssueResolution(state)} {format(new Date(created_at), 'MMM dd')}
 				</span>
