@@ -19,13 +19,14 @@ export default function PullRequestView({
 	openPRCount,
 	closedPRCount,
 }: PullRequestProps) {
+	const changeTab = changeActiveTab || (() => {});
 	return (
 		<Wrapper>
 			<Content>
 				<PullRequestTabHeader
 					openPRCount={openPRCount}
 					closedPRCount={closedPRCount}
-					toggleTab={changeActiveTab}
+					toggleTab={changeTab}
 				/>
 				{pullRequests.map((pr, index) => (
 					<PullRequestCard
