@@ -7,7 +7,7 @@ export interface GistItem {
   url: string;
 }
 
-export interface UseGists {
+export interface UseGist {
   getUserGists: () => {
     data: Readonly<Ref<Readonly<[] | GistItem[]>>>;
     loading: Ref<boolean>;

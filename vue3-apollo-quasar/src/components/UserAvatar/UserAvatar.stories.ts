@@ -9,6 +9,7 @@ export default {
       control: { type: 'radio' },
       options: ['px', 'rem', 'em', '%', 'vh', 'vw'],
     },
+    img: {},
   },
 };
 
@@ -24,4 +25,5 @@ export const Default = Template.bind({});
 Default.args = {
   size: 4,
   unit: 'rem',
+  img: 'https://avatars.githubusercontent.com/u/28502531?v=4',
 };

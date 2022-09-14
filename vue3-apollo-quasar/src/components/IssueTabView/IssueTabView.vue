@@ -3,20 +3,20 @@
     <div class="tab_view">
       <IssuePullRequestTab
         @changeTab="changeTab"
-        :openCounts="countList(ISSUES.openIssue)"
-        :closedCounts="countList(ISSUES.closedIssue)"
+        :openCounts="countList(openIssuesList)"
+        :closedCounts="countList(closedIssuesList)"
         :tabType="card_type"
       />
       <q-list class="open-issue" separator v-if="tabRef === TABS.OPEN">
         <IssuesPullRequestsCard
-          v-for="(data, index) in ISSUES.openIssue"
+          v-for="(data, index) in openIssuesList"
           :key="index"
           :state="toLowerCase(data.state)"
           :cardType="card_type"
-          :author="data.author"
+          :author="data.author.login"
           :title="data.title"
           :url="data.url"
-          :commentCount="data.comments"
+          :commentCount="data.comments.totalCount"
           :number="data.number"
           :createdAt="data.createdAt"
         >
@@ -25,16 +25,17 @@
 
       <q-list class="closed-issue" separator v-else>
         <IssuesPullRequestsCard
-          v-for="(data, index) in ISSUES.closedIssue"
+          v-for="(data, index) in closedIssuesList"
           :key="index"
           :state="toLowerCase(data.state)"
           :cardType="card_type"
-          :author="data.author"
+          :author="data.author.login"
           :title="data.title"
           :url="data.url"
-          :commentCount="data.comments"
+          :commentCount="data.comments.totalCount"
           :number="data.number"
           :createdAt="data.createdAt"
+          :closedAt="data.closedAt"
         >
         </IssuesPullRequestsCard>
       </q-list>
@@ -49,7 +50,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, defineProps, computed } from 'vue';
+import { IssuesData } from '@/composables/github/types';
 
 export default defineComponent({
   name: 'IssueTabView',
@@ -61,20 +63,51 @@ import {
   IssuesPullRequestsCard,
   PaginationButtons,
 } from '@/components';
-import { ISSUES, TABS } from './data';
+import { TABS } from './data';
+
+type Edges = {
+  edges: IssuesData[];
+};
+
+const props = defineProps({
+  openIssues: {
+    type: Object as () => Edges,
+    default: () => null,
+  },
+  closedIssues: {
+    type: Object as () => Edges,
+    default: () => null,
+  },
+});
 
 const tabRef = ref(TABS.OPEN);
 const card_type = 'issue';
 
+const openIssuesList = computed(() => {
+  const data = props.openIssues?.edges?.slice() || [];
+  const result = data.map((res) => res.node);
+  return result || [];
+});
+const closedIssuesList = computed(() => {
+  const data = props.closedIssues?.edges?.slice() || [];
+  const result = data.map((res) => res.node);
+  return result || [];
+});
+
 const changeTab = (tab: string) => {
   tabRef.value = tab;
 };
-const paginate = (value) => null;
+const paginate = (value: number) => null;
 
 const toLowerCase = (value: string) => value.toLowerCase();
 const countList = (array) => array.length;
-const showPagination = (tab) =>
-  tab === tabRef.value && ISSUES[`${tab}Issue`].length > 6;
+const showPagination = (tab: string): boolean => {
+  const issues = {
+    openIssue: openIssuesList.value,
+    closedIssue: closedIssuesList.value,
+  };
+  return tab === tabRef.value && issues[`${tab}Issue`].length > 6;
+};
 </script>
 
 <style lang="scss" scoped>

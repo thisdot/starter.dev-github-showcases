@@ -7,7 +7,7 @@
   </span>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'PrivacyBadge',
@@ -24,9 +24,9 @@ export default defineComponent({
     },
   },
   setup({ isPrivate }) {
-    const badgetText = ref<string>(isPrivate ? 'Private' : 'Public')
+    const badgetText = ref<string>(isPrivate ? 'Private' : 'Public');
 
-    return { badgetText }
+    return { badgetText };
   },
-})
+});
 </script>

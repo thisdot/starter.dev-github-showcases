@@ -82,12 +82,12 @@ export const AnchorLink = styles.a`
   }
 `;
 const svgStyles = () => css`
-  width: 1rem;
-  height: 1rem;
-  margin-bottom: 0.125rem;
-  margin-right: 0.25rem;
-  display: inline;
-  vertical-align: middle;
+	width: 1rem;
+	height: 1rem;
+	margin-bottom: 0.125rem;
+	margin-right: 0.25rem;
+	display: inline;
+	vertical-align: middle;
 `;
 
 export const TwitterIconStyles = styles(TwitterIcon)`

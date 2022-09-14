@@ -256,8 +256,20 @@
       <RepoTabHeader
         :issuesCount="issuesCount"
         :pullRequestsCount="pullRequestsCount"
+        @triggerTab="triggerTab"
       />
     </div>
+    <q-tab-panels v-model="tab">
+      <q-tab-panel :name="TABS.CODE">
+        <slot :name="TABS.CODE" />
+      </q-tab-panel>
+      <q-tab-panel :name="TABS.ISSUES">
+        <slot :name="TABS.ISSUES" />
+      </q-tab-panel>
+      <q-tab-panel :name="TABS.PULL_REQUESTS">
+        <slot :name="TABS.PULL_REQUESTS" />
+      </q-tab-panel>
+    </q-tab-panels>
   </div>
 </template>
 
@@ -267,7 +279,7 @@ import RepoTabHeader from './RepoTabHeader.vue';
 import ListItem from './ListItem.vue';
 import TextWithIconAndCount from '@/components/TextWithIconAndCount';
 import { countCalc } from '@/helpers';
-import { NOTIFICATIONS } from './data';
+import { NOTIFICATIONS, TABS } from './data';
 
 type Props = {
   username: string;
@@ -324,6 +336,7 @@ export default defineComponent({
   setup(props: Props) {
     const refStarsMenu = ref(false);
     const refWatchMenu = ref(false);
+    const tab = ref(TABS.CODE);
 
     const notify = ref(NOTIFICATIONS.all);
 
@@ -354,6 +367,9 @@ export default defineComponent({
     const forks_count = computed(() => countCalc(props.forks));
 
     const isNotActive = (value) => notify.value !== value;
+    const triggerTab = (value: string) => {
+      tab.value = value;
+    };
 
     return {
       repo_url,
@@ -369,6 +385,9 @@ export default defineComponent({
       toggleStarsMenu,
       isNotActive,
       NOTIFICATIONS,
+      tab,
+      TABS,
+      triggerTab,
     };
   },
 });

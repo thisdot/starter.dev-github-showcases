@@ -6,49 +6,56 @@ import MetaIcon from './MetaIcon';
 import { LanguageColor, Metadata, SocialWrapper } from './RepoMeta.styles';
 
 interface RepoMetaProps {
-  language?: string | null;
-  stargazerCount: number;
-  forkCount: number;
-  updatedAt: Date;
+	language?: string | null;
+	stargazerCount: number;
+	forkCount: number;
+	updatedAt: Date;
 }
 
 function RepoMeta({
-  language,
-  stargazerCount,
-  forkCount,
-  updatedAt,
+	language,
+	stargazerCount,
+	forkCount,
+	updatedAt,
 }: RepoMetaProps) {
-  const socialIcons = [];
-  if (stargazerCount > 0) {
-    socialIcons.push(
-      <MetaIcon text={stargazerCount} children={<StarLogo />} />
-    );
-  }
-  if (forkCount > 0) {
-    socialIcons.push(<MetaIcon text={forkCount} children={<BranchLogo />} />);
-  }
+	const socialIcons = [
+		{
+			count: stargazerCount,
+			icon: <StarLogo />,
+		},
+		{
+			count: forkCount,
+			icon: <BranchLogo />,
+		},
+	].filter((o) => o.count > 0);
 
-  return (
-    <Metadata>
-      {language && (
-        <div>
-          <LanguageColor
-            style={{
-              backgroundColor: getColourForLanguage(language) || '#ccc',
-            }}
-          />
-          {language}
-        </div>
-      )}
-      {socialIcons.length > 0 && <SocialWrapper>{socialIcons}</SocialWrapper>}
-      <div>
-        Updated{' '}
-        {formatDistance(new Date(updatedAt), Date.now(), {
-          addSuffix: true,
-        })}
-      </div>
-    </Metadata>
-  );
+	return (
+		<Metadata>
+			{language && (
+				<div>
+					<LanguageColor
+						style={{
+							backgroundColor: getColourForLanguage(language) || '#ccc',
+						}}
+					/>
+					{language}
+				</div>
+			)}
+			{socialIcons.length > 0 && (
+				<SocialWrapper>
+					{socialIcons.map(({ count, icon }, i) => (
+						<MetaIcon key={i} text={count} children={icon} />
+					))}
+				</SocialWrapper>
+			)}
+			<div>
+				Updated{' '}
+				{formatDistance(new Date(updatedAt), Date.now(), {
+					addSuffix: true,
+				})}
+			</div>
+		</Metadata>
+	);
 }
 
 export default RepoMeta;

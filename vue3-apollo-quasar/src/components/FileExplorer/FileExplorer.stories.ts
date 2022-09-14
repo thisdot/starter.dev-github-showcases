@@ -1,20 +1,18 @@
 import FileExplorer from './FileExplorer.vue';
+import FileExplorerNav from './FileExplorerNav.vue';
+import { ExplorerContent, Templates } from './types';
 
 export default {
   title: 'component/FileExplorer/Explorer',
   component: FileExplorer,
   argTypes: {
-    isDirectory: { type: 'boolean' },
-    name: { type: 'string' },
-    latestCommitMessage: { type: 'string' },
-    lastUpdated: { type: 'string' },
-    to: { type: 'string' },
+    contentList: {},
   },
 };
 
-const Template = (args) => ({
-  components: { FileExplorer },
-  setup() {
+const Template: Templates = (args: ExplorerContent[]) => ({
+  components: { FileExplorer, FileExplorerNav },
+  setup(): { args: ExplorerContent[] } {
     return { args };
   },
   template: '<FileExplorer v-bind="args" />',

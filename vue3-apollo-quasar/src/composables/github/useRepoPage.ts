@@ -1,5 +1,6 @@
 import { REPO_PAGE_QUERY } from './queries';
 import { useQuery, useResult } from '@vue/apollo-composable';
+import { Ref } from 'vue';
 
 interface RepoPageProps {
   name?: string;
@@ -30,6 +31,7 @@ interface RepoContext {
   branch: string;
   path: string;
   data?: {
+    visibility: string;
     isPrivate: boolean;
     stargazerCount: number;
     forkCount: number;
@@ -40,6 +42,13 @@ interface RepoContext {
     homepageUrl?: string | null;
     topics: string[];
     isOrg: boolean;
+  };
+}
+
+interface UseRepoPage {
+  getRepoPage: (data: RepoPageProps) => {
+    context: Ref<RepoContext | undefined>;
+    loading: Ref<boolean>;
   };
 }
 
@@ -56,7 +65,7 @@ function parseTopics(topics: TopicNodes): string[] {
   }, []);
 }
 
-export const useRepoPage = () => {
+export const useRepoPage = (): UseRepoPage => {
   const getRepoPage = ({ name, owner, branch, path = '' }: RepoPageProps) => {
     const isOwnerAndNameValid =
       typeof owner === 'string' && typeof name === 'string';
@@ -86,33 +95,30 @@ export const useRepoPage = () => {
     }
 
     // TODO: add better typing for repository
-    const repository: any = useResult(
-      result,
-      undefined,
-      (data) => data?.repository,
-    );
-
-    const context: RepoContext = {
-      owner,
-      name,
-      branch: repository?.defaultBranchRef?.name ?? defaultBranch,
-      path: formattedPath,
-      data: repository
-        ? {
-            isOrg: typeof repository.owner?.orgName === 'string',
-            isPrivate: repository.isPrivate,
-            stargazerCount: repository.stargazerCount,
-            forkCount: repository.forkCount,
-            watcherCount: repository.watchers?.totalCount || 0,
-            openIssueCount: repository.issues?.totalCount || 0,
-            openPullRequestCount: repository.pullRequests?.totalCount || 0,
-            description: repository.description,
-            homepageUrl: repository.homepageUrl,
-            topics: parseTopics(repository.topics?.nodes),
-          }
-        : undefined,
-    };
-    return { context, loading };
+    const context = useResult(result, undefined, ({ repository }) => {
+      return {
+        owner,
+        name,
+        branch: repository?.defaultBranchRef?.name ?? defaultBranch,
+        path: formattedPath,
+        data: repository
+          ? {
+              isOrg: typeof repository.owner?.orgName === 'string',
+              visibility: repository.visibility.toLowerCase(),
+              isPrivate: repository.isPrivate,
+              stargazerCount: repository.stargazerCount,
+              forkCount: repository.forkCount,
+              watcherCount: repository.watchers?.totalCount || 0,
+              openIssueCount: repository.issues?.totalCount || 0,
+              openPullRequestCount: repository.pullRequests?.totalCount || 0,
+              description: repository.description,
+              homepageUrl: repository.homepageUrl,
+              topics: parseTopics(repository.topics?.nodes),
+            }
+          : undefined,
+      };
+    });
+    return { context: context as Ref<RepoContext | undefined>, loading };
   };
   return { getRepoPage };
 };
