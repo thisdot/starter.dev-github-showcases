@@ -71,19 +71,7 @@ const primaryNavItems = computed(() => [
   {
     label: 'Profile',
     to: `/${userStore.username || '#'}`,
-  },
-  {
-    label: 'Repositories',
-    to: '#',
-  },
-  {
-    label: 'Gists',
-    to: '#',
-  },
-  {
-    label: 'Organizations',
-    to: '#',
-  },
+  }
 ]);
 
 const { goToExternal } = useNav();
