@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
 export const Layout = styled.div`
-  width: 100%;
   height: 100%;
-  background-color: rgb(243, 244, 246);
+	padding: 0 1rem;
+  background-color: rgb(255, 255, 255);
   display: grid;
-  
+	overflow: hidden;
 
   grid-template-columns: auto;
     grid-template-areas:
       'header'
-      'content'
-      'aside';
+      'aside'
+      'content';
   }
 
   @media (min-width: 850px) {

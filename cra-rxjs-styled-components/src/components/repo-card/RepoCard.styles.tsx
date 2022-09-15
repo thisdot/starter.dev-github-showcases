@@ -10,10 +10,6 @@ export const Containers = styled.div<Props>`
 	display: grid;
 	grid-template-columns: repeat(12, minmax(0, 1fr));
 	column-gap: 1rem;
-	&:first-of-type {
-		border-top: ${(props) =>
-			props.star && '1px solid rgb(229 231 235 / var(--tw-border-opacity))'};
-	}
 	padding: ${(props) => (props.star ? '2rem 0' : '1rem')};
 	border-bottom: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
 `;
@@ -79,6 +75,7 @@ export const StarBtn = styled.button`
 	&:hover {
 		background-color: rgb(229 231 235 / 0.5);
 	}
+	cursor: pointer;
 `;
 
 export const StarIcon = styled(Star)`

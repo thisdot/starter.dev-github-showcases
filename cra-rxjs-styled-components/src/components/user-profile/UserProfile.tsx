@@ -16,12 +16,13 @@ import {
 	AnchorLink,
 	TwitterIconStyles,
 	LinkIconStyles,
+	UserProfileContainer,
 } from './UserProfile.styles';
 
 function UserProfileView() {
 	const user = useUser();
 	return (
-		<div>
+		<UserProfileContainer>
 			<Avatar
 				src={user?.avatar_url}
 				alt="Avatar"
@@ -79,7 +80,7 @@ function UserProfileView() {
 			{user?.organizations?.length && (
 				<OrgList organizations={user?.organizations} />
 			)}
-		</div>
+		</UserProfileContainer>
 	);
 }
 
