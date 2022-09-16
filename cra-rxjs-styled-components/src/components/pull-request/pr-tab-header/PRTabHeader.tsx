@@ -2,7 +2,7 @@ import { Container, StatusLabel, StatusTab } from './PRTabHeader.style';
 import { useCallback, useState } from 'react';
 
 import CorrectIcon from '../../icons/CorrectIcon';
-import DetailsDropdown from '../../details-dropdown';
+import DetailsDropdown from '../../details-dropdown/DetailsDropdown';
 import type { DropdownTitle } from '../types';
 import type { PRTabValues } from '../types';
 import PullRequestIcon from '../../icons/PullRequestIcon';

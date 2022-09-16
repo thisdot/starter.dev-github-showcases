@@ -1,7 +1,7 @@
 import styles, { css } from 'styled-components';
 import { StyledIconBase } from '@styled-icons/styled-icon';
-import { TwitterIcon, LinkIcon } from '../icons';
-
+import { TwitterIcon } from '../icons/TwitterIcon';
+import { LinkIcon } from '../icons/LinkIcon';
 export const UserProfileContainer = styles.div`
 	max-width: 90%;
 	grid-area: aside;

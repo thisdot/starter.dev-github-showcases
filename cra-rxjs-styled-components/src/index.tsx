@@ -11,7 +11,7 @@ import TopRepos from './routes/user-top-repos';
 import RepoPullRequest from './routes/repo/repository-pull-request';
 import RepoIssues from './routes/repo/repository-issues';
 import Repo from './routes/repo';
-import UserRepos from './components/user-repos';
+import UserRepos from './components/user-repos/UserRepos';
 import UserProfile from './routes/profile';
 import RepoBranchRoot from './routes/repo/repository-code';
 import RepoBranchTreePath from './routes/repo/repository-code/repository-tree/repository-tree';

@@ -1,6 +1,6 @@
 import { RepoListWrapper } from './UserRepos.styles';
 import { useUserRepositories } from '../../hooks/user-repositories/use-user-repositories';
-import RepoCard from '../repo-card';
+import RepoCard from '../repo-card/RepoCard';
 
 function UserRepos({ isOrg = false }) {
 	const { loading, repos } = useUserRepositories(isOrg);

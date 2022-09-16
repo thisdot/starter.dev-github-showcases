@@ -1,6 +1,6 @@
 import { Layout } from '../components/layouts/Layout';
-import RepoCard from '../components/repo-card';
-import UserGists from '../components/user-gists';
+import RepoCard from '../components/repo-card/RepoCard';
+import UserGists from '../components/user-gists/UserGist';
 import styled from 'styled-components';
 import { useGists } from '../hooks/gists/use-gists';
 import { useRepos } from '../hooks/repositories/use-repos';
