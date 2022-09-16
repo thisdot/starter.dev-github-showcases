@@ -48,7 +48,7 @@ This is a demo application that re-implements some of GitHub's pages and functio
 Clone the starter.dev-showcases repository from https://github.com/thisdot/starter.dev-github-showcases
 
 ```bash
-git clone https://github.com/thisdot/starter.dev-github-showcases
+git clone https://github.com/thisdot/starter.dev-github-showcases.git
 ```
 
 ### Env Setup
