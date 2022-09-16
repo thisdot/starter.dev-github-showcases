@@ -1,6 +1,4 @@
 import { Layout } from '../components/layouts/Layout';
-import PaginateButton from '../components/paginate-button';
-import { PaginateWrapper } from '../components/paginate-button/PaginateButton.style';
 import RepoCard from '../components/repo-card';
 import UserGists from '../components/user-gists';
 import styled from 'styled-components';
@@ -56,9 +54,11 @@ const ViewRepositoriesLink = styled.a`
 
 export default function TopRepos() {
 	const user = useUser();
-	const { repositories, prevPage, nextPage, hasNextPage, hasPrevPage } =
-		useRepos(user?.login);
+	const { repositories } = useRepos(user?.login);
 	const gists = useGists();
+	const topRepositories = [...repositories]
+		.sort((a, b) => b.stargazers_count - a.stargazers_count)
+		.slice(0, 10);
 
 	return (
 		<>
@@ -75,7 +75,7 @@ export default function TopRepos() {
 					<Page>
 						<Heading>Repositories</Heading>
 						<RepositoriesContainer>
-							{repositories.map((repo) => (
+							{topRepositories.map((repo) => (
 								<RepoCard repo={repo} key={repo.id} />
 							))}
 							<ViewRepositoriesContainer>
@@ -84,15 +84,6 @@ export default function TopRepos() {
 								</ViewRepositoriesLink>
 							</ViewRepositoriesContainer>
 						</RepositoriesContainer>
-
-						<PaginateWrapper>
-							<PaginateButton onClick={prevPage} disabled={!hasPrevPage}>
-								<span className="prev"></span> Previous
-							</PaginateButton>
-							<PaginateButton onClick={nextPage} disabled={!hasNextPage}>
-								Next <span className="next"></span>
-							</PaginateButton>
-						</PaginateWrapper>
 					</Page>
 				</Main>
 			</Layout>

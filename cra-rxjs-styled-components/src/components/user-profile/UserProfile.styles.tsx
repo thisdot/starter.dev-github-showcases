@@ -2,6 +2,11 @@ import styles, { css } from 'styled-components';
 import { StyledIconBase } from '@styled-icons/styled-icon';
 import { TwitterIcon, LinkIcon } from '../icons';
 
+export const UserProfileContainer = styles.div`
+	max-width: 90%;
+	grid-area: aside;
+`;
+
 export const Avatar = styles.img`
   border-radius: 50%;
   z-index: 30;
