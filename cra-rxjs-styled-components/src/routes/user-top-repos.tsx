@@ -56,7 +56,7 @@ export default function TopRepos() {
 	const user = useUser();
 	const { repositories } = useRepos(user?.login);
 	const gists = useGists();
-	const toprepositories = [...repositories]
+	const topRepositories = [...repositories]
 		.sort((a, b) => b.stargazers_count - a.stargazers_count)
 		.slice(0, 10);
 
