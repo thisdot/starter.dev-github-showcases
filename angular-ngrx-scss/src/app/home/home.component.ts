@@ -11,14 +11,12 @@ import { fetchUserData } from '../state/user/user.actions';
 })
 export class HomeComponent implements OnInit {
   user$ = this.store.select(selectAuthUserName);
-  username = '';
 
   constructor(private store: Store) {}
 
   ngOnInit() {
     this.user$.subscribe((user) => {
-      this.username = user;
-      this.store.dispatch(fetchUserData({ username: this.username }));
+      this.store.dispatch(fetchUserData({ username: user }));
     });
   }
 }

@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { RepositoryState } from './repository.state';
 
-export const repositoryFeatureKey = 'repo';
+export const repositoryFeatureKey = 'repository';
 export const selectRepositoryState =
   createFeatureSelector<RepositoryState>(repositoryFeatureKey);
 

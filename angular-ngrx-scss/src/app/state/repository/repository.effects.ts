@@ -66,7 +66,7 @@ export class RepositoryEffects {
               visibility: info.visibility,
               watchCount: info.watchers_count,
               website: info.homepage,
-              readme: atob(readme.content),
+              readme: readme.content || '',
             };
             return fetchRepositorySuccess({ repoData: allData });
           }),
