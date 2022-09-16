@@ -75,7 +75,7 @@ export default function TopRepos() {
 					<Page>
 						<Heading>Repositories</Heading>
 						<RepositoriesContainer>
-							{toprepositories.map((repo) => (
+							{topRepositories.map((repo) => (
 								<RepoCard repo={repo} key={repo.id} />
 							))}
 							<ViewRepositoriesContainer>
