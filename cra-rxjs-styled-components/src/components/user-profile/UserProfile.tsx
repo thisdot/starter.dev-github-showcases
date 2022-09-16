@@ -3,6 +3,7 @@ import {
 	LocationMarker,
 } from '@styled-icons/heroicons-outline';
 import { useUser } from '../../context/UserProvider';
+import LoadingProfile from './LoadingProfile';
 import OrgList from './OrgList';
 import { SocialIcons } from './SocialIcons';
 import {
@@ -21,6 +22,9 @@ import {
 
 function UserProfileView() {
 	const user = useUser();
+	if (!user) {
+		return <LoadingProfile />
+	}
 	return (
 		<UserProfileContainer>
 			<Avatar

@@ -13,6 +13,7 @@ import {
 	StarBtn,
 	StarIcon,
 } from './RepoCard.styles';
+import RepoCardSkeleton from './RepoCardSkeleton';
 
 interface RepoCardProps {
 	repo: Repository;
@@ -31,6 +32,10 @@ function RepoCard({ repo, star }: RepoCardProps) {
 		updated_at,
 		visibility,
 	} = repo;
+
+	if (!repo) {
+		return <RepoCardSkeleton />
+	}
 
 	return (
 		<Containers key={id} star={star}>
