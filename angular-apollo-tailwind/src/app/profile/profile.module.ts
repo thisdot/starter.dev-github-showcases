@@ -22,6 +22,7 @@ import {
   ProfileRepoListItemComponent,
   ProfileRepoListItemSkeletonComponent,
 } from './components';
+import { PipesModule } from '@shared';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {
     ReactiveFormsModule,
     ReposFilterDropdownModule,
     PaginationModule,
+    PipesModule,
   ],
 })
 export class ProfileModule {}
