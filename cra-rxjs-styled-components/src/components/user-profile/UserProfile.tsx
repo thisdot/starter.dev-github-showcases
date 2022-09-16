@@ -23,12 +23,14 @@ function UserProfileView() {
 	const user = useUser();
 	return (
 		<UserProfileContainer>
-			<Avatar
-				src={user?.avatar_url}
-				alt="Avatar"
-				width={260}
-				height={260}
-			></Avatar>
+			{user?.avatar_url && (
+				<Avatar
+					src={user?.avatar_url}
+					alt="Avatar"
+					width={260}
+					height={260}
+				></Avatar>
+			)}
 			<NameContainer>
 				<Name>{user?.name}</Name>
 				<Username>{user?.login}</Username>
