@@ -114,3 +114,19 @@ export interface IIssue {
   updated_at: string;
   closed_by: Partial<IUser>;
 }
+
+export interface IComments {
+  body: string;
+  user: IUser;
+  created_at: string;
+  updated_at: string;
+  author_association:
+    | 'COLLABORATOR'
+    | 'CONTRIBUTOR'
+    | 'FIRST_TIMER'
+    | 'FIRST_TIME_CONTRIBUTOR'
+    | 'MANNEQUIN'
+    | 'MEMBER'
+    | 'NONE'
+    | 'OWNER';
+}
