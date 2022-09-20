@@ -54,6 +54,9 @@
   .comments {
     text-align: center;
     position: relative;
-    top: -20px;
+
+    span[appOcticon="comment"] {
+      display: block;
+    }
   }
 }
