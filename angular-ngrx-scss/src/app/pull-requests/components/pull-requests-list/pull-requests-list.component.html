@@ -4,7 +4,7 @@
       *ngIf="pullRequests?.pullRequests?.length ; else emptyList"
     >
       <app-pull-request-card
-        *ngFor="let item of pullRequests.pullRequests"
+        *ngFor="let item of pullRequests?.pullRequests"
         [pullRequest]="item"
       ></app-pull-request-card>
     </ng-container>
