@@ -13,6 +13,7 @@ export const initialRepoState: RepoState = {
   starCount: 0,
   tags: [],
   tree: [],
+  pullRequests: [],
   selectedFile: null,
   activeBranch: '',
   visibility: '',
@@ -31,6 +32,11 @@ const reducer = createReducer(
     selectedFile: fileContents,
   })),
   // TODO: handle fetchFileError case
+  on(RepositoryActions.fetchPullRequestsSuccess, (state, { pullRequests }) => ({
+    ...state,
+    pullRequests,
+  })),
+  // TODO: handle fetchPullRequestsError case
 );
 
 export function repoReducer(state: RepoState | undefined, action: Action) {

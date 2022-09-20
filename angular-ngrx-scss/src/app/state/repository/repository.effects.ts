@@ -8,6 +8,9 @@ import {
   fetchFileContents,
   fetchFileContentsFailure,
   fetchFileContentsSuccess,
+  fetchPullRequests,
+  fetchPullRequestsFailure,
+  fetchPullRequestsSuccess,
   fetchRepository,
   fetchRepositoryFailure,
   fetchRepositorySuccess,
@@ -46,6 +49,7 @@ export class RepositoryEffects {
               tree: contents,
               activeBranch: branch ?? info.activeBranch,
               selectedFile: null,
+              pullRequests: [],
               visibility: info.visibility,
               watchCount: info.watchCount,
               website: info.website,
@@ -68,6 +72,18 @@ export class RepositoryEffects {
             map((fileContents) => fetchFileContentsSuccess({ fileContents })),
             catchError((error) => of(fetchFileContentsFailure({ error }))),
           );
+      }),
+    );
+  });
+
+  fetchPullRequests$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fetchPullRequests),
+      switchMap(({ owner, repoName }) => {
+        return this.repoService.getPullRequests(owner, repoName).pipe(
+          map((pullRequests) => fetchPullRequestsSuccess({ pullRequests })),
+          catchError((error) => of(fetchPullRequestsFailure({ error }))),
+        );
       }),
     );
   });

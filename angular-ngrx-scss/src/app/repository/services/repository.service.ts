@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import {
   FileContents,
   FileContentsApiResponse,
+  PullRequestAPIResponse,
   ReadmeApiResponse,
   RepoApiResponse,
   RepoContents,
@@ -40,6 +41,7 @@ export class RepositoryService {
         issueCount: data.open_issues_count,
         tags: data.topics,
         selectedFile: null,
+        pullRequests: [],
         activeBranch: data.default_branch,
         ownerName: '',
         prCount: 0,
@@ -142,6 +144,23 @@ export class RepositoryService {
           content: atob(data.content),
           size: data.size,
         };
+      }),
+    );
+  }
+
+  getPullRequests(
+    owner: string,
+    repoName: string,
+    /*
+     * TODO: update the return type of this method. Create an interface that has just the
+     *  needed props from the response, use it here and in other relevant places in the
+     * repo state slice
+     * */
+  ): Observable<Partial<PullRequestAPIResponse[]>> {
+    const url = `${environment.githubUrl}/repos/${owner}/${repoName}/pulls`;
+    return this.http.get<PullRequestAPIResponse[]>(url).pipe(
+      map((data) => {
+        return data;
       }),
     );
   }

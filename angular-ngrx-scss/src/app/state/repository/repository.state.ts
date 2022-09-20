@@ -11,6 +11,8 @@ export interface RepoState {
   starCount: number;
   tags: string[];
   tree: RepoContents[];
+  // TODO: update this type
+  pullRequests: Partial<PullRequestAPIResponse[]>;
   activeBranch: string;
   selectedFile: FileContents | null;
   visibility: string;
@@ -166,4 +168,53 @@ export interface ReadmeApiResponse {
     git: string;
     html: string;
   };
+}
+
+export interface PullRequestAPIResponse {
+  url: string;
+  id: number;
+  node_id: string;
+  html_url: string;
+  diff_url: string;
+  patch_url: string;
+  issue_url: string;
+  commits_url: string;
+  review_comments_url: string;
+  review_comment_url: string;
+  comments_url: string;
+  statuses_url: string;
+  number: number;
+  state: string;
+  locked: true;
+  title: string;
+  user: {
+    login: string;
+    id: 1;
+    node_id: string;
+    avatar_url: string;
+    gravatar_id: string;
+    url: string;
+    html_url: string;
+    followers_url: string;
+    following_url: string;
+    gists_url: string;
+    starred_url: string;
+    subscriptions_url: string;
+    organizations_url: string;
+    repos_url: string;
+    events_url: string;
+    received_events_url: string;
+    type: string;
+    site_admin: boolean;
+  };
+  body: string;
+  labels: Array<{
+    id: number;
+    node_id: string;
+    url: string;
+    name: string;
+    description: string;
+    color: string;
+    default: boolean;
+  }>;
 }
