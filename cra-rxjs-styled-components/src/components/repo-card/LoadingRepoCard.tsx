@@ -1,7 +1,7 @@
 import ContentLoader from 'react-content-loader';
 import styled from 'styled-components';
 
-function RepoCardSkeleton() {
+function LoadingRepoCard() {
 	const Container = styled.div`
 		padding-top: 2rem;
 		padding-bottom: 2rem;
@@ -22,13 +22,4 @@ function RepoCardSkeleton() {
 	);
 }
 
-export default RepoCardSkeleton;
-
-// .container {
-//  @apply border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4;
-// padding-top: 2rem; /* 32px */
-// padding-bottom: 2rem; /* 32px */
-// border-bottom-width: 1px;
-//border-color: rgb(229 231 235);
-// display: grid
-// gap
+export default LoadingRepoCard;

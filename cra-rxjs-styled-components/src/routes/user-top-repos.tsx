@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { useGists } from '../hooks/gists/use-gists';
 import { useRepos } from '../hooks/repositories/use-repos';
 import { useUser } from '../context/UserProvider';
+import LoadingRepoCard from '../components/repo-card/LoadingRepoCard';
+import { LoadingTextLine } from '../components/Loading';
 
 const Page = styled.div`
 	padding: 3rem;
@@ -53,9 +55,10 @@ const ViewRepositoriesLink = styled.a`
 `;
 
 export default function TopRepos() {
-	const user = useUser();
+	const context = useUser();
+	const user = context?.user;
 	const { repositories } = useRepos(user?.login);
-	const gists = useGists();
+	const { gists, loadingGist } = useGists();
 	const topRepositories = [...repositories]
 		.sort((a, b) => b.stargazers_count - a.stargazers_count)
 		.slice(0, 10);
@@ -63,6 +66,7 @@ export default function TopRepos() {
 	return (
 		<>
 			<Layout>
+				{loadingGist ? <LoadingTextLine /> : (
 				<UserGists
 					title="Gists"
 					links={gists.map((gist) => ({
@@ -71,18 +75,25 @@ export default function TopRepos() {
 						href: gist.html_url,
 					}))}
 				/>
+				)}
 				<Main>
 					<Page>
 						<Heading>Repositories</Heading>
 						<RepositoriesContainer>
-							{topRepositories.map((repo) => (
-								<RepoCard repo={repo} key={repo.id} />
-							))}
-							<ViewRepositoriesContainer>
-								<ViewRepositoriesLink href={`/${user?.login}`}>
-									View all Repositories
-								</ViewRepositoriesLink>
-							</ViewRepositoriesContainer>
+							{repositories.length <= 0 ? (
+								<LoadingRepoCard />
+							) : (
+								<>
+									{topRepositories.map((repo) => (
+										<RepoCard repo={repo} key={repo.id} />
+									))}
+									<ViewRepositoriesContainer>
+										<ViewRepositoriesLink href={`/${user?.login}`}>
+											View all Repositories
+										</ViewRepositoriesLink>
+									</ViewRepositoriesContainer>
+								</>
+							)}
 						</RepositoriesContainer>
 					</Page>
 				</Main>

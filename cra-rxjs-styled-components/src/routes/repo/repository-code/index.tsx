@@ -9,9 +9,10 @@ import {
 } from '../../../components/layouts/RepoLayoutPage';
 import { useRepo } from '../../../context/RepoContext';
 import { useRepoExplorer } from '../../../hooks/repo-explorer/use-repo-explorer';
+import { LoadingBulletList } from '../../../components/Loading';
 
 export default function RepoBranchRoot() {
-	const { owner, name, branch, path, basePath, data } = useRepo();
+	const { owner, name, branch, path, basePath, data, isRepoLoading } = useRepo();
 	const { files, directories } = useRepoExplorer();
 
 	return (
@@ -19,13 +20,17 @@ export default function RepoBranchRoot() {
 			<RepoContainer>
 				<RepoGrid>
 					<RepoMain>
-						<FileExplorer
-							branch={branch}
-							path={path}
-							basePath={basePath}
-							directories={directories}
-							files={files}
-						/>
+						{isRepoLoading ? (
+							<LoadingBulletList />
+						) : (
+							<FileExplorer
+								branch={branch}
+								path={path}
+								basePath={basePath}
+								directories={directories}
+								files={files}
+							/>
+						)}
 						<Readme branch={branch} username={owner} repository={name} />
 					</RepoMain>
 					<RepoAside>

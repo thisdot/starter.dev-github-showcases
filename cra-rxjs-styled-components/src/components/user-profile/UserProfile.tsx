@@ -21,10 +21,10 @@ import {
 } from './UserProfile.styles';
 
 function UserProfileView() {
-	const user = useUser();
-	if (!user) {
-		return <LoadingProfile />
-	}
+	const context = useUser();
+	const user = context?.user;
+	const loading = context?.loading;
+	if (loading) return <LoadingProfile />;
 	return (
 		<UserProfileContainer>
 			<Avatar
