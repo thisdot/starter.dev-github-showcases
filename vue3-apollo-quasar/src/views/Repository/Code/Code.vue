@@ -3,7 +3,12 @@
     <BranchMenu :branches="repoBranches" />
     <q-card flat bordered class="q-mt-md">
       <FileExplorer v-if="!fileTree.isBlob" :content-list="fileTree.data" />
-      <pre class="file-text" v-else>{{ fileTree.text }}</pre>
+      <FileView
+        v-else
+        :path="dirPath"
+        :text="fileTree.text"
+        :fileSize="fileTree.size"
+      />
     </q-card>
   </section>
 </template>
@@ -18,7 +23,7 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { FileExplorer, BranchMenu } from '@/components';
+import { FileExplorer, BranchMenu, FileView } from '@/components';
 import { useRepoTree, useRepoBranch } from '@/composables';
 
 const props = defineProps({
@@ -53,16 +58,17 @@ const { data: tree } = getRepoTree({
 });
 
 type FileTree = {
-  text?: string | number | unknown;
+  text?: string;
+  size?: number;
   data?: ExplorerContent[];
   isBlob: boolean;
 };
 
 const fileTree = computed((): FileTree => {
   if (!Array.isArray(tree?.value)) {
-    return { text: tree?.value, isBlob: true };
+    return { text: tree?.value.text, size: tree?.value.byteSize, isBlob: true };
   }
-  const result = tree.value.map(
+  const result = tree?.value.map(
     (treeBranch): ExplorerContent => ({
       isDirectory: treeBranch.type === 'tree',
       name: treeBranch.name,

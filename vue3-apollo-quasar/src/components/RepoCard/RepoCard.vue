@@ -89,11 +89,7 @@ const props = defineProps({
   },
   owner: {
     type: Object as () => { __typename: string; login: string },
-<<<<<<< HEAD
-    required: true,
-=======
     required: false,
->>>>>>> main
   },
   primaryLanguage: {
     type: [Object, null],
@@ -118,14 +114,10 @@ const props = defineProps({
 const { getFriendlyDate, upperFirst } = useFormatter();
 const friendlyUpdatedAt = getFriendlyDate(props.updatedAt);
 
-<<<<<<< HEAD
-const repoNameWithOwner = computed(() => `${props.owner?.login}/${props.name}`);
-=======
 const repoNameWithOwner = computed(
   () =>
     `${props.owner?.login ? `${props.owner?.login}/` : ''}${props.name || ''}`,
 );
->>>>>>> main
 </script>
 
 <style lang="scss" scoped>

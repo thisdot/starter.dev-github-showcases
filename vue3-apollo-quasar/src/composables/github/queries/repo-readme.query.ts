@@ -6,6 +6,7 @@ export const REPO_README_QUERY = gql`
       readme: object(expression: $expression) {
         ... on Blob {
           text
+          byteSize
         }
       }
     }
