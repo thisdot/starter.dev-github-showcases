@@ -64,6 +64,8 @@ While in the project directory, run this command in your terminal.
 cp .env.example .env
 ```
 
+The project connects to a backend which is shared by all the starter showcases to get authentication tokens.
+
 ### OAuth Setup
 
 To use this app and authenticate with GitHub, we need to setup the OAuth credentials in GitHub.
