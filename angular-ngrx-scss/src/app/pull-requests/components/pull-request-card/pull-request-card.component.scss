@@ -1,0 +1,59 @@
+@use '../../../shared/styles/variables';
+
+.item {
+  display: flex;
+  padding: 1rem;
+
+  & > .icon {
+    margin-right: 1rem;
+
+    .purple {
+      color: variables.$purple600;
+    }
+
+    .green {
+      color: variables.$green600;
+    }
+  }
+
+  .title {
+    color: variables.$gray800;
+    font-weight: 600;
+  }
+
+  .details {
+    flex: 1;
+
+    .meta {
+      color: variables.$gray600;
+      font-size: 0.85rem;
+
+      a {
+        color: inherit;
+
+        &:hover {
+          color: variables.$blue500;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .label {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    margin-left: 0.125rem;
+    margin-right: 0.125rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: 0.75rem;
+  }
+
+  .comments {
+    text-align: center;
+    position: relative;
+    top: -20px;
+  }
+}

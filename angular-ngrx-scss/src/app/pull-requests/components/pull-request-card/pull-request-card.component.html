@@ -1,0 +1,56 @@
+<div class="item">
+  <div class="icon">
+    <span
+      *ngIf="pullRequest.state === 'open'"
+      class="icon green"
+      appOcticon="no-entry"
+      size="16"
+    ></span>
+    <span
+      *ngIf="pullRequest.state === 'closed'"
+      class="icon purple"
+      appOcticon="check-circle"
+      size="16"
+    ></span>
+  </div>
+  <div class="details">
+    <span class="title">
+      {{ pullRequest.title }}
+    </span>
+    <span
+      *ngFor="let label of pullRequest.labels"
+      class="label"
+      [style.background-color]="colorMap(label.color)"
+    >
+      {{ label.name }}
+    </span>
+    <br />
+
+    <ng-container
+      [ngTemplateOutlet]="
+        pullRequest.state === 'open' ? openPRMeta : closedPRMeta
+      "
+      [ngTemplateOutletContext]="{ pullRequest: pullRequest }"
+    ></ng-container>
+  </div>
+  <div class="comments">
+    <span class="icon green" appOcticon="comment" size="16"></span>
+    <br />
+    {{ pullRequest.commentCount }}
+  </div>
+</div>
+
+<ng-template #openPRMeta let-pullRequest="pullRequest">
+  <span class="meta">
+    #{{ pullRequest.number }} opened
+    {{ pullRequest.createdAt | relativeTime }} by
+    <a href="#">{{ pullRequest.login }}</a>
+  </span>
+</ng-template>
+
+<ng-template #closedPRMeta let-pullRequest="pullRequest">
+  <span class="meta">
+    #{{ pullRequest.number }} by <a href="#">{{ pullRequest.login }}</a> was
+    closed {{ pullRequest.createdAt | relativeTime }}
+  </span>
+</ng-template>
