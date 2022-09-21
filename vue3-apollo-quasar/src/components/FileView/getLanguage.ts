@@ -2,6 +2,7 @@ export function getLanguage(extension?: string): undefined {
   let language;
   switch (extension?.toLowerCase()) {
     case 'html':
+    case 'vue':
     case 'xhtml':
     case 'xml':
       language = 'markup';
@@ -9,6 +10,8 @@ export function getLanguage(extension?: string): undefined {
     case 'sh':
     case 'bash':
     case 'zsh':
+    case 'gitignore':
+    case 'prettierignore':
       language = 'bash';
       break;
     case 'c':
@@ -50,6 +53,7 @@ export function getLanguage(extension?: string): undefined {
       language = 'handlebars';
       break;
     case 'json':
+    case 'prettierrc':
       language = 'json';
       break;
     case 'less':

@@ -1,29 +1,34 @@
 <template>
-  <div class="full-width">
-    <div class="file-header">
-      <span class="file-header-lines">{{ lines.length }} lines</span>
-      <span class="file-header-size">{{ fileSize }} Bytes</span>
+  <div class="full-width wrapper text-caption">
+    <div class="file-header q-px-xs q-py-md">
+      <span class="q-px-xs">{{ lines.length }} lines</span>
+      <span class="file-header-size q-px-xs">{{ file_size }}</span>
     </div>
-    <FileCode v-if="language" :lines="lines">
-      <template #code>
-        <highlightjs :language="language" :code="text">
-          <template>
-            <div class="lines">
-              <span v-for="(line, i) in lines" :key="i">{{ line }}</span>
-            </div>
-          </template>
-        </highlightjs>
-      </template>
-    </FileCode>
-    <pre v-else>
-      {{ text }}
-    </pre>
+    <div class="code-wrapper q-px-sm q-py-sm">
+      <FileCode v-if="language" :codes="file_content">
+        <template #code="{ code, index }">
+          <td class="line-number">{{ index + 1 }}</td>
+          <td>
+            <highlightjs :code="code" />
+          </td>
+        </template>
+      </FileCode>
+      <FileText v-else :texts="file_content">
+        <template #text="{ text, index }">
+          <td class="line-number">{{ index + 1 }}</td>
+          <td class="text-weight-regular">
+            {{ text }}
+          </td>
+        </template>
+      </FileText>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, defineProps, computed } from 'vue';
 import { getLanguage } from './getLanguage';
+import formatBytes from '@/helpers/formatByte';
 
 export default defineComponent({
   name: 'FileView',
@@ -32,6 +37,7 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import FileCode from './FileCode.vue';
+import FileText from './FileText.vue';
 
 const props = defineProps({
   path: {
@@ -54,53 +60,47 @@ const language = computed(() => {
   return language;
 });
 
+const file_content = computed(() => props.text?.trim().split('\n'));
+
 const lines = computed(() => {
-  const linesCount = props.text.split('\n').length;
+  const linesCount = file_content?.value.length;
   const lines = Array.from(Array(linesCount).keys()).map((i) => i + 1);
   return lines;
 });
+
+const file_size = computed(() => formatBytes(props.fileSize));
 </script>
 
 <style lang="scss" scoped>
-.file-header {
-  padding: 0.75rem 0.5rem;
-  background-color: rgb(243 244 246);
-  border-bottom: 1px solid rgb(209 213 219);
+@import '@/styles/quasar.variables.scss';
+
+.wrapper {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
-  font-size: 0.75rem;
+  // font-size: 0.75rem;
+}
+.file-header {
+  background-color: $primary-100;
+  border-bottom: 1px solid $secondary-100;
   line-height: 1rem;
-  color: rgb(31 41 55);
+  color: $secondary;
 }
 .line-number {
   display: table-cell;
   text-align: right;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
   padding-right: 1rem;
   user-select: none;
-  color: rgb(107 114 128);
+  color: $secondary-200;
 }
 
 .file-header-size {
-  padding: 0 0.5rem;
-  border-left: 1px solid rgb(209 213 219);
+  border-left: 1px solid $secondary-100;
 }
 
-.file-header-lines {
-  padding: 0 0.5rem;
-}
-div > pre {
+pre {
   margin: 0;
   border-spacing: 5px;
   text-align: left;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
-  // font-size: 0.75rem;
-  line-height: 1rem;
   overflow: auto;
-}
-pre * {
-  background: #fff !important;
 }
 </style>

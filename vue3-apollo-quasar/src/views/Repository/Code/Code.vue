@@ -1,14 +1,31 @@
 <template>
   <section class="q-mx-auto q-my-xl code-section">
     <BranchMenu :branches="repoBranches" />
-    <q-card flat bordered class="q-mt-md">
-      <FileExplorer v-if="!fileTree.isBlob" :content-list="fileTree.data" />
+    <Loader v-if="loading" />
+    <q-card flat bordered class="q-mt-md" v-else>
+      <FileExplorer
+        v-if="!fileTree.isBlob && fileTree.data.length > 0"
+        :content-list="fileTree.data"
+      />
       <FileView
-        v-else
+        v-else-if="fileTree.isBlob"
         :path="dirPath"
         :text="fileTree.text"
         :fileSize="fileTree.size"
       />
+      <div
+        v-else-if="imagePath"
+        class="q-py-md row justify-center items-center"
+      >
+        <a
+          :href="'https://raw.githubusercontent.com' + imagePath"
+          target="_blank"
+          class="view-raw text-weight-medium"
+        >
+          View Raw
+        </a>
+      </div>
+      <span v-else>No content</span>
     </q-card>
   </section>
 </template>
@@ -25,6 +42,7 @@ export default defineComponent({
 <script lang="ts" setup>
 import { FileExplorer, BranchMenu, FileView } from '@/components';
 import { useRepoTree, useRepoBranch } from '@/composables';
+import Loader from './Loader.vue';
 
 const props = defineProps({
   owner: {
@@ -50,7 +68,7 @@ const props = defineProps({
 });
 
 const { getRepoTree } = useRepoTree();
-const { data: tree } = getRepoTree({
+const { data: tree, loading } = getRepoTree({
   owner: props.owner,
   name: props.repo,
   branch: props.branch,
@@ -63,6 +81,16 @@ type FileTree = {
   data?: ExplorerContent[];
   isBlob: boolean;
 };
+
+const imagePath = computed(() => {
+  const imageExtensions = ['ico', 'png', 'jpg', 'jpeg'];
+  const extensionArray = props.dirPath.split('.');
+  const extension = extensionArray[extensionArray.length - 1];
+  if (imageExtensions.indexOf(extension) >= 0) {
+    return `/${props.owner}/${props.repo}/${props.branch}/${props.dirPath}`;
+  }
+  return null;
+});
 
 const fileTree = computed((): FileTree => {
   if (!Array.isArray(tree?.value)) {
@@ -94,10 +122,15 @@ const repoBranches = computed(() => branches?.value.slice());
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/quasar.variables.scss';
 .code-section {
   max-width: 70rem;
 }
 .file-text {
   white-space: pre-wrap;
+}
+.view-raw {
+  text-decoration: none;
+  color: $primary;
 }
 </style>

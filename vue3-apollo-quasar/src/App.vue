@@ -26,4 +26,9 @@ const user = useUserStore();
 </script>
 <style>
 @import './App.css';
+
+/* For the code content view */
+[dir] .hljs {
+  background: white !important;
+}
 </style>
