@@ -21,7 +21,7 @@ export default {
     customClass: {
       type: String,
       required: false,
-      default: 'h-6',
+      default: 'h-4',
     },
   },
 };

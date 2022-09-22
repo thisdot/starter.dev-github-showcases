@@ -4,7 +4,7 @@
     viewBox="0 0 120.78 117.79"
     :class="customClass"
   >
-    <title>gh-logo-lg-dark-bg</title>
+    <title>Github Logo</title>
     <g id="Layer_2" data-name="Layer 2">
       <g id="Layer_1-2" data-name="Layer 1">
         <path
@@ -44,7 +44,7 @@
   </svg>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   name: 'GithubLogo',
   props: {

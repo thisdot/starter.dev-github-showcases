@@ -40,21 +40,28 @@ export default class CustomLoginScheme extends LocalScheme {
       // Fetch stars
       const starsEndpoint: HTTPRequest = {
         ...endpoint,
-        url: `users/${user.login}/starred`,
+        url: `users/${user.login}/starred?per_page=1`,
+        headers: {
+          Accept: 'application/vnd.github.preview',
+        },
       };
 
       const getStars = this.$auth.requestWith(this.name, starsEndpoint);
       //
 
-      const [{ data: orgs }, { data: stars }] = await Promise.all([
-        getOrgs,
-        getStars,
-      ]);
+      const [orgs, stars] = await Promise.all([getOrgs, getStars]);
+
+      const starsCount =
+        stars.headers?.link?.split(',')[1].match(/.*page=(?<page_num>\d+)/)
+          ?.groups?.page_num || 0;
+      const orgsCount =
+        orgs.headers?.link?.split(',')[1].match(/.*page=(?<page_num>\d+)/)
+          ?.groups?.page_num || 0;
 
       const customUser: IUser = {
         ...user,
-        orgs,
-        stars,
+        orgs_count: orgsCount,
+        stars_count: starsCount,
       };
 
       this.$auth.setUser(customUser);

@@ -65,6 +65,6 @@ export interface IUserApiResponse {
 }
 
 export interface IUser extends IUserApiResponse {
-  orgs: IUserOrg[];
-  stars: IUserStar[];
+  orgs_count: number;
+  stars_count: number;
 }
