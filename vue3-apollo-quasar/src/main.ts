@@ -2,6 +2,9 @@ import { createApp, h } from 'vue';
 import App from './App.vue';
 import router from './router';
 
+// For markdown
+import { VueShowdown } from 'vue-showdown';
+
 // Store - Global state management
 import { createPinia } from 'pinia';
 
