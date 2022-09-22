@@ -29,6 +29,7 @@ Amplify URL: https://main.d31pj5m17ne70k.amplifyapp.com
 - [Next.js](https://nextjs.org)
 - [React](https://reactjs.org)
 - [React Query](https://react-query.tanstack.com/)
+- [React Router](https://reactrouter.com/)
 - [Tailwind CSS](https://tailwindcss.com)
 
 ### Included Tooling
