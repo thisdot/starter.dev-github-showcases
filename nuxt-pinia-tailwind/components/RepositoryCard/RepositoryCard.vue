@@ -1,12 +1,17 @@
 <template>
   <article class="p-4 border-b">
-    <h3 class="mb-2 flex items-center">
-      <nuxt-link to="/">
-        <p class="text-xl text-blue-600 font-semibold hover:underline mr-3">
-          {{ name }}
-        </p>
+    <h3 class="mb-2">
+      <nuxt-link
+        to="/"
+        tag="a"
+        class="text-xl text-blue-600 font-semibold hover:underline mr-3"
+      >
+        {{ name }}
       </nuxt-link>
-      <PrivacyBadge :is-private="false" :custom-class="'relative bottom-0.5'" />
+      <PrivacyBadge
+        :is-private="isPrivate"
+        :custom-class="'relative bottom-0.5'"
+      />
     </h3>
 
     <div>
@@ -16,14 +21,15 @@
     </div>
 
     <RepoMeta
-      language="typeScript"
-      :updated-at="new Date()"
-      :fork-count="2"
-      :stargazer-count="4"
+      :language="meta.language"
+      :updated-at="meta.updatedAt"
+      :fork-count="meta.forkCount"
+      :stargazer-count="meta.stargazerCount"
     />
   </article>
 </template>
 <script lang="ts">
+import { PropType } from 'vue';
 export default {
   props: {
     name: {
@@ -40,6 +46,16 @@ export default {
       type: Boolean,
       required: true,
       default: false,
+    },
+    meta: {
+      type: Object as PropType<{
+        language: string;
+        updatedAt: Date;
+        forkCount: number;
+        stargazerCount: number;
+      }>,
+      required: true,
+      default: () => {},
     },
   },
 };

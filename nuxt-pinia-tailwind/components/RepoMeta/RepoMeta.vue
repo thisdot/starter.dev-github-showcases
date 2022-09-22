@@ -22,16 +22,14 @@
       </span>
     </div>
 
-    <!-- <div>
-        Updated{' '}
-        {formatDistance(new Date(updatedAt), Date.now(), {
-          addSuffix: true,
-        })}
-      </div> -->
+    <div>Updated {{ formattedUpdatedAt }}</div>
   </div>
 </template>
+
 <script lang="ts">
-export default {
+import Vue from 'vue';
+
+export default Vue.extend({
   props: {
     language: {
       type: String,
@@ -56,8 +54,13 @@ export default {
     updatedAt: {
       type: Date,
       required: true,
-      default: new Date(),
+      default: () => new Date(),
     },
   },
-};
+  computed: {
+    formattedUpdatedAt(): string {
+      return this.$formatter.userDate(this.updatedAt, new Date());
+    },
+  },
+});
 </script>
