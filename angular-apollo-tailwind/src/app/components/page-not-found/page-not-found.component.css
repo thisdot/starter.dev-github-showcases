@@ -1,0 +1,7 @@
+.container {
+  @apply flex items-center justify-center my-8;
+}
+
+.title {
+  @apply text-lg;
+}

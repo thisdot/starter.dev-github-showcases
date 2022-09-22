@@ -16,6 +16,12 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
+  //Wild Card Route for 404 request
+  // {
+  //   path: '**',
+  //   pathMatch: 'full',
+  //   component: PagenotfoundComponent,
+  // },
 ];
 
 @NgModule({
