@@ -6,7 +6,6 @@ import { useGists } from '../hooks/gists/use-gists';
 import { useRepos } from '../hooks/repositories/use-repos';
 import { useUser } from '../context/UserProvider';
 import LoadingRepoCard from '../components/repo-card/LoadingRepoCard';
-import { LoadingTextLine } from '../components/Loading';
 
 const Page = styled.div`
 	padding: 3rem;
@@ -66,7 +65,6 @@ export default function TopRepos() {
 	return (
 		<>
 			<Layout>
-				{loadingGist ? <LoadingTextLine /> : (
 				<UserGists
 					title="Gists"
 					links={gists.map((gist) => ({
@@ -74,8 +72,8 @@ export default function TopRepos() {
 						title: gist.filename,
 						href: gist.html_url,
 					}))}
+					loading={loadingGist}
 				/>
-				)}
 				<Main>
 					<Page>
 						<Heading>Repositories</Heading>

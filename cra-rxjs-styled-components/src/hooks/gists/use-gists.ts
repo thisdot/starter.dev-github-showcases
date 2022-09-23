@@ -44,8 +44,8 @@ export function useGists(): { gists: GistWithFilename[]; loadingGist: boolean } 
 					});
 				}),
 				tap((val) => {
-					setState(val);
 					setLoadingGist(false);
+					setState(val);
 				})
 			)
 			.subscribe();
