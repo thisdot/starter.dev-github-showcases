@@ -16,15 +16,17 @@ export function createApollo(
 ): ApolloClientOptions<any> {
   const http = httpLink.create({ uri });
   const error = onError(({ networkError, graphQLErrors }) => {
-    if (graphQLErrors)
+    if (graphQLErrors) {
       graphQLErrors.map(({ message, locations, path }) => {
         toasterService.showToast({
           type: ToasterType.ERROR,
           title: 'GraphQL error',
-          message: `Message: ${message}, 
+          message: `Message: ${message},
           Location: ${locations}, Path: ${path}`,
         });
       });
+      toasterService.goTo404(graphQLErrors);
+    }
 
     if (networkError) {
       toasterService.showToast({

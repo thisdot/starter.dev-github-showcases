@@ -14,14 +14,13 @@ const routes: Routes = [
     redirectTo: 'signin/redirect',
   },
   {
-    path: '',
-    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-  },
-  //Wild Card Route for 404 request
-  {
-    path: '**',
+    path: '404',
     pathMatch: 'full',
     component: PageNotFoundComponent,
+  },
+  {
+    path: '',
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
 ];
 
