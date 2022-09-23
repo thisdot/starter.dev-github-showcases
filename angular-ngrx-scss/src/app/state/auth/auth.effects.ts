@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import {
   catchError,
   concatMap,
   map,
+  mergeMap,
   skipWhile,
   switchMap,
   tap,
 } from 'rxjs/operators';
 import { UserService } from 'src/app/user/services/user.service';
-import { AuthUserData } from './auth.state';
 import { AuthService } from '../../auth/services/auth.service';
 import {
+  fetchAuthenticatedUserDataFailure,
+  fetchAuthenticatedUserDataSuccess,
+  removeUserToken,
   saveUserToken,
   saveUserTokenFailure,
   saveUserTokenSuccess,
-  removeUserToken,
-  signOutUser,
   signInUser,
-  fetchAuthenticatedUserDataSuccess,
-  fetchAuthenticatedUserDataFailure,
+  signOutUser,
   userTokenExists,
-  fetchAuthenticatedUserData,
 } from './auth.actions';
 import { selectAuthUserName } from './auth.selectors';
-import { Store } from '@ngrx/store';
+import { AuthUserData } from './auth.state';
 
 @Injectable()
 export class AuthEffects {
@@ -70,51 +70,32 @@ export class AuthEffects {
     );
   });
 
-  // This is what should work, to prevent too many fetch calls. however currently does not call correctly
-  // fetchAuthUserData$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(saveUserTokenSuccess, userTokenExists),
-  //     switchMap(() =>
-  //       this.store.select(selectAuthUserName).pipe(
-  //         skipWhile((name) => name.length > 0),
-  //         mergeMap(() =>
-  //           this.userService.getAuthenticatedUserInfo().pipe(
-  //             map((userData) => {
-  //               const user: AuthUserData = {
-  //                 avatar: userData.avatar_url,
-  //                 email: userData.email,
-  //                 username: userData.login,
-  //               };
-  //               return fetchAuthenticatedUserDataSuccess({ userData: user });
-  //             }),
-  //             catchError((error) =>
-  //               of(fetchAuthenticatedUserDataFailure({ error })),
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // });
-
+  /**
+   * Gets authenticated user's name, photo, and email
+   */
   fetchAuthUserData$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(fetchAuthenticatedUserData, userTokenExists),
-      switchMap(() => {
-        return this.userService.getAuthenticatedUserInfo().pipe(
-          map((userData) => {
-            const user: AuthUserData = {
-              avatar: userData.avatar_url,
-              email: userData.email,
-              username: userData.login,
-            };
-            return fetchAuthenticatedUserDataSuccess({ userData: user });
-          }),
-          catchError((error) =>
-            of(fetchAuthenticatedUserDataFailure({ error })),
+      ofType(saveUserTokenSuccess, userTokenExists),
+      switchMap(() =>
+        this.store.select(selectAuthUserName).pipe(
+          skipWhile((name) => name.length > 0),
+          mergeMap(() =>
+            this.userService.getAuthenticatedUserInfo().pipe(
+              map((userData) => {
+                const user: AuthUserData = {
+                  avatar: userData.avatar_url,
+                  email: userData.email,
+                  username: userData.login,
+                };
+                return fetchAuthenticatedUserDataSuccess({ userData: user });
+              }),
+              catchError((error) =>
+                of(fetchAuthenticatedUserDataFailure({ error })),
+              ),
+            ),
           ),
-        );
-      }),
+        ),
+      ),
     );
   });
 

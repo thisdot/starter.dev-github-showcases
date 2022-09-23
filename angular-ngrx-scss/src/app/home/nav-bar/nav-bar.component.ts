@@ -1,8 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { fetchAuthenticatedUserData, signOutUser } from 'src/app/state/auth';
-import { selectAuthUserName, selectAuthUserAvatar } from '../../state/auth';
+import { signOutUser } from 'src/app/state/auth';
+import { selectAuthUserAvatar, selectAuthUserName } from '../../state/auth';
 
 @Component({
   selector: 'app-nav-bar',
@@ -20,20 +20,12 @@ import { selectAuthUserName, selectAuthUserAvatar } from '../../state/auth';
     ]),
   ],
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent {
   dropdownMenuIsOpen = false;
   userAvatar$ = this.store.select(selectAuthUserAvatar);
   username$ = this.store.select(selectAuthUserName);
 
   constructor(private store: Store) {}
-
-  ngOnInit() {
-    this.username$.subscribe((user) => {
-      if (!user) {
-        this.store.dispatch(fetchAuthenticatedUserData());
-      }
-    });
-  }
 
   toggleMenu() {
     this.dropdownMenuIsOpen = !this.dropdownMenuIsOpen;

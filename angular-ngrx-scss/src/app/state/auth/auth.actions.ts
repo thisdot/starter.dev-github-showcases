@@ -29,10 +29,6 @@ export const authUserSaved = createAction(
   '[Auth API] Authenticated user data already saved',
 );
 
-export const fetchAuthenticatedUserData = createAction(
-  '[Auth API] Fetch authenticated user data',
-);
-
 export const fetchAuthenticatedUserDataSuccess = createAction(
   '[Auth API] Successfully fetched authenticated user data',
   props<{ userData: AuthUserData }>(),
