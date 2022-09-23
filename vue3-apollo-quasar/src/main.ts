@@ -2,8 +2,11 @@ import { createApp, h } from 'vue';
 import App from './App.vue';
 import router from './router';
 
-// For markdown
-import { VueShowdown } from 'vue-showdown';
+//Code highlighter
+
+import 'highlight.js/styles/stackoverflow-light.css';
+import 'highlight.js/lib/common';
+import hljsVuePlugin from '@highlightjs/vue-plugin';
 
 // Store - Global state management
 import { createPinia } from 'pinia';
@@ -18,14 +21,18 @@ import { setupGraphQL } from './init';
 const pinia = createPinia();
 
 //* GraphQL setup
-
-createApp({
+const app = createApp({
   setup() {
     setupGraphQL();
   },
   render: () => h(App),
-})
+});
+
+app
   .use(Quasar, quasarUserOptions)
   .use(pinia)
+  .use(hljsVuePlugin)
   .use(router)
   .mount('#app');
+
+app.component('highlightjs', hljsVuePlugin.component);

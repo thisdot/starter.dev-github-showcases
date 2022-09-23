@@ -18,6 +18,8 @@ export const REPO_TREE_QUERY = gql`
         }
         ... on Blob {
           text
+          byteSize
+          commitResourcePath
         }
       }
     }
