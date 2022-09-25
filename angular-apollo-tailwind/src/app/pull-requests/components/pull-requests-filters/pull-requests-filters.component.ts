@@ -52,7 +52,7 @@ export class PullRequestFiltersComponent {
   @Input() openCount = 0;
   @Input() closedCount = 0;
   @Input() currentMilestone: string | null = null;
-  @Input() set milestones(val: Milestone[]) {
+  @Input() set milestones(val: Milestone[] | null | undefined) {
     if (val) {
       const a = val as Milestone[];
       const b = [{ title: 'PullRequest with no milestone', id: '' }, ...a];

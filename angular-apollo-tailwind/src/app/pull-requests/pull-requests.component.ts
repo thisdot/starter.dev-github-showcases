@@ -17,6 +17,9 @@ export class PullRequestsComponent implements OnInit {
     this.pullRequestsStore.openPullRequestsCount$;
   readonly closedPullRequestsCount$ =
     this.pullRequestsStore.closedPullRequestsCount$;
+  readonly pageInfo$ = this.pullRequestsStore.pageInfo$;
+
+  // Filter store selectors
   readonly label$ = this.pullRequestsStore.label$;
   readonly labels$ = this.pullRequestsStore.labels$;
   readonly milestone$ = this.pullRequestsStore.milestone$;
@@ -25,7 +28,6 @@ export class PullRequestsComponent implements OnInit {
   readonly type$ = this.pullRequestsStore.type$;
   readonly sort$ = this.pullRequestsStore.sort$;
   readonly hasActiveFilters$ = this.pullRequestsStore.hasActiveFilters$;
-  readonly pageInfo$ = this.pullRequestsStore.pageInfo$;
 
   constructor(private pullRequestsStore: PullRequestsStore) {}
 
@@ -35,6 +37,7 @@ export class PullRequestsComponent implements OnInit {
 
   setMilestone(milestone: string) {
     this.pullRequestsStore.setMilestone(milestone);
+    this.pullRequestsStore.getPullRequests$();
   }
 
   setLabel(label: string) {
