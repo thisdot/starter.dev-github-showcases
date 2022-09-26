@@ -1,7 +1,7 @@
 <template>
   <div class="full-width wrapper text-caption">
     <div class="file-header q-px-xs q-py-md">
-      <span class="q-px-xs">{{ fileContent?.length }} lines</span>
+      <span class="q-px-xs">{{ lines || 0 }} lines</span>
       <span class="file-header-size q-px-xs">{{ fileSize }}</span>
     </div>
     <div class="code-wrapper q-px-sm q-py-sm">
@@ -65,6 +65,8 @@ const fileContent = computed((): string[] | undefined =>
 );
 
 const fileSize = computed((): string => formatBytes(props.fileSize));
+
+const lines = computed((): number => fileContent.value?.length || 0);
 </script>
 
 <style lang="scss" scoped>
