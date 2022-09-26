@@ -21,7 +21,7 @@ export default defineComponent({
 <script lang="ts" setup>
 import FileExplorerNav from './FileExplorerNav.vue';
 
-const props = defineProps({
+defineProps({
   contentList: {
     type: Array as () => ExplorerContent[],
     required: true,

@@ -65,7 +65,7 @@ const fileContent = computed((): string[] => props.text?.trim().split('\n'));
 const fileSize = computed((): string => formatBytes(props.fileSize));
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@/styles/quasar.variables.scss';
 
 .wrapper {

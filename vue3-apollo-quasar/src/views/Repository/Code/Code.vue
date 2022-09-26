@@ -27,7 +27,7 @@
       </div>
       <span v-else>No content</span>
     </q-card>
-    <div v-if="!loading && readme !== null">
+    <div v-if="!loading && readme !== null && !fileTree.isBlob">
       <MarkdownContainer
         :owner="owner"
         :repo="repo"
@@ -56,8 +56,6 @@ import {
 } from '@/components';
 import { useRepoTree, useRepoBranch } from '@/composables';
 import Loader from './Loader.vue';
-import { useRoute } from 'vue-router';
-const $route = useRoute();
 
 const props = defineProps({
   owner: {
@@ -136,7 +134,7 @@ const { data: branches } = getRepoBranches({
 const repoBranches = computed(() => branches?.value.slice());
 
 const readme = computed(() => {
-  const res = fileTree.value.data.find(
+  const res = fileTree.value.data?.find(
     (res) => !res.isDirectory && res.name === 'README.md',
   );
   if (res) {
@@ -144,10 +142,6 @@ const readme = computed(() => {
   }
   return null;
 });
-
-console.log('====================================');
-console.log(readme);
-console.log('====================================');
 </script>
 
 <style lang="scss" scoped>
