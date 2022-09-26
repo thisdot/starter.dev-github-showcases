@@ -40,12 +40,7 @@
         </IssuesPullRequestsCard>
       </q-list>
     </div>
-    <PaginationButtons
-      v-if="showPagination(tabRef)"
-      :isPrevActive="false"
-      :isNextActive="true"
-      @paginate="paginate"
-    />
+    <PaginationButtons v-if="showPagination(tabRef)" @paginate="paginate" />
   </div>
 </template>
 
