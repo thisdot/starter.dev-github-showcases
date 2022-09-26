@@ -1,11 +1,11 @@
 <template>
   <div class="full-width wrapper text-caption">
     <div class="file-header q-px-xs q-py-md">
-      <span class="q-px-xs">{{ lines.length }} lines</span>
-      <span class="file-header-size q-px-xs">{{ file_size }}</span>
+      <span class="q-px-xs">{{ fileContent.length }} lines</span>
+      <span class="file-header-size q-px-xs">{{ fileSize }}</span>
     </div>
     <div class="code-wrapper q-px-sm q-py-sm">
-      <FileCode v-if="language" :codes="file_content">
+      <FileCode v-if="language && fileContent" :codes="fileContent">
         <template #code="{ code, index }">
           <td class="line-number">{{ index + 1 }}</td>
           <td>
@@ -13,7 +13,7 @@
           </td>
         </template>
       </FileCode>
-      <FileText v-else :texts="file_content">
+      <FileText v-else-if="!language && fileContent" :texts="fileContent">
         <template #text="{ text, index }">
           <td class="line-number">{{ index + 1 }}</td>
           <td class="text-weight-regular">
@@ -60,15 +60,9 @@ const language = computed(() => {
   return language;
 });
 
-const file_content = computed(() => props.text?.trim().split('\n'));
+const fileContent = computed((): string[] => props.text?.trim().split('\n'));
 
-const lines = computed(() => {
-  const linesCount = file_content?.value.length;
-  const lines = Array.from(Array(linesCount).keys()).map((i) => i + 1);
-  return lines;
-});
-
-const file_size = computed(() => formatBytes(props.fileSize));
+const fileSize = computed((): string => formatBytes(props.fileSize));
 </script>
 
 <style lang="scss" scoped>
@@ -77,7 +71,6 @@ const file_size = computed(() => formatBytes(props.fileSize));
 .wrapper {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
-  // font-size: 0.75rem;
 }
 .file-header {
   background-color: $primary-100;

@@ -3,7 +3,7 @@
     <q-list>
       <q-item
         class="row justify-between items-center q-mb-xs"
-        v-for="(_, index) in 5"
+        v-for="(_, index) in rows"
         :key="index"
       >
         <div class="bg-grey-2 file"></div>
@@ -20,6 +20,9 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'CodeLoader',
 });
+</script>
+<script lang="ts" setup>
+const rows = 5;
 </script>
 
 <style lang="scss" scoped>

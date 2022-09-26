@@ -1,4 +1,4 @@
-export function getLanguage(extension?: string): undefined {
+export function getLanguage(extension?: string): string {
   let language;
   switch (extension?.toLowerCase()) {
     case 'html':
