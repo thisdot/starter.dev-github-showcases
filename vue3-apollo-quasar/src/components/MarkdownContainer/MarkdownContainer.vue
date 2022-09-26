@@ -61,7 +61,7 @@ const { readme, loading } = getRepoReadMe({
 .header {
   z-index: 30;
   border-bottom: 1px solid $secondary-100;
-  background-color: #fff;
+  background-color: $white;
 
   .title {
     line-height: 1.25rem;

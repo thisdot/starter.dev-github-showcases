@@ -5,9 +5,8 @@
     :typographer="true"
     :linkify="true"
     :html="true"
-    :highlight="{
-      inline: true,
-    }"
+    :highlight="highlight"
+    :anchor="anchor"
     :breaks="true"
   />
 </template>
@@ -26,11 +25,21 @@ defineProps({
     default: '',
   },
 });
+const anchor = {
+  level: [1, 2],
+  permalink: true,
+  permalinkBefore: true,
+  permalinkSymbol: '🔗',
+};
+const highlight = {
+  inline: true,
+};
 </script>
 <style lang="scss">
 @import '@/styles/quasar.variables.scss';
 .markdown-container {
   font-size: 1rem;
+  color: $dark-800;
   max-width: 1012px;
   line-height: 1.5;
   word-wrap: break-word;
@@ -48,6 +57,7 @@ defineProps({
     margin-bottom: 16px;
     font-weight: 600;
     line-height: 1.25;
+    position: relative;
   }
   h1 {
     font-size: 2rem;
@@ -59,6 +69,16 @@ defineProps({
   h3 {
     font-size: 1.25rem;
   }
+  h4 {
+    font-size: 1rem;
+  }
+  h5 {
+    font-size: 0.83rem;
+  }
+  h6 {
+    font-size: 0.67rem;
+  }
+
   h1,
   h2 {
     border-bottom: 1px solid $secondary-100;
@@ -95,7 +115,6 @@ defineProps({
       text-decoration: underline;
     }
   }
-
   pre {
     overflow: auto;
     font-size: 85%;
@@ -106,6 +125,21 @@ defineProps({
     code {
       background: transparent;
     }
+  }
+  p {
+    code {
+      span {
+        color: $dark-800;
+      }
+    }
+  }
+  code {
+    background-color: $primary-100;
+    border-radius: 6px;
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    user-select: all;
   }
   ul,
   ol {
@@ -123,6 +157,22 @@ defineProps({
   }
   li {
     font-weight: 400;
+  }
+  h1:hover,
+  h2:hover,
+  h3:hover,
+  h4:hover,
+  h5:hover,
+  h6:hover {
+    a.header-anchor {
+      opacity: 1;
+    }
+  }
+  a.header-anchor {
+    opacity: 0;
+    color: $secondary-200;
+    text-decoration: none;
+    font-size: 1rem;
   }
 }
 </style>

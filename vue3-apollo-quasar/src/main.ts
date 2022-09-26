@@ -17,7 +17,6 @@ import { createPinia } from 'pinia';
 import { Quasar } from 'quasar';
 import quasarUserOptions from './quasar-user-options';
 
-//
 import { setupGraphQL } from './init';
 
 const pinia = createPinia();

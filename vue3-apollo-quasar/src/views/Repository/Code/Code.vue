@@ -4,11 +4,11 @@
     <Loader v-if="loading" />
     <q-card flat bordered class="q-mt-md" v-else>
       <FileExplorer
-        v-if="!fileTree.isBlob && fileTree.data.length > 0"
-        :content-list="fileTree.data"
+        v-if="!fileTree?.isBlob && fileTree?.data?.length > 0"
+        :content-list="fileTree?.data"
       />
       <FileView
-        v-else-if="fileTree.isBlob"
+        v-else-if="fileTree?.isBlob"
         :path="dirPath"
         :text="fileTree.text"
         :fileSize="fileTree.size"
@@ -95,7 +95,12 @@ type FileTree = {
   isBlob: boolean;
 };
 
-const imagePath = computed(() => {
+type Branches = {
+  name: string;
+  default: boolean;
+};
+
+const imagePath = computed((): string | null => {
   const imageExtensions = ['ico', 'png', 'jpg', 'jpeg'];
   const extensionArray = props.dirPath.split('.');
   const extension = extensionArray[extensionArray.length - 1];
@@ -131,10 +136,10 @@ const { data: branches } = getRepoBranches({
   owner: props.owner,
   name: props.repo,
 });
-const repoBranches = computed(() => branches?.value.slice());
+const repoBranches = computed((): Branches[] => branches?.value.slice());
 
-const readme = computed(() => {
-  const res = fileTree.value.data?.find(
+const readme = computed((): string | null => {
+  const res = fileTree.value?.data?.find(
     (res) => !res.isDirectory && res.name === 'README.md',
   );
   if (res) {
