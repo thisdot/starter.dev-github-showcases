@@ -1,9 +1,18 @@
 <template>
-  <div class="markdown-container q-py-lg q-px-xl" v-html="markdownToHTML" />
+  <Markdown
+    class="markdown-container q-py-lg q-px-xl"
+    :source="markdown"
+    :typographer="true"
+    :linkify="true"
+    :html="true"
+    :highlight="{
+      inline: true,
+    }"
+    :breaks="true"
+  />
 </template>
 <script lang="ts">
-import { defineComponent, defineProps, computed } from 'vue';
-import { marked } from 'marked';
+import { defineComponent, defineProps } from 'vue';
 
 export default defineComponent({
   name: 'MarkdownView',
@@ -11,14 +20,12 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-const props = defineProps({
+defineProps({
   markdown: {
     type: String,
     default: '',
   },
 });
-
-const markdownToHTML = computed(() => marked(props.markdown));
 </script>
 <style lang="scss">
 .markdown-container {
@@ -28,7 +35,7 @@ const markdownToHTML = computed(() => marked(props.markdown));
   h4,
   h5,
   h6 {
-    font-size: inherit;
+    // font-size: unset;
     font-weight: 500;
     line-height: inherit;
     letter-spacing: inherit;
