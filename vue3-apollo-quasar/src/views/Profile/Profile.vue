@@ -11,6 +11,7 @@
           :stargazerCount="repo?.stargazerCount"
           :forkCount="repo?.forkCount"
           :updatedAt="repo?.updatedAt"
+          :isProfilePage="true"
         />
       </template>
     </ProfilePageLayout>

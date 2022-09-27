@@ -16,6 +16,7 @@ export const USER_REPOS_QUERY = gql`
         after: $afterCursor
         before: $beforeCursor
         orderBy: $orderBy
+        ownerAffiliations: [OWNER]
       ) {
         nodes {
           id
