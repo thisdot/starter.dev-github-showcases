@@ -83,7 +83,7 @@ watch(currentRepo, (res) => {
 
 <style lang="scss" scoped>
 .code-section {
-  max-width: 60rem;
+  max-width: 70rem;
 }
 .file-text {
   white-space: pre-wrap;

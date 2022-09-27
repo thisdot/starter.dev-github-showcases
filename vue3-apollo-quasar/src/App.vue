@@ -30,6 +30,6 @@ const user = useUserStore();
 
 /* For the code content view */
 [dir] .hljs {
-  background: $white !important;
+  background: transparent;
 }
 </style>

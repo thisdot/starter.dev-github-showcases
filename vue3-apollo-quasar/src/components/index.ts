@@ -27,3 +27,4 @@ export { default as IssuePullRequestTab } from './IssuePullRequestTab';
 export { default as PaginationButtons } from './PaginationButtons';
 export { default as BranchMenu } from './BranchMenu';
 export { default as FileView } from './FileView';
+export { default as MarkdownContainer } from './MarkdownContainer';
