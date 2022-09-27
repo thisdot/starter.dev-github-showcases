@@ -4,9 +4,11 @@ import router from './router';
 
 //Code highlighter
 
-import 'highlight.js/styles/stackoverflow-light.css';
+import 'highlight.js/styles/github.css';
 import 'highlight.js/lib/common';
 import hljsVuePlugin from '@highlightjs/vue-plugin';
+
+import Markdown from 'vue3-markdown-it';
 
 // Store - Global state management
 import { createPinia } from 'pinia';
@@ -15,7 +17,6 @@ import { createPinia } from 'pinia';
 import { Quasar } from 'quasar';
 import quasarUserOptions from './quasar-user-options';
 
-//
 import { setupGraphQL } from './init';
 
 const pinia = createPinia();
@@ -31,8 +32,10 @@ const app = createApp({
 app
   .use(Quasar, quasarUserOptions)
   .use(pinia)
+  .use(Markdown)
   .use(hljsVuePlugin)
   .use(router)
   .mount('#app');
 
 app.component('highlightjs', hljsVuePlugin.component);
+app.component('Markdown', Markdown);

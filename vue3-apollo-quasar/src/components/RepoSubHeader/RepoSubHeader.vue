@@ -405,7 +405,8 @@ export default defineComponent({
   }
 }
 
-a:link {
+a:link,
+a:visited {
   text-decoration: none;
   color: $primary;
 }
