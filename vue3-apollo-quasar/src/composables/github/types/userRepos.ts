@@ -10,4 +10,7 @@ export interface Repo {
   stargazerCount: number;
   forkCount: number;
   updatedAt?: string | null;
+  owner: {
+    login: string;
+  };
 }

@@ -3,6 +3,7 @@
     <ProfilePageLayout :username="username">
       <template #repositories="{ repo }">
         <RepoCard
+          :owner="repo?.owner"
           :name="repo?.name"
           :visibility="repo?.visibility"
           :description="repo?.description"

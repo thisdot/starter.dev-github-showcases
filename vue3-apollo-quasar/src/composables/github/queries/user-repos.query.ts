@@ -16,8 +16,6 @@ export const USER_REPOS_QUERY = gql`
         after: $afterCursor
         before: $beforeCursor
         orderBy: $orderBy
-        affiliations: [OWNER]
-        ownerAffiliations: [OWNER]
       ) {
         nodes {
           id
@@ -41,6 +39,9 @@ export const USER_REPOS_QUERY = gql`
           }
           isPrivate
           updatedAt
+          owner {
+            login
+          }
         }
         pageInfo {
           endCursor
