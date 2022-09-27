@@ -30,5 +30,5 @@ import { useRoute } from 'vue-router';
 import { ProfilePageLayout, RepoCard } from '@/components';
 
 const route = useRoute();
-const username = computed(() => route.params.username as string);
+const username = computed((): string => route.params.username as string);
 </script>
