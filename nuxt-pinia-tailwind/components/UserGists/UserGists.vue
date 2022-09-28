@@ -11,14 +11,14 @@
   </div>
 </template>
 <script lang="ts">
-import defineComponent from 'vue';
+import Vue from 'vue';
 import { useUserStore } from '~/store/userStore';
 
-export default new defineComponent({
+export default Vue.extend({
   name: 'UserGists',
   setup() {
     const userStore = useUserStore();
-    useUserStore().getUserGists();
+    userStore.getUserGists();
     return {
       gists: userStore.gists,
     };
