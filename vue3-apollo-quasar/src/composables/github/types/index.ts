@@ -3,6 +3,7 @@ export * from './Gist';
 export * from './UserTopRepos';
 export * from './Profile';
 export * from './PullRequest';
+export * from './OrgsProfile';
 
 export * from './Issues';
 
