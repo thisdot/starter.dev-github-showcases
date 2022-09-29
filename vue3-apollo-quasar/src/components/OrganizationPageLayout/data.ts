@@ -32,12 +32,16 @@ export const orgRepos = {
             },
             updatedAt: '4 Sep 2022',
             visibility: 'public',
+            owner: {
+              login: 'hdjerry',
+            },
+            nameWithOwner: 'hdjerry/someone',
           },
         },
         {
           node: {
-            id: '1234',
-            name: 'cream',
+            id: '123',
+            name: 'Gradients',
             description:
               'Using basic pull requests to add your name and github link to BE A MEMBER of ZTM-ng',
             url: '',
@@ -52,6 +56,10 @@ export const orgRepos = {
             },
             updatedAt: '4 Sep 2022',
             visibility: 'public',
+            owner: {
+              login: 'hdjerry',
+            },
+            nameWithOwner: 'hdjerry/someone',
           },
         },
       ],

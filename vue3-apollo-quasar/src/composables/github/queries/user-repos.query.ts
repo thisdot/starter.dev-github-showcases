@@ -40,6 +40,7 @@ export const USER_REPOS_QUERY = gql`
           }
           isPrivate
           updatedAt
+          nameWithOwner
           owner {
             login
           }

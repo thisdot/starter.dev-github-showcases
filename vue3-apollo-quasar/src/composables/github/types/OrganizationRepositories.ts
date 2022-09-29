@@ -15,6 +15,10 @@ export interface Edges {
     };
     updatedAt: string;
     visibility: string;
+    owner: {
+      login: string;
+    };
+    nameWithOwner: string;
   };
 }
 

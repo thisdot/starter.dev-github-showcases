@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 export const ORGANIZATION_REPOS_QUERY = gql`
   query OrganizationRepos($organization: String!, $first: Int!) {
     organization(login: $organization) {
-      repositories(first: $first) {
+      repositories(first: $first, ownerAffiliations: [OWNER]) {
         edges {
           node {
             id
@@ -21,6 +21,10 @@ export const ORGANIZATION_REPOS_QUERY = gql`
             }
             updatedAt
             visibility
+            nameWithOwner
+            owner {
+              login
+            }
           }
         }
       }
