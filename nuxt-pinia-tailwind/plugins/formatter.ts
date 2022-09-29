@@ -32,14 +32,12 @@ const formatter: Plugin = (_, inject) => {
       locale?: Locale;
     }
   ) => {
-    if (typeof date === 'string') {
-      date = new Date(date);
-      return formatDistance(date, dateToCompare, options);
+    const dateToFormat = typeof date === 'string' ? new Date(date) : date;
+    if (!isValidDate(dateToFormat) || !isValidDate(dateToCompare)) {
+      return '';
     }
-    if (isValidDate(date) && isValidDate(dateToCompare)) {
-      return formatDistance(date, dateToCompare, options);
-    }
-    return '';
+
+    return formatDistance(dateToFormat, dateToCompare, options);
   };
 
   inject('formatter', {
