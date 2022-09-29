@@ -58,6 +58,7 @@ export const useUserRepo = (): UseUserRepo => {
                 },
                 visibility: repo.isPrivate,
                 updatedAt: repo.updatedAt,
+                owner: repo.owner,
               },
             ]
           : acc;
