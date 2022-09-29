@@ -1,9 +1,12 @@
+import { mockedOrgProfileQuery, mockedOrgRepoQuery } from './mockedOrgProfile';
 import OrganizationPageLayout from './OrganizationPageLayout.vue';
 
 export default {
   title: 'component/Organization Page Layout',
   component: OrganizationPageLayout,
-  argTypes: {},
+  argTypes: {
+    username: {},
+  },
 };
 
 const Template = (args) => ({
@@ -21,3 +24,11 @@ const Template = (args) => ({
 });
 
 export const Default = Template.bind({});
+Default.args = {
+  username: 'thisdot',
+};
+Default.parameters = {
+  msw: {
+    handlers: [mockedOrgProfileQuery, mockedOrgRepoQuery],
+  },
+};

@@ -6,11 +6,14 @@ export const ORGANIZATION_REPOS_QUERY = gql`
       repositories(first: $first) {
         edges {
           node {
+            id
             name
             description
             url
             forkCount
             stargazerCount
+            isArchived
+            isFork
             primaryLanguage {
               color
               name
