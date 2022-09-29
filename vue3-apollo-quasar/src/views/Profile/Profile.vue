@@ -3,7 +3,7 @@
     <ProfilePageLayout :username="username">
       <template #repositories="{ repo }">
         <RepoCard
-          :owner="owner"
+          :owner="repo?.owner"
           :name="repo?.name"
           :visibility="repo?.visibility"
           :description="repo?.description"
@@ -11,6 +11,7 @@
           :stargazerCount="repo?.stargazerCount"
           :forkCount="repo?.forkCount"
           :updatedAt="repo?.updatedAt"
+          :isProfilePage="true"
         />
       </template>
     </ProfilePageLayout>
@@ -31,5 +32,4 @@ import { ProfilePageLayout, RepoCard } from '@/components';
 
 const route = useRoute();
 const username = computed((): string => route.params.username as string);
-const owner = computed((): { login: string } => ({ login: username.value }));
 </script>

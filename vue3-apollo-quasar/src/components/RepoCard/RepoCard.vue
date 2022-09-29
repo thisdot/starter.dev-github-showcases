@@ -68,8 +68,13 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, PropType } from 'vue';
 import { useFormatter } from '@/composables';
+
+type Owner = {
+  __typename?: string;
+  login: string;
+};
 
 const props = defineProps({
   name: {
@@ -88,8 +93,8 @@ const props = defineProps({
     required: false,
   },
   owner: {
-    type: Object as () => { login: string },
-    required: true,
+    type: Object as PropType<Owner>,
+    required: false,
   },
   primaryLanguage: {
     type: [Object, null],
