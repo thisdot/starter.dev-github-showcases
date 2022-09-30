@@ -20,11 +20,13 @@ export default Vue.extend({
   setup() {
     const userStore = useUserStore();
 
-    useAsync(async () => {
+    const gists = useAsync(async () => {
       await userStore.getUserGists();
+
+      return userStore.gists;
     });
     return {
-      gists: userStore.gists,
+      gists,
     };
   },
 });
