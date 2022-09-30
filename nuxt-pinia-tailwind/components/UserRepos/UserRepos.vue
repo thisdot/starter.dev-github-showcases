@@ -32,11 +32,13 @@ export default Vue.extend({
   setup() {
     const userStore = useUserStore();
     const { $auth } = useContext();
-    useAsync(async () => {
+    const repos = useAsync(async () => {
       await userStore.getUserRepos();
+
+      return userStore.repos;
     });
     return {
-      repos: userStore.repos,
+      repos,
       username: $auth.$state.user.login,
     };
   },
