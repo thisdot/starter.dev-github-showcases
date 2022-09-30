@@ -2,7 +2,6 @@
   <div class="w-full border rounded-lg relative bg-white">
     <div class="flex items-center justify-between px-4 py-3">
       <h3 class="font-semibold">Repositories</h3>
-      <NuxtLink :to="'/' + username" class="text-blue-500">View all</NuxtLink>
     </div>
 
     <RepositoryCard
@@ -12,6 +11,12 @@
       :is-private="repo.private"
       :description="repo.description"
     />
+
+    <div class="flex items-center justify-center py-4">
+      <NuxtLink :to="'/' + username" class="text-blue-500 font-semibold"
+        >View all repositories</NuxtLink
+      >
+    </div>
   </div>
 </template>
 
