@@ -1,13 +1,15 @@
-import UserProfileView from '../components/user-profile';
-import { Layout } from '../components/layouts/ProfileLayout';
 import Header from '../components/header';
+import UserProfileView from '../components/user-profile';
+import RepoCard from '../components/repo-card'
+import LoadingRepoCard from '../components/repo-card/LoadingRepoCard';
+import PaginateButton from '../components/paginate-button';
 import { useUser } from '../context/UserProvider';
 import { useRepos } from '../hooks/repositories/use-repos';
-import RepoCard from '../components/repo-card';
+
 import styled from 'styled-components';
+
+import { Layout } from '../components/layouts/ProfileLayout';
 import { PaginateWrapper } from '../components/paginate-button/PaginateButton.style';
-import PaginateButton from '../components/paginate-button';
-import LoadingRepoCard from '../components/repo-card/LoadingRepoCard';
 
 function Profile() {
 	const context = useUser();

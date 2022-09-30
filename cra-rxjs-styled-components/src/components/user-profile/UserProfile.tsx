@@ -1,11 +1,7 @@
-import {
-	OfficeBuilding,
-	LocationMarker,
-} from '@styled-icons/heroicons-outline';
-import { useUser } from '../../context/UserProvider';
-import LoadingProfile from './LoadingProfile';
 import OrgList from './OrgList';
+import LoadingProfile from './LoadingProfile';
 import { SocialIcons } from './SocialIcons';
+import { useUser } from '../../context/UserProvider';
 import {
 	Avatar,
 	NameContainer,
@@ -19,6 +15,10 @@ import {
 	LinkIconStyles,
 	UserProfileContainer,
 } from './UserProfile.styles';
+import {
+	OfficeBuilding,
+	LocationMarker,
+} from '@styled-icons/heroicons-outline';
 
 function UserProfileView() {
 	const context = useUser();

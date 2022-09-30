@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import IssuesView from './Issue.view';
+import { useState } from 'react';
 import type { Issue } from './Issue.type';
 import type { IssueTabValues } from '../types';
 

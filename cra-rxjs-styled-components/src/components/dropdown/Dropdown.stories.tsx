@@ -1,6 +1,6 @@
+import Dropdown from './Dropdown';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Routes, Route, MemoryRouter } from 'react-router-dom';
-import Dropdown from './Dropdown';
 
 export default {
   title: 'Navbar/Dropdown',

@@ -1,5 +1,5 @@
-import { LinkIcon, ReadmeBookIcon } from '../icons/index';
 import { LoadingTextLine } from '../Loading';
+import { LinkIcon, ReadmeBookIcon } from '../icons/index';
 import {
 	AboutContainer,
 	Header,

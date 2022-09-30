@@ -1,6 +1,6 @@
+import FileViewer from './FileViewer.view';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Routes, Route, MemoryRouter } from 'react-router-dom';
-import FileViewer from './FileViewer.view';
 
 export default {
   title: 'Navbar/FileViewer',

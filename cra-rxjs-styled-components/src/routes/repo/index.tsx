@@ -1,9 +1,9 @@
-import { Outlet, useLocation } from 'react-router';
-import { RepoLayout } from '../../components/layouts/RepoLayoutPage';
 import Header from '../../components/header';
-import SubHeader from '../../components/sub-header';
 import RepoPage from '../../components/repo-page';
+import SubHeader from '../../components/sub-header';
+import { Outlet, useLocation } from 'react-router';
 import { useParams } from 'react-router-dom';
+import { RepoLayout } from '../../components/layouts/RepoLayoutPage';
 
 function Repo() {
 	const { username, repo, branch } = useParams();

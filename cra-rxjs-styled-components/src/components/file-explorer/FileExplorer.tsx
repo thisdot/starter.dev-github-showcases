@@ -11,10 +11,9 @@ import {
 	FileExplorerLink,
 	FileExplorerFileContainer,
 } from './FileExplorer.styles';
-
 import { ForkIcon, DirectoryIcon, FileIcon } from '../icons/index';
-import { FileItem } from '../../types/types';
 import { LoadingBulletList } from '../Loading';
+import { FileItem } from '../../types/types';
 
 type Props = {
 	branch: string;

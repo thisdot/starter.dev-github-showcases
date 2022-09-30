@@ -1,6 +1,6 @@
+import Header from './Header';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Routes, Route, MemoryRouter } from 'react-router-dom';
-import Header from './Header';
 
 export default {
 	title: 'Navbar/Header',

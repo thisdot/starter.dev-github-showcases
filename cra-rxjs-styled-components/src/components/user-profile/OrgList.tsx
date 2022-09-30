@@ -1,4 +1,3 @@
-import { IOrganization } from '../../context/UserProvider';
 import {
 	ContainerWrapper,
 	Heading,
@@ -6,6 +5,7 @@ import {
 	Organisation,
 	OrgImage,
 } from './OrgList.styles';
+import { IOrganization } from '../../context/UserProvider';
 
 interface OrgListProps {
 	organizations: IOrganization[];

@@ -1,14 +1,14 @@
 import type { RepoContextInterface } from '../../context/RepoContext';
-import type { ReactNode } from 'react';
 import { RepoProvider } from '../../context/RepoContext';
-import { useEffect, useState } from 'react';
-import { tap, forkJoin } from 'rxjs';
+import { Repository } from '../../interfaces/repositories.interfaces';
+import { fromFetchWithAuth } from '../../hooks/auth/from-fetch-with-auth';
 import {
 	SINGLE_USER_REPO,
 	ISSUE_PR_SEARCH,
 } from '../../constants/url.constants';
-import { Repository } from '../../interfaces/repositories.interfaces';
-import { fromFetchWithAuth } from '../../hooks/auth/from-fetch-with-auth';
+
+import { useEffect, useState,ReactNode } from 'react';
+import { tap, forkJoin } from 'rxjs';
 
 type IssueDetails = {
 	total_count: number;

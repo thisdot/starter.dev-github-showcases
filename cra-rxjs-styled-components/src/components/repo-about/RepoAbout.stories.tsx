@@ -1,6 +1,6 @@
+import RepoAbout from './RepoAbout';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Routes, Route, MemoryRouter } from 'react-router-dom';
-import RepoAbout from './RepoAbout';
 
 export default {
 	title: 'Repo/About',

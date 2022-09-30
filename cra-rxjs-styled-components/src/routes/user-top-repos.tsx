@@ -1,11 +1,11 @@
-import { Layout } from '../components/layouts/Layout';
 import RepoCard from '../components/repo-card';
 import UserGists from '../components/user-gists';
-import styled from 'styled-components';
-import { useGists } from '../hooks/gists/use-gists';
-import { useRepos } from '../hooks/repositories/use-repos';
-import { useUser } from '../context/UserProvider';
 import LoadingRepoCard from '../components/repo-card/LoadingRepoCard';
+import { useUser } from '../context/UserProvider';
+import { useRepos } from '../hooks/repositories/use-repos';
+import { useGists } from '../hooks/gists/use-gists';
+import styled from 'styled-components';
+import { Layout } from '../components/layouts/Layout';
 
 const Page = styled.div`
 	padding: 3rem;

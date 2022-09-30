@@ -1,8 +1,8 @@
-import { Code } from 'react-content-loader';
 import FileViewerView from './FileViewer.view';
-import { mapExtensionToLanguage } from './mapExtensionToLanguage';
+import { Code } from 'react-content-loader';
 import { useRepo } from '../../context/RepoContext';
 import { useRepoBlob } from '../../hooks/repo-blob/use-repo-blob';
+import { mapExtensionToLanguage } from './mapExtensionToLanguage';
 
 function FileViewer() {
 	const { path, isRepoLoading } = useRepo();

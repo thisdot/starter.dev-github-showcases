@@ -1,6 +1,6 @@
+import LoadingBulletList from './LoadingBulletList';
 import { Story, Meta } from '@storybook/react';
 import React from 'react';
-import LoadingBulletList from './LoadingBulletList';
 
 export default {
   component: LoadingBulletList,
