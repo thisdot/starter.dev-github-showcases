@@ -3,7 +3,7 @@
     <q-card-section class="row q-pb-none">
       <div class="col-auto flex">
         <h3 class="text-h6 q-my-none">
-          <router-link :to="`/${repoNameWithOwner}`" class="q-mr-sm">
+          <router-link :to="`/${repoNameWithOwnerLink}`" class="q-mr-sm">
             {{ repoNameWithOwner }}
           </router-link>
           <q-chip
@@ -68,8 +68,13 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, PropType } from 'vue';
 import { useFormatter } from '@/composables';
+
+type Owner = {
+  __typename?: string;
+  login: string;
+};
 
 const props = defineProps({
   name: {
@@ -88,7 +93,7 @@ const props = defineProps({
     required: false,
   },
   owner: {
-    type: Object as () => { __typename: string; login: string },
+    type: Object as PropType<Owner>,
     required: false,
   },
   primaryLanguage: {
@@ -109,14 +114,23 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  isProfilePage: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const { getFriendlyDate, upperFirst } = useFormatter();
 const friendlyUpdatedAt = getFriendlyDate(props.updatedAt);
 
+const repoNameWithOwnerLink = computed(
+  () => `${props.owner?.login || ''}/${props.name || ''}`,
+);
 const repoNameWithOwner = computed(
   () =>
-    `${props.owner?.login ? `${props.owner?.login}/` : ''}${props.name || ''}`,
+    `${!props.isProfilePage ? `${props.owner?.login || ''}/` : ''}${
+      props.name || ''
+    }`,
 );
 </script>
 

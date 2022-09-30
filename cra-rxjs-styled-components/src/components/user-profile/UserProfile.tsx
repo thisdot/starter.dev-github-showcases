@@ -3,6 +3,7 @@ import {
 	LocationMarker,
 } from '@styled-icons/heroicons-outline';
 import { useUser } from '../../context/UserProvider';
+import LoadingProfile from './LoadingProfile';
 import OrgList from './OrgList';
 import { SocialIcons } from './SocialIcons';
 import {
@@ -20,15 +21,20 @@ import {
 } from './UserProfile.styles';
 
 function UserProfileView() {
-	const user = useUser();
+	const context = useUser();
+	const user = context?.user;
+	const loading = context?.loading;
+	if (loading) return <LoadingProfile />;
 	return (
 		<UserProfileContainer>
-			<Avatar
-				src={user?.avatar_url}
-				alt="Avatar"
-				width={260}
-				height={260}
-			></Avatar>
+			{user?.avatar_url && (
+				<Avatar
+					src={user?.avatar_url}
+					alt="Avatar"
+					width={260}
+					height={260}
+				></Avatar>
+			)}
 			<NameContainer>
 				<Name>{user?.name}</Name>
 				<Username>{user?.login}</Username>

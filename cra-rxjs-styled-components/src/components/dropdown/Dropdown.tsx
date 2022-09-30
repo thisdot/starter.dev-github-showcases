@@ -17,7 +17,9 @@ import {
 
 export default function Dropdown() {
 	const signOutHandler = useSignOut();
-	const user = useUser();
+	const context = useUser();
+	const user = context?.user;
+
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const toggleDropdown = () => setOpenDropdown(!openDropdown);
 
