@@ -11,6 +11,7 @@
   </div>
 </template>
 <script lang="ts">
+import { useAsync } from '@nuxtjs/composition-api';
 import Vue from 'vue';
 import { useUserStore } from '~/store/userStore';
 
@@ -18,7 +19,10 @@ export default Vue.extend({
   name: 'UserGists',
   setup() {
     const userStore = useUserStore();
-    userStore.getUserGists();
+
+    useAsync(async () => {
+      await userStore.getUserGists();
+    });
     return {
       gists: userStore.gists,
     };
