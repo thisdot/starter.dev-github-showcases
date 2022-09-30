@@ -23,7 +23,7 @@
 <script lang="ts">
 import { useAsync, useContext } from '@nuxtjs/composition-api';
 import Vue from 'vue';
-import RepositoryCard from '../RepositoryCard/RepositoryCard.vue';
+import RepositoryCard from '~/components/RepositoryCard/RepositoryCard.vue;
 import { useUserStore } from '~/store/userStore';
 
 export default Vue.extend({
