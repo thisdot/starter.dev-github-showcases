@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import CloseIcon from '../icons/CloseIcon';
 import {
 	DropdownContainer,
 	Dropdown,
@@ -9,6 +8,7 @@ import {
 	CloseDropdownContainer,
 	CloseButton,
 } from './DetailsDropdown.style';
+import CloseIcon from '../icons/CloseIcon';
 import type { DropdownTitle } from '../pull-request/types';
 
 interface Props {

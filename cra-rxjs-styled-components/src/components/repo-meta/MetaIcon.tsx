@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import { SocialCount, TextSpan } from './RepoMeta.styles';
+import { ReactNode } from 'react';
 
 interface MetaIconProps {
 	text: number | string;

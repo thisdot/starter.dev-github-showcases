@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
-import { createContext, useContext, useState, useEffect } from 'react';
 import { fromFetchWithAuth } from '../hooks/auth/from-fetch-with-auth';
 import { GITHUB_URL_BASE } from '../constants/url.constants';
+
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { tap, forkJoin } from 'rxjs';
 
 export interface IUserContext {

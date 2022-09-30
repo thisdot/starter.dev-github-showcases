@@ -1,6 +1,6 @@
+import { AUTH_TOKEN } from '../../constants/auth.constants';
 import { Observable } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
-import { AUTH_TOKEN } from '../../constants/auth.constants';
 
 type RequestInitWithSelector<T> = RequestInit & {
 	selector: (response: Response) => Observable<T> | Promise<T>;

@@ -1,6 +1,6 @@
-import type { Language } from 'prism-react-renderer';
 import FileCode from './FileCode';
 import FileText from './FileText';
+import type { Language } from 'prism-react-renderer';
 import {
 	FileHeader,
 	FileHeaderBytes,

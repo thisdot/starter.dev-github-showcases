@@ -1,5 +1,5 @@
-import { Navigate, useLocation } from 'react-router-dom';
 import { AUTH_TOKEN } from '../constants/auth.constants';
+import { Navigate, useLocation } from 'react-router-dom';
 
 export default function AuthGuard({ children }: { children: JSX.Element }) {
 	const location = useLocation();

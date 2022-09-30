@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
 import DetailsDropdown from '../../details-dropdown';
 import CorrectIcon from '../../icons/CorrectIcon';
 import OpenIssueIcon from '../../icons/OpenIssueIcon';
-import type { IssueTabValues } from '../../../types/types';
-
 import { Container, StatusLabel, StatusTab } from './IssueTabHeader.styles';
+
+import { useCallback, useState } from 'react';
+import type { IssueTabValues } from '../../../types/types';
 import type { DropdownTitle } from '../../../types/types';
 
 interface Props {

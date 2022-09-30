@@ -1,9 +1,10 @@
-import { formatDistance } from 'date-fns';
-import { getColourForLanguage } from '../../helpers/colours';
 import { BranchLogo } from '../misc/BranchLogo';
 import { StarLogo } from '../misc/StarLogo';
 import MetaIcon from './MetaIcon';
 import { LanguageColor, Metadata, SocialWrapper } from './RepoMeta.styles';
+import { getColourForLanguage } from '../../helpers/colours';
+
+import { formatDistance } from 'date-fns';
 
 interface RepoMetaProps {
 	language?: string | null;

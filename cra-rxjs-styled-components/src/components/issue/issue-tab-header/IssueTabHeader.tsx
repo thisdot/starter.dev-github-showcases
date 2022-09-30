@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react';
 import DetailsDropdown from '../../details-dropdown';
 import CorrectIcon from '../../icons/CorrectIcon';
 import IssueIcon from '../../icons/IssueIcon';
-import type { IssueTabValues, DropdownTitle } from '../types';
-import { Link } from 'react-router-dom';
 import { Container, StatusLabel, StatusTab } from './IssueTabHeader.style';
+import { Link } from 'react-router-dom';
+import type { IssueTabValues, DropdownTitle } from '../types';
 interface Props {
 	toggleTab: (value: IssueTabValues) => void;
 }

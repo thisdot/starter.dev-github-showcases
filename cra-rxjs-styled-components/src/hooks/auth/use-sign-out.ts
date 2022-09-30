@@ -1,9 +1,10 @@
+import { SIGN_OUT_URL } from '../../constants/url.constants';
+import { AUTH_TOKEN } from '../../constants/auth.constants';
+
 import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Subject, switchMap } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
-import { SIGN_OUT_URL } from '../../constants/url.constants';
-import { AUTH_TOKEN } from '../../constants/auth.constants';
 
 export function useSignOut() {
 	const clickListener$ = useMemo(() => new Subject<void>(), []);

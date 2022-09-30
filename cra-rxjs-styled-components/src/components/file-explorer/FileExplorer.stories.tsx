@@ -1,6 +1,6 @@
+import FileExplorer from './FileExplorer';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Routes, Route, MemoryRouter } from 'react-router-dom';
-import FileExplorer from './FileExplorer';
 
 export default {
   title: 'Repo/FileExplorer',

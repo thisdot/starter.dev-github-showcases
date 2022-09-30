@@ -1,7 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import AuthGuard from './components/AuthGuard';
 import reportWebVitals from './reportWebVitals';
@@ -17,6 +13,11 @@ import RepoBranchRoot from './routes/repo/repository-code';
 import RepoBranchTreePath from './routes/repo/repository-code/repository-tree/repository-tree';
 import RepoBranchBlobPath from './routes/repo/repository-code/repository-blob/repository-blob';
 import { UserProvider } from './context/UserProvider';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './index.css';
 
 ReactDOM.render(
 	<React.StrictMode>

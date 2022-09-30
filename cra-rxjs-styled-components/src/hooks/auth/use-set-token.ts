@@ -1,10 +1,11 @@
+import { AUTH_TOKEN } from '../../constants/auth.constants';
+import { GET_TOKEN_URL } from '../../constants/url.constants';
+import { AuthSuccessResponse } from '../../interfaces/auth.interfaces';
+
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { catchError, EMPTY, tap } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
-import { AUTH_TOKEN } from '../../constants/auth.constants';
-import { GET_TOKEN_URL } from '../../constants/url.constants';
-import { AuthSuccessResponse } from '../../interfaces/auth.interfaces';
 
 export function useSetToken() {
 	const navigate = useNavigate();

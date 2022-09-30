@@ -1,6 +1,6 @@
+import LoadingTextLine from './LoadingTextLine';
 import { Story, Meta } from '@storybook/react';
 import React from 'react';
-import LoadingTextLine from './LoadingTextLine';
 
 export default {
   component: LoadingTextLine,

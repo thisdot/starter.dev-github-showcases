@@ -1,13 +1,4 @@
 import {
-	Observable,
-	Subscription,
-	filter,
-	map,
-	switchMap,
-	tap,
-	zip,
-} from 'rxjs';
-import {
 	Pagination,
 	Repository,
 	RepositoryWithBranchCount,
@@ -17,10 +8,19 @@ import {
 	extractBranchCount,
 	sanitizeBranchesUrl,
 } from '../../helpers/extract-branch-count';
-import { useEffect, useState } from 'react';
-
 import { USER_REPO_LIST } from '../../constants/url.constants';
 import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
+
+import {
+	Observable,
+	Subscription,
+	filter,
+	map,
+	switchMap,
+	tap,
+	zip,
+} from 'rxjs';
+import { useEffect, useState } from 'react';
 import parse from 'parse-link-header';
 
 export function useRepos(username: string | undefined): UseRepo {
