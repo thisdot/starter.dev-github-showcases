@@ -60,6 +60,8 @@ describe('RepositoryEffects', () => {
       starCount: 100,
       tags: ['react', 'angular', 'vue', 'github'],
       tree: [],
+      openPullRequests: null,
+      closedPullRequests: null,
       activeBranch: '',
       selectedFile: null,
       visibility: 'public',

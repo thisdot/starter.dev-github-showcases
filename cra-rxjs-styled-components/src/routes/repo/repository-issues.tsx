@@ -1,4 +1,4 @@
-import IssueCtrl from '../../components/repo-issues/Issues';
+import IssueCtrl from '../../components/repo-issues/Issues/Issues';
 import { useRepo } from '../../context/RepoContext';
 import { useRepositoryIssues } from '../../hooks/repository-issues/use-repository-issues.ts';
 

@@ -51,10 +51,18 @@ interface UserProviderProps {
 	children: ReactNode;
 }
 
-export const UserContext = createContext<IUserContext | undefined>(undefined);
+type UserContextType = {
+	user: IUserContext | undefined;
+	loading: boolean;
+};
+
+export const UserContext = createContext<UserContextType | undefined>(
+	undefined
+);
 
 export function UserProvider({ children }: UserProviderProps) {
 	const [user, setUser] = useState<IUserContext>();
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const request = (url: string) =>
 		fromFetchWithAuth(url, {
@@ -72,12 +80,13 @@ export function UserProvider({ children }: UserProviderProps) {
 			.pipe(
 				tap((val) => {
 					if (val) {
+						setLoading(false);
+						setUser({
+							...val[0],
+							organizations: val[1],
+							starredRepos: val[2].length,
+						});
 					}
-					setUser({
-						...val[0],
-						organizations: val[1],
-						starredRepos: val[2].length,
-					});
 				})
 			)
 			.subscribe();
@@ -87,7 +96,11 @@ export function UserProvider({ children }: UserProviderProps) {
 		};
 	}, []);
 
-	return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+	return (
+		<UserContext.Provider value={{ user, loading }}>
+			{children}
+		</UserContext.Provider>
+	);
 }
 
 export function useUser() {

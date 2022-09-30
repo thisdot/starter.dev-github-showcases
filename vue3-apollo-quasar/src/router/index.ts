@@ -11,6 +11,7 @@ import {
   RepositoryDetails,
   Redirect,
   NotFound,
+  OrgsProfile,
 } from '../views';
 import { requiresAuth, requiresNoAuth } from './utils';
 
@@ -36,6 +37,11 @@ const routes: Array<RouteRecordRaw> = [
             props: true,
           },
         ],
+      },
+      {
+        path: 'orgs/:org',
+        component: OrgsProfile,
+        props: true,
       },
     ],
     beforeEnter: requiresAuth,
