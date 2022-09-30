@@ -1,9 +1,9 @@
-import IssueTabHeader from '../issue-tab-header';
-import IssueCard from '../issue-card';
+import IssueTabHeader from '../issue-tab-header/IssueTabHeader';
+import IssueCard from '../issue-card/IssueCard';
 import { Content, Wrapper } from './Issues.view.styles';
 import type { Issue } from './Issue.type';
 import { IssueTabValues } from '../../../types/types';
-import Pagination from '../../pagination';
+import Pagination from '../../pagination/Pagination';
 
 type IssueProps = {
 	issues: Issue[];

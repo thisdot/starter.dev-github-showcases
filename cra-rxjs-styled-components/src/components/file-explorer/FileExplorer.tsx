@@ -12,7 +12,9 @@ import {
 	FileExplorerFileContainer,
 } from './FileExplorer.styles';
 
-import { ForkIcon, DirectoryIcon, FileIcon } from '../icons/index';
+import { ForkIcon } from '../icons/ForkIcon';
+import { DirectoryIcon } from '../icons/DirectoryIcon';
+import { FileIcon } from '../icons/FileIcon';
 import { FileItem } from '../../types/types';
 import { LoadingBulletList } from '../Loading';
 
