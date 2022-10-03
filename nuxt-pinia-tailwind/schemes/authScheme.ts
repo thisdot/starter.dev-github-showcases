@@ -2,6 +2,13 @@ import { LocalScheme } from '@nuxtjs/auth-next/dist/runtime';
 import { HTTPRequest, HTTPResponse } from '@nuxtjs/auth-next';
 import { IUser } from '@/types/user/interfaces';
 
+const getPageCount = (pageData: string) => {
+  return (
+    pageData.split(',')[1].match(/.*page=(?<page_num>\d+)/)?.groups?.page_num ||
+    0
+  );
+};
+
 export default class CustomLoginScheme extends LocalScheme {
   //  Add any custom options
 
@@ -51,12 +58,8 @@ export default class CustomLoginScheme extends LocalScheme {
 
       const [orgs, stars] = await Promise.all([getOrgs, getStars]);
 
-      const starsCount =
-        stars.headers?.link?.split(',')[1].match(/.*page=(?<page_num>\d+)/)
-          ?.groups?.page_num || 0;
-      const orgsCount =
-        orgs.headers?.link?.split(',')[1].match(/.*page=(?<page_num>\d+)/)
-          ?.groups?.page_num || 0;
+      const starsCount = getPageCount(stars.headers.link);
+      const orgsCount = getPageCount(orgs.headers.link);
 
       const customUser: IUser = {
         ...user,

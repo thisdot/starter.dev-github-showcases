@@ -55,6 +55,7 @@ export interface IUserApiResponse {
   email: string;
   hireable: boolean;
   bio: string;
+  website_url: string;
   twitter_username: string;
   public_repos: number;
   public_gists: number;

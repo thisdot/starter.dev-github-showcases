@@ -1,4 +1,4 @@
-export interface TabItem {
+export interface ITabItem {
   title: string;
   path?: string;
   icon: string;

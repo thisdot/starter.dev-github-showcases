@@ -26,11 +26,11 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import { TabItem } from './types';
+import { ITabItem } from './types';
 export default Vue.extend({
   props: {
     tabs: {
-      type: Array as PropType<Array<TabItem>>,
+      type: Array as PropType<Array<ITabItem>>,
       default: () => [],
     },
   },
