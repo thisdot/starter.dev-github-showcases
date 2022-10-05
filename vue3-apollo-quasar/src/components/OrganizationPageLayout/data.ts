@@ -22,7 +22,31 @@ export const orgRepos = {
               'Using basic pull requests to add your name and github link to BE A MEMBER of ZTM-ng',
             url: '',
             forkCount: 2,
-            stargazerCount: 2,
+            stargazerCount: 3,
+            isFork: true,
+            isArchived: false,
+            primaryLanguage: {
+              id: '1j',
+              color: 'yellow',
+              name: 'Javascript',
+            },
+            updatedAt: '5 Sep 2022',
+            visibility: 'public',
+            owner: {
+              login: 'hdjerry',
+            },
+            nameWithOwner: 'hdjerry/someone',
+          },
+        },
+        {
+          node: {
+            id: '1234',
+            name: 'ream',
+            description:
+              'Using basic pull requests to add your name and github link to BE A MEMBER of ZTM-ng',
+            url: '',
+            forkCount: 2,
+            stargazerCount: 5,
             isFork: true,
             isArchived: false,
             primaryLanguage: {
@@ -45,8 +69,8 @@ export const orgRepos = {
             description:
               'Using basic pull requests to add your name and github link to BE A MEMBER of ZTM-ng',
             url: '',
-            forkCount: 2,
-            stargazerCount: 2,
+            forkCount: 3,
+            stargazerCount: 4,
             isFork: true,
             isArchived: false,
             primaryLanguage: {
@@ -54,7 +78,7 @@ export const orgRepos = {
               color: 'blue',
               name: 'CSS',
             },
-            updatedAt: '4 Sep 2022',
+            updatedAt: '5 Sep 2022',
             visibility: 'public',
             owner: {
               login: 'hdjerry',

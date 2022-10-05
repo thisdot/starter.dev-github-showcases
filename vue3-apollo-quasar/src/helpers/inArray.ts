@@ -5,6 +5,6 @@ type ArrayData = {
 export const inArray = (
   array: ArrayData[],
   target: string,
-): { name: string } | undefined => {
+): ArrayData | undefined => {
   return array.find((arr) => arr.name === target);
 };

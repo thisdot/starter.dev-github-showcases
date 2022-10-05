@@ -56,7 +56,7 @@
             </small>
           </div>
           <div>
-            <a :href="'/' + username" class="row items-center clear-filter">
+            <a :href="usernameUrl" class="row items-center clear-filter">
               <q-icon
                 name="fa fa-times"
                 class="text-white rounded-borders clear-filter-icon q-mx-sm"
@@ -171,6 +171,8 @@ interface Repo extends Edges {
   isArchived: boolean;
 }
 
+const usernameUrl = computed((): string => `/${props.username}`);
+
 const repoDataFilteredByType = (repos: Repo[]) => {
   let response = repos.slice();
   const filterType = filterTypeData.value?.filterType;
@@ -192,12 +194,10 @@ const sortedRepoData = (repos: Repo[]) => {
       a.node.name.toLowerCase().localeCompare(b.node.name.toLowerCase()),
     );
   } else if (sortByData.value?.sortby === SORT_OPTIONS.stars) {
-    response.sort((a, b) =>
-      b.node.stargazerCount > a.node.stargazerCount ? 1 : -1,
-    );
+    response.sort((a, b) => b.node.stargazerCount - a.node.stargazerCount);
   } else {
-    response.sort((a, b) =>
-      getTime(b.node.updatedAt) - getTime(a.node.updatedAt) ? 1 : -1,
+    response.sort(
+      (a, b) => getTime(b.node.updatedAt) - getTime(a.node.updatedAt),
     );
   }
   return response;
@@ -225,7 +225,7 @@ const repoDataFilteredBySearch = (search: string) => {
   }
   return orgRepos?.value.repositories?.edges.reduce((acc, repo) => {
     if (
-      search !== '' &&
+      search &&
       !repo?.node.name?.toLocaleLowerCase().includes(search.toLocaleLowerCase())
     ) {
       return acc;
@@ -264,7 +264,7 @@ const getLanguages = computed((): { name: string }[] => {
       });
     }
   });
-  languages.sort((a, b) => (a.name > b.name ? 1 : -1));
+  languages.sort((a, b) => a.name.localeCompare(b.name));
   return languages;
 });
 </script>
@@ -287,8 +287,8 @@ const getLanguages = computed((): { name: string }[] => {
 .company_logo {
   border: 1px solid var(--color-border-muted);
   img {
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
   }
 }
 

@@ -17,7 +17,11 @@
             class="text-h5 custom-icon"
             name="svguse:/app-icons/repo-overview.svg#repo-overview"
           />
-          <span class="tab_label q-mx-sm">Overview</span>
+          <span
+            class="tab_label q-mx-sm"
+            :class="{ 'text-weight-bold': tab === TABS.overview }"
+            >Overview</span
+          >
         </q-tab>
         <q-tab name="repositories" class="tab" v-if="repositories">
           <q-icon
@@ -26,13 +30,13 @@
           />
           <span
             class="tab_label q-mx-sm"
-            :class="{ 'text-weight-bold': tab === 'repositories' }"
+            :class="{ 'text-weight-bold': tab === TABS.repositories }"
           >
             Repositories
           </span>
           <span
             class="num text-caption q-py-xs q-px-xs"
-            :class="{ 'text-weight-bold': tab === 'repositories' }"
+            :class="{ 'text-weight-bold': tab === TABS.repositories }"
           >
             85
           </span>
@@ -44,7 +48,7 @@
           />
           <span
             class="tab_label q-mx-sm"
-            :class="{ 'text-weight-bold': tab === 'projects' }"
+            :class="{ 'text-weight-bold': tab === TABS.projects }"
           >
             Projects
           </span>
@@ -56,7 +60,7 @@
           />
           <span
             class="tab_label q-mx-sm"
-            :class="{ 'text-weight-bold': tab === 'packages' }"
+            :class="{ 'text-weight-bold': tab === TABS.packages }"
           >
             Packages
           </span>
@@ -68,13 +72,13 @@
           />
           <span
             class="tab_label q-mx-sm"
-            :class="{ 'text-weight-bold': tab === 'stars' }"
+            :class="{ 'text-weight-bold': tab === TABS.stars }"
           >
             Stars
           </span>
           <span
             class="num text-weight-medium text-caption q-py-xs q-px-xs"
-            :class="{ 'text-weight-bold': tab === 'stars' }"
+            :class="{ 'text-weight-bold': tab === TABS.stars }"
           >
             14
           </span>
@@ -116,7 +120,15 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const tab = ref<string>('repositories');
+    const TABS = {
+      repositories: 'repositories',
+      projects: 'projects',
+      packages: 'packages',
+      stars: 'stars',
+      overview: 'overview',
+    };
+
+    const tab = ref<string>(TABS.repositories);
     const activeTab = computed({
       get() {
         emit('triggerTab', tab.value);
@@ -139,6 +151,7 @@ export default defineComponent({
       tab,
       activeTab,
       isOnlyRepositories,
+      TABS,
     };
   },
 });
