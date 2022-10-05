@@ -4,7 +4,11 @@
       <div class="q-pt-md q-mx-auto">
         <div class="row items-center" v-if="!loadingOrgProfileDetail">
           <span class="company_logo q-mr-sm rounded-borders">
-            <img :src="orgProfileDetail?.avatarUrl" alt="company logo" />
+            <img
+              v-if="orgProfileDetail?.avatarUrl"
+              :src="orgProfileDetail?.avatarUrl"
+              alt="company logo"
+            />
           </span>
           <h1 class="text-h6">{{ orgProfileDetail?.name }}</h1>
         </div>
