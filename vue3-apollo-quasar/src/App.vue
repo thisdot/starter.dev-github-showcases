@@ -24,6 +24,12 @@ import { useUserStore } from '@/store/userStore';
 
 const user = useUserStore();
 </script>
-<style>
+<style lang="scss">
 @import './App.css';
+@import '@/styles/quasar.variables.scss';
+
+/* For the code content view */
+[dir] .hljs {
+  background: transparent;
+}
 </style>

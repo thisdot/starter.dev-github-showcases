@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import DetailsDropdown from '../../details-dropdown';
+import DetailsDropdown from '../../details-dropdown/DetailsDropdown';
 import CorrectIcon from '../../icons/CorrectIcon';
 import IssueIcon from '../../icons/IssueIcon';
 import type { IssueTabValues, DropdownTitle } from '../types';

@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from 'react-router';
 import { RepoLayout } from '../../components/layouts/RepoLayoutPage';
-import Header from '../../components/header';
-import SubHeader from '../../components/sub-header';
-import RepoPage from '../../components/repo-page';
+import Header from '../../components/header/Header';
+import SubHeader from '../../components/sub-header/SubHeader';
+import RepoPage from '../../components/repo-page/RepoPage.data';
 import { useParams } from 'react-router-dom';
 
 function Repo() {
