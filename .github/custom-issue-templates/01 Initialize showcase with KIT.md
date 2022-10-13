@@ -2,7 +2,7 @@
 
 ## Background
 
-As a developer I would like my starting base to be the existing KIT for the current tehcnology. It is expected for a KIT to be fully ready before commencing work on the showcase.
+As a developer, I would like my starting base to be the existing KIT for the current technology. It is expected for a KIT to be fully ready before commencing work on the showcase.
 
 ## Acceptance
 
