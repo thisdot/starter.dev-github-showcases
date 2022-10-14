@@ -1,26 +1,15 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
-  FileContents,
   FileContentsApiResponse,
   PR_STATE,
   PullRequestAPIResponse,
   ReadmeApiResponse,
   RepoApiResponse,
-  RepoContents,
   RepoContentsApiResponse,
-  RepoPullRequests,
-  RepoState,
 } from 'src/app/state/repository';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import {
-  FileContentsApiResponse,
-  ReadmeApiResponse,
-  RepoApiResponse,
-  RepoContentsApiResponse,
-} from 'src/app/state/repository';
 import {
   IssueComments,
   Issues,
@@ -125,84 +114,29 @@ export class RepositoryService {
     });
   }
 
-  getRepositoryContents(
-    owner: string,
-    repoName: string,
-    path?: string,
-  ): Observable<RepoContents[]> {
-    const url = path
-      ? `${environment.githubUrl}/repos/${owner}/${repoName}/contents/${path}`
-      : `${environment.githubUrl}/repos/${owner}/${repoName}/contents`;
-
-    return this.http.get<RepoContentsApiResponse[]>(url).pipe(
-      map((data) => {
-        return data.map((value) => ({
-          name: value.name,
-          type: value.type,
-          path: value.path,
-        }));
-      }),
-    );
-  }
-
-  getFileContents(
-    owner: string,
-    repoName: string,
-    path: string,
-    commitOrBranchOrTagName: string,
-  ): Observable<FileContents> {
-    const url = `${environment.githubUrl}/repos/${owner}/${repoName}/contents/${path}?ref=${commitOrBranchOrTagName}`;
-    return this.http.get<FileContentsApiResponse>(url).pipe(
-      map((data) => {
-        return {
-          name: data.name,
-          type: data.type,
-          // TODO: consider using a function that also takes encoding format to decode this
-          content: atob(data.content),
-          size: data.size,
-        };
-      }),
-    );
-  }
-
+  /**
+   * NOTE: This call uses the search URL to find the information, and is a bit of a duplicate of other calls that use the repo URL. Both work fine and are provided currently.
+   * Gets a list of pull requests matching the provided state
+   * @param repoOwner who the repo belongs to
+   * @param repoName name of the repo
+   * @param prState if the pr is open or closed
+   * @returns the total count of state-matching pull requests and information for each of those pulls
+   */
   getPullRequests(
-    owner: string,
+    repoOwner: string,
     repoName: string,
     prState: PR_STATE,
-  ): Observable<RepoPullRequests> {
-    const url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${repoName}+type:pr+state:${prState}`;
-    return this.http.get<PullRequestAPIResponse>(url).pipe(
-      map((data) => {
-        return {
-          totalCount: data.total_count,
-          pullRequests: data.items.map((item) => ({
-            id: item.id,
-            login: item.user.login,
-            title: item.title,
-            number: item.number,
-            state: item.state,
-            closedAt: item.closed_at ? new Date(item.closed_at) : null,
-            mergedAt: item.pull_request.merged_at
-              ? new Date(item.pull_request.merged_at)
-              : null,
-            createdAt: new Date(item.created_at),
-            labels: item.labels,
-            commentCount: item.comments,
-            labelCount: item.labels.length,
-          })),
-        };
-      }),
-    );
-  }
+  ): Observable<PullRequestAPIResponse> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const state = encodeURIComponent(prState);
+    const url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:pr+state:${state}`;
 
-  // TODO: readme file is currently an encoded string - this method should be improved to either return the raw data, or include the fields needed to de-code the string when ready to display it
-  // TODO: write test for this function when it's updated
-  getReadmeContent(owner: string, repoName: string): Observable<string> {
-    const url = `${environment.githubUrl}/repos/${owner}/${repoName}/readme`;
-
-    return this.http
-      .get<ReadmeApiResponse>(url)
-      .pipe(map((file) => file.content));
+    return this.http.get<PullRequestAPIResponse>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
   }
 
   /**

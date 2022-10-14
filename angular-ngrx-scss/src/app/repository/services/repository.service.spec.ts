@@ -1,13 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { of, delay } from 'rxjs';
+import { delay, of } from 'rxjs';
 import {
-  FileContents,
   PullRequestAPIResponse,
   RepoApiResponse,
-  RepoContents,
-  RepoPullRequests,
   RepoContentsApiResponse,
-  RepositoryState,
+  RepoPullRequests,
 } from 'src/app/state/repository';
 import {
   IssueComments,
@@ -16,11 +13,11 @@ import {
   PullRequests,
 } from './repository.interfaces';
 
-import { RepositoryService } from './repository.service';
 import {
   generatePullRequestAPIResponseFixture,
   pullRequestFixture,
 } from '../../fixtures/repository.fixtures';
+import { RepositoryService } from './repository.service';
 
 const MOCK_ISSUES: Issues = [
   {
@@ -221,26 +218,6 @@ describe('RepositoryService', () => {
   });
 
   it('should return information on the provided repository', (done) => {
-    const expectedResponse: RepoState = {
-      description: 'A collection of GitHub clone implementations.',
-      forkCount: 20,
-      issueCount: 30,
-      ownerName: '',
-      prCount: 0,
-      readme: '',
-      repoName: 'starter.dev-github-showcases',
-      starCount: 100,
-      tags: ['react', 'angular', 'vue', 'github'],
-      tree: [],
-      openPullRequests: null,
-      closedPullRequests: null,
-      activeBranch: 'main',
-      visibility: 'public',
-      selectedFile: null,
-      watchCount: 10,
-      website: 'https://starter.dev',
-    };
-
     const expectedHttpResponse: Partial<RepoApiResponse> = {
       name: 'starter.dev-github-showcases',
       description: 'A collection of GitHub clone implementations.',
@@ -287,6 +264,8 @@ describe('RepositoryService', () => {
         git_url: '',
         download_url: '',
         type: 'file',
+        encoding: '',
+        content: 'file contents',
         _links: {
           self: '',
           git: '',
@@ -303,6 +282,8 @@ describe('RepositoryService', () => {
         git_url: '',
         download_url: '',
         type: 'dir',
+        encoding: '',
+        content: 'file contents',
         _links: {
           self: '',
           git: '',
@@ -475,13 +456,12 @@ describe('RepositoryService', () => {
     it('should return pull request for given repository', (done) => {
       const apiResponse: PullRequestAPIResponse =
         generatePullRequestAPIResponseFixture();
-      const expectedResponse: RepoPullRequests = pullRequestFixture;
 
       httpClientSpy.get.and.returnValue(of(apiResponse).pipe(delay(0)));
       repoService
         .getPullRequests('thisdot', 'starter.dev-github-showcases', 'open')
         .subscribe((res) => {
-          expect(res).toEqual(expectedResponse);
+          expect(res).toEqual(apiResponse);
           done();
         });
 

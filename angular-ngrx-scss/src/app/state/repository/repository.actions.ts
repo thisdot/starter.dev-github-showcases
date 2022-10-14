@@ -3,9 +3,8 @@ import {
   FileContents,
   PR_STATE,
   RepoPullRequests,
-  RepoState,
+  RepositoryState,
 } from './repository.state';
-import { FileContents, RepositoryState } from './repository.state';
 
 export const fetchRepository = createAction(
   '[Repository API] Fetch Repository',
