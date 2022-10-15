@@ -4,7 +4,6 @@ import {
   PullRequestAPIResponse,
   RepoApiResponse,
   RepoContentsApiResponse,
-  RepoPullRequests,
 } from 'src/app/state/repository';
 import {
   IssueComments,
@@ -13,10 +12,7 @@ import {
   PullRequests,
 } from './repository.interfaces';
 
-import {
-  generatePullRequestAPIResponseFixture,
-  pullRequestFixture,
-} from '../../fixtures/repository.fixtures';
+import { generatePullRequestAPIResponseFixture } from '../../fixtures/repository.fixtures';
 import { RepositoryService } from './repository.service';
 
 const MOCK_ISSUES: Issues = [
@@ -320,6 +316,11 @@ describe('RepositoryService', () => {
 
       expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
         'https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/README.md',
+        jasmine.objectContaining({
+          headers: {
+            Accept: 'application/vnd.github.v3+json',
+          },
+        }),
       );
     });
   });
@@ -461,7 +462,7 @@ describe('RepositoryService', () => {
       repoService
         .getPullRequests('thisdot', 'starter.dev-github-showcases', 'open')
         .subscribe((res) => {
-          expect(res).toEqual(apiResponse);
+          expect(res).toBe(apiResponse);
           done();
         });
 
@@ -470,6 +471,11 @@ describe('RepositoryService', () => {
         .toBe(1);
       expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
         'https://api.github.com/search/issues?q=repo:thisdot/starter.dev-github-showcases+type:pr+state:open',
+        jasmine.objectContaining({
+          headers: {
+            Accept: 'application/vnd.github.v3+json',
+          },
+        }),
       );
     });
   });

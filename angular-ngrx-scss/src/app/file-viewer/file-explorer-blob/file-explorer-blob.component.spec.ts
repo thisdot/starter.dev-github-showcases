@@ -15,7 +15,7 @@ describe('FileExplorerBlobComponent', () => {
   let fixture: ComponentFixture<FileExplorerBlobComponent>;
   let store: MockStore;
   const initialState: AppState = {
-    repo: {
+    repository: {
       selectedFile: {
         content: 'this is a readme file',
         name: 'starter.dev-github-showcases',

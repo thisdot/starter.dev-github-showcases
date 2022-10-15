@@ -13,7 +13,7 @@ describe('FileExplorerComponent', () => {
   let component: FileExplorerComponent;
   let fixture: ComponentFixture<FileExplorerComponent>;
   const initialState: AppState = {
-    repo: {
+    repository: {
       tree: [
         {
           name: 'packages',

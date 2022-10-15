@@ -17,10 +17,10 @@ export const selectCurrentlySelectedFile = createSelector(
 
 export const selectOpenPullRequests = createSelector(
   selectRepositoryState,
-  (state: RepoState) => state.openPullRequests,
+  (state: RepositoryState) => state.openPullRequests,
 );
 
 export const selectClosedPullRequests = createSelector(
   selectRepositoryState,
-  (state: RepoState) => state.closedPullRequests,
+  (state: RepositoryState) => state.closedPullRequests,
 );

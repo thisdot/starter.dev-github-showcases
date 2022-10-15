@@ -30,11 +30,17 @@ describe('FileExplorerContainerComponent', () => {
         name: '.github',
         type: 'file',
         path: '.github',
+        content: '',
+        encoding: '',
+        size: 0,
       },
       {
         name: 'packages',
         type: 'dir',
         path: 'packages',
+        content: '',
+        encoding: '',
+        size: 0,
       },
     ];
     component.name = 'starter.dev-github-showcases';
@@ -60,6 +66,9 @@ describe('FileExplorerContainerComponent', () => {
         name: 'README.md',
         type: 'file',
         path: 'README.md',
+        content: '',
+        encoding: '',
+        size: 0,
       }),
     ).toEqual('/thisdot/starter.dev-github-showcases/blob/main/README.md');
   });
@@ -70,6 +79,9 @@ describe('FileExplorerContainerComponent', () => {
         name: '.github',
         type: 'dir',
         path: '.github',
+        content: '',
+        encoding: '',
+        size: 0,
       }),
     ).toEqual('/thisdot/starter.dev-github-showcases/tree/main/.github');
   });

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { of } from 'rxjs';
 import {
   UserGist,
@@ -80,10 +80,10 @@ describe('UserService', () => {
 
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
-    userService.getUserOrganizations().subscribe({
+    userService.getUserOrganizations('thisdot').subscribe({
       next: () => {
         expect(httpClientSpy.get).toHaveBeenCalledWith(
-          `https://api.github.com/user/orgs`,
+          `https://api.github.com/users/thisdot/orgs`,
           jasmine.objectContaining({
             headers: {
               Accept: 'application/vnd.github.v3+json',
@@ -131,7 +131,7 @@ describe('UserService', () => {
             'https://api.github.com/users/thisdot/subscriptions',
           type: 'Organization',
           url: 'https://api.github.com/users/thisdot',
-        },
+        } as UserApiResponse,
       },
       {
         name: 'Repo-test-2',
@@ -167,7 +167,7 @@ describe('UserService', () => {
             'https://api.github.com/users/thisdot/subscriptions',
           type: 'Organization',
           url: 'https://api.github.com/users/thisdot',
-        },
+        } as UserApiResponse,
       },
       {
         name: 'Repo-test-3',
@@ -202,15 +202,15 @@ describe('UserService', () => {
             'https://api.github.com/users/thisdot/subscriptions',
           type: 'Organization',
           url: 'https://api.github.com/users/thisdot',
-        },
+        } as UserApiResponse,
       },
     ];
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
-    userService.getUserRepos().subscribe({
+    userService.getUserRepos('thisdot').subscribe({
       next: () => {
         expect(httpClientSpy.get).toHaveBeenCalledWith(
-          `https://api.github.com/user/repos`,
+          `https://api.github.com/users/thisdot/repos`,
           jasmine.objectContaining({
             headers: {
               Accept: 'application/vnd.github.v3+json',
@@ -258,7 +258,7 @@ describe('UserService', () => {
             'https://api.github.com/users/thisdot/subscriptions',
           type: 'Organization',
           url: 'https://api.github.com/users/thisdot',
-        },
+        } as UserApiResponse,
       },
       {
         name: 'Repo-test-2',
@@ -294,7 +294,7 @@ describe('UserService', () => {
             'https://api.github.com/users/thisdot/subscriptions',
           type: 'Organization',
           url: 'https://api.github.com/users/thisdot',
-        },
+        } as UserApiResponse,
       },
       {
         name: 'Repo-test-3',
@@ -329,19 +329,25 @@ describe('UserService', () => {
             'https://api.github.com/users/thisdot/subscriptions',
           type: 'Organization',
           url: 'https://api.github.com/users/thisdot',
-        },
+        } as UserApiResponse,
       },
     ];
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
-    userService.getUserTopRepos().subscribe({
+    userService.getUserTopRepos('thisdot').subscribe({
       next: () => {
         expect(httpClientSpy.get).toHaveBeenCalledWith(
-          `https://api.github.com/user/repos?sort=updated&per_page=20`,
+          `https://api.github.com/users/thisdot/repos`,
           jasmine.objectContaining({
             headers: {
               Accept: 'application/vnd.github.v3+json',
             },
+            params: new HttpParams({
+              fromObject: {
+                sort: 'updated',
+                per_page: 20,
+              },
+            }),
           }),
         );
       },
@@ -359,10 +365,10 @@ describe('UserService', () => {
 
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
-    userService.getUserGists().subscribe({
+    userService.getUserGists('thisdot').subscribe({
       next: () => {
         expect(httpClientSpy.get).toHaveBeenCalledWith(
-          `https://api.github.com/gists`,
+          `https://api.github.com/users/thisdot/gists`,
           jasmine.objectContaining({
             headers: {
               Accept: 'application/vnd.github.v3+json',

@@ -3,13 +3,14 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { of } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import {
   saveUserToken,
   saveUserTokenSuccess,
-  signOutUser,
   signInUser,
+  signOutUser,
 } from './auth.actions';
 
 import { AuthEffects } from './auth.effects';
@@ -17,6 +18,7 @@ import { AuthEffects } from './auth.effects';
 describe('AuthEffects', () => {
   let actions$: Actions;
   let effects: AuthEffects;
+  let store: MockStore;
   let mockHttpClient: jasmine.SpyObj<HttpClient>;
   let authService: jasmine.SpyObj<AuthService>;
 
@@ -35,6 +37,7 @@ describe('AuthEffects', () => {
         return of();
       },
     });
+    const initialState = {};
     // the name ('http') goes as the first argument and an array of public methods you want to spyOn
     mockHttpClient = jasmine.createSpyObj('http', ['get', 'put']);
     TestBed.configureTestingModule({
@@ -49,9 +52,12 @@ describe('AuthEffects', () => {
           provide: AuthService,
           useValue: authService,
         },
+        provideMockStore({ initialState }),
       ],
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    store = TestBed.inject(MockStore);
     actions$ = TestBed.inject(Actions);
     effects = TestBed.inject(AuthEffects);
   });

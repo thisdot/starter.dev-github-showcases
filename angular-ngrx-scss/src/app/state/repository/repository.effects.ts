@@ -13,11 +13,12 @@ import {
   fetchPullRequestsSuccess,
   fetchRepository,
   fetchRepositoryFailure,
-  fetchRepositorySuccess
+  fetchRepositorySuccess,
 } from './repository.actions';
 import {
-  FileContents, RepoPullRequests,
-  RepositoryState
+  FileContents,
+  RepoPullRequests,
+  RepositoryState,
 } from './repository.state';
 
 @Injectable()
@@ -116,8 +117,8 @@ export class RepositoryEffects {
                 commentCount: item.comments,
                 labelCount: item.labels.length,
               })),
-            }
-            return fetchPullRequestsSuccess({ pullRequests, prState }),
+            };
+            return fetchPullRequestsSuccess({ pullRequests, prState });
           }),
           catchError((error) => of(fetchPullRequestsFailure({ error }))),
         );

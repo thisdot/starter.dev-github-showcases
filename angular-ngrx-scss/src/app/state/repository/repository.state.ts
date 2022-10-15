@@ -71,7 +71,7 @@ export interface RepoApiResponse {
   clone_url: string;
   mirror_url: string;
   hooks_url: string;
-  svn_url: 'string;';
+  svn_url: string;
   homepage: string;
   language: null;
   forks_count: number;
