@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, tap } from 'rxjs';
 import { selectAuthUserName } from '../state/auth';
 import { fetchUserData } from '../state/user/user.actions';
 
