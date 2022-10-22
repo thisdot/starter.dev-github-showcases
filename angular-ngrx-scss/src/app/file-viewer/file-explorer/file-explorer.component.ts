@@ -5,7 +5,6 @@ import {
   fetchRepository,
   RepoContents,
   selectedRepository,
-  selectRepositoryState,
 } from '../../state/repository';
 import { map, takeWhile, tap } from 'rxjs';
 

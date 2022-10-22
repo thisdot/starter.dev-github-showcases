@@ -22,7 +22,7 @@ describe('UserService', () => {
   });
 
   it('should return user data from the GitHub API', (done) => {
-    const expectedHttpResponse: Partial<UserApiResponse> = {
+    const expectedHttpResponse = {
       avatar_url: 'testuser_url',
       bio: '',
       blog: '',
@@ -35,15 +35,15 @@ describe('UserService', () => {
       name: '',
       twitter_username: '',
       type: 'User',
-    };
+    } as UserApiResponse;
 
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
     userService.getAuthenticatedUserInfo().subscribe({
       next: (userInfo) => {
-        expect(userInfo).toContain(expectedHttpResponse);
+        expect(userInfo).toEqual(expectedHttpResponse);
 
-        expect(httpClientSpy.get).toHaveBeenCalledWith(
+        expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
           `https://api.github.com/user`,
           jasmine.objectContaining({
             headers: {

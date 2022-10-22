@@ -7,20 +7,20 @@ export const selectRepositoryState =
 
 export const selectedRepository = createSelector(
   selectRepositoryState,
-  (state: RepositoryState) => state,
+  (state) => state,
 );
 
 export const selectCurrentlySelectedFile = createSelector(
   selectRepositoryState,
-  (state: RepositoryState) => state.selectedFile,
+  (state) => state.selectedFile,
 );
 
 export const selectOpenPullRequests = createSelector(
   selectRepositoryState,
-  (state: RepositoryState) => state.openPullRequests,
+  (state) => state.openPullRequests,
 );
 
 export const selectClosedPullRequests = createSelector(
   selectRepositoryState,
-  (state: RepositoryState) => state.closedPullRequests,
+  (state) => state.closedPullRequests,
 );

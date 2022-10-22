@@ -6,8 +6,8 @@ import { of } from 'rxjs';
 import {
   catchError,
   concatMap,
+  exhaustMap,
   map,
-  mergeMap,
   skipWhile,
   switchMap,
   tap,
@@ -79,7 +79,7 @@ export class AuthEffects {
       switchMap(() =>
         this.store.select(selectAuthUserName).pipe(
           skipWhile((name) => name.length > 0),
-          mergeMap(() =>
+          exhaustMap(() =>
             this.userService.getAuthenticatedUserInfo().pipe(
               map((userData) => {
                 const user: AuthUserData = {

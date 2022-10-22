@@ -32,7 +32,7 @@ export class ProfileEffects {
               following: userData.following,
               location: userData.location,
               name: userData.name,
-              twitter_username: userData.twitter_username,
+              twitterUsername: userData.twitter_username,
               username: userData.login,
               type: userData.type,
             };

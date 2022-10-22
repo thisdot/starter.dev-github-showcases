@@ -214,7 +214,7 @@ describe('RepositoryService', () => {
   });
 
   it('should return information on the provided repository', (done) => {
-    const expectedHttpResponse: Partial<RepoApiResponse> = {
+    const expectedHttpResponse = {
       name: 'starter.dev-github-showcases',
       description: 'A collection of GitHub clone implementations.',
       homepage: 'https://starter.dev',
@@ -225,17 +225,17 @@ describe('RepositoryService', () => {
       open_issues_count: 30,
       topics: ['react', 'angular', 'vue', 'github'],
       default_branch: 'main',
-    };
+    } as RepoApiResponse;
 
-    httpClientSpy.get.and.returnValue(of(expectedHttpResponse).pipe(delay(0)));
+    httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
     repoService
       .getRepositoryInfo('thisdot', 'starter.dev-github-showcases')
       .subscribe({
         next: (repoInfo) => {
-          expect(repoInfo).toContain(expectedHttpResponse);
+          expect(repoInfo).toEqual(expectedHttpResponse);
 
-          expect(httpClientSpy.get).toHaveBeenCalledWith(
+          expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
             `https://api.github.com/repos/thisdot/starter.dev-github-showcases`,
             jasmine.objectContaining({
               headers: {
@@ -294,7 +294,7 @@ describe('RepositoryService', () => {
       repoService
         .getRepositoryContents('thisdot', 'starter.dev-github-showcases')
         .subscribe((res) => {
-          expect(res).toBe(expectedResponse);
+          expect(res).toEqual(expectedResponse);
           done();
         });
 
@@ -462,7 +462,7 @@ describe('RepositoryService', () => {
       repoService
         .getPullRequests('thisdot', 'starter.dev-github-showcases', 'open')
         .subscribe((res) => {
-          expect(res).toBe(apiResponse);
+          expect(res).toEqual(apiResponse);
           done();
         });
 

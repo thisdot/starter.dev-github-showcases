@@ -10,12 +10,9 @@ import {
   fetchRepositorySuccess,
   fetchRepositoryFailure,
   fetchFileContents,
-  fetchFileContentsSuccess,
   fetchFileContentsFailure,
 } from './repository.actions';
 import {
-  FileContents,
-  FileContentsApiResponse,
   ReadmeApiResponse,
   RepoApiResponse,
   RepositoryState,
@@ -169,24 +166,25 @@ const MOCK_README: ReadmeApiResponse = {
   },
 };
 
-const MOCK_FILE_CONTENTS: FileContentsApiResponse = {
-  content: 'This is a readme file',
-  name: 'starter.dev-github-showcases',
-  type: 'file',
-  size: 223,
-  path: '',
-  sha: '',
-  url: '',
-  html_url: '',
-  git_url: '',
-  download_url: '',
-  encoding: '',
-  _links: {
-    self: '',
-    git: '',
-    html: '',
-  },
-};
+// TODO: related to broken test below
+// const MOCK_FILE_CONTENTS: FileContentsApiResponse = {
+//   content: 'This is a readme file',
+//   name: 'starter.dev-github-showcases',
+//   type: 'file',
+//   size: 223,
+//   path: '',
+//   sha: '',
+//   url: '',
+//   html_url: '',
+//   git_url: '',
+//   download_url: '',
+//   encoding: '',
+//   _links: {
+//     self: '',
+//     git: '',
+//     html: '',
+//   },
+// };
 
 describe('RepositoryEffects', () => {
   let actions$: Observable<Action>;

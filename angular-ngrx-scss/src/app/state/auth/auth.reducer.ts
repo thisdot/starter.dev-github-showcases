@@ -45,14 +45,17 @@ const reducer = createReducer(
     ...state,
     isAuthenticated: true,
   })),
-  on(fetchAuthenticatedUserDataSuccess, (state, { userData }) => ({
-    ...state,
-    authUser: {
-      avatar: userData.avatar,
-      email: userData.email,
-      username: userData.username,
-    },
-  })),
+  on(
+    fetchAuthenticatedUserDataSuccess,
+    (state, { userData: { avatar, email, username } }) => ({
+      ...state,
+      authUser: {
+        avatar,
+        email,
+        username,
+      },
+    }),
+  ),
 );
 
 export function authReducer(state: AuthState | undefined, action: Action) {

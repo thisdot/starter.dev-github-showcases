@@ -31,8 +31,8 @@ const USER_STATE_MOCK: UserState = {
   following: 0,
   location: '',
   name: '',
-  twitter_username: '',
-  type: '',
+  twitterUsername: '',
+  type: 'User',
 };
 
 const MOCK_USER_API_RESPONSE: UserApiResponse = {
@@ -59,7 +59,7 @@ const MOCK_USER_GISTS: UserGistsApiResponse = [
     forks_url: '',
     git_pull_url: '',
     git_push_url: '',
-    html_url: '',
+    html_url: 'github.com/gists',
     id: '',
     node_id: '',
     public: true,
@@ -67,7 +67,7 @@ const MOCK_USER_GISTS: UserGistsApiResponse = [
     updated_at: '',
     url: 'github.com/gists',
     files: {
-      '0': {
+      'textfile1.txt': {
         filename: 'textfile1.txt',
       },
     },
@@ -179,7 +179,7 @@ describe('UserEffects', () => {
       following: 0,
       location: '',
       name: '',
-      twitter_username: '',
+      twitterUsername: '',
       username: 'thisdot',
       type: 'User',
     };

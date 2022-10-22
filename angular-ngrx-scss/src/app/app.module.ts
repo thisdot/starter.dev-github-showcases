@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 import { TokenInterceptor } from './auth/services/token.interceptor';
 import { reducers } from './state';
 import { AuthEffects } from './state/auth';
-// import { DashboardEffects } from './state/dashboard/dashboard.effects';
 import { ProfileEffects } from './state/profile/profile.effects';
 import { RepositoryEffects } from './state/repository/repository.effects';
 import { UserEffects } from './state/user';
@@ -30,7 +29,6 @@ import { UserEffects } from './state/user';
       autoPause: true,
     }),
     EffectsModule.forRoot([
-      // DashboardEffects,
       AuthEffects,
       UserEffects,
       ProfileEffects,

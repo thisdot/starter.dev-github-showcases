@@ -7,15 +7,20 @@ export const selectAuthState = createFeatureSelector<AuthState>(authFeatureKey);
 
 export const selectIsAuthenticated = createSelector(
   selectAuthState,
-  (state: AuthState) => state.isAuthenticated,
+  (state) => state.isAuthenticated,
+);
+
+export const selectAuthUser = createSelector(
+  selectAuthState,
+  (state) => state.authUser,
 );
 
 export const selectAuthUserAvatar = createSelector(
-  selectAuthState,
-  (state: AuthState) => state.authUser.avatar,
+  selectAuthUser,
+  (authUser) => authUser.avatar,
 );
 
 export const selectAuthUserName = createSelector(
-  selectAuthState,
-  (state: AuthState) => state.authUser.username,
+  selectAuthUser,
+  (authUser) => authUser.username,
 );
