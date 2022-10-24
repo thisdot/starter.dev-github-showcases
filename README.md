@@ -4,14 +4,14 @@ Welcome to stater.dev GitHub Showcases! Here you can see some of the projects th
 
 See some of the projects we've built:
 
-| Project                                                                             | Technologies                     | Deployment                                                                                       |
-| ----------------------------------------------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------ |
-| [angular-apollo-tailwind](/angular-apollo-tailwind)                                 | Angular v13, Apollo, TailwindCSS | [https://angular-apollo-tailwind.starter.dev](https://angular-apollo-tailwind.starter.dev)       |
-| [next-react-query-tailwind](/next-react-query-tailwind)                             | NextJS, React Query, Tailwind    | [https://next-react-query-tailwind.starter.dev](https://next-react-query-tailwind.starter.dev)   |
-| [cra-rxjs-styled-components](/https://starter.dev/kits/cra-rxjs-styled-components/) | React, RxJS, styled-components   | [https://cra-rxjs-styled-components.starter.dev](https://cra-rxjs-styled-components.starter.dev) |
-| [angular-ngrx-scss](/angular-ngrx-scss)                                             | Angular, NgRx, SCSS              | [https://angular-ngrx-scss.starter.dev](https://angular-ngrx-scss.starter.dev)                   |
-| [angular-apollo-tailwind](/angular-apollo-tailwind)                                 | Angular, Apollo, Tailwind CSS    | [https://angular-apollo-tailwind.starter.dev](https://angular-apollo-tailwind.starter.dev)       |
-| [vue3-apollo-quasar](/vue3-apollo-quasar)                                           | Vue 3, Apollo, Quasar            | [https://vue3-apollo-quasar.starter.dev](https://vue3-apollo-quasar.starter.dev)                 |
+| Project                                                   | Technologies                     | Deployment                                                                                       |
+| --------------------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [angular-apollo-tailwind](/angular-apollo-tailwind)       | Angular v13, Apollo, TailwindCSS | [https://angular-apollo-tailwind.starter.dev](https://angular-apollo-tailwind.starter.dev)       |
+| [next-react-query-tailwind](/next-react-query-tailwind)   | NextJS, React Query, Tailwind    | [https://next-react-query-tailwind.starter.dev](https://next-react-query-tailwind.starter.dev)   |
+| [cra-rxjs-styled-components](/cra-rxjs-styled-components) | React, RxJS, styled-components   | [https://cra-rxjs-styled-components.starter.dev](https://cra-rxjs-styled-components.starter.dev) |
+| [angular-ngrx-scss](/angular-ngrx-scss)                   | Angular, NgRx, SCSS              | [https://angular-ngrx-scss.starter.dev](https://angular-ngrx-scss.starter.dev)                   |
+| [angular-apollo-tailwind](/angular-apollo-tailwind)       | Angular, Apollo, Tailwind CSS    | [https://angular-apollo-tailwind.starter.dev](https://angular-apollo-tailwind.starter.dev)       |
+| [vue3-apollo-quasar](/vue3-apollo-quasar)                 | Vue 3, Apollo, Quasar            | [https://vue3-apollo-quasar.starter.dev](https://vue3-apollo-quasar.starter.dev)                 |
 
 ## Showcase Implementations
 
