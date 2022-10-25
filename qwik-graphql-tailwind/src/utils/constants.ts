@@ -15,6 +15,8 @@ export const SIGN_IN_URL = (() => {
 export const SIGN_OUT_URL = `${API_URL_BASE}/auth/signout`;
 export const GET_TOKEN_URL = `${API_URL_BASE}/auth/token`;
 
+export const AUTH_TOKEN = 'token';
+
 // export const REPOS_URL = (page: string = '1') =>
 //   `${GITHUB_URL_BASE}/user/repos?sort=pushed&affiliation=owner,collaborator&page=${page}`;
 

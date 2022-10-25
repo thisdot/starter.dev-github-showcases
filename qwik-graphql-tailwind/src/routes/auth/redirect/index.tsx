@@ -1,15 +1,14 @@
-import { component$, useServerMount$ } from '@builder.io/qwik';
+import { component$, useClientEffect$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import { GET_TOKEN_URL } from '~/utils/constants';
+import { AUTH_TOKEN, GET_TOKEN_URL } from '~/utils/constants';
 import * as styles from '../signin/signin.classNames';
 
 export default component$(() => {
-  useServerMount$(async () => {
+  useClientEffect$(async () => {
     const abortController = new AbortController();
-    const data: any = await getAuthToken(abortController);
-
-    console.log(data);
-    // sessionStorage.setItem('token', data.token);
+    const data = await getAuthToken(abortController);
+    sessionStorage.setItem(AUTH_TOKEN, data.access_token);
+    window.location.href = '/';
   });
 
   return (
@@ -23,7 +22,7 @@ export const head: DocumentHead = {
   title: 'Redirecting...',
 };
 
-export async function getAuthToken(abortController?: AbortController): Promise<string> {
+export async function getAuthToken(abortController?: AbortController): Promise<{ access_token: string }> {
   const resp = await fetch(GET_TOKEN_URL, {
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
@@ -31,11 +30,6 @@ export async function getAuthToken(abortController?: AbortController): Promise<s
     credentials: 'include',
     signal: abortController?.signal,
   });
-  console.log('resp', resp);
 
-  // return await resp.text();
-  const json = await resp.json();
-  console.log('json', json);
-
-  return json;
+  return await resp.json();
 }
