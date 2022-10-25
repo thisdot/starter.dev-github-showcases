@@ -1,4 +1,4 @@
-import { component$, useStore, Resource, useResource$ } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { SIGN_IN_URL } from '~/utils/constants';
 import * as styles from './signin.classNames';

@@ -1,28 +1,20 @@
-import { component$, useClientEffect$, useResource$ } from '@builder.io/qwik';
+import { component$, useServerMount$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { GET_TOKEN_URL } from '~/utils/constants';
 import * as styles from '../signin/signin.classNames';
 
 export default component$(() => {
-  useClientEffect$(() => {
-    const authResource = useResource$<string>(({ cleanup }) => {
-      // Use `track` to trigger re-run of the the data fetching function.
-      // track(() => store.greeting);
+  useServerMount$(async () => {
+    const abortController = new AbortController();
+    const data: any = await getAuthToken(abortController);
 
-      // The `cleanup` function will be called when the function re-runs and the `AbortController` will abort the previous request.
-      const abortController = new AbortController();
-      cleanup(() => abortController.abort());
-
-      // Fetch the the greeting and return Promise that resolves to the greeting.
-      return getAuthToken(abortController);
-    });
-
-    console.log('authResource', authResource);
+    console.log(data);
+    // sessionStorage.setItem('token', data.token);
   });
 
   return (
     <section className={styles.section}>
-      <p className={''}>Redirecting...</p>
+      <p className={'text-white'}>Redirecting...</p>
     </section>
   );
 });
@@ -39,5 +31,11 @@ export async function getAuthToken(abortController?: AbortController): Promise<s
     credentials: 'include',
     signal: abortController?.signal,
   });
-  return await resp.text();
+  console.log('resp', resp);
+
+  // return await resp.text();
+  const json = await resp.json();
+  console.log('json', json);
+
+  return json;
 }
