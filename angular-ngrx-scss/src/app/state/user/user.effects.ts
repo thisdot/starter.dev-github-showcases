@@ -10,7 +10,7 @@ import {
   mergeMap,
 } from 'rxjs/operators';
 import { UserService } from 'src/app/user/services/user.service';
-import { selectAuthUserName } from '../auth';
+import { selectUserLoginName } from './user.selectors';
 import { UserGistsState, UserReposState } from '../profile';
 import {
   fetchUserData,
@@ -29,7 +29,7 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(fetchUserData),
       switchMap(({ username }) =>
-        this.store.select(selectAuthUserName).pipe(
+        this.store.select(selectUserLoginName).pipe(
           skipWhile((name) => name === ''),
           mergeMap(() =>
             this.userService.getUserInfo(username).pipe(

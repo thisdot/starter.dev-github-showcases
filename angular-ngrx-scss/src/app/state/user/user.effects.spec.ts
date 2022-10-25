@@ -18,6 +18,7 @@ import {
   fetchUserTopReposSuccess,
 } from './user.actions';
 import { UserEffects } from './user.effects';
+import { selectUserLoginName } from './user.selectors';
 import { UserApiResponse, UserState } from './user.state';
 
 const USER_STATE_MOCK: UserState = {
@@ -127,17 +128,16 @@ describe('UserEffects', () => {
   let effects: UserEffects;
   let store: MockStore;
   let userServiceMock: jasmine.SpyObj<UserService>;
-  const initialState = {};
 
   beforeEach(() => {
     userServiceMock = jasmine.createSpyObj('UserService', {
-      getAuthenticatedUserInfo: () => {
-        return of();
-      },
       getUserGists: () => {
         return of();
       },
       getUserTopRepos: () => {
+        return of();
+      },
+      getUserInfo: () => {
         return of();
       },
     });
@@ -148,7 +148,16 @@ describe('UserEffects', () => {
           provide: UserService,
           useValue: userServiceMock,
         },
-        provideMockStore({ initialState }),
+        provideMockStore({
+          selectors: [
+            {
+              selector: selectUserLoginName,
+              value: {
+                username: 'thisdot',
+              },
+            },
+          ],
+        }),
         UserEffects,
         provideMockActions(() => actions$),
       ],
@@ -164,29 +173,10 @@ describe('UserEffects', () => {
   });
 
   it('should get the user info from the API', (done) => {
-    actions$ = of(
-      fetchUserData({
-        username: 'thisdot',
-      }),
-    );
-    const expectedUserData: UserState = {
-      avatar: '',
-      bio: '',
-      blog: '',
-      company: '',
-      email: '',
-      followers: 0,
-      following: 0,
-      location: '',
-      name: '',
-      twitterUsername: '',
-      username: 'thisdot',
-      type: 'User',
-    };
+    actions$ = of(fetchUserData({ username: 'thisdot' }));
+    const expectedUserData = USER_STATE_MOCK;
 
-    userServiceMock.getAuthenticatedUserInfo.and.returnValue(
-      of(MOCK_USER_API_RESPONSE),
-    );
+    userServiceMock.getUserInfo.and.returnValue(of(MOCK_USER_API_RESPONSE));
 
     effects.loadUser$.subscribe((action) => {
       expect(action).toEqual(
