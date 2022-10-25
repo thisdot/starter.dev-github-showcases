@@ -7,13 +7,17 @@ export default component$(() => {
   useClientEffect$(async () => {
     const abortController = new AbortController();
     const data = await getAuthToken(abortController);
-    sessionStorage.setItem(AUTH_TOKEN, data.access_token);
-    window.location.href = '/';
+    if (data.access_token) {
+      sessionStorage.setItem(AUTH_TOKEN, data.access_token);
+      window.location.href = '/';
+    } else {
+      window.location.href = '/auth/signin';
+    }
   });
 
   return (
     <section className={styles.section}>
-      <p className={'text-white'}>Redirecting...</p>
+      <p className="text-white">Redirecting...</p>
     </section>
   );
 });
