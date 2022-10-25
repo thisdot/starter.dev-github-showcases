@@ -6,7 +6,7 @@ export default component$(() => {
   return (
     <>
       <main className={styles.main}>
-        <Header />
+        <Header user={null} />
         <section className={styles.container}>
           <Slot />
         </section>
