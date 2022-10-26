@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { AuthService } from "$lib/services";
-  import { getContext } from "svelte";
+  import { AuthService } from '$lib/services';
+  import { getContext } from 'svelte';
   const authService = getContext<AuthService>(AuthService);
   const onSubmit = () => {
     authService.signIn();
-  }
+  };
 </script>
 
 <form on:submit|preventDefault={onSubmit}>

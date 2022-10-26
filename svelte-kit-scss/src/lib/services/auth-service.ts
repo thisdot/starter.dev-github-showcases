@@ -1,22 +1,17 @@
-import { goto } from "$app/navigation";
-import { setUserToken, startAuthentication } from "$lib/stores/auth";
+import { goto } from '$app/navigation';
+import { setUserToken, startAuthentication } from '$lib/stores/auth';
 
 export class AuthService {
-  
-  private get signInUrl() : string {
+  private get signInUrl(): string {
     const redirectUrl = this.getRedirectUrl();
     return `${this.apiUrl}/api/auth/signin?redirect_url=${redirectUrl}`;
   }
 
-  private get tokenUrl() : string {
+  private get tokenUrl(): string {
     return `${this.apiUrl}/api/auth/token`;
-  }  
-
-  constructor(
-    private apiUrl: string,
-    private clientRedirectUrl: string
-  ) {
   }
+
+  constructor(private apiUrl: string, private clientRedirectUrl: string) {}
 
   /**
    * Initiates sign in with GitHub and provides a redirect url
@@ -40,9 +35,9 @@ export class AuthService {
    */
   async saveUserToken(): Promise<string | undefined> {
     const response = await fetch(this.tokenUrl, {
-      credentials: 'include'
+      credentials: 'include',
     });
-    const {access_token} = await response.json();    
+    const { access_token } = await response.json();
     setUserToken(access_token);
     return access_token;
   }
