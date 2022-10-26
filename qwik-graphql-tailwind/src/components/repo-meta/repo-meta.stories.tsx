@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/html';
-import RepoMeta, { RepoMetaProps } from '.';
+import { RepoMeta, RepoMetaProps } from './repo-meta';
 
 export default {
   title: 'Repo Meta Tag',

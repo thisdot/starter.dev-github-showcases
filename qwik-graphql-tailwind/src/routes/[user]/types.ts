@@ -24,4 +24,5 @@ export interface User {
   following: Follow;
   starredRepositories: Follow;
   organizations: Nodes;
+  repositories: any;
 }
