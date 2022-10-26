@@ -6,6 +6,8 @@ export const REDIRECT_URL = `${APP_BASE_URL}/auth/redirect`;
 
 export const SIGN_IN_BASE_URL = `${API_URL_BASE}/auth/signin`;
 
+export const GITHUB_GRAPHQL = `${GITHUB_URL_BASE}/graphql`;
+
 export const SIGN_IN_URL = (() => {
   const url = new URL(SIGN_IN_BASE_URL);
   url.searchParams.set('redirect_url', REDIRECT_URL);
@@ -19,6 +21,7 @@ export const AUTH_TOKEN = 'token';
 
 // export const REPOS_URL = (page: string = '1') =>
 //   `${GITHUB_URL_BASE}/user/repos?sort=pushed&affiliation=owner,collaborator&page=${page}`;
+export const REPOS_URL = `${GITHUB_URL_BASE}/user/repos`;
 
 // export const SINGLE_USER_REPO = (user: string, repo: string) => `${GITHUB_URL_BASE}/repos/${user}/${repo}`;
 
