@@ -1,21 +1,32 @@
 import { component$ } from '@builder.io/qwik';
-import { useLocation } from '@builder.io/qwik-city';
+import { Link } from '@builder.io/qwik-city';
+import { UserDropdown } from '../user-dropdown/userDropdown';
+import { GitHubLogo } from './github-logo';
 
 import * as styles from './header.classNames';
 
-export const counterPath = '/counter';
-export const dataFetchingPath = '/data-fetching';
+type HeaderProps = {
+  user: {
+    avatarUrl: string;
+    login: string;
+  } | null;
+};
 
-export default component$(() => {
+export default component$(({ user }: HeaderProps) => {
   return (
     <header className={styles.header}>
-      <nav className={styles.nav}>
-        <div className={styles.headerWrapper}>
-          <a href="/" className={styles.logo}>
-            ⚡️Qwik Starter
-          </a>
-        </div>
-      </nav>
+      <Link href="/">
+        <GitHubLogo />
+      </Link>
+      <div>
+        {user ? (
+          <UserDropdown image={user.avatarUrl} username={user.login} />
+        ) : (
+          <Link href="/api/auth/signin">
+            <span className={styles.navLink}>Sign In</span>
+          </Link>
+        )}
+      </div>
     </header>
   );
 });
