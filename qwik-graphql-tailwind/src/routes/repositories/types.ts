@@ -1,12 +1,17 @@
-export interface TopRepo {
+export interface TopRepo extends Omit<Repo, 'isFork' | 'isArchived'> {
+  owner: string;
+}
+
+export interface Repo {
   id: string;
   name: string;
   description?: string | null;
-  owner: string;
-  language?: string | null;
   languageColor?: string | null;
+  language?: string | null;
   isPrivate: boolean;
+  isArchived: boolean;
+  isFork: boolean;
   stargazerCount: number;
   forkCount: number;
-  updatedAt: Date;
+  updatedAt: any;
 }
