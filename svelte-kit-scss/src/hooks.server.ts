@@ -10,13 +10,13 @@ export const handle: Handle = async ({ event, resolve }) => {
   const accessTokenFromCookies = event.cookies.get(AUTH_COOKIE_NAME);
   console.log('[accessTokenFromCookies]', accessTokenFromCookies);
 
-  // restore token from cookies
   if (!accessTokenFromCookies) {
     if (!event.url.pathname.startsWith('/signin')) {
       return Response.redirect(`${event.url.origin}/signin`, 301);
     }
   }
 
+  // erase token cookie
   if (event.url.pathname === '/signin') {
     event.cookies.set(AUTH_COOKIE_NAME, String(), AUTH_COOKIE_ERASE_OPTIONS);
   }
