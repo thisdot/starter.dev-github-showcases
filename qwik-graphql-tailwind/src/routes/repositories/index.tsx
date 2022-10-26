@@ -1,36 +1,7 @@
 import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
 import { GITHUB_GRAPHQL } from '~/utils/constants';
+import { TOP_REPOS_QUERY } from '~/utils/queries/top-repos-query';
 import { useQuery } from '~/utils/useQuery';
-
-export const TOP_REPOS = `
-query UserTopRepos {
-  viewer {
-    id
-    login
-    topRepositories(
-      first: 20
-      orderBy: { field: STARGAZERS, direction: DESC }
-    ) {
-      nodes {
-        id
-        name
-        description
-        owner {
-          login
-        }
-        primaryLanguage {
-          name
-          color
-        }
-        isPrivate
-        stargazerCount
-        forkCount
-        updatedAt
-      }
-    }
-  }
-}
-`;
 
 interface RepoStore {
   data: any[];
@@ -62,7 +33,7 @@ export function updateTopRepos(store: RepoStore, response: any) {
 }
 
 export async function fetchTopRepos(abortController?: AbortController): Promise<any> {
-  const { executeQuery$ } = useQuery(TOP_REPOS);
+  const { executeQuery$ } = useQuery(TOP_REPOS_QUERY);
 
   const resp = await executeQuery$({
     signal: abortController?.signal,
