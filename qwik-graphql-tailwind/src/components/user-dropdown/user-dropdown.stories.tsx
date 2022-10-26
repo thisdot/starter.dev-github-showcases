@@ -1,7 +1,7 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import { Meta } from '@storybook/html';
 import { storybookMockRouting } from '../../utils';
-import { UserDropdown, UserDropdownProps } from './userDropdown';
+import { UserDropdown, UserDropdownProps } from './user-dropdown';
 
 const UserDropdownDemoComponent = component$(({ image, username }: UserDropdownProps) => {
   useStylesScoped$(`
