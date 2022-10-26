@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import GistListItem from './gist-list-item';
 import * as styles from './gists.className';
 
 export default component$(() => {
@@ -25,13 +25,7 @@ export default component$(() => {
 
         <ul className="space-y-2">
           {gists.map((gist) => (
-            <li key={gist.id}>
-              <Link href={gist.url}>
-                <a className={styles.link} target="_blank" data-testid={`user gist list item ${gist.name}`}>
-                  {gist.name}
-                </a>
-              </Link>
-            </li>
+            <GistListItem key={gist.id} {...gist} />
           ))}
         </ul>
       </div>
