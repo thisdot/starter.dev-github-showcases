@@ -2,9 +2,10 @@ import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
 import { GITHUB_GRAPHQL } from '~/utils/constants';
 import { TOP_REPOS_QUERY } from '~/utils/queries/top-repos-query';
 import { useQuery } from '~/utils/useQuery';
+import { TopRepo } from './types';
 
 interface RepoStore {
-  data: any[];
+  data: TopRepo[];
 }
 
 export default component$(() => {
@@ -13,7 +14,8 @@ export default component$(() => {
   });
 
   useClientEffect$(async () => {
-    const response = await fetchTopRepos();
+    const abortController = new AbortController();
+    const response = await fetchTopRepos(abortController);
 
     updateTopRepos(store, response);
   });
