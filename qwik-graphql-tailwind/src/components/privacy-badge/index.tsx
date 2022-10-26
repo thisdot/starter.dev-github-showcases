@@ -1,0 +1,12 @@
+import cn from 'classnames';
+import { component$ } from '@builder.io/qwik';
+import * as styles from './privacy-badge.className';
+
+export interface PrivacyBadgeProps {
+  isPrivate: boolean;
+  className?: string;
+}
+
+export default component$(({ isPrivate, className }: PrivacyBadgeProps) => {
+  return <span className={cn(styles.tag, className)}>{isPrivate ? 'Private' : 'Public'}</span>;
+});

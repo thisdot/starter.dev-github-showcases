@@ -58,5 +58,9 @@
     "vite": "3.1.8",
     "vite-tsconfig-paths": "3.5.2",
     "vitest": "^0.24.3"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2",
+    "date-fns": "^2.29.3"
   }
 }
