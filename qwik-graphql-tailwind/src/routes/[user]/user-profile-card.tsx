@@ -1,23 +1,9 @@
 import { component$ } from '@builder.io/qwik';
 import { BuildingIcon, LinkIcon, LocationMarkerIcon, StarIcon, TwitterIcon, UsersIcon } from '../../components/icons';
 import { OrgList } from '../../components/org-list/org-list';
-import { Follow, Nodes } from '../../utils/types';
+import { User } from './types';
 import * as styles from './user-profile.classNames';
 
-export interface UserProfileCardProps {
-  avatarUrl: any;
-  bio?: string | null;
-  company?: string | null;
-  location?: string | null;
-  login: string;
-  name?: string | null;
-  twitterUsername?: string | null;
-  websiteUrl?: string | null;
-  followers: Follow;
-  following: Follow;
-  starredRepositories: Follow;
-  organizations: Nodes;
-}
 export const UserProfileCard = component$(
   ({
     avatarUrl,
@@ -32,7 +18,7 @@ export const UserProfileCard = component$(
     following,
     starredRepositories,
     organizations,
-  }: UserProfileCardProps) => {
+  }: User) => {
     return (
       <div>
         <img src={avatarUrl} alt="Avatar" width={260} height={260} className={styles.avatar} />
