@@ -4,7 +4,7 @@ import { OrgList } from '../../components/org-list/org-list';
 import { Follow, Nodes } from '../../utils/types';
 import * as styles from './user-profile.classNames';
 
-export interface UserProfileViewProps {
+export interface UserProfileCardProps {
   avatarUrl: any;
   bio?: string | null;
   company?: string | null;
@@ -32,7 +32,7 @@ export const UserProfileCard = component$(
     following,
     starredRepositories,
     organizations,
-  }: UserProfileViewProps) => {
+  }: UserProfileCardProps) => {
     return (
       <div>
         <img src={avatarUrl} alt="Avatar" width={260} height={260} className={styles.avatar} />
@@ -42,9 +42,7 @@ export const UserProfileCard = component$(
         </h1>
         {bio && <div className={styles.bio} dangerouslySetInnerHTML={bio} />}
         <div className={styles.socials}>
-          <span className={styles.icon}>
-            <UsersIcon />
-          </span>
+          <UsersIcon className={styles.icon} />
           <span className="inline-block">
             <span className={styles.count}>{followers.totalCount}</span> followers
           </span>
@@ -53,9 +51,7 @@ export const UserProfileCard = component$(
             <span className={styles.count}>{following.totalCount}</span> following
           </span>
           <span className="mx-1">·</span>
-          <span className={styles.icon}>
-            <StarIcon />
-          </span>
+          <StarIcon className={styles.icon} />
           <span className="inline-block">
             <span className={styles.count}>{starredRepositories.totalCount}</span>{' '}
           </span>
@@ -63,25 +59,19 @@ export const UserProfileCard = component$(
         <div className={styles.fields}>
           {company && (
             <div>
-              <div className={styles.icon}>
-                <BuildingIcon />
-              </div>
+              <BuildingIcon className={styles.icon} />
               {company}
             </div>
           )}
           {location && (
             <div>
-              <div className={styles.icon}>
-                <LocationMarkerIcon />
-              </div>
+              <LocationMarkerIcon className={styles.icon} />
               {location}
             </div>
           )}
           {websiteUrl && (
             <div>
-              <div className={styles.icon}>
-                <LinkIcon />
-              </div>
+              <LinkIcon className={styles.icon} />
               <a className={styles.link} href={`https://${websiteUrl}`} target="_blank" rel="noreferrer">
                 {websiteUrl}
               </a>
@@ -89,9 +79,7 @@ export const UserProfileCard = component$(
           )}
           {twitterUsername && (
             <div>
-              <div className={styles.icon}>
-                <TwitterIcon />
-              </div>
+              <TwitterIcon className={styles.icon} />
               <a
                 className={styles.link}
                 href={`https://twitter.com/${twitterUsername}`}

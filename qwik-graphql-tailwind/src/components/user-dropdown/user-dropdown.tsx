@@ -1,7 +1,7 @@
 import { $, component$, useStore } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import { ChevronDownIcon } from '../icons';
-import * as styles from './userDropdown.classNames';
+import * as styles from './user-dropdown.classNames';
 
 export interface UserDropdownProps {
   image?: string | null;

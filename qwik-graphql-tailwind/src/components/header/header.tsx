@@ -1,6 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
-import { UserDropdown } from '../user-dropdown/userDropdown';
+import { UserDropdown } from '../user-dropdown/user-dropdown';
 import { GitHubLogo } from './github-logo';
 
 import * as styles from './header.classNames';

@@ -2,7 +2,7 @@ import { component$ } from '@builder.io/qwik';
 import { OrganizationNodes } from '../../utils/types';
 import * as styles from './org-list.classNames';
 
-interface OrgListProps {
+export interface OrgListProps {
   organizations: OrganizationNodes[];
 }
 
