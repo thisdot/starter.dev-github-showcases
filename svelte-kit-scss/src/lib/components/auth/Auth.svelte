@@ -2,17 +2,15 @@
   import { AuthService } from '$lib/services';
   import { getContext } from 'svelte';
   const authService = getContext<AuthService>(AuthService);
-  const onSubmit = () => {
+  const onClick = () => {
     authService.signIn();
   };
 </script>
 
 <div class="page">
-  <form class="form" on:submit|preventDefault={onSubmit}>
-    <input type="hidden" class="input" name="csrfToken" />
-    <input type="hidden" class="input" name="callbackUrl" />
-    <button type="submit" class="button">Sign in with GitHub</button>
-  </form>
+  <div class="form">
+    <button type="submit" class="button" on:click={onClick}>Sign in with GitHub</button>
+  </div>
 </div>
 
 <style lang="scss">

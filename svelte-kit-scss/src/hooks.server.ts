@@ -18,11 +18,6 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.cookies.set(AUTH_COOKIE_NAME, String(), AUTH_COOKIE_ERASE_OPTIONS);
   }
 
-  // redirect route
-  if (event.url.pathname === '/redirect') {
-    return Response.redirect(`${event.url.origin}/signin/redirect`, 301);
-  }
-
   const response = await resolve(event);
   return response;
 };
