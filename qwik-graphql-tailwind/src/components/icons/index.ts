@@ -7,3 +7,5 @@ export * from './link.icon';
 export * from './twitter.icon';
 export * from './git-repo.icon';
 export * from './git-branch.icon';
+export * from './check.icon';
+export * from './xmark.icon';

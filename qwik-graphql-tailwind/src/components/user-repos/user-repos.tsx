@@ -6,6 +6,8 @@ import * as styles from './user-repos.classNames';
 import { RepoMeta } from '../repo-meta/repo-meta';
 import { PrivacyBadge } from '../privacy-badge/privacy-badge';
 import { Pagination } from '../pagination/pagination';
+import RepoFilters from '../repo-filters/repo-filters';
+import { getLanguages } from './getLanguages';
 
 export interface UserReposViewProps {
   repos: Repositories;
@@ -27,10 +29,16 @@ export interface Repositories {
 
 export const UserRepos = component$(({ repos, owner }: UserReposViewProps) => {
   console.log(repos);
+  const repoFilters = {
+    state: {
+      query: '',
+    },
+  };
+  const languages = getLanguages(repos.nodes);
 
   return (
     <>
-      {/* <RepoFilters {...repoFilters} languages={languages} resultCount={filteredRepos.length} /> */}
+      <RepoFilters {...repoFilters} languages={languages} resultCount={repos.nodes.length} />
       {repos.nodes.map(
         ({ id, name, description, stargazerCount, forkCount, language, languageColor, updatedAt, isPrivate }) => (
           <div key={id} className={styles.container}>
