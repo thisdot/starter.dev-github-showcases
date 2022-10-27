@@ -1,9 +1,5 @@
-import type {UserReposState} from "./repositories";
-
-export interface UserGistsState {
-  url: string;
-  fileName: string;
-}
+import type { UserGistsState } from "./gists";
+import type { UserReposState } from "./repositories";
 
 export interface UserInfo {
   avatar: string;
