@@ -1,46 +1,32 @@
 import { component$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import { StarIcon } from '../icons';
-import { Repo } from './types';
+import { UserReposProps } from './types';
 import * as styles from './user-repos.classNames';
 import { RepoMeta } from '../repo-meta/repo-meta';
 import { PrivacyBadge } from '../privacy-badge/privacy-badge';
 import { Pagination } from '../pagination/pagination';
-import RepoFilters from '../repo-filters/repo-filters';
+import { RepoFilters } from '../repo-filters/repo-filters';
 import { getLanguages } from './getLanguages';
 
-export interface UserReposViewProps {
-  repos: Repositories;
-  owner: string;
-}
-
-export interface Repositories {
-  nodes: Repo[];
-  pageInfo:
-    | {
-        __typename?: 'PageInfo' | undefined;
-        endCursor?: string | null | undefined;
-        startCursor?: string | null | undefined;
-        hasNextPage: boolean;
-        hasPreviousPage: boolean;
-      }
-    | undefined;
-}
-
-export const UserRepos = component$(({ repos, owner }: UserReposViewProps) => {
-  console.log(repos);
-  const repoFilters = {
-    state: {
-      query: '',
-    },
-  };
+export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
   const languages = getLanguages(repos.nodes);
 
   return (
     <>
-      <RepoFilters {...repoFilters} languages={languages} resultCount={repos.nodes.length} />
+      <RepoFilters languages={languages} resultCount={repos.nodes.length} />
       {repos.nodes.map(
-        ({ id, name, description, stargazerCount, forkCount, language, languageColor, updatedAt, isPrivate }) => (
+        ({
+          id,
+          name,
+          description,
+          stargazerCount,
+          forkCount,
+          primaryLanguage,
+          languageColor,
+          updatedAt,
+          isPrivate,
+        }) => (
           <div key={id} className={styles.container}>
             <div className={styles.content}>
               <h3 className="mb-2">
@@ -51,8 +37,8 @@ export const UserRepos = component$(({ repos, owner }: UserReposViewProps) => {
               </h3>
               <div className={styles.description}>{description}</div>
               <RepoMeta
-                language={language}
-                languageColor={languageColor}
+                language={primaryLanguage?.name}
+                languageColor={primaryLanguage?.color}
                 forkCount={forkCount}
                 stargazerCount={stargazerCount}
                 updatedAt={updatedAt}

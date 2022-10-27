@@ -1,38 +1,26 @@
+import { $, component$ } from '@builder.io/qwik';
 import * as styles from './repo-filters.classNames';
-
 import cn from 'classnames';
 import { LanguageFilter, TypeFilter, RepositoryOrderField } from './types';
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
+import { XmarkIcon } from '../icons';
 
 type RepoFiltersProps = {
   languages: LanguageFilter[];
   resultCount: number;
-  state: {
-    query: string;
-    language: string;
-    type: string;
-    sort: string;
-  };
 };
 
-function RepoFilters({
-  state,
-  changeSort,
-  changeLanguage,
-  changeType,
-  setLanguages,
-  setQuery,
-  resetFilters,
-  isQueryActive,
-  isTypeActive,
-  isLanguageActive,
-  isFiltersActive,
-  languages,
-  resultCount,
-}: RepoFiltersProps) {
-  //   useEffect(() => {
-  //     setLanguages(languages);
-  //   }, [languages, setLanguages]);
+export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersProps) => {
+  const resetFilters$ = $(() => {
+    // TODO: logic for reset filters
+    console.log('reset filters');
+  });
+
+  // TODO: logic for this
+  const isFiltersActive = false;
+  const isQueryActive = false;
+  const isTypeActive = false;
+  const isLanguageActive = false;
 
   return (
     <>
@@ -43,10 +31,8 @@ function RepoFilters({
             type="search"
             name="search"
             id="search"
-            value={state.query}
             className={styles.searchInput}
             placeholder="Find a repository.."
-            // onChange$={(e) => setQuery(e.target.value)}
           />
         </div>
         <div className={styles.filters}>
@@ -54,7 +40,7 @@ function RepoFilters({
             <FilterDropdown
               name="Type"
               description="Select type"
-              current={state.type}
+              current=""
               items={[
                 {
                   label: 'All',
@@ -69,23 +55,16 @@ function RepoFilters({
                   value: TypeFilter.ARCHIVED,
                 },
               ]}
-              onChange={changeType}
             />
           </div>
           <div>
-            <FilterDropdown
-              name="Language"
-              description="Select language"
-              current={state.language}
-              items={languages}
-              onChange={changeLanguage}
-            />
+            <FilterDropdown name="Language" description="Select language" current="" items={languages} />
           </div>
           <div>
             <FilterDropdown
               name="Sort"
               description="Select order"
-              current={state.sort}
+              current=""
               items={[
                 {
                   value: RepositoryOrderField.UpdatedAt,
@@ -94,7 +73,6 @@ function RepoFilters({
                 { value: RepositoryOrderField.Name, label: 'Name' },
                 { value: RepositoryOrderField.Stargazers, label: 'Stars' },
               ]}
-              onChange={changeSort}
             />
           </div>
         </div>
@@ -105,32 +83,29 @@ function RepoFilters({
             <span className="font-semibold" data-testid="filterText">
               {resultCount}
             </span>{' '}
-            results for {isTypeActive && <span className="font-semibold">{state.type}</span>} repositories{' '}
+            results for {isTypeActive && <span className="font-semibold">[ current value (TBD) ]</span>} repositories{' '}
             {isQueryActive && (
               <>
-                matching <span className="font-semibold">{state.query}</span>
+                matching <span className="font-semibold">[ current value (TBD) ]</span>
               </>
             )}{' '}
             {isLanguageActive && (
               <>
-                written in <span className="font-semibold capitalize">{state.language}</span>
+                written in <span className="font-semibold capitalize">[ current value (TBD) ]</span>
               </>
             )}{' '}
-            sorted by <span className="font-semibold">{state.sort.split('_').join(' ').toLowerCase()}</span>
+            sorted by <span className="font-semibold">[ current value (TBD) ]</span>
           </div>
           <div>
-            reset button
-            {/* <button onClick={resetFilters} className={cn(styles.clearBtn, 'group')}>
+            <button onClick$={resetFilters$} className={cn(styles.clearBtn, 'group')}>
               <span className={cn(styles.clearBtnIconContainer, 'group-hover:bg-blue-500')}>
-                <XIcon className={styles.clearBtnIcon} />
+                <XmarkIcon className={styles.clearBtnIcon} />
               </span>
               <span className={cn(styles.clearBtnText, 'group-hover:text-blue-500')}>Clear filter</span>
-            </button> */}
+            </button>
           </div>
         </div>
       )}
     </>
   );
-}
-
-export default RepoFilters;
+});

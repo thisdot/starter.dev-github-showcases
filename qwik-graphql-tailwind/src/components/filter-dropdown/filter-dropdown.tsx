@@ -13,7 +13,6 @@ interface FilterDropdownProps {
   description?: string;
   current: number | string | null;
   items: Option[];
-  onChange: (value: any) => void;
   buttonClassName?: string;
 }
 
