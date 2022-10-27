@@ -1,7 +1,6 @@
 import {
   AUTH_COOKIE_ERASE_OPTIONS,
   AUTH_COOKIE_NAME,
-  AUTH_COOKIE_OPTIONS,
 } from '$lib/constants/auth';
 import type { Handle } from '@sveltejs/kit';
 
