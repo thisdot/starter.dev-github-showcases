@@ -16,7 +16,12 @@ export const handle: Handle = async ({ event, resolve }) => {
   // erase token cookie
   if (event.url.pathname === '/signin') {
     event.cookies.set(AUTH_COOKIE_NAME, String(), AUTH_COOKIE_ERASE_OPTIONS);
+  }else {
+    event.locals.user = {
+      username: 'iansamz'
+    }
   }
+
 
   const response = await resolve(event);
   return response;
