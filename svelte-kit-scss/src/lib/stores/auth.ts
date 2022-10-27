@@ -9,7 +9,6 @@ let tokenInternal: Writable<string | undefined>;
 
 if (browser) {
   const token = cookie.parse(document.cookie)[AUTH_COOKIE_NAME];
-  console.log(token);
   isAuthenticatedInternal = writable<boolean>(Boolean(token));
   tokenInternal = writable<string | undefined>(token);
 } else {

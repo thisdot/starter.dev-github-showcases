@@ -5,9 +5,7 @@ import {
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  console.log('here', event.url.href);
   const accessTokenFromCookies = event.cookies.get(AUTH_COOKIE_NAME);
-  console.log('[accessTokenFromCookies]', accessTokenFromCookies);
 
   if (!accessTokenFromCookies) {
     if (!event.url.pathname.startsWith('/signin')) {
