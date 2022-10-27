@@ -4,7 +4,7 @@ export interface UserReposProps {
 }
 
 export interface Repositories {
-  nodes: Repo[];
+  nodes: UserRepo[];
   pageInfo:
     | {
         __typename?: 'PageInfo' | undefined;
@@ -16,7 +16,7 @@ export interface Repositories {
     | undefined;
 }
 
-export interface Repo {
+export interface UserRepo {
   id: string;
   name: string;
   description?: string | null;
