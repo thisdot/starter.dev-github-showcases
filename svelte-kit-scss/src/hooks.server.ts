@@ -4,15 +4,6 @@ import {
 } from '$lib/constants/auth';
 import type { Handle } from '@sveltejs/kit';
 
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace App {
-    interface Locals {
-      accessToken?: string;
-    }
-  }
-}
-
 export const handle: Handle = async ({ event, resolve }) => {
   const accessTokenFromCookies = event.cookies.get(AUTH_COOKIE_NAME);
 
@@ -28,7 +19,12 @@ export const handle: Handle = async ({ event, resolve }) => {
   if (event.url.pathname === '/signin') {
     event.cookies.set(AUTH_COOKIE_NAME, String(), AUTH_COOKIE_ERASE_OPTIONS);
     event.locals.accessToken = undefined;
+  }else {
+    event.locals.user = {
+      username: 'iansamz'
+    }
   }
+
 
   const response = await resolve(event);
   return response;
