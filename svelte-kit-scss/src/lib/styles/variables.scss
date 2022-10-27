@@ -21,6 +21,10 @@ $green600: rgb(5, 150, 105);
 $purple100: rgb(124, 58, 237);
 $purple600: rgb(124, 58, 237);
 
+@apply text-purple-600;
+
+@apply text-green-600;
+
 // breakpoints
 $sm: 640px;
 $md: 768px;
