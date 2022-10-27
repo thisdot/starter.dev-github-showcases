@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/html';
-import PrivacyBadge, { PrivacyBadgeProps } from '.';
+import { PrivacyBadge, PrivacyBadgeProps } from './privacy-badge';
 
 export default {
   title: 'Privacy Badge',

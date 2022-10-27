@@ -8,7 +8,6 @@ export const closeButtonIcon = 'mr-2 h-4 w-4 text-gray-600';
 export const itemButton =
   'relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize';
 export const itemActiveIcon = 'inline w-4 h-4 absolute left-4';
-export const overlay = 'fixed inset-0 h-full w-full z-10';
 export const dropdownMenuBase =
   'origin-top-right border border-gray-300 origin-top-right absolute right-0 mt-2 w-72 rounded-md shadow-sm bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200';
 export const dropdownMenuHidden = `${dropdownMenuBase} scale-0 opacity-0`;

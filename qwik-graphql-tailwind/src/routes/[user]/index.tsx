@@ -28,7 +28,6 @@ export default component$(() => {
   const location = useLocation();
 
   useClientEffect$(async () => {
-    console.log({ location });
     const abortController = new AbortController();
     const response = await fetchUserProfile(
       {
