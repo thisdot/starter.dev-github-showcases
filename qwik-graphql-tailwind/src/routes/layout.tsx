@@ -13,11 +13,9 @@ export default component$(() => {
 
   return (
     <>
+      <Header user={null} />
       <main className={styles.main}>
-        <Header user={null} />
-        <section className={styles.container}>
-          <Slot />
-        </section>
+        <Slot />
       </main>
     </>
   );

@@ -5,3 +5,4 @@ export * from './building.icon';
 export * from './location-marker.icon';
 export * from './link.icon';
 export * from './twitter.icon';
+export * from './git-branch.icon';
