@@ -3,7 +3,7 @@ import * as styles from './tab-navigation.classNames';
 import { component$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 
-interface TabNavigationProps {
+export interface TabNavigationProps {
   tabs: TabItem[];
   basePath?: string;
   className?: string;

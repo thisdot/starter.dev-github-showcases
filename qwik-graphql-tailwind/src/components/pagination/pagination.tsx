@@ -2,7 +2,7 @@ import { $, component$ } from '@builder.io/qwik';
 import cn from 'classnames';
 import * as styles from './pagination.classNames';
 
-interface PaginationProps {
+export interface PaginationProps {
   pageInfo?: any;
   owner: string;
 }

@@ -1,28 +1,34 @@
-import type { Story, ComponentStory, ComponentMeta } from '@storybook/react';
-import TabNavigation from './tab-navigation';
-import { UserIcon, ClipboardListIcon } from '@heroicons/react/outline';
+import { component$ } from '@builder.io/qwik';
+import { Meta } from '@storybook/html';
+import { storybookMockRouting } from '../../utils';
+import { GitRepoIcon, StarIcon } from '../icons';
+import TabNavigation, { TabNavigationProps } from './tab-navigation';
+
+const TabNavigationDemoComponent = component$(({ tabs, pathname }: TabNavigationProps) => {
+  storybookMockRouting();
+  return <TabNavigation tabs={tabs} pathname={pathname} />;
+});
 
 export default {
-  component: TabNavigation,
-  title: 'Components/TabNavigation',
-} as ComponentMeta<typeof TabNavigation>;
+  title: 'Tab Navigation',
+} as Meta;
 
-const Template: ComponentStory<typeof TabNavigation> = (args) => (
-  <TabNavigation {...args} />
-);
+const Template = (args: any) => <TabNavigationDemoComponent {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Demo: any = Template.bind({});
+
+Demo.args = {
   tabs: [
     {
-      title: 'Profile',
-      path: '',
-      Icon: UserIcon,
+      title: 'Repos',
+      path: 'repos',
+      Icon: GitRepoIcon,
     },
     {
-      title: 'Repos',
-      Icon: ClipboardListIcon,
+      title: 'Stars',
+      path: 'stars',
+      Icon: StarIcon,
     },
   ],
-  pathname: '',
+  pathname: 'stars',
 };
