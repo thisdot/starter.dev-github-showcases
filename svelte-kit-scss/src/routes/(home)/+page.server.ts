@@ -9,11 +9,7 @@ export const load: PageServerLoad = async ({fetch, locals}) => {
   };
   const url = "https://api.github.com/user/repos";
   try {
-    const response = await fetch(`${url}?${new URLSearchParams(defaultParams)}`, {
-      headers: {
-        Authorization: `Bearer ${locals.accessToken}`
-      }
-    })
+    const response = await fetch(`${url}?${new URLSearchParams(defaultParams)}`);
     const data = (await response.json()) as UserReposApiResponse;
     return {
       topRepos: (mapUserReposToTopRepos(data))
