@@ -1,16 +1,13 @@
 import type {PageServerLoad} from './$types';
-import type {UserApiResponse} from "../../lib/interfaces";
+import type {UserApiResponse, UserOrgsApiResponse} from "../../lib/interfaces";
 import {mapUserInfoResponseToUserInfo, mapUserOrgsApiResponseToUserOrgs} from "../../lib/helpers/user";
-import type {UserOrgsApiResponse} from "../../lib/interfaces";
 
-const headers = {
-  Authorization: `Bearer `
-}
+type svelteFetch = (input: RequestInfo, init?: (RequestInit | undefined)) => Promise<Response>
 
-export const load: PageServerLoad = async ({params}) => {
+export const load: PageServerLoad = async ({params, fetch, locals}) => {
   const [userInfo, userOrgs] = await Promise.all([
-    await getUserInfo(params.username),
-    await getUserOrgs()
+    await getUserInfo(params.username, fetch, locals.accessToken),
+    await getUserOrgs(fetch, locals.accessToken)
   ])
 
   return {
@@ -19,18 +16,22 @@ export const load: PageServerLoad = async ({params}) => {
   }
 }
 
-const getUserInfo = async (username: string): Promise<UserApiResponse> => {
+const getUserInfo = async (username: string, fetch: svelteFetch, accessToken: string | undefined): Promise<UserApiResponse> => {
   const url = `https://api.github.com/users/${encodeURIComponent(username)}`
   const response = await fetch(url, {
-    headers
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
   })
   return (await response.json()) as UserApiResponse
 }
 
-const getUserOrgs = async (): Promise<UserOrgsApiResponse> => {
+const getUserOrgs = async (fetch: svelteFetch, accessToken: string | undefined): Promise<UserOrgsApiResponse> => {
   const url = `https://api.github.com/user/orgs`
   const response = await fetch(url, {
-    headers
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
   })
   return (await response.json()) as UserOrgsApiResponse
 }
