@@ -30,7 +30,7 @@
 </div>
 
 <style lang="scss">
-  @use '../../lib/styles/variables.scss';
+  @use 'src/lib/styles/variables.scss';
 
   .page-container {
     display: grid;
