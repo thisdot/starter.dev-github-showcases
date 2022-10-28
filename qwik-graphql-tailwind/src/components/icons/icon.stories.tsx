@@ -6,10 +6,14 @@ export default {
   title: 'Icon',
 } as Meta;
 
-const Template = (args: IconProps) => <LinkIcon {...args} />;
+const Template = (args: IconProps) => (
+  <p>
+    Example of an icon: <LinkIcon {...args} />
+  </p>
+);
 
 export const Demo: any = Template.bind({});
 
 Demo.args = {
-  className: 'w-8 h-8 fill-blue-500',
+  className: 'w-8 h-8 fill-blue-500 ',
 };

@@ -18,8 +18,8 @@ Demo.args = {
       login: 'thisdot',
     },
     {
-      avatarUrl: '//avatars.githubusercontent.com/u/22839396?v=4',
-      login: 'thisdot',
+      avatarUrl: '//avatars.githubusercontent.com/u/35700027?s=200&v=4',
+      login: 'builderIO',
     },
   ],
 };

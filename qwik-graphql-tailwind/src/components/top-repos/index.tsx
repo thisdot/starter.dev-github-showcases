@@ -1,6 +1,6 @@
 import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
 import { TOP_REPOS_QUERY } from '~/utils/queries/top-repos-query';
-import { GITHUB_GRAPHQL } from '~/utils/constants';
+import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import TopReposListItems from './top-repos-card';
 import { useQuery } from '~/utils/useQuery';
 import { parseQuery } from './parseQuery';
@@ -57,7 +57,7 @@ export async function fetchTopRepos(abortController?: AbortController): Promise<
     url: GITHUB_GRAPHQL,
     headersOpt: {
       Accept: 'application/vnd.github+json',
-      authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      authorization: `Bearer ${sessionStorage.getItem(AUTH_TOKEN)}`,
     },
   });
 
