@@ -1,5 +1,4 @@
-import type {UserReposApiResponse} from "../interfaces";
-import type {UserReposState} from "../interfaces";
+import type {UserReposApiResponse, UserReposState} from "../interfaces";
 
 export const mapUserReposToTopRepos = (repos: UserReposApiResponse): UserReposState[] => {
 

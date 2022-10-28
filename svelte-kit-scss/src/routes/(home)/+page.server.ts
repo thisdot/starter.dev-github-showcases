@@ -2,7 +2,7 @@ import type {PageServerLoad} from './$types';
 import {mapUserReposToTopRepos} from "../../lib/helpers";
 import type {UserReposApiResponse} from "../../lib/interfaces";
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({fetch, locals}) => {
   const defaultParams = {
     sort: 'updated',
     per_page: '20',
@@ -11,8 +11,7 @@ export const load: PageServerLoad = async () => {
   try {
     const response = await fetch(`${url}?${new URLSearchParams(defaultParams)}`, {
       headers: {
-        // TODO: how do I get the token
-        Authorization: `Bearer `
+        Authorization: `Bearer ${locals.accessToken}`
       }
     })
     const data = (await response.json()) as UserReposApiResponse;
@@ -20,7 +19,8 @@ export const load: PageServerLoad = async () => {
       topRepos: (mapUserReposToTopRepos(data))
     }
   } catch (err) {
-    console.error(err)
+    // TODO: investigate better ways to handle and prompt users on errors
+    return {}
   }
 }
 
