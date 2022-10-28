@@ -1,9 +1,8 @@
 <script lang="ts">
   import type {UserReposState} from "../../interfaces";
   import {relativeTimeFmt} from "../../helpers";
-  import languageColor from '../../data/language-colors.json'
   import {Law16, Star16, RepoForked16} from "svelte-octicons";
-
+  import { LANGUAGE_COLORS } from "$lib/constants/language-colors";
 
   export let repo: UserReposState
   export let username: string
@@ -17,12 +16,7 @@
   }
 
   function getLanguageColor(): string {
-    const DEFAULT_COLOR = '#000';
-    if (repo?.language) {
-      return languageColor[repo.language] ?? DEFAULT_COLOR;
-    } else {
-      return DEFAULT_COLOR;
-    }
+    return LANGUAGE_COLORS[String(repo?.language)];
   }
 </script>
 
