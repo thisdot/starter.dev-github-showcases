@@ -6,8 +6,8 @@ type svelteFetch = (input: RequestInfo, init?: (RequestInit | undefined)) => Pro
 
 export const load: PageServerLoad = async ({params, fetch, locals}) => {
   const [userInfo, userOrgs] = await Promise.all([
-    await getUserInfo(params.username, fetch, locals.accessToken),
-    await getUserOrgs(fetch, locals.accessToken)
+    getUserInfo(params.username, fetch, locals.accessToken),
+    getUserOrgs(fetch, locals.accessToken)
   ])
 
   return {
@@ -23,7 +23,7 @@ const getUserInfo = async (username: string, fetch: svelteFetch, accessToken: st
       Authorization: `Bearer ${accessToken}`
     }
   })
-  return (await response.json()) as UserApiResponse
+  return response.json() as Promise<UserApiResponse>;
 }
 
 const getUserOrgs = async (fetch: svelteFetch, accessToken: string | undefined): Promise<UserOrgsApiResponse> => {
@@ -33,5 +33,5 @@ const getUserOrgs = async (fetch: svelteFetch, accessToken: string | undefined):
       Authorization: `Bearer ${accessToken}`
     }
   })
-  return (await response.json()) as UserOrgsApiResponse
+  return response.json() as Promise<UserOrgsApiResponse>;
 }
