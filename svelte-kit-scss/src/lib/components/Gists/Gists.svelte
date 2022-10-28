@@ -33,7 +33,7 @@
 </div>
 
 <style lang="scss">
-    @use '../../../styles/variables';
+    @use '../../styles/variables.scss';
 
     .container {
         padding: 2rem 0;
