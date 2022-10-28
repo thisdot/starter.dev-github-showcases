@@ -1,10 +1,30 @@
 <script lang="ts">
-  import { AuthService } from '$lib/services';
-  import { getContext } from 'svelte';
-  const authService = getContext<AuthService>(AuthService);
+  import { PUBLIC_CLIENT_REDIRECT_URL, PUBLIC_API_URL } from '$env/static/public'
+
   const onClick = () => {
-    authService.signIn();
+    window.location.href = signInUrl();
   };
+
+  const signInUrl = () => {
+    const redirectUrl = getRedirectUrl();
+    return `${PUBLIC_API_URL}/api/auth/signin?redirect_url=${redirectUrl}`;
+  }
+
+  /**
+   * Determines the host of the page, and uses that to create a redirect url
+   */
+  const getRedirectUrl = () =>  {
+    const prPreviewRegex = /pr-(?:\d+)+.(?:[a-z0-9]+)+.amplifyapp.com/;
+    const currentUrlHost = window.location.href;
+    const prMatch = prPreviewRegex.test(currentUrlHost);
+    let redirectUrl: string;
+    if (prMatch) {
+      redirectUrl = `https://${currentUrlHost}/redirect`;
+    } else {
+      redirectUrl = PUBLIC_CLIENT_REDIRECT_URL;
+    }
+    return redirectUrl;
+  }
 </script>
 
 <div class="page">
