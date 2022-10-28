@@ -1,8 +1,8 @@
 import { component$ } from '@builder.io/qwik';
-import { BuildingIcon, LinkIcon, LocationMarkerIcon, StarIcon, TwitterIcon, UsersIcon } from '../../components/icons';
-import { OrgList } from '../../components/org-list/org-list';
-import { User } from './types';
-import * as styles from './user-profile.classNames';
+import { BuildingIcon, LinkIcon, LocationMarkerIcon, StarIcon, TwitterIcon, UsersIcon } from '../icons';
+import { OrgList } from '../org-list/org-list';
+import { User } from '../../utils/types';
+import * as styles from './user-profile-card.classNames';
 
 export const UserProfileCard = component$(
   ({

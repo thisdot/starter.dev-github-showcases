@@ -1,11 +1,12 @@
 import { Meta } from '@storybook/html';
-import { UserProfileCard, UserProfileCardProps } from './user-profile-card';
+import { User } from '../../routes/[user]/types';
+import { UserProfileCard } from './user-profile-card';
 
 export default {
   title: 'User Profile Card',
 } as Meta;
 
-const Template = (args: UserProfileCardProps) => <UserProfileCard {...args} />;
+const Template = (args: User) => <UserProfileCard {...args} />;
 
 export const Demo: any = Template.bind({
   organzations: [],

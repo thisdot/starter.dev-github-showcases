@@ -1,7 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import { Repo, TopRepo } from '~/utils/types';
-import PrivacyBadge from '~/components/privacy-badge';
-import RepoMeta from '~/components/repo-meta';
+import { PrivacyBadge } from '../privacy-badge/privacy-badge';
+import { RepoMeta } from '../repo-meta/repo-meta';
 
 interface RepoStyles {
   item: string;
@@ -9,12 +9,12 @@ interface RepoStyles {
   description: string;
 }
 
-interface RepoCardProps {
+export interface RepoCardProps {
   repo: Repo | TopRepo;
   styles: RepoStyles;
 }
 
-export default component$(({ repo, styles }: RepoCardProps) => {
+export const RepoCard = component$(({ repo, styles }: RepoCardProps) => {
   const { id, name, owner, description, stargazerCount, forkCount, language, languageColor, updatedAt, isPrivate } =
     repo;
 

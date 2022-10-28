@@ -7,6 +7,6 @@ export interface PrivacyBadgeProps {
   className?: string;
 }
 
-export default component$(({ isPrivate, className }: PrivacyBadgeProps) => {
+export const PrivacyBadge = component$(({ isPrivate, className }: PrivacyBadgeProps) => {
   return <span className={cn(styles.tag, className)}>{isPrivate ? 'Private' : 'Public'}</span>;
 });

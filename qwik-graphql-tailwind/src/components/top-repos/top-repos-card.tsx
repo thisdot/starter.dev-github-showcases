@@ -3,7 +3,7 @@ import { component$ } from '@builder.io/qwik';
 import type { TopRepo } from './types';
 
 import * as styles from './top-repos.className';
-import RepoCard from '~/components/repo-card';
+import { RepoCard } from '~/components/repo-card/repo-card';
 
 interface UserTopReposViewProps {
   login: string;
