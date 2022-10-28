@@ -7,21 +7,13 @@ export default {
 
 const Template = (args: PaginationProps) => <Pagination {...args} />;
 
-export const Demo: any = Template.bind({
-  pageInfo: {
-    hasNextPage: true,
-    hasPreviousPage: true,
-    startCursor: undefined,
-    endCursor: undefined,
-  },
-  owner: 'owner',
-});
+export const Demo: any = Template.bind({});
 
 Demo.args = {
   pageInfo: {
     hasNextPage: true,
-    hasPreviousPage: true,
-    startCursor: 'Y3Vyc29yOjE=',
+    hasPreviousPage: false,
+    startCursor: undefined,
     endCursor: 'Y3Vyc29yOjI=',
   },
   owner: 'owner',

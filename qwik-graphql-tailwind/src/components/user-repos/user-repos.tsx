@@ -16,17 +16,7 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
     <>
       <RepoFilters languages={languages} resultCount={repos.nodes.length} />
       {repos.nodes.map(
-        ({
-          id,
-          name,
-          description,
-          stargazerCount,
-          forkCount,
-          primaryLanguage,
-          languageColor,
-          updatedAt,
-          isPrivate,
-        }) => (
+        ({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
           <div key={id} className={styles.container}>
             <div className={styles.content}>
               <h3 className="mb-2">

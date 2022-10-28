@@ -1,7 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import { formatDistance } from 'date-fns';
 import { GitBranchIcon, StarIcon } from '../icons';
-import * as styles from './repo-meta.className';
+import * as styles from './repo-meta.classNames';
 
 export interface RepoMetaProps {
   language?: string | null;

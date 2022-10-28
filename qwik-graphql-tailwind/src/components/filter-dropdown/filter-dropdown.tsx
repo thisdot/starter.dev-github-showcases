@@ -9,7 +9,7 @@ interface Option {
   value: number | string | null;
 }
 
-interface FilterDropdownProps {
+export interface FilterDropdownProps {
   name: string;
   description?: string;
   current: number | string | null;

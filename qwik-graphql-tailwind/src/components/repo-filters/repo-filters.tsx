@@ -4,8 +4,9 @@ import cn from 'classnames';
 import { LanguageFilter, TypeFilter, RepositoryOrderField } from './types';
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
 import { XmarkIcon } from '../icons';
+import { SearchInput } from '../search-input/search-input';
 
-type RepoFiltersProps = {
+export type RepoFiltersProps = {
   languages: LanguageFilter[];
   resultCount: number;
 };
@@ -26,14 +27,7 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
     <>
       <div className={styles.container}>
         <div className="grow">
-          <input
-            role="search"
-            type="search"
-            name="search"
-            id="search"
-            className={styles.searchInput}
-            placeholder="Find a repository.."
-          />
+          <SearchInput className={styles.searchInput} placeholder="Search repositories..." />
         </div>
         <div className={styles.filters}>
           <div>

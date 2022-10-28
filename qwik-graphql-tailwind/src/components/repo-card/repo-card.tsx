@@ -9,12 +9,12 @@ interface RepoStyles {
   description: string;
 }
 
-interface RepoCardProps {
+export interface RepoCardProps {
   repo: Repo | TopRepo;
   styles: RepoStyles;
 }
 
-export default component$(({ repo, styles }: RepoCardProps) => {
+export const RepoCard = component$(({ repo, styles }: RepoCardProps) => {
   const { id, name, owner, description, stargazerCount, forkCount, language, languageColor, updatedAt, isPrivate } =
     repo;
 
