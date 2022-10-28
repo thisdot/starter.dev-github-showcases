@@ -25,8 +25,6 @@ export const handle: Handle = async ({ event, resolve, }) => {
   const response = await resolve(event);
 
   if(accessTokenFromCookies){
-    // todo interceptor 
-    // response.headers.set('Authorization', `Bearer ${accessTokenFromCookies}`);
 
     // get Authenticated User
     const url = `${GITHUB_URL}/user`;
