@@ -47,6 +47,8 @@
     "vitest": "0.24.3"
   },
   "dependencies": {
+    "@octokit/rest": "^19.0.5",
+    "isomorphic-fetch": "^3.0.0",
     "solid-js": "1.6.0"
   },
   "keywords": [
