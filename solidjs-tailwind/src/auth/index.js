@@ -7,4 +7,5 @@ const preventUnauthorised = createPreventUnauthorised(authStore, ROUTES.SIGNIN);
 export const useAuth = () => ({
   authStore,
   preventUnauthorised,
+  setAuth,
 });
