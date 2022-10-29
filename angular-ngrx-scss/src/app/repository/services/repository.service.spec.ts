@@ -243,9 +243,11 @@ describe('RepositoryService', () => {
               },
             }),
           );
+          done();
         },
-        complete: done,
+        error: done.fail,
       });
+    expect(httpClientSpy.get.calls.count()).withContext('called once').toBe(1);
   });
 
   describe('getRepositoryContents', () => {
