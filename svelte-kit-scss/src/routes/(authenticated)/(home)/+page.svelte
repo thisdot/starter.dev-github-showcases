@@ -1,5 +1,6 @@
 <script lang="ts">
   import TopRepositories from "$lib/components/TopRepositories/TopRepositories.svelte";
+  import Gists from "$lib/components/Gists/Gists.svelte";
   import type {PageServerData} from './$types';
 
   export let data: PageServerData
@@ -18,7 +19,7 @@
 
   <div class="page-container">
     <aside>
-      <div> replace with side bar</div>
+      <Gists />
     </aside>
     {#if data?.topRepos}
       <TopRepositories repos={data.topRepos} username="thisdot"/>
