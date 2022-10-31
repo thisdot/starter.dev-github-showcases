@@ -4,7 +4,7 @@ import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ locals, fetch }) => {
   const getContextUserUrl = new URL('/user', ENV.GITHUB_URL);
-  const response = await fetch(getContextUserUrl);
+  const response = await fetch(getContextUserUrl.toString());
   const contextUser = await remapContextUserAsync(response);
   locals.user = contextUser;
 };
