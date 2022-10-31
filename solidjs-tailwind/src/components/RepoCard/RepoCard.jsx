@@ -4,7 +4,7 @@ import RepoMeta from '../RepoMeta/RepoMeta';
 import { OcStar2 } from 'solid-icons/oc';
 import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
 
-export const RepoCard = (props) => {
+const RepoCard = (props) => {
   const [local] = splitProps(props, [
     'name',
     'description',
@@ -55,3 +55,6 @@ export const RepoCard = (props) => {
     </div>
   );
 };
+
+
+export default RepoCard;

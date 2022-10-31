@@ -1,4 +1,4 @@
-import PrivacyBadge from '.';
+import PrivacyBadge from './PrivacyBadge';
 
 export default {
   title: 'Components/PrivacyBadge',

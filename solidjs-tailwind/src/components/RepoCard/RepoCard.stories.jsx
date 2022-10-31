@@ -1,5 +1,5 @@
 import { Router } from '@solidjs/router';
-import { RepoCard } from '.';
+import RepoCard from './RepoCard';
 import { repoCardProps } from './data';
 
 export default {

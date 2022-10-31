@@ -1,7 +1,7 @@
 import { Router } from '@solidjs/router';
 import { render } from 'solid-testing-library';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { RepoCard } from '.';
+import RepoCard from './RepoCard';
 import { repoCardProps } from './data';
 
 describe('RepoCard for profilepage', () => {
