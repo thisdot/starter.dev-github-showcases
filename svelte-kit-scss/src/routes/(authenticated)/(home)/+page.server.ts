@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { mapUserReposToTopRepos } from "$lib/helpers";
+import { mapUserReposToTopRepos, mapGistsToHomeGists } from "$lib/helpers";
 import type { UserGistsApiResponse, UserReposApiResponse } from "$lib/interfaces";
 import { ENV } from '$lib/constants/env';
 
@@ -26,7 +26,7 @@ export const load: PageServerLoad = async ({fetch, parent}) => {
 
     return {
       topRepos: (mapUserReposToTopRepos(repos)),
-      gists
+      gists: (mapGistsToHomeGists(gists)),
     }
   } catch (err) {
     // TODO: investigate better ways to handle and prompt users on errors
