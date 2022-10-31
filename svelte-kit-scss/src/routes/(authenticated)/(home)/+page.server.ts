@@ -1,6 +1,6 @@
 import type {PageServerLoad} from './$types';
-import {mapUserReposToTopRepos} from "../../lib/helpers";
-import type {UserReposApiResponse} from "../../lib/interfaces";
+import {mapUserReposToTopRepos} from "$lib/helpers";
+import type {UserReposApiResponse} from "$lib/interfaces";
 
 export const load: PageServerLoad = async ({fetch, locals}) => {
   const defaultParams = {
