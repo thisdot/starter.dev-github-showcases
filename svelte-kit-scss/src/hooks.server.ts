@@ -3,7 +3,7 @@ import {ENV} from '$lib/constants/env';
 import {HEADER_NAMES} from '$lib/constants/headers';
 import type {Handle, HandleFetch} from '@sveltejs/kit';
 
-export const handle: Handle = async ({event, resolve}) => {
+export const handle: Handle = async ({ event, resolve }) => {
   const accessTokenFromCookies = event.cookies.get(AUTH_COOKIE_NAME);
 
   event.locals.accessToken = accessTokenFromCookies;
