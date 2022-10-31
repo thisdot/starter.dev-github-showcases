@@ -1,10 +1,12 @@
 <script lang="ts">
   import {ChevronDown16, MarkGithub16} from 'svelte-octicons';
+  import {onDestroy, onMount} from "svelte";
+  import {browser} from '$app/environment';
 
   export let userAvatar: string;
   export let username: string;
 
-  let dropdownMenuIsOpen = true;
+  let dropdownMenuIsOpen = false;
 
   function toggleMenu() {
     dropdownMenuIsOpen = !dropdownMenuIsOpen;
@@ -16,8 +18,19 @@
 
   function signOut() {
     closeDropdown();
-    // TODO: clear cookies and sign out
+    location.href = '/signin';
   }
+
+  onMount(() => {
+    document.addEventListener('click', closeDropdown)
+  });
+
+  if (browser) {
+    onDestroy(() => {
+      document.removeEventListener('click', closeDropdown)
+    })
+  }
+
 </script>
 
 <nav aria-label="Main Navigation">
@@ -32,7 +45,7 @@
         type="button"
         class="dropdown-title"
         aria-controls="nav-dropdown"
-        on:click={toggleMenu}
+        on:click|stopPropagation={toggleMenu}
       >
         <img src={userAvatar} alt="{username} avatar"/>
         <ChevronDown16 height="20" width="20" fill="white"/>
