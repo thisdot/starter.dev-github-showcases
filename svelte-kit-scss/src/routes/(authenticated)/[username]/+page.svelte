@@ -8,7 +8,7 @@
 
 <div class="grid grid-cols-12 profile-body container">
   <div class="subpage col-span-3">
-    <ProfileAboutSection class="profile-about-section" userInfo={data.userInfo} userOrgs={data.userOrgs}/>
+    <ProfileAboutSection userInfo={data.userInfo} userOrgs={data.userOrgs}/>
   </div>
 </div>
 
@@ -19,10 +19,6 @@
 
     .subpage {
       grid-row: 1 / 3;
-    }
-
-    .profile-about-section {
-      box-sizing: border-box;
     }
   }
 

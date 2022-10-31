@@ -7,60 +7,61 @@
 
 </script>
 
-{#if userInfo?.avatar}
-  <img
-    class="avatar"
-    src={userInfo?.avatar}
-    alt="{userInfo?.avatar} avatar"
-  />
-{/if}
+<section class="profile-about-section">
+  {#if userInfo?.avatar}
+    <img
+      class="avatar"
+      src={userInfo?.avatar}
+      alt="{userInfo?.avatar} avatar"
+    />
+  {/if}
 
-{#if userInfo}
-  <div class="content">
-    <h1>
-      <div class="name">{userInfo.name}</div>
-      <div class="username">{userInfo.username}</div>
-    </h1>
+  {#if userInfo}
+    <div class="content">
+      <h1>
+        <div class="name">{userInfo.name}</div>
+        <div class="username">{userInfo.username}</div>
+      </h1>
 
-    {#if userInfo.bio}
-      <div class="bio">{userInfo.bio}</div>
-    {/if}
-    <div class="socials">
-      <People16/>
-      <span class="social-label"> {userInfo.followers} Followers </span>
-      ·
-      <People16/>
-      <span class="social-label"> {userInfo.following} Following </span>
-    </div>
-    <div class="fields">
-      {#if userInfo.company}
-        <div>
-          <Organization16/>
-          <span>{userInfo.company}</span>
-        </div>
+      {#if userInfo.bio}
+        <div class="bio">{userInfo.bio}</div>
       {/if}
-      {#if userInfo.location}
-        <div>
-          <Location16/>
-          <span>{userInfo.location}</span>
-        </div>
-      {/if}
-      {#if userInfo.email}
-        <div>
-          <Mail16/>
-          <a href="mailto:{ userInfo.email }">
-            {userInfo?.email }
-          </a>
-        </div>
-      {/if}
-      {#if userInfo.blog}
-        <div>
-          <Link16/>
-          <a href={userInfo.blog}>{userInfo.blog}</a>
-        </div>
-      {/if}
-      {#if userInfo.twitter_username}
-        <div>
+      <div class="socials">
+        <People16/>
+        <span class="social-label"> {userInfo.followers} Followers </span>
+        ·
+        <People16/>
+        <span class="social-label"> {userInfo.following} Following </span>
+      </div>
+      <div class="fields">
+        {#if userInfo.company}
+          <div>
+            <Organization16/>
+            <span>{userInfo.company}</span>
+          </div>
+        {/if}
+        {#if userInfo.location}
+          <div>
+            <Location16/>
+            <span>{userInfo.location}</span>
+          </div>
+        {/if}
+        {#if userInfo.email}
+          <div>
+            <Mail16/>
+            <a href="mailto:{ userInfo.email }">
+              {userInfo?.email }
+            </a>
+          </div>
+        {/if}
+        {#if userInfo.blog}
+          <div>
+            <Link16/>
+            <a href={userInfo.blog}>{userInfo.blog}</a>
+          </div>
+        {/if}
+        {#if userInfo.twitter_username}
+          <div>
         <span class="icon twitter-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -75,30 +76,35 @@
             ></path>
           </svg>
         </span>
-          <a href="https://twitter.com/{ userInfo.twitter_username }"
-          >@{userInfo.twitter_username}</a
-          >
-        </div>
-      {/if}
-    </div>
+            <a href="https://twitter.com/{ userInfo.twitter_username }"
+            >@{userInfo.twitter_username}</a
+            >
+          </div>
+        {/if}
+      </div>
 
-    <div class="organizations">
-      <h2>Organizations</h2>
-      <ul>
-        {#each userOrgs as org}
-          <li>
-            <a href="/{ org.login }">
-              <img src={org.avatar_url} alt="{ org.login } logo"/>
-            </a>
-          </li>
-        {/each}
-      </ul>
+      <div class="organizations">
+        <h2>Organizations</h2>
+        <ul>
+          {#each userOrgs as org}
+            <li>
+              <a href="/{ org.login }">
+                <img src={org.avatar_url} alt="{ org.login } logo"/>
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </div>
     </div>
-  </div>
-{/if}
-
+  {/if}
+</section>
 
 <style lang="scss">
+
+  .profile-about-section {
+    box-sizing: border-box;
+  }
+
   /*
    * This image is styled so that it renders over the sticky header just like what
    * happens with upstream GitHub, while the content under it does not.

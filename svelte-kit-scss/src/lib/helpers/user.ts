@@ -1,8 +1,8 @@
 import type {UserApiResponse, UserInfo, UserOrgsApiResponse, UserOrgs} from "../interfaces";
 
 
-export const mapUserInfoResponseToUserInfo = (user: UserApiResponse): UserInfo => {
-  return ({
+export const mapUserInfoResponseToUserInfo = (user?: UserApiResponse): UserInfo | undefined => {
+  return user ? ({
     avatar: user.avatar_url,
     bio: user.bio || "",
     blog: user.blog,
@@ -10,12 +10,12 @@ export const mapUserInfoResponseToUserInfo = (user: UserApiResponse): UserInfo =
     email: user.email || "",
     followers: user.followers,
     following: user.following,
-    location: user.location,
+    location: user.location || "",
     name: user.name,
     twitter_username: user.twitter_username || "",
     username: user.login,
     type: user.type,
-  });
+  }) : undefined;
 }
 
 export const mapUserOrgsApiResponseToUserOrgs = (userOrgs: UserOrgsApiResponse): UserOrgs[] => {

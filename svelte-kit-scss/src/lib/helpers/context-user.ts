@@ -1,6 +1,6 @@
-import type { ContextUser } from "$lib/interfaces/context-user";
+import type {UserApiResponse} from "$lib/interfaces";
 
-export const remapContextUserAsync = async (response: Response): Promise<ContextUser | undefined> => {
+export const remapContextUserAsync = async (response: Response): Promise<UserApiResponse | undefined> => {
   const json = await response.json();
   return json;
 }
