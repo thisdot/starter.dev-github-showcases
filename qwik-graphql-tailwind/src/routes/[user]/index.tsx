@@ -8,6 +8,7 @@ import * as styles from './user-page.classNames';
 import { UserProfileCard } from '../../components/user-profile-card/user-profile-card';
 import ProfileNav from '../../components/profile-nav/profile-nav';
 import { UserRepos } from '../../components/user-repos/user-repos';
+import { ORG_REPOS_QUERY } from '~/utils/queries/org-repos-query';
 
 interface UserStore {
   user: User | null;
@@ -18,6 +19,11 @@ interface ProfileQueryParams {
   afterCursor?: string;
   beforeCursor?: string;
   orderBy?: string;
+}
+
+interface OrgRepoQueryParams {
+  organization: string;
+  first: number;
 }
 
 export default component$(() => {
@@ -89,6 +95,28 @@ export async function fetchUserProfile(
       afterCursor,
       beforeCursor,
       orderBy,
+    },
+    headersOpt: {
+      Accept: 'application/vnd.github+json',
+      authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
+  });
+
+  return await resp.json();
+}
+
+export async function fetchOrgRepo(
+  { organization, first }: OrgRepoQueryParams,
+  abortController?: AbortController
+): Promise<any> {
+  const { executeQuery$ } = useQuery(ORG_REPOS_QUERY);
+
+  const resp = await executeQuery$({
+    signal: abortController?.signal,
+    url: GITHUB_GRAPHQL,
+    variables: {
+      organization,
+      first,
     },
     headersOpt: {
       Accept: 'application/vnd.github+json',
