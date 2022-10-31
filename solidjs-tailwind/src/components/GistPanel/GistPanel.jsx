@@ -2,7 +2,7 @@ import { gists } from './data';
 import { For } from 'solid-js';
 import { Link } from '@solidjs/router';
 
-export const GistPanel = () => {
+const GistPanel = () => {
   const dummyGists = gists;
   return (
     <div class="h-full min-h-[30rem] pt-8 px-8">
@@ -23,3 +23,5 @@ export const GistPanel = () => {
     </div>
   );
 };
+
+export default GistPanel;

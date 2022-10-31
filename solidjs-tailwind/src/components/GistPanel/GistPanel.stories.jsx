@@ -1,5 +1,5 @@
 import { Router } from '@solidjs/router';
-import { GistPanel } from './GistPanel';
+import GistPanel from './GistPanel';
 import { gists } from './data';
 
 export default {
