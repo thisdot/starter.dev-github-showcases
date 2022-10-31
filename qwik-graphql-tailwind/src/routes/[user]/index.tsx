@@ -105,7 +105,7 @@ export async function fetchUserProfile(
   return await resp.json();
 }
 
-export async function fetchOrgRepo(
+export async function fetchOrgRepos(
   { organization, first }: OrgRepoQueryParams,
   abortController?: AbortController
 ): Promise<any> {
