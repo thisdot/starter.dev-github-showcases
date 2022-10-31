@@ -1,4 +1,4 @@
-import { RepoFilter } from '.'
+import RepoFilter from './RepoFilter';
 
 export default {
   title: "components/ Repo filter",
