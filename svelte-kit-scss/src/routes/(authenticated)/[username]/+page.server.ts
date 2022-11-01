@@ -22,5 +22,6 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
     userInfo: mapUserInfoResponseToUserInfo(userInfo),
     userOrgs: mapUserOrgsApiResponseToUserOrgs(userOrgs),
     userRepos: mapUserReposApiResponseToUserReposStates(userRepos),
+    username: params.username
   };
 };
