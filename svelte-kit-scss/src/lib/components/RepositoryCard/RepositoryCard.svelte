@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type {UserReposState} from "../../interfaces";
-  import {relativeTimeFmt} from "../../helpers";
-  import {Law16, Star16, RepoForked16} from "svelte-octicons";
-  import { LANGUAGE_COLORS } from "$lib/constants/language-colors";
+  import type { UserReposState } from '../../interfaces';
+  import { relativeTimeFmt } from '../../helpers';
+  import { Law16, Star16, RepoForked16 } from 'svelte-octicons';
+  import { LANGUAGE_COLORS } from '$lib/constants/language-colors';
 
-  export let repo: UserReposState
-  export let username: string
+  export let repo: UserReposState;
+  export let username: string;
 
   function visibility(): string {
     if (repo) {
@@ -20,46 +20,43 @@
   }
 </script>
 
-
 <h3 class="name-container" data-testid="repo-card">
-  <a class="name" href="/{username}/{repo.name}" >{ repo.name }</a>
-  <span class="visibility">{ visibility() }</span>
+  <a class="name" href="/{username}/{repo.name}">{repo.name}</a>
+  <span class="visibility">{visibility()}</span>
 </h3>
 {#if repo.description}
-  <p class="description">{ repo.description }</p>
+  <p class="description">{repo.description}</p>
 {/if}
 <div class="subline">
   {#if repo.language}
     <div class="language">
-      <div class="language-color" style="background-color: {getLanguageColor()}"></div>
-      <div class="language-label">{ repo.language }</div>
+      <div class="language-color" style="background-color: {getLanguageColor()}" />
+      <div class="language-label">{repo.language}</div>
     </div>
   {/if}
 
   {#if repo.stargazers_count}
     <div class="stars">
-      <Star16/>
-      <span class="star-count">{ repo.stargazers_count }</span>
+      <Star16 />
+      <span class="star-count">{repo.stargazers_count}</span>
     </div>
   {/if}
   {#if repo.forks_count}
     <div class="stars">
-      <RepoForked16/>
-      <span class="star-count">{ repo.forks_count }</span>
+      <RepoForked16 />
+      <span class="star-count">{repo.forks_count}</span>
     </div>
   {/if}
   {#if repo.license}
     <div class="license">
-      <Law16/>
-      <span class="license-name">{repo.license.name }</span>
+      <Law16 />
+      <span class="license-name">{repo.license.name}</span>
     </div>
   {/if}
-  <div class="updated">{ relativeTimeFmt(repo.updated_at) }</div>
+  <div class="updated">{relativeTimeFmt(repo.updated_at)}</div>
 </div>
 
-
 <style lang="scss">
-
   @use '../../styles/variables.scss';
 
   .name-container {
@@ -126,5 +123,4 @@
       }
     }
   }
-
 </style>

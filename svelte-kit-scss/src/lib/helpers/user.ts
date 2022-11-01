@@ -1,22 +1,23 @@
-import type {UserApiResponse, UserInfo, UserOrgsApiResponse, UserOrgs} from "../interfaces";
-
+import type { UserApiResponse, UserInfo, UserOrgsApiResponse, UserOrgs } from '../interfaces';
 
 export const mapUserInfoResponseToUserInfo = (user?: UserApiResponse): UserInfo | undefined => {
-  return user ? ({
-    avatar: user.avatar_url,
-    bio: user.bio || "",
-    blog: user.blog,
-    company: user.company || "",
-    email: user.email || "",
-    followers: user.followers,
-    following: user.following,
-    location: user.location || "",
-    name: user.name,
-    twitter_username: user.twitter_username || "",
-    username: user.login,
-    type: user.type,
-  }) : undefined;
-}
+  return user
+    ? {
+        avatar: user.avatar_url,
+        bio: user.bio || '',
+        blog: user.blog,
+        company: user.company || '',
+        email: user.email || '',
+        followers: user.followers,
+        following: user.following,
+        location: user.location || '',
+        name: user.name,
+        twitter_username: user.twitter_username || '',
+        username: user.login,
+        type: user.type,
+      }
+    : undefined;
+};
 
 export const mapUserOrgsApiResponseToUserOrgs = (userOrgs: UserOrgsApiResponse): UserOrgs[] => {
   return userOrgs.map((org) => ({
@@ -24,4 +25,4 @@ export const mapUserOrgsApiResponseToUserOrgs = (userOrgs: UserOrgsApiResponse):
     login: org.login,
     avatar_url: org.avatar_url,
   }));
-}
+};

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import TopRepositories from "$lib/components/TopRepositories/TopRepositories.svelte";
-  import Gists from "$lib/components/Gists/Gists.svelte";
-  import type {PageServerData} from './$types';
+  import TopRepositories from '$lib/components/TopRepositories/TopRepositories.svelte';
+  import Gists from '$lib/components/Gists/Gists.svelte';
+  import type { PageServerData } from './$types';
 
-  export let data: PageServerData
+  export let data: PageServerData;
 </script>
 
 <div class="container">
@@ -22,11 +22,10 @@
       <Gists gists={data.gists} />
     </aside>
     {#if data?.topRepos}
-      <TopRepositories repos={data.topRepos} username="thisdot"/>
+      <TopRepositories repos={data.topRepos} username="thisdot" />
     {/if}
   </div>
 </div>
-
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';

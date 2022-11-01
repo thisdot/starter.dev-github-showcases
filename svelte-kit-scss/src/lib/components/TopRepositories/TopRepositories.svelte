@@ -1,26 +1,22 @@
 <script lang="ts">
-  import type {UserReposState} from "../../interfaces";
-  import RepositoryCard from "$lib/components/RepositoryCard/RepositoryCard.svelte";
+  import type { UserReposState } from '../../interfaces';
+  import RepositoryCard from '$lib/components/RepositoryCard/RepositoryCard.svelte';
 
-  export let repos: UserReposState[]
-  export let username: string
+  export let repos: UserReposState[];
+  export let username: string;
 </script>
 
 <div class="top-repositories-container" data-testid="top-repos">
   <h2>Top Repositories</h2>
   <div class="repo-container">
-
     {#each repos as repo, i}
       <div class="repo-section">
-        <RepositoryCard repo={repo} username={username}/>
+        <RepositoryCard {repo} {username} />
       </div>
-      {#if i === (repos.length - 1)}
+      {#if i === repos.length - 1}
         <div class="view-all-link">
           {#if username}
-            <a href="/{ username }"
-               class:disabled="{!username}"
-            >View all repositories</a
-            >
+            <a href="/{username}" class:disabled={!username}>View all repositories</a>
           {/if}
         </div>
       {/if}
@@ -29,7 +25,6 @@
 </div>
 
 <style lang="scss">
-
   @use '../../styles/variables.scss';
 
   .top-repositories-container {
@@ -76,5 +71,4 @@
       }
     }
   }
-
 </style>

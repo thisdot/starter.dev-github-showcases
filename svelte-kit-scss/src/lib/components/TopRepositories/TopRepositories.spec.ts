@@ -1,23 +1,23 @@
-import {beforeEach} from "vitest";
-import {render, screen} from "@testing-library/svelte";
-import {topRepositoriesFixture} from "../../fixtures/repositories";
-import TopRepositories from "./TopRepositories.svelte";
+import { beforeEach } from 'vitest';
+import { render, screen } from '@testing-library/svelte';
+import { topRepositoriesFixture } from '../../fixtures/repositories';
+import TopRepositories from './TopRepositories.svelte';
 
-describe("TopRepositories", () => {
+describe('TopRepositories', () => {
   beforeEach(() => {
     render(TopRepositories, {
       repos: topRepositoriesFixture,
-      username: 'thisdot'
-    })
-  })
+      username: 'thisdot',
+    });
+  });
 
-  it('should render title',  () =>{
+  it('should render title', () => {
     const pageTitle = screen.getByText(/Top Repositories/);
-    expect(pageTitle).toBeTruthy()
+    expect(pageTitle).toBeTruthy();
   });
 
-  it('should render title',  () =>{
-    const pageTitle = screen.queryAllByTestId("repo-card");
-    expect(pageTitle.length).toBe(2)
+  it('should render title', () => {
+    const pageTitle = screen.queryAllByTestId('repo-card');
+    expect(pageTitle.length).toBe(2);
   });
-})
+});

@@ -1,7 +1,6 @@
-import type {UserReposApiResponse, UserReposState} from "../interfaces";
+import type { UserReposApiResponse, UserReposState } from '../interfaces';
 
 export const mapUserReposToTopRepos = (repos: UserReposApiResponse): UserReposState[] => {
-
   if (repos) {
     return repos.map((repo) => ({
       name: repo.name,
@@ -15,17 +14,17 @@ export const mapUserReposToTopRepos = (repos: UserReposApiResponse): UserReposSt
       archived: repo.archived,
       license: repo.license
         ? {
-          key: repo.license.key,
-          name: repo.license.name,
-          spdx_id: repo.license.spdx_id,
-          url: repo.license.url,
-          node_id: repo.license.node_id,
-        }
+            key: repo.license.key,
+            name: repo.license.name,
+            spdx_id: repo.license.spdx_id,
+            url: repo.license.url,
+            node_id: repo.license.node_id,
+          }
         : null,
       owner: {
         login: repo.owner.login,
       },
     }));
   }
-  return []
-}
+  return [];
+};

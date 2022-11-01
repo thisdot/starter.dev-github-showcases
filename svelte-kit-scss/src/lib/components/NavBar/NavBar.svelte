@@ -1,7 +1,7 @@
 <script lang="ts">
-  import {ChevronDown16, MarkGithub16} from 'svelte-octicons';
-  import {onDestroy, onMount} from "svelte";
-  import {browser} from '$app/environment';
+  import { ChevronDown16, MarkGithub16 } from 'svelte-octicons';
+  import { onDestroy, onMount } from 'svelte';
+  import { browser } from '$app/environment';
 
   export let userAvatar: string;
   export let username: string;
@@ -22,22 +22,21 @@
   }
 
   onMount(() => {
-    document.addEventListener('click', closeDropdown)
+    document.addEventListener('click', closeDropdown);
   });
 
   if (browser) {
     onDestroy(() => {
-      document.removeEventListener('click', closeDropdown)
-    })
+      document.removeEventListener('click', closeDropdown);
+    });
   }
-
 </script>
 
 <nav aria-label="Main Navigation">
   <ul>
     <li>
       <a class="github-icon" href="/">
-        <MarkGithub16 height="32" width="32" fill="white"/>
+        <MarkGithub16 height="32" width="32" fill="white" />
       </a>
     </li>
     <li on:click={closeDropdown} class="dropdown">
@@ -47,8 +46,8 @@
         aria-controls="nav-dropdown"
         on:click|stopPropagation={toggleMenu}
       >
-        <img src={userAvatar} alt="{username} avatar"/>
-        <ChevronDown16 height="20" width="20" fill="white"/>
+        <img src={userAvatar} alt="{username} avatar" />
+        <ChevronDown16 height="20" width="20" fill="white" />
       </button>
       {#if dropdownMenuIsOpen}
         <ul class="dropdown-menu" id="nav-dropdown">
@@ -56,13 +55,7 @@
             <a href="/{username}" on:click={closeDropdown}> Profile </a>
           </li>
           <li>
-            <button
-              type="button"
-              class="sign-out-btn"
-              on:click={signOut}
-            >
-              Sign out
-            </button>
+            <button type="button" class="sign-out-btn" on:click={signOut}> Sign out </button>
           </li>
         </ul>
       {/if}
@@ -127,7 +120,8 @@
       transform-origin: top right;
       z-index: 10;
 
-      a, .sign-out-btn {
+      a,
+      .sign-out-btn {
         color: variables.$gray900;
         font-weight: 500;
         padding: 0.5rem 1rem;
