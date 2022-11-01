@@ -10,8 +10,6 @@ export const RepoActionButtons = component$(() => {
   }
 
   const { data } = store.info;
-
-  console.log(data?.stargazerCount);
   return (
     <div class="flex space-x-4 gap-0.5">
       <span className="inline-flex shadow-sm rounded-md">
