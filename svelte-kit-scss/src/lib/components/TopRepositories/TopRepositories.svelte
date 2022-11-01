@@ -3,7 +3,7 @@
   import RepositoryCard from '$lib/components/RepositoryCard/RepositoryCard.svelte';
 
   export let repos: UserReposState[];
-  export let username: string;
+  export let username: string | undefined;
 </script>
 
 <div class="top-repositories-container" data-testid="top-repos">
@@ -11,7 +11,7 @@
   <div class="repo-container">
     {#each repos as repo, i}
       <div class="repo-section">
-        <RepositoryCard {repo} {username} />
+        <RepositoryCard {repo} />
       </div>
       {#if i === repos.length - 1}
         <div class="view-all-link">

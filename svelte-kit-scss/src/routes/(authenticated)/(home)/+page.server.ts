@@ -26,6 +26,7 @@ export const load: PageServerLoad = async ({ fetch, parent }) => {
     return {
       topRepos: mapUserReposToTopRepos(repos),
       gists: mapGistsToHomeGists(gists),
+      username: userInfo?.username,
     };
   } catch (err) {
     // TODO: investigate better ways to handle and prompt users on errors
