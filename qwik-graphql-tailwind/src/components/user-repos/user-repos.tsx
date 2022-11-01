@@ -1,21 +1,30 @@
-import { component$ } from '@builder.io/qwik';
+import { component$, useContext } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import { StarIcon } from '../icons';
-import { UserReposProps } from './types';
+import { UserRepo, UserReposProps } from './types';
 import * as styles from './user-repos.classNames';
 import { RepoMeta } from '../repo-meta/repo-meta';
 import { PrivacyBadge } from '../privacy-badge/privacy-badge';
 import { Pagination } from '../pagination/pagination';
 import { RepoFilters } from '../repo-filters/repo-filters';
 import { getLanguages } from './getLanguages';
+import filterStore from '~/context/repo-filter';
+import { repoDataFilteredBySearch } from './filter-sort-functions';
 
 export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
   const languages = getLanguages(repos.nodes);
 
+  const searchValue = useContext(filterStore);
+
+  const filteredAndSortedRepos = ((): UserRepo[] => {
+    const searchResponse = repoDataFilteredBySearch(searchValue?.search || '', repos.nodes);
+    return searchResponse;
+  })();
+
   return (
     <>
       <RepoFilters languages={languages} resultCount={repos.nodes.length} />
-      {repos.nodes.map(
+      {filteredAndSortedRepos.map(
         ({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
           <div key={id} className={styles.container}>
             <div className={styles.content}>
