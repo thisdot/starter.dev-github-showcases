@@ -1,0 +1,143 @@
+export const gistsFixture = [
+    {
+      "url": "https://api.github.com/gists/3232acaa90f23a7c673447c0de52618d",
+      "forks_url": "https://api.github.com/gists/3232acaa90f23a7c673447c0de52618d/forks",
+      "commits_url": "https://api.github.com/gists/3232acaa90f23a7c673447c0de52618d/commits",
+      "id": "3232acaa90f23a7c673447c0de52618d",
+      "node_id": "MDQ6R2lzdDMyMzJhY2FhOTBmMjNhN2M2NzM0NDdjMGRlNTI2MThk",
+      "git_pull_url": "https://gist.github.com/3232acaa90f23a7c673447c0de52618d.git",
+      "git_push_url": "https://gist.github.com/3232acaa90f23a7c673447c0de52618d.git",
+      "html_url": "https://gist.github.com/3232acaa90f23a7c673447c0de52618d",
+      "files": {
+        "README-Template.md": {
+          "filename": "README-Template.md",
+          "type": "text/markdown",
+          "language": "Markdown",
+          "raw_url": "https://gist.githubusercontent.com/iansamz/3232acaa90f23a7c673447c0de52618d/raw/5451b929c45be0356a2755fbf3fb8f82cfe3775d/README-Template.md",
+          "size": 2033
+        }
+      },
+      "public": true,
+      "created_at": "2021-04-21T20:58:43Z",
+      "updated_at": "2021-04-21T20:58:43Z",
+      "description": "A template to make good README.md",
+      "comments": 0,
+      "user": null,
+      "comments_url": "https://api.github.com/gists/3232acaa90f23a7c673447c0de52618d/comments",
+      "owner": {
+        "login": "iansamz",
+        "id": 15368874,
+        "node_id": "MDQ6VXNlcjE1MzY4ODc0",
+        "avatar_url": "https://avatars.githubusercontent.com/u/15368874?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/iansamz",
+        "html_url": "https://github.com/iansamz",
+        "followers_url": "https://api.github.com/users/iansamz/followers",
+        "following_url": "https://api.github.com/users/iansamz/following{/other_user}",
+        "gists_url": "https://api.github.com/users/iansamz/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/iansamz/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/iansamz/subscriptions",
+        "organizations_url": "https://api.github.com/users/iansamz/orgs",
+        "repos_url": "https://api.github.com/users/iansamz/repos",
+        "events_url": "https://api.github.com/users/iansamz/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/iansamz/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "truncated": false
+    },
+    {
+      "url": "https://api.github.com/gists/a16441e36ca466e14459bfcaadcc01fc",
+      "forks_url": "https://api.github.com/gists/a16441e36ca466e14459bfcaadcc01fc/forks",
+      "commits_url": "https://api.github.com/gists/a16441e36ca466e14459bfcaadcc01fc/commits",
+      "id": "a16441e36ca466e14459bfcaadcc01fc",
+      "node_id": "MDQ6R2lzdGExNjQ0MWUzNmNhNDY2ZTE0NDU5YmZjYWFkY2MwMWZj",
+      "git_pull_url": "https://gist.github.com/a16441e36ca466e14459bfcaadcc01fc.git",
+      "git_push_url": "https://gist.github.com/a16441e36ca466e14459bfcaadcc01fc.git",
+      "html_url": "https://gist.github.com/a16441e36ca466e14459bfcaadcc01fc",
+      "files": {
+        "bp-xprofile-countries-list.php": {
+          "filename": "bp-xprofile-countries-list.php",
+          "type": "application/x-httpd-php",
+          "language": "PHP",
+          "raw_url": "https://gist.githubusercontent.com/iansamz/a16441e36ca466e14459bfcaadcc01fc/raw/7320d9cc82b3e6232bbf30252cf0ccae8f2d7ff4/bp-xprofile-countries-list.php",
+          "size": 4293
+        }
+      },
+      "public": true,
+      "created_at": "2021-04-01T14:57:58Z",
+      "updated_at": "2021-04-01T14:57:58Z",
+      "description": "BuddyPress xProfile - Add Countries",
+      "comments": 0,
+      "user": null,
+      "comments_url": "https://api.github.com/gists/a16441e36ca466e14459bfcaadcc01fc/comments",
+      "owner": {
+        "login": "iansamz",
+        "id": 15368874,
+        "node_id": "MDQ6VXNlcjE1MzY4ODc0",
+        "avatar_url": "https://avatars.githubusercontent.com/u/15368874?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/iansamz",
+        "html_url": "https://github.com/iansamz",
+        "followers_url": "https://api.github.com/users/iansamz/followers",
+        "following_url": "https://api.github.com/users/iansamz/following{/other_user}",
+        "gists_url": "https://api.github.com/users/iansamz/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/iansamz/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/iansamz/subscriptions",
+        "organizations_url": "https://api.github.com/users/iansamz/orgs",
+        "repos_url": "https://api.github.com/users/iansamz/repos",
+        "events_url": "https://api.github.com/users/iansamz/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/iansamz/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "truncated": false
+    },
+    {
+      "url": "https://api.github.com/gists/d5f20d0d9a30eef92edd14833d74aa86",
+      "forks_url": "https://api.github.com/gists/d5f20d0d9a30eef92edd14833d74aa86/forks",
+      "commits_url": "https://api.github.com/gists/d5f20d0d9a30eef92edd14833d74aa86/commits",
+      "id": "d5f20d0d9a30eef92edd14833d74aa86",
+      "node_id": "MDQ6R2lzdGQ1ZjIwZDBkOWEzMGVlZjkyZWRkMTQ4MzNkNzRhYTg2",
+      "git_pull_url": "https://gist.github.com/d5f20d0d9a30eef92edd14833d74aa86.git",
+      "git_push_url": "https://gist.github.com/d5f20d0d9a30eef92edd14833d74aa86.git",
+      "html_url": "https://gist.github.com/d5f20d0d9a30eef92edd14833d74aa86",
+      "files": {
+        "resume.md": {
+          "filename": "resume.md",
+          "type": "text/markdown",
+          "language": "Markdown",
+          "raw_url": "https://gist.githubusercontent.com/iansamz/d5f20d0d9a30eef92edd14833d74aa86/raw/c4c7ccc68eab83a6325642779dae496d794b9f48/resume.md",
+          "size": 4608
+        }
+      },
+      "public": true,
+      "created_at": "2020-08-03T15:27:30Z",
+      "updated_at": "2020-08-03T17:36:40Z",
+      "description": "",
+      "comments": 0,
+      "user": null,
+      "comments_url": "https://api.github.com/gists/d5f20d0d9a30eef92edd14833d74aa86/comments",
+      "owner": {
+        "login": "iansamz",
+        "id": 15368874,
+        "node_id": "MDQ6VXNlcjE1MzY4ODc0",
+        "avatar_url": "https://avatars.githubusercontent.com/u/15368874?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/iansamz",
+        "html_url": "https://github.com/iansamz",
+        "followers_url": "https://api.github.com/users/iansamz/followers",
+        "following_url": "https://api.github.com/users/iansamz/following{/other_user}",
+        "gists_url": "https://api.github.com/users/iansamz/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/iansamz/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/iansamz/subscriptions",
+        "organizations_url": "https://api.github.com/users/iansamz/orgs",
+        "repos_url": "https://api.github.com/users/iansamz/repos",
+        "events_url": "https://api.github.com/users/iansamz/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/iansamz/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "truncated": false
+    }
+]

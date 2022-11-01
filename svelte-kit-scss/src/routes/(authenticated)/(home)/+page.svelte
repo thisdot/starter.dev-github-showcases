@@ -1,0 +1,50 @@
+<script lang="ts">
+  import TopRepositories from "$lib/components/TopRepositories/TopRepositories.svelte";
+  import Gists from "$lib/components/Gists/Gists.svelte";
+  import type {PageServerData} from './$types';
+
+  export let data: PageServerData
+</script>
+
+<div class="container">
+  <h1>SvelteKit with SCSS Starter Kit</h1>
+  <ul class="links">
+    <li>
+      <a href="/counter">See Counter example component</a>
+    </li>
+    <li>
+      <a href="/api-example">See Fetch example component</a>
+    </li>
+  </ul>
+
+  <div class="page-container">
+    <aside>
+      <Gists gists={data.gists} />
+    </aside>
+    {#if data?.topRepos}
+      <TopRepositories repos={data.topRepos} username="thisdot"/>
+    {/if}
+  </div>
+</div>
+
+
+<style lang="scss">
+  @use 'src/lib/styles/variables.scss';
+
+  .page-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: variables.$gray100;
+    @media (min-width: variables.$md) {
+      grid-template-columns: 24rem 1fr;
+    }
+  }
+
+  aside {
+    background: variables.$white;
+    padding: 2rem;
+    @media (max-width: variables.$md) {
+      order: 2;
+    }
+  }
+</style>
