@@ -5,6 +5,7 @@
   import ProfileNavSection from '$lib/components/Profile/ProfileNavSection/ProfileNavSection.svelte';
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
   import RepoList from '../../../lib/components/RepoList/RepoList.svelte';
+  import RepoControls from '../../../lib/components/RepoControls/RepoControls.svelte';
 
   export let data: PageServerData;
   const { userInfo, userOrgs, userRepos, username } = data;
@@ -30,16 +31,16 @@
   
   <div class="grid grid-cols-12 profile-body container">
     {#if isOrg}
-      <!-- TODO controls -->
       <div class="col-span-12">
+        <RepoControls />
         <RepoList repos={userRepos} {username} />
       </div>
     {:else}
       <div class="subpage col-span-3">
         <ProfileAboutSection userInfo={userInfo} userOrgs={userOrgs} />
       </div>
-      <!-- TODO controls -->
       <div class="col-span-9">
+        <RepoControls />
         <RepoList repos={userRepos} {username} />
       </div>
     {/if}
