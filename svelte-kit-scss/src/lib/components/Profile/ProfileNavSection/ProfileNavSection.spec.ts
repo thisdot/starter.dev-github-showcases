@@ -4,7 +4,6 @@ import ProfileNavSection from './ProfileNavSection.svelte';
 
 describe('ProfileNavSection', () => {
   beforeEach(() => {
-    render(ProfileNavSection, {
-    });
+    render(ProfileNavSection, {});
   });
 });

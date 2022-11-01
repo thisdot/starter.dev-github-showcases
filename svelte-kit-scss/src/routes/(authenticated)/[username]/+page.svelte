@@ -21,14 +21,14 @@
           <ProfileNavSection />
         </nav>
       {:else}
-        <div class="col-span-3"></div>
+        <div class="col-span-3" />
         <nav class="col-span-9">
           <ProfileNavSection />
         </nav>
       {/if}
     </div>
   </div>
-  
+
   <div class="grid grid-cols-12 profile-body container">
     {#if isOrg}
       <div class="col-span-12">
@@ -37,7 +37,7 @@
       </div>
     {:else}
       <div class="subpage col-span-3">
-        <ProfileAboutSection userInfo={userInfo} userOrgs={userOrgs} />
+        <ProfileAboutSection {userInfo} {userOrgs} />
       </div>
       <div class="col-span-9">
         <RepoControls />
@@ -66,7 +66,7 @@
       grid-row: 1 / 3;
     }
   }
-  
+
   .container {
     max-width: variables.$xl;
   }

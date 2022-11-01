@@ -5,7 +5,7 @@
 <ul>
   <li class="active-tab">
     <a href="/">
-      <Repo24 class="icon"/>
+      <Repo24 class="icon" />
       <span>Repositories</span>
     </a>
   </li>
