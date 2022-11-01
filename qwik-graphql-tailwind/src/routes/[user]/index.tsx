@@ -1,5 +1,5 @@
-import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
-import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
+import { component$, useClientEffect$, useContextProvider, useStore } from '@builder.io/qwik';
+import { GITHUB_GRAPHQL } from '~/utils/constants';
 import { useQuery } from '~/utils/useQuery';
 import { USER_PROFILE_QUERY } from '~/utils/queries/user-profile-query';
 import { useLocation } from '@builder.io/qwik-city';
@@ -8,6 +8,7 @@ import * as styles from './user-page.classNames';
 import { UserProfileCard } from '../../components/user-profile-card/user-profile-card';
 import ProfileNav from '../../components/profile-nav/profile-nav';
 import { UserRepos } from '../../components/user-repos/user-repos';
+import filterStore, { FilterStoreProps } from '~/context/repo-filter';
 
 interface UserStore {
   user: User | null;
@@ -24,6 +25,15 @@ export default component$(() => {
   const store = useStore<UserStore>({
     user: null,
   });
+
+  const filterState = useStore<FilterStoreProps>({
+    search: '',
+    language: '',
+    sortType: '',
+    order: '',
+  });
+
+  useContextProvider(filterStore, filterState);
 
   const location = useLocation();
 
