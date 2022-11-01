@@ -6,6 +6,7 @@ import { REPO_INFO_QUERY } from '~/utils/queries/repo-info';
 import { parseTopics } from './parseTopics';
 import { RepoTree } from '~/components/repo-tree';
 import { RepoReadMe } from '~/components/repo-read-me';
+import { ISSUES_QUERY } from '~/utils/queries/issues-query';
 
 export interface SharedState {
   name: string;
@@ -41,6 +42,12 @@ export interface SharedState {
     text?: any;
     isLoading: boolean;
   };
+}
+
+interface IssuesQueryParams {
+  owner: string;
+  name: string;
+  first: number;
 }
 
 export const RepoContext = createContext<SharedState>('repo-context');
@@ -147,6 +154,29 @@ export async function fetchRepoInfo(
       authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
     variables,
+  });
+
+  return await resp.json();
+}
+
+export async function fetchIssues(
+  { owner, name, first }: IssuesQueryParams,
+  abortController?: AbortController
+): Promise<any> {
+  const { executeQuery$ } = useQuery(ISSUES_QUERY);
+
+  const resp = await executeQuery$({
+    signal: abortController?.signal,
+    url: GITHUB_GRAPHQL,
+    variables: {
+      owner,
+      name,
+      first,
+    },
+    headersOpt: {
+      Accept: 'application/vnd.github+json',
+      authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
   });
 
   return await resp.json();
