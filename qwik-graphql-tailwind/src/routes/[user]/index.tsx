@@ -8,7 +8,6 @@ import * as styles from './user-page.classNames';
 import { UserProfileCard } from '../../components/user-profile-card/user-profile-card';
 import ProfileNav from '../../components/profile-nav/profile-nav';
 import { UserRepos } from '../../components/user-repos/user-repos';
-import { ISSUES_QUERY } from '~/utils/queries/issues-query';
 
 interface UserStore {
   user: User | null;
@@ -19,12 +18,6 @@ interface ProfileQueryParams {
   afterCursor?: string;
   beforeCursor?: string;
   orderBy?: string;
-}
-
-interface IssuesQueryParams {
-  owner: string;
-  name: string;
-  first: number;
 }
 
 export default component$(() => {
@@ -96,29 +89,6 @@ export async function fetchUserProfile(
       afterCursor,
       beforeCursor,
       orderBy,
-    },
-    headersOpt: {
-      Accept: 'application/vnd.github+json',
-      authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
-  });
-
-  return await resp.json();
-}
-
-export async function fetchIssues(
-  { owner, name, first }: IssuesQueryParams,
-  abortController?: AbortController
-): Promise<any> {
-  const { executeQuery$ } = useQuery(ISSUES_QUERY);
-
-  const resp = await executeQuery$({
-    signal: abortController?.signal,
-    url: GITHUB_GRAPHQL,
-    variables: {
-      owner,
-      name,
-      first,
     },
     headersOpt: {
       Accept: 'application/vnd.github+json',
