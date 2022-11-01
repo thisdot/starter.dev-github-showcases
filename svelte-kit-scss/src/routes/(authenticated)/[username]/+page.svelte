@@ -7,22 +7,22 @@
 
   export let data: PageServerData;
   const { userInfo, userOrgs } = data;
-  const isOrg = userInfo.type == ProfileType.Organization;
+  const isOrg = userInfo?.type == ProfileType.Organization;
 </script>
 
 <div class="profile-container">
   <div class="profile-header">
     <div class="grid grid-cols-12 container">
       {#if isOrg}
-          <OrgInfo class="col-span-12"></OrgInfo>
-          <nav class="col-span-12">
-            <ProfileNavSection ></ProfileNavSection>
-          </nav>
+        <OrgInfo />
+        <nav class="col-span-12">
+          <ProfileNavSection />
+        </nav>
       {:else}
-          <div class="col-span-3"></div>
-          <nav class="col-span-9">
-            <ProfileNavSection ></ProfileNavSection>
-          </nav>
+        <div class="col-span-3"></div>
+        <nav class="col-span-9">
+          <ProfileNavSection />
+        </nav>
       {/if}
     </div>
   </div>
