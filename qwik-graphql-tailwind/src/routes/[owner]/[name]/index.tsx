@@ -7,6 +7,7 @@ import { parseTopics } from './parseTopics';
 import { RepoTree } from '~/components/repo-tree';
 import { RepoReadMe } from '~/components/repo-read-me';
 import { ISSUES_QUERY } from '~/utils/queries/issues-query';
+import { RepoHeader } from '~/components/repo-header';
 
 export interface SharedState {
   name: string;
