@@ -9,10 +9,12 @@
 <div class="container">
   <div class="page-container">
     <aside>
-      <Gists gists={data.gists} />
+      {#if data?.gists}
+        <Gists gists={data.gists} />
+      {/if}
     </aside>
     {#if data?.topRepos}
-      <TopRepositories repos={data.topRepos} username="thisdot" />
+      <TopRepositories repos={data.topRepos} username={data?.username} />
     {/if}
   </div>
 </div>

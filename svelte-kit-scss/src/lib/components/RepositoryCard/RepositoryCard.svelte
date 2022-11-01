@@ -5,7 +5,8 @@
   import { LANGUAGE_COLORS } from '$lib/constants/language-colors';
 
   export let repo: UserReposState;
-  export let username: string;
+
+  const href = repo ? `/${repo.owner.login}/${repo.name}` : '#';
 
   function visibility(): string {
     if (repo) {
@@ -21,7 +22,7 @@
 </script>
 
 <h3 class="name-container" data-testid="repo-card">
-  <a class="name" href="/{username}/{repo.name}">{repo.name}</a>
+  <a class="name" {href}>{repo.name}</a>
   <span class="visibility">{visibility()}</span>
 </h3>
 {#if repo.description}
