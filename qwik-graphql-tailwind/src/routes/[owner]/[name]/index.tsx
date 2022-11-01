@@ -5,6 +5,7 @@ import { GITHUB_GRAPHQL } from '~/utils/constants';
 import { REPO_INFO_QUERY } from '~/utils/queries/repo-info';
 import { parseTopics } from './parseTopics';
 import { RepoTree } from '~/components/repo-tree';
+import { RepoReadMe } from '~/components/repo-read-me';
 
 export interface SharedState {
   name: string;
@@ -35,7 +36,11 @@ export interface SharedState {
     };
     isLoading: boolean;
   };
-  // readmeInfo: {
+  readme: {
+    error?: string;
+    text?: any;
+    isLoading: boolean;
+  };
 }
 
 export const RepoContext = createContext<SharedState>('repo-context');
@@ -49,6 +54,9 @@ export default component$(() => {
         isLoading: true,
       },
       tree: {
+        isLoading: true,
+      },
+      readme: {
         isLoading: true,
       },
     },
@@ -92,6 +100,7 @@ export default component$(() => {
       <br />
       <pre>{JSON.stringify(store.info.data, null, 2)}</pre>
       <RepoTree />
+      <RepoReadMe />
     </div>
   );
 });
