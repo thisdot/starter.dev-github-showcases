@@ -21,7 +21,8 @@
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "cd .. && husky install svelte-kit-scss/.husky"
   },
   "devDependencies": {
     "@babel/core": "7.19.6",
