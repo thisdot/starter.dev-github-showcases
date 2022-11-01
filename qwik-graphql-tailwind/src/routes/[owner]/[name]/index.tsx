@@ -6,6 +6,7 @@ import { REPO_INFO_QUERY } from '~/utils/queries/repo-info';
 import { parseTopics } from './parseTopics';
 import { RepoTree } from '~/components/repo-tree';
 import { RepoReadMe } from '~/components/repo-read-me';
+import { RepoAboutWidget } from '~/components/repo-about';
 
 export interface SharedState {
   name: string;
@@ -93,15 +94,27 @@ export default component$(() => {
   if (store.info.isLoading) {
     return <div>Loading...</div>;
   }
+
   useContextProvider(RepoContext, store);
+
   return (
-    <div>
-      There will be repos info!({store.branch})
-      <br />
-      <pre>{JSON.stringify(store.info.data, null, 2)}</pre>
-      <RepoTree />
-      <RepoReadMe />
-    </div>
+    <>
+      {/*  RepoHeader Here*/}
+      <div className="max-w-screen-2xl mx-auto md:py-8 px-4">
+        <div className="grid grid-cols-12 gap-8">
+          <div className="col-span-12 md:col-span-7 xl:col-span-9">
+            There will be repos info!({store.branch})
+            <br />
+            <pre>{JSON.stringify(store.info.data, null, 2)}</pre>
+            <RepoTree />
+            <RepoReadMe />
+          </div>
+          <div className="col-span-12 md:col-span-5 xl:col-span-3">
+            <RepoAboutWidget />
+          </div>
+        </div>
+      </div>
+    </>
   );
 });
 
