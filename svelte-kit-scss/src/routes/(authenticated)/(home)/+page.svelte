@@ -7,16 +7,6 @@
 </script>
 
 <div class="container">
-  <h1>SvelteKit with SCSS Starter Kit</h1>
-  <ul class="links">
-    <li>
-      <a href="/counter">See Counter example component</a>
-    </li>
-    <li>
-      <a href="/api-example">See Fetch example component</a>
-    </li>
-  </ul>
-
   <div class="page-container">
     <aside>
       <Gists gists={data.gists} />
