@@ -20,6 +20,10 @@ export default component$(() => {
     }
   });
 
+  if (!store.access_token) {
+    return <div>Loading...</div>;
+  }
+
   const userResource = useResource$<any>(({ track, cleanup }) => {
     track(() => store.access_token);
     const abortController = new AbortController();
