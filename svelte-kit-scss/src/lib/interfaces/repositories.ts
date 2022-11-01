@@ -130,6 +130,6 @@ export type UserRepo = {
     triage: boolean;
     pull: boolean;
   };
-}
+};
 
 export type UserReposApiResponse = UserRepo[];

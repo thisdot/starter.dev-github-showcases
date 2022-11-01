@@ -1,6 +1,6 @@
 <script lang="ts">
-  import NavBar from "$lib/components/NavBar/NavBar.svelte";
-  import type {LayoutServerData} from './$types';
+  import NavBar from '$lib/components/NavBar/NavBar.svelte';
+  import type { LayoutServerData } from './$types';
 
   export let data: LayoutServerData;
 </script>

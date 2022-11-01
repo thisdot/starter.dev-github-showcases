@@ -14,9 +14,7 @@ const MINUTE = 60,
  */
 export function relativeTimeFmt(dt: string): string {
   const localizedDt = new Date(dt);
-  const secondsAgo = Math.round(
-    (new Date().getTime() - localizedDt.getTime()) / 1000,
-  );
+  const secondsAgo = Math.round((new Date().getTime() - localizedDt.getTime()) / 1000);
 
   let divisor = 1;
   let unit = '?';
