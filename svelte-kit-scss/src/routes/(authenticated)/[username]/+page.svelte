@@ -3,38 +3,65 @@
   import { ProfileType } from '$lib/interfaces';
   import ProfileAboutSection from '$lib/components/Profile/ProfileAboutSection/ProfileAboutSection.svelte';
   import ProfileNavSection from '$lib/components/Profile/ProfileNavSection/ProfileNavSection.svelte';
+  import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
 
   export let data: PageServerData;
   const { userInfo, userOrgs } = data;
-  const { type } = userInfo;
+  const isOrg = userInfo.type == ProfileType.Organization;
 </script>
 
-<main>
+<div class="profile-container">
   <div class="profile-header">
     <div class="grid grid-cols-12 container">
-      <div class="col-span-3"></div>
-      <ProfileNavSection class="col-span-9"></ProfileNavSection>
+      {#if isOrg}
+          <OrgInfo class="col-span-12"></OrgInfo>
+          <nav class="col-span-12">
+            <ProfileNavSection ></ProfileNavSection>
+          </nav>
+      {:else}
+          <div class="col-span-3"></div>
+          <nav class="col-span-9">
+            <ProfileNavSection ></ProfileNavSection>
+          </nav>
+      {/if}
     </div>
   </div>
-
+  
   <div class="grid grid-cols-12 profile-body container">
-    
-    {#if type == ProfileType.User}
+    {#if isOrg}
+      <!-- TODO controls -->
+      <!-- TODO repo list -->
+    {:else}
       <div class="subpage col-span-3">
         <ProfileAboutSection userInfo={userInfo} userOrgs={userOrgs} />
       </div>
+      <!-- TODO controls -->
+      <!-- TODO repo list -->
     {/if}
-    <!-- <app-repo-controls class="col-span-9"></app-repo-controls> -->
-    <!-- <app-repo-list class="col-span-9" [repos]="repos$ | async"></app-repo-list> -->
   </div>
-</main>
+</div>
 
 <style lang="scss">
+  @use 'src/lib/styles/variables.scss';
+  .profile-container {
+    padding-top: 2rem;
+  }
+  .profile-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: white;
+    border-bottom: 1px solid rgb(229, 231, 235, 1);
+  }
   .profile-body {
     grid-template-rows: max-content 1fr;
 
     .subpage {
       grid-row: 1 / 3;
     }
+  }
+  
+  .container {
+    max-width: variables.$xl;
   }
 </style>

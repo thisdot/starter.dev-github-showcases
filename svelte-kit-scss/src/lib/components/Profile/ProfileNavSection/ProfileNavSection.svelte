@@ -1,16 +1,17 @@
-<nav>
-    <ul>
-      <li class="active-tab">
-        <a href="/">
-          <!-- <span class="icon" appOcticon="repo" size="24"></span> -->
-          <span>Repositories</span>
-        </a>
-      </li>
-    </ul>
-</nav>
+<script lang="ts">
+  import { Repo24 } from 'svelte-octicons';
+</script>
+
+<ul>
+  <li class="active-tab">
+    <a href="/">
+      <Repo24 class="icon"/>
+      <span>Repositories</span>
+    </a>
+  </li>
+</ul>
 
 <style lang="scss">
-nav {
   ul {
     list-style: none;
     padding: 0;
@@ -56,5 +57,4 @@ nav {
     display: inline-block;
     margin-right: 4px;
   }
-}
 </style>
