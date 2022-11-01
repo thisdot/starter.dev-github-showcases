@@ -5,6 +5,8 @@
   import type { UserReposState } from '$lib/interfaces';
 
   export let data: PageServerData;
+  const { userInfo, userOrgs } = data;
+  const { type } = userInfo;
 </script>
 
 <div class="grid grid-cols-12 profile-body container">
@@ -19,7 +21,18 @@
       <RepoList repos={data?.userRepos} />
     {/if}
   </div>
-</div>
+
+  <div class="grid grid-cols-12 profile-body container">
+    
+    {#if type == ProfileType.User}
+      <div class="subpage col-span-3">
+        <ProfileAboutSection userInfo={userInfo} userOrgs={userOrgs} />
+      </div>
+    {/if}
+    <!-- <app-repo-controls class="col-span-9"></app-repo-controls> -->
+    <!-- <app-repo-list class="col-span-9" [repos]="repos$ | async"></app-repo-list> -->
+  </div>
+</main>
 
 <style lang="scss">
   .profile-body {
