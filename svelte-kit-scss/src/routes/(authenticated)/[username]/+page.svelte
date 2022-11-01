@@ -15,7 +15,7 @@
   </div>
   <div class="col-span-9">
     {#if data?.userRepos}
-      <RepoList repos={data?.userRepos}/>
+      <RepoList repos={data?.userRepos} />
     {/if}
   </div>
 </div>

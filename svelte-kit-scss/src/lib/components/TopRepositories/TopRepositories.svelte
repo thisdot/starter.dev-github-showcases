@@ -11,7 +11,7 @@
   <div class="repo-container">
     {#each repos as repo, i}
       <div class="repo-section">
-        <RepositoryCard {repo}/>
+        <RepositoryCard {repo} />
       </div>
       {#if i === repos.length - 1}
         <div class="view-all-link">
