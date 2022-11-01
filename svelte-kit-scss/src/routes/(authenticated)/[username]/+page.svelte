@@ -4,9 +4,10 @@
   import ProfileAboutSection from '$lib/components/Profile/ProfileAboutSection/ProfileAboutSection.svelte';
   import ProfileNavSection from '$lib/components/Profile/ProfileNavSection/ProfileNavSection.svelte';
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
+  import RepoList from '../../../lib/components/RepoList/RepoList.svelte';
 
   export let data: PageServerData;
-  const { userInfo, userOrgs } = data;
+  const { userInfo, userOrgs, userRepos, username } = data;
   const isOrg = userInfo?.type == ProfileType.Organization;
 </script>
 
@@ -30,13 +31,17 @@
   <div class="grid grid-cols-12 profile-body container">
     {#if isOrg}
       <!-- TODO controls -->
-      <!-- TODO repo list -->
+      <div class="col-span-12">
+        <RepoList repos={userRepos} {username} />
+      </div>
     {:else}
       <div class="subpage col-span-3">
         <ProfileAboutSection userInfo={userInfo} userOrgs={userOrgs} />
       </div>
       <!-- TODO controls -->
-      <!-- TODO repo list -->
+      <div class="col-span-9">
+        <RepoList repos={userRepos} {username} />
+      </div>
     {/if}
   </div>
 </div>
