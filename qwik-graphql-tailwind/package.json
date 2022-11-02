@@ -30,8 +30,8 @@
     "test.coverage": "vitest --coverage"
   },
   "devDependencies": {
-    "@builder.io/qwik": "0.11.1",
-    "@builder.io/qwik-city": "0.0.112",
+    "@builder.io/qwik": "0.12.1",
+    "@builder.io/qwik-city": "0.0.118",
     "@storybook/addon-actions": "6.5.12",
     "@storybook/addon-essentials": "6.5.12",
     "@storybook/addon-interactions": "6.5.12",
