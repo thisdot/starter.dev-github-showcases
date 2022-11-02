@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { UserReposState } from '../../interfaces';
-  import { relativeTimeFmt } from '../../helpers';
+  import type { UserReposState } from '$lib/interfaces';
+  import { relativeTimeFmt } from '$lib/helpers';
   import { Law16, Star16, RepoForked16 } from 'svelte-octicons';
   import { LANGUAGE_COLORS } from '$lib/constants/language-colors';
 

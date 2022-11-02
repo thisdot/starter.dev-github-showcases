@@ -38,3 +38,7 @@ export function relativeTimeFmt(dt: string): string {
   const count = Math.floor(secondsAgo / divisor);
   return `${count} ${unit}${count > 1 ? 's' : ''} ago`;
 }
+
+export function titleCase(str: string): string {
+  return str.toLowerCase().replace(/\b\w/g, (s) => s.toUpperCase());
+}
