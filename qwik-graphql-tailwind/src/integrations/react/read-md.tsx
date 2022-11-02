@@ -5,6 +5,6 @@ import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
-export const Markdown = qwikify$(({ data }: any) => (
+export const Markdown = qwikify$(({ data }: { data: string }) => (
   <ReactMarkdown rehypePlugins={[rehypeRaw, remarkGfm]}>{data}</ReactMarkdown>
 ));
