@@ -7,7 +7,7 @@
     "prettier",
     "plugin:storybook/recommended"
   ],
-  "plugins": ["svelte3", "@typescript-eslint"],
+  "plugins": ["svelte3", "@typescript-eslint", "prettier"],
   "ignorePatterns": ["*.cjs"],
   "overrides": [
     {
