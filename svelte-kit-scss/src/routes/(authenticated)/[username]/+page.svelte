@@ -4,8 +4,8 @@
   import ProfileAboutSection from '$lib/components/Profile/ProfileAboutSection/ProfileAboutSection.svelte';
   import ProfileNavSection from '$lib/components/Profile/ProfileNavSection/ProfileNavSection.svelte';
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
-  import RepoList from '../../../lib/components/RepoList/RepoList.svelte';
-  import RepoControls from '../../../lib/components/RepoControls/RepoControls.svelte';
+  import RepoList from '$lib/components/RepoList/RepoList.svelte';
+  import RepoControls from '$lib/components/RepoControls/RepoControls.svelte';
 
   export let data: PageServerData;
   const { userInfo, userOrgs, userRepos, username } = data;
@@ -33,7 +33,7 @@
     {#if isOrg}
       <div class="col-span-12">
         <RepoControls />
-        <RepoList repos={userRepos} {username} />
+        <RepoList repos={userRepos} />
       </div>
     {:else}
       <div class="subpage col-span-3">
@@ -41,7 +41,7 @@
       </div>
       <div class="col-span-9">
         <RepoControls />
-        <RepoList repos={userRepos} {username} />
+        <RepoList repos={userRepos} />
       </div>
     {/if}
   </div>
