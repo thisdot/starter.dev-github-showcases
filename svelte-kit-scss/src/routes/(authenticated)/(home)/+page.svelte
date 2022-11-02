@@ -7,8 +7,6 @@
 </script>
 
 <div class="container">
-  <FilterDropdown /><FilterDropdown /><FilterDropdown /><FilterDropdown /><FilterDropdown
-  /><FilterDropdown />
   <div class="page-container">
     <aside>
       {#if data?.gists}
