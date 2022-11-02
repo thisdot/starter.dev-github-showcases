@@ -1,1 +1,66 @@
-<p>Repo Info</p>
+<script lang="ts">
+  import { Eye16, RepoForked16, Star16 } from 'svelte-octicons';
+
+  export let watchCount = 0,
+    starCount = 0,
+    forkCount = 0;
+</script>
+
+<div class="info">
+  <div class="info__counter">
+    <div class="info__counter__icon">
+      <Eye16 class="icon" />
+      Watch
+    </div>
+    <div class="info__counter__count">
+      {watchCount}
+    </div>
+  </div>
+  <div class="info__counter">
+    <div class="info__counter__icon">
+      <Star16 class="icon" />
+      Star
+    </div>
+    <div class="info__counter__count">
+      {starCount}
+    </div>
+  </div>
+  <div class="info__counter">
+    <div class="info__counter__icon">
+      <RepoForked16 class="icon" />
+      Fork
+    </div>
+    <div class="info__counter__count">
+      {forkCount}
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  @use 'src/lib/styles/variables.scss';
+
+  .info {
+    display: flex;
+    gap: 0.9rem;
+    &__counter {
+      display: flex;
+      border: 2px solid variables.$gray200;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      &__icon {
+        display: flex;
+        align-items: center;
+        line-height: 0.5rem;
+        padding: 0.125rem 0.9rem;
+        gap: 0.5rem;
+        border-right: 2px solid variables.$gray200;
+      }
+      &__count {
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        background-color: variables.$white;
+        padding: 0.125rem 0.9rem;
+      }
+    }
+  }
+</style>
