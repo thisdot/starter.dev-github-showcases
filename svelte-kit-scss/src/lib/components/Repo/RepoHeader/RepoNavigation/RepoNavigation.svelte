@@ -41,7 +41,9 @@
         class="tab tab--inactive"
         class:tab--active={!path.includes('issues') && !path.includes('pull-requests')}
       >
-        <Code16 class="icon" />
+        <div class="icon">
+          <Code16 />
+        </div>
         <span>Code</span>
       </li>
       <li
@@ -50,7 +52,9 @@
         class="tab tab--inactive"
         class:tab--active={path.includes('issues')}
       >
-        <IssueOpened16 class="icon" />
+        <div class="icon">
+          <IssueOpened16 />
+        </div>
         <span>Issues</span>
         <span class="count">
           {issueCount}
@@ -62,7 +66,9 @@
         class="tab tab--inactive"
         class:tab--active={path.includes('pull-requests')}
       >
-        <GitPullRequest16 class="icon" />
+        <div class="icon">
+          <GitPullRequest16 />
+        </div>
         <span>Pull Requests</span>
         <span class="count">
           {prCount}
@@ -100,10 +106,10 @@
               span {
                 font-weight: 600;
                 color: black;
+              }
 
-                &.icon {
-                  color: variables.$gray600;
-                }
+              .icon {
+                color: variables.$gray600;
               }
             }
           }
@@ -129,13 +135,12 @@
         }
 
         li {
-          display: inline-block;
           font-weight: 500;
         }
       }
 
       .icon {
-        display: inline-block;
+        display: inline-flex;
         margin-right: 0.5rem;
       }
     }
