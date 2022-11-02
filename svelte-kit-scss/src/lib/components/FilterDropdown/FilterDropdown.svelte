@@ -16,15 +16,15 @@
   const filterEventName = 'setFilter';
 
   function toggleMenu() {
-    this.isOpen = !this.isOpen;
+    isOpen = !isOpen;
   }
 
   function handleSetFilterClick(label: string) {
-    if (label === this.current) {
-      if (this.toggle) {
+    if (label === current) {
+      if (toggle) {
         dispatch(filterEventName, '');
       } else {
-        dispatch(filterEventName, this.items[0].value);
+        dispatch(filterEventName, items[0].value);
       }
     } else {
       dispatch(filterEventName, label);
@@ -33,7 +33,7 @@
   }
 
   function handleClearFilterClick() {
-    dispatch(filterEventName, this.items[0].value);
+    dispatch(filterEventName, items[0].value);
     isOpen = false;
   }
 
