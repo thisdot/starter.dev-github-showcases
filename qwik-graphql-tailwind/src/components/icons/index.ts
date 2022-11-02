@@ -9,3 +9,4 @@ export * from './git-repo.icon';
 export * from './git-branch.icon';
 export * from './check.icon';
 export * from './xmark.icon';
+export * from './toc.icon';
