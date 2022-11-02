@@ -1,4 +1,4 @@
-import { UserApiResponse } from '../user';
+import type { UserApiResponse } from '$lib/interfaces';
 
 export interface RepoState {
   description: string;

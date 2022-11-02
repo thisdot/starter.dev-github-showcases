@@ -7,6 +7,6 @@
 </script>
 
 <div>
-  <RepoHeader {repoInfo} />
+  <RepoHeader repo={repoInfo} />
   <slot />
 </div>

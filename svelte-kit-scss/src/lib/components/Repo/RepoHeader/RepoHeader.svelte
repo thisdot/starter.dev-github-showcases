@@ -1,15 +1,20 @@
 <script lang="ts">
-  // const repo:
+  import type { RepoState } from '$lib/interfaces';
+  import RepoHeading from './RepoHeading/RepoHeading.svelte';
+  import RepoInfo from './RepoInfo/RepoInfo.svelte';
+  import RepoNavigation from './RepoNavigation/RepoNavigation.svelte';
+
+  export let repo: RepoState;
 </script>
 
 <div class="wrapper">
-  <!-- {#if repo } -->
-  <div class="top">
-    <!-- TODO Heading -->
-    <!-- TODO Repo Info -->
-  </div>
-  <!-- TODO Repo Navigation -->
-  <!-- {/if}  -->
+  {#if repo}
+    <div class="top">
+      <RepoHeading />
+      <RepoInfo />
+    </div>
+    <RepoNavigation />
+  {/if}
 </div>
 
 <style lang="scss">
