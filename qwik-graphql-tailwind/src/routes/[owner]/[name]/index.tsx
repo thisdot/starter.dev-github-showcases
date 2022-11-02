@@ -7,6 +7,7 @@ import { parseTopics } from './parseTopics';
 import { RepoTree } from '~/components/repo-tree';
 import { RepoReadMe } from '~/components/repo-read-me';
 import { ISSUES_QUERY } from '~/utils/queries/issues-query';
+import { RepoHeader } from '~/components/repo-header';
 
 export interface SharedState {
   name: string;
@@ -103,7 +104,7 @@ export default component$(() => {
   useContextProvider(RepoContext, store);
   return (
     <div>
-      There will be repos info!({store.branch})
+      <RepoHeader />
       <br />
       <pre>{JSON.stringify(store.info.data, null, 2)}</pre>
       <RepoTree />

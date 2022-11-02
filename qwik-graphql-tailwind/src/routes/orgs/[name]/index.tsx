@@ -1,5 +1,4 @@
 import { component$, useClientEffect$ } from '@builder.io/qwik';
-import { useLocation } from '@builder.io/qwik-city';
 import { OrgProfileCard } from './org-profile-card';
 
 import { ORG_REPOS_QUERY } from '~/utils/queries/org-repos-query';
