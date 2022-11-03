@@ -76,4 +76,8 @@
       color: variables.$white;
     }
   }
+  .border-bottom-2 {
+    border-bottom: 2px solid rgba(209, 213, 219, 1);
+    padding-bottom: 2rem;
+  }
 </style>
