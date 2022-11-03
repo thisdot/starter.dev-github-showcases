@@ -1,4 +1,4 @@
-import { $, component$, useSignal, useStore } from '@builder.io/qwik';
+import { $, component$, Slot, useSignal, useStore } from '@builder.io/qwik';
 import { CheckIcon, ChevronDownIcon, XmarkIcon } from '../icons';
 import * as styles from './filter-dropdown.classNames';
 import cn from 'classnames';
@@ -13,7 +13,7 @@ export interface FilterDropdownProps {
   name: string;
   description?: string;
   current: number | string | null;
-  items: Option[];
+  items?: Option[];
   buttonClassName?: string;
 }
 
@@ -57,18 +57,20 @@ export const FilterDropdown = component$(
               {description && (
                 <div className={styles.menuHeader}>
                   <div className={styles.description}>{description}</div>
-                  <button type="button">
+                  <button onClick$={close$} type="button">
                     <XmarkIcon className={styles.closeButtonIcon} aria-hidden="true" />
                   </button>
                 </div>
               )}
-              {items.map(({ label, value }) => (
-                <div>
-                  <button type="button" name={name} className={styles.itemButton}>
-                    {value === current && <CheckIcon className={styles.itemActiveIcon} />} {label}
-                  </button>
-                </div>
-              ))}
+              {items &&
+                items.map(({ label, value }) => (
+                  <div>
+                    <button onClick$={() => null} type="button" name={name} className={styles.itemButton}>
+                      {value === current && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    </button>
+                  </div>
+                ))}
+              <Slot />
             </div>
           </nav>
         </div>

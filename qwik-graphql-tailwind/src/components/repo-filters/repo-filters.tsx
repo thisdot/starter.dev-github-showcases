@@ -1,10 +1,11 @@
-import { $, component$ } from '@builder.io/qwik';
+import { $, component$, useClientEffect$, useContext } from '@builder.io/qwik';
 import * as styles from './repo-filters.classNames';
 import cn from 'classnames';
 import { LanguageFilter, TypeFilter, RepositoryOrderField } from './types';
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
-import { XmarkIcon } from '../icons';
+import { XmarkIcon, CheckIcon } from '../icons';
 import { SearchInput } from '../search-input/search-input';
+import filterStore from '~/context/repo-filter';
 
 export type RepoFiltersProps = {
   languages: LanguageFilter[];
@@ -17,11 +18,28 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
     console.log('reset filters');
   });
 
+  const state = useContext(filterStore);
+
   // TODO: logic for this
   const isFiltersActive = false;
   const isQueryActive = false;
   const isTypeActive = false;
   const isLanguageActive = false;
+
+  const filteOptions = [
+    {
+      label: 'All',
+      value: TypeFilter.ALL,
+    },
+    {
+      label: 'Forks',
+      value: TypeFilter.FORKS,
+    },
+    {
+      label: 'Archived',
+      value: TypeFilter.ARCHIVED,
+    },
+  ];
 
   return (
     <>
@@ -31,25 +49,20 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
         </div>
         <div className={styles.filters}>
           <div>
-            <FilterDropdown
-              name="Type"
-              description="Select type"
-              current=""
-              items={[
-                {
-                  label: 'All',
-                  value: TypeFilter.ALL,
-                },
-                {
-                  label: 'Forks',
-                  value: TypeFilter.FORKS,
-                },
-                {
-                  label: 'Archived',
-                  value: TypeFilter.ARCHIVED,
-                },
-              ]}
-            />
+            <FilterDropdown name="Type" description="Select type" current="">
+              {filteOptions.map(({ label, value }) => (
+                <div>
+                  <button
+                    onClick$={() => (state.filterType = value)}
+                    type="button"
+                    name={'Type'}
+                    className={styles.itemButton}
+                  >
+                    {value === state.filterType && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                  </button>
+                </div>
+              ))}
+            </FilterDropdown>
           </div>
           <div>
             <FilterDropdown name="Language" description="Select language" current="" items={languages} />
