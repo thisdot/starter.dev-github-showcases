@@ -5,6 +5,7 @@ export const repositoryFeatureKey = 'repository';
 export const selectRepositoryState =
   createFeatureSelector<RepositoryState>(repositoryFeatureKey);
 
+// TODO: confirm where this selector is used and if it can perhaps be better written, since currently it's directly returning the whole state slice (not selecting any piece of the state)
 export const selectedRepository = createSelector(
   selectRepositoryState,
   (state) => state,

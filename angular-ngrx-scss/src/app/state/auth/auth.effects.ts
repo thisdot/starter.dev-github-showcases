@@ -6,9 +6,9 @@ import { of } from 'rxjs';
 import {
   catchError,
   concatMap,
+  distinctUntilChanged,
   exhaustMap,
   map,
-  skipWhile,
   switchMap,
   tap,
 } from 'rxjs/operators';
@@ -78,7 +78,7 @@ export class AuthEffects {
       ofType(saveUserTokenSuccess, userTokenExists),
       switchMap(() =>
         this.store.select(selectAuthUserName).pipe(
-          skipWhile((name) => name.length > 0),
+          distinctUntilChanged(),
           exhaustMap(() =>
             this.userService.getAuthenticatedUserInfo().pipe(
               map((userData) => {
