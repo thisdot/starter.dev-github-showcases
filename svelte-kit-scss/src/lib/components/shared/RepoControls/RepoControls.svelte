@@ -19,11 +19,11 @@
   const currentFilters = {
     type: defaultFilters.type,
     language: defaultFilters.language,
-    sort:  defaultFilters.sort,
+    sort: defaultFilters.sort,
     searchInput: defaultFilters.searchInput,
   };
 
-  $: hasActiveFilters = 
+  $: hasActiveFilters =
     currentFilters.type !== defaultFilters.type ||
     currentFilters.language !== defaultFilters.language ||
     currentFilters.sort !== defaultFilters.sort ||
@@ -53,7 +53,7 @@
   };
   const handleSearchInputChange = (): void => {
     dispatchFiltersChange();
-  }
+  };
 </script>
 
 <section class="repo-controls-container">
@@ -119,26 +119,26 @@
 </section>
 
 <style lang="scss">
-@use 'src/lib/styles/variables.scss';
+  @use 'src/lib/styles/variables.scss';
 
-.repo-controls-container {
-  .controls {
-    margin-bottom: 1rem;
-    display: flex;
-    gap: .5rem;
-    .search-input {
-      font-size: .875rem;
-      line-height: 1.25rem;
-      padding: 0.375rem;
-      outline: 2px solid transparent;
-      outline-offset: 2px;
-      border-radius: 0.375rem;
-      border: 1px solid variables.$gray300;
-      flex-grow: 1;
+  .repo-controls-container {
+    .controls {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      .search-input {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        padding: 0.375rem;
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        border-radius: 0.375rem;
+        border: 1px solid variables.$gray300;
+        flex-grow: 1;
+      }
+    }
+    .divider {
+      border-bottom: 1px solid variables.$gray300;
     }
   }
-  .divider {
-    border-bottom: 1px solid variables.$gray300;
-  }
-}
 </style>

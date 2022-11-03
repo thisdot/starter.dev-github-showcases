@@ -5,9 +5,9 @@
   import { scale } from 'svelte/transition';
   import { Check16, ChevronDown16, X16 } from 'svelte-octicons';
 
-  export let name: string = '';
+  export let name = '';
 
-  export let description: string = 'Select option';
+  export let description = 'Select option';
 
   export let defaultFilter: FilterDropdownOption | undefined = undefined;
 
