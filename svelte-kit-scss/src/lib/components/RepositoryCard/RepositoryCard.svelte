@@ -31,7 +31,7 @@
 <div class="subline">
   {#if repo.language}
     <div class="language">
-      <div class="language-color" style="background-color: {getLanguageColor()}" />
+      <div class="language-color" style="background-color: {getLanguageColor()}"></div>
       <div class="language-label">{repo.language}</div>
     </div>
   {/if}
@@ -58,7 +58,7 @@
 </div>
 
 <style lang="scss">
-  @use '../../styles/variables.scss';
+  @use 'src/lib/styles/variables.scss';
 
   .name-container {
     display: flex;
