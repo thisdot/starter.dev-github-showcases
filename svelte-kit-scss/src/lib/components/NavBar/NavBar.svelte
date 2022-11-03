@@ -39,7 +39,7 @@
         <MarkGithub16 height="32" width="32" fill="white" />
       </a>
     </li>
-    <li on:click={closeDropdown} class="dropdown">
+    <li on:click={closeDropdown} on:keypress={closeDropdown} class="dropdown">
       <button
         type="button"
         class="dropdown-title"

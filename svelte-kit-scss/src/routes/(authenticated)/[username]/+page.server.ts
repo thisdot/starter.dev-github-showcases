@@ -4,7 +4,7 @@ import {
   mapUserInfoResponseToUserInfo,
   mapUserOrgsApiResponseToUserOrgs,
   mapUserReposApiResponseToUserReposStates,
-} from '$lib/helpers/user';
+} from '$lib/helpers';
 import { ENV } from '$lib/constants/env';
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
@@ -17,9 +17,11 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
     fetch(fetchUserOrgsUrl).then((response) => response.json() as Promise<UserOrgsApiResponse>),
     fetch(fetchReposUrl).then((response) => response.json() as Promise<UserReposApiResponse>),
   ]);
+
   return {
     userInfo: mapUserInfoResponseToUserInfo(userInfo),
     userOrgs: mapUserOrgsApiResponseToUserOrgs(userOrgs),
     userRepos: mapUserReposApiResponseToUserReposStates(userRepos),
+    username: params.username,
   };
 };

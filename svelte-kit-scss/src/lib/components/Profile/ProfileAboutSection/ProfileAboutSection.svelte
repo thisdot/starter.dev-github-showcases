@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { UserInfo, UserOrgs } from '../../interfaces';
+  import type { UserInfo, UserOrgs } from '$lib/interfaces';
   import { Link16, Location16, Mail16, Organization16, People16 } from 'svelte-octicons';
 
   export let userInfo: UserInfo;

@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 cd svelte-kit-scss
-npm run format
+npx lint-staged

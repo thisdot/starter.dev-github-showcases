@@ -1,11 +1,15 @@
 <script lang="ts">
   import type { PageServerData } from './$types';
+  import { ProfileType } from '$lib/interfaces';
+  import ProfileAboutSection from '$lib/components/Profile/ProfileAboutSection/ProfileAboutSection.svelte';
+  import ProfileNavSection from '$lib/components/Profile/ProfileNavSection/ProfileNavSection.svelte';
   import ProfileAboutSection from '$lib/components/ProfileAboutSection/ProfileAboutSection.svelte';
   import RepoList from '$lib/components/RepoList/RepoList.svelte';
   import RepoControls from '$lib/components/shared/RepoControls/RepoControls.svelte';
-  export let data: PageServerData;
+  import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
   import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
-  import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
+  import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';  export let data: PageServerData;
+
 
   // sample:
   const handleFiltersChange = (event: CustomEvent<RepoFiltersState>): void => {
@@ -63,35 +67,71 @@
 
   const reposCount = 7;
   // sample end
+  const { userInfo, userOrgs, userRepos, username } = data;
+  const isOrg = userInfo?.type == ProfileType.Organization;
 </script>
 
-<div class="grid grid-cols-12 profile-body container">
-  <div class="subpage col-span-3">
-    {#if data?.userInfo}
-      <ProfileAboutSection userInfo={data.userInfo} userOrgs={data.userOrgs} />
-    {/if}
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="grid grid-cols-12 container">
+      {#if isOrg}
+        <OrgInfo />
+        <nav class="col-span-12">
+          <ProfileNavSection />
+        </nav>
+      {:else}
+        <div class="col-span-3" />
+        <nav class="col-span-9">
+          <ProfileNavSection />
+        </nav>
+      {/if}
+    </div>
   </div>
-  <div class="col-span-9">
-    <RepoControls
-      {reposCount}
-      {typeFilters}
-      {languageFilters}
-      {sortFilters}
-      on:filtersChange={handleFiltersChange}/>
-  </div>
-  <div class="col-span-9">
-    {#if data?.userRepos}
-      <RepoList repos={data?.userRepos} />
+
+  <div class="grid grid-cols-12 profile-body container">
+    {#if isOrg}
+      <div class="col-span-12">
+        <RepoControls
+	      {reposCount}
+	      {typeFilters}
+	      {languageFilters}
+	      {sortFilters}
+	      on:filtersChange={handleFiltersChange}/>
+        <RepoList repos={userRepos} {username} />
+      </div>
+    {:else}
+      <div class="subpage col-span-3">
+        <ProfileAboutSection {userInfo} {userOrgs} />
+      </div>
+      <div class="col-span-9">
+        <RepoControls />
+        <RepoList repos={userRepos} {username} />
+      </div>
     {/if}
   </div>
 </div>
 
 <style lang="scss">
+  @use 'src/lib/styles/variables.scss';
+  .profile-container {
+    padding-top: 2rem;
+  }
+  .profile-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: white;
+    border-bottom: 1px solid rgb(229, 231, 235, 1);
+  }
   .profile-body {
     grid-template-rows: max-content 1fr;
 
     .subpage {
       grid-row: 1 / 3;
     }
+  }
+
+  .container {
+    max-width: variables.$xl;
   }
 </style>
