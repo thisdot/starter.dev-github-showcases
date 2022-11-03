@@ -131,7 +131,7 @@
     top: 0;
     z-index: 5;
     background-color: white;
-    border-bottom: 1px solid rgb(229, 231, 235, 1);
+    border-bottom: 1px solid #fcba03;
   }
   .profile-body {
     grid-template-rows: max-content 1fr;
