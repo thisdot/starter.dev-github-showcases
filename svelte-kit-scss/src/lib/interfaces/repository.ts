@@ -231,6 +231,32 @@ export interface RepoPullRequests {
   pullRequests: RepoPullRequest[];
 }
 
+export interface RepoIssue {
+  id: number;
+  login?: string | null;
+  title: string;
+  number: number;
+  closedAt?: Date | string | null;
+  state: string;
+  createdAt: Date | string;
+  labels: Array<{
+    id: number;
+    node_id: string;
+    url: string;
+    name: string;
+    color: string;
+  }>;
+  commentCount: number;
+  labelCount: number;
+}
+
+export type IssuesAPIResponse = PullRequestAPIResponse;
+
+export interface RepoIssues {
+  totalCount: number;
+  issues: RepoIssue[];
+}
+
 export interface RepoPullRequest {
   id: number;
   login?: string | null;

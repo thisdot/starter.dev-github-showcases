@@ -25,7 +25,7 @@
 </div>
 
 <style lang="scss">
-  @use '../../styles/variables.scss';
+  @use 'src/lib/styles/variables.scss';
 
   .top-repositories-container {
     padding: 1.5rem;
