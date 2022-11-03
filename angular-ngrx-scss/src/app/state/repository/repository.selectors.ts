@@ -1,26 +1,27 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { RepoState } from './repository.state';
+import { RepositoryState } from './repository.state';
 
-export const repositoryFeatureKey = 'repo';
+export const repositoryFeatureKey = 'repository';
 export const selectRepositoryState =
-  createFeatureSelector<RepoState>(repositoryFeatureKey);
+  createFeatureSelector<RepositoryState>(repositoryFeatureKey);
 
+// TODO: confirm where this selector is used and if it can perhaps be better written, since currently it's directly returning the whole state slice (not selecting any piece of the state)
 export const selectedRepository = createSelector(
   selectRepositoryState,
-  (state: RepoState) => state,
+  (state) => state,
 );
 
 export const selectCurrentlySelectedFile = createSelector(
   selectRepositoryState,
-  (state: RepoState) => state.selectedFile,
+  (state) => state.selectedFile,
 );
 
 export const selectOpenPullRequests = createSelector(
   selectRepositoryState,
-  (state: RepoState) => state.openPullRequests,
+  (state) => state.openPullRequests,
 );
 
 export const selectClosedPullRequests = createSelector(
   selectRepositoryState,
-  (state: RepoState) => state.closedPullRequests,
+  (state) => state.closedPullRequests,
 );
