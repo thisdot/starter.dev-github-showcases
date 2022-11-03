@@ -57,7 +57,7 @@ export const FilterDropdown = component$(
               {description && (
                 <div className={styles.menuHeader}>
                   <div className={styles.description}>{description}</div>
-                  <button type="button">
+                  <button onClick$={close$} type="button">
                     <XmarkIcon className={styles.closeButtonIcon} aria-hidden="true" />
                   </button>
                 </div>

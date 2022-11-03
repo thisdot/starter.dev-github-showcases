@@ -1,3 +1,4 @@
+import { TypeFilter } from '../repo-filters/types';
 import { UserRepo } from './types';
 
 // Function to filter repos by search
@@ -24,6 +25,17 @@ export const repoDataFilteredByLanguage = (language: string, defaultLanguage: st
   } else if (language === defaultLanguage) {
     response = repos;
   }
+  return response;
+};
 
+export const repoDataFilteredByType = (filterType: string, repos: UserRepo[]): UserRepo[] => {
+  let response = repos.slice();
+  if (filterType === TypeFilter.FORKS) {
+    response = repos.filter((repo) => repo.isFork);
+  } else if (filterType === TypeFilter.ARCHIVED) {
+    response = repos.filter((repo) => repo.isArchived);
+  } else if (filterType === TypeFilter.ALL) {
+    response = repos;
+  }
   return response;
 };

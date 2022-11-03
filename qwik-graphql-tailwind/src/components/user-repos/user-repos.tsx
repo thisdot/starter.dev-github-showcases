@@ -9,7 +9,7 @@ import { Pagination } from '../pagination/pagination';
 import { RepoFilters } from '../repo-filters/repo-filters';
 import { getLanguages } from './getLanguages';
 import filterStore from '~/context/repo-filter';
-import { repoDataFilteredByLanguage, repoDataFilteredBySearch } from './filter-sort-functions';
+import { repoDataFilteredByLanguage, repoDataFilteredBySearch, repoDataFilteredByType } from './filter-sort-functions';
 import { DefaultLanguage } from '../repo-filters/types';
 
 export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
@@ -18,6 +18,7 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
   const searchValue = useContext(filterStore);
 
   const languageFilter = repoDataFilteredByLanguage(searchValue?.language, DefaultLanguage.default, repos.nodes);
+  const filterByType = repoDataFilteredByType(searchValue.filterType, repos.nodes);
 
   const filteredAndSortedRepos = ((): UserRepo[] => {
     const searchResponse = repoDataFilteredBySearch(searchValue?.search || '', repos.nodes);
