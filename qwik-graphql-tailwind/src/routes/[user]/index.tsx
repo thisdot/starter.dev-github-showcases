@@ -31,7 +31,7 @@ export default component$(() => {
     search: '',
     language: DefaultLanguage.default,
     filterType: TypeFilter.ALL,
-    order: RepositoryOrderField.UpdatedAt,
+    sortBy: RepositoryOrderField.UpdatedAt,
   });
 
   useContextProvider(filterStore, filterState);

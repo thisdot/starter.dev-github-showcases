@@ -18,7 +18,7 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
     console.log('reset filters');
   });
 
-  const state = useContext(filterStore);
+  const store = useContext(filterStore);
   // TODO: logic for this
   const isFiltersActive = false;
   const isQueryActive = false;
@@ -61,12 +61,12 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
               {filteOptions.map(({ label, value }) => (
                 <div>
                   <button
-                    onClick$={() => (state.filterType = value)}
+                    onClick$={() => (store.filterType = value)}
                     type="button"
                     name={'Type'}
                     className={styles.itemButton}
                   >
-                    {value === state.filterType && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === store.filterType && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
                 </div>
               ))}
@@ -77,12 +77,12 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
               {languages.map(({ label, value }) => (
                 <div>
                   <button
-                    onClick$={() => (state.language = value)}
+                    onClick$={() => (store.language = value)}
                     type="button"
                     name={'language'}
                     className={styles.itemButton}
                   >
-                    {value === state.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === store.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
                 </div>
               ))}
@@ -93,12 +93,12 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
               {sortOptions.map(({ label, value }) => (
                 <div>
                   <button
-                    onClick$={() => (state.order = value)}
+                    onClick$={() => (store.sortBy = value)}
                     type="button"
                     name={'order'}
                     className={styles.itemButton}
                   >
-                    {value === state.order && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === store.sortBy && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
                 </div>
               ))}

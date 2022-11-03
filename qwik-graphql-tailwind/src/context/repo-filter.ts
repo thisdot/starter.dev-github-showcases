@@ -3,7 +3,7 @@ export interface FilterStoreProps {
   search: string;
   language: string;
   filterType: string;
-  order: string;
+  sortBy: string;
 }
 const filterStore = createContext<FilterStoreProps>('filter-context');
 
