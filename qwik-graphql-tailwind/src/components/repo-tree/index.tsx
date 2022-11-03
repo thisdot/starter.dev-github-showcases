@@ -29,7 +29,6 @@ export const RepoTree = component$(() => {
   return (
     <div>
       <FileExplorer />
-      <pre>{JSON.stringify(store.tree.data, null, 2)}</pre>
     </div>
   );
 });

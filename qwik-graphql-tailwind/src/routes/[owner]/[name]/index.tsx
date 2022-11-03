@@ -107,7 +107,7 @@ export default component$(() => {
   useContextProvider(RepoContext, store);
 
   return (
-    <>
+    <div class='bg-white"'>
       <RepoHeader />
       <div className="max-w-screen-2xl mx-auto md:py-8 px-4 bg-white">
         <div className="grid grid-cols-12 gap-8">
@@ -121,7 +121,7 @@ export default component$(() => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 });
 
