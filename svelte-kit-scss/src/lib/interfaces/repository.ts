@@ -236,9 +236,9 @@ export interface RepoIssue {
   login?: string | null;
   title: string;
   number: number;
-  closedAt?: Date | null;
+  closedAt?: Date | string | null;
   state: string;
-  createdAt: Date;
+  createdAt: Date | string;
   labels: Array<{
     id: number;
     node_id: string;

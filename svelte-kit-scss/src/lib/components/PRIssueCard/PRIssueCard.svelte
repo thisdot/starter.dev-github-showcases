@@ -51,7 +51,7 @@
           </div>
           <div class="meta">
             #{issue.number}
-            {#if isOpen()}
+            {#if isOpen() && issue?.createdAt}
               <span>
                 opened
                 {relativeTimeFmt(issue.createdAt)}
@@ -59,7 +59,7 @@
             {/if}
             by
             <span class="created-by">{issue.login}</span>
-            {#if !isOpen()}
+            {#if !isOpen() && issue?.closedAt}
               <span>
                 was closed
                 {relativeTimeFmt(issue.closedAt)}
@@ -70,9 +70,6 @@
       </div>
       <div class="comments">
         <Comment16 />
-        <!--        <span data-testid="comment count">-->
-        <!--            {issue.commentCount}-->
-        <!--          </span>-->
         <div class="comment-count">
           {issue.commentCount}
         </div>
@@ -103,11 +100,6 @@
 
     .info {
       display: flex;
-    }
-
-    .comments {
-      display: flex;
-      flex-direction: column;
     }
   }
 
@@ -158,13 +150,10 @@
       }
     }
   }
+
   .comments {
     text-align: center;
     position: relative;
-
-    svg.octicon-comment {
-      display: block;
-    }
 
     .comment-count {
       text-align: center;
