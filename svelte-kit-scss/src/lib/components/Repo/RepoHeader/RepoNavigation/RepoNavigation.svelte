@@ -81,7 +81,7 @@
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
   .container {
-    max-width: 1536px;
+    max-width: variables.$lg;
     margin: 0 auto 0 0;
     nav {
       margin-bottom: -1px;
