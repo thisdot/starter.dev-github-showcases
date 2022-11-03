@@ -84,7 +84,6 @@
     max-width: variables.$lg;
     margin: 0 auto 0 0;
     nav {
-      margin-bottom: -1px;
       display: flex;
       ul {
         list-style: none;
@@ -119,7 +118,7 @@
           .count {
             display: inline-block;
             text-align: center;
-            padding: 0.125rem 0.5rem;
+            padding: 0 0.5rem;
             margin-left: 0.5rem;
             background-color: #e5e7eb;
             color: #1f2937;
