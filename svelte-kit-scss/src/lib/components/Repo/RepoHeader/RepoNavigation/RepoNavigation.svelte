@@ -41,9 +41,9 @@
         class="tab tab--inactive"
         class:tab--active={!path.includes('issues') && !path.includes('pull-requests')}
       >
-        <div class="icon">
+        <span class="icon">
           <Code16 />
-        </div>
+        </span>
         <span>Code</span>
       </li>
       <li
@@ -52,9 +52,9 @@
         class="tab tab--inactive"
         class:tab--active={path.includes('issues')}
       >
-        <div class="icon">
+        <span class="icon">
           <IssueOpened16 />
-        </div>
+        </span>
         <span>Issues</span>
         <span class="count">
           {issueCount}
@@ -66,9 +66,9 @@
         class="tab tab--inactive"
         class:tab--active={path.includes('pull-requests')}
       >
-        <div class="icon">
+        <span class="icon">
           <GitPullRequest16 />
-        </div>
+        </span>
         <span>Pull Requests</span>
         <span class="count">
           {prCount}

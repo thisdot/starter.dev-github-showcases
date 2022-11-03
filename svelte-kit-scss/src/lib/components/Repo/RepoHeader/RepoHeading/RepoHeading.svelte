@@ -5,29 +5,25 @@
 
   export let repo: RepoState;
 
-  const ownerPath = () => {
-    return `/${repo?.ownerName}`;
-  };
+  const ownerPath = `/${repo?.ownerName}`;
 
-  const repoPath = () => {
-    return `/${repo?.ownerName}/${repo?.repoName}`;
-  };
+  const repoPath = `/${repo?.ownerName}/${repo?.repoName}`;
 
-  const visibility = () => {
-    return repo?.visibility || '';
-  };
+  const visibility = repo?.visibility || '';
 </script>
 
 <div class="heading">
-  <Repo24 class="icon" />
+  <span class="icon">
+    <Repo24 />
+  </span>
   <div class="heading__breadcrumb">
-    <a href={ownerPath()}>{repo?.ownerName}</a>
+    <a href={ownerPath}>{repo?.ownerName}</a>
     <span>/</span>
-    <a href={repoPath()} class="bold">{repo?.repoName}</a>
+    <a href={repoPath} class="bold">{repo?.repoName}</a>
   </div>
   {#if repo?.visibility}
     <div class="heading__privacy">
-      <span>{titleCase(visibility())}</span>
+      <span>{titleCase(visibility)}</span>
     </div>
   {/if}
 </div>

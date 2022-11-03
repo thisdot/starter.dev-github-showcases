@@ -9,7 +9,9 @@
 <div class="info">
   <div class="info__counter">
     <div class="info__counter__icon">
-      <Eye16 class="icon" />
+      <span class="icon">
+        <Eye16 />
+      </span>
       Watch
     </div>
     <div class="info__counter__count">
@@ -18,7 +20,9 @@
   </div>
   <div class="info__counter">
     <div class="info__counter__icon">
-      <Star16 class="icon" />
+      <span class="icon">
+        <Star16 />
+      </span>
       Star
     </div>
     <div class="info__counter__count">
@@ -27,7 +31,9 @@
   </div>
   <div class="info__counter">
     <div class="info__counter__icon">
-      <RepoForked16 class="icon" />
+      <span class="icon">
+        <RepoForked16 />
+      </span>
       Fork
     </div>
     <div class="info__counter__count">
