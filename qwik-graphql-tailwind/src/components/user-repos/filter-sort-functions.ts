@@ -18,9 +18,6 @@ export const repoDataFilteredBySearch = (search: string, repos: UserRepo[]): Use
 export const repoDataFilteredByType = (filterType: string, repos: UserRepo[]): UserRepo[] => {
   let response = repos.slice();
   if (filterType === TypeFilter.FORKS) {
-    console.log('====================================');
-    console.log(response, TypeFilter.FORKS);
-    console.log('====================================');
     response = repos.filter((repo) => repo.isFork);
   } else if (filterType === TypeFilter.ARCHIVED) {
     response = repos.filter((repo) => repo.isArchived);
