@@ -1,10 +1,11 @@
-import { $, component$ } from '@builder.io/qwik';
+import { $, component$, useContext } from '@builder.io/qwik';
 import * as styles from './repo-filters.classNames';
 import cn from 'classnames';
 import { LanguageFilter, TypeFilter, RepositoryOrderField } from './types';
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
-import { XmarkIcon } from '../icons';
+import { XmarkIcon, CheckIcon } from '../icons';
 import { SearchInput } from '../search-input/search-input';
+import filterStore from '~/context/repo-filter';
 
 export type RepoFiltersProps = {
   languages: LanguageFilter[];
@@ -17,11 +18,22 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
     console.log('reset filters');
   });
 
+  const state = useContext(filterStore);
+
   // TODO: logic for this
   const isFiltersActive = false;
   const isQueryActive = false;
   const isTypeActive = false;
   const isLanguageActive = false;
+
+  const sortOptions = [
+    {
+      value: RepositoryOrderField.UpdatedAt,
+      label: 'Last updated',
+    },
+    { value: RepositoryOrderField.Name, label: 'Name' },
+    { value: RepositoryOrderField.Stargazers, label: 'Stars' },
+  ];
 
   return (
     <>
@@ -55,19 +67,20 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
             <FilterDropdown name="Language" description="Select language" current="" items={languages} />
           </div>
           <div>
-            <FilterDropdown
-              name="Sort"
-              description="Select order"
-              current=""
-              items={[
-                {
-                  value: RepositoryOrderField.UpdatedAt,
-                  label: 'Last updated',
-                },
-                { value: RepositoryOrderField.Name, label: 'Name' },
-                { value: RepositoryOrderField.Stargazers, label: 'Stars' },
-              ]}
-            />
+            <FilterDropdown name="Sort" description="Select order" current="">
+              {sortOptions.map(({ label, value }) => (
+                <div>
+                  <button
+                    onClick$={() => (state.order = value)}
+                    type="button"
+                    name={'order'}
+                    className={styles.itemButton}
+                  >
+                    {value === state.order && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                  </button>
+                </div>
+              ))}
+            </FilterDropdown>
           </div>
         </div>
       </div>

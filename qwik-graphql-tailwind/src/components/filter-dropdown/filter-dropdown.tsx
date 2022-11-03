@@ -1,5 +1,5 @@
-import { $, component$, useSignal, useStore } from '@builder.io/qwik';
-import { CheckIcon, ChevronDownIcon, XmarkIcon } from '../icons';
+import { $, component$, Slot, useSignal, useStore } from '@builder.io/qwik';
+import { CheckIcon, XmarkIcon, CarretDropdownIcon } from '../icons';
 import * as styles from './filter-dropdown.classNames';
 import cn from 'classnames';
 import { isParentWithinScope } from '../../utils/isParentWithinScope';
@@ -13,7 +13,7 @@ export interface FilterDropdownProps {
   name: string;
   description?: string;
   current: number | string | null;
-  items: Option[];
+  items?: Option[];
   buttonClassName?: string;
 }
 
@@ -45,7 +45,7 @@ export const FilterDropdown = component$(
           <div>
             <button type="button" className={buttonClassName || styles.menuButton} onClick$={toggle$}>
               {name}
-              <ChevronDownIcon className={styles.menuButtonIcon} aria-hidden="true" />
+              <CarretDropdownIcon className={styles.menuButtonIcon} aria-hidden="true" />
             </button>
           </div>
 
@@ -62,13 +62,15 @@ export const FilterDropdown = component$(
                   </button>
                 </div>
               )}
-              {items.map(({ label, value }) => (
-                <div>
-                  <button type="button" name={name} className={styles.itemButton}>
-                    {value === current && <CheckIcon className={styles.itemActiveIcon} />} {label}
-                  </button>
-                </div>
-              ))}
+              {items &&
+                items.map(({ label, value }) => (
+                  <div>
+                    <button type="button" name={name} className={styles.itemButton}>
+                      {value === current && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    </button>
+                  </div>
+                ))}
+              <Slot />
             </div>
           </nav>
         </div>
