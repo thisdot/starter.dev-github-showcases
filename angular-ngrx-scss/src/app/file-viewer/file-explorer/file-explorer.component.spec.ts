@@ -4,7 +4,7 @@ import { FileExplorerComponent } from './file-explorer.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '../../state';
-import { RepoState } from '../../state/repository';
+import { RepositoryState } from '../../state/repository';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
@@ -13,7 +13,7 @@ describe('FileExplorerComponent', () => {
   let component: FileExplorerComponent;
   let fixture: ComponentFixture<FileExplorerComponent>;
   const initialState: AppState = {
-    repo: {
+    repository: {
       tree: [
         {
           name: 'packages',
@@ -24,7 +24,7 @@ describe('FileExplorerComponent', () => {
       activeBranch: 'main',
       description: '',
       website: '',
-    } as RepoState,
+    } as RepositoryState,
   } as AppState;
   const activatedRouteStub = {
     paramMap: of({
