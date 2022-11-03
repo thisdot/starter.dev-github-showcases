@@ -7,61 +7,61 @@
   import RepoControls from '$lib/components/shared/RepoControls/RepoControls.svelte';
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
   import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
-  import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';  export let data: PageServerData;
-
+  import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
+  export let data: PageServerData;
 
   // sample:
   const handleFiltersChange = (event: CustomEvent<RepoFiltersState>): void => {
     console.log('[handleFiltersChange]', event.detail);
-  }
-  
+  };
+
   const typeFilters: FilterDropdownOption[] = [
     {
       label: 'All',
-      value: 'all'
+      value: 'all',
     },
     {
       label: 'Forked',
-      value: 'forked'
+      value: 'forked',
     },
     {
       label: 'Archived',
-      value: 'archived'
-    }
+      value: 'archived',
+    },
   ];
 
   const languageFilters: FilterDropdownOption[] = [
     {
       label: 'All',
-      value: 'all'
+      value: 'all',
     },
     {
       label: 'Vue',
-      value: 'vue'
+      value: 'vue',
     },
     {
       label: 'JavaScript',
-      value: 'js'
+      value: 'js',
     },
     {
       label: 'TypeScript',
-      value: 'ts'
-    }
+      value: 'ts',
+    },
   ];
 
   const sortFilters: FilterDropdownOption[] = [
     {
       label: 'Last Updated',
-      value: 'updated'
+      value: 'updated',
     },
     {
       label: 'Name',
-      value: 'name'
+      value: 'name',
     },
     {
       label: 'Stars',
-      value: 'stars'
-    }
+      value: 'stars',
+    },
   ];
 
   const reposCount = 7;
@@ -96,7 +96,8 @@
           {typeFilters}
           {languageFilters}
           {sortFilters}
-          on:filtersChange={handleFiltersChange}/>
+          on:filtersChange={handleFiltersChange}
+        />
         <RepoList repos={userRepos} />
       </div>
     {:else}
@@ -107,11 +108,12 @@
       </div>
       <div class="col-span-9">
         <RepoControls
-            {reposCount}
-            {typeFilters}
-            {languageFilters}
-            {sortFilters}
-            on:filtersChange={handleFiltersChange}/>       
+          {reposCount}
+          {typeFilters}
+          {languageFilters}
+          {sortFilters}
+          on:filtersChange={handleFiltersChange}
+        />
         <RepoList repos={userRepos} />
       </div>
     {/if}
