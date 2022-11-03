@@ -2,7 +2,6 @@
   import TopRepositories from '$lib/components/TopRepositories/TopRepositories.svelte';
   import Gists from '$lib/components/Gists/Gists.svelte';
   import type { PageServerData } from './$types';
-  import FilterDropdown from '$lib/components/shared/FilterDropdown/FilterDropdown.svelte';
   export let data: PageServerData;
 </script>
 

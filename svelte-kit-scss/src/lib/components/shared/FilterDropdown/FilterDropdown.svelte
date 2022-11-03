@@ -5,26 +5,13 @@
   import { scale } from 'svelte/transition';
   import { Check16, ChevronDown16, X16 } from 'svelte-octicons';
 
-  export let name: string = 'asdasd';
+  export let name: string = '';
 
   export let description: string = 'Select option';
 
   export let defaultFilter: FilterDropdownOption | undefined = undefined;
 
-  export let items: FilterDropdownOption[] = [
-    {
-      label: 'First',
-      value: 'first',
-    },
-    {
-      label: 'Second',
-      value: 'second',
-    },
-    {
-      label: 'Third',
-      value: 'third',
-    },
-  ];
+  export let items: FilterDropdownOption[] = [];
 
   let current: FilterDropdownOption | undefined = defaultFilter;
 
