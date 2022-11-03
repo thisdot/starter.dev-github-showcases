@@ -100,7 +100,7 @@
           color: variables.$gray600;
           &.tab {
             &--active {
-              border-bottom: 2px solid rgba(245, 158, 11, 1);
+              border-bottom: 2px solid #f59e0b;
 
               span {
                 font-weight: 600;
