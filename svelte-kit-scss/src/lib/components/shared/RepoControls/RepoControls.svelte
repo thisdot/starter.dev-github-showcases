@@ -8,6 +8,7 @@
   export let typeFilters: FilterDropdownOption[] = [];
   export let languageFilters: FilterDropdownOption[] = [];
   export let sortFilters: FilterDropdownOption[] = [];
+  export let hasActiveFilters: boolean;
 
   const defaultFilters: RepoFiltersState = {
     type: typeFilters[0],
@@ -27,7 +28,7 @@
     currentFilters.type !== defaultFilters.type ||
     currentFilters.language !== defaultFilters.language ||
     currentFilters.sort !== defaultFilters.sort ||
-    currentFilters.searchInput;
+    !!currentFilters.searchInput;
 
   const dispatch = createEventDispatcher();
 
@@ -65,7 +66,7 @@
       type="search"
       placeholder="Find a repository..."
       bind:value={currentFilters.searchInput}
-      on:change={handleSearchInputChange}
+      on:input={handleSearchInputChange}
     />
     <FilterDropdown
       name="Type"
@@ -126,6 +127,7 @@
       margin-bottom: 1rem;
       display: flex;
       gap: 0.5rem;
+
       .search-input {
         font-size: 0.875rem;
         line-height: 1.25rem;
@@ -137,6 +139,7 @@
         flex-grow: 1;
       }
     }
+
     .divider {
       border-bottom: 1px solid variables.$gray300;
     }
