@@ -9,6 +9,7 @@ import { UserProfileCard } from '../../components/user-profile-card/user-profile
 import ProfileNav from '../../components/profile-nav/profile-nav';
 import { UserRepos } from '../../components/user-repos/user-repos';
 import filterStore, { FilterStoreProps } from '~/context/repo-filter';
+import { DefaultLanguage, TypeFilter } from '~/components/repo-filters/types';
 
 interface UserStore {
   user: User | null;
@@ -28,8 +29,8 @@ export default component$(() => {
 
   const filterState = useStore<FilterStoreProps>({
     search: '',
-    language: '',
-    sortType: '',
+    language: DefaultLanguage.default,
+    filterType: TypeFilter.ALL,
     order: '',
   });
 

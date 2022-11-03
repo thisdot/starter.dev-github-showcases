@@ -52,7 +52,7 @@ export const UserDropdown = component$(({ image, username }: UserDropdownProps) 
           <ul className="py-1">
             {username && (
               <li data-menu-item>
-                <Link href={`/${username}`} className={styles.menuBtn}>
+                <Link preventdefault:click={false} href={`/${username}`} className={styles.menuBtn}>
                   Profile
                 </Link>
               </li>

@@ -14,3 +14,5 @@ export * from './eye.icon';
 export * from './code.icon';
 export * from './issues.icon';
 export * from './pullRequest.icon';
+export * from './folder.icon';
+export * from './document.icon';
