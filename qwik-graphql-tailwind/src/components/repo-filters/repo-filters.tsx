@@ -54,10 +54,15 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
             />
           </div>
           <div>
-            <FilterDropdown name="Language" description="Select language" current="" items={languages}>
+            <FilterDropdown name="Language" description="Select language" current="">
               {languages.map(({ label, value }) => (
                 <div>
-                  <button type="button" name={'language'} className={styles.itemButton}>
+                  <button
+                    onClick$={() => (state.language = value)}
+                    type="button"
+                    name={'language'}
+                    className={styles.itemButton}
+                  >
                     {value === state.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
                 </div>
