@@ -9,13 +9,15 @@ import { Pagination } from '../pagination/pagination';
 import { RepoFilters } from '../repo-filters/repo-filters';
 import { getLanguages } from './getLanguages';
 import filterStore from '~/context/repo-filter';
-import { repoDataFilteredBySearch, repoDataFilteredByType } from './filter-sort-functions';
+import { repoDataFilteredByLanguage, repoDataFilteredBySearch, repoDataFilteredByType } from './filter-sort-functions';
+import { DefaultLanguage } from '../repo-filters/types';
 
 export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
   const languages = getLanguages(repos.nodes);
 
   const searchValue = useContext(filterStore);
 
+  const languageFilter = repoDataFilteredByLanguage(searchValue?.language, DefaultLanguage.default, repos.nodes);
   const filterByType = repoDataFilteredByType(searchValue.filterType, repos.nodes);
 
   const filteredAndSortedRepos = ((): UserRepo[] => {
@@ -26,7 +28,7 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
   return (
     <>
       <RepoFilters languages={languages} resultCount={repos.nodes.length} />
-      {filterByType.map(
+      {languageFilter.map(
         ({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
           <div key={id} className={styles.container}>
             <div className={styles.content}>

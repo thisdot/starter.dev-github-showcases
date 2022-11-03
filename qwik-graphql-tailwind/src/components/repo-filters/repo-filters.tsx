@@ -1,4 +1,4 @@
-import { $, component$, useClientEffect$, useContext } from '@builder.io/qwik';
+import { $, component$, useContext } from '@builder.io/qwik';
 import * as styles from './repo-filters.classNames';
 import cn from 'classnames';
 import { LanguageFilter, TypeFilter, RepositoryOrderField } from './types';
@@ -19,7 +19,6 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
   });
 
   const state = useContext(filterStore);
-
   // TODO: logic for this
   const isFiltersActive = false;
   const isQueryActive = false;
@@ -65,7 +64,20 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
             </FilterDropdown>
           </div>
           <div>
-            <FilterDropdown name="Language" description="Select language" current="" items={languages} />
+            <FilterDropdown name="Language" description="Select language" current="">
+              {languages.map(({ label, value }) => (
+                <div>
+                  <button
+                    onClick$={() => (state.language = value)}
+                    type="button"
+                    name={'language'}
+                    className={styles.itemButton}
+                  >
+                    {value === state.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                  </button>
+                </div>
+              ))}
+            </FilterDropdown>
           </div>
           <div>
             <FilterDropdown

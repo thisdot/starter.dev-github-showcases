@@ -65,7 +65,7 @@ export const FilterDropdown = component$(
               {items &&
                 items.map(({ label, value }) => (
                   <div>
-                    <button onClick$={() => null} type="button" name={name} className={styles.itemButton}>
+                    <button type="button" name={name} className={styles.itemButton}>
                       {value === current && <CheckIcon className={styles.itemActiveIcon} />} {label}
                     </button>
                   </div>
