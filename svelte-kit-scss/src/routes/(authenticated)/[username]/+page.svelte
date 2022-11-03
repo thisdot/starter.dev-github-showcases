@@ -3,12 +3,71 @@
   import { ProfileType } from '$lib/interfaces';
   import ProfileAboutSection from '$lib/components/Profile/ProfileAboutSection/ProfileAboutSection.svelte';
   import ProfileNavSection from '$lib/components/Profile/ProfileNavSection/ProfileNavSection.svelte';
+  import RepoList from '$lib/components/RepoList/RepoList.svelte';
+  import RepoControls from '$lib/components/shared/RepoControls/RepoControls.svelte';
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
-  import RepoList from '../../../lib/components/RepoList/RepoList.svelte';
-  import RepoControls from '../../../lib/components/RepoControls/RepoControls.svelte';
+  import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
+  import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';  export let data: PageServerData;
 
-  export let data: PageServerData;
-  const { userInfo, userOrgs, userRepos, username } = data;
+
+  // sample:
+  const handleFiltersChange = (event: CustomEvent<RepoFiltersState>): void => {
+    console.log('[handleFiltersChange]', event.detail);
+  }
+  
+  const typeFilters: FilterDropdownOption[] = [
+    {
+      label: 'All',
+      value: 'all'
+    },
+    {
+      label: 'Forked',
+      value: 'forked'
+    },
+    {
+      label: 'Archived',
+      value: 'archived'
+    }
+  ];
+
+  const languageFilters: FilterDropdownOption[] = [
+    {
+      label: 'All',
+      value: 'all'
+    },
+    {
+      label: 'Vue',
+      value: 'vue'
+    },
+    {
+      label: 'JavaScript',
+      value: 'js'
+    },
+    {
+      label: 'TypeScript',
+      value: 'ts'
+    }
+  ];
+
+  const sortFilters: FilterDropdownOption[] = [
+    {
+      label: 'Last Updated',
+      value: 'updated'
+    },
+    {
+      label: 'Name',
+      value: 'name'
+    },
+    {
+      label: 'Stars',
+      value: 'stars'
+    }
+  ];
+
+  const reposCount = 7;
+  // sample end
+
+  const { userInfo, userOrgs, userRepos } = data;
   const isOrg = userInfo?.type == ProfileType.Organization;
 </script>
 
@@ -32,16 +91,28 @@
   <div class="grid grid-cols-12 profile-body container">
     {#if isOrg}
       <div class="col-span-12">
-        <RepoControls />
-        <RepoList repos={userRepos} {username} />
+        <RepoControls
+          {reposCount}
+          {typeFilters}
+          {languageFilters}
+          {sortFilters}
+          on:filtersChange={handleFiltersChange}/>
+        <RepoList repos={userRepos} />
       </div>
     {:else}
       <div class="subpage col-span-3">
-        <ProfileAboutSection {userInfo} {userOrgs} />
+        {#if userInfo}
+          <ProfileAboutSection {userInfo} {userOrgs} />
+        {/if}
       </div>
       <div class="col-span-9">
-        <RepoControls />
-        <RepoList repos={userRepos} {username} />
+        <RepoControls
+            {reposCount}
+            {typeFilters}
+            {languageFilters}
+            {sortFilters}
+            on:filtersChange={handleFiltersChange}/>       
+        <RepoList repos={userRepos} />
       </div>
     {/if}
   </div>
@@ -61,6 +132,7 @@
   }
   .profile-body {
     grid-template-rows: max-content 1fr;
+    padding-top: 2rem;
 
     .subpage {
       grid-row: 1 / 3;
