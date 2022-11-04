@@ -23,6 +23,7 @@ specifiers:
   jsdom: 20.0.1
   postcss: 8.4.18
   prettier: 2.7.1
+  solid-heroicons: ^3.1.0
   solid-js: 1.6.0
   solid-testing-library: 0.3.0
   storybook-addon-mock: 3.2.0
@@ -33,6 +34,7 @@ specifiers:
   vitest: 0.24.3
 
 dependencies:
+  solid-heroicons: 3.1.0_solid-js@1.6.0
   solid-js: 1.6.0
 
 devDependencies:
@@ -12328,6 +12330,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /solid-heroicons/3.1.0_solid-js@1.6.0:
+    resolution: {integrity: sha512-cOw5cxS3zgcoOChyvobvHZmHSCinnkkpsiyEiMW+irltb/6iwKq123CUD/W70astfwBvVopnixCQIF19JUzzMA==}
+    peerDependencies:
+      solid-js: '>= ^1.2.5'
+    dependencies:
+      solid-js: 1.6.0
+    dev: false
 
   /solid-js/1.6.0:
     resolution: {integrity: sha512-db5s65ErgZnBhapPx77qauzul8akHlMCvirS+Y86U4abMa3uizMVNW9ql3UxbO0yMzMGNpFJwUiOlXmJCbwVpA==}
