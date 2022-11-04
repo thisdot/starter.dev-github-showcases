@@ -8,13 +8,33 @@
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
   import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
-
+  import { debounce } from '$lib/helpers';
+  
   export let data: PageServerData;
 
-  // sample:
+  const { userInfo, userOrgs, userRepos } = data;
+
+  const DEBOUNCE_TIME = 2000;
+
+  let hasActiveFilters = false;
+
+  let filteredRepos = userRepos;
+
   const handleFiltersChange = (event: CustomEvent<RepoFiltersState>): void => {
-    console.log('[handleFiltersChange]', event.detail);
+    const { searchInput } = event.detail || {};
+    if (hasActiveFilters) {
+      filteredRepos = userRepos.filter((item) => {
+        if (searchInput) {
+          return item.name.toLowerCase().includes(searchInput.toLowerCase());
+        }
+        return true;
+      });
+    } else {
+      filteredRepos = userRepos;
+    }
   };
+
+  const filterRepos = debounce(handleFiltersChange, DEBOUNCE_TIME);
 
   const typeFilters: FilterDropdownOption[] = [
     {
@@ -68,7 +88,6 @@
   const reposCount = 7;
   // sample end
 
-  const { userInfo, userOrgs, userRepos } = data;
   const isOrg = userInfo?.type == ProfileType.Organization;
 </script>
 
@@ -97,9 +116,10 @@
           {typeFilters}
           {languageFilters}
           {sortFilters}
-          on:filtersChange={handleFiltersChange}
+          bind:hasActiveFilters
+          on:filtersChange={filterRepos}
         />
-        <RepoList repos={userRepos} />
+        <RepoList repos={filteredRepos} />
       </div>
     {:else}
       <div class="subpage col-span-3">
@@ -113,9 +133,10 @@
           {typeFilters}
           {languageFilters}
           {sortFilters}
-          on:filtersChange={handleFiltersChange}
+          bind:hasActiveFilters
+          on:filtersChange={filterRepos}
         />
-        <RepoList repos={userRepos} />
+        <RepoList repos={filteredRepos} />
       </div>
     {/if}
   </div>
@@ -123,9 +144,11 @@
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
+
   .profile-container {
     padding-top: 2rem;
   }
+
   .profile-header {
     position: sticky;
     top: 0;
@@ -133,6 +156,7 @@
     background-color: white;
     border-bottom: 1px solid #fcba03;
   }
+
   .profile-body {
     grid-template-rows: max-content 1fr;
     padding-top: 2rem;

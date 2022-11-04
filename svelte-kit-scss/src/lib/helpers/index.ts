@@ -5,3 +5,4 @@ export * from './repository';
 export * from './formatting';
 export * from './handleAnchorClick';
 export * from './issues';
+export * from './debounce';
