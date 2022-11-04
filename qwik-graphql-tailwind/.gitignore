@@ -37,3 +37,5 @@ lerna-debug.log*
 .yarn/*
 !.yarn/releases
 .env
+
+package-lock.json

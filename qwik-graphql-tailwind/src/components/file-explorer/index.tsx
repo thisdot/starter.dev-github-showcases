@@ -6,10 +6,6 @@ import * as styles from './file-explorer.classNames';
 export const FileExplorer = component$(() => {
   const store = useContext(RepoContext);
 
-  if (store.info.isLoading) {
-    return <div>Loading...</div>;
-  }
-
   const {
     branch,
     owner,
