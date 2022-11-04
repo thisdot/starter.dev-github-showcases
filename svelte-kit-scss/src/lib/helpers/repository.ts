@@ -15,7 +15,7 @@ export const mapRepoResToRepoState = (data: RepoApiResponse): RepoState => {
     openPullRequests: null,
     closedPullRequests: null,
     activeBranch: data.default_branch,
-    ownerName: '',
+    ownerName: data.owner.login,
     prCount: 0,
     readme: '',
     tree: [],
