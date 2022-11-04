@@ -9,9 +9,6 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
   const getRepoPullsUrl = new URL(`/repos/${username}/${repo}/pulls`, ENV.GITHUB_URL);
   const getRepoContentsUrl = new URL(`/repos/${username}/${repo}/contents`, ENV.GITHUB_URL);
   const getRepoReadmeUrl = new URL(`/repos/${username}/${repo}/readme`, ENV.GITHUB_URL);
-  // const getRepoContentsUrl = path
-  //   ? new URL(`/repos/${username}/${repo}/contents`, ENV.GITHUB_URL);
-  //   : new URL(`/repos/${username}/${repo}/contents/${repoPath}`, ENV.GITHUB_URL);
 
   const [repoData, repoPRs, repoContentsData, repoReadmeData] = await Promise.all([
     fetch(getRepoUrl.toString()).then((response) => response.json() as Promise<RepoApiResponse>),

@@ -6,7 +6,8 @@
 
   function getPathHref(item: RepoContents): string {
     const basePath = `/${username}/${repo}`;
-    return `${basePath}/${item.type === 'dir' ? 'tree' : 'blob'}/${branch}/${item.path}`;
+    const typeSecment = item.type === 'dir' ? 'tree' : 'blob';
+    return `${basePath}/${typeSecment}/${branch}/${item.path}`;
   }
 </script>
 
@@ -35,10 +36,10 @@
 
   .item {
     border-bottom: 1px solid variables.$gray300;
-    padding: 8px 16px;
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 1rem;
 
     &:last-child {
       border-bottom: 0;
