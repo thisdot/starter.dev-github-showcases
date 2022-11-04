@@ -8,7 +8,6 @@
   export let typeFilters: FilterDropdownOption[] = [];
   export let languageFilters: FilterDropdownOption[] = [];
   export let sortFilters: FilterDropdownOption[] = [];
-  export let hasActiveFilters: boolean;
 
   const defaultFilters: RepoFiltersState = {
     type: typeFilters[0],

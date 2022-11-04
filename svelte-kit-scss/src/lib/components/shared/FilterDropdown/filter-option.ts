@@ -1,4 +1,4 @@
-export interface FilterDropdownOption {
+export interface FilterDropdownOption<T = string> {
   label: string;
-  value: string;
+  value: T;
 }

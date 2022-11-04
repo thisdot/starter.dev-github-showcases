@@ -9,7 +9,8 @@
   import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
   import { debounce } from '$lib/helpers';
-  
+  import { LanguageFilters, SortFilters, TypeFilters } from '$lib/enums';
+
   export let data: PageServerData;
 
   const { userInfo, userOrgs, userRepos } = data;
@@ -20,73 +21,101 @@
 
   let filteredRepos = userRepos;
 
-  const handleFiltersChange = (event: CustomEvent<RepoFiltersState>): void => {
-    const { searchInput } = event.detail || {};
+  const filterRepos = (event: CustomEvent<RepoFiltersState>): void => {
+    const { searchInput, type } = event.detail;
     if (hasActiveFilters) {
       filteredRepos = userRepos.filter((item) => {
-        if (searchInput) {
-          return item.name.toLowerCase().includes(searchInput.toLowerCase());
+        const searchTermCondition = searchInput
+          ? item.name.toLowerCase().includes(searchInput.toLowerCase())
+          : true;
+        let typeCondition: boolean;
+
+        if (type.value === TypeFilters.ALL) {
+          typeCondition = true;
+        } else if (type.value === TypeFilters.ARCHIVED) {
+          typeCondition = Boolean(item.archived);
+        } else if (type.value === TypeFilters.FORKED) {
+          typeCondition = Boolean(item.fork);
         }
-        return true;
+
+        return searchTermCondition && typeCondition;
       });
     } else {
       filteredRepos = userRepos;
     }
   };
 
-  const filterRepos = debounce(handleFiltersChange, DEBOUNCE_TIME);
+  const debouncedFilterRepos = debounce(filterRepos, DEBOUNCE_TIME);
 
-  const typeFilters: FilterDropdownOption[] = [
+  let lastSearchTerm = '';
+
+  const handleFiltersChange = (event: CustomEvent<RepoFiltersState>): void => {
+    const { searchInput, type, language, sort } = event.detail || {};
+
+    hasActiveFilters =
+      type.value !== TypeFilters.ALL ||
+      language.value !== LanguageFilters.ALL ||
+      sort.value !== SortFilters.UPDATED ||
+      !!searchInput;
+
+    if (event.detail.searchInput === lastSearchTerm) {
+      filterRepos(event);
+    } else {
+      debouncedFilterRepos(event);
+    }
+    lastSearchTerm = event.detail.searchInput;
+  };
+
+  const typeFilters: FilterDropdownOption<TypeFilters>[] = [
     {
       label: 'All',
-      value: 'all',
+      value: TypeFilters.ALL,
     },
     {
       label: 'Forked',
-      value: 'forked',
+      value: TypeFilters.FORKED,
     },
     {
       label: 'Archived',
-      value: 'archived',
+      value: TypeFilters.ARCHIVED,
     },
   ];
 
-  const languageFilters: FilterDropdownOption[] = [
+  const languageFilters: FilterDropdownOption<LanguageFilters>[] = [
     {
       label: 'All',
-      value: 'all',
+      value: LanguageFilters.ALL,
     },
     {
       label: 'Vue',
-      value: 'vue',
+      value: LanguageFilters.VUE,
     },
     {
       label: 'JavaScript',
-      value: 'js',
+      value: LanguageFilters.JS,
     },
     {
       label: 'TypeScript',
-      value: 'ts',
+      value: LanguageFilters.TS,
     },
   ];
 
-  const sortFilters: FilterDropdownOption[] = [
+  const sortFilters: FilterDropdownOption<SortFilters>[] = [
     {
       label: 'Last Updated',
-      value: 'updated',
+      value: SortFilters.UPDATED,
     },
     {
       label: 'Name',
-      value: 'name',
+      value: SortFilters.NAME,
     },
     {
       label: 'Stars',
-      value: 'stars',
+      value: SortFilters.STARS,
     },
   ];
 
-  const reposCount = 7;
-  // sample end
+  $: reposCount = filteredRepos.length;
 
   const isOrg = userInfo?.type == ProfileType.Organization;
 </script>
@@ -116,8 +145,7 @@
           {typeFilters}
           {languageFilters}
           {sortFilters}
-          bind:hasActiveFilters
-          on:filtersChange={filterRepos}
+          on:filtersChange={handleFiltersChange}
         />
         <RepoList repos={filteredRepos} />
       </div>
@@ -133,8 +161,7 @@
           {typeFilters}
           {languageFilters}
           {sortFilters}
-          bind:hasActiveFilters
-          on:filtersChange={filterRepos}
+          on:filtersChange={handleFiltersChange}
         />
         <RepoList repos={filteredRepos} />
       </div>
