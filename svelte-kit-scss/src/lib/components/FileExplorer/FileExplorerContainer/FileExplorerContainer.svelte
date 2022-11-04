@@ -6,8 +6,8 @@
 
   function getPathHref(item: RepoContents): string {
     const basePath = `/${username}/${repo}`;
-    const typeSecment = item.type === 'dir' ? 'tree' : 'blob';
-    return `${basePath}/${typeSecment}/${branch}/${item.path}`;
+    const typeSegment = item.type === 'dir' ? 'tree' : 'blob';
+    return `${basePath}/${typeSegment}/${branch}/${item.path}`;
   }
 </script>
 

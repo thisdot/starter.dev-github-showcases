@@ -1,5 +1,5 @@
 <script>
-  import { ArrowDown16, GitBranch16 } from 'svelte-octicons';
+  import { GitBranch16 } from 'svelte-octicons';
 </script>
 
 <nav class="file-explorer-container">
@@ -33,7 +33,6 @@
 
     &:hover {
       background-color: variables.$gray200;
-      --bg-opacity: 0.5;
     }
     .dropdown-caret {
       margin-left: 4px;
