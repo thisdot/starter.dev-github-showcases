@@ -9,7 +9,7 @@
   import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
   import { debounce } from '$lib/helpers';
-  
+
   export let data: PageServerData;
 
   const { userInfo, userOrgs, userRepos } = data;
