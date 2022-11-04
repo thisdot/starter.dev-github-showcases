@@ -18,12 +18,21 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
     console.log('reset filters');
   });
 
-  const state = useContext(filterStore);
+  const store = useContext(filterStore);
   // TODO: logic for this
   const isFiltersActive = false;
   const isQueryActive = false;
   const isTypeActive = false;
   const isLanguageActive = false;
+
+  const sortOptions = [
+    {
+      value: RepositoryOrderField.UpdatedAt,
+      label: 'Last updated',
+    },
+    { value: RepositoryOrderField.Name, label: 'Name' },
+    { value: RepositoryOrderField.Stargazers, label: 'Stars' },
+  ];
 
   const filteOptions = [
     {
@@ -48,51 +57,52 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
         </div>
         <div className={styles.filters}>
           <div>
-            <FilterDropdown name="Type" description="Select type" current="">
+            <FilterDropdown name="Type" description="Select type">
               {filteOptions.map(({ label, value }) => (
                 <div>
                   <button
-                    onClick$={() => (state.filterType = value)}
+                    onClick$={() => (store.filterType = value)}
                     type="button"
                     name={'Type'}
                     className={styles.itemButton}
                   >
-                    {value === state.filterType && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === store.filterType && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
                 </div>
               ))}
             </FilterDropdown>
           </div>
           <div>
-            <FilterDropdown name="Language" description="Select language" current="">
+            <FilterDropdown name="Language" description="Select language">
               {languages.map(({ label, value }) => (
                 <div>
                   <button
-                    onClick$={() => (state.language = value)}
+                    onClick$={() => (store.language = value)}
                     type="button"
                     name={'language'}
                     className={styles.itemButton}
                   >
-                    {value === state.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === store.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
                 </div>
               ))}
             </FilterDropdown>
           </div>
           <div>
-            <FilterDropdown
-              name="Sort"
-              description="Select order"
-              current=""
-              items={[
-                {
-                  value: RepositoryOrderField.UpdatedAt,
-                  label: 'Last updated',
-                },
-                { value: RepositoryOrderField.Name, label: 'Name' },
-                { value: RepositoryOrderField.Stargazers, label: 'Stars' },
-              ]}
-            />
+            <FilterDropdown name="Sort" description="Select order">
+              {sortOptions.map(({ label, value }) => (
+                <div>
+                  <button
+                    onClick$={() => (store.sortBy = value)}
+                    type="button"
+                    name={'order'}
+                    className={styles.itemButton}
+                  >
+                    {value === store.sortBy && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                  </button>
+                </div>
+              ))}
+            </FilterDropdown>
           </div>
         </div>
       </div>
