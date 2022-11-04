@@ -6,14 +6,14 @@
   import type { LayoutServerData } from './$types';
 
   export let data: LayoutServerData;
-  const { repoInfo } = data;
-  const { description, website, tags, readme } = repoInfo;
+  const { repoInfo, username, repo } = data;
+  const { description, website, tags, readme, tree, activeBranch } = repoInfo;
 </script>
 
 <div class="container grid grid-cols-12 subpage">
   <section class="col-span-9 col-sm-span-12">
     <FileExplorerNav />
-    <FileExplorerContainer />
+    <FileExplorerContainer contents={tree} branch={activeBranch} {username} {repo} />
   </section>
 
   <section class="col-span-3 col-sm-span-12">
