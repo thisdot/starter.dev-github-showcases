@@ -1,12 +1,12 @@
 <script>
-  import { GitBranch16 } from 'svelte-octicons';
+  import { ChevronDown12, ChevronDown16, GitBranch16 } from 'svelte-octicons';
 </script>
 
 <nav class="file-explorer-container">
   <button class="btn">
     <GitBranch16 />
     <span class="btn-text">main</span>
-    <span class="dropdown-caret" />
+    <ChevronDown16 />
   </button>
 </nav>
 
@@ -34,26 +34,9 @@
     &:hover {
       background-color: variables.$gray200;
     }
-    .dropdown-caret {
-      margin-left: 4px;
-      opacity: 0.8;
-    }
   }
 
   .btn-text {
     font-weight: 600;
-  }
-
-  .dropdown-caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    vertical-align: middle;
-    content: '';
-    border-style: solid;
-    border-width: 4px 4px 0;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    border-left-color: transparent;
   }
 </style>
