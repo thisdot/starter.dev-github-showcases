@@ -1,7 +1,7 @@
 import { $, component$, useContext } from '@builder.io/qwik';
 import * as styles from './repo-filters.classNames';
 import cn from 'classnames';
-import { LanguageFilter, TypeFilter, RepositoryOrderField } from './types';
+import { LanguageFilter, TypeFilter, RepositoryOrderField, DefaultLanguage } from './types';
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
 import { XmarkIcon, CheckIcon } from '../icons';
 import { SearchInput } from '../search-input/search-input';
@@ -13,17 +13,16 @@ export type RepoFiltersProps = {
 };
 
 export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersProps) => {
+  const filters = useContext(filterStore);
   const resetFilters$ = $(() => {
-    // TODO: logic for reset filters
-    console.log('reset filters');
+    filters.search = '';
+    filters.language = DefaultLanguage.default;
+    (filters.type = TypeFilter.ALL), (filters.sortBy = RepositoryOrderField.UpdatedAt);
   });
-
-  const store = useContext(filterStore);
-  // TODO: logic for this
-  const isFiltersActive = false;
-  const isQueryActive = false;
-  const isTypeActive = false;
-  const isLanguageActive = false;
+  const isLanguageActive = filters.language !== TypeFilter.ALL;
+  const isQueryActive = !!filters.search;
+  const isTypeActive = filters.type !== TypeFilter.ALL;
+  const isFiltersActive = isLanguageActive || isQueryActive || isTypeActive;
 
   const sortOptions = [
     {
@@ -61,12 +60,12 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
               {filteOptions.map(({ label, value }) => (
                 <div>
                   <button
-                    onClick$={() => (store.filterType = value)}
+                    onClick$={() => (filters.type = value)}
                     type="button"
                     name={'Type'}
                     className={styles.itemButton}
                   >
-                    {value === store.filterType && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === filters.type && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
                 </div>
               ))}
@@ -77,12 +76,12 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
               {languages.map(({ label, value }) => (
                 <div>
                   <button
-                    onClick$={() => (store.language = value)}
+                    onClick$={() => (filters.language = value)}
                     type="button"
                     name={'language'}
                     className={styles.itemButton}
                   >
-                    {value === store.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === filters.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
                 </div>
               ))}
@@ -93,12 +92,12 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
               {sortOptions.map(({ label, value }) => (
                 <div>
                   <button
-                    onClick$={() => (store.sortBy = value)}
+                    onClick$={() => (filters.sortBy = value)}
                     type="button"
                     name={'order'}
                     className={styles.itemButton}
                   >
-                    {value === store.sortBy && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === filters.sortBy && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
                 </div>
               ))}
@@ -112,18 +111,18 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
             <span className="font-semibold" data-testid="filterText">
               {resultCount}
             </span>{' '}
-            results for {isTypeActive && <span className="font-semibold">[ current value (TBD) ]</span>} repositories{' '}
+            results for {isTypeActive && <span className="font-semibold">{filters.type}</span>} repositories{' '}
             {isQueryActive && (
               <>
-                matching <span className="font-semibold">[ current value (TBD) ]</span>
+                matching <span className="font-semibold">{filters.search}</span>
               </>
             )}{' '}
             {isLanguageActive && (
               <>
-                written in <span className="font-semibold capitalize">[ current value (TBD) ]</span>
+                written in <span className="font-semibold capitalize">{filters.language}</span>
               </>
             )}{' '}
-            sorted by <span className="font-semibold">[ current value (TBD) ]</span>
+            sorted by <span className="font-semibold">{filters.sortBy.split('_').join(' ').toLowerCase()}.</span>
           </div>
           <div>
             <button onClick$={resetFilters$} className={cn(styles.clearBtn, 'group')}>
