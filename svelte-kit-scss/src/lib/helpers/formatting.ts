@@ -41,3 +41,7 @@ export function relativeTimeFmt(dt: string | Date): string {
   }
   return '';
 }
+
+export function titleCase(str: string): string {
+  return str.toLowerCase().replace(/\b\w/g, (s) => s.toUpperCase());
+}

@@ -5,15 +5,16 @@
   import RepoNavigation from './RepoNavigation/RepoNavigation.svelte';
 
   export let repo: RepoState;
+  const { watchCount, starCount, forkCount, issueCount, prCount } = repo;
 </script>
 
 <div class="wrapper">
   {#if repo}
     <div class="top">
-      <RepoHeading />
-      <RepoInfo />
+      <RepoHeading {repo} />
+      <RepoInfo {watchCount} {starCount} {forkCount} />
     </div>
-    <RepoNavigation />
+    <RepoNavigation {repo} {issueCount} {prCount} />
   {/if}
 </div>
 

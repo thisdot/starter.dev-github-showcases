@@ -9,7 +9,7 @@
   import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
   import { debounce } from '$lib/helpers';
-
+  
   export let data: PageServerData;
 
   const { userInfo, userOrgs, userRepos } = data;
@@ -154,7 +154,7 @@
     top: 0;
     z-index: 5;
     background-color: white;
-    border-bottom: 1px solid rgb(229, 231, 235, 1);
+    border-bottom: 1px solid #fcba03;
   }
 
   .profile-body {
