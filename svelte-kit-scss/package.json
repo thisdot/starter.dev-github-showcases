@@ -43,6 +43,8 @@
     "@sveltejs/vite-plugin-svelte": "1.0.9",
     "@testing-library/svelte": "3.2.2",
     "@types/cookie": "0.5.1",
+    "@types/markdown-it": "^12.2.3",
+    "@types/sanitize-html": "^2.6.2",
     "@typescript-eslint/eslint-plugin": "5.27.0",
     "@typescript-eslint/parser": "5.27.0",
     "babel-loader": "8.2.5",
@@ -75,6 +77,8 @@
   },
   "type": "module",
   "dependencies": {
-    "cookie": "^0.5.0"
+    "cookie": "^0.5.0",
+    "markdown-it": "^13.0.1",
+    "sanitize-html": "^2.7.3"
   }
 }

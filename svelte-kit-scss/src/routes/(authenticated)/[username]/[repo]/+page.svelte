@@ -7,7 +7,7 @@
 
   export let data: LayoutServerData;
   const { repoInfo } = data;
-  const { description, website, tags } = repoInfo;
+  const { description, website, tags, readme } = repoInfo;
 </script>
 
 <div class="container grid grid-cols-12 subpage">
@@ -21,7 +21,7 @@
   </section>
 
   <section class="col-span-9">
-    <FileExplorerReadme />
+    <FileExplorerReadme {readme} />
   </section>
 </div>
 

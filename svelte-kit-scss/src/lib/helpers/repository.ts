@@ -1,6 +1,9 @@
-import type { RepoApiResponse, RepoState } from '$lib/interfaces';
+import type { ReadmeApiResponse, RepoApiResponse, RepoState } from '$lib/interfaces';
 
-export const mapRepoResToRepoState = (data: RepoApiResponse): RepoState => {
+export const mapRepoResToRepoState = (
+  data: RepoApiResponse,
+  readmeData: ReadmeApiResponse
+): RepoState => {
   return {
     repoName: data.name,
     description: data.description,
@@ -17,7 +20,7 @@ export const mapRepoResToRepoState = (data: RepoApiResponse): RepoState => {
     activeBranch: data.default_branch,
     ownerName: '',
     prCount: 0,
-    readme: '',
+    readme: readmeData.content,
     tree: [],
   };
 };
