@@ -28,13 +28,13 @@
         const searchTermCondition = searchInput
           ? item.name.toLowerCase().includes(searchInput.toLowerCase())
           : true;
-        let typeCondition: boolean;
+        let typeCondition = false;
 
-        if (type.value === TypeFilters.ALL) {
+        if (type?.value === TypeFilters.ALL) {
           typeCondition = true;
-        } else if (type.value === TypeFilters.ARCHIVED) {
+        } else if (type?.value === TypeFilters.ARCHIVED) {
           typeCondition = Boolean(item.archived);
-        } else if (type.value === TypeFilters.FORKED) {
+        } else if (type?.value === TypeFilters.FORKED) {
           typeCondition = Boolean(item.fork);
         }
 
@@ -45,7 +45,10 @@
     }
   };
 
-  const debouncedFilterRepos = debounce(filterRepos, DEBOUNCE_TIME);
+  const debouncedFilterRepos = debounce<(event: CustomEvent<RepoFiltersState>) => void>(
+    filterRepos,
+    DEBOUNCE_TIME
+  );
 
   let lastSearchTerm = '';
 
@@ -63,7 +66,7 @@
     } else {
       debouncedFilterRepos(event);
     }
-    lastSearchTerm = event.detail.searchInput;
+    lastSearchTerm = event?.detail?.searchInput ?? '';
   };
 
   const typeFilters: FilterDropdownOption<TypeFilters>[] = [

@@ -1,4 +1,4 @@
-export const debounce = <F extends (...args: unknown[]) => unknown>(func: F, waitFor: number) => {
+export const debounce = <F extends { (...args: unknown[]): unknown }>(func: F, waitFor: number) => {
   let timeout: NodeJS.Timeout;
 
   return (...args: Parameters<F>): void => {
