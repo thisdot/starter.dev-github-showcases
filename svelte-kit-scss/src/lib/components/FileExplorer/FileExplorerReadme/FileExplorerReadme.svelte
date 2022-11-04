@@ -11,7 +11,10 @@
     const encoded = text;
     const decoded = Buffer.from(encoded, 'base64').toString('utf8');
     return sanitizeHtml(md.render(decoded), {
-      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['h1', 'h2', 'img']),
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'details', 'summary']),
+      allowedAttributes: {
+        img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
+      },
     });
   }
 </script>
