@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal } from 'solid-js';
 
 const [search, setSearch] = createSignal('');
 const [language, setLanguage] = createSignal('');
@@ -13,5 +13,5 @@ export {
   setSearch,
   setLanguage,
   setSortBy,
-  setSortType
-}
+  setSortType,
+};
