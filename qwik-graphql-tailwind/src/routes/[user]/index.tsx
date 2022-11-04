@@ -30,7 +30,7 @@ export default component$(() => {
   const filterState = useStore<FilterStoreProps>({
     search: '',
     language: DefaultLanguage.default,
-    filterType: TypeFilter.ALL,
+    type: TypeFilter.ALL,
     sortBy: RepositoryOrderField.UpdatedAt,
   });
 

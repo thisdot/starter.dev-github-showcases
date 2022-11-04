@@ -19,56 +19,61 @@ import {
 export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
   const languages = getLanguages(repos.nodes);
 
-  const store = useContext(filterStore);
-
-  const languageFilter = repoDataFilteredByLanguage(store?.language, repos.nodes);
-  const filterByType = repoDataFilteredByType(store.filterType, repos.nodes);
-  const sortedData = sortedRepoData(store?.sortBy, repos.nodes);
+  const filters = useContext(filterStore);
 
   const filteredAndSortedRepos = ((): UserRepo[] => {
-    const searchResponse = repoDataFilteredBySearch(store?.search || '', repos.nodes);
-    /**
-     * TODO:
-     * filter by type from the search response
-     *
-     * the response from filter by type to filter by language
-     *
-     * then finaly sort them
-     *
-     * then return a response
-     */
+    let searchResponse: UserRepo[] = repos.nodes;
+
+    if (filters.search) {
+      searchResponse = repoDataFilteredBySearch(filters?.search || '', searchResponse);
+    }
+
+    if (filters.language) {
+      searchResponse = repoDataFilteredByLanguage(filters?.language, searchResponse);
+    }
+
+    if (filters.type) {
+      searchResponse = repoDataFilteredByType(filters.type, searchResponse);
+    }
+
+    if (filters.sortBy) {
+      searchResponse = sortedRepoData(filters.sortBy, searchResponse);
+    }
+
     return searchResponse;
   })();
 
   return (
     <>
-      <RepoFilters languages={languages} resultCount={repos.nodes.length} />
-      {sortedData.map(({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
-        <div key={id} className={styles.container}>
-          <div className={styles.content}>
-            <h3 className="mb-2">
-              <Link href={`/${owner}/${name}`} className={styles.headingLink}>
-                {name}
-              </Link>
-              <PrivacyBadge isPrivate={isPrivate} className="relative bottom-0.5" />
-            </h3>
-            <div className={styles.description}>{description}</div>
-            <RepoMeta
-              language={primaryLanguage?.name}
-              languageColor={primaryLanguage?.color}
-              forkCount={forkCount}
-              stargazerCount={stargazerCount}
-              updatedAt={updatedAt}
-            />
+      <RepoFilters languages={languages} resultCount={filteredAndSortedRepos.length} />
+      {filteredAndSortedRepos.map(
+        ({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
+          <div key={id} className={styles.container}>
+            <div className={styles.content}>
+              <h3 className="mb-2">
+                <Link href={`/${owner}/${name}`} className={styles.headingLink}>
+                  {name}
+                </Link>
+                <PrivacyBadge isPrivate={isPrivate} className="relative bottom-0.5" />
+              </h3>
+              <div className={styles.description}>{description}</div>
+              <RepoMeta
+                language={primaryLanguage?.name}
+                languageColor={primaryLanguage?.color}
+                forkCount={forkCount}
+                stargazerCount={stargazerCount}
+                updatedAt={updatedAt}
+              />
+            </div>
+            <div className={styles.aside}>
+              <button className={styles.starBtn}>
+                <StarIcon className={styles.starIcon} />
+                Star
+              </button>
+            </div>
           </div>
-          <div className={styles.aside}>
-            <button className={styles.starBtn}>
-              <StarIcon className={styles.starIcon} />
-              Star
-            </button>
-          </div>
-        </div>
-      ))}
+        )
+      )}
       {(repos.pageInfo?.hasNextPage || repos.pageInfo?.hasPreviousPage) && (
         <Pagination pageInfo={repos.pageInfo} owner={owner} />
       )}
