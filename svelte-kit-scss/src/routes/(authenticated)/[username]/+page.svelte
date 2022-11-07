@@ -8,67 +8,117 @@
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
   import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
-
+  import { debounce } from '$lib/helpers';
+  import { LanguageFilters, SortFilters, TypeFilters } from '$lib/enums';
   export let data: PageServerData;
 
-  // sample:
-  const handleFiltersChange = (event: CustomEvent<RepoFiltersState>): void => {
-    console.log('[handleFiltersChange]', event.detail);
+  const { userInfo, userOrgs, userRepos } = data;
+
+  const DEBOUNCE_TIME = 2000;
+
+  let hasActiveFilters = false;
+
+  let filteredRepos = userRepos;
+
+  const filterRepos = (event: CustomEvent<RepoFiltersState>): void => {
+    const { searchInput, type } = event.detail;
+    if (hasActiveFilters) {
+      filteredRepos = userRepos.filter((item) => {
+        const searchTermCondition = searchInput
+          ? item.name.toLowerCase().includes(searchInput.toLowerCase())
+          : true;
+        let typeCondition = false;
+
+        if (type?.value === TypeFilters.ALL) {
+          typeCondition = true;
+        } else if (type?.value === TypeFilters.ARCHIVED) {
+          typeCondition = Boolean(item.archived);
+        } else if (type?.value === TypeFilters.FORKED) {
+          typeCondition = Boolean(item.fork);
+        }
+
+        return searchTermCondition && typeCondition;
+      });
+    } else {
+      filteredRepos = userRepos;
+    }
   };
 
-  const typeFilters: FilterDropdownOption[] = [
+  const debouncedFilterRepos = debounce<(event: CustomEvent<RepoFiltersState>) => void>(
+    filterRepos,
+    DEBOUNCE_TIME
+  );
+
+  let lastSearchTerm = '';
+
+  const handleFiltersChange = (event: CustomEvent<RepoFiltersState>): void => {
+    const { searchInput, type, language, sort } = event.detail || {};
+
+    hasActiveFilters =
+      type.value !== TypeFilters.ALL ||
+      language.value !== LanguageFilters.ALL ||
+      sort.value !== SortFilters.UPDATED ||
+      !!searchInput;
+
+    if (event.detail.searchInput === lastSearchTerm) {
+      filterRepos(event);
+    } else {
+      debouncedFilterRepos(event);
+    }
+    lastSearchTerm = event?.detail?.searchInput ?? '';
+  };
+
+  const typeFilters: FilterDropdownOption<TypeFilters>[] = [
     {
       label: 'All',
-      value: 'all',
+      value: TypeFilters.ALL,
     },
     {
       label: 'Forked',
-      value: 'forked',
+      value: TypeFilters.FORKED,
     },
     {
       label: 'Archived',
-      value: 'archived',
+      value: TypeFilters.ARCHIVED,
     },
   ];
 
-  const languageFilters: FilterDropdownOption[] = [
+  const languageFilters: FilterDropdownOption<LanguageFilters>[] = [
     {
       label: 'All',
-      value: 'all',
+      value: LanguageFilters.ALL,
     },
     {
       label: 'Vue',
-      value: 'vue',
+      value: LanguageFilters.VUE,
     },
     {
       label: 'JavaScript',
-      value: 'js',
+      value: LanguageFilters.JS,
     },
     {
       label: 'TypeScript',
-      value: 'ts',
+      value: LanguageFilters.TS,
     },
   ];
 
-  const sortFilters: FilterDropdownOption[] = [
+  const sortFilters: FilterDropdownOption<SortFilters>[] = [
     {
       label: 'Last Updated',
-      value: 'updated',
+      value: SortFilters.UPDATED,
     },
     {
       label: 'Name',
-      value: 'name',
+      value: SortFilters.NAME,
     },
     {
       label: 'Stars',
-      value: 'stars',
+      value: SortFilters.STARS,
     },
   ];
 
-  const reposCount = 7;
-  // sample end
+  $: reposCount = filteredRepos.length;
 
-  const { userInfo, userOrgs, userRepos } = data;
   const isOrg = userInfo?.type == ProfileType.Organization;
 </script>
 
@@ -99,7 +149,7 @@
           {sortFilters}
           on:filtersChange={handleFiltersChange}
         />
-        <RepoList repos={userRepos} />
+        <RepoList repos={filteredRepos} />
       </div>
     {:else}
       <div class="subpage col-span-3">
@@ -115,7 +165,7 @@
           {sortFilters}
           on:filtersChange={handleFiltersChange}
         />
-        <RepoList repos={userRepos} />
+        <RepoList repos={filteredRepos} />
       </div>
     {/if}
   </div>
@@ -123,9 +173,11 @@
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
+
   .profile-container {
     padding-top: 2rem;
   }
+
   .profile-header {
     position: sticky;
     top: 0;
@@ -133,6 +185,7 @@
     background-color: white;
     border-bottom: 1px solid #fcba03;
   }
+
   .profile-body {
     grid-template-rows: max-content 1fr;
     padding-top: 2rem;
