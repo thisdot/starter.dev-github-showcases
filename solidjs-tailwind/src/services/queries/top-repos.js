@@ -18,6 +18,7 @@ export const TOP_REPOS_QUERY = `
             name
             color
           }
+          visibility
           isPrivate
           stargazerCount
           forkCount
