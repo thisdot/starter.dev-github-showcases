@@ -1,6 +1,7 @@
 import type { PageServerLoad } from './$types';
 import type { UserApiResponse, UserOrgsApiResponse, UserReposApiResponse } from '$lib/interfaces';
 import {
+  createLanguageMap,
   mapUserInfoResponseToUserInfo,
   mapUserOrgsApiResponseToUserOrgs,
   mapUserReposApiResponseToUserReposStates,
@@ -18,10 +19,13 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
     fetch(fetchReposUrl).then((response) => response.json() as Promise<UserReposApiResponse>),
   ]);
 
+  const userReposList = mapUserReposApiResponseToUserReposStates(userRepos);
+
   return {
     userInfo: mapUserInfoResponseToUserInfo(userInfo),
     userOrgs: mapUserOrgsApiResponseToUserOrgs(userOrgs),
-    userRepos: mapUserReposApiResponseToUserReposStates(userRepos),
+    userRepos: userReposList,
     username: params.username,
+    repoLanguageList: createLanguageMap(userReposList),
   };
 };

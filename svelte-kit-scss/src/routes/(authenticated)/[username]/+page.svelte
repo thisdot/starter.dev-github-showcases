@@ -8,12 +8,12 @@
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
   import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
-  import { debounce } from '$lib/helpers';
+  import { debounce, filterRepoUtil } from '$lib/helpers';
   import { LanguageFilters, SortFilters, TypeFilters } from '$lib/enums';
 
   export let data: PageServerData;
 
-  const { userInfo, userOrgs, userRepos } = data;
+  const { userInfo, userOrgs, userRepos, repoLanguageList } = data;
 
   const DEBOUNCE_TIME = 2000;
 
@@ -22,24 +22,9 @@
   let filteredRepos = userRepos;
 
   const filterRepos = (event: CustomEvent<RepoFiltersState>): void => {
-    const { searchInput, type } = event.detail;
+    const { searchInput, type, language } = event.detail;
     if (hasActiveFilters) {
-      filteredRepos = userRepos.filter((item) => {
-        const searchTermCondition = searchInput
-          ? item.name.toLowerCase().includes(searchInput.toLowerCase())
-          : true;
-        let typeCondition = false;
-
-        if (type?.value === TypeFilters.ALL) {
-          typeCondition = true;
-        } else if (type?.value === TypeFilters.ARCHIVED) {
-          typeCondition = Boolean(item.archived);
-        } else if (type?.value === TypeFilters.FORKED) {
-          typeCondition = Boolean(item.fork);
-        }
-
-        return searchTermCondition && typeCondition;
-      });
+      filteredRepos = userRepos.filter(filterRepoUtil(searchInput, type, language));
     } else {
       filteredRepos = userRepos;
     }
@@ -89,19 +74,7 @@
       label: 'All',
       value: LanguageFilters.ALL,
     },
-    {
-      label: 'Vue',
-      value: LanguageFilters.VUE,
-    },
-    {
-      label: 'JavaScript',
-      value: LanguageFilters.JS,
-    },
-    {
-      label: 'TypeScript',
-      value: LanguageFilters.TS,
-    },
-  ];
+  ].concat(repoLanguageList);
 
   const sortFilters: FilterDropdownOption<SortFilters>[] = [
     {
