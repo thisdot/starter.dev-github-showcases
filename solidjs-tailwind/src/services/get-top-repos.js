@@ -10,7 +10,30 @@ const getTopRepos = async ({url}) => {
       authorization: `Bearer tokenvalue`,
     }
   }
-  return await FetchApi(data);
+  const resp = await FetchApi(data);
+
+  const repos = resp.viewer.topRepositories?.nodes.reduce((acc, repo) => {
+    if (!repo) {
+      return acc;
+    }
+    return [
+      ...acc,
+      {
+        id: repo.id,
+        name: repo.name,
+        description: repo.description,
+        owner: repo.owner.login,
+        language: repo.primaryLanguage?.name,
+        languageColor: repo.primaryLanguage?.color,
+        isPrivate: repo.isPrivate,
+        stargazerCount: repo.stargazerCount,
+        forkCount: repo.forkCount,
+        updatedAt: repo.updatedAt,
+      },
+    ];
+  }, []);
+
+  return repos;
 };
 
 export default getTopRepos;
