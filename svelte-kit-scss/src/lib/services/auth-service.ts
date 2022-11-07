@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   signOut(): void {
-    goto('/signin');
+    goto('/logout');
   }
 
   /**

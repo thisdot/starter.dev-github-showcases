@@ -14,8 +14,14 @@ export const handle: Handle = async ({ event, resolve }) => {
     }
   }
 
+  if (event.url.pathname.startsWith('/signin')) {
+    if (accessTokenFromCookies) {
+      return Response.redirect(`${event.url.origin}`);
+    }
+  }
+
   // erase token cookie
-  if (event.url.pathname === '/signin') {
+  if (event.url.pathname === '/logout') {
     event.cookies.set(AUTH_COOKIE_NAME, String(), AUTH_COOKIE_ERASE_OPTIONS);
     event.locals.accessToken = undefined;
     event.locals.user = undefined;

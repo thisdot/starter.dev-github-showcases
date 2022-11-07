@@ -10,7 +10,6 @@
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
   import { debounce, filterRepoUtil } from '$lib/helpers';
   import { LanguageFilters, SortFilters, TypeFilters } from '$lib/enums';
-
   export let data: PageServerData;
 
   const { userInfo, userOrgs, userRepos, repoLanguageList } = data;

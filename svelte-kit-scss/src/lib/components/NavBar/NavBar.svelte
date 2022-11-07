@@ -18,7 +18,7 @@
 
   function signOut() {
     closeDropdown();
-    location.href = '/signin';
+    location.href = '/logout';
   }
 
   onMount(() => {
