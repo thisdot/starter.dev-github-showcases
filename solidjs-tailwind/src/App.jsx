@@ -4,11 +4,14 @@ import ROUTES from './routes';
 
 function App() {
   return (
-    <Routes>
-      <Route component={Home} path={ROUTES.HOME} />
-      <Route component={SigninPage} path={ROUTES.SIGNIN} />
-      <Route component={RedirectPage} path={ROUTES.REDIRECT} />
-    </Routes>
+    <>
+      <Header user={{ login: 'SDaian' }} />
+      <Routes>
+        <Route component={Home} path={ROUTES.HOME} />
+        <Route component={SigninPage} path={ROUTES.SIGNIN} />
+        <Route component={RedirectPage} path={ROUTES.REDIRECT} />
+      </Routes>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
-import { createResource, Show } from 'solid-js';
+import { createResource } from 'solid-js';
 import { useAuth } from '../auth';
 import { useOctokit } from '../github';
+import * as styles from './homepage.classNames';
 
 const Home = () => {
   useAuth().preventUnauthorised();
@@ -16,14 +17,19 @@ const Home = () => {
   });
 
   return (
-    <>
-      <h1 class="flex justify-center items-center text-white my-5 mx-auto bg-blue-500  w-full lg:w-[75%] p-4 text-lg ">
-        SolidJs and Tailwind CSS Starter kit
-      </h1>
-      <Show when={!data.loading} keyed>
-        <p class="w-full lg:w-[75%] p-4 mx-auto">Welcome {data().login}</p>
-      </Show>
-    </>
+    <div class={styles.container}>
+      <aside class={styles.aside}>
+        <span>Here will be the gists</span>
+      </aside>
+      <main class={styles.content}>
+        <div class="p-12">
+          <h2 class={styles.title}>
+            Top Repositories
+          </h2>
+          <span>Here will be the top repos. Welcome {data().login}</span>
+        </div>
+      </main>
+    </div>
   );
 };
 
