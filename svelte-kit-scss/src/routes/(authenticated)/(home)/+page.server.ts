@@ -17,11 +17,11 @@ export const load: PageServerLoad = async ({ fetch, parent }) => {
 
     const gistsPromise = await fetch(gistsURL);
 
-    const data = await Promise.all([reposPromise, gistsPromise]);
+    const [repoRes, gistsRes] = await Promise.all([reposPromise, gistsPromise]);
 
-    const gists = (await data[1].json()) as UserGistsApiResponse;
+    const gists = (await gistsRes.json()) as UserGistsApiResponse;
 
-    const repos = (await data[0].json()) as UserReposApiResponse;
+    const repos = (await repoRes.json()) as UserReposApiResponse;
 
     return {
       topRepos: mapUserReposToTopRepos(repos),

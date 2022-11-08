@@ -1,7 +1,7 @@
 import { beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import RepositoryCard from './RepositoryCard.svelte';
-import { topRepositoriesFixture } from '../../fixtures/repositories';
+import { topRepositoriesFixture } from '../../fixtures';
 
 describe('RepositoryCard', () => {
   beforeEach(() => {
@@ -37,7 +37,7 @@ describe('RepositoryCard', () => {
   });
 
   it('should should render repo last update', () => {
-    const lastUpdate = screen.getByText(/1 day ago/);
+    const lastUpdate = screen.getByText(/2 weeks ago/);
     expect(lastUpdate).toBeTruthy();
   });
 });

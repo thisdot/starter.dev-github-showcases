@@ -4,7 +4,13 @@ export interface UserGistsState {
 }
 
 interface Files {
-  [key: string]: { filename: string };
+  [key: string]: {
+    filename: string;
+    type: string;
+    language: string;
+    raw_url: string;
+    size: number;
+  };
 }
 
 export interface UserGist {
@@ -22,6 +28,7 @@ export interface UserGist {
   truncated: false;
   updated_at: string;
   url: string;
+  description: string;
   files: Files;
 }
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { UserReposState } from '../../interfaces';
-  import RepositoryCard from '$lib/components/RepositoryCard/RepositoryCard.svelte';
+  import RepositoryCard from '../../components/RepositoryCard/RepositoryCard.svelte';
 
   export let repos: UserReposState[];
   export let username: string | undefined;

@@ -1,6 +1,6 @@
 import { beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
-import { topRepositoriesFixture } from '../../fixtures/repositories';
+import { topRepositoriesFixture } from '../../fixtures';
 import TopRepositories from './TopRepositories.svelte';
 
 describe('TopRepositories', () => {
