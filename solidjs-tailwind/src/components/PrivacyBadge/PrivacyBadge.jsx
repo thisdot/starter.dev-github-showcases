@@ -1,10 +1,10 @@
-import { splitProps } from 'solid-js';
+import * as styles from './privacy-badge.classNames';
+import cn from 'classnames';
 
 const PrivacyBadge = (props) => {
-  const [local] = splitProps(props, ['visibility']);
   return (
-    <span class="py-0.5 px-2 text-xs rounded-xl text-gray-600 border border-gray-300 font-medium capitalize">
-      {local.visibility}
+    <span class={cn(styles.tag, props.className)}>
+      {props.isPrivate ? 'Private' : 'Public'}
     </span>
   );
 };
