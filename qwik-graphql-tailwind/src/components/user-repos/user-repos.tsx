@@ -9,21 +9,43 @@ import { Pagination } from '../pagination/pagination';
 import { RepoFilters } from '../repo-filters/repo-filters';
 import { getLanguages } from './getLanguages';
 import filterStore from '~/context/repo-filter';
-import { repoDataFilteredBySearch } from './filter-sort-functions';
+import {
+  repoDataFilteredByLanguage,
+  repoDataFilteredBySearch,
+  repoDataFilteredByType,
+  sortedRepoData,
+} from './filter-sort-functions';
 
 export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
   const languages = getLanguages(repos.nodes);
 
-  const searchValue = useContext(filterStore);
+  const filters = useContext(filterStore);
 
   const filteredAndSortedRepos = ((): UserRepo[] => {
-    const searchResponse = repoDataFilteredBySearch(searchValue?.search || '', repos.nodes);
+    let searchResponse: UserRepo[] = repos.nodes;
+
+    if (filters.search) {
+      searchResponse = repoDataFilteredBySearch(filters?.search || '', searchResponse);
+    }
+
+    if (filters.language) {
+      searchResponse = repoDataFilteredByLanguage(filters?.language, searchResponse);
+    }
+
+    if (filters.type) {
+      searchResponse = repoDataFilteredByType(filters.type, searchResponse);
+    }
+
+    if (filters.sortBy) {
+      searchResponse = sortedRepoData(filters.sortBy, searchResponse);
+    }
+
     return searchResponse;
   })();
 
   return (
     <>
-      <RepoFilters languages={languages} resultCount={repos.nodes.length} />
+      <RepoFilters languages={languages} resultCount={filteredAndSortedRepos.length} />
       {filteredAndSortedRepos.map(
         ({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
           <div key={id} className={styles.container}>

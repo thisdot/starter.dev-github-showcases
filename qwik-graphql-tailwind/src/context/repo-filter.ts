@@ -2,8 +2,8 @@ import { createContext } from '@builder.io/qwik';
 export interface FilterStoreProps {
   search: string;
   language: string;
-  sortType: string;
-  order: string;
+  type: string;
+  sortBy: string;
 }
 const filterStore = createContext<FilterStoreProps>('filter-context');
 

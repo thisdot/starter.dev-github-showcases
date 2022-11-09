@@ -19,6 +19,10 @@ export enum TypeFilter {
   ARCHIVED = 'archived',
 }
 
+export enum DefaultLanguage {
+  default = 'all',
+}
+
 export interface LanguageFilter {
   label: string;
   value: string;

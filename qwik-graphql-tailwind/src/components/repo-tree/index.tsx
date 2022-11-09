@@ -3,6 +3,7 @@ import { useQuery } from '~/utils/useQuery';
 import { GITHUB_GRAPHQL } from '~/utils/constants';
 import { REPO_TREE_QUERY } from '~/utils/queries/repo-tree';
 import { RepoContext, SharedState } from '~/routes/[owner]/[name]';
+import { FileExplorer } from '~/components/file-explorer';
 
 export const RepoTree = component$(() => {
   const store = useContext(RepoContext);
@@ -27,8 +28,7 @@ export const RepoTree = component$(() => {
 
   return (
     <div>
-      <div>There will be container!</div>
-      <pre>{JSON.stringify(store.tree.data, null, 2)}</pre>
+      <FileExplorer />
     </div>
   );
 });
