@@ -7,7 +7,7 @@ describe('ProfileNavSection', () => {
     render(ProfileNavSection, {});
   });
 
-  it("should should render Profile Nav", () => {
+  it('should should render Profile Nav', () => {
     const name = screen.getByText(/Repositories/);
     expect(name).toBeTruthy();
   });
