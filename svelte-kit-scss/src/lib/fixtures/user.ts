@@ -1,4 +1,4 @@
-import type { UserApiResponse } from '../interfaces';
+import type { UserApiResponse } from '$lib/interfaces';
 
 export const userInfoFixture: UserApiResponse = {
   login: 'thisdot',

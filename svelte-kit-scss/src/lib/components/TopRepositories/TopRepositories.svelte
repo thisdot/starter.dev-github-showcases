@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { UserReposState } from '../../interfaces';
+  import type { UserReposState } from '$lib/interfaces';
   import RepositoryCard from '$lib/components/RepositoryCard/RepositoryCard.svelte';
 
   export let repos: UserReposState[];

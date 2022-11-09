@@ -1,4 +1,13 @@
-export const gistsFixture = [
+import type { UserGistsState } from '$lib/interfaces';
+
+export const gistsFixture: UserGistsState[] = [
+  {
+    url: 'https://api.github.com/gists/3232acaa90f23a7c673447c0de52618d',
+    fileName: 'README-Template.md',
+  },
+];
+
+export const gistsAPIResponseFixture = [
   {
     url: 'https://api.github.com/gists/3232acaa90f23a7c673447c0de52618d',
     forks_url: 'https://api.github.com/gists/3232acaa90f23a7c673447c0de52618d/forks',

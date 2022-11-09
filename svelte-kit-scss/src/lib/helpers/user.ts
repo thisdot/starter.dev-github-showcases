@@ -5,7 +5,7 @@ import type {
   UserOrgs,
   UserReposState,
   UserReposApiResponse,
-} from '../interfaces';
+} from '$lib/interfaces';
 
 export const mapUserInfoResponseToUserInfo = (user?: UserApiResponse): UserInfo | undefined => {
   return user

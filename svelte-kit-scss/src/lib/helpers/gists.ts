@@ -1,4 +1,4 @@
-import type { UserGistsApiResponse, UserGistsState } from '../interfaces';
+import type { UserGistsApiResponse, UserGistsState } from '$lib/interfaces';
 
 export const mapGistsToHomeGists = (gists: UserGistsApiResponse): UserGistsState[] => {
   if (gists) {

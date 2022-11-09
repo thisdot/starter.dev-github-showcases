@@ -1,4 +1,4 @@
-import type { UserReposApiResponse, UserReposState } from '../interfaces';
+import type { UserReposApiResponse, UserReposState } from '$lib/interfaces';
 import type { FilterDropdownOption } from '../components/shared/FilterDropdown/filter-option';
 import { LanguageFilters, TypeFilters } from '../enums';
 
