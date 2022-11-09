@@ -1,4 +1,4 @@
-import type { UserGistsState } from '../interfaces';
+import type { UserGistsState } from '$lib/interfaces';
 
 export const gistsFixture: UserGistsState[] = [
   {

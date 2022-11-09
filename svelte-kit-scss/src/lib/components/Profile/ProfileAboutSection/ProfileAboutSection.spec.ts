@@ -1,8 +1,8 @@
 import { beforeEach, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import ProfileAboutSection from './ProfileAboutSection.svelte';
-import { userInfoFixture, userOrgs } from '../../../fixtures';
-import { mapUserInfoResponseToUserInfo, mapUserOrgsApiResponseToUserOrgs } from '../../../helpers';
+import { userInfoFixture, userOrgs } from '$lib/fixtures';
+import { mapUserInfoResponseToUserInfo, mapUserOrgsApiResponseToUserOrgs } from '$lib/helpers';
 
 describe('ProfileAboutSection', () => {
   beforeEach(() => {

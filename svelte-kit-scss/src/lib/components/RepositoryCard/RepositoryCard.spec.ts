@@ -1,13 +1,12 @@
 import { beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import RepositoryCard from './RepositoryCard.svelte';
-import { topRepositoriesFixture } from '../../fixtures';
+import { topRepositoriesFixture } from '$lib/fixtures';
 
 describe('RepositoryCard', () => {
   beforeEach(() => {
     render(RepositoryCard, {
       repo: topRepositoriesFixture[1],
-      username: 'thisdot',
     });
   });
 

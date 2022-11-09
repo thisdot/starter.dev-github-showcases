@@ -1,7 +1,7 @@
 import { beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import Gists from './Gists.svelte';
-import { gistsFixture } from '../../fixtures';
+import { gistsFixture } from '$lib/fixtures';
 
 describe('Gists Component', () => {
   beforeEach(() => {

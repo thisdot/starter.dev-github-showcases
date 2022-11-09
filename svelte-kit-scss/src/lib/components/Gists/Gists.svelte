@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { UserGistsState } from '../../interfaces';
+  import type { UserGistsState } from '$lib/interfaces';
 
   export let gists: UserGistsState[];
 </script>
