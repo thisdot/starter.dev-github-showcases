@@ -6,21 +6,18 @@ import type { IssuesAPIResponse } from '$lib/interfaces';
 export const load: PageServerLoad = async ({ fetch, params }) => {
   const { username, repo } = params;
 
-  const issuesOpenURL = new URL(
-    `/search/issues?q=repo:${username}/${repo}+type:issue+state:open`,
-    ENV.GITHUB_URL
-  );
-  const issuesCloseURL = new URL(
-    `/search/issues?q=repo:${username}/${repo}+type:issue+state:closed`,
-    ENV.GITHUB_URL
-  );
+  const getIssuesOpenUrl = new URL('/search/issues', ENV.GITHUB_URL);
+  getIssuesOpenUrl.searchParams.append('q', `repo:${username}/${repo}+type:issue+state:open`);
+
+  const getIssuesClosedUrl = new URL('/search/issues', ENV.GITHUB_URL);
+  getIssuesOpenUrl.searchParams.append('q', `repo:${username}/${repo}+type:issue+state:closed`);
 
   try {
     const [openIssues, closedIssues] = await Promise.all([
-      fetch(issuesOpenURL.toString()).then(
+      fetch(getIssuesOpenUrl.toString()).then(
         (response) => response.json() as Promise<IssuesAPIResponse>
       ),
-      fetch(issuesCloseURL.toString()).then(
+      fetch(getIssuesClosedUrl.toString()).then(
         (response) => response.json() as Promise<IssuesAPIResponse>
       ),
     ]);
