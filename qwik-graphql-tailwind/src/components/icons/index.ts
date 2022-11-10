@@ -17,3 +17,6 @@ export * from './pullRequest.icon';
 export * from './folder.icon';
 export * from './document.icon';
 export * from './carret-dropdown.icon';
+export * from './comment.icon';
+export * from './closed-issue.icon';
+export * from './closed-pr.icon';
