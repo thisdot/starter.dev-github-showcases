@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RouteConfigModule } from '@this-dot/route-config';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,11 @@ const routes: Routes = [
   {
     path: 'redirect',
     redirectTo: 'signin/redirect',
+  },
+  {
+    path: '404',
+    pathMatch: 'full',
+    component: PageNotFoundComponent,
   },
   {
     path: '',
