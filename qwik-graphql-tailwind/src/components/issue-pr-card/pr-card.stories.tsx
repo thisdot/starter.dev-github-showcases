@@ -17,6 +17,8 @@ Demo.args = {
     title: 'feat(solidjs): Create user profile layout ',
     number: 866,
     isOpen: false,
+    isMerged: true,
+    isDraft: false,
     createdAt: '2021-08-06T15:00:00Z',
     authorName: 'Sara Vieira',
     commentsCount: 2,

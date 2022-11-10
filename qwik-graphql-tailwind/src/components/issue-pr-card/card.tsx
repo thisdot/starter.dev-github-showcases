@@ -1,6 +1,15 @@
 import { component$ } from '@builder.io/qwik';
 import { format } from 'date-fns';
-import { CommentIcon, IssuesIcon, ClosedIssueIcon, PullRequestIcon, ClosedPrIcon } from '../icons';
+import {
+  DraftPrIcon,
+  CommentIcon,
+  IssuesIcon,
+  ResolvedIssueIcon,
+  ClosedIssueIcon,
+  PullRequestIcon,
+  MergedPrIcon,
+  ClosedPrIcon,
+} from '../icons';
 import * as styles from './issue-pr-card.classNames';
 
 export interface IssuePrCardProps {
@@ -9,6 +18,9 @@ export interface IssuePrCardProps {
     title: string;
     number: number;
     isOpen: boolean;
+    isMerged?: boolean;
+    isResolved?: boolean;
+    isDraft?: boolean;
     createdAt: string;
     authorName: string;
     commentsCount: number;
@@ -16,7 +28,23 @@ export interface IssuePrCardProps {
   type: 'issue' | 'pr';
 }
 
+// An issue can be open, closed, or resolved
+// A PR can be open, closed, or merged
+// A draft PR can be open or closed
+// when isDraft is true, the pr is open, only pr can be draft
+// when isResolved is true, the issue is closed, only issue can be resolved
+// when isMerged is true, the pr is closed, only pr can be merged
 export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
+  const iconColor = data.isOpen
+    ? type === 'pr' && data.isDraft
+      ? 'text-gray-500'
+      : 'text-green-600'
+    : data.isMerged || data.isResolved
+    ? 'text-purple-600'
+    : type === 'issue' && !data.isResolved
+    ? 'text-gray-500'
+    : 'text-red-600';
+
   return (
     <div className={styles.card_container}>
       <div className="flex">
@@ -25,17 +53,23 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
         </label>
 
         <div className="flex-shrink-0 pl-4">
-          <span className={data.isOpen ? 'text-green-600' : 'text-purple-600'}>
+          <span className={iconColor}>
             {type == 'issue' ? (
               data.isOpen ? (
                 <IssuesIcon className="w-5 h-5" />
               ) : (
-                <ClosedIssueIcon className="w-5 h-5" />
+                <>
+                  {data.isResolved ? (
+                    <ResolvedIssueIcon className="w-5 h-5" />
+                  ) : (
+                    <ClosedIssueIcon className="w-5 h-5" />
+                  )}
+                </>
               )
             ) : data.isOpen ? (
-              <PullRequestIcon className="w-5 h-5" />
+              <>{data.isDraft ? <DraftPrIcon className="w-5 h-5" /> : <PullRequestIcon className="w-5 h-5" />}</>
             ) : (
-              <ClosedPrIcon className="w-5 h-5" />
+              <>{data.isMerged ? <MergedPrIcon className="w-5 h-5" /> : <ClosedPrIcon className="w-5 h-5" />}</>
             )}
           </span>
         </div>

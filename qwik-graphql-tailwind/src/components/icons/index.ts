@@ -19,4 +19,7 @@ export * from './document.icon';
 export * from './carret-dropdown.icon';
 export * from './comment.icon';
 export * from './closed-issue.icon';
+export * from './resolved-issue.icon';
 export * from './closed-pr.icon';
+export * from './merged-pr.icon';
+export * from './draft-pr.icon';
