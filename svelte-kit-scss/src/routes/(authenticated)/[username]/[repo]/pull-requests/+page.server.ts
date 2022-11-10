@@ -1,23 +1,32 @@
 import type { PageServerLoad } from './$types';
-import { mapPRResToPRState } from '$lib/helpers';
+import { remapRepoPullRequest } from '$lib/helpers';
 import { ENV } from '$lib/constants/env';
 import type { PullRequestAPIResponse } from '$lib/interfaces';
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
   const { username, repo } = params;
 
+  const prOpenURL = new URL(
+    `/search/issues?q=repo:${username}/${repo}+type:pr+state:open`,
+    ENV.GITHUB_URL
+  );
+  const prCloseURL = new URL(
+    `/search/issues?q=repo:${username}/${repo}+type:pr+state:closed`,
+    ENV.GITHUB_URL
+  );
+
   try {
     const [openPRs, closedPRs] = await Promise.all([
-      fetch(`${ENV.GITHUB_URL}/search/issues?q=repo:${username}/${repo}+type:pr+state:open`).then(
+      fetch(prOpenURL.toString()).then(
         (response) => response.json() as Promise<PullRequestAPIResponse>
       ),
-      fetch(`${ENV.GITHUB_URL}/search/issues?q=repo:${username}/${repo}+type:pr+state:closed`).then(
+      fetch(prCloseURL.toString()).then(
         (response) => response.json() as Promise<PullRequestAPIResponse>
       ),
     ]);
     return {
-      openPRs: mapPRResToPRState(openPRs).pullRequests,
-      closedPRs: mapPRResToPRState(closedPRs).pullRequests,
+      openPRs: remapRepoPullRequest(openPRs).pullRequests,
+      closedPRs: remapRepoPullRequest(closedPRs).pullRequests,
     };
   } catch (err) {
     // TODO: investigate better ways to handle and prompt users on errors

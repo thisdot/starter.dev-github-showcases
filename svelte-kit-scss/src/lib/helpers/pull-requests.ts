@@ -1,6 +1,6 @@
 import type { PullRequestAPIResponse, RepoPullRequests } from '$lib/interfaces';
 
-export const mapPRResToPRState = (data: PullRequestAPIResponse): RepoPullRequests => {
+export const remapRepoPullRequest = (data: PullRequestAPIResponse): RepoPullRequests => {
   return {
     totalCount: data.total_count,
     pullRequests: data.items.map((item) => ({
