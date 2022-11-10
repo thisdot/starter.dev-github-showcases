@@ -7,10 +7,10 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
   const { username, repo } = params;
 
   const getPRsOpenUrl = new URL('/search/issues', ENV.GITHUB_URL);
-  getPRsOpenUrl.searchParams.append('q', `repo:${username}/${repo}+type:issue+state:open`);
+  getPRsOpenUrl.searchParams.append('q', `repo:${username}/${repo}+type:pr+state:open`);
 
   const getPRsClosedUrl = new URL('/search/issues', ENV.GITHUB_URL);
-  getPRsOpenUrl.searchParams.append('q', `repo:${username}/${repo}+type:issue+state:closed`);
+  getPRsOpenUrl.searchParams.append('q', `repo:${username}/${repo}+type:pr+state:closed`);
 
   try {
     const [openPRs, closedPRs] = await Promise.all([
