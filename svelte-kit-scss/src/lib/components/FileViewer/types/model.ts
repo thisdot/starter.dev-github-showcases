@@ -24,7 +24,7 @@ export type PrismThemeStyleEntry = StyleObj & {
     | '700'
     | '800'
     | '900';
-  'text-decorationLine'?: 'none' | 'underline' | 'line-through' | 'underline line-through';
+  'text-decoration-line'?: 'none' | 'underline' | 'line-through' | 'underline line-through';
   opacity?: number;
 };
 
