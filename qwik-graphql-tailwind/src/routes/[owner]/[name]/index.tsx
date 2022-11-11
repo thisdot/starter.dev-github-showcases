@@ -1,7 +1,7 @@
 import { component$, useClientEffect$, useContextProvider, useStore, createContext } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
 import { useQuery } from '~/utils/useQuery';
-import { GITHUB_GRAPHQL } from '~/utils/constants';
+import { GITHUB_GRAPHQL, SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX } from '~/utils/constants';
 import { REPO_INFO_QUERY } from '~/utils/queries/repo-info';
 import { parseTopics } from './parseTopics';
 import { RepoTree } from '~/components/repo-tree';
@@ -80,7 +80,7 @@ export default component$(() => {
 
   useClientEffect$(async () => {
     store.owner = params.owner;
-    store.name = params.name;
+    store.name = params.name.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
     store.branch = defaultBranch;
     store.path = params.path || '';
     const abortController = new AbortController();
@@ -100,19 +100,19 @@ export default component$(() => {
     updateRepoInfo(store, response);
   });
 
-  if (store.info.isLoading) {
+  if (store.info.isLoading && store.tree.isLoading) {
     return <div>Loading...</div>;
   }
 
   useContextProvider(RepoContext, store);
 
   return (
-    <div class='bg-white"'>
+    <div class="bg-white">
       <RepoHeader />
-      <div className="max-w-screen-2xl mx-auto md:py-8 px-4 bg-white">
+      <div className="max-w-screen-2xl mx-auto md:py-8 px-4">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-7 xl:col-span-9">
-            <BranchNavigation />
+            <BranchNavigation name={store.name} owner={store.owner} path={store.path || ''} branch={store.branch} />
             <RepoTree />
             <RepoReadMe />
           </div>

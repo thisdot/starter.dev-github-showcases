@@ -2,6 +2,7 @@ import { component$, useContext } from '@builder.io/qwik';
 import { RepoContext } from '~/routes/[owner]/[name]';
 import { FolderIcon, DocumentIcon } from '~/components/icons';
 import * as styles from './file-explorer.classNames';
+import { SPECIAL_PERIOD_CHAR } from '~/utils/constants';
 
 export const FileExplorer = component$(() => {
   const store = useContext(RepoContext);
@@ -35,8 +36,8 @@ export const FileExplorer = component$(() => {
                 <DocumentIcon className={styles.iconFile} />
               )}
             </div>
-            <a href={`${basePath}/${item.type}/${branch}/${item.path}`}>
-              <a className={styles.link}>{item.name}</a>
+            <a href={`${basePath}/${item.type}/${branch}/${item.path.replace(/\./g, SPECIAL_PERIOD_CHAR)}`}>
+              <span className={styles.link}>{item.name}</span>
             </a>
           </div>
         </div>
