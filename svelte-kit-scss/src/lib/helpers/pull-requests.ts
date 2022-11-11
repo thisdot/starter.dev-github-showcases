@@ -1,7 +1,7 @@
 import type { PullRequestItemAPIResponse, RepoPullRequest } from '$lib/interfaces';
 
-export const remapRepoPullRequest = (items: PullRequestItemAPIResponse[]): RepoPullRequest[] => {
-  return items.map((item) => ({
+export const remapRepoPullRequest = (item: PullRequestItemAPIResponse): RepoPullRequest => {
+  return {
     id: item.id,
     login: item.user.login,
     title: item.title,
@@ -13,5 +13,5 @@ export const remapRepoPullRequest = (items: PullRequestItemAPIResponse[]): RepoP
     labels: item.labels,
     commentCount: item.comments,
     labelCount: item.labels.length,
-  }));
+  };
 };

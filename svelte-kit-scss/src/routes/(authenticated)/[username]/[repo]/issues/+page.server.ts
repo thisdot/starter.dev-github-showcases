@@ -21,6 +21,7 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
         (response) => response.json() as Promise<IssuesAPIResponse>
       ),
     ]);
+
     return {
       openIssues: mapIssuesResToIssueState(openIssues).issues,
       closedIssues: mapIssuesResToIssueState(closedIssues).issues,

@@ -22,8 +22,8 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
       ),
     ]);
     return {
-      openPRs: remapRepoPullRequest(openPRs.items),
-      closedPRs: remapRepoPullRequest(closedPRs.items),
+      openPRs: openPRs.items.map((item) => remapRepoPullRequest(item)),
+      closedPRs: closedPRs.items.map((item) => remapRepoPullRequest(item)),
     };
   } catch (err) {
     // TODO: investigate better ways to handle and prompt users on errors
