@@ -1,4 +1,5 @@
 import { component$ } from '@builder.io/qwik';
+import cn from 'classnames';
 import { format } from 'date-fns';
 import {
   DraftPrIcon,
@@ -35,15 +36,13 @@ export interface IssuePrCardProps {
 // when isResolved is true, the issue is closed, only issue can be resolved
 // when isMerged is true, the pr is closed, only pr can be merged
 export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
-  const iconColor = data.isOpen
-    ? type === 'pr' && data.isDraft
-      ? 'text-gray-500'
-      : 'text-green-600'
-    : data.isMerged || data.isResolved
-    ? 'text-purple-600'
-    : type === 'issue' && !data.isResolved
-    ? 'text-gray-500'
-    : 'text-red-600';
+  const iconColor = cn({
+    'text-green-600': data.isOpen && !data.isDraft,
+    'text-gray-500':
+      (data.isOpen && type === 'pr' && data.isDraft) || (!data.isOpen && type === 'issue' && !data.isResolved),
+    'text-purple-600': !data.isOpen && (data.isMerged || data.isResolved),
+    'text-red-600': !data.isOpen && type === 'pr' && !data.isMerged,
+  });
 
   return (
     <div className={styles.card_container}>
