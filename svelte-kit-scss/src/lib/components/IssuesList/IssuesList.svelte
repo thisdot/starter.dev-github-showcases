@@ -2,7 +2,7 @@
   import type { RepoIssue } from '$lib/interfaces';
   import PRIssueCard from '$lib/components/PRIssueCard/PRIssueCard.svelte';
 
-  export let issues: RepoIssue[];
+  export let issues: RepoIssue[] | undefined;
 </script>
 
 <div class="issue">
