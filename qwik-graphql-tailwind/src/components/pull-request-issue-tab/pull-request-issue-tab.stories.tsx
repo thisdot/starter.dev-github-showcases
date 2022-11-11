@@ -1,21 +1,8 @@
 import { component$ } from '@builder.io/qwik';
 import { Meta } from '@storybook/html';
+import { labelOptions, milestonesOptions, sortOptions } from '../issue-tab-view/data';
 import { PRIssueContextProvider } from './pr-issue-context-provider';
 import { PullRequestIssueTab, PullRequestIssueTabParams } from './pull-request-issue-tab';
-const option = [
-  {
-    label: 'Tested',
-    value: 'tested',
-  },
-  {
-    label: 'Tested',
-    value: 'tested',
-  },
-  {
-    label: 'Tested',
-    value: 'tested',
-  },
-];
 
 export default {
   title: 'Pull-Request-Issue Tab',
@@ -46,7 +33,7 @@ Default.args = {
   openCount: 10,
   closedCount: 300,
   tabType: 'issue',
-  milestonesOption: option,
-  labelOption: option,
-  sortOption: option,
+  milestonesOption: milestonesOptions,
+  labelOption: labelOptions,
+  sortOption: sortOptions,
 };
