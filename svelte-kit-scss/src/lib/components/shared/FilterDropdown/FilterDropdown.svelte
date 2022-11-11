@@ -13,6 +13,8 @@
 
   export let items: FilterDropdownOption[] = [];
 
+  export let isIssue = false;
+
   let current: FilterDropdownOption | undefined = defaultFilter;
 
   let isOpen = false;
@@ -44,7 +46,7 @@
 </script>
 
 <div class="filter-dropdown-container" use:clickOutside on:clickoutside={closeDropdown}>
-  <button class="button" on:click={toggleMenu}>
+  <button class="button" class:button--is-issue={isIssue} on:click={toggleMenu}>
     {name}
     <ChevronDown16 />
   </button>
@@ -96,6 +98,10 @@
       border-radius: 0.375em;
       border: 1px solid variables.$gray300;
       background-color: variables.$gray100;
+
+      &--is-issue {
+        border: 0px;
+      }
     }
     .menu {
       position: absolute;
@@ -107,6 +113,7 @@
       border-radius: 0.375em;
       border: 1px solid variables.$gray300;
       box-shadow: 0 1px 2px 0 rgba(variables.$black, 0.05);
+      z-index: 100;
       .header {
         display: flex;
         padding: 0.625em 1em;

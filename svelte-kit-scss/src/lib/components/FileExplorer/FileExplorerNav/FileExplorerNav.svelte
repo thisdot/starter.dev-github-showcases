@@ -1,5 +1,5 @@
 <script>
-  import { ChevronDown12, ChevronDown16, GitBranch16 } from 'svelte-octicons';
+  import { ChevronDown16, GitBranch16 } from 'svelte-octicons';
 </script>
 
 <nav class="file-explorer-container">
