@@ -10,10 +10,8 @@ export const ssr = false;
 export const load: PageServerLoad = async ({ params, fetch }) => {
   const { username, repo, branch, file } = params;
 
-  const getFileContentsUrl = new URL(
-    `/repos/${username}/${repo}/contents/${file}?ref=${branch}`,
-    ENV.GITHUB_URL
-  );
+  const getFileContentsUrl = new URL(`/repos/${username}/${repo}/contents/${file}`, ENV.GITHUB_URL);
+  getFileContentsUrl.searchParams.append('ref', branch);
   const fileContentsResponse: Response = await fetch(getFileContentsUrl);
   const fileContentsResponseData: FileContentsApiResponse = await fileContentsResponse.json();
   const fileContents: FileContents | undefined = remapFileContents(fileContentsResponseData);
