@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RepoState } from 'src/app/state/repository';
+import { RepositoryState } from 'src/app/state/repository';
 
 @Component({
   selector: 'app-repo-heading',
@@ -8,7 +8,7 @@ import { RepoState } from 'src/app/state/repository';
 })
 export class RepositoryHeadingComponent {
   @Input()
-  repo?: RepoState;
+  repo?: RepositoryState;
 
   get ownerPath(): string {
     return `/${this.repo?.ownerName}`;

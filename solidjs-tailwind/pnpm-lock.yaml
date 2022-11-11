@@ -17,12 +17,14 @@ specifiers:
   '@testing-library/jest-dom': 5.16.5
   '@typescript-eslint/parser': 5.41.0
   autoprefixer: 10.4.12
+  dayjs: ^1.11.6
   eslint: 8.26.0
   eslint-plugin-solid: 0.7.4
   eslint-plugin-unused-imports: 2.0.0
   jsdom: 20.0.1
   postcss: 8.4.18
   prettier: 2.7.1
+  solid-icons: ^1.0.2
   solid-js: 1.6.0
   solid-testing-library: 0.3.0
   storybook-addon-mock: 3.2.0
@@ -52,12 +54,14 @@ devDependencies:
   '@testing-library/jest-dom': 5.16.5
   '@typescript-eslint/parser': 5.41.0_wyqvi574yv7oiwfeinomdzmc3m
   autoprefixer: 10.4.12_postcss@8.4.18
+  dayjs: 1.11.6
   eslint: 8.26.0
   eslint-plugin-solid: 0.7.4_wyqvi574yv7oiwfeinomdzmc3m
   eslint-plugin-unused-imports: 2.0.0_eslint@8.26.0
   jsdom: 20.0.1
   postcss: 8.4.18
   prettier: 2.7.1
+  solid-icons: 1.0.2_solid-js@1.6.0
   solid-testing-library: 0.3.0_solid-js@1.6.0
   storybook-addon-mock: 3.2.0
   tailwindcss: 3.2.1_postcss@8.4.18
@@ -6998,6 +7002,10 @@ packages:
       whatwg-url: 11.0.0
     dev: true
 
+  /dayjs/1.11.6:
+    resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
+    dev: true
+
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
     peerDependencies:
@@ -12327,6 +12335,15 @@ packages:
       use: 3.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /solid-icons/1.0.2_solid-js@1.6.0:
+    resolution: {integrity: sha512-Pockp4vkCFFW+uubuRpb50pqKZNzjLhUUDm5VPpcZJWSgDw7fOxnMLcO1fC2bK8l+kYbJOr52y+pB5fnoZXg3Q==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      solid-js: '*'
+    dependencies:
+      solid-js: 1.6.0
     dev: true
 
   /solid-js/1.6.0:

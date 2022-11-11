@@ -1,8 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { RepoState } from './repository.state';
+import { RepositoryState } from './repository.state';
 import * as RepositoryActions from './repository.actions';
 
-export const initialRepoState: RepoState = {
+export const initialRepositoryState: RepositoryState = {
   description: '',
   forkCount: 0,
   issueCount: 0,
@@ -23,7 +23,7 @@ export const initialRepoState: RepoState = {
 };
 
 const reducer = createReducer(
-  initialRepoState,
+  initialRepositoryState,
   on(RepositoryActions.fetchRepositorySuccess, (state, { repoData }) => ({
     ...state,
     ...repoData,
@@ -48,6 +48,9 @@ const reducer = createReducer(
   // TODO: handle fetchPullRequestsError case
 );
 
-export function repoReducer(state: RepoState | undefined, action: Action) {
+export function repositoryReducer(
+  state: RepositoryState | undefined,
+  action: Action,
+) {
   return reducer(state, action);
 }
