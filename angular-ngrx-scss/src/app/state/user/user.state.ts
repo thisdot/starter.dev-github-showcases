@@ -10,7 +10,7 @@ export interface UserState {
   following: number;
   location: string;
   name: string;
-  twitter_username: string;
+  twitterUsername: string;
   username: string;
   type: string;
   topRepos?: UserReposState[];
