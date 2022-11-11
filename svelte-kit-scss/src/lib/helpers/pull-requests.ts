@@ -1,4 +1,9 @@
-import type { PullRequestItemAPIResponse, RepoPullRequest } from '$lib/interfaces';
+import type {
+  PullRequestAPIResponse,
+  PullRequestItemAPIResponse,
+  RepoPullRequest,
+  RepoPullRequests,
+} from '$lib/interfaces';
 
 export const remapRepoPullRequest = (
   item?: PullRequestItemAPIResponse
@@ -18,4 +23,11 @@ export const remapRepoPullRequest = (
         labelCount: item.labels?.length || 0,
       }
     : undefined;
+};
+
+export const remapRepoPullRequestCollection = (data: PullRequestAPIResponse): RepoPullRequests => {
+  return {
+    totalCount: data.total_count,
+    pullRequests: data.items.map(remapRepoPullRequest).filter(Boolean) as RepoPullRequest[],
+  };
 };
