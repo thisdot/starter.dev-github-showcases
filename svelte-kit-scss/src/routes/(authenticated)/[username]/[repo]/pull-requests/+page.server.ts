@@ -6,11 +6,15 @@ import type { PullRequestAPIResponse } from '$lib/interfaces';
 export const load: PageServerLoad = async ({ fetch, params }) => {
   const { username, repo } = params;
 
-  const getPRsOpenUrl = new URL('/search/issues', ENV.GITHUB_URL);
-  getPRsOpenUrl.searchParams.append('q', `repo:${username}/${repo}+type:pr+state:open`);
+  const getPRsOpenUrl = new URL(
+    `/search/issues?q=repo:${username}/${repo}+type:pr+state:open`,
+    ENV.GITHUB_URL
+  );
 
-  const getPRsClosedUrl = new URL('/search/issues', ENV.GITHUB_URL);
-  getPRsOpenUrl.searchParams.append('q', `repo:${username}/${repo}+type:pr+state:closed`);
+  const getPRsClosedUrl = new URL(
+    `/search/issues?q=repo:${username}/${repo}+type:pr+state:closed`,
+    ENV.GITHUB_URL
+  );
 
   try {
     const [openPRs, closedPRs] = await Promise.all([
