@@ -1,20 +1,16 @@
 import type { PageServerLoad } from './$types';
 import { remapRepoIssue } from '$lib/helpers';
 import { ENV } from '$lib/constants/env';
-import type { IssuesAPIResponse } from '$lib/interfaces';
+import type { IssuesAPIResponse, RepoIssue } from '$lib/interfaces';
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
   const { username, repo } = params;
 
-  const getIssuesOpenUrl = new URL(
-    `/search/issues?q=repo:${username}/${repo}+type:issue+state:open`,
-    ENV.GITHUB_URL
-  );
+  const getIssuesOpenUrl = new URL(`/search/issues`, ENV.GITHUB_URL);
+  getIssuesOpenUrl.searchParams.append('q', `repo:${username}/${repo} type:issue state:open`);
 
-  const getIssuesClosedUrl = new URL(
-    `/search/issues?q=repo:${username}/${repo}+type:issue+state:closed`,
-    ENV.GITHUB_URL
-  );
+  const getIssuesClosedUrl = new URL(`/search/issues`, ENV.GITHUB_URL);
+  getIssuesClosedUrl.searchParams.append('q', `repo:${username}/${repo} type:issue state:closed`);
 
   try {
     const [openIssues, closedIssues] = await Promise.all([
@@ -26,8 +22,8 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
       ),
     ]);
     return {
-      openIssues: openIssues.items.map((item) => remapRepoIssue(item)),
-      closedIssues: closedIssues.items.map((item) => remapRepoIssue(item)),
+      openIssues: openIssues.items.map(remapRepoIssue).filter(Boolean) as RepoIssue[],
+      closedIssues: closedIssues.items.map(remapRepoIssue).filter(Boolean) as RepoIssue[],
     };
   } catch (err) {
     // TODO: investigate better ways to handle and prompt users on errors

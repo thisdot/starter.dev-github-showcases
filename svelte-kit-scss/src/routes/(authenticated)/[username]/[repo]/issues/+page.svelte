@@ -4,13 +4,15 @@
 
   export let data: PageServerData;
 
+  const { openIssues, closedIssues } = data;
+
   let viewState = 'open';
 </script>
 
 <div class="container">
   <span> header should go here </span>
   <div class="issues-container">
-    <IssuesList issues={viewState === 'open' ? data.openIssues : data.closedIssues} />
+    <IssuesList issues={viewState === 'open' ? openIssues : closedIssues} />
   </div>
   <span> Pagination should go here </span>
 </div>

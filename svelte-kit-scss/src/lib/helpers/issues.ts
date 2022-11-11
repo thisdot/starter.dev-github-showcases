@@ -3,7 +3,7 @@ import type { PullRequestItemAPIResponse, RepoIssue } from '$lib/interfaces';
 export const remapRepoIssue = (item: PullRequestItemAPIResponse): RepoIssue => {
   return {
     id: item.id,
-    login: item.user.login,
+    login: item.user?.login,
     title: item.title,
     number: item.number,
     state: item.state,
@@ -11,6 +11,6 @@ export const remapRepoIssue = (item: PullRequestItemAPIResponse): RepoIssue => {
     createdAt: new Date(item.created_at),
     labels: item.labels,
     commentCount: item.comments,
-    labelCount: item.labels.length,
+    labelCount: item.labels?.length || 0,
   };
 };
