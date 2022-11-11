@@ -1,5 +1,6 @@
 export * from './CounterExample';
 export * from './FetchExample';
+export * from './GistPanel';
 export * from './RepoMeta';
 export * from './RepoCard';
 export * from './PrivacyBadge';
