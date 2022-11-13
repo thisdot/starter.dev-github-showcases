@@ -1,6 +1,6 @@
 import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
 import { USER_GISTS_QUERY } from '~/utils/queries/gists-query';
-import { GITHUB_GRAPHQL } from '~/utils/constants';
+import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import GistListItem from './gist-list-item';
 import { useQuery } from '~/utils/useQuery';
 import { parseQuery } from './parseQuery';
@@ -65,7 +65,7 @@ export async function fetchGIst(abortController?: AbortController): Promise<any>
     url: GITHUB_GRAPHQL,
     headersOpt: {
       Accept: 'application/vnd.github+json',
-      authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      authorization: `Bearer ${sessionStorage.getItem(AUTH_TOKEN)}`,
     },
   });
 

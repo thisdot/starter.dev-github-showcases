@@ -10,6 +10,7 @@ import { RepoAboutWidget } from '~/components/repo-about';
 import { ISSUES_QUERY } from '~/utils/queries/issues-query';
 import { RepoHeader } from '~/components/repo-header';
 import { BranchNavigation } from '~/components/branch-navigation';
+import { PULL_REQUEST_QUERY } from '~/utils/queries/pull-request';
 
 export interface SharedState {
   name: string;
@@ -47,7 +48,7 @@ export interface SharedState {
   };
 }
 
-interface IssuesQueryParams {
+interface IssuesPullRequestsQueryParams {
   owner: string;
   name: string;
   first: number;
@@ -179,10 +180,33 @@ export async function fetchRepoInfo(
 }
 
 export async function fetchIssues(
-  { owner, name, first }: IssuesQueryParams,
+  { owner, name, first }: IssuesPullRequestsQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(ISSUES_QUERY);
+
+  const resp = await executeQuery$({
+    signal: abortController?.signal,
+    url: GITHUB_GRAPHQL,
+    variables: {
+      owner,
+      name,
+      first,
+    },
+    headersOpt: {
+      Accept: 'application/vnd.github+json',
+      authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
+  });
+
+  return await resp.json();
+}
+
+export async function fetchPullRequests(
+  { owner, name, first }: IssuesPullRequestsQueryParams,
+  abortController?: AbortController
+): Promise<any> {
+  const { executeQuery$ } = useQuery(PULL_REQUEST_QUERY);
 
   const resp = await executeQuery$({
     signal: abortController?.signal,
