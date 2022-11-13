@@ -36,7 +36,13 @@ export const FileExplorer = component$(() => {
                 <DocumentIcon className={styles.iconFile} />
               )}
             </div>
-            <a href={`${basePath}/${item.type}/${branch}/${item.path.replace(/\./g, SPECIAL_PERIOD_CHAR)}`}>
+            <a
+              href={`${basePath}/${item.type}/${branch}/${item.path.replace(/\./g, SPECIAL_PERIOD_CHAR)}?forkCount=${
+                store.info.data?.forkCount || 0
+              }&watcherCount=${store.info.data?.watcherCount || 0}&stargazerCount=${
+                store.info.data?.stargazerCount || 0
+              }`}
+            >
               <span className={styles.link}>{item.name}</span>
             </a>
           </div>
