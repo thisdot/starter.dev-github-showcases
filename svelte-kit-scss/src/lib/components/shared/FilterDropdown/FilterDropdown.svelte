@@ -13,6 +13,8 @@
 
   export let items: FilterDropdownOption[] = [];
 
+  export let borderNone = false;
+
   let current: FilterDropdownOption | undefined = defaultFilter;
 
   let isOpen = false;
@@ -44,7 +46,7 @@
 </script>
 
 <div class="filter-dropdown-container" use:clickOutside on:clickoutside={closeDropdown}>
-  <button class="button" on:click={toggleMenu}>
+  <button class="button" class:border-none={borderNone} on:click={toggleMenu}>
     {name}
     <ChevronDown16 />
   </button>
@@ -96,6 +98,11 @@
       border-radius: 0.375em;
       border: 1px solid variables.$gray300;
       background-color: variables.$gray100;
+
+      &.border-none {
+        border: 0px;
+        background: none;
+      }
     }
     .menu {
       position: absolute;

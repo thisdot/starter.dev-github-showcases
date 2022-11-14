@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
-import { remapRepoPullRequest } from '$lib/helpers';
+import { remapRepoPullRequestCollection } from '$lib/helpers';
 import { ENV } from '$lib/constants/env';
-import type { PullRequestAPIResponse, RepoPullRequest } from '$lib/interfaces';
+import type { PullRequestAPIResponse } from '$lib/interfaces';
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
   const { username, repo } = params;
@@ -22,8 +22,8 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
       ),
     ]);
     return {
-      openPRs: openPRs.items.map(remapRepoPullRequest).filter(Boolean) as RepoPullRequest[],
-      closedPRs: closedPRs.items.map(remapRepoPullRequest).filter(Boolean) as RepoPullRequest[],
+      openPRs: remapRepoPullRequestCollection(openPRs),
+      closedPRs: remapRepoPullRequestCollection(closedPRs),
     };
   } catch (err) {
     // TODO: investigate better ways to handle and prompt users on errors

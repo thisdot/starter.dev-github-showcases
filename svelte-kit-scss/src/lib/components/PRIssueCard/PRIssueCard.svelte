@@ -153,7 +153,6 @@
 
   .comments {
     text-align: center;
-    position: relative;
 
     .comment-count {
       text-align: center;
