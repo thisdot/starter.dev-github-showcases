@@ -27,8 +27,8 @@
     sort: defaultFilters.sort,
   };
 
-  // $: hasActiveFilters =
-  //   currentFilters.label !== defaultFilters.label || currentFilters.sort !== defaultFilters.sort;
+  $: hasActiveFilters =
+    currentFilters.label !== defaultFilters.label || currentFilters.sort !== defaultFilters.sort;
 
   const dispatch = createEventDispatcher();
 
@@ -125,6 +125,7 @@
 
         &.active {
           color: variables.$gray900;
+          font-weight: 600;
         }
       }
     }
