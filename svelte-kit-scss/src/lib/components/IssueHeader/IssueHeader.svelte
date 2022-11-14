@@ -1,12 +1,12 @@
 <script lang="ts">
   import { Check16, NoEntry16 } from 'svelte-octicons';
-  import type { PR_STATE, RepoIssue } from '$lib/interfaces';
+  import type { PR_STATE, RepoIssues } from '$lib/interfaces';
   import FilterDropdown from '$lib/components/shared/FilterDropdown/FilterDropdown.svelte';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
   import { createEventDispatcher } from 'svelte';
 
-  export let openIssues: RepoIssue | undefined,
-    closedIssues: RepoIssue | undefined,
+  export let openIssues: RepoIssues | undefined,
+    closedIssues: RepoIssues | undefined,
     viewState: PR_STATE;
 
   export let labelFilters: FilterDropdownOption[] = [];

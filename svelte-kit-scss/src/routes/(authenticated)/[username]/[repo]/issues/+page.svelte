@@ -68,7 +68,7 @@
       {sortFilters}
       bind:viewState
     />
-    <IssuesList issues={viewState === 'open' ? openIssues.issues : closedIssues.issues} />
+    <IssuesList issues={viewState === 'open' ? openIssues?.issues : closedIssues?.issues} />
   </div>
   <Pagination />
 </div>
