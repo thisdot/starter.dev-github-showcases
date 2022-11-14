@@ -4,7 +4,7 @@
   import PRHeader from '$lib/components/PRHeader/PRHeader.svelte';
   import type { PR_STATE } from '$lib/interfaces';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
-  import Pagination from '../../../../../lib/components/shared/Pagination/Pagination.svelte';
+  import Pagination from '$lib/components/shared/Pagination/Pagination.svelte';
 
   export let data: PageServerData;
 
