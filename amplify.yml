@@ -135,11 +135,11 @@ applications:
         preBuild:
           commands:
             - nvm install --lts=gallium
-            - pnpm install
+            - npm install
         build:
           commands:
             - node -v
-            - pnpm run build
+            - npm run build
       artifacts:
         baseDirectory: dist/
         files:
