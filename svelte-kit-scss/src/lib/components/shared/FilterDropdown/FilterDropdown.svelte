@@ -101,6 +101,7 @@
 
       &.border-none {
         border: 0px;
+        background: none;
       }
     }
     .menu {
