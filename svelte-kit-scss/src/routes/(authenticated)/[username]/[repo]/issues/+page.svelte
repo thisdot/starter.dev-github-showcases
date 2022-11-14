@@ -1,20 +1,76 @@
 <script lang="ts">
   import type { PageServerData } from './$types';
   import IssuesList from '$lib/components/IssuesList/IssuesList.svelte';
+  import IssueHeader from '$lib/components/IssueHeader/IssueHeader.svelte';
+  import Pagination from '$lib/components/shared/Pagination/Pagination.svelte';
+  import type { PR_STATE } from '$lib/interfaces';
+  import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
 
   export let data: PageServerData;
 
   const { openIssues, closedIssues } = data;
 
-  let viewState = 'open';
+  const sortFilters: FilterDropdownOption<any>[] = [
+    {
+      label: 'Dummy 1',
+      value: 'dummy-1',
+    },
+    {
+      label: 'Dummy 2',
+      value: 'dummy-2',
+    },
+    {
+      label: 'Dummy 3',
+      value: 'dummy-3',
+    },
+  ];
+
+  const milestoneFilters: FilterDropdownOption<any>[] = [
+    {
+      label: 'Dummy 1',
+      value: 'dummy-1',
+    },
+    {
+      label: 'Dummy 2',
+      value: 'dummy-2',
+    },
+    {
+      label: 'Dummy 3',
+      value: 'dummy-3',
+    },
+  ];
+
+  const labelFilters: FilterDropdownOption<any>[] = [
+    {
+      label: 'Dummy 1',
+      value: 'dummy-1',
+    },
+    {
+      label: 'Dummy 2',
+      value: 'dummy-2',
+    },
+    {
+      label: 'Dummy 3',
+      value: 'dummy-3',
+    },
+  ];
+
+  let viewState: PR_STATE = 'open';
 </script>
 
 <div class="container">
-  <span> header should go here </span>
   <div class="issues-container">
-    <IssuesList issues={viewState === 'open' ? openIssues : closedIssues} />
+    <IssueHeader
+      {openIssues}
+      {closedIssues}
+      {labelFilters}
+      {milestoneFilters}
+      {sortFilters}
+      bind:viewState
+    />
+    <IssuesList issues={viewState === 'open' ? openIssues?.issues : closedIssues?.issues} />
   </div>
-  <span> Pagination should go here </span>
+  <Pagination />
 </div>
 
 <style lang="scss">
