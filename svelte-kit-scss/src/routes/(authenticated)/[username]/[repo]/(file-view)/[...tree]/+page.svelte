@@ -3,17 +3,18 @@
   import FileExplorerContainer from '$lib/components/FileExplorer/FileExplorerContainer/FileExplorerContainer.svelte';
   import FileExplorerNav from '$lib/components/FileExplorer/FileExplorerNav/FileExplorerNav.svelte';
   import FileExplorerReadme from '$lib/components/FileExplorer/FileExplorerReadme/FileExplorerReadme.svelte';
-  import type { LayoutServerData } from './$types';
+  import type { PageServerData } from './$types';
 
-  export let data: LayoutServerData;
-  const { repoInfo, username, repo } = data;
-  const { description, website, tags, readme, tree, activeBranch } = repoInfo;
+  export let data: PageServerData;
+  console.log('DATA', data);
+  const { repoInfo, username, repo, readme, tree } = data;
+  const { description, website, tags, defaultBranch } = repoInfo;
 </script>
 
 <div class="container grid grid-cols-12 subpage">
   <section class="col-span-9 col-sm-span-12">
     <FileExplorerNav />
-    <FileExplorerContainer contents={tree} branch={activeBranch} {username} {repo} />
+    <FileExplorerContainer contents={tree} branch={defaultBranch} {username} {repo} />
   </section>
 
   <section class="col-span-3 col-sm-span-12">

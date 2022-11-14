@@ -1,5 +1,5 @@
 import type {
-  ReadmeApiResponse,
+  // ReadmeApiResponse,
   RepoApiResponse,
   RepoContents,
   RepoContentsApiResponse,
@@ -8,9 +8,7 @@ import type {
 
 export const mapRepoResToRepoState = (
   data: RepoApiResponse,
-  prCount: number,
-  contents: RepoContentsApiResponse[],
-  readmeData: ReadmeApiResponse
+  openPullRequestsCount: number
 ): RepoState => {
   return {
     repoName: data.name,
@@ -20,16 +18,13 @@ export const mapRepoResToRepoState = (
     watchCount: data.watchers_count,
     starCount: data.stargazers_count,
     forkCount: data.forks_count,
-    issueCount: data.open_issues_count,
+    openIssuesCount: data.open_issues_count,
+    openPullRequestsCount,
     tags: data.topics,
-    selectedFile: null,
-    openPullRequests: null,
-    closedPullRequests: null,
-    activeBranch: data.default_branch,
+    defaultBranch: data.default_branch,
     ownerName: data.owner.login,
-    prCount,
-    readme: readmeData.content,
-    tree: alignTreeFolderFirst(mapRepoContentsApiToRepoContent(contents)),
+    //readme: readmeData.content,
+    //tree: alignTreeFolderFirst(mapRepoContentsApiToRepoContent(contents)),
   };
 };
 
