@@ -14,4 +14,6 @@ export const Default: any = Template.bind({});
 
 Default.args = {
   activeTab: TABS.OPEN,
+  owner: 'thisdot',
+  name: 'starter.dev-github-showcases',
 };

@@ -6,8 +6,7 @@ export const ISSUES_QUERY = `
         states: [OPEN]
         orderBy: { field: CREATED_AT, direction: DESC }
       ) {
-        edges {
-          node {
+        nodes {
             state
             createdAt
             closedAt
@@ -21,7 +20,6 @@ export const ISSUES_QUERY = `
             url
             title
           }
-        }
       }
 
       closedIssues: issues(
@@ -29,8 +27,7 @@ export const ISSUES_QUERY = `
         states: [CLOSED]
         orderBy: { field: CREATED_AT, direction: DESC }
       ) {
-        edges {
-          node {
+        nodes {
             state
             createdAt
             closedAt
@@ -44,7 +41,6 @@ export const ISSUES_QUERY = `
             url
             title
           }
-        }
       }
     }
   }

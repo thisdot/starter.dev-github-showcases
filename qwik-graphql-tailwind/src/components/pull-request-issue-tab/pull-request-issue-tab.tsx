@@ -1,5 +1,5 @@
 import { $, component$, useContext } from '@builder.io/qwik';
-import { PullRequestIcon, CheckIcon, ClosedIssue } from '../icons';
+import { PullRequestIcon, CheckIcon, IssuesIcon } from '../icons';
 import cn from 'classnames';
 import { TABS } from './data';
 import * as styles from './pull-request-issue-tab-classNames';
@@ -35,9 +35,9 @@ export const PullRequestIssueTab = component$(
       'font-semibold text-gray-900': tab.activeTab === TABS.CLOSED,
     });
     const iconsClasses = 'w-4 h-4';
-    const getIcon = $(() => {
-      return tabType === 'pr' ? <PullRequestIcon className={iconsClasses} /> : <ClosedIssue className={iconsClasses} />;
-    });
+    const getIcon = $(() =>
+      tabType === 'pr' ? <PullRequestIcon className={iconsClasses} /> : <IssuesIcon className={iconsClasses} />
+    );
 
     const toggleTab = $((value: string) => {
       tab.activeTab = value;
