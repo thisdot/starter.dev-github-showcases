@@ -1,4 +1,9 @@
-import type { PullRequestItemAPIResponse, RepoIssue } from '$lib/interfaces';
+import type {
+  IssuesAPIResponse,
+  PullRequestItemAPIResponse,
+  RepoIssue,
+  RepoIssues,
+} from '$lib/interfaces';
 
 export const remapRepoIssue = (item: PullRequestItemAPIResponse): RepoIssue => {
   return {
@@ -12,5 +17,12 @@ export const remapRepoIssue = (item: PullRequestItemAPIResponse): RepoIssue => {
     labels: item.labels,
     commentCount: item.comments,
     labelCount: item.labels?.length || 0,
+  };
+};
+
+export const remapRepoIssueCollection = (data: IssuesAPIResponse): RepoIssues => {
+  return {
+    totalCount: data.total_count,
+    issues: data.items.map(remapRepoIssue).filter(Boolean) as RepoIssue[],
   };
 };
