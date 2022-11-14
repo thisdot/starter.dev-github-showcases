@@ -7,6 +7,7 @@ import {
   Switch,
   Match,
 } from 'solid-js';
+import { CaretIcon, CloseIcon, CorrectIcon } from '../icons';
 
 function clickOutside(el, accessor) {
   const onClick = (e) => {
@@ -37,17 +38,7 @@ const FilterDropdown = (props) => {
           aria-haspopup="true"
         >
           {local.name}
-          <svg
-            aria-hidden="true"
-            height="1rem"
-            viewBox="0 0 16 16"
-            version="1.1"
-            width="1rem"
-            data-view-component="true"
-            fill="currentColor"
-          >
-            <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
-          </svg>
+          <CaretIcon />
         </button>
       </div>
       <Show when={showOptions()}>
@@ -61,22 +52,7 @@ const FilterDropdown = (props) => {
           <div class="flex justify-between items-center text-sm text-gray-600 px-3 py-1">
             <strong class="capitalize text-xs">Select {local.name}</strong>
             <button onClick={() => setShowOptions(false)}>
-              <svg
-                aria-label="Close menu"
-                aria-hidden="false"
-                role="img"
-                height="1rem"
-                viewBox="0 0 16 16"
-                version="1.1"
-                width="1rem"
-                data-view-component="true"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"
-                />
-              </svg>
+              <CloseIcon />
             </button>
           </div>
           <For each={local.items}>
@@ -94,20 +70,7 @@ const FilterDropdown = (props) => {
                 >
                   <Switch fallback={<span class="mr-4" />}>
                     <Match when={item === 'All'}>
-                      <svg
-                        height="1rem"
-                        viewBox="0 0 16 16"
-                        version="1.1"
-                        width="1rem"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        id="correct"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
-                        />
-                      </svg>
+                      <CorrectIcon />
                     </Match>
                   </Switch>
                   {item}

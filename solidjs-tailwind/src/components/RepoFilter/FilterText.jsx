@@ -1,4 +1,5 @@
 import { Show, splitProps } from 'solid-js';
+import { CloseIcon } from '../icons';
 
 const modifyFilterTypeText = (filterText = 'test') => {
   if (filterText.endsWith('s')) {
@@ -49,22 +50,9 @@ const FilterText = (props) => {
           href={'/' + local.username}
           class="flex items-center clear-filter group hover:text-blue-600 transition-colors delay-[60ms] no-underline gap-2 text-sm"
         >
-          <svg
-            class="text-white rounded-md bg-gray-500 group-hover:bg-blue-600 transition-colors delay-[60ms] w-4 h-4"
-            aria-hidden="false"
-            role="img"
-            height="1rem"
-            viewBox="0 0 16 16"
-            version="1.1"
-            width="1rem"
-            data-view-component="true"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"
-            />
-          </svg>
+          <span class="text-white rounded-md bg-gray-500 group-hover:bg-blue-600 transition-colors delay-[60ms] w-4 h-4">
+            <CloseIcon />
+          </span>
           Clear filter
         </a>
       </div>
