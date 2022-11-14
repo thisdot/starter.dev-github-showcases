@@ -56,6 +56,10 @@ Signals can live outside of components. Each relevant component subscribes to it
 
 Demonstrates how to retrieve data from a third-party API by using `createResource`.
 
+#### Other Resources
+
+- [Solidjs Icons](https://www.npmjs.com/package/solid-icons)
+
 ## Installation
 
 ### CLI (Recommended)
