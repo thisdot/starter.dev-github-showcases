@@ -1,5 +1,6 @@
 import { $, component$, useSignal, useStore } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
+import { AUTH_TOKEN, SIGN_OUT_URL } from '../../utils/constants';
 import { isParentWithinScope } from '../../utils/isParentWithinScope';
 import { ChevronDownIcon } from '../icons';
 import * as styles from './user-dropdown.classNames';
@@ -24,8 +25,17 @@ export const UserDropdown = component$(({ image, username }: UserDropdownProps) 
     store.expanded = false;
   });
 
-  const signOut$ = $(() => {
-    // TODO: sign out
+  const signOut$ = $(async () => {
+    sessionStorage.removeItem(AUTH_TOKEN);
+    fetch(SIGN_OUT_URL, {
+      method: 'POST',
+    })
+      .then(() => {
+        window.location.href = '/auth/signin';
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   });
 
   return (
