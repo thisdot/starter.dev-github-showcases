@@ -2,11 +2,15 @@ name: Solidjs TailwindCSS CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - "solidjs-tailwind/**"
     paths:
       - "solidjs-tailwind/**"
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - "solidjs-tailwind/**"
     paths:
       - "solidjs-tailwind/**"
 
