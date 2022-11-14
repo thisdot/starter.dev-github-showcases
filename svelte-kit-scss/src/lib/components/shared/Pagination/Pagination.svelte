@@ -20,7 +20,6 @@
     .group {
       position: relative;
       display: inline-flex;
-      z-index: 0;
     }
 
     .button {

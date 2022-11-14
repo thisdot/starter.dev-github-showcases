@@ -75,7 +75,7 @@
       items={labelFilters}
       defaultFilter={defaultFilters.label}
       on:setFilter={handleLabelFilterChange}
-      isIssue={true}
+      borderNone={true}
     />
     <FilterDropdown
       name="Sort"
@@ -83,7 +83,7 @@
       items={sortFilters}
       defaultFilter={defaultFilters.sort}
       on:setFilter={handleSortFilterChange}
-      isIssue={true}
+      borderNone={true}
     />
   </div>
 </div>
