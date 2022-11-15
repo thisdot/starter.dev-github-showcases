@@ -1,3 +1,4 @@
+import { mockedIssuesQuery } from '../../mock/mockedIssues';
 import { TABS } from '../pull-request-issue-tab/data';
 import { IssueTabView, IssuesProps } from './issue-tab-view';
 
@@ -11,6 +12,12 @@ export default {
 const Template = (args: IssuesProps) => <IssueTabView {...args} />;
 
 export const Default: any = Template.bind({});
+
+Default.parameters = {
+  msw: {
+    handlers: [mockedIssuesQuery],
+  },
+};
 
 Default.args = {
   activeTab: TABS.OPEN,
