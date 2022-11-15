@@ -1,11 +1,16 @@
 import { component$, useContext } from '@builder.io/qwik';
+import { useLocation } from '@builder.io/qwik-city';
 import { RepoContext } from '~/routes/[owner]/[name]';
 import { RepoActionButtons } from '../repo-action-buttons';
 import { RepoHeading } from '../repo-heading';
-import { RepoNavigation } from '../repo-navigation';
+import TabNavigation from '../tab-navigation/tab-navigation';
+import { tabList } from './tab-lists';
 
 export const RepoHeader = component$(() => {
   const store = useContext(RepoContext);
+  const location = useLocation();
+  const { owner, name } = store;
+  const basePath = `${owner}/${name}`;
 
   if (store.info.isLoading) {
     return <div>Loading...</div>;
@@ -17,8 +22,8 @@ export const RepoHeader = component$(() => {
         <RepoHeading />
         <RepoActionButtons />
       </div>
-      <div>
-        <RepoNavigation />
+      <div className="mt-6">
+        <TabNavigation tabs={tabList} basePath={basePath} className={'border-none'} pathname={location.pathname} />
       </div>
     </div>
   );
