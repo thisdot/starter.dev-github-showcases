@@ -41,36 +41,9 @@ jobs:
         run: npm run lint
         working-directory: svelte-kit-scss
 
-  format-check:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: svelte-kit-scss/package-lock.json
-
-      - name: Install dependencies
-        run: npm install --frozen-lockfile
-        working-directory: svelte-kit-scss
-
-      - name: Check formatting
-        run: npm run format:check
-        working-directory: svelte-kit-scss
-
   test:
     runs-on: ubuntu-latest
-    needs: [lint, format-check]
+    needs: [lint]
 
     strategy:
       matrix:
@@ -98,7 +71,7 @@ jobs:
 
   test-e2e:
     runs-on: ubuntu-latest
-    needs: [lint, format-check]
+    needs: [lint]
 
     strategy:
       matrix:
@@ -126,7 +99,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: [lint, format-check, test]
+    needs: [lint, test]
 
     strategy:
       fail-fast: false
