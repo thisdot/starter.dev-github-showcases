@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('counter page has expected h1', async ({ page }) => {
-  await page.goto('/counter');
-  expect(await page.textContent('h1')).toBe('Increment, Decrement and Reset Button Example');
+test('signin page has "sign in with github" button', async ({ page }) => {
+  await page.goto('/signin');
+  expect(await page.textContent('button')).toBe('Sign in with GitHub');
 });

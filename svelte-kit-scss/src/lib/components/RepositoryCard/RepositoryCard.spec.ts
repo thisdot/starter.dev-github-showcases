@@ -36,7 +36,7 @@ describe('RepositoryCard', () => {
   });
 
   it('should should render repo last update', () => {
-    const lastUpdate = screen.getByText(/2 weeks ago/);
+    const lastUpdate = screen.getByText(/weeks ago/);
     expect(lastUpdate).toBeTruthy();
   });
 });
