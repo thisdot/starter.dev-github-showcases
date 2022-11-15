@@ -1,16 +1,19 @@
+import type { RepoFolderData } from '$lib/components/FileExplorer/models';
 import { ENV } from '$lib/constants/env';
-import { alignTreeFolderFirst, mapRepoContentsApiToRepoContent } from '$lib/helpers';
+import { remapRepoFolderContentItem } from '$lib/helpers';
 import type { ReadmeApiResponse, RepoContentsApiResponse } from '$lib/interfaces';
-import type { PageServerLoad } from './$types';
+import { error } from '@sveltejs/kit';
+import type { PageServerLoad, PageServerParentData } from './$types';
 
 export const load: PageServerLoad = async ({ params, parent, fetch }) => {
-  const { username, repo } = params;
-  const { repoInfo } = await parent();
+  const layoutData: PageServerParentData = await parent();
+  const { repoInfo, username, repo } = layoutData;
   const treePath = params.tree || `tree/${repoInfo.defaultBranch}`;
 
   const [, branch, ...folderPathSegments] = treePath.split('/');
   const folderPath = folderPathSegments.join('/');
-  console.log('folderPath', folderPath);
+
+  const isRoot = !folderPathSegments.length;
 
   const getRepoContentsUrl = new URL(
     `/repos/${username}/${repo}/contents/${folderPath}`,
@@ -21,24 +24,29 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
     `/repos/${username}/${repo}/readme/${folderPath}`,
     ENV.GITHUB_URL
   );
-  const [contentsData, readmeData] = await Promise.all([
-    fetch(getRepoContentsUrl.toString()).then(
-      (response) => response.json() as Promise<RepoContentsApiResponse[]>
-    ),
-    fetch(getRepoReadmeUrl.toString()).then(
-      (response) => response.json() as Promise<ReadmeApiResponse>
-    ),
-  ]);
 
-  const tree = alignTreeFolderFirst(mapRepoContentsApiToRepoContent(contentsData));
+  const contentsDataResponse = await fetch(getRepoContentsUrl);
+
+  if (!contentsDataResponse.ok) {
+    const contentsData = (await contentsDataResponse.json()) as { message: string };
+    throw error(contentsDataResponse.status, contentsData.message); // todo: Not Found Page
+  }
+
+  const contentsData = (await contentsDataResponse.json()) as RepoContentsApiResponse[];
+
+  const folder: RepoFolderData = {
+    path: folderPath,
+    contents: contentsData.map(remapRepoFolderContentItem),
+  };
+
+  const readmeData = await fetch(getRepoReadmeUrl).then(
+    (response) => response.json() as Promise<ReadmeApiResponse>
+  );
 
   return {
+    ...layoutData,
     readme: readmeData.content,
-    tree,
+    folder,
+    isRoot,
   };
-  // if (post) {
-  //   return post;
-  // }
-
-  // throw error(404, 'Not found');
 };

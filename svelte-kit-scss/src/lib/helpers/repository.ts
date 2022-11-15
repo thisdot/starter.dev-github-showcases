@@ -1,7 +1,8 @@
+import type { RepoFolderContentItem } from '$lib/components/FileExplorer/models';
+import type { GithubRepoContentsItemType } from '$lib/constants/github';
 import type {
   // ReadmeApiResponse,
   RepoApiResponse,
-  RepoContents,
   RepoContentsApiResponse,
   RepoState,
 } from '$lib/interfaces';
@@ -28,27 +29,10 @@ export const mapRepoResToRepoState = (
   };
 };
 
-export const mapRepoContentsApiToRepoContent = (
-  contents: RepoContentsApiResponse[]
-): RepoContents[] => {
-  return contents.map((value) => ({
-    name: value.name,
-    type: value.type,
-    path: value.path,
-  }));
-};
-
-export const alignTreeFolderFirst = (contents: RepoContents[]): RepoContents[] => {
-  const fileItems: RepoContents[] = [];
-  const dirItems: RepoContents[] = [];
-
-  contents.forEach((item) => {
-    if (item.type === 'dir') {
-      dirItems.push(item);
-    } else {
-      fileItems.push(item);
-    }
-  });
-
-  return dirItems.concat(fileItems);
-};
+export const remapRepoFolderContentItem = (
+  repoContentItem: RepoContentsApiResponse
+): RepoFolderContentItem => ({
+  name: repoContentItem.name,
+  type: repoContentItem.type as GithubRepoContentsItemType,
+  path: repoContentItem.path,
+});

@@ -1,10 +1,10 @@
 <script lang="ts">
   import { Book16, Link16 } from 'svelte-octicons';
   import { handleAnchorClick } from '$lib/helpers';
+  import type { RepoState } from '$lib/interfaces';
 
-  export let description: string;
-  export let website: string;
-  export let tags: string[];
+  export let repoInfo: RepoState;
+  const { description, website, tags } = repoInfo;
 </script>
 
 <div class="container border-bottom-2">

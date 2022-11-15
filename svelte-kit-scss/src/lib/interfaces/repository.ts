@@ -115,7 +115,12 @@ export interface RepoApiResponse {
   };
 }
 
-export interface RepoContents {
+export interface RepoFolder {
+  path: string;
+  contents: RepoContentItem;
+}
+
+export interface RepoContentItem {
   name: string;
   type: string;
   path: string;
