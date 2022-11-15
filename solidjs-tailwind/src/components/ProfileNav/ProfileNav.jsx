@@ -2,6 +2,7 @@ import { tabList } from './tab-list';
 import { TabNavigation } from '../TabNavigation';
 
 const ProfileNav = (props) => {
+  console.log(tabList);
   return (
     <TabNavigation
       tabs={tabList}

@@ -12,7 +12,7 @@ const TabNavigation = (props) => {
       ? props.pathname.includes(pathName)
       : otherPaths.every((path) => props.pathname.includes(path));
   };
-  
+
   return (
     <div class={`${styles.container} ${props.class}`}>
       <nav class={styles.nav} aria-label="Tabs">
@@ -32,11 +32,6 @@ const TabNavigation = (props) => {
                     : styles.tabInactive
                 } ${styles.tab}`}
               >
-                {/* <Icon
-                  class={`${
-                    isCurrentTab(item.path) ? styles.iconActive : styles.iconInactive
-                  } ${styles.icon}`}
-                /> */}
                 <span>{item.title}</span>
                 {typeof count === 'number' && (
                   <span class="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">

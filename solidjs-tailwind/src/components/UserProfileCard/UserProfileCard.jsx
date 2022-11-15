@@ -1,4 +1,12 @@
 import * as styles from './user-profile-card.classNames';
+import {
+  UsersIcon,
+  StarIcon,
+  LinkIcon,
+  LocationMarkerIcon,
+  OfficeBuildingIcon,
+  TwitterIcon,
+} from '../Icons';
 
 const UserProfileCard = (props) => {
   return (
@@ -16,36 +24,40 @@ const UserProfileCard = (props) => {
       </h1>
       {props.bio && <div class={styles.bio} InnerHTML={props.bio} />}
       <div class={styles.socials}>
-        {/* <UsersIcon class={styles.icon} /> */}
+        <UsersIcon class={styles.icon} />
         <span class="inline-block">
-          <span class={styles.count}>{props.followers.totalCount}</span> followers
+          <span class={styles.count}>{props.followers?.totalCount || 0}</span>{' '}
+          followers
         </span>
         <span class="mx-1">·</span>
         <span class="inline-block">
-          <span class={styles.count}>{props.following.totalCount}</span> following
+          <span class={styles.count}>{props.following?.totalCount || 0}</span>{' '}
+          following
         </span>
         <span class="mx-1">·</span>
-        {/* <StarIcon class={styles.icon} /> */}
+        <StarIcon class={styles.icon} />
         <span class="inline-block">
-          <span class={styles.count}>{props.starredRepositories.totalCount}</span>{' '}
+          <span class={styles.count}>
+            {props.starredRepositories?.totalCount || 0}
+          </span>{' '}
         </span>
       </div>
       <div class={styles.fields}>
         {props.company && (
           <div>
-            {/* <BuildingIcon class={styles.icon} /> */}
+            <OfficeBuildingIcon class={styles.icon} />
             {props.company}
           </div>
         )}
-        {location && (
+        {props.location && (
           <div>
-            {/* <LocationMarkerIcon class={styles.icon} /> */}
-            {location}
+            <LocationMarkerIcon class={styles.icon} />
+            {props.location}
           </div>
         )}
         {props.websiteUrl && (
           <div>
-            {/* <LinkIcon class={styles.icon} /> */}
+            <LinkIcon class={styles.icon} />
             <a
               class={styles.link}
               href={`https://${props.websiteUrl}`}
@@ -58,7 +70,7 @@ const UserProfileCard = (props) => {
         )}
         {props.twitterUsername && (
           <div>
-            {/* <TwitterIcon class={styles.icon} /> */}
+            <TwitterIcon class={styles.icon} />
             <a
               class={styles.link}
               href={`https://twitter.com/${props.twitterUsername}`}
@@ -70,10 +82,10 @@ const UserProfileCard = (props) => {
           </div>
         )}
       </div>
-      {props.organizations.nodes.length > 0 && (
+      {/* {props.organizations.nodes.length > 0 && (
         <span>Here will be the orgList</span>
         // <OrgList organizations={props.organizations.nodes} />
-      )}
+      )} */}
     </div>
   );
 };
