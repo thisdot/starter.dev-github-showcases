@@ -1,4 +1,4 @@
-import { component$, useClientEffect$, useContextProvider, useStore, createContext, Slot } from '@builder.io/qwik';
+import { component$, useClientEffect$, useContextProvider, useStore, createContext } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
 import { useQuery } from '~/utils/useQuery';
 import { GITHUB_GRAPHQL } from '~/utils/constants';

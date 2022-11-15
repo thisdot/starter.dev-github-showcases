@@ -10,7 +10,7 @@ const UserDropdownDemoComponent = component$(({ image, username }: UserDropdownP
     }`);
   storybookMockRouting();
   return (
-    <div class="container">
+    <div className="container">
       <UserDropdown image={image} username={username} />
     </div>
   );
@@ -21,7 +21,7 @@ export default {
 } as Meta;
 
 const Template = (args: UserDropdownProps) => (
-  <div class="w-fit bg-gray-900 p-4">
+  <div className="w-fit bg-gray-900 p-4">
     <UserDropdownDemoComponent image={args.image} username={args.username} />
   </div>
 );

@@ -6,7 +6,7 @@ import Header from './header';
 const HeaderDemoComponent = component$(() => {
   storybookMockRouting();
   return (
-    <div class="container">
+    <div className="container">
       <Header user={null} />
     </div>
   );
