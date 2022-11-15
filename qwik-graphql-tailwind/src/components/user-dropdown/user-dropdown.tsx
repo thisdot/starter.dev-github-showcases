@@ -54,7 +54,7 @@ export const UserDropdown = component$(({ image, username }: UserDropdownProps) 
           <div className={styles.avatarContainer}>
             {image && <img src={image} alt="Profile Photo" width={32} height={32} />}
           </div>
-          <div class="w-4 ml-1">
+          <div className="w-4 ml-1">
             <ChevronDownIcon />
           </div>
         </button>

@@ -8,14 +8,14 @@ import { RepoTree } from '~/components/repo-tree';
 import { RepoReadMe } from '~/components/repo-read-me';
 import { RepoAboutWidget } from '~/components/repo-about';
 import { ISSUES_QUERY } from '~/utils/queries/issues-query';
-import { RepoHeader } from '~/components/repo-header';
 import { BranchNavigation } from '~/components/branch-navigation';
 import { PULL_REQUEST_QUERY } from '~/utils/queries/pull-request';
+import { RepoHeader } from '~/components/repo-header';
 
 export interface SharedState {
   name: string;
   owner: string;
-  branch?: string;
+  branch: string;
   path?: string;
   info: {
     error?: string;
@@ -59,6 +59,7 @@ export const RepoContext = createContext<SharedState>('repo-context');
 export default component$(() => {
   const store = useStore<SharedState>(
     {
+      branch: 'HEAD',
       owner: '',
       name: '',
       info: {
@@ -74,22 +75,24 @@ export default component$(() => {
     { recursive: true }
   );
 
-  const { params } = useLocation();
+  const { path, name, owner } = useLocation().params;
 
-  const isOwnerAndNameValid = typeof params.owner === 'string' && typeof params.name === 'string';
-  const defaultBranch = typeof params.branch === 'string' ? params.branch : 'HEAD';
+  const _owner = owner.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
+  const _name = name.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
+  const _path = path?.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.') || '';
+
+  const isOwnerAndNameValid = typeof owner === 'string' && typeof name === 'string';
 
   useClientEffect$(async () => {
-    store.owner = params.owner;
-    store.name = params.name.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
-    store.branch = defaultBranch;
-    store.path = params.path || '';
     const abortController = new AbortController();
+    store.owner = _owner;
+    store.name = _name;
+    store.path = _path;
     const response = await fetchRepoInfo(
       isOwnerAndNameValid
         ? {
-            owner: params.owner,
-            name: params.name,
+            owner: _owner,
+            name: _name,
           }
         : {
             owner: '',
@@ -97,7 +100,6 @@ export default component$(() => {
           },
       abortController
     );
-
     updateRepoInfo(store, response);
   });
 
@@ -108,18 +110,18 @@ export default component$(() => {
   useContextProvider(RepoContext, store);
 
   return (
-    <div class="bg-white">
+    <div class="bg-white h-screen">
       <RepoHeader
-        name={store.name}
-        owner={store.owner}
+        name={_name}
+        owner={_owner}
         forkCount={store.info.data?.forkCount || 0}
         watcherCount={store.info.data?.watcherCount || 0}
         stargazerCount={store.info.data?.stargazerCount || 0}
       />
-      <div className="max-w-screen-2xl mx-auto md:py-8 px-4">
+      <div className="max-w-screen-2xl mx-auto md:py-8 px-4 bg-white">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-7 xl:col-span-9">
-            <BranchNavigation name={store.name} owner={store.owner} path={store.path || ''} branch={store.branch} />
+            <BranchNavigation name={_name} owner={_owner} path={_path || ''} branch={store.branch} />
             <RepoTree />
             <RepoReadMe />
           </div>

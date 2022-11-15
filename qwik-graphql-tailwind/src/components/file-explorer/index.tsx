@@ -26,7 +26,7 @@ export const FileExplorer = component$(() => {
           </a>
         </a>
       )}
-      {data?.tree.map((item) => (
+      {data?.tree?.map((item) => (
         <div key={item.path} className={styles.cell}>
           <div className="flex items-center">
             <div className="mr-2.5">
