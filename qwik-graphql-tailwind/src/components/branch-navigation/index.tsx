@@ -1,17 +1,19 @@
-import { component$, useContext } from '@builder.io/qwik';
-import { RepoContext } from '~/routes/[owner]/[name]';
+import { component$ } from '@builder.io/qwik';
 import { GitBranchIcon } from '~/components/icons';
+import { SPECIAL_PERIOD_CHAR } from '~/utils/constants';
 import * as styles from './branch-navigation.classNames';
 
-export const BranchNavigation = component$(() => {
-  const store = useContext(RepoContext);
+interface Props {
+  name: string;
+  owner: string;
+  path: string;
+  branch: string;
+}
 
-  if (store.info.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  const { name, owner, path, branch } = store;
+export const BranchNavigation = component$(({ name, owner, path, branch }: Props) => {
   const crumbs = path ? path.split('/').filter(Boolean) : [];
+
+  const fileViewLink = `/${owner.replace(/\./g, SPECIAL_PERIOD_CHAR)}/${name.replace(/\./g, SPECIAL_PERIOD_CHAR)}`;
 
   return (
     <nav className={styles.container}>
@@ -20,8 +22,8 @@ export const BranchNavigation = component$(() => {
       </button>
       {crumbs.length > 0 && (
         <div className={styles.crumbs}>
-          <a href={`/${owner}/${name}`}>
-            <a className={styles.rootLink}>{name}</a>
+          <a href={fileViewLink}>
+            <span className={styles.rootLink}>{name}</span>
           </a>
           <span className={styles.separator}>/</span>
           {crumbs.map((crumb, i) => {
@@ -29,7 +31,7 @@ export const BranchNavigation = component$(() => {
 
             // creates a proper GitHub url path from a repo path
             const crumbPath = crumbs.slice(0, i + 1).join('/');
-            const href = `/${owner}/${name}/tree/${branch}/${crumbPath}`;
+            const href = `${fileViewLink}/tree/${branch.replace(/\./g, SPECIAL_PERIOD_CHAR)}/${crumbPath}`;
 
             return (
               <>
@@ -38,7 +40,7 @@ export const BranchNavigation = component$(() => {
                 ) : (
                   <>
                     <a href={`/${href}`}>
-                      <a className={styles.crumbLink}>{crumb}</a>
+                      <span className={styles.crumbLink}>{crumb}</span>
                     </a>
                     <span className={styles.separator}>/</span>
                   </>
