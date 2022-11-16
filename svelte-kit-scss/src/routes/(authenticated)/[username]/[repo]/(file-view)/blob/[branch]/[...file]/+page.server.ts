@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { ENV } from '$lib/constants/env';
-import type { FileContentsApiResponse, FileContents } from '$lib/interfaces';
+import type { GithubFileContentsItem, FileContents } from '$lib/interfaces';
 import { mapLanguageExt, remapFileContents } from '$lib/helpers/file';
 import Prism from 'prismjs';
 import loadPrismLanguages from 'prismjs/components/index';
@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
   const getFileContentsUrl = new URL(`/repos/${username}/${repo}/contents/${file}`, ENV.GITHUB_URL);
   getFileContentsUrl.searchParams.append('ref', branch);
   const fileContentsResponse: Response = await fetch(getFileContentsUrl);
-  const fileContentsResponseData: FileContentsApiResponse = await fileContentsResponse.json();
+  const fileContentsResponseData: GithubFileContentsItem = await fileContentsResponse.json();
   const fileContents: FileContents | undefined = remapFileContents(fileContentsResponseData);
 
   const extension: string | undefined = fileContents?.name.split('.').pop();

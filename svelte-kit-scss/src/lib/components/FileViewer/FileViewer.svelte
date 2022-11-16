@@ -1,6 +1,6 @@
 <script lang="ts">
   import { mapLanguageExt } from '$lib/helpers/file';
-  import type { FileContents } from '$lib/interfaces/repository';
+  import type { FileContents } from '$lib/interfaces';
   import type { Language } from '$lib/components/FileViewer/types/language';
   import FileCode from './FileCode/FileCode.svelte';
   import FileText from './FileText.svelte';

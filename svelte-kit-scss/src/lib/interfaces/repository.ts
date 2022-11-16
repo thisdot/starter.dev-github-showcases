@@ -3,18 +3,15 @@ import type { UserApiResponse } from '$lib/interfaces';
 export interface RepoState {
   description: string;
   forkCount: number;
-  issueCount: number;
+  openIssuesCount: number;
   ownerName: string;
-  prCount: number;
-  readme: string;
+  openPullRequestsCount: number;
+  // readme: string;
   repoName: string;
   starCount: number;
   tags: string[];
-  tree: RepoContents[];
-  openPullRequests: RepoPullRequests | null;
-  closedPullRequests: RepoPullRequests | null;
-  activeBranch: string;
-  selectedFile: FileContents | null;
+  // tree: RepoContents[];
+  defaultBranch: string;
   visibility: string;
   watchCount: number;
   website: string;
@@ -71,7 +68,7 @@ export interface RepoApiResponse {
   clone_url: string;
   mirror_url: string;
   hooks_url: string;
-  svn_url: 'string;';
+  svn_url: string;
   homepage: string;
   language: null;
   forks_count: number;
@@ -117,36 +114,6 @@ export interface RepoApiResponse {
     node_id: string;
   };
 }
-
-export interface RepoContents {
-  name: string;
-  type: string;
-  path: string;
-}
-
-export interface RepoContentsApiResponse {
-  name: string;
-  path: string;
-  sha: string;
-  size: number;
-  url: string;
-  html_url: string;
-  git_url: string;
-  download_url: string;
-  type: string;
-  _links: {
-    self: string;
-    git: string;
-    html: string;
-  };
-}
-
-export interface FileContentsApiResponse extends RepoContentsApiResponse {
-  content: string;
-  encoding: string;
-}
-
-export type FileContents = Pick<FileContentsApiResponse, 'content' | 'name' | 'type' | 'size'>;
 
 export interface ReadmeApiResponse {
   name: string;

@@ -7,3 +7,4 @@ export * from './handleAnchorClick';
 export * from './issues';
 export * from './pull-requests';
 export * from './debounce';
+export * from './repository-contents';
