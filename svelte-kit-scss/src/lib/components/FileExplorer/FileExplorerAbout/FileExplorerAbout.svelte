@@ -4,7 +4,7 @@
   import type { RepoState } from '$lib/interfaces';
 
   export let repoInfo: RepoState;
-  const { description, website, tags } = repoInfo;
+  $: ({ description, website, tags } = repoInfo);
 </script>
 
 <div class="container border-bottom-2">

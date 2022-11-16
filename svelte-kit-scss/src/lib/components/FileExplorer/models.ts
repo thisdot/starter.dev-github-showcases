@@ -1,12 +1,7 @@
 import type { GithubRepoContentsItemType } from '$lib/constants/github';
 
-export interface RepoFolderData {
-  path: string;
-  contents: RepoFolderContentItem[];
-}
-
-export interface RepoFolderContentItem {
+export interface FileExplorerFolderContentItem {
   name: string;
   type: GithubRepoContentsItemType;
-  path: string;
+  href: string;
 }

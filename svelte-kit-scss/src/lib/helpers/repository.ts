@@ -1,11 +1,6 @@
-import type { RepoFolderContentItem } from '$lib/components/FileExplorer/models';
+import type { FileExplorerFolderContentItem } from '$lib/components/FileExplorer/models';
 import type { GithubRepoContentsItemType } from '$lib/constants/github';
-import type {
-  // ReadmeApiResponse,
-  RepoApiResponse,
-  RepoContentsApiResponse,
-  RepoState,
-} from '$lib/interfaces';
+import type { RepoApiResponse, GithubRepoContentsItem, RepoState } from '$lib/interfaces';
 
 export const mapRepoResToRepoState = (
   data: RepoApiResponse,
@@ -24,15 +19,5 @@ export const mapRepoResToRepoState = (
     tags: data.topics,
     defaultBranch: data.default_branch,
     ownerName: data.owner.login,
-    //readme: readmeData.content,
-    //tree: alignTreeFolderFirst(mapRepoContentsApiToRepoContent(contents)),
   };
 };
-
-export const remapRepoFolderContentItem = (
-  repoContentItem: RepoContentsApiResponse
-): RepoFolderContentItem => ({
-  name: repoContentItem.name,
-  type: repoContentItem.type as GithubRepoContentsItemType,
-  path: repoContentItem.path,
-});

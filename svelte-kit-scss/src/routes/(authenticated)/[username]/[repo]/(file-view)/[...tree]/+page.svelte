@@ -5,17 +5,14 @@
   import FileExplorerReadme from '$lib/components/FileExplorer/FileExplorerReadme/FileExplorerReadme.svelte';
   import type { PageServerData } from './$types';
   export let data: PageServerData;
+
+  $: ({ parentHref, contents } = data);
 </script>
 
 <div class="container grid grid-cols-12 subpage">
   <section class="col-span-9 col-sm-span-12">
     <FileExplorerNav />
-    <FileExplorerContainer
-      folder={data?.folder}
-      branch={data?.repoInfo?.defaultBranch}
-      username={data?.username}
-      repo={data?.repo}
-    />
+    <FileExplorerContainer {parentHref} {contents} />
   </section>
 
   <section class="col-span-3 col-sm-span-12">

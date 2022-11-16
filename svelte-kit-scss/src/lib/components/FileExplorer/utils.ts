@@ -1,7 +1,9 @@
 import { GithubRepoContentsItemType } from '$lib/constants/github';
-import type { RepoFolderContentItem } from './models';
+import type { FileExplorerFolderContentItem } from './models';
 
-export const sortFolderContentItems = (items: RepoFolderContentItem[]): RepoFolderContentItem[] => {
+export const sortFolderContentItems = (
+  items: FileExplorerFolderContentItem[]
+): FileExplorerFolderContentItem[] => {
   const itemsSorted = items.sort((a, b) => a.name.localeCompare(b.name));
   const dirs = itemsSorted.filter((x) => x.type === GithubRepoContentsItemType.Dir);
   const other = itemsSorted.filter((x) => x.type !== GithubRepoContentsItemType.Dir);

@@ -115,41 +115,6 @@ export interface RepoApiResponse {
   };
 }
 
-export interface RepoFolder {
-  path: string;
-  contents: RepoContentItem;
-}
-
-export interface RepoContentItem {
-  name: string;
-  type: string;
-  path: string;
-}
-
-export interface RepoContentsApiResponse {
-  name: string;
-  path: string;
-  sha: string;
-  size: number;
-  url: string;
-  html_url: string;
-  git_url: string;
-  download_url: string;
-  type: string;
-  _links: {
-    self: string;
-    git: string;
-    html: string;
-  };
-}
-
-export interface FileContentsApiResponse extends RepoContentsApiResponse {
-  content: string;
-  encoding: string;
-}
-
-export type FileContents = Pick<FileContentsApiResponse, 'content' | 'name' | 'type' | 'size'>;
-
 export interface ReadmeApiResponse {
   name: string;
   path: string;

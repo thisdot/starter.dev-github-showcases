@@ -1,26 +1,17 @@
 <script lang="ts">
   import { GithubRepoContentsItemType } from '$lib/constants/github';
   import { File16, FileDirectoryFill16 } from 'svelte-octicons';
-  import type { RepoFolderData } from '../models';
+  import type { FileExplorerFolderContentItem } from '../models';
   import { sortFolderContentItems } from '../utils';
 
-  export let folder: RepoFolderData, branch: string, username: string, repo: string;
+  export let parentHref: string | undefined = undefined;
+  export let contents: FileExplorerFolderContentItem[] = [];
 
-  $: items = sortFolderContentItems(folder.contents);
-  $: folderPathSegments = folder.path.split('/');
-  $: isRoot = !folderPathSegments.filter(Boolean).length;
-  $: parentPath = folderPathSegments.slice(0, -1).join('/');
-  $: parentHref = getPathHref(GithubRepoContentsItemType.Dir, parentPath);
-
-  function getPathHref(type: GithubRepoContentsItemType, path: string): string {
-    const basePath = `/${username}/${repo}`;
-    const typeSegment = type === GithubRepoContentsItemType.Dir ? 'tree' : 'blob';
-    return `${basePath}/${typeSegment}/${branch}/${path}`;
-  }
+  $: items = sortFolderContentItems(contents);
 </script>
 
 <div class="container file-list">
-  {#if !isRoot}
+  {#if parentHref}
     <div class="item up-to-parent">
       <a href={parentHref} class="parent-link">. .</a>
     </div>
@@ -32,7 +23,7 @@
       {:else}
         <File16 color="#9ca3af" />
       {/if}
-      <a href={getPathHref(item.type, item.path)} class="link">{item.name}</a>
+      <a href={item.href} class="link">{item.name}</a>
     </div>
   {/each}
 </div>

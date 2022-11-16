@@ -1,7 +1,6 @@
-import type { RepoFolderData } from '$lib/components/FileExplorer/models';
 import { ENV } from '$lib/constants/env';
-import { remapRepoFolderContentItem } from '$lib/helpers';
-import type { ReadmeApiResponse, RepoContentsApiResponse } from '$lib/interfaces';
+import { composeDirHref, remapFileExplorerFolderContentsItem } from '$lib/helpers';
+import type { ReadmeApiResponse, GithubRepoContentsItem } from '$lib/interfaces';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad, PageServerParentData } from './$types';
 
@@ -9,11 +8,8 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
   const layoutData: PageServerParentData = await parent();
   const { repoInfo, username, repo } = layoutData;
   const treePath = params.tree || `tree/${repoInfo.defaultBranch}`;
-
   const [, branch, ...folderPathSegments] = treePath.split('/');
   const folderPath = folderPathSegments.join('/');
-
-  const isRoot = !folderPathSegments.length;
 
   const getRepoContentsUrl = new URL(
     `/repos/${username}/${repo}/contents/${folderPath}`,
@@ -26,18 +22,20 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
   );
 
   const contentsDataResponse = await fetch(getRepoContentsUrl);
-
   if (!contentsDataResponse.ok) {
     const contentsData = (await contentsDataResponse.json()) as { message: string };
     throw error(contentsDataResponse.status, contentsData.message); // todo: Not Found Page
   }
+  const contentsData = (await contentsDataResponse.json()) as GithubRepoContentsItem[];
 
-  const contentsData = (await contentsDataResponse.json()) as RepoContentsApiResponse[];
-
-  const folder: RepoFolderData = {
-    path: folderPath,
-    contents: contentsData.map(remapRepoFolderContentItem),
-  };
+  const isRoot = !folderPathSegments.length;
+  const parentFolderPath = folderPathSegments.slice(0, -1).join('/');
+  const parentHref = isRoot
+    ? undefined
+    : composeDirHref(parentFolderPath, username, repo, branch, repoInfo.defaultBranch);
+  const contents = contentsData.map((item) =>
+    remapFileExplorerFolderContentsItem(item, username, repo, branch, repoInfo.defaultBranch)
+  );
 
   const readmeData = await fetch(getRepoReadmeUrl).then(
     (response) => response.json() as Promise<ReadmeApiResponse>
@@ -45,8 +43,8 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
 
   return {
     ...layoutData,
+    parentHref,
+    contents,
     readme: readmeData.content,
-    folder,
-    isRoot,
   };
 };
