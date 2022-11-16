@@ -1,13 +1,13 @@
 import type { GistItem } from './types';
 
 export function parseQuery(repos: any[]): GistItem[] {
-  return repos.reduce((acc: GistItem[], gist) => {
+  return repos.reduce((acc: GistItem[], gist: any) => {
     if (!gist) {
       return acc;
     }
     const files = gist.files ?? [];
     const gists = files.reduce(
-      (_acc: GistItem[], file) =>
+      (_acc: GistItem[], file: any) =>
         file
           ? [
               ..._acc,
