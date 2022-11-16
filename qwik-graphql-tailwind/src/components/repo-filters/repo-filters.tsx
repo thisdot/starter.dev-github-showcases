@@ -57,7 +57,7 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
         <div className={styles.filters}>
           <div>
             <FilterDropdown name="Type" description="Select type">
-              {filteOptions.map(({ label, value }) => (
+              {filteOptions.map(({ label, value }: { label: string; value: string }) => (
                 <div>
                   <button
                     onClick$={() => (filters.type = value)}
@@ -73,7 +73,7 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
           </div>
           <div>
             <FilterDropdown name="Language" description="Select language">
-              {languages.map(({ label, value }) => (
+              {languages.map(({ label, value }: { label: string; value: string }) => (
                 <div>
                   <button
                     onClick$={() => (filters.language = value)}
@@ -89,7 +89,7 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
           </div>
           <div>
             <FilterDropdown name="Sort" description="Select order">
-              {sortOptions.map(({ label, value }) => (
+              {sortOptions.map(({ label, value }: { label: string; value: string }) => (
                 <div>
                   <button
                     onClick$={() => (filters.sortBy = value)}
