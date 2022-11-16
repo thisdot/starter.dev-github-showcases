@@ -4,6 +4,7 @@ import type { TopRepo } from './types';
 
 import * as styles from './top-repos.className';
 import { RepoCard } from '~/components/repo-card/repo-card';
+import { SPECIAL_PERIOD_CHAR } from '~/utils/constants';
 
 interface UserTopReposViewProps {
   login: string;
@@ -20,7 +21,7 @@ export default component$(({ repos, login }: UserTopReposViewProps) => {
         <RepoCard repo={repo} styles={styles} />
       ))}
       <div className={styles.linkContainer}>
-        <a href={`/${login}`} className={styles.allRepoLink}>
+        <a href={`/${login.replace(/\./g, SPECIAL_PERIOD_CHAR)}`} className={styles.allRepoLink}>
           View all repositories
         </a>
       </div>

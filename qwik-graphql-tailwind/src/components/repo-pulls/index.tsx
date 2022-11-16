@@ -12,7 +12,7 @@ export default component$(({ activeTab }: PullRequests) => {
   const store = useStore<PullRequests>({
     activeTab: activeTab,
   });
-  useContextProvider(issuesPRStore, store);
+
   const option = [
     {
       label: 'Tested',
@@ -27,6 +27,7 @@ export default component$(({ activeTab }: PullRequests) => {
       value: 'tested',
     },
   ];
+
   const testData = {
     openCount: 10,
     closedCount: 300,
@@ -36,6 +37,7 @@ export default component$(({ activeTab }: PullRequests) => {
     sortOption: option,
   };
 
+  useContextProvider(issuesPRStore, store);
   return (
     <>
       <div className="border rounded-lg">

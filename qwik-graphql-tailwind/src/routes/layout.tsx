@@ -20,13 +20,6 @@ export default component$(() => {
     }
   });
 
-  // FIXME: a bug in qwik prevents us from reading state in the layout
-  // https://github.com/BuilderIO/qwik/issues/1648
-  // this logic was to show the loading text till access_token is set in the store
-  // if (!store.access_token) {
-  //   return <div>Loading...</div>;
-  // }
-
   const userResource = useResource$<any>(({ track, cleanup }) => {
     track(() => store.access_token);
     const abortController = new AbortController();
@@ -36,10 +29,18 @@ export default component$(() => {
 
   return (
     <div>
-      <Resource value={userResource} onResolved={({ data }) => <Header user={data?.viewer} />}></Resource>
-      <main className={styles.main}>
-        <Slot />
-      </main>
+      <Resource
+        value={userResource}
+        onPending={() => <div>Loading...</div>}
+        onResolved={({ data }) => (
+          <>
+            <Header user={data?.viewer} />
+            <main className={styles.main}>
+              <Slot />
+            </main>
+          </>
+        )}
+      />
     </div>
   );
 });
