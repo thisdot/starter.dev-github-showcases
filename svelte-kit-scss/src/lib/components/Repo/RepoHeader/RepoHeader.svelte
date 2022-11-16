@@ -5,7 +5,7 @@
   import RepoNavigation from './RepoNavigation/RepoNavigation.svelte';
 
   export let repo: RepoState;
-  const { watchCount, starCount, forkCount, openIssuesCount, openPullRequestsCount } = repo;
+  $: ({ watchCount, starCount, forkCount, openIssuesCount, openPullRequestsCount } = repo);
 </script>
 
 <div class="wrapper">
