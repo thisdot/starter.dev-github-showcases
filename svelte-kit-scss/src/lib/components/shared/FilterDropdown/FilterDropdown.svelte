@@ -15,7 +15,7 @@
 
   export let borderNone = false;
 
-  let current: FilterDropdownOption | undefined = defaultFilter;
+  export let current: FilterDropdownOption | undefined = defaultFilter;
 
   let isOpen = false;
 
@@ -42,6 +42,7 @@
   const handleResetFilterClick = (): void => {
     current = defaultFilter;
     dispatchSetFilter();
+    closeDropdown();
   };
 </script>
 
