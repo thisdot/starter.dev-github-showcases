@@ -18,7 +18,7 @@
     "build.types": "tsc --incremental --noEmit",
     "dev": "vite --mode ssr",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
-    "lint": "true",
+    "lint": "eslint src/**/*.ts*",
     "prettier": "prettier --write \"**/*.+(ts|tsx)\"",
     "prettier.check": "prettier --check \"**/*.+(ts|tsx)\"",
     "preview": "qwik build preview && vite preview --open",
