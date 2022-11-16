@@ -1,14 +1,11 @@
-import { component$, useClientEffect$, useContextProvider, useStore, createContext } from '@builder.io/qwik';
+import { component$, useClientEffect$, useContextProvider, useStore, createContext, Slot } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
 import { useQuery } from '~/utils/useQuery';
 import { GITHUB_GRAPHQL } from '~/utils/constants';
 import { REPO_INFO_QUERY } from '~/utils/queries/repo-info';
 import { parseTopics } from './parseTopics';
-import { RepoTree } from '~/components/repo-tree';
-import { RepoReadMe } from '~/components/repo-read-me';
-import { RepoAboutWidget } from '~/components/repo-about';
 import { ISSUES_QUERY } from '~/utils/queries/issues-query';
-import { BranchNavigation } from '~/components/branch-navigation';
+import { RepoHeader } from '~/components/repo-header';
 import { PULL_REQUEST_QUERY } from '~/utils/queries/pull-request';
 
 export interface SharedState {
@@ -107,14 +104,20 @@ export default component$(() => {
   useContextProvider(RepoContext, store);
 
   return (
-    <div className="grid grid-cols-12 gap-8">
-      <div className="col-span-12 md:col-span-7 xl:col-span-9">
-        <BranchNavigation />
-        <RepoTree />
-        <RepoReadMe />
-      </div>
-      <div className="col-span-12 md:col-span-5 xl:col-span-3">
-        <RepoAboutWidget />
+    <div class="bg-white">
+      <RepoHeader />
+      <div className="max-w-screen-2xl mx-auto md:py-8 px-4 bg-white">
+        <Slot />
+        {/* <div className="grid grid-cols-12 gap-8">
+          <div className="col-span-12 md:col-span-7 xl:col-span-9">
+            <BranchNavigation />
+            <RepoTree />
+            <RepoReadMe />
+          </div>
+          <div className="col-span-12 md:col-span-5 xl:col-span-3">
+            <RepoAboutWidget />
+          </div>
+        </div> */}
       </div>
     </div>
   );

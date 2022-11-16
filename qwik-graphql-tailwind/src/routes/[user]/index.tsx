@@ -1,5 +1,5 @@
 import { component$, useClientEffect$, useContextProvider, useStore } from '@builder.io/qwik';
-import { GITHUB_GRAPHQL } from '~/utils/constants';
+import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import { useQuery } from '~/utils/useQuery';
 import { USER_PROFILE_QUERY } from '~/utils/queries/user-profile-query';
 import { useLocation } from '@builder.io/qwik-city';
@@ -103,7 +103,7 @@ export async function fetchUserProfile(
     },
     headersOpt: {
       Accept: 'application/vnd.github+json',
-      authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      authorization: `Bearer ${sessionStorage.getItem(AUTH_TOKEN)}`,
     },
   });
 

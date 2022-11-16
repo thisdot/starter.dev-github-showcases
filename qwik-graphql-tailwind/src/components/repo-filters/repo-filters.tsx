@@ -5,7 +5,7 @@ import { LanguageFilter, TypeFilter, RepositoryOrderField, DefaultLanguage } fro
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
 import { XmarkIcon, CheckIcon } from '../icons';
 import { SearchInput } from '../search-input/search-input';
-import filterStore from '~/context/repo-filter';
+import filterStore from '../../context/repo-filter';
 
 export type RepoFiltersProps = {
   languages: LanguageFilter[];

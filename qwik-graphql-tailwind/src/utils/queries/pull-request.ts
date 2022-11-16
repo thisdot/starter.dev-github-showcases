@@ -1,12 +1,9 @@
-export const ISSUES_QUERY = `
-  query IssuesQuery($owner: String!, $name: String!, $first: Int!) {
+export const PULL_REQUEST_QUERY = `
+  query PullRequests($owner: String!, $name: String!, $first: Int!) {
     repository(owner: $owner, name: $name) {
-      openIssues: issues(
-        first: $first
-        states: [OPEN]
-        orderBy: { field: CREATED_AT, direction: DESC }
-      ) {
-        nodes {
+      openPullRequest: pullRequests(first: $first, states: [OPEN]) {
+        edges {
+          node {
             state
             createdAt
             closedAt
@@ -17,17 +14,15 @@ export const ISSUES_QUERY = `
             author {
               login
             }
-            url
+            headRefName
             title
+            url
           }
+        }
       }
-
-      closedIssues: issues(
-        first: $first
-        states: [CLOSED]
-        orderBy: { field: CREATED_AT, direction: DESC }
-      ) {
-        nodes {
+      closedPullRequest: pullRequests(first: $first, states: [CLOSED, MERGED]) {
+        edges {
+          node {
             state
             createdAt
             closedAt
@@ -38,9 +33,11 @@ export const ISSUES_QUERY = `
             author {
               login
             }
-            url
+            headRefName
             title
+            url
           }
+        }
       }
     }
   }
