@@ -1,38 +1,42 @@
 import { createEffect, createResource } from 'solid-js';
 import { useAuth } from '../auth';
 import { useNavigate } from '@solidjs/router';
+import { API_URL, REDIRECT_URL, SIGN_IN_BASE_URL } from '../helper/constants';
 
 const fetchToken = () =>
-  fetch('http://localhost:4000/api/auth/token', {
+  fetch(`${API_URL}/auth/token`, {
     credentials: 'include',
   })
-    .then((response) => response.json())
-    .then((data) => data.access_token);
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      return data.access_token
+    });
 
-const SigninPage = () => {
-  const { setAuth } = useAuth();
-  const navigate = useNavigate();
-  const [token] = createResource(fetchToken);
-  createEffect(() => {
-    if (!token()) {
-      return;
-    }
+  const SigninPage = () => {
+      const signInHref = `${SIGN_IN_BASE_URL}?redirect_url=${REDIRECT_URL}`;
+      const { setAuth } = useAuth();
+      const navigate = useNavigate();
+      const [token] = createResource(fetchToken);
 
-    setAuth({ token: token() });
-    navigate(sessionStorage.getItem('auth_return_path'));
-  });
+    createEffect(() => {
+      if (token() && !token.loading) {
+        setAuth({ token: token() });
+        navigate(sessionStorage.getItem('auth_return_path'));
+      }
+    });
 
   return (
-    <main class="absolute bg-black text-gray-500 w-full h-full m-0 p-0 table">
-      <form class="p-64 block mx-auto mb-2">
+    <main class="flex justify-center items-center bg-black text-gray-500 w-screen h-screen">
+      <div>
         <a
-          href="http://localhost:4000/api/auth/signin?redirect_url=http%3A%2F%2Flocalhost%3A3000"
+          href={signInHref}
           class="w-full mb-3 px-4 py-3 border border-solid border-gray-500 rounded-md font-medium relative"
         >
           Sign in with GitHub
         </a>
-        {token}
-      </form>
+      </div>
     </main>
   );
 };
