@@ -59,6 +59,7 @@
     currentFilters.language = defaultFilters.language;
     currentFilters.type = defaultFilters.type;
     currentFilters.sort = defaultFilters.sort;
+    currentFilters.searchInput = defaultFilters.searchInput;
     dispatchFiltersChange();
   };
 </script>
