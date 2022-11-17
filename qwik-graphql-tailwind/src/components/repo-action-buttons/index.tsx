@@ -1,15 +1,13 @@
-import { component$, useContext } from '@builder.io/qwik';
-import { RepoContext } from '~/routes/[owner]/[name]';
+import { component$ } from '@builder.io/qwik';
 import { GitBranchIcon, StarIcon, EyeIcon } from '../icons';
 
-export const RepoActionButtons = component$(() => {
-  const store = useContext(RepoContext);
+interface RepoActionButtonsProps {
+  stargazerCount: number | string;
+  forkCount: number | string;
+  watcherCount: number | string;
+}
 
-  if (store.info.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  const { data } = store.info;
+export const RepoActionButtons = component$(({ watcherCount, stargazerCount, forkCount }: RepoActionButtonsProps) => {
   return (
     <div className="flex space-x-4 gap-0.5">
       <span className="inline-flex shadow-sm rounded-md">
@@ -18,7 +16,7 @@ export const RepoActionButtons = component$(() => {
           Watch
         </button>
         <button className="-ml-px relative inline-flex items-center px-3 py-1.5 rounded-r-md border border-gray-300 bg-white text-xs font-semibold text-gray-700 hover:text-blue-600">
-          {data?.watcherCount}
+          {watcherCount}
         </button>
       </span>
       <span className="inline-flex shadow-sm rounded-md">
@@ -27,7 +25,7 @@ export const RepoActionButtons = component$(() => {
           Star
         </button>
         <button className="-ml-px relative inline-flex items-center px-3 py-1.5 rounded-r-md border border-gray-300 bg-white text-xs font-semibold text-gray-700 hover:text-blue-600">
-          {data?.stargazerCount}
+          {stargazerCount}
         </button>
       </span>
       <span className="inline-flex shadow-sm rounded-md">
@@ -36,7 +34,7 @@ export const RepoActionButtons = component$(() => {
           Fork
         </button>
         <button className="-ml-px relative inline-flex items-center px-3 py-1.5 rounded-r-md border border-gray-300 bg-white text-xs font-semibold text-gray-700 hover:text-blue-600">
-          {data?.forkCount}
+          {forkCount}
         </button>
       </span>
     </div>

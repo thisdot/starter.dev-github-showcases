@@ -4,7 +4,7 @@ interface File {
 }
 
 export function parseQuery(repos: any[]): GistItem[] {
-  return repos.reduce((acc: GistItem[], gist) => {
+  return repos.reduce((acc: GistItem[], gist: any) => {
     if (!gist) {
       return acc;
     }

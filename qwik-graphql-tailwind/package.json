@@ -18,7 +18,7 @@
     "build.types": "tsc --incremental --noEmit",
     "dev": "vite --mode ssr",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
-    "lint": "eslint \"src/**/*.ts*\"",
+    "lint": "eslint src/**/*.ts*",
     "prettier": "prettier --write \"**/*.+(ts|tsx)\"",
     "prettier.check": "prettier --check \"**/*.+(ts|tsx)\"",
     "preview": "qwik build preview && vite preview --open",
@@ -30,8 +30,8 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "0.12.1",
-    "@builder.io/qwik-city": "0.0.118",
+    "@builder.io/qwik": "0.13.1",
+    "@builder.io/qwik-city": "0.0.121",
     "@builder.io/qwik-react": "0.1.1",
     "@storybook/addon-actions": "6.5.13",
     "@storybook/addon-essentials": "6.5.13",
@@ -71,6 +71,8 @@
     "@tailwindcss/typography": "^0.5.7",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
+    "prism-react-renderer": "^1.3.5",
+    "query-string": "^7.1.1",
     "react-markdown": "^8.0.3",
     "rehype-raw": "^6.1.1",
     "remark-gfm": "^3.0.1"

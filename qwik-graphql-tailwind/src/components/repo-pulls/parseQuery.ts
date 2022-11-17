@@ -1,3 +1,5 @@
+import { RepoPullRequestsQuery } from './types';
+
 export interface Label {
   color: string;
   name: string;
