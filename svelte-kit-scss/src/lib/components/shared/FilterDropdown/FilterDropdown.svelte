@@ -38,12 +38,6 @@
     dispatchSetFilter();
     closeDropdown();
   };
-
-  const handleResetFilterClick = (): void => {
-    current = defaultFilter;
-    dispatchSetFilter();
-    closeDropdown();
-  };
 </script>
 
 <div class="filter-dropdown-container" use:clickOutside on:clickoutside={closeDropdown}>
@@ -59,7 +53,7 @@
     >
       <div class="header">
         <div class="description">{description}</div>
-        <div class="reset" on:click={handleResetFilterClick} on:keypress={handleResetFilterClick}>
+        <div class="close" on:click={closeDropdown} on:keypress={closeDropdown}>
           <span class:invisible={current?.value === defaultFilter}>
             <X16 />
           </span>
@@ -124,7 +118,7 @@
         .description {
           flex-grow: 1;
         }
-        .reset {
+        .close {
           cursor: pointer;
         }
       }
