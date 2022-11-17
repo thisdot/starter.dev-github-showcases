@@ -1,15 +1,14 @@
-import { Routes, Route } from '@solidjs/router';
-import { Home, Counter, ApiExample } from './pages';
+import { Route, Routes } from '@solidjs/router';
+import { Home, RedirectPage, SigninPage } from './pages';
+import ROUTES from './routes';
 
 function App() {
   return (
-    <div class="text-center">
-      <Routes>
-        <Route component={Home} path="/" />
-        <Route component={Counter} path="/counter" />
-        <Route component={ApiExample} path="/api-example" />
-      </Routes>
-    </div>
+    <Routes>
+      <Route component={Home} path={ROUTES.HOME} />
+      <Route component={SigninPage} path={ROUTES.SIGNIN} />
+      <Route component={RedirectPage} path={ROUTES.REDIRECT} />
+    </Routes>
   );
 }
 

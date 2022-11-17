@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   fetchRepository,
   RepoContents,
-  selectRepositoryState,
+  selectedRepository,
 } from '../../state/repository';
 import { map, takeWhile, tap } from 'rxjs';
 
@@ -18,7 +18,7 @@ export class FileExplorerComponent implements OnInit, OnDestroy {
   repoName = '';
   path = '';
   branch = '';
-  repo$ = this.store.select(selectRepositoryState).pipe(
+  repo$ = this.store.select(selectedRepository).pipe(
     map((repo) => {
       const fileItems: RepoContents[] = [];
       const dirItems: RepoContents[] = [];
