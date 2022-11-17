@@ -1,25 +1,28 @@
-import { NavLink } from '@solidjs/router';
+import { createResource, Show } from 'solid-js';
+import { useAuth } from '../auth';
+import { useOctokit } from '../github';
 
 const Home = () => {
+  useAuth().preventUnauthorised();
+
+  const [data] = createResource(() => {
+    try {
+      return useOctokit()
+        .rest.users.getAuthenticated()
+        .then((response) => response.data);
+    } catch {
+      return Promise.resolve({});
+    }
+  });
+
   return (
     <>
-      <header class="flex justify-center items-center text-white my-5 mx-auto bg-blue-500  w-full lg:w-[75%] p-4 text-lg ">
+      <h1 class="flex justify-center items-center text-white my-5 mx-auto bg-blue-500  w-full lg:w-[75%] p-4 text-lg ">
         SolidJs and Tailwind CSS Starter kit
-      </header>
-      <div class="flex flex-col gap-2 items-center text-blue-800 underline text-base">
-        <NavLink
-          href="/counter"
-          class="hover:text-blue-500 transition-colors delay-100"
-        >
-          See Counter example component
-        </NavLink>
-        <NavLink
-          href="/api-example"
-          class="hover:text-blue-500 transition-colors delay-100"
-        >
-          See API example component
-        </NavLink>
-      </div>
+      </h1>
+      <Show when={!data.loading} keyed>
+        <p class="w-full lg:w-[75%] p-4 mx-auto">Welcome {data().login}</p>
+      </Show>
     </>
   );
 };
