@@ -2,6 +2,7 @@ import FetchApi from "./api";
 import { useAuth } from "../auth";
 import { USER_GISTS_QUERY } from "./queries/gists";
 
+
 const getGists = async ({url}) => {
   const { authStore } = useAuth();
 
