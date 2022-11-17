@@ -128,3 +128,22 @@ applications:
       cache:
         paths:
           - node_modules/**/*
+
+  - appRoot: solidjs-tailwind
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - npm install
+        build:
+          commands:
+            - node -v
+            - npm run build
+      artifacts:
+        baseDirectory: dist/
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*

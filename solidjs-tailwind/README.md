@@ -56,6 +56,10 @@ Signals can live outside of components. Each relevant component subscribes to it
 
 Demonstrates how to retrieve data from a third-party API by using `createResource`.
 
+#### Other Resources
+
+- [Solidjs Icons](https://www.npmjs.com/package/solid-icons)
+
 ## Installation
 
 ### CLI (Recommended)
@@ -85,7 +89,7 @@ git clone https://github.com/thisdot/starter.dev.git
 
 - `pnpm run dev` - Runs the development server on localhost port 3000 with HMR
 - `pnpm run test` - Runs the test suite
-- `pnpm run storbook` - To showcase the component library
+- `pnpm run storybook` - To showcase the component library
 - `pnpm run build` - Builds a production version of the app to deploy
 - `pnpm run serve` - Serves a production build on localhost port 4173
 - `pnpm run lint` - Uses eslint to find potential issues in the codebase
