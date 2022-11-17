@@ -1,3 +1,4 @@
+export * from './RepoFilter';
 export * from './GistPanel';
 export * from './RepoMeta';
 export * from './RepoCard';
