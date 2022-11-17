@@ -1,13 +1,16 @@
 import FetchApi from "./api";
+import { useAuth } from "../auth";
 import { USER_GISTS_QUERY } from "./queries/gists";
 
 const getGists = async ({url}) => {
+  const { authStore } = useAuth();
+
     const data = {
       url,
       query: USER_GISTS_QUERY,
       variable: null,
       headersOptions: {
-        authorization: `Bearer tokenvalue`,
+        authorization: `Bearer ${authStore.token}`,
       }
     }
     const resp = await FetchApi(data);
