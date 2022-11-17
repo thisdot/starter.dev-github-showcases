@@ -1,3 +1,3 @@
 export { default as Home } from './Home';
-export { default as Counter } from './Counter';
-export { default as ApiExample } from './ApiExample';
+export { default as SigninPage } from './Signin';
+export { default as RedirectPage } from './Redirect';

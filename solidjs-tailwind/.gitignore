@@ -1,5 +1,10 @@
 node_modules
 dist
 
+# env file
+.env.development
+.env.production
+.env.local
+
 # .vscode
 .vscode/*
