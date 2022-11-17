@@ -8,7 +8,7 @@
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
   import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
-  import { debounce, filterRepoUtil } from '$lib/helpers';
+  import { debounce, filterReposUtil } from '$lib/helpers';
   import { LanguageFilters, SortFilters, TypeFilters } from '$lib/enums';
   export let data: PageServerData;
 
@@ -21,9 +21,15 @@
   let filteredRepos = userRepos;
 
   const filterRepos = (event: CustomEvent<RepoFiltersState>): void => {
-    const { searchInput, type, language } = event.detail;
+    const { searchInput, type, language, sort } = event.detail;
     if (hasActiveFilters) {
-      filteredRepos = userRepos.filter(filterRepoUtil(searchInput, type, language));
+      filteredRepos = filterReposUtil(
+        userRepos,
+        searchInput,
+        type?.value,
+        language?.value,
+        sort?.value
+      );
     } else {
       filteredRepos = userRepos;
     }

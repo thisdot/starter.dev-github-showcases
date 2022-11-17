@@ -1,6 +1,6 @@
 import type { UserReposApiResponse, UserReposState } from '$lib/interfaces';
 import type { FilterDropdownOption } from '../components/shared/FilterDropdown/filter-option';
-import { LanguageFilters, TypeFilters } from '../enums';
+import { LanguageFilters, SortFilters, TypeFilters } from '../enums';
 
 export const mapUserReposToTopRepos = (repos: UserReposApiResponse): UserReposState[] => {
   if (repos) {
@@ -31,34 +31,45 @@ export const mapUserReposToTopRepos = (repos: UserReposApiResponse): UserReposSt
   return [];
 };
 
-export function filterRepoUtil(
-  searchInput: string,
-  type: FilterDropdownOption<string>,
-  language: FilterDropdownOption<string>
+export function filterReposUtil(
+  filteredRepos: UserReposState[],
+  search?: string,
+  type?: string,
+  language?: string,
+  sort?: string
 ) {
-  return (repo: UserReposState) => {
-    const searchTermCondition = searchInput
-      ? repo.name.toLowerCase().includes(searchInput.toLowerCase())
-      : true;
-    let typeCondition = false;
-    let languageCondition: boolean;
+  if (search) {
+    filteredRepos = filteredRepos?.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }
 
-    if (type?.value === TypeFilters.ALL) {
-      typeCondition = true;
-    } else if (type?.value === TypeFilters.ARCHIVED) {
-      typeCondition = Boolean(repo.archived);
-    } else if (type?.value === TypeFilters.FORKED) {
-      typeCondition = Boolean(repo.fork);
+  if (type !== TypeFilters.ALL) {
+    if (type === TypeFilters.ARCHIVED) {
+      filteredRepos = filteredRepos?.filter((item) => Boolean(item.archived));
     }
-
-    if (language?.value === LanguageFilters.ALL) {
-      languageCondition = true;
-    } else {
-      languageCondition = repo.language?.toLowerCase() === language?.value.toLowerCase();
+    if (type === TypeFilters.FORKED) {
+      filteredRepos = filteredRepos?.filter((item) => Boolean(item.fork));
     }
+  }
 
-    return searchTermCondition && typeCondition && languageCondition;
-  };
+  if (language !== LanguageFilters.ALL) {
+    filteredRepos = filteredRepos?.filter(
+      (item) => item.language?.toLowerCase() === language?.toLowerCase()
+    );
+  }
+
+  if (sort !== SortFilters.UPDATED) {
+    if (sort === SortFilters.NAME) {
+      filteredRepos = filteredRepos?.slice().sort((a, b) => a.name.localeCompare(b.name));
+    }
+    if (sort === SortFilters.STARS) {
+      filteredRepos = filteredRepos
+        ?.slice()
+        .sort((a, b) => a.stargazers_count - b.stargazers_count);
+    }
+  }
+  return filteredRepos ?? [];
 }
 
 export function createLanguageMap(repos: UserReposState[]): FilterDropdownOption[] {
