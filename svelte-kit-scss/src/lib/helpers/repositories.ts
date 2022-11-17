@@ -43,6 +43,7 @@ export function filterReposUtil(
       item.name.toLowerCase().includes(search.toLowerCase())
     );
   }
+
   if (type !== TypeFilters.ALL) {
     if (type === TypeFilters.ARCHIVED) {
       filteredRepos = filteredRepos?.filter((item) => Boolean(item.archived));
@@ -51,14 +52,16 @@ export function filterReposUtil(
       filteredRepos = filteredRepos?.filter((item) => Boolean(item.fork));
     }
   }
+
   if (language !== LanguageFilters.ALL) {
     filteredRepos = filteredRepos?.filter(
       (item) => item.language?.toLowerCase() === language?.toLowerCase()
     );
   }
+
   if (sort !== SortFilters.UPDATED) {
     if (sort === SortFilters.NAME) {
-      filteredRepos = filteredRepos?.slice().sort((a, b) => (a.name > b.name ? 1 : -1));
+      filteredRepos = filteredRepos?.slice().sort((a, b) => a.name.localeCompare(b.name));
     }
     if (sort === SortFilters.STARS) {
       filteredRepos = filteredRepos
