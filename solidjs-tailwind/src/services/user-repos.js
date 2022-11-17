@@ -1,15 +1,17 @@
+import { useAuth } from "../auth";
 import FetchApi from "./api";
 import { USER_REPOS_QUERY } from "./queries/all-repos";
 
 const getUserRepos = async ({
   url
 }) => {
+  const { authStore } = useAuth();
   const data = {
     url,
     query: USER_REPOS_QUERY,
     variable: null,
     headersOptions: {
-      authorization: `Bearer tokenvalue`,
+      authorization: `Bearer ${authStore.token}`,
     }
   }
   const resp = await FetchApi(data);
