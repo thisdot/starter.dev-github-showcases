@@ -2,6 +2,7 @@ export * from './CounterExample';
 export * from './FetchExample';
 export * from './UserProfile';
 export * from './Icons';
+export * from './RepoFilter';
 export * from './GistPanel';
 export * from './RepoMeta';
 export * from './RepoCard';
