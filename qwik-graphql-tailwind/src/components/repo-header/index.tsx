@@ -19,6 +19,10 @@ export const RepoHeader = component$(
   ({ name, owner, watcherCount, stargazerCount, forkCount, issuesCount, prCount }: RepoHeaderProps) => {
     const { pathname } = useLocation();
     const basePath = `${owner}/${name}`;
+    const tabList = createTabList({
+      issueCount: issuesCount,
+      pullRequestCount: prCount,
+    });
 
     return (
       <div className="pt-6 px-12 bg-gray-100 border-b border-gray-300">
@@ -27,15 +31,7 @@ export const RepoHeader = component$(
           <RepoActionButtons watcherCount={watcherCount} stargazerCount={stargazerCount} forkCount={forkCount} />
         </div>
         <div className="mt-6">
-          <TabNavigation
-            tabs={createTabList({
-              issueCount: issuesCount,
-              pullRequestCount: prCount,
-            })}
-            basePath={basePath}
-            className={'border-none'}
-            pathname={pathname}
-          />
+          <TabNavigation tabs={tabList} basePath={basePath} className={'border-none'} pathname={pathname} />
         </div>
       </div>
     );

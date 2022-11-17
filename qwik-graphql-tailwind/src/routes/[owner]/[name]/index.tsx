@@ -141,7 +141,6 @@ export function updateRepoInfo(store: SharedState, response: any) {
     data: { repository },
   } = response;
   if (repository) {
-    console.log(repository);
     store.info.data = {
       isPrivate: repository.isPrivate,
       forkCount: repository.forkCount,
