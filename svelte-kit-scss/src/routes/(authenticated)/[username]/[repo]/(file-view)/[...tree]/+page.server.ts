@@ -24,7 +24,13 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
   const contentsDataResponse = await fetch(getRepoContentsUrl);
   if (!contentsDataResponse.ok) {
     const contentsData = (await contentsDataResponse.json()) as { message: string };
-    throw error(contentsDataResponse.status, contentsData.message); // todo: Not Found Page
+    const errorMessage =
+      contentsDataResponse.status === 404
+        ? `The '${username}/${repo}' repository doesn't contain the '${
+            folderPathSegments.slice(-1)[0] || ''
+          }' path in '${branch}'.`
+        : contentsData.message;
+    throw error(contentsDataResponse.status, errorMessage);
   }
   const contentsData = (await contentsDataResponse.json()) as GithubRepoContentsItem[];
 
