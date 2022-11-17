@@ -50,6 +50,7 @@
     "@heroicons/react": "1.0.5"
   },
   "dependencies": {
+    "solid-heroicons": "^3.1.0",
     "solid-js": "1.6.0"
   },
   "keywords": [
