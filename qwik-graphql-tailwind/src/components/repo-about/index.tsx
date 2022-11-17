@@ -13,15 +13,11 @@ export const RepoAboutWidget = component$(() => {
     <div className={styles.container}>
       <h3 className={styles.heading}>About</h3>
       <div className={styles.description}>
-        {store.info.isLoading ? (
-          <div>Loading..</div>
-        ) : (
-          <div className="space-y-4">
-            <Description text={store.info.data?.description} />
-            <HomepageUrl homepageUrl={store.info.data?.homepageUrl} />
-            <Topics topics={store.info.data?.topics} />
-          </div>
-        )}
+        <div className="space-y-4">
+          <Description text={store.info.data?.description} />
+          <HomepageUrl homepageUrl={store.info.data?.homepageUrl} />
+          <Topics topics={store.info.data?.topics} />
+        </div>
       </div>
       <div>
         <a className={styles.readmeLink}>

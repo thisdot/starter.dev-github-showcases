@@ -22,15 +22,7 @@ export const RepoTree = component$(() => {
     updateRepoTree(store, response);
   });
 
-  if (store.tree.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <div>
-      <FileExplorer />
-    </div>
-  );
+  return <FileExplorer />;
 });
 
 export function updateRepoTree(store: SharedState, response: any) {

@@ -1,16 +1,12 @@
-import { component$, useContext } from '@builder.io/qwik';
-import { RepoContext } from '~/routes/[owner]/[name]';
+import { component$ } from '@builder.io/qwik';
 import { RepoIcon } from '../icons/repo.icon';
 
-export const RepoHeading = component$(() => {
-  const store = useContext(RepoContext);
+interface RepoHeadingProps {
+  name: string;
+  owner: string;
+}
 
-  if (store.info.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  const { name, owner } = store;
-
+export const RepoHeading = component$(({ name, owner }: RepoHeadingProps) => {
   return (
     <h1 className="flex items-center text-xl leading-7">
       <RepoIcon className="w-6 h-6 text-gray-600" />

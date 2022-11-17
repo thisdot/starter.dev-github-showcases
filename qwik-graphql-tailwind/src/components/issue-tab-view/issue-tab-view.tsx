@@ -4,9 +4,9 @@ import issuesPRStore, { IssuesPRStoreProps } from '../../context/issue-pr-store'
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
 import { labelOptions, milestonesOptions, sortOptions } from './data';
 import { ChevronDownIcon } from '../icons';
-import { useQuery } from '~/utils';
-import { ISSUES_QUERY } from '~/utils/queries/issues-query';
-import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
+import { useQuery } from '../../utils';
+import { ISSUES_QUERY } from '../../utils/queries/issues-query';
+import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
 import IssuesData from './issues-data';
 import { Issue } from './type';
 
@@ -120,5 +120,6 @@ export async function fetchRepoIssues(
       authorization: `Bearer ${sessionStorage.getItem(AUTH_TOKEN)}`,
     },
   });
+
   return await resp.json();
 }

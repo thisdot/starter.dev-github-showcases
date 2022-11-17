@@ -1,7 +1,8 @@
 import type { TabItem } from './types';
 import * as styles from './tab-navigation.classNames';
 import { component$ } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { Link, useLocation } from '@builder.io/qwik-city';
+import { stringify } from 'query-string';
 
 export interface TabNavigationProps {
   tabs: TabItem[];
@@ -17,15 +18,18 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
     return pathName !== '' ? pathname.includes(pathName!) : otherPaths.every((path) => !pathname.includes(path!));
   };
 
+  const query = useLocation().query;
+
   return (
     <div className={`${styles.container} ${className}`}>
       <nav className={styles.nav} aria-label="Tabs">
         {tabs.map(({ title, path, Icon, count }, index) => {
           const href = path === '' ? `/${basePath}` : `/${basePath}/${path}`;
+
           return (
             <Link
-              href={href}
               key={index}
+              href={href + '?' + stringify(query)}
               className={`${isCurrentTab(path) ? styles.tabActive : styles.tabInactive} ${styles.tab}`}
             >
               <Icon className={`${isCurrentTab(path) ? styles.iconActive : styles.iconInactive} ${styles.icon}`} />

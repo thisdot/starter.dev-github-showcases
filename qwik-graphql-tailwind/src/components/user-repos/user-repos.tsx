@@ -17,27 +17,26 @@ import {
 } from './filter-sort-functions';
 
 export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
+  const filters = useContext(filterStore);
   const languages = getLanguages(repos.nodes);
 
-  const filters = useContext(filterStore);
-
   const filteredAndSortedRepos = ((): UserRepo[] => {
-    let searchResponse: UserRepo[] = repos.nodes;
+    const searchResponse: UserRepo[] = repos.nodes;
 
     if (filters.search) {
-      searchResponse = repoDataFilteredBySearch(filters?.search || '', searchResponse);
+      return repoDataFilteredBySearch(filters?.search || '', searchResponse);
     }
 
     if (filters.language) {
-      searchResponse = repoDataFilteredByLanguage(filters?.language, searchResponse);
+      return repoDataFilteredByLanguage(filters?.language, searchResponse);
     }
 
     if (filters.type) {
-      searchResponse = repoDataFilteredByType(filters.type, searchResponse);
+      return repoDataFilteredByType(filters.type, searchResponse);
     }
 
     if (filters.sortBy) {
-      searchResponse = sortedRepoData(filters.sortBy, searchResponse);
+      return sortedRepoData(filters.sortBy, searchResponse);
     }
 
     return searchResponse;
