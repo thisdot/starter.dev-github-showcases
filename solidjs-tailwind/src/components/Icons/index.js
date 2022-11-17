@@ -5,3 +5,7 @@ export * from './LocationMarkerIcon';
 export * from './OfficeBuildingIcon';
 export * from './StarIcon';
 export * from './UsersIcon';
+export * from './repo-book';
+export * from './close';
+export * from './caret';
+export * from './correct';
