@@ -1,8 +1,8 @@
 import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
-import { USER_GISTS_QUERY } from '~/utils/queries/gists-query';
-import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
+import { USER_GISTS_QUERY } from '../../utils/queries/gists-query';
+import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
 import GistListItem from './gist-list-item';
-import { useQuery } from '~/utils/useQuery';
+import { useQuery } from '../../utils/useQuery';
 import { parseQuery } from './parseQuery';
 import * as styles from './gists.className';
 import { GistItem } from './types';

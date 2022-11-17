@@ -1,4 +1,7 @@
 import type { GistItem } from './types';
+interface File {
+  name: string;
+}
 
 export function parseQuery(repos: any[]): GistItem[] {
   return repos.reduce((acc: GistItem[], gist: any) => {
@@ -7,7 +10,7 @@ export function parseQuery(repos: any[]): GistItem[] {
     }
     const files = gist.files ?? [];
     const gists = files.reduce(
-      (_acc: GistItem[], file: any) =>
+      (_acc: GistItem[], file: File) =>
         file
           ? [
               ..._acc,
