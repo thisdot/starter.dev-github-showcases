@@ -1,6 +1,6 @@
 import { UserApiResponse } from '../user';
 
-export interface RepoState {
+export interface RepositoryState {
   description: string;
   forkCount: number;
   issueCount: number;
@@ -71,7 +71,7 @@ export interface RepoApiResponse {
   clone_url: string;
   mirror_url: string;
   hooks_url: string;
-  svn_url: 'string;';
+  svn_url: string;
   homepage: string;
   language: null;
   forks_count: number;
@@ -122,6 +122,9 @@ export interface RepoContents {
   name: string;
   type: string;
   path: string;
+  content: string;
+  encoding: string;
+  size: number;
 }
 
 export interface RepoContentsApiResponse {
@@ -134,6 +137,8 @@ export interface RepoContentsApiResponse {
   git_url: string;
   download_url: string;
   type: string;
+  encoding: string;
+  content: string;
   _links: {
     self: string;
     git: string;
