@@ -21,24 +21,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        uses: pnpm/action-setup@v2.2.4
         with:
           fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v2
-        uses: pnpm/action-setup@v2.2.4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-          cache-dependency-path: solidjs-tailwind/pnpm-lock.yaml
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install
         working-directory: solidjs-tailwind
 
       - name: Lint files
-        run: pnpm run lint
+        run: npm run lint
         working-directory: solidjs-tailwind
   
 
@@ -47,24 +43,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        uses: pnpm/action-setup@v2.2.4
         with:
           fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v2
-        uses: pnpm/action-setup@v2.2.4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
-          cache-dependency-path: solidjs-tailwind/pnpm-lock.yaml
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install
         working-directory: solidjs-tailwind
 
       - name: Run tests
-        run: pnpm run test
+        run: npm run test
         working-directory: solidjs-tailwind
 
   
@@ -79,22 +71,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        uses: pnpm/action-setup@v2.2.4
         with:
           fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v2
-        uses: pnpm/action-setup@v2.2.4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
-          cache-dependency-path: solidjs-tailwind/pnpm-lock.yaml
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install
         working-directory: solidjs-tailwind
 
       - name: Build Project
-        run: pnpm run build
+        run: npm run build
         working-directory: solidjs-tailwind
