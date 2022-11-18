@@ -7,7 +7,7 @@ import {
   Switch,
   Match,
 } from 'solid-js';
-import { CaretIcon, CloseIcon, CorrectIcon } from '../ICONS';
+import { CaretIcon, CloseIcon, CorrectIcon } from '../Iconsx';
 
 function clickOutside(el, accessor) {
   const onClick = (e) => {
