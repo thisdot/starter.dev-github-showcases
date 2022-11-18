@@ -113,10 +113,11 @@
         display: flex;
         padding: 0.625em 1em;
         font-size: 0.75em;
-        line-height: 1em;
+        line-height: normal;
         font-weight: 600;
         .description {
           flex-grow: 1;
+          height: 100%;
         }
         .close {
           cursor: pointer;

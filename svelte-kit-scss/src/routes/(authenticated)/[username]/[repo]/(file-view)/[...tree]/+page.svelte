@@ -6,12 +6,12 @@
   import type { PageServerData } from './$types';
   export let data: PageServerData;
 
-  $: ({ parentHref, contents } = data);
+  $: ({ parentHref, contents, branches, defaultBranch } = data);
 </script>
 
 <div class="container grid grid-cols-12 subpage">
   <section class="col-span-9 col-sm-span-12">
-    <FileExplorerNav />
+    <FileExplorerNav {branches} {defaultBranch} />
     <FileExplorerContainer {parentHref} {contents} />
   </section>
 

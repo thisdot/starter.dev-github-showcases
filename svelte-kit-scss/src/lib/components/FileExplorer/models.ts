@@ -5,3 +5,7 @@ export interface FileExplorerFolderContentItem {
   type: GithubRepoContentsItemType;
   href: string;
 }
+
+export interface BranchOption {
+  name: string;
+}

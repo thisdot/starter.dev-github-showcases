@@ -1,6 +1,10 @@
 import { ENV } from '$lib/constants/env';
-import { composeDirHref, remapFileExplorerFolderContentsItem } from '$lib/helpers';
-import type { ReadmeApiResponse, GithubRepoContentsItem } from '$lib/interfaces';
+import {
+  composeDirHref,
+  remapBranchOption,
+  remapFileExplorerFolderContentsItem,
+} from '$lib/helpers';
+import type { ReadmeApiResponse, GithubRepoContentsItem, GithubBranch } from '$lib/interfaces';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad, PageServerParentData } from './$types';
 
@@ -47,10 +51,22 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
     (response) => response.json() as Promise<ReadmeApiResponse>
   );
 
+  const getRepoBranchesUrl = new URL(`/repos/${username}/${repo}/branches`, ENV.GITHUB_URL);
+
+  const branches = await fetch(getRepoBranchesUrl).then(
+    (response) => response.json() as Promise<GithubBranch>
+  );
+
+  if (!Array.isArray(branches)) {
+    throw error(400, 'Unable to fetch branches');
+  }
+
   return {
     ...layoutData,
     parentHref,
     contents,
     readme: readmeData.content,
+    branches: branches.map(remapBranchOption),
+    defaultBranch: repoInfo.defaultBranch,
   };
 };
