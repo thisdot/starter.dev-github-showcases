@@ -9,10 +9,10 @@ const FetchApi = ({ url, query, variables, headersOptions }) => {
       },
       body: JSON.stringify({
         query,
-        variables,
-      }),
+        variables
+      })
     })
-      .then((res) => res.json())
+    .then((res) => res.json())
       .then((result) => {
         resolve(result);
       })
