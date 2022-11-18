@@ -1,5 +1,5 @@
 import { Show, splitProps } from 'solid-js';
-import { CloseIcon } from '../Icons';
+import { CloseIcon } from '../ICONS';
 
 const modifyFilterTypeText = (filterText = 'test') => {
   if (filterText.endsWith('s')) {

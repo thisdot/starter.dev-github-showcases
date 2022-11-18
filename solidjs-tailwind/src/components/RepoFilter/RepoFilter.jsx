@@ -1,5 +1,5 @@
 import { mergeProps, Show } from 'solid-js';
-import { RepoBookIcon } from '../Icons';
+import { RepoBookIcon } from '../ICONS';
 import { FILTER_TYPE_OPTIONS, SORT_OPTIONS } from './data';
 import FilterDropdown from './FilterDropdown';
 import FilterText from './FilterText';

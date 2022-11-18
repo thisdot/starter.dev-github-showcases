@@ -1,5 +1,5 @@
 export * from './UserProfile';
-export * from './Icons';
+export * from './ICONS';
 export * from './RepoFilter';
 export * from './GistPanel';
 export * from './RepoMeta';
