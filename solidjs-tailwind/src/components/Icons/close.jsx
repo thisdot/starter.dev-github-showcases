@@ -17,4 +17,5 @@ const CloseIcon = () => (
   </svg>
 );
 
+
 export default CloseIcon;

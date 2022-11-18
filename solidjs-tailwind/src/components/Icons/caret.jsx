@@ -12,4 +12,5 @@ const CaretIcon = () => (
   </svg>
 );
 
+
 export default CaretIcon;

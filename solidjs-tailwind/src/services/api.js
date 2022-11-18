@@ -1,7 +1,7 @@
-const FetchApi = ({ url, query, variables, headersOptions }) => {
+const FetchApi = ({url, query, variables, headersOptions}) => {
   return new Promise((resolve, reject) => {
     fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
         ...headersOptions,
         Accept: 'application/vnd.github+json',
