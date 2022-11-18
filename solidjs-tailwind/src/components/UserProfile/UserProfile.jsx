@@ -6,7 +6,7 @@ import {
   link,
 } from 'solid-heroicons/outline';
 import { Icon } from 'solid-heroicons';
-import { TwitterIcon } from '../Iconsx';
+import { TwitterIcon } from '../Icons';
 import OrgList from './OrgList';
 
 const UserProfile = (userProfileProps) => {
