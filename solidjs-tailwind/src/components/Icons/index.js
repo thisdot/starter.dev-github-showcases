@@ -1,10 +1,4 @@
-export * from './repo.icon';
-export * from './TwitterIcon';
-export * from './LinkIcon';
-export * from './LocationMarkerIcon';
-export * from './OfficeBuildingIcon';
-export * from './StarIcon';
-export * from './UsersIcon';
+export { default as TwitterIcon } from './TwitterIcon';
 export { default as CaretIcon } from './caret';
 export { default as CloseIcon } from './close';
 export { default as CorrectIcon } from './correct';
