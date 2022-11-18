@@ -23,3 +23,4 @@ export * from './resolved-issue.icon';
 export * from './closed-pr.icon';
 export * from './merged-pr.icon';
 export * from './draft-pr.icon';
+export * from './information-circle.icon';
