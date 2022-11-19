@@ -10,15 +10,24 @@ export interface TabNavigationProps {
   className?: string;
   isOrg?: boolean;
   pathname: string;
+  query?: {
+    name: string;
+    owner: string;
+    stargazerCount: number | string;
+    forkCount: number | string;
+    watcherCount: number | string;
+    issuesCount: number | string;
+    prCount: number | string;
+  };
 }
 
-export const TabNavigation = component$(({ tabs, className, basePath = '', pathname }: TabNavigationProps) => {
+export const TabNavigation = component$(({ tabs, className, basePath = '', pathname, query }: TabNavigationProps) => {
   const isCurrentTab = (pathName?: string) => {
     const otherPaths = tabs.filter(({ path }) => path !== pathName).map(({ path }) => path);
     return pathName !== '' ? pathname.includes(pathName!) : otherPaths.every((path) => !pathname.includes(path!));
   };
 
-  const query = useLocation().query;
+  const _query = query || useLocation().query;
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -29,7 +38,7 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
           return (
             <Link
               key={index}
-              href={href + '?' + stringify(query)}
+              href={href + '?' + stringify(_query)}
               className={`${isCurrentTab(path) ? styles.tabActive : styles.tabInactive} ${styles.tab}`}
             >
               <Icon className={`${isCurrentTab(path) ? styles.iconActive : styles.iconInactive} ${styles.icon}`} />

@@ -11,8 +11,8 @@ interface RepoHeaderProps {
   stargazerCount: number | string;
   forkCount: number | string;
   watcherCount: number | string;
-  issuesCount: number;
-  prCount: number;
+  issuesCount: number | string;
+  prCount: number | string;
 }
 
 export const RepoHeader = component$(
@@ -20,8 +20,8 @@ export const RepoHeader = component$(
     const { pathname } = useLocation();
     const basePath = `${owner}/${name}`;
     const tabList = createTabList({
-      issueCount: issuesCount,
-      pullRequestCount: prCount,
+      issueCount: Number(issuesCount),
+      pullRequestCount: Number(prCount),
     });
 
     return (
@@ -31,7 +31,21 @@ export const RepoHeader = component$(
           <RepoActionButtons watcherCount={watcherCount} stargazerCount={stargazerCount} forkCount={forkCount} />
         </div>
         <div className="mt-6">
-          <TabNavigation tabs={tabList} basePath={basePath} className={'border-none'} pathname={pathname} />
+          <TabNavigation
+            tabs={tabList}
+            basePath={basePath}
+            className={'border-none'}
+            pathname={pathname}
+            query={{
+              name,
+              owner,
+              watcherCount,
+              stargazerCount,
+              forkCount,
+              issuesCount,
+              prCount,
+            }}
+          />
         </div>
       </div>
     );
