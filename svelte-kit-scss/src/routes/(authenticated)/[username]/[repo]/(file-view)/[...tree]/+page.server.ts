@@ -66,7 +66,12 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
     parentHref,
     contents,
     readme: readmeData.content,
-    branches: branches.map(remapBranchOption),
+    branches: branches.map((branch) =>
+      remapBranchOption(branch, (branchName: string) =>
+        composeDirHref(folderPath, username, repo, branchName, repoInfo.defaultBranch)
+      )
+    ),
     defaultBranch: repoInfo.defaultBranch,
+    currentBranch: branch,
   };
 };

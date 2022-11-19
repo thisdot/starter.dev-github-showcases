@@ -5,17 +5,21 @@
   import type { BranchOption } from '../models';
   export let branches: BranchOption[];
   export let defaultBranch: string;
+  export let currentBranch: string;
 
   let searchTerm = String();
 
   $: options = branches.filter((x) => x.name).filter((x) => x.name.includes(searchTerm));
+  const reset = () => {
+    searchTerm = String();
+  };
 </script>
 
 <nav class="file-explorer-container">
   <DropdownMenu description="Select branches">
-    <button class="btn">
+    <button class="dropdown-button" on:click={reset} on:keypress={reset}>
       <GitBranch16 />
-      <span class="btn-text">main</span>
+      <span class="label">{currentBranch}</span>
       <ChevronDown16 />
     </button>
     <svelte:fragment slot="content">
@@ -31,7 +35,7 @@
         <div class="tabs">
           <div class="tab active">Branches</div>
         </div>
-        <BranchesSelectList {options} {defaultBranch} />
+        <BranchesSelectList {options} {defaultBranch} {currentBranch} />
       </div>
     </svelte:fragment>
   </DropdownMenu>
@@ -46,7 +50,26 @@
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     align-items: center;
-
+    .dropdown-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      max-width: 12rem;
+      border-radius: 4px;
+      border: $border;
+      padding: 0.5em 1em;
+      font-weight: 600;
+      color: variables.$gray700;
+      background: variables.$gray100;
+      &:hover {
+        background: variables.$gray200;
+      }
+      .label {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+      }
+    }
     .menu-content {
       width: 18.75rem;
       .search {
@@ -76,25 +99,5 @@
         }
       }
     }
-  }
-
-  .btn {
-    display: inline-flex;
-    gap: 0.5rem;
-    position: relative;
-    padding: 0.45rem 1rem;
-    background-color: variables.$gray50;
-    color: variables.$gray700;
-    align-items: center;
-    border-radius: 0.375rem;
-    border: solid 1px variables.$gray300;
-
-    &:hover {
-      background-color: variables.$gray200;
-    }
-  }
-
-  .btn-text {
-    font-weight: 600;
   }
 </style>

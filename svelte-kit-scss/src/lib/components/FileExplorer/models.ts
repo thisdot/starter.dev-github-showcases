@@ -8,4 +8,5 @@ export interface FileExplorerFolderContentItem {
 
 export interface BranchOption {
   name: string;
+  href: string;
 }
