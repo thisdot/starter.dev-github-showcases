@@ -15,7 +15,7 @@ type HeaderProps = {
 export default component$(({ user }: HeaderProps) => {
   return (
     <header className={styles.header}>
-      <Link href="/">
+      <Link preventdefault:click={false} href="/">
         <GitHubLogo />
       </Link>
       <div>
