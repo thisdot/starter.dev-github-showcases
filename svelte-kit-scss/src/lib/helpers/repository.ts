@@ -1,6 +1,4 @@
-import type { FileExplorerFolderContentItem } from '$lib/components/FileExplorer/models';
-import type { GithubRepoContentsItemType } from '$lib/constants/github';
-import type { RepoApiResponse, GithubRepoContentsItem, RepoState } from '$lib/interfaces';
+import type { RepoApiResponse, RepoState } from '$lib/interfaces';
 
 export const mapRepoResToRepoState = (
   data: RepoApiResponse,
