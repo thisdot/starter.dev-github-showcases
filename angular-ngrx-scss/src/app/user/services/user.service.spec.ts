@@ -1,13 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { fakeAsync, tick } from '@angular/core/testing';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { of } from 'rxjs';
 import {
   UserGist,
-  UserGistsState,
+  UserOrg,
   UserRepo,
-  UserReposState,
 } from 'src/app/state/profile/profile.state';
-import { UserApiResponse, UserState } from 'src/app/state/user';
+import { UserApiResponse } from 'src/app/state/user';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -23,9 +21,9 @@ describe('UserService', () => {
     expect(userService).toBeTruthy();
   });
 
-  it('should return user data from the GitHub API', fakeAsync(() => {
-    const expectedResponse: UserState = {
-      avatar: 'lindakatcodes_url',
+  it('should return user data from the GitHub API', (done) => {
+    const expectedHttpResponse = {
+      avatar_url: 'testuser_url',
       bio: '',
       blog: '',
       company: '',
@@ -33,88 +31,71 @@ describe('UserService', () => {
       followers: 0,
       following: 0,
       location: '',
-      name: '',
-      twitter_username: '',
-      username: 'lindakatcodes',
-      type: 'User',
-    };
-
-    const expectedHttpResponse: Partial<UserApiResponse> = {
-      avatar_url: 'lindakatcodes_url',
-      bio: '',
-      blog: '',
-      company: '',
-      email: '',
-      followers: 0,
-      following: 0,
-      location: '',
-      login: 'lindakatcodes',
+      login: 'testuser',
       name: '',
       twitter_username: '',
       type: 'User',
-    };
+    } as UserApiResponse;
 
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
-    const result = {};
+    userService.getAuthenticatedUserInfo().subscribe({
+      next: (userInfo) => {
+        expect(userInfo).toEqual(expectedHttpResponse);
 
-    userService.getAuthenticatedUserInfo().subscribe((res) => {
-      Object.assign(result, res);
+        expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
+          `https://api.github.com/user`,
+          jasmine.objectContaining({
+            headers: {
+              Accept: 'application/vnd.github.v3+json',
+            },
+          }),
+        );
+      },
+      complete: done,
     });
-    tick(1000);
+  });
 
-    expect(result).toEqual(expectedResponse);
-    expect(httpClientSpy.get.calls.count()).withContext('called once').toBe(1);
-  }));
-
-  it('should return the top repositories from the Github API', fakeAsync(() => {
-    const expectedResponse: UserReposState[] = [
+  it('should return organizations the user belongs to from the GitHub API', (done) => {
+    const expectedHttpResponse: Partial<UserOrg>[] = [
       {
-        name: 'Repo-test',
-        description: 'This is a repo test',
-        language: 'TypeScript',
-        stargazers_count: 0,
-        forks_count: 0,
-        private: false,
-        updated_at: '2022-06-17T09:54:38Z',
-        license: null,
-        fork: false,
-        archived: false,
-        owner: {
-          login: 'thisdot',
-        },
+        login: 'Fake Org 1',
+        id: 0,
+        url: '',
+        description: 'Org 1',
       },
       {
-        name: 'Repo-test-2',
-        description: 'This is a repo test 2',
-        language: 'Javascript',
-        stargazers_count: 0,
-        forks_count: 0,
-        private: false,
-        updated_at: '2022-06-17T09:54:38Z',
-        license: null,
-        fork: false,
-        archived: false,
-        owner: {
-          login: 'thisdot',
-        },
+        login: 'Fake Org 2',
+        id: 1,
+        url: '',
+        description: 'Org 2',
       },
       {
-        name: 'Repo-test-3',
-        description: 'This is a repo test 2',
-        language: 'Javascript',
-        stargazers_count: 0,
-        forks_count: 0,
-        private: false,
-        updated_at: '2022-06-17T09:54:38Z',
-        license: null,
-        fork: false,
-        archived: false,
-        owner: {
-          login: 'thisdot',
-        },
+        login: 'Fake Org 3',
+        id: 2,
+        url: '',
+        description: 'Org 3',
       },
     ];
+
+    httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
+
+    userService.getUserOrganizations('thisdot').subscribe({
+      next: () => {
+        expect(httpClientSpy.get).toHaveBeenCalledWith(
+          `https://api.github.com/users/thisdot/orgs`,
+          jasmine.objectContaining({
+            headers: {
+              Accept: 'application/vnd.github.v3+json',
+            },
+          }),
+        );
+      },
+      complete: done,
+    });
+  });
+
+  it('should return the authenticated users repositories from the Github API', (done) => {
     const expectedHttpResponse: Partial<UserRepo>[] = [
       {
         name: 'Repo-test',
@@ -150,7 +131,7 @@ describe('UserService', () => {
             'https://api.github.com/users/thisdot/subscriptions',
           type: 'Organization',
           url: 'https://api.github.com/users/thisdot',
-        },
+        } as UserApiResponse,
       },
       {
         name: 'Repo-test-2',
@@ -186,7 +167,7 @@ describe('UserService', () => {
             'https://api.github.com/users/thisdot/subscriptions',
           type: 'Organization',
           url: 'https://api.github.com/users/thisdot',
-        },
+        } as UserApiResponse,
       },
       {
         name: 'Repo-test-3',
@@ -221,31 +202,160 @@ describe('UserService', () => {
             'https://api.github.com/users/thisdot/subscriptions',
           type: 'Organization',
           url: 'https://api.github.com/users/thisdot',
-        },
+        } as UserApiResponse,
       },
     ];
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
-    const result: UserReposState[] = [];
-
-    userService.getUserTopRepos().subscribe((res) => {
-      Object.assign(result, res);
+    userService.getUserRepos('thisdot').subscribe({
+      next: () => {
+        expect(httpClientSpy.get).toHaveBeenCalledWith(
+          `https://api.github.com/users/thisdot/repos`,
+          jasmine.objectContaining({
+            headers: {
+              Accept: 'application/vnd.github.v3+json',
+            },
+          }),
+        );
+      },
+      complete: done,
     });
-    tick(1000);
+  });
 
-    expect(result).toEqual(expectedResponse);
-    expect(httpClientSpy.get.calls.count()).withContext('called once').toBe(1);
-  }));
-
-  it('should return the gists from the user', fakeAsync(() => {
-    const username = 'thisDot';
-    const expectedResponse: UserGistsState[] = [
+  it('should return the top repositories from the Github API', (done) => {
+    const expectedHttpResponse: Partial<UserRepo>[] = [
       {
-        url: 'github.com/gists',
-        fileName: 'textfile1.txt',
+        name: 'Repo-test',
+        description: 'This is a repo test',
+        language: 'TypeScript',
+        license: null,
+        private: false,
+        stargazers_count: 0,
+        forks_count: 0,
+        updated_at: '2022-06-17T09:54:38Z',
+        fork: false,
+        archived: false,
+        owner: {
+          avatar_url: 'https://avatars.githubusercontent.com/u/22839396?v=4',
+          events_url: 'https://api.github.com/users/thisdot/events{/privacy}',
+          followers_url: 'https://api.github.com/users/thisdot/followers',
+          following_url:
+            'https://api.github.com/users/thisdot/following{/other_user}',
+          gists_url: 'https://api.github.com/users/thisdot/gists{/gist_id}',
+          gravatar_id: '',
+          html_url: 'https://github.com/thisdot',
+          id: 22839396,
+          login: 'thisdot',
+          node_id: 'MDEyOk9yZ2FuaXphdGlvbjIyODM5Mzk2',
+          organizations_url: 'https://api.github.com/users/thisdot/orgs',
+          received_events_url:
+            'https://api.github.com/users/thisdot/received_events',
+          repos_url: 'https://api.github.com/users/thisdot/repos',
+          site_admin: false,
+          starred_url:
+            'https://api.github.com/users/thisdot/starred{/owner}{/repo}',
+          subscriptions_url:
+            'https://api.github.com/users/thisdot/subscriptions',
+          type: 'Organization',
+          url: 'https://api.github.com/users/thisdot',
+        } as UserApiResponse,
+      },
+      {
+        name: 'Repo-test-2',
+        description: 'This is a repo test 2',
+        language: 'Javascript',
+        license: null,
+        private: false,
+        stargazers_count: 0,
+        forks_count: 0,
+        updated_at: '2022-06-17T09:54:38Z',
+        fork: false,
+        archived: false,
+        owner: {
+          avatar_url: 'https://avatars.githubusercontent.com/u/22839396?v=4',
+          events_url: 'https://api.github.com/users/thisdot/events{/privacy}',
+          followers_url: 'https://api.github.com/users/thisdot/followers',
+          following_url:
+            'https://api.github.com/users/thisdot/following{/other_user}',
+          gists_url: 'https://api.github.com/users/thisdot/gists{/gist_id}',
+          gravatar_id: '',
+          html_url: 'https://github.com/thisdot',
+          id: 22839396,
+          login: 'thisdot',
+          node_id: 'MDEyOk9yZ2FuaXphdGlvbjIyODM5Mzk2',
+          organizations_url: 'https://api.github.com/users/thisdot/orgs',
+          received_events_url:
+            'https://api.github.com/users/thisdot/received_events',
+          repos_url: 'https://api.github.com/users/thisdot/repos',
+          site_admin: false,
+          starred_url:
+            'https://api.github.com/users/thisdot/starred{/owner}{/repo}',
+          subscriptions_url:
+            'https://api.github.com/users/thisdot/subscriptions',
+          type: 'Organization',
+          url: 'https://api.github.com/users/thisdot',
+        } as UserApiResponse,
+      },
+      {
+        name: 'Repo-test-3',
+        description: 'This is a repo test 2',
+        language: 'Javascript',
+        private: false,
+        stargazers_count: 0,
+        forks_count: 0,
+        updated_at: '2022-06-17T09:54:38Z',
+        fork: false,
+        archived: false,
+        owner: {
+          avatar_url: 'https://avatars.githubusercontent.com/u/22839396?v=4',
+          events_url: 'https://api.github.com/users/thisdot/events{/privacy}',
+          followers_url: 'https://api.github.com/users/thisdot/followers',
+          following_url:
+            'https://api.github.com/users/thisdot/following{/other_user}',
+          gists_url: 'https://api.github.com/users/thisdot/gists{/gist_id}',
+          gravatar_id: '',
+          html_url: 'https://github.com/thisdot',
+          id: 22839396,
+          login: 'thisdot',
+          node_id: 'MDEyOk9yZ2FuaXphdGlvbjIyODM5Mzk2',
+          organizations_url: 'https://api.github.com/users/thisdot/orgs',
+          received_events_url:
+            'https://api.github.com/users/thisdot/received_events',
+          repos_url: 'https://api.github.com/users/thisdot/repos',
+          site_admin: false,
+          starred_url:
+            'https://api.github.com/users/thisdot/starred{/owner}{/repo}',
+          subscriptions_url:
+            'https://api.github.com/users/thisdot/subscriptions',
+          type: 'Organization',
+          url: 'https://api.github.com/users/thisdot',
+        } as UserApiResponse,
       },
     ];
+    httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
+    userService.getUserTopRepos('thisdot').subscribe({
+      next: () => {
+        expect(httpClientSpy.get).toHaveBeenCalledWith(
+          `https://api.github.com/users/thisdot/repos`,
+          jasmine.objectContaining({
+            headers: {
+              Accept: 'application/vnd.github.v3+json',
+            },
+            params: new HttpParams({
+              fromObject: {
+                sort: 'updated',
+                per_page: 20,
+              },
+            }),
+          }),
+        );
+      },
+      complete: done,
+    });
+  });
+
+  it('should return the gists from the user', (done) => {
     const expectedHttpResponse: Partial<UserGist>[] = [
       {
         html_url: 'github.com/gists',
@@ -255,13 +365,18 @@ describe('UserService', () => {
 
     httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
-    const result: UserGistsState[] = [];
-
-    userService.getUserGists(username).subscribe((res) => {
-      Object.assign(result, res);
+    userService.getUserGists('thisdot').subscribe({
+      next: () => {
+        expect(httpClientSpy.get).toHaveBeenCalledWith(
+          `https://api.github.com/users/thisdot/gists`,
+          jasmine.objectContaining({
+            headers: {
+              Accept: 'application/vnd.github.v3+json',
+            },
+          }),
+        );
+      },
+      complete: done,
     });
-    tick(1000);
-
-    expect(result).toEqual(expectedResponse);
-  }));
+  });
 });
