@@ -1,4 +1,4 @@
-import { component$, useContext } from '@builder.io/qwik';
+import { component$, useClientEffect$, useContext, useStore, useWatch$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import { StarIcon } from '../icons';
 import { UserRepo, UserReposProps } from './types';
@@ -16,36 +16,47 @@ import {
   sortedRepoData,
 } from './filter-sort-functions';
 
+interface State {
+  searchResponse: UserRepo[];
+}
 export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
+  const state = useStore<State>({
+    searchResponse: [],
+  });
   const filters = useContext(filterStore);
   const languages = getLanguages(repos.nodes);
 
-  const filteredAndSortedRepos = ((): UserRepo[] => {
-    const searchResponse: UserRepo[] = repos.nodes;
-
+  useWatch$(({ track }) => {
+    track(() => filters.search);
+    track(() => filters.language);
+    track(() => filters.sortBy);
+    track(() => filters.type);
+    state.searchResponse = repos.nodes;
     if (filters.search) {
-      return repoDataFilteredBySearch(filters?.search || '', searchResponse);
+      state.searchResponse = repoDataFilteredBySearch(filters?.search || '', state.searchResponse);
     }
 
     if (filters.language) {
-      return repoDataFilteredByLanguage(filters?.language, searchResponse);
+      state.searchResponse = repoDataFilteredByLanguage(filters?.language, state.searchResponse);
     }
 
     if (filters.type) {
-      return repoDataFilteredByType(filters.type, searchResponse);
+      state.searchResponse = repoDataFilteredByType(filters.type, state.searchResponse);
     }
 
     if (filters.sortBy) {
-      return sortedRepoData(filters.sortBy, searchResponse);
+      state.searchResponse = sortedRepoData(filters.sortBy, state.searchResponse);
     }
+  });
 
-    return searchResponse;
-  })();
+  useClientEffect$(() => {
+    state.searchResponse = repos.nodes;
+  });
 
   return (
     <>
-      <RepoFilters languages={languages} resultCount={filteredAndSortedRepos.length} />
-      {filteredAndSortedRepos.map(
+      <RepoFilters languages={languages} resultCount={state.searchResponse.length} />
+      {state.searchResponse.map(
         ({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
           <div key={id} className={styles.container}>
             <div className={styles.content}>
