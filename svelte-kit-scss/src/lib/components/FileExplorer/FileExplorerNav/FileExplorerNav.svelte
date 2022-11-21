@@ -28,7 +28,7 @@
           <input
             type="text"
             class="search-input"
-            placeholder="Find or create a branch"
+            placeholder="Find a branch"
             bind:value={searchTerm}
           />
         </div>
