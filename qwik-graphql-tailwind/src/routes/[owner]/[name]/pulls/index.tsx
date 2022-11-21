@@ -7,7 +7,7 @@ import { SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX } from '~/utils/constants';
 
 export default component$(() => {
   const { name, owner } = useLocation().params;
-  const { forkCount, watcherCount, stargazerCount } = useLocation().query;
+  const { prCount, forkCount, issuesCount, watcherCount, stargazerCount } = useLocation().query;
 
   const _name = name.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
   const _owner = owner.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
@@ -17,9 +17,11 @@ export default component$(() => {
       <RepoHeader
         name={_name}
         owner={_owner}
-        forkCount={forkCount || 0}
-        watcherCount={watcherCount || 0}
-        stargazerCount={stargazerCount || 0}
+        prCount={prCount}
+        forkCount={forkCount}
+        issuesCount={issuesCount}
+        watcherCount={watcherCount}
+        stargazerCount={stargazerCount}
       />
       <div className="md:py-12 max-w-screen-xl mx-auto">
         <PRIssueContextProvider activeTab="open">
