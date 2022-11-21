@@ -31,7 +31,6 @@ export default component$(() => {
     <div>
       <Resource
         value={userResource}
-        onPending={() => <div>Loading...</div>}
         onResolved={({ data }) => (
           <>
             <Header user={data?.viewer} />

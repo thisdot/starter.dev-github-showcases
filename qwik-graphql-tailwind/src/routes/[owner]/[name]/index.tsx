@@ -117,6 +117,8 @@ export default component$(() => {
         forkCount={store.info.data?.forkCount || 0}
         watcherCount={store.info.data?.watcherCount || 0}
         stargazerCount={store.info.data?.stargazerCount || 0}
+        issuesCount={store.info.data?.openIssueCount || 0}
+        prCount={store.info.data?.openPullRequestCount || 0}
       />
       <div className="max-w-screen-2xl mx-auto md:py-8 px-4 bg-white">
         <div className="grid grid-cols-12 gap-8">

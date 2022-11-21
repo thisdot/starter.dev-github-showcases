@@ -41,6 +41,8 @@ export const FileExplorer = component$(() => {
                 store.info.data?.forkCount || 0
               }&watcherCount=${store.info.data?.watcherCount || 0}&stargazerCount=${
                 store.info.data?.stargazerCount || 0
+              }&issuesCount=${store.info.data?.openIssueCount || 0}&prCount=${
+                store.info.data?.openPullRequestCount || 0
               }`}
             >
               <span className={styles.link}>{item.name}</span>

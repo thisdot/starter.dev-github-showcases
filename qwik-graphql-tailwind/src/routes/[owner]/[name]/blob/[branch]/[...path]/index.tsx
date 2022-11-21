@@ -7,7 +7,7 @@ import { SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX } from '~/utils/constants';
 
 export default component$(() => {
   const { path, name, owner, branch } = useLocation().params;
-  const { forkCount, watcherCount, stargazerCount } = useLocation().query;
+  const { prCount, forkCount, issuesCount, watcherCount, stargazerCount } = useLocation().query;
 
   const _name = name.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
   const _path = path.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
@@ -19,9 +19,11 @@ export default component$(() => {
       <RepoHeader
         name={_name}
         owner={_owner}
-        forkCount={forkCount || 0}
-        watcherCount={watcherCount || 0}
-        stargazerCount={stargazerCount || 0}
+        prCount={prCount}
+        forkCount={forkCount}
+        issuesCount={issuesCount}
+        watcherCount={watcherCount}
+        stargazerCount={stargazerCount}
       />
       <div className="max-w-screen-2xl mx-auto md:py-8 px-4">
         <div className="grid grid-cols-12 gap-8">

@@ -4,7 +4,7 @@ import { qwikify$ } from '@builder.io/qwik-react';
 import type { Language } from 'prism-react-renderer';
 import cn from 'classnames';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import theme from 'prism-react-renderer/themes/nightOwlLight';
+import theme from 'prism-react-renderer/themes/nightOwlLight/index.cjs';
 import * as styles from '../../components/file-viewer/file-viewer.classNames';
 
 interface FileCodeProps {

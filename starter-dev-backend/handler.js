@@ -18,6 +18,7 @@ app.use(
     origin: new RegExp(
       [
         'localhost',
+        '127.0.0.1',
         process.env.SERVER_BASE_URL,
         process.env.CORS_REGEXP,
         process.env.PR_PREVIEW_REGEXP,
