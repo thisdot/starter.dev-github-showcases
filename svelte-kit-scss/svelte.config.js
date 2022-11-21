@@ -8,10 +8,9 @@ const config = {
   preprocess: preprocess({ typescript: true, scss: true }),
 
   kit: {
-    adapter: adapter(),
-    prerender: {
-      default: true,
-    },
+    adapter: adapter({
+      fallback: 'index.html',
+    }),
   },
 };
 
