@@ -39,3 +39,12 @@ functions:
     handler: handler.handler
     events:
       - httpApi: '*'
+  graphql:
+    handler: handlers/graphql.server
+    events:
+      - http:
+          path: graphql
+          method: post
+      - http:
+          path: graphql
+          method: get
