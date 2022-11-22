@@ -1,8 +1,8 @@
 import { createResource } from 'solid-js';
 import { useAuth } from '../auth';
 import { useOctokit } from '../github';
-import { TopRepos } from '../components';
-import * as styles from './homepage.classNames';
+import { TopRepos } from '../components/TopRepos';
+import * as styles from './Home.classNames';
 
 const Home = () => {
   useAuth().preventUnauthorised();

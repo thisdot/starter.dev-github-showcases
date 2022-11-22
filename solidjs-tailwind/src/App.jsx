@@ -1,7 +1,9 @@
 import { Route, Routes } from '@solidjs/router';
-import { Home, RedirectPage, SigninPage } from './pages';
 import ROUTES from './routes';
-import { Header } from './components/';
+import { Header } from './components/Header';
+import Home from './pages/Home';
+import SigninPage from './pages/Signin';
+import RedirectPage from './pages/Redirect';
 
 function App() {
   return (

@@ -1,5 +1,5 @@
-import * as styles from './privacy-badge.classNames';
 import cn from 'classnames';
+import * as styles from './PrivacyBadge.classNames';
 
 const PrivacyBadge = (props) => {
   return (
