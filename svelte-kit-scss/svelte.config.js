@@ -1,4 +1,4 @@
-import adapter from 'sveltekit-adapter-aws';
+import { adapter } from 'sveltekit-adapter-aws';
 import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
