@@ -1,8 +1,8 @@
-import { useAuth } from "../auth";
-import { TOP_REPOS_QUERY } from "./queries/top-repos";
-import FetchApi from "./api";
+import { useAuth } from '../auth';
+import { TOP_REPOS_QUERY } from './queries/top-repos';
+import gqlFetch from '../helpers/gqlFetch';
 
-const getTopRepos = async ({url}) => {
+const getTopRepos = async ({ url }) => {
   const { authStore } = useAuth();
 
   const data = {
@@ -11,9 +11,9 @@ const getTopRepos = async ({url}) => {
     variable: null,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
-    }
-  }
-  const resp = await FetchApi(data);
+    },
+  };
+  const resp = await gqlFetch(data);
 
   const repos = resp.viewer.topRepositories?.nodes.reduce((acc, repo) => {
     if (!repo) {

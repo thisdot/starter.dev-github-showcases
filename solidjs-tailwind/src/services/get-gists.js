@@ -1,44 +1,43 @@
-import FetchApi from "./api";
-import { useAuth } from "../auth";
-import { USER_GISTS_QUERY } from "./queries/gists";
+import gqlFetch from '../helpers/gqlFetch';
+import { useAuth } from '../auth';
+import { USER_GISTS_QUERY } from './queries/gists';
 
-
-const getGists = async ({url}) => {
+const getGists = async ({ url }) => {
   const { authStore } = useAuth();
 
-    const data = {
-      url,
-      query: USER_GISTS_QUERY,
-      variable: null,
-      headersOptions: {
-        authorization: `Bearer ${authStore.token}`,
-      }
+  const data = {
+    url,
+    query: USER_GISTS_QUERY,
+    variable: null,
+    headersOptions: {
+      authorization: `Bearer ${authStore.token}`,
+    },
+  };
+  const resp = await gqlFetch(data);
+  const gists = resp.viewer.gists.nodes?.reduce((acc, gist) => {
+    if (!gist) {
+      return acc;
     }
-    const resp = await FetchApi(data);
-    const gists = resp.viewer.gists.nodes?.reduce((acc, gist) => {
-        if (!gist) {
-          return acc;
-        }
-        const files = gist.files ?? [];
-        const gists = files.reduce(
-          (_acc, file) =>
-          file ?
-          [
-            ..._acc,
-            {
-              id: gist.id,
-              description: gist.description,
-              name: file.name || gist.name,
-              url: gist.url,
-            },
-          ] :
-          acc,
-          [],
-        );
-        return [...acc, ...gists];
-      }, []);
+    const files = gist.files ?? [];
+    const gists = files.reduce(
+      (_acc, file) =>
+        file
+          ? [
+              ..._acc,
+              {
+                id: gist.id,
+                description: gist.description,
+                name: file.name || gist.name,
+                url: gist.url,
+              },
+            ]
+          : acc,
+      []
+    );
+    return [...acc, ...gists];
+  }, []);
 
-    return gists;
+  return gists;
 };
 
 export default getGists;
