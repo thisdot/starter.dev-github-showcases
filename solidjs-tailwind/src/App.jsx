@@ -1,5 +1,5 @@
 import { Route, Routes } from '@solidjs/router';
-import { Home, RedirectPage, SigninPage, Profile } from './pages';
+import { Home, OrgProfile, RedirectPage, SigninPage, Profile } from './pages';
 import ROUTES from './routes';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
       <Route component={SigninPage} path={ROUTES.SIGNIN} />
       <Route component={RedirectPage} path={ROUTES.REDIRECT} />
       <Route component={Profile} path='profile' />
+      <Route component={OrgProfile} path={ROUTES.ORGPROFILE} />
     </Routes>
   );
 }

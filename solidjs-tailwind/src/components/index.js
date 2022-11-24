@@ -10,5 +10,6 @@ export * from './UserDropdown';
 export * from './ProfilePage';
 export * from './ProfileNav';
 export * from './TabNavigation';
+export * from './OrgAbout';
 export { default as PageHeader } from './PageHeader';
 export { default as PageFooter } from './PageFooter';

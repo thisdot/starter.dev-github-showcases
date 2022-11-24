@@ -12,7 +12,10 @@ const Header = (props) => {
       </NavLink>
       <div>
         {props.user ? (
-          <UserDropdown image={props.user.avatarUrl} username={props.user.login} />
+          <UserDropdown
+            image={props.user.avatarUrl}
+            username={props.user.login}
+          />
         ) : (
           <NavLink href="/api/auth/signin">
             <span class={styles.navLink}>Sign In</span>
