@@ -56,5 +56,4 @@ const RepoCard = (props) => {
   );
 };
 
-
 export default RepoCard;

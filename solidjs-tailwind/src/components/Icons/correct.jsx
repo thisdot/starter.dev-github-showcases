@@ -15,5 +15,4 @@ const CorrectIcon = () => (
   </svg>
 );
 
-
 export default CorrectIcon;

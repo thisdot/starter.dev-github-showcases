@@ -8,24 +8,24 @@ const fetchToken = () =>
     credentials: 'include',
   })
     .then((response) => {
-      return response.json()
+      return response.json();
     })
     .then((data) => {
-      return data.access_token
+      return data.access_token;
     });
 
-  const SigninPage = () => {
-      const signInHref = `${SIGN_IN_BASE_URL}?redirect_url=${REDIRECT_URL}`;
-      const { setAuth } = useAuth();
-      const navigate = useNavigate();
-      const [token] = createResource(fetchToken);
+const SigninPage = () => {
+  const signInHref = `${SIGN_IN_BASE_URL}?redirect_url=${REDIRECT_URL}`;
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const [token] = createResource(fetchToken);
 
-    createEffect(() => {
-      if (token() && !token.loading) {
-        setAuth({ token: token() });
-        navigate(sessionStorage.getItem('auth_return_path'));
-      }
-    });
+  createEffect(() => {
+    if (token() && !token.loading) {
+      setAuth({ token: token() });
+      navigate(sessionStorage.getItem('auth_return_path'));
+    }
+  });
 
   return (
     <main class="flex justify-center items-center bg-black text-gray-500 w-screen h-screen">
