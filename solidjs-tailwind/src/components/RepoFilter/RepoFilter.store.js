@@ -3,15 +3,15 @@ import { createSignal } from 'solid-js';
 const [search, setSearch] = createSignal('');
 const [language, setLanguage] = createSignal('');
 const [sortBy, setSortBy] = createSignal('');
-const [sortType, setSortType] = createSignal('');
+const [filterType, setFilterType] = createSignal('');
 
 export {
   search,
   language,
   sortBy,
-  sortType,
+  filterType,
   setSearch,
   setLanguage,
   setSortBy,
-  setSortType,
+  setFilterType,
 };
