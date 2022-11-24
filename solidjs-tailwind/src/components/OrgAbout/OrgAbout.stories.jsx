@@ -7,11 +7,7 @@ export default {
   component: OrgAbout,
   argTypes: {
     name: {},
-    description: {},
-    primaryLanguage: {},
-    owner: {},
-    isProfilePage: {},
-    stargazerCount: {},
+    avatarUrl: {},
   },
 };
 
