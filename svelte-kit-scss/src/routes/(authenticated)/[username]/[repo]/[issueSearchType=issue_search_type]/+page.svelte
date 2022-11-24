@@ -3,14 +3,17 @@
   import IssuesList from '$lib/components/IssuesList/IssuesList.svelte';
   import IssueHeader from '$lib/components/IssueHeader/IssueHeader.svelte';
   import Pagination from '$lib/components/shared/Pagination/Pagination.svelte';
-  import type { PR_STATE } from '$lib/interfaces';
+  // import type { PR_STATE } from '$lib/interfaces';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
+  import IssueSearchList from '$lib/components/IssueSearch/IssueSearchList.svelte';
+  import IssueSearchControls from '$lib/components/IssueSearch/IssueSearchControls.svelte';
+  import BoxLayout from '$lib/components/shared/layouts/BoxLayout.svelte';
 
   export let data: PageServerData;
 
-  const { openIssues, closedIssues } = data;
+  const { issues, openIssuesCount, closedIssuesCount } = data;
 
-  const sortFilters: FilterDropdownOption<any>[] = [
+  const sortFilters: FilterDropdownOption<string>[] = [
     {
       label: 'Dummy 1',
       value: 'dummy-1',
@@ -25,7 +28,7 @@
     },
   ];
 
-  const milestoneFilters: FilterDropdownOption<any>[] = [
+  const milestoneFilters: FilterDropdownOption<string>[] = [
     {
       label: 'Dummy 1',
       value: 'dummy-1',
@@ -40,7 +43,7 @@
     },
   ];
 
-  const labelFilters: FilterDropdownOption<any>[] = [
+  const labelFilters: FilterDropdownOption<string>[] = [
     {
       label: 'Dummy 1',
       value: 'dummy-1',
@@ -55,30 +58,19 @@
     },
   ];
 
-  let viewState: PR_STATE = 'open';
+  // let viewState: PR_STATE = 'open';
 </script>
 
-<div class="container">
-  <div class="issues-container">
-    <IssueHeader
-      {openIssues}
-      {closedIssues}
-      {labelFilters}
-      {milestoneFilters}
-      {sortFilters}
-      bind:viewState
-    />
-    <IssuesList issues={viewState === 'open' ? openIssues?.issues : closedIssues?.issues} />
-  </div>
-  <Pagination />
-</div>
+<BoxLayout>
+  <svelte:fragment slot="header">
+    <IssueSearchControls />
+  </svelte:fragment>
+  <IssueSearchList items={issues} />
+  <svelte:fragment slot="footer">
+    <Pagination />
+  </svelte:fragment>
+</BoxLayout>
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
-
-  .issues-container {
-    border-radius: 0.5rem;
-    border: 1px solid variables.$gray200;
-    margin: 2rem auto;
-  }
 </style>

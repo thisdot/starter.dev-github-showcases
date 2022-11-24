@@ -5,7 +5,7 @@ export * from './repository';
 export * from './formatting';
 export * from './handleAnchorClick';
 export * from './issues';
-export * from './pull-requests';
 export * from './debounce';
 export * from './repository-contents';
 export * from './branches';
+export * from './issues-search-query-filters';

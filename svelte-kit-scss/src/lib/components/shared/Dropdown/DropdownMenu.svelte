@@ -48,6 +48,7 @@
       background: variables.$white;
       border-radius: 4px;
       box-shadow: variables.$gray400 0 0.5rem 1.5rem 0;
+      overflow: hidden;
       .header {
         display: flex;
         padding: 0.625em 1em;
