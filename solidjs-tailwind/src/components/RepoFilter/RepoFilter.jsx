@@ -3,6 +3,7 @@ import { RepoBookIcon } from '../Icons';
 import { FILTER_TYPE_OPTIONS, SORT_OPTIONS } from './data';
 import FilterDropdown from './FilterDropdown';
 import FilterText from './FilterText';
+import { setSortBy, sortBy } from './RepoFilter.store';
 import SearchInput from './SearchInput';
 
 const RepoFilter = (props) => {
@@ -14,7 +15,7 @@ const RepoFilter = (props) => {
 
   const selectLanguage = (value) => console.log(value);
   const selectType = (value) => console.log(value);
-  const selectSort = (value) => console.log(value);
+  const selectSort = (value) => setSortBy(value);
   const isOnlySorted = true;
 
   return (
@@ -37,6 +38,7 @@ const RepoFilter = (props) => {
             />
             <FilterDropdown
               name="Sort"
+              selected={sortBy()}
               items={sortOptions}
               selectOption={selectSort}
             />
