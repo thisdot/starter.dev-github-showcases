@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { ChevronDown16 } from 'svelte-octicons';
-  import ButtonText from '../shared/buttons/ButtonText.svelte';
   import DropdownMenuSelect from '$lib/components/shared/Dropdown/DropdownMenuSelect/DropdownMenuSelect.svelte';
+  import DropdownFilterTextButton from './DropdownFilterTextButton.svelte';
 
   type SomeOption = {
     label: string;
@@ -20,6 +19,9 @@
       label: 'None',
     },
   ];
+  const handleFilterSelect = ({ detail }: CustomEvent<SomeOption>) => {
+    console.log(detail);
+  };
 </script>
 
 <div class="issue-search-controls">
@@ -28,10 +30,9 @@
     {options}
     labelAccessor={(x) => x.label}
     checkedPredicate={() => true}
+    on:select={handleFilterSelect}
   >
-    <ButtonText text="Sort">
-      <ChevronDown16 slot="right" />
-    </ButtonText>
+    <DropdownFilterTextButton text="Sort" />
   </DropdownMenuSelect>
 </div>
 

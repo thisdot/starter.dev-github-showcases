@@ -6,7 +6,7 @@
   // import type { PR_STATE } from '$lib/interfaces';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
   import IssueSearchList from '$lib/components/IssueSearch/IssueSearchList.svelte';
-  import IssueSearchControls from '$lib/components/IssueSearch/IssueSearchControls.svelte';
+  import IssueSearchControls from '$lib/components/IssueSearch/IssueSearchControls/IssueSearchControls.svelte';
   import BoxLayout from '$lib/components/shared/layouts/BoxLayout.svelte';
 
   export let data: PageServerData;

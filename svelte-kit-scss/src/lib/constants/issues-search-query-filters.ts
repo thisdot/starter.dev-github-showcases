@@ -18,10 +18,12 @@ export enum IssueSearchQueryType {
   PullRequest = 'is:pr',
 }
 
-export const AllowedIssuesSearchQuery = [
-  ...Object.values(IssuesSearchQuerySort),
-  ...Object.values(IssueSearchQueryState),
-  ...Object.values(IssueSearchQueryType),
-];
+export const AllowedIssuesSearchQueries = [
+  Object.values(IssuesSearchQuerySort),
+  Object.values(IssueSearchQueryState),
+  Object.values(IssueSearchQueryType),
+] as const;
 
-export type IssueSearchQueryFilter = typeof AllowedIssuesSearchQuery[number];
+export const AllowedIssuesSearchQueryValues = AllowedIssuesSearchQueries.flat();
+
+export type IssueSearchQueryFilter = typeof AllowedIssuesSearchQueryValues[number];

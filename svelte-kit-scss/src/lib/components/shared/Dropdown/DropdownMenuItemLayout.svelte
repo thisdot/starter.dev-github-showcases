@@ -1,4 +1,4 @@
-<div class="dropdown-menu-item-layout">
+<div class="dropdown-menu-item-layout" on:click on:keypress>
   <slot />
 </div>
 

@@ -1,5 +1,5 @@
 import {
-  AllowedIssuesSearchQuery,
+  AllowedIssuesSearchQueryValues,
   type IssueSearchQueryFilter,
 } from '$lib/constants/issues-search-query-filters';
 
@@ -32,7 +32,7 @@ export const parseIssuesSearchQueryAllowed = (
     (query
       ?.split(SEPARATOR)
       .filter((x) =>
-        AllowedIssuesSearchQuery.includes(x as IssueSearchQueryFilter)
+        AllowedIssuesSearchQueryValues.includes(x as IssueSearchQueryFilter)
       ) as IssueSearchQueryFilter[]) || null
   );
 };
