@@ -19,3 +19,5 @@ export const LocationMarkerIcon = (props) => (
     />
   </svg>
 );
+
+export default LocationMarkerIcon;

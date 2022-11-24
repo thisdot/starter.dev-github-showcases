@@ -14,3 +14,5 @@ export const OfficeBuildingIcon = (props) => (
     />
   </svg>
 );
+
+export default OfficeBuildingIcon;

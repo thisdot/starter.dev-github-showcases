@@ -14,3 +14,5 @@ export const StarIcon = (props) => (
     />
   </svg>
 );
+
+export default StarIcon;

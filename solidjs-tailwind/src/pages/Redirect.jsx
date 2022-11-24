@@ -6,7 +6,7 @@ const Redirect = () => {
   createEffect(() => {
     const timer = setTimeout(() => {
       const last_visted_path = sessionStorage.getItem('auth_return_path');
-      const isAuthPage = last_visted_path.includes('signin');
+      const isAuthPage = last_visted_path?.includes('signin');
       const to = isAuthPage ? '/' : last_visted_path;
       route(to, { replace: true });
     }, 3000);

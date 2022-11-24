@@ -1,4 +1,4 @@
-export const LinkIcon = (props) => (
+const LinkIcon = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -14,3 +14,6 @@ export const LinkIcon = (props) => (
     />
   </svg>
 );
+
+export default LinkIcon;
+

@@ -14,3 +14,5 @@ export const UsersIcon = (props) => (
     />
   </svg>
 );
+
+export default UsersIcon;
