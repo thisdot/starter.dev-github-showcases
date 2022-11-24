@@ -1,5 +1,5 @@
 import { createSignal } from 'solid-js';
-import { FILTER_TYPE_OPTIONS, defaultLanguage } from './data';main
+import { FILTER_TYPE_OPTIONS, defaultLanguage } from './data';
 
 const [search, setSearch] = createSignal('');
 const [language, setLanguage] = createSignal(defaultLanguage);
