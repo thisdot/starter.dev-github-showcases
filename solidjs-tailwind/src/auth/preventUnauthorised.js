@@ -11,3 +11,8 @@ const preventUnauthorised = (authStore, redirectPath) => () => {
 };
 
 export default preventUnauthorised;
+
+
+//<AuthGuard>
+//  <Route component={Home} path={ROUTES.HOME} />
+//</AuthGuard>

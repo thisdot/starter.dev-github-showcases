@@ -11,13 +11,13 @@ import { REPO_README_QUERY } from './queries/repo-readme';
  *  }
  * }
  */
-const getReadme = async ({ url, variable }) => {
+const getReadme = async ({ url, variables }) => {
   const { authStore } = useAuth();
 
   const data = {
     url,
     query: REPO_README_QUERY,
-    variable,
+    variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },

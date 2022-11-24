@@ -13,13 +13,13 @@ import { REPO_TREE_QUERY } from './queries/repo-tree';
  * }
  */
 
-const getRepoTree = async ({ url, variable }) => {
+const getRepoTree = async ({ url, variables }) => {
   const { authStore } = useAuth();
 
   const data = {
     url,
     query: REPO_TREE_QUERY,
-    variable,
+    variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },

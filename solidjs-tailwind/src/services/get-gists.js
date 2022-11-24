@@ -8,7 +8,7 @@ const getGists = async ({ url }) => {
   const data = {
     url,
     query: USER_GISTS_QUERY,
-    variable: null,
+    variables: null,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },

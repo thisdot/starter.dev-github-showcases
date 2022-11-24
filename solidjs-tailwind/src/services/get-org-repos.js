@@ -8,19 +8,19 @@ import { ORGANIZATION_REPOS_QUERY } from './queries/org-repos';
  *
  */
 
-const getOrgRepos = async ({ url, variable }) => {
+const getOrgRepos = async ({ url, variables }) => {
   const { authStore } = useAuth();
 
   const data = {
     url,
     query: ORGANIZATION_REPOS_QUERY,
-    variable,
+    variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },
   };
   const resp = await FetchApi(data);
-  return resp.organization;
+  return resp?.data?.organization?.repositories;
 };
 
 export default getOrgRepos;

@@ -25,13 +25,13 @@ export function parseTopics(topics) {
  * }
  */
 
-const getRepoInfo = async ({ url, variable }) => {
+const getRepoInfo = async ({ url, variables }) => {
   const { authStore } = useAuth();
 
   const data = {
     url,
     query: REPO_INFO_QUERY,
-    variable,
+    variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },

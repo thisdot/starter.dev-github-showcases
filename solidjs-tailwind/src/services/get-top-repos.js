@@ -8,7 +8,7 @@ const getTopRepos = async ({ url }) => {
   const data = {
     url,
     query: TOP_REPOS_QUERY,
-    variable: null,
+    variables: null,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },

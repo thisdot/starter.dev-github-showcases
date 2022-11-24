@@ -8,7 +8,7 @@ const userProfile = async ({ url }) => {
   const data = {
     url,
     query: USER_PROFILE_QUERY,
-    variable: null,
+    variables: null,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },
