@@ -1,8 +1,7 @@
 import { createSignal } from 'solid-js';
-import { defaultLanguage } from './data';
 
 const [search, setSearch] = createSignal('');
-const [language, setLanguage] = createSignal(defaultLanguage);
+const [language, setLanguage] = createSignal('');
 const [sortBy, setSortBy] = createSignal('');
 const [sortType, setSortType] = createSignal('');
 

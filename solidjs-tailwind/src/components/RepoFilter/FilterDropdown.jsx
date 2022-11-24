@@ -19,7 +19,7 @@ function clickOutside(el, accessor) {
 }
 
 const FilterDropdown = (props) => {
-  const [local] = splitProps(props, ['name', 'title', 'items', 'selected', 'selectOption']);
+  const [local] = splitProps(props, ['name', 'title', 'items', 'selectOption']);
   const [showOptions, setShowOptions] = createSignal(false);
   const toggleOption = () => setShowOptions(!showOptions());
 
@@ -69,7 +69,7 @@ const FilterDropdown = (props) => {
                   tabindex="-1"
                 >
                   <Switch fallback={<span class="mr-4" />}>
-                    <Match when={item === local.selected}>
+                    <Match when={item === 'All'}>
                       <CorrectIcon />
                     </Match>
                   </Switch>
