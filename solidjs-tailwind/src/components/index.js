@@ -7,5 +7,6 @@ export * from './RepoCard';
 export * from './PrivacyBadge';
 export * from './Header';
 export * from './UserDropdown';
+export * from './OrgAbout';
 export { default as PageHeader } from './PageHeader';
 export { default as PageFooter } from './PageFooter';
