@@ -19,5 +19,5 @@ const Template = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  repos: [repoCardProps],
+  repos: [repoCardProps, repoCardProps],
 };
