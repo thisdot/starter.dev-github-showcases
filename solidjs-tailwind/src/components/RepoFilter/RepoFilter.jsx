@@ -3,6 +3,7 @@ import { RepoBookIcon } from '../Icons';
 import { FILTER_TYPE_OPTIONS, SORT_OPTIONS } from './data';
 import FilterDropdown from './FilterDropdown';
 import FilterText from './FilterText';
+import { language, setLanguage } from './RepoFilter.store';
 import SearchInput from './SearchInput';
 
 const RepoFilter = (props) => {
@@ -12,7 +13,7 @@ const RepoFilter = (props) => {
 
   const merged = mergeProps({ repoBtnText: 'New' }, props);
 
-  const selectLanguage = (value) => console.log(value);
+  const selectLanguage = (value) => setLanguage(value);
   const selectType = (value) => console.log(value);
   const selectSort = (value) => console.log(value);
   const isOnlySorted = true;
@@ -32,6 +33,7 @@ const RepoFilter = (props) => {
             />
             <FilterDropdown
               name="Language"
+              selected={language()}
               items={languageOptions}
               selectOption={selectLanguage}
             />
