@@ -5,6 +5,7 @@ dist
 .env.development
 .env.production
 .env.local
+.env
 
 # .vscode
 .vscode/*

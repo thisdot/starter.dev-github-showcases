@@ -1,7 +1,7 @@
-const FetchApi = ({url, query, variables, headersOptions}) => {
+const FetchApi = ({ url, query, variables, headersOptions }) => {
   return new Promise((resolve, reject) => {
     fetch(url, {
-      method: "POST",
+      method: 'POST',
       headers: {
         ...headersOptions,
         Accept: 'application/vnd.github+json',
@@ -9,10 +9,10 @@ const FetchApi = ({url, query, variables, headersOptions}) => {
       },
       body: JSON.stringify({
         query,
-        variables
-      })
+        variables,
+      }),
     })
-    .then((res) => res.json())
+      .then((res) => res.json())
       .then((result) => {
         resolve(result);
       })

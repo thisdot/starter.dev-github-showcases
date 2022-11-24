@@ -1,18 +1,18 @@
 import { createSignal } from 'solid-js';
-import { defaultLanguage } from './data';
+import { FILTER_TYPE_OPTIONS, defaultLanguage } from './data';
 
 const [search, setSearch] = createSignal('');
 const [language, setLanguage] = createSignal(defaultLanguage);
 const [sortBy, setSortBy] = createSignal('');
-const [sortType, setSortType] = createSignal('');
+const [filterType, setFilterType] = createSignal(FILTER_TYPE_OPTIONS.default);
 
 export {
   search,
   language,
   sortBy,
-  sortType,
+  filterType,
   setSearch,
   setLanguage,
   setSortBy,
-  setSortType,
+  setFilterType,
 };

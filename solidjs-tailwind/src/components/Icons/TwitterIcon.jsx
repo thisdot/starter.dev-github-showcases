@@ -12,5 +12,4 @@ function TwitterIcon(className) {
   );
 }
 
-
 export default TwitterIcon;
