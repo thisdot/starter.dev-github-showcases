@@ -6,7 +6,7 @@ const Redirect = () => {
   createEffect(() => {
     const timer = setTimeout(() => {
       route('/');
-    }, 3000);
+    }, 1000);
     onCleanup(() => clearTimeout(timer));
   });
   return <div>Redirecting...</div>;

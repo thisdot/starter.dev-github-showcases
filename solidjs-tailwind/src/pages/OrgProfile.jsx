@@ -1,22 +1,47 @@
 import { UserRepos, OrgAbout } from '../components';
 import { GITHUB_GRAPHQL } from '../helper/constants';
 import getOrgRepos from '../services/get-org-repos';
-import { useAuth } from '../auth';
+import { createEffect, createResource, createSignal } from 'solid-js';
 
-const OrgProfile = async () => {
+const parseRepoData = (repos) => {
+  return repos?.edges.map((res) => res.node);
+}
 
+const OrgProfile = () => {
+  const [repos, setRepos] = createSignal([])
+  const [loading, setLoading] = createSignal(true)
 
-  useAuth().preventUnauthorised();
-  const { edges } = await getOrgRepos({
-    url: `${GITHUB_GRAPHQL}`,
-    variables: {
-      organization: 'thisdot',
-      first: 10,
-    },
-  });
+  // const [resp] = createResource(() => getOrgRepos({
+  //   url: `${GITHUB_GRAPHQL}`,
+  //   variables: {
+  //     organization: 'thisdot',
+  //     first: 10,
+  //   },
+  // }))
 
-  // use a parseer to the data
-  console.log(edges);
+  createEffect(() => {
+    const fetchOrgRepos = async () => {
+      const resp = await getOrgRepos({
+        url: `${GITHUB_GRAPHQL}`,
+        variables: {
+          organization: 'thisdot',
+          first: 10,
+        },
+      });
+      console.log('====================================');
+      console.log(resp);
+      console.log('====================================');
+      const result = parseRepoData(resp);
+      setRepos(result);
+      setLoading(false);
+    };
+
+    fetchOrgRepos()
+    // if(resp() && !resp.loading) {
+    //   const result = parseRepoData(resp());
+    //   setRepos(result);
+    // }
+  })
 
   return (
     <div class="relative pt-4">
@@ -35,7 +60,7 @@ const OrgProfile = async () => {
           <div class="col-span-12 md:col-span-8 xl:col-span-12">
             {/* TODO:  <ProfileNav /> goes here with class="border-none md:hidden" */}
             {/* TODO: replace repoCardProps with real data */}
-            <UserRepos repos={[]} />
+            <UserRepos loading={loading()} repos={repos()} />
           </div>
         </div>
       </div>
