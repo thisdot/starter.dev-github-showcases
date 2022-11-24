@@ -1,17 +1,16 @@
 import { For } from 'solid-js';
-import { RepoCard, RepoFilter } from '../components';
+import { RepoCard, RepoFilter } from '../index';
+
 
 const UserRepos = (props) => {
-  const getLanguages();
   return (
     <>
       <RepoFilter />
-      <For each={[props.repos]}>
+      <For each={props.repos}>
         {(props) => <RepoCard {...props} isProfilePage />}
       </For>
     </>
-
-  )
-}
+  );
+};
 
 export default UserRepos;

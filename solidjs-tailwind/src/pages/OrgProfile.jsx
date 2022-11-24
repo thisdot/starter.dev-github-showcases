@@ -1,5 +1,4 @@
-import { For } from 'solid-js';
-import { RepoCard, OrgAbout, RepoFilter } from '../components';
+import { UserRepos, OrgAbout } from '../components';
 import { repoCardProps } from '../components/RepoCard/data';
 
 const OrgProfile = () => {
@@ -19,11 +18,8 @@ const OrgProfile = () => {
         <div class="grid grid-cols-12 gap-8">
           <div class="col-span-12 md:col-span-8 xl:col-span-12">
             {/* TODO:  <ProfileNav /> goes here with class="border-none md:hidden" */}
-            <RepoFilter />
             {/* TODO: replace repoCardProps with real data */}
-            <For each={[repoCardProps]}>
-              {(props) => <RepoCard {...props} isProfilePage />}
-            </For>
+            <UserRepos repos={[repoCardProps]} />
           </div>
         </div>
       </div>
