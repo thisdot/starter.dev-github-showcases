@@ -15,8 +15,9 @@ const RepoCard = (props) => {
     'updatedAt',
     'visibility',
   ]);
-  const repoNameWithOwnerLink = () =>
-    `${local.owner?.login || ''}/${local.name || ''}`;
+
+  const repoNameWithOwnerLink = () => local.owner?.login ? `/${local.owner.login}/${local.name || ''}` : '';
+  
   const repoNameWithOwner = () =>
     `${!local.isProfilePage ? `${local.owner?.login || ''}/` : ''}${
       local.name || ''

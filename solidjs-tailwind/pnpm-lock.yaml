@@ -26,7 +26,7 @@ specifiers:
   jsdom: 20.0.1
   postcss: 8.4.18
   prettier: 2.7.1
-  solid-heroicons: ^3.1.0
+  solid-heroicons: ^3.1.1
   solid-icons: ^1.0.2
   solid-js: 1.6.0
   solid-testing-library: 0.3.0
@@ -39,7 +39,7 @@ specifiers:
 
 dependencies:
   isomorphic-fetch: 3.0.0
-  solid-heroicons: 3.1.0_solid-js@1.6.0
+  solid-heroicons: 3.1.1_solid-js@1.6.0
   solid-js: 1.6.0
 
 devDependencies:
@@ -12360,8 +12360,8 @@ packages:
       - supports-color
     dev: true
 
-  /solid-heroicons/3.1.0_solid-js@1.6.0:
-    resolution: {integrity: sha512-cOw5cxS3zgcoOChyvobvHZmHSCinnkkpsiyEiMW+irltb/6iwKq123CUD/W70astfwBvVopnixCQIF19JUzzMA==}
+  /solid-heroicons/3.1.1_solid-js@1.6.0:
+    resolution: {integrity: sha512-wfU/SqxqxWxInvfFlKJfCBPnJ94Zq1GQFiFL3M0KwZzT81lSF5yIC4HA/Czp3DYrn+dUumjO0qdrx8Ab3cy2sA==}
     peerDependencies:
       solid-js: '>= ^1.2.5'
     dependencies:

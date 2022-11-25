@@ -20,7 +20,7 @@ const OrgProfile = () => {
   );
 
   createEffect(() => {
-    if (resp() && !resp().loading) {
+    if (resp() && !resp.loading) {
       const result = parseRepoData(resp().repositories);
       setOrgInfo(resp().orgInfo);
       setRepos(result);

@@ -1,29 +1,23 @@
 import { NavLink } from '@solidjs/router';
 import { createSignal } from 'solid-js';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import { clickOutside } from '../../utils/onclick-outside';
 import * as styles from './user-dropdown.classNames';
 
 const UserDropdown = (props) => {
-  let elementRef;
-
   const [expanded, setExpanded] = createSignal(false);
-  const toggle = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setExpanded(!expanded());
-  };
 
-  const signOut$ = () => {
+  const signOut = () => {
     // TODO: sign out
   };
 
   return (
-    <div onClick={(e) => toggle(e)}>
-      <div class={styles.dropdown} ref={elementRef}>
+    <div use:clickOutside={() => setExpanded(false)}>
+      <div class={styles.dropdown}>
         <button
           role="button"
           class={styles.dropdownBtn}
-          onClick={(e) => toggle(e)}
+          onClick={() => setExpanded(!expanded())}
         >
           <div class={styles.avatarContainer}>
             {props.image && (
@@ -48,10 +42,6 @@ const UserDropdown = (props) => {
             {props.username && (
               <li data-menu-item>
                 <NavLink
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
                   href={`/${props.username}`}
                   class={styles.menuBtn}
                 >
