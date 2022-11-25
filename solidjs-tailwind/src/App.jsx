@@ -1,6 +1,6 @@
 import { Route, Routes } from '@solidjs/router';
 import { AuthGuard } from './components/AuthGuard';
-import { Home, OrgProfile, RedirectPage, SigninPage,  Profile } from './pages';
+import { Home, OrgProfile, RedirectPage, SigninPage, Profile } from './pages';
 import ROUTES from './routes';
 
 function App() {
