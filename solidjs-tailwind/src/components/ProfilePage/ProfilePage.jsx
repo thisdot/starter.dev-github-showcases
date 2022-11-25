@@ -24,12 +24,7 @@ const ProfilePage = (props) => {
               class="border-none md:hidden"
               pathname={location.pathname}
             />
-            {props.repos ? (
-              <UserRepos
-                repos={props.repos.repos}
-                // owner={location.params.user}
-              />
-            ) : null}
+            {props.repos ? <UserRepos repos={props.repos.repos} /> : null}
           </div>
         </div>
       </div>
