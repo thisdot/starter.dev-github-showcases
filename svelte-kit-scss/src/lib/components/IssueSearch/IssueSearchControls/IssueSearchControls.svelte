@@ -1,36 +1,27 @@
 <script lang="ts">
+  import { goto, prefetch } from '$app/navigation';
   import DropdownMenuSelect from '$lib/components/shared/Dropdown/DropdownMenuSelect/DropdownMenuSelect.svelte';
   import DropdownFilterTextButton from './DropdownFilterTextButton.svelte';
+  import type { NavigationFilterOption } from './models';
 
-  type SomeOption = {
-    label: string;
-    value?: number;
-  };
-  let options: SomeOption[] = [
-    {
-      label: 'One asdasdsadasdsadsd',
-      value: 1,
-    },
-    {
-      label: 'Two',
-      value: 2,
-    },
-    {
-      label: 'None',
-    },
-  ];
-  const handleFilterSelect = ({ detail }: CustomEvent<SomeOption>) => {
-    console.log(detail);
+  export let sortFilters: NavigationFilterOption[];
+
+  const handleFilterSelect = async (option: NavigationFilterOption): Promise<void> => {
+    if (option.active) {
+      return;
+    }
+    await prefetch(option.href);
+    await goto(option.href);
   };
 </script>
 
 <div class="issue-search-controls">
   <DropdownMenuSelect
     description="Sort by"
-    {options}
+    options={sortFilters}
     labelAccessor={(x) => x.label}
-    checkedPredicate={() => true}
-    on:select={handleFilterSelect}
+    checkedPredicate={(x) => x.active}
+    on:select={async ({ detail }) => await handleFilterSelect(detail)}
   >
     <DropdownFilterTextButton text="Sort" />
   </DropdownMenuSelect>

@@ -11,64 +11,13 @@
 
   export let data: PageServerData;
 
-  const { issues, openIssuesCount, closedIssuesCount } = data;
-
-  const sortFilters: FilterDropdownOption<string>[] = [
-    {
-      label: 'Dummy 1',
-      value: 'dummy-1',
-    },
-    {
-      label: 'Dummy 2',
-      value: 'dummy-2',
-    },
-    {
-      label: 'Dummy 3',
-      value: 'dummy-3',
-    },
-  ];
-
-  const milestoneFilters: FilterDropdownOption<string>[] = [
-    {
-      label: 'Dummy 1',
-      value: 'dummy-1',
-    },
-    {
-      label: 'Dummy 2',
-      value: 'dummy-2',
-    },
-    {
-      label: 'Dummy 3',
-      value: 'dummy-3',
-    },
-  ];
-
-  const labelFilters: FilterDropdownOption<string>[] = [
-    {
-      label: 'Dummy 1',
-      value: 'dummy-1',
-    },
-    {
-      label: 'Dummy 2',
-      value: 'dummy-2',
-    },
-    {
-      label: 'Dummy 3',
-      value: 'dummy-3',
-    },
-  ];
-
-  // let viewState: PR_STATE = 'open';
+  $: ({ issues, openIssuesCount, closedIssuesCount, sortFilters } = data);
 </script>
 
 <BoxLayout>
-  <svelte:fragment slot="header">
-    <IssueSearchControls />
-  </svelte:fragment>
+  <IssueSearchControls slot="header" {sortFilters} />
   <IssueSearchList items={issues} />
-  <svelte:fragment slot="footer">
-    <Pagination />
-  </svelte:fragment>
+  <Pagination slot="footer" />
 </BoxLayout>
 
 <style lang="scss">

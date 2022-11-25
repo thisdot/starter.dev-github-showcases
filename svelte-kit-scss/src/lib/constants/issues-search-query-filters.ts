@@ -1,29 +1,25 @@
 export enum IssuesSearchQuerySort {
-  Newest = 'sort:created-desc',
-  Oldest = 'sort:created-asc',
-  MostCommented = 'sort:comments-desc',
-  LeastCommented = 'sort:comments-asc',
-  RecentlyUpdated = 'sort:updated-desc',
-  LeastRecentlyUpdated = 'sort:updated-asc',
-  BestMatch = 'sort:relevance-desc',
+  'Newest' = 'sort:created-desc',
+  'Oldest' = 'sort:created-asc',
+  'Most commented' = 'sort:comments-desc',
+  'Least commented' = 'sort:comments-asc',
+  'Recently updated' = 'sort:updated-desc',
+  'Least recently updated' = 'sort:updated-asc',
+  'BestMatch' = 'sort:relevance-desc',
 }
 
 export enum IssueSearchQueryState {
-  Open = 'is:open',
-  Closed = 'is:closed',
+  'Open' = 'is:open',
+  'Closed' = 'is:closed',
 }
 
 export enum IssueSearchQueryType {
-  Issue = 'is:issue',
-  PullRequest = 'is:pr',
+  'Issue' = 'is:issue',
+  'Pull request' = 'is:pr',
 }
 
-export const AllowedIssuesSearchQueries = [
+export const PREDEFINED_SEARCH_QUERY_PARAMETER_GROUPS = [
   Object.values(IssuesSearchQuerySort),
   Object.values(IssueSearchQueryState),
   Object.values(IssueSearchQueryType),
-] as const;
-
-export const AllowedIssuesSearchQueryValues = AllowedIssuesSearchQueries.flat();
-
-export type IssueSearchQueryFilter = typeof AllowedIssuesSearchQueryValues[number];
+] as string[][];

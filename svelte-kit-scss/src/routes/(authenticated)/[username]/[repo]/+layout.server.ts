@@ -7,7 +7,10 @@ import {
   IssueSearchQueryState,
   IssueSearchQueryType,
 } from '$lib/constants/issues-search-query-filters';
-import { buildIssueSearchQuery } from '$lib/helpers/issues-search-query-builder';
+import {
+  buildFilterParameter,
+  SEARCH_QUERY_PARAMETER_QUALIFIER,
+} from '$lib/helpers/issues-search-query-builder';
 
 export const load: LayoutServerLoad = async ({ params, fetch }) => {
   const { username, repo } = params;
@@ -18,10 +21,11 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
   );
 
   const issueService = new IssuesSearchService(fetch);
-  const openPullsQuery = buildIssueSearchQuery(
-    [IssueSearchQueryState.Open, IssueSearchQueryType.PullRequest],
-    `${username}/${repo}`
-  );
+  const openPullsQuery = [
+    IssueSearchQueryState['Open'],
+    IssueSearchQueryType['Pull request'],
+    buildFilterParameter(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO, `${username}/${repo}`),
+  ].join(' ');
   const openPullsCount = await issueService.getIssuesCount(openPullsQuery);
 
   return {

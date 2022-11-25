@@ -2,57 +2,67 @@ import type { PageServerLoad } from './$types';
 import {
   IssueSearchQueryState,
   IssuesSearchQuerySort,
-  type IssueSearchQueryFilter,
 } from '$lib/constants/issues-search-query-filters';
-import {
-  buildIssueSearchQuery,
-  ensureIssuesSearchQueryFilterValue,
-  parseIssuesSearchQueryAllowed,
-} from '$lib/helpers/issues-search-query-builder';
+
 import { IssuesSearchService } from '$lib/services';
 import { IssueSearchPageTypeFiltersMap, type IssueSearchTypePage } from '$lib/constants/matchers';
+import {
+  buildFilterParameter,
+  estimateSearchQueryForParameter,
+  SEARCH_QUERY_PARAMETER_QUALIFIER,
+  splitFilterParameters,
+} from '$lib/helpers/issues-search-query-builder';
+import type { NavigationFilterOption } from '$lib/components/IssueSearch/IssueSearchControls/models';
 
 const DEFAULT_PER_PAGE = 25;
 const PAGE_SEARCH_PARAM_QUERY = 'q';
 const PAGE_SEARCH_PARAM_PAGE = 'page';
 
-export const load: PageServerLoad = async ({ fetch, params, url: { searchParams } }) => {
+export const load: PageServerLoad = async ({ fetch, params, url: { searchParams, href } }) => {
   const service = new IssuesSearchService(fetch, DEFAULT_PER_PAGE);
   const { username, repo, issueSearchType } = params;
 
-  const defaultFilters: IssueSearchQueryFilter[] = [
+  const defaultSearchQuery = [
     IssueSearchPageTypeFiltersMap[issueSearchType as IssueSearchTypePage],
     IssueSearchQueryState.Open,
     IssuesSearchQuerySort.Newest,
-  ];
+    buildFilterParameter(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO, `${username}/${repo}`),
+  ].join(' ');
 
   const currentSearchQuery = searchParams.get(PAGE_SEARCH_PARAM_QUERY);
   const currentPageString = searchParams.get(PAGE_SEARCH_PARAM_PAGE);
   const currentPage = currentPageString ? Number(currentPageString) : null;
 
-  const allowedSearchQueryFilters =
-    parseIssuesSearchQueryAllowed(currentSearchQuery) || defaultFilters;
-  const searchQuery = buildIssueSearchQuery(allowedSearchQueryFilters, `${username}/${repo}`);
+  const searchQuery = currentSearchQuery || defaultSearchQuery;
 
   const issues = await service.getIssues(searchQuery, { page: currentPage });
 
-  const searchQueryOpen = ensureIssuesSearchQueryFilterValue(
-    searchQuery,
-    Object.values(IssueSearchQueryState),
-    IssueSearchQueryState.Open
-  );
+  const searchQueryOpen = estimateSearchQueryForParameter(searchQuery, IssueSearchQueryState.Open);
   const openIssuesCount = await service.getIssuesCount(searchQueryOpen);
 
-  const searchQueryClosed = ensureIssuesSearchQueryFilterValue(
+  const searchQueryClosed = estimateSearchQueryForParameter(
     searchQuery,
-    Object.values(IssueSearchQueryState),
-    IssueSearchQueryState.Open
+    IssueSearchQueryState.Closed
   );
   const closedIssuesCount = await service.getIssuesCount(searchQueryClosed);
+
+  const sortFilters = Object.entries(IssuesSearchQuerySort).map(([label, queryParameter]) => {
+    const url = new URL(href);
+    const query = estimateSearchQueryForParameter(searchQuery, queryParameter);
+    console.log('Query', query);
+    url.searchParams.set(PAGE_SEARCH_PARAM_QUERY, query);
+
+    return {
+      label,
+      href: url.toString(),
+      active: splitFilterParameters(searchQuery).includes(queryParameter),
+    } as NavigationFilterOption;
+  });
 
   return {
     issues,
     openIssuesCount,
     closedIssuesCount,
+    sortFilters,
   };
 };
