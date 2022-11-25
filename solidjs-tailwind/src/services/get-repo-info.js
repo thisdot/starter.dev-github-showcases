@@ -38,7 +38,7 @@ const getRepoInfo = async (variables) => {
     },
   };
   const resp = await FetchApi(data);
-  const repository = resp.repository;
+  const repository = resp.data?.repository;
   return {
     branch: repository?.defaultBranchRef?.name ?? 'HEAD',
     info: {

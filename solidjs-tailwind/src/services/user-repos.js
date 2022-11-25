@@ -14,8 +14,8 @@ const getUserRepos = async (variables) => {
     },
   };
   const resp = await FetchApi(data);
-  const nodes = resp?.owner?.repositories?.nodes;
-  const pageInfo = resp?.owner?.repositories?.pageInfo;
+  const nodes = resp.data?.owner?.repositories?.nodes;
+  const pageInfo = resp.data?.owner?.repositories?.pageInfo;
 
   if (!nodes) {
     return undefined;

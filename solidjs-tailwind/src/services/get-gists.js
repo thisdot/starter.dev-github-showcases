@@ -15,7 +15,7 @@ const getGists = async () => {
     },
   };
   const resp = await FetchApi(data);
-  const gists = resp.viewer.gists.nodes?.reduce((acc, gist) => {
+  const gists = resp.data?.viewer.gists.nodes?.reduce((acc, gist) => {
     if (!gist) {
       return acc;
     }

@@ -15,7 +15,7 @@ const getIssues = async (variables) => {
     },
   };
   const resp = await FetchApi(data);
-  const repository = resp.repository;
+  const repository = resp.data?.repository;
 
   return {
     openIssues: repository?.openIssues.nodes,

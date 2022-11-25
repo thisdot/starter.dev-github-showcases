@@ -28,8 +28,8 @@ const getRepoTree = async (variables) => {
   const resp = await FetchApi(data);
 
   return {
-    branches: resp.repository?.branches?.nodes,
-    tree: resp.repository?.tree?.entries,
+    branches: resp.data?.repository?.branches?.nodes,
+    tree: resp.data?.repository?.tree?.entries,
   };
 };
 
