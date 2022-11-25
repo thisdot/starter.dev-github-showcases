@@ -1,22 +1,31 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
+import { REPO_README_QUERY } from './queries/repo-readme';
 import { GITHUB_GRAPHQL } from '../helper/constants';
-import { USER_PROFILE_QUERY } from './queries/user-profile';
-
-const userProfile = async () => {
+/**
+ *
+ * @param {
+ *  variable: {
+ *    owner
+ *    name
+ *    expression
+ *  }
+ * }
+ */
+const getReadme = async (variables) => {
   const { authStore } = useAuth();
 
   const data = {
     url: `${GITHUB_GRAPHQL}`,
-    query: USER_PROFILE_QUERY,
-    variables: null,
+    query: REPO_README_QUERY,
+    variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },
   };
   const resp = await FetchApi(data);
 
-  return resp.user;
+  return resp.repository?.readme?.text;
 };
 
-export default userProfile;
+export default getReadme;

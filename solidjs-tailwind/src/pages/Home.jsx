@@ -1,9 +1,7 @@
 import { createResource, Show } from 'solid-js';
-import { useAuth } from '../auth';
 import { useOctokit } from '../github';
 
 const Home = () => {
-  useAuth().preventUnauthorised();
 
   const [data] = createResource(() => {
     try {
