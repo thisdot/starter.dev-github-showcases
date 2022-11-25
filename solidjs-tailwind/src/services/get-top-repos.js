@@ -1,14 +1,15 @@
 import { useAuth } from '../auth';
 import { TOP_REPOS_QUERY } from './queries/top-repos';
+import { GITHUB_GRAPHQL } from '../helper/constants';
 import FetchApi from './api';
 
-const getTopRepos = async ({ url }) => {
+const getTopRepos = async () => {
   const { authStore } = useAuth();
 
   const data = {
-    url,
+    url: `${GITHUB_GRAPHQL}`,
     query: TOP_REPOS_QUERY,
-    variable: null,
+    variables: null,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },

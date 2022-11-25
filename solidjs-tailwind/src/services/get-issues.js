@@ -1,14 +1,15 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
 import { ISSUES_QUERY } from './queries/issue-info';
+import { GITHUB_GRAPHQL } from '../helper/constants';
 
-const getIssues = async ({ url, variable }) => {
+const getIssues = async (variables) => {
   const { authStore } = useAuth();
 
   const data = {
-    url,
+    url: `${GITHUB_GRAPHQL}`,
     query: ISSUES_QUERY,
-    variable,
+    variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },

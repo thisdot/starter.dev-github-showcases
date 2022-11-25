@@ -8,5 +8,6 @@ export * from './PrivacyBadge';
 export * from './Header';
 export * from './UserDropdown';
 export * from './OrgAbout';
+export * from './UserRepos';
 export { default as PageHeader } from './PageHeader';
 export { default as PageFooter } from './PageFooter';

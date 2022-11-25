@@ -1,5 +1,6 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
+import { GITHUB_GRAPHQL } from '../helper/constants';
 import { ORGANIZATION_REPOS_QUERY } from './queries/org-repos';
 
 /**
@@ -8,19 +9,25 @@ import { ORGANIZATION_REPOS_QUERY } from './queries/org-repos';
  *
  */
 
-const getOrgRepos = async ({ url, variable }) => {
+const getOrgRepos = async (variables) => {
   const { authStore } = useAuth();
 
   const data = {
-    url,
+    url: `${GITHUB_GRAPHQL}`,
     query: ORGANIZATION_REPOS_QUERY,
-    variable,
+    variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },
   };
   const resp = await FetchApi(data);
-  return resp.organization;
+  return {
+    orgInfo: {
+      avatarUrl: resp.data?.organization?.avatarUrl,
+      name: resp.data?.organization?.name,
+    },
+    repositories: resp?.data?.organization?.repositories
+  }
 };
 
 export default getOrgRepos;

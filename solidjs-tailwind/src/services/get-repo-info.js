@@ -1,6 +1,7 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
 import { REPO_INFO_QUERY } from './queries/repo-info';
+import { GITHUB_GRAPHQL } from '../helper/constants';
 
 export function parseTopics(topics) {
   if (!topics) {
@@ -25,13 +26,13 @@ export function parseTopics(topics) {
  * }
  */
 
-const getRepoInfo = async ({ url, variable }) => {
+const getRepoInfo = async (variables) => {
   const { authStore } = useAuth();
 
   const data = {
-    url,
+    url: `${GITHUB_GRAPHQL}`,
     query: REPO_INFO_QUERY,
-    variable,
+    variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },
