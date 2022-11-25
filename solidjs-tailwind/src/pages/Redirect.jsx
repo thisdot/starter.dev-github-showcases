@@ -1,13 +1,17 @@
 import { useNavigate } from '@solidjs/router';
-import { createEffect, onCleanup } from 'solid-js';
+import { createEffect, createResource } from 'solid-js';
+import { useAuth } from '../auth';
+import getProfile from '../services/get-profile';
 
 const Redirect = () => {
   const route = useNavigate();
+  const { authStore, setAuth } = useAuth();
+  const [data] = createResource(getProfile);
   createEffect(() => {
-    const timer = setTimeout(() => {
+    if (!data.loading && data()) {
+      setAuth({...authStore, user: data()})
       route('/');
-    }, 1000);
-    onCleanup(() => clearTimeout(timer));
+    }
   });
   return <div>Redirecting...</div>;
 };

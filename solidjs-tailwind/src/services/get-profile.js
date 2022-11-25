@@ -1,22 +1,29 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
 import { GITHUB_GRAPHQL } from '../helper/constants';
-import { USER_PROFILE_QUERY } from './queries/user-profile';
 
-const userProfile = async (variables) => {
+const getProfile = async () => {
   const { authStore } = useAuth();
-
+  const query = `
+  query LoggedinUser {
+    viewer {
+      avatarUrl
+      name
+      login
+    }
+  }
+`;
   const data = {
     url: `${GITHUB_GRAPHQL}`,
-    query: USER_PROFILE_QUERY,
-    variables,
+    query,
+    variables: null,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },
   };
   const resp = await FetchApi(data);
 
-  return resp.data?.user;
+  return resp.data?.viewer;
 };
 
-export default userProfile;
+export default getProfile;

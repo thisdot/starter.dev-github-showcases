@@ -16,7 +16,7 @@ const getTopRepos = async () => {
   };
   const resp = await FetchApi(data);
 
-  const repos = resp.viewer.topRepositories?.nodes.reduce((acc, repo) => {
+  const repos = resp.data?.viewer.topRepositories?.nodes.reduce((acc, repo) => {
     if (!repo) {
       return acc;
     }

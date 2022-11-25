@@ -25,7 +25,7 @@ const getReadme = async (variables) => {
   };
   const resp = await FetchApi(data);
 
-  return resp.repository?.readme?.text;
+  return resp.data.repository?.readme?.text;
 };
 
 export default getReadme;
