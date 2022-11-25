@@ -7,6 +7,7 @@ import {
   OfficeBuildingIcon,
   TwitterIcon,
 } from '../Icons';
+import OrgList from '../UserProfile/OrgList';
 
 const UserProfileCard = (props) => {
   return (
@@ -82,10 +83,9 @@ const UserProfileCard = (props) => {
           </div>
         )}
       </div>
-      {/* {props.organizations.nodes.length > 0 && (
-        <span>Here will be the orgList</span>
-        // <OrgList organizations={props.organizations.nodes} />
-      )} */}
+      {props?.organizations?.nodes.length > 0 && (
+        <OrgList organizations={props.organizations.nodes} />
+      )}
     </div>
   );
 };

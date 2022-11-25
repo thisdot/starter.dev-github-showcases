@@ -1,5 +1,6 @@
 import { ProfileNav } from '../ProfileNav';
 import { UserProfileCard } from '../UserProfileCard';
+import { UserRepos } from '../UserRepos';
 import styles from './Profile.module.css';
 
 const ProfilePage = (props) => {
@@ -23,13 +24,12 @@ const ProfilePage = (props) => {
               class="border-none md:hidden"
               pathname={location.pathname}
             />
-            {/* This component was created on other PR, should be updated after merge */}
-            {/* {props.user?.repositories ? (
-            <UserRepos
-              repos={props.user?.repositories}
-              owner={location.params.user}
-            />
-          ) : null} */}
+            {props.repos ? (
+              <UserRepos
+                repos={props.repos.repos}
+                // owner={location.params.user}
+              />
+            ) : null}
           </div>
         </div>
       </div>
