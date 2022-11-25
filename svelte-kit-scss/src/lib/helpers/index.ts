@@ -8,4 +8,3 @@ export * from './issues';
 export * from './debounce';
 export * from './repository-contents';
 export * from './branches';
-export * from './issues-search-query-filters';
