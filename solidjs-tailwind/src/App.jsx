@@ -8,7 +8,7 @@ function App() {
       <Route component={Home} path={ROUTES.HOME} />
       <Route component={SigninPage} path={ROUTES.SIGNIN} />
       <Route component={RedirectPage} path={ROUTES.REDIRECT} />
-      <Route component={Profile} path='profile' />
+      <Route component={Profile} path={ROUTES.PROFILE} />
     </Routes>
   );
 }
