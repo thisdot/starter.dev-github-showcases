@@ -1,12 +1,13 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
+import { GITHUB_GRAPHQL } from '../helper/constants';
 import { USER_GISTS_QUERY } from './queries/gists';
 
-const getGists = async ({ url }) => {
+const getGists = async () => {
   const { authStore } = useAuth();
 
   const data = {
-    url,
+    url: `${GITHUB_GRAPHQL}`,
     query: USER_GISTS_QUERY,
     variables: null,
     headersOptions: {

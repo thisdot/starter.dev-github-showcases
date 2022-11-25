@@ -1,5 +1,6 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
+import { GITHUB_GRAPHQL } from '../helper/constants';
 import { REPO_TREE_QUERY } from './queries/repo-tree';
 
 /**
@@ -13,11 +14,11 @@ import { REPO_TREE_QUERY } from './queries/repo-tree';
  * }
  */
 
-const getRepoTree = async ({ url, variables }) => {
+const getRepoTree = async (variables) => {
   const { authStore } = useAuth();
 
   const data = {
-    url,
+    url: `${GITHUB_GRAPHQL}`,
     query: REPO_TREE_QUERY,
     variables,
     headersOptions: {
