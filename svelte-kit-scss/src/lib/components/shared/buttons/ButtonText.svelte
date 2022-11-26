@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let text = String();
+  export let text: string;
 </script>
 
 <button class="button-text">
@@ -7,11 +7,7 @@
     <span><slot name="left" /></span>
   {/if}
 
-  {#if text}
-    <span>{text}</span>
-  {:else if $$slots.default}
-    <span><slot /></span>
-  {/if}
+  <span>{text}</span>
 
   {#if $$slots.right}
     <span><slot name="right" /></span>
