@@ -6,19 +6,26 @@
   $: assigneesCount = assignees.length;
 
   let itemSizePx = 0;
-  const computeMarginRightPx = (size: number, index: number): number => {
+  $: computeMarginRightPx = (index: number): number => {
+    console.log('computeMarginRightPx');
+    console.log('index', index);
+    console.log('index', itemSizePx);
     const powerOf2 = assigneesCount - 1 - index;
-    return size / Math.pow(2, powerOf2) - size;
+    return itemSizePx / Math.pow(2, powerOf2) - itemSizePx;
   };
 </script>
 
 <div class="issue-search-assignees">
-  <div class="zone" bind:clientHeight={itemSizePx}>
-    {#each assigneesReversed as assignee, index}
+  <div
+    class="zone"
+    bind:clientHeight={itemSizePx}
+    style="visibility: {itemSizePx ? 'visible' : 'hidden'}"
+  >
+    {#each assigneesReversed as assignee, i}
       <div
         class="assignee"
-        style="margin-right: {computeMarginRightPx(itemSizePx, index)}px;"
-        class:last={index === assigneesCount - 1}
+        style="margin-right: {computeMarginRightPx(i)}px;"
+        class:last={i === assigneesCount - 1}
       >
         <img class="image" src={assignee.avatarUrl} alt={assignee.login} />
       </div>
