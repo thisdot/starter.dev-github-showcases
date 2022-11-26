@@ -7,9 +7,6 @@
 
   let itemSizePx = 0;
   $: computeMarginRightPx = (index: number): number => {
-    console.log('computeMarginRightPx');
-    console.log('index', index);
-    console.log('index', itemSizePx);
     const powerOf2 = assigneesCount - 1 - index;
     return itemSizePx / Math.pow(2, powerOf2) - itemSizePx;
   };

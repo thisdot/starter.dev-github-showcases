@@ -43,7 +43,6 @@ export const estimateSearchQueryForParameter = (baseQuery: string, parameter: st
   const predefinedGroup = PREDEFINED_SEARCH_QUERY_PARAMETER_GROUPS.find((x) =>
     x.includes(parameter)
   );
-  console.log('predefinedGroup', predefinedGroup);
 
   const parametersFiltered = predefinedGroup
     ? splitFilterParameters(baseQuery).filter((x) => !predefinedGroup.includes(x))

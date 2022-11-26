@@ -31,10 +31,6 @@ export class IssuesSearchService {
       searchQuery,
       this.ensurePaginationInfo(paginationInfo)
     );
-    console.log(
-      '[getIssues]',
-      responseData.items.filter((x) => x.number === 909)
-    );
     return responseData.items.map(remapIssue);
   }
 
