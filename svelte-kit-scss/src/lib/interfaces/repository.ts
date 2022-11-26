@@ -6,11 +6,9 @@ export interface RepoState {
   openIssuesCount: number;
   ownerName: string;
   openPullRequestsCount: number;
-  // readme: string;
   repoName: string;
   starCount: number;
   tags: string[];
-  // tree: RepoContents[];
   defaultBranch: string;
   visibility: string;
   watchCount: number;
@@ -132,127 +130,4 @@ export interface ReadmeApiResponse {
     git: string;
     html: string;
   };
-}
-
-export interface PullRequestLabel {
-  id: number;
-  node_id: string;
-  url: string;
-  name: string;
-  description: string;
-  color: string;
-  default: boolean;
-}
-
-export interface PullRequestItemAPIResponse {
-  url: string;
-  repository_url: string;
-  labels_url: string;
-  comments_url: string;
-  events_url: string;
-  html_url: string;
-  id: number;
-  node_id: string;
-  number: number;
-  title: string;
-  user: Partial<UserApiResponse>;
-  labels: PullRequestLabel[];
-  state: string;
-  locked: boolean;
-  assignee: string | null;
-  assignees: unknown[];
-  milestone: null;
-  comments: number;
-  created_at: string;
-  updated_at: string;
-  closed_at: string | null;
-  author_association: AUTHOR_ASSOCIATION;
-  active_lock_reason: string | null;
-  draft: boolean;
-  pull_request: {
-    url: string;
-    html_url: string;
-    diff_url: string;
-    patch_url: string;
-    merged_at: string | null;
-  };
-  body: string;
-
-  diff_url: string;
-  patch_url: string;
-  issue_url: string;
-  commits_url: string;
-  review_comments_url: string;
-  review_comment_url: string;
-  statuses_url: string;
-}
-
-export interface PullRequestAPIResponse {
-  total_count: number;
-  incomplete_results: boolean;
-  items: PullRequestItemAPIResponse[];
-}
-
-export interface RepoPullRequests {
-  totalCount: number;
-  pullRequests: RepoPullRequest[];
-}
-
-export interface RepoIssue {
-  id: number;
-  login?: string | null;
-  title: string;
-  number: number;
-  closedAt?: Date | string | null;
-  state: string;
-  createdAt: Date | string;
-  labels: Array<{
-    id: number;
-    node_id: string;
-    url: string;
-    name: string;
-    color: string;
-  }>;
-  commentCount: number;
-  labelCount: number;
-}
-
-export type IssuesAPIResponse = PullRequestAPIResponse;
-
-export interface RepoIssues {
-  totalCount: number;
-  issues: RepoIssue[];
-}
-
-export interface RepoPullRequest {
-  id: number;
-  login?: string | null;
-  title: string;
-  number: number;
-  closedAt?: Date | null;
-  mergedAt?: Date | null;
-  state: string;
-  createdAt: Date;
-  labels: Array<{
-    id: number;
-    node_id: string;
-    url: string;
-    name: string;
-    color: string;
-  }>;
-  commentCount: number;
-  labelCount: number;
-}
-
-export type PR_STATE = 'open' | 'closed';
-
-export enum AUTHOR_ASSOCIATION {
-  COLLABORATOR = 'COLLABORATOR',
-  CONTRIBUTOR = 'CONTRIBUTOR',
-  FIRST_TIMER = 'FIRST_TIMER',
-  FIRST_TIME_CONTRIBUTOR = 'FIRST_TIME_CONTRIBUTOR',
-  MANNEQUIN = 'MANNEQUIN',
-  MEMBER = 'MEMBER',
-  NONE = 'NONE',
-  OWNER = 'OWNER',
 }

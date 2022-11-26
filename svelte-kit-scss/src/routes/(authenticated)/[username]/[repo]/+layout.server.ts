@@ -1,28 +1,36 @@
 import { ENV } from '$lib/constants/env';
 import type { LayoutServerLoad } from './$types';
-import type { PullRequestAPIResponse, RepoApiResponse } from '$lib/interfaces';
-import { mapRepoResToRepoState, remapRepoPullRequestCollection } from '$lib/helpers';
+import type { RepoApiResponse } from '$lib/interfaces';
+import { mapRepoResToRepoState } from '$lib/helpers';
+import { IssuesSearchService } from '$lib/services';
+import {
+  IssueSearchQueryState,
+  IssueSearchQueryType,
+} from '$lib/constants/issues-search-query-filters';
+import {
+  buildFilterParameter,
+  SEARCH_QUERY_PARAMETER_QUALIFIER,
+} from '$lib/helpers/issues-search-query-builder';
 
 export const load: LayoutServerLoad = async ({ params, fetch }) => {
   const { username, repo } = params;
   const getRepoUrl = new URL(`/repos/${username}/${repo}`, ENV.GITHUB_URL);
 
-  const getOpenRepoPullsUrl = new URL(`/search/issues`, ENV.GITHUB_URL);
-  getOpenRepoPullsUrl.searchParams.append('q', `repo:${username}/${repo} is:pr is:open`);
-  getOpenRepoPullsUrl.searchParams.append('per_page', '1');
+  const repoData = await fetch(getRepoUrl.toString()).then(
+    (response) => response.json() as Promise<RepoApiResponse>
+  );
 
-  const [repoData, openRepoPullsCollection] = await Promise.all([
-    fetch(getRepoUrl.toString()).then((response) => response.json() as Promise<RepoApiResponse>),
-    fetch(getOpenRepoPullsUrl.toString()).then(
-      (response) => response.json() as Promise<PullRequestAPIResponse>
-    ),
-  ]);
-
-  const pullsCollection = remapRepoPullRequestCollection(openRepoPullsCollection);
+  const issueService = new IssuesSearchService(fetch);
+  const openPullsQuery = [
+    IssueSearchQueryState['Open'],
+    IssueSearchQueryType['Pull request'],
+    buildFilterParameter(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO, `${username}/${repo}`),
+  ].join(' ');
+  const openPullsCount = await issueService.getIssuesCount(openPullsQuery);
 
   return {
     username,
     repo,
-    repoInfo: mapRepoResToRepoState(repoData, pullsCollection.totalCount),
+    repoInfo: mapRepoResToRepoState(repoData, openPullsCount),
   };
 };
