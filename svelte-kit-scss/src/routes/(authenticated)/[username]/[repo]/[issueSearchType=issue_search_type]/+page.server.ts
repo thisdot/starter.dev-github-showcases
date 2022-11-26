@@ -35,21 +35,26 @@ export const load: PageServerLoad = async ({ fetch, params, url: { searchParams,
 
   const searchQuery = currentSearchQuery || defaultSearchQuery;
 
-  const issues = await service.getIssues(searchQuery, { page: currentPage });
+  const issuesPromise = service.getIssues(searchQuery, { page: currentPage });
 
   const searchQueryOpen = estimateSearchQueryForParameter(searchQuery, IssueSearchQueryState.Open);
-  const openIssuesCount = await service.getIssuesCount(searchQueryOpen);
+  const openIssuesCountPromise = service.getIssuesCount(searchQueryOpen);
 
   const searchQueryClosed = estimateSearchQueryForParameter(
     searchQuery,
     IssueSearchQueryState.Closed
   );
-  const closedIssuesCount = await service.getIssuesCount(searchQueryClosed);
+  const closedIssuesCountPromise = service.getIssuesCount(searchQueryClosed);
+
+  const [issues, openIssuesCount, closedIssuesCount] = await Promise.all([
+    issuesPromise,
+    openIssuesCountPromise,
+    closedIssuesCountPromise,
+  ]);
 
   const sortFilters = Object.entries(IssuesSearchQuerySort).map(([label, queryParameter]) => {
     const url = new URL(href);
     const query = estimateSearchQueryForParameter(searchQuery, queryParameter);
-    console.log('Query', query);
     url.searchParams.set(PAGE_SEARCH_PARAM_QUERY, query);
 
     return {
