@@ -4,11 +4,13 @@ import {
   IssuesSearchQuerySort,
 } from '$lib/constants/issues-search-query-filters';
 
-import { IssuesSearchService } from '$lib/services';
+import { IssueMilestoneService, IssuesSearchService } from '$lib/services';
 import { IssueSearchPageTypeFiltersMap, type IssueSearchTypePage } from '$lib/constants/matchers';
 import {
+  buildFilterParameter,
   ensureRepoParameter,
   estimateSearchQueryForParameter,
+  SEARCH_QUERY_PARAMETER_QUALIFIER,
   splitFilterParameters,
 } from '$lib/helpers/issues-search-query-builder';
 import type { NavigationFilterOption } from '$lib/components/IssueSearch/IssueSearchControls/models';
@@ -37,6 +39,7 @@ const buildNavigationFilterOptions = <TParameter extends string>(
 
 export const load: PageServerLoad = async ({ fetch, params, url: { searchParams, href } }) => {
   const service = new IssuesSearchService(fetch, DEFAULT_PER_PAGE);
+  const milestoneService = new IssueMilestoneService(fetch);
   const { username, repo, issueSearchType } = params;
 
   const defaultSearchQuery = [
@@ -68,10 +71,13 @@ export const load: PageServerLoad = async ({ fetch, params, url: { searchParams,
   );
   const closedIssuesCountPromise = service.getIssuesCount(searchQueryClosed);
 
-  const [issues, openIssuesCount, closedIssuesCount] = await Promise.all([
+  const openMilestonesPromise = milestoneService.getOpenMilestones(username, repo);
+
+  const [issues, openIssuesCount, closedIssuesCount, openMilestones] = await Promise.all([
     issuesPromise,
     openIssuesCountPromise,
     closedIssuesCountPromise,
+    openMilestonesPromise,
   ]);
 
   const sortFilters = buildNavigationFilterOptions(href, searchQuery, IssuesSearchQuerySort);
@@ -94,9 +100,23 @@ export const load: PageServerLoad = async ({ fetch, params, url: { searchParams,
     }
   );
 
+  const labelParameterDictionaryMilestones = openMilestones.reduce((dict, x) => {
+    dict[x.title] = buildFilterParameter(
+      SEARCH_QUERY_PARAMETER_QUALIFIER.MILESTONE,
+      `"${x.title}"`
+    );
+    return dict;
+  }, {} as Record<string, string>);
+  const milestoneFilters = buildNavigationFilterOptions(
+    href,
+    searchQuery,
+    labelParameterDictionaryMilestones
+  );
+  console.log(labelParameterDictionaryMilestones);
   return {
     issues,
     sortFilters,
     stateFilters,
+    milestoneFilters,
   };
 };

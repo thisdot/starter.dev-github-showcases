@@ -9,6 +9,7 @@
 
   export let sortFilters: NavigationFilterOption[];
   export let stateFilters: NavigationFilterOption[];
+  export let milestoneFilters: NavigationFilterOption[];
 
   const handleFilterSelect = async (option: NavigationFilterOption): Promise<void> => {
     if (option.active) {
@@ -46,13 +47,24 @@
       </svelte:fragment>
     </SelectButton>
   </div>
-  <div>
+  <div class="secondary">
+    <DropdownMenuSelect
+      description="Sort by"
+      options={milestoneFilters}
+      labelAccessor={(x) => x.label}
+      checkedPredicate={(x) => x.active}
+      on:select={async ({ detail }) => await handleFilterSelect(detail)}
+      direction="left"
+    >
+      <DropdownFilterTextButton text="Milestone" />
+    </DropdownMenuSelect>
     <DropdownMenuSelect
       description="Sort by"
       options={sortFilters}
       labelAccessor={(x) => x.label}
       checkedPredicate={(x) => x.active}
       on:select={async ({ detail }) => await handleFilterSelect(detail)}
+      direction="left"
     >
       <DropdownFilterTextButton text="Sort" />
     </DropdownMenuSelect>
@@ -64,6 +76,10 @@
     display: flex;
     .primary {
       flex: 1;
+    }
+    .secondary {
+      display: flex;
+      gap: 1em;
     }
   }
 </style>

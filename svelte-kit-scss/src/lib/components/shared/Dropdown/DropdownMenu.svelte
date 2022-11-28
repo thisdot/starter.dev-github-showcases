@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import { clickOutside } from '$lib/components/shared/actions/clickOutside';
   import { X16 } from 'svelte-octicons';
   import { scale } from 'svelte/transition';
@@ -12,6 +13,9 @@
   };
 
   $: descriptionDisplay = description || String();
+  type Direction = 'left' | 'right';
+  export let direction: Direction = 'right';
+  const reverseDirection = (direction: Direction) => (direction === 'left' ? 'right' : 'left');
 </script>
 
 <div class="dropdown-container noselect" use:clickOutside on:clickoutside={close}>
@@ -19,7 +23,11 @@
     <slot />
   </div>
   {#if isOpen}
-    <div class="menu" transition:scale={{ duration: 100, start: 0.95 }}>
+    <div
+      class="menu"
+      transition:scale={{ duration: 100, start: 0.95 }}
+      style="{reverseDirection(direction)}: 0;"
+    >
       <div class="header">
         <div class="description">{descriptionDisplay}</div>
         <div class="close" on:click={close} on:keypress={close}>
@@ -41,8 +49,9 @@
       font-size: 12px;
       line-height: 1;
       position: absolute;
+      z-index: 9999;
       top: 100%;
-      left: 0;
+      // left: 0; inline
       margin-top: 8px;
       border: $border;
       background: variables.$white;
