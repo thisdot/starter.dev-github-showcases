@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
-      "module": "commonjs",
+      "baseUrl": "./",
+      "module": "ES2020",
       "moduleResolution": "node",
-      "outDir": "dist",
+      "outDir": "./dist",
       "lib": ["esnext"],
       "preserveConstEnums": true,
       "noImplicitAny": true,
@@ -25,5 +26,5 @@
         "path": "./tsconfig.spec.json"
       }
     ],
-    "exclude": ["node_modules", "handler.js", "lib"]
+    "exclude": ["node_modules", "handler", "lib", "generated"]
   }

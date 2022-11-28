@@ -2,7 +2,8 @@ node_modules/
 .serverless
 .env
 .webpack/
-generated/
+
+
 
 # IDEs and editors
 .idea

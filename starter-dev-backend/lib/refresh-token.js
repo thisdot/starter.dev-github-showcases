@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
 import calculateTokenExpiration from './expiration';
 
