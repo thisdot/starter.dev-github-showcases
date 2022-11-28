@@ -1,5 +1,7 @@
 import { Show, splitProps } from 'solid-js';
 import { CloseIcon } from '../Icons';
+import { defaultFilterType, defaultLanguage } from './data';
+import { filterType, language, search, sortBy } from './RepoFilter.store';
 
 const modifyFilterTypeText = (filterText = 'test') => {
   if (filterText.endsWith('s')) {
@@ -13,36 +15,33 @@ const modifyFilterTypeText = (filterText = 'test') => {
 };
 
 const FilterText = (props) => {
-  const [local] = splitProps(props, ['username']);
+  const [local] = splitProps(props, ['username', 'filteredRepoCount']);
 
   return (
     <div class="flex justify-between items-center border-b border-b-gray-300 pb-4">
       <div class="flex-grow">
         <small class="text-sm lowercase flex items-baseline gap-1">
-          {/* <length of filtered array */}
-          <strong>{/**Filtered repo length */}</strong>
+          <strong>{local.filteredRepoCount}</strong>
           results for
-          {/* <!-- repo type --> */}
-          <Show when={true}>
-            <strong>{modifyFilterTypeText(/**filter type */)}</strong>
-          </Show>
+          <Show when={filterType() && filterType() !== defaultFilterType}>
+            <strong>{modifyFilterTypeText(filterType())}</strong>
+          </Show>{' '}
           repositories
-          {/* search text */}
-          <Show when={true}>
+          <Show when={search()}>
             <span>
-              matching <strong> {/**search */} </strong>
+              matching <strong> {search()} </strong>
             </span>
           </Show>
-          {/* Language */}
-          <Show when={true}>
+          <Show when={language() && language() !== defaultLanguage}>
             <span>
               written in
-              <strong> {/** language */} </strong>
+              <strong> {language()} </strong>
             </span>
           </Show>
-          sorted by
-          {/*  Sorted text */}
-          <strong>{/**Sort by */}</strong>
+          <span>
+            sorted by
+            <strong>{' ' + sortBy()}</strong>
+          </span>
         </small>
       </div>
       <div>
