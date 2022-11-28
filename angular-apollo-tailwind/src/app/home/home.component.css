@@ -1,0 +1,3 @@
+.netlify-badge-container {
+  @apply flex justify-center mt-auto pb-5 pt-6;
+}
