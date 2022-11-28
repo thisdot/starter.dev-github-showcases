@@ -49,7 +49,7 @@
   </div>
   <div class="secondary">
     <DropdownMenuSelect
-      description="Sort by"
+      description="Filter by milestone"
       options={milestoneFilters}
       labelAccessor={(x) => x.label}
       checkedPredicate={(x) => x.active}
