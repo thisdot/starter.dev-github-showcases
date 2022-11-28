@@ -2,7 +2,7 @@ import { component$ } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
 import { PRIssueContextProvider } from '~/components/pull-request-issue-tab/pr-issue-context-provider';
 import { RepoHeader } from '~/components/repo-header';
-import RepoPulls from '~/components/repo-pulls';
+import PullRequestsTabView from '~/components/repo-pulls';
 import { SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX } from '~/utils/constants';
 
 export default component$(() => {
@@ -25,7 +25,7 @@ export default component$(() => {
       />
       <div className="md:py-12 max-w-screen-xl mx-auto">
         <PRIssueContextProvider activeTab="open">
-          <RepoPulls activeTab="open" />
+          <PullRequestsTabView activeTab="open" owner={owner} name={name} />
         </PRIssueContextProvider>
       </div>
     </div>

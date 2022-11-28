@@ -77,8 +77,8 @@ export default component$(() => {
 
   const { path, name, owner } = useLocation().params;
 
-  const _owner = owner.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
-  const _name = name.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
+  const _owner = owner?.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
+  const _name = name?.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
   const _path = path?.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.') || '';
 
   const isOwnerAndNameValid = typeof owner === 'string' && typeof name === 'string';

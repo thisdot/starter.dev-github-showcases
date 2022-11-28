@@ -1,6 +1,6 @@
-import { createEffect, createResource } from 'solid-js';
-import { useNavigate } from '@solidjs/router';
+import { createEffect, createResource, Match, Switch } from 'solid-js';
 import { useAuth } from '../auth';
+import { useNavigate } from '@solidjs/router';
 import { API_URL, REDIRECT_URL, SIGN_IN_BASE_URL } from '../helper/constants';
 
 const fetchToken = () =>
@@ -28,16 +28,22 @@ const SigninPage = () => {
   });
 
   return (
-    <main class="flex justify-center items-center bg-black text-gray-500 w-screen h-screen">
-      <div>
-        <a
-          href={signInHref}
-          class="w-full mb-3 px-4 py-3 border border-solid border-gray-500 rounded-md font-medium relative"
-        >
-          Sign in with GitHub
-        </a>
-      </div>
-    </main>
+    <Switch
+      fallback={
+        <main class="flex justify-center items-center bg-black text-gray-500 w-screen h-screen">
+          <div>
+            <a
+              href={signInHref}
+              class="w-full mb-3 px-4 py-3 border border-solid border-gray-500 rounded-md font-medium relative"
+            >
+              Sign in with GitHub
+            </a>
+          </div>
+        </main>
+      }
+    >
+      <Match when={token.loading}>Loading...</Match>
+    </Switch>
   );
 };
 
