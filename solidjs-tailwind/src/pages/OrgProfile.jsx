@@ -1,7 +1,8 @@
-import { UserRepos, OrgAbout } from '../components';
-import getOrgRepos from '../services/get-org-repos';
 import { createEffect, createResource, createSignal } from 'solid-js';
 import { useParams } from '@solidjs/router';
+import { UserRepos } from '../components/UserRepos';
+import { OrgAbout } from '../components/OrgAbout';
+import getOrgRepos from '../services/get-org-repos';
 
 const parseRepoData = (repos) => {
   return repos?.edges.map((res) => res.node);

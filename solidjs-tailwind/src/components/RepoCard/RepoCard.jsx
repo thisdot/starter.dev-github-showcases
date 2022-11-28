@@ -2,7 +2,7 @@ import { Link } from '@solidjs/router';
 import { Show, splitProps } from 'solid-js';
 import RepoMeta from '../RepoMeta/RepoMeta';
 import { OcStar2 } from 'solid-icons/oc';
-import PrivacyBadge from '../PrivacyBadge';
+import { PrivacyBadge } from '../PrivacyBadge';
 
 const RepoCard = (props) => {
   const [local] = splitProps(props, [
