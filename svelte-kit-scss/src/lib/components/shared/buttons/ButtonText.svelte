@@ -21,6 +21,8 @@
     opacity: 0.7;
     padding: 0;
     background: transparent;
+    font-weight: inherit;
+    cursor: pointer;
     &:hover {
       opacity: unset;
     }

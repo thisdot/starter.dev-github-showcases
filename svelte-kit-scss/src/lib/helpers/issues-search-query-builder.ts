@@ -33,6 +33,17 @@ export const splitFilterParameters = (query: string): string[] => {
   }, [] as string[]);
 };
 
+export const ensureRepoParameter = (query: string, repoName: string): string => {
+  const repoParam = splitFilterParameters(query).find((x) =>
+    x.startsWith(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO)
+  );
+  return repoParam
+    ? query
+    : [query, buildFilterParameter(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO, repoName)].join(
+        PARAMETER_SEPARATOR
+      );
+};
+
 export const estimateSearchQueryForParameter = (baseQuery: string, parameter: string) => {
   // validate parameter
   const [qualifier, value] = parameter.split(QUALIFIER_SEPARATOR);

@@ -7,9 +7,8 @@ import {
 import { IssuesSearchService } from '$lib/services';
 import { IssueSearchPageTypeFiltersMap, type IssueSearchTypePage } from '$lib/constants/matchers';
 import {
-  buildFilterParameter,
+  ensureRepoParameter,
   estimateSearchQueryForParameter,
-  SEARCH_QUERY_PARAMETER_QUALIFIER,
   splitFilterParameters,
 } from '$lib/helpers/issues-search-query-builder';
 import type { NavigationFilterOption } from '$lib/components/IssueSearch/IssueSearchControls/models';
@@ -17,6 +16,24 @@ import type { NavigationFilterOption } from '$lib/components/IssueSearch/IssueSe
 const DEFAULT_PER_PAGE = 25;
 const PAGE_SEARCH_PARAM_QUERY = 'q';
 const PAGE_SEARCH_PARAM_PAGE = 'page';
+
+const buildNavigationFilterOptions = <TParameter extends string>(
+  currentUrlHref: string,
+  queryBase: string,
+  labelParameterDictionary: Record<string, TParameter>,
+  decorateLabelFn?: (label: string, parameter: TParameter) => string
+): NavigationFilterOption[] => {
+  return Object.entries(labelParameterDictionary).map(([label, queryParameter]) => {
+    const url = new URL(currentUrlHref);
+    const query = estimateSearchQueryForParameter(queryBase, queryParameter);
+    url.searchParams.set(PAGE_SEARCH_PARAM_QUERY, query);
+    return {
+      label: decorateLabelFn ? decorateLabelFn(label, queryParameter) : label,
+      href: url.toString(),
+      active: splitFilterParameters(queryBase).includes(queryParameter),
+    } as NavigationFilterOption;
+  });
+};
 
 export const load: PageServerLoad = async ({ fetch, params, url: { searchParams, href } }) => {
   const service = new IssuesSearchService(fetch, DEFAULT_PER_PAGE);
@@ -26,7 +43,6 @@ export const load: PageServerLoad = async ({ fetch, params, url: { searchParams,
     IssueSearchPageTypeFiltersMap[issueSearchType as IssueSearchTypePage],
     IssueSearchQueryState.Open,
     IssuesSearchQuerySort.Newest,
-    buildFilterParameter(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO, `${username}/${repo}`),
   ].join(' ');
 
   const currentSearchQuery = searchParams.get(PAGE_SEARCH_PARAM_QUERY);
@@ -35,13 +51,19 @@ export const load: PageServerLoad = async ({ fetch, params, url: { searchParams,
 
   const searchQuery = currentSearchQuery || defaultSearchQuery;
 
-  const issuesPromise = service.getIssues(searchQuery, { page: currentPage });
+  const pageDefaultRepo = `${username}/${repo}`;
+  const requestSearchQuery = ensureRepoParameter(searchQuery, pageDefaultRepo);
 
-  const searchQueryOpen = estimateSearchQueryForParameter(searchQuery, IssueSearchQueryState.Open);
+  const issuesPromise = service.getIssues(requestSearchQuery, { page: currentPage });
+
+  const searchQueryOpen = estimateSearchQueryForParameter(
+    requestSearchQuery,
+    IssueSearchQueryState.Open
+  );
   const openIssuesCountPromise = service.getIssuesCount(searchQueryOpen);
 
   const searchQueryClosed = estimateSearchQueryForParameter(
-    searchQuery,
+    requestSearchQuery,
     IssueSearchQueryState.Closed
   );
   const closedIssuesCountPromise = service.getIssuesCount(searchQueryClosed);
@@ -52,22 +74,29 @@ export const load: PageServerLoad = async ({ fetch, params, url: { searchParams,
     closedIssuesCountPromise,
   ]);
 
-  const sortFilters = Object.entries(IssuesSearchQuerySort).map(([label, queryParameter]) => {
-    const url = new URL(href);
-    const query = estimateSearchQueryForParameter(searchQuery, queryParameter);
-    url.searchParams.set(PAGE_SEARCH_PARAM_QUERY, query);
-
-    return {
-      label,
-      href: url.toString(),
-      active: splitFilterParameters(searchQuery).includes(queryParameter),
-    } as NavigationFilterOption;
-  });
+  const sortFilters = buildNavigationFilterOptions(href, searchQuery, IssuesSearchQuerySort);
+  const stateFilters = buildNavigationFilterOptions(
+    href,
+    searchQuery,
+    IssueSearchQueryState,
+    (label, parameter) => {
+      const parts = [];
+      switch (parameter) {
+        case IssueSearchQueryState.Open:
+          parts.push(openIssuesCount);
+          break;
+        case IssueSearchQueryState.Closed:
+          parts.push(closedIssuesCount);
+          break;
+      }
+      parts.push(label);
+      return parts.join(' ');
+    }
+  );
 
   return {
     issues,
-    openIssuesCount,
-    closedIssuesCount,
     sortFilters,
+    stateFilters,
   };
 };
