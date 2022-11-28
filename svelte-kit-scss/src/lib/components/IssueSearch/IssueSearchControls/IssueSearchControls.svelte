@@ -19,7 +19,7 @@
   };
 
   const resolveStateFilterIssueState = (option: NavigationFilterOption): IssueState | undefined => {
-    let result = undefined;
+    let result: IssueState | undefined;
     if (option.label.endsWith('Closed')) {
       result = IssueState.Closed;
     } else if (option.label.endsWith('Open')) {
