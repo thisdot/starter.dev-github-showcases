@@ -1,4 +1,4 @@
-import FetchApi from './api';
+import { gqlFetch } from '../helper/gqlFetch';
 import { useAuth } from '../auth';
 import { ISSUES_QUERY } from './queries/issue-info';
 import { GITHUB_GRAPHQL } from '../helper/constants';
@@ -14,7 +14,7 @@ const getIssues = async (variables) => {
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data);
+  const resp = await gqlFetch(data);
   const repository = resp.data?.repository;
 
   return {

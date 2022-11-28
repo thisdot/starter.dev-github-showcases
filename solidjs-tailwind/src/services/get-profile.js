@@ -1,4 +1,4 @@
-import FetchApi from './api';
+import { gqlFetch } from '../helper/gqlFetch';
 import { useAuth } from '../auth';
 import { GITHUB_GRAPHQL } from '../helper/constants';
 import { LOGGEDIN_USER_PROFILE } from './queries/viewer-profile';
@@ -14,7 +14,7 @@ const getProfile = async () => {
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data);
+  const resp = await gqlFetch(data);
 
   return resp.data?.viewer;
 };

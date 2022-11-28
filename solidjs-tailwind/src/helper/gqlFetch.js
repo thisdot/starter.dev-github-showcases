@@ -1,4 +1,4 @@
-const gqlFetch = ({ url, query, variables, headersOptions }) => {
+export const gqlFetch = ({ url, query, variables, headersOptions }) => {
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -12,5 +12,3 @@ const gqlFetch = ({ url, query, variables, headersOptions }) => {
     }),
   }).then((res) => res.json());
 };
-
-export default gqlFetch;

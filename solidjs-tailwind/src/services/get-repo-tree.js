@@ -1,4 +1,4 @@
-import FetchApi from './api';
+import { gqlFetch } from '../helper/gqlFetch';
 import { useAuth } from '../auth';
 import { GITHUB_GRAPHQL } from '../helper/constants';
 import { REPO_TREE_QUERY } from './queries/repo-tree';
@@ -25,7 +25,7 @@ const getRepoTree = async (variables) => {
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data);
+  const resp = await gqlFetch(data);
 
   return {
     branches: resp.data?.repository?.branches?.nodes,

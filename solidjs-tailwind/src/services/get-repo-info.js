@@ -1,4 +1,4 @@
-import FetchApi from './api';
+import { gqlFetch } from '../helper/gqlFetch';
 import { useAuth } from '../auth';
 import { REPO_INFO_QUERY } from './queries/repo-info';
 import { GITHUB_GRAPHQL } from '../helper/constants';
@@ -37,7 +37,7 @@ const getRepoInfo = async (variables) => {
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data);
+  const resp = await gqlFetch(data);
   const repository = resp.data?.repository;
   return {
     branch: repository?.defaultBranchRef?.name ?? 'HEAD',

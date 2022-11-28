@@ -1,4 +1,4 @@
-import FetchApi from './api';
+import { gqlFetch } from '../helper/gqlFetch';
 import { useAuth } from '../auth';
 import { GITHUB_GRAPHQL } from '../helper/constants';
 import { ORGANIZATION_REPOS_QUERY } from './queries/org-repos';
@@ -20,14 +20,14 @@ const getOrgRepos = async (variables) => {
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data);
+  const resp = await gqlFetch(data);
   return {
     orgInfo: {
       avatarUrl: resp.data?.organization?.avatarUrl,
       name: resp.data?.organization?.name,
     },
-    repositories: resp?.data?.organization?.repositories
-  }
+    repositories: resp?.data?.organization?.repositories,
+  };
 };
 
 export default getOrgRepos;
