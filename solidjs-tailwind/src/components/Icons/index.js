@@ -10,3 +10,4 @@ export { default as StarIcon } from './StarIcon';
 export { default as LocationMarkerIcon } from './LocationMarkerIcon';
 export { default as UsersIcon } from './UsersIcon';
 export { default as GitBranchIcon } from './GitBranchIcon';
+export { default as BookOpenIcon } from './BookOpenIcon';
