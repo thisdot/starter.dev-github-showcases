@@ -6,7 +6,9 @@
     "sass"
   ],
   "private": true,
+  "hasShowcase": false,
   "version": "0.1.0",
+  "type": "module",
   "scripts": {
     "start": "vite dev --open",
     "dev": "vite dev",
@@ -77,7 +79,6 @@
     ],
     "src/**/*{.js,.ts,.svelte}": "eslint ."
   },
-  "type": "module",
   "dependencies": {
     "cookie": "^0.5.0",
     "markdown-it": "^13.0.1",
