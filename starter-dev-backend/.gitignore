@@ -3,8 +3,6 @@ node_modules/
 .env
 .webpack/
 
-
-
 # IDEs and editors
 .idea
 .project
