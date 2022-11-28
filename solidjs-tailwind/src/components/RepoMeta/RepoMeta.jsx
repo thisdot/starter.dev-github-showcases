@@ -1,5 +1,5 @@
 import { formatDistance } from 'date-fns';
-import * as styles from './RepoMeta.classNames';
+import styles from './RepoMeta.module.css';
 
 const RepoMeta = (props) => {
   return (

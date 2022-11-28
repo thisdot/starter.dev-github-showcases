@@ -1,6 +1,6 @@
 import { For } from 'solid-js';
 import { RepoCard } from '../RepoCard';
-import * as styles from './TopRepos.classNames';
+import styles from './TopRepos.module.css';
 
 const TopRepos = (props) => {
   return (
