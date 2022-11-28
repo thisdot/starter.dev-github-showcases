@@ -1,25 +1,16 @@
 import {
   createSignal,
   Show,
-  onCleanup,
   splitProps,
   For,
   Switch,
   Match,
 } from 'solid-js';
 import { CaretIcon, CloseIcon, CorrectIcon } from '../Icons';
-
-function clickOutside(el, accessor) {
-  const onClick = (e) => {
-    !el.contains(e.target) && accessor()?.();
-  };
-  document.body.addEventListener('click', onClick);
-
-  onCleanup(() => document.body.removeEventListener('click', onClick));
-}
+import { clickOutside } from '../../utils/onclick-outside';
 
 const FilterDropdown = (props) => {
-  const [local] = splitProps(props, ['name', 'title', 'items', 'selectOption']);
+  const [local] = splitProps(props, ['name', 'title', 'items', 'selected', 'selectOption']);
   const [showOptions, setShowOptions] = createSignal(false);
   const toggleOption = () => setShowOptions(!showOptions());
 
@@ -69,7 +60,7 @@ const FilterDropdown = (props) => {
                   tabindex="-1"
                 >
                   <Switch fallback={<span class="mr-4" />}>
-                    <Match when={item === 'All'}>
+                    <Match when={item === local.selected}>
                       <CorrectIcon />
                     </Match>
                   </Switch>

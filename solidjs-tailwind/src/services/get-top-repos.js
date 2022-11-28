@@ -1,21 +1,22 @@
 import { useAuth } from '../auth';
 import { TOP_REPOS_QUERY } from './queries/top-repos';
-import gqlFetch from '../helpers/gqlFetch';
+import { GITHUB_GRAPHQL } from '../helper/constants';
+import { gqlFetch } from '../helper/gqlFetch';
 
-const getTopRepos = async ({ url }) => {
+const getTopRepos = async () => {
   const { authStore } = useAuth();
 
   const data = {
-    url,
+    url: `${GITHUB_GRAPHQL}`,
     query: TOP_REPOS_QUERY,
-    variable: null,
+    variables: null,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },
   };
   const resp = await gqlFetch(data);
 
-  const repos = resp.viewer.topRepositories?.nodes.reduce((acc, repo) => {
+  const repos = resp.data?.viewer.topRepositories?.nodes.reduce((acc, repo) => {
     if (!repo) {
       return acc;
     }

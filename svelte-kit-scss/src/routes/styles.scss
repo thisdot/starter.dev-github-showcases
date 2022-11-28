@@ -144,3 +144,11 @@ a {
 .invisible {
   visibility: hidden;
 }
+
+a.link-anchor {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    color: variables.$blue600;
+  }
+}

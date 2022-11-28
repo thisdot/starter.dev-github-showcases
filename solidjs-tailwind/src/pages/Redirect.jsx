@@ -1,19 +1,19 @@
-import { useNavigate } from "@solidjs/router";
-import { createEffect, onCleanup } from "solid-js";
+import { useNavigate } from '@solidjs/router';
+import { createEffect, createResource } from 'solid-js';
+import { useAuth } from '../auth';
+import getProfile from '../services/get-profile';
 
 const Redirect = () => {
-  const route = useNavigate()
+  const route = useNavigate();
+  const { authStore, setAuth } = useAuth();
+  const [data] = createResource(getProfile);
   createEffect(() => {
-    const timer = setTimeout(() => {
-      const last_visted_path = sessionStorage.getItem('auth_return_path');
-      const isAuthPage = last_visted_path.includes('signin');
-      const to = isAuthPage ? '/' : last_visted_path;
-      route(to, { replace: true });
-    }, 3000);
-    onCleanup(() => clearTimeout(timer));
-
-  })
+    if (!data.loading && data()) {
+      setAuth({...authStore, user: data()})
+      route('/');
+    }
+  });
   return <div>Redirecting...</div>;
-}
+};
 
 export default Redirect;

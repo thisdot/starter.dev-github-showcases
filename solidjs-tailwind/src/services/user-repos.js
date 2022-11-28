@@ -1,20 +1,21 @@
 import { useAuth } from '../auth';
-import gqlFetch from '../helper/gqlFetch';
+import { gqlFetch } from '../helper/gqlFetch';
+import { GITHUB_GRAPHQL } from '../helper/constants';
 import { USER_REPOS_QUERY } from './queries/all-repos';
 
-const getUserRepos = async ({ url }) => {
+const getUserRepos = async (variables) => {
   const { authStore } = useAuth();
   const data = {
-    url,
+    url: `${GITHUB_GRAPHQL}`,
     query: USER_REPOS_QUERY,
-    variable: null,
+    variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },
   };
   const resp = await gqlFetch(data);
-  const nodes = resp?.owner?.repositories?.nodes;
-  const pageInfo = resp?.owner?.repositories?.pageInfo;
+  const nodes = resp.data?.owner?.repositories?.nodes;
+  const pageInfo = resp.data?.owner?.repositories?.pageInfo;
 
   if (!nodes) {
     return undefined;
