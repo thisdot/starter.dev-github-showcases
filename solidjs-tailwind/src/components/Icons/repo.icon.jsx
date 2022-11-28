@@ -5,6 +5,4 @@ export const RepoIcon = (props) => (
   </svg>
 );
 
-
-
 export default RepoIcon;
