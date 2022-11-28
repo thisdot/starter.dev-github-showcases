@@ -248,9 +248,14 @@ export class PullRequestsStore extends ComponentStore<FilterState> {
               .valueChanges.pipe(
                 tapResponse(
                   (res) => {
-                    const { openPullRequests, closedPullRequests, labels } =
-                      parsePullRequestsQuery(res.data);
+                    const {
+                      openPullRequests,
+                      closedPullRequests,
+                      milestones,
+                      labels,
+                    } = parsePullRequestsQuery(res.data);
 
+                    this.setMilestones(milestones);
                     this.setLabels(labels);
                     this.setOpenPullRequests(openPullRequests);
                     this.setClosedPullRequests(closedPullRequests);

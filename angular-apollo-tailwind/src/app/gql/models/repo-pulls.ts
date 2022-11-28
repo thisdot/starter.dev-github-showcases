@@ -1,4 +1,4 @@
-import { Label, PageInfo } from '../github.schema';
+import { Label, Milestone, PageInfo } from '../github.schema';
 
 export interface RepoPullRequests {
   pageInfo: PageInfo;
@@ -19,6 +19,13 @@ export interface RepoPullRequest {
   labels: Label[];
   commentCount: number;
   labelCount: number;
+}
+
+export interface RepoPullRequestDetails {
+  openPullRequests: RepoPullRequests;
+  closedPullRequests: RepoPullRequests;
+  milestones: Milestone[];
+  labels: Label[];
 }
 
 export enum PULL_REQUESTS_TYPE {

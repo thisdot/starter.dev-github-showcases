@@ -10,6 +10,22 @@ query RepoPullRequests(
 ) {
   repository(owner: $owner, name: $name) {
     id
+    milestones(first: 100, states: [OPEN]) {
+      nodes {
+        id
+        closed
+        description
+        number
+        title
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      totalCount
+    }
     openPullRequests: pullRequests(
       first: $first
       last: $last

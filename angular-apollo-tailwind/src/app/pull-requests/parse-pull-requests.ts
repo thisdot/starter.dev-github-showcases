@@ -1,4 +1,10 @@
-import { Label, RepoPullRequest, RepoPullRequestsQuery } from '../gql';
+import {
+  Label,
+  Milestone,
+  RepoPullRequest,
+  RepoPullRequestDetails,
+  RepoPullRequestsQuery,
+} from '../gql';
 
 export const parsePullRequests = (connection: any) => {
   if (!connection) {
@@ -58,11 +64,34 @@ export const parsePullRequests = (connection: any) => {
   return { pullRequests, totalCount, pageInfo };
 };
 
-export const parsePullRequestsQuery = (data: RepoPullRequestsQuery) => {
+const parseMilestones = (milestones: any) => {
+  const nodes = milestones.nodes;
+  return nodes.reduce((milestones: Milestone[], milestone: Milestone) => {
+    if (!milestone) {
+      return milestones;
+    }
+
+    return [
+      ...milestones,
+      {
+        id: milestone.id,
+        closed: milestone.closed,
+        title: milestone.title,
+        number: milestone.number,
+        description: milestone.description,
+      },
+    ];
+  }, []);
+};
+
+export const parsePullRequestsQuery = (
+  data: RepoPullRequestsQuery,
+): RepoPullRequestDetails => {
   const openPullRequests = parsePullRequests(data.repository?.openPullRequests);
   const closedPullRequests = parsePullRequests(
     data.repository?.closedPullRequests,
   );
+  const milestones = parseMilestones(data.repository?.milestones);
 
   const labelMap = [
     ...closedPullRequests.pullRequests,
@@ -82,6 +111,7 @@ export const parsePullRequestsQuery = (data: RepoPullRequestsQuery) => {
   return {
     openPullRequests,
     closedPullRequests,
+    milestones,
     labels: Object.values(labelMap) as Label[],
   };
 };

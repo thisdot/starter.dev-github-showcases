@@ -25,7 +25,7 @@
         [openCount]="(openPullRequestsCount$ | async)!"
         [closedCount]="(closedPullRequestsCount$ | async)!"
         [currentMilestone]="milestone$ | async"
-        [milestones]="(milestones$ | async)!"
+        [milestones]="milestones$ | async"
         [currentLabel]="label$ | async"
         [labels]="(labels$ | async)!"
         [sort]="sort$ | async"
