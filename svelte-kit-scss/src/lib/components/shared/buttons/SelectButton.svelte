@@ -12,8 +12,6 @@
   const handleOptionClick = (option: TOption): void => {
     dispatch('select', option);
   };
-
-  $: console.log($$slots);
 </script>
 
 <div class="select-button">
