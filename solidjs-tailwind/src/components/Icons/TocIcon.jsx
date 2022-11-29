@@ -3,7 +3,7 @@ export const TOCIcon = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class={props.className ?? ''}
+      class={props.class ?? ''}
       viewBox="0 0 16 16"
       width="16"
       height="16"
