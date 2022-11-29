@@ -11,11 +11,28 @@ import {
 import cookieParser from 'cookie-parser';
 
 export const app = express();
-const router = express.Router();
+
+app.use(
+  cors({
+    credentials: true,
+    origin: new RegExp(
+      [
+        'localhost',
+        '127.0.0.1',
+        process.env.SERVER_BASE_URL,
+        process.env.CORS_REGEXP,
+        process.env.PR_PREVIEW_REGEXP,
+      ]
+        .filter(Boolean)
+        .join('|'),
+    ),
+  }),
+);
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router); // path must route to lambda
 
+const router = express.Router();
 router.get('/', (req, res) => {
   res.redirect(303, `https://starter.dev`);
 });
