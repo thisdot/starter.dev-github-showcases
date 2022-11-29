@@ -2,69 +2,27 @@ import serverless from 'serverless-http';
 import express from 'express';
 import cors from 'cors';
 import routes from './routes';
-import {
-  accessToken,
-  clearCookies,
-  fetchSigninUrl,
-  getAccessToken,
-} from './lib';
-import cookieParser from 'cookie-parser';
+// import {
+//   accessToken,
+//   clearCookies,
+//   fetchSigninUrl,
+//   getAccessToken,
+// } from './lib';
+// import cookieParser from 'cookie-parser';
 
-const app = express();
+export const app = express();
 const router = express.Router();
 
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: new RegExp(
-//       [
-//         'localhost',
-//         '127.0.0.1',
-//         process.env.SERVER_BASE_URL,
-//         process.env.CORS_REGEXP,
-//         process.env.PR_PREVIEW_REGEXP,
-//       ]
-//         .filter(Boolean)
-//         .join('|'),
-//     ),
-//   }),
-// );
-// app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(express.json());
+router.get('/', (req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write('<h1>Hello from Express.js!</h1>');
+  res.end();
+});
+router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
+router.post('/', (req, res) => res.json({ postBody: req.body }));
 
+app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router); // path must route to lambda
-
-app.get('/', (req, res, next) => {
-  return res.status(200).json({
-    message: 'Welcome to the starter.dev backend!',
-  });
-});
-
-app.get('/hello', (req, res) => {
-  if (!req.query.greeting) {
-    res.send('Hello, there');
-  }
-  res.send(`Hello, ${req.query.greeting}`);
-});
-
-app.use('/graphql', routes);
-
-// Step 1 - push user to Github OAuth
-app.get('/api/auth/signin', fetchSigninUrl);
-
-// Step 2 - verify code and state then fetch token and save it as a cookie
-// TODO: replace Github OAuth app with new endpoint -> `https://<host>/api/auth/signin/callback`
-app.get('/api/auth/signin/callback', accessToken);
-
-// Step 3 - client fetches token from cookie
-app.get('/api/auth/token', getAccessToken);
-
-app.post('/api/auth/signout', clearCookies);
-
-app.use((req, res, next) => {
-  return res.status(404).json({
-    error: 'Not Found',
-  });
-});
+app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 export const handler = serverless(app);
