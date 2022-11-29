@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { goto, prefetch } from '$app/navigation';
+  import { goto } from '$app/navigation';
   import DropdownMenuSelect from '$lib/components/shared/Dropdown/DropdownMenuSelect/DropdownMenuSelect.svelte';
   import DropdownFilterTextButton from './DropdownFilterTextButton.svelte';
   import type { NavigationFilterOption } from './models';
