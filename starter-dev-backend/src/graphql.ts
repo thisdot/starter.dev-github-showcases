@@ -1,7 +1,5 @@
-const { ApolloServer, gql } = require('apollo-server-lambda');
-const {
-  ApolloServerPluginLandingPageGraphQLPlayground,
-} = require('apollo-server-core');
+import { ApolloServer, gql } from 'apollo-server-lambda';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
@@ -31,13 +29,17 @@ const getHandler = (event, context) => {
     // install the Playground plugin and set the `introspection` option explicitly to `true`.
     introspection: true,
     persistedQueries: false,
-    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground({
+        settings: { 'schema.polling.enable': false },
+      }),
+    ],
   });
   const graphqlHandler = server.createHandler();
   if (!event.requestContext) {
     event.requestContext = context;
   }
-  return graphqlHandler(event, context);
+  return graphqlHandler(event, context, () => {});
 };
 
-exports.handler = getHandler;
+export const handler = getHandler;
