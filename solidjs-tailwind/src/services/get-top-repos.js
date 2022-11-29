@@ -37,7 +37,7 @@ const getTopRepos = async () => {
     ];
   }, []);
 
-  return repos;
+  return { repos, login: resp.data?.viewer.login };
 };
 
 export default getTopRepos;
