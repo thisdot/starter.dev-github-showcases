@@ -1,12 +1,12 @@
 import { createStore } from 'solid-js/store';
+const storage = window.sessionStorage || sessionStorage;
 
-const createAuthStore = () =>
-  createStore({
-    token: null,
-    user: null,
-    get isAuthenticated() {
-      return !!this.token;
-    },
-  });
+const [authStore, setAuth] = createStore({
+  token: storage.getItem('token'),
+  user: null,
+  get isAuthenticated() {
+    return !!this.token;
+  },
+});
 
-export default createAuthStore;
+export default [authStore, setAuth];
