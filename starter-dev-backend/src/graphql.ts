@@ -17,6 +17,7 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  persistedQueries: false,
 });
 
 exports.handler = server.createHandler();
