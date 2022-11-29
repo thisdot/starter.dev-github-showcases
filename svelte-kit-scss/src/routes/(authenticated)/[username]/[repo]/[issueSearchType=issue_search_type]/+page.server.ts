@@ -1,4 +1,4 @@
-import type { PageServerLoad, PageServerLoadEvent, RouteParams } from './$types';
+import type { PageServerLoad, PageServerLoadEvent } from './$types';
 import {
   IssueSearchQueryState,
   IssuesSearchQuerySort,

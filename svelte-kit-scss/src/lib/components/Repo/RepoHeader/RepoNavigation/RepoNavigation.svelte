@@ -6,8 +6,8 @@
   import { IssueSearchPageTypeFiltersMap } from '$lib/constants/matchers';
   let path: string;
 
-  const issueSarchPageTypeIssue = Object.keys(IssueSearchPageTypeFiltersMap)[0];
-  const issueSarchPageTypePullRequest = Object.keys(IssueSearchPageTypeFiltersMap)[1];
+  const issueSearchPageTypeIssue = Object.keys(IssueSearchPageTypeFiltersMap)[0];
+  const issueSearchPageTypeRequest = Object.keys(IssueSearchPageTypeFiltersMap)[1];
 
   function getPath(currentPath: string) {
     path = currentPath;
@@ -24,11 +24,11 @@
   }
 
   function openIssues() {
-    openTabLink(issueSarchPageTypeIssue);
+    openTabLink(issueSearchPageTypeIssue);
   }
 
   function openPRs() {
-    openTabLink(issueSarchPageTypePullRequest);
+    openTabLink(issueSearchPageTypeRequest);
   }
 
   function openTabLink(link: string) {
@@ -43,8 +43,8 @@
         on:click={openCode}
         on:keypress={openCode}
         class="tab tab--inactive"
-        class:tab--active={!path.includes(issueSarchPageTypeIssue) &&
-          !path.includes(issueSarchPageTypePullRequest)}
+        class:tab--active={!path.includes(issueSearchPageTypeIssue) &&
+          !path.includes(issueSearchPageTypeRequest)}
       >
         <span class="icon">
           <Code16 />
@@ -55,7 +55,7 @@
         on:click={openIssues}
         on:keypress={openIssues}
         class="tab tab--inactive"
-        class:tab--active={path.includes(issueSarchPageTypeIssue)}
+        class:tab--active={path.includes(issueSearchPageTypeIssue)}
       >
         <span class="icon">
           <IssueOpened16 />
@@ -69,7 +69,7 @@
         on:click={openPRs}
         on:keypress={openPRs}
         class="tab tab--inactive"
-        class:tab--active={path.includes(issueSarchPageTypePullRequest)}
+        class:tab--active={path.includes(issueSearchPageTypeRequest)}
       >
         <span class="icon">
           <GitPullRequest16 />
