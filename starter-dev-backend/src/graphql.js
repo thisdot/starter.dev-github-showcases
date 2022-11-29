@@ -1,23 +1,33 @@
 const { ApolloServer, gql } = require('apollo-server-lambda');
-import { startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda';
+const {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+} = require('apollo-server-core');
+
+// Construct a schema, using GraphQL schema language
 const typeDefs = gql`
   type Query {
-    hello(greeting: String!): String!
+    hello: String
   }
 `;
 
+// Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    hello: async ({ greeting }) => {
-      return `Hello, ${greeting}`;
-    },
+    hello: () => 'Hello world!',
   },
 };
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  persistedQueries: false,
+
+  // By default, the GraphQL Playground interface and GraphQL introspection
+  // is disabled in "production" (i.e. when `process.env.NODE_ENV` is `production`).
+  //
+  // If you'd like to have GraphQL Playground and introspection enabled in production,
+  // install the Playground plugin and set the `introspection` option explicitly to `true`.
+  introspection: true,
+  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
-exports.handler = startServerAndCreateLambdaHandler(server);
+exports.handler = server.createHandler();
