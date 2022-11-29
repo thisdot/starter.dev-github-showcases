@@ -23,16 +23,25 @@ const buildNavigationFilterOptions = <TParameter extends string>(
   currentUrlHref: string,
   queryBase: string,
   labelParameterDictionary: Record<string, TParameter>,
-  decorateLabelFn?: (label: string, parameter: TParameter) => string
+  decorateLabelFn?: (label: string, parameter: TParameter) => string,
+  optional?: boolean
 ): NavigationFilterOption[] => {
   return Object.entries(labelParameterDictionary).map(([label, queryParameter]) => {
     const url = new URL(currentUrlHref);
     const query = estimateSearchQueryForParameter(queryBase, queryParameter);
-    url.searchParams.set(PAGE_SEARCH_PARAM_QUERY, query);
+    const active = splitFilterParameters(queryBase).includes(queryParameter);
+    if (optional && active) {
+      const deactivateQuery = splitFilterParameters(queryBase)
+        .filter((x) => x !== queryParameter)
+        .join(' ');
+      url.searchParams.set(PAGE_SEARCH_PARAM_QUERY, deactivateQuery);
+    } else {
+      url.searchParams.set(PAGE_SEARCH_PARAM_QUERY, query);
+    }
     return {
       label: decorateLabelFn ? decorateLabelFn(label, queryParameter) : label,
       href: url.toString(),
-      active: splitFilterParameters(queryBase).includes(queryParameter),
+      active,
     } as NavigationFilterOption;
   });
 };
@@ -110,7 +119,9 @@ export const load: PageServerLoad = async ({ fetch, params, url: { searchParams,
   const milestoneFilters = buildNavigationFilterOptions(
     href,
     searchQuery,
-    labelParameterDictionaryMilestones
+    labelParameterDictionaryMilestones,
+    (label) => label,
+    true
   );
   console.log(labelParameterDictionaryMilestones);
   return {

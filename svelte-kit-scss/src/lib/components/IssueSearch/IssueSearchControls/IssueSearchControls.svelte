@@ -9,12 +9,19 @@
   export let stateFilters: NavigationFilterOption[];
   export let milestoneFilters: NavigationFilterOption[];
 
-  const handleFilterSelect = async (option: NavigationFilterOption): Promise<void> => {
-    if (option.active) {
+  const navigateHref = async (href: string): Promise<void> => {
+    await prefetch(href);
+    await goto(href);
+  };
+
+  const handleFilterSelect = async (
+    option: NavigationFilterOption,
+    optional = false
+  ): Promise<void> => {
+    if (!optional && option.active) {
       return;
     }
-    await prefetch(option.href);
-    await goto(option.href);
+    await navigateHref(option.href);
   };
 </script>
 
@@ -28,7 +35,7 @@
       options={milestoneFilters}
       labelAccessor={(x) => x.label}
       checkedPredicate={(x) => x.active}
-      on:select={async ({ detail }) => await handleFilterSelect(detail)}
+      on:select={async ({ detail }) => await handleFilterSelect(detail, true)}
       direction="left"
     >
       <DropdownFilterTextButton text="Milestone" />
