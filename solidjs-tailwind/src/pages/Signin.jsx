@@ -1,49 +1,30 @@
-import { createEffect, createResource, Match, Switch } from 'solid-js';
+import { createEffect } from 'solid-js';
 import { useAuth } from '../auth';
 import { useNavigate } from '@solidjs/router';
-import { API_URL, REDIRECT_URL, SIGN_IN_BASE_URL } from '../helper/constants';
-
-const fetchToken = () =>
-  fetch(`${API_URL}/auth/token`, {
-    credentials: 'include',
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      return data.access_token;
-    });
+import { REDIRECT_URL, SIGN_IN_BASE_URL } from '../helper/constants';
 
 const SigninPage = () => {
   const signInHref = `${SIGN_IN_BASE_URL}?redirect_url=${REDIRECT_URL}`;
-  const { setAuth } = useAuth();
+  const { authStore } = useAuth();
   const navigate = useNavigate();
-  const [token] = createResource(fetchToken);
 
   createEffect(() => {
-    if (token() && !token.loading) {
-      setAuth({ token: token() });
-      navigate(sessionStorage.getItem('auth_return_path'));
+    if (authStore.token) {
+      navigate(sessionStorage.getItem('auth_return_path') || '/');
     }
   });
 
   return (
-    <Switch
-      fallback={
-        <main class="flex justify-center items-center bg-black text-gray-500 w-screen h-screen">
-          <div>
-            <a
-              href={signInHref}
-              class="w-full mb-3 px-4 py-3 border border-solid border-gray-500 rounded-md font-medium relative"
-            >
-              Sign in with GitHub
-            </a>
-          </div>
-        </main>
-      }
-    >
-      <Match when={token.loading}>Loading...</Match>
-    </Switch>
+    <main class="flex justify-center items-center bg-black text-gray-500 w-screen h-screen">
+      <div>
+        <a
+          href={signInHref}
+          class="w-full mb-3 px-4 py-3 border border-solid border-gray-500 rounded-md font-medium relative"
+        >
+          Sign in with GitHub
+        </a>
+      </div>
+    </main>
   );
 };
 
