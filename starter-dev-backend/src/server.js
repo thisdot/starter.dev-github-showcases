@@ -2,12 +2,12 @@ import serverless from 'serverless-http';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-// import {
-//   accessToken,
-//   clearCookies,
-//   fetchSigninUrl,
-//   getAccessToken,
-// } from './lib';
+import {
+  accessToken,
+  clearCookies,
+  fetchSigninUrl,
+  getAccessToken,
+} from './lib';
 // import cookieParser from 'cookie-parser';
 
 export const app = express();
@@ -18,11 +18,13 @@ router.get('/', (req, res) => {
   res.write('<h1>Hello from Express.js!</h1>');
   res.end();
 });
-router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
 router.post('/', (req, res) => res.json({ postBody: req.body }));
 
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router); // path must route to lambda
+
+// Step 1 - push user to Github OAuth
+app.get('/api/auth/signin', fetchSigninUrl);
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 export const handler = serverless(app);
