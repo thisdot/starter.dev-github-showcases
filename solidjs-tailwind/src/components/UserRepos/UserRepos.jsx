@@ -1,5 +1,5 @@
 import { For } from 'solid-js';
-import { RepoCard } from '../RepoCard';
+import { UserRepoCard } from './UserRepoCard';
 import { RepoFilter } from '../RepoFilter';
 
 const UserRepos = (props) => {
@@ -9,9 +9,7 @@ const UserRepos = (props) => {
       {props.loading ? (
         <div>Loading...</div>
       ) : (
-        <For each={props.repos}>
-          {(props) => <RepoCard {...props} isProfilePage />}
-        </For>
+        <For each={props.repos}>{(props) => <UserRepoCard {...props} />}</For>
       )}
     </>
   );
