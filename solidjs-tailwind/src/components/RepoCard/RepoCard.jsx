@@ -10,7 +10,6 @@ const RepoCard = (props) => {
     'language',
     'stargazerCount',
     'owner',
-    'isProfilePage',
     'updatedAt',
     'forkCount',
     'isPrivate',
