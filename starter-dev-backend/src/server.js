@@ -19,12 +19,12 @@ router.get('/', (req, res) => {
   res.end();
 });
 router.post('/', (req, res) => res.json({ postBody: req.body }));
+router.get('/api/auth/signin', fetchSigninUrl);
 
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router); // path must route to lambda
 
 // Step 1 - push user to Github OAuth
-app.get('/api/auth/signin', fetchSigninUrl);
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 export const handler = serverless(app);
