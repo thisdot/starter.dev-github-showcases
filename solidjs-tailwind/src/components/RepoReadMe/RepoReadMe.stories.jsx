@@ -37,11 +37,11 @@ Default.args = {
   readme: {
     isLoading: false,
     text: `
-            # This is a title
-            
-            - here's
-            - a
-            - list
+# This is a title
+
+- here's
+- a
+- list
         `,
     error: undefined,
   },
