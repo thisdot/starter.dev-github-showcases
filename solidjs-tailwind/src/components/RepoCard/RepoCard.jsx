@@ -2,7 +2,7 @@ import { Link } from '@solidjs/router';
 import { Show, splitProps } from 'solid-js';
 import RepoMeta from '../RepoMeta/RepoMeta';
 import { OcStar2 } from 'solid-icons/oc';
-import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
+import { PrivacyBadge } from '../PrivacyBadge';
 
 const RepoCard = (props) => {
   const [local] = splitProps(props, [
@@ -16,8 +16,9 @@ const RepoCard = (props) => {
     'visibility',
   ]);
 
-  const repoNameWithOwnerLink = () => local.owner?.login ? `/${local.owner.login}/${local.name || ''}` : '';
-  
+  const repoNameWithOwnerLink = () =>
+    local.owner?.login ? `/${local.owner.login}/${local.name || ''}` : '';
+
   const repoNameWithOwner = () =>
     `${!local.isProfilePage ? `${local.owner?.login || ''}/` : ''}${
       local.name || ''

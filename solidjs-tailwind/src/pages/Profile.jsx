@@ -6,7 +6,7 @@ import {
   Match,
   Switch,
 } from 'solid-js';
-import { ProfilePage } from '../components';
+import { ProfilePage } from '../components/ProfilePage';
 import userProfile from '../services/user-profile';
 import getUserRepos from '../services/user-repos';
 
@@ -20,7 +20,7 @@ const Profile = () => {
       username: params?.login,
     })
   );
-  
+
   const [repos] = createResource(() =>
     getUserRepos({
       username: params?.login,
