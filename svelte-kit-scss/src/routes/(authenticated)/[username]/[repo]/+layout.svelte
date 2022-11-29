@@ -6,9 +6,9 @@
   const { repoInfo } = data;
 </script>
 
-<div class="container">
+<div>
   <RepoHeader repo={repoInfo} />
-  <div class="main">
+  <div class="main container">
     <slot />
   </div>
 </div>
