@@ -1,6 +1,7 @@
 # starter.dev Backend
 
 A Serverless Framework Express.js backend for allowing users to perform OAuth authentication with GitHub from a set of configured applications.
+
 ## Getting Started
 
 ### Requirements
@@ -13,16 +14,14 @@ A Serverless Framework Express.js backend for allowing users to perform OAuth au
 
 1. [Create a GitHub OAuth application](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app)
 2. Create your project `.env`
+
 ```
 cp .env.example .env
 ```
+
 3. Add your GitHub OAuth application credentials to `.env`
 4. Install dependencies: `yarn install`
 5. Run the project: `yarn start`
-
-## Anatomy of the Severless Framework template
-
-This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to the `httpApi` event. To learn more about `httpApi` event configuration options, please refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/). As the event is configured in a way to accept all incoming requests, `express` framework is responsible for routing and handling requests internally. Implementation takes advantage of `serverless-http` package, which allows you to wrap existing `express` applications. To learn more about `serverless-http`, please refer to corresponding [GitHub repository](https://github.com/dougmoscrop/serverless-http).
 
 ## Deployment
 
@@ -31,7 +30,6 @@ This template configures a single function, `api`, which is responsible for hand
 ```
 serverless deploy
 ```
-
 
 After running deploy, you should see output similar to:
 
