@@ -4,8 +4,7 @@
   "description": "",
   "scripts": {
     "build": "netlify-lambda build src",
-    "start:gql": "netlify-lambda serve src/graphql",
-    "start:server": "netlify-lambda serve src/server",
+    "dev": "netlify dev",
     "postinstall": "netlify-lambda install"
   },
   "dependencies": {
