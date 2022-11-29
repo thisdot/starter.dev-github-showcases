@@ -14,8 +14,8 @@ export enum IssueSearchQueryState {
 }
 
 export enum IssueSearchQueryType {
-  'Issue' = 'is:issue',
-  'Pull request' = 'is:pr',
+  Issue = 'is:issue',
+  PullRequest = 'is:pr',
 }
 
 export const PREDEFINED_SEARCH_QUERY_PARAMETER_GROUPS = [

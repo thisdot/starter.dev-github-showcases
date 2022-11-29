@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad, PageServerLoadEvent } from './$types';
 import {
   IssueSearchQueryState,
   IssuesSearchQuerySort,
@@ -14,6 +14,7 @@ import {
   splitFilterParameters,
 } from '$lib/helpers/issues-search-query-builder';
 import type { NavigationFilterOption } from '$lib/components/IssueSearch/IssueSearchControls/models';
+import { redirect } from '@sveltejs/kit';
 
 const DEFAULT_PER_PAGE = 25;
 const PAGE_SEARCH_PARAM_QUERY = 'q';
@@ -46,7 +47,35 @@ const buildNavigationFilterOptions = <TParameter extends string>(
   });
 };
 
-export const load: PageServerLoad = async ({ fetch, params, url: { searchParams, href } }) => {
+const redirectIfRequired = ({
+  params,
+  url: { searchParams, pathname, search },
+}: PageServerLoadEvent): void => {
+  const query = searchParams.get(PAGE_SEARCH_PARAM_QUERY);
+  if (!query) {
+    return;
+  }
+  const issueSearchPageType = params.issueSearchType as keyof typeof IssueSearchPageTypeFiltersMap;
+
+  const requiredParameter = IssueSearchPageTypeFiltersMap[issueSearchPageType];
+  const queryParameters = splitFilterParameters(query);
+  if (query && !queryParameters.includes(requiredParameter)) {
+    const pageType = Object.entries(IssueSearchPageTypeFiltersMap)
+      .find(([, param]) => queryParameters.includes(param))
+      ?.at(0);
+    const targetPathname = [...pathname.split('/').slice(0, -1), pageType].join('/');
+    throw redirect(302, `${targetPathname}${search}`);
+  }
+};
+
+export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
+  redirectIfRequired(event);
+  const {
+    fetch,
+    params,
+    url: { searchParams, href },
+  } = event;
+
   const service = new IssuesSearchService(fetch, DEFAULT_PER_PAGE);
   const milestoneService = new IssueMilestoneService(fetch);
   const { username, repo, issueSearchType } = params;
@@ -123,7 +152,6 @@ export const load: PageServerLoad = async ({ fetch, params, url: { searchParams,
     (label) => label,
     true
   );
-  console.log(labelParameterDictionaryMilestones);
   return {
     issues,
     sortFilters,
