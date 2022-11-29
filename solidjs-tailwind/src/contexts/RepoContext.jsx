@@ -1,5 +1,4 @@
-import { createEffect } from "solid-js";
-import { createSignal, createContext, useContext } from "solid-js";
+import { createSignal, createEffect,  createContext, useContext } from "solid-js";
 
 const RepoContext = createContext();
 
@@ -9,7 +8,6 @@ export function RepoProvider(props) {
   createEffect(() => {
     setReadme(props.readme)
   });
-  
 
   const repo = [
     readme
