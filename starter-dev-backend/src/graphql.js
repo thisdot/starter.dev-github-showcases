@@ -27,6 +27,7 @@ const server = new ApolloServer({
   // If you'd like to have GraphQL Playground and introspection enabled in production,
   // install the Playground plugin and set the `introspection` option explicitly to `true`.
   introspection: true,
+  persistedQueries: false,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
