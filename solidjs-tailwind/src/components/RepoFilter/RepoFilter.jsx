@@ -84,10 +84,7 @@ const RepoFilter = (props) => {
         </div>
       </div>
       <Show when={!isOnlySorted()}>
-        <FilterText
-          username="hdjerry"
-          filteredRepoCount={merged.filteredRepoCount}
-        />
+        <FilterText filteredRepoCount={merged.filteredRepoCount} />
       </Show>
     </>
   );

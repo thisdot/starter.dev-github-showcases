@@ -1,3 +1,4 @@
+import { useLocation } from '@solidjs/router';
 import { Show, splitProps } from 'solid-js';
 import { CloseIcon } from '../Icons';
 import { defaultFilterType, defaultLanguage } from './data';
@@ -15,7 +16,8 @@ const modifyFilterTypeText = (filterText = 'test') => {
 };
 
 const FilterText = (props) => {
-  const [local] = splitProps(props, ['username', 'filteredRepoCount']);
+  const [local] = splitProps(props, ['filteredRepoCount']);
+  const location = useLocation();
 
   return (
     <div class="flex justify-between items-center border-b border-b-gray-300 pb-4">
@@ -46,7 +48,7 @@ const FilterText = (props) => {
       </div>
       <div>
         <a
-          href={'/' + local.username}
+          href={location.pathname}
           class="flex items-center clear-filter group hover:text-blue-600 transition-colors delay-[60ms] no-underline gap-2 text-sm"
         >
           <span class="text-white rounded-md bg-gray-500 group-hover:bg-blue-600 transition-colors delay-[60ms] w-4 h-4">
