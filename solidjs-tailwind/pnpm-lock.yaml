@@ -19,6 +19,8 @@ specifiers:
   '@testing-library/jest-dom': 5.16.5
   '@typescript-eslint/parser': 5.41.0
   autoprefixer: 10.4.12
+  classnames: ^2.3.1
+  date-fns: ^2.25.0
   dayjs: ^1.11.6
   eslint: 8.26.0
   eslint-plugin-solid: 0.7.4
@@ -68,6 +70,8 @@ devDependencies:
   '@testing-library/jest-dom': 5.16.5
   '@typescript-eslint/parser': 5.41.0_wyqvi574yv7oiwfeinomdzmc3m
   autoprefixer: 10.4.12_postcss@8.4.18
+  classnames: 2.3.2
+  date-fns: 2.29.3
   dayjs: 1.11.6
   eslint: 8.26.0
   eslint-plugin-solid: 0.7.4_wyqvi574yv7oiwfeinomdzmc3m
@@ -6623,6 +6627,10 @@ packages:
       static-extend: 0.1.2
     dev: true
 
+  /classnames/2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+    dev: true
+
   /clean-css/4.2.4:
     resolution: {integrity: sha512-EJUDT7nDVFDvaQgAo2G/PJvxmp1o/c6iXLbswsBbUFXi1Nr+AjA2cKmfbKDMjMvzEe75g3P6JkaDDAKk96A85A==}
     engines: {node: '>= 4.0'}
@@ -7048,6 +7056,11 @@ packages:
       abab: 2.0.6
       whatwg-mimetype: 3.0.0
       whatwg-url: 11.0.0
+    dev: true
+
+  /date-fns/2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
     dev: true
 
   /dayjs/1.11.6:

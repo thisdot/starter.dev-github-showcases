@@ -1,20 +1,33 @@
+import { createEffect, createResource } from 'solid-js';
+import { useNavigate, useLocation, Outlet } from '@solidjs/router';
 import ROUTES from '../../routes';
 import { useAuth } from '../../auth';
-import { useNavigate, useLocation } from '@solidjs/router';
-import { Show, children } from 'solid-js';
+import { Header } from '../Header';
+import getProfile from '../../services/get-profile';
 
-const AuthGuard = (props) => {
+const AuthGuard = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { authStore } = useAuth();
-  const c = children(() => props.children);
+  const { authStore, setAuth } = useAuth();
+  const [data] = createResource(getProfile);
 
-  if (!authStore.isAuthenticated) {
+  createEffect(() => {
+    if (!authStore.isAuthenticated) {
+      navigate(ROUTES.SIGNIN, { replace: true });
+    } else {
+      if (data() && !data.loading) {
+        setAuth({ ...authStore, user: data() });
+      }
+    }
     sessionStorage.setItem('auth_return_path', location.pathname);
-    navigate(ROUTES.SIGNIN, { replace: true });
-  }
+  });
 
-  return <Show when={authStore.isAuthenticated}>{c()}</Show>;
+  return (
+    <div>
+      <Header />
+      <Outlet />
+    </div>
+  );
 };
 
 export default AuthGuard;

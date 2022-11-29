@@ -1,15 +1,18 @@
-import { useAuth } from '../auth';
+import { TopRepos } from '../components/TopRepos';
 
 const Home = () => {
-const { authStore } = useAuth();
-
   return (
-    <>
-      <h1 class="flex justify-center items-center text-white my-5 mx-auto bg-blue-500  w-full lg:w-[75%] p-4 text-lg ">
-        SolidJs and Tailwind CSS Starter kit
-      </h1>
-      <p class="w-full lg:w-[75%] p-4 mx-auto">Welcome {authStore.user.login}</p>
-    </>
+    <div class="w-full min-h-[calc(100vh-70px)] flex flex-col-reverse lg:flex-row bg-gray-100">
+      <aside class="w-full lg:w-96 bg-white p-8">
+        <span>Here will be the gists</span>
+      </aside>
+      <main class="max-w-screen-lg w-full">
+        <div class="p-12">
+          <h2 class="text-lg font-medium mb-4">Top Repositories</h2>
+          <TopRepos repos={[]} />
+        </div>
+      </main>
+    </div>
   );
 };
 
