@@ -9,11 +9,6 @@
   export let stateFilters: NavigationFilterOption[];
   export let milestoneFilters: NavigationFilterOption[];
 
-  const navigateHref = async (href: string): Promise<void> => {
-    await prefetch(href);
-    await goto(href);
-  };
-
   const handleFilterSelect = async (
     option: NavigationFilterOption,
     optional = false
@@ -21,7 +16,7 @@
     if (!optional && option.active) {
       return;
     }
-    await navigateHref(option.href);
+    await goto(option.href);
   };
 </script>
 

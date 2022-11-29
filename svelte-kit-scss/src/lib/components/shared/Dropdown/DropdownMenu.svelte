@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { browser } from '$app/environment';
   import { clickOutside } from '$lib/components/shared/actions/clickOutside';
   import { X16 } from 'svelte-octicons';
   import { scale } from 'svelte/transition';
   export let description: string | undefined;
+  type Direction = 'left' | 'right';
+  export let direction: Direction = 'right';
   let isOpen = false;
   const close = (): void => {
     isOpen = false;
@@ -13,8 +14,7 @@
   };
 
   $: descriptionDisplay = description || String();
-  type Direction = 'left' | 'right';
-  export let direction: Direction = 'right';
+
   const reverseDirection = (direction: Direction) => (direction === 'left' ? 'right' : 'left');
 </script>
 
@@ -49,7 +49,7 @@
       font-size: 12px;
       line-height: 1;
       position: absolute;
-      z-index: 9999;
+      z-index: 1;
       top: 100%;
       // left: 0; inline
       margin-top: 8px;
