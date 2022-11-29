@@ -6,14 +6,16 @@ const {
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
   type Query {
-    hello: String
+    hello(greeting: String!): String!
   }
 `;
 
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    hello: () => 'Hello world!',
+    hello: async ({ greeting }) => {
+      return `Hello, ${greeting}`;
+    },
   },
 };
 
