@@ -8,7 +8,7 @@ import {
   fetchSigninUrl,
   getAccessToken,
 } from './lib';
-// import cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 
 export const app = express();
 const router = express.Router();
