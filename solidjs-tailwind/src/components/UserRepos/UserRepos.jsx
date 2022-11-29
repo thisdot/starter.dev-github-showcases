@@ -1,5 +1,7 @@
+
 import { For, splitProps } from 'solid-js';
-import { RepoCard, RepoFilter } from '../index';
+import { RepoCard } from '../RepoCard';
+import { RepoFilter } from '../RepoFilter';
 
 const UserRepos = (props) => {
   const [local] = splitProps(props, ['loading', 'repos', 'languages']);

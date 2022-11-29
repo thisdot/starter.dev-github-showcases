@@ -1,38 +1,46 @@
-import { Show, splitProps } from 'solid-js';
-import { OcStar2 } from 'solid-icons/oc';
-import getFriendlyDate from '../../helper/getFriendlyDate';
+import { formatDistance } from 'date-fns';
+import * as styles from './RepoMeta.classNames';
 
 const RepoMeta = (props) => {
-  const [local] = splitProps(props, [
-    'primaryLanguage',
-    'stargazerCount',
-    'updatedAt',
-  ]);
-
-  const friendlyUpdatedAt = () => getFriendlyDate(local.updatedAt);
-
   return (
-    <div class="flex mt-4 text-xs text-gray-600 space-x-4">
-      <Show when={local.primaryLanguage}>
-        <div class="language flex items-center gap-3">
+    <div class={styles.metadata}>
+      {props.language && (
+        <div>
           <span
             style={{
-              'background-color': local.primaryLanguage.color || '#ccc',
+              'background-color': props.languageColor || '#ccc',
             }}
-            class="w-3 h-3 rounded-full"
+            class={styles.languageColor}
           />
-          <span>{local.primaryLanguage.name}</span>
+          {props.language}
         </div>
-      </Show>
-      <Show when={local.stargazerCount}>
-        <div class="language flex items-baseline gap-3">
-          <span class="-translate-x-1 -translate-y-[0.65rem]">
-            <OcStar2 size={2} />
-          </span>
-          <span>{local.stargazerCount}</span>
+      )}
+      {(props.stargazerCount > 0 || props.forkCount > 0) && (
+        <div class="space-x-4">
+          {props.stargazerCount > 0 && (
+            <span
+              class={styles.socialCount}
+              data-testid="repository star count"
+            >
+              {/* <StarIcon class={styles.socialIcon} /> {props.stargazerCount} */}
+            </span>
+          )}
+          {props.forkCount > 0 && (
+            <span
+              class={styles.socialCount}
+              data-testid="repository fork count"
+            >
+              {/* <GitBranchIcon class={styles.socialIcon} /> {props.forkCount} */}
+            </span>
+          )}
         </div>
-      </Show>
-      <span class="text-subtitle">Updated {friendlyUpdatedAt()}</span>
+      )}
+      <div>
+        Updated{' '}
+        {formatDistance(new Date(props.updatedAt), Date.now(), {
+          addSuffix: true,
+        })}
+      </div>
     </div>
   );
 };
