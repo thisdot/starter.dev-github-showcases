@@ -1,11 +1,7 @@
 import createAuthStore from './AuthStore';
-import ROUTES from '../routes';
-import createPreventUnauthorised from './preventUnauthorised';
 
-const [authStore, setAuth] = createAuthStore();
-const preventUnauthorised = createPreventUnauthorised(authStore, ROUTES.SIGNIN);
+const [authStore, setAuth] = createAuthStore;
 export const useAuth = () => ({
   authStore,
-  preventUnauthorised,
   setAuth,
 });
