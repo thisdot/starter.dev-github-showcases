@@ -24,7 +24,7 @@
   }
 
   function openPRs() {
-    openTabLink('pull-requests');
+    openTabLink('pulls');
   }
 
   function openTabLink(link: string) {
@@ -39,7 +39,7 @@
         on:click={openCode}
         on:keypress={openCode}
         class="tab tab--inactive"
-        class:tab--active={!path.includes('issues') && !path.includes('pull-requests')}
+        class:tab--active={!path.includes('issues') && !path.includes('pulls')}
       >
         <span class="icon">
           <Code16 />
@@ -64,7 +64,7 @@
         on:click={openPRs}
         on:keypress={openPRs}
         class="tab tab--inactive"
-        class:tab--active={path.includes('pull-requests')}
+        class:tab--active={path.includes('pulls')}
       >
         <span class="icon">
           <GitPullRequest16 />
