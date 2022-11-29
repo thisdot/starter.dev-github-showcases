@@ -15,7 +15,3 @@
   <IssueSearchList items={issues} />
   <Pagination slot="footer" />
 </BoxLayout>
-
-<style lang="scss">
-  @use 'src/lib/styles/variables.scss';
-</style>
