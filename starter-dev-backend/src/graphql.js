@@ -1,5 +1,5 @@
 const { ApolloServer, gql } = require('apollo-server-lambda');
-
+import { startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda';
 const typeDefs = gql`
   type Query {
     hello(greeting: String!): String!
@@ -20,4 +20,4 @@ const server = new ApolloServer({
   persistedQueries: false,
 });
 
-exports.handler = server.createHandler();
+exports.handler = startServerAndCreateLambdaHandler(server);
