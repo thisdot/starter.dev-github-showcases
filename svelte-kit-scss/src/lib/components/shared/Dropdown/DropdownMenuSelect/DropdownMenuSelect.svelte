@@ -15,9 +15,11 @@
   const handleOptionClick = (option: TOption): void => {
     dispatch('select', option);
   };
+  type Direction = 'left' | 'right';
+  export let direction: Direction = 'right';
 </script>
 
-<DropdownMenu {description}>
+<DropdownMenu {description} {direction}>
   <slot />
   <div slot="content">
     {#each options as option}
