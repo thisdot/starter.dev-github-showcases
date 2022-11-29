@@ -7,12 +7,15 @@
 
   export let sortFilters: NavigationFilterOption[];
   export let stateFilters: NavigationFilterOption[];
+  export let milestoneFilters: NavigationFilterOption[];
 
-  const handleFilterSelect = async (option: NavigationFilterOption): Promise<void> => {
-    if (option.active) {
+  const handleFilterSelect = async (
+    option: NavigationFilterOption,
+    optional = false
+  ): Promise<void> => {
+    if (!optional && option.active) {
       return;
     }
-    await prefetch(option.href);
     await goto(option.href);
   };
 </script>
@@ -21,13 +24,24 @@
   <div class="primary">
     <IssueStateFilter options={stateFilters} />
   </div>
-  <div>
+  <div class="secondary">
+    <DropdownMenuSelect
+      description="Filter by milestone"
+      options={milestoneFilters}
+      labelAccessor={(x) => x.label}
+      checkedPredicate={(x) => x.active}
+      on:select={async ({ detail }) => await handleFilterSelect(detail, true)}
+      direction="left"
+    >
+      <DropdownFilterTextButton text="Milestone" />
+    </DropdownMenuSelect>
     <DropdownMenuSelect
       description="Sort by"
       options={sortFilters}
       labelAccessor={(x) => x.label}
       checkedPredicate={(x) => x.active}
       on:select={async ({ detail }) => await handleFilterSelect(detail)}
+      direction="left"
     >
       <DropdownFilterTextButton text="Sort" />
     </DropdownMenuSelect>
@@ -39,6 +53,10 @@
     display: flex;
     .primary {
       flex: 1;
+    }
+    .secondary {
+      display: flex;
+      gap: 1em;
     }
   }
 </style>
