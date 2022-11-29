@@ -152,7 +152,6 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
     (label) => label,
     true
   );
-  console.log(labelParameterDictionaryMilestones);
   return {
     issues,
     sortFilters,
