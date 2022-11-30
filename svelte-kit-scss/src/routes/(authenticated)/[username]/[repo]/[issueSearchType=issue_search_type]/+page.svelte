@@ -7,15 +7,11 @@
 
   export let data: PageServerData;
 
-  $: ({ issues, openIssuesCount, closedIssuesCount, sortFilters } = data);
+  $: ({ issues, sortFilters, stateFilters, milestoneFilters } = data);
 </script>
 
 <BoxLayout>
-  <IssueSearchControls slot="header" {sortFilters} />
+  <IssueSearchControls slot="header" {sortFilters} {stateFilters} {milestoneFilters} />
   <IssueSearchList items={issues} />
   <Pagination slot="footer" />
 </BoxLayout>
-
-<style lang="scss">
-  @use 'src/lib/styles/variables.scss';
-</style>

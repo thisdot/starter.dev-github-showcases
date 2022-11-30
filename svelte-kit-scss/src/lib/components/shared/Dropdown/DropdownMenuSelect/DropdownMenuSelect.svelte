@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import DropdownMenu from '../DropdownMenu.svelte';
-  import DropdownMenuItemLayout from '../DropdownMenuItemLayout.svelte';
   import DropdownItemTemplateCheckbox from '../item-templates/DropdownItemTemplateCheckbox.svelte';
   export let description: string | undefined;
 
@@ -15,28 +14,50 @@
   const handleOptionClick = (option: TOption): void => {
     dispatch('select', option);
   };
+  type Direction = 'left' | 'right';
+  export let direction: Direction = 'right';
 </script>
 
-<DropdownMenu {description}>
+<DropdownMenu {description} {direction}>
   <slot />
-  <div slot="content">
+  <div slot="content" role="listbox">
     {#each options as option}
-      <DropdownMenuItemLayout
+      <div
+        class="dropdown-menu-item-layout"
         on:click={() => handleOptionClick(option)}
         on:keypress={() => handleOptionClick(option)}
       >
         {#if $$slots.option}
-          <slot name="option" {option} {checkedPredicate} {labelAccessor} />
+          <slot
+            aria-selected
+            role="option"
+            name="option"
+            {option}
+            {checkedPredicate}
+            {labelAccessor}
+          />
         {:else}
           <DropdownItemTemplateCheckbox
             label={labelAccessor(option)}
             checked={checkedPredicate(option)}
           />
         {/if}
-      </DropdownMenuItemLayout>
+      </div>
     {/each}
   </div>
 </DropdownMenu>
 
 <style lang="scss">
+  @use 'src/lib/styles/variables.scss';
+  .dropdown-menu-item-layout {
+    border-bottom: 1px solid variables.$gray300;
+    padding: 0.75em 1.25em;
+    cursor: pointer;
+    &:hover {
+      background: variables.$gray100;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 </style>
