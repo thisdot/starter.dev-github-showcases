@@ -6,3 +6,4 @@ export * from './repository-contents';
 export * from './branches';
 export * from './data-contract';
 export * from './issues';
+export * from './issue-milestone';
