@@ -1,6 +1,7 @@
 import { Show } from 'solid-js';
-import { LockClosedIcon } from 'solid-heroicons/outline';
-import { GitRepoIcon } from '../Icons/repo.icon';
+import { Icon } from 'solid-heroicons';
+import { lockClosed } from 'solid-heroicons/solid';
+import GitRepoIcon from '../Icons/repo.icon';
 import styles from './RepoHeading.module.css';
 
 function PrivacyIcon(props) {
@@ -10,9 +11,9 @@ function PrivacyIcon(props) {
       fallback={<div class={styles.iconPlaceholder} />}
     >
       {props.isPrivate ? (
-        <LockClosedIcon class={styles.icon} />
+        <Icon path={lockClosed} class={styles.privacyIcon} />
       ) : (
-        <GitRepoIcon class={styles.icon} />
+        <GitRepoIcon class={styles.privacyIcon} />
       )}
     </Show>
   );
