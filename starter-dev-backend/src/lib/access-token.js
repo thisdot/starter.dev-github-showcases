@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import axios from 'axios';
 import { ACCESS_TOKEN_COOKIE } from './constants';
 

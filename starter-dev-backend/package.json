@@ -14,7 +14,7 @@
     "@apollo/server": "^4.2.2",
     "@types/cookie-parser": "^1.4.2",
     "apollo-server-lambda": "^3.11.1",
-    "axios": "^0.24.0",
+    "axios": "^1.2.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
