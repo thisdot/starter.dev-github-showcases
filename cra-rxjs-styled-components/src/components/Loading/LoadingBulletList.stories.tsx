@@ -3,8 +3,8 @@ import React from 'react';
 import LoadingBulletList from './LoadingBulletList';
 
 export default {
-  component: LoadingBulletList,
-  title: 'Loading/LoadingBulletList',
+	component: LoadingBulletList,
+	title: 'Loading/LoadingBulletList',
 } as Meta;
 
 const Template: Story = () => <LoadingBulletList />;

@@ -23,7 +23,7 @@ export const Layout = styled.div`
 `;
 
 export const NetlifyBadgeContainer = styled.div`
-	grid-area: footer;	
+	grid-area: footer;
 	margin-top: auto;
 	text-align: center;
 	background-color: white;

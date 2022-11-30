@@ -1,5 +1,8 @@
 import { Outlet, useLocation } from 'react-router';
-import { NetlifyBadgeContainer, RepoLayout } from '../../components/layouts/RepoLayoutPage';
+import {
+	NetlifyBadgeContainer,
+	RepoLayout,
+} from '../../components/layouts/RepoLayoutPage';
 import Header from '../../components/header/Header';
 import SubHeader from '../../components/sub-header/SubHeader';
 import RepoPage from '../../components/repo-page/RepoPage.data';

@@ -5,7 +5,10 @@ import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 import { filter, map, Subscription, tap } from 'rxjs';
 import { useUser } from '../../context/UserProvider';
 
-export function useGists(): { gists: GistWithFilename[]; loadingGist: boolean } {
+export function useGists(): {
+	gists: GistWithFilename[];
+	loadingGist: boolean;
+} {
 	const [state, setState] = useState<GistWithFilename[]>([]);
 	const [loadingGist, setLoadingGist] = useState<boolean>(true);
 	const context = useUser();
