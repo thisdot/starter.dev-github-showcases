@@ -9,7 +9,7 @@
   <div class="check-mark">
     <Check16 class="icon" />
   </div>
-  <div class="label">
+  <div class="label" aria-label={label}>
     {label}
   </div>
 </div>

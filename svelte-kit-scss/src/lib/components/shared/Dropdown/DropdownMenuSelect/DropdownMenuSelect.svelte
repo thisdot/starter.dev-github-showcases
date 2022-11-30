@@ -20,7 +20,7 @@
 
 <DropdownMenu {description} {direction}>
   <slot />
-  <div slot="content">
+  <div slot="content" role="listbox">
     {#each options as option}
       <div
         class="dropdown-menu-item-layout"
@@ -28,7 +28,14 @@
         on:keypress={() => handleOptionClick(option)}
       >
         {#if $$slots.option}
-          <slot name="option" {option} {checkedPredicate} {labelAccessor} />
+          <slot
+            aria-selected
+            role="option"
+            name="option"
+            {option}
+            {checkedPredicate}
+            {labelAccessor}
+          />
         {:else}
           <DropdownItemTemplateCheckbox
             label={labelAccessor(option)}
