@@ -16,7 +16,7 @@ const ProfilePage = (props) => {
       </div>
       <div class="mx-auto max-w-screen-2xl py-8 px-4">
         <div class="grid grid-cols-12 gap-8">
-          <div class="pt-8 relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
+          <div data-testid="user-profile" class="pt-8 relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
             {props.user ? <UserProfileCard {...props.user} /> : null}
           </div>
           <div class="col-span-12 md:col-span-8 xl:col-span-9">
