@@ -1,27 +1,21 @@
-import {
-  createRoot
-} from "solid-js"
-import {
-  insert,
-  template,
-  createComponent
-} from "solid-js/web"
+import { createRoot } from 'solid-js';
+import { insert, template, createComponent } from 'solid-js/web';
+import { initialize, mswDecorator } from 'msw-storybook-addon';
 import '../src/index.css';
 
 export const decorators = [
-  ((Story) => (
+  mswDecorator,
+  (Story) =>
     createRoot(() => {
-      const element = template("<div/>").cloneNode(true)
-      insert(element, createComponent(Story, {}))
-      return element
-    })
-  )),
-]
-
+      const element = template('<div/>').cloneNode(true);
+      insert(element, createComponent(Story, {}));
+      return element;
+    }),
+];
 
 export const parameters = {
   actions: {
-    argTypesRegex: "^on[A-Z].*"
+    argTypesRegex: '^on[A-Z].*',
   },
   controls: {
     matchers: {
@@ -29,4 +23,4 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+};
