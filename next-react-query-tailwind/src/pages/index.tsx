@@ -12,16 +12,29 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="w-full  min-h-[calc(100vh-70px)] flex flex-col-reverse lg:flex-row bg-gray-100">
+      <div className="w-full  min-h-[calc(100vh-165px)] flex flex-col-reverse lg:flex-row bg-gray-100">
         <aside className="w-full lg:w-96 bg-white p-8">
           <UserGists />
         </aside>
         <main className="max-w-screen-lg w-full">
           <div className="p-12">
-            <h2 data-testid="show repo list" className="text-lg font-medium mb-4">Top Repositories</h2>
+            <h2
+              data-testid="show repo list"
+              className="text-lg font-medium mb-4"
+            >
+              Top Repositories
+            </h2>
             <UserTopRepos />
           </div>
         </main>
+      </div>
+      <div className="flex justify-center mt-auto pb-5 pt-6">
+        <a target="_blank" href="https://www.netlify.com">
+          <img
+            src="https://www.netlify.com/v3/img/components/netlify-light.svg"
+            alt="Deploys by Netlify"
+          />
+        </a>
       </div>
     </div>
   );
