@@ -13,7 +13,7 @@ interface ApolloServerContext {
   };
 }
 
-const getHandler = (event, context) => {
+const getHandler = (event: any, context: any) => {
   const server = new ApolloServer({
     schema,
     dataSources: () => ({}),

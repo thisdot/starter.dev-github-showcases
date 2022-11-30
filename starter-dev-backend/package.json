@@ -8,7 +8,8 @@
     "dev": "run-s codegen dev:start",
     "dev:start": "netlify dev",
     "codegen": "graphql-codegen --config codegen.ts",
-    "postinstall": "netlify-lambda install"
+    "postinstall": "netlify-lambda install",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@apollo/server": "^4.2.2",
@@ -23,6 +24,7 @@
     "graphql": "^16.6.0",
     "morgan": "^1.10.0",
     "netlify-lambda": "^2.0.15",
+    "prettier": "^2.8.0",
     "serverless-http": "^2.7.0"
   },
   "devDependencies": {
