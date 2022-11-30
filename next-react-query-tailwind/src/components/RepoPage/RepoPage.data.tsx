@@ -86,7 +86,7 @@ function RepoPage({ name, owner, branch, path = '', children }: RepoPageProps) {
       <div className="h-[calc(100%-70px)] flex flex-col">
         <RepoProvider value={context}>{children}</RepoProvider>
         <div className="flex justify-center mt-auto pb-5 pt-6">
-          <a target="_blank" href="https://www.netlify.com">
+          <a target="_blank" rel="noreferrer noopener" href="https://www.netlify.com">
             <img
               src="https://www.netlify.com/v3/img/components/netlify-light.svg"
               alt="Deploys by Netlify"
