@@ -1,4 +1,5 @@
 import { formatDistance } from 'date-fns';
+import { StarIcon, GitBranchIcon } from '../Icons';
 import styles from './RepoMeta.module.css';
 
 const RepoMeta = (props) => {
@@ -22,7 +23,7 @@ const RepoMeta = (props) => {
               class={styles.socialCount}
               data-testid="repository star count"
             >
-              {/* <StarIcon class={styles.socialIcon} /> {props.stargazerCount} */}
+              <StarIcon class={styles.socialIcon} /> {props.stargazerCount}
             </span>
           )}
           {props.forkCount > 0 && (
@@ -30,7 +31,7 @@ const RepoMeta = (props) => {
               class={styles.socialCount}
               data-testid="repository fork count"
             >
-              {/* <GitBranchIcon class={styles.socialIcon} /> {props.forkCount} */}
+              <GitBranchIcon class={styles.socialIcon} /> {props.forkCount}
             </span>
           )}
         </div>

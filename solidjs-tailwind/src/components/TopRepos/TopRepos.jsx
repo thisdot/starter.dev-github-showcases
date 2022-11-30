@@ -8,7 +8,7 @@ const TopRepos = (props) => {
       {props.repos.length > 0 ? (
         <div class={styles.container}>
           <For each={props.repos}>
-            {(repo) => <RepoCard repo={repo} styles={styles} />}
+            {(repo) => <RepoCard {...repo()} styles={styles} />}
           </For>
           <div class={styles.linkContainer}>
             <a href={`/${props.login}`} class={styles.allRepoLink}>

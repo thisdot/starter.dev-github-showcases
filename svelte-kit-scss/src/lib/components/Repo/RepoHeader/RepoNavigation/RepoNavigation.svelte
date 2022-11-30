@@ -3,7 +3,11 @@
   import type { RepoState } from '$lib/interfaces';
   import { Code16, GitPullRequest16, IssueOpened16 } from 'svelte-octicons';
   import { page } from '$app/stores';
+  import { IssueSearchPageTypeFiltersMap } from '$lib/constants/matchers';
   let path: string;
+
+  const issueSearchPageTypeIssue = Object.keys(IssueSearchPageTypeFiltersMap)[0];
+  const issueSearchPageTypeRequest = Object.keys(IssueSearchPageTypeFiltersMap)[1];
 
   function getPath(currentPath: string) {
     path = currentPath;
@@ -20,11 +24,11 @@
   }
 
   function openIssues() {
-    openTabLink('issues');
+    openTabLink(issueSearchPageTypeIssue);
   }
 
   function openPRs() {
-    openTabLink('pull-requests');
+    openTabLink(issueSearchPageTypeRequest);
   }
 
   function openTabLink(link: string) {
@@ -39,7 +43,8 @@
         on:click={openCode}
         on:keypress={openCode}
         class="tab tab--inactive"
-        class:tab--active={!path.includes('issues') && !path.includes('pull-requests')}
+        class:tab--active={!path.includes(issueSearchPageTypeIssue) &&
+          !path.includes(issueSearchPageTypeRequest)}
       >
         <span class="icon">
           <Code16 />
@@ -50,7 +55,7 @@
         on:click={openIssues}
         on:keypress={openIssues}
         class="tab tab--inactive"
-        class:tab--active={path.includes('issues')}
+        class:tab--active={path.includes(issueSearchPageTypeIssue)}
       >
         <span class="icon">
           <IssueOpened16 />
@@ -64,7 +69,7 @@
         on:click={openPRs}
         on:keypress={openPRs}
         class="tab tab--inactive"
-        class:tab--active={path.includes('pull-requests')}
+        class:tab--active={path.includes(issueSearchPageTypeRequest)}
       >
         <span class="icon">
           <GitPullRequest16 />

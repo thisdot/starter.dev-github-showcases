@@ -13,13 +13,8 @@ export const SEARCH_QUERY_PARAMETER_QUALIFIER = {
 type SearchQueryParameterQualifier =
   typeof SEARCH_QUERY_PARAMETER_QUALIFIER[keyof typeof SEARCH_QUERY_PARAMETER_QUALIFIER];
 
-export const buildFilterParameter = (qualifier: SearchQueryParameterQualifier, value: string) => {
-  let paramValue = value;
-  if (qualifier === SEARCH_QUERY_PARAMETER_QUALIFIER.MILESTONE) {
-    paramValue = JSON.stringify(value);
-  }
-  return [qualifier, paramValue].join(QUALIFIER_SEPARATOR);
-};
+export const buildFilterParameter = (qualifier: SearchQueryParameterQualifier, value: string) =>
+  [qualifier, value].join(QUALIFIER_SEPARATOR);
 
 export const splitFilterParameters = (query: string): string[] => {
   return query.split(PARAMETER_SEPARATOR).reduce((arr, x) => {
@@ -31,6 +26,17 @@ export const splitFilterParameters = (query: string): string[] => {
     }
     return arr;
   }, [] as string[]);
+};
+
+export const ensureRepoParameter = (query: string, repoName: string): string => {
+  const repoParam = splitFilterParameters(query).find((x) =>
+    x.startsWith(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO)
+  );
+  return repoParam
+    ? query
+    : [query, buildFilterParameter(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO, repoName)].join(
+        PARAMETER_SEPARATOR
+      );
 };
 
 export const estimateSearchQueryForParameter = (baseQuery: string, parameter: string) => {

@@ -11,3 +11,4 @@ export { default as LocationMarkerIcon } from './LocationMarkerIcon';
 export { default as UsersIcon } from './UsersIcon';
 export { default as TOCIcon } from './TocIcon';
 export { default as BookOpenIcon } from './BookOpenIcon';
+export { default as GitBranchIcon } from './GitBranchIcon';
