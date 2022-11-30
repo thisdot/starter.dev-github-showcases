@@ -42,8 +42,10 @@ describe('RepoCard for non profile page', () => {
     expect(wrapper).toBeTruthy();
   });
 
-  it('a tag text should contain name', async () => {
-    const repowithOwner = await wrapper.getByText(notProfileData.name);
+  it('a tag text should contain owner/name', async () => {
+    const repowithOwner = await wrapper.getByText(
+      `${notProfileData.owner.login}/${notProfileData.name}`
+    );
     expect(repowithOwner).toBeVisible();
   });
 });

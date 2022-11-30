@@ -25,13 +25,15 @@ const getTopRepos = async () => {
       {
         id: repo.id,
         name: repo.name,
+        owner: repo.owner,
         description: repo.description,
-        owner: repo.owner.login,
-        language: repo.primaryLanguage?.name,
-        languageColor: repo.primaryLanguage?.color,
-        isPrivate: repo.isPrivate,
         stargazerCount: repo.stargazerCount,
         forkCount: repo.forkCount,
+        primaryLanguage: {
+          name: repo.primaryLanguage?.name,
+          color: repo.primaryLanguage?.color,
+        },
+        visibility: repo.visibility,
         updatedAt: repo.updatedAt,
       },
     ];
