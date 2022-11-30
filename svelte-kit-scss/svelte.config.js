@@ -8,7 +8,9 @@ const config = {
   preprocess: preprocess({ typescript: true, scss: true }),
 
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+      edge: true
+    })
   },
 };
 
