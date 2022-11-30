@@ -39,7 +39,7 @@ export const PullRequestIssueTab = component$(
       tabType === 'pr' ? <PullRequestIcon className={iconsClasses} /> : <IssuesIcon className={iconsClasses} />
     );
 
-    const toggleTab = $((value: string) => {
+    const toggleTab = $((value: TABS) => {
       tab.activeTab = value;
       dropdown.selectedLabel = labelOption[0].value;
       dropdown.selectedSort = sortOption[0].value;

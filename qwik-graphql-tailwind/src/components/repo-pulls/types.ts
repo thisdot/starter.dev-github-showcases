@@ -127,3 +127,29 @@ export type RepoPullRequestsQuery = {
     | null
     | undefined;
 };
+
+export interface Label {
+  color: string;
+  name: string;
+}
+
+export type PullRequest = {
+  id: string;
+  url: string;
+  state: string;
+  author: { login: string };
+  comments: {
+    totalCount: number;
+  };
+  login?: string | null;
+  title: string;
+  number: number;
+  closed: boolean;
+  closedAt?: string | null;
+  merged: boolean;
+  mergedAt?: Date | null;
+  createdAt: string;
+  labels: Label[];
+  commentCount: number;
+  labelCount: number;
+};
