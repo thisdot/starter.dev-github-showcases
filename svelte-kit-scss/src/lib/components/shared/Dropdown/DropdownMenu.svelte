@@ -3,6 +3,8 @@
   import { X16 } from 'svelte-octicons';
   import { scale } from 'svelte/transition';
   export let description: string | undefined;
+  type Direction = 'left' | 'right';
+  export let direction: Direction = 'right';
   let isOpen = false;
   const close = (): void => {
     isOpen = false;
@@ -12,6 +14,8 @@
   };
 
   $: descriptionDisplay = description || String();
+
+  const reverseDirection = (direction: Direction) => (direction === 'left' ? 'right' : 'left');
 </script>
 
 <div class="dropdown-container noselect" use:clickOutside on:clickoutside={close}>
@@ -19,7 +23,11 @@
     <slot />
   </div>
   {#if isOpen}
-    <div class="menu" transition:scale={{ duration: 100, start: 0.95 }}>
+    <div
+      class="menu"
+      transition:scale={{ duration: 100, start: 0.95 }}
+      style="{reverseDirection(direction)}: 0;"
+    >
       <div class="header">
         <div class="description">{descriptionDisplay}</div>
         <div class="close" on:click={close} on:keypress={close}>
@@ -41,13 +49,15 @@
       font-size: 12px;
       line-height: 1;
       position: absolute;
+      z-index: 1;
       top: 100%;
-      left: 0;
+      // left: 0; inline
       margin-top: 8px;
       border: $border;
       background: variables.$white;
       border-radius: 4px;
       box-shadow: variables.$gray400 0 0.5rem 1.5rem 0;
+      overflow: hidden;
       .header {
         display: flex;
         padding: 0.625em 1em;

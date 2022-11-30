@@ -6,7 +6,17 @@
   const { repoInfo } = data;
 </script>
 
-<div>
+<div class="container">
   <RepoHeader repo={repoInfo} />
-  <slot />
+  <div class="main">
+    <slot />
+  </div>
 </div>
+
+<style lang="scss">
+  .container {
+    .main {
+      padding: 1.5rem;
+    }
+  }
+</style>

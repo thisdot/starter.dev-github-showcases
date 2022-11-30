@@ -31,6 +31,7 @@ export const UserDropdown = component$(({ image, username }: UserDropdownProps) 
       method: 'POST',
     })
       .then(() => {
+        sessionStorage.removeItem('user');
         window.location.href = '/auth/signin';
       })
       .catch((err) => {

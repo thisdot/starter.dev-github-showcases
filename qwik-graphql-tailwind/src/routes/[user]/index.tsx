@@ -12,6 +12,7 @@ import filterStore, { FilterStoreProps } from '~/context/repo-filter';
 import { DefaultLanguage, TypeFilter, RepositoryOrderField } from '~/components/repo-filters/types';
 
 interface UserStore {
+  isLoading: boolean;
   user: User | null;
 }
 
@@ -25,6 +26,7 @@ interface ProfileQueryParams {
 export default component$(() => {
   const store = useStore<UserStore>({
     user: null,
+    isLoading: true,
   });
 
   const filterState = useStore<FilterStoreProps>({
@@ -53,6 +55,10 @@ export default component$(() => {
     updateUserProfile(store, response);
   });
 
+  if (store.isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.stickyNav}>
@@ -66,15 +72,13 @@ export default component$(() => {
       <div className="mx-auto max-w-screen-2xl py-8 px-4">
         <div className="grid grid-cols-12 gap-8">
           <div className="pt-8 relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
-            {store.user ? <UserProfileCard {...store.user} /> : 'Loading...'}
+            {store.user ? <UserProfileCard {...store.user} /> : null}
           </div>
           <div className="col-span-12 md:col-span-8 xl:col-span-9">
             <ProfileNav className="border-none md:hidden" pathname={location.pathname} />
             {store.user?.repositories ? (
               <UserRepos repos={store.user?.repositories} owner={location.params.user} />
-            ) : (
-              'Loading...'
-            )}
+            ) : null}
           </div>
         </div>
       </div>
@@ -83,6 +87,7 @@ export default component$(() => {
 });
 
 export function updateUserProfile(store: UserStore, response: any) {
+  store.isLoading = false;
   store.user = response.data.user;
 }
 

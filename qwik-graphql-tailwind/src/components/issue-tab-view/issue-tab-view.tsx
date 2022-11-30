@@ -1,6 +1,6 @@
 import { component$, useClientEffect$, useContextProvider, useStore } from '@builder.io/qwik';
 import DropdownStores, { DropdownStoresProps } from '../../context/issue-tab-header-dropdown';
-import issuesPRStore, { IssuesPRStoreProps } from '../../context/issue-pr-store';
+import issuesPRStore, { IssuesPRStoreProps, Tabs } from '../../context/issue-pr-store';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
 import { labelOptions, milestonesOptions, sortOptions } from './data';
 import { ChevronDownIcon } from '../icons';
@@ -10,16 +10,12 @@ import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
 import IssuesData from './issues-data';
 import { Issue } from './type';
 
-type Tabs = 'open' | 'closed';
-
 export interface IssuesProps {
   activeTab: Tabs;
   owner: string;
   name: string;
 }
-export interface IssuesStores {
-  activeTab: Tabs;
-}
+
 export interface DropdownStores {
   selectedLabel: string;
   selectedSort: string;
@@ -35,6 +31,7 @@ interface IssuesQueryParams {
 interface IssueStore {
   closedIssues: Issue[];
   openIssues: Issue[];
+  loading: boolean;
 }
 
 export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps) => {
@@ -51,6 +48,7 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
   const issuesStore = useStore<IssueStore>({
     closedIssues: [],
     openIssues: [],
+    loading: true,
   });
 
   useContextProvider(issuesPRStore, store);
@@ -58,6 +56,7 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
 
   useClientEffect$(async () => {
     const abortController = new AbortController();
+    issuesStore.loading = true;
     const response = await fetchRepoIssues(
       {
         owner,
@@ -81,6 +80,13 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
           labelOption={labelOptions}
           sortOption={sortOptions}
         />
+        {issuesStore.loading && (
+          <div className=" animate-pulse p-3 flex flex-col gap-2">
+            <div className="w-full h-4 rounded-md bg-gray-200"></div>
+            <div className="w-full h-4 rounded-md bg-gray-200"></div>
+            <div className="w-full h-4 rounded-md bg-gray-200"></div>
+          </div>
+        )}
         <IssuesData issues={store.activeTab === DEFAULT_TAB ? issuesStore.openIssues : issuesStore.closedIssues} />
       </div>
       <div className="flex items-center justify-center gap-4 mt-5">
@@ -101,6 +107,7 @@ export function updateIssueState(store: IssueStore, response: any) {
   const { closedIssues, openIssues } = response.data.repository;
   store.closedIssues = closedIssues.nodes;
   store.openIssues = openIssues.nodes;
+  store.loading = false;
 }
 export async function fetchRepoIssues(
   { owner, name, first }: IssuesQueryParams,

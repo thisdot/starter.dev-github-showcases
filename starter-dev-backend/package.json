@@ -3,38 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "codegen": "graphql-codegen --config codegen.ts",
-    "start": "sls offline start",
-    "deploy": "sls deploy --stage production --region us-east-1",
-    "deploy:dev": "sls deploy --stage dev --region us-east-1"
+    "build": "netlify-lambda build src",
+    "dev": "netlify dev",
+    "postinstall": "netlify-lambda install"
   },
   "dependencies": {
-    "@apollo/server": "^4.1.1",
-    "@as-integrations/aws-lambda": "^1.0.1",
+    "@apollo/server": "^4.2.2",
     "@types/cookie-parser": "^1.4.2",
+    "apollo-server-lambda": "^3.11.1",
     "axios": "^0.24.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express": "^4.17.1",
-    "graphql": "^16.3.0",
-    "graphql-tag": "^2.12.6",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.6.0",
     "morgan": "^1.10.0",
-    "serverless-http": "^2.7.0",
-    "serverless-plugin-typescript": "^2.1.4"
+    "netlify-lambda": "^2.0.15",
+    "serverless-http": "^2.7.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "2.13.12",
-    "@graphql-codegen/introspection": "^2.2.1",
-    "@graphql-codegen/typescript": "2.8.2",
-    "@graphql-codegen/typescript-resolvers": "^2.7.7",
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "@typescript-eslint/parser": "^5.42.1",
-    "dotenv": "^10.0.0",
-    "serverless": "^3.7.2",
-    "serverless-bundle": "^5.2.0",
-    "serverless-domain-manager": "^6.0.2",
-    "serverless-esbuild": "^1.33.2",
-    "serverless-offline": "^8.3.1"
+    "dotenv": "^10.0.0"
   }
 }
