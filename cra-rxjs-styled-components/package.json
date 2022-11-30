@@ -86,7 +86,8 @@
 		"@storybook/testing-library": "^0.0.9",
 		"@types/parse-link-header": "^2.0.0",
 		"@types/styled-components": "^5.1.21",
-		"eslint": "7.11.0",
+		"eslint": "^8.0.0",
+		"eslint-config-react-app": "^7.0.1",
 		"eslint-plugin-react-hooks": "^4.3.0",
 		"husky": "8.0.1",
 		"prettier": "^2.5.1"
