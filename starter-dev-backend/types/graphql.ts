@@ -14,15 +14,45 @@ export type Scalars = {
   Float: number;
 };
 
+export type Owner = {
+  __typename?: 'Owner';
+  login?: Maybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Simple hello world query that accepts a greeting */
   hello: Scalars['String'];
+  repos?: Maybe<Array<Maybe<Repo>>>;
 };
 
 
 export type QueryHelloArgs = {
   greeting: Scalars['String'];
+};
+
+
+export type QueryReposArgs = {
+  username?: InputMaybe<Scalars['String']>;
+};
+
+/**
+ * WIP
+ * https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
+ */
+export type Repo = {
+  __typename?: 'Repo';
+  description?: Maybe<Scalars['String']>;
+  forks_count?: Maybe<Scalars['Int']>;
+  full_name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  language?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  owner?: Maybe<Owner>;
+  private?: Maybe<Scalars['Boolean']>;
+  stargazers_count?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['String']>;
 };
 
 
@@ -95,22 +125,53 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  Owner: ResolverTypeWrapper<Owner>;
   Query: ResolverTypeWrapper<{}>;
+  Repo: ResolverTypeWrapper<Repo>;
   String: ResolverTypeWrapper<Scalars['String']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
+  ID: Scalars['ID'];
+  Int: Scalars['Int'];
+  Owner: Owner;
   Query: {};
+  Repo: Repo;
   String: Scalars['String'];
+};
+
+export type OwnerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Owner'] = ResolversParentTypes['Owner']> = {
+  login?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   hello?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<QueryHelloArgs, 'greeting'>>;
+  repos?: Resolver<Maybe<Array<Maybe<ResolversTypes['Repo']>>>, ParentType, ContextType, Partial<QueryReposArgs>>;
+};
+
+export type RepoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Repo'] = ResolversParentTypes['Repo']> = {
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  forks_count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  full_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  language?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  owner?: Resolver<Maybe<ResolversTypes['Owner']>, ParentType, ContextType>;
+  private?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  stargazers_count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
+  Owner?: OwnerResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Repo?: RepoResolvers<ContextType>;
 };
 
