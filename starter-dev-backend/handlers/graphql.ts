@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda';
-import { GitHubAPI } from 'rest-api-source/github-rest-api';
-import { schema } from '../schema';
+import { GitHubAPI } from 'src/rest-api-source/github-rest-api';
+import { schema } from '../src/schema';
 import { Context } from 'aws-lambda';
 
 export type ApolloServerContext = {
