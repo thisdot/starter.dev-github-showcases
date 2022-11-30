@@ -1,7 +1,7 @@
 import serverless from 'serverless-http';
 import express from 'express';
+import bodyParser from 'body-parser';
 import cors from 'cors';
-import routes from './routes';
 import {
   accessToken,
   clearCookies,
@@ -10,7 +10,7 @@ import {
 } from './lib';
 import cookieParser from 'cookie-parser';
 
-const app = express();
+export const app = express();
 
 app.use(
   cors({
@@ -29,22 +29,14 @@ app.use(
   }),
 );
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(express.json());
+app.use(bodyParser.json());
+app.use('/.netlify/functions/server', router); // path must route to lambda
 
-app.get('/', (req, res, next) => {
-  return res.status(200).json({
-    message: 'Welcome to the starter.dev backend!',
-  });
+const router = express.Router();
+router.get('/', (req, res) => {
+  res.redirect(303, `https://starter.dev`);
 });
-
-app.get('/hello', (req, res) => {
-  if (!req.query.greeting) {
-    res.send('Hello, there');
-  }
-  res.send(`Hello, ${req.query.greeting}`);
-});
-
-app.use('/graphql', routes);
+router.post('/', (req, res) => res.json({ postBody: req.body }));
 
 // Step 1 - push user to Github OAuth
 app.get('/api/auth/signin', fetchSigninUrl);
@@ -58,10 +50,7 @@ app.get('/api/auth/token', getAccessToken);
 
 app.post('/api/auth/signout', clearCookies);
 
-app.use((req, res, next) => {
-  return res.status(404).json({
-    error: 'Not Found',
-  });
-});
+// Step 1 - push user to Github OAuth
+app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 export const handler = serverless(app);
