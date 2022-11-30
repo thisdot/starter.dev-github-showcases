@@ -42,8 +42,8 @@ const RepoCard = (props) => {
           </div>
         </Show>
         <RepoMeta
-          language={local.primaryLanguage.name}
-          languageColor={local.primaryLanguage.color}
+          language={local.primaryLanguage?.name}
+          languageColor={local.primaryLanguage?.color}
           forkCount={local.forkCount}
           stargazerCount={local.stargazerCount}
           updatedAt={local.updatedAt}
