@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@apollo/server": "^4.2.2",
-    "@as-integrations/aws-lambda": "^1.0.1",
     "@types/cookie-parser": "^1.4.2",
     "apollo-server-lambda": "^3.11.1",
     "axios": "^0.24.0",
@@ -24,10 +23,6 @@
     "serverless-http": "^2.7.0"
   },
   "devDependencies": {
-    "dotenv": "^10.0.0",
-    "serverless": "^3.7.2",
-    "serverless-bundle": "^5.2.0",
-    "serverless-domain-manager": "^6.0.2",
-    "serverless-offline": "^8.3.1"
+    "dotenv": "^10.0.0"
   }
 }
