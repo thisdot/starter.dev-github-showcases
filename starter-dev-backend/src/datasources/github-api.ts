@@ -1,15 +1,21 @@
-// import axios, { AxiosInstance } from 'axios';
-
-import { RESTDataSource } from '@apollo/datasource-rest';
+// import DataLoader from 'dataloader';
+import {
+  RESTDataSource,
+  WillSendRequestOptions,
+} from '@apollo/datasource-rest';
 import { KeyValueCache } from 'apollo-server-core';
 
 export class GitHubAPI extends RESTDataSource {
-  token: string;
+  private token: string;
 
   constructor(options: { token: string; cache: KeyValueCache }) {
     super(options);
     this.token = options.token;
     this.baseURL = 'https://api.github.com/';
+  }
+
+  override willSendRequest(request: WillSendRequestOptions) {
+    request.headers['authorization'] = this.token;
   }
 
   // https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#about-the-users-api
