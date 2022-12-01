@@ -28,3 +28,4 @@ export { default as PaginationButtons } from './PaginationButtons';
 export { default as BranchMenu } from './BranchMenu';
 export { default as FileView } from './FileView';
 export { default as MarkdownContainer } from './MarkdownContainer';
+export { default as Footer } from './Footer';
