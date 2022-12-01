@@ -11,7 +11,7 @@ export const remapIssueMilestone = (milestone: GithubIssueMilestone): IssueMiles
   return {
     id: milestone.id,
     number: milestone.number,
-    title: milestone.title,
     state: <IssueMilestoneState>String(milestone.state),
+    title: milestone.title,
   };
 };

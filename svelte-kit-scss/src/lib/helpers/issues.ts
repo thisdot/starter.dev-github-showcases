@@ -7,25 +7,17 @@ import {
   type IssueLabel,
   type IssueUser,
   type GithubSearchIssueUser,
-  type GithubSearchIssueAssignee,
-  type IssueAssignee,
   IssueState,
 } from '$lib/interfaces';
 
 const remapIssueLabel = (label: GithubSearchIssueLabel): IssueLabel => ({
   id: label.id,
-  nodeId: label.node_id,
   url: label.url,
   name: label.name,
   color: label.color,
 });
 
 const remapIssueUser = (user: GithubSearchIssueUser): IssueUser => ({
-  login: user.login,
-  avatarUrl: user.avatar_url,
-});
-
-const remapIssueAssignee = (user: GithubSearchIssueAssignee): IssueAssignee => ({
   login: user.login,
   avatarUrl: user.avatar_url,
 });
@@ -39,17 +31,16 @@ const remapIssueState = (state: string): IssueState => {
 
 export const remapIssue = (issue: GithubSearchIssue): Issue => {
   return {
+    assignees: issue.assignees.map(remapIssueUser),
+    closedAt: issue.closed_at,
+    commentsCount: issue.comments,
+    createdAt: issue.created_at,
     id: issue.id,
-    user: remapIssueUser(issue.user),
-    title: issue.title,
+    labels: issue.labels.map(remapIssueLabel),
     number: issue.number,
     state: remapIssueState(issue.state),
-    closedAt: issue.closed_at,
-    createdAt: issue.created_at,
-    labels: issue.labels.map(remapIssueLabel),
-    commentsCount: issue.comments,
-    labelCount: issue.labels?.length || 0,
-    assignees: issue.assignees.map(remapIssueAssignee),
+    title: issue.title,
+    user: remapIssueUser(issue.user),
   };
 };
 
