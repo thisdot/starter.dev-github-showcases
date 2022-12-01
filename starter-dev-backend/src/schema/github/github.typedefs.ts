@@ -2,8 +2,7 @@ import gql from 'graphql-tag';
 
 export const githubTypeDefs = gql`
   """
-  WIP
-  https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
+  A Repo object
   """
   type Repo {
     description: String
@@ -19,16 +18,34 @@ export const githubTypeDefs = gql`
     updated_at: String
   }
 
+  """
+  A Owner object used in Repo
+  """
   type Owner {
     login: String
   }
 
-  #   type User {
+  """
+  A User object
+  """
+  type User {
+    bio: String
+    company: String
+    email: String
+    followers: String
+    following: String
+    location: String
+    login: String
+    name: String
+    twitter_username: String
+  }
 
-  #   }
-
+  """
+  GitHub queries
+  """
   type Query {
     repos(username: String): [Repo]
-    # owner: User
+    repo(owner: String, repoName: String): Repo
+    owner: User
   }
 `;

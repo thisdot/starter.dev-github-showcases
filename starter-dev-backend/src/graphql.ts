@@ -1,31 +1,32 @@
-import { ApolloServer, gql } from 'apollo-server-lambda';
+import { ApolloServer } from 'apollo-server-lambda';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { schema } from './schema';
-import { GitHubAPI } from './rest-api-source/github-rest-api';
-
+import { GitHubAPI } from './datasources/github-api';
 import { LambdaContextFunctionParams } from 'apollo-server-lambda/dist/ApolloServer';
 import { Context } from 'aws-lambda';
 
 interface ApolloServerContext {
   context: Context;
-  restAPISources: {
+  dataSources: {
     githubAPI: GitHubAPI;
   };
+  token: String;
 }
 
 const getHandler = (event: any, context: any) => {
   const server = new ApolloServer({
     schema,
-    dataSources: () => ({}),
     context: async ({
       event,
       context,
     }: LambdaContextFunctionParams): Promise<ApolloServerContext> => {
+      const token = req.headers.token;
       return {
         context,
-        restAPISources: {
-          githubAPI: new GitHubAPI(),
+        dataSources: {
+          githubAPI: new GitHubAPI({ token }),
         },
+        token,
       };
     },
     // By default, the GraphQL Playground interface and GraphQL introspection
