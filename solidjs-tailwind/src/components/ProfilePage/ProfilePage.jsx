@@ -1,7 +1,7 @@
 import { createEffect, createSignal, splitProps } from 'solid-js';
 import useRepoSortFilter from '../../helper/useRepoSortFilter';
 import { ProfileNav } from '../ProfileNav';
-import { UserProfileCard } from '../UserProfileCard';
+import { UserProfile } from '../UserProfile';
 import { UserRepos } from '../UserRepos';
 import styles from './Profile.module.css';
 
@@ -29,7 +29,7 @@ const ProfilePage = (props) => {
       <div class="mx-auto max-w-screen-2xl py-8 px-4">
         <div class="grid grid-cols-12 gap-8">
           <div class="pt-8 relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
-            {local.user ? <UserProfileCard {...local.user} /> : null}
+            {local.user ? <UserProfile {...local.user} /> : null}
           </div>
           <div class="col-span-12 md:col-span-8 xl:col-span-9">
             <ProfileNav
