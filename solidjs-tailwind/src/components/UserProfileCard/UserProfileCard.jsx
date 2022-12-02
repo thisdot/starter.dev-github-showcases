@@ -1,4 +1,3 @@
-import * as styles from './user-profile-card.classNames';
 import {
   UsersIcon,
   StarIcon,
@@ -8,6 +7,7 @@ import {
   TwitterIcon,
 } from '../Icons';
 import OrgList from '../UserProfile/OrgList';
+import styles from './UserProfileCard.module.css';
 
 const UserProfileCard = (props) => {
   return (
