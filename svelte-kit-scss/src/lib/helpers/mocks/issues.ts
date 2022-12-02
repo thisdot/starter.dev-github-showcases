@@ -45,7 +45,7 @@ export const MOCK_SEARCH_ISSUE: GithubSearchIssue = {
 };
 
 export const MOCK_SEARCH_ISSUES_RESPONSE: GithubSearchIssueApiResponse = {
-  total_count: 280,
+  total_count: 123,
   incomplete_results: false,
   items: [MOCK_SEARCH_ISSUE, MOCK_SEARCH_ISSUE],
 };

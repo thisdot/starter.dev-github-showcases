@@ -19,7 +19,6 @@ export interface UserInfo {
 }
 
 export interface UserApiResponse {
-  username: string;
   login: string;
   id: number;
   node_id: string;
