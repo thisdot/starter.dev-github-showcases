@@ -9,7 +9,6 @@ export { default as OfficeBuildingIcon } from './OfficeBuildingIcon';
 export { default as StarIcon } from './StarIcon';
 export { default as LocationMarkerIcon } from './LocationMarkerIcon';
 export { default as UsersIcon } from './UsersIcon';
-export { default as GitBranchIcon } from './GitBranchIcon';
 export { default as TOCIcon } from './TocIcon';
 export { default as BookOpenIcon } from './BookOpenIcon';
 export { default as GitBranchIcon } from './GitBranchIcon';
