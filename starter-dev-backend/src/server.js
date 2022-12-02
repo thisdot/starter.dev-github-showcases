@@ -12,6 +12,7 @@ import {
 import cookieParser from 'cookie-parser';
 
 export const app = express();
+const router = express.Router();
 
 app.use(
   cors({
@@ -33,7 +34,6 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router); // path must route to lambda
 
-const router = express.Router();
 router.get('/', (req, res) => {
   res.redirect(303, `https://starter.dev`);
 });
