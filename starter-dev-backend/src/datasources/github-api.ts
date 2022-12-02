@@ -31,7 +31,6 @@ export class GitHubAPI extends RESTDataSource {
 
   // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
   async getRepos(username: string, perPage?: string) {
-    // if ()
     return await this
       .get(`/users/${username}/repos?sort=updated&per_page=${perPage}
     `);
