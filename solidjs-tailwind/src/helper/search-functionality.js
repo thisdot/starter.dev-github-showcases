@@ -5,7 +5,6 @@ export const repoDataFilteredBySearch = (repos) => {
   if (repos.length < 1) {
     return repos;
   }
-
   return repos.reduce((acc, repo) => {
     if (search() !== '' && !repo?.name?.match(new RegExp(search(), 'ig'))) {
       return acc;
