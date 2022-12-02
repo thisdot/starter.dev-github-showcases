@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * Creates and redirects to initial Github OAuth for grant.
  */

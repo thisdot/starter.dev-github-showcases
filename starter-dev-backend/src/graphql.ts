@@ -1,27 +1,33 @@
 import { ApolloServer, gql } from 'apollo-server-lambda';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import { schema } from './schema';
+import { GitHubAPI } from './rest-api-source/github-rest-api';
 
-// Construct a schema, using GraphQL schema language
-const typeDefs = gql`
-  type Query {
-    hello(greeting: String!): String!
-  }
-`;
+import { LambdaContextFunctionParams } from 'apollo-server-lambda/dist/ApolloServer';
+import { Context } from 'aws-lambda';
 
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    hello: async (_, { greeting }) => {
-      return `Hello, ${greeting}`;
-    },
-  },
-};
+interface ApolloServerContext {
+  context: Context;
+  restAPISources: {
+    githubAPI: GitHubAPI;
+  };
+}
 
-const getHandler = (event, context) => {
+const getHandler = (event: any, context: any) => {
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-
+    schema,
+    dataSources: () => ({}),
+    context: async ({
+      event,
+      context,
+    }: LambdaContextFunctionParams): Promise<ApolloServerContext> => {
+      return {
+        context,
+        restAPISources: {
+          githubAPI: new GitHubAPI(),
+        },
+      };
+    },
     // By default, the GraphQL Playground interface and GraphQL introspection
     // is disabled in "production" (i.e. when `process.env.NODE_ENV` is `production`).
     //

@@ -18,12 +18,14 @@ function RepoHeading(props) {
         <span class={styles.separator}>/</span>
         <Link href={`/${props.owner}/${name}`}>
           <a data-testid="header repo name" class={styles.nameLink}>
-            {name}
+            {props.name}
           </a>
         </Link>
       </span>
       {props.data ? (
-        <PrivacyBadge isPrivate={props.data.isPrivate} />
+        <PrivacyBadge
+          visibility={props.data.isPrivate ? 'Private' : 'Public'}
+        />
       ) : (
         <div class={styles.badgePlaceholder} />
       )}

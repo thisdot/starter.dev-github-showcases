@@ -6,6 +6,7 @@ const SearchInput = () => {
   };
   return (
     <input
+      data-testid="search-input"
       placeholder="find a repository.."
       role="search"
       type="search"

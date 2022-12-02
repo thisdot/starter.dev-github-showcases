@@ -1,3 +1,4 @@
+import { Router } from '@solidjs/router';
 import RepoHeading from './RepoHeading';
 
 const args = {
@@ -20,7 +21,11 @@ export default {
   title: 'RepoPage/RepoHeading',
 };
 
-const Template = (args) => <RepoHeading {...args} />;
+const Template = (args) => (
+  <Router>
+    <RepoHeading {...args} />
+  </Router>
+);
 
 export const Public = Template.bind({});
 Public.args = args;

@@ -26,7 +26,7 @@ const RepoCard = (props) => {
     }`;
 
   return (
-    <div class="px-4 py-4 border-b border-gray-200 first-of-type:border-t flex justify-between flex-wrap md:flex-nowrap gap-x-4">
+    <div data-testid='repo-item' class="px-4 py-4 border-b border-gray-200 first-of-type:border-t flex justify-between flex-wrap md:flex-nowrap gap-x-4">
       <div class="col-span-12 md:col-span-7 text-left">
         <h3 class="mb-4">
           <Link href={repoNameWithOwnerLink()}>
@@ -42,8 +42,8 @@ const RepoCard = (props) => {
           </div>
         </Show>
         <RepoMeta
-          language={local.primaryLanguage.name}
-          languageColor={local.primaryLanguage.color}
+          language={local.primaryLanguage?.name}
+          languageColor={local.primaryLanguage?.color}
           forkCount={local.forkCount}
           stargazerCount={local.stargazerCount}
           updatedAt={local.updatedAt}
