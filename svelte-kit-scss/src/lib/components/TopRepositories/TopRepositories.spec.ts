@@ -16,8 +16,8 @@ describe('TopRepositories', () => {
     expect(pageTitle).toBeTruthy();
   });
 
-  it('should render title', () => {
-    const pageTitle = screen.queryAllByTestId('repo-card');
-    expect(pageTitle.length).toBe(2);
+  it('should render 2 Top Repositories', () => {
+    const repoCards = screen.queryAllByTestId('repo-card');
+    expect(repoCards.length).toBe(2);
   });
 });

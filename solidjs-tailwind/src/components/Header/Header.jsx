@@ -1,6 +1,7 @@
 import { NavLink } from '@solidjs/router';
 import { useAuth } from '../../auth';
 import { UserDropdown } from '../UserDropdown';
+import { SIGN_IN_BASE_URL } from '../../helper/constants';
 
 import { GithubLogo } from './GithubLogo';
 import styles from './Header.module.css';
@@ -20,7 +21,9 @@ const Header = () => {
             username={authStore.user.login}
           />
         ) : (
-          <NavLink href="/api/auth/signin">
+          <NavLink
+            href={`${SIGN_IN_BASE_URL}?redirect_url=${window.location.href}`}
+          >
             <span class={styles.navLink}>Sign In</span>
           </NavLink>
         )}
