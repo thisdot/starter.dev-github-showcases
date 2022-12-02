@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, test, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { SORT_OPTIONS } from '../components/RepoFilter/data';
 import { sortedRepoData } from './sort-repo-function';
 
