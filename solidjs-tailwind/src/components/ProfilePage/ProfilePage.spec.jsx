@@ -13,10 +13,11 @@ describe('Profile Page', () => {
         nodes: userProfileProps.organizations,
       },
     },
-    repos: {
+    reposInfo: {
       repos: [],
     },
   };
+
   beforeEach(async () => {
     wrapper = await render(() => (
       <Router>
