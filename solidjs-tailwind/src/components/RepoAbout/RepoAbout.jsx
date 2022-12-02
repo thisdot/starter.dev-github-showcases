@@ -1,4 +1,4 @@
-import { BookOpenIcon } from '../icons';
+import { BookOpenIcon } from '../Icons';
 import { Description } from './Description';
 import { HomepageUrl } from './HomePageUrl';
 import { Topics } from './Topics';
@@ -9,7 +9,7 @@ export const RepoAboutWidget = (props) => {
     <div class={styles.container}>
       <h3 class={styles.heading}>About</h3>
       <div class={styles.description}>
-        <div class="space-y-4">
+        <div data-testid="about-info" class="space-y-4">
           <Description text={props.info.data?.description} />
           <HomepageUrl homepageUrl={props.info.data?.homepageUrl} />
           <Topics topics={props.info.data?.topics} />

@@ -1,4 +1,5 @@
 import { Router } from '@solidjs/router';
+import { orgData } from './data';
 import OrgAbout from './OrgAbout';
 
 
@@ -20,6 +21,5 @@ const Template = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  avatarUrl: 'https://avatars.githubusercontent.com/u/1024025?v=4',
-  name: 'This Dot',
+  ...orgData
 };
