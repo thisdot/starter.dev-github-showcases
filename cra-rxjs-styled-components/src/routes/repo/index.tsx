@@ -1,5 +1,8 @@
 import { Outlet, useLocation } from 'react-router';
-import { RepoLayout } from '../../components/layouts/RepoLayoutPage';
+import {
+	NetlifyBadgeContainer,
+	RepoLayout,
+} from '../../components/layouts/RepoLayoutPage';
 import Header from '../../components/header/Header';
 import SubHeader from '../../components/sub-header/SubHeader';
 import RepoPage from '../../components/repo-page/RepoPage.data';
@@ -27,6 +30,18 @@ function Repo() {
 				<RepoLayout>
 					<SubHeader />
 					<Outlet />
+					<NetlifyBadgeContainer>
+						<a
+							target="_blank"
+							rel="noreferrer noopener"
+							href="https://www.netlify.com"
+						>
+							<img
+								src="https://www.netlify.com/v3/img/components/netlify-light.svg"
+								alt="Deploys by Netlify"
+							/>
+						</a>
+					</NetlifyBadgeContainer>
 				</RepoLayout>
 			</RepoPage>
 		</>

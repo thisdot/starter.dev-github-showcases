@@ -1,4 +1,4 @@
-export const TABS = {
-  OPEN: 'open',
-  CLOSED: 'closed',
-};
+export enum TABS {
+  OPEN = 'open',
+  CLOSED = 'closed',
+}

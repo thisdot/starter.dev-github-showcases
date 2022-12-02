@@ -23,7 +23,19 @@ function ProfilePage({ owner, children }: ProfilePageProps) {
     return <>{error.message}</>;
   }
 
-  return <ErrorBoundary>{children({ username: owner })}</ErrorBoundary>;
+  return (
+    <ErrorBoundary>
+      {children({ username: owner })}
+      <div className="flex justify-center mt-auto pb-5 pt-6">
+        <a target="_blank" rel="noreferrer noopener" href="https://www.netlify.com">
+          <img
+            src="https://www.netlify.com/v3/img/components/netlify-light.svg"
+            alt="Deploys by Netlify"
+          />
+        </a>
+      </div>
+    </ErrorBoundary>
+  );
 }
 
 export default ProfilePage;

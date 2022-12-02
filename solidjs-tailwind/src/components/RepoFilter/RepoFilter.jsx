@@ -1,22 +1,49 @@
-import { mergeProps, Show } from 'solid-js';
+import { createEffect, createSignal, mergeProps, Show } from 'solid-js';
 import { RepoBookIcon } from '../Icons';
-import { FILTER_TYPE_OPTIONS, SORT_OPTIONS } from './data';
+import {
+  defaultFilterType,
+  defaultLanguage,
+  FILTER_TYPE_OPTIONS,
+  SORT_OPTIONS,
+} from './data';
 import FilterDropdown from './FilterDropdown';
 import FilterText from './FilterText';
-import { language, setLanguage, filterType, setFilterType, setSortBy, sortBy } from './RepoFilter.store';
+import {
+  language,
+  setLanguage,
+  filterType,
+  setFilterType,
+  setSortBy,
+  sortBy,
+  search,
+} from './RepoFilter.store';
 import SearchInput from './SearchInput';
 
 const RepoFilter = (props) => {
   const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
   const sortOptions = Object.values(SORT_OPTIONS);
   const languageOptions = ['All', 'HTML', 'CSS', 'PHP'];
+  const [isOnlySorted, setIsOnlySorted] = createSignal(true);
 
-  const merged = mergeProps({ repoBtnText: 'New' }, props);
+  const merged = mergeProps(
+    { repoBtnText: 'New', languages: languageOptions, filteredRepoCount: 0 },
+    props
+  );
 
   const selectLanguage = (value) => setLanguage(value);
   const selectType = (value) => setFilterType(value);
   const selectSort = (value) => setSortBy(value);
-  const isOnlySorted = true;
+
+  createEffect(() => {
+    setIsOnlySorted(
+      sortBy() &&
+        !(
+          language() !== defaultLanguage ||
+          filterType() !== defaultFilterType ||
+          search()
+        )
+    );
+  });
 
   return (
     <>
@@ -35,7 +62,7 @@ const RepoFilter = (props) => {
             <FilterDropdown
               name="Language"
               selected={language()}
-              items={languageOptions}
+              items={merged.languages}
               selectOption={selectLanguage}
             />
             <FilterDropdown
@@ -56,8 +83,8 @@ const RepoFilter = (props) => {
           </a>
         </div>
       </div>
-      <Show when={!isOnlySorted}>
-        <FilterText username="hdjerry" />
+      <Show when={!isOnlySorted()}>
+        <FilterText filteredRepoCount={merged.filteredRepoCount} />
       </Show>
     </>
   );
