@@ -16,6 +16,7 @@ const FilterDropdown = (props) => {
 
   return (
     <div
+      data-testid="filter-dropdown"
       class="relative inline-block text-left"
       use:clickOutside={() => setShowOptions(false)}
     >
@@ -23,6 +24,7 @@ const FilterDropdown = (props) => {
         <button
           onClick={toggleOption}
           type="button"
+          data-testid="filter-dropdown-button"
           class="inline-flex w-full justify-center items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
           id="menu-button"
           aria-expanded="true"
