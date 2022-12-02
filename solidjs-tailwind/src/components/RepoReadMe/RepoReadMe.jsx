@@ -4,7 +4,7 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import { useRepo } from '../../contexts/RepoContext';
 import { Empty } from './Empty';
-import { TOCIcon } from '../icons';
+import { TOCIcon } from '../Icons';
 
 import styles from './RepoReadMe.module.css';
 

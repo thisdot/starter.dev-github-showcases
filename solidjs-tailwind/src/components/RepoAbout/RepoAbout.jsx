@@ -1,4 +1,4 @@
-import { BookOpenIcon } from '../icons';
+import { BookOpenIcon } from '../Icons';
 import { Description } from './Description';
 import { HomepageUrl } from './HomePageUrl';
 import { Topics } from './Topics';
