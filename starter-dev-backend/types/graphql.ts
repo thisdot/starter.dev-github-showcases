@@ -14,11 +14,13 @@ export type Scalars = {
   Float: number;
 };
 
+/** A Owner object used in Repo */
 export type Owner = {
   __typename?: 'Owner';
   login?: Maybe<Scalars['String']>;
 };
 
+/** GitHub queries */
 export type Query = {
   __typename?: 'Query';
   /** Simple hello world query that accepts a greeting */
@@ -29,25 +31,26 @@ export type Query = {
 };
 
 
+/** GitHub queries */
 export type QueryHelloArgs = {
   greeting: Scalars['String'];
 };
 
 
+/** GitHub queries */
 export type QueryRepoArgs = {
-  owner?: InputMaybe<Scalars['String']>;
-  repoName?: InputMaybe<Scalars['String']>;
+  owner: Scalars['String'];
+  repoName: Scalars['String'];
 };
 
 
+/** GitHub queries */
 export type QueryReposArgs = {
-  username?: InputMaybe<Scalars['String']>;
+  perPage?: InputMaybe<Scalars['String']>;
+  username: Scalars['String'];
 };
 
-/**
- * WIP
- * https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
- */
+/** A Repo object */
 export type Repo = {
   __typename?: 'Repo';
   description?: Maybe<Scalars['String']>;
@@ -63,6 +66,7 @@ export type Repo = {
   updated_at?: Maybe<Scalars['String']>;
 };
 
+/** A User object */
 export type User = {
   __typename?: 'User';
   bio?: Maybe<Scalars['String']>;
@@ -175,8 +179,8 @@ export type OwnerResolvers<ContextType = any, ParentType extends ResolversParent
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   hello?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<QueryHelloArgs, 'greeting'>>;
   owner?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  repo?: Resolver<Maybe<ResolversTypes['Repo']>, ParentType, ContextType, Partial<QueryRepoArgs>>;
-  repos?: Resolver<Maybe<Array<Maybe<ResolversTypes['Repo']>>>, ParentType, ContextType, Partial<QueryReposArgs>>;
+  repo?: Resolver<Maybe<ResolversTypes['Repo']>, ParentType, ContextType, RequireFields<QueryRepoArgs, 'owner' | 'repoName'>>;
+  repos?: Resolver<Maybe<Array<Maybe<ResolversTypes['Repo']>>>, ParentType, ContextType, RequireFields<QueryReposArgs, 'username'>>;
 };
 
 export type RepoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Repo'] = ResolversParentTypes['Repo']> = {

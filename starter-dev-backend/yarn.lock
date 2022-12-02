@@ -72,6 +72,14 @@
     "@apollo/utils.keyvaluecache" "^2.0.1"
     "@apollo/utils.logger" "^2.0.0"
 
+"@apollo/server-plugin-response-cache@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@apollo/server-plugin-response-cache/-/server-plugin-response-cache-4.0.3.tgz#5f76ef515dfe8ceb46cc27559bc0f126c66c96ef"
+  integrity sha512-oAHq0hFC6KNkkyekKI5hhrMAnIWC8+27KuPZoDUNxRn+jfaEpkcBI5J+gJEDXrsbg/isk+Tzj7CDjXVTq6sYBw==
+  dependencies:
+    "@apollo/utils.createhash" "^2.0.0"
+    "@apollo/utils.keyvaluecache" "^2.0.1"
+
 "@apollo/server@^4.2.2":
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/@apollo/server/-/server-4.2.2.tgz#5fe966dcb6298479a63e718afa5cfef2404f6a37"

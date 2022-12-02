@@ -44,8 +44,8 @@ export const githubTypeDefs = gql`
   GitHub queries
   """
   type Query {
-    repos(username: String): [Repo]
-    repo(owner: String, repoName: String): Repo
+    repos(username: String!, perPage: String): [Repo]
+    repo(owner: String!, repoName: String!): Repo
     owner: User
   }
 `;
