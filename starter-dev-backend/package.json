@@ -20,7 +20,6 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
-    "dataloader": "^2.1.0",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
     "graphql": "^16.6.0",
