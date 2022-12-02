@@ -14,6 +14,14 @@
       Sign in with GitHub</q-btn
     >
   </div>
+  <div class="fixed-bottom flex justify-center q-pb-md text-white">
+    <a target="_blank" href="https://www.netlify.com">
+      <img
+        src="https://www.netlify.com/v3/img/components/netlify-light.svg"
+        alt="Deploys by Netlify"
+      />
+    </a>
+  </div>
 </template>
 
 <script lang="ts">

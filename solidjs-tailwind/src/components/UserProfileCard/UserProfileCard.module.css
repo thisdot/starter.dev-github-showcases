@@ -1,0 +1,45 @@
+@tailwind utilities;
+
+.avatar {
+  @apply rounded-full shadow z-30;
+}
+
+.name {
+  @apply text-2xl text-gray-800 font-bold leading-tight;
+}
+
+.username {
+  @apply text-xl text-gray-500 font-light;
+}
+
+.bio {
+  @apply text-gray-800 mt-4 mb-3;
+}
+
+.icon {
+  @apply w-4 h-4 mb-0.5 mr-1 inline-block;
+}
+
+.count {
+  @apply font-medium text-gray-900;
+}
+
+.socials {
+  @apply text-sm text-gray-600 my-4;
+}
+
+.fields {
+  @apply text-sm text-gray-800 space-y-1;
+}
+
+.link {
+  @apply hover:text-blue-600 hover:underline;
+}
+
+.buttonContainer {
+  @apply flex flex-col w-4/5 bg-gray-100 mb-3 items-center text-gray-600 rounded-md border-solid border-slate-500 border hover:bg-gray-200;
+}
+
+.button {
+  @apply border-none text-black py-0.5;
+}
