@@ -6,12 +6,14 @@ export default {
   title: 'Components/Repo Card',
   component: RepoCard,
   argTypes: {
-    name: {},
-    description: {},
-    primaryLanguage: {},
+    name: '',
     owner: {},
-    isProfilePage: {},
-    stargazerCount: {},
+    isProfilePage: '',
+    stargazerCount: '',
+    visibility: '',
+    primaryLanguage: {},
+    description: '',
+    updatedAt: '',
   },
 };
 

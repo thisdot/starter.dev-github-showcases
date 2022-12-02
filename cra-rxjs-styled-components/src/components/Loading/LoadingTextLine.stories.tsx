@@ -3,8 +3,8 @@ import React from 'react';
 import LoadingTextLine from './LoadingTextLine';
 
 export default {
-  component: LoadingTextLine,
-  title: 'Loading/LoadingTextLine',
+	component: LoadingTextLine,
+	title: 'Loading/LoadingTextLine',
 } as Meta;
 
 const Template: Story = () => <LoadingTextLine />;

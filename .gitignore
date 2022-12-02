@@ -18,3 +18,9 @@
 # System Files
 .DS_Store
 node_modules
+
+# Local Netlify folder
+.netlify
+
+# Codegen
+graphql.schema.json
