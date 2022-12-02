@@ -16,6 +16,7 @@ const FilterDropdown = (props) => {
 
   return (
     <div
+      data-testid="filter-dropdown"
       class={styles.dropDownContainer}
       use:clickOutside={() => setShowOptions(false)}
     >
@@ -23,6 +24,7 @@ const FilterDropdown = (props) => {
         <button
           onClick={toggleOption}
           type="button"
+          data-testid="filter-dropdown-button"
           class={styles.dropDownButton}
           id="menu-button"
           aria-expanded="true"

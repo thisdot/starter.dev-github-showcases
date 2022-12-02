@@ -27,7 +27,7 @@ const RepoCard = (props) => {
     }`;
 
   return (
-    <div class={styles.container}>
+    <div data-testid="repo-item" class={styles.container}>
       <div class={styles.grid}>
         <h3 class="mb-4">
           <Link href={repoNameWithOwnerLink()}>

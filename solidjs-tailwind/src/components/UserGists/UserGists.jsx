@@ -3,14 +3,14 @@ import { For } from 'solid-js';
 import Container from './Container';
 import styles from './UserGists.module.css';
 
-const UserGists = (props) => {
+const UserGists = (props) => {  
   return (
     <Container>
       <div class="mt-3">
         {props.gists.length > 0 ? (
           <For each={props.gists}>
             {(gist) => (
-              <div class="my-1">
+              <div class="my-1" data-testid='gist-item'>
                 <Link href={gist.url} class={styles.link} target="_blank">
                   {gist.name}
                 </Link>
