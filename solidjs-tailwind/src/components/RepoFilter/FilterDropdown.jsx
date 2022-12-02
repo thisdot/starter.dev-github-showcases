@@ -1,23 +1,23 @@
-import {
-  createSignal,
-  Show,
-  splitProps,
-  For,
-  Switch,
-  Match,
-} from 'solid-js';
+import { createSignal, Show, splitProps, For, Switch, Match } from 'solid-js';
 import { CaretIcon, CloseIcon, CorrectIcon } from '../Icons';
 import { clickOutside } from '../../utils/onclick-outside';
+import styles from './RepoFilter.module.css';
 
 const FilterDropdown = (props) => {
-  const [local] = splitProps(props, ['name', 'title', 'items', 'selected', 'selectOption']);
+  const [local] = splitProps(props, [
+    'name',
+    'title',
+    'items',
+    'selected',
+    'selectOption',
+  ]);
   const [showOptions, setShowOptions] = createSignal(false);
   const toggleOption = () => setShowOptions(!showOptions());
 
   return (
     <div
       data-testid="filter-dropdown"
-      class="relative inline-block text-left"
+      class={styles.dropDownContainer}
       use:clickOutside={() => setShowOptions(false)}
     >
       <div>
@@ -25,7 +25,7 @@ const FilterDropdown = (props) => {
           onClick={toggleOption}
           type="button"
           data-testid="filter-dropdown-button"
-          class="inline-flex w-full justify-center items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none"
+          class={styles.dropDownButton}
           id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"
@@ -36,13 +36,13 @@ const FilterDropdown = (props) => {
       </div>
       <Show when={showOptions()}>
         <div
-          class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          class={styles.menu}
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
           tabindex="-1"
         >
-          <div class="flex justify-between items-center text-sm text-gray-600 px-3 py-1">
+          <div class={styles.close}>
             <strong class="capitalize text-xs">Select {local.name}</strong>
             <button onClick={() => setShowOptions(false)}>
               <CloseIcon />
@@ -52,15 +52,11 @@ const FilterDropdown = (props) => {
             {(item, index) => (
               <div
                 data-index={index()}
-                class="py-1 transition delay-[50ms] hover:bg-gray-300 cursor-pointer"
+                class={styles.menuItemContainer}
                 role="none"
                 onClick={() => local.selectOption(item)}
               >
-                <span
-                  class="text-gray-700 px-4 py-2 text-sm flex items-center gap-3"
-                  role="menuitem"
-                  tabindex="-1"
-                >
+                <span class={styles.menuItem} role="menuitem" tabindex="-1">
                   <Switch fallback={<span class="mr-4" />}>
                     <Match when={item === local.selected}>
                       <CorrectIcon />

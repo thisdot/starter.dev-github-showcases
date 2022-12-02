@@ -1,5 +1,6 @@
 import { NavLink } from '@solidjs/router';
 import { For } from 'solid-js';
+import cn from 'classnames';
 import styles from './TabNavigation.module.css';
 
 const TabNavigation = (props) => {
@@ -31,6 +32,14 @@ const TabNavigation = (props) => {
                     : styles.tabInactive
                 } ${styles.tab}`}
               >
+                <item.Icon
+                  class={cn(
+                    isCurrentTab(item.path)
+                      ? styles.iconActive
+                      : styles.iconInactive,
+                    styles.icon
+                  )}
+                />
                 <span>{item.title}</span>
                 {typeof count === 'number' && (
                   <span class="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">
