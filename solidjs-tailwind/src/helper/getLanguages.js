@@ -1,4 +1,5 @@
 export function getLanguages(repos) {
+
   const initialValue = { all: 'All' };
 
   const languageMap = repos.reduce(
