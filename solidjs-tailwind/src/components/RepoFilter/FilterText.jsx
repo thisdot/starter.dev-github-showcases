@@ -3,6 +3,7 @@ import { Show, splitProps } from 'solid-js';
 import { CloseIcon } from '../Icons';
 import { defaultFilterType, defaultLanguage } from './data';
 import { filterType, language, search, sortBy } from './RepoFilter.store';
+import styles from './RepoFilter.module.css';
 
 const modifyFilterTypeText = (filterText = 'test') => {
   if (filterText.endsWith('s')) {
@@ -20,9 +21,9 @@ const FilterText = (props) => {
   const location = useLocation();
 
   return (
-    <div class="flex justify-between items-center border-b border-b-gray-300 pb-4">
+    <div class={styles.filterTextContainer}>
       <div class="flex-grow">
-        <small class="text-sm lowercase flex items-baseline gap-1">
+        <small class={styles.filterText}>
           <strong>{local.filteredRepoCount}</strong>
           results for
           <Show when={filterType() && filterType() !== defaultFilterType}>
@@ -47,11 +48,8 @@ const FilterText = (props) => {
         </small>
       </div>
       <div>
-        <a
-          href={location.pathname}
-          class="flex items-center clear-filter group hover:text-blue-600 transition-colors delay-[60ms] no-underline gap-2 text-sm"
-        >
-          <span class="text-white rounded-md bg-gray-500 group-hover:bg-blue-600 transition-colors delay-[60ms] w-4 h-4">
+        <a href={location.pathname} class={styles.clearFilter}>
+          <span class={styles.closeIconSpan}>
             <CloseIcon />
           </span>
           Clear filter
