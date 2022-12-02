@@ -13,7 +13,7 @@ import getUserRepos from '../services/user-repos';
 const Profile = () => {
   const params = useParams();
   const [profile, setProfile] = createSignal({});
-  const [userRepo, setRepos] = createSignal({});
+  const [userReposInfo, setReposInfo] = createSignal({});
 
   const [resp] = createResource(() =>
     userProfile({
@@ -36,14 +36,14 @@ const Profile = () => {
 
   createEffect(() => {
     if (repos() && !repos.loading) {
-      setRepos(repos());
+      setReposInfo(repos());
     }
   });
 
   return (
     <Switch fallback={<div>Loading...</div>}>
       <Match when={!resp.loading && !repos.loading}>
-        <ProfilePage user={profile()} repos={userRepo()} />
+        <ProfilePage user={profile()} reposInfo={userReposInfo()} />
       </Match>
     </Switch>
   );

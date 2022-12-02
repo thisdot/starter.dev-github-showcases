@@ -1,14 +1,11 @@
 export function getLanguages(repos) {
-  const initialValue = { all: 'All' };
+  let languages = new Set(['All']);
 
-  const languageMap = repos.reduce(
-    (acc, repo) =>
-      repo.primaryLanguage ? { ...acc, [repo.primaryLanguage.name.toLowerCase()]: repo.primaryLanguage.name } : acc,
-    initialValue
-  );
+  repos.forEach((repo) => {
+    if (repo.primaryLanguage && repo.primaryLanguage.name) {
+      languages.add(repo.primaryLanguage.name);
+    }
+  });
 
-  return Object.entries(languageMap).map(([key, value]) => ({
-    value: key,
-    label: value,
-  }));
+  return [...languages];
 }

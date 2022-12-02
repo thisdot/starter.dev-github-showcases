@@ -1,15 +1,21 @@
-import { For } from 'solid-js';
+import { For, splitProps } from 'solid-js';
+import { RepoCard } from '../RepoCard';
 import { RepoFilter } from '../RepoFilter';
-import RepoCard from '../RepoCard/RepoCard';
 
 const UserRepos = (props) => {
+  const [local] = splitProps(props, ['loading', 'repos', 'languages']);
   return (
     <>
-      <RepoFilter />
-      {props.loading ? (
+      <RepoFilter
+        languages={local.languages}
+        filteredRepoCount={local.repos.length}
+      />
+      {local.loading ? (
         <div>Loading...</div>
       ) : (
-        <For each={props.repos}>{(props) => <RepoCard {...props} isProfilePage />}</For>
+        <For each={local.repos}>
+          {(props) => <RepoCard {...props} isProfilePage />}
+        </For>
       )}
     </>
   );
