@@ -4,7 +4,7 @@ import { UserDropdown } from '../UserDropdown';
 import { SIGN_IN_BASE_URL } from '../../helper/constants';
 
 import { GithubLogo } from './GithubLogo';
-import * as styles from './Header.classNames';
+import styles from './Header.module.css';
 
 const Header = () => {
   const { authStore } = useAuth();

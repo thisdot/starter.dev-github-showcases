@@ -1,7 +1,6 @@
 import { NavLink } from '@solidjs/router';
 import { For } from 'solid-js';
-
-import * as styles from './tab-navigation.classNames';
+import styles from './TabNavigation.module.css';
 
 const TabNavigation = (props) => {
   const isCurrentTab = (pathName) => {
