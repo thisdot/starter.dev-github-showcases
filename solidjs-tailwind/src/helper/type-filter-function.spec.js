@@ -1,10 +1,11 @@
-import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { repoDataFilteredByLanguage } from './language-filter-function';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { FILTER_TYPE_OPTIONS } from "../components/RepoFilter/data";
+import { sortedRepoData } from './sort-repo-function';
 
 const MOCK_REPOS = [
   {
     id: 'fakeID',
-    name: 'Repo Test',
+    name: 'Repo Test Java',
     description: null,
     stargazerCount: 0,
     forkCount: 0,
@@ -20,7 +21,7 @@ const MOCK_REPOS = [
   },
   {
     id: 'fakeID',
-    name: 'Repo Test',
+    name: 'Repo Test Typescript',
     description: null,
     stargazerCount: 0,
     forkCount: 0,
@@ -36,7 +37,7 @@ const MOCK_REPOS = [
   },
   {
     id: 'fakeID',
-    name: 'Repo Test',
+    name: 'Repo Test php',
     description: null,
     stargazerCount: 0,
     forkCount: 0,
@@ -52,20 +53,28 @@ const MOCK_REPOS = [
   },
 ];
 
-const MOCK_LANGUAGE = 'TypeScript';
+const MOCK_SORT_NAME = 'Repo Test Java';
 
-describe('languageFilter helper', () => {
-  let filteredRepos = [];
+describe('type-filter-function helper', () => {
   vi.mock('../components/RepoFilter/RepoFilter.store', () => ({
-    language: vi.fn(() => MOCK_LANGUAGE),
+    sortBy: vi
+      .fn()
+      .mockImplementationOnce(() => FILTER_TYPE_OPTIONS.forks)
+      .mockImplementationOnce(() => FILTER_TYPE_OPTIONS.archived)
+      .mockImplementationOnce(() => FILTER_TYPE_OPTIONS.default),
   }));
-
+  let filteredRepos = [];
   beforeEach(() => {
-    filteredRepos = repoDataFilteredByLanguage(MOCK_REPOS);
+    filteredRepos = sortedRepoData(MOCK_REPOS);
   });
 
-  test('should return a filtered value by language', () => {
-    expect(filteredRepos.length).toBe(1);
-    expect(filteredRepos[0].primaryLanguage.name).toBe(MOCK_LANGUAGE);
+  it('should return a list filtered by name', () => {
+    const firstItem = filteredRepos[0];
+    expect(firstItem.name).toBe(MOCK_SORT_NAME);
+  });
+
+  it('should return a list filtered by stars', () => {
+    const firstItem = filteredRepos[0];
+    expect(firstItem.name).toBe(MOCK_SORT_NAME);
   });
 });

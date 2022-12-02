@@ -52,21 +52,17 @@ const MOCK_REPOS = [
   },
 ];
 
-const INITIAL_VALUE = 'all';
+const INITIAL_VALUE = 'All';
 
 describe('getLanguages helper', () => {
-  let languages = [];
-
-  beforeEach(() => {
-    languages = getLanguages(MOCK_REPOS);
-  });
+  let languages = getLanguages(MOCK_REPOS);
 
   test('should return a unique list of languages', () => {
     expect(languages.length).toBe(4);
   });
 
   test('should return "All" in the first position', () => {
-    expect(languages[0].value).toBe(INITIAL_VALUE);
+    expect(languages[0]).toBe(INITIAL_VALUE);
   });
 
   test('should return at least one item', () => {
