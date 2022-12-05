@@ -1,57 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { SORT_OPTIONS } from '../components/RepoFilter/data';
 import { sortedRepoData } from './sort-repo-function';
-
-const MOCK_REPOS = [
-  {
-    id: 'fakeID',
-    name: 'Repo Test Java',
-    description: null,
-    stargazerCount: 0,
-    forkCount: 0,
-    isArchived: false,
-    isFork: false,
-    primaryLanguage: {
-      id: 'MDg6TGFuZ3VhZ2UxNTg=',
-      color: '#b07219',
-      name: 'Java',
-    },
-    isPrivate: false,
-    updatedAt: '2016-06-27T20:21:44Z',
-  },
-  {
-    id: 'fakeID',
-    name: 'Repo Test Typescript',
-    description: null,
-    stargazerCount: 0,
-    forkCount: 0,
-    isArchived: false,
-    isFork: false,
-    primaryLanguage: {
-      id: 'MDg6TGFuZ3VhZ2UxNTg=',
-      color: '#3178c6',
-      name: 'TypeScript',
-    },
-    isPrivate: false,
-    updatedAt: '2016-06-27T20:21:44Z',
-  },
-  {
-    id: 'fakeID',
-    name: 'Repo Test php',
-    description: null,
-    stargazerCount: 0,
-    forkCount: 0,
-    isArchived: false,
-    isFork: false,
-    primaryLanguage: {
-      id: 'MDg6TGFuZ3VhZ2UxNTg=',
-      color: '#4F5D95',
-      name: 'PHP',
-    },
-    isPrivate: false,
-    updatedAt: '2016-06-27T20:21:44Z',
-  },
-];
+import { MOCK_REPOS } from './fixtures/mocks';
 
 const MOCK_SORT_NAME = 'Repo Test Java';
 

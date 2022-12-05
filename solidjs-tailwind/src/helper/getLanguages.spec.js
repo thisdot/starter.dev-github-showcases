@@ -1,56 +1,6 @@
-import { beforeEach, describe, expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { getLanguages } from './getLanguages';
-
-const MOCK_REPOS = [
-  {
-    id: 'fakeID',
-    name: 'Repo Test',
-    description: null,
-    stargazerCount: 0,
-    forkCount: 0,
-    isArchived: false,
-    isFork: false,
-    primaryLanguage: {
-      id: 'MDg6TGFuZ3VhZ2UxNTg=',
-      color: '#b07219',
-      name: 'Java',
-    },
-    isPrivate: false,
-    updatedAt: '2016-06-27T20:21:44Z',
-  },
-  {
-    id: 'fakeID',
-    name: 'Repo Test',
-    description: null,
-    stargazerCount: 0,
-    forkCount: 0,
-    isArchived: false,
-    isFork: false,
-    primaryLanguage: {
-      id: 'MDg6TGFuZ3VhZ2UxNTg=',
-      color: '#3178c6',
-      name: 'TypeScript',
-    },
-    isPrivate: false,
-    updatedAt: '2016-06-27T20:21:44Z',
-  },
-  {
-    id: 'fakeID',
-    name: 'Repo Test',
-    description: null,
-    stargazerCount: 0,
-    forkCount: 0,
-    isArchived: false,
-    isFork: false,
-    primaryLanguage: {
-      id: 'MDg6TGFuZ3VhZ2UxNTg=',
-      color: '#4F5D95',
-      name: 'PHP',
-    },
-    isPrivate: false,
-    updatedAt: '2016-06-27T20:21:44Z',
-  },
-];
+import { MOCK_REPOS } from './fixtures/mocks';
 
 const INITIAL_VALUE = 'All';
 
