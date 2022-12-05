@@ -18,6 +18,7 @@ import {
   search,
 } from './RepoFilter.store';
 import SearchInput from './SearchInput';
+import styles from './RepoFilter.module.css';
 
 const RepoFilter = (props) => {
   const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
@@ -47,12 +48,12 @@ const RepoFilter = (props) => {
 
   return (
     <>
-      <div class="flex relative mb-4 space-x-4 border-b border-b-gray-300 pb-4">
-        <div class="flex space-x-4 flex-1">
+      <div class={styles.repoFilterContainer}>
+        <div class={styles.filterDropDownContainer}>
           <div class="flex-grow">
             <SearchInput />
           </div>
-          <div class="flex items-center space-x-1.5">
+          <div class={styles.filterDropdownList}>
             <FilterDropdown
               name="Type"
               items={typeOptions}
@@ -74,10 +75,7 @@ const RepoFilter = (props) => {
           </div>
         </div>
         <div>
-          <a
-            href="https://github.com/new"
-            class="flex items-center text-white gap-2 bg-green-600 rounded-md px-3 py-1.5 text-sm font-semibold"
-          >
+          <a href="https://github.com/new" class={styles.iconLink}>
             <RepoBookIcon />
             <span> {merged.repoBtnText} </span>
           </a>

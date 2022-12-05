@@ -1,0 +1,61 @@
+@tailwind utilities;
+
+.repoFilterContainer {
+  @apply flex relative mb-4 space-x-4 border-b border-b-gray-300 pb-4;
+}
+
+.filterDropDownContainer {
+  @apply flex space-x-4 flex-1;
+}
+
+.iconLink {
+  @apply flex items-center text-white gap-2 bg-green-600 rounded-md px-3 py-1.5 text-sm font-semibold;
+}
+
+.filterDropdownList {
+  @apply flex items-center space-x-1.5;
+}
+
+.dropDownContainer {
+  @apply relative inline-block text-left;
+}
+
+.dropDownButton {
+  @apply inline-flex w-full justify-center items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none;
+}
+
+.menu {
+  @apply absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
+}
+
+.close {
+  @apply flex justify-between items-center text-sm text-gray-600 px-3 py-1;
+}
+
+.menuItem {
+  @apply text-gray-700 px-4 py-2 text-sm flex items-center gap-3;
+}
+
+.menuItemContainer {
+  @apply py-1 transition delay-[50ms] hover:bg-gray-300 cursor-pointer;
+}
+
+.filterTextContainer {
+  @apply flex justify-between items-center border-b border-b-gray-300 pb-4;
+}
+
+.filterText {
+  @apply text-sm lowercase flex items-baseline gap-1;
+}
+
+.clearFilter {
+  @apply flex items-center hover:text-blue-600 transition-colors delay-[60ms] no-underline gap-2 text-sm;
+}
+
+.closeIconSpan {
+  @apply text-white rounded-md bg-gray-500 group-hover:bg-blue-600 transition-colors delay-[60ms] w-4 h-4;
+}
+
+.searchInput {
+  @apply border p-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md outline-none;
+}

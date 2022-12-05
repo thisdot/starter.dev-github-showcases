@@ -1,5 +1,5 @@
 import { Link } from '@solidjs/router';
-import { LinkIcon } from '../icons';
+import { LinkIcon } from '../Icons';
 import styles from './RepoAbout.module.css';
 
 export const HomepageUrl = (props) => {
