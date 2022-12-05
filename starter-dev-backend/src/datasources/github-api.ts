@@ -19,6 +19,23 @@ export class GitHubAPI extends RESTDataSource {
     request.headers['authorization'] = this.context.token;
   }
 
+  async getOrgsMemberCount(login: string) {
+    return await this.get(`/orgs/${login}/members?per_page=100}`);
+  }
+
+  async getOrgRepos(login: string) {
+    return await this.get(`/orgs/${login}`);
+  }
+
+  // https://docs.github.com/en/rest/orgs/orgs?apiVersion=2022-11-28#list-organizations-for-a-user
+  async getOrgs(login: string) {
+    return await this.get(`/users/${login}/orgs`);
+  }
+
+  async getOwnerStarCount(login: string) {
+    return await this.get(`/users/${login}/starred`);
+  }
+
   // https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#about-the-users-api
   async getOwner() {
     return await this.get('/user');

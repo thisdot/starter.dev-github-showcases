@@ -11,7 +11,7 @@ export const githubTypeDefs = gql`
     id: ID
     language: String
     name: String
-    owner: Owner
+    owner: User
     private: Boolean
     stargazers_count: Int
     title: String
@@ -21,14 +21,14 @@ export const githubTypeDefs = gql`
   """
   A Owner object used in Repo
   """
-  type Owner {
+  type User {
     login: String
   }
 
   """
   A User object
   """
-  type User {
+  type Owner {
     bio: String
     company: String
     email: String
@@ -37,15 +37,28 @@ export const githubTypeDefs = gql`
     location: String
     login: String
     name: String
+    orgs: [Orgs]
+    starred_url: String
     twitter_username: String
+  }
+
+  """
+  A Organization object used in Owner
+  """
+  type Orgs {
+    avatar_url: String
+    login: String
+    name: String
+    members_url: String
+    repos_url: String
   }
 
   """
   GitHub queries
   """
   type Query {
-    repos(username: String!, perPage: String): [Repo]
+    owner: Owner
     repo(owner: String!, repoName: String!): Repo
-    owner: User
+    repos(username: String!, perPage: String): [Repo]
   }
 `;
