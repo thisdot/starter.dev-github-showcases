@@ -4,6 +4,6 @@ export * from './user';
 export * from './repository';
 export * from './repository-contents';
 export * from './branches';
-export * from './data-contract';
+export * from './data-contract/github';
 export * from './issues';
 export * from './issue-milestone';

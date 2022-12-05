@@ -1,0 +1,60 @@
+import type { GithubSimpleUser } from './common';
+
+export interface GithubRepository {
+  id: number;
+  node_id: string;
+  name: string;
+  full_name: string;
+  owner: GithubSimpleUser;
+  private: boolean;
+  description: string;
+  fork: boolean;
+  url: string;
+  homepage: string;
+  language: null;
+  forks_count: number;
+  forks: number;
+  stargazers_count: number;
+  watchers_count: number;
+  watchers: number;
+  size: number;
+  default_branch: string;
+  open_issues_count: number;
+  open_issues: number;
+  is_template: boolean;
+  topics: string[];
+  has_issues: boolean;
+  has_projects: boolean;
+  has_wiki: boolean;
+  has_pages: boolean;
+  has_downloads: boolean;
+  has_discussions: boolean;
+  archived: boolean;
+  disabled: boolean;
+  visibility: string;
+  pushed_at: string;
+  created_at: string;
+  updated_at: string;
+  permissions: {
+    pull: boolean;
+    push: boolean;
+    admin: boolean;
+  };
+  allow_rebase_merge: boolean;
+  temp_clone_token: string;
+  allow_squash_merge: boolean;
+  allow_auto_merge: boolean;
+  delete_branch_on_merge: boolean;
+  allow_merge_commit: boolean;
+  subscribers_count: number;
+  network_count: number;
+  license: {
+    key: string;
+    name: string;
+    spdx_id: string;
+    url: string;
+    node_id: string;
+  };
+  organization?: GithubSimpleUser | null;
+  parent?: GithubRepository;
+}
