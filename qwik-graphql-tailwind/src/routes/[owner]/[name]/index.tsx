@@ -7,9 +7,7 @@ import { parseTopics } from './parseTopics';
 import { RepoTree } from '~/components/repo-tree';
 import { RepoReadMe } from '~/components/repo-read-me';
 import { RepoAboutWidget } from '~/components/repo-about';
-import { ISSUES_QUERY } from '~/utils/queries/issues-query';
 import { BranchNavigation } from '~/components/branch-navigation';
-import { PULL_REQUEST_QUERY } from '~/utils/queries/pull-request';
 import { RepoHeader } from '~/components/repo-header';
 
 export interface SharedState {
@@ -46,12 +44,6 @@ export interface SharedState {
     text?: any;
     isLoading: boolean;
   };
-}
-
-interface IssuesPullRequestsQueryParams {
-  owner: string;
-  name: string;
-  first: number;
 }
 
 export const RepoContext = createContext<SharedState>('repo-context');
@@ -110,7 +102,7 @@ export default component$(() => {
   useContextProvider(RepoContext, store);
 
   return (
-    <div class="bg-white h-screen">
+    <div className="bg-white h-screen">
       <RepoHeader
         name={_name}
         owner={_owner}
@@ -178,52 +170,6 @@ export async function fetchRepoInfo(
       authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
     variables,
-  });
-
-  return await resp.json();
-}
-
-export async function fetchIssues(
-  { owner, name, first }: IssuesPullRequestsQueryParams,
-  abortController?: AbortController
-): Promise<any> {
-  const { executeQuery$ } = useQuery(ISSUES_QUERY);
-
-  const resp = await executeQuery$({
-    signal: abortController?.signal,
-    url: GITHUB_GRAPHQL,
-    variables: {
-      owner,
-      name,
-      first,
-    },
-    headersOpt: {
-      Accept: 'application/vnd.github+json',
-      authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
-  });
-
-  return await resp.json();
-}
-
-export async function fetchPullRequests(
-  { owner, name, first }: IssuesPullRequestsQueryParams,
-  abortController?: AbortController
-): Promise<any> {
-  const { executeQuery$ } = useQuery(PULL_REQUEST_QUERY);
-
-  const resp = await executeQuery$({
-    signal: abortController?.signal,
-    url: GITHUB_GRAPHQL,
-    variables: {
-      owner,
-      name,
-      first,
-    },
-    headersOpt: {
-      Accept: 'application/vnd.github+json',
-      authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
   });
 
   return await resp.json();
