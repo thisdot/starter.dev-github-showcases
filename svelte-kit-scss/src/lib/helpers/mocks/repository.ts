@@ -1,18 +1,12 @@
 import type { GithubRepository } from '$lib/interfaces';
+import { MOCK_SIMPLE_USER_TYPE_USER, MOCK_SIMPLE_USER_TYPE_ORG } from './common/simple-user';
 
 export const MOCK_REPOSITORY_API_RESPONSE: GithubRepository = {
   id: 1296269,
   node_id: 'MDEwOlJlcG9zaXRvcnkxMjk2MjY5',
   name: 'Hello-World',
   full_name: 'octocat/Hello-World',
-  owner: {
-    login: 'octocat',
-    id: 1,
-    avatar_url: 'https://github.com/images/error/octocat_happy.gif',
-    url: 'https://api.github.com/users/octocat',
-    type: 'User',
-    site_admin: false,
-  },
+  owner: MOCK_SIMPLE_USER_TYPE_USER,
   private: false,
   description: 'This your first repo!',
   fork: false,
@@ -62,12 +56,5 @@ export const MOCK_REPOSITORY_API_RESPONSE: GithubRepository = {
     url: 'https://api.github.com/licenses/mit',
     node_id: 'MDc6TGljZW5zZW1pdA==',
   },
-  organization: {
-    login: 'octocat',
-    id: 1,
-    avatar_url: 'https://github.com/images/error/octocat_happy.gif',
-    url: 'https://api.github.com/users/octocat',
-    type: 'Organization',
-    site_admin: false,
-  },
+  organization: MOCK_SIMPLE_USER_TYPE_ORG,
 };
