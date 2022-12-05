@@ -26,8 +26,8 @@ describe('RepoHeader', () => {
     });
 
     const watchCount = screen.getAllByText(repo.watchCount);
-    const forkCount = screen.getByText(repo.forkCount);
-    const starCount = screen.getByText(repo.starCount);
+    const forkCount = screen.getAllByText(repo.forkCount);
+    const starCount = screen.getAllByText(repo.starCount);
 
     expect(watchCount).toBeTruthy();
     expect(forkCount).toBeTruthy();
