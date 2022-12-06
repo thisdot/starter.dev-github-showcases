@@ -1,8 +1,8 @@
 import { Router } from '@solidjs/router';
-import RepoNavigation from './RepoNavigation';
+import RepoNavigation from './BranchNavigation';
 
 export default {
-  title: 'Components/Repo Navigation',
+  title: 'Components/Branch Navigation',
   component: RepoNavigation,
   argTypes: {
     name: {},
