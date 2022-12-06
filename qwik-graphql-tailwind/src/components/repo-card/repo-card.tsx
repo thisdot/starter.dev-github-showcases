@@ -1,5 +1,4 @@
 import { component$ } from '@builder.io/qwik';
-import { SPECIAL_PERIOD_CHAR } from '~/utils/constants';
 import { Repo, TopRepo } from '~/utils/types';
 import { PrivacyBadge } from '../privacy-badge/privacy-badge';
 import { RepoMeta } from '../repo-meta/repo-meta';
@@ -22,7 +21,7 @@ export const RepoCard = component$(({ repo, styles }: RepoCardProps) => {
   return (
     <div key={id} className={styles.item}>
       <h3 className="mb-2">
-        <a href={`/${owner}/${name.replace(/\./g, SPECIAL_PERIOD_CHAR)}`} className={styles.headingLink}>
+        <a href={`/${owner}/${name}`} className={styles.headingLink}>
           {name}
         </a>
         <PrivacyBadge isPrivate={isPrivate} className="relative bottom-0.5" />

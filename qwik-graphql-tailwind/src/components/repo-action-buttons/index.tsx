@@ -1,13 +1,10 @@
-import { component$ } from '@builder.io/qwik';
+import { component$, useContext } from '@builder.io/qwik';
+import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
 import { GitBranchIcon, StarIcon, EyeIcon } from '../icons';
 
-interface RepoActionButtonsProps {
-  stargazerCount: number | string;
-  forkCount: number | string;
-  watcherCount: number | string;
-}
+export const RepoActionButtons = component$(() => {
+  const store = useContext(RepoContext);
 
-export const RepoActionButtons = component$(({ watcherCount, stargazerCount, forkCount }: RepoActionButtonsProps) => {
   return (
     <div className="flex space-x-4 gap-0.5">
       <span className="inline-flex shadow-sm rounded-md">
@@ -16,7 +13,7 @@ export const RepoActionButtons = component$(({ watcherCount, stargazerCount, for
           Watch
         </button>
         <button className="-ml-px relative inline-flex items-center px-3 py-1.5 rounded-r-md border border-gray-300 bg-white text-xs font-semibold text-gray-700 hover:text-blue-600">
-          {watcherCount}
+          {store.info.data?.watcherCount || 0}
         </button>
       </span>
       <span className="inline-flex shadow-sm rounded-md">
@@ -25,7 +22,7 @@ export const RepoActionButtons = component$(({ watcherCount, stargazerCount, for
           Star
         </button>
         <button className="-ml-px relative inline-flex items-center px-3 py-1.5 rounded-r-md border border-gray-300 bg-white text-xs font-semibold text-gray-700 hover:text-blue-600">
-          {stargazerCount}
+          {store.info.data?.stargazerCount || 0}
         </button>
       </span>
       <span className="inline-flex shadow-sm rounded-md">
@@ -34,7 +31,7 @@ export const RepoActionButtons = component$(({ watcherCount, stargazerCount, for
           Fork
         </button>
         <button className="-ml-px relative inline-flex items-center px-3 py-1.5 rounded-r-md border border-gray-300 bg-white text-xs font-semibold text-gray-700 hover:text-blue-600">
-          {forkCount}
+          {store.info.data?.forkCount || 0}
         </button>
       </span>
     </div>

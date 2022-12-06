@@ -1,22 +1,19 @@
-import { component$, useClientEffect$, useContextProvider, useStore, createContext } from '@builder.io/qwik';
+import { Slot, useStore, component$, createContext, useClientEffect$, useContextProvider } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
 import { useQuery } from '~/utils/useQuery';
-import { GITHUB_GRAPHQL, SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX } from '~/utils/constants';
+import { GITHUB_GRAPHQL } from '~/utils/constants';
 import { REPO_INFO_QUERY } from '~/utils/queries/repo-info';
 import { parseTopics } from './parseTopics';
-import { RepoTree } from '~/components/repo-tree';
-import { RepoReadMe } from '~/components/repo-read-me';
-import { RepoAboutWidget } from '~/components/repo-about';
-import { ISSUES_QUERY } from '~/utils/queries/issues-query';
-import { BranchNavigation } from '~/components/branch-navigation';
-import { PULL_REQUEST_QUERY } from '~/utils/queries/pull-request';
-import { RepoHeader } from '~/components/repo-header';
+import { REPO_README_QUERY } from '~/utils/queries/repo-read-me';
+import { REPO_TREE_QUERY } from '~/utils/queries/repo-tree';
+import { RepoLayout } from '~/components/repo-layout';
 
 export interface SharedState {
   name: string;
   owner: string;
   branch: string;
   path?: string;
+  isLoading: boolean;
   info: {
     error?: string;
     data?: {
@@ -31,7 +28,6 @@ export interface SharedState {
       topics: string[];
       isOrg: boolean;
     };
-    isLoading: boolean;
   };
   tree: {
     error?: string;
@@ -39,19 +35,11 @@ export interface SharedState {
       branches: { name: string }[];
       tree: { name: string; type: string; path: string }[];
     };
-    isLoading: boolean;
   };
   readme: {
     error?: string;
     text?: any;
-    isLoading: boolean;
   };
-}
-
-interface IssuesPullRequestsQueryParams {
-  owner: string;
-  name: string;
-  first: number;
 }
 
 export const RepoContext = createContext<SharedState>('repo-context');
@@ -59,40 +47,32 @@ export const RepoContext = createContext<SharedState>('repo-context');
 export default component$(() => {
   const store = useStore<SharedState>(
     {
-      branch: 'HEAD',
-      owner: '',
+      info: {},
       name: '',
-      info: {
-        isLoading: true,
-      },
-      tree: {
-        isLoading: true,
-      },
-      readme: {
-        isLoading: true,
-      },
+      owner: '',
+      tree: {},
+      readme: {},
+      branch: 'HEAD',
+      isLoading: true,
     },
     { recursive: true }
   );
 
   const { path, name, owner } = useLocation().params;
 
-  const _owner = owner?.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
-  const _name = name?.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.');
-  const _path = path?.replace(SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX, '.') || '';
-
   const isOwnerAndNameValid = typeof owner === 'string' && typeof name === 'string';
 
   useClientEffect$(async () => {
     const abortController = new AbortController();
-    store.owner = _owner;
-    store.name = _name;
-    store.path = _path;
+    store.owner = owner;
+    store.name = name;
+    store.path = path || '';
+    store.isLoading = true;
     const response = await fetchRepoInfo(
       isOwnerAndNameValid
         ? {
-            owner: _owner,
-            name: _name,
+            owner,
+            name,
           }
         : {
             owner: '',
@@ -103,35 +83,43 @@ export default component$(() => {
     updateRepoInfo(store, response);
   });
 
-  if (store.info.isLoading && store.tree.isLoading) {
-    return <div>Loading...</div>;
-  }
+  useClientEffect$(async () => {
+    store.isLoading = true;
+    const abortController = new AbortController();
+    const response = await fetchRepoReadMe(
+      {
+        owner: store.owner,
+        name: store.name,
+        expression: store.path ? `HEAD:${store.path}/README.md` : 'HEAD:README.md',
+      },
+      abortController
+    );
+
+    updateRepoReadMe(store, response);
+  });
+
+  useClientEffect$(async ({ track }) => {
+    store.isLoading = true;
+    const path = track(() => store.path);
+    const abortController = new AbortController();
+    const response = await fetchRepoTree(
+      {
+        owner: store.owner,
+        name: store.name,
+        expression: `${store.branch}:${path}`,
+      },
+      abortController
+    );
+
+    updateRepoTree(store, response);
+  });
 
   useContextProvider(RepoContext, store);
-
   return (
-    <div class="bg-white h-screen">
-      <RepoHeader
-        name={_name}
-        owner={_owner}
-        forkCount={store.info.data?.forkCount || 0}
-        watcherCount={store.info.data?.watcherCount || 0}
-        stargazerCount={store.info.data?.stargazerCount || 0}
-        issuesCount={store.info.data?.openIssueCount || 0}
-        prCount={store.info.data?.openPullRequestCount || 0}
-      />
-      <div className="max-w-screen-2xl mx-auto md:py-8 px-4 bg-white">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 md:col-span-7 xl:col-span-9">
-            <BranchNavigation name={_name} owner={_owner} path={_path || ''} branch={store.branch} />
-            <RepoTree />
-            <RepoReadMe />
-          </div>
-          <div className="col-span-12 md:col-span-5 xl:col-span-3">
-            <RepoAboutWidget />
-          </div>
-        </div>
-      </div>
+    <div className="bg-white h-screen">
+      <RepoLayout>
+        <Slot />
+      </RepoLayout>
     </div>
   );
 });
@@ -158,7 +146,6 @@ export function updateRepoInfo(store: SharedState, response: any) {
     store.info.data = undefined;
     store.info.error = 'No repository found';
   }
-  store.info.isLoading = false;
 }
 
 export async function fetchRepoInfo(
@@ -183,47 +170,75 @@ export async function fetchRepoInfo(
   return await resp.json();
 }
 
-export async function fetchIssues(
-  { owner, name, first }: IssuesPullRequestsQueryParams,
+export function updateRepoReadMe(store: SharedState, response: any) {
+  const {
+    data: { repository },
+  } = response;
+  if (repository) {
+    const readme = repository.readme as Blob;
+    store.readme.text = readme?.text ?? undefined;
+  } else {
+    store.readme.text = undefined;
+  }
+}
+
+export async function fetchRepoReadMe(
+  variables: {
+    owner: string;
+    name: string;
+    expression: string;
+  },
   abortController?: AbortController
 ): Promise<any> {
-  const { executeQuery$ } = useQuery(ISSUES_QUERY);
+  const { executeQuery$ } = useQuery(REPO_README_QUERY);
 
   const resp = await executeQuery$({
     signal: abortController?.signal,
     url: GITHUB_GRAPHQL,
-    variables: {
-      owner,
-      name,
-      first,
-    },
     headersOpt: {
       Accept: 'application/vnd.github+json',
       authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
+    variables,
   });
 
   return await resp.json();
 }
 
-export async function fetchPullRequests(
-  { owner, name, first }: IssuesPullRequestsQueryParams,
+export function updateRepoTree(store: SharedState, response: any) {
+  const {
+    data: { repository },
+  } = response;
+  if (repository) {
+    store.tree.data = {
+      branches: repository.branches?.nodes,
+      tree: repository.tree?.entries,
+    };
+  } else {
+    store.tree.data = undefined;
+    store.tree.error = 'No found';
+  }
+  store.isLoading = false;
+}
+
+export async function fetchRepoTree(
+  variables: {
+    owner: string;
+    name: string;
+    expression: string;
+  },
   abortController?: AbortController
 ): Promise<any> {
-  const { executeQuery$ } = useQuery(PULL_REQUEST_QUERY);
+  const { executeQuery$ } = useQuery(REPO_TREE_QUERY);
 
   const resp = await executeQuery$({
     signal: abortController?.signal,
     url: GITHUB_GRAPHQL,
-    variables: {
-      owner,
-      name,
-      first,
-    },
     headersOpt: {
       Accept: 'application/vnd.github+json',
       authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
+    variables,
   });
 
   return await resp.json();
