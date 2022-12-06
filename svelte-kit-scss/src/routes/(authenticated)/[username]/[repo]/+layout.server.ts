@@ -1,6 +1,6 @@
 import { ENV } from '$lib/constants/env';
 import type { LayoutServerLoad } from './$types';
-import type { RepoApiResponse } from '$lib/interfaces';
+import type { GithubRepository } from '$lib/interfaces';
 import { mapRepoResToRepoState } from '$lib/helpers';
 import { IssuesSearchService } from '$lib/services';
 import {
@@ -17,13 +17,13 @@ export const load: LayoutServerLoad = async ({ params, fetch }) => {
   const getRepoUrl = new URL(`/repos/${username}/${repo}`, ENV.GITHUB_URL);
 
   const repoData = await fetch(getRepoUrl.toString()).then(
-    (response) => response.json() as Promise<RepoApiResponse>
+    (response) => response.json() as Promise<GithubRepository>
   );
 
   const issueService = new IssuesSearchService(fetch);
   const openPullsQuery = [
     IssueSearchQueryState['Open'],
-    IssueSearchQueryType['Pull request'],
+    IssueSearchQueryType['PullRequest'],
     buildFilterParameter(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO, `${username}/${repo}`),
   ].join(' ');
   const openPullsCount = await issueService.getIssuesCount(openPullsQuery);
