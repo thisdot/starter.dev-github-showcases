@@ -4,19 +4,17 @@ export const GithubResolvers = {
       const data = await dataSources.githubAPI.getOrgs(login);
       return data;
     },
-    starred_url: async ({ login }: any, __: any, { dataSources }: any) => {
+    starCount: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOwnerStarCount(login);
-      console.log(data);
-      console.log(data.length);
       return data.length;
     },
   },
-  Orgs: {
-    repos_url: async ({ login }: any, __: any, { dataSources }: any) => {
+  Org: {
+    reposCount: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOrgRepos(login);
       return data.public_repos;
     },
-    members_url: async ({ login }: any, __: any, { dataSources }: any) => {
+    membersCount: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOrgsMemberCount(login);
       return data.length;
     },

@@ -26,5 +26,5 @@
       "path": "./tsconfig.spec.json"
     }
   ],
-  "exclude": ["node_modules", "handler", "lib", "generated"]
+  "exclude": ["node_modules", "handler", "lib", "types"]
 }
