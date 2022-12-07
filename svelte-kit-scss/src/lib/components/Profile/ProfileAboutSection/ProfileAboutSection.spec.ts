@@ -11,8 +11,8 @@ const mockOrganizations = MOCK_ORGANIZATION_SIMPLE_ARRAY.map(remapOrganizationSi
 describe('ProfileAboutSection', () => {
   beforeEach(() => {
     render(ProfileAboutSection, {
-      userProfile: mockUserProfile,
-      userOrgs: mockOrganizations,
+      profile: mockUserProfile,
+      organizations: mockOrganizations,
     });
   });
 
