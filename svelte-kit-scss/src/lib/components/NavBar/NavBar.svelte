@@ -1,10 +1,10 @@
 <script lang="ts">
   import { ChevronDown16, MarkGithub16 } from 'svelte-octicons';
   import { onDestroy, onMount } from 'svelte';
-  import { browser } from '$app/environment';
 
   export let userAvatar: string;
   export let username: string;
+  export let browser: boolean;
 
   let dropdownMenuIsOpen = false;
 
