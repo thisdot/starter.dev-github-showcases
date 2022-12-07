@@ -4,17 +4,17 @@ export const GithubResolvers = {
       const data = await dataSources.githubAPI.getOrgs(login);
       return data;
     },
-    starCount: async ({ login }: any, __: any, { dataSources }: any) => {
+    starred_url: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOwnerStarCount(login);
       return data.length;
     },
   },
-  Org: {
-    reposCount: async ({ login }: any, __: any, { dataSources }: any) => {
+  Orgs: {
+    repos_url: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOrgRepos(login);
       return data.public_repos;
     },
-    membersCount: async ({ login }: any, __: any, { dataSources }: any) => {
+    members_url: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOrgsMemberCount(login);
       return data.length;
     },

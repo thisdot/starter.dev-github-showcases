@@ -2,44 +2,10 @@ import {
   RESTDataSource,
   WillSendRequestOptions,
 } from '@apollo/datasource-rest';
-// import { Repo } from 'src/types';
-import { repoFormatter, orgFormatter, ownerFormatter } from 'src/formatters';
 
-// const repoFormatter = (repo: Repo[] | Repo) => {
-//   if (!repo) {
-//     return null;
-//   }
+// TODO: follow up PR will cover formatters and testing
+// import { repoFormatter, orgFormatter, ownerFormatter } from 'src/formatters';
 
-//   if (!Array.isArray(repo)) {
-//     return {
-//       description: repo?.description,
-//       forkCount: repo?.forks_count,
-//       fullName: repo?.full_name,
-//       id: repo?.id,
-//       isPrivate: repo?.private,
-//       language: repo?.language,
-//       name: repo?.name,
-//       owner: repo?.owner,
-//       stargazersCount: repo?.stargazers_count,
-//       title: repo?.title,
-//       updatedAt: repo?.updated_at,
-//     };
-//   }
-
-//   return repo.map((repoItem: Repo | null) => ({
-//     description: repoItem?.description,
-//     forkCount: repoItem?.forks_count,
-//     fullName: repoItem?.full_name,
-//     id: repoItem?.id,
-//     isPrivate: repoItem?.private,
-//     language: repoItem?.language,
-//     name: repoItem?.name,
-//     owner: repoItem?.owner,
-//     stargazersCount: repoItem?.stargazers_count,
-//     title: repoItem?.title,
-//     updatedAt: repoItem?.updated_at,
-//   }));
-// };
 export class GitHubAPI extends RESTDataSource {
   context: any;
 
@@ -94,7 +60,7 @@ export class GitHubAPI extends RESTDataSource {
     const data = await this
       .get(`/users/${username}/repos?sort=updated&per_page=${perPage}
     `);
-    return repoFormatter(data);
-    // return data;
+    // return repoFormatter(data);
+    return data;
   }
 }

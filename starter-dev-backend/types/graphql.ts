@@ -15,13 +15,13 @@ export type Scalars = {
 };
 
 /** A Organization object used in Owner */
-export type Org = {
-  __typename?: 'Org';
-  avatar?: Maybe<Scalars['String']>;
+export type Orgs = {
+  __typename?: 'Orgs';
+  avatar_url?: Maybe<Scalars['String']>;
   login?: Maybe<Scalars['String']>;
-  membersCount?: Maybe<Scalars['String']>;
+  members_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  reposCount?: Maybe<Scalars['String']>;
+  repos_url?: Maybe<Scalars['String']>;
 };
 
 /** A User object */
@@ -35,9 +35,9 @@ export type Owner = {
   location?: Maybe<Scalars['String']>;
   login?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  orgs?: Maybe<Array<Maybe<Org>>>;
-  starCount?: Maybe<Scalars['String']>;
-  twitterUsername?: Maybe<Scalars['String']>;
+  orgs?: Maybe<Array<Maybe<Orgs>>>;
+  starred_url?: Maybe<Scalars['String']>;
+  twitter_username?: Maybe<Scalars['String']>;
 };
 
 /** GitHub queries */
@@ -74,16 +74,16 @@ export type QueryReposArgs = {
 export type Repo = {
   __typename?: 'Repo';
   description?: Maybe<Scalars['String']>;
-  forkCount?: Maybe<Scalars['Int']>;
-  fullName?: Maybe<Scalars['String']>;
+  forks_count?: Maybe<Scalars['Int']>;
+  full_name?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
-  isPrivate?: Maybe<Scalars['Boolean']>;
   language?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   owner?: Maybe<User>;
-  stargazersCount?: Maybe<Scalars['Int']>;
+  private?: Maybe<Scalars['Boolean']>;
+  stargazers_count?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['String']>;
 };
 
 /** A Owner object used in Repo */
@@ -164,7 +164,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  Org: ResolverTypeWrapper<Org>;
+  Orgs: ResolverTypeWrapper<Orgs>;
   Owner: ResolverTypeWrapper<Owner>;
   Query: ResolverTypeWrapper<{}>;
   Repo: ResolverTypeWrapper<Repo>;
@@ -177,7 +177,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   ID: Scalars['ID'];
   Int: Scalars['Int'];
-  Org: Org;
+  Orgs: Orgs;
   Owner: Owner;
   Query: {};
   Repo: Repo;
@@ -185,12 +185,12 @@ export type ResolversParentTypes = {
   User: User;
 };
 
-export type OrgResolvers<ContextType = any, ParentType extends ResolversParentTypes['Org'] = ResolversParentTypes['Org']> = {
-  avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type OrgsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Orgs'] = ResolversParentTypes['Orgs']> = {
+  avatar_url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   login?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  membersCount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  members_url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  reposCount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  repos_url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -203,9 +203,9 @@ export type OwnerResolvers<ContextType = any, ParentType extends ResolversParent
   location?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   login?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  orgs?: Resolver<Maybe<Array<Maybe<ResolversTypes['Org']>>>, ParentType, ContextType>;
-  starCount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  twitterUsername?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  orgs?: Resolver<Maybe<Array<Maybe<ResolversTypes['Orgs']>>>, ParentType, ContextType>;
+  starred_url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  twitter_username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -218,16 +218,16 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type RepoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Repo'] = ResolversParentTypes['Repo']> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  forkCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  fullName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  forks_count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  full_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  isPrivate?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   language?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   owner?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  stargazersCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  private?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  stargazers_count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -237,7 +237,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
-  Org?: OrgResolvers<ContextType>;
+  Orgs?: OrgsResolvers<ContextType>;
   Owner?: OwnerResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Repo?: RepoResolvers<ContextType>;

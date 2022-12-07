@@ -3,6 +3,6 @@
   functions = "functions"
 
 [functions]
-  included_files = ["src/formatters/*.ts"]
+  included_files = ["src/formatters/**.ts"]
   node_bundler = "esbuild" 
 
