@@ -3,11 +3,12 @@
   import type { LayoutServerData } from './$types';
 
   export let data: LayoutServerData;
+  $: ({ login, avatarUrl } = data);
 </script>
 
 <div class="page">
   <header class="nav">
-    <NavBar username={data?.userInfo.username} userAvatar={data?.userInfo.avatar} />
+    <NavBar username={login} userAvatar={avatarUrl} />
   </header>
   <main class="main">
     <slot />

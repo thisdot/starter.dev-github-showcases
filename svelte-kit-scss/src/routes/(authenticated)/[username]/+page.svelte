@@ -12,7 +12,7 @@
   import { LanguageFilters, SortFilters, TypeFilters } from '$lib/enums';
   export let data: PageServerData;
 
-  const { userInfo, userOrgs, userRepos, repoLanguageList } = data;
+  const { profile, organizations, userRepos, repoLanguageList } = data;
 
   const DEBOUNCE_TIME = 2000;
 
@@ -98,7 +98,7 @@
 
   $: reposCount = filteredRepos.length;
 
-  const isOrg = userInfo?.type == ProfileType.Organization;
+  const isOrg = profile?.type == ProfileType.Organization;
 </script>
 
 <div class="profile-container">
@@ -132,8 +132,8 @@
       </div>
     {:else}
       <div class="subpage col-span-3">
-        {#if userInfo}
-          <ProfileAboutSection {userInfo} {userOrgs} />
+        {#if profile}
+          <ProfileAboutSection {profile} {organizations} />
         {/if}
       </div>
       <div class="col-span-9">

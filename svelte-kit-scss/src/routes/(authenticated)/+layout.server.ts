@@ -1,14 +1,9 @@
-import { ENV } from '$lib/constants/env';
-import { remapContextUserAsync } from '$lib/helpers/context-user';
 import type { LayoutServerLoad } from './$types';
-import { mapUserInfoResponseToUserInfo } from '$lib/helpers/user';
+import { UserService } from '$lib/services';
 
 export const load: LayoutServerLoad = async ({ locals, fetch }) => {
-  const getContextUserUrl = new URL('/user', ENV.GITHUB_URL);
-  const response = await fetch(getContextUserUrl.toString());
-  const contextUser = await remapContextUserAsync(response);
-  locals.user = contextUser;
-  return {
-    userInfo: mapUserInfoResponseToUserInfo(locals.user),
-  };
+  const userService = new UserService(fetch);
+  const authenticatedUser = await userService.getAuthenticatedUser();
+  locals.user = authenticatedUser;
+  return authenticatedUser;
 };
