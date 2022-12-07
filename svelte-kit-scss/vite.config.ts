@@ -8,7 +8,6 @@ const config: UserConfig & { test: VitestConfig['test'] } = {
   define: {
     // Eliminate in-source test code
     'import.meta.vitest': 'undefined',
-    // global: '({})',
   },
   test: {
     // jest like globals
