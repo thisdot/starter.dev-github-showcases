@@ -11,39 +11,40 @@ interface ApolloServerContext {
   token: String;
 }
 
+export const apolloServer = new ApolloServer({
+  cache: new InMemoryLRUCache(),
+  schema,
+  dataSources: () => {
+    return {
+      githubAPI: new GitHubAPI(),
+    };
+  },
+  context: async ({
+    event,
+    context,
+  }: LambdaContextFunctionParams): Promise<ApolloServerContext> => {
+    const token = event.headers.authorization;
+    return {
+      ...context,
+      token,
+    };
+  },
+  // By default, the GraphQL Playground interface and GraphQL introspection
+  // is disabled in "production" (i.e. when `process.env.NODE_ENV` is `production`).
+  //
+  // If you'd like to have GraphQL Playground and introspection enabled in production,
+  // install the Playground plugin and set the `introspection` option explicitly to `true`.
+  introspection: true,
+  persistedQueries: false,
+  plugins: [
+    ApolloServerPluginLandingPageGraphQLPlayground({
+      settings: { 'schema.polling.enable': false },
+    }),
+  ],
+});
+
 const getHandler = (event: any, context: any) => {
-  const server = new ApolloServer({
-    cache: new InMemoryLRUCache(),
-    schema,
-    dataSources: () => {
-      return {
-        githubAPI: new GitHubAPI(),
-      };
-    },
-    context: async ({
-      event,
-      context,
-    }: LambdaContextFunctionParams): Promise<ApolloServerContext> => {
-      const token = event.headers.authorization;
-      return {
-        ...context,
-        token,
-      };
-    },
-    // By default, the GraphQL Playground interface and GraphQL introspection
-    // is disabled in "production" (i.e. when `process.env.NODE_ENV` is `production`).
-    //
-    // If you'd like to have GraphQL Playground and introspection enabled in production,
-    // install the Playground plugin and set the `introspection` option explicitly to `true`.
-    introspection: true,
-    persistedQueries: false,
-    plugins: [
-      ApolloServerPluginLandingPageGraphQLPlayground({
-        settings: { 'schema.polling.enable': false },
-      }),
-    ],
-  });
-  const graphqlHandler = server.createHandler();
+  const graphqlHandler = apolloServer.createHandler();
   if (!event.requestContext) {
     event.requestContext = context;
   }

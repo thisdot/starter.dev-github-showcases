@@ -1,20 +1,34 @@
 import gql from 'graphql-tag';
-import { handler } from '../../graphql';
-import { GitHubAPI } from '../../datasources/github-api';
+import { apolloServer } from '../../graphql';
+// import { GitHubAPI } from '../../datasources/github-api';
+// import { GitHubModel } from '../../models/GitHubModel';
 import { createMockRepoData } from '../../utils/test';
-import { Repo } from '../../../types/graphql';
 
-jest.mock('../../datasources/github-api');
-const mockedGitHubAPI = jest.mocked(GitHubAPI, true);
+// Repo mock
+const mockGetRepo = jest.fn().mockResolvedValue(createMockRepoData);
+jest.mock('../../datasources/github-api', () => {
+  return jest.fn().mockImplementation(() => {
+    return { getRepo: mockGetRepo };
+  });
+});
+
+const defaultParams = {
+  event: { headers: {} },
+  context: {},
+  express: {
+    req: {},
+    res: {},
+  },
+};
 
 describe('github queries', () => {
   describe('github repo queries', () => {
-    let mockedRepoData: Repo;
+    // let service: any;
     let subject: any;
 
-    beforeAll(async () => {
-      mockedRepoData = createMockRepoData;
-      mockedGitHubAPI.getRepo.mockedResolvedValue(mockedRepoData);
+    beforeEach(async () => {
+      //   service = new GitHubAPI();
+      //   service = new GitHubModel();
 
       const QUERY = gql`
         query Repo($owner: String!, $repoName: String!) {
@@ -38,23 +52,59 @@ describe('github queries', () => {
 
       // should be on apolloServer?
       // we have apolloServer not being exported and inside a handler
-      subject = await handler.executeOperation({
-        query: QUERY,
-        variables: {
-          owner: 'WillHutt',
-          repoName: 'starwars-api',
+      subject = await apolloServer.executeOperation(
+        {
+          query: QUERY,
+          variables: {
+            owner: 'WillHutt',
+            repoName: 'starwars-api',
+          },
         },
-      });
-    });
-
-    afterAll(() => {
-      mockedGitHubAPI.getRepo.mockClear();
-    });
-
-    it('Should have made a call to get a repo', async () => {
-      expect(mockedGitHubAPI.getRepo).toHaveBeenCalledWith(
-        mockedRepoData.owner.login,
+        defaultParams,
       );
+    });
+
+    // it('Should call getRepo and return repo data', async () => {
+    //   const repo = await service.getRepo('WillHutt', 'starwars-api');
+    //   expect(repo).toEqual({
+    //     __typename: 'Repo',
+    //     description: 'test',
+    //     forks_count: 0,
+    //     full_name: 'WillHutt/starwars-api',
+    //     id: '567482388',
+    //     language: 'JavaScript',
+    //     name: 'starwars-api',
+    //     owner: {
+    //       __typename: 'User',
+    //       login: 'WillHutt',
+    //     },
+    //     private: false,
+    //     stargazers_count: 0,
+    //     title: 'test',
+    //     updated_at: '2022-11-17T22:18:18Z',
+    //   });
+    //   expect(mockGetRepo).toHaveBeenCalled();
+    //   expect(mockGetRepo).toHaveBeenCalledWith('WillHutt', 'starwars-api');
+    // });
+
+    it('Should return query data', () => {
+      expect(subject).toEqual({
+        __typename: 'Repo',
+        description: 'test',
+        forks_count: 0,
+        full_name: 'WillHutt/starwars-api',
+        id: '567482388',
+        language: 'JavaScript',
+        name: 'starwars-api',
+        owner: {
+          __typename: 'User',
+          login: 'WillHutt',
+        },
+        private: false,
+        stargazers_count: 0,
+        title: 'test',
+        updated_at: '2022-11-17T22:18:18Z',
+      });
     });
   });
 });

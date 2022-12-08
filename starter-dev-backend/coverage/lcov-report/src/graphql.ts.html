@@ -116,7 +116,8 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -130,7 +131,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -161,6 +161,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -182,39 +184,40 @@ interface ApolloServerContext {
   token: String;
 }
 &nbsp;
+export const <span class="cstat-no" title="statement not covered" >apolloServer = new ApolloServer({</span>
+  cache: new InMemoryLRUCache(),
+  schema,
+  dataSources: <span class="fstat-no" title="function not covered" >() =</span>&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      githubAPI: new GitHubAPI(),
+    };
+  },
+  context: <span class="fstat-no" title="function not covered" >async </span>({
+    event,
+    context,
+  }: LambdaContextFunctionParams): Promise&lt;ApolloServerContext&gt; =&gt; {
+    const token = <span class="cstat-no" title="statement not covered" >event.headers.authorization;</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      ...context,
+      token,
+    };
+  },
+  // By default, the GraphQL Playground interface and GraphQL introspection
+  // is disabled in "production" (i.e. when `process.env.NODE_ENV` is `production`).
+  //
+  // If you'd like to have GraphQL Playground and introspection enabled in production,
+  // install the Playground plugin and set the `introspection` option explicitly to `true`.
+  introspection: true,
+  persistedQueries: false,
+  plugins: [
+    ApolloServerPluginLandingPageGraphQLPlayground({
+      settings: { 'schema.polling.enable': false },
+    }),
+  ],
+});
+&nbsp;
 const getHandler = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>vent: any, context: any) =&gt; {</span>
-  const server = <span class="cstat-no" title="statement not covered" >new ApolloServer({</span>
-    cache: new InMemoryLRUCache(),
-    schema,
-    dataSources: <span class="fstat-no" title="function not covered" >() =</span>&gt; {
-<span class="cstat-no" title="statement not covered" >      return {</span>
-        githubAPI: new GitHubAPI(),
-      };
-    },
-    context: <span class="fstat-no" title="function not covered" >async </span>({
-      event,
-      context,
-    }: LambdaContextFunctionParams): Promise&lt;ApolloServerContext&gt; =&gt; {
-      const token = <span class="cstat-no" title="statement not covered" >event.headers.authorization;</span>
-<span class="cstat-no" title="statement not covered" >      return {</span>
-        ...context,
-        token,
-      };
-    },
-    // By default, the GraphQL Playground interface and GraphQL introspection
-    // is disabled in "production" (i.e. when `process.env.NODE_ENV` is `production`).
-    //
-    // If you'd like to have GraphQL Playground and introspection enabled in production,
-    // install the Playground plugin and set the `introspection` option explicitly to `true`.
-    introspection: true,
-    persistedQueries: false,
-    plugins: [
-      ApolloServerPluginLandingPageGraphQLPlayground({
-        settings: { 'schema.polling.enable': false },
-      }),
-    ],
-  });
-  const graphqlHandler = <span class="cstat-no" title="statement not covered" >server.createHandler();</span>
+  const graphqlHandler = <span class="cstat-no" title="statement not covered" >apolloServer.createHandler();</span>
 <span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!event.requestContext) {</span>
 <span class="cstat-no" title="statement not covered" >    event.requestContext = context;</span>
   }
@@ -229,7 +232,7 @@ export const <span class="cstat-no" title="statement not covered" >handler = get
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-07T23:52:04.844Z
+                at 2022-12-08T23:58:36.086Z
             </div>
         <script src="../prettify.js"></script>
         <script>
