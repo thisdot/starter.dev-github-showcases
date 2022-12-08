@@ -1,61 +1,79 @@
 <script lang="ts">
-  import type { UserInfo, UserOrgs } from '$lib/interfaces';
+  import type { OrganizationSimple, PublicProfileInformation } from '$lib/interfaces';
   import { Link16, Location16, Mail16, Organization16, People16 } from 'svelte-octicons';
 
-  export let userInfo: UserInfo;
-  export let userOrgs: UserOrgs[];
+  export let profile: PublicProfileInformation;
+  export let organizations: OrganizationSimple[];
+
+  $: ({
+    avatarUrl,
+    login,
+    name,
+    bio,
+    followers,
+    following,
+    company,
+    location,
+    email,
+    blog,
+    twitterUsername,
+  } = profile);
 </script>
 
 <section class="profile-about-section">
-  {#if userInfo?.avatar}
-    <img class="avatar" src={userInfo?.avatar} alt="{userInfo?.avatar} avatar" />
+  {#if avatarUrl}
+    <img class="avatar" src={avatarUrl} alt={name ?? login} data-testid="avatar" />
   {/if}
 
-  {#if userInfo}
+  {#if profile}
     <div class="content">
       <h1>
-        <div class="name">{userInfo.name}</div>
-        <div class="username">{userInfo.username}</div>
+        <div class="name" data-testid="name">{name}</div>
+        <div class="username" data-testid="username">{login}</div>
       </h1>
 
-      {#if userInfo.bio}
-        <div class="bio">{userInfo.bio}</div>
+      {#if bio}
+        <div class="bio" data-testid="bio">{bio}</div>
       {/if}
       <div class="socials">
-        <People16 />
-        <span class="social-label"> {userInfo.followers} Followers </span>
-        ·
-        <People16 />
-        <span class="social-label"> {userInfo.following} Following </span>
+        <span class="social-label">
+          <People16 />
+          <span class="count" data-testid="followers">{followers}</span> Followers</span
+        >
+        <span class="separator-dot">&#x2022;</span>
+        <span class="social-label">
+          <People16 />
+          <span class="count" data-testid="following">{following}</span> Following</span
+        >
       </div>
       <div class="fields">
-        {#if userInfo.company}
+        {#if company}
           <div>
             <Organization16 />
-            <span>{userInfo.company}</span>
+            <span data-testid="company">{company}</span>
           </div>
         {/if}
-        {#if userInfo.location}
+        {#if location}
           <div>
             <Location16 />
-            <span>{userInfo.location}</span>
+            <span data-testid="location">{location}</span>
           </div>
         {/if}
-        {#if userInfo.email}
+        {#if email}
           <div>
             <Mail16 />
-            <a href="mailto:{userInfo.email}">
-              {userInfo?.email}
+            <a href="mailto:{email}" data-testid="email">
+              {email}
             </a>
           </div>
         {/if}
-        {#if userInfo.blog}
+        {#if blog}
           <div>
             <Link16 />
-            <a href={userInfo.blog}>{userInfo.blog}</a>
+            <a href={blog} data-testid="blog">{blog}</a>
           </div>
         {/if}
-        {#if userInfo.twitter_username}
+        {#if twitterUsername}
           <div>
             <span class="icon twitter-icon">
               <svg
@@ -71,8 +89,8 @@
                 />
               </svg>
             </span>
-            <a href="https://twitter.com/{userInfo.twitter_username}"
-              >@{userInfo.twitter_username}</a
+            <a href="https://twitter.com/{twitterUsername}"
+              >@<span data-testid="twitterUsername">{twitterUsername}</span></a
             >
           </div>
         {/if}
@@ -81,10 +99,10 @@
       <div class="organizations">
         <h2>Organizations</h2>
         <ul>
-          {#each userOrgs as org}
+          {#each organizations as org}
             <li>
               <a href="/{org.login}">
-                <img src={org.avatar_url} alt="{org.login} logo" />
+                <img src={org.avatarUrl} alt={org.login} />
               </a>
             </li>
           {/each}
@@ -97,95 +115,113 @@
 <style lang="scss">
   .profile-about-section {
     box-sizing: border-box;
-  }
 
-  /*
+    /*
    * This image is styled so that it renders over the sticky header just like what
    * happens with upstream GitHub, while the content under it does not.
    */
-  .avatar {
-    position: relative;
-    transform: translateY(-5rem);
-    z-index: 20;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1; // Prevent reflow of content under image on image load.
-    border-radius: 50%;
-  }
+    .avatar {
+      position: relative;
+      transform: translateY(-5rem);
+      z-index: 20;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1; // Prevent reflow of content under image on image load.
+      border-radius: 50%;
+    }
 
-  a {
-    color: black;
+    a {
+      color: black;
 
-    &:hover,
-    &:active,
-    &:focus {
-      color: #0000ee;
+      &:hover,
+      &:active,
+      &:focus {
+        color: #0000ee;
 
-      &:visited {
-        color: #551a8b;
+        &:visited {
+          color: #551a8b;
+        }
       }
     }
-  }
 
-  .icon {
-    margin-right: 6px;
-  }
+    .icon {
+      margin-right: 6px;
+    }
 
-  .content {
-    margin-top: -5rem;
-  }
+    .content {
+      margin-top: -5rem;
+    }
 
-  .name {
-    font-size: 26px;
-    line-height: 1.25;
-    font-weight: 600;
-  }
+    .name {
+      font-size: 26px;
+      line-height: 1.25;
+      font-weight: 600;
+    }
 
-  .username {
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 24px;
-    color: #8b949e;
-  }
+    .username {
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 24px;
+      color: #8b949e;
+    }
 
-  .bio {
-    margin: 16px 0;
-  }
+    .bio {
+      margin: 16px 0;
+    }
 
-  .twitter-icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-  }
-
-  .organizations {
-    margin-top: 1.25rem;
-    border-top: solid 1px rgba(229, 231, 235, 1);
-
-    ul {
+    .socials {
       display: flex;
-      flex-wrap: wrap;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      gap: 8px;
+      align-items: center;
+      gap: 0.25em;
+      .social-label {
+        display: flex;
+        align-items: center;
+        gap: 0.25em;
+        .count {
+          font-weight: 600;
+        }
+      }
+      .separator-dot {
+        justify-content: center;
+        text-align: center;
+      }
     }
 
-    img {
-      display: block;
-      width: 32px;
-      height: 32px;
-      aspect-ratio: 1/1;
-      border-radius: 0.25rem;
-      border: solid 1px rgba(209, 213, 219, 1);
-      box-sizing: content-box;
-      background-color: white;
+    .twitter-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
     }
 
-    h2 {
-      font-size: 16px;
-      margin-bottom: 8px;
+    .organizations {
+      margin-top: 1.25rem;
+      border-top: solid 1px rgba(229, 231, 235, 1);
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        gap: 8px;
+      }
+
+      img {
+        display: block;
+        width: 32px;
+        height: 32px;
+        aspect-ratio: 1/1;
+        border-radius: 0.25rem;
+        border: solid 1px rgba(209, 213, 219, 1);
+        box-sizing: content-box;
+        background-color: white;
+      }
+
+      h2 {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
     }
   }
 </style>

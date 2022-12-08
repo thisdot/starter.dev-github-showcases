@@ -1,41 +1,6 @@
-import type {
-  UserApiResponse,
-  UserInfo,
-  UserOrgsApiResponse,
-  UserOrgs,
-  UserReposState,
-  UserReposApiResponse,
-} from '$lib/interfaces';
+import type { UserReposState, UserReposApiResponse } from '$lib/interfaces';
 
-export const mapUserInfoResponseToUserInfo = (user?: UserApiResponse): UserInfo | undefined => {
-  return user
-    ? {
-        avatar: user.avatar_url,
-        bio: user.bio || '',
-        blog: user.blog,
-        company: user.company || '',
-        email: user.email || '',
-        followers: user.followers,
-        following: user.following,
-        location: user.location || '',
-        name: user.name,
-        twitter_username: user.twitter_username || '',
-        username: user.login,
-        type: user.type,
-      }
-    : undefined;
-};
-
-export const mapUserOrgsApiResponseToUserOrgs = (userOrgs: UserOrgsApiResponse): UserOrgs[] => {
-  return Array.isArray(userOrgs)
-    ? userOrgs.map((org) => ({
-        id: org.id,
-        login: org.login,
-        avatar_url: org.avatar_url,
-      }))
-    : [];
-};
-
+// todo: refactor
 export const mapUserReposApiResponseToUserReposStates = (
   userRepos: UserReposApiResponse
 ): UserReposState[] => {
