@@ -1,6 +1,6 @@
 export const GithubResolvers = {
   Owner: {
-    orgs: async ({ login }: any, test: any, { dataSources }: any) => {
+    orgs: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOrgs(login);
       return data;
     },

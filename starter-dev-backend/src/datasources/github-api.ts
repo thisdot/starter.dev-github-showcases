@@ -22,41 +22,41 @@ export class GitHubAPI extends RESTDataSource {
     request.headers['authorization'] = this.context.token;
   }
 
-  async getOrgsMemberCount(login: string) {
+  public async getOrgsMemberCount(login: string) {
     return await this.get(`/orgs/${login}/members?per_page=100}`);
   }
 
-  async getOrgRepos(login: string) {
+  public async getOrgRepos(login: string) {
     return await this.get(`/orgs/${login}`);
   }
 
   // https://docs.github.com/en/rest/orgs/orgs?apiVersion=2022-11-28#list-organizations-for-a-user
-  async getOrgs(login: string) {
+  public async getOrgs(login: string) {
     const data = await this.get(`/users/${login}/orgs`);
     // return orgFormatter(data);
     return data;
   }
 
-  async getOwnerStarCount(login: string) {
+  public async getOwnerStarCount(login: string) {
     return await this.get(`/users/${login}/starred`);
   }
 
   // https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#about-the-users-api
-  async getOwner() {
+  public async getOwner() {
     const data = await this.get('/user');
     // return ownerFormatter(data);
     return data;
   }
 
   // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
-  async getRepo(owner: string, repoName: string) {
+  public async getRepo(owner: string, repoName: string) {
     const data = await this.get(`/repos/${owner}/${repoName}`);
     // return repoFormatter(data);
     return data;
   }
 
   // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-  async getRepos(username: string, perPage?: string) {
+  public async getRepos(username: string, perPage?: string) {
     const data = await this
       .get(`/users/${username}/repos?sort=updated&per_page=${perPage}
     `);

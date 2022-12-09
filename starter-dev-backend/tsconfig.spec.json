@@ -1,7 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "composite": true,
+    "isolatedModules": true,
+    "module": "commonjs",
     "types": ["jest", "node"]
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "jest.config.ts, **/*.test.ts"]
 }
