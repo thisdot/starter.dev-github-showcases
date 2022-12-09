@@ -84,3 +84,9 @@ git clone https://github.com/thisdot/starter.dev.git
 ### Demo Implementation
 
 To Be completed
+
+## Static Site Generator (Node.js)
+
+```
+npm run build.server
+```
