@@ -58,7 +58,7 @@ app.use(
 );
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(bodyParser.json());
-app.use('/.netlify/functions/server', router); // path must route to lambda
+// app.use('/.netlify/functions/server', router); // path must route to lambda
 
 export default app;
 export const handler = serverless(app);
