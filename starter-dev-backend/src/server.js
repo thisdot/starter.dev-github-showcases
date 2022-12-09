@@ -30,7 +30,7 @@ app.use(
 );
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(bodyParser.json());
-app.use('/.netlify/functions/server', router); // path must route to lambda
+// app.use('/.netlify/functions/server', router); // path must route to lambda
 
 const router = express.Router();
 router.get('/', (req, res) => {
