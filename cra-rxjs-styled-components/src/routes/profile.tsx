@@ -1,5 +1,8 @@
 import UserProfileView from '../components/user-profile/UserProfile';
-import { Layout } from '../components/layouts/ProfileLayout';
+import {
+	Layout,
+	NetlifyBadgeContainer,
+} from '../components/layouts/ProfileLayout';
 import Header from '../components/header/Header';
 import { useUser } from '../context/UserProvider';
 import { useRepos } from '../hooks/repositories/use-repos';
@@ -42,6 +45,18 @@ function Profile() {
 						</>
 					)}
 				</ContentLayout>
+				<NetlifyBadgeContainer>
+					<a
+						target="_blank"
+						rel="noreferrer noopener"
+						href="https://www.netlify.com"
+					>
+						<img
+							src="https://www.netlify.com/v3/img/components/netlify-light.svg"
+							alt="Deploys by Netlify"
+						/>
+					</a>
+				</NetlifyBadgeContainer>
 			</Layout>
 		</>
 	);

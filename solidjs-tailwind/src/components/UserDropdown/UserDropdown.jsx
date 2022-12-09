@@ -2,13 +2,25 @@ import { NavLink } from '@solidjs/router';
 import { createSignal } from 'solid-js';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { clickOutside } from '../../utils/onclick-outside';
-import * as styles from './user-dropdown.classNames';
+import styles from './UserDropdown.module.css';
+import { useAuth } from '../../auth';
+import { SIGN_OUT_URL } from '../../helper/constants';
 
 const UserDropdown = (props) => {
   const [expanded, setExpanded] = createSignal(false);
 
   const signOut = () => {
-    // TODO: sign out
+    fetch(SIGN_OUT_URL, {
+      method: 'POST',
+      credentials: 'include',
+    }).then(() => {
+      useAuth().setAuth({
+        token: null,
+        user: null,
+        isAuthenticated: false,
+      });
+      sessionStorage.removeItem('token');
+    });
   };
 
   return (
@@ -41,16 +53,15 @@ const UserDropdown = (props) => {
           <ul class="py-1">
             {props.username && (
               <li data-menu-item>
-                <NavLink
-                  href={`/${props.username}`}
-                  class={styles.menuBtn}
-                >
+                <NavLink href={`/${props.username}`} class={styles.menuBtn}>
                   Profile
                 </NavLink>
               </li>
             )}
             <li data-menu-item>
-              <button class={styles.menuBtn}>Sign Out</button>
+              <button class={styles.menuBtn} onClick={[signOut]}>
+                Sign Out
+              </button>
             </li>
           </ul>
         </nav>

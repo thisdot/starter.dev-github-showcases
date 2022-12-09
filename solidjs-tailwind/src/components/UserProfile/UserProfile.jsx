@@ -8,6 +8,7 @@ import {
 import { Icon } from 'solid-heroicons';
 import { TwitterIcon } from '../Icons';
 import OrgList from './OrgList';
+import styles from './UserProfile.module.css';
 
 const UserProfile = (userProfileProps) => {
   return (
@@ -17,58 +18,48 @@ const UserProfile = (userProfileProps) => {
         alt="Avatar"
         width={260}
         height={260}
-        class="rounded-full shadow z-30"
+        class={styles.avatar}
       />
       <h1 class="mt-2">
-        <div class="text-2xl text-gray-800 font-bold leading-tight">
-          {userProfileProps.name}
-        </div>
-        <div class="text-xl text-gray-500 font-light">
-          {userProfileProps.username}
-        </div>
+        <div class={styles.name}>{userProfileProps.name}</div>
+        <div class={styles.username}>{userProfileProps.username}</div>
       </h1>
-      <div class="text-gray-800 mt-4">{userProfileProps.bio}</div>
-      <div class="text-sm text-gray-600 my-4">
-        <Icon path={users} class="w-4 h-4 mb-0.5 mr-1 inline" />
+      <div class={styles.bio}>{userProfileProps.bio}</div>
+      <div class={styles.socials}>
+        <Icon path={users} class={styles.icon} />
         <span class="inline-block">
-          <span class="font-medium text-gray-900">
-            {userProfileProps.followers}
-          </span>{' '}
+          <span class={styles.count}>{userProfileProps.followers}</span>{' '}
           followers
         </span>
         <span class="mx-1">·</span>
         <span class="inline-block">
-          <span class="font-medium text-gray-900">
-            {userProfileProps.following}
-          </span>{' '}
+          <span class={styles.count}>{userProfileProps.following}</span>{' '}
           following
         </span>
         <span class="mx-1">·</span>
-        <Icon path={star} class="w-4 h-4 mb-0.5 mr-1 inline" />
+        <Icon path={star} class={styles.icon} />
         <span class="inline-block">
-          <span class="font-medium text-gray-900">
-            {userProfileProps.starredRepos}
-          </span>{' '}
+          <span class={styles.count}>{userProfileProps.starredRepos}</span>{' '}
         </span>
       </div>
-      <div class="text-sm text-gray-800 space-y-1">
+      <div class={styles.fields}>
         {userProfileProps.company && (
           <div>
-            <Icon path={buildingOffice} class="w-4 h-4 mb-0.5 mr-1 inline" />
+            <Icon path={buildingOffice} class={styles.icon} />
             {userProfileProps.company}
           </div>
         )}
         {userProfileProps.location && (
           <div>
-            <Icon path={mapPin} class="w-4 h-4 mb-0.5 mr-1 inline" />
+            <Icon path={mapPin} class={styles.icon} />
             {userProfileProps.location}
           </div>
         )}
         {userProfileProps.websiteUrl && (
           <div>
-            <Icon path={link} class="w-4 h-4 mb-0.5 mr-1 inline" />
+            <Icon path={link} class={styles.icon} />
             <a
-              class="hover:text-blue-600 hover:underline"
+              class={styles.link}
               href={userProfileProps.websiteUrl}
               target="_blank"
               rel="noreferrer"
@@ -79,9 +70,9 @@ const UserProfile = (userProfileProps) => {
         )}
         {userProfileProps.twitterUsername && (
           <div>
-            <TwitterIcon class="w-4 h-4 mb-0.5 mr-1 inline" />
+            <TwitterIcon class={styles.icon} />
             <a
-              class="hover:text-blue-600 hover:underline"
+              class={styles.link}
               href={`https:/twitter.com/${userProfileProps.twitterUsername}`}
               target="_blank"
               rel="noreferrer"
@@ -91,8 +82,8 @@ const UserProfile = (userProfileProps) => {
           </div>
         )}
       </div>
-      {userProfileProps.organizations.length > 0 && (
-        <OrgList organizations={userProfileProps.organizations} />
+      {userProfileProps?.organizations?.nodes.length > 0 && (
+        <OrgList organizations={userProfileProps.organizations.nodes} />
       )}
     </div>
   );

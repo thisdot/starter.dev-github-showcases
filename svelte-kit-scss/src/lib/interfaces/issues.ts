@@ -1,14 +1,13 @@
 export interface IssueLabel {
-  id: number;
-  nodeId: string;
-  url: string;
-  name: string;
   color: string;
+  id: number;
+  name: string;
+  url: string;
 }
 
 export interface IssueUser {
-  login: string;
   avatarUrl: string;
+  login: string;
 }
 
 export enum IssueState {
@@ -19,17 +18,16 @@ export enum IssueState {
 export type IssueAssignee = IssueUser;
 
 export interface Issue {
-  id: number;
-  user: IssueUser;
-  title: string;
-  number: number;
-  closedAt?: string | null;
-  state: IssueState;
-  createdAt: string;
-  labels: IssueLabel[];
-  commentsCount: number;
-  labelCount: number;
   assignees: IssueAssignee[];
+  closedAt?: string | null;
+  commentsCount: number;
+  createdAt: string;
+  id: number;
+  labels: IssueLabel[];
+  number: number;
+  state: IssueState;
+  title: string;
+  user: IssueUser;
 }
 
 export interface IssueCollection {

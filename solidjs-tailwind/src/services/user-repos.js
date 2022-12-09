@@ -30,6 +30,8 @@ const getUserRepos = async (variables) => {
             description: repo.description,
             stargazerCount: repo.stargazerCount,
             forkCount: repo.forkCount,
+            isFork: repo.isFork,
+            isArchived: repo.isArchived,
             primaryLanguage: {
               name: repo.primaryLanguage?.name,
               color: repo.primaryLanguage?.color,

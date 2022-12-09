@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const RepoLayout = styled.div`
+	display: flex;
+	flex-direction: column;
 	width: 100%;
-	height: 100%;
+	height: calc(100% - 70px);
 `;
 
 export const RepoContainer = styled.div`
@@ -46,4 +48,12 @@ export const RepoCenterWrapper = styled.div`
 	margin-top: 3rem;
 	margin-bottom: 3rem;
 	max-width: 80rem;
+`;
+
+export const NetlifyBadgeContainer = styled.div`
+	margin-top: auto;
+	padding-top: 2rem;
+	padding-bottom: 1rem;
+	text-align: center;
+	background-color: white;
 `;

@@ -1,3 +1,5 @@
+import styles from './OrgAbout.module.css';
+
 const OrgAbout = (props) => {
   return (
     <div class="flex items-center my-2">
@@ -6,13 +8,10 @@ const OrgAbout = (props) => {
         height="30"
         width="30"
         alt="Org Avatar"
-        class="border rounded"
+        class={styles.avatar}
         data-testid="org about avatar"
       />
-      <span
-        class="text-xl font-bold text-gray-700 ml-2"
-        data-testid="org about name"
-      >
+      <span class={styles.name} data-testid="org about name">
         {props.name}
       </span>
     </div>

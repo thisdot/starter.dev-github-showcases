@@ -1,31 +1,59 @@
-import { mergeProps, Show } from 'solid-js';
+import { createEffect, createSignal, mergeProps, Show } from 'solid-js';
 import { RepoBookIcon } from '../Icons';
-import { FILTER_TYPE_OPTIONS, SORT_OPTIONS } from './data';
+import {
+  defaultFilterType,
+  defaultLanguage,
+  FILTER_TYPE_OPTIONS,
+  SORT_OPTIONS,
+} from './data';
 import FilterDropdown from './FilterDropdown';
 import FilterText from './FilterText';
-import { language, setLanguage, filterType, setFilterType, setSortBy, sortBy } from './RepoFilter.store';
+import {
+  language,
+  setLanguage,
+  filterType,
+  setFilterType,
+  setSortBy,
+  sortBy,
+  search,
+} from './RepoFilter.store';
 import SearchInput from './SearchInput';
+import styles from './RepoFilter.module.css';
 
 const RepoFilter = (props) => {
   const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
   const sortOptions = Object.values(SORT_OPTIONS);
   const languageOptions = ['All', 'HTML', 'CSS', 'PHP'];
+  const [isOnlySorted, setIsOnlySorted] = createSignal(true);
 
-  const merged = mergeProps({ repoBtnText: 'New' }, props);
+  const merged = mergeProps(
+    { repoBtnText: 'New', languages: languageOptions, filteredRepoCount: 0 },
+    props
+  );
 
   const selectLanguage = (value) => setLanguage(value);
   const selectType = (value) => setFilterType(value);
   const selectSort = (value) => setSortBy(value);
-  const isOnlySorted = true;
+
+  createEffect(() => {
+    setIsOnlySorted(
+      sortBy() &&
+        !(
+          language() !== defaultLanguage ||
+          filterType() !== defaultFilterType ||
+          search()
+        )
+    );
+  });
 
   return (
     <>
-      <div class="flex relative mb-4 space-x-4 border-b border-b-gray-300 pb-4">
-        <div class="flex space-x-4 flex-1">
+      <div class={styles.repoFilterContainer}>
+        <div class={styles.filterDropDownContainer}>
           <div class="flex-grow">
             <SearchInput />
           </div>
-          <div class="flex items-center space-x-1.5">
+          <div class={styles.filterDropdownList}>
             <FilterDropdown
               name="Type"
               items={typeOptions}
@@ -35,7 +63,7 @@ const RepoFilter = (props) => {
             <FilterDropdown
               name="Language"
               selected={language()}
-              items={languageOptions}
+              items={merged.languages}
               selectOption={selectLanguage}
             />
             <FilterDropdown
@@ -47,17 +75,14 @@ const RepoFilter = (props) => {
           </div>
         </div>
         <div>
-          <a
-            href="https://github.com/new"
-            class="flex items-center text-white gap-2 bg-green-600 rounded-md px-3 py-1.5 text-sm font-semibold"
-          >
+          <a href="https://github.com/new" class={styles.iconLink}>
             <RepoBookIcon />
             <span> {merged.repoBtnText} </span>
           </a>
         </div>
       </div>
-      <Show when={!isOnlySorted}>
-        <FilterText username="hdjerry" />
+      <Show when={!isOnlySorted()}>
+        <FilterText filteredRepoCount={merged.filteredRepoCount} />
       </Show>
     </>
   );

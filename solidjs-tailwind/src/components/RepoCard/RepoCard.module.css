@@ -1,0 +1,29 @@
+@tailwind utilities;
+
+.container {
+  @apply px-4 py-4 border-b border-gray-200 first-of-type:border-t flex justify-between flex-wrap md:flex-nowrap gap-x-4;
+}
+
+.grid {
+  @apply col-span-12 md:col-span-7 text-left;
+}
+
+.repoName {
+  @apply text-xl text-blue-600 font-semibold hover:underline mr-3;
+}
+
+.description {
+  @apply text-gray-600 text-sm max-w-prose;
+}
+
+.buttonContainer {
+  @apply col-span-12 md:col-span-5 flex items-start md:justify-end mt-4 lg:mt-0;
+}
+
+.button {
+  @apply inline-flex gap-2 items-center px-3 py-1 rounded-md bg-gray-100 bg-opacity-75 border border-gray-300 text-sm font-medium text-gray-800 hover:bg-gray-200 hover:bg-opacity-50;
+}
+
+.buttonSpan {
+  @apply -translate-x-1 -translate-y-[0.45rem];
+}

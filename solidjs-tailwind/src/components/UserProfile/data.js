@@ -9,10 +9,12 @@ export const userProfileProps = {
   name: 'Tom VanAntwerp',
   twitterUsername: 'tvanantwerp',
   websiteUrl: 'https://tomvanantwerp.com',
-  organizations: [
-    {
-      avatarUrl: 'https://avatars.githubusercontent.com/u/22839396?v=4',
-      login: 'thisdot',
-    },
-  ],
+  organizations: {
+    nodes: [
+      {
+        avatarUrl: 'https://avatars.githubusercontent.com/u/22839396?v=4',
+        login: 'thisdot',
+      },
+    ],
+  },
 };

@@ -15,14 +15,7 @@ export enum GithubIssueMilestoneStateFilter {
  */
 export interface GithubIssueMilestone {
   id: number;
-  title: string;
   number: number;
   state: GithubIssueMilestoneState;
-  description: string;
-  open_issues: number;
-  closed_issues: number;
-  created_at: string;
-  updated_at: string;
-  closed_at: string;
-  due_on: string;
+  title: string;
 }
