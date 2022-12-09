@@ -4,7 +4,7 @@ import {
   remapBranchOption,
   remapFileExplorerFolderContentsItem,
 } from '$lib/helpers';
-import type { ReadmeApiResponse, GithubRepoContentsItem, GithubBranch } from '$lib/interfaces';
+import type { GithubFileContentsItem, GithubRepoContentsItem, GithubBranch } from '$lib/interfaces';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad, PageServerParentData } from './$types';
 
@@ -48,7 +48,7 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
   );
 
   const readmeData = await fetch(getRepoReadmeUrl).then(
-    (response) => response.json() as Promise<ReadmeApiResponse>
+    (response) => response.json() as Promise<GithubFileContentsItem>
   );
 
   const getRepoBranchesUrl = new URL(`/repos/${username}/${repo}/branches`, ENV.GITHUB_URL);
