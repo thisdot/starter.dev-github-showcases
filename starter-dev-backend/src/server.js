@@ -3,7 +3,6 @@ import serverless from 'serverless-http';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import path from 'path';
 import {
   accessToken,
   clearCookies,
@@ -14,6 +13,19 @@ import cookieParser from 'cookie-parser';
 
 export const app = express();
 const router = express.Router();
+
+router.get('/', (req, res) => {
+  return res.status(200).json({
+    message: 'Welcome to the starter.dev backend!',
+  });
+});
+
+router.get('/hello', (req, res) => {
+  if (!req.query.greeting) {
+    res.send('Hello, there');
+  }
+  res.send(`Hello, ${req.query.greeting}`);
+});
 
 // Step 1 - push user to Github OAuth
 router.get('/api/auth/signin', fetchSigninUrl);
