@@ -10,8 +10,8 @@ import type { PageServerLoad, PageServerParentData } from './$types';
 
 export const load: PageServerLoad = async ({ params, parent, fetch }) => {
   const layoutData: PageServerParentData = await parent();
-  const { repoInfo, username, repo } = layoutData;
-  const treePath = params.tree || `tree/${repoInfo.defaultBranch}`;
+  const { repositoryState, username, repo } = layoutData;
+  const treePath = params.tree || `tree/${repositoryState.defaultBranch}`;
   const [, branch, ...folderPathSegments] = treePath.split('/');
   const folderPath = folderPathSegments.join('/');
 
@@ -42,9 +42,9 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
   const parentFolderPath = folderPathSegments.slice(0, -1).join('/');
   const parentHref = isRoot
     ? undefined
-    : composeDirHref(parentFolderPath, username, repo, branch, repoInfo.defaultBranch);
+    : composeDirHref(parentFolderPath, username, repo, branch, repositoryState.defaultBranch);
   const contents = contentsData.map((item) =>
-    remapFileExplorerFolderContentsItem(item, username, repo, branch, repoInfo.defaultBranch)
+    remapFileExplorerFolderContentsItem(item, username, repo, branch, repositoryState.defaultBranch)
   );
 
   const readmeData = await fetch(getRepoReadmeUrl).then(
@@ -68,10 +68,10 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
     readme: readmeData.content,
     branches: branches.map((branch) =>
       remapBranchOption(branch, (branchName: string) =>
-        composeDirHref(folderPath, username, repo, branchName, repoInfo.defaultBranch)
+        composeDirHref(folderPath, username, repo, branchName, repositoryState.defaultBranch)
       )
     ),
-    defaultBranch: repoInfo.defaultBranch,
+    defaultBranch: repositoryState.defaultBranch,
     currentBranch: branch,
   };
 };

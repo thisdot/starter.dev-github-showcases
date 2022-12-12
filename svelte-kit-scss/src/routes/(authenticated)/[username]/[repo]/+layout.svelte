@@ -3,10 +3,10 @@
   import type { LayoutServerData } from './$types';
 
   export let data: LayoutServerData;
-  const { repoInfo } = data;
+  const { repositoryState } = data;
 </script>
 
-<RepoHeader repo={repoInfo} />
+<RepoHeader {repositoryState} />
 <div class="container">
   <slot />
 </div>

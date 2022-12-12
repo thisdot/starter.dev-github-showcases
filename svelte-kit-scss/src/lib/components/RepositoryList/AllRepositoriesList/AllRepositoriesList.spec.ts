@@ -1,12 +1,12 @@
 import { beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import { topRepositoriesFixture } from '$lib/fixtures';
-import RepoList from './RepoList.svelte';
+import AllRepositoriesList from './AllRepositoriesList.svelte';
 
 describe('RepoList', () => {
   beforeEach(() => {
-    render(RepoList, {
-      repos: topRepositoriesFixture,
+    render(AllRepositoriesList, {
+      models: topRepositoriesFixture,
     });
   });
 

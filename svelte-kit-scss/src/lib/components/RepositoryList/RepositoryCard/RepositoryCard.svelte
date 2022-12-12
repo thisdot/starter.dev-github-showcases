@@ -1,60 +1,59 @@
 <script lang="ts">
-  import type { UserReposState } from '$lib/interfaces';
   import { relativeTimeFmt } from '$lib/helpers';
   import { Law16, Star16, RepoForked16 } from 'svelte-octicons';
   import { LANGUAGE_COLORS } from '$lib/constants/language-colors';
+  import type { RepositoryCardViewModel } from '../view-models';
 
-  export let repo: UserReposState;
+  export let model: RepositoryCardViewModel;
 
-  const href = repo ? `/${repo.owner.login}/${repo.name}` : '#';
+  $: ({
+    name,
+    visibility,
+    language,
+    description,
+    stargazersCount,
+    forksCount,
+    updatedAt,
+    license,
+    routeHref: href,
+  } = model);
 
-  function visibility(): string {
-    if (repo) {
-      return repo?.private ? 'Private' : 'Public';
-    } else {
-      return '';
-    }
-  }
-
-  function getLanguageColor(): string {
-    return LANGUAGE_COLORS[String(repo?.language)];
+  function getLanguageColor(language: string | null | undefined): string {
+    return LANGUAGE_COLORS[String(language)];
   }
 </script>
 
 <h3 class="name-container" data-testid="repo-card">
-  <a class="name" {href}>{repo.name}</a>
-  <span class="visibility">{visibility()}</span>
+  <a class="name" {href} data-testid="name">{name}</a>
+  <span class="visibility" data-testid="visibility">{visibility}</span>
 </h3>
-{#if repo.description}
-  <p class="description">{repo.description}</p>
+{#if description}
+  <p class="description" data-testid="description">{description}</p>
 {/if}
 <div class="subline">
-  {#if repo.language}
+  {#if language}
     <div class="language">
-      <div class="language-color" style="background-color: {getLanguageColor()}" />
-      <div class="language-label">{repo.language}</div>
+      <div class="language-color" style="background-color: {getLanguageColor(language)}" />
+      <div class="language-label" data-testid="language">{language}</div>
     </div>
   {/if}
-
-  {#if repo.stargazers_count}
-    <div class="stars">
-      <Star16 />
-      <span class="star-count">{repo.stargazers_count}</span>
-    </div>
-  {/if}
-  {#if repo.forks_count}
-    <div class="stars">
-      <RepoForked16 />
-      <span class="star-count">{repo.forks_count}</span>
-    </div>
-  {/if}
-  {#if repo.license}
+  <div class="stars">
+    <Star16 />
+    <span class="star-count" data-testid="stargazersCount">{stargazersCount}</span>
+  </div>
+  <div class="stars">
+    <RepoForked16 />
+    <span class="star-count" data-testid="forksCount">{forksCount}</span>
+  </div>
+  {#if license}
     <div class="license">
       <Law16 />
-      <span class="license-name">{repo.license.name}</span>
+      <span class="license-name" data-testid="license_name">{license.name}</span>
     </div>
   {/if}
-  <div class="updated">{relativeTimeFmt(repo.updated_at)}</div>
+  {#if updatedAt}
+    <div class="updated" data-testid="updated">{relativeTimeFmt(updatedAt)}</div>
+  {/if}
 </div>
 
 <style lang="scss">

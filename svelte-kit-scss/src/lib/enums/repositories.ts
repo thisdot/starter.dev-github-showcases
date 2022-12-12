@@ -11,7 +11,7 @@ export enum LanguageFilters {
   TS = 'ts',
 }
 
-export enum SortFilters {
+export enum RepositorySortFilters {
   UPDATED = 'updated',
   NAME = 'name',
   STARS = 'stars',

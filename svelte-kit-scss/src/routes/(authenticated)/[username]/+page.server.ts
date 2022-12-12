@@ -1,29 +1,28 @@
 import type { PageServerLoad } from './$types';
-import type { UserReposApiResponse } from '$lib/interfaces';
-import { createLanguageMap, mapUserReposApiResponseToUserReposStates } from '$lib/helpers';
-import { ENV } from '$lib/constants/env';
-import { SortFilters } from '$lib/enums';
-import { OrganizationService, UserService } from '$lib/services';
+import { buildRepositoryCardViewModel, createLanguageMap } from '$lib/helpers';
+import { OrganizationService, UserService, RepositoryService } from '$lib/services';
+import type { AllRepositoriesListViewModel } from '$lib/components/RepositoryList/view-models';
 
-export const load: PageServerLoad = async ({ fetch, params }) => {
+export const load: PageServerLoad = async ({ fetch, params: { username } }) => {
   const userService = new UserService(fetch);
-  const orgService = new OrganizationService(fetch);
-  const fetchReposUrl = new URL(`/users/${params.username}/repos`, ENV.GITHUB_URL);
-  fetchReposUrl.searchParams.append('sort', SortFilters.UPDATED);
+  const organizationService = new OrganizationService(fetch);
+  const repositoryService = new RepositoryService(fetch);
 
-  const [profile, organizations, userRepos] = await Promise.all([
-    userService.getUserProfile(params.username),
-    orgService.listOrganizationsForUser(params.username),
-    fetch(fetchReposUrl).then((response) => response.json() as Promise<UserReposApiResponse>),
+  const [profile, organizations, repositories] = await Promise.all([
+    userService.getUserProfile(username),
+    organizationService.listOrganizationsForUser(username),
+    repositoryService.getUserRepositories(username),
   ]);
 
-  const userReposList = mapUserReposApiResponseToUserReposStates(userRepos);
+  const allRepositoriesListViewModel: AllRepositoriesListViewModel = {
+    repositories: repositories.map(buildRepositoryCardViewModel),
+  };
 
   return {
     profile,
     organizations,
-    userRepos: userReposList,
-    username: params.username,
-    repoLanguageList: createLanguageMap(userReposList),
+    allRepositoriesListViewModel,
+    username,
+    repoLanguageList: createLanguageMap(repositories),
   };
 };

@@ -3,7 +3,7 @@
  *
  * [`Github API: Repositories > Get a repository > Response schema > owner`](https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#get-a-repository)
  */
-export interface GithubSimpleUser {
+export type GithubSimpleUser = {
   avatar_url: string;
   email?: string | null;
   id: number;
@@ -13,4 +13,4 @@ export interface GithubSimpleUser {
   starred_at?: string;
   type: string;
   url: string;
-}
+};

@@ -1,43 +1,15 @@
-import type { UserReposApiResponse, UserReposState } from '$lib/interfaces';
+import type { Repository } from '$lib/interfaces';
 import type { FilterDropdownOption } from '../components/shared/FilterDropdown/filter-option';
-import { LanguageFilters, SortFilters, TypeFilters } from '../enums';
+import { LanguageFilters, RepositorySortFilters, TypeFilters } from '../enums';
 
-export const mapUserReposToTopRepos = (repos: UserReposApiResponse): UserReposState[] => {
-  if (repos) {
-    return repos.map((repo) => ({
-      name: repo.name,
-      description: repo.description,
-      language: repo.language,
-      stargazers_count: repo.stargazers_count,
-      forks_count: repo.forks_count,
-      private: repo.private,
-      updated_at: repo.updated_at,
-      fork: repo.fork,
-      archived: repo.archived,
-      license: repo.license
-        ? {
-            key: repo.license.key,
-            name: repo.license.name,
-            spdx_id: repo.license.spdx_id,
-            url: repo.license.url,
-            node_id: repo.license.node_id,
-          }
-        : null,
-      owner: {
-        login: repo.owner.login,
-      },
-    }));
-  }
-  return [];
-};
-
-export function filterReposUtil(
-  filteredRepos: UserReposState[],
+// todo: refactor
+export function filterReposUtil<T extends Repository>(
+  filteredRepos: T[],
   search?: string,
   type?: string,
   language?: string,
   sort?: string
-) {
+): T[] {
   if (search) {
     filteredRepos = filteredRepos?.filter((item) =>
       item.name.toLowerCase().includes(search.toLowerCase())
@@ -46,10 +18,10 @@ export function filterReposUtil(
 
   if (type !== TypeFilters.ALL) {
     if (type === TypeFilters.ARCHIVED) {
-      filteredRepos = filteredRepos?.filter((item) => Boolean(item.archived));
+      filteredRepos = filteredRepos?.filter((item) => item.archived);
     }
     if (type === TypeFilters.FORKED) {
-      filteredRepos = filteredRepos?.filter((item) => Boolean(item.fork));
+      filteredRepos = filteredRepos?.filter((item) => item.fork);
     }
   }
 
@@ -59,20 +31,18 @@ export function filterReposUtil(
     );
   }
 
-  if (sort !== SortFilters.UPDATED) {
-    if (sort === SortFilters.NAME) {
+  if (sort !== RepositorySortFilters.UPDATED) {
+    if (sort === RepositorySortFilters.NAME) {
       filteredRepos = filteredRepos?.slice().sort((a, b) => a.name.localeCompare(b.name));
     }
-    if (sort === SortFilters.STARS) {
-      filteredRepos = filteredRepos
-        ?.slice()
-        .sort((a, b) => a.stargazers_count - b.stargazers_count);
+    if (sort === RepositorySortFilters.STARS) {
+      filteredRepos = filteredRepos?.slice().sort((a, b) => a.stargazersCount - b.stargazersCount);
     }
   }
   return filteredRepos ?? [];
 }
 
-export function createLanguageMap(repos: UserReposState[]): FilterDropdownOption[] {
+export function createLanguageMap(repos: Repository[]): FilterDropdownOption[] {
   const uniqueLanguages = new Set();
   const langFilterList: FilterDropdownOption[] = [];
   repos.forEach((repo) => {

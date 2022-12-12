@@ -13,5 +13,5 @@
 <BoxLayout>
   <IssueSearchControls slot="header" {sortFilters} {stateFilters} {milestoneFilters} />
   <IssueSearchList items={issues} />
-  <Pagination slot="footer" />
+  <Pagination slot="bottom" />
 </BoxLayout>

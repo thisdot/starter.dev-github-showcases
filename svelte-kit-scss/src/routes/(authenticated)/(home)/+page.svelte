@@ -1,8 +1,10 @@
 <script lang="ts">
-  import TopRepositories from '$lib/components/TopRepositories/TopRepositories.svelte';
+  import TopRepositoriesList from '$lib/components/RepositoryList/TopRepositoriesList/TopRepositoriesList.svelte';
   import Gists from '$lib/components/Gists/Gists.svelte';
   import type { PageServerData } from './$types';
   export let data: PageServerData;
+
+  $: ({ topRepositoriesListViewModel } = data);
 </script>
 
 <div class="container">
@@ -12,9 +14,10 @@
         <Gists gists={data.gists} />
       {/if}
     </aside>
-    {#if data?.topRepos}
-      <TopRepositories repos={data.topRepos} username={data?.username} />
-    {/if}
+    <div class="top-repositories">
+      <h3>Top Repositories</h3>
+      <TopRepositoriesList model={topRepositoriesListViewModel} />
+    </div>
   </div>
 </div>
 
@@ -28,13 +31,16 @@
     @media (min-width: variables.$md) {
       grid-template-columns: 24rem 1fr;
     }
-  }
 
-  aside {
-    background: variables.$white;
-    padding: 2rem;
-    @media (max-width: variables.$md) {
-      order: 2;
+    aside {
+      background: variables.$white;
+      padding: 2rem;
+      @media (max-width: variables.$md) {
+        order: 2;
+      }
+    }
+    .top-repositories {
+      padding: 1em;
     }
   }
 </style>

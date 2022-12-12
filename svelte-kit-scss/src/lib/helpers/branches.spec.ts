@@ -29,7 +29,6 @@ describe('.remapBranchOption', () => {
       });
 
       it('calls buildHref function once', () => {
-        console.log(mockBuildHrefFn);
         expect(mockBuildHrefFn).toHaveBeenCalledTimes(1);
       });
 

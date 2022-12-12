@@ -3,42 +3,47 @@
   import { ProfileType } from '$lib/interfaces';
   import ProfileAboutSection from '$lib/components/Profile/ProfileAboutSection/ProfileAboutSection.svelte';
   import ProfileNavSection from '$lib/components/Profile/ProfileNavSection/ProfileNavSection.svelte';
-  import RepoList from '$lib/components/RepoList/RepoList.svelte';
   import RepoControls from '$lib/components/shared/RepoControls/RepoControls.svelte';
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
   import type { RepoFiltersState } from '$lib/components/shared/RepoControls/repo-filters-state';
   import type { FilterDropdownOption } from '$lib/components/shared/FilterDropdown/filter-option';
   import { debounce, filterReposUtil } from '$lib/helpers';
-  import { LanguageFilters, SortFilters, TypeFilters } from '$lib/enums';
+  import { LanguageFilters, RepositorySortFilters, TypeFilters } from '$lib/enums';
+  import AllRepositoriesList from '$lib/components/RepositoryList/AllRepositoriesList/AllRepositoriesList.svelte';
+  import type { RepositoryCardViewModel } from '$lib/components/RepositoryList/view-models';
+
   export let data: PageServerData;
 
-  const { profile, organizations, userRepos, repoLanguageList } = data;
+  $: ({ profile, organizations, allRepositoriesListViewModel, repoLanguageList } = data);
 
   const DEBOUNCE_TIME = 2000;
 
   let hasActiveFilters = false;
 
-  let filteredRepos = userRepos;
+  $: repositories = allRepositoriesListViewModel.repositories;
+
+  //todo: refactor filtering. Navigation-based filtering
+  let filteredRepos: RepositoryCardViewModel[] | undefined;
+
+  // todo: refactor
+  $: repositoriesToShow = filteredRepos || repositories;
 
   const filterRepos = (event: CustomEvent<RepoFiltersState>): void => {
     const { searchInput, type, language, sort } = event.detail;
     if (hasActiveFilters) {
       filteredRepos = filterReposUtil(
-        userRepos,
+        repositories,
         searchInput,
         type?.value,
         language?.value,
         sort?.value
       );
     } else {
-      filteredRepos = userRepos;
+      filteredRepos = undefined;
     }
   };
 
-  const debouncedFilterRepos = debounce<(event: CustomEvent<RepoFiltersState>) => void>(
-    filterRepos,
-    DEBOUNCE_TIME
-  );
+  const debouncedFilterRepos = debounce<CustomEvent<RepoFiltersState>>(filterRepos, DEBOUNCE_TIME);
 
   let lastSearchTerm = '';
 
@@ -46,9 +51,9 @@
     const { searchInput, type, language, sort } = event.detail || {};
 
     hasActiveFilters =
-      type.value !== TypeFilters.ALL ||
-      language.value !== LanguageFilters.ALL ||
-      sort.value !== SortFilters.UPDATED ||
+      type?.value !== TypeFilters.ALL ||
+      language?.value !== LanguageFilters.ALL ||
+      sort?.value !== RepositorySortFilters.UPDATED ||
       !!searchInput;
 
     if (event.detail.searchInput === lastSearchTerm) {
@@ -74,29 +79,32 @@
     },
   ];
 
-  const languageFilters: FilterDropdownOption<LanguageFilters>[] = [
-    {
-      label: 'All',
-      value: LanguageFilters.ALL,
-    },
-  ].concat(repoLanguageList);
+  // todo: fix
+  $: languageFilters = (
+    [
+      {
+        label: 'All',
+        value: LanguageFilters.ALL,
+      },
+    ] as FilterDropdownOption<string>[]
+  ).concat(repoLanguageList);
 
-  const sortFilters: FilterDropdownOption<SortFilters>[] = [
+  const sortFilters: FilterDropdownOption<RepositorySortFilters>[] = [
     {
       label: 'Last Updated',
-      value: SortFilters.UPDATED,
+      value: RepositorySortFilters.UPDATED,
     },
     {
       label: 'Name',
-      value: SortFilters.NAME,
+      value: RepositorySortFilters.NAME,
     },
     {
       label: 'Stars',
-      value: SortFilters.STARS,
+      value: RepositorySortFilters.STARS,
     },
   ];
 
-  $: reposCount = filteredRepos.length;
+  $: reposCount = filteredRepos?.length;
 
   const isOrg = profile?.type == ProfileType.Organization;
 </script>
@@ -128,7 +136,8 @@
           {sortFilters}
           on:filtersChange={handleFiltersChange}
         />
-        <RepoList repos={filteredRepos} />
+        <!-- todo: refactor   -->
+        <AllRepositoriesList model={{ repositories: repositoriesToShow }} />
       </div>
     {:else}
       <div class="subpage col-span-3">
@@ -144,7 +153,8 @@
           {sortFilters}
           on:filtersChange={handleFiltersChange}
         />
-        <RepoList repos={filteredRepos} />
+        <!-- todo: refactor   -->
+        <AllRepositoriesList model={{ repositories: repositoriesToShow }} />
       </div>
     {/if}
   </div>

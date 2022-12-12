@@ -1,20 +1,25 @@
 <script lang="ts">
-  import type { RepoState } from '$lib/interfaces';
+  import type { RepositoryState } from '$lib/interfaces';
   import RepoHeading from './RepoHeading/RepoHeading.svelte';
   import RepoInfo from './RepoInfo/RepoInfo.svelte';
   import RepoNavigation from './RepoNavigation/RepoNavigation.svelte';
 
-  export let repo: RepoState;
-  $: ({ watchCount, starCount, forkCount, openIssuesCount, openPullRequestsCount } = repo);
+  export let repositoryState: RepositoryState;
+  $: ({ watchersCount, stargazersCount, forksCount, openIssuesCount, openPullRequestsCount } =
+    repositoryState);
 </script>
 
 <div class="wrapper">
-  {#if repo}
+  {#if repositoryState}
     <div class="top">
-      <RepoHeading {repo} />
-      <RepoInfo {watchCount} {starCount} {forkCount} />
+      <RepoHeading repo={repositoryState} />
+      <RepoInfo watchCount={watchersCount} starCount={stargazersCount} forkCount={forksCount} />
     </div>
-    <RepoNavigation {repo} issueCount={openIssuesCount} prCount={openPullRequestsCount} />
+    <RepoNavigation
+      repo={repositoryState}
+      issueCount={openIssuesCount}
+      prCount={openPullRequestsCount}
+    />
   {/if}
 </div>
 

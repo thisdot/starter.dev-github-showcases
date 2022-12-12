@@ -1,10 +1,11 @@
-export const debounce = <F extends { (...args: unknown[]): unknown }>(func: F, waitFor: number) => {
+// todo: refactor
+export const debounce = <F extends CustomEvent>(func: (event: F) => void, waitFor: number) => {
   let timeout: NodeJS.Timeout;
 
-  return (...args: Parameters<F>): void => {
+  return (event: F): void => {
     if (timeout) {
       clearTimeout(timeout);
     }
-    timeout = setTimeout(() => func(...args), waitFor);
+    timeout = setTimeout(() => func(event), waitFor);
   };
 };

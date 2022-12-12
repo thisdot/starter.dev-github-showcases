@@ -1,28 +1,51 @@
 import { describe, it } from 'vitest';
-import { MOCK_REPOSITORY_API_RESPONSE } from './mocks/repository';
-import { mapRepoResToRepoState } from './repository';
+import { remapSimpleUser } from './common';
+import { MOCK_REPOSITORY, MOCK_REPOSITORY_LICENSE_SIMPLE } from './mocks/repository';
+import { buildRepositoryState, remapRepository, remapRepositoryLicenseSimple } from './repository';
+import { expectCamelFromSnakeCasePropertiesMapping } from './test-utils';
 
-describe('.mapRepoResToRepoState', () => {
+describe('.remapRepositoryLicenseSimple', () => {
+  describe('when called', () => {
+    it('returns expected result', () => {
+      const input = MOCK_REPOSITORY_LICENSE_SIMPLE;
+
+      const output = remapRepositoryLicenseSimple(input);
+
+      expect(output).toBeTruthy();
+      expectCamelFromSnakeCasePropertiesMapping(output, input);
+    });
+  });
+});
+
+describe('.remapRepository', () => {
+  describe('when called', () => {
+    it('returns expected result', () => {
+      const mockInputLicense = MOCK_REPOSITORY_LICENSE_SIMPLE;
+      const input = {
+        ...MOCK_REPOSITORY,
+        license: mockInputLicense,
+      };
+
+      const output = remapRepository(input);
+
+      expect(output).toBeTruthy();
+      expectCamelFromSnakeCasePropertiesMapping(output, input, ['owner', 'license']);
+      expect(output.owner).toEqual(remapSimpleUser(input.owner));
+      expect(output.license).toEqual(remapRepositoryLicenseSimple(mockInputLicense));
+    });
+  });
+});
+
+describe('.buildRepositoryState', () => {
   describe('when called', () => {
     it('returns expected result', () => {
       const pullsCount = 123;
-      const response = MOCK_REPOSITORY_API_RESPONSE;
+      const input = remapRepository(MOCK_REPOSITORY);
 
-      const result = mapRepoResToRepoState(response, pullsCount);
+      const output = buildRepositoryState(input, pullsCount);
 
-      expect(result).toBeTruthy();
-      expect(result.defaultBranch).toBe(response.default_branch);
-      expect(result.description).toBe(response.description);
-      expect(result.forkCount).toBe(response.forks_count);
-      expect(result.openIssuesCount).toBe(response.open_issues_count);
-      expect(result.openPullRequestsCount).toBe(pullsCount);
-      expect(result.ownerName).toBe(response.owner.login);
-      expect(result.repoName).toBe(response.name);
-      expect(result.starCount).toBe(response.stargazers_count);
-      expect(result.tags).toBe(response.topics);
-      expect(result.visibility).toBe(response.visibility);
-      expect(result.watchCount).toBe(response.watchers_count);
-      expect(result.website).toBe(response.homepage);
+      expect(output).toMatchObject(input);
+      expect(output.openPullRequestsCount).toBe(pullsCount);
     });
   });
 });
