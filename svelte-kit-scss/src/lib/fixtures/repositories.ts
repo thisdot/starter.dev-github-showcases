@@ -1,3 +1,5 @@
+import type { RepoState } from '$lib/interfaces';
+
 export const topRepositoriesFixture = [
   {
     id: 433924027,
@@ -241,3 +243,18 @@ export const topRepositoriesFixture = [
     },
   },
 ];
+
+export const starterDevRepoFixture: RepoState = {
+  repoName: 'starter.dev-github-showcases',
+  description: 'A collection of GitHub clone implementations.',
+  website: '',
+  visibility: 'public',
+  watchCount: 42,
+  starCount: 42,
+  forkCount: 9,
+  openIssuesCount: 165,
+  openPullRequestsCount: 165,
+  tags: ['angular', 'apollo-client', 'github', 'tailwindcss'],
+  defaultBranch: 'main',
+  ownerName: 'thisdot',
+};
