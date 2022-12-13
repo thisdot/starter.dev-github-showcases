@@ -1,4 +1,4 @@
-import axios from 'axios';
+import fetch from 'node-fetch';
 import calculateTokenExpiration from './expiration';
 
 export const REFRESH_TOKEN_ERROR = 'RefreshAccessTokenError';
@@ -21,14 +21,16 @@ export default async (token) => {
       refresh_token: token.refreshToken,
     });
 
-    const response = await axios({
-      url: `https://github.com/login/oauth/access_token?${params.toString()}`,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+    const response = await fetch(
+      `https://github.com/login/oauth/access_token?${params.toString()}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
       },
-    });
+    );
 
     const newToken = await response.json();
 
