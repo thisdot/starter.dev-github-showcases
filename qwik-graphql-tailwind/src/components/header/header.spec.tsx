@@ -1,6 +1,6 @@
 import { createDOM } from '@builder.io/qwik/testing';
 import { describe, test } from 'vitest';
-import Header from './Header';
+import Header from './header';
 
 describe('Header component', async () => {
   test('should mount', async () => {
