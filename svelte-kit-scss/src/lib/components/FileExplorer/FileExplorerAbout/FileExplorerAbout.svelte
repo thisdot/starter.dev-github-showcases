@@ -1,10 +1,10 @@
 <script lang="ts">
   import { Book16, Link16 } from 'svelte-octicons';
   import { handleAnchorClick } from '$lib/helpers';
-  import type { RepoState } from '$lib/interfaces';
+  import type { RepositoryState } from '$lib/interfaces';
 
-  export let repoInfo: RepoState;
-  $: ({ description, website, tags } = repoInfo);
+  export let repositoryState: RepositoryState;
+  $: ({ description, homepage, topics } = repositoryState);
 </script>
 
 <div class="container border-bottom-2">
@@ -14,20 +14,20 @@
       {description ?? 'No description, website, or topics provided.'}
     </span>
 
-    {#if website}
+    {#if homepage}
       <div class="linkContainer mt-1">
         <span class="icon">
           <Link16 />
         </span>
-        <a href={website} class="link" target="_blank" rel="noreferrer">
-          {website}
+        <a href={homepage} class="link" target="_blank" rel="noreferrer">
+          {homepage}
         </a>
       </div>
     {/if}
 
-    {#if tags}
+    {#if Array.isArray(topics)}
       <div class="mt-1">
-        {#each tags as tag}
+        {#each topics as tag}
           <span class="tag">{tag}</span>
         {/each}
       </div>

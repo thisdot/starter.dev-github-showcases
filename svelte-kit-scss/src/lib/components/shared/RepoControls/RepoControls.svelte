@@ -100,7 +100,6 @@
       bind:current={currentFilters.sort}
     />
   </div>
-  <div class="divider" />
   {#if hasActiveFilters}
     <div class="results">
       <p class="results__text">
