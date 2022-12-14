@@ -1,10 +1,11 @@
-import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
+import { component$, QRL, useClientEffect$, useStore } from '@builder.io/qwik';
 import { TOP_REPOS_QUERY } from '~/utils/queries/top-repos-query';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import TopReposListItems from './top-repos-card';
 import { useQuery } from '~/utils/useQuery';
 import { parseQuery } from './parseQuery';
 import { TopRepo } from './types';
+import { useSessionStorage } from '~/hook/useSessionStorage';
 
 interface RepoStore {
   login: '';
@@ -13,6 +14,8 @@ interface RepoStore {
 }
 
 export default component$(() => {
+  const [cachedTopRepos, setTopRepos] = useSessionStorage('top_repos', '');
+
   const store = useStore<RepoStore>({
     login: '',
     data: [],
@@ -20,9 +23,16 @@ export default component$(() => {
   });
 
   useClientEffect$(async () => {
-    const abortController = new AbortController();
-    const response = await fetchTopRepos(abortController);
-    updateTopRepos(store, response);
+    if (cachedTopRepos.value) {
+      store.isLoading = false;
+      const val = cachedTopRepos.value;
+      store.data = val.data;
+      store.login = val.login;
+    } else {
+      const abortController = new AbortController();
+      const response = await fetchTopRepos(abortController);
+      updateTopRepos(store, response, setTopRepos);
+    }
   });
 
   return (
@@ -35,7 +45,7 @@ export default component$(() => {
   );
 });
 
-export function updateTopRepos(store: RepoStore, response: any) {
+export function updateTopRepos(store: RepoStore, response: any, setTopRepos: QRL<(value: any) => void>) {
   const {
     data: {
       viewer: {
@@ -46,6 +56,7 @@ export function updateTopRepos(store: RepoStore, response: any) {
   } = response;
   store.login = login;
   store.data = parseQuery(nodes);
+  setTopRepos({ login, data: parseQuery(nodes) });
   store.isLoading = false;
 }
 

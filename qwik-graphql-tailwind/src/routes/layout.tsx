@@ -1,4 +1,5 @@
 import { component$, Slot, useClientEffect$, useStore } from '@builder.io/qwik';
+import { useSessionStorage } from '~/hook/useSessionStorage';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import Header from '../components/header/header';
 import { useQuery } from '../utils';
@@ -16,6 +17,8 @@ interface UserStore {
 }
 
 export default component$(() => {
+  const [cachedUser, setUser] = useSessionStorage('user', '');
+
   const store = useStore<UserStore>({
     access_token: null,
     isLoading: false,
@@ -30,13 +33,13 @@ export default component$(() => {
     if (!store.access_token) {
       window.location.href = '/auth/signin';
     } else {
-      const storedUser = sessionStorage.getItem('user');
-      if (storedUser) {
-        store.viewer = JSON.parse(storedUser);
+      if (cachedUser.value) {
+        store.viewer = cachedUser.value;
       } else {
         store.isLoading = true;
         const abortController = new AbortController();
         const response = await fetchAuthenticatedUser(store.access_token, abortController);
+        setUser(response.data.viewer);
         updateUserProfile(store, response);
       }
     }
@@ -61,7 +64,6 @@ export default component$(() => {
 export function updateUserProfile(store: UserStore, response: any) {
   store.isLoading = false;
   store.viewer = response.data.viewer;
-  sessionStorage.setItem('user', JSON.stringify(response.data.viewer));
 }
 
 export async function fetchAuthenticatedUser(token: string | null, abortController?: AbortController): Promise<any> {
