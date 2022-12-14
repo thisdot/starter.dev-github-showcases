@@ -115,6 +115,7 @@
 <style lang="scss">
   .profile-about-section {
     box-sizing: border-box;
+    max-width: 251px;
 
     /*
    * This image is styled so that it renders over the sticky header just like what

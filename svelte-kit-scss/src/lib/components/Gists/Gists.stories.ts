@@ -2,8 +2,7 @@ import Gists from './Gists.svelte';
 
 export default {
   component: Gists,
-  title: 'Home/Gists',
-  excludeStories: /.*Data$/,
+  title: 'components/Gists',
   argTypes: {
     message: 'from Storybook',
   },

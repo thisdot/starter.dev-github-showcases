@@ -6,7 +6,7 @@
 
 <div class="container">
   <h3>Gists</h3>
-  {#if gists.length > 0}
+  {#if gists?.length > 0}
     <ul>
       {#each gists as gist}
         <li>

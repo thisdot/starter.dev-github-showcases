@@ -1,7 +1,7 @@
 import type { GithubOrganizationSimple } from '$lib/interfaces/data-contract/github';
 
 export const MOCK_ORGANIZATION_SIMPLE: GithubOrganizationSimple = {
-  avatar_url: 'https://github.com/images/error/octocat_happy.gif',
+  avatar_url: 'https://avatars.githubusercontent.com/u/9919?s=64&v=4',
   description: 'A great organization',
   id: 1,
   login: 'github',
@@ -11,7 +11,7 @@ export const MOCK_ORGANIZATION_SIMPLE: GithubOrganizationSimple = {
 
 export const MOCK_ORGANIZATION_SIMPLE_ARRAY: GithubOrganizationSimple[] = [
   {
-    avatar_url: 'https://github.com/images/error/octocat_happy.gif',
+    avatar_url: 'https://avatars.githubusercontent.com/u/9919?s=64&v=4',
     description: 'A great organization',
     id: 1,
     login: 'github',
