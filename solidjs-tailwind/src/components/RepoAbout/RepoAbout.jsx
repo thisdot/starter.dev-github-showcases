@@ -3,16 +3,19 @@ import { Description } from './Description';
 import { HomepageUrl } from './HomePageUrl';
 import { Topics } from './Topics';
 import styles from './RepoAbout.module.css';
+import { useRepo } from '../../contexts/RepoContext';
 
-export const RepoAboutWidget = (props) => {
+export const RepoAboutWidget = () => {
+  const {info} = useRepo();
+
   return (
     <div class={styles.container}>
       <h3 class={styles.heading}>About</h3>
       <div class={styles.description}>
         <div data-testid="about-info" class="space-y-4">
-          <Description text={props.info.data?.description} />
-          <HomepageUrl homepageUrl={props.info.data?.homepageUrl} />
-          <Topics topics={props.info.data?.topics} />
+          <Description text={info().info?.description} />
+          <HomepageUrl homepageUrl={info().info?.homepageUrl} />
+          <Topics topics={info().info?.topics || []} />
         </div>
       </div>
       <div>
@@ -23,3 +26,5 @@ export const RepoAboutWidget = (props) => {
     </div>
   );
 }
+
+export default RepoAboutWidget;

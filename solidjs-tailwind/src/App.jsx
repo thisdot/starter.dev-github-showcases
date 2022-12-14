@@ -6,6 +6,10 @@ import SigninPage from './pages/Signin';
 import RedirectPage from './pages/Redirect';
 import Profile from './pages/Profile';
 import OrgProfile from './pages/OrgProfile';
+import RepoDetails from './pages/RepoDetails';
+// import RepoBlob from './pages/RepoBlob';
+import RepoTree from './pages/RepoTree';
+import { Repo } from './components/Repo';
 
 function App() {
   return (
@@ -17,6 +21,11 @@ function App() {
           <Route component={Home} path={ROUTES.HOME} />
           <Route component={Profile} path={ROUTES.PROFILE} />
           <Route component={OrgProfile} path={ROUTES.ORGPROFILE} />
+          <Route component={Repo} path={ROUTES.REPO_DETAILS}>
+            <Route component={RepoDetails} path={'/'}  />
+            <Route component={RepoTree} path={ROUTES.REPO_TREE} />
+            {/* <Route component={RepoBlob} path={ROUTES.REPO_BLOB} /> */}
+          </Route>
         </Route>
       </Routes>
     </>
