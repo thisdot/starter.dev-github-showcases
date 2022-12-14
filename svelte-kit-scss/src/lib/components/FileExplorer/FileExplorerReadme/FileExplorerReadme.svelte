@@ -1,25 +1,10 @@
 <script lang="ts">
   import { ListUnordered16 } from 'svelte-octicons';
-  import MarkdownIt from 'markdown-it';
-  import sanitizeHtml from 'sanitize-html';
-  import { Buffer } from 'buffer';
 
-  export let readme: string;
-  const md = new MarkdownIt();
-
-  function encodeReadmeURI(text: string) {
-    const encoded = text;
-    const decoded = Buffer.from(encoded, 'base64').toString('utf8');
-    return sanitizeHtml(md.render(decoded), {
-      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'details', 'summary']),
-      allowedAttributes: {
-        img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
-      },
-    });
-  }
+  export let html: string;
 </script>
 
-{#if readme}
+{#if html}
   <div id="readme">
     <div class="header">
       <span class="icon">
@@ -29,7 +14,7 @@
     </div>
     <div class="content">
       <span>
-        {@html encodeReadmeURI(readme)}
+        {@html html}
       </span>
     </div>
   </div>

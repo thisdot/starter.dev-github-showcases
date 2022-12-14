@@ -2,11 +2,19 @@
   import FileExplorerAbout from '$lib/components/FileExplorer/FileExplorerAbout/FileExplorerAbout.svelte';
   import FileExplorerContainer from '$lib/components/FileExplorer/FileExplorerContainer/FileExplorerContainer.svelte';
   import FileExplorerNav from '$lib/components/FileExplorer/FileExplorerNav/FileExplorerNav.svelte';
-  // import FileExplorerReadme from '$lib/components/FileExplorer/FileExplorerReadme/FileExplorerReadme.svelte';
+  import FileExplorerReadme from '$lib/components/FileExplorer/FileExplorerReadme/FileExplorerReadme.svelte';
   import type { PageServerData } from './$types';
   export let data: PageServerData;
 
-  $: ({ parentHref, contents, branches, defaultBranch, currentBranch, repositoryState } = data);
+  $: ({
+    parentHref,
+    contents,
+    branches,
+    defaultBranch,
+    currentBranch,
+    repositoryState,
+    readmeHtml,
+  } = data);
 </script>
 
 <div class="container grid grid-cols-12 subpage">
@@ -19,9 +27,9 @@
     <FileExplorerAbout {repositoryState} />
   </section>
 
-  <!-- <section class="col-span-9">
-    <FileExplorerReadme readme={data?.readme} />
-  </section> -->
+  <section class="col-span-9">
+    <FileExplorerReadme html={readmeHtml} />
+  </section>
 </div>
 
 <style lang="scss">
