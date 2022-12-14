@@ -41,6 +41,7 @@
     "@storybook/svelte": "6.5.14",
     "@storybook/testing-library": "0.0.13",
     "@sveltejs/adapter-auto": "1.0.0-next.90",
+    "@sveltejs/adapter-netlify": "^1.0.0-next.73",
     "@sveltejs/kit": "1.0.0-next.572",
     "@sveltejs/vite-plugin-svelte": "^1.4.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -81,7 +82,6 @@
     "src/**/*{.js,.ts,.svelte}": "eslint ."
   },
   "dependencies": {
-    "@sveltejs/adapter-netlify": "^1.0.0-next.88",
     "cookie": "^0.5.0",
     "markdown-it": "^13.0.1",
     "prismjs": "^1.29.0",
