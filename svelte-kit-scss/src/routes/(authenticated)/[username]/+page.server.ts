@@ -1,17 +1,25 @@
 import type { PageServerLoad } from './$types';
-import { buildRepositoryCardViewModel, createLanguageMap } from '$lib/helpers';
-import { OrganizationService, UserService, RepositoryService } from '$lib/services';
+import {
+  buildRepositoryCardViewModel,
+  createLanguageMap,
+  extractRepositoryPageSearchQueryParameters,
+  remapRepositorySearchQueryParameters,
+} from '$lib/helpers';
+import { OrganizationService, UserService, RepositorySearchService } from '$lib/services';
 import type { AllRepositoriesListViewModel } from '$lib/components/RepositoryList/view-models';
 
-export const load: PageServerLoad = async ({ fetch, params: { username } }) => {
+export const load: PageServerLoad = async ({ fetch, params: { username }, url }) => {
+  const pageSearchQueryParameters = extractRepositoryPageSearchQueryParameters(url);
+  const searchQueryParameters = remapRepositorySearchQueryParameters(pageSearchQueryParameters);
+
   const userService = new UserService(fetch);
   const organizationService = new OrganizationService(fetch);
-  const repositoryService = new RepositoryService(fetch);
+  const repositorySearchService = new RepositorySearchService(fetch);
 
   const [profile, organizations, repositories] = await Promise.all([
     userService.getUserProfile(username),
     organizationService.listOrganizationsForUser(username),
-    repositoryService.getUserRepositories(username),
+    repositorySearchService.searchRepositoriesForUser(username, searchQueryParameters),
   ]);
 
   const allRepositoriesListViewModel: AllRepositoriesListViewModel = {

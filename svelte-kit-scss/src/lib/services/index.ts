@@ -5,3 +5,4 @@ export * from './issue-milestone-service';
 export * from './user-service';
 export * from './organization-service';
 export * from './repository-service';
+export * from './search-repository-service';
