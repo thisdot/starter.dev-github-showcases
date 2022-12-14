@@ -13,28 +13,39 @@ describe('Repo About', () => {
           json: () => {
             return new Promise((resolve) => {
               resolve({
-               data: {
-                repository : {
-                  readme: {
-                    text: '# Test Repo'
+                data: {
+                  repository: {
+                    isPrivate: false,
+                    forkCount: 1,
+                    description: 'Test Repo',
+                    homepageUrl: 'http://localhost',
+                    readme: {
+                      text: '# Test Repo',
+                    },
+                    stargazerCount: 1,
+                    issues: {
+                      totalCount: 1,
+                    },
+                    topics: {
+                      nodes: [
+                        {
+                          topic: {
+                            name: 'test',
+                          },
+                        },
+                      ],
+                    },
+                    watchers: {
+                      totalCount: 1,
+                    },
+                    pullRequests: {
+                      totalCount: 1,
+                    },
+                    owner: {
+                      orgName: 'test',
+                    },
                   },
-                  stargazerCount: 1,
-                  issues: {
-                    totalCount: 1
-                  },
-                  topics: ['test'],
-                  homepageUrl: 'http://localhost',
-                  watchers: {
-                    totalCount: 1
-                  },
-                  pullRequests: {
-                    totalCount: 1
-                  },
-                  owner: {
-                    orgName: 'test',
-                  }
-                }
-               }
+                },
               });
             });
           },
@@ -42,7 +53,7 @@ describe('Repo About', () => {
       });
     };
 
-    wrapper = render(() => (
+    wrapper = await render(() => (
       <Router>
         <RepoProvider>
           <RepoAboutWidget />
@@ -55,10 +66,12 @@ describe('Repo About', () => {
     expect(wrapper).toBeTruthy();
   });
 
-  // it('should show show contents', async () => {
-  //   const contents = await wrapper.getByTestId('about-info');
-  //   const topic = await wrapper.getByText(aboutData.info.data.topics[0]);
-  //   expect(contents.innerHTML).toBeTruthy();
-  //   expect(topic).toBeVisible();
-  // })
-})
+  it('should show contents', () => {
+    setTimeout(async () => {
+      const contents = await wrapper.getByTestId('about-info');
+      const topic = await wrapper.getByText('test');
+      expect(contents.innerHTML).toBeTruthy();
+      expect(topic).toBeVisible();
+    }, 500);
+  });
+});

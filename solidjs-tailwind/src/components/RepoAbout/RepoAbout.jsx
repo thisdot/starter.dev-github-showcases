@@ -12,7 +12,7 @@ export const RepoAboutWidget = () => {
     <div class={styles.container}>
       <h3 class={styles.heading}>About</h3>
       <div class={styles.description}>
-        <div data-testid="about-info" class="sp?ace-y-4">
+        <div data-testid="about-info" class="space-y-4">
           <Description text={info().info?.description} />
           <HomepageUrl homepageUrl={info().info?.homepageUrl} />
           <Topics topics={info().info?.topics || []} />
