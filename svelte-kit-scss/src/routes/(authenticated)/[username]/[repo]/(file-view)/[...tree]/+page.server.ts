@@ -1,5 +1,6 @@
 import { ENV } from '$lib/constants/env';
 import {
+  buildMarkdownPreviewHtml,
   composeDirHref,
   remapBranchOption,
   remapFileExplorerFolderContentsItem,
@@ -65,7 +66,7 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
     ...layoutData,
     parentHref,
     contents,
-    readme: readmeData.content,
+    readmeHtml: buildMarkdownPreviewHtml(readmeData),
     branches: branches.map((branch) =>
       remapBranchOption(branch, (branchName: string) =>
         composeDirHref(folderPath, username, repo, branchName, repositoryState.defaultBranch)
