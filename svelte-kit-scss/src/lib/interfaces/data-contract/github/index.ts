@@ -3,5 +3,6 @@ export * from './milestones';
 export * from './common';
 export * from './repository';
 export * from './repository-contents';
+export * from './repository-search';
 export * from './users';
 export * from './organizations';

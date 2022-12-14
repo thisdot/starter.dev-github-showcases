@@ -1,4 +1,3 @@
-export * from './repositories';
 export * from './gists';
 export * from './users';
 export * from './repository';
@@ -8,3 +7,4 @@ export * from './issues';
 export * from './issue-milestone';
 export * from './organizations';
 export * from './common';
+export * from './repository-search';
