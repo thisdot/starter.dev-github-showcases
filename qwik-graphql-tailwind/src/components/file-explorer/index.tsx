@@ -1,5 +1,4 @@
 import { component$, useContext } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
 import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
 import { FolderIcon, DocumentIcon } from '~/components/icons';
 import * as styles from './file-explorer.classNames';
@@ -36,9 +35,9 @@ export const FileExplorer = component$(() => {
                 <DocumentIcon className={styles.iconFile} />
               )}
             </div>
-            <Link href={`${basePath}/${item.type}/${branch}/${item.path}`}>
+            <a href={`${basePath}/${item.type}/${branch}/${item.path}`}>
               <span className={styles.link}>{item.name}</span>
-            </Link>
+            </a>
           </div>
         </div>
       ))}
