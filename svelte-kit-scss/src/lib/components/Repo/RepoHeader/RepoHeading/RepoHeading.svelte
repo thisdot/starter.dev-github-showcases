@@ -11,9 +11,9 @@
     owner: { login },
   } = repo);
 
-  const ownerPath = `/${login}`;
+  $: ownerPath = `/${login}`;
 
-  const repoPath = `/${login}/${name}`;
+  $: repoPath = `/${login}/${name}`;
 </script>
 
 <div class="heading">

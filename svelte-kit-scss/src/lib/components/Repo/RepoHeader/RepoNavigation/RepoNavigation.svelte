@@ -11,7 +11,7 @@
   const issueSearchPageTypeIssue = Object.keys(
     IssueSearchPageTypeFiltersMap
   )[0] as SearchIssuePagePath;
-  const issueSearchPageTypeRequest = Object.keys(
+  const issueSearchPageTypePullRequest = Object.keys(
     IssueSearchPageTypeFiltersMap
   )[1] as SearchIssuePagePath;
 
@@ -20,7 +20,10 @@
     prCount = 0;
 
   $: path = $page.url.pathname;
-  $: ({ name, owner: login } = repo);
+  $: ({
+    name,
+    owner: { login },
+  } = repo);
 
   function openCode() {
     openRepoTab(DEFAULT_TAB);
@@ -31,7 +34,7 @@
   }
 
   function openPRs() {
-    openRepoTab(issueSearchPageTypeRequest);
+    openRepoTab(issueSearchPageTypePullRequest);
   }
 
   function openRepoTab(path: SearchIssuePagePath | DefaultTab) {
@@ -47,7 +50,7 @@
         on:keypress={openCode}
         class="tab tab--inactive"
         class:tab--active={!path.includes(issueSearchPageTypeIssue) &&
-          !path.includes(issueSearchPageTypeRequest)}
+          !path.includes(issueSearchPageTypePullRequest)}
       >
         <span class="icon">
           <Code16 />
@@ -72,7 +75,7 @@
         on:click={openPRs}
         on:keypress={openPRs}
         class="tab tab--inactive"
-        class:tab--active={path.includes(issueSearchPageTypeRequest)}
+        class:tab--active={path.includes(issueSearchPageTypePullRequest)}
       >
         <span class="icon">
           <GitPullRequest16 />
