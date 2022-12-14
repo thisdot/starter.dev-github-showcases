@@ -6,7 +6,15 @@
   import type { PageServerData } from './$types';
   export let data: PageServerData;
 
-  $: ({ parentHref, contents, branches, defaultBranch, currentBranch } = data);
+  $: ({
+    parentHref,
+    contents,
+    branches,
+    defaultBranch,
+    currentBranch,
+    repositoryState,
+    readmeHtml,
+  } = data);
 </script>
 
 <div class="container grid grid-cols-12 subpage">
@@ -16,11 +24,11 @@
   </section>
 
   <section class="col-span-3 col-sm-span-12">
-    <FileExplorerAbout repoInfo={data?.repoInfo} />
+    <FileExplorerAbout {repositoryState} />
   </section>
 
   <section class="col-span-9">
-    <FileExplorerReadme readme={data?.readme} />
+    <FileExplorerReadme html={readmeHtml} />
   </section>
 </div>
 

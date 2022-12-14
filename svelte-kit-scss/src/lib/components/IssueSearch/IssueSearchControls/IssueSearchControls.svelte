@@ -2,7 +2,7 @@
   import { goto } from '$app/navigation';
   import DropdownMenuSelect from '$lib/components/shared/Dropdown/DropdownMenuSelect/DropdownMenuSelect.svelte';
   import DropdownFilterTextButton from './DropdownFilterTextButton.svelte';
-  import type { NavigationFilterOption } from './models';
+  import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
   import IssueStateFilter from './IssueStateFilter.svelte';
 
   export let sortFilters: NavigationFilterOption[];

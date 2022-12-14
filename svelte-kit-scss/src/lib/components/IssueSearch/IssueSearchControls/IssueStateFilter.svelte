@@ -1,17 +1,25 @@
 <script lang="ts">
   import IssueStateIcon from '../IssueSearchListItem/IssueStateIcon.svelte';
-  import type { NavigationFilterOption } from './models';
   import { IssueState } from '$lib/interfaces';
+  import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
 
   export let options: NavigationFilterOption[];
   $: [openFilter, closedFilter] = options;
 </script>
 
-<div class="issue-state-filters" data-sveltekit-preload-data="off">
-  <a class="link" href={openFilter.href} class:active={openFilter.active}
+<div class="issue-state-filters">
+  <a
+    class="link"
+    href={openFilter.href}
+    class:active={openFilter.active}
+    data-sveltekit-preload-data="off"
     ><IssueStateIcon state={IssueState.Open} /><span>{openFilter.label}</span></a
   >
-  <a class="link" href={closedFilter.href} class:active={closedFilter.active}
+  <a
+    class="link"
+    href={closedFilter.href}
+    class:active={closedFilter.active}
+    data-sveltekit-preload-data="off"
     ><IssueStateIcon state={IssueState.Closed} /><span>{closedFilter.label}</span></a
   >
 </div>

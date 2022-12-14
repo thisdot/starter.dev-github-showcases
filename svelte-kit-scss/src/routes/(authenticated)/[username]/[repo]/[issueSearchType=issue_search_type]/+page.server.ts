@@ -13,7 +13,7 @@ import {
   SEARCH_QUERY_PARAMETER_QUALIFIER,
   splitFilterParameters,
 } from '$lib/helpers/issues-search-query-builder';
-import type { NavigationFilterOption } from '$lib/components/IssueSearch/IssueSearchControls/models';
+import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
 import { redirect } from '@sveltejs/kit';
 
 const DEFAULT_PER_PAGE = 25;

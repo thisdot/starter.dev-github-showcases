@@ -1,38 +1,44 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import type { RepoState } from '$lib/interfaces';
+  import type { RepositoryState } from '$lib/interfaces';
   import { Code16, GitPullRequest16, IssueOpened16 } from 'svelte-octicons';
   import { page } from '$app/stores';
   import { IssueSearchPageTypeFiltersMap } from '$lib/constants/matchers';
-  let path: string;
 
-  const issueSearchPageTypeIssue = Object.keys(IssueSearchPageTypeFiltersMap)[0];
-  const issueSearchPageTypeRequest = Object.keys(IssueSearchPageTypeFiltersMap)[1];
+  const DEFAULT_TAB = '';
+  type DefaultTab = typeof DEFAULT_TAB;
+  type SearchIssuePagePath = keyof typeof IssueSearchPageTypeFiltersMap;
+  const issueSearchPageTypeIssue = Object.keys(
+    IssueSearchPageTypeFiltersMap
+  )[0] as SearchIssuePagePath;
+  const issueSearchPageTypePullRequest = Object.keys(
+    IssueSearchPageTypeFiltersMap
+  )[1] as SearchIssuePagePath;
 
-  function getPath(currentPath: string) {
-    path = currentPath;
-  }
-
-  $: getPath($page.url.pathname);
-
-  export let repo: RepoState,
+  export let repo: RepositoryState,
     issueCount = 0,
     prCount = 0;
 
+  $: path = $page.url.pathname;
+  $: ({
+    name,
+    owner: { login },
+  } = repo);
+
   function openCode() {
-    openTabLink('');
+    openRepoTab(DEFAULT_TAB);
   }
 
   function openIssues() {
-    openTabLink(issueSearchPageTypeIssue);
+    openRepoTab(issueSearchPageTypeIssue);
   }
 
   function openPRs() {
-    openTabLink(issueSearchPageTypeRequest);
+    openRepoTab(issueSearchPageTypePullRequest);
   }
 
-  function openTabLink(link: string) {
-    goto(`/${repo?.ownerName}/${repo?.repoName}/${link}`);
+  function openRepoTab(path: SearchIssuePagePath | DefaultTab) {
+    goto(`/${login}/${name}/${path}`);
   }
 </script>
 
@@ -44,7 +50,7 @@
         on:keypress={openCode}
         class="tab tab--inactive"
         class:tab--active={!path.includes(issueSearchPageTypeIssue) &&
-          !path.includes(issueSearchPageTypeRequest)}
+          !path.includes(issueSearchPageTypePullRequest)}
       >
         <span class="icon">
           <Code16 />
@@ -69,7 +75,7 @@
         on:click={openPRs}
         on:keypress={openPRs}
         class="tab tab--inactive"
-        class:tab--active={path.includes(issueSearchPageTypeRequest)}
+        class:tab--active={path.includes(issueSearchPageTypePullRequest)}
       >
         <span class="icon">
           <GitPullRequest16 />

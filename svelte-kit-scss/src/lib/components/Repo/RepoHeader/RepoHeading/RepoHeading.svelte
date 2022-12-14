@@ -1,15 +1,19 @@
 <script lang="ts">
-  import type { RepoState } from '$lib/interfaces';
+  import type { RepositoryState } from '$lib/interfaces';
   import { titleCase } from '$lib/helpers/formatting';
   import { Repo24 } from 'svelte-octicons';
 
-  export let repo: RepoState;
+  export let repo: RepositoryState;
 
-  const ownerPath = `/${repo?.ownerName}`;
+  $: ({
+    name,
+    visibility,
+    owner: { login },
+  } = repo);
 
-  const repoPath = `/${repo?.ownerName}/${repo?.repoName}`;
+  $: ownerPath = `/${login}`;
 
-  const visibility = repo?.visibility || '';
+  $: repoPath = `/${login}/${name}`;
 </script>
 
 <div class="heading">
@@ -17,11 +21,11 @@
     <Repo24 />
   </span>
   <div class="heading__breadcrumb">
-    <a href={ownerPath}>{repo?.ownerName}</a>
+    <a href={ownerPath}>{login}</a>
     <span>/</span>
-    <a href={repoPath} class="bold">{repo?.repoName}</a>
+    <a href={repoPath} class="bold">{name}</a>
   </div>
-  {#if repo?.visibility}
+  {#if visibility}
     <div class="heading__privacy">
       <span>{titleCase(visibility)}</span>
     </div>
