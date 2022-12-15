@@ -44,5 +44,3 @@ export const REPOS_URL = `${GITHUB_URL_BASE}/user/repos`;
 //   page: number
 // ) =>
 //   `${GITHUB_URL_BASE}/search/issues?q=repo:${user}/${repo}%20is:${type}%20state:${state}&per_page=${per_page}&page=${page}`;
-
-
