@@ -1,6 +1,6 @@
 import adapter from '@sveltejs/adapter-netlify';
 import preprocess from 'svelte-preprocess';
-import GlobalPolyFill from "@esbuild-plugins/node-globals-polyfill";
+import GlobalPolyFill from '@esbuild-plugins/node-globals-polyfill';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -15,16 +15,16 @@ const config = {
   },
   optimizeDeps: {
     esbuildOptions: {
-        define: {
-            global: "globalThis",
-        },
-        plugins: [
-            GlobalPolyFill({
-                buffer: true,
-            }),
-        ],
+      define: {
+        global: 'globalThis',
+      },
+      plugins: [
+        GlobalPolyFill({
+          buffer: true,
+        }),
+      ],
     },
-},
+  },
 };
 
 export default config;
