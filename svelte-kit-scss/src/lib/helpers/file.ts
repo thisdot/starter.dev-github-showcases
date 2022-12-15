@@ -86,7 +86,8 @@ export const remapFileContents = (
 ): FileContents | undefined => {
   return responseData
     ? {
-        content: Buffer.from(responseData.content, 'base64').toString('binary'),
+        // content: Buffer.from(responseData.content, 'base64').toString('binary'),
+        content: atob(responseData.content),
         name: responseData.name,
         size: responseData.size,
         type: responseData.type,
