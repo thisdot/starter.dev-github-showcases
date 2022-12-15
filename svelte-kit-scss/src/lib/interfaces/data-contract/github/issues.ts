@@ -1,5 +1,3 @@
-import type { GithubCollectionPage } from './common';
-
 // todo: cleanup
 export interface GithubSearchIssueLabel {
   id: number;

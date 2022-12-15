@@ -1,8 +1,4 @@
-import {
-  GithubIssueAuthorAssociation,
-  type GithubCollectionPage,
-  type GithubSearchIssue,
-} from '$lib/interfaces';
+import { GithubIssueAuthorAssociation, type GithubSearchIssue } from '$lib/interfaces';
 
 export const MOCK_SEARCH_ISSUE: GithubSearchIssue = {
   id: 35802,

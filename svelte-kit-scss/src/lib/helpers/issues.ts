@@ -2,12 +2,10 @@ import {
   type GithubSearchIssueLabel,
   type GithubSearchIssue,
   type Issue,
-  type IssueCollection,
   type IssueLabel,
   type IssueUser,
   type GithubSearchIssueUser,
   IssueState,
-  type GithubCollectionPage,
 } from '$lib/interfaces';
 
 const remapIssueLabel = (label: GithubSearchIssueLabel): IssueLabel => ({
