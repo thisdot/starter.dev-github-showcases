@@ -1,5 +1,5 @@
 import { component$, useContext } from '@builder.io/qwik';
-import { RepoContext } from '~/routes/[owner]/[name]';
+import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
 import { BookOpenIcon } from '../icons/book-open.icon';
 import { Description } from './description';
 import { HomepageUrl } from './homepage-url';

@@ -1,8 +1,7 @@
 import type { TabItem } from './types';
 import * as styles from './tab-navigation.classNames';
 import { component$ } from '@builder.io/qwik';
-import { Link, useLocation } from '@builder.io/qwik-city';
-import { stringify } from 'query-string';
+import { Link } from '@builder.io/qwik-city';
 
 export interface TabNavigationProps {
   tabs: TabItem[];
@@ -10,24 +9,13 @@ export interface TabNavigationProps {
   className?: string;
   isOrg?: boolean;
   pathname: string;
-  query?: {
-    name: string;
-    owner: string;
-    stargazerCount: number | string;
-    forkCount: number | string;
-    watcherCount: number | string;
-    issuesCount: number | string;
-    prCount: number | string;
-  };
 }
 
-export const TabNavigation = component$(({ tabs, className, basePath = '', pathname, query }: TabNavigationProps) => {
+export const TabNavigation = component$(({ tabs, className, basePath = '', pathname }: TabNavigationProps) => {
   const isCurrentTab = (pathName?: string) => {
     const otherPaths = tabs.filter(({ path }) => path !== pathName).map(({ path }) => path);
     return pathName !== '' ? pathname.includes(pathName!) : otherPaths.every((path) => !pathname.includes(path!));
   };
-
-  const _query = query || useLocation().query;
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -38,7 +26,7 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
           return (
             <Link
               key={index}
-              href={href + '?' + stringify(_query)}
+              href={href}
               className={`${isCurrentTab(path) ? styles.tabActive : styles.tabInactive} ${styles.tab}`}
             >
               <Icon className={`${isCurrentTab(path) ? styles.iconActive : styles.iconInactive} ${styles.icon}`} />
