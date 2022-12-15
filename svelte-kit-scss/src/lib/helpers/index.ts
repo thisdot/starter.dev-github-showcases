@@ -12,3 +12,4 @@ export * from './issue-milestone';
 export * from './organizations';
 export * from './common';
 export * from './router';
+export * from './repository-search';

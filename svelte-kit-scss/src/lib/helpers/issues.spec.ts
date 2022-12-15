@@ -1,7 +1,7 @@
 import { IssueState, type GithubSearchIssueUser, type IssueUser } from '$lib/interfaces';
 import { describe, it } from 'vitest';
-import { remapIssue, remapRepoIssueCollection } from './issues';
-import { MOCK_SEARCH_ISSUE, MOCK_SEARCH_ISSUES_RESPONSE } from './mocks/issues';
+import { remapIssue } from './issues';
+import { MOCK_SEARCH_ISSUE } from './mocks/issues';
 
 describe('.remapIssue', () => {
   describe('when called', () => {
@@ -30,17 +30,3 @@ function expectUserMappingCorrect(actual: IssueUser, expected: GithubSearchIssue
   expect(actual.login).toEqual(expected.login);
   expect(actual.avatarUrl).toEqual(expected.avatar_url);
 }
-
-describe('.remapRepoIssueCollection', () => {
-  describe('when called', () => {
-    it('returns expected result', () => {
-      const result = remapRepoIssueCollection(MOCK_SEARCH_ISSUES_RESPONSE);
-
-      expect(result).toBeTruthy();
-      expect(result.totalCount).toEqual(MOCK_SEARCH_ISSUES_RESPONSE.total_count);
-      expect(result.issues).toBeInstanceOf(Array);
-      expect(result.issues.length).toEqual(MOCK_SEARCH_ISSUES_RESPONSE.items.length);
-      expect(result.issues).toEqual(MOCK_SEARCH_ISSUES_RESPONSE.items.map(remapIssue));
-    });
-  });
-});

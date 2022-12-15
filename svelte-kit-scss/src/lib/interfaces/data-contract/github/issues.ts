@@ -33,6 +33,8 @@ export enum GithubIssueAuthorAssociation {
  * [`Github API: Search > Search issues and pull requests`](https://docs.github.com/en/rest/search?apiVersion=2022-11-28#search-issues-and-pull-requests)
  */
 export interface GithubSearchIssue {
+  // properties commented for easier mocking
+
   // url: string;
   // repository_url: string;
   // labels_url: string;
@@ -73,10 +75,4 @@ export interface GithubSearchIssue {
   // review_comments_url: string;
   // review_comment_url: string;
   // statuses_url: string;
-}
-
-export interface GithubSearchIssueApiResponse {
-  total_count: number;
-  incomplete_results: boolean;
-  items: GithubSearchIssue[];
 }
