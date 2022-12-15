@@ -11,6 +11,10 @@ export default extendConfig(baseConfig, () => {
       },
       outDir: '.netlify/edge-functions/entry.netlify-edge',
     },
-    plugins: [netifyEdgeAdaptor()],
+    plugins: [
+      netifyEdgeAdaptor({
+        staticGenerate: true,
+      }),
+    ],
   };
 });
