@@ -33,8 +33,8 @@ const config: UserConfig & { test: VitestConfig['test'] } = {
     alias: {
       $lib: path.resolve(__dirname, './src/lib'),
       '@toruslabs/openlogin': path.resolve(
-          './node_modules/@toruslabs/openlogin/dist/openlogin.umd.min.js'
-      )
+        './node_modules/@toruslabs/openlogin/dist/openlogin.umd.min.js'
+      ),
     },
   },
 };
