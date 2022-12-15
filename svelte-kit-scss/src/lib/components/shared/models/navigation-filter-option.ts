@@ -1,5 +1,5 @@
 export interface NavigationFilterOption {
-  label: string;
-  href: string;
   active: boolean;
+  href: string;
+  label: string;
 }

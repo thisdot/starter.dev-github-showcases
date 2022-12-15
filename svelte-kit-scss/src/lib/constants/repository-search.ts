@@ -1,4 +1,5 @@
 export enum RepositorySearchType {
+  All = '',
   Public = 'public',
   Private = 'private',
   Sources = 'sources',
@@ -13,3 +14,5 @@ export enum RepositorySearchSort {
   Name = 'name',
   Stars = 'stars',
 }
+
+export const REPOSITORY_FILTERS_LABELS_MAP = new Map([RepositorySearchType]);
