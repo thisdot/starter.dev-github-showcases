@@ -53,6 +53,7 @@
     "@typescript-eslint/eslint-plugin": "5.45.1",
     "@typescript-eslint/parser": "5.45.1",
     "babel-loader": "9.1.0",
+    "buffer": "^6.0.3",
     "eslint": "8.29.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
