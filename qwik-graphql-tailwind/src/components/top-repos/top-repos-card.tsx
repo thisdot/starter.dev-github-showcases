@@ -9,7 +9,7 @@ interface UserTopReposViewProps {
   login: string;
   repos: TopRepo[];
 }
-export default component$(({ repos, login }: UserTopReposViewProps) => {
+export const TopReposListItems = component$(({ repos, login }: UserTopReposViewProps) => {
   if (repos.length === 0) {
     return <div>No repositories found</div>;
   }

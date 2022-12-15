@@ -12,7 +12,7 @@ interface GistStore {
   isLoading: boolean;
 }
 
-export default component$(() => {
+export const Gists = component$(() => {
   const store = useStore<GistStore>({
     data: [],
     isLoading: true,
