@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "@babel/core": "7.20.5",
-    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@fontsource/fira-mono": "4.5.10",
     "@neoconfetti/svelte": "1.0.0",
     "@playwright/test": "1.28.1",
