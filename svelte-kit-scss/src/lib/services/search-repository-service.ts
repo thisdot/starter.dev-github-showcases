@@ -1,30 +1,22 @@
 import { ENV } from '$lib/constants/env';
-import { remapRepository } from '$lib/helpers';
-import type { RepositorySearchResultItem } from '$lib/interfaces';
-import type { GithubRepositorySearchResultItem } from '$lib/interfaces/data-contract/github';
+import { RepositorySearchSort, RepositorySearchType } from '$lib/constants/repository-search';
+import { remapRepository, remapCollectionPage } from '$lib/helpers';
+import type {
+  CollectionPage,
+  RepositorySearchQueryParameters,
+  RepositorySearchResultItem,
+} from '$lib/interfaces';
+import type {
+  GithubCollectionPage,
+  GithubRepositorySearchResultItem,
+} from '$lib/interfaces/data-contract/github';
 
 import { AbstractFetchService } from './abstract-fetch-service';
 
-export enum RepositorySearchType {
-  Public = 'public',
-  Private = 'private',
-  Sources = 'sources',
-  Forks = 'forks',
-  Archived = 'archived',
-  Mirrors = 'mirrors',
-  Templates = 'templates',
-}
-
-export enum RepositorySearchSort {
-  LastUpdated = 'updated',
-  Name = 'name',
-  Stars = 'stars',
-}
-
 const MAP_SORT = new Map([
-  [RepositorySearchSort.LastUpdated, 'updated'],
-  [RepositorySearchSort.Name, 'name-asc'],
-  [RepositorySearchSort.Stars, 'stars'],
+  [RepositorySearchSort.LastUpdated, 'sort:updated'],
+  [RepositorySearchSort.Name, 'sort:name-asc'],
+  [RepositorySearchSort.Stars, 'sort:stars'],
 ]);
 
 const MAP_TYPE = new Map([
@@ -36,13 +28,6 @@ const MAP_TYPE = new Map([
   [RepositorySearchType.Mirrors, 'mirror:true'],
   [RepositorySearchType.Templates, 'is_template:true'],
 ]);
-
-export type RepositorySearchQueryParameters = {
-  language?: string;
-  sort?: RepositorySearchSort;
-  term?: string;
-  type?: RepositorySearchType;
-};
 
 export class RepositorySearchService extends AbstractFetchService {
   private readonly endpoint = '/search/repositories';
@@ -64,12 +49,15 @@ export class RepositorySearchService extends AbstractFetchService {
   async searchRepositoriesForUser(
     username: string,
     params: RepositorySearchQueryParameters
-  ): Promise<RepositorySearchResultItem[]> {
+  ): Promise<CollectionPage<RepositorySearchResultItem>> {
     const query = this.buildRepositorySearchRequestQueryForUser(username, params);
+    console.log(query);
     const url = new URL(this.endpoint, ENV.GITHUB_URL);
     url.searchParams.append('q', query);
-    const items = await this.rejectableFetchJson<GithubRepositorySearchResultItem[]>(url);
-    return items.map(remapRepository);
+    const collectionPage = await this.rejectableFetchJson<
+      GithubCollectionPage<GithubRepositorySearchResultItem>
+    >(url);
+    return remapCollectionPage(collectionPage, remapRepository);
   }
 
   private buildRepositorySearchRequestQueryForUser(
@@ -77,7 +65,7 @@ export class RepositorySearchService extends AbstractFetchService {
     params: RepositorySearchQueryParameters
   ): string {
     const { language, sort, term, type } = params;
-    const parts = [];
+    const parts = [`user:${username}`];
     if (language) {
       parts.push(`language:${language}`);
     }
@@ -86,13 +74,12 @@ export class RepositorySearchService extends AbstractFetchService {
     }
     const sortValue = sort ? MAP_SORT.get(sort) : null;
     if (sortValue) {
-      parts.push(`sort:${sortValue}`);
+      parts.push(sortValue);
     }
     const typeValue = type ? MAP_TYPE.get(type) : null;
     if (typeValue) {
-      parts.push(`sort:${typeValue}`);
+      parts.push(typeValue);
     }
-    parts.push(`user:${username}`);
     return parts.join(' ');
   }
 }

@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url })
   const organizationService = new OrganizationService(fetch);
   const repositorySearchService = new RepositorySearchService(fetch);
 
-  const [profile, organizations, repositories] = await Promise.all([
+  const [profile, organizations, { items: repositories }] = await Promise.all([
     userService.getUserProfile(username),
     organizationService.listOrganizationsForUser(username),
     repositorySearchService.searchRepositoriesForUser(username, searchQueryParameters),

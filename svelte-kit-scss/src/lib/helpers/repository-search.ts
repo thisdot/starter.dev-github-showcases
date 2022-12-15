@@ -1,15 +1,8 @@
-import {
-  RepositorySearchSort,
-  RepositorySearchType,
-  type RepositorySearchQueryParameters,
-} from '$lib/services';
-
-export type RepositoryPageSearchQueryParameters = {
-  language?: string;
-  q?: string;
-  sort?: string;
-  type?: string;
-};
+import { RepositorySearchSort, RepositorySearchType } from '$lib/constants/repository-search';
+import type {
+  RepositoryPageSearchQueryParameters,
+  RepositorySearchQueryParameters,
+} from '$lib/interfaces';
 
 export const extractRepositoryPageSearchQueryParameters = (
   url: URL

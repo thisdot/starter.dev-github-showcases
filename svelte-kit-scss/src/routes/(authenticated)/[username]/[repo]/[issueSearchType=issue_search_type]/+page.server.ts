@@ -76,7 +76,7 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
     url: { searchParams, href },
   } = event;
 
-  const service = new IssuesSearchService(fetch, DEFAULT_PER_PAGE);
+  const service = new IssuesSearchService(fetch);
   const milestoneService = new IssueMilestoneService(fetch);
   const { username, repo, issueSearchType } = params;
 
@@ -95,7 +95,10 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
   const pageDefaultRepo = `${username}/${repo}`;
   const requestSearchQuery = ensureRepoParameter(searchQuery, pageDefaultRepo);
 
-  const issuesPromise = service.getIssues(requestSearchQuery, { page: currentPage });
+  const issuesPromise = service.getIssues(requestSearchQuery, {
+    page: currentPage,
+    perPage: DEFAULT_PER_PAGE,
+  });
 
   const searchQueryOpen = estimateSearchQueryForParameter(
     requestSearchQuery,

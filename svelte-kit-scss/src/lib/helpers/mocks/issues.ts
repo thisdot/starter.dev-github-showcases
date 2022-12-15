@@ -1,7 +1,7 @@
 import {
   GithubIssueAuthorAssociation,
+  type GithubCollectionPage,
   type GithubSearchIssue,
-  type GithubSearchIssueApiResponse,
 } from '$lib/interfaces';
 
 export const MOCK_SEARCH_ISSUE: GithubSearchIssue = {
@@ -42,10 +42,4 @@ export const MOCK_SEARCH_ISSUE: GithubSearchIssue = {
   closed_at: null,
   locked: true,
   author_association: GithubIssueAuthorAssociation.Collaborator,
-};
-
-export const MOCK_SEARCH_ISSUES_RESPONSE: GithubSearchIssueApiResponse = {
-  total_count: 123,
-  incomplete_results: false,
-  items: [MOCK_SEARCH_ISSUE, MOCK_SEARCH_ISSUE],
 };

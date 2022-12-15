@@ -32,5 +32,5 @@ export interface Issue {
 
 export interface IssueCollection {
   totalCount: number;
-  issues: Issue[];
+  items: Issue[];
 }

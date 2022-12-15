@@ -12,4 +12,4 @@ export * from './issue-milestone';
 export * from './organizations';
 export * from './common';
 export * from './router';
-export * from './reposiotry-search';
+export * from './repository-search';

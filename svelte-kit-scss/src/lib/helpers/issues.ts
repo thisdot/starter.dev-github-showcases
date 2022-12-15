@@ -1,13 +1,13 @@
 import {
   type GithubSearchIssueLabel,
   type GithubSearchIssue,
-  type GithubSearchIssueApiResponse,
   type Issue,
   type IssueCollection,
   type IssueLabel,
   type IssueUser,
   type GithubSearchIssueUser,
   IssueState,
+  type GithubCollectionPage,
 } from '$lib/interfaces';
 
 const remapIssueLabel = (label: GithubSearchIssueLabel): IssueLabel => ({
@@ -41,14 +41,5 @@ export const remapIssue = (issue: GithubSearchIssue): Issue => {
     state: remapIssueState(issue.state),
     title: issue.title,
     user: remapIssueUser(issue.user),
-  };
-};
-
-export const remapRepoIssueCollection = (
-  responseBody: GithubSearchIssueApiResponse
-): IssueCollection => {
-  return {
-    totalCount: responseBody.total_count,
-    issues: responseBody.items.map(remapIssue).filter(Boolean) as Issue[],
   };
 };
