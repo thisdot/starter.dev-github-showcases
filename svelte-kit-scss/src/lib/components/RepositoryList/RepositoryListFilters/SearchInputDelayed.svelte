@@ -1,7 +1,19 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { Search16, Sync16 } from 'svelte-octicons';
+
   export let value: string | null | undefined;
   export let delay = 3000;
+  let timeout: NodeJS.Timeout | undefined = undefined;
+  $: loading = Boolean(timeout);
+
+  const resetTimeout = (): void => {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = undefined;
+    }
+  };
+
   const dispatch = createEventDispatcher<{ input: string | null }>();
 
   const dispatchFiltersChange = (newValue: string | null): void => {
@@ -9,14 +21,11 @@
       value = newValue;
       dispatch('input', newValue);
     }
+    resetTimeout();
   };
 
-  let timeout: NodeJS.Timeout | undefined;
   const scheduleInputDispatch = (value: string | null): void => {
-    if (timeout) {
-      clearTimeout(timeout);
-      timeout = undefined;
-    }
+    resetTimeout();
     timeout = setTimeout(() => dispatchFiltersChange(value), delay);
   };
 
@@ -28,26 +37,48 @@
   };
 </script>
 
-<input
-  class="search-input-delayed"
-  aria-label="Search repository"
-  type="search"
-  placeholder="Find a repository..."
-  value={value || ''}
-  on:input={handleInput}
-/>
+<div class="search-input-delayed">
+  <div class="icon">
+    {#if loading}
+      <Sync16 />
+    {:else}
+      <Search16 />
+    {/if}
+  </div>
+
+  <input
+    class="input"
+    aria-label="Search repository"
+    type="search"
+    placeholder="Find a repository..."
+    value={value || ''}
+    on:input={handleInput}
+  />
+  {timeout}
+</div>
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
 
   .search-input-delayed {
-    font-size: 1em;
-    line-height: 1.5em;
-    padding: 0.375em;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    border-radius: 0.375em;
-    border: 1px solid variables.$gray300;
+    display: inline-block;
     flex-grow: 1;
+    position: relative;
+    .icon {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 0.25em 0.5em;
+    }
+    .input {
+      font-size: 1em;
+      line-height: 1.5em;
+      padding: 0.375em 0.375em 0.375em 2em;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      border-radius: 0.375em;
+      border: 1px solid variables.$gray300;
+      width: 100%;
+    }
   }
 </style>
