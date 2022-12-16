@@ -1,4 +1,4 @@
-import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
+import { component$, QRL, useClientEffect$, useStore } from '@builder.io/qwik';
 import { USER_GISTS_QUERY } from '../../utils/queries/gists-query';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
 import GistListItem from './gist-list-item';
@@ -6,6 +6,7 @@ import { useQuery } from '../../utils/useQuery';
 import { parseQuery } from './parseQuery';
 import * as styles from './gists.className';
 import { GistItem } from './types';
+import { useSessionStorage } from '~/hook/useSessionStorage';
 
 interface GistStore {
   data: GistItem[];
@@ -13,15 +14,22 @@ interface GistStore {
 }
 
 export default component$(() => {
+  const [cachedGists, setGists] = useSessionStorage('gist', '');
+
   const store = useStore<GistStore>({
     data: [],
     isLoading: true,
   });
 
   useClientEffect$(async () => {
-    const abortController = new AbortController();
-    const response = await fetchGIst(abortController);
-    updateGists(store, response);
+    if (cachedGists.value) {
+      store.isLoading = false;
+      store.data = cachedGists.value;
+    } else {
+      const abortController = new AbortController();
+      const response = await fetchGIst(abortController);
+      updateGists(store, response, setGists);
+    }
   });
 
   return (
@@ -45,7 +53,7 @@ export default component$(() => {
   );
 });
 
-export function updateGists(store: GistStore, response: any) {
+export function updateGists(store: GistStore, response: any, setGists: QRL<(value: any) => void>) {
   const {
     data: {
       viewer: {
@@ -55,6 +63,7 @@ export function updateGists(store: GistStore, response: any) {
   } = response;
   store.data = parseQuery(nodes);
   store.isLoading = false;
+  setGists(parseQuery(nodes));
 }
 
 export async function fetchGIst(abortController?: AbortController): Promise<any> {
