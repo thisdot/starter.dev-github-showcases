@@ -46,15 +46,10 @@ export const isRepositorySearchQueryParametersEqual = (
   params1: RepositorySearchQueryParameters,
   params2: RepositorySearchQueryParameters
 ): boolean => {
-  const merged12 = { ...params1, ...params2 };
-  const paramIncludes12 = !Object.keys(merged12)
-    .map((key) => key as keyof RepositorySearchQueryParameters)
-    .find((key) => merged12[key] !== params1[key]);
-  const merged21 = { ...params2, ...params1 };
-  const paramIncludes21 = !Object.keys(merged21)
-    .map((key) => key as keyof RepositorySearchQueryParameters)
-    .find((key) => merged21[key] !== params2[key]);
-  return paramIncludes12 && paramIncludes21;
+  const keysUnion = <(keyof RepositorySearchQueryParameters)[]>(
+    Object.keys({ ...params1, ...params2 })
+  );
+  return !keysUnion.find((key) => (params1[key] || undefined) !== (params2[key] || undefined));
 };
 
 export const buildURLSearchParamsForParameters = (
@@ -64,7 +59,6 @@ export const buildURLSearchParamsForParameters = (
     params,
     DEFAULT_REPOSITORY_SEARCH_QUERY_PARAMETERS_REQUIRED
   );
-
   const urlSearchParams = new URLSearchParams();
   if (!isDefault) {
     urlSearchParams.append('language', params.language || '');
@@ -75,24 +69,41 @@ export const buildURLSearchParamsForParameters = (
   return urlSearchParams;
 };
 
+export const buildRepositoryPageHrefForParameter = <
+  TParamName extends keyof RepositorySearchQueryParameters,
+  TValue extends RepositorySearchQueryParameters[TParamName]
+>(
+  currentPageUrl: URL,
+  searchQueryParameters: RepositorySearchQueryParameters,
+  paramName: TParamName,
+  value: TValue
+) => {
+  const { pathname } = currentPageUrl;
+  const params = composeRepositorySearchQueryParameters(searchQueryParameters, paramName, value);
+  const urlSearchParamsString = buildURLSearchParamsForParameters(params).toString();
+  const hrefSearch = urlSearchParamsString ? `?${urlSearchParamsString}` : '';
+  return `${pathname}${hrefSearch}`;
+};
+
 export const buildRepositoryPageNavigationFilterOptions = <
   TParamName extends keyof RepositorySearchQueryParameters,
   TValue extends RepositorySearchQueryParameters[TParamName]
 >(
-  paramName: TParamName,
-  valueLabelMap: Map<TValue, string>,
   currentPageUrl: URL,
-  searchQueryParameters: RepositorySearchQueryParameters
+  searchQueryParameters: RepositorySearchQueryParameters,
+  paramName: TParamName,
+  valueLabelMap: Map<TValue, string>
 ) => {
-  const { pathname } = currentPageUrl;
   return Array.from(valueLabelMap).map(([value, label]) => {
     const params = composeRepositorySearchQueryParameters(searchQueryParameters, paramName, value);
-    const urlSearchParamsString = buildURLSearchParamsForParameters(params).toString();
-    const hrefSearch = urlSearchParamsString ? `?${urlSearchParamsString}` : '';
-    const href = `${pathname}${hrefSearch}`;
     return {
       active: isRepositorySearchQueryParametersEqual(searchQueryParameters, params),
-      href,
+      href: buildRepositoryPageHrefForParameter(
+        currentPageUrl,
+        searchQueryParameters,
+        paramName,
+        value
+      ),
       label,
     };
   });
