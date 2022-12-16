@@ -2,7 +2,6 @@ import type { PageServerLoad } from './$types';
 import {
   buildRepositoryCardViewModel,
   buildRepositoryPageNavigationFilterOptions,
-  createLanguageMap,
   extractRepositoryPageSearchQueryParameters,
   remapRepositorySearchQueryParameters,
 } from '$lib/helpers';
@@ -38,18 +37,23 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url })
 
   const allRepositoriesListViewModel: AllRepositoriesListViewModel = {
     repositories: repositories.map(buildRepositoryCardViewModel),
-    sortFilters: buildRepositoryPageNavigationFilterOptions(
-      'sort',
-      MAP_FILTER_LABEL_SORT,
-      url,
-      searchQueryParameters
-    ),
-    typeFilters: buildRepositoryPageNavigationFilterOptions(
-      'type',
-      MAP_FILTER_LABEL_TYPE,
-      url,
-      searchQueryParameters
-    ),
+    controls: {
+      sortFilters: buildRepositoryPageNavigationFilterOptions(
+        url,
+        searchQueryParameters,
+        'sort',
+        MAP_FILTER_LABEL_SORT
+      ),
+      typeFilters: buildRepositoryPageNavigationFilterOptions(
+        url,
+        searchQueryParameters,
+        'type',
+        MAP_FILTER_LABEL_TYPE
+      ),
+      search: {
+        term: searchQueryParameters.term,
+      },
+    },
   };
 
   return {
@@ -57,6 +61,5 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url })
     organizations,
     allRepositoriesListViewModel,
     username,
-    repoLanguageList: createLanguageMap(repositories),
   };
 };

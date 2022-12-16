@@ -5,6 +5,7 @@ import type { AllRepositoriesListViewModel } from '../view-models';
 
 const MOCK_VIEW_MODEL: AllRepositoriesListViewModel = {
   repositories: MOCK_REPOSITORY_CARD_VIEW_MODELS,
+  controls: {},
 };
 
 describe('RepoList', () => {

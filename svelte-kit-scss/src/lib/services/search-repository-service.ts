@@ -51,7 +51,6 @@ export class RepositorySearchService extends AbstractFetchService {
     params: RepositorySearchQueryParameters
   ): Promise<CollectionPage<RepositorySearchResultItem>> {
     const query = this.buildRepositorySearchRequestQueryForUser(username, params);
-    console.log(query);
     const url = new URL(this.endpoint, ENV.GITHUB_URL);
     url.searchParams.append('q', query);
     const collectionPage = await this.rejectableFetchJson<

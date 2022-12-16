@@ -12,11 +12,11 @@ import {
   buildFilterParameter,
   SEARCH_QUERY_PARAMETER_QUALIFIER,
 } from '$lib/helpers/issues-search-query-builder';
-import type { RepositorySortFilters } from '$lib/enums/repositories';
+import type { RepositorySort } from '$lib/constants/repository';
 import type { NonNegativeIntegerRange } from '$lib/interfaces/type-utls';
 
 type RepositoryRequestOptions = {
-  sort?: RepositorySortFilters;
+  sort?: RepositorySort;
   pagination?: {
     perPage: NonNegativeIntegerRange<1, 200>;
   };

@@ -1,4 +1,9 @@
 <div class="box-layout">
+  {#if $$slots.top}
+    <div class="top">
+      <slot name="top" />
+    </div>
+  {/if}
   <div class="border-area">
     {#if $$slots.header}
       <div class="header">
@@ -37,11 +42,17 @@
         background: variables.$gray100;
         overflow: hidden;
       }
+      .top {
+        margin-bottom: 1em;
+      }
       .header {
         border-bottom: $border;
       }
       .footer {
         border-top: $border;
+      }
+      .bottom {
+        margin-top: 1em;
       }
     }
   }

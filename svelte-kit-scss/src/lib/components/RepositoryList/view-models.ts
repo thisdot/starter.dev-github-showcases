@@ -13,7 +13,14 @@ export type TopRepositoriesListViewModel = RepositoryListViewModel & {
   viewAllRouteHref?: string;
 };
 
-export type AllRepositoriesListViewModel = RepositoryListViewModel & {
+export type RepositoryListControlsViewModel = {
   sortFilters?: NavigationFilterOption[];
   typeFilters?: NavigationFilterOption[];
+  search?: {
+    term: string | undefined;
+  };
+};
+
+export type AllRepositoriesListViewModel = RepositoryListViewModel & {
+  controls: RepositoryListControlsViewModel;
 };
