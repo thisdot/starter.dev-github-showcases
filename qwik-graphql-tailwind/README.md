@@ -84,6 +84,10 @@ git clone https://github.com/thisdot/starter.dev.git
 
 To Be completed
 
+> ## Declaimer ⚠️
+>
+> For the [Live Demo on Netlify](https://qwik-graphql-tailwind.netlify.app/) We can't get the Netlify adapter to work with Qwik at this time due to a bug in the adapter. We gonna update the build and the demo when the bug is fixed. We used temporarily the Static adaptor instead for the Netlify demo so you may see some issues with it. However, the demo is working fine locally, so we highly recommend you clone the repo and run it locally to see the full potential of the starter kit.
+
 ## Static Site Generator (Node.js)
 
 ```
