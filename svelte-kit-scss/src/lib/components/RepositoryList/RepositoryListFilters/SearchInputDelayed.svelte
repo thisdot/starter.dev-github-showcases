@@ -54,7 +54,6 @@
     value={value || ''}
     on:input={handleInput}
   />
-  {timeout}
 </div>
 
 <style lang="scss">
