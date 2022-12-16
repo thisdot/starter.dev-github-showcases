@@ -2,6 +2,7 @@ import { component$, useContext } from '@builder.io/qwik';
 import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
 import { FolderIcon, DocumentIcon } from '~/components/icons';
 import * as styles from './file-explorer.classNames';
+import { Link } from '@builder.io/qwik-city';
 
 export const FileExplorer = component$(() => {
   const store = useContext(RepoContext);
@@ -19,11 +20,11 @@ export const FileExplorer = component$(() => {
   return (
     <div className={styles.container}>
       {repoPath && (
-        <a href={backLink}>
-          <a className={styles.cellBack}>
+        <Link href={backLink}>
+          <Link className={styles.cellBack}>
             <div className="text-blue-600">..</div>
-          </a>
-        </a>
+          </Link>
+        </Link>
       )}
       {data?.tree?.map((item) => (
         <div key={item.path} className={styles.cell}>
@@ -35,9 +36,9 @@ export const FileExplorer = component$(() => {
                 <DocumentIcon className={styles.iconFile} />
               )}
             </div>
-            <a href={`${basePath}/${item.type}/${branch}/${item.path}`}>
+            <Link href={`${basePath}/${item.type}/${branch}/${item.path}`}>
               <span className={styles.link}>{item.name}</span>
-            </a>
+            </Link>
           </div>
         </div>
       ))}

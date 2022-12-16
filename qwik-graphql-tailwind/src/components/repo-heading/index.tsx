@@ -1,4 +1,5 @@
 import { component$, useContext } from '@builder.io/qwik';
+import { Link } from '@builder.io/qwik-city';
 import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
 import { RepoIcon } from '../icons/repo.icon';
 
@@ -11,13 +12,13 @@ export const RepoHeading = component$(() => {
     <h1 className="flex items-center text-xl leading-7">
       <RepoIcon className="w-6 h-6 text-gray-600" />
       <span className="text-[#2563EB] inline-block ml-2.5 mb-0.5">
-        <a href={profile_url} className="hover:underline">
+        <Link href={profile_url} className="hover:underline">
           {store.owner}
-        </a>
+        </Link>
         <span className="text-black ml-1.5">/</span>
-        <a href={repo_url} className="font-semibold ml-1.5 hover:underline">
+        <Link href={repo_url} className="font-semibold ml-1.5 hover:underline">
           {store.name}
-        </a>
+        </Link>
       </span>
     </h1>
   );

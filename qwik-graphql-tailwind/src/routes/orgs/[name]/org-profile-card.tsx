@@ -1,4 +1,5 @@
 import { component$ } from '@builder.io/qwik';
+import { Link } from '@builder.io/qwik-city';
 import { RepoIcon } from '~/components/icons/repo.icon';
 
 export const OrgProfileCard = component$(() => {
@@ -7,7 +8,7 @@ export const OrgProfileCard = component$(() => {
       <div className="border-b border-gray-200 pt-2 ">
         <div className="grid grid-cols-12 max-w-screen-lg mx-auto">
           <div className="col-span-12 md:col-span-8 xl:col-span-12 px-4">
-            <a className="text-black">
+            <Link className="text-black">
               <h1 className="flex text-2xl font-bold">
                 <img
                   className="mr-1"
@@ -17,7 +18,7 @@ export const OrgProfileCard = component$(() => {
                 />
                 This Dot
               </h1>
-            </a>
+            </Link>
           </div>
           <div className="col-span-12 md:col-span-8 xl:col-span-12">
             <div className="px-4">

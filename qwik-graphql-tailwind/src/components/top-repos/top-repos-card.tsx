@@ -4,6 +4,7 @@ import type { TopRepo } from './types';
 
 import * as styles from './top-repos.className';
 import { RepoCard } from '~/components/repo-card/repo-card';
+import { Link } from '@builder.io/qwik-city';
 
 interface UserTopReposViewProps {
   login: string;
@@ -20,9 +21,9 @@ export default component$(({ repos, login }: UserTopReposViewProps) => {
         <RepoCard repo={repo} styles={styles} />
       ))}
       <div className={styles.linkContainer}>
-        <a href={`/${login}`} className={styles.allRepoLink}>
+        <Link href={`/${login}`} className={styles.allRepoLink}>
           View all repositories
-        </a>
+        </Link>
       </div>
     </div>
   );

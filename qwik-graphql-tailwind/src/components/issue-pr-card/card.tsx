@@ -1,4 +1,5 @@
 import { component$ } from '@builder.io/qwik';
+import { Link } from '@builder.io/qwik-city';
 import cn from 'classnames';
 import { format } from 'date-fns';
 import {
@@ -75,14 +76,14 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
       </div>
 
       <div className={styles.card_title_container}>
-        <a className={styles.card_title} href={data.url}>
+        <Link className={styles.card_title} href={data.url}>
           {data.title}
-        </a>
+        </Link>
         <div className={styles.card_subtitle}>
           <span className="opened-by">
             #{data.number}
             {' by '}
-            <a href="#">{data.authorName}</a> was {data.isOpen ? 'opened' : 'closed'} on{' '}
+            <Link href="#">{data.authorName}</Link> was {data.isOpen ? 'opened' : 'closed'} on{' '}
             {format(new Date(data.createdAt), 'MMM d, yyyy')}
           </span>
         </div>
@@ -91,12 +92,12 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
       <div className={styles.card_right_side}>
         <span className="ml-2 pt-1 flex-1 flex-shrink-0">
           {data.commentsCount > 0 && (
-            <a href="#" className="">
+            <Link href="#" className="">
               <div className="flex items-center justify-end">
                 <CommentIcon className="w-5 h-5" />
                 <span className="ml-1 text-sm font-bold">{data.commentsCount}</span>
               </div>
-            </a>
+            </Link>
           )}
         </span>
       </div>

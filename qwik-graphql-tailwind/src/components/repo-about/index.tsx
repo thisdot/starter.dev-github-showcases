@@ -5,6 +5,7 @@ import { Description } from './description';
 import { HomepageUrl } from './homepage-url';
 import { Topics } from './topic';
 import * as styles from './repo-about.className';
+import { Link } from '@builder.io/qwik-city';
 
 export const RepoAboutWidget = component$(() => {
   const store = useContext(RepoContext);
@@ -20,9 +21,9 @@ export const RepoAboutWidget = component$(() => {
         </div>
       </div>
       <div>
-        <a className={styles.readmeLink}>
+        <Link className={styles.readmeLink}>
           <BookOpenIcon className={styles.readmeIcon} /> Readme
-        </a>
+        </Link>
       </div>
     </div>
   );

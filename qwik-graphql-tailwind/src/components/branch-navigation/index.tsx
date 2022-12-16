@@ -1,4 +1,5 @@
 import { component$, useContext } from '@builder.io/qwik';
+import { Link } from '@builder.io/qwik-city';
 import { GitBranchIcon } from '~/components/icons';
 import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
 import * as styles from './branch-navigation.classNames';
@@ -17,9 +18,10 @@ export const BranchNavigation = component$(() => {
       </button>
       {crumbs.length > 0 && (
         <div className={styles.crumbs}>
-          <a href={fileViewLink}>
+          <Link href={fileViewLink}>
             <span className={styles.rootLink}>{store.name}</span>
-          </a>
+          </Link>
+
           <span className={styles.separator}>/</span>
           {crumbs.map((crumb, i) => {
             const isLast = i === crumbs.length - 1;
@@ -34,9 +36,9 @@ export const BranchNavigation = component$(() => {
                   <span className={styles.crumbEnd}>{crumb}</span>
                 ) : (
                   <>
-                    <a href={`/${href}`}>
+                    <Link href={href}>
                       <span className={styles.crumbLink}>{crumb}</span>
-                    </a>
+                    </Link>
                     <span className={styles.separator}>/</span>
                   </>
                 )}
