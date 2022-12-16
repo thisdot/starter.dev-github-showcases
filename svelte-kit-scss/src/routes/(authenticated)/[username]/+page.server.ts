@@ -2,7 +2,6 @@ import type { PageServerLoad } from './$types';
 import {
   buildRepositoryCardViewModel,
   buildRepositoryPageNavigationFilterOptions,
-  createLanguageMap,
   extractRepositoryPageSearchQueryParameters,
   remapRepositorySearchQueryParameters,
 } from '$lib/helpers';
@@ -62,6 +61,5 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url })
     organizations,
     allRepositoriesListViewModel,
     username,
-    repoLanguageList: createLanguageMap(repositories),
   };
 };

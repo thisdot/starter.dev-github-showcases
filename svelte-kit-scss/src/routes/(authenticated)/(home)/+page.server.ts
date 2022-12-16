@@ -3,7 +3,7 @@ import { buildRepositoryCardViewModel, mapGistsToHomeGists } from '$lib/helpers'
 import type { PublicProfileInformation, UserGistsApiResponse } from '$lib/interfaces';
 import { ENV } from '$lib/constants/env';
 import { RepositoryService } from '$lib/services';
-import { RepositorySortFilters } from '$lib/enums';
+import { RepositorySort } from '$lib/constants/repository';
 import type { TopRepositoriesListViewModel } from '$lib/components/RepositoryList/view-models';
 
 const DEFAULT_PAGE_SIZE = 200;
@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ fetch, parent }) => {
 
   const repositoryService = new RepositoryService(fetch);
   const repositoriesPromise = repositoryService.getAuthenticatedUserRepositories({
-    sort: RepositorySortFilters.UPDATED,
+    sort: RepositorySort.Updated,
     pagination: {
       perPage: DEFAULT_PAGE_SIZE,
     },
