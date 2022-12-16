@@ -1,6 +1,6 @@
-import { component$, useClientEffect$, useStore, useContext } from '@builder.io/qwik';
+import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
+import { useLocation } from '@builder.io/qwik-city';
 import { REPO_FILE_QUERY } from '~/utils/queries/file-query';
-import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
 import { useQuery } from '~/utils';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import { mapExtensionToLanguage } from './mapExtensionToLanguage';
@@ -21,8 +21,6 @@ interface FileStore {
 }
 
 export const FileViewer = component$(() => {
-  const { path, name, owner, branch } = useContext(RepoContext);
-
   const store = useStore<FileStore>({
     text: '',
     lines: 0,
@@ -30,13 +28,14 @@ export const FileViewer = component$(() => {
     isLoading: true,
   });
 
+  const { path, name, owner } = useLocation().params;
   useClientEffect$(async () => {
     const abortController = new AbortController();
     const response = await fetchFile(
       {
         owner,
         name,
-        expression: `${branch}:${path}`,
+        expression: `HEAD:${path.split('/').shift()}`,
       },
       abortController
     );
@@ -47,7 +46,7 @@ export const FileViewer = component$(() => {
     return <div>Loading...</div>;
   }
 
-  const extension = path?.split('.').pop();
+  const extension = path?.split('.').pop()?.split('/').shift();
   const language = mapExtensionToLanguage(extension);
 
   return <FileViewerView text={store.text} lines={store.lines} language={language} byteSize={store.byteSize} />;
