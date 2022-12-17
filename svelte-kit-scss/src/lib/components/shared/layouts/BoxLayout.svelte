@@ -34,7 +34,6 @@
     .border-area {
       border: $border;
       border-radius: 6px;
-      overflow: hidden;
       background-color: variables.$white;
       .header,
       .footer {
