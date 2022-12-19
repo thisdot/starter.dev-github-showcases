@@ -1,4 +1,5 @@
 import type { TabItem } from './types';
+import cn from 'classnames';
 import * as styles from './tab-navigation.classNames';
 import { component$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
@@ -18,7 +19,8 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
   };
 
   return (
-    <div className={`${styles.container} ${className}`}>
+    // <div className={`${styles.container} ${className}`}>
+    <div className={cn(styles.container, className)}>
       <nav className={styles.nav} aria-label="Tabs">
         {tabs.map(({ title, path, Icon, count }, index) => {
           const href = path === '' ? `/${basePath}` : `/${basePath}/${path}`;

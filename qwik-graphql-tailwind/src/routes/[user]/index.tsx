@@ -71,7 +71,7 @@ export default component$(() => {
       </div>
       <div className="mx-auto max-w-screen-2xl py-8 px-4">
         <div className="grid grid-cols-12 gap-8">
-          <div className="pt-8 relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
+          <div className="relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
             {store.user ? <UserProfileCard {...store.user} /> : null}
           </div>
           <div className="col-span-12 md:col-span-8 xl:col-span-9">
