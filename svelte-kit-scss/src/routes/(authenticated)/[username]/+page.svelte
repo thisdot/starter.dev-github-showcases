@@ -5,17 +5,58 @@
   import ProfileNavSection from '$lib/components/Profile/ProfileNavSection/ProfileNavSection.svelte';
   import OrgInfo from '$lib/components/Profile/OrgInfo/OrgInfo.svelte';
   import AllRepositoriesList from '$lib/components/RepositoryList/AllRepositoriesList/AllRepositoriesList.svelte';
+  import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
+  import LayoutSidebar from '$lib/components/shared/layouts/LayoutSidebar.svelte';
 
   export let data: PageServerData;
 
   $: ({ profile, organizations, allRepositoriesListViewModel } = data);
 
-  const isOrg = profile?.type == ProfileType.Organization;
+  $: isOrg = profile?.type == ProfileType.Organization;
 </script>
 
-<div class="profile-container">
+<div class="page-container">
+  {#if isOrg}
+    <LayoutPageContentRow>
+      <OrgInfo />
+    </LayoutPageContentRow>
+    <LayoutPageContentRow>
+      <ProfileNavSection />
+    </LayoutPageContentRow>
+    <LayoutPageContentRow>
+      <LayoutSidebar>
+        <div>
+          <AllRepositoriesList model={allRepositoriesListViewModel} />
+        </div>
+        <div slot="sidebar-right">
+          <ProfileAboutSection {profile} {organizations} />
+        </div>
+      </LayoutSidebar>
+    </LayoutPageContentRow>
+  {:else}
+    <LayoutPageContentRow>
+      <LayoutSidebar placeholder="sidebar-left">
+        <ProfileNavSection />
+      </LayoutSidebar>
+    </LayoutPageContentRow>
+    <LayoutPageContentRow>
+      <LayoutSidebar>
+        <div slot="sidebar-left">
+          <ProfileAboutSection {profile} {organizations} />
+        </div>
+        <div>
+          <AllRepositoriesList model={allRepositoriesListViewModel} />
+        </div>
+      </LayoutSidebar>
+    </LayoutPageContentRow>
+  {/if}
+</div>
+
+<!-- todo: refactor this. use above snippet base-->
+
+<!-- <div class="profile-container">
   <div class="profile-header">
-    <div class="grid grid-cols-12 container">
+    <div class="container">
       {#if isOrg}
         <OrgInfo />
         <nav class="col-span-12">
@@ -30,7 +71,7 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-12 profile-body container">
+  <div class="container">
     {#if isOrg}
       <div class="col-span-12">
         <AllRepositoriesList model={allRepositoriesListViewModel} />
@@ -46,33 +87,33 @@
       </div>
     {/if}
   </div>
-</div>
-
+</div> -->
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
-
-  .profile-container {
-    padding-top: 2rem;
+  .page-container {
   }
+  // .profile-container {
+  //   padding-top: 2rem;
+  // }
 
-  .profile-header {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    background-color: white;
-    border-bottom: 1px solid #fcba03;
-  }
+  // .profile-header {
+  //   position: sticky;
+  //   top: 0;
+  //   z-index: 5;
+  //   background-color: white;
+  //   border-bottom: 1px solid #fcba03;
+  // }
 
-  .profile-body {
-    grid-template-rows: max-content 1fr;
-    padding-top: 2rem;
+  // .profile-body {
+  //   grid-template-rows: max-content 1fr;
+  //   padding-top: 2rem;
 
-    .subpage {
-      grid-row: 1 / 3;
-    }
-  }
+  //   .subpage {
+  //     grid-row: 1 / 3;
+  //   }
+  // }
 
-  .container {
-    max-width: variables.$xl;
-  }
+  // .container {
+  //   max-width: variables.$xl;
+  // }
 </style>
