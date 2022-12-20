@@ -1,5 +1,29 @@
+<script lang="ts">
+  import { browser } from '$app/environment';
+  import { onDestroy, onMount } from 'svelte';
+
+  const handleScroll = () => {
+    // todo: handle sticky
+  };
+
+  if (browser && $$slots.sticky) {
+    onMount(() => {
+      document.addEventListener('scroll', handleScroll);
+    });
+
+    onDestroy(() => {
+      document.removeEventListener('scroll', handleScroll);
+    });
+  }
+</script>
+
 <div class="layout-page-header">
   <slot />
+  {#if $$slots.sticky}
+    <div class="sticky">
+      <slot name="sticky" />
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">
