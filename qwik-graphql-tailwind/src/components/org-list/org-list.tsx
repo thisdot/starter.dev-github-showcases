@@ -8,11 +8,11 @@ export interface OrgListProps {
 
 export const OrgList = component$(({ organizations }: OrgListProps) => {
   return (
-    <div className={styles.container}>
-      <h2 className={styles.heading}>Organizations</h2>
-      <div className={styles.list}>
+    <div class={styles.container}>
+      <h2 class={styles.heading}>Organizations</h2>
+      <div class={styles.list}>
         {organizations.map(({ avatarUrl, login }) => (
-          <div key={login} className={styles.listItem}>
+          <div key={login} class={styles.listItem}>
             <img src={avatarUrl} alt="Organization" style={{ objectFit: 'fill' }} />
           </div>
         ))}

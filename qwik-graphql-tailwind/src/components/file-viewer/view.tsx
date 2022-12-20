@@ -13,12 +13,12 @@ interface FileViewerViewProps {
 
 export const FileViewerView = component$(({ text, byteSize, lines, language }: FileViewerViewProps) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.fileHeader}>
-        <span data-testid="file viewer line count" className={styles.fileHeaderLines}>
+    <div class={styles.container}>
+      <div class={styles.fileHeader}>
+        <span data-testid="file viewer line count" class={styles.fileHeaderLines}>
           {lines} lines
         </span>
-        <span data-testid="file viewer byte size" className={styles.fileHeaderBytes}>
+        <span data-testid="file viewer byte size" class={styles.fileHeaderBytes}>
           {byteSize} Bytes
         </span>
       </div>

@@ -1,5 +1,4 @@
-import { component$, useClientEffect$, useContext, useStore, useWatch$ } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { component$, useClientEffect$, useContext, useStore, useTask$ } from '@builder.io/qwik';
 import { StarIcon } from '../icons';
 import { UserRepo, UserReposProps } from './types';
 import * as styles from './user-repos.classNames';
@@ -26,7 +25,7 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
   const filters = useContext(filterStore);
   const languages = getLanguages(repos.nodes);
 
-  useWatch$(({ track }) => {
+  useTask$(({ track }) => {
     track(() => filters.search);
     track(() => filters.language);
     track(() => filters.sortBy);
@@ -58,15 +57,15 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
       <RepoFilters languages={languages} resultCount={state.searchResponse.length} />
       {state.searchResponse.map(
         ({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
-          <div key={id} className={styles.container}>
-            <div className={styles.content}>
-              <h3 className="mb-2">
-                <Link href={`/${owner}/${name}`} className={styles.headingLink}>
+          <div key={id} class={styles.container}>
+            <div class={styles.content}>
+              <h3 class="mb-2">
+                <a href={`/${owner}/${name}`} class={styles.headingLink}>
                   {name}
-                </Link>
+                </a>
                 <PrivacyBadge isPrivate={isPrivate} className="relative bottom-0.5" />
               </h3>
-              <div className={styles.description}>{description}</div>
+              <div class={styles.description}>{description}</div>
               <RepoMeta
                 language={primaryLanguage?.name}
                 languageColor={primaryLanguage?.color}
@@ -75,8 +74,8 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
                 updatedAt={updatedAt}
               />
             </div>
-            <div className={styles.aside}>
-              <button className={styles.starBtn}>
+            <div class={styles.aside}>
+              <button class={styles.starBtn}>
                 <StarIcon className={styles.starIcon} />
                 Star
               </button>

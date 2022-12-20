@@ -1,46 +1,112 @@
-import { component$, useContext } from '@builder.io/qwik';
-import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
+import { component$, useStore, useClientEffect$ } from '@builder.io/qwik';
 import { FolderIcon, DocumentIcon } from '~/components/icons';
 import * as styles from './file-explorer.classNames';
+import { useLocation } from '@builder.io/qwik-city';
+import { useQuery } from '~/utils';
+import { REPO_TREE_QUERY } from '~/utils/queries/repo-tree';
+import { GITHUB_GRAPHQL } from '~/utils/constants';
+import { parseQueryData } from './parseTree';
+import { BranchNavigation } from '../branch-navigation';
 
-export const FileExplorer = component$(() => {
-  const store = useContext(RepoContext);
+export interface TreeState {
+  isLoading: boolean;
+  branches: { name: string }[];
+  tree: { name: string; type: string; path: string }[];
+}
 
-  const {
-    branch,
-    owner,
-    name,
-    path: repoPath,
-    tree: { data },
-  } = store;
+export const FileExplorer = component$(({ branch }: { branch?: string }) => {
+  const { path, name, owner, branch: pathBranch } = useLocation().params;
+
+  const store = useStore<TreeState>(
+    {
+      tree: [],
+      branches: [],
+      isLoading: true,
+    },
+    { recursive: true }
+  );
+
+  useClientEffect$(async () => {
+    const abortController = new AbortController();
+
+    const response = await fetchRepoTree(
+      {
+        owner,
+        name,
+        expression: `${pathBranch || branch}:${path?.replace(/\/+$/, '') || ''}`,
+      },
+      abortController
+    );
+    updateRepoTree(store, response);
+  });
+
   const basePath = `/${owner}/${name}`;
-  const backLink = `${basePath}/tree/${branch}/${repoPath}`;
+  const backLink = `${basePath}/tree/${branch}/${path || ''}`;
+
+  if (store.isLoading) {
+    return <div />;
+  }
 
   return (
-    <div className={styles.container}>
-      {repoPath && (
-        <a href={backLink}>
-          <a className={styles.cellBack}>
-            <div className="text-blue-600">..</div>
+    <>
+      <BranchNavigation branch={pathBranch || branch} />
+      <div class={styles.container}>
+        {path && (
+          <a href={backLink}>
+            <span class={styles.cellBack}>
+              <div class="text-blue-600">..</div>
+            </span>
           </a>
-        </a>
-      )}
-      {data?.tree?.map((item) => (
-        <div key={item.path} className={styles.cell}>
-          <div className="flex items-center">
-            <div className="mr-2.5">
-              {item.type === 'tree' ? (
-                <FolderIcon className={styles.iconDir} />
-              ) : (
-                <DocumentIcon className={styles.iconFile} />
-              )}
+        )}
+        {store.tree?.map((item) => (
+          <div key={item.path} class={styles.cell}>
+            <div class="flex items-center">
+              <div class="mr-2.5">
+                {item.type === 'tree' ? (
+                  <FolderIcon className={styles.iconDir} />
+                ) : (
+                  <DocumentIcon className={styles.iconFile} />
+                )}
+              </div>
+              <a href={`${basePath}/${item.type}/${pathBranch || branch}/${item.path}`}>
+                <span class={styles.link}>{item.name}</span>
+              </a>
             </div>
-            <a href={`${basePath}/${item.type}/${branch}/${item.path}`}>
-              <span className={styles.link}>{item.name}</span>
-            </a>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 });
+
+export function updateRepoTree(store: TreeState, response: any) {
+  const {
+    data: { repository },
+  } = response;
+  store.isLoading = false;
+  store.branches = repository.branches?.nodes;
+  store.tree = parseQueryData(repository.tree);
+}
+
+export async function fetchRepoTree(
+  variables: {
+    owner: string;
+    name: string;
+    expression: string;
+  },
+  abortController?: AbortController
+): Promise<any> {
+  const { executeQuery$ } = useQuery(REPO_TREE_QUERY);
+
+  const resp = await executeQuery$({
+    signal: abortController?.signal,
+    url: GITHUB_GRAPHQL,
+    headersOpt: {
+      Accept: 'application/vnd.github+json',
+      authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
+    variables,
+  });
+
+  return await resp.json();
+}

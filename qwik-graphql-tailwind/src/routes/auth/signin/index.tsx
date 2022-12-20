@@ -5,9 +5,9 @@ import * as styles from './signin.classNames';
 
 export default component$(() => {
   return (
-    <section className={styles.section}>
+    <section class={styles.section}>
       <button
-        className={styles.button}
+        class={styles.button}
         onClick$={() => {
           window.location.href = SIGN_IN_URL;
         }}

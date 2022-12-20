@@ -18,7 +18,7 @@ export const SearchInput = component$(({ placeholder, className }: SearchInputPr
       name="search"
       id="search"
       value={searchValue.search}
-      className={cn(styles.input, className)}
+      class={cn(styles.input, className)}
       placeholder={placeholder}
       onInput$={handleInput$}
     />

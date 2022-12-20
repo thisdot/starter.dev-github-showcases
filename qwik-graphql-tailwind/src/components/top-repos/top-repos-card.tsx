@@ -15,12 +15,12 @@ export default component$(({ repos, login }: UserTopReposViewProps) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div class={styles.container}>
       {repos.map((repo) => (
-        <RepoCard repo={repo} styles={styles} />
+        <RepoCard key={repo.id} repo={repo} styles={styles} />
       ))}
-      <div className={styles.linkContainer}>
-        <a href={`/${login}`} className={styles.allRepoLink}>
+      <div class={styles.linkContainer}>
+        <a href={`/${login}`} class={styles.allRepoLink}>
           View all repositories
         </a>
       </div>

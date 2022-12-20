@@ -12,9 +12,9 @@ export const HomepageUrl = component$(({ homepageUrl }: HomepageUrlProps) => {
     return null;
   }
   return (
-    <div className={styles.linkContainer}>
+    <div class={styles.linkContainer}>
       <LinkIcon className={styles.linkIcon} />
-      <Link href={homepageUrl} className={styles.link} target="_blank">
+      <Link href={homepageUrl} class={styles.link} target="_blank">
         {homepageUrl}
       </Link>
     </div>

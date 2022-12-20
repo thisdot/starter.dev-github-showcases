@@ -6,9 +6,9 @@ import TopRepos from '../components/top-repos';
 
 export default component$(() => {
   return (
-    <div className={styles.container}>
+    <div class={styles.container}>
       <Gists />
-      <div className={styles.content}>
+      <div class={styles.content}>
         <TopRepos />
       </div>
     </div>

@@ -50,21 +50,16 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
 
   return (
     <>
-      <div className={styles.container}>
-        <div className="grow">
+      <div class={styles.container}>
+        <div class="grow">
           <SearchInput className={styles.searchInput} placeholder="Search repositories..." />
         </div>
-        <div className={styles.filters}>
+        <div class={styles.filters}>
           <div>
             <FilterDropdown name="Type" description="Select type">
               {filteOptions.map(({ label, value }: { label: string; value: string }) => (
                 <div>
-                  <button
-                    onClick$={() => (filters.type = value)}
-                    type="button"
-                    name={'Type'}
-                    className={styles.itemButton}
-                  >
+                  <button onClick$={() => (filters.type = value)} type="button" name={'Type'} class={styles.itemButton}>
                     {value === filters.type && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
                 </div>
@@ -79,7 +74,7 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
                     onClick$={() => (filters.language = value)}
                     type="button"
                     name={'language'}
-                    className={styles.itemButton}
+                    class={styles.itemButton}
                   >
                     {value === filters.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
@@ -95,7 +90,7 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
                     onClick$={() => (filters.sortBy = value)}
                     type="button"
                     name={'order'}
-                    className={styles.itemButton}
+                    class={styles.itemButton}
                   >
                     {value === filters.sortBy && <CheckIcon className={styles.itemActiveIcon} />} {label}
                   </button>
@@ -106,30 +101,30 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
         </div>
       </div>
       {isFiltersActive && (
-        <div className={styles.filtersDetail}>
-          <div className="text-sm">
-            <span className="font-semibold" data-testid="filterText">
+        <div class={styles.filtersDetail}>
+          <div class="text-sm">
+            <span class="font-semibold" data-testid="filterText">
               {resultCount}
             </span>{' '}
-            results for {isTypeActive && <span className="font-semibold">{filters.type}</span>} repositories{' '}
+            results for {isTypeActive && <span class="font-semibold">{filters.type}</span>} repositories{' '}
             {isQueryActive && (
               <>
-                matching <span className="font-semibold">{filters.search}</span>
+                matching <span class="font-semibold">{filters.search}</span>
               </>
             )}{' '}
             {isLanguageActive && (
               <>
-                written in <span className="font-semibold capitalize">{filters.language}</span>
+                written in <span class="font-semibold capitalize">{filters.language}</span>
               </>
             )}{' '}
-            sorted by <span className="font-semibold">{filters.sortBy.split('_').join(' ').toLowerCase()}.</span>
+            sorted by <span class="font-semibold">{filters.sortBy.split('_').join(' ').toLowerCase()}.</span>
           </div>
           <div>
-            <button onClick$={resetFilters$} className={cn(styles.clearBtn, 'group')}>
-              <span className={cn(styles.clearBtnIconContainer, 'group-hover:bg-blue-500')}>
+            <button onClick$={resetFilters$} class={cn(styles.clearBtn, 'group')}>
+              <span class={cn(styles.clearBtnIconContainer, 'group-hover:bg-blue-500')}>
                 <XmarkIcon className={styles.clearBtnIcon} />
               </span>
-              <span className={cn(styles.clearBtnText, 'group-hover:text-blue-500')}>Clear filter</span>
+              <span class={cn(styles.clearBtnText, 'group-hover:text-blue-500')}>Clear filter</span>
             </button>
           </div>
         </div>

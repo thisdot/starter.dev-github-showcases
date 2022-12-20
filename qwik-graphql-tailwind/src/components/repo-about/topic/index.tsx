@@ -10,9 +10,9 @@ export const Topics = component$(({ topics }: TopicsProps) => {
     return null;
   }
   return (
-    <div className="space-y-1">
+    <div class="space-y-1">
       {topics.map((topic) => (
-        <span key={topic} className={styles.topic}>
+        <span key={topic} class={styles.topic}>
           {topic}
         </span>
       ))}

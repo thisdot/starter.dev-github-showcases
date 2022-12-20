@@ -5,15 +5,13 @@ import { GITHUB_GRAPHQL } from '~/utils/constants';
 import { REPO_INFO_QUERY } from '~/utils/queries/repo-info';
 import { parseTopics } from './parseTopics';
 import { REPO_README_QUERY } from '~/utils/queries/repo-read-me';
-import { REPO_TREE_QUERY } from '~/utils/queries/repo-tree';
-import { RepoLayout } from '~/components/repo-layout';
+import { RepoHeader } from '~/components/repo-header';
 
 export interface SharedState {
   name: string;
   owner: string;
   branch: string;
   path?: string;
-  isLoading: boolean;
   info: {
     error?: string;
     data?: {
@@ -27,13 +25,6 @@ export interface SharedState {
       homepageUrl?: string | null;
       topics: string[];
       isOrg: boolean;
-    };
-  };
-  tree: {
-    error?: string;
-    data?: {
-      branches: { name: string }[];
-      tree: { name: string; type: string; path: string }[];
     };
   };
   readme: {
@@ -50,10 +41,8 @@ export default component$(() => {
       info: {},
       name: '',
       owner: '',
-      tree: {},
       readme: {},
       branch: 'HEAD',
-      isLoading: true,
     },
     { recursive: true }
   );
@@ -62,17 +51,17 @@ export default component$(() => {
 
   const isOwnerAndNameValid = typeof owner === 'string' && typeof name === 'string';
 
-  useClientEffect$(async () => {
+  useClientEffect$(async ({ track }) => {
+    store.owner = track(() => owner);
+    store.name = track(() => name);
+    store.path = track(() => path || '');
+
     const abortController = new AbortController();
-    store.owner = owner;
-    store.name = name;
-    store.path = path || '';
-    store.isLoading = true;
-    const response = await fetchRepoInfo(
+    const response1 = await fetchRepoInfo(
       isOwnerAndNameValid
         ? {
-            owner,
-            name,
+            owner: store.owner,
+            name: store.name,
           }
         : {
             owner: '',
@@ -80,13 +69,9 @@ export default component$(() => {
           },
       abortController
     );
-    updateRepoInfo(store, response);
-  });
+    updateRepoInfo(store, response1);
 
-  useClientEffect$(async () => {
-    store.isLoading = true;
-    const abortController = new AbortController();
-    const response = await fetchRepoReadMe(
+    const response2 = await fetchRepoReadMe(
       {
         owner: store.owner,
         name: store.name,
@@ -94,32 +79,14 @@ export default component$(() => {
       },
       abortController
     );
-
-    updateRepoReadMe(store, response);
-  });
-
-  useClientEffect$(async ({ track }) => {
-    store.isLoading = true;
-    const path = track(() => store.path);
-    const abortController = new AbortController();
-    const response = await fetchRepoTree(
-      {
-        owner: store.owner,
-        name: store.name,
-        expression: `${store.branch}:${path}`,
-      },
-      abortController
-    );
-
-    updateRepoTree(store, response);
+    updateRepoReadMe(store, response2);
   });
 
   useContextProvider(RepoContext, store);
   return (
-    <div className="bg-white h-screen">
-      <RepoLayout>
-        <Slot />
-      </RepoLayout>
+    <div class="bg-white h-screen">
+      {store.info.data ? <RepoHeader /> : <div>Loading...</div>}
+      <Slot />
     </div>
   );
 });
@@ -191,45 +158,6 @@ export async function fetchRepoReadMe(
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(REPO_README_QUERY);
-
-  const resp = await executeQuery$({
-    signal: abortController?.signal,
-    url: GITHUB_GRAPHQL,
-    headersOpt: {
-      Accept: 'application/vnd.github+json',
-      authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
-    variables,
-  });
-
-  return await resp.json();
-}
-
-export function updateRepoTree(store: SharedState, response: any) {
-  const {
-    data: { repository },
-  } = response;
-  if (repository) {
-    store.tree.data = {
-      branches: repository.branches?.nodes,
-      tree: repository.tree?.entries,
-    };
-  } else {
-    store.tree.data = undefined;
-    store.tree.error = 'No found';
-  }
-  store.isLoading = false;
-}
-
-export async function fetchRepoTree(
-  variables: {
-    owner: string;
-    name: string;
-    expression: string;
-  },
-  abortController?: AbortController
-): Promise<any> {
-  const { executeQuery$ } = useQuery(REPO_TREE_QUERY);
 
   const resp = await executeQuery$({
     signal: abortController?.signal,

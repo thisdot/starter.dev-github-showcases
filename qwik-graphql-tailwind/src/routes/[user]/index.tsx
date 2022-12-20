@@ -60,21 +60,21 @@ export default component$(() => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.stickyNav}>
-        <div className={styles.gridNav}>
-          <div className="col-span-12 md:col-span-4 xl:col-span-3" />
-          <div className={styles.profileNav}>
+    <div class={styles.container}>
+      <div class={styles.stickyNav}>
+        <div class={styles.gridNav}>
+          <div class="col-span-12 md:col-span-4 xl:col-span-3" />
+          <div class={styles.profileNav}>
             <ProfileNav className="border-none" pathname={location.pathname} />
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-screen-2xl py-8 px-4">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="pt-8 relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
+      <div class="mx-auto max-w-screen-2xl py-8 px-4">
+        <div class="grid grid-cols-12 gap-8">
+          <div class="pt-8 relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
             {store.user ? <UserProfileCard {...store.user} /> : null}
           </div>
-          <div className="col-span-12 md:col-span-8 xl:col-span-9">
+          <div class="col-span-12 md:col-span-8 xl:col-span-9">
             <ProfileNav className="border-none md:hidden" pathname={location.pathname} />
             {store.user?.repositories ? (
               <UserRepos repos={store.user?.repositories} owner={location.params.user} />

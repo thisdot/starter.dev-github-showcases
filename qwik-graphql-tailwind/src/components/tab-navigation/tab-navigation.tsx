@@ -18,8 +18,8 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
   };
 
   return (
-    <div className={`${styles.container} ${className}`}>
-      <nav className={styles.nav} aria-label="Tabs">
+    <div class={`${styles.container} ${className}`}>
+      <nav class={styles.nav} aria-label="Tabs">
         {tabs.map(({ title, path, Icon, count }, index) => {
           const href = path === '' ? `/${basePath}` : `/${basePath}/${path}`;
 
@@ -27,14 +27,12 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
             <Link
               key={index}
               href={href}
-              className={`${isCurrentTab(path) ? styles.tabActive : styles.tabInactive} ${styles.tab}`}
+              class={`${isCurrentTab(path) ? styles.tabActive : styles.tabInactive} ${styles.tab}`}
             >
               <Icon className={`${isCurrentTab(path) ? styles.iconActive : styles.iconInactive} ${styles.icon}`} />
               <span>{title}</span>
               {typeof count === 'number' && (
-                <span className="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">
-                  {count}
-                </span>
+                <span class="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">{count}</span>
               )}
             </Link>
           );

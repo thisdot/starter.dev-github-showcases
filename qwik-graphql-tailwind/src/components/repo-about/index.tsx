@@ -10,17 +10,17 @@ export const RepoAboutWidget = component$(() => {
   const store = useContext(RepoContext);
 
   return (
-    <div className={styles.container}>
-      <h3 className={styles.heading}>About</h3>
-      <div className={styles.description}>
-        <div className="space-y-4">
+    <div class={styles.container}>
+      <h3 class={styles.heading}>About</h3>
+      <div class={styles.description}>
+        <div class="space-y-4">
           <Description text={store.info.data?.description} />
           <HomepageUrl homepageUrl={store.info.data?.homepageUrl} />
           <Topics topics={store.info.data?.topics} />
         </div>
       </div>
       <div>
-        <a className={styles.readmeLink}>
+        <a class={styles.readmeLink}>
           <BookOpenIcon className={styles.readmeIcon} /> Readme
         </a>
       </div>

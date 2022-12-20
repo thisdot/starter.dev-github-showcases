@@ -10,7 +10,7 @@ export const DocumentIcon = component$(({ className }: IconProps) => {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      className={className ?? ''}
+      class={className ?? ''}
     >
       <path
         stroke-linecap="round"

@@ -5,11 +5,11 @@ export default component$(({ text }: { text: string }) => {
   const lines = text.split('\n');
 
   return (
-    <pre data-testid="text-block" className={styles.codeBlock}>
+    <pre data-testid="text-block" class={styles.codeBlock}>
       {lines.map((line, i) => (
-        <div key={i} className="table-row">
-          <span className={styles.lineNumber}>{i + 1}</span>
-          <span className="table-cell">{line}</span>
+        <div key={i} class="table-row">
+          <span class={styles.lineNumber}>{i + 1}</span>
+          <span class="table-cell">{line}</span>
         </div>
       ))}
     </pre>

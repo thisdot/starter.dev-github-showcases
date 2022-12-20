@@ -49,7 +49,7 @@ export default component$(() => {
       ) : (
         <>
           <Header user={store.viewer} />
-          <main className={styles.main}>
+          <main class={styles.main}>
             <Slot />
           </main>
         </>

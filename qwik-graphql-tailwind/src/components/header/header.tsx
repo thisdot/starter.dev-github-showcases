@@ -14,7 +14,7 @@ type HeaderProps = {
 
 export default component$(({ user }: HeaderProps) => {
   return (
-    <header className={styles.header}>
+    <header class={styles.header}>
       <Link preventdefault:click={false} href="/">
         <GitHubLogo />
       </Link>
@@ -23,7 +23,7 @@ export default component$(({ user }: HeaderProps) => {
           <UserDropdown image={user.avatarUrl} username={user.login} />
         ) : (
           <Link href="/api/auth/signin">
-            <span className={styles.navLink}>Sign In</span>
+            <span class={styles.navLink}>Sign In</span>
           </Link>
         )}
       </div>

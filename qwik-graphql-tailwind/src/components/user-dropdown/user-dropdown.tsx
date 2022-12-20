@@ -50,26 +50,26 @@ export const UserDropdown = component$(({ image, username }: UserDropdownProps) 
         }
       }}
     >
-      <div className={styles.dropdown} ref={elementRef}>
-        <button role="button" className={styles.dropdownBtn} onClick$={toggle$}>
-          <div className={styles.avatarContainer}>
+      <div class={styles.dropdown} ref={elementRef}>
+        <button role="button" class={styles.dropdownBtn} onClick$={toggle$}>
+          <div class={styles.avatarContainer}>
             {image && <img src={image} alt="Profile Photo" width={32} height={32} />}
           </div>
-          <div className="w-4 ml-1">
+          <div class="w-4 ml-1">
             <ChevronDownIcon />
           </div>
         </button>
-        <nav className={store.expanded ? styles.dropdownMenuBase : styles.dropdownMenuHidden}>
-          <ul className="py-1">
+        <nav class={store.expanded ? styles.dropdownMenuBase : styles.dropdownMenuHidden}>
+          <ul class="py-1">
             {username && (
               <li data-menu-item>
-                <Link preventdefault:click={false} href={`/${username}`} className={styles.menuBtn}>
+                <Link preventdefault:click={false} href={`/${username}`} class={styles.menuBtn}>
                   Profile
                 </Link>
               </li>
             )}
             <li data-menu-item>
-              <button className={styles.menuBtn} onClick$={signOut$}>
+              <button class={styles.menuBtn} onClick$={signOut$}>
                 Sign Out
               </button>
             </li>

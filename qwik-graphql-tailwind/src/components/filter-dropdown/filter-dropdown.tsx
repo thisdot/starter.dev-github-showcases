@@ -33,22 +33,22 @@ export const FilterDropdown = component$(({ name, description, buttonClassName }
         }
       }}
     >
-      <div className={styles.container} ref={elementRef}>
+      <div class={styles.container} ref={elementRef}>
         <div>
-          <button type="button" className={buttonClassName || styles.menuButton} onClick$={toggle$}>
+          <button type="button" class={buttonClassName || styles.menuButton} onClick$={toggle$}>
             {name}
             <CarretDropdownIcon className={styles.menuButtonIcon} aria-hidden="true" />
           </button>
         </div>
 
         <nav
-          className={cn(styles.dropdownMenuBase, !store.expanded ? styles.dropdownMenuHidden : '')}
+          class={cn(styles.dropdownMenuBase, !store.expanded ? styles.dropdownMenuHidden : '')}
           data-testid="filterDropdown"
         >
           <div>
             {description && (
-              <div className={styles.menuHeader}>
-                <div className={styles.description}>{description}</div>
+              <div class={styles.menuHeader}>
+                <div class={styles.description}>{description}</div>
                 <button onClick$={close$} type="button">
                   <XmarkIcon className={styles.closeButtonIcon} aria-hidden="true" />
                 </button>

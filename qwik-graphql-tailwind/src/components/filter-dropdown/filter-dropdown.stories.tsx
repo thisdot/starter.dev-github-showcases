@@ -10,7 +10,7 @@ const FilterDropdownDemoComponent = component$((props: FilterDropdownProps) => {
     }`);
   storybookMockRouting();
   return (
-    <div className="container">
+    <div class="container">
       <FilterDropdown {...props} />
     </div>
   );

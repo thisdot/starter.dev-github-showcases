@@ -10,7 +10,7 @@ export interface GistListProps {
 export default component$(({ name, url }: GistListProps) => {
   return (
     <li>
-      <a href={url} className={styles.link} target="_blank" data-testid={`user gist list item ${name}`}>
+      <a href={url} class={styles.link} target="_blank" data-testid={`user gist list item ${name}`}>
         {name}
       </a>
     </li>

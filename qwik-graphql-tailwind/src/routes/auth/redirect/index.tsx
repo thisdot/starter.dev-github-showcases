@@ -16,8 +16,8 @@ export default component$(() => {
   });
 
   return (
-    <section className={styles.section}>
-      <p className="text-white">Redirecting...</p>
+    <section class={styles.section}>
+      <p class="text-white">Redirecting...</p>
     </section>
   );
 });

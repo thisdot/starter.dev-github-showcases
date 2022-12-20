@@ -24,13 +24,13 @@ export const Pagination = component$(({ pageInfo, owner }: PaginationProps) => {
   });
 
   return (
-    <div className={styles.container}>
-      <span className={styles.group}>
+    <div class={styles.container}>
+      <span class={styles.group}>
         <button
           type="button"
           disabled={!pageInfo.hasPreviousPage || !pageInfo.startCursor}
           onClick$={handlePreviousClick$}
-          className={
+          class={
             !pageInfo.hasPreviousPage || !pageInfo.startCursor
               ? cn(styles.button, styles.buttonPrev)
               : cn(styles.button, styles.buttonPrev)
@@ -42,7 +42,7 @@ export const Pagination = component$(({ pageInfo, owner }: PaginationProps) => {
           type="button"
           onClick$={handleNextClick$}
           disabled={!pageInfo.hasNextPage || !pageInfo.endCursor}
-          className={
+          class={
             !pageInfo.hasNextPage || !pageInfo.endCursor
               ? cn(styles.button, styles.buttonNext)
               : cn(styles.button, styles.buttonNext)
