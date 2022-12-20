@@ -7,6 +7,7 @@
   import AllRepositoriesList from '$lib/components/RepositoryList/AllRepositoriesList/AllRepositoriesList.svelte';
   import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
   import LayoutSidebar from '$lib/components/shared/layouts/LayoutSidebar.svelte';
+  import LayoutPageHeader from '$lib/components/shared/layouts/LayoutPageHeader.svelte';
 
   export let data: PageServerData;
 
@@ -17,12 +18,15 @@
 
 <div class="page-container">
   {#if isOrg}
-    <LayoutPageContentRow>
-      <OrgInfo />
-    </LayoutPageContentRow>
-    <LayoutPageContentRow>
-      <ProfileNavSection />
-    </LayoutPageContentRow>
+    <LayoutPageHeader>
+      <LayoutPageContentRow>
+        <OrgInfo />
+      </LayoutPageContentRow>
+      <LayoutPageContentRow>
+        <ProfileNavSection />
+      </LayoutPageContentRow>
+    </LayoutPageHeader>
+
     <LayoutPageContentRow>
       <LayoutSidebar>
         <div>
@@ -34,11 +38,13 @@
       </LayoutSidebar>
     </LayoutPageContentRow>
   {:else}
-    <LayoutPageContentRow>
-      <LayoutSidebar placeholder="sidebar-left">
-        <ProfileNavSection />
-      </LayoutSidebar>
-    </LayoutPageContentRow>
+    <LayoutPageHeader>
+      <LayoutPageContentRow>
+        <LayoutSidebar placeholder="sidebar-left">
+          <ProfileNavSection />
+        </LayoutSidebar>
+      </LayoutPageContentRow>
+    </LayoutPageHeader>
     <LayoutPageContentRow>
       <LayoutSidebar>
         <div slot="sidebar-left">
