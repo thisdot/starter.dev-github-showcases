@@ -2,7 +2,6 @@ import { component$ } from '@builder.io/qwik';
 
 import type { TopRepo } from './types';
 
-import * as styles from './top-repos.className';
 import { RepoCard } from '~/components/repo-card/repo-card';
 
 interface UserTopReposViewProps {
@@ -15,12 +14,12 @@ export default component$(({ repos, login }: UserTopReposViewProps) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className="w-full border rounded-lg relative bg-white">
       {repos.map((repo) => (
-        <RepoCard repo={repo} styles={styles} />
+        <RepoCard repo={repo} />
       ))}
-      <div className={styles.linkContainer}>
-        <a href={`/${login}`} className={styles.allRepoLink}>
+      <div className="bg-gray-50 p-5 w-full text-center">
+        <a href={`/${login}`} className="font-semibold text-gray-600 hover:text-blue-500">
           View all repositories
         </a>
       </div>

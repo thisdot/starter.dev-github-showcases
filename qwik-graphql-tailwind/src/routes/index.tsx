@@ -1,14 +1,13 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import * as styles from './homepage.classNames';
 import Gists from '../components/gists';
 import TopRepos from '../components/top-repos';
 
 export default component$(() => {
   return (
-    <div className={styles.container}>
+    <div className="flex flex-col-reverse lg:flex-row  min-h-[calc(100vh-70px)]">
       <Gists />
-      <div className={styles.content}>
+      <div className="basis-3/4">
         <TopRepos />
       </div>
     </div>

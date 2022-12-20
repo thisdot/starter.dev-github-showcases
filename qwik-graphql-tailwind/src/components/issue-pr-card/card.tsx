@@ -11,7 +11,6 @@ import {
   MergedPrIcon,
   ClosedPrIcon,
 } from '../icons';
-import * as styles from './issue-pr-card.classNames';
 
 export interface IssuePrCardProps {
   data: {
@@ -45,9 +44,9 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
   });
 
   return (
-    <div className={styles.card_container}>
+    <div className="flex relative items-baseline border-y border-gray-300 pt-2 pb-3">
       <div className="flex">
-        <label className={styles.card_checkbox}>
+        <label className="flex-shrink-0 pl-3 hidden md:block">
           <input type="checkbox" name="issues[]" autoComplete="off" />
         </label>
 
@@ -74,11 +73,11 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
         </div>
       </div>
 
-      <div className={styles.card_title_container}>
-        <a className={styles.card_title} href={data.url}>
+      <div className="flex-auto min-width-0 pr-3 pl-2">
+        <a className="align-middle no-underline markdown-title font-semibold" href={data.url}>
           {data.title}
         </a>
-        <div className={styles.card_subtitle}>
+        <div className="flex mt-1 text-sm text-gray-500">
           <span className="opened-by">
             #{data.number}
             {' by '}
@@ -88,7 +87,7 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
         </div>
       </div>
 
-      <div className={styles.card_right_side}>
+      <div className="flex-shrink-0 w-1/5 text-right pr-3 flex-nowrap flex">
         <span className="ml-2 pt-1 flex-1 flex-shrink-0">
           {data.commentsCount > 0 && (
             <a href="#" className="">
