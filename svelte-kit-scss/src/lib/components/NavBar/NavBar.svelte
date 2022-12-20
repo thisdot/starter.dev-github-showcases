@@ -32,7 +32,7 @@
   }
 </script>
 
-<nav aria-label="Main Navigation">
+<nav class="nav-bar" aria-label="Main Navigation">
   <ul>
     <li>
       <a class="github-icon" href="/">
@@ -65,79 +65,79 @@
 
 <style lang="scss">
   @use 'src/lib/styles/variables';
-
-  nav {
+  .nav-bar {
+    font-size: 0.875rem;
     height: 100%;
     display: grid;
     background: variables.$gray900;
-  }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .github-icon,
-    .dropdown-title {
-      color: variables.$white;
-      cursor: pointer;
-    }
-  }
-
-  img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    margin-right: 1rem;
-  }
-
-  .dropdown {
-    position: relative;
-
-    .dropdown-title {
-      background-color: transparent;
-      border: none;
-      font-family: inherit;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 1em 2em;
       display: flex;
+      justify-content: space-between;
       align-items: center;
+
+      .github-icon,
+      .dropdown-title {
+        color: variables.$white;
+        cursor: pointer;
+      }
     }
 
-    .dropdown-menu {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      position: absolute;
-      right: 0;
-      width: 14rem;
-      background-color: variables.$white;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      border-radius: 0.375rem;
-      margin-top: 0.5rem;
-      padding: 0.25rem 0;
-      transform-origin: top right;
-      z-index: 10;
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 1em;
+    }
 
-      a,
-      .sign-out-btn {
-        color: variables.$gray900;
-        font-weight: 500;
-        padding: 0.5rem 1rem;
-        display: block;
-        text-decoration: none;
+    .dropdown {
+      position: relative;
 
-        &:hover {
-          color: variables.$blue600;
-        }
+      .dropdown-title {
+        background-color: transparent;
+        border: none;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
       }
 
-      .sign-out-btn {
-        font-size: 1rem;
-        border: none;
-        background: inherit;
-        cursor: pointer;
+      .dropdown-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        right: 0;
+        width: 14em;
+        background-color: variables.$white;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border-radius: 0.375em;
+        margin-top: 0.5em;
+        padding: 0.25em 0;
+        transform-origin: top right;
+        z-index: 10;
+
+        a,
+        .sign-out-btn {
+          color: variables.$gray900;
+          font-weight: 500;
+          padding: 0.5em 1em;
+          display: block;
+          text-decoration: none;
+
+          &:hover {
+            color: variables.$blue600;
+          }
+        }
+
+        .sign-out-btn {
+          font-size: 1em;
+          border: none;
+          background: inherit;
+          cursor: pointer;
+        }
       }
     }
   }

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { Repo24 } from 'svelte-octicons';
+  import { Repo16 } from 'svelte-octicons';
 </script>
 
 <ul>
   <li class="active-tab">
     <a href="/">
       <span class="icon">
-        <Repo24 />
+        <Repo16 />
       </span>
       <span>Repositories</span>
     </a>
@@ -15,6 +15,7 @@
 
 <style lang="scss">
   ul {
+    font-size: 0.875em;
     list-style: none;
     padding: 0;
     margin: 0;
