@@ -19,7 +19,6 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
   };
 
   return (
-    // <div className={`${styles.container} ${className}`}>
     <div className={cn(styles.container, className)}>
       <nav className={styles.nav} aria-label="Tabs">
         {tabs.map(({ title, path, Icon, count }, index) => {
