@@ -48,7 +48,7 @@ export default component$(() => {
       ) : (
         <>
           <Header user={store.viewer} />
-          <main className="min-h-screen bg-gray-100">
+          <main class="min-h-screen bg-gray-100">
             <Slot />
           </main>
         </>

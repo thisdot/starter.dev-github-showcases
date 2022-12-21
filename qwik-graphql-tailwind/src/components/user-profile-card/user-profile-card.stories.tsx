@@ -14,7 +14,7 @@ export const Demo: any = Template.bind({
 
 Demo.args = {
   avatarUrl: '//avatars.githubusercontent.com/u/11267785?v=4',
-  bio: 'Senior Software Engineer <a className="user-mention" data-hovercard-type="organization" data-hovercard-url="/orgs/thisdot/hovercard" href="//github.com/thisdot">@thisdot</a>',
+  bio: 'Senior Software Engineer <a class="user-mention" data-hovercard-type="organization" data-hovercard-url="/orgs/thisdot/hovercard" href="//github.com/thisdot">@thisdot</a>',
   company: '@thisdot',
   followers: { totalCount: 24 },
   following: { totalCount: 20 },

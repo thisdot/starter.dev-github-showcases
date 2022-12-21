@@ -5,9 +5,9 @@ import TopRepos from '../components/top-repos';
 
 export default component$(() => {
   return (
-    <div className="flex flex-col-reverse lg:flex-row  min-h-[calc(100vh-70px)]">
+    <div class="flex flex-col-reverse lg:flex-row  min-h-[calc(100vh-70px)]">
       <Gists />
-      <div className="basis-3/4">
+      <div class="basis-3/4">
         <TopRepos />
       </div>
     </div>

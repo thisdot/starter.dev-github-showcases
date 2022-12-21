@@ -20,28 +20,28 @@ export const UserProfileCard = component$(
   }: User) => {
     return (
       <div>
-        <img src={avatarUrl} alt="Avatar" width={260} height={260} className="rounded-full shadow z-30" />
-        <h1 className="mt-2">
-          <div className="text-2xl text-gray-800 font-bold leading-tight">{name}</div>
-          <div className="text-xl text-gray-500 font-light">{login}</div>
+        <img src={avatarUrl} alt="Avatar" width={260} height={260} class="rounded-full shadow z-30" />
+        <h1 class="mt-2">
+          <div class="text-2xl text-gray-800 font-bold leading-tight">{name}</div>
+          <div class="text-xl text-gray-500 font-light">{login}</div>
         </h1>
-        {bio && <div className="text-gray-800 mt-4 mb-3" dangerouslySetInnerHTML={bio} />}
-        <div className="text-sm text-gray-600 my-4">
+        {bio && <div class="text-gray-800 mt-4 mb-3" dangerouslySetInnerHTML={bio} />}
+        <div class="text-sm text-gray-600 my-4">
           <UsersIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
-          <span className="inline-block">
-            <span className="font-medium text-gray-900">{followers.totalCount}</span> followers
+          <span class="inline-block">
+            <span class="font-medium text-gray-900">{followers.totalCount}</span> followers
           </span>
-          <span className="mx-1">·</span>
-          <span className="inline-block">
-            <span className="font-medium text-gray-900">{following.totalCount}</span> following
+          <span class="mx-1">·</span>
+          <span class="inline-block">
+            <span class="font-medium text-gray-900">{following.totalCount}</span> following
           </span>
-          <span className="mx-1">·</span>
+          <span class="mx-1">·</span>
           <StarIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
-          <span className="inline-block">
-            <span className="font-medium text-gray-900">{starredRepositories.totalCount}</span>{' '}
+          <span class="inline-block">
+            <span class="font-medium text-gray-900">{starredRepositories.totalCount}</span>{' '}
           </span>
         </div>
-        <div className="text-sm text-gray-800 space-y-1">
+        <div class="text-sm text-gray-800 space-y-1">
           {company && (
             <div>
               <BuildingIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
@@ -58,7 +58,7 @@ export const UserProfileCard = component$(
             <div>
               <LinkIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
               <a
-                className="hover:text-blue-600 hover:underline"
+                class="hover:text-blue-600 hover:underline"
                 href={`https://${websiteUrl}`}
                 target="_blank"
                 rel="noreferrer"
@@ -71,7 +71,7 @@ export const UserProfileCard = component$(
             <div>
               <TwitterIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
               <a
-                className="hover:text-blue-600 hover:underline"
+                class="hover:text-blue-600 hover:underline"
                 href={`https://twitter.com/${twitterUsername}`}
                 target="_blank"
                 rel="noreferrer"

@@ -12,7 +12,7 @@ export const UsersIcon = component$(({ className }: IconProps) => {
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      className={className ?? ''}
+      class={className ?? ''}
     >
       <path
         stroke-linecap="round"

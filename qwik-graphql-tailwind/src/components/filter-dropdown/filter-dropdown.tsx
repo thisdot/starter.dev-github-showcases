@@ -32,11 +32,11 @@ export const FilterDropdown = component$(({ name, description, buttonClassName }
         }
       }}
     >
-      <div className="relative inline-block text-left z-30" ref={elementRef}>
+      <div class="relative inline-block text-left z-30" ref={elementRef}>
         <div>
           <button
             type="button"
-            className={
+            class={
               buttonClassName ||
               'relative inline-flex items-center px-4 py-1.5 rounded-md bg-gray-100 bg-opacity-75 border border-gray-300 text-sm font-medium text-gray-800 hover:bg-gray-200 hover:bg-opacity-50'
             }
@@ -46,9 +46,9 @@ export const FilterDropdown = component$(({ name, description, buttonClassName }
             <CarretDropdownIcon className="-mr-1 ml-1 h-4 w-4 -mt-1" aria-hidden="true" />
           </button>
         </div>
-
+        {/* TODO: update class to reduce class repetition */}
         <nav
-          className={cn(
+          class={cn(
             'origin-top-right border border-gray-300 absolute right-0 mt-2 w-72 rounded-md shadow-sm bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200',
             !store.expanded
               ? 'origin-top-right border border-gray-300 absolute right-0 mt-2 w-72 rounded-md shadow-sm bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200 scale-0 opacity-0'
@@ -58,8 +58,8 @@ export const FilterDropdown = component$(({ name, description, buttonClassName }
         >
           <div>
             {description && (
-              <div className="flex justify-between items-center">
-                <div className="px-4 py-2.5 text-xs text-gray-800 font-semibold">{description}</div>
+              <div class="flex justify-between items-center">
+                <div class="px-4 py-2.5 text-xs text-gray-800 font-semibold">{description}</div>
                 <button onClick$={close$} type="button">
                   <XmarkIcon className="mr-2 h-4 w-4 text-gray-600" aria-hidden="true" />
                 </button>

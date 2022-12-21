@@ -6,7 +6,7 @@ import { IconProps } from './types';
 export const PullRequestIcon = component$(({ className }: IconProps) => {
   useStylesScoped$(iconStyles);
   return (
-    <svg className={className ?? ''} viewBox="0 0 16 16" version="1.1" aria-hidden="true" fill="currentColor">
+    <svg class={className ?? ''} viewBox="0 0 16 16" version="1.1" aria-hidden="true" fill="currentColor">
       <path
         fill-rule="evenodd"
         fill="currentColor"

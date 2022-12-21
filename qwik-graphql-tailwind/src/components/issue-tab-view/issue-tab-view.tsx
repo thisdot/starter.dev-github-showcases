@@ -71,7 +71,7 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
 
   return (
     <>
-      <div className="border border-gray-300 rounded-lg">
+      <div class="border border-gray-300 rounded-lg">
         <PullRequestIssueTab
           openCount={issuesStore.openIssues.length}
           closedCount={issuesStore.closedIssues.length}
@@ -81,20 +81,20 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
           sortOption={sortOptions}
         />
         {issuesStore.loading && (
-          <div className=" animate-pulse p-3 flex flex-col gap-2">
-            <div className="w-full h-4 rounded-md bg-gray-200"></div>
-            <div className="w-full h-4 rounded-md bg-gray-200"></div>
-            <div className="w-full h-4 rounded-md bg-gray-200"></div>
+          <div class=" animate-pulse p-3 flex flex-col gap-2">
+            <div class="w-full h-4 rounded-md bg-gray-200"></div>
+            <div class="w-full h-4 rounded-md bg-gray-200"></div>
+            <div class="w-full h-4 rounded-md bg-gray-200"></div>
           </div>
         )}
         <IssuesData issues={store.activeTab === DEFAULT_TAB ? issuesStore.openIssues : issuesStore.closedIssues} />
       </div>
-      <div className="flex items-center justify-center gap-4 mt-5">
-        <button className="flex items-center gap-1 text-base">
+      <div class="flex items-center justify-center gap-4 mt-5">
+        <button class="flex items-center gap-1 text-base">
           <ChevronDownIcon className="rotate-90 w-3 h-3 translate-y-[0.1rem]" />
           prev
         </button>
-        <button className="flex items-baseline gap-1 text-sm">
+        <button class="flex items-baseline gap-1 text-sm">
           Next
           <ChevronDownIcon className="-rotate-90 w-3 h-3 translate-y-[0.1rem]" />
         </button>

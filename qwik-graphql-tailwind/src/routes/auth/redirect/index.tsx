@@ -15,8 +15,8 @@ export default component$(() => {
   });
 
   return (
-    <section className="flex h-screen w-full items-center justify-center bg-black">
-      <p className="text-white">Redirecting...</p>
+    <section class="flex h-screen w-full items-center justify-center bg-black">
+      <p class="text-white">Redirecting...</p>
     </section>
   );
 });

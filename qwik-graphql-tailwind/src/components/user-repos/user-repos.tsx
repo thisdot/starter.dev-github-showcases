@@ -1,5 +1,4 @@
-import { component$, useClientEffect$, useContext, useStore, useWatch$ } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { component$, useClientEffect$, useContext, useStore, useTask$ } from '@builder.io/qwik';
 import { StarIcon } from '../icons';
 import { UserRepo, UserReposProps } from './types';
 import { RepoMeta } from '../repo-meta/repo-meta';
@@ -25,7 +24,7 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
   const filters = useContext(filterStore);
   const languages = getLanguages(repos.nodes);
 
-  useWatch$(({ track }) => {
+  useTask$(({ track }) => {
     track(() => filters.search);
     track(() => filters.language);
     track(() => filters.sortBy);
@@ -57,15 +56,15 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
       <RepoFilters languages={languages} resultCount={state.searchResponse.length} />
       {state.searchResponse.map(
         ({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
-          <div key={id} className="py-8 border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4">
-            <div className="col-span-12 md:col-span-7">
-              <h3 className="mb-2">
-                <Link href={`/${owner}/${name}`} className="text-xl text-blue-600 font-semibold hover:underline mr-3">
+          <div key={id} class="py-8 border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4">
+            <div class="col-span-12 md:col-span-7">
+              <h3 class="mb-2">
+                <a href={`/${owner}/${name}`} class="text-xl text-blue-600 font-semibold hover:underline mr-3">
                   {name}
-                </Link>
+                </a>
                 <PrivacyBadge isPrivate={isPrivate} className="relative bottom-0.5" />
               </h3>
-              <div className="text-gray-600 text-sm max-w-prose">{description}</div>
+              <div class="text-gray-600 text-sm max-w-prose">{description}</div>
               <RepoMeta
                 language={primaryLanguage?.name}
                 languageColor={primaryLanguage?.color}
@@ -74,8 +73,8 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
                 updatedAt={updatedAt}
               />
             </div>
-            <div className="col-span-12 md:col-span-5 flex items-start justify-end">
-              <button className="relative inline-flex items-center px-3 py-1 rounded-md bg-gray-100 bg-opacity-75 border border-gray-300 text-sm font-medium text-gray-800 hover:bg-gray-200 hover:bg-opacity-50">
+            <div class="col-span-12 md:col-span-5 flex items-start justify-end">
+              <button class="relative inline-flex items-center px-3 py-1 rounded-md bg-gray-100 bg-opacity-75 border border-gray-300 text-sm font-medium text-gray-800 hover:bg-gray-200 hover:bg-opacity-50">
                 <StarIcon className="w-4 h-4 text-gray-600 mr-1" />
                 Star
               </button>

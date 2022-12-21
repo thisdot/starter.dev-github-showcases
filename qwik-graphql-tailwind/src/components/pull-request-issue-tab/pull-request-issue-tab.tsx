@@ -46,27 +46,27 @@ export const PullRequestIssueTab = component$(
     });
 
     return (
-      <div className="flex flex-wrap space-x-1 space-y-2 md:space-x-0 md:space-y-0 items-center justify-between p-4 bg-gray-100 border-b rounded-t-lg">
-        <div className="flex space-x-4">
-          <button className={openBtnClasses} onClick$={() => toggleTab(TABS.OPEN)}>
+      <div class="flex flex-wrap space-x-1 space-y-2 md:space-x-0 md:space-y-0 items-center justify-between p-4 bg-gray-100 border-b rounded-t-lg">
+        <div class="flex space-x-4">
+          <button class={openBtnClasses} onClick$={() => toggleTab(TABS.OPEN)}>
             {getIcon()}
             <span>{openCount}</span>
             Open
           </button>
-          <button className={closedBtnClasses} onClick$={() => toggleTab(TABS.CLOSED)}>
+          <button class={closedBtnClasses} onClick$={() => toggleTab(TABS.CLOSED)}>
             <CheckIcon className={iconsClasses} />
             <span>{closedCount}</span>
             Closed
           </button>
         </div>
-        <div className="flex items-center space-x-8">
+        <div class="flex items-center space-x-8">
           <div>
             <FilterDropdown name="Label" description="Filter by label" buttonClassName="border-none text-sm">
-              <div className="p-2 border-t border-t-gray-300">
+              <div class="p-2 border-t border-t-gray-300">
                 <input
                   type="text"
                   placeholder="Filter labels"
-                  className="w-full border border-gray-300 focus:border-blue-500 py-1 px-2 rounded-md text-sm"
+                  class="w-full border border-gray-300 focus:border-blue-500 py-1 px-2 rounded-md text-sm"
                 />
               </div>
               {labelOption.map(({ label, value, color, description }) => (
@@ -75,19 +75,19 @@ export const PullRequestIssueTab = component$(
                     onClick$={() => (dropdown.selectedLabel = value)}
                     type="button"
                     name={'language'}
-                    className="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
                     {value === dropdown.selectedLabel && <CheckIcon className="inline w-4 h-4 absolute left-4" />}
-                    <div className="flex gap-2">
+                    <div class="flex gap-2">
                       {color && (
                         <span
-                          className="w-3.5 h-3.5 rounded-full border border-gray-200 translate-y-0.5"
+                          class="w-3.5 h-3.5 rounded-full border border-gray-200 translate-y-0.5"
                           style={{ backgroundColor: color }}
                         ></span>
                       )}
-                      <div className="normal-case">
+                      <div class="normal-case">
                         <div>{label}</div>
-                        {description && <div className="text-gray-400 text-xs">{description}</div>}
+                        {description && <div class="text-gray-400 text-xs">{description}</div>}
                       </div>
                     </div>
                   </button>
@@ -101,11 +101,11 @@ export const PullRequestIssueTab = component$(
               description="Filter by milestone"
               buttonClassName="border-none text-sm items-start"
             >
-              <div className="p-2 border-t border-t-gray-300">
+              <div class="p-2 border-t border-t-gray-300">
                 <input
                   type="text"
                   placeholder="Filter milestones"
-                  className="w-full border border-gray-300 focus:border-blue-500 py-1 px-2 rounded-md text-sm"
+                  class="w-full border border-gray-300 focus:border-blue-500 py-1 px-2 rounded-md text-sm"
                 />
               </div>
               {milestonesOption.map(({ label, value }) => (
@@ -116,7 +116,7 @@ export const PullRequestIssueTab = component$(
                     }}
                     type="button"
                     name={'language'}
-                    className="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
                     {value === dropdown.selectedMilestones && <CheckIcon className="inline w-4 h-4 absolute left-4" />}{' '}
                     {label}
@@ -133,7 +133,7 @@ export const PullRequestIssueTab = component$(
                     onClick$={() => (dropdown.selectedSort = value)}
                     type="button"
                     name={'language'}
-                    className="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
                     {value === dropdown.selectedSort && <CheckIcon className="inline w-4 h-4 absolute left-4" />}{' '}
                     {label}

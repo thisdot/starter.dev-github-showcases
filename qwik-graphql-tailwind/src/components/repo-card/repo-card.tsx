@@ -13,14 +13,14 @@ export const RepoCard = component$(({ repo }: RepoCardProps) => {
     repo;
 
   return (
-    <div key={id} className="p-4 border-b">
-      <h3 className="mb-2">
-        <Link href={`/${owner}/${name}`} className="text-xl text-blue-600 font-semibold hover:underline mr-3">
+    <div key={id} class="p-4 border-b">
+      <h3 class="mb-2">
+        <Link href={`/${owner}/${name}`} class="text-xl text-blue-600 font-semibold hover:underline mr-3">
           {name}
         </Link>
         <PrivacyBadge isPrivate={isPrivate} className="relative bottom-0.5" />
       </h3>
-      <div className="text-gray-600 text-sm max-w-prose -mb-1 -mt-1">{description}</div>
+      <div class="text-gray-600 text-sm max-w-prose -mb-1 -mt-1">{description}</div>
       <RepoMeta
         language={language}
         languageColor={languageColor}
