@@ -1,6 +1,5 @@
 import cn from 'classnames';
 import { component$ } from '@builder.io/qwik';
-import * as styles from './privacy-badge.className';
 
 export interface PrivacyBadgeProps {
   isPrivate: boolean;
@@ -8,5 +7,9 @@ export interface PrivacyBadgeProps {
 }
 
 export const PrivacyBadge = component$(({ isPrivate, className }: PrivacyBadgeProps) => {
-  return <span class={cn(styles.tag, className)}>{isPrivate ? 'Private' : 'Public'}</span>;
+  return (
+    <span class={cn('py-0.5 px-2 text-xs rounded-xl text-gray-600 border border-gray-300 font-medium', className)}>
+      {isPrivate ? 'Private' : 'Public'}
+    </span>
+  );
 });

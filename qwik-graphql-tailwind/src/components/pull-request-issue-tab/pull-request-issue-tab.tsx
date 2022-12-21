@@ -2,7 +2,6 @@ import { $, component$, useContext } from '@builder.io/qwik';
 import { PullRequestIcon, CheckIcon, IssuesIcon } from '../icons';
 import cn from 'classnames';
 import { TABS } from './data';
-import * as styles from './pull-request-issue-tab-classNames';
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
 import issuesPRStore from '../../context/issue-pr-store';
 import DropdownStores from '../../context/issue-tab-header-dropdown';
@@ -28,10 +27,10 @@ export const PullRequestIssueTab = component$(
     const tab = useContext(issuesPRStore);
     const dropdown = useContext(DropdownStores);
 
-    const openBtnClasses = cn(styles.btnClasses, {
+    const openBtnClasses = cn('text-xs flex items-center gap-1 text-gray-600', {
       'font-semibold text-gray-900': tab.activeTab === TABS.OPEN,
     });
-    const closedBtnClasses = cn(styles.btnClasses, {
+    const closedBtnClasses = cn('text-xs flex items-center gap-1 text-gray-600', {
       'font-semibold text-gray-900': tab.activeTab === TABS.CLOSED,
     });
     const iconsClasses = 'w-4 h-4';
@@ -64,7 +63,11 @@ export const PullRequestIssueTab = component$(
           <div>
             <FilterDropdown name="Label" description="Filter by label" buttonClassName="border-none text-sm">
               <div class="p-2 border-t border-t-gray-300">
-                <input type="text" placeholder="Filter labels" class={styles.filterInput} />
+                <input
+                  type="text"
+                  placeholder="Filter labels"
+                  class="w-full border border-gray-300 focus:border-blue-500 py-1 px-2 rounded-md text-sm"
+                />
               </div>
               {labelOption.map(({ label, value, color, description }) => (
                 <div>
@@ -72,9 +75,9 @@ export const PullRequestIssueTab = component$(
                     onClick$={() => (dropdown.selectedLabel = value)}
                     type="button"
                     name={'language'}
-                    class={styles.itemButton}
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
-                    {value === dropdown.selectedLabel && <CheckIcon className={styles.itemActiveIcon} />}
+                    {value === dropdown.selectedLabel && <CheckIcon className="inline w-4 h-4 absolute left-4" />}
                     <div class="flex gap-2">
                       {color && (
                         <span
@@ -99,7 +102,11 @@ export const PullRequestIssueTab = component$(
               buttonClassName="border-none text-sm items-start"
             >
               <div class="p-2 border-t border-t-gray-300">
-                <input type="text" placeholder="Filter milestones" class={styles.filterInput} />
+                <input
+                  type="text"
+                  placeholder="Filter milestones"
+                  class="w-full border border-gray-300 focus:border-blue-500 py-1 px-2 rounded-md text-sm"
+                />
               </div>
               {milestonesOption.map(({ label, value }) => (
                 <div>
@@ -109,9 +116,10 @@ export const PullRequestIssueTab = component$(
                     }}
                     type="button"
                     name={'language'}
-                    class={styles.itemButton}
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
-                    {value === dropdown.selectedMilestones && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === dropdown.selectedMilestones && <CheckIcon className="inline w-4 h-4 absolute left-4" />}{' '}
+                    {label}
                   </button>
                 </div>
               ))}
@@ -125,9 +133,10 @@ export const PullRequestIssueTab = component$(
                     onClick$={() => (dropdown.selectedSort = value)}
                     type="button"
                     name={'language'}
-                    class={styles.itemButton}
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
-                    {value === dropdown.selectedSort && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === dropdown.selectedSort && <CheckIcon className="inline w-4 h-4 absolute left-4" />}{' '}
+                    {label}
                   </button>
                 </div>
               ))}

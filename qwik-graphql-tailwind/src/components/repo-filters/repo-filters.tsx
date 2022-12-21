@@ -1,5 +1,4 @@
 import { $, component$, useContext } from '@builder.io/qwik';
-import * as styles from './repo-filters.classNames';
 import cn from 'classnames';
 import { LanguageFilter, TypeFilter, RepositoryOrderField, DefaultLanguage } from './types';
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
@@ -50,17 +49,22 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
 
   return (
     <>
-      <div class={styles.container}>
+      <div class="flex relative mb-4 space-x-4">
         <div class="grow">
-          <SearchInput className={styles.searchInput} placeholder="Search repositories..." />
+          <SearchInput className="w-full" placeholder="Find a repositories..." />
         </div>
-        <div class={styles.filters}>
+        <div class="flex items-center space-x-1.5">
           <div>
             <FilterDropdown name="Type" description="Select type">
               {filteOptions.map(({ label, value }: { label: string; value: string }) => (
                 <div>
-                  <button onClick$={() => (filters.type = value)} type="button" name={'Type'} class={styles.itemButton}>
-                    {value === filters.type && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                  <button
+                    onClick$={() => (filters.type = value)}
+                    type="button"
+                    name={'Type'}
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
+                  >
+                    {value === filters.type && <CheckIcon className="inline w-4 h-4 absolute left-4" />} {label}
                   </button>
                 </div>
               ))}
@@ -74,9 +78,9 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
                     onClick$={() => (filters.language = value)}
                     type="button"
                     name={'language'}
-                    class={styles.itemButton}
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
-                    {value === filters.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === filters.language && <CheckIcon className="inline w-4 h-4 absolute left-4" />} {label}
                   </button>
                 </div>
               ))}
@@ -90,9 +94,9 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
                     onClick$={() => (filters.sortBy = value)}
                     type="button"
                     name={'order'}
-                    class={styles.itemButton}
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
-                    {value === filters.sortBy && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === filters.sortBy && <CheckIcon className="inline w-4 h-4 absolute left-4" />} {label}
                   </button>
                 </div>
               ))}
@@ -101,7 +105,7 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
         </div>
       </div>
       {isFiltersActive && (
-        <div class={styles.filtersDetail}>
+        <div class="py-4 border-t flex items-center justify-between">
           <div class="text-sm">
             <span class="font-semibold" data-testid="filterText">
               {resultCount}
@@ -120,11 +124,18 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
             sorted by <span class="font-semibold">{filters.sortBy.split('_').join(' ').toLowerCase()}.</span>
           </div>
           <div>
-            <button onClick$={resetFilters$} class={cn(styles.clearBtn, 'group')}>
-              <span class={cn(styles.clearBtnIconContainer, 'group-hover:bg-blue-500')}>
-                <XmarkIcon className={styles.clearBtnIcon} />
+            <button onClick$={resetFilters$} class={cn('inline-flex items-center justify-center', 'group')}>
+              <span
+                class={cn(
+                  'p-0.5 rounded bg-gray-500 inline-flex items-center justify-center mr-2 group-hover:bg-blue-500',
+                  'group-hover:bg-blue-500'
+                )}
+              >
+                <XmarkIcon className="w-3.5 h-3.5 text-white" />
               </span>
-              <span class={cn(styles.clearBtnText, 'group-hover:text-blue-500')}>Clear filter</span>
+              <span class={cn('text-sm text-gray-500 group-hover:text-blue-500', 'group-hover:text-blue-500')}>
+                Clear filter
+              </span>
             </button>
           </div>
         </div>

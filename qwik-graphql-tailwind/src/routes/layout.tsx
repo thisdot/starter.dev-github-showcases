@@ -2,7 +2,6 @@ import { component$, Slot, useClientEffect$, useStore } from '@builder.io/qwik';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import Header from '../components/header/header';
 import { useQuery } from '../utils';
-import * as styles from './layout.classNames';
 
 interface IViewer {
   login: string;
@@ -49,7 +48,7 @@ export default component$(() => {
       ) : (
         <>
           <Header user={store.viewer} />
-          <main class={styles.main}>
+          <main class="min-h-screen bg-gray-100">
             <Slot />
           </main>
         </>

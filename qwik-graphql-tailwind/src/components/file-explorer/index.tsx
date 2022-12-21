@@ -1,6 +1,5 @@
 import { component$, useStore, useClientEffect$ } from '@builder.io/qwik';
 import { FolderIcon, DocumentIcon } from '~/components/icons';
-import * as styles from './file-explorer.classNames';
 import { useLocation } from '@builder.io/qwik-city';
 import { useQuery } from '~/utils';
 import { REPO_TREE_QUERY } from '~/utils/queries/repo-tree';
@@ -41,7 +40,7 @@ export const FileExplorer = component$(({ branch }: { branch?: string }) => {
   });
 
   const basePath = `/${owner}/${name}`;
-  const backLink = `${basePath}/tree/${branch}/${path || ''}`;
+  const backLink = `${basePath}/tree/${branch || pathBranch}/${path || ''}`;
 
   if (store.isLoading) {
     return <div />;
@@ -50,26 +49,26 @@ export const FileExplorer = component$(({ branch }: { branch?: string }) => {
   return (
     <>
       <BranchNavigation branch={pathBranch || branch} />
-      <div class={styles.container}>
+      <div class="border rounded border-gray-300 text-sm">
         {path && (
           <a href={backLink}>
-            <span class={styles.cellBack}>
+            <a class="block py-2 px-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer">
               <div class="text-blue-600">..</div>
-            </span>
+            </a>
           </a>
         )}
-        {store.tree?.map((item) => (
-          <div key={item.path} class={styles.cell}>
+        {store?.tree?.map((item) => (
+          <div key={item.path} class="py-2 px-4 border-b border-gray-300 last-of-type:border-none hover:bg-gray-50">
             <div class="flex items-center">
               <div class="mr-2.5">
                 {item.type === 'tree' ? (
-                  <FolderIcon className={styles.iconDir} />
+                  <FolderIcon className="w-5 h-5 text-blue-400" />
                 ) : (
-                  <DocumentIcon className={styles.iconFile} />
+                  <DocumentIcon className="w-5 h-5 text-gray-500" />
                 )}
               </div>
-              <a href={`${basePath}/${item.type}/${pathBranch || branch}/${item.path}`}>
-                <span class={styles.link}>{item.name}</span>
+              <a href={`${basePath}/${item.type}/${branch || pathBranch}/${item.path}`}>
+                <span class="hover:text-blue-600 hover:underline">{item.name}</span>
               </a>
             </div>
           </div>

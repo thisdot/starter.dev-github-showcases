@@ -2,7 +2,6 @@ import { component$ } from '@builder.io/qwik';
 import { BuildingIcon, LinkIcon, LocationMarkerIcon, StarIcon, TwitterIcon, UsersIcon } from '../icons';
 import { OrgList } from '../org-list/org-list';
 import { User } from '../../utils/types';
-import * as styles from './user-profile-card.classNames';
 
 export const UserProfileCard = component$(
   ({
@@ -21,52 +20,62 @@ export const UserProfileCard = component$(
   }: User) => {
     return (
       <div>
-        <img src={avatarUrl} alt="Avatar" width={260} height={260} class={styles.avatar} />
+        <img src={avatarUrl} alt="Avatar" width={260} height={260} class="rounded-full shadow z-30" />
         <h1 class="mt-2">
-          <div class={styles.name}>{name}</div>
-          <div class={styles.username}>{login}</div>
+          <div class="text-2xl text-gray-800 font-bold leading-tight">{name}</div>
+          <div class="text-xl text-gray-500 font-light">{login}</div>
         </h1>
-        {bio && <div class={styles.bio} dangerouslySetInnerHTML={bio} />}
-        <div class={styles.socials}>
-          <UsersIcon className={styles.icon} />
+        {bio && <div class="text-gray-800 mt-4 mb-3" dangerouslySetInnerHTML={bio} />}
+        <div class="text-sm text-gray-600 my-4">
+          <UsersIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
           <span class="inline-block">
-            <span class={styles.count}>{followers.totalCount}</span> followers
+            <span class="font-medium text-gray-900">{followers.totalCount}</span> followers
           </span>
           <span class="mx-1">·</span>
           <span class="inline-block">
-            <span class={styles.count}>{following.totalCount}</span> following
+            <span class="font-medium text-gray-900">{following.totalCount}</span> following
           </span>
           <span class="mx-1">·</span>
-          <StarIcon className={styles.icon} />
+          <StarIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
           <span class="inline-block">
-            <span class={styles.count}>{starredRepositories.totalCount}</span>{' '}
+            <span class="font-medium text-gray-900">{starredRepositories.totalCount}</span>{' '}
           </span>
         </div>
-        <div class={styles.fields}>
+        <div class="text-sm text-gray-800 space-y-1">
           {company && (
             <div>
-              <BuildingIcon className={styles.icon} />
+              <BuildingIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
               {company}
             </div>
           )}
           {location && (
             <div>
-              <LocationMarkerIcon className={styles.icon} />
+              <LocationMarkerIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
               {location}
             </div>
           )}
           {websiteUrl && (
             <div>
-              <LinkIcon className={styles.icon} />
-              <a class={styles.link} href={`https://${websiteUrl}`} target="_blank" rel="noreferrer">
+              <LinkIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
+              <a
+                class="hover:text-blue-600 hover:underline"
+                href={`https://${websiteUrl}`}
+                target="_blank"
+                rel="noreferrer"
+              >
                 {websiteUrl}
               </a>
             </div>
           )}
           {twitterUsername && (
             <div>
-              <TwitterIcon className={styles.icon} />
-              <a class={styles.link} href={`https://twitter.com/${twitterUsername}`} target="_blank" rel="noreferrer">
+              <TwitterIcon className="w-4 h-4 mb-0.5 mr-1 inline-block" />
+              <a
+                class="hover:text-blue-600 hover:underline"
+                href={`https://twitter.com/${twitterUsername}`}
+                target="_blank"
+                rel="noreferrer"
+              >
                 @{twitterUsername}
               </a>
             </div>

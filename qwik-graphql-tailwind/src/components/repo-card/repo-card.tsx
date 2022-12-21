@@ -4,30 +4,23 @@ import { Repo, TopRepo } from '~/utils/types';
 import { PrivacyBadge } from '../privacy-badge/privacy-badge';
 import { RepoMeta } from '../repo-meta/repo-meta';
 
-interface RepoStyles {
-  item: string;
-  headingLink: string;
-  description: string;
-}
-
 export interface RepoCardProps {
   repo: Repo | TopRepo;
-  styles: RepoStyles;
 }
 
-export const RepoCard = component$(({ repo, styles }: RepoCardProps) => {
+export const RepoCard = component$(({ repo }: RepoCardProps) => {
   const { id, name, owner, description, stargazerCount, forkCount, language, languageColor, updatedAt, isPrivate } =
     repo;
 
   return (
-    <div key={id} class={styles.item}>
+    <div key={id} class="p-4 border-b">
       <h3 class="mb-2">
-        <Link href={`/${owner}/${name}`} class={styles.headingLink}>
+        <Link href={`/${owner}/${name}`} class="text-xl text-blue-600 font-semibold hover:underline mr-3">
           {name}
         </Link>
         <PrivacyBadge isPrivate={isPrivate} className="relative bottom-0.5" />
       </h3>
-      <div class={styles.description}>{description}</div>
+      <div class="text-gray-600 text-sm max-w-prose -mb-1 -mt-1">{description}</div>
       <RepoMeta
         language={language}
         languageColor={languageColor}

@@ -1,7 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
 import { GitBranchIcon } from '~/components/icons';
-import * as styles from './branch-navigation.classNames';
 
 export const BranchNavigation = component$(({ branch }: { branch?: string }) => {
   const { path, name, owner, branch: pathBranch } = useLocation().params;
@@ -11,17 +10,17 @@ export const BranchNavigation = component$(({ branch }: { branch?: string }) => 
   const fileViewLink = `/${owner}/${name}/`;
 
   return (
-    <nav class={styles.container}>
-      <button class={styles.btn}>
-        <GitBranchIcon className={styles.btnIcon} /> {branch || pathBranch}{' '}
-        <span class={styles.btnCaret}>{'\u25BC'}</span>
+    <nav class="my-6 flex items-center">
+      <button class="relative inline-flex items-center px-4 py-1 rounded-md bg-gray-50 border border-gray-300 font-medium text-gray-700 hover:bg-gray-200 hover:bg-opacity-50">
+        <GitBranchIcon className="w-5 h-5 text-gray-600 mr-1" /> {branch || pathBranch}{' '}
+        <span class="text-xs text-gray-600 ml-1.5 mt-0.5">{'\u25BC'}</span>
       </button>
       {crumbs.length > 0 && (
-        <div class={styles.crumbs}>
+        <div class="flex px-3">
           <a href={fileViewLink}>
-            <span class={styles.rootLink}>{name}</span>
+            <span class="font-semibold text-blue-600 hover:underline">{name}</span>
           </a>
-          <span class={styles.separator}>/</span>
+          <span class="text-lg text-gray-800 leading-snug mx-1.5">/</span>
           {crumbs.map((crumb, i) => {
             const isLast = i === crumbs.length - 1;
 
@@ -32,13 +31,13 @@ export const BranchNavigation = component$(({ branch }: { branch?: string }) => 
             return (
               <>
                 {isLast ? (
-                  <span class={styles.crumbEnd}>{crumb}</span>
+                  <span class="font-semibold">{crumb}</span>
                 ) : (
                   <>
                     <a href={href}>
-                      <span class={styles.crumbLink}>{crumb}</span>
+                      <span class="text-blue-600 hover:underline">{crumb}</span>
                     </a>
-                    <span class={styles.separator}>/</span>
+                    <span class="text-lg text-gray-800 leading-snug mx-1.5">/</span>
                   </>
                 )}
               </>

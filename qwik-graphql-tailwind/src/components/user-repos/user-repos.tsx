@@ -1,7 +1,6 @@
 import { component$, useClientEffect$, useContext, useStore, useTask$ } from '@builder.io/qwik';
 import { StarIcon } from '../icons';
 import { UserRepo, UserReposProps } from './types';
-import * as styles from './user-repos.classNames';
 import { RepoMeta } from '../repo-meta/repo-meta';
 import { PrivacyBadge } from '../privacy-badge/privacy-badge';
 import { Pagination } from '../pagination/pagination';
@@ -57,15 +56,15 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
       <RepoFilters languages={languages} resultCount={state.searchResponse.length} />
       {state.searchResponse.map(
         ({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
-          <div key={id} class={styles.container}>
-            <div class={styles.content}>
+          <div key={id} class="py-8 border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4">
+            <div class="col-span-12 md:col-span-7">
               <h3 class="mb-2">
-                <a href={`/${owner}/${name}`} class={styles.headingLink}>
+                <a href={`/${owner}/${name}`} class="text-xl text-blue-600 font-semibold hover:underline mr-3">
                   {name}
                 </a>
                 <PrivacyBadge isPrivate={isPrivate} className="relative bottom-0.5" />
               </h3>
-              <div class={styles.description}>{description}</div>
+              <div class="text-gray-600 text-sm max-w-prose">{description}</div>
               <RepoMeta
                 language={primaryLanguage?.name}
                 languageColor={primaryLanguage?.color}
@@ -74,9 +73,9 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
                 updatedAt={updatedAt}
               />
             </div>
-            <div class={styles.aside}>
-              <button class={styles.starBtn}>
-                <StarIcon className={styles.starIcon} />
+            <div class="col-span-12 md:col-span-5 flex items-start justify-end">
+              <button class="relative inline-flex items-center px-3 py-1 rounded-md bg-gray-100 bg-opacity-75 border border-gray-300 text-sm font-medium text-gray-800 hover:bg-gray-200 hover:bg-opacity-50">
+                <StarIcon className="w-4 h-4 text-gray-600 mr-1" />
                 Star
               </button>
             </div>
