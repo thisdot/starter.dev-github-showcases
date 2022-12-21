@@ -8,7 +8,7 @@
 
   const getHref = (i: number): string => {
     const crumbPath = crumbs.slice(0, i + 1).join('/');
-    return `${basePath}/tree/${branch}/${crumbPath}`;
+    return `/${basePath}/tree/${branch}/${crumbPath}`;
   };
 </script>
 
