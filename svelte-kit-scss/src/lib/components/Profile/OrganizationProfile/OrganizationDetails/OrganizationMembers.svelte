@@ -6,7 +6,7 @@
 
 <div class="organization-members">
   {#each members as member}
-    <a class="member-link" href="/{member.login}">
+    <a class="member-link" href={member.href}>
       <img class="image" src={member.avatarUrl} alt={member.login} />
     </a>
   {/each}
