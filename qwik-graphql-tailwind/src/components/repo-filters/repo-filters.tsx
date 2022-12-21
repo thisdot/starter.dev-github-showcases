@@ -52,7 +52,7 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
     <>
       <div className={styles.container}>
         <div className="grow">
-          <SearchInput className={styles.searchInput} placeholder="Search repositories..." />
+          <SearchInput className={styles.searchInput} placeholder="Find a repositories..." />
         </div>
         <div className={styles.filters}>
           <div>
