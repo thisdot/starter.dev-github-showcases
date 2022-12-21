@@ -10,15 +10,15 @@
 
   $: ({
     avatarUrl,
-    login,
-    name,
     bio,
+    blog,
+    company,
+    email,
     followers,
     following,
-    company,
     location,
-    email,
-    blog,
+    login,
+    name,
     twitterUsername,
   } = profile);
 </script>
@@ -43,34 +43,35 @@
   <div class="info secondary followers">
     <ProfileFollowers {followers} {following} />
   </div>
-  <div class="info secondary details">
-    {#if company}
-      <SocialLink iconComponent={Organization16} label={company} />
-    {/if}
-    {#if location}
-      <SocialLink iconComponent={Location16} label={location} mobileHide={true} />
-    {/if}
-    {#if email}
-      <SocialLink
-        iconComponent={Mail16}
-        label={email}
-        href={`mailto:{${email}}`}
-        mobileHide={true}
-      />
-    {/if}
-    {#if blog}
-      <SocialLink iconComponent={Link16} label={blog} href={blog} />
-    {/if}
-    {#if twitterUsername}
-      <SocialLink
-        iconComponent={IconTwitter16}
-        label={twitterUsername}
-        href={`https://twitter.com/${twitterUsername}`}
-        mobileHide={true}
-      />
-    {/if}
-  </div>
-  <div />
+  {#if company || location || email || blog || twitterUsername}
+    <div class="info secondary details">
+      {#if company}
+        <SocialLink iconComponent={Organization16} label={company} />
+      {/if}
+      {#if location}
+        <SocialLink iconComponent={Location16} label={location} mobileHide={true} />
+      {/if}
+      {#if email}
+        <SocialLink
+          iconComponent={Mail16}
+          label={email}
+          href={`mailto:{${email}}`}
+          mobileHide={true}
+        />
+      {/if}
+      {#if blog}
+        <SocialLink iconComponent={Link16} label={blog} href={blog} />
+      {/if}
+      {#if twitterUsername}
+        <SocialLink
+          iconComponent={IconTwitter16}
+          label={twitterUsername}
+          href={`https://twitter.com/${twitterUsername}`}
+          mobileHide={true}
+        />
+      {/if}
+    </div>
+  {/if}
   <div class="info organizations">
     <hr />
     <h2>Organizations</h2>

@@ -1,5 +1,6 @@
 import type { SimpleUser } from '$lib/interfaces';
 import type { GithubSimpleUser } from '$lib/interfaces/data-contract/github';
+import { resolveUserHref } from '../router';
 
 export const remapSimpleUser = (user: GithubSimpleUser): SimpleUser => ({
   avatarUrl: user.avatar_url,
@@ -11,4 +12,5 @@ export const remapSimpleUser = (user: GithubSimpleUser): SimpleUser => ({
   starredAt: user.starred_at,
   type: user.type,
   url: user.url,
+  href: resolveUserHref(user),
 });
