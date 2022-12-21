@@ -74,5 +74,8 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
     ),
     defaultBranch: repositoryState.defaultBranch,
     currentBranch: branch,
+    username,
+    repo,
+    folderPath,
   };
 };
