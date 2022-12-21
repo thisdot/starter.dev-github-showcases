@@ -8,11 +8,11 @@
   import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
   import LayoutSidebar from '$lib/components/shared/layouts/LayoutSidebar.svelte';
   import LayoutPageHeader from '$lib/components/shared/layouts/LayoutPageHeader.svelte';
+  import UserProfile from '$lib/components/Profile/UserProfile/UserProfile.svelte';
 
   export let data: PageServerData;
 
   $: ({ profile, organizations, allRepositoriesListViewModel } = data);
-
   $: isOrg = profile?.type == ProfileType.Organization;
 </script>
 
@@ -47,12 +47,8 @@
     </LayoutPageHeader>
     <LayoutPageContentRow>
       <LayoutSidebar>
-        <div slot="sidebar-left">
-          <ProfileAboutSection {profile} {organizations} />
-        </div>
-        <div>
-          <AllRepositoriesList model={allRepositoriesListViewModel} />
-        </div>
+        <UserProfile {profile} {organizations} slot="sidebar-left" />
+        <AllRepositoriesList model={allRepositoriesListViewModel} />
       </LayoutSidebar>
     </LayoutPageContentRow>
   {/if}

@@ -3,7 +3,7 @@
   import { Search16, Sync16 } from 'svelte-octicons';
 
   export let value: string | null | undefined;
-  export let delay = 3000;
+  export let delay = 2000;
   let timeout: NodeJS.Timeout | undefined = undefined;
   $: loading = Boolean(timeout);
 
