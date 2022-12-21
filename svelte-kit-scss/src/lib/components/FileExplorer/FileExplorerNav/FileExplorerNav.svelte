@@ -3,13 +3,13 @@
   import DropdownMenu from '$lib/components/shared/Dropdown/DropdownMenu.svelte';
   import BranchesSelectList from './BranchesSelectList.svelte';
   import type { BranchOption } from '../models';
-  import Breadcrumbs from './Breadcrumbs.svelte';
+  import Breadcrumbs from './Breadcrumbs/Breadcrumbs.svelte';
+  import type { BreadcrumbData } from '$lib/interfaces';
   export let branches: BranchOption[];
   export let defaultBranch: string;
   export let currentBranch: string;
-  export let username: string;
-  export let repo: string;
-  export let folderPath: string;
+  export let breadcrumbData: BreadcrumbData;
+  export let parentHref: string | undefined = undefined;
 
   let searchTerm = String();
 
@@ -43,7 +43,10 @@
       </div>
     </svelte:fragment>
   </DropdownMenu>
-  <Breadcrumbs {username} {repo} path={folderPath} branch={currentBranch} />
+
+  {#if parentHref}
+    <Breadcrumbs {breadcrumbData} />
+  {/if}
 </nav>
 
 <style lang="scss">

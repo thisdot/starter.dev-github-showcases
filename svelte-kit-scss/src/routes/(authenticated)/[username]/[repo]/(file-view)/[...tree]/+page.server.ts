@@ -2,6 +2,7 @@ import { ENV } from '$lib/constants/env';
 import {
   buildMarkdownPreviewHtml,
   composeDirHref,
+  getBreadcrumbs,
   remapBranchOption,
   remapFileExplorerFolderContentsItem,
 } from '$lib/helpers';
@@ -62,6 +63,8 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
     throw error(400, 'Unable to fetch branches');
   }
 
+  const breadcrumbData = getBreadcrumbs(username, repo, branch, folderPathSegments);
+
   return {
     ...layoutData,
     parentHref,
@@ -74,8 +77,6 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
     ),
     defaultBranch: repositoryState.defaultBranch,
     currentBranch: branch,
-    username,
-    repo,
-    folderPath,
+    breadcrumbData,
   };
 };
