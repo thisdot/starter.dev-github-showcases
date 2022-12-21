@@ -5,6 +5,7 @@ import GistListItem from './gist-list-item';
 import { useQuery } from '../../utils/useQuery';
 import { parseQuery } from './parseQuery';
 import { GistItem } from './types';
+import { LoadingPulseDot } from '../Loading/loading-pulse-dot';
 
 interface GistStore {
   data: GistItem[];
@@ -31,7 +32,7 @@ export default component$(() => {
         </h3>
 
         {store.isLoading ? (
-          <div>Loading...</div>
+          <LoadingPulseDot />
         ) : (
           <ul class="space-y-2">
             {store.data.map((gist) => (
