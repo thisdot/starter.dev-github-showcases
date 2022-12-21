@@ -74,7 +74,7 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
       </div>
 
       <div className="flex-auto min-width-0 pr-3 pl-2">
-        <a className="align-middle no-underline markdown-title font-semibold" href={data.url}>
+        <a className="align-middle no-underline markdown-title font-semibold" target="_blank" href={data.url}>
           {data.title}
         </a>
         <div className="flex mt-1 text-sm text-gray-500">
