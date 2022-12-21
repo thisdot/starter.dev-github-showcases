@@ -1,6 +1,4 @@
 import type { TabItem } from './types';
-import cn from 'classnames';
-import * as styles from './tab-navigation.classNames';
 import { component$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 
@@ -19,8 +17,8 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
   };
 
   return (
-    <div className={cn(styles.container, className)}>
-      <nav className={styles.nav} aria-label="Tabs">
+    <div className={`$'border-b border-gray-200' ${className}`}>
+      <nav className="-mb-px flex" aria-label="Tabs">
         {tabs.map(({ title, path, Icon, count }, index) => {
           const href = path === '' ? `/${basePath}` : `/${basePath}/${path}`;
 
@@ -28,9 +26,15 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
             <Link
               key={index}
               href={href}
-              className={`${isCurrentTab(path) ? styles.tabActive : styles.tabInactive} ${styles.tab}`}
+              className={`${
+                isCurrentTab(path)
+                  ? 'border-yellow-500 text-gray-900 font-semibold'
+                  : 'border-transparent text-gray-600 hover:border-gray-300'
+              } inline-flex items-center p-4 border-b-2 font-medium text-sm`}
             >
-              <Icon className={`${isCurrentTab(path) ? styles.iconActive : styles.iconInactive} ${styles.icon}`} />
+              <Icon
+                className={`${isCurrentTab(path) ? 'text-gray-700' : 'text-gray-500'} -ml-0.5 mr-2 h-5 w-5 border-none`}
+              />
               <span>{title}</span>
               {typeof count === 'number' && (
                 <span className="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">

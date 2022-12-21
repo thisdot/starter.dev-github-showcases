@@ -1,7 +1,6 @@
 import { $, component$, useContext } from '@builder.io/qwik';
 import cn from 'classnames';
 import filterStore from '~/context/repo-filter';
-import * as styles from './search-input.classNames';
 
 export interface SearchInputProps {
   placeholder: string;
@@ -18,7 +17,10 @@ export const SearchInput = component$(({ placeholder, className }: SearchInputPr
       name="search"
       id="search"
       value={searchValue.search}
-      className={cn(styles.input, className)}
+      className={cn(
+        'border p-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block sm:text-sm border-gray-300 rounded-md outline-none',
+        className
+      )}
       placeholder={placeholder}
       onInput$={handleInput$}
     />

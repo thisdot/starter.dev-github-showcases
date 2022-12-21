@@ -4,7 +4,6 @@ import { useQuery } from '~/utils/useQuery';
 import { USER_PROFILE_QUERY } from '~/utils/queries/user-profile-query';
 import { useLocation } from '@builder.io/qwik-city';
 import { User } from './types';
-import * as styles from './user-page.classNames';
 import { UserProfileCard } from '../../components/user-profile-card/user-profile-card';
 import ProfileNav from '../../components/profile-nav/profile-nav';
 import { UserRepos } from '../../components/user-repos/user-repos';
@@ -60,11 +59,11 @@ export default component$(() => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.stickyNav}>
-        <div className={styles.gridNav}>
+    <div className="relative pt-8 bg-white">
+      <div className="border-b border-gray-200 sticky top-0 bg-white z-20 hidden md:block">
+        <div className="grid grid-cols-12 gap-8 max-w-screen-2xl mx-auto">
           <div className="col-span-12 md:col-span-4 xl:col-span-3" />
-          <div className={styles.profileNav}>
+          <div className="col-span-12 md:col-span-8 xl:col-span-9">
             <ProfileNav className="border-none" pathname={location.pathname} />
           </div>
         </div>

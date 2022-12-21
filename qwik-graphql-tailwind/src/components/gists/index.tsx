@@ -4,7 +4,6 @@ import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
 import GistListItem from './gist-list-item';
 import { useQuery } from '../../utils/useQuery';
 import { parseQuery } from './parseQuery';
-import * as styles from './gists.className';
 import { GistItem } from './types';
 
 interface GistStore {
@@ -25,7 +24,7 @@ export default component$(() => {
   });
 
   return (
-    <aside className={styles.container}>
+    <aside className="basis-1/4 border-t border-b bg-white h-auto shadow-lg p-8">
       <div className="border-y py-3 space-y-5">
         <h3 data-testid="show gists list" className="font-semibold">
           Gists
