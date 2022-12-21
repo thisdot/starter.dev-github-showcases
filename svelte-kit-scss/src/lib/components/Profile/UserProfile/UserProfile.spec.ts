@@ -19,7 +19,7 @@ describe('UserProfile', () => {
   it.each([
     ['name', mockUserProfile.name],
     ['login', mockUserProfile.login],
-    ['bio', mockUserProfile.login],
+    ['bio', mockUserProfile.bio],
     // ['followers', mockUserProfile.followers],
     // ['following', mockUserProfile.following],
     // ['email', mockUserProfile.email],
