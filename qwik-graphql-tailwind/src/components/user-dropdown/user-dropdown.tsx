@@ -59,11 +59,9 @@ export const UserDropdown = component$(({ image, username }: UserDropdownProps) 
           </div>
         </button>
         <nav
-          className={
-            store.expanded
-              ? 'z-40 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200'
-              : 'z-40 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200 scale-0 opacity-0'
-          }
+          className={`z-40 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200 ${
+            store.expanded ? 'scale-0 opacity-0' : ''
+          }`}
         >
           <ul className="py-1">
             {username && (
