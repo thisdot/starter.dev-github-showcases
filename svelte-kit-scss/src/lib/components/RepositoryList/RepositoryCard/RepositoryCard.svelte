@@ -92,6 +92,8 @@
             line-height: 1.5em;
             padding: 0 0.5em;
             border-radius: 0.75em;
+            color: variables.$gray600;
+            margin-left: 0.5em;
           }
         }
       }
@@ -108,6 +110,7 @@
         display: flex;
         align-items: center;
         gap: 0.25em;
+        color: variables.$gray600;
       }
     }
   }
