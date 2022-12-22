@@ -15,6 +15,7 @@ import {
 } from '$lib/helpers/issues-search-query-builder';
 import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
 import { redirect } from '@sveltejs/kit';
+import type { Issue } from '$lib/interfaces';
 
 const DEFAULT_PER_PAGE = 25;
 const PAGE_SEARCH_PARAM_QUERY = 'q';
@@ -155,8 +156,17 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
     (label) => label,
     true
   );
+
+  const issueType = issueSearchType === 'pulls' ? 'pull' : issueSearchType;
+
+  const issuesWithLinks = issues.reduce((issues_accumulator, issue) => {
+    issue.href = `https://github.com/${username}/${repo}/${issueType}/${issue.number}`;
+    issues_accumulator.push(issue);
+    return issues_accumulator;
+  }, [] as Issue[]);
+
   return {
-    issues,
+    issues: issuesWithLinks,
     sortFilters,
     stateFilters,
     milestoneFilters,
