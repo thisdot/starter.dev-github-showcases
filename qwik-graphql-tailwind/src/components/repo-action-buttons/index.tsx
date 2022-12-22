@@ -13,7 +13,7 @@ export const RepoActionButtons = component$(() => {
           Watch
         </button>
         <button class="-ml-px relative inline-flex items-center px-3 py-1.5 rounded-r-md border border-gray-300 bg-white text-xs font-semibold text-gray-700 hover:text-blue-600">
-          {store.info.data?.watcherCount || 0}
+          {store.info?.watcherCount || 0}
         </button>
       </span>
       <span class="inline-flex shadow-sm rounded-md">
@@ -22,7 +22,7 @@ export const RepoActionButtons = component$(() => {
           Star
         </button>
         <button class="-ml-px relative inline-flex items-center px-3 py-1.5 rounded-r-md border border-gray-300 bg-white text-xs font-semibold text-gray-700 hover:text-blue-600">
-          {store.info.data?.stargazerCount || 0}
+          {store.info?.stargazerCount || 0}
         </button>
       </span>
       <span class="inline-flex shadow-sm rounded-md">
@@ -31,7 +31,7 @@ export const RepoActionButtons = component$(() => {
           Fork
         </button>
         <button class="-ml-px relative inline-flex items-center px-3 py-1.5 rounded-r-md border border-gray-300 bg-white text-xs font-semibold text-gray-700 hover:text-blue-600">
-          {store.info.data?.forkCount || 0}
+          {store.info?.forkCount || 0}
         </button>
       </span>
     </div>
