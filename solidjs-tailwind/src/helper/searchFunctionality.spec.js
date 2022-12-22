@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { repoDataFilteredBySearch } from './search-functionality';
+import { repoDataFilteredBySearch } from './searchFunctionality';
 import { MOCK_REPOS } from './fixtures/mocks';
 
 const MOCK_SEARCH_INPUT = 'php';
