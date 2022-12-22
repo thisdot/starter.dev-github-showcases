@@ -7,7 +7,7 @@ export default component$(() => {
   const { name, owner } = useLocation().params;
 
   return (
-    <div className="md:py-12 max-w-screen-xl mx-auto">
+    <div class="md:py-12 max-w-screen-xl mx-auto">
       <PRIssueContextProvider activeTab="open">
         <IssueTabView activeTab="open" name={name} owner={owner} />
       </PRIssueContextProvider>

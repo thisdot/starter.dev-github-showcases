@@ -49,34 +49,34 @@ export const UserDropdown = component$(({ image, username }: UserDropdownProps) 
         }
       }}
     >
-      <div className="relative top-1 inline-block text-left z-30" ref={elementRef}>
-        <button role="button" className="inline-flex items-center text-gray-200 fill-current" onClick$={toggle$}>
-          <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-200">
+      <div class="relative top-1 inline-block text-left z-30" ref={elementRef}>
+        <button role="button" class="inline-flex items-center text-gray-200 fill-current" onClick$={toggle$}>
+          <div class="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-200">
             {image && <img src={image} alt="Profile Photo" width={32} height={32} />}
           </div>
-          <div className="w-4 ml-1">
+          <div class="w-4 ml-1">
             <ChevronDownIcon />
           </div>
         </button>
         <nav
-          className={`z-40 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200 ${
-            store.expanded ? 'scale-0 opacity-0' : ''
+          class={`z-40 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200 ${
+            store.expanded ? '' : 'scale-0 opacity-0'
           }`}
         >
-          <ul className="py-1">
+          <ul class="py-1">
             {username && (
               <li data-menu-item>
                 <Link
                   preventdefault:click={false}
                   href={`/${username}`}
-                  className="block font-medium px-4 py-2 text-gray-900 hover:text-blue-600"
+                  class="block font-medium px-4 py-2 text-gray-900 hover:text-blue-600"
                 >
                   Profile
                 </Link>
               </li>
             )}
             <li data-menu-item>
-              <button className="block font-medium px-4 py-2 text-gray-900 hover:text-blue-600" onClick$={signOut$}>
+              <button class="block font-medium px-4 py-2 text-gray-900 hover:text-blue-600" onClick$={signOut$}>
                 Sign Out
               </button>
             </li>

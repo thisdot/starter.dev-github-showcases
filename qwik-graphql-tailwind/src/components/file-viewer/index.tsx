@@ -5,6 +5,8 @@ import { useQuery } from '~/utils';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import { mapExtensionToLanguage } from './mapExtensionToLanguage';
 import { FileViewerView } from './view';
+import { useLocation } from '@builder.io/qwik-city';
+import { BranchNavigation } from '../branch-navigation';
 
 interface FileQueryParams {
   owner: string;
@@ -21,7 +23,8 @@ interface FileStore {
 }
 
 export const FileViewer = component$(() => {
-  const { path, name, owner, branch } = useContext(RepoContext);
+  const globalStore = useContext(RepoContext);
+  const { path, name, owner, branch: pathBranch } = useLocation().params;
 
   const store = useStore<FileStore>({
     text: '',
@@ -36,21 +39,27 @@ export const FileViewer = component$(() => {
       {
         owner,
         name,
-        expression: `${branch}:${path}`,
+        expression: `${globalStore.branch || pathBranch}:${path.replace(/\/+$/, '') || ''}`,
       },
       abortController
     );
+
     updateFile(store, response);
   });
 
   if (store.isLoading) {
-    return <div>Loading...</div>;
+    return <div />;
   }
 
-  const extension = path?.split('.').pop();
+  const extension = globalStore.path?.split('.').pop();
   const language = mapExtensionToLanguage(extension);
 
-  return <FileViewerView text={store.text} lines={store.lines} language={language} byteSize={store.byteSize} />;
+  return (
+    <>
+      <BranchNavigation />
+      <FileViewerView text={store.text} lines={store.lines} language={language} byteSize={store.byteSize} />
+    </>
+  );
 });
 
 export function updateFile(store: FileStore, response: any) {

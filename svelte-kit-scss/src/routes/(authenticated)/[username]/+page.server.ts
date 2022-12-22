@@ -8,6 +8,7 @@ import {
 import { OrganizationService, UserService, RepositorySearchService } from '$lib/services';
 import type { AllRepositoriesListViewModel } from '$lib/components/RepositoryList/view-models';
 import { RepositorySearchSort, RepositorySearchType } from '$lib/constants/repository-search';
+import { ProfileType, type SimpleUser } from '$lib/interfaces';
 
 const MAP_FILTER_LABEL_SORT = new Map<RepositorySearchSort, string>([
   [RepositorySearchSort.LastUpdated, 'Last updated'],
@@ -34,6 +35,10 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url })
     organizationService.listOrganizationsForUser(username),
     repositorySearchService.searchRepositoriesForUser(username, searchQueryParameters),
   ]);
+  let organizationMembers: SimpleUser[] | undefined = undefined;
+  if (profile.type === ProfileType.Organization) {
+    organizationMembers = await organizationService.listOrganizationMembers(profile.login);
+  }
 
   const allRepositoriesListViewModel: AllRepositoriesListViewModel = {
     repositories: repositories.map(buildRepositoryCardViewModel),
@@ -61,5 +66,6 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url })
     organizations,
     allRepositoriesListViewModel,
     username,
+    organizationMembers,
   };
 };

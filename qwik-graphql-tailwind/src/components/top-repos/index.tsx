@@ -26,8 +26,8 @@ export default component$(() => {
   });
 
   return (
-    <div className="p-12">
-      <h2 data-testid="show repo list" className="text-lg font-medium mb-4">
+    <div class="p-12">
+      <h2 data-testid="show repo list" class="text-lg font-medium mb-4">
         Top Repositories
       </h2>
       {store.isLoading ? <div>Loading...</div> : <TopReposListItems repos={store.data} login={store.login} />}

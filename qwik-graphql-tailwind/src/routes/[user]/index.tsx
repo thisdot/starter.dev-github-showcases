@@ -59,21 +59,21 @@ export default component$(() => {
   }
 
   return (
-    <div className="relative pt-8 bg-white">
-      <div className="border-b border-gray-200 sticky top-0 bg-white z-20 hidden md:block">
-        <div className="grid grid-cols-12 gap-8 max-w-screen-2xl mx-auto">
-          <div className="col-span-12 md:col-span-4 xl:col-span-3" />
-          <div className="col-span-12 md:col-span-8 xl:col-span-9">
+    <div class="relative pt-8 bg-white">
+      <div class="border-b border-gray-200 sticky top-0 bg-white z-20 hidden md:block">
+        <div class="grid grid-cols-12 gap-8 max-w-screen-2xl mx-auto">
+          <div class="col-span-12 md:col-span-4 xl:col-span-3" />
+          <div class="col-span-12 md:col-span-8 xl:col-span-9">
             <ProfileNav className="border-none" pathname={location.pathname} />
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-screen-2xl py-8 px-4">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
+      <div class="mx-auto max-w-screen-2xl py-8 px-4">
+        <div class="grid grid-cols-12 gap-8">
+          <div class="relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3">
             {store.user ? <UserProfileCard {...store.user} /> : null}
           </div>
-          <div className="col-span-12 md:col-span-8 xl:col-span-9">
+          <div class="col-span-12 md:col-span-8 xl:col-span-9">
             <ProfileNav className="border-none md:hidden" pathname={location.pathname} />
             {store.user?.repositories ? (
               <UserRepos repos={store.user?.repositories} owner={location.params.user} />

@@ -5,10 +5,10 @@ import {
   sortBy,
 } from '../components/RepoFilter/RepoFilter.store';
 import { getLanguages } from './getLanguages';
-import { repoDataFilteredByLanguage } from './language-filter-function';
-import { repoDataFilteredBySearch } from './search-functionality';
-import { sortedRepoData } from './sort-repo-function';
-import { repoDataFilteredByType } from './type-filter-function';
+import { repoDataFilteredByLanguage } from './languageFilterFunction';
+import { repoDataFilteredBySearch } from './searchFunctionality';
+import { sortedRepoData } from './sortRepoFunction';
+import { repoDataFilteredByType } from './typeFilterFunction';
 
 const useRepoSortFilter = (repos) => {
   const languages = getLanguages(repos);

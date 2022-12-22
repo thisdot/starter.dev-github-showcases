@@ -17,8 +17,8 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
   };
 
   return (
-    <div className={`$'border-b border-gray-200' ${className}`}>
-      <nav className="-mb-px flex" aria-label="Tabs">
+    <div class={`$'border-b border-gray-200' ${className}`}>
+      <nav class="-mb-px flex" aria-label="Tabs">
         {tabs.map(({ title, path, Icon, count }, index) => {
           const href = path === '' ? `/${basePath}` : `/${basePath}/${path}`;
 
@@ -26,7 +26,7 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
             <Link
               key={index}
               href={href}
-              className={`${
+              class={`${
                 isCurrentTab(path)
                   ? 'border-yellow-500 text-gray-900 font-semibold'
                   : 'border-transparent text-gray-600 hover:border-gray-300'
@@ -37,9 +37,7 @@ export const TabNavigation = component$(({ tabs, className, basePath = '', pathn
               />
               <span>{title}</span>
               {typeof count === 'number' && (
-                <span className="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">
-                  {count}
-                </span>
+                <span class="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">{count}</span>
               )}
             </Link>
           );

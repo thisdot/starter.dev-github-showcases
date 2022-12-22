@@ -11,7 +11,7 @@ export default component$(({ name, url }: GistListProps) => {
     <li>
       <a
         href={url}
-        className="text-sm hover:text-blue-500 hover:underline"
+        class="text-sm hover:text-blue-500 hover:underline"
         target="_blank"
         data-testid={`user gist list item ${name}`}
       >

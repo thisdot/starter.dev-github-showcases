@@ -11,19 +11,23 @@ export const RepoHeader = component$(() => {
 
   const { pathname } = useLocation();
   const basePath = `${store.owner}/${store.name}`;
-  const tabList = createTabList({
-    issueCount: store.info.data?.openIssueCount || 0,
-    pullRequestCount: store.info.data?.openPullRequestCount || 0,
-  });
 
   return (
-    <div className="pt-6 px-12 bg-gray-100 border-b border-gray-300">
-      <div className="flex justify-between items-center">
+    <div class="pt-6 px-12 bg-gray-100 border-b border-gray-300">
+      <div class="flex justify-between items-center">
         <RepoHeading />
         <RepoActionButtons />
       </div>
-      <div className="mt-6">
-        <TabNavigation tabs={tabList} basePath={basePath} className={'border-none'} pathname={pathname} />
+      <div class="mt-6">
+        <TabNavigation
+          tabs={createTabList({
+            issueCount: store.info.data?.openIssueCount || 0,
+            pullRequestCount: store.info.data?.openPullRequestCount || 0,
+          })}
+          basePath={basePath}
+          className="border-none"
+          pathname={pathname}
+        />
       </div>
     </div>
   );

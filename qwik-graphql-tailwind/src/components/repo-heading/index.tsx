@@ -8,14 +8,14 @@ export const RepoHeading = component$(() => {
   const profile_url = `/${store.owner}`;
   const repo_url = `/${store.owner}/${store.name}`;
   return (
-    <h1 className="flex items-center text-xl leading-7">
+    <h1 class="flex items-center text-xl leading-7">
       <RepoIcon className="w-6 h-6 text-gray-600" />
-      <span className="text-[#2563EB] inline-block ml-2.5 mb-0.5">
-        <a href={profile_url} className="hover:underline">
+      <span class="text-[#2563EB] inline-block ml-2.5 mb-0.5">
+        <a href={profile_url} class="hover:underline">
           {store.owner}
         </a>
-        <span className="text-black ml-1.5">/</span>
-        <a href={repo_url} className="font-semibold ml-1.5 hover:underline">
+        <span class="text-black ml-1.5">/</span>
+        <a href={repo_url} class="font-semibold ml-1.5 hover:underline">
           {store.name}
         </a>
       </span>

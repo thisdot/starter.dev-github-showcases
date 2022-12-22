@@ -12,7 +12,7 @@ type HeaderProps = {
 
 export default component$(({ user }: HeaderProps) => {
   return (
-    <header className="bg-gray-900 flex justify-between items-center py-4 px-8">
+    <header class="bg-gray-900 flex justify-between items-center py-4 px-8">
       <Link preventdefault:click={false} href="/">
         <GitHubLogo />
       </Link>
@@ -21,7 +21,7 @@ export default component$(({ user }: HeaderProps) => {
           <UserDropdown image={user.avatarUrl} username={user.login} />
         ) : (
           <Link href="/api/auth/signin">
-            <span className="text-white font-semibold text-lg">Sign In</span>
+            <span class="text-white font-semibold text-lg">Sign In</span>
           </Link>
         )}
       </div>

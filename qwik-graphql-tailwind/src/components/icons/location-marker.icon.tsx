@@ -11,7 +11,7 @@ export const LocationMarkerIcon = component$(({ className }: IconProps) => {
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      className={className ?? ''}
+      class={className ?? ''}
     >
       <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
       <path

@@ -1,6 +1,6 @@
 import type { Breadcrumb } from '$lib/components/shared/Breadcrumbs/models';
-import type { Repository } from '$lib/interfaces';
 import { composeDirHref } from './repository-contents';
+import type { GithubSimpleUser, Repository } from '$lib/interfaces';
 
 export const resolveRepositoryHref = (repository: Repository): string =>
   `/${repository.owner.login}/${repository.name}`;
@@ -47,3 +47,4 @@ export const buildContentItemBreadcrumbs = (
 
   return breadcrumbs;
 };
+export const resolveUserHref = (user: GithubSimpleUser): string => `/${user.login}`;

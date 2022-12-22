@@ -14,12 +14,12 @@ export default component$(({ repos, login }: UserTopReposViewProps) => {
   }
 
   return (
-    <div className="w-full border rounded-lg relative bg-white">
+    <div class="w-full border rounded-lg relative bg-white">
       {repos.map((repo) => (
-        <RepoCard repo={repo} />
+        <RepoCard key={repo.id} repo={repo} />
       ))}
-      <div className="bg-gray-50 p-5 w-full text-center">
-        <a href={`/${login}`} className="font-semibold text-gray-600 hover:text-blue-500">
+      <div class="bg-gray-50 p-5 w-full text-center">
+        <a href={`/${login}`} class="font-semibold text-gray-600 hover:text-blue-500">
           View all repositories
         </a>
       </div>

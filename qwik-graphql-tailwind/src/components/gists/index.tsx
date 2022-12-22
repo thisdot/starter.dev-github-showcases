@@ -24,16 +24,16 @@ export default component$(() => {
   });
 
   return (
-    <aside className="basis-1/4 border-t border-b bg-white h-auto shadow-lg p-8">
-      <div className="border-y py-3 space-y-5">
-        <h3 data-testid="show gists list" className="font-semibold">
+    <aside class="basis-1/4 border-t border-b bg-white h-auto shadow-lg p-8">
+      <div class="border-y py-3 space-y-5">
+        <h3 data-testid="show gists list" class="font-semibold">
           Gists
         </h3>
 
         {store.isLoading ? (
           <div>Loading...</div>
         ) : (
-          <ul className="space-y-2">
+          <ul class="space-y-2">
             {store.data.map((gist) => (
               <GistListItem key={gist.id} {...gist} />
             ))}

@@ -11,9 +11,9 @@ export const HomepageUrl = component$(({ homepageUrl }: HomepageUrlProps) => {
     return null;
   }
   return (
-    <div className="max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
+    <div class="max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
       <LinkIcon className="w-4 h-4 inline text-gray-700 mr-2 -mt-0.5" />
-      <Link href={homepageUrl} className="font-semibold text-blue-600 hover:underline text-sm" target="_blank">
+      <Link href={homepageUrl} class="font-semibold text-blue-600 hover:underline text-sm" target="_blank">
         {homepageUrl}
       </Link>
     </div>
