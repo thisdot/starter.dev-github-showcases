@@ -1,6 +1,6 @@
 import { createSignal, Show, splitProps, For, Switch, Match } from 'solid-js';
 import { CaretIcon, CloseIcon, CorrectIcon } from '../Icons';
-import { clickOutside } from '../../utils/onclick-outside';
+import { clickOutside } from '../../utils/onclickOutside';
 import styles from './RepoFilter.module.css';
 
 const FilterDropdown = (props) => {
