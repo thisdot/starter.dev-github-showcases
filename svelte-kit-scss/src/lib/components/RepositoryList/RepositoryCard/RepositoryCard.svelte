@@ -61,8 +61,8 @@
       </div>
     {/if}
     {#if updatedAt}
-      <div class="entry updated" data-testid="updated">
-        <span>Updated <span>{relativeTimeFmt(updatedAt)}</span></span>
+      <div class="entry updated">
+        <span>Updated <span data-testid="updated">{relativeTimeFmt(updatedAt)}</span></span>
       </div>
     {/if}
   </div>
