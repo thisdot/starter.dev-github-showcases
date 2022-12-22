@@ -155,7 +155,6 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
     (label) => label,
     true
   );
-
   return {
     issues,
     sortFilters,
