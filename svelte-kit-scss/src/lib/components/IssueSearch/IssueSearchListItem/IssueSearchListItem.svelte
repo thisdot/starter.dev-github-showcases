@@ -7,7 +7,7 @@
   import IssueLabel from './IssueLabel.svelte';
 
   export let item: Issue;
-  $: ({ title, commentsCount, state, assignees, labels, url } = item);
+  $: ({ title, commentsCount, state, assignees, labels, htmlUrl } = item);
 </script>
 
 <div class="issue-search-list-item">
@@ -16,7 +16,7 @@
   </div>
   <div class="main">
     <div class="title">
-      <a href={url} target="_blank" rel="noreferrer" class="link-anchor">
+      <a href={htmlUrl} target="_blank" rel="noreferrer" class="link-anchor">
         {title}
       </a>
       {#each labels as label (label.name)}

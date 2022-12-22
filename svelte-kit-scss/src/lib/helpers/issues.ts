@@ -39,6 +39,6 @@ export const remapIssue = (issue: GithubSearchIssue): Issue => {
     state: remapIssueState(issue.state),
     title: issue.title,
     user: remapIssueUser(issue.user),
-    url: issue.html_url,
+    htmlUrl: issue.html_url,
   };
 };
