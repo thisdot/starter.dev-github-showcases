@@ -62,7 +62,7 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
               <h3 class="mb-2">
                 <Link href={`/${owner}/${name}`} class="text-xl text-blue-600 font-semibold hover:underline mr-3">
                   {name}
-                </a>
+                </Link>
                 <PrivacyBadge isPrivate={isPrivate} className="relative bottom-0.5" />
               </h3>
               <div class="text-gray-600 text-sm max-w-prose">{description}</div>

@@ -1,10 +1,6 @@
 import { component$, useContext } from '@builder.io/qwik';
 import { FolderIcon, DocumentIcon } from '~/components/icons';
 import { Link, useLocation } from '@builder.io/qwik-city';
-import { useQuery } from '~/utils';
-import { REPO_TREE_QUERY } from '~/utils/queries/repo-tree';
-import { GITHUB_GRAPHQL } from '~/utils/constants';
-import { parseQueryData } from './parseTree';
 import { BranchNavigation } from '../branch-navigation';
 import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
 
@@ -54,35 +50,3 @@ export const FileExplorer = component$(({ tree }: { tree: any[] }) => {
     </>
   );
 });
-
-export function updateRepoTree(store: TreeState, response: any) {
-  const {
-    data: { repository },
-  } = response;
-  store.isLoading = false;
-  store.branches = repository.branches?.nodes;
-  store.tree = parseQueryData(repository.tree);
-}
-
-export async function fetchRepoTree(
-  variables: {
-    owner: string;
-    name: string;
-    expression: string;
-  },
-  abortController?: AbortController
-): Promise<any> {
-  const { executeQuery$ } = useQuery(REPO_TREE_QUERY);
-
-  const resp = await executeQuery$({
-    signal: abortController?.signal,
-    url: GITHUB_GRAPHQL,
-    headersOpt: {
-      Accept: 'application/vnd.github+json',
-      authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
-    variables,
-  });
-
-  return await resp.json();
-}

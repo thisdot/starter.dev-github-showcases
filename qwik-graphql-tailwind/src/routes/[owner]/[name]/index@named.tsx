@@ -32,15 +32,17 @@ export default component$(() => {
     const { owner, name, path } = cleanUpParams(location.params);
     track(() => store.branch);
     const abortController = new AbortController();
-    const response = await fetchRepoTree(
-      {
-        owner,
-        name,
-        expression: `${store.branch}:${path?.replace(/\/+$/, '') || ''}`,
-      },
-      abortController
-    );
-    updateRepoTree(store2, response);
+    if (owner && name) {
+      const response = await fetchRepoTree(
+        {
+          owner,
+          name,
+          expression: `${store.branch}:${path?.replace(/\/+$/, '') || ''}`,
+        },
+        abortController
+      );
+      updateRepoTree(store2, response);
+    }
   });
 
   useClientEffect$(async () => {

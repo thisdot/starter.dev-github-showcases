@@ -26,15 +26,17 @@ export default component$(() => {
     track(() => location.params);
     const { owner, name, path, branch } = cleanUpParams(location.params);
     const abortController = new AbortController();
-    const response = await fetchRepoTree(
-      {
-        owner,
-        name,
-        expression: `${branch}:${path?.replace(/\/+$/, '') || ''}`,
-      },
-      abortController
-    );
-    updateRepoTree(store, response);
+    if (owner && name) {
+      const response = await fetchRepoTree(
+        {
+          owner,
+          name,
+          expression: `${branch}:${path?.replace(/\/+$/, '') || ''}`,
+        },
+        abortController
+      );
+      updateRepoTree(store, response);
+    }
   });
 
   return (
