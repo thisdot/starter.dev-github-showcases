@@ -1,25 +1,24 @@
-import { beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/svelte';
+import { render } from '@testing-library/svelte';
 import Breadcrumbs from './Breadcrumbs.svelte';
 
 describe('Breadcrumbs Component', () => {
-  beforeEach(() => {
-    render(Breadcrumbs, {
-      breadcrumbData: {
-        breadcrumbs: [
-          {
-            name: 'svelte-kit-scss',
-            href: '/thisdot/starter.dev-github-showcases/tree/main/svelte-kit-scss',
-          },
-        ],
-        username: 'thisdot',
-        repo: 'starter.dev-github-showcases',
-      },
-    });
-  });
-
   it('should render breadcrumb accurately', () => {
-    const name = screen.getByText(/starter\.dev-github-showcases\s*\/\s*svelte-kit-scss/);
-    expect(name).toBeTruthy();
+    const { container } = render(Breadcrumbs, {
+      breadcrumbs: [
+        {
+          emphasis: true,
+          href: '/thisdot/starter.dev-github-showcases',
+          name: 'starter.dev-github-showcases',
+        },
+        {
+          emphasis: true,
+          href: undefined,
+          name: 'svelte-kit-scss',
+        },
+      ],
+    });
+
+    const breadcrumbs = container.getElementsByClassName('breadcrumbs')[0];
+    expect(breadcrumbs.textContent).toEqual(`starter.dev-github-showcases /svelte-kit-scss `);
   });
 });

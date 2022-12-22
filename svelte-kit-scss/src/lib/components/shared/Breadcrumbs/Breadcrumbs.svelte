@@ -5,7 +5,7 @@
 </script>
 
 <div class="breadcrumbs">
-  {#each breadcrumbs as { name, href, emphasis }}
+  {#each breadcrumbs as { name, href, emphasis }, index}
     {#if name}
       {#if !href}
         <span class="breadcrumb" class:emphasis data-testid={`breadcrumb ${name}`}>{name}</span>
@@ -15,7 +15,9 @@
         </a>
       {/if}
     {/if}
-    <span>/</span>
+    {#if !(index + 1 === breadcrumbs.length)}
+      <span>/</span>
+    {/if}
   {/each}
 </div>
 

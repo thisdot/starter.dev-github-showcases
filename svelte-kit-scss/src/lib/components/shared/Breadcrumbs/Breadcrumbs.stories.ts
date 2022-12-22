@@ -5,16 +5,18 @@ export default {
   title: 'Home/Breadcrumbs',
   excludeStories: /.*Data$/,
   argTypes: {
-    breadcrumbData: {
-      breadcrumbs: [
-        {
-          name: 'svelte-kit-scss',
-          href: '/thisdot/starter.dev-github-showcases/tree/main/svelte-kit-scss',
-        },
-      ],
-      username: 'thisdot',
-      repo: 'starter.dev-github-showcases',
-    },
+    breadcrumbs: [
+      {
+        emphasis: true,
+        href: '/thisdot/starter.dev-github-showcases',
+        name: 'starter.dev-github-showcases',
+      },
+      {
+        emphasis: true,
+        href: undefined,
+        name: 'svelte-kit-scss',
+      },
+    ],
   },
 };
 
