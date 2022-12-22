@@ -14,12 +14,13 @@
     currentBranch,
     repositoryState,
     readmeHtml,
+    breadcrumbs,
   } = data);
 </script>
 
 <div class="container grid grid-cols-12 subpage">
   <section class="col-span-9 col-sm-span-12">
-    <FileExplorerNav {branches} {defaultBranch} {currentBranch} />
+    <FileExplorerNav {branches} {defaultBranch} {currentBranch} {breadcrumbs} />
     <FileExplorerContainer {parentHref} {contents} />
   </section>
 
