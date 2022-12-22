@@ -1,7 +1,7 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
 import { ISSUES_QUERY } from './queries/issue-info';
-import { GITHUB_GRAPHQL } from '../helper/constants';
+import { GITHUB_GRAPHQL } from '../utils/constants';
 
 const getIssues = async (variables) => {
   const { authStore } = useAuth();

@@ -1,6 +1,6 @@
 import { useAuth } from '../auth';
 import { TOP_REPOS_QUERY } from './queries/top-repos';
-import { GITHUB_GRAPHQL } from '../helper/constants';
+import { GITHUB_GRAPHQL } from '../utils/constants';
 import FetchApi from './api';
 
 const getTopRepos = async () => {

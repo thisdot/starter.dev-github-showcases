@@ -1,6 +1,6 @@
 import { createEffect, createResource, createSignal } from 'solid-js';
 import { useParams } from '@solidjs/router';
-import useRepoSortFilter from '../helper/useRepoSortFilter';
+import useRepoSortFilter from '../utils/useRepoSortFilter';
 import { UserRepos } from '../components/UserRepos';
 import { OrgAbout } from '../components/OrgAbout';
 import { ProfileNav } from '../components/ProfileNav';
