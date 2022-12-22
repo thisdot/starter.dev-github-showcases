@@ -12,4 +12,7 @@
 </div>
 
 <style lang="scss">
+  .container {
+    margin: 1.5rem 5rem 0;
+  }
 </style>
