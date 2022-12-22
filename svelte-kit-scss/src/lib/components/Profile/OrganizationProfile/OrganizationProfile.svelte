@@ -31,15 +31,10 @@
         <SocialLink iconComponent={Organization16} label={company} />
       {/if}
       {#if location}
-        <SocialLink iconComponent={Location16} label={location} mobileHide={true} />
+        <SocialLink iconComponent={Location16} label={location} />
       {/if}
       {#if email}
-        <SocialLink
-          iconComponent={Mail16}
-          label={email}
-          href={`mailto:{${email}}`}
-          mobileHide={true}
-        />
+        <SocialLink iconComponent={Mail16} label={email} href={`mailto:{${email}}`} />
       {/if}
       {#if blog}
         <SocialLink iconComponent={Link16} label={blog} href={blog} />
@@ -49,7 +44,6 @@
           iconComponent={IconTwitter16}
           label={twitterUsername}
           href={`https://twitter.com/${twitterUsername}`}
-          mobileHide={true}
         />
       {/if}
     </div>
