@@ -157,16 +157,8 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
     true
   );
 
-  const issueType = issueSearchType === 'pulls' ? 'pull' : issueSearchType;
-
-  const issuesWithLinks = issues.reduce((issues_accumulator, issue) => {
-    issue.href = `https://github.com/${username}/${repo}/${issueType}/${issue.number}`;
-    issues_accumulator.push(issue);
-    return issues_accumulator;
-  }, [] as Issue[]);
-
   return {
-    issues: issuesWithLinks,
+    issues,
     sortFilters,
     stateFilters,
     milestoneFilters,

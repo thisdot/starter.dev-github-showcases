@@ -28,7 +28,7 @@ export interface Issue {
   state: IssueState;
   title: string;
   user: IssueUser;
-  href?: string;
+  url: string;
 }
 
 export interface IssueCollection {
