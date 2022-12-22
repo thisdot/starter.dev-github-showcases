@@ -1,7 +1,6 @@
 <script lang="ts">
   import { relativeTimeFmt } from '$lib/helpers';
   import { Law16, Star16, RepoForked16 } from 'svelte-octicons';
-  import { LANGUAGE_COLORS } from '$lib/constants/language-colors';
   import type { RepositoryCardViewModel } from '../view-models';
   import ProgrammingLanguage from '$lib/components/shared/ProgrammingLanguage/ProgrammingLanguage.svelte';
 
@@ -17,7 +16,6 @@
     updatedAt,
     license,
     routeHref: href,
-    topics,
   } = model);
 </script>
 
@@ -34,11 +32,6 @@
         <span data-testid="description">{description}</span>
       </div>
     {/if}
-    <!-- {#if topics}
-      <div class="topics">
-        
-      </div>
-    {/if} -->
   </div>
   <div class="footer">
     {#if language}

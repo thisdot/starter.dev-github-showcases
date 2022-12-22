@@ -14,7 +14,6 @@ describe('RepositoryCard', () => {
 
     it.each([
       ['name', MOCK_REPOSITORY_CARD_VIEW_MODEL.name],
-      // ['language', MOCK_REPOSITORY_CARD_VIEW_MODEL.language],
       ['description', MOCK_REPOSITORY_CARD_VIEW_MODEL.description],
       ['stargazersCount', MOCK_REPOSITORY_CARD_VIEW_MODEL.stargazersCount],
       ['forksCount', MOCK_REPOSITORY_CARD_VIEW_MODEL.forksCount],
