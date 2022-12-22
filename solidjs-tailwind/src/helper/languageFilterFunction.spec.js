@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { repoDataFilteredByLanguage } from './language-filter-function';
+import { repoDataFilteredByLanguage } from './languageFilterFunction';
 import { MOCK_REPOS } from './fixtures/mocks';
 
 const MOCK_LANGUAGE = 'TypeScript';

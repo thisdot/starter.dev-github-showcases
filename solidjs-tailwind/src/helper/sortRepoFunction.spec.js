@@ -1,17 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { FILTER_TYPE_OPTIONS } from "../components/RepoFilter/data";
-import { sortedRepoData } from './sort-repo-function';
+import { SORT_OPTIONS } from '../components/RepoFilter/data';
+import { sortedRepoData } from './sortRepoFunction';
 import { MOCK_REPOS } from './fixtures/mocks';
 
 const MOCK_SORT_NAME = 'Repo Test Java';
 
-describe('type-filter-function helper', () => {
+describe('sort-repo-function helper', () => {
   vi.mock('../components/RepoFilter/RepoFilter.store', () => ({
     sortBy: vi
       .fn()
-      .mockImplementationOnce(() => FILTER_TYPE_OPTIONS.forks)
-      .mockImplementationOnce(() => FILTER_TYPE_OPTIONS.archived)
-      .mockImplementationOnce(() => FILTER_TYPE_OPTIONS.default),
+      .mockImplementationOnce(() => SORT_OPTIONS.name)
+      .mockImplementationOnce(() => SORT_OPTIONS.stars)
+      .mockImplementationOnce(() => SORT_OPTIONS.default),
   }));
   let filteredRepos = [];
   beforeEach(() => {
