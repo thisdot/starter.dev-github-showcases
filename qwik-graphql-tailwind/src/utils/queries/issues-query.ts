@@ -6,6 +6,7 @@ export const ISSUES_QUERY = `
         states: [OPEN]
         orderBy: { field: CREATED_AT, direction: DESC }
       ) {
+        totalCount
         nodes {
             state
             createdAt
@@ -27,6 +28,7 @@ export const ISSUES_QUERY = `
         states: [CLOSED]
         orderBy: { field: CREATED_AT, direction: DESC }
       ) {
+        totalCount
         nodes {
             state
             createdAt
