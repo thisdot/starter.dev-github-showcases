@@ -34,7 +34,7 @@ export const buildContentItemBreadcrumbs = (
     breadcrumbs = [
       {
         name: repo,
-        href: '/',
+        href: composeDirHref('/', username, repo, branch, defaultBranch),
         emphasis: true,
       },
       ...breadcrumbs,
