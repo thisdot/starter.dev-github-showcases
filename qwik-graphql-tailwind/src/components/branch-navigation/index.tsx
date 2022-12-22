@@ -1,6 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
 import { GitBranchIcon } from '~/components/icons';
+import { Link } from '@builder.io/qwik-city';
 
 export const BranchNavigation = component$(({ branch }: { branch?: string }) => {
   const { path, name, owner, branch: pathBranch } = useLocation().params;
@@ -17,9 +18,10 @@ export const BranchNavigation = component$(({ branch }: { branch?: string }) => 
       </button>
       {crumbs.length > 0 && (
         <div class="flex px-3">
-          <a href={fileViewLink}>
+          <Link href={fileViewLink}>
             <span class="font-semibold text-blue-600 hover:underline">{name}</span>
-          </a>
+          </Link>
+
           <span class="text-lg text-gray-800 leading-snug mx-1.5">/</span>
           {crumbs.map((crumb, i) => {
             const isLast = i === crumbs.length - 1;
@@ -34,9 +36,9 @@ export const BranchNavigation = component$(({ branch }: { branch?: string }) => 
                   <span class="font-semibold">{crumb}</span>
                 ) : (
                   <>
-                    <a href={href}>
+                    <Link href={href}>
                       <span class="text-blue-600 hover:underline">{crumb}</span>
-                    </a>
+                    </Link>
                     <span class="text-lg text-gray-800 leading-snug mx-1.5">/</span>
                   </>
                 )}

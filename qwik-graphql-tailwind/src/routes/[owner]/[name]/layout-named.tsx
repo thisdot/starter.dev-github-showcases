@@ -4,32 +4,23 @@ import { useQuery } from '~/utils/useQuery';
 import { GITHUB_GRAPHQL } from '~/utils/constants';
 import { REPO_INFO_QUERY } from '~/utils/queries/repo-info';
 import { parseTopics } from './parseTopics';
-import { REPO_README_QUERY } from '~/utils/queries/repo-read-me';
 import { RepoHeader } from '~/components/repo-header';
+import { cleanUpParams } from '~/utils/helpers';
 
 export interface SharedState {
-  name: string;
-  owner: string;
   branch: string;
-  path?: string;
+  isLoading: boolean;
   info: {
-    error?: string;
-    data?: {
-      isPrivate: boolean;
-      stargazerCount: number;
-      forkCount: number;
-      watcherCount: number;
-      openIssueCount: number;
-      openPullRequestCount: number;
-      description?: string | null;
-      homepageUrl?: string | null;
-      topics: string[];
-      isOrg: boolean;
-    };
-  };
-  readme: {
-    error?: string;
-    text?: any;
+    isPrivate?: boolean;
+    stargazerCount?: number;
+    forkCount?: number;
+    watcherCount?: number;
+    openIssueCount?: number;
+    openPullRequestCount?: number;
+    description?: string | null;
+    homepageUrl?: string | null;
+    topics?: string[];
+    isOrg?: boolean;
   };
 }
 
@@ -39,29 +30,24 @@ export default component$(() => {
   const store = useStore<SharedState>(
     {
       info: {},
-      name: '',
-      owner: '',
-      readme: {},
       branch: 'HEAD',
+      isLoading: true,
     },
     { recursive: true }
   );
+  const location = useLocation();
+  useContextProvider(RepoContext, store);
 
-  const { path, name, owner } = useLocation().params;
+  const isOwnerAndNameValid = typeof location.params?.owner === 'string' && typeof location.params?.name === 'string';
 
-  const isOwnerAndNameValid = typeof owner === 'string' && typeof name === 'string';
-
-  useClientEffect$(async ({ track }) => {
-    store.owner = track(() => owner);
-    store.name = track(() => name);
-    store.path = track(() => path || '');
-
+  useClientEffect$(async () => {
+    const { owner, name } = cleanUpParams(location.params);
     const abortController = new AbortController();
-    const response1 = await fetchRepoInfo(
+    const response = await fetchRepoInfo(
       isOwnerAndNameValid
         ? {
-            owner: store.owner,
-            name: store.name,
+            owner,
+            name,
           }
         : {
             owner: '',
@@ -69,23 +55,12 @@ export default component$(() => {
           },
       abortController
     );
-    updateRepoInfo(store, response1);
-
-    const response2 = await fetchRepoReadMe(
-      {
-        owner: store.owner,
-        name: store.name,
-        expression: store.path ? `HEAD:${store.path}/README.md` : 'HEAD:README.md',
-      },
-      abortController
-    );
-    updateRepoReadMe(store, response2);
+    updateRepoInfo(store, response);
   });
 
-  useContextProvider(RepoContext, store);
   return (
     <div class="bg-white h-screen">
-      {store.info.data ? <RepoHeader /> : <div>Loading...</div>}
+      {!store.isLoading ? <RepoHeader /> : <div>Loading...</div>}
       <Slot />
     </div>
   );
@@ -96,7 +71,7 @@ export function updateRepoInfo(store: SharedState, response: any) {
     data: { repository },
   } = response;
   if (repository) {
-    store.info.data = {
+    store.info = {
       isPrivate: repository.isPrivate,
       forkCount: repository.forkCount,
       description: repository.description,
@@ -108,10 +83,8 @@ export function updateRepoInfo(store: SharedState, response: any) {
       isOrg: typeof repository.owner?.orgName === 'string',
       openPullRequestCount: repository.pullRequests.totalCount,
     };
+    store.isLoading = false;
     store.branch = repository?.defaultBranchRef?.name ?? store.branch;
-  } else {
-    store.info.data = undefined;
-    store.info.error = 'No repository found';
   }
 }
 
@@ -123,41 +96,6 @@ export async function fetchRepoInfo(
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(REPO_INFO_QUERY);
-
-  const resp = await executeQuery$({
-    signal: abortController?.signal,
-    url: GITHUB_GRAPHQL,
-    headersOpt: {
-      Accept: 'application/vnd.github+json',
-      authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
-    variables,
-  });
-
-  return await resp.json();
-}
-
-export function updateRepoReadMe(store: SharedState, response: any) {
-  const {
-    data: { repository },
-  } = response;
-  if (repository) {
-    const readme = repository.readme as Blob;
-    store.readme.text = readme?.text ?? undefined;
-  } else {
-    store.readme.text = undefined;
-  }
-}
-
-export async function fetchRepoReadMe(
-  variables: {
-    owner: string;
-    name: string;
-    expression: string;
-  },
-  abortController?: AbortController
-): Promise<any> {
-  const { executeQuery$ } = useQuery(REPO_README_QUERY);
 
   const resp = await executeQuery$({
     signal: abortController?.signal,
