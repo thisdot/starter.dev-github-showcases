@@ -21,6 +21,7 @@ export const BranchNavigation = component$(({ branch }: { branch?: string }) => 
           <Link href={fileViewLink}>
             <span class="font-semibold text-blue-600 hover:underline">{name}</span>
           </Link>
+
           <span class="text-lg text-gray-800 leading-snug mx-1.5">/</span>
           {crumbs.map((crumb, i) => {
             const isLast = i === crumbs.length - 1;

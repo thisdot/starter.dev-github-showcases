@@ -1,7 +1,7 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
 import { REPO_README_QUERY } from './queries/repo-readme';
-import { GITHUB_GRAPHQL } from '../helper/constants';
+import { GITHUB_GRAPHQL } from '../utils/constants';
 /**
  *
  * @param {

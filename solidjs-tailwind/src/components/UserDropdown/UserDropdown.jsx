@@ -1,10 +1,10 @@
 import { NavLink } from '@solidjs/router';
 import { createSignal } from 'solid-js';
 import { ChevronDownIcon } from '@heroicons/react/solid';
-import { clickOutside } from '../../utils/onclick-outside';
+import { clickOutside } from '../../utils/onclickOutside';
 import styles from './UserDropdown.module.css';
 import { useAuth } from '../../auth';
-import { SIGN_OUT_URL } from '../../helper/constants';
+import { SIGN_OUT_URL } from '../../utils/constants';
 
 const UserDropdown = (props) => {
   const [expanded, setExpanded] = createSignal(false);

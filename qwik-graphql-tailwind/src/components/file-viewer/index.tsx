@@ -51,7 +51,7 @@ export const FileViewer = component$(() => {
     return <div />;
   }
 
-  const extension = path?.split('.').pop();
+  const extension = globalStore.path?.split('.').pop();
   const language = mapExtensionToLanguage(extension);
 
   return (

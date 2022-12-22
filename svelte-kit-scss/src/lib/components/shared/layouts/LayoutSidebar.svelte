@@ -34,6 +34,7 @@
       flex: 1;
     }
     .sidebar {
+      min-width: 0;
       flex: 1;
     }
     @media (min-width: variables.$md) {
