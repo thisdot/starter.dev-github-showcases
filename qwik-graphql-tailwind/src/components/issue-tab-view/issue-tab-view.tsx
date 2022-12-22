@@ -31,6 +31,8 @@ interface IssuesQueryParams {
 interface IssueStore {
   closedIssues: Issue[];
   openIssues: Issue[];
+  closedIssuesCount: number;
+  openIssuesCount: number;
   loading: boolean;
 }
 
@@ -48,6 +50,8 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
   const issuesStore = useStore<IssueStore>({
     closedIssues: [],
     openIssues: [],
+    closedIssuesCount: 0,
+    openIssuesCount: 0,
     loading: true,
   });
 
@@ -73,8 +77,8 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
     <>
       <div class="border border-gray-300 rounded-lg">
         <PullRequestIssueTab
-          openCount={issuesStore.openIssues.length}
-          closedCount={issuesStore.closedIssues.length}
+          openCount={issuesStore.openIssuesCount}
+          closedCount={issuesStore.closedIssuesCount}
           tabType="issue"
           milestonesOption={milestonesOptions}
           labelOption={labelOptions}
@@ -90,9 +94,9 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
         <IssuesData issues={store.activeTab === DEFAULT_TAB ? issuesStore.openIssues : issuesStore.closedIssues} />
       </div>
       <div class="flex items-center justify-center gap-4 mt-5">
-        <button class="flex items-center gap-1 text-base">
+        <button class="flex items-center gap-1 text-sm">
           <ChevronDownIcon className="rotate-90 w-3 h-3 translate-y-[0.1rem]" />
-          prev
+          Prev
         </button>
         <button class="flex items-baseline gap-1 text-sm">
           Next
@@ -107,6 +111,8 @@ export function updateIssueState(store: IssueStore, response: any) {
   const { closedIssues, openIssues } = response.data.repository;
   store.closedIssues = closedIssues.nodes;
   store.openIssues = openIssues.nodes;
+  store.closedIssuesCount = closedIssues.totalCount;
+  store.openIssuesCount = openIssues.totalCount;
   store.loading = false;
 }
 export async function fetchRepoIssues(

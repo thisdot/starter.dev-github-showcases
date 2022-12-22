@@ -31,6 +31,8 @@ interface PullRequestsQueryParams {
 interface PullRequestStore {
   closedPullRequest: PullRequest[];
   openPullRequest: PullRequest[];
+  closedPullRequestCount: number;
+  openPullRequestCount: number;
   loading: boolean;
 }
 
@@ -47,6 +49,8 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
 
   const pullRequestStore = useStore<PullRequestStore>({
     closedPullRequest: [],
+    closedPullRequestCount: 0,
+    openPullRequestCount: 0,
     openPullRequest: [],
     loading: true,
   });
@@ -73,8 +77,8 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
     <>
       <div class="border border-gray-300 rounded-lg">
         <PullRequestIssueTab
-          openCount={pullRequestStore.openPullRequest.length}
-          closedCount={pullRequestStore.closedPullRequest.length}
+          openCount={pullRequestStore.openPullRequestCount}
+          closedCount={pullRequestStore.closedPullRequestCount}
           tabType="pr"
           milestonesOption={milestonesOptions}
           labelOption={labelOptions}
@@ -96,7 +100,7 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
       <div class="flex items-center justify-center gap-4 mt-5">
         <button class="flex items-center gap-1 text-base">
           <ChevronDownIcon className="rotate-90 w-3 h-3 translate-y-[0.1rem]" />
-          prev
+          Prev
         </button>
         <button class="flex items-baseline gap-1 text-sm">
           Next
@@ -111,6 +115,8 @@ export function updatePullRequestState(store: PullRequestStore, response: any) {
   const { closedPullRequest, openPullRequest } = response.data.repository;
   store.closedPullRequest = closedPullRequest.nodes;
   store.openPullRequest = openPullRequest.nodes;
+  store.closedPullRequestCount = closedPullRequest.totalCount;
+  store.openPullRequestCount = openPullRequest.totalCount;
   store.loading = false;
 }
 export async function fetchRepoPullRequests(
