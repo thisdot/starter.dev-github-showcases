@@ -25,7 +25,7 @@ describe('repository-contents', () => {
           'mock_repo',
           'mock_non_default_branch',
           'mock_default_branch',
-          '/mock_username/mock_repo/tree/mock_non_default_branch/',
+          '/mock_username/mock_repo/tree/mock_non_default_branch',
         ],
         [
           'with non-root path and default branch',
