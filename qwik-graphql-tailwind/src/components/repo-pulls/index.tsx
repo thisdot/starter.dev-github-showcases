@@ -1,14 +1,15 @@
-import { component$, useClientEffect$, useContextProvider, useStore } from '@builder.io/qwik';
+import { component$, useClientEffect$, useContextProvider, useStore, useTask$ } from '@builder.io/qwik';
 import DropdownStores, { DropdownStoresProps } from '../../context/issue-tab-header-dropdown';
 import issuesPRStore, { IssuesPRStoreProps, Tabs } from '../../context/issue-pr-store';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
-import { labelOptions, milestonesOptions, sortOptions } from './data';
+import { getSortOptions, labelOptions, milestonesOptions } from './data';
 import { ChevronDownIcon } from '../icons';
 import { useQuery } from '../../utils';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
 import PullRequestData from './repo-pulls-data';
 import { PullRequest } from './types';
 import { PULL_REQUEST_QUERY } from '../../utils/queries/pull-request';
+import { sortPullRequestData } from './filter-sort-functions';
 
 export interface PullRequestsProps {
   activeTab: Tabs;
@@ -19,7 +20,6 @@ export interface PullRequestsProps {
 export interface DropdownStores {
   selectedLabel: string;
   selectedSort: string;
-  selectedMilestones: string;
 }
 
 interface PullRequestsQueryParams {
@@ -41,6 +41,9 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
   const store = useStore<IssuesPRStoreProps>({
     activeTab: activeTab,
   });
+
+  const sortOptions = getSortOptions(DEFAULT_TAB, store.activeTab);
+
   const dropdownStore = useStore<DropdownStoresProps>({
     selectedLabel: labelOptions[0].value,
     selectedSort: sortOptions[0].value,
@@ -71,6 +74,23 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
     );
 
     updatePullRequestState(pullRequestStore, response);
+  });
+
+  useTask$(({ track }) => {
+    track(() => dropdownStore.selectedSort);
+    track(() => store.activeTab);
+
+    if (dropdownStore.selectedSort && store.activeTab === DEFAULT_TAB) {
+      pullRequestStore.openPullRequest = sortPullRequestData(
+        dropdownStore.selectedSort,
+        pullRequestStore.openPullRequest
+      );
+    } else {
+      pullRequestStore.closedPullRequest = sortPullRequestData(
+        dropdownStore.selectedSort,
+        pullRequestStore.closedPullRequest
+      );
+    }
   });
 
   return (
