@@ -32,7 +32,6 @@
 
   .layout-page-header {
     border-bottom: 1px solid variables.$gray300;
-    overflow-x: hidden;
     margin-bottom: 1rem;
     &.gray {
       background-color: variables.$gray100;

@@ -2,7 +2,6 @@ export * from './gists';
 export * from './users';
 export * from './repository';
 export * from './formatting';
-export * from './handleAnchorClick';
 export * from './issues';
 export * from './repository-contents';
 export * from './branches';

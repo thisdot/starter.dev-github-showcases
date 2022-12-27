@@ -3,6 +3,9 @@
   import type { PageServerData } from './$types';
   import Prism from 'prismjs';
   import { browser } from '$app/environment';
+  import { currentPageId } from '$lib/stores/current-page-id';
+  import { PAGE_IDS } from '$lib/constants/page-ids';
+  import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
 
   export let data: PageServerData;
   const { fileContents, prismLanguage, language } = data;
@@ -11,15 +14,9 @@
       Prism.languages[language] = prismLanguage;
     }
   }
+  currentPageId.set(PAGE_IDS.REPOSITORY.CODE);
 </script>
 
-<div class="file-view-page">
+<LayoutPageContentRow>
   <FileViewer {fileContents} />
-</div>
-
-<style lang="scss">
-  @use 'src/lib/styles/variables.scss';
-  .file-view-page {
-    padding: 2rem 1rem;
-  }
-</style>
+</LayoutPageContentRow>

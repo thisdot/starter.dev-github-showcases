@@ -9,10 +9,10 @@ import type { GithubFileContentsItem, GithubRepoContentsItem, GithubBranch } fro
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad, PageServerParentData } from './$types';
 
-export const load: PageServerLoad = async ({ params, parent, fetch }) => {
+export const load: PageServerLoad = async ({ params: { username, repo, tree }, parent, fetch }) => {
   const layoutData: PageServerParentData = await parent();
-  const { repositoryState, username, repo } = layoutData;
-  const treePath = params.tree || `tree/${repositoryState.defaultBranch}`;
+  const { repositoryState } = layoutData;
+  const treePath = tree || `tree/${repositoryState.defaultBranch}`;
   const [, branch, ...folderPathSegments] = treePath.split('/');
   const folderPath = folderPathSegments.join('/');
 

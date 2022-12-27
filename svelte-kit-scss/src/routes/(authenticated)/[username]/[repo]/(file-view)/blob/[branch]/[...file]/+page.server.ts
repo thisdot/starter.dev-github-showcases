@@ -7,9 +7,7 @@ import loadPrismLanguages from 'prismjs/components/index';
 
 export const ssr = false;
 
-export const load: PageServerLoad = async ({ params, fetch }) => {
-  const { username, repo, branch, file } = params;
-
+export const load: PageServerLoad = async ({ params: { username, repo, branch, file }, fetch }) => {
   const getFileContentsUrl = new URL(`/repos/${username}/${repo}/contents/${file}`, ENV.GITHUB_URL);
   getFileContentsUrl.searchParams.append('ref', branch);
   const fileContentsResponse: Response = await fetch(getFileContentsUrl);
