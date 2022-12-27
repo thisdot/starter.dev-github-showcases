@@ -10,7 +10,7 @@ describe('.remapTopicReference', () => {
 
       expect(output).toBeTruthy();
       expect(output.name).toEqual('mock_topic');
-      expect(output.name).toEqual('https://github.com/topics/mock_topic');
+      expect(output.url).toEqual('https://github.com/topics/mock_topic');
     });
   });
 });
