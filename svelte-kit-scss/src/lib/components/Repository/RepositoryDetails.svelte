@@ -65,6 +65,11 @@
           font-size: 1em;
           color: variables.$gray800;
           margin: 1em 0;
+          .text {
+            &.empty {
+              font-style: italic;
+            }
+          }
         }
         .topics {
           color: variables.$blue600;

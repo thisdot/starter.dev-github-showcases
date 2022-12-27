@@ -3,6 +3,7 @@ import { RepositoryService } from '$lib/services';
 import type { PageNavigationTabViewModel } from '$lib/components/shared/PageNavigationTabs/models';
 import { resolveRepositoryHref, resolveRepositoryIssueSearchPageHref } from '$lib/helpers';
 import { PAGE_IDS } from '$lib/constants/page-ids';
+import type { Breadcrumb } from '$lib/components/shared/Breadcrumbs/models';
 
 export const load: LayoutServerLoad = async ({ params: { username, repo }, fetch }) => {
   const repositoryService = new RepositoryService(fetch);
@@ -31,8 +32,21 @@ export const load: LayoutServerLoad = async ({ params: { username, repo }, fetch
     },
   ];
 
+  const breadcrumbs: Breadcrumb[] = [
+    {
+      name: repositoryState.owner.login,
+      href: repositoryState.owner.href,
+    },
+    {
+      name: repositoryState.name,
+      href: resolveRepositoryHref(repositoryState),
+      emphasis: true,
+    },
+  ];
+
   return {
     repositoryState,
     tabs,
+    breadcrumbs,
   };
 };
