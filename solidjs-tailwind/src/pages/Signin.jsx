@@ -1,7 +1,7 @@
 import { createEffect } from 'solid-js';
 import { useAuth } from '../auth';
 import { useNavigate } from '@solidjs/router';
-import { REDIRECT_URL, SIGN_IN_BASE_URL } from '../helper/constants';
+import { REDIRECT_URL, SIGN_IN_BASE_URL } from '../utils/constants';
 
 const SigninPage = () => {
   const signInHref = `${SIGN_IN_BASE_URL}?redirect_url=${REDIRECT_URL}`;

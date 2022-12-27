@@ -13,9 +13,9 @@ export const RepoAboutWidget = component$(() => {
       <h3 class="text-gray-700 font-semibold">About</h3>
       <div class="text-gray-600">
         <div class="space-y-4">
-          <Description text={store.info.data?.description} />
-          <HomepageUrl homepageUrl={store.info.data?.homepageUrl} />
-          <Topics topics={store.info.data?.topics} />
+          <Description text={store.info?.description} />
+          <HomepageUrl homepageUrl={store.info?.homepageUrl} />
+          <Topics topics={store.info?.topics} />
         </div>
       </div>
       <div>

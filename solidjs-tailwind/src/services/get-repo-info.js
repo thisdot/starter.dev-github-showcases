@@ -1,7 +1,7 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
 import { REPO_INFO_QUERY } from './queries/repo-info';
-import { GITHUB_GRAPHQL } from '../helper/constants';
+import { GITHUB_GRAPHQL } from '../utils/constants';
 
 export function parseTopics(topics) {
   if (!topics) {

@@ -1,7 +1,7 @@
 import { useNavigate } from '@solidjs/router';
 import { createEffect, createResource } from 'solid-js';
 import { useAuth } from '../auth';
-import { API_URL } from '../helper/constants';
+import { API_URL } from '../utils/constants';
 
 const fetchToken = () =>
   fetch(`${API_URL}/auth/token`, {

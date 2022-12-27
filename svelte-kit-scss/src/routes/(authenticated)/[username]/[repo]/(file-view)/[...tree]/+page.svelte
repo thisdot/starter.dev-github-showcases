@@ -18,6 +18,7 @@
     currentBranch,
     repositoryState,
     readmeHtml,
+    breadcrumbs,
   } = data);
 
   currentPageId.set(PAGE_IDS.REPOSITORY.CODE);
@@ -25,7 +26,7 @@
 
 <LayoutPageContentRow>
   <LayoutSidebar>
-    <FileExplorerNav {branches} {defaultBranch} {currentBranch} />
+    <FileExplorerNav {branches} {defaultBranch} {currentBranch} {breadcrumbs} />
     <FileExplorerContainer {parentHref} {contents} />
     <div class="readme">
       <FileExplorerReadme html={readmeHtml} />

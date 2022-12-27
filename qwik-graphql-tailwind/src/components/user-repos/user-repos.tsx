@@ -1,4 +1,5 @@
 import { component$, useClientEffect$, useContext, useStore, useTask$ } from '@builder.io/qwik';
+import { Link } from '@builder.io/qwik-city';
 import { StarIcon } from '../icons';
 import { UserRepo, UserReposProps } from './types';
 import { RepoMeta } from '../repo-meta/repo-meta';
@@ -59,9 +60,9 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
           <div key={id} class="py-8 border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4">
             <div class="col-span-12 md:col-span-7">
               <h3 class="mb-2">
-                <a href={`/${owner}/${name}`} class="text-xl text-blue-600 font-semibold hover:underline mr-3">
+                <Link href={`/${owner}/${name}`} class="text-xl text-blue-600 font-semibold hover:underline mr-3">
                   {name}
-                </a>
+                </Link>
                 <PrivacyBadge isPrivate={isPrivate} className="relative bottom-0.5" />
               </h3>
               <div class="text-gray-600 text-sm max-w-prose">{description}</div>

@@ -1,4 +1,5 @@
 import { component$ } from '@builder.io/qwik';
+import { Link } from '@builder.io/qwik-city';
 
 import type { TopRepo } from './types';
 
@@ -19,9 +20,9 @@ export default component$(({ repos, login }: UserTopReposViewProps) => {
         <RepoCard key={repo.id} repo={repo} />
       ))}
       <div class="bg-gray-50 p-5 w-full text-center">
-        <a href={`/${login}`} class="font-semibold text-gray-600 hover:text-blue-500">
+        <Link href={`/${login}`} class="font-semibold text-gray-600 hover:text-blue-500">
           View all repositories
-        </a>
+        </Link>
       </div>
     </div>
   );

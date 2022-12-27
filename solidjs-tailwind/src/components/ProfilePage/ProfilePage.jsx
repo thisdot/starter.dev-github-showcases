@@ -1,5 +1,5 @@
 import { createEffect, createSignal, splitProps } from 'solid-js';
-import useRepoSortFilter from '../../helper/useRepoSortFilter';
+import useRepoSortFilter from '../../utils/useRepoSortFilter';
 import { ProfileNav } from '../ProfileNav';
 import { UserProfile } from '../UserProfile';
 import { UserRepos } from '../UserRepos';

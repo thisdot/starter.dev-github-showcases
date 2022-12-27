@@ -1,5 +1,7 @@
+import type { Breadcrumb } from '$lib/components/shared/Breadcrumbs/models';
 import { ENV } from '$lib/constants/env';
 import {
+  buildContentItemBreadcrumbs,
   buildMarkdownPreviewHtml,
   composeDirHref,
   remapBranchOption,
@@ -62,6 +64,14 @@ export const load: PageServerLoad = async ({ params: { username, repo, tree }, p
     throw error(400, 'Unable to fetch branches');
   }
 
+  const breadcrumbs = buildContentItemBreadcrumbs(
+    username,
+    repo,
+    branch,
+    repositoryState.defaultBranch,
+    folderPathSegments
+  );
+
   return {
     ...layoutData,
     parentHref,
@@ -74,5 +84,6 @@ export const load: PageServerLoad = async ({ params: { username, repo, tree }, p
     ),
     defaultBranch: repositoryState.defaultBranch,
     currentBranch: branch,
+    breadcrumbs,
   };
 };
