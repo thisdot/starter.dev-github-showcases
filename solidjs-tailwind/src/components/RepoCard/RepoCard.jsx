@@ -1,6 +1,6 @@
 import { Link } from '@solidjs/router';
 import { Show, splitProps } from 'solid-js';
-import { OcStar2 } from 'solid-icons/oc';
+import { StarIcon } from '../Icons';
 import RepoMeta from '../RepoMeta/RepoMeta';
 import { PrivacyBadge } from '../PrivacyBadge';
 import styles from './RepoCard.module.css';
@@ -49,10 +49,7 @@ const RepoCard = (props) => {
       {local.isProfilePage ? (
         <div class={styles.buttonContainer}>
           <button class={styles.button}>
-            <span class={styles.buttonSpan}>
-              <OcStar2 size={2} />
-            </span>
-            <span class="ml-2">Star</span>
+            <StarIcon /> <span class="ml-1">Star</span>
           </button>
         </div>
       ) : null}
