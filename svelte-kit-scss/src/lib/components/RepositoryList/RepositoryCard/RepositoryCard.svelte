@@ -3,6 +3,7 @@
   import { Law16, Star16, RepoForked16 } from 'svelte-octicons';
   import type { RepositoryCardViewModel } from '../view-models';
   import ProgrammingLanguage from '$lib/components/shared/ProgrammingLanguage/ProgrammingLanguage.svelte';
+  import VisibilityLabel from '$lib/components/Repository/VisibilityLabel.svelte';
 
   export let model: RepositoryCardViewModel;
 
@@ -24,7 +25,7 @@
     <div class="title">
       <h3>
         <a class="link" {href} data-testid="name">{name}</a>
-        <span class="visibility" data-testid="visibility">{visibility}</span>
+        <VisibilityLabel {visibility} />
       </h3>
     </div>
     {#if description}
@@ -76,17 +77,6 @@
           .link {
             font-weight: 600;
             color: variables.$blue600;
-          }
-          .visibility {
-            font-size: 0.75em;
-            font-weight: 500;
-            text-transform: capitalize;
-            border: 1px solid variables.$gray300;
-            line-height: 1.5em;
-            padding: 0 0.5em;
-            border-radius: 0.75em;
-            color: variables.$gray600;
-            margin-left: 0.5em;
           }
         }
       }
