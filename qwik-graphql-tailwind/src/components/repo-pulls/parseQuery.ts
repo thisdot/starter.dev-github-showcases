@@ -58,6 +58,7 @@ function parsePullRequests(connection?: any) {
 }
 
 export function parseQuery(data: { data: RepoPullRequestsQuery }): ParsedPullRequestQuery {
+  console.log(data);
   const openPullRequests = parsePullRequests(data.data.repository?.openPullRequest);
   const closedPullRequests = parsePullRequests(data.data.repository?.closedPullRequest);
 

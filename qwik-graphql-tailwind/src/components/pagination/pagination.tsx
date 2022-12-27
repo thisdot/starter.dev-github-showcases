@@ -1,17 +1,18 @@
 import { $, component$ } from '@builder.io/qwik';
 
 export interface PaginationProps {
+  tab: string;
   pageInfo?: any;
   owner: string;
 }
 
-export const Pagination = component$(({ pageInfo, owner }: PaginationProps) => {
+export const Pagination = component$(({ tab, pageInfo, owner }: PaginationProps) => {
   if (!pageInfo) {
     return null;
   }
 
-  const prevUrl = `/${owner}?before=${pageInfo.startCursor}`;
-  const nextUrl = `/${owner}?after=${pageInfo.endCursor}`;
+  const prevUrl = `/${owner}?before=${pageInfo.startCursor}${tab ? `&tab=${tab}` : ''}`;
+  const nextUrl = `/${owner}?after=${pageInfo.endCursor}${tab ? `&tab=${tab}` : ''}`;
 
   const handlePreviousClick$ = $(() => {
     window.location.assign(prevUrl);

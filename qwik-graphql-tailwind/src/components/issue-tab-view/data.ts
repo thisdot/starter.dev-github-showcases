@@ -1,23 +1,25 @@
+import { IssueOrderField, OrderDirection } from './type';
+
 export const sortOptions = [
   {
-    value: 'Newest',
+    value: `${IssueOrderField.CreatedAt}^${OrderDirection.Desc}`,
     label: 'Newest',
   },
   {
-    value: 'Oldest',
+    value: `${IssueOrderField.CreatedAt}^${OrderDirection.Asc}`,
     label: 'Oldest',
   },
   {
-    value: 'Most Commented',
+    value: `${IssueOrderField.Comments}^${OrderDirection.Desc}`,
     label: 'Most Commented',
   },
   {
-    value: 'Least Commented',
+    value: `${IssueOrderField.Comments}^${OrderDirection.Asc}`,
     label: 'Least Commented',
   },
   {
-    value: 'Resently Updated',
-    label: 'Resently Updated',
+    label: 'Least recently updated',
+    value: `${IssueOrderField.UpdatedAt}^${OrderDirection.Asc}`,
   },
 ];
 
@@ -40,6 +42,7 @@ export const labelOptions = [
     description: "This doesn't seem right",
   },
 ];
+
 export const milestonesOptions = [
   {
     value: 'Issue With No Milestone',

@@ -1,62 +1,42 @@
-import { component$, useClientEffect$, useContextProvider, useStore } from '@builder.io/qwik';
-import DropdownStores, { DropdownStoresProps } from '../../context/issue-tab-header-dropdown';
-import issuesPRStore, { IssuesPRStoreProps, Tabs } from '../../context/issue-pr-store';
+import { isBrowser } from '@builder.io/qwik/build';
+import { useLocation } from '@builder.io/qwik-city';
+import { component$, useClientEffect$, useContext, useTask$ } from '@builder.io/qwik';
+
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
-import { labelOptions, milestonesOptions, sortOptions } from './data';
-import { ChevronDownIcon } from '../icons';
-import { useQuery } from '../../utils';
-import { ISSUES_QUERY } from '../../utils/queries/issues-query';
-import { AUTH_TOKEN, DEFAULT_PAGE_SIZE, GITHUB_GRAPHQL } from '../../utils/constants';
+import { Pagination } from '../pagination/pagination';
 import IssuesData from './issues-data';
-import { Issue } from './type';
+import { labelOptions, milestonesOptions, sortOptions } from './data';
+
+import { useQuery } from '~/utils';
+import { ISSUES_QUERY } from '~/utils/queries/issues-query';
+import IssuesPRContext, { IssuesPRContextProps } from '~/context/issue-pr-store';
+import { AUTH_TOKEN, GITHUB_GRAPHQL, DEFAULT_PAGE_SIZE } from '~/utils/constants';
+import DropdownContext from '~/context/issue-tab-header-dropdown';
+
+import { IssueOrderField, OrderDirection } from './type';
 
 export interface IssuesProps {
-  activeTab: Tabs;
   owner: string;
   name: string;
-}
-
-export interface DropdownStores {
-  selectedLabel: string;
-  selectedSort: string;
-  selectedMilestones: string;
 }
 
 interface IssuesQueryParams {
   owner: string;
   name: string;
   first: number;
+  after?: string;
+  before?: string;
+  orderBy: string;
+  direction: string;
 }
 
-interface IssueStore {
-  closedIssues: Issue[];
-  openIssues: Issue[];
-  closedIssuesCount: number;
-  openIssuesCount: number;
-  loading: boolean;
-}
+export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
+  const query = useLocation().query;
+  const issuesStore = useContext(IssuesPRContext);
+  const dropdownStore = useContext(DropdownContext);
 
-export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps) => {
-  const DEFAULT_TAB = 'open';
-  const store = useStore<IssuesPRStoreProps>({
-    activeTab: activeTab,
-  });
-  const dropdownStore = useStore<DropdownStoresProps>({
-    selectedLabel: labelOptions[0].value,
-    selectedSort: sortOptions[0].value,
-    selectedMilestones: milestonesOptions[0].value,
-  });
-
-  const issuesStore = useStore<IssueStore>({
-    closedIssues: [],
-    openIssues: [],
-    closedIssuesCount: 0,
-    openIssuesCount: 0,
-    loading: true,
-  });
-
-  useContextProvider(issuesPRStore, store);
-  useContextProvider(DropdownStores, dropdownStore);
+  const afterCursor = typeof query.after === 'string' ? query.after : undefined;
+  const beforeCursor = typeof query.before === 'string' ? query.before : undefined;
 
   useClientEffect$(async () => {
     const abortController = new AbortController();
@@ -65,7 +45,11 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
       {
         owner,
         name,
+        after: afterCursor,
+        before: beforeCursor,
         first: DEFAULT_PAGE_SIZE,
+        orderBy: IssueOrderField.CreatedAt,
+        direction: OrderDirection.Desc,
       },
       abortController
     );
@@ -73,50 +57,75 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
     updateIssueState(issuesStore, response);
   });
 
+  useTask$(async ({ track }) => {
+    const abortController = new AbortController();
+
+    track(() => issuesStore.activeTab);
+    track(() => dropdownStore.selectedSort);
+
+    if (isBrowser) {
+      const response = await fetchRepoIssues(
+        {
+          owner,
+          name,
+          first: DEFAULT_PAGE_SIZE,
+          orderBy: dropdownStore.selectedSort.split('^')[0],
+          direction: dropdownStore.selectedSort.split('^')[1],
+        },
+        abortController
+      );
+
+      updateIssueState(issuesStore, response);
+    }
+  });
+
   return (
     <>
       <div class="border border-gray-300 rounded-lg">
         <PullRequestIssueTab
+          tabType="issue"
+          sortOption={sortOptions}
+          labelOption={labelOptions}
+          milestonesOption={milestonesOptions}
           openCount={issuesStore.openIssuesCount}
           closedCount={issuesStore.closedIssuesCount}
-          tabType="issue"
-          milestonesOption={milestonesOptions}
-          labelOption={labelOptions}
-          sortOption={sortOptions}
         />
         {issuesStore.loading && (
-          <div class=" animate-pulse p-3 flex flex-col gap-2">
+          <div class="animate-pulse p-3 flex flex-col gap-2">
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
           </div>
         )}
-        <IssuesData issues={store.activeTab === DEFAULT_TAB ? issuesStore.openIssues : issuesStore.closedIssues} />
+        <IssuesData issues={issuesStore.activeTab === 'open' ? issuesStore.openIssues : issuesStore.closedIssues} />
       </div>
-      <div class="flex items-center justify-center gap-4 mt-5">
-        <button class="flex items-center gap-1 text-sm">
-          <ChevronDownIcon className="rotate-90 w-3 h-3 translate-y-[0.1rem]" />
-          Prev
-        </button>
-        <button class="flex items-baseline gap-1 text-sm">
-          Next
-          <ChevronDownIcon className="-rotate-90 w-3 h-3 translate-y-[0.1rem]" />
-        </button>
-      </div>
+      {(issuesStore.openPageInfo?.hasNextPage ||
+        issuesStore.openPageInfo?.hasPreviousPage ||
+        issuesStore.closedPageInfo?.hasNextPage ||
+        issuesStore.closedPageInfo?.hasPreviousPage) && (
+        <Pagination
+          tab={issuesStore.activeTab}
+          pageInfo={issuesStore.activeTab ? issuesStore.openPageInfo : issuesStore.closedPageInfo}
+          owner={`${owner}/${name}/issues`}
+        />
+      )}
     </>
   );
 });
 
-export function updateIssueState(store: IssueStore, response: any) {
+export function updateIssueState(store: IssuesPRContextProps, response: any) {
   const { closedIssues, openIssues } = response.data.repository;
   store.closedIssues = closedIssues.nodes;
   store.openIssues = openIssues.nodes;
   store.closedIssuesCount = closedIssues.totalCount;
   store.openIssuesCount = openIssues.totalCount;
+  store.openPageInfo = openIssues.pageInfo;
+  store.closedPageInfo = closedIssues.pageInfo;
   store.loading = false;
 }
+
 export async function fetchRepoIssues(
-  { owner, name, first }: IssuesQueryParams,
+  { owner, name, first, after, before, orderBy, direction }: IssuesQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(ISSUES_QUERY);
@@ -127,6 +136,10 @@ export async function fetchRepoIssues(
       owner,
       name,
       first,
+      after,
+      before,
+      orderBy,
+      direction,
     },
     headersOpt: {
       Accept: 'application/vnd.github+json',

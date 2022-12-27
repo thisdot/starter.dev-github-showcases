@@ -1,10 +1,10 @@
 import { $, component$, useContext } from '@builder.io/qwik';
 import { PullRequestIcon, CheckIcon, IssuesIcon } from '../icons';
 import cn from 'classnames';
-import { TABS } from './data';
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
-import issuesPRStore from '../../context/issue-pr-store';
-import DropdownStores from '../../context/issue-tab-header-dropdown';
+import IssuesPRContext from '~/context/issue-pr-store';
+import DropdownStores from '~/context/issue-tab-header-dropdown';
+import PullRequestContext from '~/context/pull-request-store';
 
 type Dropdowns = {
   label: string;
@@ -22,9 +22,14 @@ export interface PullRequestIssueTabParams {
   sortOption: Dropdowns[];
 }
 
+export enum TABS {
+  OPEN = 'open',
+  CLOSED = 'closed',
+}
+
 export const PullRequestIssueTab = component$(
   ({ openCount, closedCount, tabType, milestonesOption, labelOption, sortOption }: PullRequestIssueTabParams) => {
-    const tab = useContext(issuesPRStore);
+    const tab = tabType === 'issue' ? useContext(IssuesPRContext) : useContext(PullRequestContext);
     const dropdown = useContext(DropdownStores);
 
     const openBtnClasses = cn('text-xs flex items-center gap-1 text-gray-600', {
@@ -62,7 +67,7 @@ export const PullRequestIssueTab = component$(
         <div class="flex items-center space-x-8">
           <div>
             <FilterDropdown name="Label" description="Filter by label" buttonClassName="border-none text-sm">
-              {labelOption.map(({ label, value, color, description }) => (
+              {labelOption?.map(({ label, value, color, description }) => (
                 <div>
                   <button
                     onClick$={() => (dropdown.selectedLabel = value)}
@@ -124,7 +129,7 @@ export const PullRequestIssueTab = component$(
           )}
           <div>
             <FilterDropdown name="Sort" description="Sort by" buttonClassName="border-none text-sm">
-              {sortOption.map(({ label, value }) => (
+              {sortOption?.map(({ label, value }) => (
                 <div>
                   <button
                     onClick$={() => (dropdown.selectedSort = value)}
