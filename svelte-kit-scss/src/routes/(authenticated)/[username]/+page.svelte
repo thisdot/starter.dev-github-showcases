@@ -41,7 +41,7 @@
     </LayoutPageContentRow>
   {:else}
     <LayoutPageHeader>
-      <LayoutPageContentRow>
+      <LayoutPageContentRow slot="sticky">
         <LayoutSidebar placeholder="sidebar-left">
           <PageNavigtionTabs {tabs} currentPageId={pageId} />
         </LayoutSidebar>
