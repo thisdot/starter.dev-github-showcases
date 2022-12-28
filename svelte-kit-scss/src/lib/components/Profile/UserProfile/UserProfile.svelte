@@ -38,7 +38,9 @@
     </div>
   </div>
   <div class="info secondary bio">
-    <span data-testid="bio">{bio}</span>
+    {#if bio}
+      <span data-testid="bio">{bio}</span>
+    {/if}
   </div>
   <div class="info secondary followers">
     <ProfileFollowers {followers} {following} />
