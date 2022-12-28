@@ -24,7 +24,7 @@
   currentPageId.set(PAGE_IDS.REPOSITORY.CODE);
 </script>
 
-<LayoutPageContentRow>
+<LayoutPageContentRow marginBottom>
   <LayoutSidebar>
     <FileExplorerNav {branches} {defaultBranch} {currentBranch} {breadcrumbs} />
     <FileExplorerContainer {parentHref} {contents} />

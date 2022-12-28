@@ -17,6 +17,6 @@
   currentPageId.set(PAGE_IDS.REPOSITORY.CODE);
 </script>
 
-<LayoutPageContentRow>
+<LayoutPageContentRow marginBottom>
   <FileViewer {fileContents} />
 </LayoutPageContentRow>

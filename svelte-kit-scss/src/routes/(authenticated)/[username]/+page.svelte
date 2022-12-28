@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { PageServerData } from './$types';
   import { ProfileType } from '$lib/interfaces';
-  import ProfileNavSection from '$lib/components/Profile/ProfileNavSection/ProfileNavSection.svelte';
   import AllRepositoriesList from '$lib/components/RepositoryList/AllRepositoriesList/AllRepositoriesList.svelte';
   import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
   import LayoutSidebar from '$lib/components/shared/layouts/LayoutSidebar.svelte';
@@ -9,10 +8,12 @@
   import UserProfile from '$lib/components/Profile/UserProfile/UserProfile.svelte';
   import OrganizationProfile from '$lib/components/Profile/OrganizationProfile/OrganizationProfile.svelte';
   import OrganizationDetails from '$lib/components/Profile/OrganizationProfile/OrganizationDetails/OrganizationDetails.svelte';
+  import PageNavigtionTabs from '$lib/components/shared/PageNavigationTabs/PageNavigtionTabs.svelte';
 
   export let data: PageServerData;
 
-  $: ({ profile, organizations, allRepositoriesListViewModel, organizationMembers } = data);
+  $: ({ tabs, pageId, profile, organizations, allRepositoriesListViewModel, organizationMembers } =
+    data);
   $: isOrg = profile?.type == ProfileType.Organization;
   $: people = organizationMembers || [];
 </script>
@@ -26,11 +27,11 @@
         </div>
       </LayoutPageContentRow>
       <LayoutPageContentRow>
-        <ProfileNavSection />
+        <PageNavigtionTabs {tabs} currentPageId={pageId} />
       </LayoutPageContentRow>
     </LayoutPageHeader>
 
-    <LayoutPageContentRow>
+    <LayoutPageContentRow marginBottom>
       <LayoutSidebar>
         <AllRepositoriesList model={allRepositoriesListViewModel} />
         <div slot="sidebar-right">
@@ -42,11 +43,11 @@
     <LayoutPageHeader>
       <LayoutPageContentRow>
         <LayoutSidebar placeholder="sidebar-left">
-          <ProfileNavSection />
+          <PageNavigtionTabs {tabs} currentPageId={pageId} />
         </LayoutSidebar>
       </LayoutPageContentRow>
     </LayoutPageHeader>
-    <LayoutPageContentRow>
+    <LayoutPageContentRow marginBottom>
       <LayoutSidebar>
         <UserProfile {profile} {organizations} slot="sidebar-left" />
         <AllRepositoriesList model={allRepositoriesListViewModel} />

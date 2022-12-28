@@ -4,4 +4,7 @@ export const PAGE_IDS = {
     ISSUES: 'repository-issues',
     PULLS: 'repository-pulls',
   },
+  PROFILE: {
+    REPOSITORIES: 'profile-repositories',
+  },
 } as const;
