@@ -9,7 +9,6 @@ import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
 import PullRequestData from './repo-pulls-data';
 import { PullRequest } from './types';
 import { PULL_REQUEST_QUERY } from '../../utils/queries/pull-request';
-import { sortPullRequestData } from './filter-sort-functions';
 
 export interface PullRequestsProps {
   activeTab: Tabs;
@@ -26,6 +25,8 @@ interface PullRequestsQueryParams {
   owner: string;
   name: string;
   first: number;
+  orderBy: string;
+  direction: string;
 }
 
 interface PullRequestStore {
@@ -69,6 +70,8 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
         owner,
         name,
         first: 10,
+        orderBy: 'CREATED_AT',
+        direction: 'DESC',
       },
       abortController
     );
@@ -76,21 +79,24 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
     updatePullRequestState(pullRequestStore, response);
   });
 
-  useTask$(({ track }) => {
+  useTask$(async ({ track }) => {
+    const abortController = new AbortController();
+
     track(() => dropdownStore.selectedSort);
     track(() => store.activeTab);
 
-    if (dropdownStore.selectedSort && store.activeTab === DEFAULT_TAB) {
-      pullRequestStore.openPullRequest = sortPullRequestData(
-        dropdownStore.selectedSort,
-        pullRequestStore.openPullRequest
-      );
-    } else {
-      pullRequestStore.closedPullRequest = sortPullRequestData(
-        dropdownStore.selectedSort,
-        pullRequestStore.closedPullRequest
-      );
-    }
+    const response = await fetchRepoPullRequests(
+      {
+        owner,
+        name,
+        first: 10,
+        orderBy: dropdownStore.selectedSort.split('^')[0],
+        direction: dropdownStore.selectedSort.split('^')[1],
+      },
+      abortController
+    );
+
+    updatePullRequestState(pullRequestStore, response);
   });
 
   return (
@@ -139,8 +145,9 @@ export function updatePullRequestState(store: PullRequestStore, response: any) {
   store.openPullRequestCount = openPullRequest.totalCount;
   store.loading = false;
 }
+
 export async function fetchRepoPullRequests(
-  { owner, name, first }: PullRequestsQueryParams,
+  { owner, name, first, orderBy, direction }: PullRequestsQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(PULL_REQUEST_QUERY);
@@ -151,6 +158,8 @@ export async function fetchRepoPullRequests(
       owner,
       name,
       first,
+      orderBy,
+      direction,
     },
     headersOpt: {
       Accept: 'application/vnd.github+json',
