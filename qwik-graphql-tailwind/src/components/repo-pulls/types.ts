@@ -160,7 +160,7 @@ export enum PullRequestOrderField {
   /** Order issues by creation time */
   CreatedAt = 'CREATED_AT',
   /** Order issues by update time */
-  ClosedAt = 'CLOSED_AT',
+  UpdatedAt = 'UPDATED_AT',
 }
 
 export enum OrderDirection {

@@ -2,13 +2,14 @@ import { component$, useClientEffect$, useContextProvider, useStore, useTask$ } 
 import DropdownStores, { DropdownStoresProps } from '../../context/issue-tab-header-dropdown';
 import issuesPRStore, { IssuesPRStoreProps, Tabs } from '../../context/issue-pr-store';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
-import { getSortOptions, labelOptions, milestonesOptions } from './data';
+import { labelOptions, milestonesOptions, sortOptions } from './data';
 import { ChevronDownIcon } from '../icons';
 import { useQuery } from '../../utils';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
 import PullRequestData from './repo-pulls-data';
 import { PullRequest } from './types';
 import { PULL_REQUEST_QUERY } from '../../utils/queries/pull-request';
+import { isBrowser } from '@builder.io/qwik/build';
 
 export interface PullRequestsProps {
   activeTab: Tabs;
@@ -42,8 +43,6 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
   const store = useStore<IssuesPRStoreProps>({
     activeTab: activeTab,
   });
-
-  const sortOptions = getSortOptions(DEFAULT_TAB, store.activeTab);
 
   const dropdownStore = useStore<DropdownStoresProps>({
     selectedLabel: labelOptions[0].value,
@@ -82,21 +81,23 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
   useTask$(async ({ track }) => {
     const abortController = new AbortController();
 
-    track(() => dropdownStore.selectedSort);
     track(() => store.activeTab);
+    track(() => dropdownStore.selectedSort);
 
-    const response = await fetchRepoPullRequests(
-      {
-        owner,
-        name,
-        first: 10,
-        orderBy: dropdownStore.selectedSort.split('^')[0],
-        direction: dropdownStore.selectedSort.split('^')[1],
-      },
-      abortController
-    );
+    if (isBrowser) {
+      const response = await fetchRepoPullRequests(
+        {
+          owner,
+          name,
+          first: 10,
+          orderBy: dropdownStore.selectedSort.split('^')[0],
+          direction: dropdownStore.selectedSort.split('^')[1],
+        },
+        abortController
+      );
 
-    updatePullRequestState(pullRequestStore, response);
+      updatePullRequestState(pullRequestStore, response);
+    }
   });
 
   return (

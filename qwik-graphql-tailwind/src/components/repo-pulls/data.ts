@@ -1,14 +1,13 @@
 import { OrderDirection, PullRequestOrderField } from './types';
-import { Tabs } from '../../context/issue-pr-store';
 
-export const getSortOptions = (defaultTab: Tabs, activeTab: Tabs) => [
+export const sortOptions = [
   {
-    value: `${PullRequestOrderField[`${activeTab === defaultTab ? 'CreatedAt' : 'ClosedAt'}`]}^${OrderDirection.Desc}`,
-    label: activeTab === defaultTab ? 'Newest' : 'Recently Closed',
+    value: `${PullRequestOrderField.CreatedAt}^${OrderDirection.Desc}`,
+    label: 'Newest',
   },
   {
-    value: `${PullRequestOrderField[`${activeTab === defaultTab ? 'CreatedAt' : 'ClosedAt'}`]}^${OrderDirection.Asc}`,
-    label: activeTab === defaultTab ? 'Oldest' : 'Least recently Closed',
+    value: `${PullRequestOrderField.CreatedAt}^${OrderDirection.Asc}`,
+    label: 'Oldest',
   },
   {
     label: 'Most commented',
@@ -17,6 +16,14 @@ export const getSortOptions = (defaultTab: Tabs, activeTab: Tabs) => [
   {
     label: 'Least commented',
     value: `${PullRequestOrderField.Comments}^${OrderDirection.Asc}`,
+  },
+  {
+    label: 'Recently updated',
+    value: `${PullRequestOrderField.UpdatedAt}^${OrderDirection.Desc}`,
+  },
+  {
+    label: 'Least reecently updated',
+    value: `${PullRequestOrderField.UpdatedAt}^${OrderDirection.Asc}`,
   },
 ];
 

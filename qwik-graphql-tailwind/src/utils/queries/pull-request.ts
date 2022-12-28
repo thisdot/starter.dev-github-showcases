@@ -19,7 +19,7 @@ export const PULL_REQUEST_QUERY = `
             url
         }
       }
-      closedPullRequest: pullRequests(first: $first, states: [CLOSED, MERGED], orderBy: {field: UPDATED_AT, direction: DESC}) {
+      closedPullRequest: pullRequests(first: $first, states: [CLOSED, MERGED], orderBy:{ field: $orderBy, direction: $direction}) {
         totalCount
         nodes {
             state
