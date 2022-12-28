@@ -15,6 +15,7 @@ import {
 } from '$lib/helpers/issues-search-query-builder';
 import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
 import { redirect } from '@sveltejs/kit';
+import { PAGE_IDS } from '$lib/constants/page-ids';
 
 const DEFAULT_PER_PAGE = 25;
 const PAGE_SEARCH_PARAM_QUERY = 'q';
@@ -72,13 +73,12 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
   redirectIfRequired(event);
   const {
     fetch,
-    params,
+    params: { username, repo, issueSearchType },
     url: { searchParams, href },
   } = event;
 
   const service = new IssuesSearchService(fetch);
   const milestoneService = new IssueMilestoneService(fetch);
-  const { username, repo, issueSearchType } = params;
 
   const defaultSearchQuery = [
     IssueSearchPageTypeFiltersMap[issueSearchType as IssueSearchTypePage],
@@ -160,5 +160,6 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
     sortFilters,
     stateFilters,
     milestoneFilters,
+    pageId: issueSearchType === 'issues' ? PAGE_IDS.REPOSITORY.ISSUES : PAGE_IDS.REPOSITORY.PULLS,
   };
 };

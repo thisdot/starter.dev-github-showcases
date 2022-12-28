@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { OrganizationSimple, PublicProfileInformation } from '$lib/interfaces';
-  import { Link16, Location16, Mail16, Organization16, People16 } from 'svelte-octicons';
+  import { Link16, Location16, Mail16, Organization16 } from 'svelte-octicons';
   import ProfileFollowers from '../common/ProfileFollowers.svelte';
   import SocialLink from '../common/SocialLink.svelte';
   import IconTwitter16 from '$lib/components/shared/icons/IconTwitter16.svelte';
@@ -38,7 +38,9 @@
     </div>
   </div>
   <div class="info secondary bio">
-    <span data-testid="bio">{bio}</span>
+    {#if bio}
+      <span data-testid="bio">{bio}</span>
+    {/if}
   </div>
   <div class="info secondary followers">
     <ProfileFollowers {followers} {following} />

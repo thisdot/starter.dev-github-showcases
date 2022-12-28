@@ -5,11 +5,17 @@
     right: 'sidebar-right',
   } as const;
   export let placeholder: NamedSlot | undefined = undefined;
+  let sidebarClientHeightLeft: number | undefined;
+  let sidebarClientHeightRight: number | undefined;
 </script>
 
 <div class="layout-sidebar">
   {#if $$slots[SLOT.left] || placeholder === SLOT.left}
-    <div class="sidebar left">
+    <div
+      class="sidebar left"
+      bind:clientHeight={sidebarClientHeightLeft}
+      class:empty={!sidebarClientHeightLeft}
+    >
       <slot name="sidebar-left" />
     </div>
   {/if}
@@ -17,7 +23,11 @@
     <slot />
   </div>
   {#if $$slots[SLOT.right] || placeholder === SLOT.right}
-    <div class="sidebar right">
+    <div
+      class="sidebar right"
+      bind:clientHeight={sidebarClientHeightRight}
+      class:empty={!sidebarClientHeightRight}
+    >
       <slot name="sidebar-right" />
     </div>
   {/if}
@@ -36,11 +46,17 @@
     .sidebar {
       min-width: 0;
       flex: 1;
+      &.empty {
+        display: none;
+      }
     }
     @media (min-width: variables.$md) {
       flex-direction: row;
       .sidebar {
         flex: 0 0 16rem;
+        &.empty {
+          display: unset;
+        }
       }
     }
     @media (min-width: variables.$lg) {

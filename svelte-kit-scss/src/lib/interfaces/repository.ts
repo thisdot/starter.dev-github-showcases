@@ -1,4 +1,4 @@
-import type { SimpleUser } from '$lib/interfaces';
+import type { SimpleUser, TopicReference } from '$lib/interfaces';
 
 export type RepositoryLicenseSimple = {
   name: string;
@@ -23,6 +23,7 @@ export type Repository = {
   fork: boolean;
 };
 
-export type RepositoryState = Repository & {
+export type RepositoryState = Omit<Repository, 'topics'> & {
   openPullRequestsCount: number;
+  topics: TopicReference[];
 };

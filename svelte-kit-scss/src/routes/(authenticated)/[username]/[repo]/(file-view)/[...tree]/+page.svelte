@@ -1,8 +1,12 @@
 <script lang="ts">
-  import FileExplorerAbout from '$lib/components/FileExplorer/FileExplorerAbout/FileExplorerAbout.svelte';
   import FileExplorerContainer from '$lib/components/FileExplorer/FileExplorerContainer/FileExplorerContainer.svelte';
   import FileExplorerNav from '$lib/components/FileExplorer/FileExplorerNav/FileExplorerNav.svelte';
   import FileExplorerReadme from '$lib/components/FileExplorer/FileExplorerReadme/FileExplorerReadme.svelte';
+  import RepositoryDetails from '$lib/components/Repository/RepositoryDetails.svelte';
+  import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
+  import LayoutSidebar from '$lib/components/shared/layouts/LayoutSidebar.svelte';
+  import { PAGE_IDS } from '$lib/constants/page-ids';
+  import { currentPageId } from '$lib/stores/current-page-id';
   import type { PageServerData } from './$types';
   export let data: PageServerData;
 
@@ -16,25 +20,23 @@
     readmeHtml,
     breadcrumbs,
   } = data);
+
+  currentPageId.set(PAGE_IDS.REPOSITORY.CODE);
 </script>
 
-<div class="container grid grid-cols-12 subpage">
-  <section class="col-span-9 col-sm-span-12">
+<LayoutPageContentRow marginBottom>
+  <LayoutSidebar>
     <FileExplorerNav {branches} {defaultBranch} {currentBranch} {breadcrumbs} />
     <FileExplorerContainer {parentHref} {contents} />
-  </section>
-
-  <section class="col-span-3 col-sm-span-12">
-    <FileExplorerAbout {repositoryState} />
-  </section>
-
-  <section class="col-span-9">
-    <FileExplorerReadme html={readmeHtml} />
-  </section>
-</div>
+    <div class="readme">
+      <FileExplorerReadme html={readmeHtml} />
+    </div>
+    <RepositoryDetails {repositoryState} slot="sidebar-right" />
+  </LayoutSidebar>
+</LayoutPageContentRow>
 
 <style lang="scss">
-  .container.subpage {
-    gap: 2rem;
+  .readme {
+    margin-top: 1rem;
   }
 </style>

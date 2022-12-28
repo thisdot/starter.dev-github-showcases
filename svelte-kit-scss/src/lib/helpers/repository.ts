@@ -5,6 +5,7 @@ import type {
 } from '$lib/interfaces/data-contract/github';
 import { remapSimpleUser, resolveRepositoryHref } from '$lib/helpers';
 import type { RepositoryCardViewModel } from '$lib/components/RepositoryList/view-models';
+import { remapTopicReference } from './topic';
 
 export const remapRepositoryLicenseSimple = (
   license: GithubRepositoryLicenseSimple
@@ -38,6 +39,7 @@ export const buildRepositoryState = (
   return {
     ...repository,
     openPullRequestsCount,
+    topics: repository.topics.map(remapTopicReference),
   };
 };
 
