@@ -5,9 +5,9 @@ import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issu
 import { labelOptions, milestonesOptions, sortOptions } from './data';
 import { ChevronDownIcon } from '../icons';
 import { useQuery } from '../../utils';
-import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
+import { AUTH_TOKEN, DEFAULT_PAGE_NUMBER, GITHUB_GRAPHQL } from '../../utils/constants';
 import PullRequestData from './repo-pulls-data';
-import { PullRequest } from './types';
+import { PullRequest, PullRequestOrderField, OrderDirection } from './types';
 import { PULL_REQUEST_QUERY } from '../../utils/queries/pull-request';
 import { isBrowser } from '@builder.io/qwik/build';
 
@@ -68,9 +68,9 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
       {
         owner,
         name,
-        first: 10,
-        orderBy: 'CREATED_AT',
-        direction: 'DESC',
+        first: DEFAULT_PAGE_NUMBER,
+        orderBy: PullRequestOrderField.CreatedAt,
+        direction: OrderDirection.Desc,
       },
       abortController
     );
@@ -89,7 +89,7 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
         {
           owner,
           name,
-          first: 10,
+          first: DEFAULT_PAGE_NUMBER,
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],
         },

@@ -6,7 +6,7 @@ import { labelOptions, milestonesOptions, sortOptions } from './data';
 import { ChevronDownIcon } from '../icons';
 import { useQuery } from '../../utils';
 import { ISSUES_QUERY } from '../../utils/queries/issues-query';
-import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
+import { AUTH_TOKEN, DEFAULT_PAGE_NUMBER, GITHUB_GRAPHQL } from '../../utils/constants';
 import IssuesData from './issues-data';
 import { Issue } from './type';
 
@@ -65,7 +65,7 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
       {
         owner,
         name,
-        first: 10,
+        first: DEFAULT_PAGE_NUMBER,
       },
       abortController
     );
