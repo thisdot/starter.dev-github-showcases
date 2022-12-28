@@ -34,6 +34,7 @@
         text-decoration: none;
         vertical-align: bottom;
         white-space: nowrap;
+        color: inherit;
       }
       &:before {
         content: '';
