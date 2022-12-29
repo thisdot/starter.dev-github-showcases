@@ -17,7 +17,7 @@ export interface PullRequestIssueTabParams {
   openCount: number;
   closedCount: number;
   tabType: 'pr' | 'issue';
-  milestonesOption: Dropdowns[];
+  milestonesOption?: Dropdowns[];
   labelOption: Dropdowns[];
   sortOption: Dropdowns[];
 }
@@ -40,9 +40,9 @@ export const PullRequestIssueTab = component$(
 
     const toggleTab = $((value: TABS) => {
       tab.activeTab = value;
-      dropdown.selectedLabel = labelOption[0].value;
+      dropdown.selectedLabel = undefined;
       dropdown.selectedSort = sortOption[0].value;
-      dropdown.selectedMilestones = milestonesOption[0].value;
+      dropdown.selectedMilestones = milestonesOption ? milestonesOption[0].value : undefined;
     });
 
     return (
@@ -62,13 +62,6 @@ export const PullRequestIssueTab = component$(
         <div class="flex items-center space-x-8">
           <div>
             <FilterDropdown name="Label" description="Filter by label" buttonClassName="border-none text-sm">
-              <div class="p-2 border-t border-t-gray-300">
-                <input
-                  type="text"
-                  placeholder="Filter labels"
-                  class="w-full border border-gray-300 focus:border-blue-500 py-1 px-2 rounded-md text-sm"
-                />
-              </div>
               {labelOption.map(({ label, value, color, description }) => (
                 <div>
                   <button
@@ -95,36 +88,40 @@ export const PullRequestIssueTab = component$(
               ))}
             </FilterDropdown>
           </div>
-          <div>
-            <FilterDropdown
-              name="Milestones"
-              description="Filter by milestone"
-              buttonClassName="border-none text-sm items-start"
-            >
-              <div class="p-2 border-t border-t-gray-300">
-                <input
-                  type="text"
-                  placeholder="Filter milestones"
-                  class="w-full border border-gray-300 focus:border-blue-500 py-1 px-2 rounded-md text-sm"
-                />
-              </div>
-              {milestonesOption.map(({ label, value }) => (
-                <div>
-                  <button
-                    onClick$={() => {
-                      dropdown.selectedMilestones = value;
-                    }}
-                    type="button"
-                    name={'language'}
-                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
-                  >
-                    {value === dropdown.selectedMilestones && <CheckIcon className="inline w-4 h-4 absolute left-4" />}{' '}
-                    {label}
-                  </button>
+          {milestonesOption && (
+            <div>
+              <FilterDropdown
+                name="Milestones"
+                description="Filter by milestone"
+                buttonClassName="border-none text-sm items-start"
+              >
+                <div class="p-2 border-t border-t-gray-300">
+                  <input
+                    type="text"
+                    placeholder="Filter milestones"
+                    class="w-full border border-gray-300 focus:border-blue-500 py-1 px-2 rounded-md text-sm"
+                  />
                 </div>
-              ))}
-            </FilterDropdown>
-          </div>
+                {milestonesOption.map(({ label, value }) => (
+                  <div>
+                    <button
+                      onClick$={() => {
+                        dropdown.selectedMilestones = value;
+                      }}
+                      type="button"
+                      name={'language'}
+                      class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
+                    >
+                      {value === dropdown.selectedMilestones && (
+                        <CheckIcon className="inline w-4 h-4 absolute left-4" />
+                      )}{' '}
+                      {label}
+                    </button>
+                  </div>
+                ))}
+              </FilterDropdown>
+            </div>
+          )}
           <div>
             <FilterDropdown name="Sort" description="Sort by" buttonClassName="border-none text-sm">
               {sortOption.map(({ label, value }) => (
