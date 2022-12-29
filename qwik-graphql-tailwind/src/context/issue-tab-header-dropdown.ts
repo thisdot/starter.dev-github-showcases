@@ -1,8 +1,8 @@
 import { createContext } from '@builder.io/qwik';
 export interface DropdownStoresProps {
-  selectedLabel: string;
+  selectedLabel: string | undefined;
   selectedSort: string;
-  selectedMilestones: string;
+  selectedMilestones?: string;
 }
 const DropdownStores = createContext<DropdownStoresProps>('DropdownStores-context');
 

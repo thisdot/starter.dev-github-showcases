@@ -18,8 +18,9 @@ const PullRequestData = ({ pull_request }: PullRequestDataProps) => {
             isOpen: issue.state === 'OPEN',
             isMerged: issue.state === 'MERGED',
             createdAt: issue.closedAt || issue.createdAt,
-            authorName: issue.author.login,
-            commentsCount: issue.comments.totalCount,
+            authorName: issue.login,
+            commentsCount: issue.commentCount,
+            labels: issue.labels,
           }}
         />
       ))}

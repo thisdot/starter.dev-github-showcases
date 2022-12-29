@@ -1,10 +1,10 @@
 import { $, component$, useContext } from '@builder.io/qwik';
-import cn from 'classnames';
 import { LanguageFilter, TypeFilter, RepositoryOrderField, DefaultLanguage } from './types';
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
-import { XmarkIcon, CheckIcon } from '../icons';
+import { CheckIcon } from '../icons';
 import { SearchInput } from '../search-input/search-input';
 import filterStore from '../../context/repo-filter';
+import { ClearFilterAndSortBtn } from '../clear-filter-and-sort-button/index';
 
 export type RepoFiltersProps = {
   languages: LanguageFilter[];
@@ -123,21 +123,7 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
             )}{' '}
             sorted by <span class="font-semibold">{filters.sortBy.split('_').join(' ').toLowerCase()}.</span>
           </div>
-          <div>
-            <button onClick$={resetFilters$} class={cn('inline-flex items-center justify-center', 'group')}>
-              <span
-                class={cn(
-                  'p-0.5 rounded bg-gray-500 inline-flex items-center justify-center mr-2 group-hover:bg-blue-500',
-                  'group-hover:bg-blue-500'
-                )}
-              >
-                <XmarkIcon className="w-3.5 h-3.5 text-white" />
-              </span>
-              <span class={cn('text-sm text-gray-500 group-hover:text-blue-500', 'group-hover:text-blue-500')}>
-                Clear filter
-              </span>
-            </button>
-          </div>
+          <ClearFilterAndSortBtn clearFn={resetFilters$} />
         </div>
       )}
     </>
