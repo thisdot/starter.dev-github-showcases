@@ -5,7 +5,7 @@ import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issu
 import { sortOptions } from './data';
 import { ChevronDownIcon } from '../icons';
 import { useQuery } from '../../utils';
-import { AUTH_TOKEN, DEFAULT_PAGE_NUMBER, GITHUB_GRAPHQL } from '../../utils/constants';
+import { AUTH_TOKEN, DEFAULT_PAGE_SIZE, GITHUB_GRAPHQL } from '../../utils/constants';
 import PullRequestData from './repo-pulls-data';
 import { PullRequest, PullRequestOrderField, OrderDirection, ParsedPullRequestQuery, Label } from './types';
 import { PULL_REQUEST_QUERY } from '../../utils/queries/pull-request';
@@ -81,7 +81,7 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
       {
         owner,
         name,
-        first: DEFAULT_PAGE_NUMBER,
+        first: DEFAULT_PAGE_SIZE,
         labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
         orderBy: PullRequestOrderField.CreatedAt,
         direction: OrderDirection.Desc,
@@ -94,24 +94,27 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
 
   useTask$(async ({ track }) => {
     const abortController = new AbortController();
-
     track(() => store.activeTab);
     track(() => dropdownStore.selectedSort);
     track(() => dropdownStore.selectedLabel);
 
+    // fetchRepoPullRequests needs auth token.
+    // Because we store auth token in sessionStorage we need to be sure that the storage is defined.
+    // We ask to the useTask to do the following operation only in browser,
+    // where we are sure that sessionStorage is not undefined.
     if (isBrowser) {
       const response = await fetchRepoPullRequests(
         {
           owner,
           name,
-          first: DEFAULT_PAGE_NUMBER,
+          first: DEFAULT_PAGE_SIZE,
           labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],
         },
         abortController
       );
-
+      console.log(parseQuery(response));
       updatePullRequestState(pullRequestStore, parseQuery(response));
     }
   });

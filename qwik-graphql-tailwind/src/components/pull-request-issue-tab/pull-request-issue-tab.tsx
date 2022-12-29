@@ -67,7 +67,7 @@ export const PullRequestIssueTab = component$(
                   <button
                     onClick$={() => (dropdown.selectedLabel = value)}
                     type="button"
-                    name={'language'}
+                    name="language"
                     class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
                     {value === dropdown.selectedLabel && <CheckIcon className="inline w-4 h-4 absolute left-4" />}
@@ -114,7 +114,7 @@ export const PullRequestIssueTab = component$(
                     >
                       {value === dropdown.selectedMilestones && (
                         <CheckIcon className="inline w-4 h-4 absolute left-4" />
-                      )}{' '}
+                      )}
                       {label}
                     </button>
                   </div>

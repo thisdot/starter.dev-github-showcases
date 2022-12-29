@@ -81,7 +81,13 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
             {data.title}
           </a>
           {data.labels.map((label: Label) => (
-            <span class={`mt-2 ml-2 py-1 px-2 rounded-full text-sm bg-[#${label.color}]`}>{label.name}</span>
+            <span
+              key={label.color}
+              class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm', `bg-[#${label.color}]`)}
+              style={{ backgroundColor: `#${label.color}` }}
+            >
+              {label.name}
+            </span>
           ))}
         </div>
         <div class="flex mt-1 text-sm text-gray-500">
