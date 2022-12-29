@@ -4,3 +4,5 @@ export const cleanUpParams = (params: Record<string, string>) => {
   }
   return params;
 };
+
+export const getTime = (time: string) => new Date(time).getTime();

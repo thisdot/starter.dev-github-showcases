@@ -1,14 +1,15 @@
-import { component$, useClientEffect$, useContextProvider, useStore } from '@builder.io/qwik';
+import { component$, useClientEffect$, useContextProvider, useStore, useTask$ } from '@builder.io/qwik';
 import DropdownStores, { DropdownStoresProps } from '../../context/issue-tab-header-dropdown';
 import issuesPRStore, { IssuesPRStoreProps, Tabs } from '../../context/issue-pr-store';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
 import { labelOptions, milestonesOptions, sortOptions } from './data';
 import { ChevronDownIcon } from '../icons';
 import { useQuery } from '../../utils';
-import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
+import { AUTH_TOKEN, DEFAULT_PAGE_NUMBER, GITHUB_GRAPHQL } from '../../utils/constants';
 import PullRequestData from './repo-pulls-data';
-import { PullRequest } from './types';
+import { PullRequest, PullRequestOrderField, OrderDirection } from './types';
 import { PULL_REQUEST_QUERY } from '../../utils/queries/pull-request';
+import { isBrowser } from '@builder.io/qwik/build';
 
 export interface PullRequestsProps {
   activeTab: Tabs;
@@ -19,13 +20,14 @@ export interface PullRequestsProps {
 export interface DropdownStores {
   selectedLabel: string;
   selectedSort: string;
-  selectedMilestones: string;
 }
 
 interface PullRequestsQueryParams {
   owner: string;
   name: string;
   first: number;
+  orderBy: string;
+  direction: string;
 }
 
 interface PullRequestStore {
@@ -41,6 +43,7 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
   const store = useStore<IssuesPRStoreProps>({
     activeTab: activeTab,
   });
+
   const dropdownStore = useStore<DropdownStoresProps>({
     selectedLabel: labelOptions[0].value,
     selectedSort: sortOptions[0].value,
@@ -65,12 +68,36 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
       {
         owner,
         name,
-        first: 10,
+        first: DEFAULT_PAGE_NUMBER,
+        orderBy: PullRequestOrderField.CreatedAt,
+        direction: OrderDirection.Desc,
       },
       abortController
     );
 
     updatePullRequestState(pullRequestStore, response);
+  });
+
+  useTask$(async ({ track }) => {
+    const abortController = new AbortController();
+
+    track(() => store.activeTab);
+    track(() => dropdownStore.selectedSort);
+
+    if (isBrowser) {
+      const response = await fetchRepoPullRequests(
+        {
+          owner,
+          name,
+          first: DEFAULT_PAGE_NUMBER,
+          orderBy: dropdownStore.selectedSort.split('^')[0],
+          direction: dropdownStore.selectedSort.split('^')[1],
+        },
+        abortController
+      );
+
+      updatePullRequestState(pullRequestStore, response);
+    }
   });
 
   return (
@@ -119,8 +146,9 @@ export function updatePullRequestState(store: PullRequestStore, response: any) {
   store.openPullRequestCount = openPullRequest.totalCount;
   store.loading = false;
 }
+
 export async function fetchRepoPullRequests(
-  { owner, name, first }: PullRequestsQueryParams,
+  { owner, name, first, orderBy, direction }: PullRequestsQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(PULL_REQUEST_QUERY);
@@ -131,6 +159,8 @@ export async function fetchRepoPullRequests(
       owner,
       name,
       first,
+      orderBy,
+      direction,
     },
     headersOpt: {
       Accept: 'application/vnd.github+json',

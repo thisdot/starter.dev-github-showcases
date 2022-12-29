@@ -1,7 +1,7 @@
 export const PULL_REQUEST_QUERY = `
-  query PullRequests($owner: String!, $name: String!, $first: Int!) {
+  query PullRequests($owner: String!, $name: String!, $first: Int!, $orderBy: IssueOrderField!, $direction: OrderDirection!) {
     repository(owner: $owner, name: $name) {
-      openPullRequest: pullRequests(first: $first, states: [OPEN]) {
+      openPullRequest: pullRequests(first: $first, states: [OPEN], orderBy:{ field: $orderBy, direction: $direction}) {
         totalCount
         nodes {
             state
@@ -19,7 +19,7 @@ export const PULL_REQUEST_QUERY = `
             url
         }
       }
-      closedPullRequest: pullRequests(first: $first, states: [CLOSED, MERGED]) {
+      closedPullRequest: pullRequests(first: $first, states: [CLOSED, MERGED], orderBy:{ field: $orderBy, direction: $direction}) {
         totalCount
         nodes {
             state
