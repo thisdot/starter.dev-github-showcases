@@ -1,9 +1,12 @@
 import { ENV } from '$lib/constants/env';
 import { AbstractFetchService } from './abstract-fetch-service';
 
-import type {
-  GithubOrganizationSimple,
-  GithubSimpleUser,
+import {
+  GITHUB_MAX_PER_PAGE_ORGANIZATION_MEMBERS,
+  GITHUB_MAX_PER_PAGE_ORGANIZATION_MEMBERSHIP,
+  type GithubOrganizationMembership,
+  type GithubOrganizationSimple,
+  type GithubSimpleUser,
 } from '$lib/interfaces/data-contract/github';
 import type { OrganizationSimple, SimpleUser } from '$lib/interfaces';
 
@@ -23,8 +26,20 @@ export class OrganizationService extends AbstractFetchService {
    */
   async listOrganizationsForUser(username: string): Promise<OrganizationSimple[]> {
     const url = new URL(`/users/${username}/orgs`, ENV.GITHUB_URL);
+    url.searchParams.append('per_page', String(GITHUB_MAX_PER_PAGE_ORGANIZATION_MEMBERSHIP));
     const items = await this.rejectableFetchJson<GithubOrganizationSimple[]>(url);
     return items.map(remapOrganizationSimple);
+  }
+
+  /**
+   * List organization memberships for authenticated user
+   * @returns Organizations Simple
+   */
+  async listOrganizationsForAuthenticatedUser(): Promise<OrganizationSimple[]> {
+    const url = new URL(`/user/memberships/orgs`, ENV.GITHUB_URL);
+    url.searchParams.append('per_page', String(GITHUB_MAX_PER_PAGE_ORGANIZATION_MEMBERSHIP));
+    const memberships = await this.rejectableFetchJson<GithubOrganizationMembership[]>(url);
+    return memberships.map((x) => x.organization).map(remapOrganizationSimple);
   }
 
   async listOrganizationMembers(
@@ -32,7 +47,7 @@ export class OrganizationService extends AbstractFetchService {
     role?: 'all' | 'admin' | 'member'
   ): Promise<SimpleUser[]> {
     const url = new URL(`/orgs/${organizationLogin}/members`, ENV.GITHUB_URL);
-    url.searchParams.append('per_page', '100');
+    url.searchParams.append('per_page', String(GITHUB_MAX_PER_PAGE_ORGANIZATION_MEMBERS));
     if (role) {
       url.searchParams.append('role', role);
     }
