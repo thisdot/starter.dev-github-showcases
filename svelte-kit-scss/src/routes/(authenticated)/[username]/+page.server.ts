@@ -2,7 +2,10 @@ import type { PageServerLoad } from './$types';
 import {
   buildRepositoryCardViewModel,
   buildRepositoryPageNavigationFilterOptions,
+  buildURLSearchParamsForParameters,
+  DEFAULT_REPOSITORY_SEARCH_QUERY_PARAMETERS_REQUIRED,
   extractRepositoryPageSearchQueryParameters,
+  isRepositorySearchQueryParametersEqual,
   remapRepositorySearchQueryParameters,
 } from '$lib/helpers';
 import { OrganizationService, UserService, RepositorySearchService } from '$lib/services';
@@ -47,6 +50,16 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url, p
     organizationMembers = await organizationService.listOrganizationMembers(profile.login);
   }
 
+  let resetFiltersHref: string | undefined = undefined;
+  if (
+    !isRepositorySearchQueryParametersEqual(
+      searchQueryParameters,
+      DEFAULT_REPOSITORY_SEARCH_QUERY_PARAMETERS_REQUIRED
+    )
+  ) {
+    resetFiltersHref = url.pathname;
+  }
+
   const allRepositoriesListViewModel: AllRepositoriesListViewModel = {
     repositories: repositories.map(buildRepositoryCardViewModel),
     controls: {
@@ -65,6 +78,7 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url, p
       search: {
         term: searchQueryParameters.term,
       },
+      resetFiltersHref,
     },
   };
 
@@ -73,7 +87,7 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url, p
       label: 'Repositories',
       pageId: PAGE_IDS.PROFILE.REPOSITORIES,
       icon: 'Repo16',
-      href: `/${username}`,
+      href: url.pathname,
     },
   ];
 
