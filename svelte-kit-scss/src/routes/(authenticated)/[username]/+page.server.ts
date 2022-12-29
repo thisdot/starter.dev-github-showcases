@@ -24,7 +24,7 @@ const MAP_FILTER_LABEL_TYPE = new Map<RepositorySearchType, string>(
   >
 );
 
-export const load: PageServerLoad = async ({ fetch, params: { username }, url }) => {
+export const load: PageServerLoad = async ({ fetch, params: { username }, url, parent }) => {
   const pageSearchQueryParameters = extractRepositoryPageSearchQueryParameters(url);
   const searchQueryParameters = remapRepositorySearchQueryParameters(pageSearchQueryParameters);
 
@@ -32,9 +32,14 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url })
   const organizationService = new OrganizationService(fetch);
   const repositorySearchService = new RepositorySearchService(fetch);
 
+  const authenticatedUser = await parent();
+  const isAuthenticatedUser = username === authenticatedUser?.login;
+
   const [profile, organizations, { items: repositories }] = await Promise.all([
     userService.getUserProfile(username),
-    organizationService.listOrganizationsForUser(username),
+    isAuthenticatedUser
+      ? organizationService.listOrganizationsForAuthenticatedUser()
+      : organizationService.listOrganizationsForUser(username),
     repositorySearchService.searchRepositoriesForUser(username, searchQueryParameters),
   ]);
   let organizationMembers: SimpleUser[] | undefined = undefined;
