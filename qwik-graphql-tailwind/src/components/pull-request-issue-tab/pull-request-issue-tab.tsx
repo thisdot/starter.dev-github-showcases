@@ -100,30 +100,25 @@ export const PullRequestIssueTab = component$(
                 description="Filter by milestone"
                 buttonClassName="border-none text-sm items-start"
               >
-                <div class="p-2 border-t border-t-gray-300">
-                  <input
-                    type="text"
-                    placeholder="Filter milestones"
-                    class="w-full border border-gray-300 focus:border-blue-500 py-1 px-2 rounded-md text-sm"
-                  />
-                </div>
-                {milestonesOption.map(({ label, value }) => (
-                  <div>
-                    <button
-                      onClick$={() => {
-                        dropdown.selectedMilestones = value;
-                      }}
-                      type="button"
-                      name={'language'}
-                      class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
-                    >
-                      {value === dropdown.selectedMilestones && (
-                        <CheckIcon className="inline w-4 h-4 absolute left-4" />
-                      )}
-                      {label}
-                    </button>
-                  </div>
-                ))}
+                {[{ label: 'Issue with no milestone', value: undefined }, ...milestonesOption].map(
+                  ({ label, value }) => (
+                    <div>
+                      <button
+                        onClick$={() => {
+                          dropdown.selectedMilestones = value;
+                        }}
+                        type="button"
+                        name={'language'}
+                        class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
+                      >
+                        {value === dropdown.selectedMilestones && (
+                          <CheckIcon className="inline w-4 h-4 absolute left-4" />
+                        )}
+                        {label}
+                      </button>
+                    </div>
+                  )
+                )}
               </FilterDropdown>
             </div>
           )}

@@ -1,16 +1,22 @@
+import { Label } from '../repo-pulls/types';
 export interface Issue {
   url: string;
   closedAt: string;
-  comments: {
-    totalCount: number;
-  };
+  commentCount: number;
+  labels: Label[];
   createdAt: string;
   number: number;
   state: string;
   title: string;
-  author: {
-    login: string;
-  };
+  login: string;
+}
+
+export interface Milestone {
+  id: string;
+  closed: boolean;
+  description?: string | null;
+  number: number;
+  title: string;
 }
 
 export enum IssueOrderField {

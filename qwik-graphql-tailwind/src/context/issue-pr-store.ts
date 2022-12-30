@@ -24,6 +24,8 @@ export interface IssuesPRContextProps {
   closedIssuesCount: number;
   openIssuesCount: number;
   loading: boolean;
+  milestones: { value: string; label: string }[];
+  issuesLabel: { value: string; label: string }[];
   openPageInfo: {
     endCursor: string;
     hasNextPage: boolean;

@@ -1,20 +1,20 @@
-import { isBrowser } from '@builder.io/qwik/build';
-import { useLocation } from '@builder.io/qwik-city';
-import { component$, useClientEffect$, useContext, useTask$ } from '@builder.io/qwik';
-
+import { $, component$, useClientEffect$, useContext, useTask$ } from '@builder.io/qwik';
+import { IssuesPRContextProps } from '../../context/issue-pr-store';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
-import { Pagination } from '../pagination/pagination';
+import { sortOptions } from './data';
+import { useQuery } from '../../utils';
+import { ISSUES_QUERY } from '../../utils/queries/issues-query';
+import { AUTH_TOKEN, DEFAULT_PAGE_SIZE, GITHUB_GRAPHQL } from '../../utils/constants';
 import IssuesData from './issues-data';
-
-import { labelOptions, milestonesOptions, sortOptions } from './data';
-
-import { useQuery } from '~/utils';
-import { ISSUES_QUERY } from '~/utils/queries/issues-query';
-import IssuesPRContext, { IssuesPRContextProps } from '~/context/issue-pr-store';
-import { AUTH_TOKEN, GITHUB_GRAPHQL, DEFAULT_PAGE_SIZE } from '~/utils/constants';
-import DropdownContext from '~/context/issue-tab-header-dropdown';
-
-import { IssueOrderField, OrderDirection } from './type';
+import { IssueOrderField, Milestone, OrderDirection } from './type';
+import { isBrowser } from '@builder.io/qwik/build';
+import { parseQuery } from './parseQuery';
+import { Label } from '../repo-pulls/types';
+import { ClearFilterAndSortBtn } from '../clear-filter-and-sort-button';
+import { useLocation } from '@builder.io/qwik-city';
+import IssuesPRContext from '../../context/issue-pr-store';
+import DropdownContext from '../../context/issue-tab-header-dropdown';
+import { Pagination } from '../pagination/pagination';
 
 export interface IssuesProps {
   owner: string;
@@ -29,6 +29,7 @@ interface IssuesQueryParams {
   before?: string;
   orderBy: string;
   direction: string;
+  filterBy: { milestone: string | undefined; labels: string[] | undefined };
 }
 
 export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
@@ -38,6 +39,17 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
 
   const afterCursor = typeof location.query.after === 'string' ? location.query.after : undefined;
   const beforeCursor = typeof location.query.before === 'string' ? location.query.before : undefined;
+
+  const hasActiveFilter =
+    dropdownStore.selectedLabel !== undefined ||
+    dropdownStore.selectedSort !== sortOptions[0].value ||
+    dropdownStore.selectedMilestones !== undefined;
+
+  const resetFilters$ = $(() => {
+    dropdownStore.selectedLabel = undefined;
+    dropdownStore.selectedMilestones = undefined;
+    dropdownStore.selectedSort = sortOptions[0].value;
+  });
 
   useClientEffect$(async () => {
     const abortController = new AbortController();
@@ -51,11 +63,15 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
         first: DEFAULT_PAGE_SIZE,
         orderBy: IssueOrderField.CreatedAt,
         direction: OrderDirection.Desc,
+        filterBy: {
+          milestone: dropdownStore.selectedMilestones,
+          labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
+        },
       },
       abortController
     );
 
-    updateIssueState(issuesStore, response);
+    updateIssueState(issuesStore, parseQuery(response));
   });
 
   useTask$(async ({ track }) => {
@@ -65,6 +81,8 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
     const before = track(() => location.query.before);
     track(() => issuesStore.activeTab);
     track(() => dropdownStore.selectedSort);
+    track(() => dropdownStore.selectedMilestones);
+    track(() => dropdownStore.selectedLabel);
 
     if (isBrowser) {
       const response = await fetchRepoIssues(
@@ -76,22 +94,31 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
           first: DEFAULT_PAGE_SIZE,
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],
+          filterBy: {
+            milestone: dropdownStore.selectedMilestones,
+            labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
+          },
         },
         abortController
       );
 
-      updateIssueState(issuesStore, response);
+      updateIssueState(issuesStore, parseQuery(response));
     }
   });
 
   return (
     <>
+      {hasActiveFilter && (
+        <div class="mb-2 pl-2">
+          <ClearFilterAndSortBtn clearFn={resetFilters$} />
+        </div>
+      )}
       <div class="border border-gray-300 rounded-lg">
         <PullRequestIssueTab
           tabType="issue"
+          milestonesOption={issuesStore.milestones}
+          labelOption={issuesStore.issuesLabel}
           sortOption={sortOptions}
-          labelOption={labelOptions}
-          milestonesOption={milestonesOptions}
           openCount={issuesStore.openIssuesCount}
           closedCount={issuesStore.closedIssuesCount}
         />
@@ -120,18 +147,20 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
 });
 
 export function updateIssueState(store: IssuesPRContextProps, response: any) {
-  const { closedIssues, openIssues } = response.data.repository;
+  const { closedIssues, openIssues, labels, milestones } = response.data.repository;
   store.closedIssues = closedIssues.nodes;
   store.openIssues = openIssues.nodes;
   store.closedIssuesCount = closedIssues.totalCount;
   store.openIssuesCount = openIssues.totalCount;
+  store.issuesLabel = labels.map((lab: Label) => ({ label: lab.name, value: lab.name }));
+  store.milestones = milestones.map((milestone: Milestone) => ({ value: milestone.id, label: milestone.title }));
   store.openPageInfo = openIssues.pageInfo;
   store.closedPageInfo = closedIssues.pageInfo;
   store.loading = false;
 }
 
 export async function fetchRepoIssues(
-  { owner, name, first, after, before, orderBy, direction }: IssuesQueryParams,
+  { owner, name, first, after, before, orderBy, direction, filterBy }: IssuesQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(ISSUES_QUERY);
@@ -146,6 +175,7 @@ export async function fetchRepoIssues(
       before,
       orderBy,
       direction,
+      filterBy,
     },
     headersOpt: {
       Accept: 'application/vnd.github+json',
