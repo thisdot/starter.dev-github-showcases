@@ -1,4 +1,4 @@
-import { Issue, Milestone } from './type';
+import { Issue, IssuesQuery, Milestone, ParsedIssueQuery } from './type';
 import { Label } from '../repo-pulls/types';
 
 function parseIssues(connection?: any) {
@@ -60,7 +60,7 @@ function parseIssues(connection?: any) {
 
 function parseMilestones(milestones?: any) {
   const nodes = milestones.nodes || [];
-  return nodes.reduce((milestones: Milestone[], milestone: any) => {
+  return nodes.reduce((milestones: Milestone[], milestone: Milestone) => {
     if (!milestone) {
       return milestones;
     }
@@ -78,13 +78,13 @@ function parseMilestones(milestones?: any) {
   }, []);
 }
 
-export function parseQuery(data: { data: any }): any {
+export function parseQuery(data: { data: IssuesQuery }): ParsedIssueQuery {
   const openIssues = parseIssues(data.data.repository?.openIssues);
   const closedIssues = parseIssues(data.data.repository?.closedIssues);
   const milestones = parseMilestones(data.data.repository?.milestones);
 
   const labelMap = [...closedIssues.issues, ...openIssues.issues].reduce(
-    (acc: { [key: string]: Label }, issue: any) => {
+    (acc: { [key: string]: Label }, issue: Issue) => {
       const map: { [key: string]: Label } = {};
       issue.labels.forEach((label: Label) => {
         map[label.name] = label;

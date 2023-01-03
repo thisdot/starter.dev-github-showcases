@@ -1,12 +1,11 @@
 import { $, component$, useClientEffect$, useContext, useTask$ } from '@builder.io/qwik';
-import { IssuesPRContextProps } from '../../context/issue-pr-store';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
 import { sortOptions } from './data';
 import { useQuery } from '../../utils';
 import { ISSUES_QUERY } from '../../utils/queries/issues-query';
 import { AUTH_TOKEN, DEFAULT_PAGE_SIZE, GITHUB_GRAPHQL } from '../../utils/constants';
 import IssuesData from './issues-data';
-import { IssueOrderField, Milestone, OrderDirection } from './type';
+import { IssueOrderField, Milestone, OrderDirection, ParsedIssueQuery } from './type';
 import { isBrowser } from '@builder.io/qwik/build';
 import { parseQuery } from './parseQuery';
 import { Label } from '../repo-pulls/types';
@@ -146,10 +145,10 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
   );
 });
 
-export function updateIssueState(store: IssuesPRContextProps, response: any) {
-  const { closedIssues, openIssues, labels, milestones } = response.data.repository;
-  store.closedIssues = closedIssues.nodes;
-  store.openIssues = openIssues.nodes;
+export function updateIssueState(store: any, response: ParsedIssueQuery) {
+  const { closedIssues, openIssues, milestones, labels } = response;
+  store.closedIssues = closedIssues.issues;
+  store.openIssues = openIssues.issues;
   store.closedIssuesCount = closedIssues.totalCount;
   store.openIssuesCount = openIssues.totalCount;
   store.issuesLabel = labels.map((lab: Label) => ({ label: lab.name, value: lab.name }));
