@@ -2,7 +2,6 @@ import type { PageServerLoad } from './$types';
 import {
   buildRepositoryCardViewModel,
   buildRepositoryPageNavigationFilterOptions,
-  buildURLSearchParamsForParameters,
   DEFAULT_REPOSITORY_SEARCH_QUERY_PARAMETERS_REQUIRED,
   extractRepositoryPageSearchQueryParameters,
   isRepositorySearchQueryParametersEqual,
