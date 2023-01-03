@@ -2,6 +2,7 @@ import type { IssueSearchTypePage } from '$lib/constants/matchers';
 import type { Breadcrumb } from '$lib/components/shared/Breadcrumbs/models';
 import { composeDirHref } from './repository-contents';
 import type { GithubSimpleUser, Repository } from '$lib/interfaces';
+import { PARAMETER_NAME_PAGE } from '$lib/constants/router';
 
 export const resolveRepositoryHref = (repository: Pick<Repository, 'owner' | 'name'>): string =>
   `/${repository.owner.login}/${repository.name}`;
@@ -53,3 +54,13 @@ export const buildContentItemBreadcrumbs = (
   return breadcrumbs;
 };
 export const resolveUserHref = (user: GithubSimpleUser): string => `/${user.login}`;
+
+export const buildPageUrl = (baseUrl: URL, pageNumber: number): URL => {
+  const url = new URL(baseUrl);
+  if (pageNumber < 2) {
+    url.searchParams.has(PARAMETER_NAME_PAGE) && url.searchParams.delete(PARAMETER_NAME_PAGE);
+  } else {
+    url.searchParams.set(PARAMETER_NAME_PAGE, String(pageNumber));
+  }
+  return url;
+};
