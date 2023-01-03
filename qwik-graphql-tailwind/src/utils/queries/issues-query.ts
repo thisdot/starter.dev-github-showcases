@@ -1,10 +1,10 @@
 export const ISSUES_QUERY = `
-  query IssuesQuery($owner: String!, $name: String!, $first: Int!) {
+  query IssuesQuery($owner: String!, $name: String!, $first: Int!, $orderBy: IssueOrderField!, $direction: OrderDirection!) {
     repository(owner: $owner, name: $name) {
       openIssues: issues(
         first: $first
         states: [OPEN]
-        orderBy: { field: CREATED_AT, direction: DESC }
+        orderBy:{ field: $orderBy, direction: $direction}
       ) {
         totalCount
         nodes {
@@ -26,7 +26,7 @@ export const ISSUES_QUERY = `
       closedIssues: issues(
         first: $first
         states: [CLOSED]
-        orderBy: { field: CREATED_AT, direction: DESC }
+        orderBy:{ field: $orderBy, direction: $direction}
       ) {
         totalCount
         nodes {

@@ -1,4 +1,4 @@
-import { component$, useClientEffect$, useContextProvider, useStore } from '@builder.io/qwik';
+import { component$, useClientEffect$, useContextProvider, useStore, useTask$ } from '@builder.io/qwik';
 import DropdownStores, { DropdownStoresProps } from '../../context/issue-tab-header-dropdown';
 import issuesPRStore, { IssuesPRStoreProps, Tabs } from '../../context/issue-pr-store';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
@@ -8,7 +8,8 @@ import { useQuery } from '../../utils';
 import { ISSUES_QUERY } from '../../utils/queries/issues-query';
 import { AUTH_TOKEN, DEFAULT_PAGE_SIZE, GITHUB_GRAPHQL } from '../../utils/constants';
 import IssuesData from './issues-data';
-import { Issue } from './type';
+import { Issue, IssueOrderField, OrderDirection } from './type';
+import { isBrowser } from '@builder.io/qwik/build';
 
 export interface IssuesProps {
   activeTab: Tabs;
@@ -26,6 +27,8 @@ interface IssuesQueryParams {
   owner: string;
   name: string;
   first: number;
+  orderBy: string;
+  direction: string;
 }
 
 interface IssueStore {
@@ -66,11 +69,35 @@ export const IssueTabView = component$(({ activeTab, owner, name }: IssuesProps)
         owner,
         name,
         first: DEFAULT_PAGE_SIZE,
+        orderBy: IssueOrderField.CreatedAt,
+        direction: OrderDirection.Desc,
       },
       abortController
     );
 
     updateIssueState(issuesStore, response);
+  });
+
+  useTask$(async ({ track }) => {
+    const abortController = new AbortController();
+
+    track(() => store.activeTab);
+    track(() => dropdownStore.selectedSort);
+
+    if (isBrowser) {
+      const response = await fetchRepoIssues(
+        {
+          owner,
+          name,
+          first: DEFAULT_PAGE_SIZE,
+          orderBy: dropdownStore.selectedSort.split('^')[0],
+          direction: dropdownStore.selectedSort.split('^')[1],
+        },
+        abortController
+      );
+
+      updateIssueState(issuesStore, response);
+    }
   });
 
   return (
@@ -116,7 +143,7 @@ export function updateIssueState(store: IssueStore, response: any) {
   store.loading = false;
 }
 export async function fetchRepoIssues(
-  { owner, name, first }: IssuesQueryParams,
+  { owner, name, first, orderBy, direction }: IssuesQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(ISSUES_QUERY);
@@ -127,6 +154,8 @@ export async function fetchRepoIssues(
       owner,
       name,
       first,
+      orderBy,
+      direction,
     },
     headersOpt: {
       Accept: 'application/vnd.github+json',
