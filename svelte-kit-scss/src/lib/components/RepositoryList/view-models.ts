@@ -19,6 +19,7 @@ export type RepositoryListControlsViewModel = {
   search?: {
     term: string | undefined;
   };
+  resetFiltersHref?: string;
 };
 
 export type AllRepositoriesListViewModel = RepositoryListViewModel & {

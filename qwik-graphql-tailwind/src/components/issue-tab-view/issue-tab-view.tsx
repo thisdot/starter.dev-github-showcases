@@ -5,6 +5,7 @@ import { component$, useClientEffect$, useContext, useTask$ } from '@builder.io/
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
 import { Pagination } from '../pagination/pagination';
 import IssuesData from './issues-data';
+
 import { labelOptions, milestonesOptions, sortOptions } from './data';
 
 import { useQuery } from '~/utils';
@@ -14,6 +15,7 @@ import { AUTH_TOKEN, GITHUB_GRAPHQL, DEFAULT_PAGE_SIZE } from '~/utils/constants
 import DropdownContext from '~/context/issue-tab-header-dropdown';
 
 import { IssueOrderField, OrderDirection } from './type';
+
 
 export interface IssuesProps {
   owner: string;
@@ -59,7 +61,6 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
 
   useTask$(async ({ track }) => {
     const abortController = new AbortController();
-
     track(() => issuesStore.activeTab);
     track(() => dropdownStore.selectedSort);
 
