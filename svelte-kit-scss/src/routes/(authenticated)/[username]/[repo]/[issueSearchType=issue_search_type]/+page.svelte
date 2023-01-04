@@ -9,13 +9,20 @@
 
   export let data: PageServerData;
 
-  $: ({ issues, sortFilters, stateFilters, milestoneFilters, pageId, pagination } = data);
+  $: ({ issues, sortFilters, stateFilters, milestoneFilters, labelFilters, pageId, pagination } =
+    data);
   $: currentPageId.set(pageId);
 </script>
 
 <LayoutPageContentRow marginBottom>
   <BoxLayout>
-    <IssueSearchControls slot="header" {sortFilters} {stateFilters} {milestoneFilters} />
+    <IssueSearchControls
+      slot="header"
+      {sortFilters}
+      {stateFilters}
+      {milestoneFilters}
+      {labelFilters}
+    />
     <IssueSearchList items={issues} />
     <div slot="bottom" class="bottom">
       <Pagination model={pagination} />
