@@ -34,12 +34,12 @@ interface PullRequestsQueryParams {
 }
 
 export default component$(({ owner, name }: PullRequestsProps) => {
-  const query = useLocation().query;
+  const location = useLocation();
   const pullRequestStore = useContext(PullRequestContext);
   const dropdownStore = useContext(DropdownContext);
 
-  const afterCursor = typeof query.after === 'string' ? query.after : undefined;
-  const beforeCursor = typeof query.before === 'string' ? query.before : undefined;
+  const afterCursor = typeof location.query.after === 'string' ? location.query.after : undefined;
+  const beforeCursor = typeof location.query.before === 'string' ? location.query.before : undefined;
 
   const hasActiveFilter =
     dropdownStore.selectedLabel !== undefined || dropdownStore.selectedSort !== sortOptions[0].value;
@@ -71,6 +71,8 @@ export default component$(({ owner, name }: PullRequestsProps) => {
 
   useTask$(async ({ track }) => {
     const abortController = new AbortController();
+    const after = track(() => location.query.after);
+    const before = track(() => location.query.before);
     track(() => pullRequestStore.activeTab);
     track(() => dropdownStore.selectedSort);
     track(() => dropdownStore.selectedLabel);
@@ -84,8 +86,8 @@ export default component$(({ owner, name }: PullRequestsProps) => {
         {
           owner,
           name,
-          after: afterCursor,
-          before: beforeCursor,
+          after,
+          before,
           first: DEFAULT_PAGE_SIZE,
           labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
           orderBy: dropdownStore.selectedSort.split('^')[0] || '',
@@ -93,7 +95,6 @@ export default component$(({ owner, name }: PullRequestsProps) => {
         },
         abortController
       );
-
       updatePullRequestState(pullRequestStore, parseQuery(response));
     }
   });
@@ -113,20 +114,21 @@ export default component$(({ owner, name }: PullRequestsProps) => {
           openCount={pullRequestStore.openPullRequestCount}
           closedCount={pullRequestStore.closedPullRequestCount}
         />
-        {pullRequestStore.loading && (
+        {pullRequestStore.loading ? (
           <div class="animate-pulse p-3 flex flex-col gap-2">
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
           </div>
+        ) : (
+          <PullRequestData
+            pull_request={
+              pullRequestStore.activeTab === 'open'
+                ? pullRequestStore.openPullRequest
+                : pullRequestStore.closedPullRequest
+            }
+          />
         )}
-        <PullRequestData
-          pull_request={
-            pullRequestStore.activeTab === 'open'
-              ? pullRequestStore.openPullRequest
-              : pullRequestStore.closedPullRequest
-          }
-        />
       </div>
       {(pullRequestStore.openPageInfo?.hasNextPage ||
         pullRequestStore.openPageInfo?.hasPreviousPage ||

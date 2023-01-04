@@ -1,6 +1,6 @@
 import { component$, useContextProvider, useStore } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
-import { IssueTabView } from '~/components/issue-tab-view/issue-tab-view';
+import { IssueTabView } from '~/components/issue-tab-view';
 import { sortOptions } from '~/components/repo-pulls/data';
 import IssuesPRContext, { IssuesPRContextProps } from '~/context/issue-pr-store';
 import DropdownStores, { DropdownStoresProps } from '~/context/issue-tab-header-dropdown';

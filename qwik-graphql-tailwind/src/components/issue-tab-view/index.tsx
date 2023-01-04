@@ -16,7 +16,6 @@ import DropdownContext from '~/context/issue-tab-header-dropdown';
 
 import { IssueOrderField, OrderDirection } from './type';
 
-
 export interface IssuesProps {
   owner: string;
   name: string;
@@ -33,12 +32,12 @@ interface IssuesQueryParams {
 }
 
 export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
-  const query = useLocation().query;
+  const location = useLocation();
   const issuesStore = useContext(IssuesPRContext);
   const dropdownStore = useContext(DropdownContext);
 
-  const afterCursor = typeof query.after === 'string' ? query.after : undefined;
-  const beforeCursor = typeof query.before === 'string' ? query.before : undefined;
+  const afterCursor = typeof location.query.after === 'string' ? location.query.after : undefined;
+  const beforeCursor = typeof location.query.before === 'string' ? location.query.before : undefined;
 
   useClientEffect$(async () => {
     const abortController = new AbortController();
@@ -61,6 +60,9 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
 
   useTask$(async ({ track }) => {
     const abortController = new AbortController();
+    issuesStore.loading = true;
+    const after = track(() => location.query.after);
+    const before = track(() => location.query.before);
     track(() => issuesStore.activeTab);
     track(() => dropdownStore.selectedSort);
 
@@ -69,6 +71,8 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
         {
           owner,
           name,
+          after,
+          before,
           first: DEFAULT_PAGE_SIZE,
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],

@@ -1,12 +1,14 @@
 import { $, component$ } from '@builder.io/qwik';
+import { useNavigate } from '@builder.io/qwik-city';
 
 export interface PaginationProps {
-  tab: string;
+  tab?: string;
   pageInfo?: any;
   owner: string;
 }
 
 export const Pagination = component$(({ tab, pageInfo, owner }: PaginationProps) => {
+  const nav = useNavigate();
   if (!pageInfo) {
     return null;
   }
@@ -15,11 +17,11 @@ export const Pagination = component$(({ tab, pageInfo, owner }: PaginationProps)
   const nextUrl = `/${owner}?after=${pageInfo.endCursor}${tab ? `&tab=${tab}` : ''}`;
 
   const handlePreviousClick$ = $(() => {
-    window.location.assign(prevUrl);
+    nav.path = prevUrl;
   });
 
   const handleNextClick$ = $(() => {
-    window.location.assign(nextUrl);
+    nav.path = nextUrl;
   });
 
   return (

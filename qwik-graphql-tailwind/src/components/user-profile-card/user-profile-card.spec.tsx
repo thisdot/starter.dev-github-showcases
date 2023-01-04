@@ -46,6 +46,8 @@ describe('UserProfileCard component', () => {
     const { screen, render } = await createDOM();
     await render(<UserProfileCard {...user} />);
 
+    console.log(screen.outerHTML);
+
     expect(screen.outerHTML).toContain(user.name);
     expect(screen.outerHTML).toContain(user.bio);
   });
