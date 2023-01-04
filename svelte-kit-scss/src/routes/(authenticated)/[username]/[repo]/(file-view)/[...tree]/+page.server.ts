@@ -1,4 +1,3 @@
-import type { Breadcrumb } from '$lib/components/shared/Breadcrumbs/models';
 import { ENV } from '$lib/constants/env';
 import {
   buildContentItemBreadcrumbs,
