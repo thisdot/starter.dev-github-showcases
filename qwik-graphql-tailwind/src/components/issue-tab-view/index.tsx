@@ -95,14 +95,15 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
           openCount={issuesStore.openIssuesCount}
           closedCount={issuesStore.closedIssuesCount}
         />
-        {issuesStore.loading && (
+        {issuesStore.loading ? (
           <div class="animate-pulse p-3 flex flex-col gap-2">
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
           </div>
+        ) : (
+          <IssuesData issues={issuesStore.activeTab === 'open' ? issuesStore.openIssues : issuesStore.closedIssues} />
         )}
-        <IssuesData issues={issuesStore.activeTab === 'open' ? issuesStore.openIssues : issuesStore.closedIssues} />
       </div>
       {(issuesStore.openPageInfo?.hasNextPage ||
         issuesStore.openPageInfo?.hasPreviousPage ||

@@ -3,7 +3,13 @@ import { useNavigate } from '@builder.io/qwik-city';
 
 export interface PaginationProps {
   tab?: string;
-  pageInfo?: any;
+  pageInfo?: {
+    __typename?: string;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+    startCursor?: string;
+    endCursor?: string;
+  };
   owner: string;
 }
 

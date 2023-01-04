@@ -18,7 +18,7 @@ export interface PullRequestIssueTabParams {
   closedCount: number;
   tabType: 'pr' | 'issue';
   milestonesOption?: Dropdowns[];
-  labelOption: Dropdowns[];
+  labelOption?: Dropdowns[];
   sortOption: Dropdowns[];
 }
 
@@ -129,7 +129,7 @@ export const PullRequestIssueTab = component$(
           )}
           <div>
             <FilterDropdown name="Sort" description="Sort by" buttonClassName="border-none text-sm">
-              {sortOption?.map(({ label, value }) => (
+              {sortOption.map(({ label, value }) => (
                 <div>
                   <button
                     onClick$={() => (dropdown.selectedSort = value)}

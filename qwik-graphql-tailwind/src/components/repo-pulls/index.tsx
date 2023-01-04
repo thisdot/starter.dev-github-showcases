@@ -90,8 +90,8 @@ export default component$(({ owner, name }: PullRequestsProps) => {
           before,
           first: DEFAULT_PAGE_SIZE,
           labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
-          orderBy: dropdownStore.selectedSort.split('^')[0] || '',
-          direction: dropdownStore.selectedSort.split('^')[1] || '',
+          orderBy: dropdownStore.selectedSort.split('^')[0],
+          direction: dropdownStore.selectedSort.split('^')[1],
         },
         abortController
       );
