@@ -18,6 +18,10 @@ export const sortOptions = [
     label: 'Least Commented',
   },
   {
+    label: 'Recently updated',
+    value: `${IssueOrderField.UpdatedAt}^${OrderDirection.Desc}`,
+  },
+  {
     label: 'Least recently updated',
     value: `${IssueOrderField.UpdatedAt}^${OrderDirection.Asc}`,
   },
