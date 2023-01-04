@@ -26,7 +26,12 @@ export const load: PageServerLoad = async ({
 
   const layoutData: PageServerParentData = await parent();
   const { repositoryState } = layoutData;
-  const blobPath = file || `blob/${repositoryState.defaultBranch}`;
+
+  if (!file) {
+    throw error(404);
+  }
+
+  const blobPath = file;
   const folderPathSegments = blobPath.split('/');
   const folderPath = folderPathSegments.join('/');
 
