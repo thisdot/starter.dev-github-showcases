@@ -9,14 +9,24 @@
 
   export let data: PageServerData;
 
-  $: ({ issues, sortFilters, stateFilters, milestoneFilters, pageId } = data);
+  $: ({ issues, sortFilters, stateFilters, milestoneFilters, pageId, pagination } = data);
   $: currentPageId.set(pageId);
 </script>
 
-<LayoutPageContentRow>
+<LayoutPageContentRow marginBottom>
   <BoxLayout>
     <IssueSearchControls slot="header" {sortFilters} {stateFilters} {milestoneFilters} />
     <IssueSearchList items={issues} />
-    <Pagination slot="bottom" />
+    <div slot="bottom" class="bottom">
+      <Pagination model={pagination} />
+    </div>
   </BoxLayout>
 </LayoutPageContentRow>
+
+<style lang="scss">
+  .bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+</style>

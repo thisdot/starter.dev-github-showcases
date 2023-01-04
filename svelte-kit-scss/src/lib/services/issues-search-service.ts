@@ -6,6 +6,7 @@ import type {
   GithubSearchIssue,
   Issue,
 } from '$lib/interfaces';
+import type { NonNegativeIntegerRange } from '$lib/interfaces/type-utls';
 import { AbstractFetchService } from './abstract-fetch-service';
 
 const SEARCH_PARAM_NAME_QUERY = 'q';
@@ -14,7 +15,7 @@ const SEARCH_PARAM_NAME_PER_PAGE = 'per_page';
 
 type IssuesSearchPaginationInfo = {
   page?: number | null;
-  perPage?: number;
+  perPage?: NonNegativeIntegerRange<1, 100>;
 };
 
 export class IssuesSearchService extends AbstractFetchService {
@@ -31,12 +32,12 @@ export class IssuesSearchService extends AbstractFetchService {
     return data.totalCount;
   }
 
-  async getIssues(
+  async getIssuesCollection(
     searchQuery: string,
     paginationInfo?: IssuesSearchPaginationInfo
-  ): Promise<Issue[]> {
+  ): Promise<CollectionPage<Issue>> {
     const collectionPage = await this.requestIssuesInternal(searchQuery, paginationInfo);
-    return collectionPage.items;
+    return collectionPage;
   }
 
   private async requestIssuesInternal(

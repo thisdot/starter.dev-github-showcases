@@ -16,6 +16,8 @@ import {
 import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
 import { redirect } from '@sveltejs/kit';
 import { PAGE_IDS } from '$lib/constants/page-ids';
+import type { PaginationViewModel } from '$lib/components/shared/Pagination/view-models';
+import { buildPageUrl } from '$lib/helpers';
 
 const DEFAULT_PER_PAGE = 25;
 const PAGE_SEARCH_PARAM_QUERY = 'q';
@@ -88,14 +90,14 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
 
   const currentSearchQuery = searchParams.get(PAGE_SEARCH_PARAM_QUERY);
   const currentPageString = searchParams.get(PAGE_SEARCH_PARAM_PAGE);
-  const currentPage = currentPageString ? Number(currentPageString) : null;
+  const currentPage = currentPageString ? Number(currentPageString) : 1;
 
   const searchQuery = currentSearchQuery || defaultSearchQuery;
 
   const pageDefaultRepo = `${username}/${repo}`;
   const requestSearchQuery = ensureRepoParameter(searchQuery, pageDefaultRepo);
 
-  const issuesPromise = service.getIssues(requestSearchQuery, {
+  const issuesCollectionPromise = service.getIssuesCollection(requestSearchQuery, {
     page: currentPage,
     perPage: DEFAULT_PER_PAGE,
   });
@@ -114,8 +116,8 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
 
   const openMilestonesPromise = milestoneService.getOpenMilestones(username, repo);
 
-  const [issues, openIssuesCount, closedIssuesCount, openMilestones] = await Promise.all([
-    issuesPromise,
+  const [issuesCollection, openIssuesCount, closedIssuesCount, openMilestones] = await Promise.all([
+    issuesCollectionPromise,
     openIssuesCountPromise,
     closedIssuesCountPromise,
     openMilestonesPromise,
@@ -155,11 +157,24 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
     (label) => label,
     true
   );
+  const totalPagesCount = Math.ceil(issuesCollection.totalCount / DEFAULT_PER_PAGE);
+  const canNavigateNext = currentPage < totalPagesCount;
+  const pagesHrefsEntries = [...Array(totalPagesCount).keys()]
+    .map((index) => ++index)
+    .map((pageNumber) => [pageNumber, buildPageUrl(event.url, pageNumber).href]);
+  const pagination: PaginationViewModel = {
+    previousPageHref: currentPage > 1 ? buildPageUrl(event.url, currentPage - 1).href : undefined,
+    nextPageHref: canNavigateNext ? buildPageUrl(event.url, currentPage + 1).href : undefined,
+    pagesHrefs: Object.fromEntries(pagesHrefsEntries),
+    currentPage,
+  };
+
   return {
-    issues,
+    issues: issuesCollection.items,
     sortFilters,
     stateFilters,
     milestoneFilters,
     pageId: issueSearchType === 'issues' ? PAGE_IDS.REPOSITORY.ISSUES : PAGE_IDS.REPOSITORY.PULLS,
+    pagination,
   };
 };
