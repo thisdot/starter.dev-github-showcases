@@ -1,7 +1,7 @@
 import { createResource, createSignal, createEffect } from 'solid-js';
 import getRepoPullRequests from "../../services/get-repo-pull-requests";
 import { useParams } from '@solidjs/router';
-
+import { PRAndIssuesData } from '../PRAndIssuesData/PRAndIssuesData';
 
 const RepoPullRequests = () => {
   const params = useParams();
@@ -12,15 +12,20 @@ const RepoPullRequests = () => {
 
   createEffect(() => {
     if (resp() && !resp.loading) {
-      console.log('dentro', resp().openPullRequests)
-      setPulls(resp().openPullRequests);
+      setPulls(resp().openPullRequests.pullRequests);
+      console.log('dentro', resp().openPullRequests.pullRequests)
+      console.log(pulls())
     }
   });
 
     return (
-      <div>
-         {pulls()}
-      </div>
+      <>
+      {resp.loading ? (
+        <div>Loading...</div>
+      ) : (
+        <PRAndIssuesData pulls={pulls()}/>
+      )}
+      </>
     );
   };
   
