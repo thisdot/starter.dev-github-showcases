@@ -59,3 +59,60 @@ export const MOCK_REPOSITORY: GithubRepository = {
   watchers: 80,
   web_commit_signoff_required: false,
 };
+
+export const MOCK_REPOSITORY_STATE = {
+  defaultBranch: 'main',
+  description: 'A collection of GitHub clone implementations.',
+  forksCount: 9,
+  homepage: '',
+  name: 'starter.dev-github-showcases',
+  openIssuesCount: 179,
+  owner: {
+    avatarUrl: 'https://avatars.githubusercontent.com/u/22839396?v=4',
+    id: 22839396,
+    login: 'thisdot',
+    siteAdmin: false,
+    type: 'Organization',
+    url: 'https://api.github.com/users/thisdot',
+    href: '/thisdot',
+  },
+  stargazersCount: 44,
+  topics: [
+    {
+      name: 'angular',
+      url: 'https://github.com/topics/angular',
+    },
+    {
+      name: 'apollo-client',
+      url: 'https://github.com/topics/apollo-client',
+    },
+    {
+      name: 'github',
+      url: 'https://github.com/topics/github',
+    },
+    {
+      name: 'tailwindcss',
+      url: 'https://github.com/topics/tailwindcss',
+    },
+  ],
+  visibility: 'public',
+  watchersCount: 44,
+  language: 'TypeScript',
+  updatedAt: '2022-12-16T02:31:04Z',
+  license: null,
+  archived: false,
+  fork: false,
+  openPullRequestsCount: 35,
+};
+
+export const MOCK_BREADCRUMBS = [
+  {
+    name: 'thisdot',
+    href: '/thisdot',
+  },
+  {
+    name: 'starter.dev-github-showcases',
+    href: '/thisdot/starter.dev-github-showcases',
+    emphasis: true,
+  },
+];
