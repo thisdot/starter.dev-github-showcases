@@ -19,3 +19,9 @@ export { default as CodeIcon } from './CodeIcon';
 export { default as ChevronDownIcon } from './ChevronDownIcon';
 export { default as DocumentIcon } from './DocumentIcon';
 export { default as FolderIcon } from './FolderIcon';
+export { default as ClosedIssueIcon } from './ClosedIssueIcon';
+export { default as IssuesIcon } from './IssuesIcon';
+export { default as MergedPrIcon } from './MergedPrIcon';
+export { default as CommentIcon } from './CommentIcon';
+export { default as ClosedPrIcon } from './ClosedPrIcon';
+

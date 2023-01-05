@@ -1,23 +1,34 @@
+// I must disable eslint because otherwise everytime I save the file
+// elsint brokes my class declaration at line #38 and the icon hasn't the right color
+
+/* eslint-disable */ 
 import { splitProps } from 'solid-js';
 import { format } from 'date-fns';
 import cn from 'classnames';
+import { useLocation } from '@solidjs/router';
+import { IssuesIcon, 
+         PullRequestIcon, 
+         MergedPrIcon, 
+         ClosedPrIcon,
+         CommentIcon
+        } from '../Icons';
 
 const PRAndIssuesListItem = (props) => {
+    const { pathname } = useLocation();
+
+    const type = pathname.includes('pulls') ? 'pr' : 'issue'
+
     const [local] = splitProps(props, [
       'number',
       'title',
       'url',
-      'isOpen',
-      'isMerged',
-      'isResolved',
-      'isDraft',
+      'state',
       'createdAt',
       'authorName',
-      'commentsCount',
+      'commentCount',
       'labels'
     ]);
 
-  
     return (
       <div class="flex relative items-baseline border-y border-gray-300 pt-2 pb-3">
       <div class="flex">
@@ -26,25 +37,20 @@ const PRAndIssuesListItem = (props) => {
         </label>
 
         <div class="flex-shrink-0 pl-4">
-          {/* <span class={iconColor}>
-            {type == 'issue' ? (
-              data.isOpen ? (
+          <span class={cn({
+              'text-green-600': local.state === 'OPEN',
+              'text-gray-500': local.state !== 'OPEN' && type === 'issue',
+              'text-purple-600': local.state !== 'OPEN' && local.state === 'MERGED',
+              'text-red-600': local.state !== 'OPEN' && type === 'pr' && local.state !== 'MERGED',
+            })}>
+            {type === 'issue' ? ( 
                 <IssuesIcon class="w-5 h-5" />
-              ) : (
-                <>
-                  {data.isResolved ? (
-                    <ResolvedIssueIcon class="w-5 h-5" />
-                  ) : (
-                    <ClosedIssueIcon class="w-5 h-5" />
-                  )}
-                </>
-              )
-            ) : data.isOpen ? (
-              <>{data.isDraft ? <DraftPrIcon class="w-5 h-5" /> : <PullRequestIcon class="w-5 h-5" />}</>
+              ) : local.state === 'OPEN' ? (
+              <PullRequestIcon class="w-5 h-5" />
             ) : (
-              <>{data.isMerged ? <MergedPrIcon class="w-5 h-5" /> : <ClosedPrIcon class="w-5 h-5" />}</>
+              <>{local.state === 'MERGED' ? <MergedPrIcon class="w-5 h-5" /> : <ClosedPrIcon class="w-5 h-5" />}</>
             )}
-          </span> */}
+          </span>
         </div>
       </div>
 
@@ -75,11 +81,11 @@ const PRAndIssuesListItem = (props) => {
 
       <div class="flex-shrink-0 w-1/5 text-right pr-3 flex-nowrap flex">
         <span class="ml-2 pt-1 flex-1 flex-shrink-0">
-          {local.commentsCount > 0 && (
+          {local.commentCount > 0 && (
             <a href="#" class="">
               <div class="flex items-center justify-end">
-                {/* <CommentIcon class="w-5 h-5" /> */}
-                <span class="ml-1 text-sm font-bold">{local.commentsCount}</span>
+                <CommentIcon class="w-5 h-5" />
+                <span class="ml-1 text-sm font-bold">{local.commentCount}</span>
               </div>
             </a>
           )}

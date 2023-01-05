@@ -4,7 +4,7 @@ import { PRAndIssuesListItem } from "../PRAndIssuesListItem";
 
 export const PRAndIssuesData = (props) => {
   return (
-    <>
+    <div class="border border-gray-300 rounded-lg">
       {props.pulls.length > 0 ? (
         <div>
           <For each={props.pulls}>
@@ -14,6 +14,6 @@ export const PRAndIssuesData = (props) => {
       ) : (
         <div>No pull requests found</div>
       )}
-    </>
+    </div>
   );
 }
