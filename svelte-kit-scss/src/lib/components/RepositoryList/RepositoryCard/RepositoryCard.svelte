@@ -3,7 +3,7 @@
   import { Law16, Star16, RepoForked16 } from 'svelte-octicons';
   import type { RepositoryCardViewModel } from '../view-models';
   import ProgrammingLanguage from '$lib/components/shared/ProgrammingLanguage/ProgrammingLanguage.svelte';
-  import VisibilityLabel from '$lib/components/Repository/RepositoryHeading/VisibilityLabel.svelte';
+  import VisibilityLabel from '$lib/components/shared/VisibilityLabel/VisibilityLabel.svelte';
 
   export let model: RepositoryCardViewModel;
 

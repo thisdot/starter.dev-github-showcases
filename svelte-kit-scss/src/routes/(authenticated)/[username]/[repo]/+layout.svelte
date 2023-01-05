@@ -9,7 +9,6 @@
 
   export let data: LayoutServerData;
   $: ({ repositoryState, breadcrumbs, tabs } = data);
-  console.log(breadcrumbs);
 </script>
 
 <LayoutPageHeader gray paddingTop>
