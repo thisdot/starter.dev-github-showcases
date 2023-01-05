@@ -12,15 +12,14 @@ const RepoPullRequests = () => {
 
   createEffect(() => {
     if (resp() && !resp.loading) {
-      setPulls(resp().pullRequests);
+      console.log('dentro', resp().openPullRequests)
+      setPulls(resp().openPullRequests);
     }
   });
 
-  console.log('gino', pulls())
-
     return (
       <div>
-          cane
+         {pulls()}
       </div>
     );
   };

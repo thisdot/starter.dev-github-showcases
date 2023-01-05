@@ -3,43 +3,20 @@ import { useAuth } from '../auth';
 import FetchApi from './api';
 import { GITHUB_GRAPHQL } from '../utils/constants';
 
-/**
- *
- * @param {
-*  variable: {
-  *    owner
-  *    name
-  *    first
-  *    labels
-  *    orderBy
-  *    direction
-  *  }
-  * }
-  */
+function parsePullRequests(connection) {
+  if (!connection) {
+    return {
+      pullRequests: [],
+      totalCount: 0,
+      pageInfo: { hasNextPage: false, hasPreviousPage: false },
+    };
+  }
 
-const getRepoPullRequests = async ({ owner, name }) => {
-  const { authStore } = useAuth();
+  const pageInfo = connection.pageInfo;
+  const nodes = connection.nodes || [];
+  const totalCount = connection.totalCount;
 
-  const data = {
-    url: `${GITHUB_GRAPHQL}`,
-    query: REPO_PULL_REQUESTS,
-    variables: {
-      owner,
-      name,
-      first: 30,
-      labels: undefined,
-      orderBy: 'CREATED_AT',
-      direction: 'DESC',
-    },
-    headersOptions: {
-      authorization: `Bearer ${authStore.token}`,
-    },
-  };
-  const resp = await FetchApi(data);
-
-  console.log('fetch', resp)
-
-  const pullRequests = resp.data?.repository?.reduce((pullRequests, pullRequest) => {
+  const pullRequests = nodes.reduce((pullRequests, pullRequest) => {
     if (!pullRequest) {
       return pullRequests;
     }
@@ -80,7 +57,65 @@ const getRepoPullRequests = async ({ owner, name }) => {
     ];
   }, []);
 
-  return { pullRequests };
+  return { pullRequests, totalCount, pageInfo };
+}
+
+/**
+ *
+ * @param {
+*  variable: {
+  *    owner
+  *    name
+  *    first
+  *    labels
+  *    orderBy
+  *    direction
+  *  }
+  * }
+  */
+
+const getRepoPullRequests = async ({ owner, name }) => {
+  const { authStore } = useAuth();
+
+  const data = {
+    url: `${GITHUB_GRAPHQL}`,
+    query: REPO_PULL_REQUESTS,
+    variables: {
+      owner,
+      name,
+      first: 30,
+      labels: undefined,
+      orderBy: 'CREATED_AT',
+      direction: 'DESC',
+    },
+    headersOptions: {
+      authorization: `Bearer ${authStore.token}`,
+    },
+  };
+  const resp = await FetchApi(data);
+
+  const openPullRequests = parsePullRequests(resp.data.repository?.openPullRequest)
+  const closedPullRequests = parsePullRequests(resp.data.repository?.closedPullRequest);
+
+  const labelMap = [...closedPullRequests.pullRequests, ...openPullRequests.pullRequests].reduce(
+    (acc, issue) => {
+      const map = {};
+      issue.labels.forEach((label) => {
+        map[label.name] = label;
+      });
+      return {
+        ...acc,
+        ...map,
+      };
+    },
+    {}
+  );
+
+  return {
+    openPullRequests,
+    closedPullRequests,
+    labels: Object.values(labelMap),
+  };
 };
 
 export default getRepoPullRequests;
