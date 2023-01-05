@@ -13,18 +13,16 @@ const RepoPullRequests = () => {
   createEffect(() => {
     if (resp() && !resp.loading) {
       setPulls(resp().openPullRequests.pullRequests);
-      console.log('dentro', resp().openPullRequests.pullRequests)
-      console.log(pulls())
     }
   });
 
     return (
       <>
-      {resp.loading ? (
-        <div>Loading...</div>
-      ) : (
-        <PRAndIssuesData pulls={pulls()}/>
-      )}
+        {resp.loading ? (
+          <div>Loading...</div>
+        ) : (
+          <PRAndIssuesData pulls={pulls()}/>
+        )}
       </>
     );
   };

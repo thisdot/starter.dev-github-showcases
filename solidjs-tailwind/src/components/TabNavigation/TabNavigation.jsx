@@ -15,8 +15,8 @@ const TabNavigation = (props) => {
           {(item, index) => {
             const href =
               item.path === ''
-                ? `/${props.basePath}`
-                : `/${props.basePath}/${item.path}`;
+                ? `${props.basePath}`
+                : `${item.path}`;
             return (
               <NavLink
                 href={href}

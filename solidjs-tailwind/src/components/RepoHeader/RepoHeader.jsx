@@ -10,6 +10,7 @@ import { TabNavigation } from '../TabNavigation';
 function RepoHeader() {
   const { info } = useRepo();
   const { pathname } = useLocation();
+
   return (
     <div class={styles.wrapper}>
       <div class={styles.topRow}>
@@ -22,7 +23,7 @@ function RepoHeader() {
             issueCount: info().info?.openIssueCount,
             pullRequestCount: info().info?.openPullRequestCount,
           })}
-          basePath="/[owner]/[name]"
+          basePath="/"
           class="border-none"
           pathname={pathname}
         />

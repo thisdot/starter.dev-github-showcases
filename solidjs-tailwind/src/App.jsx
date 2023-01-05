@@ -26,8 +26,8 @@ function App() {
             <Route component={RepoDetails} path={'/'}  />
             <Route component={RepoTree} path={ROUTES.REPO_TREE} />
             {/* <Route component={RepoBlob} path={ROUTES.REPO_BLOB} /> */}
+            <Route component={PullReqAndIssues} path={ROUTES.REPO_PULLS} />
           </Route>
-          <Route component={PullReqAndIssues} path={ROUTES.REPO_PULLS} />
         </Route>
       </Routes>
     </>
