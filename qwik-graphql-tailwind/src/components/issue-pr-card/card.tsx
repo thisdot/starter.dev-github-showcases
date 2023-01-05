@@ -25,7 +25,7 @@ export interface IssuePrCardProps {
     createdAt: string;
     authorName: string;
     commentsCount: number;
-    labels: Label[];
+    labels?: Label[];
   };
   type: 'issue' | 'pr';
 }
@@ -80,7 +80,7 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
           <a class="align-middle no-underline markdown-title font-semibold" target="_blank" href={data.url}>
             {data.title}
           </a>
-          {data.labels.map((label: Label) => (
+          {data.labels?.map((label: Label) => (
             <span
               key={label.color}
               class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm', `bg-[#${label.color}]`)}

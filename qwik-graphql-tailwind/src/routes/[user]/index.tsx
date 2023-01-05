@@ -1,4 +1,4 @@
-import { component$, useClientEffect$, useContextProvider, useStore } from '@builder.io/qwik';
+import { component$, useClientEffect$, useContextProvider, useStore, useTask$ } from '@builder.io/qwik';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import { useQuery } from '~/utils/useQuery';
 import { USER_PROFILE_QUERY } from '~/utils/queries/user-profile-query';
@@ -9,6 +9,7 @@ import ProfileNav from '../../components/profile-nav/profile-nav';
 import { UserRepos } from '../../components/user-repos/user-repos';
 import filterStore, { FilterStoreProps } from '~/context/repo-filter';
 import { DefaultLanguage, TypeFilter, RepositoryOrderField } from '~/components/repo-filters/types';
+import { isBrowser } from '@builder.io/qwik/build';
 
 interface UserStore {
   isLoading: boolean;
@@ -23,6 +24,8 @@ interface ProfileQueryParams {
 }
 
 export default component$(() => {
+  const location = useLocation();
+
   const store = useStore<UserStore>({
     user: null,
     isLoading: true,
@@ -37,8 +40,6 @@ export default component$(() => {
 
   useContextProvider(filterStore, filterState);
 
-  const location = useLocation();
-
   useClientEffect$(async () => {
     const abortController = new AbortController();
     const response = await fetchUserProfile(
@@ -52,6 +53,28 @@ export default component$(() => {
     );
 
     updateUserProfile(store, response);
+  });
+
+  useTask$(async ({ track }) => {
+    const abortController = new AbortController();
+    store.isLoading = true;
+    const after = track(() => location.query.after);
+    const before = track(() => location.query.before);
+    const orderBy = track(() => location.query.orderBy);
+
+    if (isBrowser && location.params.user) {
+      const response = await fetchUserProfile(
+        {
+          orderBy,
+          afterCursor: after,
+          beforeCursor: before,
+          username: location.params.user,
+        },
+        abortController
+      );
+
+      updateUserProfile(store, response);
+    }
   });
 
   if (store.isLoading) {

@@ -18,17 +18,11 @@ const repo: Repo = {
   isFork: false,
 };
 
-const styles = {
-  item: 'repo-card',
-  headingLink: 'repo-card-heading',
-  description: 'repo-card-description',
-};
-
 describe('RepoCard component', function () {
   it('should mount', async () => {
     const { screen, render } = await createDOM();
 
-    await render(<RepoCard repo={repo} styles={styles} />);
-    expect(screen.outerHTML).toContain(repo.name);
+    await render(<RepoCard repo={repo} />);
+    expect(screen.outerHTML).toContain(repo.description);
   });
 });
