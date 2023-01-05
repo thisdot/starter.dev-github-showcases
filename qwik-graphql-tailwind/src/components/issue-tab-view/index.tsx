@@ -11,7 +11,7 @@ import { parseQuery } from './parseQuery';
 import { Label } from '../repo-pulls/types';
 import { ClearFilterAndSortBtn } from '../clear-filter-and-sort-button';
 import { useLocation } from '@builder.io/qwik-city';
-import IssuesPRContext from '../../context/issue-pr-store';
+import IssuesPRContext, { IssuesPRContextProps } from '../../context/issue-pr-store';
 import DropdownContext from '../../context/issue-tab-header-dropdown';
 import { Pagination } from '../pagination/pagination';
 
@@ -145,7 +145,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
   );
 });
 
-export function updateIssueState(store: any, response: ParsedIssueQuery) {
+export function updateIssueState(store: IssuesPRContextProps, response: ParsedIssueQuery) {
   const { closedIssues, openIssues, milestones, labels } = response;
   store.closedIssues = closedIssues.issues;
   store.openIssues = openIssues.issues;

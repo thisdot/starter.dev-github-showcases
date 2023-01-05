@@ -1,20 +1,18 @@
 import { createContext } from '@builder.io/qwik';
+import { Label } from '../components/repo-pulls/types';
 
 export type Tabs = 'open' | 'closed';
 
 export interface Issue {
   url: string;
   closedAt: string;
-  comments: {
-    totalCount: number;
-  };
+  commentCount: number;
   createdAt: string;
   number: number;
   state: string;
   title: string;
-  author: {
-    login: string;
-  };
+  login: string;
+  labels: Label[];
 }
 
 export interface IssuesPRContextProps {
@@ -27,16 +25,16 @@ export interface IssuesPRContextProps {
   milestones: { value: string; label: string }[];
   issuesLabel: { value: string; label: string }[];
   openPageInfo: {
-    endCursor: string;
+    endCursor?: string;
     hasNextPage: boolean;
     hasPreviousPage: boolean;
-    startCursor: string;
+    startCursor?: string;
   };
   closedPageInfo: {
-    endCursor: string;
+    endCursor?: string;
     hasNextPage: boolean;
     hasPreviousPage: boolean;
-    startCursor: string;
+    startCursor?: string;
   };
 }
 const IssuesPRContext = createContext<IssuesPRContextProps>('Issues-context');

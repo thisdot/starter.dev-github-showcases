@@ -65,34 +65,36 @@ export const PullRequestIssueTab = component$(
           </button>
         </div>
         <div class="flex items-center space-x-8">
-          <div>
-            <FilterDropdown name="Label" description="Filter by label" buttonClassName="border-none text-sm">
-              {labelOption?.map(({ label, value, color, description }) => (
-                <div>
-                  <button
-                    onClick$={() => (dropdown.selectedLabel = value)}
-                    type="button"
-                    name="language"
-                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
-                  >
-                    {value === dropdown.selectedLabel && <CheckIcon className="inline w-4 h-4 absolute left-4" />}
-                    <div class="flex gap-2">
-                      {color && (
-                        <span
-                          class="w-3.5 h-3.5 rounded-full border border-gray-200 translate-y-0.5"
-                          style={{ backgroundColor: color }}
-                        ></span>
-                      )}
-                      <div class="normal-case">
-                        <div>{label}</div>
-                        {description && <div class="text-gray-400 text-xs">{description}</div>}
+          {labelOption && (
+            <div>
+              <FilterDropdown name="Label" description="Filter by label" buttonClassName="border-none text-sm">
+                {labelOption.map(({ label, value, color, description }) => (
+                  <div>
+                    <button
+                      onClick$={() => (dropdown.selectedLabel = value)}
+                      type="button"
+                      name="language"
+                      class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
+                    >
+                      {value === dropdown.selectedLabel && <CheckIcon className="inline w-4 h-4 absolute left-4" />}
+                      <div class="flex gap-2">
+                        {color && (
+                          <span
+                            class="w-3.5 h-3.5 rounded-full border border-gray-200 translate-y-0.5"
+                            style={{ backgroundColor: color }}
+                          ></span>
+                        )}
+                        <div class="normal-case">
+                          <div>{label}</div>
+                          {description && <div class="text-gray-400 text-xs">{description}</div>}
+                        </div>
                       </div>
-                    </div>
-                  </button>
-                </div>
-              ))}
-            </FilterDropdown>
-          </div>
+                    </button>
+                  </div>
+                ))}
+              </FilterDropdown>
+            </div>
+          )}
           {milestonesOption && (
             <div>
               <FilterDropdown
