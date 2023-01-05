@@ -1,13 +1,4 @@
-// todo: cleanup
-export interface GithubSearchIssueLabel {
-  id: number;
-  node_id: string;
-  url: string;
-  name: string;
-  description?: string;
-  color: string;
-  default?: boolean;
-}
+import type { GithubIssueLabel } from './issue-label';
 
 export type GithubSearchIssueUser = {
   login: string;
@@ -46,7 +37,7 @@ export interface GithubSearchIssue {
   number: number;
   title: string;
   user: GithubSearchIssueUser;
-  labels: GithubSearchIssueLabel[];
+  labels: GithubIssueLabel[];
   state: GithubSearchIssueState;
   locked: boolean;
   assignee: GithubSearchIssueUser | null;

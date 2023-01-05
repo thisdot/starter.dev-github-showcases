@@ -1,9 +1,4 @@
-export interface IssueLabel {
-  color: string;
-  id: number;
-  name: string;
-  url: string;
-}
+import type { IssueLabel } from './issue-label';
 
 export interface IssueUser {
   avatarUrl: string;
