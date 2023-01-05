@@ -28,7 +28,7 @@ interface IssuesQueryParams {
   before?: string;
   orderBy: string;
   direction: string;
-  filterBy: { milestone: string | undefined; labels: string[] | undefined };
+  filterBy: { milestone?: string; labels: string[] | undefined };
 }
 
 export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
@@ -40,7 +40,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
   const beforeCursor = typeof location.query.before === 'string' ? location.query.before : undefined;
 
   const hasActiveFilter =
-    dropdownStore.selectedLabel !== undefined ||
+    dropdownStore.selectedLabel ||
     dropdownStore.selectedSort !== sortOptions[0].value ||
     dropdownStore.selectedMilestones !== undefined;
 

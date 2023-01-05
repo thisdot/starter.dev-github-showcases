@@ -41,8 +41,7 @@ export default component$(({ owner, name }: PullRequestsProps) => {
   const afterCursor = typeof location.query.after === 'string' ? location.query.after : undefined;
   const beforeCursor = typeof location.query.before === 'string' ? location.query.before : undefined;
 
-  const hasActiveFilter =
-    dropdownStore.selectedLabel !== undefined || dropdownStore.selectedSort !== sortOptions[0].value;
+  const hasActiveFilter = dropdownStore.selectedLabel || dropdownStore.selectedSort !== sortOptions[0].value;
 
   const resetFilters$ = $(() => {
     dropdownStore.selectedLabel = undefined;
