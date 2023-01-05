@@ -62,11 +62,11 @@ export const MOCK_REPOSITORY: GithubRepository = {
 
 export const MOCK_REPOSITORY_STATE = {
   defaultBranch: 'main',
-  description: null,
-  forksCount: 2,
+  description: 'A collection of GitHub clone implementations.',
+  forksCount: 9,
   homepage: '',
-  name: 'starter.dev',
-  openIssuesCount: 112,
+  name: 'starter.dev-github-showcases',
+  openIssuesCount: 179,
   owner: {
     avatarUrl: 'https://avatars.githubusercontent.com/u/22839396?v=4',
     id: 22839396,
@@ -76,7 +76,7 @@ export const MOCK_REPOSITORY_STATE = {
     url: 'https://api.github.com/users/thisdot',
     href: '/thisdot',
   },
-  stargazersCount: 21,
+  stargazersCount: 44,
   topics: [
     {
       name: 'angular',
@@ -87,88 +87,22 @@ export const MOCK_REPOSITORY_STATE = {
       url: 'https://github.com/topics/apollo-client',
     },
     {
-      name: 'astro',
-      url: 'https://github.com/topics/astro',
-    },
-    {
-      name: 'chakra-ui',
-      url: 'https://github.com/topics/chakra-ui',
-    },
-    {
-      name: 'jest',
-      url: 'https://github.com/topics/jest',
-    },
-    {
-      name: 'nextjs',
-      url: 'https://github.com/topics/nextjs',
-    },
-    {
-      name: 'ngrx',
-      url: 'https://github.com/topics/ngrx',
-    },
-    {
-      name: 'nuxt',
-      url: 'https://github.com/topics/nuxt',
-    },
-    {
-      name: 'pinia',
-      url: 'https://github.com/topics/pinia',
-    },
-    {
-      name: 'qwik',
-      url: 'https://github.com/topics/qwik',
-    },
-    {
-      name: 'react-query',
-      url: 'https://github.com/topics/react-query',
-    },
-    {
-      name: 'reactjs',
-      url: 'https://github.com/topics/reactjs',
-    },
-    {
-      name: 'rxjs',
-      url: 'https://github.com/topics/rxjs',
-    },
-    {
-      name: 'starter-kit',
-      url: 'https://github.com/topics/starter-kit',
-    },
-    {
-      name: 'storybook',
-      url: 'https://github.com/topics/storybook',
-    },
-    {
-      name: 'styled-components',
-      url: 'https://github.com/topics/styled-components',
+      name: 'github',
+      url: 'https://github.com/topics/github',
     },
     {
       name: 'tailwindcss',
       url: 'https://github.com/topics/tailwindcss',
     },
-    {
-      name: 'tanstack-query',
-      url: 'https://github.com/topics/tanstack-query',
-    },
-    {
-      name: 'typescript',
-      url: 'https://github.com/topics/typescript',
-    },
-    {
-      name: 'vue',
-      url: 'https://github.com/topics/vue',
-    },
   ],
   visibility: 'public',
-  watchersCount: 21,
+  watchersCount: 44,
   language: 'TypeScript',
-  updatedAt: '2023-01-01T18:40:35Z',
-  license: {
-    name: 'MIT License',
-  },
+  updatedAt: '2022-12-16T02:31:04Z',
+  license: null,
   archived: false,
   fork: false,
-  openPullRequestsCount: 14,
+  openPullRequestsCount: 35,
 };
 
 export const MOCK_BREADCRUMBS = [
@@ -177,8 +111,8 @@ export const MOCK_BREADCRUMBS = [
     href: '/thisdot',
   },
   {
-    name: 'starter.dev',
-    href: '/thisdot/starter.dev',
+    name: 'starter.dev-github-showcases',
+    href: '/thisdot/starter.dev-github-showcases',
     emphasis: true,
   },
 ];

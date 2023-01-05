@@ -16,7 +16,6 @@
   <LayoutPageContentRow>
     <div class="top">
       <div class="heading">
-        {console.log(breadcrumbs)}
         <RepositoryHeading {repositoryState} {breadcrumbs} />
       </div>
       <div class="counters">
