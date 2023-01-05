@@ -2,7 +2,7 @@
   import FileExplorerContainer from '$lib/components/FileExplorer/FileExplorerContainer/FileExplorerContainer.svelte';
   import FileExplorerNav from '$lib/components/FileExplorer/FileExplorerNav/FileExplorerNav.svelte';
   import FileExplorerReadme from '$lib/components/FileExplorer/FileExplorerReadme/FileExplorerReadme.svelte';
-  import RepositoryDetails from '$lib/components/Repository/RepositoryDetails/RepositoryDetails.svelte';
+  import RepositoryDetails from '$lib/components/Repository/RepositoryDetails.svelte';
   import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
   import LayoutSidebar from '$lib/components/shared/layouts/LayoutSidebar.svelte';
   import { PAGE_IDS } from '$lib/constants/page-ids';
