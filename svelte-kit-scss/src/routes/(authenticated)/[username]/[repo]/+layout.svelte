@@ -1,6 +1,6 @@
 <script lang="ts">
-  import RepositoryCounters from '$lib/components/Repository/RepositoryCounters.svelte';
-  import RepositoryHeading from '$lib/components/Repository/RepositoryHeading.svelte';
+  import RepositoryCounters from '$lib/components/Repository/RepositoryCounters/RepositoryCounters.svelte';
+  import RepositoryHeading from '$lib/components/Repository/RepositoryHeading/RepositoryHeading.svelte';
   import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
   import LayoutPageHeader from '$lib/components/shared/layouts/LayoutPageHeader.svelte';
   import PageNavigtionTabs from '$lib/components/shared/PageNavigationTabs/PageNavigtionTabs.svelte';
