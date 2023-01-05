@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Book16, Eye16, RepoForked16, Star16 } from 'svelte-octicons';
   import type { RepositoryState } from '$lib/interfaces';
-  import Chips from '../../shared/chips/Chips.svelte';
+  import Chips from '$lib/components/shared/chips/Chips.svelte';
 
   export let repositoryState: RepositoryState;
   $: ({ description, topics, stargazersCount, watchersCount, forksCount } = repositoryState);
@@ -17,7 +17,7 @@
     <h2 class="heading">About</h2>
     <div class="description">
       {#if description}
-        <span class="text" data-testid="Description">{description}</span>
+        <span class="text" data-testid="description">{description}</span>
       {:else}
         <span class="text empty">No description, website, or topics provided.</span>
       {/if}
@@ -34,15 +34,18 @@
       {/if}
       <span class="reference stargazersCount">
         <Star16 />
-        <span><span class="count" data-testid="Stars">{stargazersCount}</span> stars</span>
+        <span
+          ><span class="count" data-testid="stargazers-count">{stargazersCount}</span> stars</span
+        >
       </span>
       <span class="reference watchersCount">
         <Eye16 />
-        <span><span class="count" data-testid="Watchers">{watchersCount}</span> watching</span>
+        <span><span class="count" data-testid="watchers-count">{watchersCount}</span> watching</span
+        >
       </span>
       <span class="reference forksCount">
         <RepoForked16 />
-        <span><span class="count" data-testid="Forks">{forksCount}</span> forks</span>
+        <span><span class="count" data-testid="forks-count">{forksCount}</span> forks</span>
       </span>
     </div>
   </div>

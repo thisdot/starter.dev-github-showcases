@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { RepositoryState } from '$lib/interfaces';
   import Breadcrumbs from '$lib/components/shared/Breadcrumbs/Breadcrumbs.svelte';
-  import VisibilityLabel from '../../shared/VisibilityLabel/VisibilityLabel.svelte';
+  import VisibilityLabel from '$lib/components/Repository/VisibilityLabel/VisibilityLabel.svelte';
   import type { Breadcrumb } from '$lib/components/shared/Breadcrumbs/models';
   import { Repo16 } from 'svelte-octicons';
 
