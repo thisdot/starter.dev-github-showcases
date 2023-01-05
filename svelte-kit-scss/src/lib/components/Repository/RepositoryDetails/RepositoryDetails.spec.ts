@@ -12,6 +12,7 @@ describe('RepositoryDetails Component', () => {
   });
 
   it.each([
+    ['Description', repositoryState.description],
     ['Watchers', repositoryState.watchersCount],
     ['Forks', repositoryState.forksCount],
     ['Stars', repositoryState.stargazersCount],
@@ -19,5 +20,12 @@ describe('RepositoryDetails Component', () => {
     const element = screen.getByTestId(testId);
     const expectedText = String(expectedValue);
     expect(element.innerHTML).toEqual(expectedText);
+  });
+
+  it('should render chips', () => {
+    repositoryState.topics.map((topic) => {
+      const chip = screen.getByText(topic.name);
+      expect(chip).toBeTruthy();
+    });
   });
 });

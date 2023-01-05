@@ -17,7 +17,7 @@
     <h2 class="heading">About</h2>
     <div class="description">
       {#if description}
-        <span class="text">{description}</span>
+        <span class="text" data-testid="Description">{description}</span>
       {:else}
         <span class="text empty">No description, website, or topics provided.</span>
       {/if}
@@ -34,15 +34,15 @@
       {/if}
       <span class="reference stargazersCount">
         <Star16 />
-        <span><span class="count">{stargazersCount}</span> stars</span>
+        <span><span class="count" data-testid="Stars">{stargazersCount}</span> stars</span>
       </span>
       <span class="reference watchersCount">
         <Eye16 />
-        <span><span class="count">{watchersCount}</span> watching</span>
+        <span><span class="count" data-testid="Watchers">{watchersCount}</span> watching</span>
       </span>
       <span class="reference forksCount">
         <RepoForked16 />
-        <span><span class="count">{forksCount}</span> forks</span>
+        <span><span class="count" data-testid="Forks">{forksCount}</span> forks</span>
       </span>
     </div>
   </div>
