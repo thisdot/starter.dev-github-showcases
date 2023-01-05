@@ -15,7 +15,7 @@
       </span>
     </div>
     <div class="count">
-      <span class="text">
+      <span class="text" data-testid={label}>
         {count}
       </span>
     </div>

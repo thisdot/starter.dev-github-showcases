@@ -9,12 +9,14 @@
 
   export let data: LayoutServerData;
   $: ({ repositoryState, breadcrumbs, tabs } = data);
+  console.log(breadcrumbs);
 </script>
 
 <LayoutPageHeader gray paddingTop>
   <LayoutPageContentRow>
     <div class="top">
       <div class="heading">
+        {console.log(breadcrumbs)}
         <RepositoryHeading {repositoryState} {breadcrumbs} />
       </div>
       <div class="counters">

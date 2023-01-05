@@ -59,3 +59,126 @@ export const MOCK_REPOSITORY: GithubRepository = {
   watchers: 80,
   web_commit_signoff_required: false,
 };
+
+export const MOCK_REPOSITORY_STATE = {
+  defaultBranch: 'main',
+  description: null,
+  forksCount: 2,
+  homepage: '',
+  name: 'starter.dev',
+  openIssuesCount: 112,
+  owner: {
+    avatarUrl: 'https://avatars.githubusercontent.com/u/22839396?v=4',
+    id: 22839396,
+    login: 'thisdot',
+    siteAdmin: false,
+    type: 'Organization',
+    url: 'https://api.github.com/users/thisdot',
+    href: '/thisdot',
+  },
+  stargazersCount: 21,
+  topics: [
+    {
+      name: 'angular',
+      url: 'https://github.com/topics/angular',
+    },
+    {
+      name: 'apollo-client',
+      url: 'https://github.com/topics/apollo-client',
+    },
+    {
+      name: 'astro',
+      url: 'https://github.com/topics/astro',
+    },
+    {
+      name: 'chakra-ui',
+      url: 'https://github.com/topics/chakra-ui',
+    },
+    {
+      name: 'jest',
+      url: 'https://github.com/topics/jest',
+    },
+    {
+      name: 'nextjs',
+      url: 'https://github.com/topics/nextjs',
+    },
+    {
+      name: 'ngrx',
+      url: 'https://github.com/topics/ngrx',
+    },
+    {
+      name: 'nuxt',
+      url: 'https://github.com/topics/nuxt',
+    },
+    {
+      name: 'pinia',
+      url: 'https://github.com/topics/pinia',
+    },
+    {
+      name: 'qwik',
+      url: 'https://github.com/topics/qwik',
+    },
+    {
+      name: 'react-query',
+      url: 'https://github.com/topics/react-query',
+    },
+    {
+      name: 'reactjs',
+      url: 'https://github.com/topics/reactjs',
+    },
+    {
+      name: 'rxjs',
+      url: 'https://github.com/topics/rxjs',
+    },
+    {
+      name: 'starter-kit',
+      url: 'https://github.com/topics/starter-kit',
+    },
+    {
+      name: 'storybook',
+      url: 'https://github.com/topics/storybook',
+    },
+    {
+      name: 'styled-components',
+      url: 'https://github.com/topics/styled-components',
+    },
+    {
+      name: 'tailwindcss',
+      url: 'https://github.com/topics/tailwindcss',
+    },
+    {
+      name: 'tanstack-query',
+      url: 'https://github.com/topics/tanstack-query',
+    },
+    {
+      name: 'typescript',
+      url: 'https://github.com/topics/typescript',
+    },
+    {
+      name: 'vue',
+      url: 'https://github.com/topics/vue',
+    },
+  ],
+  visibility: 'public',
+  watchersCount: 21,
+  language: 'TypeScript',
+  updatedAt: '2023-01-01T18:40:35Z',
+  license: {
+    name: 'MIT License',
+  },
+  archived: false,
+  fork: false,
+  openPullRequestsCount: 14,
+};
+
+export const MOCK_BREADCRUMBS = [
+  {
+    name: 'thisdot',
+    href: '/thisdot',
+  },
+  {
+    name: 'starter.dev',
+    href: '/thisdot/starter.dev',
+    emphasis: true,
+  },
+];
