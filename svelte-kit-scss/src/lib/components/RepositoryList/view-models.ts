@@ -1,5 +1,6 @@
 import type { Repository } from '$lib/interfaces';
-import type { NavigationFilterOption } from '../shared/models/navigation-filter-option';
+import type { HtmlSentanceNode } from '$lib/components/shared/HtmlSentance/view-models';
+import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
 
 export type RepositoryCardViewModel = Repository & {
   routeHref: string;
@@ -20,6 +21,7 @@ export type RepositoryListControlsViewModel = {
     term: string | undefined;
   };
   resetFiltersHref?: string;
+  sentance: HtmlSentanceNode[];
 };
 
 export type AllRepositoriesListViewModel = RepositoryListViewModel & {
