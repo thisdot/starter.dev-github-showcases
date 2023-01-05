@@ -128,11 +128,6 @@ export type RepoPullRequestsQuery = {
     | undefined;
 };
 
-export interface Label {
-  color: string;
-  name: string;
-}
-
 export type PullRequest = {
   id: string;
   url: string;

@@ -1,11 +1,28 @@
 export const ISSUES_QUERY = `
-  query IssuesQuery($owner: String!, $name: String!, $first: Int!, $before: String, $after: String, $orderBy: IssueOrderField!, $direction: OrderDirection!) {
+  query IssuesQuery($owner: String!, $name: String!, $first: Int!, $before: String, $after: String, $orderBy: IssueOrderField!, $direction: OrderDirection!, $filterBy: IssueFilters) {
     repository(owner: $owner, name: $name) {
+      milestones(first: 100, states: [OPEN]) {
+        nodes {
+          id
+          closed
+          description
+          number
+          title
+        }
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+          hasPreviousPage
+        }
+        totalCount
+      }
       openIssues: issues(
         first: $first
         states: [OPEN]
         after: $after
         before: $before
+        filterBy: $filterBy
         orderBy:{ field: $orderBy, direction: $direction}
       ) {
         totalCount
@@ -19,6 +36,13 @@ export const ISSUES_QUERY = `
             state
             createdAt
             closedAt
+            labels(first: 100) {
+              totalCount
+              nodes {
+                color
+                name
+              }
+            }
             comments {
               totalCount
             }
@@ -36,6 +60,7 @@ export const ISSUES_QUERY = `
         states: [CLOSED]
         after: $after
         before: $before
+        filterBy: $filterBy
         orderBy:{ field: $orderBy, direction: $direction}
       ) {
         totalCount
@@ -49,6 +74,13 @@ export const ISSUES_QUERY = `
             state
             createdAt
             closedAt
+            labels(first: 100) {
+              totalCount
+              nodes {
+                color
+                name
+              }
+            }
             comments {
               totalCount
             }
