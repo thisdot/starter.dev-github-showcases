@@ -20,12 +20,12 @@ describe('UserProfile', () => {
     ['name', mockUserProfile.name],
     ['login', mockUserProfile.login],
     ['bio', mockUserProfile.bio],
-    // ['followers', mockUserProfile.followers],
-    // ['following', mockUserProfile.following],
-    // ['email', mockUserProfile.email],
-    // ['blog', mockUserProfile.blog],
-    // ['twitterUsername', mockUserProfile.twitterUsername],
-    // ['location', mockUserProfile.location],
+    ['followers', mockUserProfile.followers],
+    ['following', mockUserProfile.following],
+    ['email', mockUserProfile.email],
+    ['blog', mockUserProfile.blog],
+    ['twitterUsername', mockUserProfile.twitterUsername],
+    ['location', mockUserProfile.location],
   ])('should render: %s', (testId, expectedValue) => {
     const element = screen.getByTestId(testId);
     const expectedText = String(expectedValue);

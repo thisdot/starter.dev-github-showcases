@@ -48,10 +48,15 @@
   {#if company || location || email || blog || twitterUsername}
     <div class="info secondary details">
       {#if company}
-        <SocialLink iconComponent={Organization16} label={company} />
+        <SocialLink iconComponent={Organization16} label={company} testId="company" />
       {/if}
       {#if location}
-        <SocialLink iconComponent={Location16} label={location} mobileHide={true} />
+        <SocialLink
+          iconComponent={Location16}
+          label={location}
+          mobileHide={true}
+          testId="location"
+        />
       {/if}
       {#if email}
         <SocialLink
@@ -59,10 +64,11 @@
           label={email}
           href={`mailto:{${email}}`}
           mobileHide={true}
+          testId="email"
         />
       {/if}
       {#if blog}
-        <SocialLink iconComponent={Link16} label={blog} href={blog} />
+        <SocialLink iconComponent={Link16} label={blog} href={blog} testId="blog" />
       {/if}
       {#if twitterUsername}
         <SocialLink
@@ -70,6 +76,7 @@
           label={twitterUsername}
           href={`https://twitter.com/${twitterUsername}`}
           mobileHide={true}
+          testId="twitterUsername"
         />
       {/if}
     </div>
