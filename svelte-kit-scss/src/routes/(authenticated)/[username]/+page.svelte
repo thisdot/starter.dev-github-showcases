@@ -23,6 +23,7 @@
     <LayoutPageHeader gray>
       <LayoutPageContentRow>
         <div class="org-profile">
+          {console.log(profile)}
           <OrganizationProfile {profile} />
         </div>
       </LayoutPageContentRow>
