@@ -31,4 +31,9 @@ describe('UserProfile', () => {
     const expectedText = String(expectedValue);
     expect(element.innerHTML).toEqual(expectedText);
   });
+
+  it('should render avatar of user', async () => {
+    const image = screen.getByTestId(`avatar`);
+    expect(image.getAttribute('src')).toBe(mockUserProfile.avatarUrl);
+  });
 });
