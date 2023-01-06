@@ -84,12 +84,6 @@ git clone https://github.com/thisdot/starter.dev.git
 
 To Be completed
 
-## Static Site Generator (Node.js)
-
-```
-npm run build.server
-```
-
 ## Netlify
 
 This starter site is configured to deploy to [Netlify Edge Functions](https://docs.netlify.com/edge-functions/overview/), which means it will be rendered at an edge location near to your users.
