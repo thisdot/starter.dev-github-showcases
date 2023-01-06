@@ -10,8 +10,12 @@ See some of the projects we've built:
 | [next-react-query-tailwind](/next-react-query-tailwind)   | NextJS, React Query, Tailwind    | [https://next-react-query-tailwind.starter.dev](https://next-react-query-tailwind.starter.dev)   |
 | [cra-rxjs-styled-components](/cra-rxjs-styled-components) | React, RxJS, styled-components   | [https://cra-rxjs-styled-components.starter.dev](https://cra-rxjs-styled-components.starter.dev) |
 | [angular-ngrx-scss](/angular-ngrx-scss)                   | Angular, NgRx, SCSS              | [https://angular-ngrx-scss.starter.dev](https://angular-ngrx-scss.starter.dev)                   |
-| [angular-apollo-tailwind](/angular-apollo-tailwind)       | Angular, Apollo, Tailwind CSS    | [https://angular-apollo-tailwind.starter.dev](https://angular-apollo-tailwind.starter.dev)       |
 | [vue3-apollo-quasar](/vue3-apollo-quasar)                 | Vue 3, Apollo, Quasar            | [https://vue3-apollo-quasar.starter.dev](https://vue3-apollo-quasar.starter.dev)                 |
+| [qwik-graphql-tailwind](/qwik-graphql-tailwind)           | Qwik, GraphQL, Tailwind CSS      | [https://qwik-graphql-tailwind.starter.dev](https://qwik-graphql-tailwind.starter.dev)           |
+| [solidjs-tailwind](/solidjs-tailwind)                     | Solidjs, Tailwind CSS            | [https://solidjs-tailwind.starter.dev](https://solidjs-tailwind.starter.dev)                     |
+| [nuxt-pinia-tailwind](/nuxt-pinia-tailwind)               | Nuxt Pinia Tailwind CSS          | [https://nuxt-pinia-tailwind.starter.dev](https://nuxt-pinia-tailwind.starter.dev)               |
+| [svelte-kit-scss](/svelte-kit-scss)                       | Svelte SCSS                      | [https://svelte-kit-scss.starter.dev](https://svelte-kit-scss.starter.dev)                       |
+| [vite-apollo-vanilla](/vite-apollo-vanilla)               | Vite Apollo Vanilla              | [https://vite-apollo-vanilla.starter.dev](https://vite-apollo-vanilla.starter.dev)               |
 
 ## Showcase Implementations
 

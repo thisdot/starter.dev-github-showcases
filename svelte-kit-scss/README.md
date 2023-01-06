@@ -108,3 +108,9 @@ git clone https://github.com/thisdot/starter.dev.git
 [Repository](https://github.com/thisdot/starter.dev-github-showcases/tree/main/svelte-kit-scss)
 
 The demo application tries to implement some of GitHub's pages and functionality. It uses the OAuth credentials in GitHub to authenticate users with their GitHub accounts and uses svelte's fetch api to fetch data from the GitHub API. Check out the link above to learn more or check out the demo!
+
+## Live Demo
+
+This demo app gets deployed to Netlify on changes to the `main` branch.
+
+https://svelte-kit-scss.starter.dev

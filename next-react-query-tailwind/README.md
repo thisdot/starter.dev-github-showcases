@@ -148,8 +148,8 @@ yarn dev
 
 Open your browser to [http://localhost:3000](http://localhost:3000)
 
-## Deployment
+## Live Demo
 
 This demo app gets deployed to Netlify on changes to the `main` branch.
 
-https://next-react-query-tailwind.netlify.app
+https://next-react-query-tailwind.starter.dev
