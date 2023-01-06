@@ -1,5 +1,5 @@
 import type { Repository } from '$lib/interfaces';
-import type { HtmlSentanceNode } from '$lib/components/shared/HtmlSentance/view-models';
+import type { HtmlSentenceNode } from '$lib/components/shared/HtmlSentence/view-models';
 import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
 
 export type RepositoryCardViewModel = Repository & {
@@ -21,7 +21,7 @@ export type RepositoryListControlsViewModel = {
     term: string | undefined;
   };
   resetFiltersHref?: string;
-  sentance: HtmlSentanceNode[];
+  sentence: HtmlSentenceNode[];
 };
 
 export type AllRepositoriesListViewModel = RepositoryListViewModel & {

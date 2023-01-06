@@ -1,4 +1,4 @@
-export type HtmlSentanceNode = {
+export type HtmlSentenceNode = {
   text: string;
   emphasis?: boolean;
 };

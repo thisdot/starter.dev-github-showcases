@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import DropdownMenuSelect from '$lib/components/shared/Dropdown/DropdownMenuSelect/DropdownMenuSelect.svelte';
-  import HtmlSentance from '$lib/components/shared/HtmlSentance/HtmlSentance.svelte';
+  import HtmlSentence from '$lib/components/shared/HtmlSentence/HtmlSentence.svelte';
   import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
   import {
     buildRepositoryPageHrefForParameter,
@@ -14,7 +14,7 @@
   import SearchInputDelayed from './SearchInputDelayed.svelte';
 
   export let controls: RepositoryListControlsViewModel;
-  $: ({ sortFilters, typeFilters, search, sentance, resetFiltersHref } = controls);
+  $: ({ sortFilters, typeFilters, search, sentence, resetFiltersHref } = controls);
 
   const handleFilterSelect = async (option: NavigationFilterOption): Promise<void> => {
     return goto(option.href);
@@ -76,8 +76,8 @@
   </div>
   {#if resetFiltersHref}
     <div class="filter-state">
-      <div class="sentance">
-        <HtmlSentance nodes={sentance} />
+      <div class="sentence">
+        <HtmlSentence nodes={sentence} />
       </div>
       <div class="reset">
         <a class="link" href={resetFiltersHref}>
@@ -106,7 +106,7 @@
     .filter-state {
       margin-bottom: 1rem;
       display: flex;
-      .sentance {
+      .sentence {
         flex-grow: 1;
       }
       .reset {

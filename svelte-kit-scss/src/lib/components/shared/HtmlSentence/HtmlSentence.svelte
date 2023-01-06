@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { HtmlSentanceNode } from './view-models';
-  export let nodes: HtmlSentanceNode[];
+  import type { HtmlSentenceNode } from './view-models';
+  export let nodes: HtmlSentenceNode[];
 </script>
 
-<span class="html-sentance">
+<span class="html-sentence">
   {#each nodes as node, index}
     {#if index}
       {' '}

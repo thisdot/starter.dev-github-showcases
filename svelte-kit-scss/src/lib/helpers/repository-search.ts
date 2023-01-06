@@ -1,4 +1,4 @@
-import type { HtmlSentanceNode } from '$lib/components/shared/HtmlSentance/view-models';
+import type { HtmlSentenceNode } from '$lib/components/shared/HtmlSentence/view-models';
 import { RepositorySearchSort, RepositorySearchType } from '$lib/constants/repository-search';
 import type {
   RepositoryPageSearchQueryParameters,
@@ -110,11 +110,11 @@ export const buildRepositoryPageNavigationFilterOptions = <
   });
 };
 
-export const composeRepositoryFiltersStateSentance = (
+export const composeRepositoryFiltersStateSentence = (
   { language, sort, term, type }: RepositorySearchQueryParameters,
   resultsCount: number
-): HtmlSentanceNode[] => {
-  const resultCountNodes: HtmlSentanceNode[] = [
+): HtmlSentenceNode[] => {
+  const resultCountNodes: HtmlSentenceNode[] = [
     {
       text: String(resultsCount),
       emphasis: true,
@@ -143,7 +143,7 @@ export const composeRepositoryFiltersStateSentance = (
       typeText = 'all';
   }
 
-  const typeNodes: HtmlSentanceNode[] = [
+  const typeNodes: HtmlSentenceNode[] = [
     {
       text: typeText,
       emphasis: true,
@@ -153,7 +153,7 @@ export const composeRepositoryFiltersStateSentance = (
     },
   ];
 
-  const termNodes: HtmlSentanceNode[] = term
+  const termNodes: HtmlSentenceNode[] = term
     ? [
         {
           text: 'matching',

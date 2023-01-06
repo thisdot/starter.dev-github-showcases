@@ -2,7 +2,7 @@ import type { PageServerLoad } from './$types';
 import {
   buildRepositoryCardViewModel,
   buildRepositoryPageNavigationFilterOptions,
-  composeRepositoryFiltersStateSentance,
+  composeRepositoryFiltersStateSentence,
   DEFAULT_REPOSITORY_SEARCH_QUERY_PARAMETERS_REQUIRED,
   extractRepositoryPageSearchQueryParameters,
   isRepositorySearchQueryParametersEqual,
@@ -79,7 +79,7 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url, p
         term: searchQueryParameters.term,
       },
       resetFiltersHref,
-      sentance: composeRepositoryFiltersStateSentance(searchQueryParameters, totalCount),
+      sentence: composeRepositoryFiltersStateSentence(searchQueryParameters, totalCount),
     },
   };
 
