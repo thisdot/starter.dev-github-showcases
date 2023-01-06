@@ -4,10 +4,12 @@
   import DropdownFilterTextButton from './DropdownFilterTextButton.svelte';
   import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
   import IssueStateFilter from './IssueStateFilter.svelte';
+  import IssueLabelFilterItemTemplateCheckbox from './IssueLabelFilterItemTemplateCheckbox.svelte';
 
   export let sortFilters: NavigationFilterOption[];
   export let stateFilters: NavigationFilterOption[];
   export let milestoneFilters: NavigationFilterOption[];
+  export let labelFilters: NavigationFilterOption[];
 
   const handleFilterSelect = async (
     option: NavigationFilterOption,
@@ -25,6 +27,26 @@
     <IssueStateFilter options={stateFilters} />
   </div>
   <div class="secondary">
+    <DropdownMenuSelect
+      description="Filter by label"
+      options={labelFilters}
+      labelAccessor={(x) => x.label}
+      checkedPredicate={(x) => x.active}
+      on:select={async ({ detail }) => await handleFilterSelect(detail, true)}
+      direction="left"
+    >
+      <DropdownFilterTextButton text="Label" />
+      <IssueLabelFilterItemTemplateCheckbox
+        slot="option"
+        let:option
+        label={option.label}
+        checked={option.active}
+        description={option.extras?.['description']
+          ? String(option.extras?.['description'])
+          : undefined}
+        color={option.extras?.['color'] ? String(option.extras?.['color']) : undefined}
+      />
+    </DropdownMenuSelect>
     <DropdownMenuSelect
       description="Filter by milestone"
       options={milestoneFilters}

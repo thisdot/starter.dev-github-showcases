@@ -45,14 +45,14 @@ export default component$(() => {
     <div>
       {store.isLoading ? (
         <div>Loading...</div>
-      ) : (
+      ) : store.access_token ? (
         <>
           <Header user={store.viewer} />
           <main class="min-h-screen bg-gray-100">
             <Slot />
           </main>
         </>
-      )}
+      ) : null}
     </div>
   );
 });

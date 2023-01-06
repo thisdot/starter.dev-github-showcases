@@ -80,15 +80,16 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
           <a class="align-middle no-underline markdown-title font-semibold" target="_blank" href={data.url}>
             {data.title}
           </a>
-          {data.labels?.map((label: Label) => (
-            <span
-              key={label.color}
-              class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm', `bg-[#${label.color}]`)}
-              style={{ backgroundColor: `#${label.color}` }}
-            >
-              {label.name}
-            </span>
-          ))}
+          {data.labels &&
+            data.labels.map((label: Label) => (
+              <span
+                key={label.color}
+                class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm', `bg-[#${label.color}]`)}
+                style={{ backgroundColor: `#${label.color}` }}
+              >
+                {label.name}
+              </span>
+            ))}
         </div>
         <div class="flex mt-1 text-sm text-gray-500">
           <span class="opened-by">

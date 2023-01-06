@@ -18,8 +18,9 @@ const IssuesData = ({ issues }: IssueDataProps) => {
             isOpen: issue.state === 'OPEN',
             isResolved: issue.state === 'CLOSED',
             createdAt: issue.closedAt || issue.createdAt,
-            authorName: issue.author.login,
-            commentsCount: issue.comments.totalCount,
+            authorName: issue.login,
+            commentsCount: issue.commentCount,
+            labels: issue.labels,
           }}
         />
       ))}
