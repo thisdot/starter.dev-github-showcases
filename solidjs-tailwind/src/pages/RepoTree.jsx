@@ -4,7 +4,6 @@ import { BranchNavigation } from '../components/BranchNavigation';
 
 const RepoTree = () => {
   return (
-    <RepoProvider>
       <div class="bg-white h-screen">
         {/* <RepoHeader /> */}
         <div class="max-w-screen-2xl mx-auto md:py-8 px-4">
@@ -16,7 +15,6 @@ const RepoTree = () => {
           </div>
         </div>
       </div>
-    </RepoProvider>
   );
 };
 

@@ -23,7 +23,7 @@ function App() {
           <Route component={OrgProfile} path={ROUTES.ORGPROFILE} />
           <Route component={Repo} path={ROUTES.REPO_DETAILS}>
             <Route component={RepoDetails} path={'/'}  />
-            <Route component={RepoTree} path={ROUTES.REPO_TREE} />
+            <Route component={RepoTree} path={[ROUTES.REPO_TREE, ROUTES.REPO_TREE + '/*']}  />
             {/* <Route component={RepoBlob} path={ROUTES.REPO_BLOB} /> */}
           </Route>
         </Route>
