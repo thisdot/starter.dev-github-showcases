@@ -45,6 +45,7 @@
         class="dropdown-title"
         aria-controls="nav-dropdown"
         on:click|stopPropagation={toggleMenu}
+        data-testid="nav-dropdown"
       >
         <img src={userAvatar} alt="{username} avatar" />
         <ChevronDown16 height="20" width="20" fill="white" />
@@ -55,7 +56,14 @@
             <a href="/{username}" on:click={closeDropdown}> Profile </a>
           </li>
           <li>
-            <button type="button" class="sign-out-btn" on:click={signOut}> Sign out </button>
+            <button
+              type="button"
+              class="sign-out-btn"
+              on:click={signOut}
+              data-testid="sign-out-btn"
+            >
+              Sign out
+            </button>
           </li>
         </ul>
       {/if}
