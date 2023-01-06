@@ -1,8 +1,6 @@
 import { For } from 'solid-js';
 import { Link } from '@solidjs/router';
-import { document } from 'solid-heroicons/outline';
-import { folder } from 'solid-heroicons/solid';
-import { Icon } from 'solid-heroicons';
+import { DocumentIcon, FolderIcon } from '../Icons';
 import styles from './FileExplorer.module.css';
 import { useRepo } from '../../contexts/RepoContext';
 import { useParams } from '@solidjs/router';
@@ -53,9 +51,9 @@ const FileExplorerView = () => {
                 <div class="flex items-center">
                   <div class="mr-2.5">
                     {item.type === 'tree' ? (
-                      <Icon path={folder} class={styles.iconDir} />
+                      <FolderIcon class={styles.iconDir} />
                     ) : (
-                      <Icon path={document} class={styles.iconFile} />
+                      <DocumentIcon class={styles.iconFile} />
                     )}
                   </div>
                   <Link
