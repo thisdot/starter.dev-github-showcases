@@ -2,7 +2,7 @@
 
 This demo application is a small re-implementation of some GitHub pages / functionality built using their GraphQL API.
 
-Netlify URL: https://next-react-query-tailwind.netlify.app
+Netlify URL: https://next-react-query-tailwind.starter.dev
 
 ## Table of Contents
 
