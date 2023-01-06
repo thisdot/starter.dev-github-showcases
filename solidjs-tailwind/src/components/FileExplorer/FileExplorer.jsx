@@ -1,13 +1,10 @@
-import { For } from 'solid-js';
-import { Link } from '@solidjs/router';
+import { createResource, createSignal, createEffect, For } from 'solid-js';
+import { Link, useParams } from '@solidjs/router';
 import { DocumentIcon, FolderIcon } from '../Icons';
 import styles from './FileExplorer.module.css';
 import { useRepo } from '../../contexts/RepoContext';
-import { useParams } from '@solidjs/router';
-import { createResource } from 'solid-js';
 import getRepoTree from '../../services/get-repo-tree';
-import { createSignal } from 'solid-js';
-import { createEffect } from 'solid-js';
+import { parseQueryData } from './parseTree';
 
 const FileExplorerView = () => {
   const [tree, setTree] = createSignal([]);
@@ -28,7 +25,7 @@ const FileExplorerView = () => {
 
   createEffect(() => {
     if (resTree() && !resTree.loading) {
-      setTree(resTree()?.tree);
+      setTree(parseQueryData(resTree()?.tree));
     }
   });
 
