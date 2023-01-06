@@ -5,25 +5,16 @@ import { RepoHeader } from './';
 
 const MOCK_STORE: SharedState = {
   branch: 'HEAD',
-  owner: 'this-dot',
-  name: 'repo',
-  path: '/',
   isLoading: false,
   info: {
-    data: {
-      isPrivate: false,
-      stargazerCount: 10,
-      forkCount: 10,
-      watcherCount: 10,
-      openIssueCount: 10,
-      openPullRequestCount: 10,
-      topics: ['info'],
-      isOrg: false,
-    },
-  },
-  tree: {},
-  readme: {
-    text: 'Just a readme',
+    isPrivate: false,
+    stargazerCount: 10,
+    forkCount: 10,
+    watcherCount: 10,
+    openIssueCount: 10,
+    openPullRequestCount: 10,
+    topics: ['info'],
+    isOrg: false,
   },
 };
 

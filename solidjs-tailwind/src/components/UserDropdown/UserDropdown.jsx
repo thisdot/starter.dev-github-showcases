@@ -1,6 +1,6 @@
 import { NavLink } from '@solidjs/router';
 import { createSignal } from 'solid-js';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon } from '../Icons';
 import { clickOutside } from '../../utils/onclickOutside';
 import styles from './UserDropdown.module.css';
 import { useAuth } from '../../auth';
@@ -41,9 +41,7 @@ const UserDropdown = (props) => {
               />
             )}
           </div>
-          <div class="w-4 ml-1">
-            <ChevronDownIcon />
-          </div>
+          <ChevronDownIcon class="-mr-1 ml-2 h-3 w-3" aria-hidden="true" />
         </button>
         <nav
           class={

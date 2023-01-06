@@ -2,6 +2,7 @@ import type { PageServerLoad } from './$types';
 import {
   buildRepositoryCardViewModel,
   buildRepositoryPageNavigationFilterOptions,
+  composeRepositoryFiltersStateSentence,
   DEFAULT_REPOSITORY_SEARCH_QUERY_PARAMETERS_REQUIRED,
   extractRepositoryPageSearchQueryParameters,
   isRepositorySearchQueryParametersEqual,
@@ -37,7 +38,7 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url, p
   const authenticatedUser = await parent();
   const isAuthenticatedUser = username === authenticatedUser?.login;
 
-  const [profile, organizations, { items: repositories }] = await Promise.all([
+  const [profile, organizations, { items: repositories, totalCount }] = await Promise.all([
     userService.getUserProfile(username),
     isAuthenticatedUser
       ? organizationService.listOrganizationsForAuthenticatedUser()
@@ -78,6 +79,7 @@ export const load: PageServerLoad = async ({ fetch, params: { username }, url, p
         term: searchQueryParameters.term,
       },
       resetFiltersHref,
+      sentence: composeRepositoryFiltersStateSentence(searchQueryParameters, totalCount),
     },
   };
 

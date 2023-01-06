@@ -1,73 +1,47 @@
-import { $, component$, useClientEffect$, useContextProvider, useStore, useTask$ } from '@builder.io/qwik';
-import DropdownStores, { DropdownStoresProps } from '../../context/issue-tab-header-dropdown';
-import issuesPRStore, { IssuesPRStoreProps, Tabs } from '../../context/issue-pr-store';
-import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
-import { sortOptions } from './data';
-import { ChevronDownIcon } from '../icons';
-import { useQuery } from '../../utils';
-import { AUTH_TOKEN, DEFAULT_PAGE_SIZE, GITHUB_GRAPHQL } from '../../utils/constants';
-import PullRequestData from './repo-pulls-data';
-import { PullRequest, PullRequestOrderField, OrderDirection, ParsedPullRequestQuery, Label } from './types';
-import { PULL_REQUEST_QUERY } from '../../utils/queries/pull-request';
 import { isBrowser } from '@builder.io/qwik/build';
+import { useLocation } from '@builder.io/qwik-city';
+import { $, component$, useClientEffect$, useTask$, useContext } from '@builder.io/qwik';
+
 import { parseQuery } from './parseQuery';
+import PullRequestData from './repo-pulls-data';
+import { PullRequestOrderField, OrderDirection, ParsedPullRequestQuery, Label } from './types';
+
+import { Pagination } from '../pagination/pagination';
+import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
 import { ClearFilterAndSortBtn } from '../clear-filter-and-sort-button';
 
+import { useQuery } from '~/utils';
+import { PULL_REQUEST_QUERY } from '~/utils/queries/pull-request';
+import PullRequestContext, { PullRequestContextProps } from '~/context/pull-request-store';
+import { AUTH_TOKEN, GITHUB_GRAPHQL, DEFAULT_PAGE_SIZE } from '~/utils/constants';
+import DropdownContext from '~/context/issue-tab-header-dropdown';
+import { sortOptions } from './data';
+
 export interface PullRequestsProps {
-  activeTab: Tabs;
   owner: string;
   name: string;
-}
-
-export interface DropdownStores {
-  selectedLabel: string;
-  selectedSort: string;
 }
 
 interface PullRequestsQueryParams {
   owner: string;
   name: string;
   first: number;
+  after?: string;
+  before?: string;
   labels?: string[];
   orderBy: string;
   direction: string;
 }
 
-interface PullRequestStore {
-  closedPullRequest: PullRequest[];
-  openPullRequest: PullRequest[];
-  pullRequestLabels: { value: string; label: string }[];
-  closedPullRequestCount: number;
-  openPullRequestCount: number;
-  loading: boolean;
-}
+export default component$(({ owner, name }: PullRequestsProps) => {
+  const location = useLocation();
+  const pullRequestStore = useContext(PullRequestContext);
+  const dropdownStore = useContext(DropdownContext);
 
-export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
-  const DEFAULT_TAB = 'open';
+  const afterCursor = typeof location.query.after === 'string' ? location.query.after : undefined;
+  const beforeCursor = typeof location.query.before === 'string' ? location.query.before : undefined;
 
-  const store = useStore<IssuesPRStoreProps>({
-    activeTab: activeTab,
-  });
-
-  const dropdownStore = useStore<DropdownStoresProps>({
-    selectedLabel: undefined,
-    selectedSort: sortOptions[0].value,
-  });
-
-  const pullRequestStore = useStore<PullRequestStore>({
-    closedPullRequest: [],
-    closedPullRequestCount: 0,
-    openPullRequestCount: 0,
-    pullRequestLabels: [],
-    openPullRequest: [],
-    loading: true,
-  });
-
-  useContextProvider(issuesPRStore, store);
-  useContextProvider(DropdownStores, dropdownStore);
-
-  const hasActiveFilter =
-    dropdownStore.selectedLabel !== undefined || dropdownStore.selectedSort !== sortOptions[0].value;
+  const hasActiveFilter = dropdownStore.selectedLabel || dropdownStore.selectedSort !== sortOptions[0].value;
 
   const resetFilters$ = $(() => {
     dropdownStore.selectedLabel = undefined;
@@ -85,6 +59,8 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
         labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
         orderBy: PullRequestOrderField.CreatedAt,
         direction: OrderDirection.Desc,
+        after: afterCursor,
+        before: beforeCursor,
       },
       abortController
     );
@@ -94,7 +70,9 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
 
   useTask$(async ({ track }) => {
     const abortController = new AbortController();
-    track(() => store.activeTab);
+    const after = track(() => location.query.after);
+    const before = track(() => location.query.before);
+    track(() => pullRequestStore.activeTab);
     track(() => dropdownStore.selectedSort);
     track(() => dropdownStore.selectedLabel);
 
@@ -107,6 +85,8 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
         {
           owner,
           name,
+          after,
+          before,
           first: DEFAULT_PAGE_SIZE,
           labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
           orderBy: dropdownStore.selectedSort.split('^')[0],
@@ -114,7 +94,6 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
         },
         abortController
       );
-      console.log(parseQuery(response));
       updatePullRequestState(pullRequestStore, parseQuery(response));
     }
   });
@@ -128,51 +107,56 @@ export default component$(({ activeTab, owner, name }: PullRequestsProps) => {
       )}
       <div class="border border-gray-300 rounded-lg">
         <PullRequestIssueTab
+          tabType="pr"
+          sortOption={sortOptions}
+          labelOption={pullRequestStore.pullRequestLabels}
           openCount={pullRequestStore.openPullRequestCount}
           closedCount={pullRequestStore.closedPullRequestCount}
-          tabType="pr"
-          labelOption={pullRequestStore.pullRequestLabels}
-          sortOption={sortOptions}
         />
-        {pullRequestStore.loading && (
-          <div class=" animate-pulse p-3 flex flex-col gap-2">
+        {pullRequestStore.loading ? (
+          <div class="animate-pulse p-3 flex flex-col gap-2">
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
           </div>
+        ) : (
+          <PullRequestData
+            pull_request={
+              pullRequestStore.activeTab === 'open'
+                ? pullRequestStore.openPullRequest
+                : pullRequestStore.closedPullRequest
+            }
+          />
         )}
-        <PullRequestData
-          pull_request={
-            store.activeTab === DEFAULT_TAB ? pullRequestStore.openPullRequest : pullRequestStore.closedPullRequest
-          }
+      </div>
+      {(pullRequestStore.openPageInfo?.hasNextPage ||
+        pullRequestStore.openPageInfo?.hasPreviousPage ||
+        pullRequestStore.closedPageInfo?.hasNextPage ||
+        pullRequestStore.closedPageInfo?.hasPreviousPage) && (
+        <Pagination
+          tab={pullRequestStore.activeTab}
+          pageInfo={pullRequestStore.activeTab ? pullRequestStore.openPageInfo : pullRequestStore.closedPageInfo}
+          owner={`${owner}/${name}/pulls`}
         />
-      </div>
-      <div class="flex items-center justify-center gap-4 mt-5">
-        <button class="flex items-center gap-1 text-base">
-          <ChevronDownIcon className="rotate-90 w-3 h-3 translate-y-[0.1rem]" />
-          Prev
-        </button>
-        <button class="flex items-baseline gap-1 text-sm">
-          Next
-          <ChevronDownIcon className="-rotate-90 w-3 h-3 translate-y-[0.1rem]" />
-        </button>
-      </div>
+      )}
     </>
   );
 });
 
-export function updatePullRequestState(store: PullRequestStore, response: ParsedPullRequestQuery) {
+export function updatePullRequestState(store: PullRequestContextProps, response: ParsedPullRequestQuery) {
   const { closedPullRequests, openPullRequests, labels } = response;
   store.closedPullRequest = closedPullRequests.pullRequests;
   store.openPullRequest = openPullRequests.pullRequests;
   store.closedPullRequestCount = closedPullRequests.totalCount;
   store.openPullRequestCount = openPullRequests.totalCount;
   store.pullRequestLabels = labels.map((lab: Label) => ({ label: lab.name, value: lab.name }));
+  store.openPageInfo = openPullRequests.pageInfo;
+  store.closedPageInfo = closedPullRequests.pageInfo;
   store.loading = false;
 }
 
 export async function fetchRepoPullRequests(
-  { owner, name, first, labels, orderBy, direction }: PullRequestsQueryParams,
+  { owner, name, first, after, before, labels, orderBy, direction }: PullRequestsQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(PULL_REQUEST_QUERY);
@@ -186,6 +170,8 @@ export async function fetchRepoPullRequests(
       labels,
       orderBy,
       direction,
+      after,
+      before,
     },
     headersOpt: {
       Accept: 'application/vnd.github+json',
