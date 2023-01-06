@@ -2,7 +2,6 @@ import { beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
 import NavBar from './NavBar.svelte';
 import userEvent from '@testing-library/user-event';
-import type { SvelteComponentDev } from 'svelte/internal';
 
 const MOCK_NAVBAR = {
   username: 'thisdot',
@@ -10,19 +9,16 @@ const MOCK_NAVBAR = {
 };
 
 describe('Navbar Component', () => {
-  let NavbarComponent: SvelteComponentDev;
   beforeEach(() => {
-    const NavbarComponent = render(NavBar, {
+    render(NavBar, {
       username: MOCK_NAVBAR.username,
       userAvatar: MOCK_NAVBAR.userAvatar,
     });
   });
 
   it('should render avatar of user', async () => {
-    const { getByAltText } = NavbarComponent;
-    const image = getByAltText(`${MOCK_NAVBAR.username} avatar`);
-
-    expect(image.src).toContain(MOCK_NAVBAR.userAvatar);
+    const image = screen.getByAltText(`${MOCK_NAVBAR.username} avatar`);
+    expect(image.getAttribute('src')).toBe(MOCK_NAVBAR.userAvatar);
   });
 
   it('should render profile link', async () => {
@@ -40,6 +36,6 @@ describe('Navbar Component', () => {
     const signOutBtn = screen.getByTestId('sign-out-btn');
     await userEvent.click(signOutBtn);
 
-    expect(document.location.href).toEqual('/');
+    expect(document.location.href).toEqual('http://localhost:3000/');
   });
 });
