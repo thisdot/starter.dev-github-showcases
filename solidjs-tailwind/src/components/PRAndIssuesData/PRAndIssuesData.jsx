@@ -5,11 +5,11 @@ import { PRAndIssuesHeader } from "../PRAndIssuesHeader";
 export const PRAndIssuesData = (props) => {
   return (
     <div class="border border-gray-300 rounded-lg">
-      {props.pulls.length > 0 ? (
+      {props.data.length > 0 ? (
         <div>
           <PRAndIssuesHeader {...props}/>
-          <For each={props.pulls}>
-            {(pulls) => <PRAndIssuesListItem {...pulls()} />}
+          <For each={props.data}>
+            {(data) => <PRAndIssuesListItem {...data()} />}
           </For>
         </div>
       ) : (

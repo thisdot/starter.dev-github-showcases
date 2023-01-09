@@ -6,7 +6,7 @@ import { PRAndIssuesData } from '../PRAndIssuesData/PRAndIssuesData';
 const RepoPullRequests = () => {
   const params = useParams();
 
-  const [pulls, setPulls] = createSignal([]);
+  const [data, setData] = createSignal([]);
   const [openCount, setOpenCount] = createSignal();
   const [closedCount, setClosedCount] = createSignal();
   const [tabActive, setActiveTab] = createSignal('open');
@@ -17,7 +17,7 @@ const RepoPullRequests = () => {
     if (resp() && !resp.loading) {
       setOpenCount(resp().openPullRequests.totalCount)
       setClosedCount(resp().closedPullRequests.totalCount)
-      setPulls(tabActive() === 'open' ? resp().openPullRequests.pullRequests : resp().closedPullRequests.pullRequests);
+      setData(tabActive() === 'open' ? resp().openPullRequests.pullRequests : resp().closedPullRequests.pullRequests);
     }
   });
 
@@ -27,7 +27,7 @@ const RepoPullRequests = () => {
           <div>Loading...</div>
         ) : (
           <PRAndIssuesData 
-            pulls={pulls()} 
+            data={data()} 
             tabActive={tabActive()} 
             setActiveTab={setActiveTab} 
             openCount={openCount()}
