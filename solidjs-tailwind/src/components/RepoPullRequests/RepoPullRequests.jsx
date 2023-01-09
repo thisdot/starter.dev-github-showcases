@@ -7,15 +7,17 @@ const RepoPullRequests = () => {
   const params = useParams();
 
   const [pulls, setPulls] = createSignal([]);
+  const [openCount, setOpenCount] = createSignal();
+  const [closedCount, setClosedCount] = createSignal();
+  const [tabActive, setActiveTab] = createSignal('open');
 
   const [resp] = createResource(() => getRepoPullRequests({owner: params.owner, name: params.name}));
 
   createEffect(() => {
     if (resp() && !resp.loading) {
-      // TO BE FIXED: for now I'm passing only the open PRs to the page, whenever the header of the table will be 
-      // implemented and added to PRAndIssuesData component, we must pass all prs here and then inside the component 
-      // decide what prs show (open or closed)
-      setPulls(resp().openPullRequests.pullRequests);
+      setOpenCount(resp().openPullRequests.totalCount)
+      setClosedCount(resp().closedPullRequests.totalCount)
+      setPulls(tabActive() === 'open' ? resp().openPullRequests.pullRequests : resp().closedPullRequests.pullRequests);
     }
   });
 
@@ -24,7 +26,13 @@ const RepoPullRequests = () => {
         {resp.loading ? (
           <div>Loading...</div>
         ) : (
-          <PRAndIssuesData pulls={pulls()}/>
+          <PRAndIssuesData 
+            pulls={pulls()} 
+            tabActive={tabActive()} 
+            setActiveTab={setActiveTab} 
+            openCount={openCount()}
+            closedCount={closedCount()}
+          />
         )}
       </div>
     );

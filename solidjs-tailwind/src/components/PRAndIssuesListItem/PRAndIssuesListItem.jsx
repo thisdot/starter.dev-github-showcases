@@ -4,8 +4,8 @@
 /* eslint-disable */ 
 import { splitProps } from 'solid-js';
 import { format } from 'date-fns';
-import cn from 'classnames';
 import { useLocation } from '@solidjs/router';
+import cn from 'classnames';
 import { IssuesIcon, 
          PullRequestIcon, 
          MergedPrIcon, 
@@ -14,9 +14,8 @@ import { IssuesIcon,
         } from '../Icons';
 
 const PRAndIssuesListItem = (props) => {
-    const { pathname } = useLocation();
-
-    const type = pathname.includes('pulls') ? 'pr' : 'issue'
+  const { pathname } = useLocation();
+  const type = pathname.includes('pulls') ? 'pr' : 'issue'
 
     const [local] = splitProps(props, [
       'number',
@@ -26,7 +25,7 @@ const PRAndIssuesListItem = (props) => {
       'createdAt',
       'authorName',
       'commentCount',
-      'labels'
+      'labels',
     ]);
 
     return (

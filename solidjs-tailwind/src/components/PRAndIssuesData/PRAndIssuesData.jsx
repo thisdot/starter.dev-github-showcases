@@ -1,14 +1,15 @@
 import { For } from "solid-js";
 import { PRAndIssuesListItem } from "../PRAndIssuesListItem";
-
+import { PRAndIssuesHeader } from "../PRAndIssuesHeader";
 
 export const PRAndIssuesData = (props) => {
   return (
     <div class="border border-gray-300 rounded-lg">
       {props.pulls.length > 0 ? (
         <div>
+          <PRAndIssuesHeader {...props}/>
           <For each={props.pulls}>
-            {(pulls) => <PRAndIssuesListItem {...pulls()}  />}
+            {(pulls) => <PRAndIssuesListItem {...pulls()} />}
           </For>
         </div>
       ) : (
