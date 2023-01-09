@@ -5,7 +5,7 @@ const ROUTES = {
   PROFILE: '/:login',
   ORGPROFILE: '/orgs/:org',
   REPO_DETAILS: '/:owner/:name',
-  REPO_TREE: '/tree/:branch/:path',
+  REPO_TREE: '/tree/:branch/*path',
   REPO_BLOB: '/blob/:branch/:path',
 };
 
