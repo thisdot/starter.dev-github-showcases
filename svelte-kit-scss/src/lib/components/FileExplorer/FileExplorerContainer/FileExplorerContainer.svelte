@@ -10,7 +10,7 @@
   $: items = sortFolderContentItems(contents);
 </script>
 
-<div class="container file-list" data-testid="file-list">
+<div class="file-list">
   {#if parentHref}
     <div class="item up-to-parent">
       <a href={parentHref} class="parent-link" data-testid="file-list-parent-link">. .</a>

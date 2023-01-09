@@ -64,17 +64,15 @@
     }
 
     .details {
+      display: none;
+      @media (min-width: variables.$md) {
+        display: flex;
+      }
       flex: 0 0 25%;
-      display: flex;
       .detail {
         flex: 1;
         text-align: right;
         line-height: normal;
-        .comments {
-          .count {
-            display: inline-block;
-          }
-        }
       }
     }
   }

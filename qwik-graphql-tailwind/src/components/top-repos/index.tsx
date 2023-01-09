@@ -5,6 +5,7 @@ import TopReposListItems from './top-repos-card';
 import { useQuery } from '~/utils/useQuery';
 import { parseQuery } from './parseQuery';
 import { TopRepo } from './types';
+import { LoadingPulseDot } from '../Loading/loading-pulse-dot';
 
 interface RepoStore {
   login: '';
@@ -30,7 +31,7 @@ export default component$(() => {
       <h2 data-testid="show repo list" class="text-lg font-medium mb-4">
         Top Repositories
       </h2>
-      {store.isLoading ? <div>Loading...</div> : <TopReposListItems repos={store.data} login={store.login} />}
+      {store.isLoading ? <LoadingPulseDot /> : <TopReposListItems repos={store.data} login={store.login} />}
     </div>
   );
 });

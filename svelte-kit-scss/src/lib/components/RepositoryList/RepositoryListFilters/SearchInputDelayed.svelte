@@ -68,6 +68,9 @@
       left: 0;
       top: 0;
       padding: 0.25em 0.5em;
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
     .input {
       font-size: 1em;

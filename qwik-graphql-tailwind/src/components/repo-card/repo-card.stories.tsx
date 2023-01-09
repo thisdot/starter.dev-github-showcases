@@ -27,9 +27,4 @@ Demo.args = {
     languageColor: '#2b7489',
     updatedAt: '2019-01-17T23:41:24Z',
   },
-  styles: {
-    item: 'col-span-12 md:col-span-7',
-    headingLink: 'text-xl text-blue-600 font-semibold hover:underline mr-3',
-    description: 'text-gray-600 text-sm max-w-prose',
-  },
 };

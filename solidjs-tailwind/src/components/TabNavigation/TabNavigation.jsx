@@ -5,12 +5,7 @@ import styles from './TabNavigation.module.css';
 
 const TabNavigation = (props) => {
   const isCurrentTab = (pathName) => {
-    const otherPaths = props.tabs
-      .filter(({ path }) => path !== pathName)
-      .map(({ path }) => path);
-    return pathName !== ''
-      ? props.pathname.includes(pathName)
-      : otherPaths.every((path) => props.pathname.includes(path));
+    return pathName !== '' ? props.pathname.includes(pathName) : true;
   };
 
   return (
@@ -41,7 +36,7 @@ const TabNavigation = (props) => {
                   )}
                 />
                 <span>{item.title}</span>
-                {typeof count === 'number' && (
+                {typeof item.count === 'number' && (
                   <span class="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">
                     {item.count}
                   </span>

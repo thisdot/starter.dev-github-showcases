@@ -5,16 +5,18 @@ import {
   type GithubIssueMilestone,
   type IssueMilestone,
 } from '$lib/interfaces';
-import { error } from '@sveltejs/kit';
+import { AbstractFetchService } from './abstract-fetch-service';
 
 const SEARCH_PARAMS = {
   STATE: 'state',
 };
 
-export class IssueMilestoneService {
+export class IssueMilestoneService extends AbstractFetchService {
   constructor(
-    private fetch: (input: URL | RequestInfo, init?: RequestInit | undefined) => Promise<Response>
-  ) {}
+    fetch: (input: URL | RequestInfo, init?: RequestInit | undefined) => Promise<Response>
+  ) {
+    super(fetch);
+  }
 
   async getOpenMilestones(owner: string, repo: string): Promise<IssueMilestone[]> {
     const milestones = await this.requestMilestones(owner, repo, {
@@ -35,12 +37,8 @@ export class IssueMilestoneService {
       getItemsUrl.searchParams.append(SEARCH_PARAMS.STATE, parameters.state);
     }
 
-    const response = await this.fetch(getItemsUrl.toString());
-    if (!response.ok) {
-      const body = await response.json();
-      throw error(response.status, body?.message || response.statusText);
-    }
-    const responseBodyJson = (await response.json()) as Promise<GithubIssueMilestone[]>;
-    return responseBodyJson;
+    const items = await this.rejectableFetchJson<GithubIssueMilestone[]>(getItemsUrl);
+
+    return items;
   }
 }

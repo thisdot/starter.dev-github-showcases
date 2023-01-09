@@ -6,7 +6,7 @@
     'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
   --font-mono: 'Fira Mono', monospace;
-  --color-text: #000000;
+  --color-text: variables.$gray800;
   font-family: var(--font-body);
   color: var(--color-text);
 }
@@ -38,90 +38,6 @@ a {
 .octicon {
   fill: currentColor;
   overflow: visible;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.grid {
-  display: grid;
-}
-
-.grid-cols-12 {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-}
-
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-
-.col-span-9 {
-  grid-column: span 9 / span 9;
-}
-
-.col-span-12 {
-  grid-column: span 12 / span 12;
-}
-
-@media (max-width: variables.$sm) {
-  .col-sm-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .col-sm-span-9 {
-    grid-column: span 9 / span 9;
-  }
-
-  .col-sm-span-12 {
-    grid-column: span 12 / span 12;
-  }
-}
-
-@media (max-width: variables.$md) {
-  .col-md-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .col-md-span-9 {
-    grid-column: span 9 / span 9;
-  }
-
-  .col-md-span-12 {
-    grid-column: span 12 / span 12;
-  }
-}
-
-@media (max-width: variables.$lg) {
-  .col-lg-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .col-lg-span-9 {
-    grid-column: span 9 / span 9;
-  }
-
-  .col-lg-span-12 {
-    grid-column: span 12 / span 12;
-  }
-}
-
-@media (min-width: variables.$xl + 1) {
-  .col-xl-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .col-xl-span-9 {
-    grid-column: span 9 / span 9;
-  }
-
-  .col-xl-span-12 {
-    grid-column: span 12 / span 12;
-  }
-}
-
-.subpage {
-  padding: 2rem 1rem;
 }
 
 .container {

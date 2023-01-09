@@ -5,6 +5,8 @@ export const StarIcon = (props) => (
     viewBox="0 0 24 24"
     stroke-width="1.5"
     stroke="currentColor"
+    height="1rem"
+    width="1rem"
     class={props.class ?? ''}
   >
     <path

@@ -106,3 +106,9 @@ yarn start
 ```
 
 Open your browser to [http://localhost:3000](http://localhost:3000)
+
+## Live Demo
+
+This demo app gets deployed to Netlify on changes to the `main` branch.
+
+https://cra-rxjs-styled-components.starter.dev

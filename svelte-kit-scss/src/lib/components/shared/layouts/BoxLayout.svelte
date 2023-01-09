@@ -1,10 +1,15 @@
+<script lang="ts">
+  let borderAreaHeight: number;
+  $: borderAreaEmpty = !borderAreaHeight;
+</script>
+
 <div class="box-layout">
   {#if $$slots.top}
     <div class="top">
       <slot name="top" />
     </div>
   {/if}
-  <div class="border-area">
+  <div class="border-area" bind:clientHeight={borderAreaHeight} class:empty={borderAreaEmpty}>
     {#if $$slots.header}
       <div class="header">
         <slot name="header" />
@@ -35,6 +40,9 @@
       border: $border;
       border-radius: 6px;
       background-color: variables.$white;
+      &.empty {
+        border: none;
+      }
       .header,
       .footer {
         padding: 1em;

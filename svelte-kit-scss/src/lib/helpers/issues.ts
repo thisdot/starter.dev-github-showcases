@@ -1,19 +1,11 @@
 import {
-  type GithubSearchIssueLabel,
   type GithubSearchIssue,
   type Issue,
-  type IssueLabel,
   type IssueUser,
   type GithubSearchIssueUser,
   IssueState,
 } from '$lib/interfaces';
-
-const remapIssueLabel = (label: GithubSearchIssueLabel): IssueLabel => ({
-  id: label.id,
-  url: label.url,
-  name: label.name,
-  color: label.color,
-});
+import { remapIssueLabel } from './issue-label';
 
 const remapIssueUser = (user: GithubSearchIssueUser): IssueUser => ({
   login: user.login,

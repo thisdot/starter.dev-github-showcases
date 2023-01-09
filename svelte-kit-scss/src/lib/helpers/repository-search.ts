@@ -1,3 +1,4 @@
+import type { HtmlSentenceNode } from '$lib/components/shared/HtmlSentence/view-models';
 import { RepositorySearchSort, RepositorySearchType } from '$lib/constants/repository-search';
 import type {
   RepositoryPageSearchQueryParameters,
@@ -107,4 +108,81 @@ export const buildRepositoryPageNavigationFilterOptions = <
       label,
     };
   });
+};
+
+export const composeRepositoryFiltersStateSentence = (
+  { language, sort, term, type }: RepositorySearchQueryParameters,
+  resultsCount: number
+): HtmlSentenceNode[] => {
+  const resultCountNodes: HtmlSentenceNode[] = [
+    {
+      text: String(resultsCount),
+      emphasis: true,
+    },
+    {
+      text: 'results for',
+    },
+  ];
+
+  let typeText: string;
+  switch (type) {
+    case RepositorySearchType.Archived:
+    case RepositorySearchType.Public:
+    case RepositorySearchType.Private:
+      typeText = type;
+      break;
+    case RepositorySearchType.Sources:
+    case RepositorySearchType.Mirrors:
+    case RepositorySearchType.Templates:
+      typeText = type.slice(0, -1);
+      break;
+    case RepositorySearchType.Forks:
+      typeText = 'forked';
+      break;
+    default:
+      typeText = 'all';
+  }
+
+  const typeNodes: HtmlSentenceNode[] = [
+    {
+      text: typeText,
+      emphasis: true,
+    },
+    {
+      text: 'repositories',
+    },
+  ];
+
+  const termNodes: HtmlSentenceNode[] = term
+    ? [
+        {
+          text: 'matching',
+        },
+        {
+          text: term,
+          emphasis: true,
+        },
+      ]
+    : [];
+
+  let sortedByText: string;
+  switch (sort) {
+    case RepositorySearchSort.Name:
+    case RepositorySearchSort.Stars: {
+      sortedByText = sort;
+      break;
+    }
+    default:
+      sortedByText = 'last updated';
+  }
+  const sortedByNodes = [
+    {
+      text: 'sorted by',
+    },
+    {
+      text: sortedByText,
+      emphasis: true,
+    },
+  ];
+  return [...resultCountNodes, ...typeNodes, ...termNodes, ...sortedByNodes];
 };

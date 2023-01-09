@@ -3,7 +3,7 @@ export type RepoPullRequestsQuery = {
   repository?:
     | {
         __typename?: 'Repository';
-        openPullRequests: {
+        openPullRequest: {
           __typename?: 'PullRequestConnection';
           totalCount: number;
           pageInfo: {
@@ -63,7 +63,7 @@ export type RepoPullRequestsQuery = {
             | null
             | undefined;
         };
-        closedPullRequests: {
+        closedPullRequest: {
           __typename?: 'PullRequestConnection';
           totalCount: number;
           pageInfo: {
@@ -128,20 +128,14 @@ export type RepoPullRequestsQuery = {
     | undefined;
 };
 
-export interface Label {
-  color: string;
-  name: string;
-}
-
 export type PullRequest = {
   id: string;
   url: string;
   state: string;
-  author: { login: string };
   comments: {
     totalCount: number;
   };
-  login?: string | null;
+  login: string;
   title: string;
   number: number;
   closed: boolean;
@@ -153,3 +147,34 @@ export type PullRequest = {
   commentCount: number;
   labelCount: number;
 };
+
+export enum PullRequestOrderField {
+  /** Order issues by comment count */
+  Comments = 'COMMENTS',
+  /** Order issues by creation time */
+  CreatedAt = 'CREATED_AT',
+  /** Order issues by update time */
+  UpdatedAt = 'UPDATED_AT',
+}
+
+export enum OrderDirection {
+  Asc = 'ASC',
+  Desc = 'DESC',
+}
+
+export interface Label {
+  color: string;
+  name: string;
+}
+
+export interface ParsedPullRequestQuery {
+  openPullRequests: ParsedPullRequest;
+  closedPullRequests: ParsedPullRequest;
+  labels: Label[];
+}
+
+export interface ParsedPullRequest {
+  pullRequests: PullRequest[];
+  totalCount: number;
+  pageInfo: { hasNextPage: boolean; hasPreviousPage: boolean };
+}

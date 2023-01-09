@@ -154,3 +154,9 @@ You can check out the [contribution guide](CONTRIBUTING.md) to understand what t
 ### Acknowledgement
 
 The Quasar Logo is licensed under a Creative Commons Attribution 4.0 International License by [Emanuele Bertoldi.](https://github.com/zuck)
+
+## Live Demo
+
+This demo app gets deployed to Netlify on changes to the `main` branch.
+
+https://vue3-apollo-quasar.starter.dev
