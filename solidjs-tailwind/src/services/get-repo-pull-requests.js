@@ -74,9 +74,9 @@ function parsePullRequests(connection) {
   * }
   */
 
-const getRepoPullRequests = async ({ owner, name }) => {
+const getRepoPullRequests = async ({ owner, name, orderBy, direction, labels }) => {
   const { authStore } = useAuth();
-
+  console.log(labels)
   const data = {
     url: `${GITHUB_GRAPHQL}`,
     query: REPO_PULL_REQUESTS,
@@ -84,9 +84,9 @@ const getRepoPullRequests = async ({ owner, name }) => {
       owner,
       name,
       first: 30,
-      labels: undefined,
-      orderBy: 'CREATED_AT',
-      direction: 'DESC',
+      labels,
+      orderBy,
+      direction,
     },
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,

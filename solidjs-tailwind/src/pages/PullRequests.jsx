@@ -1,11 +1,11 @@
 import { RepoHeader } from "../components/RepoHeader"
 import { RepoPullRequests } from "../components/RepoPullRequests"
 
-const PullReqAndIssues = () => {
+const PullRequests = () => {
     return <div class="bg-white h-screen">
         <RepoHeader/>
         <RepoPullRequests/>
     </div>
 }
 
-export default PullReqAndIssues
+export default PullRequests

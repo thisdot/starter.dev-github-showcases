@@ -1,10 +1,17 @@
 import cn from 'classnames';
 import {CheckIcon, PullRequestIcon, IssuesIcon } from '../Icons';
 import { useLocation } from '@solidjs/router';
+import FilterDropdown from '../RepoFilter/FilterDropdown';
+import {SORT_OPTIONS} from './data'
+import { createMemo } from 'solid-js';
 
 const PRAndIssuesHeader = (props) => {
   const { pathname } = useLocation();
   const type = pathname.includes('pulls') ? 'pr' : 'issue'
+  const sortOptions = Object.values(SORT_OPTIONS)
+  const selectSort = (value) =>  props.setSortBy(value);
+  const labelOptions = createMemo(() => Object.values({...props.labelOpt.map((label) => label.name)}))
+  const selectLabel = (value) =>  props.setSelectedLabel(value)
 
   return (
     <div class="flex flex-wrap space-x-1 space-y-2 md:space-x-0 md:space-y-0 items-center justify-between p-4 bg-gray-100 border-b rounded-t-lg">
@@ -28,7 +35,24 @@ const PRAndIssuesHeader = (props) => {
           Closed
         </button>
       </div>
-      <div class="flex items-center space-x-8" />
+      <div class="flex items-center space-x-8">
+        {labelOptions && <div>
+          <FilterDropdown name="Label"
+            selected={props.selectedLabel}
+            items={labelOptions()}
+            selectOption={selectLabel}
+            class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
+          />
+        </div>}
+        <div>
+          <FilterDropdown name="Sort"
+            selected={props.sortBy}
+            items={sortOptions}
+            selectOption={selectSort}
+            class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
+          />
+        </div>
+      </div>
     </div>
   );
 }
