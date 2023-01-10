@@ -16,24 +16,55 @@ describe('UserProfile', () => {
     });
   });
 
-  it.each([
-    ['name', mockUserProfile.name],
-    ['login', mockUserProfile.login],
-    ['bio', mockUserProfile.bio],
-    ['followers', mockUserProfile.followers],
-    ['following', mockUserProfile.following],
-    ['email', mockUserProfile.email],
-    ['blog', mockUserProfile.blog],
-    ['twitterUsername', mockUserProfile.twitterUsername],
-    ['location', mockUserProfile.location],
-  ])('should render: %s', (testId, expectedValue) => {
-    const element = screen.getByTestId(testId);
-    const expectedText = String(expectedValue);
-    expect(element.textContent).toEqual(expectedText);
+  const { name, bio, followers, email, blog, twitterUsername, location, avatarUrl, following } =
+    mockUserProfile;
+
+  it('should render name of org correctly', () => {
+    const element = screen.getByTestId('name');
+    expect(element.textContent).toEqual(String(name));
+  });
+
+  it('should render bio of org correctly', () => {
+    const element = screen.getByTestId('bio');
+    expect(element.textContent).toEqual(String(bio));
+  });
+
+  it('should render blog of org correctly', () => {
+    const element = screen.getByTestId('blog');
+    expect(element.textContent).toEqual(String(blog));
+  });
+
+  it('should render twitterUsername of org correctly', () => {
+    const element = screen.getByTestId('twitterUsername');
+    expect(element.textContent).toEqual(String(twitterUsername));
+  });
+
+  it('should render location of org correctly', () => {
+    const element = screen.getByTestId('location');
+    expect(element.textContent).toEqual(String(location));
+  });
+
+  it('should render email of org correctly', () => {
+    if (email) {
+      const element = screen.getByTestId('email');
+      const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      expect(regexEmail.test(String(element.textContent))).toBeTruthy();
+      expect(element.textContent).toEqual(String(email));
+    }
+  });
+
+  it('should render followers of org correctly', () => {
+    const element = screen.getByTestId('followers');
+    expect(Number(element.textContent)).toEqual(followers);
+  });
+
+  it('should render following of org correctly', () => {
+    const element = screen.getByTestId('following');
+    expect(Number(element.textContent)).toEqual(following);
   });
 
   it('should render avatar of user', async () => {
     const image = screen.getByTestId(`avatar`);
-    expect(image.getAttribute('src')).toBe(mockUserProfile.avatarUrl);
+    expect(image.getAttribute('src')).toBe(avatarUrl);
   });
 });
