@@ -59,7 +59,7 @@ export const MARKDOWN_ALLOWED_ENCODING: BufferEncoding[] = [
 /** **Use only on server side!** */
 export const buildMarkdownPreviewHtml = (file: GithubFileContentsItem): string => {
   const { content, encoding } = file;
-  const md = new MarkdownIt();
+  const md = new MarkdownIt({ html: true });
   const bufferEncoding = MARKDOWN_ALLOWED_ENCODING.find((x) => x === encoding);
   if (!bufferEncoding) {
     console.warn(`Unsupported encoding: ${bufferEncoding}`);
