@@ -43,5 +43,9 @@
     border: 1px solid variables.$gray300;
     border-radius: 0.25rem;
     border-top: none;
+
+    :global(*) {
+      max-width: 100%;
+    }
   }
 </style>
