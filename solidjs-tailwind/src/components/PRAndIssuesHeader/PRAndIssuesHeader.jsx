@@ -1,34 +1,43 @@
 import cn from 'classnames';
 import {CheckIcon, PullRequestIcon, IssuesIcon } from '../Icons';
-import { useLocation } from '@solidjs/router';
-import FilterDropdown from '../RepoFilter/FilterDropdown';
-import {SORT_OPTIONS} from './data'
+import FilterDropdown from '../FilterDropDown/FilterDropdown';
+import { SORT_OPTIONS } from '../../utils/constants';
 import { createMemo } from 'solid-js';
+import { usePrAndIssuesParams } from '../../contexts/PrAndIssuesContext';
 
 const PRAndIssuesHeader = (props) => {
-  const { pathname } = useLocation();
-  const type = pathname.includes('pulls') ? 'pr' : 'issue'
+  const {
+    type,
+    setActiveTab, 
+    sortBy, 
+    setSortBy, 
+    setSelectedLabel, 
+    labelOpt,
+    selectedLabel, 
+    tabActive
+  } = usePrAndIssuesParams()
+
   const sortOptions = Object.values(SORT_OPTIONS)
-  const selectSort = (value) =>  props.setSortBy(value);
-  const labelOptions = createMemo(() => Object.values({...props.labelOpt.map((label) => label.name)}))
-  const selectLabel = (value) =>  props.setSelectedLabel(value)
+  const selectSort = (value) =>  setSortBy(value);
+  const labelOptions = createMemo(() => Object.values({...labelOpt().map((label) => label.name)}))
+  const selectLabel = (value) =>  setSelectedLabel(value)
 
   return (
     <div class="flex flex-wrap space-x-1 space-y-2 md:space-x-0 md:space-y-0 items-center justify-between p-4 bg-gray-100 border-b rounded-t-lg">
       <div class="flex space-x-4">
         <button class={cn('text-xs flex items-center gap-1 text-gray-600', {
-          'font-semibold text-gray-900': props.tabActive === 'open',
+          'font-semibold text-gray-900': tabActive() === 'open',
         })} 
-          onClick={() => props.setActiveTab('open')}
+          onClick={() => setActiveTab('open')}
         >
           {type === 'pr' ? <PullRequestIcon class='w-4 h-4' /> : <IssuesIcon class='w-4 h-4' />}
           <span>{props.openCount}</span>
           Open
         </button>
         <button class={cn('text-xs flex items-center gap-1 text-gray-600', {
-            'font-semibold text-gray-900': props.tabActive === 'closed',
+            'font-semibold text-gray-900': tabActive() === 'closed',
           })} 
-          onClick={() => props.setActiveTab('closed')}
+          onClick={() => setActiveTab('closed')}
         >
           <CheckIcon class='w-4 h-4' />
           <span>{props.closedCount}</span>
@@ -38,7 +47,7 @@ const PRAndIssuesHeader = (props) => {
       <div class="flex items-center space-x-8">
         {labelOptions && <div>
           <FilterDropdown name="Label"
-            selected={props.selectedLabel}
+            selected={selectedLabel()}
             items={labelOptions()}
             selectOption={selectLabel}
             class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
@@ -46,7 +55,7 @@ const PRAndIssuesHeader = (props) => {
         </div>}
         <div>
           <FilterDropdown name="Sort"
-            selected={props.sortBy}
+            selected={sortBy()}
             items={sortOptions}
             selectOption={selectSort}
             class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
