@@ -5,7 +5,7 @@
 </script>
 
 <div class="comments-count">
-  <Comment16 class="icon" /><span class="count">{count}</span>
+  <Comment16 class="icon" /><span class="count" data-testid="issue-comments-count">{count}</span>
 </div>
 
 <style lang="scss">

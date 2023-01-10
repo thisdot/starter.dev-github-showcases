@@ -1,10 +1,21 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import IssueSearchList from './IssueSearchList.svelte';
+import { render, screen } from '@testing-library/svelte';
+import { IssueState } from '$lib/interfaces';
+import { MOCK_ISSUE_ARRAY } from '$lib/helpers/mocks/issues';
 
 describe('IssueSearch', () => {
+  beforeEach(() => {
+    render(IssueSearchList, {
+      items: MOCK_ISSUE_ARRAY,
+    });
+  });
+
   describe('List issues', () => {
-    it.todo('should list open issues');
-    it.todo('should list closed issues');
+    it('should list all issues', () => {
+      const issues = screen.queryAllByTestId('issue-search-list-item');
+      expect(issues.length).toBe(4);
+    });
   });
 
   describe('Filter issues', () => {
@@ -24,10 +35,29 @@ describe('IssueSearch', () => {
   });
 
   describe('Each issue should contain relevant information', () => {
-    it.todo('should contain a title that is clickable');
+    it.each(screen.queryAllByTestId('issue-title'))(
+      'should contain a title that is clickable',
+      (title: HTMLElement) => {
+        expect(title).toHaveProperty('href');
+      }
+    );
     it.todo('should contain an issue number');
-    it.todo('should contain the comments count');
-    it.todo('should contain labels if any');
+
+    it('should contain the comments count', () => {
+      const commentCounts = screen
+        .queryAllByTestId('issue-comments-count')
+        .map((comment) => comment.textContent)
+        .filter(Boolean);
+
+      expect(commentCounts.length).toBe(4);
+      expect(commentCounts).toEqual(['5', '0', '0', '10']);
+    });
+
+    it('should contain labels if any', () => {
+      const labels = screen.queryAllByTestId('issue-label');
+      expect(labels.length).toBe(1);
+    });
+
     it.todo('should contain a date of creation');
     it.todo('should contain the name of the person that created it');
     it.todo('should have the name of the person that created it be clickable');

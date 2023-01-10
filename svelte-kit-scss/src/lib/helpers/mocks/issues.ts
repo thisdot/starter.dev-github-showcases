@@ -1,4 +1,9 @@
-import { GithubIssueAuthorAssociation, type GithubSearchIssue } from '$lib/interfaces';
+import {
+  GithubIssueAuthorAssociation,
+  IssueState,
+  type GithubSearchIssue,
+  type Issue,
+} from '$lib/interfaces';
 
 export const MOCK_SEARCH_ISSUE: GithubSearchIssue = {
   id: 35802,
@@ -39,3 +44,79 @@ export const MOCK_SEARCH_ISSUE: GithubSearchIssue = {
   locked: true,
   author_association: GithubIssueAuthorAssociation.Collaborator,
 };
+
+export const MOCK_ISSUE_ARRAY: Issue[] = [
+  {
+    assignees: [],
+    closedAt: null,
+    commentsCount: 5,
+    createdAt: '2021-08-01T00:00:00Z',
+    id: 1,
+    labels: [
+      {
+        color: '#000000',
+        default: false,
+        description: null,
+        id: 5456512,
+        name: 'some label',
+        url: 'https://github.com/owner/repo/labels/some%20label',
+      },
+    ],
+    number: 1,
+    state: IssueState.Open,
+    title: 'Open issue 1 with comments',
+    user: {
+      login: 'foo',
+      avatarUrl: 'https://via.placeholder.com/150/24f355',
+    },
+    htmlUrl: '',
+  },
+  {
+    assignees: [],
+    closedAt: null,
+    commentsCount: 0,
+    createdAt: '2021-08-01T00:00:00Z',
+    id: 2,
+    labels: [],
+    number: 1,
+    state: IssueState.Open,
+    title: 'Open issue 2 with no comments',
+    user: {
+      login: 'bar',
+      avatarUrl: 'https://via.placeholder.com/150/24f355',
+    },
+    htmlUrl: '',
+  },
+  {
+    assignees: [],
+    closedAt: null,
+    commentsCount: 0,
+    createdAt: '2021-08-01T00:00:00Z',
+    id: 3,
+    labels: [],
+    number: 3,
+    state: IssueState.Open,
+    title: 'Closed issue 1 with comments',
+    user: {
+      login: 'fizz',
+      avatarUrl: 'https://via.placeholder.com/150/24f355',
+    },
+    htmlUrl: '',
+  },
+  {
+    assignees: [],
+    closedAt: null,
+    commentsCount: 10,
+    createdAt: '2021-08-01T00:00:00Z',
+    id: 4,
+    labels: [],
+    number: 4,
+    state: IssueState.Open,
+    title: 'Closed issue 2 with no comments',
+    user: {
+      login: 'buzz',
+      avatarUrl: 'https://via.placeholder.com/150/24f355',
+    },
+    htmlUrl: '',
+  },
+];
