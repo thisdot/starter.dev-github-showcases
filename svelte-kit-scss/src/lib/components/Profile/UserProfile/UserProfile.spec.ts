@@ -19,29 +19,16 @@ describe('UserProfile', () => {
   const { name, bio, followers, email, blog, twitterUsername, location, avatarUrl, following } =
     mockUserProfile;
 
-  it('should render name of org correctly', () => {
-    const element = screen.getByTestId('name');
-    expect(element.textContent).toEqual(String(name));
-  });
-
-  it('should render bio of org correctly', () => {
-    const element = screen.getByTestId('bio');
-    expect(element.textContent).toEqual(String(bio));
-  });
-
-  it('should render blog of org correctly', () => {
-    const element = screen.getByTestId('blog');
-    expect(element.textContent).toEqual(String(blog));
-  });
-
-  it('should render twitterUsername of org correctly', () => {
-    const element = screen.getByTestId('twitterUsername');
-    expect(element.textContent).toEqual(String(twitterUsername));
-  });
-
-  it('should render location of org correctly', () => {
-    const element = screen.getByTestId('location');
-    expect(element.textContent).toEqual(String(location));
+  it.each([
+    ['name', name],
+    ['bio', bio],
+    ['blog', blog],
+    ['twitterUsername', twitterUsername],
+    ['location', location],
+  ])('should render: %s', (testId, expectedValue) => {
+    const element = screen.getByTestId(testId);
+    const expectedText = String(expectedValue);
+    expect(element.innerHTML).toEqual(expectedText);
   });
 
   it('should render email of org correctly', () => {
