@@ -40,12 +40,17 @@ export const FileExplorer = component$(({ tree }: { tree: any[] }) => {
                   <DocumentIcon className="w-5 h-5 text-gray-500" />
                 )}
               </div>
-              <Link href={`${basePath}/${item.type}/${globalStore.branch || pathBranch}/${item.path}`}>
+              <a href={`${basePath}/${item.type}/${globalStore.branch || pathBranch}/${item.path}`}>
                 <span class="hover:text-blue-600 hover:underline">{item.name}</span>
-              </Link>
+              </a>
             </div>
           </div>
         ))}
+        {!tree.length ? (
+          <div class="animate-pulse">
+            <div class="w-full h-10 border-b border-gray-300 last-of-type:border-none bg-gray-200" />
+          </div>
+        ) : null}
       </div>
     </>
   );
