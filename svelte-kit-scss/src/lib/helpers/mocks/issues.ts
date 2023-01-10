@@ -64,7 +64,7 @@ export const MOCK_ISSUE_ARRAY: Issue[] = [
     ],
     number: 1,
     state: IssueState.Open,
-    title: 'Open issue 1 with comments',
+    title: '#2 Open issue 1 with comments',
     user: {
       login: 'foo',
       avatarUrl: 'https://via.placeholder.com/150/24f355',
@@ -78,9 +78,9 @@ export const MOCK_ISSUE_ARRAY: Issue[] = [
     createdAt: '2021-08-01T00:00:00Z',
     id: 2,
     labels: [],
-    number: 1,
+    number: 2,
     state: IssueState.Open,
-    title: 'Open issue 2 with no comments',
+    title: '#2 Open issue 2 with no comments',
     user: {
       login: 'bar',
       avatarUrl: 'https://via.placeholder.com/150/24f355',
@@ -96,7 +96,7 @@ export const MOCK_ISSUE_ARRAY: Issue[] = [
     labels: [],
     number: 3,
     state: IssueState.Open,
-    title: 'Closed issue 1 with comments',
+    title: '#3 Closed issue 1 with comments',
     user: {
       login: 'fizz',
       avatarUrl: 'https://via.placeholder.com/150/24f355',
