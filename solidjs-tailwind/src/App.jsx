@@ -11,6 +11,7 @@ import RepoDetails from './pages/RepoDetails';
 import RepoTree from './pages/RepoTree';
 import PullReqAndIssues from './pages/PullReqAndIssues';
 import { Repo } from './components/Repo';
+import Issues from './pages/Issues';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route component={RepoTree} path={ROUTES.REPO_TREE} />
             {/* <Route component={RepoBlob} path={ROUTES.REPO_BLOB} /> */}
             <Route component={PullReqAndIssues} path={ROUTES.REPO_PULLS} />
+            <Route component={Issues} path={ROUTES.REPO_ISSUES} />
           </Route>
         </Route>
       </Routes>
