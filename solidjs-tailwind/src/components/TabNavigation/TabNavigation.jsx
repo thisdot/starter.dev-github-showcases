@@ -14,7 +14,7 @@ const TabNavigation = (props) => {
         <For each={props.tabs} fallback={<div>Loading...</div>}>
           {(item, index) => {
             const href =
-              item.path === ''
+                item.path === ''
                 ? `/${props.basePath}`
                 : `/${props.basePath}/${item.path}`;
             return (
