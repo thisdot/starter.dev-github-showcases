@@ -31,9 +31,13 @@
     {:else}
       <ListBlankSlate heading="No results matched your search." icon={IssueOpened24} />
     {/if}
-    <div slot="bottom" class="bottom">
-      <Pagination model={pagination} />
-    </div>
+    <svelte:fragment slot="bottom">
+      {#if hasIssues}
+        <div class="bottom">
+          <Pagination model={pagination} />
+        </div>
+      {/if}
+    </svelte:fragment>
   </BoxLayout>
 </LayoutPageContentRow>
 
