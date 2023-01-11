@@ -4,15 +4,17 @@
   export let target: '_blank' | '_self' | '_parent' | '_top' = '_self';
 </script>
 
-<div class="chips">
+<div class="chips noselect">
   {#each chips as { label, href }}
-    <div class="chip" class:link={href}>
-      {#if href}
-        <a {href} class="text" {target} rel="noreferrer">{label}</a>
-      {:else}
+    {#if href}
+      <a class="chip link" {href} {target} rel="noreferrer">
         <span class="text">{label}</span>
-      {/if}
-    </div>
+      </a>
+    {:else}
+      <div class="chip">
+        <span class="text">{label}</span>
+      </div>
+    {/if}
   {/each}
 </div>
 
@@ -31,7 +33,6 @@
       padding: 0 0.625em;
       .text {
         font-size: 0.75em;
-        text-decoration: none;
         vertical-align: bottom;
         white-space: nowrap;
         color: inherit;
@@ -49,6 +50,8 @@
         z-index: -1;
       }
       &.link {
+        text-decoration: none;
+        border-radius: 1em;
         &:hover {
           &:before {
             opacity: 1;
