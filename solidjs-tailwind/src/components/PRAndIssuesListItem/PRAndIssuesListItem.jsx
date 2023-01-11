@@ -12,10 +12,10 @@ import { IssuesIcon,
          ClosedPrIcon,
          CommentIcon
         } from '../Icons';
-import { usePrAndIssuesParams } from '../../contexts/PrAndIssuesContext';
+import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 
 const PRAndIssuesListItem = (props) => {
-  const { type } = usePrAndIssuesParams()
+  const { type } = usePrAndIssuesContext()
 
     const [local] = splitProps(props, [
       'number',

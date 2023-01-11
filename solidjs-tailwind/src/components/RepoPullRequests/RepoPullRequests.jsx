@@ -4,7 +4,7 @@ import { useParams } from '@solidjs/router';
 import { PRAndIssuesData } from '../PRAndIssuesData/PRAndIssuesData';
 import { parseSortParams } from './utils';
 import { SORT_OPTIONS } from '../../utils/constants';
-import { usePrAndIssuesParams } from '../../contexts/PrAndIssuesContext';
+import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 import { CloseIcon } from '../Icons';
 
 const RepoPullRequests = () => {
@@ -15,7 +15,7 @@ const RepoPullRequests = () => {
     selectedLabel,
     setLabelOpt,
     clearSortAndFilter,
-  } = usePrAndIssuesParams()
+  } = usePrAndIssuesContext()
 
   const [data, setData] = createSignal([]);
   const [openCount, setOpenCount] = createSignal();

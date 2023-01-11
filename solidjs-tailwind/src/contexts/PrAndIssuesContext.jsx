@@ -41,6 +41,6 @@ export function PrAndIssuesProvider(props) {
   );
 }
 
-export function usePrAndIssuesParams() {
+export function usePrAndIssuesContext() {
   return useContext(PrAndIssueContext);
 }
