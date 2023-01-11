@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import Auth from './Auth.svelte';
 
 describe('Auth Component', () => {
-  it('should render sign out', async () => {
+  it('should render sign in', async () => {
     render(Auth);
 
     const signInBtn = screen.getByRole('button');
