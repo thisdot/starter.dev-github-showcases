@@ -15,7 +15,7 @@ const FileExplorerView = () => {
   const basePath = `/${params.owner}/${params.name}`;
   const backLink = `${basePath}/tree/${branch}/${params.path}`;
 
-  const [resTree] = createResource(`${branch}_${params.path}`, () =>
+  const [resTree] = createResource(() => `${branch}_${params.path}`, () =>
     getRepoTree({
       owner: params.owner,
       name: params.name,
