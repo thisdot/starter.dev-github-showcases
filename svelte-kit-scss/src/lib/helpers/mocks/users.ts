@@ -14,7 +14,7 @@ export const MOCK_GITHUB_PUBLIC_PROFILE_INFORMATION: GithubPublicProfileInformat
   login: 'octocat',
   id: 1,
   node_id: 'MDQ6VXNlcjE=',
-  avatar_url: 'https://github.com/images/error/octocat_happy.gif',
+  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
   gravatar_id: '',
   url: 'https://api.github.com/users/octocat',
   type: 'User',
@@ -44,7 +44,7 @@ export const MOCK_GITHUB_ORGANIZATION_PROFILE_INFORMATION: GithubPublicProfileIn
   login: 'octocat',
   id: 1,
   node_id: 'MDQ6VXNlcjE=',
-  avatar_url: 'https://github.com/images/error/octocat_happy.gif',
+  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
   gravatar_id: '',
   url: 'https://api.github.com/users/octocat',
   type: 'Organization',
@@ -73,6 +73,15 @@ export const MOCK_GITHUB_ORGANIZATION_PROFILE_INFORMATION: GithubPublicProfileIn
 
 export const MOCK_GITHUB_ORGANIZATION_MEMBERS = [
   {
+    avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4',
+    id: 2,
+    login: 'octocat1',
+    siteAdmin: false,
+    type: 'User',
+    url: 'https://api.github.com/users/octocat1',
+    href: '/octocat1',
+  },
+  {
     avatarUrl: 'https://avatars.githubusercontent.com/u/5031274?v=4',
     id: 1,
     login: 'octocat',
@@ -80,14 +89,5 @@ export const MOCK_GITHUB_ORGANIZATION_MEMBERS = [
     type: 'User',
     url: 'https://api.github.com/users/octocat',
     href: '/octocat',
-  },
-  {
-    avatarUrl: 'https://github.com/images/error/octocat_happy.gif',
-    id: 2,
-    login: 'octocat1',
-    siteAdmin: false,
-    type: 'User',
-    url: 'https://api.github.com/users/octocat1',
-    href: '/octocat1',
   },
 ];

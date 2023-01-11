@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/svelte';
+import { render, screen } from '@testing-library/svelte';
 import ProfileOrganizations from './ProfileOrganizations.svelte';
 
 const organizations = [
@@ -32,21 +32,9 @@ describe('ProfileOrganizations', () => {
     profileOrganizationsTree();
   });
 
-  let currentTestIndex = 0;
-  it.each(organizations)(
-    `should render organization ${currentTestIndex}`,
-    ({ login, avatarUrl }) => {
-      const { container } = profileOrganizationsTree();
-      const links = container.getElementsByClassName(
-        'organization-link'
-      ) as HTMLCollectionOf<HTMLAnchorElement>;
-      const images = container.getElementsByClassName(
-        'image'
-      ) as HTMLCollectionOf<HTMLImageElement>;
-
-      expect(links[currentTestIndex].getAttribute('href')).toBe(`/${login}`);
-      expect(images[currentTestIndex].getAttribute('src')).toBe(avatarUrl);
-      currentTestIndex += 1;
-    }
-  );
+  it.each(organizations)(`should render member %#`, ({ avatarUrl, login }) => {
+    const image = screen.getByAltText(login) as HTMLImageElement;
+    expect(image.getAttribute('src')).toBe(avatarUrl);
+    expect(image.closest('a')?.href).toBe(`${window.location.origin}/${login}`);
+  });
 });
