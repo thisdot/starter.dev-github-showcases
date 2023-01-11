@@ -12,9 +12,9 @@ describe('RepositoryCounters Component', () => {
   });
 
   it.each([
-    ['count Watchers', repositoryState.watchersCount],
-    ['count Forks', repositoryState.forksCount],
-    ['count Stars', repositoryState.stargazersCount],
+    ['count Watch', repositoryState.watchersCount],
+    ['count Fork', repositoryState.forksCount],
+    ['count Star', repositoryState.stargazersCount],
   ])('should render: %s', (testId, expectedValue) => {
     const element = screen.getByTestId(testId);
     const expectedText = String(expectedValue);
