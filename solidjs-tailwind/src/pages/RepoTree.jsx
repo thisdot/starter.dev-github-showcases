@@ -1,5 +1,4 @@
 import FileExplorer from '../components/FileExplorer';
-import { RepoProvider } from '../contexts/RepoContext';
 import { BranchNavigation } from '../components/BranchNavigation';
 
 const RepoTree = () => {
