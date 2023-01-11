@@ -12,10 +12,10 @@ import { IssuesIcon,
          ClosedPrIcon,
          CommentIcon
         } from '../Icons';
+import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 
 const PRAndIssuesListItem = (props) => {
-  const { pathname } = useLocation();
-  const type = pathname.includes('pulls') ? 'pr' : 'issue'
+  const { type } = usePrAndIssuesContext()
 
     const [local] = splitProps(props, [
       'number',

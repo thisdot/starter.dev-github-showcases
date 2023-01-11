@@ -9,7 +9,7 @@ import OrgProfile from './pages/OrgProfile';
 import RepoDetails from './pages/RepoDetails';
 // import RepoBlob from './pages/RepoBlob';
 import RepoTree from './pages/RepoTree';
-import PullReqAndIssues from './pages/PullReqAndIssues';
+import PullRequests from './pages/PullRequests';
 import { Repo } from './components/Repo';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
             <Route component={RepoDetails} path={'/'}  />
             <Route component={RepoTree} path={ROUTES.REPO_TREE} />
             {/* <Route component={RepoBlob} path={ROUTES.REPO_BLOB} /> */}
-            <Route component={PullReqAndIssues} path={ROUTES.REPO_PULLS} />
+            <Route component={PullRequests} path={ROUTES.REPO_PULLS} />
           </Route>
         </Route>
       </Routes>
