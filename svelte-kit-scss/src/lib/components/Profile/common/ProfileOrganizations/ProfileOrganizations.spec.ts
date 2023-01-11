@@ -16,25 +16,37 @@ const organizations = [
     description: '',
     id: 1,
     login: 'github',
-    nodeId: 1,
+    nodeId: 'MDEasdfJadsfYUYKjUkasdlmnHJS12Y',
     url: 'https://api.github.com/orgs/github',
   },
 ];
 
 describe('ProfileOrganizations', () => {
-  describe('should render items', () => {
-    render(ProfileOrganizations, {
+  function profileOrganizationsTree() {
+    return render(ProfileOrganizations, {
       organizations,
     });
+  }
 
-    it('should render repository items', () => {
-      const links = screen.getAllByRole('link');
-      const images = screen.getAllByRole('img');
-
-      organizations.map((org, i) => {
-        expect(links[i].getAttribute('href')).toBe(`/${org.login}`);
-        expect(images[i].getAttribute('src')).toBe(org.avatarUrl);
-      });
-    });
+  beforeEach(() => {
+    profileOrganizationsTree();
   });
+
+  let currentTestIndex = 0;
+  it.each(organizations)(
+    `should render organization ${currentTestIndex}`,
+    ({ login, avatarUrl }) => {
+      const { container } = profileOrganizationsTree();
+      const links = container.getElementsByClassName(
+        'organization-link'
+      ) as HTMLCollectionOf<HTMLAnchorElement>;
+      const images = container.getElementsByClassName(
+        'image'
+      ) as HTMLCollectionOf<HTMLImageElement>;
+
+      expect(links[currentTestIndex].getAttribute('href')).toBe(`/${login}`);
+      expect(images[currentTestIndex].getAttribute('src')).toBe(avatarUrl);
+      currentTestIndex += 1;
+    }
+  );
 });

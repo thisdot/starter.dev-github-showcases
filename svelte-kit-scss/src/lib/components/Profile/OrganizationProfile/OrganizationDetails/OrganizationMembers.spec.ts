@@ -1,22 +1,31 @@
 import { it, expect } from 'vitest';
-import { getByRole, render, screen } from '@testing-library/svelte';
+import { render } from '@testing-library/svelte';
 import OrganizationMembers from './OrganizationMembers.svelte';
 import { MOCK_GITHUB_ORGANIZATION_MEMBERS } from '$lib/helpers/mocks/users';
 
-const mockOrgMembers = MOCK_GITHUB_ORGANIZATION_MEMBERS;
+const members = MOCK_GITHUB_ORGANIZATION_MEMBERS;
 
 describe('OrganizationMembers', () => {
-  it('should render organization members', () => {
-    render(OrganizationMembers, {
-      members: mockOrgMembers,
+  function organizationMembersTree() {
+    return render(OrganizationMembers, {
+      members,
     });
+  }
 
-    const links = screen.getAllByRole('link');
-    const images = screen.getAllByRole('img');
+  beforeEach(() => {
+    organizationMembersTree();
+  });
 
-    mockOrgMembers.map((member, i) => {
-      expect(links[i].getAttribute('href')).toBe(member.href);
-      expect(images[i].getAttribute('src')).toBe(member.avatarUrl);
-    });
+  let currentTestIndex = 0;
+  it.each(members)(`should render member ${currentTestIndex}`, ({ href, avatarUrl }) => {
+    const { container } = organizationMembersTree();
+    const links = container.getElementsByClassName(
+      'member-link'
+    ) as HTMLCollectionOf<HTMLAnchorElement>;
+    const images = container.getElementsByClassName('image') as HTMLCollectionOf<HTMLImageElement>;
+
+    expect(links[currentTestIndex].getAttribute('href')).toBe(href);
+    expect(images[currentTestIndex].getAttribute('src')).toBe(avatarUrl);
+    currentTestIndex += 1;
   });
 });
