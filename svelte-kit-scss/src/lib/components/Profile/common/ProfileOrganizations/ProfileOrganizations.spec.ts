@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/svelte';
+import { render } from '@testing-library/svelte';
 import ProfileOrganizations from './ProfileOrganizations.svelte';
 
 const organizations = [
