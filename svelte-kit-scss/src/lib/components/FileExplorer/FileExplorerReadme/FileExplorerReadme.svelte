@@ -45,5 +45,9 @@
     border-bottom-left-radius: 0.25em;
     border-bottom-right-radius: 0.25em;
     border-top: none;
+
+    :global(*) {
+      max-width: 100%;
+    }
   }
 </style>
