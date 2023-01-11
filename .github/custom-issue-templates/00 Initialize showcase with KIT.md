@@ -7,6 +7,6 @@ As a developer, I would like my starting base to be the existing KIT for the cur
 ## Acceptance
 
 - [ ] Import the KIT
-- [ ] Follow the instruction in the Read me to modify required data (ex title, name, description)
+- [ ] Follow the instruction in the README to modify required data (ex title, name, description)
 - [ ] If you find anything missing or wrong in the KIT, raise a Ticket (even if it is just a high risk update in the package.json)
 
