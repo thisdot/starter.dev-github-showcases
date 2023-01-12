@@ -47,11 +47,12 @@ export default component$(({ owner, name }: PullRequestsProps) => {
   const resetFilters$ = $(() => {
     dropdownStore.selectedLabel = undefined;
     dropdownStore.selectedSort = sortOptions[0].value;
+    window.location.href = `${location.pathname}?tab=${pullRequestStore.activeTab}`;
   });
 
   useClientEffect$(async () => {
-    const abortController = new AbortController();
     pullRequestStore.loading = true;
+    const abortController = new AbortController();
     const response = await fetchRepoPullRequests(
       {
         owner,
@@ -124,6 +125,7 @@ export default component$(({ owner, name }: PullRequestsProps) => {
           </div>
         ) : (
           <PullRequestData
+            loading={pullRequestStore.loading}
             pull_request={
               pullRequestStore.activeTab === 'open'
                 ? pullRequestStore.openPullRequest

@@ -49,6 +49,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
     dropdownStore.selectedLabel = undefined;
     dropdownStore.selectedMilestones = undefined;
     dropdownStore.selectedSort = sortOptions[0].value;
+    window.location.href = `${location.pathname}?tab=${issuesStore.activeTab}`;
   });
 
   useClientEffect$(async () => {
@@ -92,7 +93,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
           name,
           after,
           before,
-          first: location.query.after ? DEFAULT_PAGE_SIZE : undefined,
+          first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
           last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],
@@ -131,7 +132,10 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
           </div>
         ) : (
-          <IssuesData issues={issuesStore.activeTab === 'open' ? issuesStore.openIssues : issuesStore.closedIssues} />
+          <IssuesData
+            loading={issuesStore.loading}
+            issues={issuesStore.activeTab === 'open' ? issuesStore.openIssues : issuesStore.closedIssues}
+          />
         )}
       </div>
       {(issuesStore.openPageInfo?.hasNextPage ||
