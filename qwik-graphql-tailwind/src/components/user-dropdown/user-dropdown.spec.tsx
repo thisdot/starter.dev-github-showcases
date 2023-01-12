@@ -1,5 +1,5 @@
 import { createDOM } from '@builder.io/qwik/testing';
-import { describe, it, vi } from 'vitest';
+import { describe, it, vi, expect } from 'vitest';
 import { UserDropdown } from './user-dropdown';
 
 describe('UserDropdown Component', () => {
@@ -23,5 +23,12 @@ describe('UserDropdown Component', () => {
     const { render } = await createDOM();
 
     await render(<UserDropdown username="thisDot" />);
+  });
+
+  it(`should show Profile name`, async () => {
+    const { screen, render } = await createDOM();
+
+    await render(<UserDropdown username="thisDot" />);
+    expect(screen.outerHTML).toContain('thisDot');
   });
 });
