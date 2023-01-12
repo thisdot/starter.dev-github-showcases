@@ -18,49 +18,42 @@
   $: people = organizationMembers || [];
 </script>
 
-<div class="page-container">
-  {#if isOrg}
-    <LayoutPageHeader gray>
-      <LayoutPageContentRow>
-        <div class="org-profile">
-          <OrganizationProfile {profile} />
-        </div>
-      </LayoutPageContentRow>
-      <LayoutPageContentRow>
-        <PageNavigtionTabs {tabs} currentPageId={pageId} />
-      </LayoutPageContentRow>
-    </LayoutPageHeader>
+{#if isOrg}
+  <LayoutPageHeader gray paddingTop>
+    <LayoutPageContentRow>
+      <div class="org-profile">
+        <OrganizationProfile {profile} />
+      </div>
+    </LayoutPageContentRow>
+    <LayoutPageContentRow>
+      <PageNavigtionTabs {tabs} currentPageId={pageId} />
+    </LayoutPageContentRow>
+  </LayoutPageHeader>
 
-    <LayoutPageContentRow marginBottom>
-      <LayoutSidebar>
-        <AllRepositoriesList model={allRepositoriesListViewModel} />
-        <div slot="sidebar-right">
-          <OrganizationDetails {people} />
-        </div>
+  <LayoutPageContentRow marginBottom>
+    <LayoutSidebar>
+      <AllRepositoriesList model={allRepositoriesListViewModel} />
+      <div slot="sidebar-right">
+        <OrganizationDetails {people} />
+      </div>
+    </LayoutSidebar>
+  </LayoutPageContentRow>
+{:else}
+  <LayoutPageHeader>
+    <LayoutPageContentRow slot="sticky">
+      <LayoutSidebar placeholder="sidebar-left">
+        <PageNavigtionTabs {tabs} currentPageId={pageId} />
       </LayoutSidebar>
     </LayoutPageContentRow>
-  {:else}
-    <LayoutPageHeader>
-      <LayoutPageContentRow slot="sticky">
-        <LayoutSidebar placeholder="sidebar-left">
-          <PageNavigtionTabs {tabs} currentPageId={pageId} />
-        </LayoutSidebar>
-      </LayoutPageContentRow>
-    </LayoutPageHeader>
-    <LayoutPageContentRow marginBottom>
-      <LayoutSidebar>
-        <UserProfile {profile} {organizations} slot="sidebar-left" />
-        <AllRepositoriesList model={allRepositoriesListViewModel} />
-      </LayoutSidebar>
-    </LayoutPageContentRow>
-  {/if}
-</div>
+  </LayoutPageHeader>
+  <LayoutPageContentRow marginBottom>
+    <LayoutSidebar>
+      <UserProfile {profile} {organizations} slot="sidebar-left" />
+      <AllRepositoriesList model={allRepositoriesListViewModel} />
+    </LayoutSidebar>
+  </LayoutPageContentRow>
+{/if}
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
-  .page-container {
-    .org-profile {
-      margin-top: 1.5rem;
-    }
-  }
 </style>
