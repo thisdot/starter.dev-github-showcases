@@ -66,7 +66,11 @@ export const buildMarkdownPreviewHtml = async (
     return content;
   }
   const decoded = Buffer.from(content, bufferEncoding).toString('utf8');
-  const compiledResponse = await compile(decoded);
+  const compiledResponse = await compile(decoded).then((x) =>
+    x?.code
+      .replace(/>{@html `<code class="language-/g, '><code class="language-')
+      .replace(/<\/code>`}<\/pre>/g, '</code></pre>')
+  );
 
-  return compiledResponse?.code;
+  return compiledResponse;
 };
