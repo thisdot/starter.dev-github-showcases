@@ -42,17 +42,17 @@ export default component$(() => {
 
   useClientEffect$(async () => {
     const abortController = new AbortController();
-    const response = await fetchUserProfile(
+    const userResponse = await fetchUserProfile(
       {
         username: location.params.user,
-        afterCursor: location.query?.after,
-        beforeCursor: location.query?.before,
+        afterCursor: location.query.after,
+        beforeCursor: location.query.before,
         orderBy: location.query?.orderBy,
       },
       abortController
     );
 
-    updateUserProfile(store, response);
+    updateUserProfile(store, userResponse);
   });
 
   useTask$(async ({ track }) => {
@@ -63,17 +63,17 @@ export default component$(() => {
     const orderBy = track(() => location.query.orderBy);
 
     if (isBrowser && location.params.user) {
-      const response = await fetchUserProfile(
+      const userResponse = await fetchUserProfile(
         {
-          orderBy,
+          username: location.params.user,
           afterCursor: after,
           beforeCursor: before,
-          username: location.params.user,
+          orderBy: orderBy,
         },
         abortController
       );
 
-      updateUserProfile(store, response);
+      updateUserProfile(store, userResponse);
     }
   });
 

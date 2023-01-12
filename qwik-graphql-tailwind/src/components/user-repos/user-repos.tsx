@@ -1,12 +1,13 @@
-import { component$, useClientEffect$, useContext, useStore, useTask$ } from '@builder.io/qwik';
+import { component$, useContext, useTask$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import { StarIcon } from '../icons';
-import { UserRepo, UserReposProps } from './types';
+import { UserReposProps } from './types';
 import { RepoMeta } from '../repo-meta/repo-meta';
 import { PrivacyBadge } from '../privacy-badge/privacy-badge';
 import { Pagination } from '../pagination/pagination';
 import { RepoFilters } from '../repo-filters/repo-filters';
 import { getLanguages } from './getLanguages';
+import { useLocation } from '@builder.io/qwik-city';
 import filterStore from '~/context/repo-filter';
 import {
   repoDataFilteredByLanguage,
@@ -15,13 +16,8 @@ import {
   sortedRepoData,
 } from './filter-sort-functions';
 
-interface State {
-  searchResponse: UserRepo[];
-}
 export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
-  const state = useStore<State>({
-    searchResponse: [],
-  });
+  const location = useLocation();
   const filters = useContext(filterStore);
   const languages = getLanguages(repos.nodes);
 
@@ -30,32 +26,30 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
     track(() => filters.language);
     track(() => filters.sortBy);
     track(() => filters.type);
-    state.searchResponse = repos.nodes;
+    track(() => location.query.after);
+    track(() => location.query.before);
+
     if (filters.search) {
-      state.searchResponse = repoDataFilteredBySearch(filters?.search || '', state.searchResponse);
+      repos.nodes = repoDataFilteredBySearch(filters?.search || '', repos.nodes);
     }
 
     if (filters.language) {
-      state.searchResponse = repoDataFilteredByLanguage(filters?.language, state.searchResponse);
+      repos.nodes = repoDataFilteredByLanguage(filters?.language, repos.nodes);
     }
 
     if (filters.type) {
-      state.searchResponse = repoDataFilteredByType(filters.type, state.searchResponse);
+      repos.nodes = repoDataFilteredByType(filters.type, repos.nodes);
     }
 
     if (filters.sortBy) {
-      state.searchResponse = sortedRepoData(filters.sortBy, state.searchResponse);
+      repos.nodes = sortedRepoData(filters.sortBy, repos.nodes);
     }
-  });
-
-  useClientEffect$(() => {
-    state.searchResponse = repos.nodes;
   });
 
   return (
     <>
-      <RepoFilters languages={languages} resultCount={state.searchResponse.length} />
-      {state.searchResponse.map(
+      <RepoFilters languages={languages} resultCount={repos.nodes.length} />
+      {repos.nodes.map(
         ({ id, name, description, stargazerCount, forkCount, primaryLanguage, updatedAt, isPrivate }) => (
           <div key={id} class="py-8 border-b border-gray-200 first-of-type:border-t grid grid-cols-12 gap-x-4">
             <div class="col-span-12 md:col-span-7">
