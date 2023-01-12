@@ -1,5 +1,5 @@
 export const USER_PROFILE_QUERY = `
-  query UserProfile($username: String!, $afterCursor: String, $beforeCursor: String, $orderBy: RepositoryOrder) {
+  query UserProfile($username: String!, $afterCursor: String, $beforeCursor: String) {
     user(login: $username) {
       avatarUrl
       bio
@@ -26,7 +26,6 @@ export const USER_PROFILE_QUERY = `
         first: 10
         after: $afterCursor
         before: $beforeCursor
-        orderBy: $orderBy
       ) {
         nodes {
           id

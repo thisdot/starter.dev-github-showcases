@@ -45,9 +45,8 @@ export default component$(() => {
     const userResponse = await fetchUserProfile(
       {
         username: location.params.user,
-        afterCursor: location.query.after,
-        beforeCursor: location.query.before,
-        orderBy: location.query?.orderBy,
+        afterCursor: location.query?.after,
+        beforeCursor: location.query?.before,
       },
       abortController
     );
@@ -60,7 +59,6 @@ export default component$(() => {
     store.isLoading = true;
     const after = track(() => location.query.after);
     const before = track(() => location.query.before);
-    const orderBy = track(() => location.query.orderBy);
 
     if (isBrowser && location.params.user) {
       const userResponse = await fetchUserProfile(
@@ -68,7 +66,6 @@ export default component$(() => {
           username: location.params.user,
           afterCursor: after,
           beforeCursor: before,
-          orderBy: orderBy,
         },
         abortController
       );
