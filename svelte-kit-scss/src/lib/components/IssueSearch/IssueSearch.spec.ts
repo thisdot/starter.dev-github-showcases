@@ -33,7 +33,6 @@ describe('IssueSearch', () => {
         .map((number) => number.textContent)
         .filter(Boolean);
 
-      expect(issueNumbers.length).toBe(ISSUE_LENGTH);
       expect(issueNumbers).toEqual(['#1', '#2', '#3', '#4']);
     });
 
@@ -43,7 +42,6 @@ describe('IssueSearch', () => {
         .map((comment) => comment.textContent)
         .filter(Boolean);
 
-      expect(commentCounts.length).toBe(ISSUE_LENGTH);
       expect(commentCounts).toEqual(['5', '0', '0', '10']);
     });
 
