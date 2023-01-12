@@ -1,5 +1,5 @@
 import { createDOM } from '@builder.io/qwik/testing';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, it, vi } from 'vitest';
 import { UserDropdown } from './user-dropdown';
 
 describe('UserDropdown Component', () => {
@@ -13,13 +13,15 @@ describe('UserDropdown Component', () => {
         type: '',
         sortBy: '',
       }),
+      useStore: () => ({
+        expanded: false,
+      }),
     };
   });
 
   it(`should mount`, async () => {
-    const { screen, render } = await createDOM();
+    const { render } = await createDOM();
 
     await render(<UserDropdown username="thisDot" />);
-    console.log(screen.outerHTML);
   });
 });
