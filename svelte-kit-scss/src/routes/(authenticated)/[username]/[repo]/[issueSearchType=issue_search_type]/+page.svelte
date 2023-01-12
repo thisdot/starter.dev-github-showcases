@@ -6,12 +6,15 @@
   import BoxLayout from '$lib/components/shared/layouts/BoxLayout.svelte';
   import { currentPageId } from '$lib/stores/current-page-id';
   import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
+  import ListBlankSlate from '$lib/components/shared/ListBlankSlate/ListBlankSlate.svelte';
+  import { IssueOpened24 } from 'svelte-octicons';
 
   export let data: PageServerData;
 
   $: ({ issues, sortFilters, stateFilters, milestoneFilters, labelFilters, pageId, pagination } =
     data);
   $: currentPageId.set(pageId);
+  $: hasIssues = issues.length;
 </script>
 
 <LayoutPageContentRow marginBottom>
@@ -23,10 +26,18 @@
       {milestoneFilters}
       {labelFilters}
     />
-    <IssueSearchList items={issues} />
-    <div slot="bottom" class="bottom">
-      <Pagination model={pagination} />
-    </div>
+    {#if hasIssues}
+      <IssueSearchList items={issues} />
+    {:else}
+      <ListBlankSlate heading="No results matched your search." icon={IssueOpened24} />
+    {/if}
+    <svelte:fragment slot="bottom">
+      {#if hasIssues}
+        <div class="bottom">
+          <Pagination model={pagination} />
+        </div>
+      {/if}
+    </svelte:fragment>
   </BoxLayout>
 </LayoutPageContentRow>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import BoxLayout from '$lib/components/shared/layouts/BoxLayout.svelte';
-  import BlankSlate from '../RepositoryList/BlankSlate.svelte';
+  import ListBlankSlate from '$lib/components/shared/ListBlankSlate/ListBlankSlate.svelte';
   import RepositoryList from '../RepositoryList/RepositoryList.svelte';
   import RepositoryListControls from '../RepositoryListFilters/RepositoryListControls.svelte';
   import type { AllRepositoriesListViewModel } from '../view-models';
@@ -21,8 +21,8 @@
 
 {#if !hasItemsToShow}
   {#if hasSelectedFilters}
-    <BlankSlate heading="The profile doesn't have any repositories that match." />
+    <ListBlankSlate heading="The profile doesn't have any repositories that match." />
   {:else}
-    <BlankSlate heading="The profile doesn't have any repositories yet." />
+    <ListBlankSlate heading="The profile doesn't have any repositories yet." />
   {/if}
 {/if}
