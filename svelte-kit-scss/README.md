@@ -10,11 +10,13 @@ This starter kit features **Svelte** and **SCSS**
     - [Tech Stack](#tech-stack)
     - [Included Tooling](#included-tooling)
     - [Architecture Decisions](#architecture-decisions)
-  - [Installation](#installation)
+  - [Getting Started](#getting-started)
     - [CLI (Recommended)](#cli-recommended)
     - [Manual](#manual)
+    - [Environment Variables](#environment-variables)
   - [Commands](#commands)
   - [Demo Implementation](#demo-implementation)
+  - [Live Demo](#live-demo)
 
 ## Overview
 
@@ -35,7 +37,7 @@ This starter kit features **Svelte** and **SCSS**
 
 ### Architecture Decisions
 
-For this kit, we maintained the [Sveltekit Project Strucuture](https://kit.svelte.dev/docs/project-structure) and we do recommend it. For the `src/lib/components` folder, each component is co-located with its tests and stories. This structure makes it easy to find all the code and functionality related to a specific component. Due to Sveltekit's preference for data fetching from the route page, the components are primarily simple view components.
+For this kit, we maintained the [Sveltekit Project Structure](https://kit.svelte.dev/docs/project-structure) and we do recommend it. For the `src/lib/components` folder, each component is co-located with its tests and stories. This structure makes it easy to find all the code and functionality related to a specific component. Due to Sveltekit's preference for data fetching from the route page, the components are primarily simple view components.
 
 - #### Storybook
 
@@ -43,11 +45,11 @@ For this kit, we maintained the [Sveltekit Project Strucuture](https://kit.svelt
 
 - #### Styling
 
-  Svelte comes with sass support. Sass being one of the most mature, stable, and powerful professional grade CSS extension language, it quickly allows us to design robust components.
+  Svelte comes with sass support. Sass one of the most mature, stable, and powerful professional-grade CSS extension language, it quickly allows us to design robust components.
 
 - #### Example Components
 
-  In this `svelte-kit-scss/src/lib/components` directory you will find the `Counter` and `Greeting` directory.
+  In this `svelte-kit-scss/src/lib/components` directory, you will find the `Counter` and `Greeting` directory.
 
   The `Counter` directory contains the following files:
 
@@ -61,7 +63,7 @@ For this kit, we maintained the [Sveltekit Project Strucuture](https://kit.svelt
   - Greeting.svelte
   - Greeting.stories.ts
 
-## Installation
+## Getting Started
 
 ### CLI (Recommended)
 
@@ -92,6 +94,14 @@ git clone https://github.com/thisdot/starter.dev.git
 - `cd` into your project directory and run `npm install`.
 - Run `npm run dev` to start the development server.
 - Open your browser to `http://localhost:5137` to see the included example code running.
+
+### Environment Variables
+
+First start by copying contents of `.env.example` to `.env`.
+
+```bash
+cp .env.example .env
+```
 
 ## Commands
 
