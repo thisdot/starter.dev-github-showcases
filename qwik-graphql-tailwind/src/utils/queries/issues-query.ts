@@ -1,5 +1,5 @@
 export const ISSUES_QUERY = `
-  query IssuesQuery($owner: String!, $name: String!, $first: Int!, $before: String, $after: String, $orderBy: IssueOrderField!, $direction: OrderDirection!, $filterBy: IssueFilters) {
+  query IssuesQuery($owner: String!, $name: String!, $first: Int, $last: Int, $before: String, $after: String, $orderBy: IssueOrderField!, $direction: OrderDirection!, $filterBy: IssueFilters) {
     repository(owner: $owner, name: $name) {
       milestones(first: 100, states: [OPEN]) {
         nodes {
@@ -19,6 +19,7 @@ export const ISSUES_QUERY = `
       }
       openIssues: issues(
         first: $first
+        last: $last
         states: [OPEN]
         after: $after
         before: $before
@@ -57,6 +58,7 @@ export const ISSUES_QUERY = `
 
       closedIssues: issues(
         first: $first
+        last: $last
         states: [CLOSED]
         after: $after
         before: $before

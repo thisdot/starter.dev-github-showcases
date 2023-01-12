@@ -9,7 +9,7 @@ import { createTabList } from './tab-lists';
 export const RepoHeader = component$(() => {
   const store = useContext(RepoContext);
   const { pathname, params } = useLocation();
-  
+
   const basePath = `${params.owner}/${params.name}`;
 
   return (

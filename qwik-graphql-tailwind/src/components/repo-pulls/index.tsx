@@ -25,7 +25,8 @@ export interface PullRequestsProps {
 interface PullRequestsQueryParams {
   owner: string;
   name: string;
-  first: number;
+  first?: number;
+  last?: number;
   after?: string;
   before?: string;
   labels?: string[];
@@ -55,7 +56,8 @@ export default component$(({ owner, name }: PullRequestsProps) => {
       {
         owner,
         name,
-        first: DEFAULT_PAGE_SIZE,
+        first: afterCursor || !beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
+        last: beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
         labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
         orderBy: PullRequestOrderField.CreatedAt,
         direction: OrderDirection.Desc,
@@ -87,7 +89,8 @@ export default component$(({ owner, name }: PullRequestsProps) => {
           name,
           after,
           before,
-          first: DEFAULT_PAGE_SIZE,
+          first: location.query.after ? DEFAULT_PAGE_SIZE : undefined,
+          last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
           labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],
@@ -156,7 +159,7 @@ export function updatePullRequestState(store: PullRequestContextProps, response:
 }
 
 export async function fetchRepoPullRequests(
-  { owner, name, first, after, before, labels, orderBy, direction }: PullRequestsQueryParams,
+  { owner, name, first, last, after, before, labels, orderBy, direction }: PullRequestsQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(PULL_REQUEST_QUERY);
@@ -167,6 +170,7 @@ export async function fetchRepoPullRequests(
       owner,
       name,
       first,
+      last,
       labels,
       orderBy,
       direction,

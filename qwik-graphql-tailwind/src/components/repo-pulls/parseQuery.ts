@@ -10,7 +10,7 @@ function parsePullRequests(connection?: any) {
   }
 
   const pageInfo = connection.pageInfo;
-  const nodes = connection.nodes || [];
+  const nodes = connection?.nodes || [];
   const totalCount = connection.totalCount;
 
   const pullRequests = nodes.reduce((pullRequests: PullRequest[], pullRequest: any) => {

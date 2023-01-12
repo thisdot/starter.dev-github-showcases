@@ -23,7 +23,8 @@ export interface IssuesProps {
 interface IssuesQueryParams {
   owner: string;
   name: string;
-  first: number;
+  first?: number;
+  last?: number;
   after?: string;
   before?: string;
   orderBy: string;
@@ -59,7 +60,8 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
         name,
         after: afterCursor,
         before: beforeCursor,
-        first: DEFAULT_PAGE_SIZE,
+        first: afterCursor ? DEFAULT_PAGE_SIZE : undefined,
+        last: beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
         orderBy: IssueOrderField.CreatedAt,
         direction: OrderDirection.Desc,
         filterBy: {
@@ -90,7 +92,8 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
           name,
           after,
           before,
-          first: DEFAULT_PAGE_SIZE,
+          first: location.query.after ? DEFAULT_PAGE_SIZE : undefined,
+          last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],
           filterBy: {
@@ -159,7 +162,7 @@ export function updateIssueState(store: IssuesPRContextProps, response: ParsedIs
 }
 
 export async function fetchRepoIssues(
-  { owner, name, first, after, before, orderBy, direction, filterBy }: IssuesQueryParams,
+  { owner, name, first, last, after, before, orderBy, direction, filterBy }: IssuesQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(ISSUES_QUERY);
@@ -170,6 +173,7 @@ export async function fetchRepoIssues(
       owner,
       name,
       first,
+      last,
       after,
       before,
       orderBy,

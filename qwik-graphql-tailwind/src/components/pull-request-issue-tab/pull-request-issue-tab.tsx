@@ -5,6 +5,7 @@ import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
 import IssuesPRContext from '~/context/issue-pr-store';
 import DropdownStores from '~/context/issue-tab-header-dropdown';
 import PullRequestContext from '~/context/pull-request-store';
+import { useLocation } from '@builder.io/qwik-city';
 
 type Dropdowns = {
   label: string;
@@ -31,6 +32,9 @@ export const PullRequestIssueTab = component$(
   ({ openCount, closedCount, tabType, milestonesOption, labelOption, sortOption }: PullRequestIssueTabParams) => {
     const tab = tabType === 'issue' ? useContext(IssuesPRContext) : useContext(PullRequestContext);
     const dropdown = useContext(DropdownStores);
+    const { pathname } = useLocation();
+
+    // const basePath = `${params.owner}/${params.name}`;
 
     const openBtnClasses = cn('text-xs flex items-center gap-1 text-gray-600', {
       'font-semibold text-gray-900': tab.activeTab === TABS.OPEN,
@@ -46,8 +50,9 @@ export const PullRequestIssueTab = component$(
     const toggleTab = $((value: TABS) => {
       tab.activeTab = value;
       dropdown.selectedLabel = undefined;
-      dropdown.selectedSort = sortOption[0].value;
+      dropdown.selectedSort = dropdown.selectedSort || sortOption[0].value;
       dropdown.selectedMilestones = milestonesOption ? milestonesOption[0].value : undefined;
+      window.location.href = `${pathname}?tab=${value}`;
     });
 
     return (
