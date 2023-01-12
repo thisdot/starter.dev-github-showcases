@@ -89,7 +89,7 @@ export default component$(({ owner, name }: PullRequestsProps) => {
           name,
           after,
           before,
-          first: location.query.after ? DEFAULT_PAGE_SIZE : undefined,
+          first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
           last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
           labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
           orderBy: dropdownStore.selectedSort.split('^')[0],
@@ -138,7 +138,9 @@ export default component$(({ owner, name }: PullRequestsProps) => {
         pullRequestStore.closedPageInfo?.hasPreviousPage) && (
         <Pagination
           tab={pullRequestStore.activeTab}
-          pageInfo={pullRequestStore.activeTab ? pullRequestStore.openPageInfo : pullRequestStore.closedPageInfo}
+          pageInfo={
+            pullRequestStore.activeTab === 'open' ? pullRequestStore.openPageInfo : pullRequestStore.closedPageInfo
+          }
           owner={`${owner}/${name}/pulls`}
         />
       )}

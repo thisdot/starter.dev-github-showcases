@@ -60,7 +60,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
         name,
         after: afterCursor,
         before: beforeCursor,
-        first: afterCursor ? DEFAULT_PAGE_SIZE : undefined,
+        first: afterCursor || !beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
         last: beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
         orderBy: IssueOrderField.CreatedAt,
         direction: OrderDirection.Desc,
@@ -140,7 +140,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
         issuesStore.closedPageInfo?.hasPreviousPage) && (
         <Pagination
           tab={issuesStore.activeTab}
-          pageInfo={issuesStore.activeTab ? issuesStore.openPageInfo : issuesStore.closedPageInfo}
+          pageInfo={issuesStore.activeTab === 'open' ? issuesStore.openPageInfo : issuesStore.closedPageInfo}
           owner={`${owner}/${name}/issues`}
         />
       )}
