@@ -1,16 +1,18 @@
 <script lang="ts">
   import { IssueState } from '$lib/interfaces';
-  import { CheckCircle16, Circle16 } from 'svelte-octicons';
+  import { GitMerge16, GitPullRequest16, IssueClosed16, IssueOpened16 } from 'svelte-octicons';
 
   export let state: IssueState;
+  export let pull = false;
+
+  $: openIcon = pull ? GitPullRequest16 : IssueOpened16;
+  $: closedIcon = pull ? GitMerge16 : IssueClosed16;
 </script>
 
 {#if state === IssueState.Open}
-  <Circle16 class="issue-state-icon open">
-    <circle cx="50%" cy="50%" r="2" />
-  </Circle16>
+  <svelte:component this={openIcon} class="issue-state-icon open" />
 {:else if state === IssueState.Closed}
-  <CheckCircle16 class="issue-state-icon closed" />
+  <svelte:component this={closedIcon} class="issue-state-icon closed" />
 {/if}
 
 <style lang="scss">

@@ -19,6 +19,12 @@ export enum GithubIssueAuthorAssociation {
   Owner = 'OWNER',
 }
 
+export type GithubSearchIssuePullRequest = {
+  url: string;
+  html_url: string;
+  merged_at?: string | null;
+};
+
 /**
  * Contains the only relevant properties.
  * [`Github API: Search > Search issues and pull requests`](https://docs.github.com/en/rest/search?apiVersion=2022-11-28#search-issues-and-pull-requests)
@@ -50,13 +56,7 @@ export interface GithubSearchIssue {
   author_association: GithubIssueAuthorAssociation;
   // active_lock_reason?: string | null;
   // draft: boolean;
-  // pull_request: {
-  //   url: string;
-  //   html_url: string;
-  //   diff_url: string;
-  //   patch_url: string;
-  //   merged_at?: string | null;
-  // };
+  pull_request?: GithubSearchIssuePullRequest;
   // body: string;
 
   // diff_url: string;

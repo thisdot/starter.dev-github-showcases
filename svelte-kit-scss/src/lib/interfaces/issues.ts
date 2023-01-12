@@ -12,6 +12,12 @@ export enum IssueState {
 
 export type IssueAssignee = IssueUser;
 
+export type IssuePullRequest = {
+  url: string;
+  htmlUrl: string;
+  mergedAt?: string | null;
+};
+
 export interface Issue {
   assignees: IssueAssignee[];
   closedAt?: string | null;
@@ -24,6 +30,7 @@ export interface Issue {
   title: string;
   user: IssueUser;
   htmlUrl: string;
+  pullRequest?: IssuePullRequest;
 }
 
 export interface IssueCollection {

@@ -51,7 +51,7 @@ export const PullRequestIssueTab = component$(
       tab.activeTab = value;
       dropdown.selectedLabel = undefined;
       dropdown.selectedSort = dropdown.selectedSort || sortOption[0].value;
-      dropdown.selectedMilestones = milestonesOption ? milestonesOption[0].value : undefined;
+      dropdown.selectedMilestones = undefined;
       window.location.href = `${pathname}?tab=${value}`;
     });
 

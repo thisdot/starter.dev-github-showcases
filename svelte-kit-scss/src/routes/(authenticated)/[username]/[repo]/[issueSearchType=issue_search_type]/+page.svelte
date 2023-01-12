@@ -8,6 +8,7 @@
   import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
   import ListBlankSlate from '$lib/components/shared/ListBlankSlate/ListBlankSlate.svelte';
   import { IssueOpened24 } from 'svelte-octicons';
+  import { PAGE_IDS } from '$lib/constants/page-ids';
 
   export let data: PageServerData;
 
@@ -15,6 +16,7 @@
     data);
   $: currentPageId.set(pageId);
   $: hasIssues = issues.length;
+  $: pull = pageId === PAGE_IDS.REPOSITORY.PULLS;
 </script>
 
 <LayoutPageContentRow marginBottom>
@@ -25,6 +27,7 @@
       {stateFilters}
       {milestoneFilters}
       {labelFilters}
+      {pull}
     />
     {#if hasIssues}
       <IssueSearchList items={issues} />

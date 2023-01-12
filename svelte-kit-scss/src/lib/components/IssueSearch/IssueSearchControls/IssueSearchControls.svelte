@@ -10,6 +10,7 @@
   export let stateFilters: NavigationFilterOption[];
   export let milestoneFilters: NavigationFilterOption[];
   export let labelFilters: NavigationFilterOption[];
+  export let pull = false;
 
   const handleFilterSelect = async (
     option: NavigationFilterOption,
@@ -24,7 +25,7 @@
 
 <div class="issue-search-controls">
   <div class="primary">
-    <IssueStateFilter options={stateFilters} />
+    <IssueStateFilter options={stateFilters} {pull} />
   </div>
   <div class="secondary">
     <DropdownMenuSelect
