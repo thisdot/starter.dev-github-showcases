@@ -63,6 +63,7 @@
     "husky": "^8.0.2",
     "jsdom": "20.0.3",
     "lint-staged": "^13.1.0",
+    "mdsvex": "0.10.6",
     "prettier": "2.8.0",
     "prettier-plugin-svelte": "2.8.1",
     "sass": "1.56.1",
@@ -84,7 +85,6 @@
   },
   "dependencies": {
     "cookie": "^0.5.0",
-    "markdown-it": "^13.0.1",
     "prismjs": "^1.29.0",
     "sanitize-html": "^2.7.3"
   }

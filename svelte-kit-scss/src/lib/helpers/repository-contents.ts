@@ -1,8 +1,7 @@
 import type { FileExplorerFolderContentItem } from '$lib/components/FileExplorer/models';
 import { GithubRepoContentsItemType } from '$lib/constants/github';
 import type { GithubFileContentsItem, GithubRepoContentsItem } from '$lib/interfaces';
-import MarkdownIt from 'markdown-it';
-import sanitizeHtml from 'sanitize-html';
+import { compile } from 'mdsvex';
 
 export const composeDirHref = (
   path: string,
@@ -57,19 +56,17 @@ export const MARKDOWN_ALLOWED_ENCODING: BufferEncoding[] = [
 ];
 
 /** **Use only on server side!** */
-export const buildMarkdownPreviewHtml = (file: GithubFileContentsItem): string => {
+export const buildMarkdownPreviewHtml = async (
+  file: GithubFileContentsItem
+): Promise<string | undefined> => {
   const { content, encoding } = file;
-  const md = new MarkdownIt();
   const bufferEncoding = MARKDOWN_ALLOWED_ENCODING.find((x) => x === encoding);
   if (!bufferEncoding) {
     console.warn(`Unsupported encoding: ${bufferEncoding}`);
     return content;
   }
   const decoded = Buffer.from(content, bufferEncoding).toString('utf8');
-  return sanitizeHtml(md.render(decoded), {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'details', 'summary']),
-    allowedAttributes: {
-      img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
-    },
-  });
+  const compiledResponse = await compile(decoded);
+
+  return compiledResponse?.code;
 };

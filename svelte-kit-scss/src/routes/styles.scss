@@ -66,3 +66,23 @@ a.link-anchor {
     color: variables.$blue600;
   }
 }
+
+.markdown {
+  table {
+    border-collapse: collapse;
+    display: block;
+    width: 100%;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+
+    td,
+    th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  }
+}
