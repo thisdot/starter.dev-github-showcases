@@ -97,7 +97,7 @@ git clone https://github.com/thisdot/starter.dev.git
 
 ### Environment Variables
 
-First start by copying contents of `.env.example` to `.env`.
+First, start by copying the contents of `.env.example` to `.env`.
 
 ```bash
 cp .env.example .env
