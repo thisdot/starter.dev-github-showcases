@@ -12,11 +12,11 @@ const getRouteLoadStats = (): RoutesLoadStats => {
   return stats;
 };
 
-const GITHUB_API_REQUEST_TIMEOUT_MILISECONDS = GITHUB_API_REQUEST_TIMEOUT_SECONDS * 1000;
+const GITHUB_API_REQUEST_TIMEOUT_MILLISECONDS = GITHUB_API_REQUEST_TIMEOUT_SECONDS * 1000;
 
 const estimateRouteLoadTime = (routeId: string): number => {
   const stats: RoutesLoadStats = getRouteLoadStats();
-  const lastTimeouts = stats[routeId] || [GITHUB_API_REQUEST_TIMEOUT_MILISECONDS];
+  const lastTimeouts = stats[routeId] || [GITHUB_API_REQUEST_TIMEOUT_MILLISECONDS];
   const averageTimeoutRounded = Math.round(
     lastTimeouts.reduce((a, b) => a + b, 0) / lastTimeouts.length
   );
@@ -61,20 +61,19 @@ export const setNavigation = (navigation: Navigation | null): void => {
 };
 
 const FRACTION_DIVISOR = 10;
-let timeoutId: NodeJS.Timeout | undefined = undefined;
+let timeoutId: NodeJS.Timeout;
 navigationProgressWritable.subscribe((progress) => {
-  if (progress < PROGRESS_COMPLETED) {
-    if (destinationRouteId) {
-      const estimatedLoadTime = estimateRouteLoadTime(destinationRouteId);
-      const updateInterval = Math.floor(estimatedLoadTime / FRACTION_DIVISOR);
-      const newProgress = progress + PROGRESS_COMPLETED / FRACTION_DIVISOR;
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        const actualProgress = get(navigationProgressWritable);
-        if (actualProgress < PROGRESS_COMPLETED && newProgress < PROGRESS_COMPLETED) {
-          navigationProgressWritable.set(newProgress);
-        }
-      }, updateInterval);
-    }
+  if (progress < PROGRESS_COMPLETED && destinationRouteId) {
+    const estimatedLoadTime = estimateRouteLoadTime(destinationRouteId);
+    const updateInterval = Math.floor(estimatedLoadTime / FRACTION_DIVISOR);
+    const newProgress = progress + PROGRESS_COMPLETED / FRACTION_DIVISOR;
+
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const actualProgress = get(navigationProgressWritable);
+      if (actualProgress < PROGRESS_COMPLETED && newProgress < PROGRESS_COMPLETED) {
+        navigationProgressWritable.set(newProgress);
+      }
+    }, updateInterval);
   }
 });
