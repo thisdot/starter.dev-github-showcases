@@ -48,6 +48,7 @@ export const UserRepos = component$(({ repos, owner }: UserReposProps) => {
         },
         abortController
       );
+
       state.searchResponse = response.data.user.repositories.nodes;
     }
 
