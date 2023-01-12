@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [spaFallbackWithDot(), solidPlugin()],
   server: {
     port: 3000,
+    hmr: {
+      overlay: false,//To hide the overlay error message
+    },
   },
   build: {
     target: 'esnext',
