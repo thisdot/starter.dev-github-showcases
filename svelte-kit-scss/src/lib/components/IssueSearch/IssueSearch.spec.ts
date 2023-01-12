@@ -3,6 +3,8 @@ import IssueSearchList from './IssueSearchList.svelte';
 import { render, screen } from '@testing-library/svelte';
 import { MOCK_ISSUE_ARRAY } from '$lib/helpers/mocks/issues';
 
+const ISSUE_LENGTH = MOCK_ISSUE_ARRAY.length;
+
 describe('IssueSearch', () => {
   beforeEach(() => {
     render(IssueSearchList, {
@@ -13,7 +15,7 @@ describe('IssueSearch', () => {
   describe('List issues', () => {
     it('should list all issues', () => {
       const issues = screen.queryAllByTestId('issue-search-list-item');
-      expect(issues.length).toBe(4);
+      expect(issues.length).toBe(ISSUE_LENGTH);
     });
   });
 
@@ -31,7 +33,7 @@ describe('IssueSearch', () => {
         .map((number) => number.textContent)
         .filter(Boolean);
 
-      expect(issueNumbers.length).toBe(4);
+      expect(issueNumbers.length).toBe(ISSUE_LENGTH);
       expect(issueNumbers).toEqual(['#1', '#2', '#3', '#4']);
     });
 
@@ -41,7 +43,7 @@ describe('IssueSearch', () => {
         .map((comment) => comment.textContent)
         .filter(Boolean);
 
-      expect(commentCounts.length).toBe(4);
+      expect(commentCounts.length).toBe(ISSUE_LENGTH);
       expect(commentCounts).toEqual(['5', '0', '0', '10']);
     });
 
@@ -52,13 +54,13 @@ describe('IssueSearch', () => {
 
     it('should contain a date of creation', () => {
       const dates = screen.queryAllByTestId('issue-date');
-      expect(dates.length).toBe(4);
+      expect(dates.length).toBe(ISSUE_LENGTH);
     });
 
     describe('Handle name of the person that created issue', () => {
       it('should contain the name', () => {
         const names = screen.queryAllByTestId('issue-user-login');
-        expect(names.length).toBe(4);
+        expect(names.length).toBe(ISSUE_LENGTH);
       });
 
       it.each(screen.queryAllByTestId('issue-user-login'))('should be clickable', (name) => {
