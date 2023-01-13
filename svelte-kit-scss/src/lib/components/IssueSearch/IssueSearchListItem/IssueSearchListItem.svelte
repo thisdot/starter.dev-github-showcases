@@ -12,13 +12,19 @@
   $: pull = Boolean(pullRequest);
 </script>
 
-<div class="issue-search-list-item">
+<div class="issue-search-list-item" data-testid="issue-search-list-item">
   <div class="state">
     <IssueStateIcon {state} {pull} />
   </div>
   <div class="main">
     <div class="title">
-      <a href={htmlUrl} target="_blank" rel="noreferrer" class="link-anchor">
+      <a
+        href={htmlUrl}
+        target="_blank"
+        rel="noreferrer"
+        class="link-anchor"
+        data-testid="issue-title"
+      >
         {title}
       </a>
       {#each labels as label (label.name)}

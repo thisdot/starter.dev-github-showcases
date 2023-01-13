@@ -17,7 +17,7 @@
   `;
 </script>
 
-<span class="issue-label noselect" {style}>
+<span class="issue-label noselect" {style} data-testid="issue-label">
   {name}
 </span>
 
