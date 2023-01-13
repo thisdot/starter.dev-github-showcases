@@ -1,19 +1,18 @@
 import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
 import { TOP_REPOS_QUERY } from '~/utils/queries/top-repos-query';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
-import TopReposListItems from './top-repos-card';
 import { useQuery } from '~/utils/useQuery';
 import { parseQuery } from './parseQuery';
 import { TopRepo } from './types';
 import { LoadingPulseDot } from '../Loading/loading-pulse-dot';
+import { TopReposListItems } from './top-repos-card';
 
 interface RepoStore {
   login: '';
   data: TopRepo[];
   isLoading: boolean;
 }
-
-export default component$(() => {
+export const TopRepos = component$(() => {
   const store = useStore<RepoStore>({
     login: '',
     data: [],
