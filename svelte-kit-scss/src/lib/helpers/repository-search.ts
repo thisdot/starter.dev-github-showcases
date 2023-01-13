@@ -111,7 +111,7 @@ export const buildRepositoryPageNavigationFilterOptions = <
 };
 
 export const composeRepositoryFiltersStateSentence = (
-  { language, sort, term, type }: RepositorySearchQueryParameters,
+  { sort, term, type }: RepositorySearchQueryParameters,
   resultsCount: number
 ): HtmlSentenceNode[] => {
   const resultCountNodes: HtmlSentenceNode[] = [

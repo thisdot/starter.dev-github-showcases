@@ -9,7 +9,11 @@
   $: borderColor = ['fff', 'ffffff'].includes(String(color?.toLowerCase())) ? 'd1d5db' : color;
 </script>
 
-<div class="issue-label-item-template-checkbox" class:checked>
+<div
+  class="issue-label-item-template-checkbox"
+  class:checked
+  data-testid="issue-label-item-template-checkbox"
+>
   <div class="check-mark">
     <Check16 class="icon" />
   </div>

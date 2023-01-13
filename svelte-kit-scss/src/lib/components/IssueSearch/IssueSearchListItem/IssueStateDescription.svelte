@@ -8,12 +8,13 @@
 
 <span>
   {#if open}
-    #{item.number} opened by <a class="link-anchor" href="#">{item.user.login}</a>
-    {relativeTimeFmt(item.createdAt)}
+    <span data-testid="issue-number">#{item.number}</span> opened by
+    <a class="link-anchor" href="#" data-testid="issue-user-login">{item.user.login}</a>
+    <span data-testid="issue-date">{relativeTimeFmt(item.createdAt)}</span>
   {:else if item.closedAt}
-    #{item.number} by <a class="link-anchor" href="#">{item.user.login}</a> was closed {relativeTimeFmt(
-      item.closedAt
-    )}
+    <span data-testid="issue-number">#{item.number}</span> by
+    <a class="link-anchor" href="#" data-testid="issue-user-login">{item.user.login}</a>
+    was closed <span data-testid="issue-date">{relativeTimeFmt(item.closedAt)}</span>
   {:else}
     #{item.number} -
   {/if}
