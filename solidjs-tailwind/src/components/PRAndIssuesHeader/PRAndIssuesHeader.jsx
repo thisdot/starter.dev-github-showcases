@@ -17,8 +17,6 @@ const PRAndIssuesHeader = (props) => {
     tabActive
   } = usePrAndIssuesContext();
 
-  console.log(type);
-
   const sortOptions = Object.values(SORT_OPTIONS);
   const selectSort = (value) =>  setSortBy(value);
   const labelOptions = createMemo(() => Object.values({...labelOpt().map((label) => label.name)}))
