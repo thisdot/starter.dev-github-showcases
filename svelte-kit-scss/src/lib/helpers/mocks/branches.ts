@@ -7,11 +7,4 @@ export const MOCK_BRANCH: GithubBranch = {
     url: 'mock_url',
   },
   protected: true,
-  protection: {
-    required_status_checks: {
-      enforcement_level: 'mock_enforcement_level',
-      contexts: [],
-    },
-  },
-  protection_url: 'mock_protection_url',
 };

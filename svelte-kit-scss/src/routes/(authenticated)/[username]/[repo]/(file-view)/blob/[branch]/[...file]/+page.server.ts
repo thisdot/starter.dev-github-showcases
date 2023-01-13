@@ -1,11 +1,13 @@
 import type { PageServerLoad, PageServerParentData } from './$types';
 import { ENV } from '$lib/constants/env';
-import type { GithubFileContentsItem, FileContents, GithubBranch } from '$lib/interfaces';
+import type { FileContents } from '$lib/interfaces';
+import type { GithubFileContentsItem } from '$lib/interfaces/data-contract/github';
 import { mapLanguageExt, remapFileContents } from '$lib/helpers/file';
 import Prism from 'prismjs';
 import loadPrismLanguages from 'prismjs/components/index';
-import { buildContentItemBreadcrumbs, composeDirHref, remapBranchOption } from '$lib/helpers';
+import { buildContentItemBreadcrumbs, buildRepositoryFolderBranchOptions } from '$lib/helpers';
 import { error } from '@sveltejs/kit';
+import { BranchService } from '$lib/services';
 
 export const load: PageServerLoad = async ({
   params: { username, repo, branch, file },
@@ -33,15 +35,15 @@ export const load: PageServerLoad = async ({
   const folderPathSegments = blobPath.split('/');
   const folderPath = folderPathSegments.join('/');
 
-  const getRepoBranchesUrl = new URL(`/repos/${username}/${repo}/branches`, ENV.GITHUB_URL);
-
-  const branches = await fetch(getRepoBranchesUrl).then(
-    (response) => response.json() as Promise<GithubBranch>
+  const branchService = new BranchService(fetch);
+  const repositoryBranches = await branchService.getBranchesForRepository(username, repo);
+  const branches = buildRepositoryFolderBranchOptions(
+    folderPath,
+    username,
+    repo,
+    repositoryBranches,
+    repositoryState.defaultBranch
   );
-
-  if (!Array.isArray(branches)) {
-    throw error(400, 'Unable to fetch branches');
-  }
 
   const breadcrumbs = buildContentItemBreadcrumbs(
     username,
@@ -55,11 +57,7 @@ export const load: PageServerLoad = async ({
     fileContents,
     prismLanguage: language ? Prism.languages[language] : undefined,
     language: language,
-    branches: branches.map((branch) =>
-      remapBranchOption(branch, (branchName: string) =>
-        composeDirHref(folderPath, username, repo, branchName, repositoryState.defaultBranch)
-      )
-    ),
+    branches,
     defaultBranch: repositoryState.defaultBranch,
     currentBranch: branch,
     breadcrumbs,
