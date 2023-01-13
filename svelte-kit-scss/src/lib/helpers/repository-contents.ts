@@ -73,9 +73,16 @@ export const buildMarkdownPreviewHtml = (file: GithubFileContentsItem): string =
   const md = new MarkdownIt();
   const decodedContent = decodeFileContent(file);
   return sanitizeHtml(md.render(decodedContent), {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'details', 'summary']),
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+      'img',
+      'details',
+      'summary',
+      'a',
+      'code',
+    ]),
     allowedAttributes: {
       img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
+      a: ['href'],
     },
   });
 };

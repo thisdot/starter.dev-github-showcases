@@ -13,7 +13,7 @@
       <span class="filename">README.md</span>
     </div>
     <div class="content">
-      <span>
+      <span class="markdown">
         {@html html}
       </span>
     </div>
