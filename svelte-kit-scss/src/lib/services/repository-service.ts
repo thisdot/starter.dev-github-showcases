@@ -86,6 +86,9 @@ export class RepositoryService extends AbstractFetchService {
       buildFilterParameter(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO, `${username}/${repo}`),
     ].join(' ');
     const openPullsCount = await issueService.getIssuesCount(openPullsQuery);
+    // openIssuesCount is the total number of open issues + PRs
+    // subtract PRs count to get open issues count
+    repository.openIssuesCount -= openPullsCount;
     return buildRepositoryState(repository, openPullsCount);
   }
 
