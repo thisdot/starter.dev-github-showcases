@@ -8,16 +8,16 @@ import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 const PRAndIssuesHeader = (props) => {
   const {
     type,
-    setActiveTab, 
-    sortBy, 
-    setSortBy, 
-    setSelectedLabel, 
+    setActiveTab,
+    sortBy,
+    setSortBy,
+    setSelectedLabel,
     labelOpt,
-    selectedLabel, 
+    selectedLabel,
     tabActive
-  } = usePrAndIssuesContext()
+  } = usePrAndIssuesContext();
 
-  const sortOptions = Object.values(SORT_OPTIONS)
+  const sortOptions = Object.values(SORT_OPTIONS);
   const selectSort = (value) =>  setSortBy(value);
   const labelOptions = createMemo(() => Object.values({...labelOpt().map((label) => label.name)}))
   const selectLabel = (value) =>  setSelectedLabel(value)
@@ -27,7 +27,7 @@ const PRAndIssuesHeader = (props) => {
       <div class="flex space-x-4">
         <button class={cn('text-xs flex items-center gap-1 text-gray-600', {
           'font-semibold text-gray-900': tabActive() === 'open',
-        })} 
+        })}
           onClick={() => setActiveTab('open')}
         >
           {type === 'pr' ? <PullRequestIcon class='w-4 h-4' /> : <IssuesIcon class='w-4 h-4' />}
@@ -36,7 +36,7 @@ const PRAndIssuesHeader = (props) => {
         </button>
         <button class={cn('text-xs flex items-center gap-1 text-gray-600', {
             'font-semibold text-gray-900': tabActive() === 'closed',
-          })} 
+          })}
           onClick={() => setActiveTab('closed')}
         >
           <CheckIcon class='w-4 h-4' />
