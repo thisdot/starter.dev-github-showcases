@@ -1,3 +1,4 @@
+import type { BranchOption } from '$lib/components/FileExplorer/models';
 import { ENV } from '$lib/constants/env';
 import {
   buildContentItemBreadcrumbs,
@@ -63,6 +64,25 @@ export const load: PageServerLoad = async ({ params: { username, repo, tree }, p
     throw error(400, 'Unable to fetch branches');
   }
 
+  const defaultBranchOption: BranchOption = {
+    name: repositoryState.defaultBranch,
+    href: composeDirHref(
+      folderPath,
+      username,
+      repo,
+      repositoryState.defaultBranch,
+      repositoryState.defaultBranch
+    ),
+  };
+
+  const branchOptions = branches
+    .map((branch) =>
+      remapBranchOption(branch, (branchName: string) =>
+        composeDirHref(folderPath, username, repo, branchName, repositoryState.defaultBranch)
+      )
+    )
+    .concat(defaultBranchOption);
+
   const breadcrumbs = buildContentItemBreadcrumbs(
     username,
     repo,
@@ -76,11 +96,7 @@ export const load: PageServerLoad = async ({ params: { username, repo, tree }, p
     parentHref,
     contents,
     readmeHtml: buildMarkdownPreviewHtml(readmeData),
-    branches: branches.map((branch) =>
-      remapBranchOption(branch, (branchName: string) =>
-        composeDirHref(folderPath, username, repo, branchName, repositoryState.defaultBranch)
-      )
-    ),
+    branches: branchOptions,
     defaultBranch: repositoryState.defaultBranch,
     currentBranch: branch,
     breadcrumbs,
