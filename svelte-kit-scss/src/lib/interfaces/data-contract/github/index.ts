@@ -7,3 +7,4 @@ export * from './repository-search';
 export * from './users';
 export * from './organizations';
 export * from './issue-label';
+export * from './branches';

@@ -7,3 +7,4 @@ export * from './organization-service';
 export * from './repository-service';
 export * from './search-repository-service';
 export * from './user-service';
+export * from './branch-service';
