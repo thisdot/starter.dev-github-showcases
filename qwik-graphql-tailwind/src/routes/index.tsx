@@ -1,7 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import Gists from '../components/gists';
-import TopRepos from '../components/top-repos';
+import { Gists } from '~/components/gists';
+import { TopRepos } from '~/components/top-repos';
 
 export default component$(() => {
   return (
