@@ -45,7 +45,7 @@ For this kit, we maintained the [Sveltekit Project Structure](https://kit.svelte
 
 - #### Styling
 
-  Svelte comes with sass support. Sass one of the most mature, stable, and powerful professional-grade CSS extension language, it quickly allows us to design robust components.
+  Svelte comes with sass support. Sass is one of the most mature, stable, and powerful professional-grade CSS extension languages, it quickly allows us to design robust components.
 
 - #### Example Components
 
