@@ -9,8 +9,6 @@ import { buildContentItemBreadcrumbs, buildRepositoryFolderBranchOptions } from 
 import { error } from '@sveltejs/kit';
 import { BranchService } from '$lib/services';
 
-export const ssr = false;
-
 export const load: PageServerLoad = async ({
   params: { username, repo, branch, file },
   parent,
