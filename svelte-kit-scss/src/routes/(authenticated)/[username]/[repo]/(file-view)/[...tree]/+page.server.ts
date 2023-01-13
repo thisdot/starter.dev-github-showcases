@@ -53,8 +53,8 @@ export const load: PageServerLoad = async ({ params: { username, repo, tree }, p
     remapFileExplorerFolderContentsItem(item, username, repo, branch, repositoryState.defaultBranch)
   );
 
-  const readmeData = await fetch(getRepoReadmeUrl).then(
-    (response) => response.json() as Promise<GithubFileContentsItem>
+  const readmeData = await fetch(getRepoReadmeUrl).then((response) =>
+    response.ok ? (response.json() as Promise<GithubFileContentsItem>) : Promise.resolve(undefined)
   );
 
   const branchService = new BranchService(fetch);
@@ -79,7 +79,7 @@ export const load: PageServerLoad = async ({ params: { username, repo, tree }, p
     ...layoutData,
     parentHref,
     contents,
-    readmeHtml: buildMarkdownPreviewHtml(readmeData),
+    readmeHtml: readmeData ? buildMarkdownPreviewHtml(readmeData) : String(),
     branches,
     defaultBranch: repositoryState.defaultBranch,
     currentBranch: branch,
