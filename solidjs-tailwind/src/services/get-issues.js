@@ -59,7 +59,7 @@ function parseIssues(connection) {
   return { issues, totalCount, pageInfo };
 }
 
-const getIssues = async ({ owner, name, orderBy, direction, labels }) => {
+const getIssues = async ({ owner, name, after, before, orderBy, direction, labels }) => {
   const { authStore } = useAuth();
 
   const data = {
@@ -70,6 +70,8 @@ const getIssues = async ({ owner, name, orderBy, direction, labels }) => {
       name,
       first: 30,
       labels,
+      after,
+      before,
       orderBy,
       direction,
     },

@@ -1,24 +1,29 @@
 import { createResource, createSignal, createEffect } from 'solid-js';
-import { useParams } from '@solidjs/router';
+import { useParams, useLocation } from '@solidjs/router';
 import { PRAndIssuesData } from '../PRAndIssuesData/PRAndIssuesData';
 import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 import { parseSortParams } from './utils';
 import { SORT_OPTIONS } from '../../utils/constants';
 import getIssues from '../../services/get-issues';
 import { CloseIcon } from '../Icons';
+import { Pagination } from '../Pagination';
 
 const RepoIssues = () => {
   const params = useParams();
+  const location = useLocation();
   const { tabActive, sortBy, selectedLabel, setLabelOpt, clearSortAndFilter } =
     usePrAndIssuesContext();
 
   const [data, setData] = createSignal([]);
+  const [pageInfo, setPageInfo] = createSignal({});
   const [openCount, setOpenCount] = createSignal();
   const [closedCount, setClosedCount] = createSignal();
 
   const fetchParameters = () => ({
     owner: params.owner,
     name: params.name,
+    after: location.query.after,
+    before: location.query.before,
     orderBy: parseSortParams(SORT_OPTIONS, sortBy(), 0),
     direction: parseSortParams(SORT_OPTIONS, sortBy(), 1),
     labels: selectedLabel() ? [selectedLabel()] : undefined,
@@ -33,6 +38,9 @@ const RepoIssues = () => {
       setLabelOpt(resp().labels);
       setOpenCount(resp().openIssues.totalCount);
       setClosedCount(resp().closedIssues.totalCount);
+      setPageInfo(
+        resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].pageInfo
+      );
       setData(
         resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].issues
       );
@@ -61,6 +69,13 @@ const RepoIssues = () => {
             openCount={openCount()}
             closedCount={closedCount()}
           />
+          {(pageInfo().hasNextPage || pageInfo().hasPreviousPage) && (
+            <Pagination
+              tab={tabActive()}
+              pageInfo={pageInfo()}
+              owner={`${params.owner}/${params.name}/issues`}
+            />
+          )}
         </>
       )}
     </div>

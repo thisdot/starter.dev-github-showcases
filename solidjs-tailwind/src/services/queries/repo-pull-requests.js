@@ -3,11 +3,17 @@ export const REPO_PULL_REQUESTS = `
       repository(owner: $owner, name: $name) {
       openPullRequest: pullRequests(first: $first, states: [OPEN], labels: $labels, orderBy:{ field: $orderBy, direction: $direction}) {
         totalCount
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
         nodes {
           state
           createdAt
           closedAt
-          labels(first: 100) {    
+          labels(first: 100) {
             totalCount
             nodes {
               color
@@ -28,6 +34,12 @@ export const REPO_PULL_REQUESTS = `
       }
       closedPullRequest: pullRequests(first: $first, states: [CLOSED, MERGED], labels: $labels, orderBy:{ field: $orderBy, direction: $direction}) {
         totalCount
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
         nodes {
           state
           createdAt
