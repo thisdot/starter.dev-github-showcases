@@ -59,7 +59,7 @@ function parseIssues(connection) {
   return { issues, totalCount, pageInfo };
 }
 
-const getIssues = async ({ owner, name }) => {
+const getIssues = async ({ owner, name, orderBy, direction, labels }) => {
   const { authStore } = useAuth();
 
   const data = {
@@ -69,9 +69,9 @@ const getIssues = async ({ owner, name }) => {
       owner,
       name,
       first: 30,
-      labels: undefined,
-      orderBy: 'CREATED_AT',
-      direction: 'DESC',
+      labels,
+      orderBy,
+      direction,
     },
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
