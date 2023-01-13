@@ -1,4 +1,4 @@
-import { component$, useClientEffect$, useContextProvider, useStore, useTask$ } from '@builder.io/qwik';
+import { component$, useClientEffect$, useContextProvider, useStore } from '@builder.io/qwik';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import { useQuery } from '~/utils/useQuery';
 import { USER_PROFILE_QUERY } from '~/utils/queries/user-profile-query';
@@ -9,7 +9,6 @@ import ProfileNav from '../../components/profile-nav/profile-nav';
 import { UserRepos } from '../../components/user-repos/user-repos';
 import filterStore, { FilterStoreProps } from '~/context/repo-filter';
 import { DefaultLanguage, TypeFilter, RepositoryOrderField } from '~/components/repo-filters/types';
-import { isBrowser } from '@builder.io/qwik/build';
 
 interface UserStore {
   isLoading: boolean;
@@ -18,9 +17,6 @@ interface UserStore {
 
 interface ProfileQueryParams {
   username: string;
-  afterCursor?: string;
-  beforeCursor?: string;
-  orderBy?: string;
 }
 
 export default component$(() => {
@@ -42,36 +38,9 @@ export default component$(() => {
 
   useClientEffect$(async () => {
     const abortController = new AbortController();
-    const userResponse = await fetchUserProfile(
-      {
-        username: location.params.user,
-        afterCursor: location.query?.after,
-        beforeCursor: location.query?.before,
-      },
-      abortController
-    );
+    const userResponse = await fetchUserProfile({ username: location.params.user }, abortController);
 
     updateUserProfile(store, userResponse);
-  });
-
-  useTask$(async ({ track }) => {
-    const abortController = new AbortController();
-    store.isLoading = true;
-    const after = track(() => location.query.after);
-    const before = track(() => location.query.before);
-
-    if (isBrowser && location.params.user) {
-      const userResponse = await fetchUserProfile(
-        {
-          username: location.params.user,
-          afterCursor: after,
-          beforeCursor: before,
-        },
-        abortController
-      );
-
-      updateUserProfile(store, userResponse);
-    }
   });
 
   if (store.isLoading) {
@@ -95,9 +64,7 @@ export default component$(() => {
           </div>
           <div class="col-span-12 md:col-span-8 xl:col-span-9">
             <ProfileNav className="border-none md:hidden" pathname={location.pathname} />
-            {store.user?.repositories ? (
-              <UserRepos repos={store.user?.repositories} owner={location.params.user} />
-            ) : null}
+            <UserRepos owner={location.params.user} />
           </div>
         </div>
       </div>
@@ -111,7 +78,7 @@ export function updateUserProfile(store: UserStore, response: any) {
 }
 
 export async function fetchUserProfile(
-  { username, afterCursor, beforeCursor, orderBy }: ProfileQueryParams,
+  { username }: ProfileQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(USER_PROFILE_QUERY);
@@ -121,9 +88,6 @@ export async function fetchUserProfile(
     url: GITHUB_GRAPHQL,
     variables: {
       username,
-      afterCursor,
-      beforeCursor,
-      orderBy,
     },
     headersOpt: {
       Accept: 'application/vnd.github+json',

@@ -1,21 +1,14 @@
 export const REPOS_QUERY = `
 query UserRepos(
   $username: String!
-  $first: Int
-  $last: Int
   $afterCursor: String
   $beforeCursor: String
-  $orderBy: RepositoryOrder
 ) {
-  user(login: $username) {
-    id
+  owner: user(login: $username) {
     repositories(
-      first: $first
-      last: $last
+      first: 10
       after: $afterCursor
       before: $beforeCursor
-      orderBy: $orderBy
-      affiliations: [OWNER]
       ownerAffiliations: [OWNER]
     ) {
       nodes {
@@ -31,8 +24,19 @@ query UserRepos(
           color
           name
         }
+        languages(first: 10, orderBy: { direction: ASC, field: SIZE }) {
+          nodes {
+            color
+            name
+            id
+          }
+        }
         isPrivate
+        visibility
         updatedAt
+        owner {
+          login
+        }
       }
       pageInfo {
         endCursor
@@ -43,5 +47,4 @@ query UserRepos(
     }
   }
 }
-
 `;
