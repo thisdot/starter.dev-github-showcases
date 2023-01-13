@@ -1,12 +1,30 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import type { UserConfig } from 'vite';
 import { configDefaults, type UserConfig as VitestConfig } from 'vitest/config';
+import nodePolyfills from 'rollup-plugin-polyfill-node';
+import { nodeModulesPolyfillPlugin } from 'esbuild-plugins-node-modules-polyfill';
 
 const config: UserConfig & { test: VitestConfig['test'] } = {
   plugins: [sveltekit()],
   define: {
     // Eliminate in-source test code
     'import.meta.vitest': 'undefined',
+  },
+  resolve: {
+    alias: {
+      path: 'rollup-plugin-node-polyfills/polyfills/path',
+    },
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      // Enable esbuild polyfill plugins
+      plugins: [nodeModulesPolyfillPlugin()],
+    },
+  },
+  build: {
+    rollupOptions: {
+      plugins: [nodePolyfills()],
+    },
   },
   test: {
     // jest like globals
