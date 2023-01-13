@@ -1,5 +1,6 @@
 import type { FileContents, GithubFileContentsItem } from '$lib/interfaces';
 import type { Language } from '$lib/components/FileViewer/types/language';
+import { decodeFileContent } from './repository-contents';
 
 export const mapLanguageExt = (extension?: string): Language | undefined => {
   switch (extension?.toLowerCase()) {
@@ -86,8 +87,7 @@ export const remapFileContents = (
 ): FileContents | undefined => {
   return responseData
     ? {
-        // content: Buffer.from(responseData.content, 'base64').toString('binary'),
-        content: atob(responseData.content),
+        content: decodeFileContent(responseData),
         name: responseData.name,
         size: responseData.size,
         type: responseData.type,

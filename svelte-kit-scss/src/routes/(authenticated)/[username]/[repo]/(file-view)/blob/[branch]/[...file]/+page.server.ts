@@ -7,8 +7,6 @@ import loadPrismLanguages from 'prismjs/components/index';
 import { buildContentItemBreadcrumbs, composeDirHref, remapBranchOption } from '$lib/helpers';
 import { error } from '@sveltejs/kit';
 
-export const ssr = false;
-
 export const load: PageServerLoad = async ({
   params: { username, repo, branch, file },
   parent,
