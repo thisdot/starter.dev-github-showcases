@@ -1,14 +1,15 @@
-import type { BranchOption } from '$lib/components/FileExplorer/models';
 import { ENV } from '$lib/constants/env';
 import {
   buildContentItemBreadcrumbs,
   buildMarkdownPreviewHtml,
   buildRepositoryFolderBranchOptions,
   composeDirHref,
-  remapBranchOption,
   remapFileExplorerFolderContentsItem,
 } from '$lib/helpers';
-import type { GithubFileContentsItem, GithubRepoContentsItem, GithubBranch } from '$lib/interfaces';
+import type {
+  GithubFileContentsItem,
+  GithubRepoContentsItem,
+} from '$lib/interfaces/data-contract/github';
 import { BranchService } from '$lib/services';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad, PageServerParentData } from './$types';
