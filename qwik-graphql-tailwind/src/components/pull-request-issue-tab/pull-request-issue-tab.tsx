@@ -34,8 +34,6 @@ export const PullRequestIssueTab = component$(
     const dropdown = useContext(DropdownStores);
     const { pathname } = useLocation();
 
-    // const basePath = `${params.owner}/${params.name}`;
-
     const openBtnClasses = cn('text-xs flex items-center gap-1 text-gray-600', {
       'font-semibold text-gray-900': tab.activeTab === TABS.OPEN,
     });
