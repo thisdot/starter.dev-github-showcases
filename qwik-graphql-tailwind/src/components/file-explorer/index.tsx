@@ -1,4 +1,4 @@
-import { component$, useContext } from '@builder.io/qwik';
+import { $, component$, useContext } from '@builder.io/qwik';
 import { FolderIcon, DocumentIcon } from '~/components/icons';
 import { Link, useLocation } from '@builder.io/qwik-city';
 import { BranchNavigation } from '../branch-navigation';
@@ -17,6 +17,10 @@ export const FileExplorer = component$(({ tree }: { tree: any[] }) => {
 
   const basePath = `/${owner}/${name}`;
   const backLink = `${basePath}/tree/${globalStore.branch || pathBranch}/${path || ''}`;
+
+  const handleFolderClick$ = $((path: string) => {
+    window.location.href = path;
+  });
 
   return (
     <>
@@ -40,9 +44,14 @@ export const FileExplorer = component$(({ tree }: { tree: any[] }) => {
                   <DocumentIcon className="w-5 h-5 text-gray-500" />
                 )}
               </div>
-              <a href={`${basePath}/${item.type}/${globalStore.branch || pathBranch}/${item.path}`}>
-                <span class="hover:text-blue-600 hover:underline">{item.name}</span>
-              </a>
+              <span
+                class="cursor-pointer hover:text-blue-600 hover:underline"
+                onClick$={() =>
+                  handleFolderClick$(`${basePath}/${item.type}/${globalStore.branch || pathBranch}/${item.path}`)
+                }
+              >
+                {item.name}
+              </span>
             </div>
           </div>
         ))}
