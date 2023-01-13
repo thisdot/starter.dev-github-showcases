@@ -19,8 +19,8 @@ export const Pagination = component$(({ tab, pageInfo, owner }: PaginationProps)
     return null;
   }
 
-  const prevUrl = `/${owner}?before=${pageInfo.startCursor}${tab ? `&tab=${tab}` : ''}`;
-  const nextUrl = `/${owner}?after=${pageInfo.endCursor}${tab ? `&tab=${tab}` : ''}`;
+  const prevUrl = `/${owner}?before=${pageInfo?.startCursor}${tab ? `&tab=${tab}` : ''}`;
+  const nextUrl = `/${owner}?after=${pageInfo?.endCursor}${tab ? `&tab=${tab}` : ''}`;
 
   const handlePreviousClick$ = $(() => {
     nav.path = prevUrl;

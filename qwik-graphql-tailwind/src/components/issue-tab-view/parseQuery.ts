@@ -11,7 +11,7 @@ function parseIssues(connection?: any) {
   }
 
   const pageInfo = connection.pageInfo;
-  const nodes = connection.nodes || [];
+  const nodes = connection?.nodes || [];
   const totalCount = connection.totalCount;
 
   const issues = nodes.reduce((issues: Issue[], issue: any) => {
@@ -59,7 +59,7 @@ function parseIssues(connection?: any) {
 }
 
 function parseMilestones(milestones?: any) {
-  const nodes = milestones.nodes || [];
+  const nodes = milestones?.nodes || [];
   return nodes.reduce((milestones: Milestone[], milestone: Milestone) => {
     if (!milestone) {
       return milestones;

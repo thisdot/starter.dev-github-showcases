@@ -23,7 +23,8 @@ export interface IssuesProps {
 interface IssuesQueryParams {
   owner: string;
   name: string;
-  first: number;
+  first?: number;
+  last?: number;
   after?: string;
   before?: string;
   orderBy: string;
@@ -48,6 +49,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
     dropdownStore.selectedLabel = undefined;
     dropdownStore.selectedMilestones = undefined;
     dropdownStore.selectedSort = sortOptions[0].value;
+    window.location.href = `${location.pathname}?tab=${issuesStore.activeTab}`;
   });
 
   useClientEffect$(async () => {
@@ -59,7 +61,8 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
         name,
         after: afterCursor,
         before: beforeCursor,
-        first: DEFAULT_PAGE_SIZE,
+        first: afterCursor || !beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
+        last: beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
         orderBy: IssueOrderField.CreatedAt,
         direction: OrderDirection.Desc,
         filterBy: {
@@ -90,7 +93,8 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
           name,
           after,
           before,
-          first: DEFAULT_PAGE_SIZE,
+          first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+          last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],
           filterBy: {
@@ -128,7 +132,10 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
             <div class="w-full h-4 rounded-md bg-gray-200"></div>
           </div>
         ) : (
-          <IssuesData issues={issuesStore.activeTab === 'open' ? issuesStore.openIssues : issuesStore.closedIssues} />
+          <IssuesData
+            loading={issuesStore.loading}
+            issues={issuesStore.activeTab === 'open' ? issuesStore.openIssues : issuesStore.closedIssues}
+          />
         )}
       </div>
       {(issuesStore.openPageInfo?.hasNextPage ||
@@ -137,7 +144,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
         issuesStore.closedPageInfo?.hasPreviousPage) && (
         <Pagination
           tab={issuesStore.activeTab}
-          pageInfo={issuesStore.activeTab ? issuesStore.openPageInfo : issuesStore.closedPageInfo}
+          pageInfo={issuesStore.activeTab === 'open' ? issuesStore.openPageInfo : issuesStore.closedPageInfo}
           owner={`${owner}/${name}/issues`}
         />
       )}
@@ -159,7 +166,7 @@ export function updateIssueState(store: IssuesPRContextProps, response: ParsedIs
 }
 
 export async function fetchRepoIssues(
-  { owner, name, first, after, before, orderBy, direction, filterBy }: IssuesQueryParams,
+  { owner, name, first, last, after, before, orderBy, direction, filterBy }: IssuesQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(ISSUES_QUERY);
@@ -170,6 +177,7 @@ export async function fetchRepoIssues(
       owner,
       name,
       first,
+      last,
       after,
       before,
       orderBy,

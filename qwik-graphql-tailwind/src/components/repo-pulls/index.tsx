@@ -25,7 +25,8 @@ export interface PullRequestsProps {
 interface PullRequestsQueryParams {
   owner: string;
   name: string;
-  first: number;
+  first?: number;
+  last?: number;
   after?: string;
   before?: string;
   labels?: string[];
@@ -46,16 +47,18 @@ export default component$(({ owner, name }: PullRequestsProps) => {
   const resetFilters$ = $(() => {
     dropdownStore.selectedLabel = undefined;
     dropdownStore.selectedSort = sortOptions[0].value;
+    window.location.href = `${location.pathname}?tab=${pullRequestStore.activeTab}`;
   });
 
   useClientEffect$(async () => {
-    const abortController = new AbortController();
     pullRequestStore.loading = true;
+    const abortController = new AbortController();
     const response = await fetchRepoPullRequests(
       {
         owner,
         name,
-        first: DEFAULT_PAGE_SIZE,
+        first: afterCursor || !beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
+        last: beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
         labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
         orderBy: PullRequestOrderField.CreatedAt,
         direction: OrderDirection.Desc,
@@ -87,7 +90,8 @@ export default component$(({ owner, name }: PullRequestsProps) => {
           name,
           after,
           before,
-          first: DEFAULT_PAGE_SIZE,
+          first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+          last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
           labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],
@@ -121,6 +125,7 @@ export default component$(({ owner, name }: PullRequestsProps) => {
           </div>
         ) : (
           <PullRequestData
+            loading={pullRequestStore.loading}
             pull_request={
               pullRequestStore.activeTab === 'open'
                 ? pullRequestStore.openPullRequest
@@ -135,7 +140,9 @@ export default component$(({ owner, name }: PullRequestsProps) => {
         pullRequestStore.closedPageInfo?.hasPreviousPage) && (
         <Pagination
           tab={pullRequestStore.activeTab}
-          pageInfo={pullRequestStore.activeTab ? pullRequestStore.openPageInfo : pullRequestStore.closedPageInfo}
+          pageInfo={
+            pullRequestStore.activeTab === 'open' ? pullRequestStore.openPageInfo : pullRequestStore.closedPageInfo
+          }
           owner={`${owner}/${name}/pulls`}
         />
       )}
@@ -156,7 +163,7 @@ export function updatePullRequestState(store: PullRequestContextProps, response:
 }
 
 export async function fetchRepoPullRequests(
-  { owner, name, first, after, before, labels, orderBy, direction }: PullRequestsQueryParams,
+  { owner, name, first, last, after, before, labels, orderBy, direction }: PullRequestsQueryParams,
   abortController?: AbortController
 ): Promise<any> {
   const { executeQuery$ } = useQuery(PULL_REQUEST_QUERY);
@@ -167,6 +174,7 @@ export async function fetchRepoPullRequests(
       owner,
       name,
       first,
+      last,
       labels,
       orderBy,
       direction,
