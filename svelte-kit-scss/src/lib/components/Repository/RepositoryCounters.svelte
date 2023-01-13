@@ -8,9 +8,9 @@
 </script>
 
 <div class="repository-counters">
-  <NamedCounter label="Watchers" icon={Eye16} count={watchersCount} />
-  <NamedCounter label="Forks" icon={RepoForked16} count={forksCount} />
-  <NamedCounter label="Stars" icon={Star16} count={stargazersCount} />
+  <NamedCounter label="Watch" icon={Eye16} count={watchersCount} />
+  <NamedCounter label="Fork" icon={RepoForked16} count={forksCount} />
+  <NamedCounter label="Star" icon={Star16} count={stargazersCount} />
 </div>
 
 <style lang="scss">

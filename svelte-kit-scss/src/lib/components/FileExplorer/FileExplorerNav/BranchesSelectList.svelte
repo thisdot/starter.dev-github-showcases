@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { BranchOption } from '../models';
   import { Check16 } from 'svelte-octicons';
-  import { goto, prefetch } from '$app/navigation';
+  import { goto } from '$app/navigation';
 
   export let options: BranchOption[];
   export let defaultBranch: string | undefined = undefined;
@@ -14,7 +14,6 @@
     if (isCurrent(option)) {
       return;
     }
-    await prefetch(option.href);
     await goto(option.href);
   };
 </script>

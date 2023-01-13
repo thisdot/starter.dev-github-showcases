@@ -1,10 +1,10 @@
-import {
-  type GithubSearchIssue,
-  type Issue,
-  type IssueUser,
-  type GithubSearchIssueUser,
-  IssueState,
-} from '$lib/interfaces';
+import { type Issue, type IssueUser, IssueState, type IssuePullRequest } from '$lib/interfaces';
+
+import type {
+  GithubSearchIssuePullRequest,
+  GithubSearchIssue,
+  GithubSearchIssueUser,
+} from '$lib/interfaces/data-contract/github';
 import { remapIssueLabel } from './issue-label';
 
 const remapIssueUser = (user: GithubSearchIssueUser): IssueUser => ({
@@ -17,6 +17,16 @@ const remapIssueState = (state: string): IssueState => {
     throw new Error(`Unsupported IssueState: ${state}`);
   }
   return <IssueState>state;
+};
+
+const remapIssuePullRequest = (
+  issuePullRequest: GithubSearchIssuePullRequest
+): IssuePullRequest => {
+  return {
+    url: issuePullRequest.url,
+    htmlUrl: issuePullRequest.html_url,
+    mergedAt: issuePullRequest.merged_at,
+  };
 };
 
 export const remapIssue = (issue: GithubSearchIssue): Issue => {
@@ -32,5 +42,6 @@ export const remapIssue = (issue: GithubSearchIssue): Issue => {
     title: issue.title,
     user: remapIssueUser(issue.user),
     htmlUrl: issue.html_url,
+    pullRequest: issue.pull_request ? remapIssuePullRequest(issue.pull_request) : undefined,
   };
 };

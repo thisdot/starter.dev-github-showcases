@@ -7,15 +7,15 @@ import getRepoTree from '../../services/get-repo-tree';
 import { parseQueryData } from './parseTree';
 
 const FileExplorerView = () => {
-  const [tree, setTree] = createSignal([]);
   const { info } = useRepo();
   const params = useParams();
+  const [tree, setTree] = createSignal([]);
 
   const branch = params.branch || info().branch;
   const basePath = `/${params.owner}/${params.name}`;
   const backLink = `${basePath}/tree/${branch}/${params.path}`;
 
-  const [resTree] = createResource(`${branch}_${params.path}`, () =>
+  const [resTree] = createResource(() => `${branch}_${params.path}`, () =>
     getRepoTree({
       owner: params.owner,
       name: params.name,
@@ -56,12 +56,12 @@ const FileExplorerView = () => {
                   <Link
                     href={`${basePath}/${item.type}/${branch}/${item.path}`}
                   >
-                    <span
+                    <a
                       data-testid={`file explorer list ${item.name}`}
                       class={styles.link}
                     >
                       {item.name}
-                    </span>
+                    </a>
                   </Link>
                 </div>
               </div>

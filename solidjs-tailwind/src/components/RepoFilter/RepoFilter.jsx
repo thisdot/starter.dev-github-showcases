@@ -6,7 +6,7 @@ import {
   FILTER_TYPE_OPTIONS,
   SORT_OPTIONS,
 } from './data';
-import FilterDropdown from './FilterDropdown';
+import FilterDropdown from '../FilterDropDown/FilterDropdown';
 import FilterText from './FilterText';
 import {
   language,

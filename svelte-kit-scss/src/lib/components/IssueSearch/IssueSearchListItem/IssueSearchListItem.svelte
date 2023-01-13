@@ -7,12 +7,14 @@
   import IssueLabel from './IssueLabel.svelte';
 
   export let item: Issue;
-  $: ({ title, commentsCount, state, assignees, labels, htmlUrl } = item);
+
+  $: ({ title, commentsCount, state, assignees, labels, htmlUrl, pullRequest } = item);
+  $: pull = Boolean(pullRequest);
 </script>
 
 <div class="issue-search-list-item">
   <div class="state">
-    <IssueStateIcon {state} />
+    <IssueStateIcon {state} {pull} />
   </div>
   <div class="main">
     <div class="title">
