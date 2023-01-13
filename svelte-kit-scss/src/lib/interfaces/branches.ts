@@ -1,15 +1,10 @@
-export interface GithubBranch {
+export type BranchCommit = {
+  sha: string;
+  url: string;
+};
+
+export type Branch = {
   name: string;
-  commit: {
-    sha: string;
-    url: string;
-  };
+  commit?: BranchCommit;
   protected: true;
-  protection: {
-    required_status_checks: {
-      enforcement_level: string;
-      contexts: string[];
-    };
-  };
-  protection_url: string;
-}
+};

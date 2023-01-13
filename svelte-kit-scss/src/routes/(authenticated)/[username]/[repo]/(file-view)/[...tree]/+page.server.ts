@@ -2,11 +2,15 @@ import { ENV } from '$lib/constants/env';
 import {
   buildContentItemBreadcrumbs,
   buildMarkdownPreviewHtml,
+  buildRepositoryFolderBranchOptions,
   composeDirHref,
-  remapBranchOption,
   remapFileExplorerFolderContentsItem,
 } from '$lib/helpers';
-import type { GithubFileContentsItem, GithubRepoContentsItem, GithubBranch } from '$lib/interfaces';
+import type {
+  GithubFileContentsItem,
+  GithubRepoContentsItem,
+} from '$lib/interfaces/data-contract/github';
+import { BranchService } from '$lib/services';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad, PageServerParentData } from './$types';
 
@@ -53,15 +57,15 @@ export const load: PageServerLoad = async ({ params: { username, repo, tree }, p
     (response) => response.json() as Promise<GithubFileContentsItem>
   );
 
-  const getRepoBranchesUrl = new URL(`/repos/${username}/${repo}/branches`, ENV.GITHUB_URL);
-
-  const branches = await fetch(getRepoBranchesUrl).then(
-    (response) => response.json() as Promise<GithubBranch>
+  const branchService = new BranchService(fetch);
+  const repositoryBranches = await branchService.getBranchesForRepository(username, repo);
+  const branches = buildRepositoryFolderBranchOptions(
+    folderPath,
+    username,
+    repo,
+    repositoryBranches,
+    repositoryState.defaultBranch
   );
-
-  if (!Array.isArray(branches)) {
-    throw error(400, 'Unable to fetch branches');
-  }
 
   const breadcrumbs = buildContentItemBreadcrumbs(
     username,
@@ -76,11 +80,7 @@ export const load: PageServerLoad = async ({ params: { username, repo, tree }, p
     parentHref,
     contents,
     readmeHtml: buildMarkdownPreviewHtml(readmeData),
-    branches: branches.map((branch) =>
-      remapBranchOption(branch, (branchName: string) =>
-        composeDirHref(folderPath, username, repo, branchName, repositoryState.defaultBranch)
-      )
-    ),
+    branches,
     defaultBranch: repositoryState.defaultBranch,
     currentBranch: branch,
     breadcrumbs,

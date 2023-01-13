@@ -56,7 +56,6 @@ export class IssuesSearchService extends AbstractFetchService {
     const collectionPage = await this.rejectableFetchJson<GithubCollectionPage<GithubSearchIssue>>(
       url
     );
-    console.log(collectionPage.items[0]);
     return remapCollectionPage(collectionPage, remapIssue);
   }
 }
