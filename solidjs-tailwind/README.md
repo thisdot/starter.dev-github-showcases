@@ -5,13 +5,13 @@ This starter kit features SolidJS combined with Tailwind CSS.
 ## Table of Contents
 
 - [Overview](#overview)
-    - [Tech Stack](#tech-stack)
-    - [Included Tooling](#included-tooling)
-    - [Architectural Decisions](#architectural-decisions)
-    - [Example Components](#example-components)
+  - [Tech Stack](#tech-stack)
+  - [Included Tooling](#included-tooling)
+  - [Architectural Decisions](#architectural-decisions)
+  - [Example Components](#example-components)
 - [Installation](#installation)
-    - [CLI](#cli)
-    - [Manual](#manual)
+  - [CLI](#cli)
+  - [Manual](#manual)
 - [Commands](#commands)
 - [Demo Implementation](#demo-implementation)
 
@@ -33,7 +33,7 @@ This starter kit features SolidJS combined with Tailwind CSS.
 
 #### State management
 
-Managing state between components is a big part of creating modern web applications. Typically, this is done by using a third-party package. Sometimes it can be combined with fetching server data (e.g., Apollo or Tanstack Query).
+Managing the state between components is a big part of creating modern web applications. Typically, this is done by using a third-party package. Sometimes it can be combined with fetching server data (e.g., Apollo or Tanstack Query).
 
 ##### Considered Options
 
@@ -42,13 +42,13 @@ Managing state between components is a big part of creating modern web applicati
 
 ##### Decision
 
-Use SolidJS' native `createResource` as it comes bundles and is the "solid way" of handling things.
+Use SolidJS' native `createResource` as it comes with bundles and is the "solid way" of handling things.
 
 ### Example Components
 
 #### Counter `src/components/CounterExample`
 
-A small counter example which showcases how to use state in SolidJS. You can view the example on the `src/pages/Counter`.
+A small counter example that showcases how to use state in SolidJS. You can view the example on the `src/pages/Counter`.
 
 Signals can live outside of components. Each relevant component subscribes to its value by using it.
 
@@ -93,7 +93,7 @@ git clone https://github.com/thisdot/starter.dev.git
 - `pnpm run build` - Builds a production version of the app to deploy
 - `pnpm run serve` - Serves a production build on localhost port 4173
 - `pnpm run lint` - Uses eslint to find potential issues in the codebase
-- `pnpm run lint-fix` - Tries to auto fix potential issues
+- `pnpm run lint-fix` - Tries to auto-fix potential issues
 - `pnpm run format` - Fixes formatting issues in the codebase
 
 ## Demo Implementation
