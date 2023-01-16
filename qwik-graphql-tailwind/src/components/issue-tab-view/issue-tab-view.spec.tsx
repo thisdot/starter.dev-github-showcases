@@ -1,5 +1,5 @@
 import { createDOM } from '@builder.io/qwik/testing';
-import { test, expect, describe } from 'vitest';
+import { test, expect, describe, vi } from 'vitest';
 import { Issue } from './type';
 import IssuesData from './issues-data';
 
@@ -11,12 +11,9 @@ const issues: Issue[] = [
     state: 'OPEN',
     closedAt: '',
     createdAt: '2022-12-06T00:00:00Z',
-    author: {
-      login: 'johnsmith',
-    },
-    comments: {
-      totalCount: 2,
-    },
+    login: 'johnsmith',
+    commentCount: 2,
+    labels: [],
   },
   {
     url: 'https://github.com/user/repo/issues/2',
@@ -25,20 +22,24 @@ const issues: Issue[] = [
     state: 'CLOSED',
     closedAt: '2022-12-07T00:00:00Z',
     createdAt: '2022-12-05T00:00:00Z',
-    author: {
-      login: 'johndoe',
-    },
-    comments: {
-      totalCount: 0,
-    },
+    login: 'johnDoe',
+    commentCount: 1,
+    labels: [],
   },
 ];
 
+vi.mock('@builder.io/qwik', async () => {
+  const qwik = await vi.importActual<typeof import('@builder.io/qwik')>('@builder.io/qwik');
+  return {
+    ...qwik,
+    useContext: () => ({}),
+  };
+});
 describe('IssuesData component', () => {
   test(`should mount`, async () => {
     const { screen, render } = await createDOM();
 
-    await render(<IssuesData issues={issues} />);
+    await render(<IssuesData issues={issues} loading={false} />);
     expect(screen.outerHTML).toContain('https://github.com/user/repo/issues/2');
   });
 });
