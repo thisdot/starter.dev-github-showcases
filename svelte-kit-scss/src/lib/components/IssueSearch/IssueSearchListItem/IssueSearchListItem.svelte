@@ -42,7 +42,7 @@
       <IssueSearchAssignees {assignees} />
     </div>
     <div class="detail comments">
-      <a href="#" class="link-anchor">
+      <a href={'#'} class="link-anchor">
         <CommentsCount count={commentsCount} />
       </a>
     </div>
