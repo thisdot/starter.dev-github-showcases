@@ -1,11 +1,11 @@
 import { ENV } from '$lib/constants/env';
 import {
   buildContentItemBreadcrumbs,
-  buildMarkdownPreviewHtml,
   buildRepositoryFolderBranchOptions,
   composeDirHref,
   remapFileExplorerFolderContentsItem,
 } from '$lib/helpers';
+import { buildMarkdownPreviewHtml } from '$lib/server/helpers';
 import type {
   GithubFileContentsItem,
   GithubRepoContentsItem,

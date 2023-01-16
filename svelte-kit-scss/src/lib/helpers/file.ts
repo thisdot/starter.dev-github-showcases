@@ -1,6 +1,4 @@
-import type { FileContents, GithubFileContentsItem } from '$lib/interfaces';
 import type { Language } from '$lib/components/FileViewer/types/language';
-import { decodeFileContent } from './repository-contents';
 
 export const mapLanguageExt = (extension?: string): Language | undefined => {
   switch (extension?.toLowerCase()) {
@@ -80,17 +78,4 @@ export const mapLanguageExt = (extension?: string): Language | undefined => {
     default:
       return undefined;
   }
-};
-
-export const remapFileContents = (
-  responseData?: GithubFileContentsItem
-): FileContents | undefined => {
-  return responseData
-    ? {
-        content: decodeFileContent(responseData),
-        name: responseData.name,
-        size: responseData.size,
-        type: responseData.type,
-      }
-    : undefined;
 };

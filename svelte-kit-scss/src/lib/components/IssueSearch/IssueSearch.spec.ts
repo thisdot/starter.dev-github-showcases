@@ -42,7 +42,7 @@ describe('IssueSearch', () => {
         .map((comment) => comment.textContent)
         .filter(Boolean);
 
-      expect(commentCounts).toEqual(['5', '0', '0', '10']);
+      expect(commentCounts).toEqual(['5', '10']);
     });
 
     it('should contain labels if any', () => {

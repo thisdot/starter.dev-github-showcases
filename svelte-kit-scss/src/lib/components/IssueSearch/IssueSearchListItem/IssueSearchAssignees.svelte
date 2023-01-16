@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { IssueAssignee } from '$lib/interfaces';
+  import type { SimpleUser } from '$lib/interfaces';
 
-  export let assignees: IssueAssignee[];
+  export let assignees: SimpleUser[];
   $: assigneesReversed = assignees.slice().reverse();
   $: assigneesCount = assignees.length;
 
