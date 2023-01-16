@@ -13,37 +13,43 @@
 
 <div class="organization-profile">
   <div class="section avatar">
-    <img class="image" src={avatarUrl} alt={at} width="100" height="100" />
+    <img class="image" src={avatarUrl} alt={at} data-testid="avatar" width="100" height="100" />
   </div>
   <div class="section info">
     <div class="name">
-      <h1>{name}</h1>
+      <h1 data-testid="name">{name}</h1>
     </div>
     {#if bio}
       <div class="bio">
-        <span>{bio}</span>
+        <span data-testid="bio">{bio}</span>
       </div>
     {/if}
 
     <div class="details">
       <ProfileFollowers {followers} />
       {#if company}
-        <SocialLink iconComponent={Organization16} label={company} />
+        <SocialLink iconComponent={Organization16} label={company} testId="company" />
       {/if}
       {#if location}
-        <SocialLink iconComponent={Location16} label={location} />
+        <SocialLink iconComponent={Location16} label={location} testId="location" />
       {/if}
       {#if email}
-        <SocialLink iconComponent={Mail16} label={email} href={`mailto:{${email}}`} />
+        <SocialLink
+          iconComponent={Mail16}
+          label={email}
+          href={`mailto:{${email}}`}
+          testId="email"
+        />
       {/if}
       {#if blog}
-        <SocialLink iconComponent={Link16} label={blog} href={blog} />
+        <SocialLink iconComponent={Link16} label={blog} href={blog} testId="blog" />
       {/if}
       {#if twitterUsername}
         <SocialLink
           iconComponent={IconTwitter16}
           label={twitterUsername}
           href={`https://twitter.com/${twitterUsername}`}
+          testId="twitterUsername"
         />
       {/if}
     </div>

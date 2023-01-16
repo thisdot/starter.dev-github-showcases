@@ -16,19 +16,42 @@ describe('UserProfile', () => {
     });
   });
 
+  const { name, bio, followers, email, blog, twitterUsername, location, avatarUrl, following } =
+    mockUserProfile;
+
   it.each([
-    ['name', mockUserProfile.name],
-    ['login', mockUserProfile.login],
-    ['bio', mockUserProfile.bio],
-    // ['followers', mockUserProfile.followers],
-    // ['following', mockUserProfile.following],
-    // ['email', mockUserProfile.email],
-    // ['blog', mockUserProfile.blog],
-    // ['twitterUsername', mockUserProfile.twitterUsername],
-    // ['location', mockUserProfile.location],
+    ['name', name],
+    ['bio', bio],
+    ['blog', blog],
+    ['twitterUsername', twitterUsername],
+    ['location', location],
   ])('should render: %s', (testId, expectedValue) => {
     const element = screen.getByTestId(testId);
     const expectedText = String(expectedValue);
     expect(element.innerHTML).toEqual(expectedText);
+  });
+
+  it('should render email of org correctly', () => {
+    if (email) {
+      const element = screen.getByTestId('email');
+      const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      expect(regexEmail.test(String(element.textContent))).toBeTruthy();
+      expect(element.textContent).toEqual(String(email));
+    }
+  });
+
+  it('should render followers of org correctly', () => {
+    const element = screen.getByTestId('followers');
+    expect(Number(element.textContent)).toEqual(followers);
+  });
+
+  it('should render following of org correctly', () => {
+    const element = screen.getByTestId('following');
+    expect(Number(element.textContent)).toEqual(following);
+  });
+
+  it('should render avatar of user', async () => {
+    const image = screen.getByTestId(`avatar`);
+    expect(image.getAttribute('src')).toBe(avatarUrl);
   });
 });

@@ -11,6 +11,6 @@ describe('VisibilityLabel Component', () => {
 
     const element = screen.getByTestId('visibility');
     const expectedText = String(visibility);
-    expect(element.innerHTML).toEqual(expectedText);
+    expect(element.textContent).toEqual(expectedText);
   });
 });

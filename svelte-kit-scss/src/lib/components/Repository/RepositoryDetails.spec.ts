@@ -19,7 +19,7 @@ describe('RepositoryDetails Component', () => {
   ])('should render: %s', (testId, expectedValue) => {
     const element = screen.getByTestId(testId);
     const expectedText = String(expectedValue);
-    expect(element.innerHTML).toEqual(expectedText);
+    expect(element.textContent).toEqual(expectedText);
   });
 
   it('should render chips', () => {

@@ -5,6 +5,7 @@
   export let label: string | null | undefined = undefined;
   export let iconComponent: ComponentType;
   export let mobileHide = false;
+  export let testId: string | null | undefined = undefined;
 </script>
 
 <div class="social-link" class:mobile-hide={mobileHide}>
@@ -14,9 +15,9 @@
     </div>
     <div class="entry label">
       {#if href}
-        <a class="link" {href}>{label || href}</a>
+        <a class="link" data-testid={testId} {href}>{label || href}</a>
       {:else}
-        <span>{label || ''}</span>
+        <span data-testid={testId}>{label || ''}</span>
       {/if}
     </div>
   </div>
