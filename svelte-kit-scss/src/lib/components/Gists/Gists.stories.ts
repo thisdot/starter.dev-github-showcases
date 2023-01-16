@@ -4,14 +4,18 @@ export default {
   component: Gists,
   title: 'Home/Gists',
   excludeStories: /.*Data$/,
-  argTypes: {
-    message: 'from Storybook',
-  },
 };
 
-const Template = ({ ...args }) => ({
+export const Default = () => ({
   Component: Gists,
-  props: args,
+  args: {
+    gists: gistsFixture,
+  },
 });
 
-export const Default = Template.bind({});
+export const Empty = () => ({
+  Component: Gists,
+  args: {
+    gists: [],
+  },
+});
