@@ -1,16 +1,11 @@
-import { type Issue, type IssueUser, IssueState, type IssuePullRequest } from '$lib/interfaces';
+import { type Issue, IssueState, type IssuePullRequest } from '$lib/interfaces';
 
 import type {
   GithubSearchIssuePullRequest,
   GithubSearchIssue,
-  GithubSearchIssueUser,
 } from '$lib/interfaces/data-contract/github';
+import { remapSimpleUser } from './common';
 import { remapIssueLabel } from './issue-label';
-
-const remapIssueUser = (user: GithubSearchIssueUser): IssueUser => ({
-  login: user.login,
-  avatarUrl: user.avatar_url,
-});
 
 const remapIssueState = (state: string): IssueState => {
   if (!Object.values(IssueState).map(String).includes(state)) {
@@ -31,7 +26,7 @@ const remapIssuePullRequest = (
 
 export const remapIssue = (issue: GithubSearchIssue): Issue => {
   return {
-    assignees: issue.assignees.map(remapIssueUser),
+    assignees: issue.assignees.map(remapSimpleUser),
     closedAt: issue.closed_at,
     commentsCount: issue.comments,
     createdAt: issue.created_at,
@@ -40,7 +35,7 @@ export const remapIssue = (issue: GithubSearchIssue): Issue => {
     number: issue.number,
     state: remapIssueState(issue.state),
     title: issue.title,
-    user: remapIssueUser(issue.user),
+    user: issue.user ? remapSimpleUser(issue.user) : null,
     htmlUrl: issue.html_url,
     pullRequest: issue.pull_request ? remapIssuePullRequest(issue.pull_request) : undefined,
   };

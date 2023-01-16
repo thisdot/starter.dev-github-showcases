@@ -35,17 +35,17 @@
       <IssueStateDescription {item} />
     </div>
   </div>
-  <!-- todo: hide for mobile -->
   <div class="details">
     <div class="detail linked-issue" />
     <div class="detail assignees">
       <IssueSearchAssignees {assignees} />
     </div>
     <div class="detail comments">
-      <!-- svelte-ignore a11y-invalid-attribute -->
-      <a href="#" class="link-anchor">
-        <CommentsCount count={commentsCount} />
-      </a>
+      {#if commentsCount}
+        <a href={htmlUrl} class="link-anchor">
+          <CommentsCount count={commentsCount} />
+        </a>
+      {/if}
     </div>
   </div>
 </div>
@@ -59,6 +59,9 @@
     font-size: 1rem;
     & > div {
       padding: 0 0.25rem;
+    }
+    .state {
+      padding-top: 0.25em;
     }
     .main {
       flex: 1;

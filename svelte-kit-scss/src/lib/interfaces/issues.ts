@@ -1,16 +1,10 @@
+import type { SimpleUser } from './common';
 import type { IssueLabel } from './issue-label';
-
-export interface IssueUser {
-  avatarUrl: string;
-  login: string;
-}
 
 export enum IssueState {
   Open = 'open',
   Closed = 'closed',
 }
-
-export type IssueAssignee = IssueUser;
 
 export type IssuePullRequest = {
   url: string;
@@ -19,7 +13,7 @@ export type IssuePullRequest = {
 };
 
 export interface Issue {
-  assignees: IssueAssignee[];
+  assignees: SimpleUser[];
   closedAt?: string | null;
   commentsCount: number;
   createdAt: string;
@@ -28,7 +22,7 @@ export interface Issue {
   number: number;
   state: IssueState;
   title: string;
-  user: IssueUser;
+  user: SimpleUser | null;
   htmlUrl: string;
   pullRequest?: IssuePullRequest;
 }

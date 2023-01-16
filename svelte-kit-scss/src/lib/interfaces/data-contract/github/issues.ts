@@ -1,11 +1,6 @@
+import type { GithubSimpleUser } from './common';
 import type { GithubIssueLabel } from './issue-label';
 
-export type GithubSearchIssueUser = {
-  login: string;
-  avatar_url: string;
-};
-
-export type GithubSearchIssueAssignee = GithubSearchIssueUser;
 export type GithubSearchIssueState = 'open' | 'close';
 
 export enum GithubIssueAuthorAssociation {
@@ -42,12 +37,12 @@ export interface GithubSearchIssue {
   // node_id: string;
   number: number;
   title: string;
-  user: GithubSearchIssueUser;
+  user: GithubSimpleUser | null;
   labels: GithubIssueLabel[];
   state: GithubSearchIssueState;
   locked: boolean;
-  assignee: GithubSearchIssueUser | null;
-  assignees: GithubSearchIssueAssignee[];
+  assignee: GithubSimpleUser | null;
+  assignees: GithubSimpleUser[];
   milestone?: unknown;
   comments: number;
   created_at: string;
