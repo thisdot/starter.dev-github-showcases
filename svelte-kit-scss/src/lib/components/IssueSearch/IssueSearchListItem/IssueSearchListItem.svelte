@@ -42,7 +42,8 @@
       <IssueSearchAssignees {assignees} />
     </div>
     <div class="detail comments">
-      <a href={'#'} class="link-anchor">
+      <!-- svelte-ignore a11y-invalid-attribute -->
+      <a href="#" class="link-anchor">
         <CommentsCount count={commentsCount} />
       </a>
     </div>
