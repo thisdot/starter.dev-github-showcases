@@ -2,12 +2,13 @@ import type { PageServerLoad, PageServerParentData } from './$types';
 import { ENV } from '$lib/constants/env';
 import type { FileContents } from '$lib/interfaces';
 import type { GithubFileContentsItem } from '$lib/interfaces/data-contract/github';
-import { mapLanguageExt, remapFileContents } from '$lib/helpers/file';
+import { mapLanguageExt } from '$lib/helpers/file';
 import Prism from 'prismjs';
 import loadPrismLanguages from 'prismjs/components/index';
 import { buildContentItemBreadcrumbs, buildRepositoryFolderBranchOptions } from '$lib/helpers';
 import { error } from '@sveltejs/kit';
 import { BranchService } from '$lib/services';
+import { remapFileContents } from '$lib/server/helpers';
 
 export const load: PageServerLoad = async ({
   params: { username, repo, branch, file },
