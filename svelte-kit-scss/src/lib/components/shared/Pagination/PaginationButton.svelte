@@ -13,7 +13,7 @@
   <span class="pagination-button" class:disabled class:current>
     {#if IconComponent}
       <span class="icon {iconPosition}">
-        <IconComponent />
+        <svelte:component this={IconComponent} />
       </span>
     {/if}
     <span>{label}</span>
@@ -22,7 +22,7 @@
   <a {href} class="pagination-button">
     {#if IconComponent}
       <span class="icon {iconPosition}">
-        <IconComponent />
+        <svelte:component this={IconComponent} />
       </span>
     {/if}
     <span>{label}</span></a
