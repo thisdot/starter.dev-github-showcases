@@ -6754,6 +6754,11 @@ headers-polyfill@^3.1.0:
   resolved "https://registry.yarnpkg.com/headers-polyfill/-/headers-polyfill-3.1.2.tgz#9a4dcb545c5b95d9569592ef7ec0708aab763fbe"
   integrity sha512-tWCK4biJ6hcLqTviLXVR9DTRfYGQMXEIUj3gwJ2rZ5wO/at3XtkI4g8mCvFdUF9l1KMBNCfmNAdnahm1cgavQA==
 
+highlight.js@^11.6.0:
+  version "11.7.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-11.7.0.tgz#3ff0165bc843f8c9bce1fd89e2fda9143d24b11e"
+  integrity sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==
+
 hmac-drbg@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -9837,6 +9842,11 @@ pretty-hrtime@^1.0.3:
   resolved "https://registry.yarnpkg.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
   integrity sha512-66hKPCr+72mlfiSjlEB1+45IjXSqvVAIy6mocupoww4tBFE9R9IhwwUGoI4G++Tc9Aq+2rxOt0RFU6gPcrte0A==
 
+prism-react-renderer@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-1.3.5.tgz#786bb69aa6f73c32ba1ee813fbe17a0115435085"
+  integrity sha512-IJ+MSwBWKG+SM3b2SUfdrhC+gu01QkV2KmRQgREThBfSQRoufqRfxfHUxpG1WcaFjP+kojcFyO9Qqtpgt3qLCg==
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -10873,6 +10883,14 @@ solid-heroicons@^3.1.1:
   dependencies:
     solid-js "^1.6.2"
 
+solid-highlight@^0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/solid-highlight/-/solid-highlight-0.1.12.tgz#c4890b9a0ae3ad7301a3a160db9da8cfdc7cadd2"
+  integrity sha512-1zTiNeuD8SDjil//wcdNGeYVrsgkhVdyHD65WBuO2SV33onTRHXZR8agH60Kpe9GcFmjDmz0UwKWj1zFXesnig==
+  dependencies:
+    highlight.js "^11.6.0"
+    solid-js "^1.4.8"
+
 solid-icons@^1.0.2:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/solid-icons/-/solid-icons-1.0.4.tgz#13eb122fe927110e2463c96d226492fb837a9802"
@@ -10882,6 +10900,13 @@ solid-js@1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-1.6.0.tgz#52fe81e553e42fc6873ebd12093eb8fdc5d22571"
   integrity sha512-db5s65ErgZnBhapPx77qauzul8akHlMCvirS+Y86U4abMa3uizMVNW9ql3UxbO0yMzMGNpFJwUiOlXmJCbwVpA==
+  dependencies:
+    csstype "^3.1.0"
+
+solid-js@^1.4.8:
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-1.6.8.tgz#c21a71f376b915061db7b5b9511e90babe1ccabf"
+  integrity sha512-+X5rf4bL3Il/LI2pn6O2d63D/KyG8Shxj3DM6violSPOhRgm5ln37Pq6uVDAvJcmsObOBeGOjXAwZvqwyZjisg==
   dependencies:
     csstype "^3.1.0"
 
