@@ -5,49 +5,37 @@
 </script>
 
 {#if html}
-  <div id="readme">
-    <div class="header">
-      <span class="icon">
-        <ListUnordered16 />
-      </span>
-      <span class="filename">README.md</span>
-    </div>
-    <div class="content">
-      <span class="markdown">
-        {@html html}
-      </span>
-    </div>
+  <div class="header">
+    <ListUnordered16 />
+    <span class="filename">README.md</span>
+  </div>
+  <div class="content">
+    <span class="markdown">
+      {@html html}
+    </span>
   </div>
 {/if}
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
-
   .header {
     position: sticky;
-    z-index: 3;
     top: 0;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    border-bottom: 1px solid variables.$gray300;
     background-color: variables.$white;
+    padding: 1em;
     font-weight: 600;
-    padding: 0.625rem;
-    border: 1px solid variables.$gray300;
-    border-top-right-radius: 0.25em;
-    border-top-left-radius: 0.25em;
-
-    .icon {
-      margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    .filename {
+      font-size: 0.875em;
+      line-height: 1;
     }
   }
-
   .content {
-    padding: 0.625rem;
-    border: 1px solid variables.$gray300;
-    border-bottom-left-radius: 0.25em;
-    border-bottom-right-radius: 0.25em;
-    border-top: none;
-
-    :global(*) {
-      max-width: 100%;
-    }
+    padding: 1em 2em;
   }
 </style>
