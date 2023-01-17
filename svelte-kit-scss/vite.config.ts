@@ -18,6 +18,8 @@ const config: UserConfig & { test: VitestConfig['test'] } = {
     setupFiles: ['./setupTests.ts'],
     // Exclude files in c8
     coverage: {
+      provider: 'c8',
+      reporter: ['text', 'html'],
       exclude: ['setupTest.ts'],
     },
     deps: {

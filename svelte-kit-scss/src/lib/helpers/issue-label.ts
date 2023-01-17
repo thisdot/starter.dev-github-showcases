@@ -5,7 +5,7 @@ export const remapIssueLabel = (label: GithubIssueLabel): IssueLabel => {
   return {
     color: label.color,
     default: label.default,
-    description: label.description,
+    description: label.description || null,
     id: label.id,
     name: label.name,
     url: label.url,

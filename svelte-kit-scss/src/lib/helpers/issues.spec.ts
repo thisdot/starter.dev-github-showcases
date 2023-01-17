@@ -1,10 +1,10 @@
 import type {
   GithubSearchIssuePullRequest,
-  GithubSearchIssueUser,
+  GithubSimpleUser,
   IssuePullRequest,
-  IssueUser,
+  SimpleUser,
 } from '$lib/interfaces';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { remapIssue } from './issues';
 import { MOCK_SEARCH_ISSUE, MOCK_SEARCH_ISSUE_PULL } from './mocks/issues';
 import { expectCamelFromSnakeCasePropertiesMapping } from './test-utils';
@@ -27,7 +27,10 @@ describe('.remapIssue', () => {
         expect(result.number).toEqual(MOCK_SEARCH_ISSUE.number);
         expect(result.state).toEqual(MOCK_SEARCH_ISSUE.state);
         expect(result.title).toEqual(MOCK_SEARCH_ISSUE.title);
-        expectUserMappingCorrect(result.user, MOCK_SEARCH_ISSUE.user);
+        expectUserMappingCorrect(
+          result.user as SimpleUser,
+          MOCK_SEARCH_ISSUE.user as GithubSimpleUser
+        );
         expect(result.pullRequest).toStrictEqual(undefined);
       });
     });
@@ -47,7 +50,10 @@ describe('.remapIssue', () => {
         expect(result.number).toEqual(MOCK_SEARCH_ISSUE_PULL.number);
         expect(result.state).toEqual(MOCK_SEARCH_ISSUE_PULL.state);
         expect(result.title).toEqual(MOCK_SEARCH_ISSUE_PULL.title);
-        expectUserMappingCorrect(result.user, MOCK_SEARCH_ISSUE_PULL.user);
+        expectUserMappingCorrect(
+          result.user as SimpleUser,
+          MOCK_SEARCH_ISSUE.user as GithubSimpleUser
+        );
         expectCamelFromSnakeCasePropertiesMapping(
           result.pullRequest as IssuePullRequest,
           MOCK_SEARCH_ISSUE_PULL.pull_request as GithubSearchIssuePullRequest
@@ -57,7 +63,7 @@ describe('.remapIssue', () => {
   });
 });
 
-function expectUserMappingCorrect(actual: IssueUser, expected: GithubSearchIssueUser) {
+function expectUserMappingCorrect(actual: SimpleUser, expected: GithubSimpleUser) {
   expect(actual.login).toEqual(expected.login);
   expect(actual.avatarUrl).toEqual(expected.avatar_url);
 }
