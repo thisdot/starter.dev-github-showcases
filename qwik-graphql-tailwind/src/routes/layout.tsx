@@ -10,14 +10,12 @@ interface IViewer {
 
 interface UserStore {
   viewer: IViewer | null;
-  isLoading: boolean;
   access_token: string | null;
 }
 
 export default component$(() => {
   const store = useStore<UserStore>({
     access_token: null,
-    isLoading: false,
     viewer: {
       login: '',
       avatarUrl: '',
@@ -33,7 +31,6 @@ export default component$(() => {
       if (storedUser) {
         store.viewer = JSON.parse(storedUser);
       } else {
-        store.isLoading = true;
         const abortController = new AbortController();
         const response = await fetchAuthenticatedUser(store.access_token, abortController);
         updateUserProfile(store, response);
@@ -43,9 +40,7 @@ export default component$(() => {
 
   return (
     <div>
-      {store.isLoading ? (
-        <div>Loading...</div>
-      ) : store.access_token ? (
+      {store.access_token ? (
         <>
           <Header user={store.viewer} />
           <main class="min-h-screen bg-gray-100">
@@ -58,7 +53,6 @@ export default component$(() => {
 });
 
 export function updateUserProfile(store: UserStore, response: any) {
-  store.isLoading = false;
   store.viewer = response.data.viewer;
   sessionStorage.setItem('user', JSON.stringify(response.data.viewer));
 }
