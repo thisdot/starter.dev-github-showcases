@@ -14,7 +14,9 @@ vi.mock('@builder.io/qwik', async () => {
   return {
     ...qwik,
     useContext: () => ({}),
-    useStore: () => ({}),
+    useStore: () => ({
+      searchResponse: [],
+    }),
   };
 });
 
