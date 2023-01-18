@@ -15,6 +15,8 @@ export default component$(() => {
       closedIssuesCount: 0,
       openIssuesCount: 0,
       loading: true,
+      milestones: [],
+      issuesLabel: [],
       openPageInfo: {
         endCursor: '',
         hasNextPage: false,
