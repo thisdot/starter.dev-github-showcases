@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/html';
-import { mockedGistsQuery } from '../../mock/mockedGists';
-import Gists from './index';
+import { Gists } from '.';
+import { mockedGistsQuery } from '~/mock/mockedGists';
 
 export default {
   title: 'Gists',

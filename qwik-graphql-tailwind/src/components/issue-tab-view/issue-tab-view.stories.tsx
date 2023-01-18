@@ -1,5 +1,4 @@
 import { mockedIssuesQuery } from '../../mock/mockedIssues';
-import { TABS } from '../pull-request-issue-tab/data';
 import { IssueTabView, IssuesProps } from '.';
 
 export default {
@@ -15,12 +14,12 @@ export const Default: any = Template.bind({});
 
 Default.parameters = {
   msw: {
-    handlers: [mockedIssuesQuery],
+    handlers: mockedIssuesQuery,
   },
 };
 
 Default.args = {
-  activeTab: TABS.OPEN,
+  activeTab: 'open',
   owner: 'thisdot',
   name: 'starter.dev-github-showcases',
 };
