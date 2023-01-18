@@ -10,7 +10,7 @@ import { isBrowser } from '@builder.io/qwik/build';
 import { parseQuery } from './parseQuery';
 import { Label } from '../repo-pulls/types';
 import { ClearFilterAndSortBtn } from '../clear-filter-and-sort-button';
-import { useLocation } from '@builder.io/qwik-city';
+import { useLocation, useNavigate } from '@builder.io/qwik-city';
 import IssuesPRContext, { IssuesPRContextProps } from '../../context/issue-pr-store';
 import DropdownContext from '../../context/issue-tab-header-dropdown';
 import { Pagination } from '../pagination/pagination';
@@ -34,6 +34,7 @@ interface IssuesQueryParams {
 
 export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const issuesStore = useContext(IssuesPRContext);
   const dropdownStore = useContext(DropdownContext);
 
@@ -49,7 +50,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
     dropdownStore.selectedLabel = undefined;
     dropdownStore.selectedMilestones = undefined;
     dropdownStore.selectedSort = sortOptions[0].value;
-    window.location.href = `${location.pathname}?tab=${issuesStore.activeTab}`;
+    navigate.path = `${location.pathname}?tab=${issuesStore.activeTab}`;
   });
 
   useClientEffect$(async () => {

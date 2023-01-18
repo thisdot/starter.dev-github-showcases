@@ -1,5 +1,5 @@
 import { isBrowser } from '@builder.io/qwik/build';
-import { useLocation } from '@builder.io/qwik-city';
+import { useLocation, useNavigate } from '@builder.io/qwik-city';
 import { $, component$, useClientEffect$, useTask$, useContext } from '@builder.io/qwik';
 
 import { parseQuery } from './parseQuery';
@@ -36,6 +36,7 @@ interface PullRequestsQueryParams {
 
 export default component$(({ owner, name }: PullRequestsProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const pullRequestStore = useContext(PullRequestContext);
   const dropdownStore = useContext(DropdownContext);
 
@@ -47,7 +48,7 @@ export default component$(({ owner, name }: PullRequestsProps) => {
   const resetFilters$ = $(() => {
     dropdownStore.selectedLabel = undefined;
     dropdownStore.selectedSort = sortOptions[0].value;
-    window.location.href = `${location.pathname}?tab=${pullRequestStore.activeTab}`;
+    navigate.path = `${location.pathname}?tab=${pullRequestStore.activeTab}`;
   });
 
   useClientEffect$(async () => {

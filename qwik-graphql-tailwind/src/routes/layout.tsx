@@ -2,6 +2,7 @@ import { component$, Slot, useClientEffect$, useStore } from '@builder.io/qwik';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import Header from '../components/header/header';
 import { useQuery } from '../utils';
+import { useNavigate } from '@builder.io/qwik-city';
 
 interface IViewer {
   login: string;
@@ -21,11 +22,12 @@ export default component$(() => {
       avatarUrl: '',
     },
   });
+  const navigate = useNavigate();
 
   useClientEffect$(async () => {
     store.access_token = sessionStorage.getItem(AUTH_TOKEN);
     if (!store.access_token) {
-      window.location.href = '/auth/signin';
+      navigate.path = '/auth/signin';
     } else {
       const storedUser = sessionStorage.getItem('user');
       if (storedUser) {
