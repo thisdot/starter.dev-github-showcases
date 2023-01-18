@@ -81,9 +81,9 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
             {data.title}
           </a>
           {data.labels &&
-            data.labels.map((label: Label) => (
+            data.labels.map((label: Label, i) => (
               <span
-                key={label.color}
+                key={i}
                 class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm', `bg-[#${label.color}]`)}
                 style={{ backgroundColor: `#${label.color}` }}
               >
