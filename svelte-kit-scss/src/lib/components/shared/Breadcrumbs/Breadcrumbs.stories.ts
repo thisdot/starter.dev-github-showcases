@@ -1,28 +1,21 @@
+import type { Meta, StoryObj } from '@storybook/svelte';
+
+import { MOCK_BREADCRUMBS } from '$lib/helpers/mocks/repository';
 import Breadcrumbs from './Breadcrumbs.svelte';
 
-export default {
-  component: Breadcrumbs,
+const meta = {
   title: 'Home/Breadcrumbs',
-  excludeStories: /.*Data$/,
-  argTypes: {
-    breadcrumbs: [
-      {
-        emphasis: true,
-        href: '/thisdot/starter.dev-github-showcases',
-        name: 'starter.dev-github-showcases',
-      },
-      {
-        emphasis: true,
-        href: undefined,
-        name: 'svelte-kit-scss',
-      },
-    ],
+  component: Breadcrumbs,
+  parameters: {
+    layout: 'fullscreen',
+  },
+} satisfies Meta<Breadcrumbs>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    breadcrumbs: MOCK_BREADCRUMBS,
   },
 };
-
-const Template = ({ ...args }) => ({
-  Component: Breadcrumbs,
-  props: args,
-});
-
-export const Default = Template.bind({});
