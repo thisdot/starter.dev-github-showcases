@@ -74,7 +74,7 @@ export const PullRequestIssueTab = component$(
                 {labelOption.map(({ label, value, color, description }) => (
                   <div>
                     <button
-                      onClick$={() => (dropdown.selectedLabel = value)}
+                      onClick$={() => (dropdown.selectedLabel = dropdown.selectedLabel === value ? undefined : value)}
                       type="button"
                       name="language"
                       class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
@@ -109,9 +109,9 @@ export const PullRequestIssueTab = component$(
                   ({ label, value }) => (
                     <div>
                       <button
-                        onClick$={() => {
-                          dropdown.selectedMilestones = value;
-                        }}
+                        onClick$={() =>
+                          (dropdown.selectedMilestones = dropdown.selectedMilestones === value ? undefined : value)
+                        }
                         type="button"
                         name={'language'}
                         class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
