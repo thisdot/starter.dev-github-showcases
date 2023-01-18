@@ -3,10 +3,8 @@ import { JSXNode, useContextProvider } from '@builder.io/qwik';
 import { QWIK_LOADER } from '@builder.io/qwik/loader/index';
 import { render } from '@builder.io/qwik';
 import '../src/global.css';
-import { initialize, mswDecorator } from 'msw-storybook-addon';
 
-// Initialize MSW
-initialize();
+
 eval(QWIK_LOADER);
 
 export const decorators = [
@@ -16,5 +14,4 @@ export const decorators = [
     render(parent, jsxNode);
     return parent;
   },
-  mswDecorator,
 ];
