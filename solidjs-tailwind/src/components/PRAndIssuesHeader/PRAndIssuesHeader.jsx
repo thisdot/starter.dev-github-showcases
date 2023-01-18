@@ -18,9 +18,9 @@ const PRAndIssuesHeader = (props) => {
   } = usePrAndIssuesContext();
 
   const sortOptions = Object.values(SORT_OPTIONS);
-  const selectSort = (value) =>  setSortBy(value);
+  const selectSort = (value) =>  setSortBy(sortBy() === value ? 'Newest' : value);
   const labelOptions = createMemo(() => Object.values({...labelOpt().map((label) => label.name)}))
-  const selectLabel = (value) =>  setSelectedLabel(value)
+  const selectLabel = (value) => setSelectedLabel(selectedLabel() !== value ? value : undefined);
 
   return (
     <div class="flex flex-wrap space-x-1 space-y-2 md:space-x-0 md:space-y-0 items-center justify-between p-4 bg-gray-100 border-b rounded-t-lg">
