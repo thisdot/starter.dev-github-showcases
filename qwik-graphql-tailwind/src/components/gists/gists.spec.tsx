@@ -1,16 +1,6 @@
 import { createDOM } from '@builder.io/qwik/testing';
 import { describe, vi, it } from 'vitest';
 import { Gists } from '~/components/gists';
-import { GistItem } from './types';
-
-const MOCK_GISTS: GistItem[] = [
-  {
-    id: '123',
-    description: '123',
-    name: 'gist-test',
-    url: 'https://url-gists.com',
-  },
-];
 
 describe('Gists Component', () => {
   // Mocks useStore/useContext
@@ -18,12 +8,7 @@ describe('Gists Component', () => {
     const qwik = await vi.importActual<typeof import('@builder.io/qwik')>('@builder.io/qwik');
     return {
       ...qwik,
-      useStore: () => ({
-        store: {
-          isLoading: false,
-          data: MOCK_GISTS,
-        },
-      }),
+      useStore: () => ({}),
     };
   });
 

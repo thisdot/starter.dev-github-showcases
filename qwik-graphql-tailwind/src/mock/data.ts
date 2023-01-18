@@ -97,3 +97,54 @@ export const IssuesResponse = {
     },
   },
 };
+
+export const repos = {
+  data: {
+    owner: {
+      repositories: {
+        pageInfo: {
+          endCursor: undefined,
+          hasNextPage: false,
+          hasPreviousPage: false,
+          startCursor: undefined,
+        },
+        nodes: [
+          {
+            id: 'MDEwOlJlcG9zaXRvcnkxMjM0NzUxMjM=',
+            name: 'my-repo1',
+            description: 'This is just a description for my-repo1.',
+            isArchived: false,
+            isPrivate: false,
+            primaryLanguage: {
+              id: 'MDg6TGFuZ3VhZ2UxNzI=',
+              name: 'Javascript',
+              color: '#6b7289',
+            },
+            updatedAt: '2019-01-17T23:41:24Z',
+            languageColor: null,
+            isFork: false,
+            stargazerCount: 0,
+            forkCount: 0,
+          },
+          {
+            name: 'my-repo2',
+            description: 'This is just a description for my-repo2.',
+            isArchived: false,
+            isPrivate: false,
+            primaryLanguage: {
+              id: 'MDg6TGFuZ3VhZ2UxNzI=',
+              name: 'TypeScript',
+              color: '#2b7489',
+            },
+            updatedAt: '2019-01-17T23:41:24Z',
+            id: 'todo',
+            languageColor: null,
+            isFork: false,
+            stargazerCount: 0,
+            forkCount: 0,
+          },
+        ],
+      },
+    },
+  },
+};
