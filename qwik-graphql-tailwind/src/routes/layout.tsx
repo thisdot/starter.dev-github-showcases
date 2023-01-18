@@ -2,6 +2,7 @@ import { component$, Slot, useClientEffect$, useStore } from '@builder.io/qwik';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import Header from '../components/header/header';
 import { useQuery } from '../utils';
+import { useNavigate } from '@builder.io/qwik-city';
 
 interface IViewer {
   login: string;
@@ -10,30 +11,28 @@ interface IViewer {
 
 interface UserStore {
   viewer: IViewer | null;
-  isLoading: boolean;
   access_token: string | null;
 }
 
 export default component$(() => {
   const store = useStore<UserStore>({
     access_token: null,
-    isLoading: false,
     viewer: {
       login: '',
       avatarUrl: '',
     },
   });
+  const navigate = useNavigate();
 
   useClientEffect$(async () => {
     store.access_token = sessionStorage.getItem(AUTH_TOKEN);
     if (!store.access_token) {
-      window.location.href = '/auth/signin';
+      navigate.path = '/auth/signin';
     } else {
       const storedUser = sessionStorage.getItem('user');
       if (storedUser) {
         store.viewer = JSON.parse(storedUser);
       } else {
-        store.isLoading = true;
         const abortController = new AbortController();
         const response = await fetchAuthenticatedUser(store.access_token, abortController);
         updateUserProfile(store, response);
@@ -43,9 +42,7 @@ export default component$(() => {
 
   return (
     <div>
-      {store.isLoading ? (
-        <div>Loading...</div>
-      ) : store.access_token ? (
+      {store.access_token ? (
         <>
           <Header user={store.viewer} />
           <main class="min-h-screen bg-gray-100">
@@ -58,7 +55,6 @@ export default component$(() => {
 });
 
 export function updateUserProfile(store: UserStore, response: any) {
-  store.isLoading = false;
   store.viewer = response.data.viewer;
   sessionStorage.setItem('user', JSON.stringify(response.data.viewer));
 }
