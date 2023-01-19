@@ -22,7 +22,7 @@ export default function SignIn({
                 </button>
               </div>
             ))
-          : ''}
+          : null}
 
         <div className="w-11/12 pb-6">
           <a
