@@ -9,7 +9,7 @@ import { CloseIcon } from '../Icons';
 
 const RepoIssues = () => {
   const params = useParams();
-  const { tabActive, sortBy, selectedLabel, setLabelOpt, clearSortAndFilter } =
+  const { tabActive, sortBy, selectedLabel, setLabelOpt, setMilestoneOpt, clearSortAndFilter, selectedMilestone } =
     usePrAndIssuesContext();
 
   const [data, setData] = createSignal([]);
@@ -22,6 +22,7 @@ const RepoIssues = () => {
     orderBy: parseSortParams(SORT_OPTIONS, sortBy(), 0),
     direction: parseSortParams(SORT_OPTIONS, sortBy(), 1),
     labels: selectedLabel() ? [selectedLabel()] : undefined,
+    milestones: selectedMilestone() ? [selectedMilestone()] : undefined,
   });
 
   const [resp] = createResource(fetchParameters, () =>
@@ -30,7 +31,9 @@ const RepoIssues = () => {
 
   createEffect(() => {
     if (resp() && !resp.loading) {
+      console.log(resp().labels)
       setLabelOpt(resp().labels);
+      setMilestoneOpt(resp().milestones);
       setOpenCount(resp().openIssues.totalCount);
       setClosedCount(resp().closedIssues.totalCount);
       setData(

@@ -14,11 +14,14 @@ export function PrAndIssuesProvider(props) {
   const [tabActive, setActiveTab] = createSignal('open');
   const [sortBy, setSortBy] = createSignal('Newest');
   const [selectedLabel, setSelectedLabel] = createSignal(undefined);
+  const [selectedMilestone, setSelectedMilestone] = createSignal(undefined);
   const [labelOpt, setLabelOpt] = createSignal([]);
+  const [milestoneOpt, setMilestoneOpt] = createSignal([]);
 
   const clearSortAndFilter = () => {
     setSortBy('Newest')
     setSelectedLabel(undefined)
+    setSelectedMilestone(undefined)
   }
 
   const PrAndIssuesParameters = {
@@ -31,7 +34,11 @@ export function PrAndIssuesProvider(props) {
     selectedLabel,
     setSelectedLabel,
     labelOpt,
-    setLabelOpt
+    setLabelOpt,
+    selectedMilestone,
+    setSelectedMilestone,
+    milestoneOpt,
+    setMilestoneOpt
   };
 
   return (

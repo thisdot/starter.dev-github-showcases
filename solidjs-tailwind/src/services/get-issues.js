@@ -59,6 +59,26 @@ function parseIssues(connection) {
   return { issues, totalCount, pageInfo };
 }
 
+function parseMilestones(milestones) {
+  const nodes = milestones?.nodes || [];
+  return nodes.reduce((milestones, milestone) => {
+    if (!milestone) {
+      return milestones;
+    }
+
+    return [
+      ...milestones,
+      {
+        id: milestone.id,
+        closed: milestone.closed,
+        title: milestone.title,
+        number: milestone.number,
+        description: milestone.description,
+      },
+    ];
+  }, []);
+}
+
 const getIssues = async ({ owner, name, orderBy, direction, labels }) => {
   const { authStore } = useAuth();
 
@@ -81,6 +101,7 @@ const getIssues = async ({ owner, name, orderBy, direction, labels }) => {
   const repository = resp.data?.repository;
   const closedIssues = parseIssues(repository?.closedIssues);
   const openIssues = parseIssues(repository?.openIssues);
+  const milestones = parseMilestones(repository?.milestones)
 
   const labelMap = [...closedIssues.issues, ...openIssues.issues].reduce(
     (acc, issue) => {
@@ -99,6 +120,7 @@ const getIssues = async ({ owner, name, orderBy, direction, labels }) => {
   return {
     openIssues,
     closedIssues,
+    milestones,
     labels: Object.values(labelMap),
   };
 };

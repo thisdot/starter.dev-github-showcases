@@ -14,13 +14,18 @@ const PRAndIssuesHeader = (props) => {
     setSelectedLabel,
     labelOpt,
     selectedLabel,
-    tabActive
+    tabActive,
+    setSelectedMilestone,
+    selectedMilestone,
+    milestoneOpt
   } = usePrAndIssuesContext();
 
   const sortOptions = Object.values(SORT_OPTIONS);
   const selectSort = (value) =>  setSortBy(value);
   const labelOptions = createMemo(() => Object.values({...labelOpt().map((label) => label.name)}))
+  const milestoneOptions = createMemo(() => Object.values({...milestoneOpt().map((milestone) => milestone.title)}))
   const selectLabel = (value) =>  setSelectedLabel(value)
+  const selectMilestone = (value) =>  setSelectedMilestone(value)
 
   return (
     <div class="flex flex-wrap space-x-1 space-y-2 md:space-x-0 md:space-y-0 items-center justify-between p-4 bg-gray-100 border-b rounded-t-lg">
@@ -50,6 +55,14 @@ const PRAndIssuesHeader = (props) => {
             selected={selectedLabel()}
             items={labelOptions()}
             selectOption={selectLabel}
+            class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
+          />
+        </div>}
+        {milestoneOptions && <div>
+          <FilterDropdown name="Milestone"
+            selected={selectedMilestone()}
+            items={milestoneOptions()}
+            selectOption={selectMilestone}
             class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
           />
         </div>}
