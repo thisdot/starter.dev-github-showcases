@@ -16,7 +16,7 @@ function UserDropdownView({ image, username }: UserDropdownViewProps) {
   const { replace } = useRouter();
 
   const handleSignOut = () => {
-    signOut();
+    signOut({ callbackUrl: '/' });
     replace('/api/auth/signin');
   };
 
