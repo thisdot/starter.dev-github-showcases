@@ -79,7 +79,7 @@ function parseMilestones(milestones) {
   }, []);
 }
 
-const getIssues = async ({ owner, name, orderBy, direction, labels }) => {
+const getIssues = async ({ owner, name, orderBy, direction, filterBy }) => {
   const { authStore } = useAuth();
 
   const data = {
@@ -89,9 +89,9 @@ const getIssues = async ({ owner, name, orderBy, direction, labels }) => {
       owner,
       name,
       first: 30,
-      labels,
       orderBy,
       direction,
+      filterBy
     },
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
