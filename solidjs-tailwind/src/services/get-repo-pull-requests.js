@@ -74,7 +74,7 @@ function parsePullRequests(connection) {
   * }
   */
 
-const getRepoPullRequests = async ({ owner, name, orderBy, direction, labels }) => {
+const getRepoPullRequests = async ({ owner, name, orderBy, direction, labels, before, after, first, last }) => {
   const { authStore } = useAuth();
   const data = {
     url: `${GITHUB_GRAPHQL}`,
@@ -82,10 +82,13 @@ const getRepoPullRequests = async ({ owner, name, orderBy, direction, labels }) 
     variables: {
       owner,
       name,
-      first: 30,
+      first,
+      last,
       labels,
       orderBy,
       direction,
+      before,
+      after,
     },
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
