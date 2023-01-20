@@ -28,7 +28,7 @@ const PRAndIssuesHeader = (props) => {
   const milestoneOptions = createMemo(() => Object.values({...milestoneOpt().map((milestone) => milestone.title)}))
   const selectLabel = (value) =>  setSelectedLabel(value)
   const selectMilestone = (value) => { 
-    setSelectedMilestone(value) 
+    setSelectedMilestone(selectedMilestone() !== value ? value : undefined) 
     setMilestoneId(getSelectedMilestoneId(milestoneOpt(), selectedMilestone()))
   }
 
