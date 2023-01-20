@@ -69,7 +69,7 @@ export const PullRequestIssueTab = component$(
           </button>
         </div>
         <div class="flex items-center space-x-8">
-          {labelOption && (
+          {labelOption && labelOption.length !== 0 && (
             <div>
               <FilterDropdown name="Label" description="Filter by label" buttonClassName="border-none text-sm">
                 {labelOption.map(({ label, value, color, description }) => (
@@ -99,7 +99,7 @@ export const PullRequestIssueTab = component$(
               </FilterDropdown>
             </div>
           )}
-          {milestonesOption && (
+          {milestonesOption && milestonesOption.length !== 0 && (
             <div>
               <FilterDropdown
                 name="Milestones"
