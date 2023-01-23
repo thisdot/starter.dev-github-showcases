@@ -1,21 +1,23 @@
 import { createResource, createSignal, createEffect } from 'solid-js';
-import { useParams } from '@solidjs/router';
+import { useLocation, useParams } from '@solidjs/router';
 import { PRAndIssuesData } from '../PRAndIssuesData/PRAndIssuesData';
 import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 import { parseSortParams } from './utils';
-import { SORT_OPTIONS } from '../../utils/constants';
+import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../utils/constants';
 import getIssues from '../../services/get-issues';
 import { CloseIcon } from '../Icons';
+import { Pagination } from '../Pagination';
 
 const RepoIssues = () => {
   const params = useParams();
+  const location = useLocation()
   const { tabActive, sortBy, selectedLabel, setLabelOpt, setMilestoneOpt, clearSortAndFilter, selectedMilestone, milestoneId} =
     usePrAndIssuesContext();
 
   const [data, setData] = createSignal([]);
   const [openCount, setOpenCount] = createSignal();
   const [closedCount, setClosedCount] = createSignal();
-
+  const [pageInfo, setPageInfo] = createSignal();
 
   const fetchParameters = () => ({
     owner: params.owner,
@@ -25,7 +27,11 @@ const RepoIssues = () => {
     filterBy: {
       labels: selectedLabel() ? [selectedLabel()] : undefined,
       milestone: selectedMilestone() ? milestoneId() : undefined,
-    }
+    },
+    before: typeof location.query.before === 'string' ? location.query.before : undefined,
+    after: typeof location.query.after === 'string' ? location.query.after : undefined,
+    first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+    last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
   });
 
   const [resp] = createResource(fetchParameters, () =>
@@ -38,11 +44,13 @@ const RepoIssues = () => {
       setMilestoneOpt(resp().milestones);
       setOpenCount(resp().openIssues.totalCount);
       setClosedCount(resp().closedIssues.totalCount);
+      setPageInfo(resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].pageInfo)
       setData(
         resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].issues
       );
     }
   });
+
 
   return (
     <div class="md:py-12 max-w-screen-xl mx-auto">
@@ -66,6 +74,14 @@ const RepoIssues = () => {
             openCount={openCount()}
             closedCount={closedCount()}
           />
+          {
+            pageInfo() && (pageInfo().hasNextPage || pageInfo().hasPreviousPage) && 
+              <Pagination
+                tab={tabActive()}
+                pageInfo={pageInfo()}
+                owner={`${params.owner}/${params.name}/issues`}
+              />
+          }
         </>
       )}
     </div>

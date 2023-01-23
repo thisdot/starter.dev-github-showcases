@@ -31,3 +31,5 @@ export const SORT_OPTIONS = {
   [`${OrderField.UpdatedAt}^${OrderDirection.Desc}`]: 'Recently updated',
   [`${OrderField.UpdatedAt}^${OrderDirection.Asc}`]: 'Least reecently updated',
 }
+
+export const DEFAULT_PAGE_SIZE = 30
