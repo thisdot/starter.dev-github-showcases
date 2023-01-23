@@ -7,12 +7,13 @@ import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../utils/constants';
 import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination'
+import { PRAndIssueLoaderSkeleton } from '../PRandIssueLoaderSkeleton';
 
 const RepoPullRequests = () => {
   const params = useParams();
   const location = useLocation()
   const {
-    tabActive, 
+    tabActive,
     sortBy,
     selectedLabel,
     setLabelOpt,
@@ -26,18 +27,18 @@ const RepoPullRequests = () => {
 
 
   const fetchParameters = () => ({
-      owner: params.owner, 
-      name: params.name, 
-      orderBy: parseSortParams(SORT_OPTIONS, sortBy(), 0), 
+      owner: params.owner,
+      name: params.name,
+      orderBy: parseSortParams(SORT_OPTIONS, sortBy(), 0),
       direction: parseSortParams(SORT_OPTIONS, sortBy(), 1),
       labels: selectedLabel() ? [selectedLabel()] : undefined,
       before: typeof location.query.before === 'string' ? location.query.before : undefined,
       after: typeof location.query.after === 'string' ? location.query.after : undefined,
       first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
-      last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,  
+      last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
   })
 
-  const [resp] = createResource(fetchParameters, () => 
+  const [resp] = createResource(fetchParameters, () =>
      getRepoPullRequests(fetchParameters())
     );
 
@@ -54,11 +55,11 @@ const RepoPullRequests = () => {
     return (
       <div class="md:py-12 max-w-screen-xl mx-auto">
         {resp.loading ? (
-          <div>Loading...</div>
+         <PRAndIssueLoaderSkeleton />
         ) : (
           <>
-          {(selectedLabel() || sortBy() !== 'Newest') && 
-            <div 
+          {(selectedLabel() || sortBy() !== 'Newest') &&
+            <div
               class="flex items-center gap-2 text-sm my-4 ml-2 cursor-pointer"
               onClick={clearSortAndFilter}
             >
@@ -68,13 +69,13 @@ const RepoPullRequests = () => {
               Clear filter
             </div>
           }
-          <PRAndIssuesData 
-            data={data()} 
+          <PRAndIssuesData
+            data={data()}
             openCount={openCount()}
             closedCount={closedCount()}
           />
           {
-            pageInfo() && (pageInfo().hasNextPage || pageInfo().hasPreviousPage) && 
+            pageInfo() && (pageInfo().hasNextPage || pageInfo().hasPreviousPage) &&
               <Pagination
                 tab={tabActive()}
                 pageInfo={pageInfo()}
@@ -86,6 +87,5 @@ const RepoPullRequests = () => {
     </div>
   );
 };
-  
+
   export default RepoPullRequests;
-  
