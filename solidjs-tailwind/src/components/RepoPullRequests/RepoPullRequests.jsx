@@ -7,7 +7,7 @@ import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../utils/constants';
 import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination'
-import { PRAndIssueLoaderSkeleton } from '../PRandIssueLoaderSkeleton';
+import { PRAndIssueLoaderSkeleton } from '../PRAndIssueLoaderSkeleton';
 
 const RepoPullRequests = () => {
   const params = useParams();
