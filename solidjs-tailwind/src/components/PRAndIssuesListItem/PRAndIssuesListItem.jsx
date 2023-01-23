@@ -4,7 +4,6 @@
 /* eslint-disable */
 import { splitProps } from 'solid-js';
 import { format } from 'date-fns';
-import { useLocation } from '@solidjs/router';
 import cn from 'classnames';
 import { IssuesIcon,
          PullRequestIcon,

@@ -1,8 +1,10 @@
+import type { Breadcrumb } from '$lib/components/shared/Breadcrumbs/models';
 import type { IssueSearchTypePage } from '$lib/constants/matchers';
 import type { Repository } from '$lib/interfaces';
 import { describe, it } from 'vitest';
 import { MOCK_SIMPLE_USER_TYPE_USER } from './mocks/common';
 import {
+  buildContentItemBreadcrumbs,
   buildPageUrl,
   resolveRepositoryHref,
   resolveRepositoryIssueSearchPageHref,
@@ -88,5 +90,137 @@ describe('.buildPageUrl', () => {
         });
       });
     });
+  });
+});
+
+describe('.buildContentItemBreadcrumbs', () => {
+  describe('when called', () => {
+    const MOCK_USERNAME = 'mock_username';
+    const MOCK_REPO = 'mock_repo';
+
+    const CASES: [string, string, string, string[], string | undefined, Breadcrumb[]][] = [
+      [
+        'for default branch, without path segments, without filename',
+        'branch-name-default',
+        'branch-name-default',
+        [],
+        undefined,
+        [],
+      ],
+      [
+        'for default branch, with path segments, without filename',
+        'branch-name-default',
+        'branch-name-default',
+        ['mock_folderPathSegment_1', 'mock_folderPathSegment_2'],
+        undefined,
+        [
+          {
+            name: MOCK_REPO,
+            href: `/${MOCK_USERNAME}/${MOCK_REPO}`,
+            emphasis: true,
+          },
+          {
+            name: 'mock_folderPathSegment_1',
+            href: `/${MOCK_USERNAME}/${MOCK_REPO}/tree/branch-name-default/mock_folderPathSegment_1`,
+          },
+          {
+            name: 'mock_folderPathSegment_2',
+            href: undefined,
+            emphasis: true,
+          },
+        ],
+      ],
+      [
+        'for non-default branch, with path segments, without filename',
+        'branch-name',
+        'branch-name-default',
+        ['mock_folderPathSegment_1', 'mock_folderPathSegment_2'],
+        undefined,
+        [
+          {
+            name: MOCK_REPO,
+            href: `/${MOCK_USERNAME}/${MOCK_REPO}/tree/branch-name`,
+            emphasis: true,
+          },
+          {
+            name: 'mock_folderPathSegment_1',
+            href: `/${MOCK_USERNAME}/${MOCK_REPO}/tree/branch-name/mock_folderPathSegment_1`,
+          },
+          {
+            name: 'mock_folderPathSegment_2',
+            emphasis: true,
+          },
+        ],
+      ],
+      [
+        'for default branch, with path segments, with filename',
+        'branch-name-default',
+        'branch-name-default',
+        ['mock_folderPathSegment_1', 'mock_folderPathSegment_2'],
+        'file_name.ext',
+        [
+          {
+            name: MOCK_REPO,
+            href: `/${MOCK_USERNAME}/${MOCK_REPO}`,
+            emphasis: true,
+          },
+          {
+            name: 'mock_folderPathSegment_1',
+            href: `/${MOCK_USERNAME}/${MOCK_REPO}/tree/branch-name-default/mock_folderPathSegment_1`,
+          },
+          {
+            name: 'mock_folderPathSegment_2',
+            href: `/${MOCK_USERNAME}/${MOCK_REPO}/tree/branch-name-default/mock_folderPathSegment_1/mock_folderPathSegment_2`,
+          },
+          {
+            name: 'file_name.ext',
+            href: undefined,
+            emphasis: true,
+          },
+        ],
+      ],
+      [
+        'for non-default branch, without path segments, with filename',
+        'branch-name',
+        'branch-name-default',
+        [],
+        undefined,
+        [],
+      ],
+      [
+        'for default branch, without path segments, with filename',
+        'branch-name-default',
+        'branch-name-default',
+        [],
+        'file_name.ext',
+        [
+          {
+            name: MOCK_REPO,
+            href: `/${MOCK_USERNAME}/${MOCK_REPO}`,
+            emphasis: true,
+          },
+          {
+            name: 'file_name.ext',
+            emphasis: true,
+          },
+        ],
+      ],
+    ];
+
+    it.each(CASES)(
+      '%s',
+      (description, branch, defaultBranch, folderPathSegments, fileName, expectedResult) => {
+        console.log(description, folderPathSegments);
+        const output = buildContentItemBreadcrumbs(
+          MOCK_USERNAME,
+          MOCK_REPO,
+          branch,
+          defaultBranch,
+          folderPathSegments,
+          fileName
+        );
+        expect(output).toEqual(expectedResult);
+      }
+    );
   });
 });

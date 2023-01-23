@@ -14,7 +14,7 @@ export function withAuthRedirect(
       return {
         redirect: {
           permanent: false,
-          destination: '/api/auth/signin',
+          destination: '/auth/signin',
         },
       };
     }

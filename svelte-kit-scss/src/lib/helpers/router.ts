@@ -11,6 +11,18 @@ export const resolveRepositoryIssueSearchPageHref = (
   issueSearchTypePage: IssueSearchTypePage
 ): string => [resolveRepositoryHref(repository), issueSearchTypePage].join('/');
 
+export const resolveUserHref = (user: GithubSimpleUser): string => `/${user.login}`;
+
+export const buildPageUrl = (baseUrl: URL, pageNumber: number): URL => {
+  const url = new URL(baseUrl);
+  if (pageNumber < 2) {
+    url.searchParams.has(PARAMETER_NAME_PAGE) && url.searchParams.delete(PARAMETER_NAME_PAGE);
+  } else {
+    url.searchParams.set(PARAMETER_NAME_PAGE, String(pageNumber));
+  }
+  return url;
+};
+
 export const buildContentItemBreadcrumbs = (
   username: string,
   repo: string,
@@ -19,9 +31,9 @@ export const buildContentItemBreadcrumbs = (
   folderPathSegments: string[],
   fileName?: string
 ): Breadcrumb[] => {
-  let breadcrumbs = folderPathSegments.reduce((breadcrumbs, segment, index) => {
-    const parentFolderPath = breadcrumbs[index - 1];
-    const currentFolderPath = [parentFolderPath, segment].filter(Boolean).join('/');
+  let breadcrumbs = folderPathSegments.reduce((breadcrumbs, segment, index, segments) => {
+    const parentFolderPathSegments = segments.slice(0, index);
+    const currentFolderPath = [...parentFolderPathSegments, segment].filter(Boolean).join('/');
     breadcrumbs.push({
       name: segment,
       href: composeDirHref(currentFolderPath, username, repo, branch, defaultBranch),
@@ -52,15 +64,4 @@ export const buildContentItemBreadcrumbs = (
   }
 
   return breadcrumbs;
-};
-export const resolveUserHref = (user: GithubSimpleUser): string => `/${user.login}`;
-
-export const buildPageUrl = (baseUrl: URL, pageNumber: number): URL => {
-  const url = new URL(baseUrl);
-  if (pageNumber < 2) {
-    url.searchParams.has(PARAMETER_NAME_PAGE) && url.searchParams.delete(PARAMETER_NAME_PAGE);
-  } else {
-    url.searchParams.set(PARAMETER_NAME_PAGE, String(pageNumber));
-  }
-  return url;
 };
