@@ -12,6 +12,8 @@ export default component$(() => {
       activeTab: (location.query.tab || 'open') as any,
       closedIssues: [],
       openIssues: [],
+      issuesLabel: [],
+      milestones: [],
       closedIssuesCount: 0,
       openIssuesCount: 0,
       loading: true,
