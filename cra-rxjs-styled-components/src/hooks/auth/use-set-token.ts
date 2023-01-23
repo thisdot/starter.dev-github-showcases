@@ -1,3 +1,4 @@
+import { useUser } from '../../context/UserProvider';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { catchError, EMPTY, tap } from 'rxjs';
@@ -8,6 +9,7 @@ import { AuthSuccessResponse } from '../../interfaces/auth.interfaces';
 
 export function useSetToken() {
 	const navigate = useNavigate();
+	const { loadUser } = useUser();
 
 	useEffect(() => {
 		const subscription = fromFetch<AuthSuccessResponse>(GET_TOKEN_URL, {
@@ -31,10 +33,14 @@ export function useSetToken() {
 			)
 			.subscribe(({ access_token }) => {
 				sessionStorage.setItem(AUTH_TOKEN, access_token);
-				navigate('/', { replace: true });
+				loadUser().subscribe({
+					complete: () => {
+						navigate('/', { replace: true });
+					},
+				});
 			});
 		return () => {
 			subscription.unsubscribe();
 		};
-	}, [navigate]);
+	}, [navigate, loadUser]);
 }
