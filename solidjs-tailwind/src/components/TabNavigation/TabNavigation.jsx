@@ -4,10 +4,10 @@ import cn from 'classnames';
 import styles from './TabNavigation.module.css';
 
 const TabNavigation = (props) => {
-  const isCurrentTab = (href) => {
-    return props.pathname === href ? true  : false;
+  const isCurrentTab = (pathName) => {
+    const otherPaths = props.tabs.filter(({ path }) => path !== pathName).map(({ path }) => path);
+    return pathName !== '' ? props.pathname.includes(pathName) : otherPaths.every((path) => !props.pathname.includes(path));
   };
-
 
   return (
     <div class={`${styles.container} ${props.class}`}>
@@ -23,7 +23,7 @@ const TabNavigation = (props) => {
                 href={href}
                 key={index}
                 class={`${
-                  isCurrentTab(href)
+                  isCurrentTab(item.path)
                     ? styles.tabActive
                     : styles.tabInactive
                 } ${styles.tab}`}
