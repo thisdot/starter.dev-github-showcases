@@ -22,7 +22,7 @@ const RepoCard = (props) => {
     local.owner?.login ? `/${local.owner.login}/${local.name || ''}` : '';
 
   const repoNameWithOwner = () =>
-    `${!local.isProfilePage ? `${local.owner?.login || ''}/` : ''}${
+    `${local.isProfilePage ? `${local.owner?.login || ''}/` : ''}${
       local.name || ''
     }`;
 
