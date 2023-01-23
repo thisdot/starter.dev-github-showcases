@@ -1,43 +1,24 @@
 import { Router } from '@solidjs/router';
 import RepoNavigation from './BranchNavigation';
+import { RepoProvider } from '../../contexts/RepoContext';
+// import { mockRepoInfo } from '../../../msw/mockRepoInfo';
 
 export default {
   title: 'Components/Branch Navigation',
   component: RepoNavigation,
-  argTypes: {
-    name: {},
-    owner: {},
-    branch: {},
-    path: {},
+  parameters: {
+    // msw: {
+    //   handlers: [mockRepoInfo],
+    // },
   },
 };
 
-const Template = (args) => (
+const Template = () => (
   <Router>
-    <RepoNavigation {...args} />
+    <RepoProvider>
+      <RepoNavigation />
+    </RepoProvider>
   </Router>
 );
 
 export const RepoRoot = Template.bind({});
-RepoRoot.args = {
-  name: 'starter.dev',
-  owner: 'thisdot',
-  branch: 'main',
-  path: '',
-};
-
-export const SrcPathTree = Template.bind({});
-SrcPathTree.args = {
-  name: 'starter.dev',
-  owner: 'thisdot',
-  branch: 'main',
-  path: 'src',
-};
-
-export const DeepPathFile = Template.bind({});
-DeepPathFile.args = {
-  name: 'starter.dev',
-  owner: 'thisdot',
-  branch: 'main',
-  path: 'solidjs-tailwind/src/components/RepoNavigation.tsx',
-};
