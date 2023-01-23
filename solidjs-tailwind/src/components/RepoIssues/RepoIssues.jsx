@@ -7,6 +7,7 @@ import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../utils/constants';
 import getIssues from '../../services/get-issues';
 import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination';
+import { PRAndIssueLoaderSkeleton } from '../PRAndIssueLoaderSkeleton';
 
 const RepoIssues = () => {
   const params = useParams();
@@ -55,7 +56,7 @@ const RepoIssues = () => {
   return (
     <div class="md:py-12 max-w-screen-xl mx-auto">
       {resp.loading ? (
-        <div>Loading...</div>
+        <PRAndIssueLoaderSkeleton />
       ) : (
         <>
           {(selectedLabel() || sortBy() !== 'Newest') && (
@@ -74,14 +75,14 @@ const RepoIssues = () => {
             openCount={openCount()}
             closedCount={closedCount()}
           />
-          {
-            pageInfo() && (pageInfo().hasNextPage || pageInfo().hasPreviousPage) && 
+          {pageInfo() &&
+            (pageInfo().hasNextPage || pageInfo().hasPreviousPage) && (
               <Pagination
                 tab={tabActive()}
                 pageInfo={pageInfo()}
                 owner={`${params.owner}/${params.name}/issues`}
               />
-          }
+            )}
         </>
       )}
     </div>
