@@ -23,6 +23,9 @@ module.exports = {
         hot: false,
       })
     );
+    config.optimizeDeps = {
+      include: [...config.optimizeDeps.include, 'msw']
+    }
 
     return config;
   },
