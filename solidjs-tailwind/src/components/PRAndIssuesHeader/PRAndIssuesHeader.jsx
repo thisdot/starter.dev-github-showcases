@@ -23,10 +23,10 @@ const PRAndIssuesHeader = (props) => {
   } = usePrAndIssuesContext();
 
   const sortOptions = Object.values(SORT_OPTIONS);
-  const selectSort = (value) =>  setSortBy(value);
+  const selectSort = (value) =>  setSortBy(sortBy() === value ? 'Newest' : value);
   const labelOptions = createMemo(() => Object.values({...labelOpt().map((label) => label.name)}))
   const milestoneOptions = createMemo(() => Object.values({...milestoneOpt().map((milestone) => milestone.title)}))
-  const selectLabel = (value) =>  setSelectedLabel(value)
+  const selectLabel = (value) => setSelectedLabel(selectedLabel() !== value ? value : undefined);
   const selectMilestone = (value) => { 
     setSelectedMilestone(selectedMilestone() !== value ? value : undefined) 
     setMilestoneId(getSelectedMilestoneId(milestoneOpt(), selectedMilestone()))
