@@ -3,7 +3,7 @@ export const repoCardProps = {
   owner: {
     login: 'hdjerry',
   },
-  isProfilePage: true,
+  isProfilePage: false,
   stargazerCount: 2,
   visibility: 'Private',
   primaryLanguage: {
