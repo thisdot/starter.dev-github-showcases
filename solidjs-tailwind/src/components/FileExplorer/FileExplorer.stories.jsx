@@ -1,7 +1,7 @@
 import { Router } from '@solidjs/router';
 import FileExplorer from './FileExplorer';
 import { RepoProvider } from '../../contexts/RepoContext';
-import { mockRepoInfo } from '../../../msw/mockRepoInfo';
+import { mockRepoTree } from '../../../msw/mockRepoTree';
 
 export default {
   title: 'Components/File Explorer',
@@ -19,8 +19,6 @@ const Template = () => (
 export const RootDir = Template.bind({});
 RootDir.parameters = {
   msw: {
-    handlers: {
-      fileExplorer: mockRepoInfo,
-    },
+    handlers: [mockRepoTree],
   },
 };

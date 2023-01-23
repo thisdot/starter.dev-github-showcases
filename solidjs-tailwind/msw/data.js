@@ -37,3 +37,35 @@ export const repoInforResponse = {
     }
   }
 }
+
+export const repoTreeResponse = {
+  data: {
+    repository: {
+      branches: {
+        nodes: [],
+      },
+      tree: {
+        entries: [
+          {
+            name: 'Olive Tree',
+            type: 'tree',
+            path: '/'
+          }, {
+            name: 'Burnt Palace',
+            type: 'tree',
+            path: '/'
+          },
+           {
+             name: '.gitignore',
+             path: '.gitignore',
+             type: 'blob',
+           }, {
+             name: '.prettierrc',
+             path: '.prettierrc',
+             type: 'blob',
+           },
+        ]
+      }
+    }
+  }
+}
