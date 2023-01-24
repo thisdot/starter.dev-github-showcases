@@ -8,7 +8,8 @@ import {
 } from 'react';
 import { fromFetchWithAuth } from '../hooks/auth/from-fetch-with-auth';
 import { GITHUB_URL_BASE } from '../constants/url.constants';
-import { tap, forkJoin, Observable } from 'rxjs';
+import { tap, forkJoin, Observable, of } from 'rxjs';
+import { AUTH_TOKEN } from '../constants/auth.constants';
 
 export interface IUserContext {
 	avatar_url: string;
@@ -72,6 +73,9 @@ export function UserProvider({ children }: UserProviderProps) {
 	const [loading, setLoading] = useState<boolean>(true);
 
 	const request = (url: string) => {
+		if (!sessionStorage.getItem(AUTH_TOKEN)) {
+			return of(undefined);
+		}
 		return fromFetchWithAuth(url, {
 			selector: (response: Response) => {
 				return response.json();
@@ -87,8 +91,8 @@ export function UserProvider({ children }: UserProviderProps) {
 				request(`${GITHUB_URL_BASE}/user/starred`),
 			]).pipe(
 				tap((val) => {
-					if (val) {
-						setLoading(false);
+					setLoading(false);
+					if (val && val.every((v) => v !== undefined)) {
 						setUser({
 							...val[0],
 							organizations: val[1],
