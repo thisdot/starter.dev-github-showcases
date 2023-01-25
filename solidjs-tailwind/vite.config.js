@@ -40,7 +40,7 @@ function spaFallbackWithDot() {
     configureServer(server) {
       return () => {
         server.middlewares.use(function customSpaFallback(req, res, next) {
-          if (req.url.includes('.') && !req.url.endsWith('.html')) {
+          if (req.url.includes('.')) {
             req.url = '/index.html';
           }
           next();
