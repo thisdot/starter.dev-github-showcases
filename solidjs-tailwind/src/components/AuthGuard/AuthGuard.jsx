@@ -1,4 +1,4 @@
-import { createEffect, createResource } from 'solid-js';
+import { Show, createEffect, createResource } from 'solid-js';
 import { useNavigate, useLocation, Outlet } from '@solidjs/router';
 import ROUTES from '../../routes';
 import { useAuth } from '../../auth';
@@ -23,10 +23,12 @@ const AuthGuard = () => {
   });
 
   return (
-    <div>
-      <Header />
-      <Outlet />
-    </div>
+    <Show when={authStore.isAuthenticated}>
+      <div data-testid="guard">
+        <Header />
+        <Outlet />
+      </div>
+    </Show>
   );
 };
 
