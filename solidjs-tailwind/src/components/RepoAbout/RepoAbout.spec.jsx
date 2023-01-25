@@ -1,57 +1,17 @@
 import { Router } from '@solidjs/router';
 import { render } from 'solid-testing-library';
 import { beforeEach, describe, expect, it } from 'vitest';
+import 'whatwg-fetch';
 import { RepoAboutWidget } from './RepoAbout';
 import { RepoProvider } from '../../contexts/RepoContext';
+import { setupMswServer } from '../../../msw/server';
+import { repoInforResponse } from '../../../msw/data';
+
+setupMswServer()
 
 describe('Repo About', () => {
   let wrapper;
   beforeEach(async () => {
-    window.fetch = () => {
-      return new Promise((resolve) => {
-        resolve({
-          json: () => {
-            return new Promise((resolve) => {
-              resolve({
-                data: {
-                  repository: {
-                    isPrivate: false,
-                    forkCount: 1,
-                    description: 'Test Repo',
-                    homepageUrl: 'http://localhost',
-                    readme: {
-                      text: '# Test Repo',
-                    },
-                    stargazerCount: 1,
-                    issues: {
-                      totalCount: 1,
-                    },
-                    topics: {
-                      nodes: [
-                        {
-                          topic: {
-                            name: 'test',
-                          },
-                        },
-                      ],
-                    },
-                    watchers: {
-                      totalCount: 1,
-                    },
-                    pullRequests: {
-                      totalCount: 1,
-                    },
-                    owner: {
-                      orgName: 'test',
-                    },
-                  },
-                },
-              });
-            });
-          },
-        });
-      });
-    };
 
     wrapper = await render(() => (
       <Router>
@@ -66,12 +26,12 @@ describe('Repo About', () => {
     expect(wrapper).toBeTruthy();
   });
 
-  it('should show contents', () => {
-    setTimeout(async () => {
-      const contents = await wrapper.getByTestId('about-info');
-      const topic = await wrapper.getByText('test');
+  it('should show contents', async () => {
+      const loading = await wrapper.findByText('Loading...');
+      expect(loading).toBeInTheDocument();
+      const contents = await wrapper.findByTestId('about-info');
+      const topic = await wrapper.findByText(repoInforResponse.data.repository.description);
       expect(contents.innerHTML).toBeTruthy();
       expect(topic).toBeVisible();
-    }, 500);
   });
 });
