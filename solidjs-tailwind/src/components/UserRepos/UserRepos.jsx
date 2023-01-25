@@ -4,7 +4,13 @@ import { RepoCard } from '../RepoCard';
 import { RepoFilter } from '../RepoFilter';
 
 const UserRepos = (props) => {
-  const [local] = splitProps(props, ['loading', 'owner', 'repos', 'pageInfo', 'languages']);
+  const [local] = splitProps(props, [
+    'loading',
+    'owner',
+    'repos',
+    'pageInfo',
+    'languages',
+  ]);
 
   return (
     <>
@@ -19,8 +25,7 @@ const UserRepos = (props) => {
           <For each={local.repos}>
             {(props) => <RepoCard {...props} isProfilePage />}
           </For>
-          {(local.pageInfo?.hasNextPage ||
-            local.pageInfo?.hasPreviousPage) && (
+          {(local.pageInfo?.hasNextPage || local.pageInfo?.hasPreviousPage) && (
             <Pagination pageInfo={local.pageInfo} owner={local.owner} />
           )}
         </>

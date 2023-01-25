@@ -26,8 +26,8 @@ const getOrgRepos = async (variables) => {
       avatarUrl: resp.data?.organization?.avatarUrl,
       name: resp.data?.organization?.name,
     },
-    repositories: resp?.data?.organization?.repositories
-  }
+    repositories: resp?.data?.organization?.repositories,
+  };
 };
 
 export default getOrgRepos;

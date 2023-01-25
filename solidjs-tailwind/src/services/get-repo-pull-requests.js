@@ -1,4 +1,4 @@
-import { REPO_PULL_REQUESTS } from "./queries/repo-pull-requests";
+import { REPO_PULL_REQUESTS } from './queries/repo-pull-requests';
 import { useAuth } from '../auth';
 import FetchApi from './api';
 import { GITHUB_GRAPHQL } from '../utils/constants';
@@ -26,12 +26,12 @@ function parsePullRequests(connection) {
       (labels, label) =>
         label
           ? [
-            ...labels,
-            {
-              color: label.color,
-              name: label.name,
-            },
-          ]
+              ...labels,
+              {
+                color: label.color,
+                name: label.name,
+              },
+            ]
           : labels,
       []
     );
@@ -63,18 +63,28 @@ function parsePullRequests(connection) {
 /**
  *
  * @param {
-*  variable: {
-  *    owner
-  *    name
-  *    first
-  *    labels
-  *    orderBy
-  *    direction
-  *  }
-  * }
-  */
+ *  variable: {
+ *    owner
+ *    name
+ *    first
+ *    labels
+ *    orderBy
+ *    direction
+ *  }
+ * }
+ */
 
-const getRepoPullRequests = async ({ owner, name, orderBy, direction, labels, before, after, first, last }) => {
+const getRepoPullRequests = async ({
+  owner,
+  name,
+  orderBy,
+  direction,
+  labels,
+  before,
+  after,
+  first,
+  last,
+}) => {
   const { authStore } = useAuth();
   const data = {
     url: `${GITHUB_GRAPHQL}`,
@@ -96,22 +106,26 @@ const getRepoPullRequests = async ({ owner, name, orderBy, direction, labels, be
   };
   const resp = await FetchApi(data);
 
-  const openPullRequests = parsePullRequests(resp.data.repository?.openPullRequest)
-  const closedPullRequests = parsePullRequests(resp.data.repository?.closedPullRequest);
-
-  const labelMap = [...closedPullRequests.pullRequests, ...openPullRequests.pullRequests].reduce(
-    (acc, issue) => {
-      const map = {};
-      issue.labels.forEach((label) => {
-        map[label.name] = label;
-      });
-      return {
-        ...acc,
-        ...map,
-      };
-    },
-    {}
+  const openPullRequests = parsePullRequests(
+    resp.data.repository?.openPullRequest
   );
+  const closedPullRequests = parsePullRequests(
+    resp.data.repository?.closedPullRequest
+  );
+
+  const labelMap = [
+    ...closedPullRequests.pullRequests,
+    ...openPullRequests.pullRequests,
+  ].reduce((acc, issue) => {
+    const map = {};
+    issue.labels.forEach((label) => {
+      map[label.name] = label;
+    });
+    return {
+      ...acc,
+      ...map,
+    };
+  }, {});
 
   return {
     openPullRequests,

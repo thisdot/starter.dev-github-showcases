@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { FILTER_TYPE_OPTIONS } from "../components/RepoFilter/data";
+import { FILTER_TYPE_OPTIONS } from '../components/RepoFilter/data';
 import { sortedRepoData } from './sortRepoFunction';
 import { MOCK_REPOS } from './fixtures/mocks';
 

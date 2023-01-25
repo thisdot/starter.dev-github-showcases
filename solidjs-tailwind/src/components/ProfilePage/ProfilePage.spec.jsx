@@ -33,5 +33,5 @@ describe('Profile Page', () => {
   it('should show user profile info', async () => {
     const userProfile = await wrapper.getByTestId('user-profile');
     expect(userProfile.innerHTML).toBeTruthy();
-  })
-})
+  });
+});

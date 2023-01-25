@@ -11,7 +11,7 @@ export default {
 const Template = () => (
   <Router>
     <RepoProvider>
-     <RepoHeading />
+      <RepoHeading />
     </RepoProvider>
   </Router>
 );

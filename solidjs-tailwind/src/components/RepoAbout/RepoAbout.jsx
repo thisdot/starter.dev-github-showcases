@@ -6,7 +6,7 @@ import styles from './RepoAbout.module.css';
 import { useRepo } from '../../contexts/RepoContext';
 
 export const RepoAboutWidget = () => {
-  const {info} = useRepo();
+  const { info } = useRepo();
 
   return (
     <div class={styles.container}>
@@ -25,6 +25,6 @@ export const RepoAboutWidget = () => {
       </div>
     </div>
   );
-}
+};
 
 export default RepoAboutWidget;

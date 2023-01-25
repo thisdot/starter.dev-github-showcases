@@ -55,6 +55,9 @@ describe('Top repos after loading', () => {
 
   it('should have a link to view all repositories', async () => {
     const ele = await wrapper.getByText('View all repositories');
-    expect(ele.closest('a')).toHaveAttribute('href', `/${repoCardProps.owner.login}`);
+    expect(ele.closest('a')).toHaveAttribute(
+      'href',
+      `/${repoCardProps.owner.login}`
+    );
   });
 });

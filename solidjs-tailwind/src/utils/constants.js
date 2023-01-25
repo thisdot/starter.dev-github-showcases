@@ -16,12 +16,12 @@ export const OrderField = {
   CreatedAt: 'CREATED_AT',
   /** Order issues by update time */
   UpdatedAt: 'UPDATED_AT',
-}
+};
 
 export const OrderDirection = {
   Asc: 'ASC',
   Desc: 'DESC',
-}
+};
 
 export const SORT_OPTIONS = {
   [`${OrderField.CreatedAt}^${OrderDirection.Desc}`]: 'Newest',
@@ -30,6 +30,6 @@ export const SORT_OPTIONS = {
   [`${OrderField.Comments}^${OrderDirection.Asc}`]: 'Least commented',
   [`${OrderField.UpdatedAt}^${OrderDirection.Desc}`]: 'Recently updated',
   [`${OrderField.UpdatedAt}^${OrderDirection.Asc}`]: 'Least reecently updated',
-}
+};
 
-export const DEFAULT_PAGE_SIZE = 30
+export const DEFAULT_PAGE_SIZE = 30;

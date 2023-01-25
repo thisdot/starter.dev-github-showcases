@@ -1,6 +1,6 @@
 import { RepoHeader } from '../components/RepoHeader';
 import RepoIssues from '../components/RepoIssues/RepoIssues';
-import { PrAndIssuesProvider } from "../contexts/PrAndIssuesContext"
+import { PrAndIssuesProvider } from '../contexts/PrAndIssuesContext';
 
 const Issues = () => {
   return (

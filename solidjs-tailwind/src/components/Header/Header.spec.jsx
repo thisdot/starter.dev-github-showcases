@@ -1,8 +1,8 @@
-import { Router } from "@solidjs/router";
+import { Router } from '@solidjs/router';
 import { render } from 'solid-testing-library';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
-import { useAuth } from "../../auth";
-import Header from "./Header.jsx";
+import { useAuth } from '../../auth';
+import Header from './Header.jsx';
 
 describe('Header', () => {
   const { setAuth } = useAuth();
@@ -16,14 +16,14 @@ describe('Header', () => {
   });
 
   afterAll(async () => {
-     setAuth({
-       token: null,
-       user: null,
-     });
-  })
+    setAuth({
+      token: null,
+      user: null,
+    });
+  });
 
   it('should mount', () => {
-    expect(wrapper).toBeTruthy()
+    expect(wrapper).toBeTruthy();
   });
 
   it('should show sign in', async () => {
@@ -35,12 +35,11 @@ describe('Header', () => {
     setAuth({
       token: '',
       user: {
-      avatarUrl: 'https://avatars.githubusercontent.com/u/22839396?v=4',
-      login: 'hdjerry',
+        avatarUrl: 'https://avatars.githubusercontent.com/u/22839396?v=4',
+        login: 'hdjerry',
       },
     });
     const profileText = await wrapper.getByText('Profile');
     expect(profileText).toBeVisible();
   });
-
-})
+});

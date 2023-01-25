@@ -22,13 +22,15 @@ const Profile = () => {
     })
   );
 
-  const [repos] = createResource(() => `${location.query?.after}_${location.query?.before}`, () =>
-    getUserRepos({
-      username: params?.login,
-      afterCursor: location.query?.after,
-      beforeCursor: location.query?.before,
-      first: 10,
-    })
+  const [repos] = createResource(
+    () => `${location.query?.after}_${location.query?.before}`,
+    () =>
+      getUserRepos({
+        username: params?.login,
+        afterCursor: location.query?.after,
+        beforeCursor: location.query?.before,
+        first: 10,
+      })
   );
 
   createEffect(() => {

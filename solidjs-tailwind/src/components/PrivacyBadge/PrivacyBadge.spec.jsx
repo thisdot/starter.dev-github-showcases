@@ -4,11 +4,9 @@ import PrivacyBadge from './PrivacyBadge';
 
 describe('Privacy Badge', () => {
   let wrapper;
-  const visibility = 'PUBLIC'
+  const visibility = 'PUBLIC';
   beforeEach(async () => {
-    wrapper = await render(() => (
-        <PrivacyBadge visibility={visibility} />
-    ));
+    wrapper = await render(() => <PrivacyBadge visibility={visibility} />);
   });
 
   it('should mount', () => {

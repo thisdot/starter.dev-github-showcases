@@ -1,5 +1,5 @@
-import { SORT_OPTIONS } from "../components/RepoFilter/data";
-import { sortBy } from "../components/RepoFilter/RepoFilter.store";
+import { SORT_OPTIONS } from '../components/RepoFilter/data';
+import { sortBy } from '../components/RepoFilter/RepoFilter.store';
 
 const getTime = (time) => new Date(time).getTime();
 

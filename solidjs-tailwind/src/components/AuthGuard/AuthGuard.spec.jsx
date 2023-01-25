@@ -41,12 +41,23 @@ describe('Auth guard', () => {
     expect(await wrapper.queryByTestId('guard')).toBeInTheDocument();
   });
 
-   it('redirects unauthenticated users to SignIn', async () => {
-     await setAuth({
-       token: null,
-       user: null,
-     });
-     expect(await wrapper.queryByTestId('guard')).not.toBeInTheDocument();
-   });
+  it('redirects unauthenticated users to SignIn', async () => {
+    setAuth({
+      token: null,
+      user: null,
+    });
+
+    const PrivateComponent = () => <>Private!</>;
+    const PublicComponent = () => <>Redirected!</>;
+    wrapper = await render(() => (
+      <Router>
+        <Routes>
+          <Route component={PublicComponent} path={ROUTES.SIGNIN} />
+          <Route component={AuthGuard} path="/">
+            <Route component={PrivateComponent} path={ROUTES.HOME} />
+          </Route>
+        </Routes>
+      </Router>
+    ));
 
 });

@@ -6,7 +6,7 @@ export default {
   title: 'Components/User Repos',
   component: UserRepos,
   argTypes: {
-   repos: {},
+    repos: {},
   },
 };
 

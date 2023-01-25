@@ -11,5 +11,5 @@ const Template = (args) => <PrivacyBadge {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  visibility: 'Private'
+  visibility: 'Private',
 };

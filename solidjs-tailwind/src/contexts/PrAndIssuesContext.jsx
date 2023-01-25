@@ -1,16 +1,11 @@
-import {
-  createSignal,
-  createContext,
-  useContext,
-} from 'solid-js';
+import { createSignal, createContext, useContext } from 'solid-js';
 import { useLocation } from '@solidjs/router';
-
 
 const PrAndIssueContext = createContext();
 
 export function PrAndIssuesProvider(props) {
   const { pathname } = useLocation();
-  const type = pathname.includes('pulls') ? 'pr' : 'issue'
+  const type = pathname.includes('pulls') ? 'pr' : 'issue';
   const [tabActive, setActiveTab] = createSignal('open');
   const [sortBy, setSortBy] = createSignal('Newest');
   const [selectedLabel, setSelectedLabel] = createSignal(undefined);
@@ -20,15 +15,15 @@ export function PrAndIssuesProvider(props) {
   const [milestoneId, setMilestoneId] = createSignal(undefined);
 
   const clearSortAndFilter = () => {
-    setSortBy('Newest')
-    setSelectedLabel(undefined)
-    setSelectedMilestone(undefined)
-  }
+    setSortBy('Newest');
+    setSelectedLabel(undefined);
+    setSelectedMilestone(undefined);
+  };
 
   const PrAndIssuesParameters = {
     type,
-    clearSortAndFilter,  
-    tabActive, 
+    clearSortAndFilter,
+    tabActive,
     setActiveTab,
     sortBy,
     setSortBy,
@@ -41,7 +36,7 @@ export function PrAndIssuesProvider(props) {
     milestoneOpt,
     setMilestoneOpt,
     milestoneId,
-    setMilestoneId
+    setMilestoneId,
   };
 
   return (
