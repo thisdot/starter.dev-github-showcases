@@ -49,7 +49,7 @@
 }
 
 .clearFilter {
-  @apply flex items-center hover:text-blue-600 transition-colors delay-[60ms] no-underline gap-2 text-sm;
+  @apply flex items-center hover:text-blue-600 transition-colors delay-[60ms] no-underline gap-2 text-sm cursor-pointer;
 }
 
 .closeIconSpan {
