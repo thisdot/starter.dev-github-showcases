@@ -27,7 +27,7 @@ describe('RepoCard for non profile page', () => {
   let wrapper;
   const profileData = {
     ...repoCardProps,
-    isProfilePage: true,
+    isProfilePage: false,
   };
 
   beforeEach(async () => {

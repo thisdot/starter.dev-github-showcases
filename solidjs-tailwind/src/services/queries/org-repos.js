@@ -17,6 +17,9 @@ export const ORGANIZATION_REPOS_QUERY = `
               id
             }
             updatedAt
+            owner {
+              login
+            }
             visibility
           }
         }
