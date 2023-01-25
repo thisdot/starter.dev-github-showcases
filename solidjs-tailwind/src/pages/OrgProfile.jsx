@@ -27,6 +27,9 @@ const OrgProfile = () => {
     if (resp() && !resp.loading) {
       const result = parseRepoData(resp().repositories);
       const [reposResults, languages] = useRepoSortFilter(result);
+      console.log('====================================');
+      console.log(reposResults);
+      console.log('====================================');
       setOrgInfo(resp().orgInfo);
       setRepos(reposResults);
       setReposLanguages(languages);
