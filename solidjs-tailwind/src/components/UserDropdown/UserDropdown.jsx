@@ -51,7 +51,7 @@ const UserDropdown = (props) => {
           <ul class="py-1">
             {props.username && (
               <li data-menu-item>
-                <NavLink href={`/${props.username}`} class={styles.menuBtn}>
+                <NavLink href={`/${props.username}`} class={styles.menuBtn} onClick={() => setExpanded(false)}>
                   Profile
                 </NavLink>
               </li>
