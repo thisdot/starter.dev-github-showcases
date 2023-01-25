@@ -7,12 +7,11 @@ import { RepoProvider } from '../../contexts/RepoContext';
 import { setupMswServer } from '../../../msw/server';
 import { repoInforResponse } from '../../../msw/data';
 
-setupMswServer()
+setupMswServer();
 
 describe('Repo About', () => {
   let wrapper;
   beforeEach(async () => {
-
     wrapper = await render(() => (
       <Router>
         <RepoProvider>
@@ -27,11 +26,13 @@ describe('Repo About', () => {
   });
 
   it('should show contents', async () => {
-      const loading = await wrapper.findByText('Loading...');
-      expect(loading).toBeInTheDocument();
-      const contents = await wrapper.findByTestId('about-info');
-      const topic = await wrapper.findByText(repoInforResponse.data.repository.description);
-      expect(contents.innerHTML).toBeTruthy();
-      expect(topic).toBeVisible();
+    const loading = await wrapper.findByText('Loading...');
+    expect(loading).toBeInTheDocument();
+    const contents = await wrapper.findByTestId('about-info');
+    const topic = await wrapper.findByText(
+      repoInforResponse.data.repository.description
+    );
+    expect(contents.innerHTML).toBeTruthy();
+    expect(topic).toBeVisible();
   });
 });

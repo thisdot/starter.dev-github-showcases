@@ -31,7 +31,7 @@ describe('Auth guard', () => {
       token: null,
       user: null,
     });
-  })
+  });
 
   it('should mount', () => {
     expect(wrapper).toBeTruthy();
@@ -42,22 +42,10 @@ describe('Auth guard', () => {
   });
 
   it('redirects unauthenticated users to SignIn', async () => {
-    setAuth({
+    await setAuth({
       token: null,
       user: null,
     });
-
-    const PrivateComponent = () => <>Private!</>;
-    const PublicComponent = () => <>Redirected!</>;
-    wrapper = await render(() => (
-      <Router>
-        <Routes>
-          <Route component={PublicComponent} path={ROUTES.SIGNIN} />
-          <Route component={AuthGuard} path="/">
-            <Route component={PrivateComponent} path={ROUTES.HOME} />
-          </Route>
-        </Routes>
-      </Router>
-    ));
-
+    expect(await wrapper.queryByTestId('guard')).not.toBeInTheDocument();
+  });
 });
