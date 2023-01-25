@@ -61,7 +61,8 @@ export function RepoProvider(props) {
   });
 
   const repo = {
-    info, readme, setLoading
+    info,
+    readme,
   };
 
   return (

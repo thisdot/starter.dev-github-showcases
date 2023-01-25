@@ -1,13 +1,13 @@
 import { For } from 'solid-js';
-import { Link } from '@solidjs/router';
+import { useNavigate, useParams } from '@solidjs/router';
 import { GitBranchIcon } from '../Icons';
 import styles from './BranchNavigation.module.css';
-import { useParams } from '@solidjs/router';
 import { useRepo } from '../../contexts/RepoContext';
 
 function BranchNavigation() {
   const params = useParams();
   const { info } = useRepo();
+  const navigate = useNavigate();
 
   const branch = info().branch || params.branch;
 
@@ -28,14 +28,14 @@ function BranchNavigation() {
       </button>
       {params.path?.split('/').filter(Boolean).length > 0 && (
         <div class={styles.crumbs}>
-          <Link href={`/${params.owner}/${params.name}`}>
+          <div onClick={() => navigate(`/${params.owner}/${params.name}`)}>
             <a
               data-testid={`file explorer nav root ${params.name}`}
               class={styles.rootLink}
             >
               {params.name}
             </a>
-          </Link>
+          </div>
           <span class={styles.separator}>/</span>
           <For each={params.path?.split('/').filter(Boolean)}>
             {(crumb, index) => (
@@ -50,14 +50,14 @@ function BranchNavigation() {
                   </span>
                 ) : (
                   <>
-                    <Link href={`${hrefPath(index())}`}>
+                    <div onClick={() => navigate(`${hrefPath(index())}`)}>
                       <a
                         data-testid={`file explorer nav crumb ${crumb}`}
                         class={styles.crumbLink}
                       >
                         {crumb}
                       </a>
-                    </Link>
+                    </div>
                     <span class={styles.separator}>/</span>
                   </>
                 )}
