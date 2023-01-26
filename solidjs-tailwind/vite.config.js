@@ -4,6 +4,9 @@ import solidPlugin from 'vite-plugin-solid';
 
 export default defineConfig({
   plugins: [spaFallbackWithDot(), solidPlugin()],
+  preview: {
+    port: 3000,
+  },
   server: {
     port: 3000,
     hmr: {
