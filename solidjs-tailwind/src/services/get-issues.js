@@ -3,7 +3,6 @@ import { useAuth } from '../auth';
 import { ISSUES_QUERY } from './queries/issue-info';
 import { GITHUB_GRAPHQL } from '../utils/constants';
 
-
 function parseIssues(connection) {
   if (!connection) {
     return {
@@ -27,12 +26,12 @@ function parseIssues(connection) {
       (labels, label) =>
         label
           ? [
-            ...labels,
-            {
-              color: label.color,
-              name: label.name,
-            },
-          ]
+              ...labels,
+              {
+                color: label.color,
+                name: label.name,
+              },
+            ]
           : labels,
       []
     );
@@ -79,7 +78,17 @@ function parseMilestones(milestones) {
   }, []);
 }
 
-const getIssues = async ({ owner, name, orderBy, direction, filterBy, before, after, first, last }) => {
+const getIssues = async ({
+  owner,
+  name,
+  orderBy,
+  direction,
+  filterBy,
+  before,
+  after,
+  first,
+  last,
+}) => {
   const { authStore } = useAuth();
 
   const data = {
@@ -94,7 +103,7 @@ const getIssues = async ({ owner, name, orderBy, direction, filterBy, before, af
       direction,
       filterBy,
       before,
-      after
+      after,
     },
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
@@ -104,7 +113,7 @@ const getIssues = async ({ owner, name, orderBy, direction, filterBy, before, af
   const repository = resp.data?.repository;
   const closedIssues = parseIssues(repository?.closedIssues);
   const openIssues = parseIssues(repository?.openIssues);
-  const milestones = parseMilestones(repository?.milestones)
+  const milestones = parseMilestones(repository?.milestones);
 
   const labelMap = [...closedIssues.issues, ...openIssues.issues].reduce(
     (acc, issue) => {

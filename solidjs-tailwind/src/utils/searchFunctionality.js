@@ -1,4 +1,4 @@
-import { search } from "../components/RepoFilter/RepoFilter.store";
+import { search } from '../components/RepoFilter/RepoFilter.store';
 
 // Function to filter repos by search
 export const repoDataFilteredBySearch = (repos) => {

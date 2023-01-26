@@ -1,7 +1,7 @@
 import { createSignal, Show, splitProps, For, Switch, Match } from 'solid-js';
 import { CaretIcon, CloseIcon, CorrectIcon } from '../Icons';
 import { clickOutside } from '../../utils/onclickOutside';
-import styles from "../RepoFilter/RepoFilter.module.css"
+import styles from '../RepoFilter/RepoFilter.module.css';
 
 const FilterDropdown = (props) => {
   const [local] = splitProps(props, [
@@ -10,7 +10,7 @@ const FilterDropdown = (props) => {
     'items',
     'selected',
     'selectOption',
-    'class'
+    'class',
   ]);
   const [showOptions, setShowOptions] = createSignal(false);
   const toggleOption = () => setShowOptions(!showOptions());

@@ -7,7 +7,7 @@ export default {
   title: 'Components/RepoReadMe',
   parameters: {
     msw: {
-      handlers: [mockReadme]
+      handlers: [mockReadme],
     },
   },
 };

@@ -16,12 +16,16 @@ const modifyFilterTypeText = (filterText = 'test') => {
 };
 
 const FilterText = (props) => {
-  const [local] = splitProps(props, ['filteredRepoCount', 'setFilterType', 'setLanguage']);
+  const [local] = splitProps(props, [
+    'filteredRepoCount',
+    'setFilterType',
+    'setLanguage',
+  ]);
 
   const clearFilters = () => {
     local.setFilterType(defaultFilterType);
-    local.setLanguage(defaultLanguage)
-  }
+    local.setLanguage(defaultLanguage);
+  };
 
   return (
     <div class={styles.filterTextContainer}>

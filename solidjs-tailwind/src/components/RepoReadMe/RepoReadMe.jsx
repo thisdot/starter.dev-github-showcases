@@ -10,7 +10,7 @@ import styles from './RepoReadMe.module.css';
 
 const RepoReadMe = () => {
   const { pathname } = useLocation();
-  const {readme} = useRepo();
+  const { readme } = useRepo();
 
   return (
     <>

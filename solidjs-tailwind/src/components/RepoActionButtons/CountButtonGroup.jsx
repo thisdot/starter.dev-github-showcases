@@ -1,4 +1,4 @@
-import { children } from "solid-js";
+import { children } from 'solid-js';
 import styles from './RepoActionButtons.module.css';
 
 const formatCountString = (props) => {
@@ -16,9 +16,7 @@ function CountButtonGroup(props) {
   const count = () => props.count || 0;
   let countText = formatCountString(count());
   const c = children(() => props.children);
-  let buttonText = c().toString()
-    .replace('[object Object],', '')
-    .toLowerCase();
+  let buttonText = c().toString().replace('[object Object],', '').toLowerCase();
   return (
     <span class={styles.btnGroup}>
       <button type="button" class={styles.btnMain}>

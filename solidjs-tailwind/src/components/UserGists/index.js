@@ -1,1 +1,1 @@
-export {default as UserGists } from './UserGists';
+export { default as UserGists } from './UserGists';

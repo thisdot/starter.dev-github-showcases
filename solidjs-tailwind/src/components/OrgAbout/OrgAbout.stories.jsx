@@ -2,7 +2,6 @@ import { Router } from '@solidjs/router';
 import { orgData } from './data';
 import OrgAbout from './OrgAbout';
 
-
 export default {
   title: 'Components/Org About',
   component: OrgAbout,
@@ -21,5 +20,5 @@ const Template = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  ...orgData
+  ...orgData,
 };

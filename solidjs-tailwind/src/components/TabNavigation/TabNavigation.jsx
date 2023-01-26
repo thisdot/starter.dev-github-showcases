@@ -5,8 +5,12 @@ import styles from './TabNavigation.module.css';
 
 const TabNavigation = (props) => {
   const isCurrentTab = (pathName) => {
-    const otherPaths = props.tabs.filter(({ path }) => path !== pathName).map(({ path }) => path);
-    return pathName !== '' ? props.pathname.includes(pathName) : otherPaths.every((path) => !props.pathname.includes(path));
+    const otherPaths = props.tabs
+      .filter(({ path }) => path !== pathName)
+      .map(({ path }) => path);
+    return pathName !== ''
+      ? props.pathname.includes(pathName)
+      : otherPaths.every((path) => !props.pathname.includes(path));
   };
 
   return (
@@ -15,7 +19,7 @@ const TabNavigation = (props) => {
         <For each={props.tabs} fallback={<div>Loading...</div>}>
           {(item, index) => {
             const href =
-                item.path === ''
+              item.path === ''
                 ? `/${props.basePath}`
                 : `/${props.basePath}/${item.path}`;
             return (

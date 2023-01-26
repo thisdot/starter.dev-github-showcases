@@ -8,7 +8,10 @@ function OrgList(props) {
       <div data-testid="profile page orgs" class="flex flex-wrap space-x-2">
         <For each={props.organizations}>
           {(props) => (
-            <a onClick={() => navigate(`/orgs/${props.login}`)} class='cursor-pointer'>
+            <a
+              onClick={() => navigate(`/orgs/${props.login}`)}
+              class="cursor-pointer"
+            >
               <div class="relative w-9 h-9 rounded border border-gray-300 overflow-hidden">
                 <img src={props.avatarUrl} alt="Organization" />
               </div>

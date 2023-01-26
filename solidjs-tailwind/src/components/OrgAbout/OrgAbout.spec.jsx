@@ -20,6 +20,6 @@ describe('Org About', () => {
 
   it('should show organisation name', async () => {
     const orgName = await wrapper.getByText(orgData.name);
-    expect(orgName).toBeVisible()
+    expect(orgName).toBeVisible();
   });
 });

@@ -13,7 +13,8 @@ function BranchNavigation() {
 
   // creates a proper GitHub url path from a repo path
   const hrefPath = (index) => {
-    const crumbPath = params.path?.split('/')
+    const crumbPath = params.path
+      ?.split('/')
       .filter(Boolean)
       .slice(0, index + 1)
       .join('/');

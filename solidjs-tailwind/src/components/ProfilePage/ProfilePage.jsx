@@ -46,7 +46,12 @@ const ProfilePage = (props) => {
               pathname={location.pathname}
             />
             {local.reposInfo ? (
-              <UserRepos languages={reposlanguages()} repos={repoState()} pageInfo={pageInfo()} owner={params.login} />
+              <UserRepos
+                languages={reposlanguages()}
+                repos={repoState()}
+                pageInfo={pageInfo()}
+                owner={params.login}
+              />
             ) : null}
           </div>
         </div>

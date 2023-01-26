@@ -1,4 +1,4 @@
-import { PRAndIssuesHeader } from "../PRAndIssuesHeader";
+import { PRAndIssuesHeader } from '../PRAndIssuesHeader';
 
 const PRAndIssueLoaderSkeleton = () => {
   return (

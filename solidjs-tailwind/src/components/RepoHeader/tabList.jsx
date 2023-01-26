@@ -1,4 +1,4 @@
-import { PullRequestIcon, InformationCircleIcon, CodeIcon } from '../Icons'
+import { PullRequestIcon, InformationCircleIcon, CodeIcon } from '../Icons';
 
 export function createTabList(props) {
   const issuesCount = () => props.issueCount || 0;

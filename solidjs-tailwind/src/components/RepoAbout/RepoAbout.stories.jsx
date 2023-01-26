@@ -14,12 +14,11 @@ export default {
 };
 
 const Template = () => (
-    <Router>
-      <RepoProvider>
-        <RepoAboutWidget />
-      </RepoProvider>
-    </Router>
+  <Router>
+    <RepoProvider>
+      <RepoAboutWidget />
+    </RepoProvider>
+  </Router>
 );
 
 export const Default = Template.bind({});
-

@@ -1,1 +1,1 @@
-export { default as PRAndIssuesHeader } from "./PRAndIssuesHeader"
+export { default as PRAndIssuesHeader } from './PRAndIssuesHeader';

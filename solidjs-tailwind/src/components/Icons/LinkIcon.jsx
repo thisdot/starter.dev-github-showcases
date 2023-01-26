@@ -16,4 +16,3 @@ const LinkIcon = (props) => (
 );
 
 export default LinkIcon;
-

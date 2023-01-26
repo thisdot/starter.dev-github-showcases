@@ -31,7 +31,7 @@ describe('Auth guard', () => {
       token: null,
       user: null,
     });
-  })
+  });
 
   it('should mount', () => {
     expect(wrapper).toBeTruthy();
@@ -41,12 +41,11 @@ describe('Auth guard', () => {
     expect(await wrapper.queryByTestId('guard')).toBeInTheDocument();
   });
 
-   it('redirects unauthenticated users to SignIn', async () => {
-     await setAuth({
-       token: null,
-       user: null,
-     });
-     expect(await wrapper.queryByTestId('guard')).not.toBeInTheDocument();
-   });
-
+  it('redirects unauthenticated users to SignIn', async () => {
+    await setAuth({
+      token: null,
+      user: null,
+    });
+    expect(await wrapper.queryByTestId('guard')).not.toBeInTheDocument();
+  });
 });

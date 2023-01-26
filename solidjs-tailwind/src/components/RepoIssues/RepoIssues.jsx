@@ -11,9 +11,17 @@ import { PRAndIssueLoaderSkeleton } from '../PRAndIssueLoaderSkeleton';
 
 const RepoIssues = () => {
   const params = useParams();
-  const location = useLocation()
-  const { tabActive, sortBy, selectedLabel, setLabelOpt, setMilestoneOpt, clearSortAndFilter, selectedMilestone, milestoneId} =
-    usePrAndIssuesContext();
+  const location = useLocation();
+  const {
+    tabActive,
+    sortBy,
+    selectedLabel,
+    setLabelOpt,
+    setMilestoneOpt,
+    clearSortAndFilter,
+    selectedMilestone,
+    milestoneId,
+  } = usePrAndIssuesContext();
 
   const [data, setData] = createSignal([]);
   const [openCount, setOpenCount] = createSignal();
@@ -29,9 +37,18 @@ const RepoIssues = () => {
       labels: selectedLabel() ? [selectedLabel()] : undefined,
       milestone: selectedMilestone() ? milestoneId() : undefined,
     },
-    before: typeof location.query.before === 'string' ? location.query.before : undefined,
-    after: typeof location.query.after === 'string' ? location.query.after : undefined,
-    first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+    before:
+      typeof location.query.before === 'string'
+        ? location.query.before
+        : undefined,
+    after:
+      typeof location.query.after === 'string'
+        ? location.query.after
+        : undefined,
+    first:
+      location.query.after || !location.query.before
+        ? DEFAULT_PAGE_SIZE
+        : undefined,
     last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
   });
 
@@ -45,13 +62,14 @@ const RepoIssues = () => {
       setMilestoneOpt(resp().milestones);
       setOpenCount(resp().openIssues.totalCount);
       setClosedCount(resp().closedIssues.totalCount);
-      setPageInfo(resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].pageInfo)
+      setPageInfo(
+        resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].pageInfo
+      );
       setData(
         resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].issues
       );
     }
   });
-
 
   return (
     <div class="md:py-12 max-w-screen-xl mx-auto">

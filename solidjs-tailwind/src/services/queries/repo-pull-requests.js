@@ -65,4 +65,4 @@ export const REPO_PULL_REQUESTS = `
       }
     }
   }
-`
+`;

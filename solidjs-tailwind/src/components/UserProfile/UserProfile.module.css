@@ -1,12 +1,12 @@
 @tailwind utilities;
 
 .avatar {
-@apply rounded-full shadow z-30;
+  @apply rounded-full shadow z-30;
 }
 .name {
   @apply text-2xl text-gray-800 font-bold leading-tight;
 }
-.username  {
+.username {
   @apply text-xl text-gray-500 font-light;
 }
 .bio {

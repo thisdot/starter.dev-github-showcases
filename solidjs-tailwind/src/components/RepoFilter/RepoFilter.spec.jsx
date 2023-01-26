@@ -21,8 +21,8 @@ describe('Repo Meta data', () => {
 
   it('should update search state when text is enter', async () => {
     const input = await wrapper.findByTestId('search-input');
-    fireEvent.keyUp(input, {target: {value: '23'}})
-    expect(input.value).toBe(search())
+    fireEvent.keyUp(input, { target: { value: '23' } });
+    expect(input.value).toBe(search());
   });
 
   it('should open and close dropdown', async () => {
@@ -39,10 +39,9 @@ describe('Repo Meta data', () => {
     const types = ['Type', 'Language', 'Sort'];
     const eles = await wrapper.queryAllByTestId('filter-dropdown-button');
     eles.forEach(async (ele, i) => {
-        await fireEvent.click(ele);
-        const typographyEl = await wrapper.findByText(`Select ${types[i]}`);
-        expect(typographyEl).toBeInTheDocument();
+      await fireEvent.click(ele);
+      const typographyEl = await wrapper.findByText(`Select ${types[i]}`);
+      expect(typographyEl).toBeInTheDocument();
     });
   });
-
 });
