@@ -64,7 +64,7 @@ Demonstrates how to retrieve data from a third-party API by using `createResourc
 
 ### CLI (Recommended)
 
-Run this commands with your favorite package manager
+Run these commands with your favorite package manager
 
 ```bash
 dlx create-starter-dev
@@ -88,7 +88,7 @@ git clone https://github.com/thisdot/starter.dev.git
 
 ## Commands
 
-Run this commands with your favorite package manager
+Run these commands with your favorite package manager
 
 - `dev` - Runs the development server on localhost port 3000 with HMR
 - `test` - Runs the test suite
