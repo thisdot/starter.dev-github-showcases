@@ -62,17 +62,18 @@ Demonstrates how to retrieve data from a third-party API by using `createResourc
 
 ## Installation
 
+This README is written with pnpm in mind but you can use other manager runner 
+
 ### CLI (Recommended)
 
-Run these commands with your favorite package manager
-
 ```bash
-dlx create-starter-dev
+npm i -g pnpm
+pnpm dlx create-starter-dev
 ```
 
 - Follow the prompts to select the <kit name> starter kit and name your new project.
-- `cd` into your project directory and run `install` with your favorite package manager.
-- Run `dev` with your favorite package manager to start the development server.
+- `cd` into your project directory and run `pnpm install`.
+- Run `pnpm run dev` to start the development server.
 - Open your browser to `http://localhost:3000` to see the included example code running.
 
 ### Manual
@@ -82,13 +83,11 @@ git clone https://github.com/thisdot/starter.dev.git
 ```
 
 - Copy and rename the `starters/solidjs-tailwind` directory to the name of your new project.
-- `cd` into your project directory and run `install` with your favorite package manager.
-- Run `dev` with your favorite package manager to start the development server.
+- `cd` into your project directory and run `pnpm install`.
+- Run `pnpm run dev` to start the development server.
 - Open your browser to `http://localhost:3000` to see the included example code running.
 
 ## Commands
-
-Run these commands with your favorite package manager
 
 - `dev` - Runs the development server on localhost port 3000 with HMR
 - `test` - Runs the test suite
