@@ -62,6 +62,8 @@ Demonstrates how to retrieve data from a third-party API by using `createResourc
 
 ## Installation
 
+This README is written with pnpm in mind but you can use other manager runner 
+
 ### CLI (Recommended)
 
 ```bash
@@ -87,14 +89,14 @@ git clone https://github.com/thisdot/starter.dev.git
 
 ## Commands
 
-- `pnpm run dev` - Runs the development server on localhost port 3000 with HMR
-- `pnpm run test` - Runs the test suite
-- `pnpm run storybook` - To showcase the component library
-- `pnpm run build` - Builds a production version of the app to deploy
-- `pnpm run serve` - Serves a production build on localhost port 4173
-- `pnpm run lint` - Uses eslint to find potential issues in the codebase
-- `pnpm run lint-fix` - Tries to auto-fix potential issues
-- `pnpm run format` - Fixes formatting issues in the codebase
+- `dev` - Runs the development server on localhost port 3000 with HMR
+- `test` - Runs the test suite
+- `storybook` - To showcase the component library
+- `build` - Builds a production version of the app to deploy
+- `serve` - Serves a production build on localhost port 4173
+- `lint` - Uses eslint to find potential issues in the codebase
+- `lint-fix` - Tries to auto-fix potential issues
+- `format` - Fixes formatting issues in the codebase
 
 ## Demo Implementation
 
