@@ -58,7 +58,7 @@ Demonstrates how to retrieve data from a third-party API by using `createResourc
 
 #### Other Resources
 
-- [Solidjs Icons](https://www.npmjs.com/package/solid-icons)
+- [SolidJS Icons](https://www.npmjs.com/package/solid-icons)
 
 ## Installation
 
