@@ -57,6 +57,7 @@ const FileExplorerView = () => {
                     )}
                   </div>
                   <div
+                    class="cursor-pointer"
                     onClick={() =>
                       navigate(
                         `${basePath}/${item.type}/${branch}/${item.path}`
