@@ -26,12 +26,12 @@ function parsePullRequests(connection) {
       (labels, label) =>
         label
           ? [
-            ...labels,
-            {
-              color: label.color,
-              name: label.name,
-            },
-          ]
+              ...labels,
+              {
+                color: label.color,
+                name: label.name,
+              },
+            ]
           : labels,
       []
     );
@@ -130,12 +130,12 @@ const getRepoPullRequests = async ({
     resp.data.repository?.closedPullRequest
   );
 
-  const labelMap = parseLabels(resp.data.repository?.labels)
+  const labelMap = parseLabels(resp.data.repository?.labels);
 
   return {
     openPullRequests,
     closedPullRequests,
-    labels: labelMap
+    labels: labelMap,
   };
 };
 

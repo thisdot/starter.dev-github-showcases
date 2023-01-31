@@ -26,12 +26,12 @@ function parseIssues(connection) {
       (labels, label) =>
         label
           ? [
-            ...labels,
-            {
-              color: label.color,
-              name: label.name,
-            },
-          ]
+              ...labels,
+              {
+                color: label.color,
+                name: label.name,
+              },
+            ]
           : labels,
       []
     );
@@ -131,7 +131,7 @@ const getIssues = async ({
   const closedIssues = parseIssues(repository?.closedIssues);
   const openIssues = parseIssues(repository?.openIssues);
   const milestones = parseMilestones(repository?.milestones);
-  const labels = parseLabels(repository?.labels)
+  const labels = parseLabels(repository?.labels);
 
   return {
     openIssues,
