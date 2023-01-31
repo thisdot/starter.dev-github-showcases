@@ -26,12 +26,12 @@ function parsePullRequests(connection) {
       (labels, label) =>
         label
           ? [
-              ...labels,
-              {
-                color: label.color,
-                name: label.name,
-              },
-            ]
+            ...labels,
+            {
+              color: label.color,
+              name: label.name,
+            },
+          ]
           : labels,
       []
     );
@@ -58,6 +58,23 @@ function parsePullRequests(connection) {
   }, []);
 
   return { pullRequests, totalCount, pageInfo };
+}
+
+function parseLabels(labels) {
+  const nodes = labels?.nodes || [];
+  return nodes.reduce((labels, label) => {
+    if (!label) {
+      return labels;
+    }
+
+    return [
+      ...labels,
+      {
+        color: label.color,
+        name: label.name,
+      },
+    ];
+  }, []);
 }
 
 /**
@@ -113,24 +130,12 @@ const getRepoPullRequests = async ({
     resp.data.repository?.closedPullRequest
   );
 
-  const labelMap = [
-    ...closedPullRequests.pullRequests,
-    ...openPullRequests.pullRequests,
-  ].reduce((acc, issue) => {
-    const map = {};
-    issue.labels.forEach((label) => {
-      map[label.name] = label;
-    });
-    return {
-      ...acc,
-      ...map,
-    };
-  }, {});
+  const labelMap = parseLabels(resp.data.repository?.labels)
 
   return {
     openPullRequests,
     closedPullRequests,
-    labels: Object.values(labelMap),
+    labels: labelMap
   };
 };
 
