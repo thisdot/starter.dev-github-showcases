@@ -19,6 +19,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
 import { useAuth } from './auth';
 import protectedPaths from './utils/protected-paths';
 import { StoreProps } from './auth/AuthStore';
+import Layout from './components/layout';
 
 export default function Root() {
   const { authStore }: { authStore: StoreProps } = useAuth();
@@ -54,9 +55,11 @@ export default function Root() {
         <QueryClientProvider client={queryClient}>
           <Suspense>
             <ErrorBoundary>
-              <Routes>
-                <FileRoutes />
-              </Routes>
+              <Layout>
+                <Routes>
+                  <FileRoutes />
+                </Routes>
+              </Layout>
             </ErrorBoundary>
           </Suspense>
         </QueryClientProvider>
