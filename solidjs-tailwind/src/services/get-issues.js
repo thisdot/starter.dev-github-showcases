@@ -78,6 +78,23 @@ function parseMilestones(milestones) {
   }, []);
 }
 
+function parseLabels(labels) {
+  const nodes = labels?.nodes || [];
+  return nodes.reduce((labels, label) => {
+    if (!label) {
+      return labels;
+    }
+
+    return [
+      ...labels,
+      {
+        color: label.color,
+        name: label.name,
+      },
+    ];
+  }, []);
+}
+
 const getIssues = async ({
   owner,
   name,
@@ -114,26 +131,13 @@ const getIssues = async ({
   const closedIssues = parseIssues(repository?.closedIssues);
   const openIssues = parseIssues(repository?.openIssues);
   const milestones = parseMilestones(repository?.milestones);
-
-  const labelMap = [...closedIssues.issues, ...openIssues.issues].reduce(
-    (acc, issue) => {
-      const map = {};
-      issue.labels.forEach((label) => {
-        map[label.name] = label;
-      });
-      return {
-        ...acc,
-        ...map,
-      };
-    },
-    {}
-  );
+  const labels = parseLabels(repository?.labels);
 
   return {
     openIssues,
     closedIssues,
     milestones,
-    labels: Object.values(labelMap),
+    labels,
   };
 };
 

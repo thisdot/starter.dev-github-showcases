@@ -17,6 +17,13 @@ export const ISSUES_QUERY = `
         }
         totalCount
       }
+      labels(first: 100) {
+        totalCount
+        nodes {
+          color
+          name
+        }
+      }
       openIssues: issues(
         first: $first
         last: $last
