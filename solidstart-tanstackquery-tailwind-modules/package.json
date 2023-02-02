@@ -25,7 +25,7 @@
     "lint": "eslint --ext .ts,.tsx ./src",
     "lint-fix": "eslint --ext .ts,.tsx ./src --fix",
     "format": "prettier --write ./src --ignore-path .gitignore",
-    "prepare": "cd .. && cd .. && husky install starters/solidstart-tanstackquery-tailwind-modules/.husky"
+    "prepare": "cd .. && cd .. && husky install starter.dev-github-showcases/solidstart-tanstackquery-tailwind-modules/.husky"
   },
   "type": "module",
   "devDependencies": {
@@ -34,7 +34,7 @@
     "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-interactions": "^6.5.16",
     "@storybook/addon-links": "^6.5.16",
-    "@storybook/builder-vite": "~0.4.0",
+    "@storybook/builder-vite": "^0.3.0",
     "@storybook/html": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
     "@tanstack/solid-query": "^4.22.4",
@@ -52,15 +52,15 @@
     "solid-testing-library": "^0.5.0",
     "tailwindcss": "^3.2.4",
     "typescript": "^4.9.4",
-    "vite": "~4.1.1",
+    "vite": "3.2.5",
     "vitest": "^0.28.2",
     "whatwg-fetch": "^3.6.2"
   },
   "dependencies": {
     "@solidjs/meta": "^0.28.2",
-    "@solidjs/router": "~0.7.0",
+    "@solidjs/router": "^0.7.0",
     "solid-js": "^1.6.9",
-    "solid-start": "~0.2.18",
+    "solid-start": "0.2.15",
     "undici": "^5.15.1"
   },
   "engines": {
