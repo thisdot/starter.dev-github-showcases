@@ -25,7 +25,7 @@
     "lint": "eslint --ext .ts,.tsx ./src",
     "lint-fix": "eslint --ext .ts,.tsx ./src --fix",
     "format": "prettier --write ./src --ignore-path .gitignore",
-    "prepare": "cd .. && cd .. && husky install starter.dev-github-showcases/solidstart-tanstackquery-tailwind-modules/.husky"
+    "prepare": "cd .. && husky install solidstart-tanstackquery-tailwind-modules/.husky"
   },
   "type": "module",
   "devDependencies": {
@@ -39,6 +39,7 @@
     "@storybook/testing-library": "^0.0.13",
     "@tanstack/solid-query": "^4.22.4",
     "@testing-library/jest-dom": "^5.16.5",
+    "@typescript-eslint/parser": "^5.50.0",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^8.3.0",
     "eslint-plugin-solid": "^0.9.4",
@@ -62,6 +63,9 @@
     "solid-js": "^1.6.9",
     "solid-start": "0.2.15",
     "undici": "^5.15.1"
+  },
+  "engines": {
+    "node": ">=16"
   },
   "msw": {
     "workerDirectory": "public"
