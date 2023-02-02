@@ -1,14 +1,10 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
-
 import solid from "solid-start/vite";
 import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [solid()],
-  preview: {
-    port: 3000,
-  },
   server: {
     port: 3000,
     hmr: {
@@ -16,7 +12,7 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    include: ['@tanstack/query-core']
+    include: ['@tanstack/solid-query', 'msw', 'msw-storybook-addon']
   },
   test: {
     globals: true,
