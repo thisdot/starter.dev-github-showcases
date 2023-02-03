@@ -2,7 +2,14 @@ import FetchApi from './api';
 import { useAuth } from '../auth';
 import { ISSUES_QUERY } from './queries/issue-info';
 import { GITHUB_GRAPHQL } from '../utils/constants';
-import { LabelProps, MilestoneProps, Variables, Response, IssueProps, Issue } from '~/types/issues-type';
+import {
+  LabelProps,
+  MilestoneProps,
+  Variables,
+  Response,
+  IssueProps,
+  Issue,
+} from '~/types/issues-type';
 
 function parseIssues(data: IssueProps) {
   if (!data) {
@@ -24,7 +31,7 @@ function parseIssues(data: IssueProps) {
 
     const labelNodes: LabelProps[] = issue.labels?.nodes || [];
     const labels = labelNodes.reduce(
-      (labels:LabelProps[], label) =>
+      (labels: LabelProps[], label) =>
         label
           ? [
               ...labels,
