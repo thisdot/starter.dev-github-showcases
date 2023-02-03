@@ -1,4 +1,4 @@
-import { createStore } from 'solid-js/store';
+import { SetStoreFunction, createStore } from 'solid-js/store';
 import { isServer } from 'solid-js/web';
 
 export type StoreProps = {
@@ -15,4 +15,4 @@ const [authStore, setAuth] = createStore<StoreProps>({
   },
 });
 
-export default [authStore, setAuth];
+export default [authStore as StoreProps, setAuth as SetStoreFunction<StoreProps>];

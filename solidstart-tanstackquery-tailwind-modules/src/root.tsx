@@ -18,9 +18,10 @@ import './root.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
 import { useAuth } from './auth';
 import protectedPaths from './utils/protected-paths';
+import { StoreProps } from './auth/AuthStore';
 
 export default function Root() {
-  const { authStore }: any = useAuth();
+  const { authStore }: { authStore: StoreProps } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const queryClient = new QueryClient({

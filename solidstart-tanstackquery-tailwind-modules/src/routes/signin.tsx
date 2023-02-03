@@ -2,11 +2,12 @@ import { Show, createEffect } from 'solid-js';
 import { isServer } from 'solid-js/web';
 import { useNavigate } from 'solid-start';
 import { useAuth } from '~/auth';
+import { StoreProps } from '~/auth/AuthStore';
 import { REDIRECT_URL, SIGN_IN_BASE_URL } from '~/utils/constants';
 
 export default function SignIn() {
   const signInHref = `${SIGN_IN_BASE_URL}?redirect_url=${REDIRECT_URL}`;
-  const { authStore }: any = useAuth();
+  const { authStore }: { authStore: StoreProps } = useAuth();
   const navigate = useNavigate();
   createEffect(() => {
     if (authStore.isAuthenticated) {

@@ -6,11 +6,12 @@ import {
 import protectedPaths from './utils/protected-paths';
 import { redirect } from 'solid-start';
 import { useAuth } from './auth';
+import { StoreProps } from './auth/AuthStore';
 
 export default createHandler(
-  ({ forward }: any) => {
+  ({ forward }) => {
     return async (event) => {
-      const { authStore }: any = useAuth();
+      const { authStore }: { authStore: StoreProps } = useAuth();
       if (
         protectedPaths.includes(new URL(event.request.url).pathname) &&
         !authStore.isAuthenticated
