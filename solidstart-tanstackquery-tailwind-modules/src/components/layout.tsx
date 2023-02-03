@@ -4,7 +4,7 @@ import { useAuth } from '~/auth';
 import { StoreProps } from '~/auth/AuthStore';
 
 interface LayoutProps {
-  children: JSXElement
+  children: JSXElement;
 }
 
 export const Layout = (props: LayoutProps) => {
@@ -15,12 +15,9 @@ export const Layout = (props: LayoutProps) => {
       <Show when={authStore.isAuthenticated}>
         <Header />
       </Show>
-      <main class="min-h-screen bg-gray-100">
-        {props.children}
-      </main>
+      <main class="min-h-screen bg-gray-100">{props.children}</main>
     </>
-  )
-}
+  );
+};
 
-export default Layout
-
+export default Layout;
