@@ -25,3 +25,12 @@ Thumbs.db
 
 yarn.lock
 package-lock.json
+
+# env file
+.env.development
+.env.production
+.env.local
+.env
+
+# .vscode
+.vscode/*

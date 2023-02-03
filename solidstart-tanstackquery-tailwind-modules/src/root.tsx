@@ -1,5 +1,5 @@
 // @refresh reload
-import { Suspense } from 'solid-js';
+import { Suspense, createEffect } from 'solid-js';
 import {
   Body,
   ErrorBoundary,
@@ -10,12 +10,20 @@ import {
   Routes,
   Scripts,
   Title,
+  useLocation,
+  useNavigate,
 } from 'solid-start';
 import './root.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
+import { useAuth } from './auth';
+import protectedPaths from './utils/protected-paths';
+import { StoreProps } from './auth/AuthStore';
 
 export default function Root() {
+  const { authStore }: { authStore: StoreProps } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -24,6 +32,15 @@ export default function Root() {
       },
     },
   });
+  createEffect(() => {
+    if (
+      protectedPaths.includes(location.pathname) &&
+      !authStore.isAuthenticated
+    ) {
+      navigate('/signin');
+    }
+  });
+
   return (
     <Html lang="en">
       <Head>
