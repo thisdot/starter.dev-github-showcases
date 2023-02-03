@@ -24,14 +24,14 @@ const getGists = async () => {
       (_acc, file) =>
         file
           ? [
-              ..._acc,
-              {
-                id: gist.id,
-                description: gist.description,
-                name: file.name || gist.name,
-                url: gist.url,
-              },
-            ]
+            ..._acc,
+            {
+              id: gist.id,
+              description: gist.description,
+              name: file.name || gist.name,
+              url: gist.url,
+            },
+          ]
           : acc,
       []
     );
