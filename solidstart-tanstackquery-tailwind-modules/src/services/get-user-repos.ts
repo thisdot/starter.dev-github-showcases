@@ -4,7 +4,7 @@ import { GITHUB_GRAPHQL } from '../utils/constants';
 import { USER_REPOS_QUERY } from './queries/user-repos';
 import { UserRepo, UserRepoInfo } from '~/types/user-repo-type';
 
-type Variables = Record<string, string|number|null> | null;
+type Variables = Record<string, string | number | null> | null;
 type Response = {
   data: UserRepoInfo;
 };
@@ -19,10 +19,9 @@ const getUserRepos = async (variables: Variables) => {
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data) as Response;
+  const resp = (await FetchApi(data)) as Response;
   const nodes = resp.data?.owner?.repositories?.nodes;
   const pageInfo = resp.data?.owner?.repositories?.pageInfo;
-
 
   if (!nodes) {
     return undefined;

@@ -14,7 +14,7 @@ export interface UserRepo {
   primaryLanguage: {
     name: string;
     color: string;
-  }
+  };
 }
 
 export interface PageInfo {
@@ -27,7 +27,7 @@ export interface UserRepoInfo {
   owner: {
     repositories: {
       nodes: UserRepo[];
-      pageInfo: PageInfo
+      pageInfo: PageInfo;
     };
   };
 }
