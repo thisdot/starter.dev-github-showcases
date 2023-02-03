@@ -4,7 +4,6 @@ import { GITHUB_GRAPHQL } from '~/utils/constants';
 import { USER_GISTS_QUERY } from './queries/gists';
 import FetchApi, { ApiProps } from './api';
 
-
 const getGists = async () => {
   const { authStore }: { authStore: StoreProps } = useAuth();
   const data: ApiProps<undefined> = {
@@ -17,7 +16,7 @@ const getGists = async () => {
 
   const resp = (await FetchApi(data)) as Response;
 
-  return resp
+  return resp;
 };
 
 export default getGists;
