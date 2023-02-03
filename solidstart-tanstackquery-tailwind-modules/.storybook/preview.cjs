@@ -3,13 +3,10 @@
 import { render } from "solid-js/web";
 import '../src/root.css';
 
-import {
-  initialize,
-  mswDecorator
-} from 'msw-storybook-addon';
+import { initializeWorker, mswDecorator } from "msw-storybook-addon/dist/mswDecorator";
 
 // Initialize MSW
-initialize();
+initializeWorker();
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
