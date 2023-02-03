@@ -1,15 +1,9 @@
 /* @refresh reload */
-import { initializeWorker } from "msw-storybook-addon/dist/mswDecorator";
+import { initializeWorker, mswDecorator } from "msw-storybook-addon/dist/mswDecorator";
 import { render } from "solid-js/web";
 import '../src/root.css';
 
-import {
-  initialize,
-  mswDecorator
-} from 'msw-storybook-addon';
-
 // Initialize MSW
-// initialize();
 initializeWorker();
 
 export const parameters = {
