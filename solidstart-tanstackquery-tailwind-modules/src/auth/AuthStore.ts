@@ -3,7 +3,7 @@ import { isServer } from 'solid-js/web';
 
 export type StoreProps = {
   token: string | null;
-  user: any;
+  user: Record<string, string> | null;
   isAuthenticated: boolean;
 };
 
@@ -15,4 +15,7 @@ const [authStore, setAuth] = createStore<StoreProps>({
   },
 });
 
-export default [authStore as StoreProps, setAuth as SetStoreFunction<StoreProps>];
+export default [
+  authStore as StoreProps,
+  setAuth as SetStoreFunction<StoreProps>,
+];
