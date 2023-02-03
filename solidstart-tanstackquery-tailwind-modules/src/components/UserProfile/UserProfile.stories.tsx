@@ -5,7 +5,7 @@ import { userProfileProps } from './data.js';
 export default {
   title: 'Components/User Profile Card',
   component: UserProfile,
-} 
+};
 
 const Template = (args: UserProfileProps) => (
   <Router>
