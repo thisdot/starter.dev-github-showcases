@@ -1,6 +1,6 @@
-import { RepoCardProps } from "./RepoCard";
+import { RepoCardProps } from './RepoCard';
 
-export const repoCardMockedData: RepoCardProps =  {
+export const repoCardMockedData: RepoCardProps = {
   name: 'cowrywise-unsplashed',
   owner: {
     login: 'hdjerry',

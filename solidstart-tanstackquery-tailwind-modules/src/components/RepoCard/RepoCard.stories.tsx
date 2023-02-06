@@ -2,7 +2,6 @@ import RepoCard from './RepoCard';
 import { repoCardMockedData } from './data';
 import { Router } from '@solidjs/router';
 
-
 export default {
   title: 'Components/Repo Card',
   component: RepoCard,

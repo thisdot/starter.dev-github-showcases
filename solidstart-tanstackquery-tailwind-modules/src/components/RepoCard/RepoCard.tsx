@@ -6,20 +6,20 @@ import PrivacyBadge from '../PrivacyBadge/PrivacyBadge';
 import { StarIcon } from '../Icons';
 
 export interface RepoCardProps {
-  name: string,
-  description: string,
+  name: string;
+  description: string;
   primaryLanguage: {
-    name: string,
-    color: string
-  },
-  stargazerCount: number,
+    name: string;
+    color: string;
+  };
+  stargazerCount: number;
   owner: {
-    login: string
-  },
-  forkCount: number,
-  isProfilePage: boolean,
-  updatedAt: string,
-  visibility: string,
+    login: string;
+  };
+  forkCount: number;
+  isProfilePage: boolean;
+  updatedAt: string;
+  visibility: string;
 }
 
 const RepoCard = (props: RepoCardProps) => {
@@ -39,7 +39,8 @@ const RepoCard = (props: RepoCardProps) => {
     local.owner?.login ? `/${local.owner.login}/${local.name || ''}` : '';
 
   const repoNameWithOwner = () =>
-    `${!local.isProfilePage ? `${local.owner?.login + '/' || ''}` : ''}${local.name || ''
+    `${!local.isProfilePage ? `${local.owner?.login + '/' || ''}` : ''}${
+      local.name || ''
     }`;
 
   return (

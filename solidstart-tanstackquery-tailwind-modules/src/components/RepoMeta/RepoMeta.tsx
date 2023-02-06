@@ -4,15 +4,21 @@ import styles from './RepoMeta.module.css';
 import { splitProps } from 'solid-js';
 
 interface RepoMetaProps {
-  language: string,
-  languageColor: string,
-  stargazerCount: number,
-  forkCount: number,
-  updatedAt: string
+  language: string;
+  languageColor: string;
+  stargazerCount: number;
+  forkCount: number;
+  updatedAt: string;
 }
 
 const RepoMeta = (props: RepoMetaProps) => {
-  const [local] = splitProps(props, ['language', 'languageColor', 'stargazerCount', 'forkCount', 'updatedAt']);
+  const [local] = splitProps(props, [
+    'language',
+    'languageColor',
+    'stargazerCount',
+    'forkCount',
+    'updatedAt',
+  ]);
 
   return (
     <div class={styles.metadata}>
