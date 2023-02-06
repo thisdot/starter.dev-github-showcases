@@ -9,7 +9,9 @@
     "jsx": "preserve",
     "strict": true,
     "types": [
-      "solid-start/env"
+      "solid-start/env",
+      "jest",
+      "@testing-library/jest-dom"
     ],
     "baseUrl": "./",
     "paths": {
