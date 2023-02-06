@@ -1,7 +1,7 @@
 export type ApiProps = {
   url: string;
   query: string | null;
-  variables: Record<string, string | number | null> | null;
+  variables?: Record<string, string | number | null> | null;
   headersOptions: Record<string, string>;
 };
 const FetchApi = async ({
