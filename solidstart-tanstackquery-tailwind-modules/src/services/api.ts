@@ -1,7 +1,7 @@
 export type ApiProps<VariablesType> = {
   url: string;
   query: string | null;
-  variables: VariablesType;
+  variables?: VariablesType;
   headersOptions: Record<string, string>;
 };
 
