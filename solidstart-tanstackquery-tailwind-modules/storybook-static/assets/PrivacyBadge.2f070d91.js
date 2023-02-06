@@ -1,2 +1,0 @@
-var i=Object.defineProperty;var r=(t,s)=>i(t,"name",{value:s,configurable:!0});import{s as a,i as o,t as l}from"./web.9316b53f.js";const n=l('<span class="py-0.5 px-2 text-xs rounded-xl text-gray-600 border border-gray-300 font-medium capitalize"></span>'),d=r(t=>{const[s]=a(t,["visibility"]);return(()=>{const e=n.cloneNode(!0);return o(e,()=>s.visibility),e})()},"PrivacyBadge");export{d as P};
-//# sourceMappingURL=PrivacyBadge.2f070d91.js.map
