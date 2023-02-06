@@ -1,14 +1,14 @@
 export interface RepoTree {
   branches: {
     nodes: {
-      name: string
-    }[]
-  },
+      name: string;
+    }[];
+  };
   tree: {
     entries: {
-      name: string, 
-      type: string, 
-      path: string
-    }
-  }
+      name: string;
+      type: string;
+      path: string;
+    };
+  };
 }

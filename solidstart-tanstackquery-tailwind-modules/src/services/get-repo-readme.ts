@@ -6,10 +6,10 @@ import { ApiProps } from './api';
 import { RepoReadme } from '~/types/repo-readme-types';
 
 type RepoReadmeVariables = {
-  owner: string, 
-  name: string,
-  expression: string
-}
+  owner: string;
+  name: string;
+  expression: string;
+};
 
 type Response = {
   data: {
@@ -39,7 +39,7 @@ const getReadme = async (variables: RepoReadmeVariables) => {
     },
   };
 
-  const resp = await FetchApi(data) as Response;
+  const resp = (await FetchApi(data)) as Response;
 
   return resp.data.repository?.readme?.text;
 };

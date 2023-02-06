@@ -5,12 +5,12 @@ import { USER_REPOS_QUERY } from './queries/user-repos';
 import { UserRepo, UserRepoInfo } from '~/types/user-repo-type';
 
 type UserReposVariables = {
-  username: string, 
-  afterCursor: string, 
-  beforeCursor: string, 
-  orderBy: {field: string, direction: string}
-  first: number,
-  last: number
+  username: string;
+  afterCursor: string;
+  beforeCursor: string;
+  orderBy: { field: string; direction: string };
+  first: number;
+  last: number;
 };
 type Response = {
   data: UserRepoInfo;

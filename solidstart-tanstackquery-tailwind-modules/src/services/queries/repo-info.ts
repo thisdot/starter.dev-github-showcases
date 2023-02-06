@@ -35,4 +35,3 @@ export const REPO_INFO_QUERY = `
     }
   }
 `;
-

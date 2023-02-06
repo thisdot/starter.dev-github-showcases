@@ -5,10 +5,10 @@ import { REPO_TREE_QUERY } from './queries/repo-tree';
 import { RepoTree } from '~/types/repo-tree-type';
 
 type RepoTreeVariables = {
-  owner: string, 
-  name: string, 
-  expression: string
-}
+  owner: string;
+  name: string;
+  expression: string;
+};
 
 type Response = {
   data: {
@@ -38,7 +38,7 @@ const getRepoTree = async (variables: RepoTreeVariables) => {
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data) as Response;
+  const resp = (await FetchApi(data)) as Response;
 
   return {
     branches: resp.data?.repository?.branches?.nodes,

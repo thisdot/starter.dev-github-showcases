@@ -6,17 +6,16 @@ import { ApiProps } from './api';
 import { RepoFile } from '~/types/repo-file-type';
 
 type RepoFileVariables = {
-  owner: string, 
-  name: string, 
-  expression: string
-}
+  owner: string;
+  name: string;
+  expression: string;
+};
 
 type Response = {
   data: {
     repository: RepoFile;
   };
 };
-
 
 /**
  *
@@ -40,7 +39,7 @@ const getRepoFile = async (variables: RepoFileVariables) => {
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data) as Response;
+  const resp = (await FetchApi(data)) as Response;
 
   return resp?.data?.repository?.blob;
 };

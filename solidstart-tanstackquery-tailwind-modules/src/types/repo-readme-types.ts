@@ -1,5 +1,5 @@
 export interface RepoReadme {
   readme: {
-    text: string
-  }
+    text: string;
+  };
 }

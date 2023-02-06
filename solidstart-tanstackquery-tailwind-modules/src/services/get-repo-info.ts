@@ -5,16 +5,15 @@ import { GITHUB_GRAPHQL } from '../utils/constants';
 import { RepoInfo, Topics } from '~/types/repo-info-type';
 
 type RepoInfoVariables = {
-  owner: string,
-  name: string
-}
+  owner: string;
+  name: string;
+};
 
 type Response = {
   data: {
     repository: RepoInfo;
   };
 };
-
 
 export function parseTopics(topics: Topics[]) {
   if (!topics) {
@@ -50,7 +49,7 @@ const getRepoInfo = async (variables: RepoInfoVariables) => {
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data) as Response;
+  const resp = (await FetchApi(data)) as Response;
   const repository = resp.data?.repository;
   return {
     branch: repository?.defaultBranchRef?.name ?? 'HEAD',

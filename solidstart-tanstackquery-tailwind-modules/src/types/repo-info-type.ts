@@ -1,32 +1,32 @@
 export type Topics = {
   topic: {
-    name: string
-  }
-}
+    name: string;
+  };
+};
 
 export interface RepoInfo {
   defaultBranchRef: {
-    name: string
-  },
-  isPrivate: boolean,
-  stargazerCount: number,
-  forkCount: number, 
-  description: string,
-  homepageUrl: string, 
+    name: string;
+  };
+  isPrivate: boolean;
+  stargazerCount: number;
+  forkCount: number;
+  description: string;
+  homepageUrl: string;
   watchers: {
-    totalCount: number,
-  },
+    totalCount: number;
+  };
   issues: {
-    totalCount: number, 
-  }
+    totalCount: number;
+  };
   pullRequests: {
-    totalCount: number, 
-  }
+    totalCount: number;
+  };
   topics: {
-    nodes: Topics[]
-  },
+    nodes: Topics[];
+  };
   owner: {
-    orgName: string, 
-    orgAvatarUrl: string
-  }
+    orgName: string;
+    orgAvatarUrl: string;
+  };
 }

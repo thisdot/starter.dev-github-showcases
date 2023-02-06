@@ -5,7 +5,7 @@ import { USER_PROFILE_QUERY } from './queries/user-profile';
 import { UserProfile } from '~/types/user-profile-type';
 
 type UserProfileVariables = {
-  username: string
+  username: string;
 };
 
 type Response = {
