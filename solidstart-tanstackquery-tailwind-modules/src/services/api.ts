@@ -1,15 +1,16 @@
-export type ApiProps = {
+export type ApiProps<VariablesType> = {
   url: string;
   query: string | null;
-  variables: Record<string, string | number | null> | null;
+  variables: VariablesType;
   headersOptions: Record<string, string>;
 };
-const FetchApi = async ({
+
+const FetchApi = async <VariablesType>({
   url,
   query,
   variables,
   headersOptions,
-}: ApiProps) => {
+}: ApiProps<VariablesType>) => {
   return (
     (await new Promise((resolve, reject) => {
       fetch(url, {
