@@ -5,7 +5,10 @@ import { GITHUB_GRAPHQL } from '../utils/constants';
 import { PullRequest, RepoPullRequestsQuery } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
 
-type Variables = Record<string, string | number | null> | null;
+type PullRequestVariables = {
+  owner: string;
+  name: string;
+};
 type Response = {
   data: RepoPullRequestsQuery;
 };
@@ -54,9 +57,9 @@ function parsePullRequests(connection?: any) {
   return { pullRequests, totalCount, pageInfo };
 }
 
-const getRepoPullRequests = async (variables: Variables) => {
+const getRepoPullRequests = async (variables: PullRequestVariables) => {
   const { authStore } = useAuth();
-  const data: ApiProps = {
+  const data: ApiProps<PullRequestVariables> = {
     url: `${GITHUB_GRAPHQL}`,
     query: PULL_REQUEST_QUERY,
     variables,
