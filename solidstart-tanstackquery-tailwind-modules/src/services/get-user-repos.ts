@@ -4,14 +4,21 @@ import { GITHUB_GRAPHQL } from '../utils/constants';
 import { USER_REPOS_QUERY } from './queries/user-repos';
 import { UserRepo, UserRepoInfo } from '~/types/user-repo-type';
 
-type Variables = Record<string, string | number | null> | null;
+type UserReposVariables = {
+  username: string, 
+  afterCursor: string, 
+  beforeCursor: string, 
+  orderBy: {field: string, direction: string}
+  first: number,
+  last: number
+};
 type Response = {
   data: UserRepoInfo;
 };
 
-const getUserRepos = async (variables: Variables) => {
+const getUserRepos = async (variables: UserReposVariables) => {
   const { authStore } = useAuth();
-  const data: ApiProps = {
+  const data: ApiProps<UserReposVariables> = {
     url: `${GITHUB_GRAPHQL}`,
     query: USER_REPOS_QUERY,
     variables,
