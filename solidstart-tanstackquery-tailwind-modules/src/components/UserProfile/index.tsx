@@ -9,6 +9,7 @@ import { Icon } from 'solid-heroicons';
 import { TwitterIcon } from '../Icons';
 import OrgList from './OrgList';
 import styles from './UserProfile.module.css';
+import { Show } from 'solid-js';
 
 export interface UserProfileProps {
   avatarUrl: string;
@@ -64,19 +65,19 @@ const UserProfile = (userProfileProps: UserProfileProps) => {
         </span>
       </div>
       <div class={styles.fields}>
-        {userProfileProps.company && (
+        <Show when={userProfileProps.company}>
           <div>
             <Icon path={buildingOffice} class={styles.icon} />
             {userProfileProps.company}
           </div>
-        )}
-        {userProfileProps.location && (
+        </Show>
+        <Show when={userProfileProps.location}>
           <div>
             <Icon path={mapPin} class={styles.icon} />
             {userProfileProps.location}
           </div>
-        )}
-        {userProfileProps.websiteUrl && (
+        </Show>
+        <Show when={userProfileProps.websiteUrl}>
           <div>
             <Icon path={link} class={styles.icon} />
             <a
@@ -88,8 +89,8 @@ const UserProfile = (userProfileProps: UserProfileProps) => {
               {userProfileProps.websiteUrl}
             </a>
           </div>
-        )}
-        {userProfileProps.twitterUsername && (
+        </Show>
+        <Show when={userProfileProps.twitterUsername}>
           <div>
             <TwitterIcon class={styles.icon} />
             <a
@@ -101,11 +102,11 @@ const UserProfile = (userProfileProps: UserProfileProps) => {
               @{userProfileProps.twitterUsername}
             </a>
           </div>
-        )}
+        </Show>
       </div>
-      {userProfileProps?.organizations?.nodes.length > 0 && (
+      <Show when={userProfileProps.organizations.nodes.length > 0}>
         <OrgList organizations={userProfileProps.organizations.nodes} />
-      )}
+      </Show>
     </div>
   );
 };

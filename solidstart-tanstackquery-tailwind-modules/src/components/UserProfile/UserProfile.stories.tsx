@@ -1,6 +1,6 @@
 import { Router } from '@solidjs/router';
 import UserProfile, { UserProfileProps } from '.';
-import { userProfileProps } from './data.js';
+import { userProfileMockedData } from './data.js';
 
 export default {
   title: 'Components/User Profile Card',
@@ -16,5 +16,5 @@ const Template = (args: UserProfileProps) => (
 export const Default: any = Template.bind({});
 
 Default.args = {
-  ...userProfileProps,
+  ...userProfileMockedData,
 };

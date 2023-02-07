@@ -1,4 +1,4 @@
-export const userProfileProps = {
+export const userProfileMockedData = {
   avatarUrl: 'https://avatars.githubusercontent.com/u/2487968?v=4',
   bio: `Senior Software Engineer @thisdot`,
   company: '@thisdot',
