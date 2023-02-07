@@ -21,7 +21,6 @@ export default function OrgProfile() {
     avatarUrl: '',
   });
 
-
   // const orgRepos = createQuery(() => ['org-repos'], getOrgRepos({organization: params?.org, first: 10,}));
 
   // createEffect(() => {
