@@ -5,7 +5,7 @@ import { GistsData } from './index';
 import { gists } from './data';
 
 describe('User gist card', () => {
-  let wrapper;
+  let wrapper: any;
 
   beforeEach(async () => {
     wrapper = await render(() => (
