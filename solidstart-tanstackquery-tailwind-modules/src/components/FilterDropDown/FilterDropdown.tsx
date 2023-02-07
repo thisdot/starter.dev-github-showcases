@@ -14,12 +14,13 @@ const FilterDropdown = (props) => {
   ]);
   const [showOptions, setShowOptions] = createSignal(false);
   const toggleOption = () => setShowOptions(!showOptions());
+  const _clickOutside = clickOutside;
 
   return (
     <div
       data-testid="filter-dropdown"
       class={styles.dropDownContainer}
-      use:clickOutside={() => setShowOptions(false)}
+      use:_clickOutside={() => setShowOptions(false)}
     >
       <div>
         <button
