@@ -4,13 +4,12 @@ import { clickOutside } from '../../utils/onclickOutside';
 import styles from '../RepoFilter/RepoFilter.module.css';
 
 const FilterDropdown = (props) => {
-  const [local] = splitProps(props, [
+  const [local, others] = splitProps(props, [
     'name',
     'title',
     'items',
     'selected',
     'selectOption',
-    'class',
   ]);
   const [showOptions, setShowOptions] = createSignal(false);
   const toggleOption = () => setShowOptions(!showOptions());
@@ -27,10 +26,11 @@ const FilterDropdown = (props) => {
           onClick={toggleOption}
           type="button"
           data-testid="filter-dropdown-button"
-          class={props.class || styles.dropDownButton}
+          class={styles.dropDownButton}
           id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"
+          {...others}
         >
           {local.name}
           <CaretIcon />

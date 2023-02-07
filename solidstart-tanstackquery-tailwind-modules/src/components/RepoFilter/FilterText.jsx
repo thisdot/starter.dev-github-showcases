@@ -22,10 +22,7 @@ const FilterText = (props) => {
     'setLanguage',
   ]);
 
-  const clearFilters = () => {
-    local.setFilterType(defaultFilterType);
-    local.setLanguage(defaultLanguage);
-  };
+  const clearFilters = () => {};
 
   return (
     <div class={styles.filterTextContainer}>
