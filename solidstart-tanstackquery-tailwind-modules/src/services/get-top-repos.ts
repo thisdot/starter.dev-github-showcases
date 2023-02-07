@@ -1,59 +1,49 @@
 import { useAuth } from '../auth';
 import FetchApi, { ApiProps } from './api';
 import { GITHUB_GRAPHQL } from '../utils/constants';
-import { UserRepo, UserRepoInfo } from '~/types/user-repo-type';
 import { TOP_REPOS_QUERY } from './queries/top-repos-query';
+import { TopRepositories, TopRepository } from '~/types/top-repos-type';
 
-type Variables = Record<string, string | number | null> | null;
 type Response = {
-  data: UserRepoInfo;
-};
+  data: TopRepositories
+}
 
-const getTopRepos = async (variables: Variables) => {
+const getTopRepos = async () => {
   const { authStore } = useAuth();
-  const data: ApiProps = {
+  const data: ApiProps<undefined> = {
     url: `${GITHUB_GRAPHQL}`,
     query: TOP_REPOS_QUERY,
-    variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
     },
   };
   const resp = (await FetchApi(data)) as Response;
-  const nodes = resp.data?.owner?.repositories?.nodes;
-  const pageInfo = resp.data?.owner?.repositories?.pageInfo;
 
-  if (!nodes) {
-    return undefined;
-  }
-  const repos = nodes?.reduce((acc: UserRepo[], repo: UserRepo) => {
-    return repo
-      ? [
-          ...acc,
-          {
-            id: repo.id,
-            name: repo.name,
-            description: repo.description,
-            stargazerCount: repo.stargazerCount,
-            forkCount: repo.forkCount,
-            isFork: repo.isFork,
-            isArchived: repo.isArchived,
-            primaryLanguage: {
-              name: repo.primaryLanguage?.name,
-              color: repo.primaryLanguage?.color,
-            },
-            visibility: repo.visibility,
-            updatedAt: repo.updatedAt,
-            owner: repo.owner,
-          },
-        ]
-      : acc;
-  }, []);
+  const repos = resp.data?.viewer.topRepositories?.nodes.reduce((acc, repo) => {
+    if (!repo) {
+      return acc;
+    }
+    return [
+      ...acc,
+      {
+        id: repo.id,
+        name: repo.name,
+        owner: repo.owner,
+        description: repo.description,
+        stargazerCount: repo.stargazerCount,
+        forkCount: repo.forkCount,
+        primaryLanguage: {
+          name: repo.primaryLanguage?.name,
+          color: repo.primaryLanguage?.color,
+        },
+        visibility: repo.visibility,
+        updatedAt: repo.updatedAt,
+        isPrivate: repo.isPrivate
+      },
+    ];
+  }, [] as TopRepository[]);
 
-  return {
-    pageInfo,
-    repos,
-  };
+  return { repos, login: resp.data?.viewer.login };
 };
 
 export default getTopRepos;
