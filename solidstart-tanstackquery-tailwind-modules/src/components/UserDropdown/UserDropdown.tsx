@@ -1,10 +1,8 @@
 import { A } from '@solidjs/router';
-import { createSignal } from 'solid-js';
+import { createSignal, Show } from 'solid-js';
 import { ChevronDownIcon } from '../Icons';
 import { clickOutside } from '../../utils/onclickOutside';
 import styles from './UserDropdown.module.css';
-import { useAuth } from '../../auth';
-import { SIGN_OUT_URL } from '../../utils/constants';
 
 interface IProps {
   image: string;
@@ -15,20 +13,6 @@ const UserDropdown = (props: IProps) => {
   const [expanded, setExpanded] = createSignal(false);
 
   const _clickOutside = clickOutside;
-
-  const signOut = () => {
-    fetch(SIGN_OUT_URL, {
-      method: 'POST',
-      credentials: 'include',
-    }).then(() => {
-      useAuth().setAuth({
-        token: null,
-        user: null,
-        isAuthenticated: false,
-      });
-      sessionStorage.removeItem('token');
-    });
-  };
 
   return (
     // @ts-ignore
@@ -57,7 +41,7 @@ const UserDropdown = (props: IProps) => {
           }
         >
           <ul class="py-1">
-            {props.username && (
+            <Show when={props.username}>
               <li data-menu-item>
                 <A
                   href={`/${props.username}`}
@@ -67,9 +51,9 @@ const UserDropdown = (props: IProps) => {
                   Profile
                 </A>
               </li>
-            )}
+            </Show>
             <li data-menu-item>
-              <button class={styles.menuBtn} onClick={() => signOut()}>
+              <button class={styles.menuBtn}>
                 Sign Out
               </button>
             </li>
