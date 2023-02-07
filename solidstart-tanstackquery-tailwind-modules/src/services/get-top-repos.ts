@@ -5,8 +5,8 @@ import { TOP_REPOS_QUERY } from './queries/top-repos-query';
 import { TopRepositories, TopRepository } from '~/types/top-repos-type';
 
 type Response = {
-  data: TopRepositories
-}
+  data: TopRepositories;
+};
 
 const getTopRepos = async () => {
   const { authStore } = useAuth();
@@ -38,7 +38,7 @@ const getTopRepos = async () => {
         },
         visibility: repo.visibility,
         updatedAt: repo.updatedAt,
-        isPrivate: repo.isPrivate
+        isPrivate: repo.isPrivate,
       },
     ];
   }, [] as TopRepository[]);

@@ -9,7 +9,7 @@ describe('Top repos empty state', () => {
   beforeEach(async () => {
     wrapper = await render(() => (
       <Router>
-        <TopRepos topRepos={[]} login='' />
+        <TopRepos topRepos={[]} login="" />
       </Router>
     ));
   });
@@ -34,7 +34,10 @@ describe('Top repos after loading', () => {
   beforeEach(async () => {
     wrapper = await render(() => (
       <Router>
-        <TopRepos topRepos={[{ ...repoCardMockedData, id: '23', isPrivate: false }]} login={repoCardMockedData.owner.login} />
+        <TopRepos
+          topRepos={[{ ...repoCardMockedData, id: '23', isPrivate: false }]}
+          login={repoCardMockedData.owner.login}
+        />
       </Router>
     ));
   });
@@ -55,8 +58,8 @@ describe('Top repos after loading', () => {
 
   it('should have a link to view all repositories', async () => {
     const ele = await wrapper.getByText('View all repositories');
-    // We must add this ts-ignore in orther to avoid to change types in global test configuration. 
-    // Vitest doesn't have the right type for this assertion 
+    // We must add this ts-ignore in orther to avoid to change types in global test configuration.
+    // Vitest doesn't have the right type for this assertion
     //@ts-ignore
     expect(ele.closest('a')).toHaveAttribute(
       'href',

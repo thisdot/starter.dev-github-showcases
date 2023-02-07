@@ -1,10 +1,10 @@
-import { Switch, Match } from "solid-js";
-import { createQuery } from "@tanstack/solid-query";
-import getGists from "~/services/get-gists";
-import { GistsData } from "~/components/GistPanel";
-import TopRepos from "~/components/TopRepos/TopRepos";
-import getTopRepos from "~/services/get-top-repos";
-import { LoadingPulseDot } from "~/components/LoadingPulseDot/LoadingPulseDot";
+import { Switch, Match } from 'solid-js';
+import { createQuery } from '@tanstack/solid-query';
+import getGists from '~/services/get-gists';
+import { GistsData } from '~/components/GistPanel';
+import TopRepos from '~/components/TopRepos/TopRepos';
+import getTopRepos from '~/services/get-top-repos';
+import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
 
 const Home = () => {
   const gists = createQuery(() => ['gists'], getGists);
@@ -36,13 +36,16 @@ const Home = () => {
             </Match>
             <Match when={topRepos.isSuccess && !topRepos.isLoading}>
               <h2 class="text-lg font-medium mb-4">Top Repositories</h2>
-              <TopRepos topRepos={topRepos.data?.repos || []} login={topRepos.data?.login || ""} />
+              <TopRepos
+                topRepos={topRepos.data?.repos || []}
+                login={topRepos.data?.login || ''}
+              />
             </Match>
           </Switch>
         </div>
       </main>
     </div>
   );
-}
+};
 
-export default Home
+export default Home;
