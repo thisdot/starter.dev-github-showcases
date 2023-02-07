@@ -21,8 +21,8 @@ describe('Repo Meta data', () => {
 
   it('should update search state when text is enter', async () => {
     const input = await wrapper.findByTestId('search-input');
-    fireEvent.keyUp(input, { target: { value: '23' } });
-    expect(input.value).toBe(search());
+    fireEvent.input(input, { target: { value: '23' } });
+    await expect(input.value).toBe(search());
   });
 
   it('should open and close dropdown', async () => {
