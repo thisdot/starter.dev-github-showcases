@@ -1,10 +1,9 @@
-import { setSearch } from './RepoFilter.store';
 import styles from './RepoFilter.module.css';
 import { JSX } from 'solid-js';
 
 const SearchInput = () => {
   const handleChange: JSX.EventHandler<HTMLInputElement, InputEvent> = (e) => {
-    setSearch(e.currentTarget.value);
+    // Serch functionality
   };
   return (
     <input
