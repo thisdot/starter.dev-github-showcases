@@ -53,9 +53,7 @@ const UserDropdown = (props: IProps) => {
               </li>
             </Show>
             <li data-menu-item>
-              <button class={styles.menuBtn}>
-                Sign Out
-              </button>
+              <button class={styles.menuBtn}>Sign Out</button>
             </li>
           </ul>
         </nav>
