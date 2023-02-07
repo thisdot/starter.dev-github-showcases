@@ -4,9 +4,20 @@ import { GitHubLogo } from './github-logo';
 import styles from './Header.module.css';
 import { SIGN_IN_BASE_URL } from '../../utils/constants';
 import { UserDropdown } from '../UserDropdown';
+import { createQuery } from '@tanstack/solid-query';
+import { Match, Switch, createEffect } from 'solid-js';
+import getViewerProfile from '~/services/get-viewer-profile';
 
 const Header = () => {
-  const { authStore } = useAuth();
+  const { authStore, setAuth } = useAuth();
+
+  const query = createQuery(() => ['viewer'], getViewerProfile);
+
+  createEffect(() => {
+    if (query.isSuccess && !query.isLoading) {
+      setAuth({ ...authStore, user: query.data });
+    }
+  });
 
   return (
     <header class={styles.header}>
@@ -15,16 +26,27 @@ const Header = () => {
       </A>
 
       <div>
-        {authStore.user ? (
-          <UserDropdown
-            image={authStore.user.avatarUrl}
-            username={authStore.user.login}
-          />
-        ) : (
-          <A href={`${SIGN_IN_BASE_URL}?redirect_url=${window.location.href}`}>
-            <span class={styles.navLink}>Sign In</span>
-          </A>
-        )}
+        <Switch>
+          <Match when={query.isLoading}>
+            <span class={styles.navLink}>....</span>
+          </Match>
+          <Match when={query.isError}>
+            <span class={styles.navLink}>error</span>
+          </Match>
+          <Match when={query.isSuccess && authStore.user}>
+            <UserDropdown
+              image={authStore.user.avatarUrl}
+              username={authStore.user.login}
+            />
+          </Match>
+          <Match when={!authStore.token}>
+            <A
+              href={`${SIGN_IN_BASE_URL}?redirect_url=${window.location.href}`}
+            >
+              <span class={styles.navLink}>Sign In</span>
+            </A>
+          </Match>
+        </Switch>
       </div>
     </header>
   );

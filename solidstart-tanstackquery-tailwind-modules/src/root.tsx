@@ -28,8 +28,8 @@ export default function Root() {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        refetchOnMount: true,
-        staleTime: 1000,
+        refetchOnMount: false,
+        staleTime: Infinity,
       },
     },
   });

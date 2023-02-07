@@ -16,7 +16,7 @@ type Response = {
 const getViewerProfile = async () => {
   const { authStore } = useAuth();
 
-  const data: ApiProps = {
+  const data: ApiProps<undefined> = {
     url: `${GITHUB_GRAPHQL}`,
     query: LOGGEDIN_USER_PROFILE,
     headersOptions: {
