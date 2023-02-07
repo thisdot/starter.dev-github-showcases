@@ -28,18 +28,15 @@ const Header = () => {
       <div>
         <Switch>
           <Match when={query.isLoading}>
-            <UserDropdown
-              image={""}
-              username={""}
-            />
+            <UserDropdown image={''} username={''} />
           </Match>
           <Match when={query.isError}>
             <span class={styles.navLink}>error</span>
           </Match>
           <Match when={query.isSuccess && authStore.user}>
             <UserDropdown
-              image={authStore.user?.avatarUrl || ""}
-              username={authStore.user?.login || ""}
+              image={authStore.user?.avatarUrl || ''}
+              username={authStore.user?.login || ''}
             />
           </Match>
           <Match when={!authStore.token}>
