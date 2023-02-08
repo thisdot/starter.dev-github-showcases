@@ -7,9 +7,9 @@ export type UseAuthProps = {
   authStore: StoreProps;
   setAuth: SetStoreFunction<StoreProps>;
 };
-const [authStore, setAuth] = createAuthStore;
+const {authStore, setAuth} = createAuthStore;
 export const useAuth = () =>
   ({
     authStore,
     setAuth,
-  } as UseAuthProps);
+  });
