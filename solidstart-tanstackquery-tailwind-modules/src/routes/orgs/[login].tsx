@@ -7,9 +7,7 @@ import { RepoCard } from '~/components/RepoCard';
 import getOrgRepos from '~/services/get-org-repos';
 import { Repository } from '~/types/org-repos';
 
-const parseRepoData = (repos: {
-  edges: {node: Repository;}[];
-}) => {
+const parseRepoData = (repos: { edges: { node: Repository }[] }) => {
   return repos?.edges?.map((res) => res.node);
 };
 
@@ -25,7 +23,7 @@ export default function OrgProfile() {
   });
 
   const orgRepos = createQuery(
-    () => ['org-repos'], 
+    () => ['org-repos'],
     () => getOrgRepos({ organization: params?.login, first: 10 })
   );
 

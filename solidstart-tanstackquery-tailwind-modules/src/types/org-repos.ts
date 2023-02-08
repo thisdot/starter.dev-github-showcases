@@ -24,6 +24,6 @@ export interface OrgRepoInfo {
       edges: {
         node: Repository;
       }[];
-    }
+    };
   };
 }
