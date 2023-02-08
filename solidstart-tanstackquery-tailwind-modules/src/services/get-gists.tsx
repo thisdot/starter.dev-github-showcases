@@ -3,6 +3,13 @@ import { StoreProps } from '~/auth/AuthStore';
 import { GITHUB_GRAPHQL } from '~/utils/constants';
 import { USER_GISTS_QUERY } from './queries/gists';
 import FetchApi, { ApiProps } from './api';
+import { Gists } from '~/types/gists-type';
+
+interface Response {
+  data: {
+    gists: Gists[];
+  };
+}
 
 const getGists = async () => {
   const { authStore }: { authStore: StoreProps } = useAuth();
@@ -15,8 +22,7 @@ const getGists = async () => {
   };
 
   const resp = (await FetchApi(data)) as Response;
-
-  return resp;
+  return resp?.data.gists || null;
 };
 
 export default getGists;
