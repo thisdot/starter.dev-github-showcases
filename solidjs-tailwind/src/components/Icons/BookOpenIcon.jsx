@@ -15,6 +15,6 @@ const BookOpenIcon = (props) => {
       />
     </svg>
   );
-}
+};
 
 export default BookOpenIcon;

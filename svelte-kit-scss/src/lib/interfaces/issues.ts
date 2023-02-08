@@ -1,38 +1,33 @@
-export interface IssueLabel {
-  id: number;
-  nodeId: string;
-  url: string;
-  name: string;
-  color: string;
-}
-
-export interface IssueUser {
-  login: string;
-  avatarUrl: string;
-}
+import type { SimpleUser } from './common';
+import type { IssueLabel } from './issue-label';
 
 export enum IssueState {
   Open = 'open',
   Closed = 'closed',
 }
 
-export type IssueAssignee = IssueUser;
+export type IssuePullRequest = {
+  url: string;
+  htmlUrl: string;
+  mergedAt?: string | null;
+};
 
 export interface Issue {
-  id: number;
-  user: IssueUser;
-  title: string;
-  number: number;
+  assignees: SimpleUser[];
   closedAt?: string | null;
-  state: IssueState;
-  createdAt: string;
-  labels: IssueLabel[];
   commentsCount: number;
-  labelCount: number;
-  assignees: IssueAssignee[];
+  createdAt: string;
+  id: number;
+  labels: IssueLabel[];
+  number: number;
+  state: IssueState;
+  title: string;
+  user: SimpleUser | null;
+  htmlUrl: string;
+  pullRequest?: IssuePullRequest;
 }
 
 export interface IssueCollection {
   totalCount: number;
-  issues: Issue[];
+  items: Issue[];
 }

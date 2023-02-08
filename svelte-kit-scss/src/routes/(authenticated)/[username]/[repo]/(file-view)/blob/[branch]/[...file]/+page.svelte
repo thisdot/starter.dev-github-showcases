@@ -3,23 +3,30 @@
   import type { PageServerData } from './$types';
   import Prism from 'prismjs';
   import { browser } from '$app/environment';
+  import { currentPageId } from '$lib/stores/current-page-id';
+  import { PAGE_IDS } from '$lib/constants/page-ids';
+  import LayoutPageContentRow from '$lib/components/shared/layouts/LayoutPageContentRow.svelte';
+  import FileExplorerNav from '$lib/components/FileExplorer/FileExplorerNav/FileExplorerNav.svelte';
 
   export let data: PageServerData;
-  const { fileContents, prismLanguage, language } = data;
+  const {
+    fileContents,
+    prismLanguage,
+    language,
+    branches,
+    defaultBranch,
+    currentBranch,
+    breadcrumbs,
+  } = data;
   if (browser) {
     if (language && prismLanguage && !Prism.languages[language]) {
       Prism.languages[language] = prismLanguage;
     }
   }
+  currentPageId.set(PAGE_IDS.REPOSITORY.CODE);
 </script>
 
-<div class="file-view-page">
+<LayoutPageContentRow marginBottom>
+  <FileExplorerNav {branches} {defaultBranch} {currentBranch} {breadcrumbs} />
   <FileViewer {fileContents} />
-</div>
-
-<style lang="scss">
-  @use 'src/lib/styles/variables.scss';
-  .file-view-page {
-    padding: 2rem 1rem;
-  }
-</style>
+</LayoutPageContentRow>

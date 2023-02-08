@@ -1,36 +1,52 @@
-import { ENV } from '$lib/constants/env';
 import type { LayoutServerLoad } from './$types';
-import type { RepoApiResponse } from '$lib/interfaces';
-import { mapRepoResToRepoState } from '$lib/helpers';
-import { IssuesSearchService } from '$lib/services';
-import {
-  IssueSearchQueryState,
-  IssueSearchQueryType,
-} from '$lib/constants/issues-search-query-filters';
-import {
-  buildFilterParameter,
-  SEARCH_QUERY_PARAMETER_QUALIFIER,
-} from '$lib/helpers/issues-search-query-builder';
+import { RepositoryService } from '$lib/services';
+import type { PageNavigationTabViewModel } from '$lib/components/shared/PageNavigationTabs/models';
+import { resolveRepositoryHref, resolveRepositoryIssueSearchPageHref } from '$lib/helpers';
+import { PAGE_IDS } from '$lib/constants/page-ids';
+import type { Breadcrumb } from '$lib/components/shared/Breadcrumbs/models';
 
-export const load: LayoutServerLoad = async ({ params, fetch }) => {
-  const { username, repo } = params;
-  const getRepoUrl = new URL(`/repos/${username}/${repo}`, ENV.GITHUB_URL);
+export const load: LayoutServerLoad = async ({ params: { username, repo }, fetch }) => {
+  const repositoryService = new RepositoryService(fetch);
 
-  const repoData = await fetch(getRepoUrl.toString()).then(
-    (response) => response.json() as Promise<RepoApiResponse>
-  );
+  const repositoryState = await repositoryService.getUserRepositoryState(username, repo);
+  const tabs: PageNavigationTabViewModel[] = [
+    {
+      label: 'Code',
+      pageId: PAGE_IDS.REPOSITORY.CODE,
+      icon: 'Code16',
+      href: resolveRepositoryHref(repositoryState),
+    },
+    {
+      label: 'Issues',
+      pageId: PAGE_IDS.REPOSITORY.ISSUES,
+      icon: 'IssueOpened16',
+      href: resolveRepositoryIssueSearchPageHref(repositoryState, 'issues'),
+      count: repositoryState.openIssuesCount,
+    },
+    {
+      label: 'Pull Requests',
+      pageId: PAGE_IDS.REPOSITORY.PULLS,
+      icon: 'GitPullRequest16',
+      href: resolveRepositoryIssueSearchPageHref(repositoryState, 'pulls'),
+      count: repositoryState.openPullRequestsCount,
+    },
+  ];
 
-  const issueService = new IssuesSearchService(fetch);
-  const openPullsQuery = [
-    IssueSearchQueryState['Open'],
-    IssueSearchQueryType['Pull request'],
-    buildFilterParameter(SEARCH_QUERY_PARAMETER_QUALIFIER.REPO, `${username}/${repo}`),
-  ].join(' ');
-  const openPullsCount = await issueService.getIssuesCount(openPullsQuery);
+  const breadcrumbs: Breadcrumb[] = [
+    {
+      name: repositoryState.owner.login,
+      href: repositoryState.owner.href,
+    },
+    {
+      name: repositoryState.name,
+      href: resolveRepositoryHref(repositoryState),
+      emphasis: true,
+    },
+  ];
 
   return {
-    username,
-    repo,
-    repoInfo: mapRepoResToRepoState(repoData, openPullsCount),
+    repositoryState,
+    tabs,
+    breadcrumbs,
   };
 };

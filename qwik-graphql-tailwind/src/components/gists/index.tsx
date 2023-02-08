@@ -4,15 +4,15 @@ import { AUTH_TOKEN, GITHUB_GRAPHQL } from '../../utils/constants';
 import GistListItem from './gist-list-item';
 import { useQuery } from '../../utils/useQuery';
 import { parseQuery } from './parseQuery';
-import * as styles from './gists.className';
 import { GistItem } from './types';
+import { LoadingPulseDot } from '../Loading/loading-pulse-dot';
 
 interface GistStore {
   data: GistItem[];
   isLoading: boolean;
 }
 
-export default component$(() => {
+export const Gists = component$(() => {
   const store = useStore<GistStore>({
     data: [],
     isLoading: true,
@@ -25,16 +25,16 @@ export default component$(() => {
   });
 
   return (
-    <aside className={styles.container}>
-      <div className="border-y py-3 space-y-5">
-        <h3 data-testid="show gists list" className="font-semibold">
+    <aside class="basis-1/4 border-t border-b bg-white h-auto shadow-lg p-8">
+      <div class="border-y py-3 space-y-5">
+        <h3 data-testid="show gists list" class="font-semibold">
           Gists
         </h3>
 
         {store.isLoading ? (
-          <div>Loading...</div>
+          <LoadingPulseDot />
         ) : (
-          <ul className="space-y-2">
+          <ul class="space-y-2">
             {store.data.map((gist) => (
               <GistListItem key={gist.id} {...gist} />
             ))}

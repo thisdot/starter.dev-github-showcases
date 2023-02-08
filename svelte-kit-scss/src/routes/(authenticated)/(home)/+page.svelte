@@ -1,40 +1,38 @@
 <script lang="ts">
-  import TopRepositories from '$lib/components/TopRepositories/TopRepositories.svelte';
+  import TopRepositoriesList from '$lib/components/RepositoryList/TopRepositoriesList/TopRepositoriesList.svelte';
   import Gists from '$lib/components/Gists/Gists.svelte';
   import type { PageServerData } from './$types';
+  import LayoutSidebar from '$lib/components/shared/layouts/LayoutSidebar.svelte';
   export let data: PageServerData;
+
+  $: ({ topRepositoriesListViewModel } = data);
 </script>
 
-<div class="container">
-  <div class="page-container">
-    <aside>
+<div class="page-container">
+  <LayoutSidebar>
+    <div slot="sidebar-left" class="sidebar">
       {#if data?.gists}
         <Gists gists={data.gists} />
       {/if}
-    </aside>
-    {#if data?.topRepos}
-      <TopRepositories repos={data.topRepos} username={data?.username} />
-    {/if}
-  </div>
+    </div>
+    <div class="main">
+      <h3>Top Repositories</h3>
+      <TopRepositoriesList model={topRepositoriesListViewModel} />
+    </div>
+  </LayoutSidebar>
 </div>
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
 
   .page-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    background: variables.$gray100;
-    @media (min-width: variables.$md) {
-      grid-template-columns: 24rem 1fr;
+    background-color: variables.$white;
+    .sidebar {
+      padding: 2em;
     }
-  }
-
-  aside {
-    background: variables.$white;
-    padding: 2rem;
-    @media (max-width: variables.$md) {
-      order: 2;
+    .main {
+      background-color: variables.$gray100;
+      padding: 2em;
     }
   }
 </style>

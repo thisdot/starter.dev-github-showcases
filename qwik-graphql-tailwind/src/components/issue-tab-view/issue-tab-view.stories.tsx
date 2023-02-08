@@ -1,6 +1,6 @@
 import { mockedIssuesQuery } from '../../mock/mockedIssues';
 import { TABS } from '../pull-request-issue-tab/data';
-import { IssueTabView, IssuesProps } from './issue-tab-view';
+import { IssueTabView, IssuesProps } from '.';
 
 export default {
   title: 'Issue Tab View',

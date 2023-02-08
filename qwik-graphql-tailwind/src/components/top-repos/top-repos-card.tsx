@@ -1,29 +1,28 @@
 import { component$ } from '@builder.io/qwik';
+import { Link } from '@builder.io/qwik-city';
 
 import type { TopRepo } from './types';
 
-import * as styles from './top-repos.className';
 import { RepoCard } from '~/components/repo-card/repo-card';
-import { SPECIAL_PERIOD_CHAR } from '~/utils/constants';
 
 interface UserTopReposViewProps {
   login: string;
   repos: TopRepo[];
 }
-export default component$(({ repos, login }: UserTopReposViewProps) => {
+export const TopReposListItems = component$(({ repos, login }: UserTopReposViewProps) => {
   if (repos.length === 0) {
     return <div>No repositories found</div>;
   }
 
   return (
-    <div className={styles.container}>
+    <div class="w-full border rounded-lg relative bg-white">
       {repos.map((repo) => (
-        <RepoCard repo={repo} styles={styles} />
+        <RepoCard key={repo.id} repo={repo} />
       ))}
-      <div className={styles.linkContainer}>
-        <a href={`/${login.replace(/\./g, SPECIAL_PERIOD_CHAR)}`} className={styles.allRepoLink}>
+      <div class="bg-gray-50 p-5 w-full text-center">
+        <Link href={`/${login}`} class="font-semibold text-gray-600 hover:text-blue-500">
           View all repositories
-        </a>
+        </Link>
       </div>
     </div>
   );

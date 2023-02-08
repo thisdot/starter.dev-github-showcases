@@ -1,6 +1,6 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
-import { GITHUB_GRAPHQL } from '../helper/constants';
+import { GITHUB_GRAPHQL } from '../utils/constants';
 import { LOGGEDIN_USER_PROFILE } from './queries/viewer-profile';
 
 const getProfile = async () => {

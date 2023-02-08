@@ -1,26 +1,32 @@
 <script lang="ts">
   import { IssueState } from '$lib/interfaces';
-  import { CheckCircle16, Circle16 } from 'svelte-octicons';
+  import { GitMerge16, GitPullRequest16, IssueClosed16, IssueOpened16 } from 'svelte-octicons';
 
   export let state: IssueState;
+  export let pull = false;
+
+  $: openIcon = pull ? GitPullRequest16 : IssueOpened16;
+  $: closedIcon = pull ? GitMerge16 : IssueClosed16;
 </script>
 
-{#if state === IssueState.Open}
-  <Circle16 class="issue-state-icon open">
-    <circle cx="50%" cy="50%" r="2" />
-  </Circle16>
-{:else if state === IssueState.Closed}
-  <CheckCircle16 class="issue-state-icon closed" />
-{/if}
+<span class="issue-state-icon-component">
+  {#if state === IssueState.Open}
+    <svelte:component this={openIcon} class="issue-state-icon open" />
+  {:else if state === IssueState.Closed}
+    <svelte:component this={closedIcon} class="issue-state-icon closed" />
+  {/if}
+</span>
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
+  .issue-state-icon-component {
+    display: flex;
+    :global(.issue-state-icon.open) {
+      color: variables.$green100;
+    }
 
-  :global(.issue-state-icon.open) {
-    color: variables.$green100;
-  }
-
-  :global(.issue-state-icon.closed) {
-    color: variables.$purple100;
+    :global(.issue-state-icon.closed) {
+      color: variables.$purple100;
+    }
   }
 </style>

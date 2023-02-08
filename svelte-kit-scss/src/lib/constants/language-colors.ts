@@ -1,5 +1,6 @@
 export const LANGUAGE_COLORS: Record<string, string> = {
   undefined: '#000000',
+  null: '#000000',
   '1C Enterprise': '#814CCC',
   '2-Dimensional Array': '#38761D',
   '4D': '#004289',

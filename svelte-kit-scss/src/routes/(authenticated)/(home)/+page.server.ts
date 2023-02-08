@@ -1,35 +1,37 @@
 import type { PageServerLoad } from './$types';
-import { mapUserReposToTopRepos, mapGistsToHomeGists } from '$lib/helpers';
-import type { UserGistsApiResponse, UserReposApiResponse } from '$lib/interfaces';
+import { buildRepositoryCardViewModel, mapGistsToHomeGists } from '$lib/helpers';
+import type { PublicProfileInformation, UserGistsApiResponse } from '$lib/interfaces';
 import { ENV } from '$lib/constants/env';
+import { RepositoryService } from '$lib/services';
+import { RepositorySort } from '$lib/constants/repository';
+import type { TopRepositoriesListViewModel } from '$lib/components/RepositoryList/view-models';
+
+const DEFAULT_PAGE_SIZE = 200;
 
 export const load: PageServerLoad = async ({ fetch, parent }) => {
-  const repoURL = new URL('/user/repos', ENV.GITHUB_URL);
-  repoURL.searchParams.append('sort', 'updated');
-  repoURL.searchParams.append('per_page', '20');
+  const { login }: PublicProfileInformation = await parent();
 
-  const { userInfo } = await parent();
+  const gistsURL = new URL(`/users/${login}/gists`, ENV.GITHUB_URL);
+  const gistsPromise = fetch(gistsURL);
 
-  const gistsURL = new URL(`/users/${userInfo?.username}/gists`, ENV.GITHUB_URL);
+  const repositoryService = new RepositoryService(fetch);
+  const repositoriesPromise = repositoryService.getAuthenticatedUserRepositories({
+    sort: RepositorySort.Updated,
+    pagination: {
+      perPage: DEFAULT_PAGE_SIZE,
+    },
+  });
 
-  try {
-    const reposPromise = await fetch(repoURL);
+  const [repositories, gistsRes] = await Promise.all([repositoriesPromise, gistsPromise]);
 
-    const gistsPromise = await fetch(gistsURL);
+  const gists = (await gistsRes.json()) as UserGistsApiResponse;
 
-    const [repoRes, gistsRes] = await Promise.all([reposPromise, gistsPromise]);
-
-    const gists = (await gistsRes.json()) as UserGistsApiResponse;
-
-    const repos = (await repoRes.json()) as UserReposApiResponse;
-
-    return {
-      topRepos: mapUserReposToTopRepos(repos),
-      gists: mapGistsToHomeGists(gists),
-      username: userInfo?.username,
-    };
-  } catch (err) {
-    // TODO: investigate better ways to handle and prompt users on errors
-    return {};
-  }
+  const topRepositoriesListViewModel: TopRepositoriesListViewModel = {
+    repositories: repositories.map(buildRepositoryCardViewModel),
+    viewAllRouteHref: `/${login}`,
+  };
+  return {
+    topRepositoriesListViewModel,
+    gists: mapGistsToHomeGists(gists),
+  };
 };

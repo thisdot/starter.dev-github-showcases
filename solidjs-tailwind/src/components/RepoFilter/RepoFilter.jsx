@@ -6,7 +6,7 @@ import {
   FILTER_TYPE_OPTIONS,
   SORT_OPTIONS,
 } from './data';
-import FilterDropdown from './FilterDropdown';
+import FilterDropdown from '../FilterDropDown/FilterDropdown';
 import FilterText from './FilterText';
 import {
   language,
@@ -82,7 +82,11 @@ const RepoFilter = (props) => {
         </div>
       </div>
       <Show when={!isOnlySorted()}>
-        <FilterText filteredRepoCount={merged.filteredRepoCount} />
+        <FilterText
+          filteredRepoCount={merged.filteredRepoCount}
+          setFilterType={setFilterType}
+          setLanguage={setLanguage}
+        />
       </Show>
     </>
   );

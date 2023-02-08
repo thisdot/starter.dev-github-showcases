@@ -1,4 +1,4 @@
-import { RepoIcon } from "../Icons";
+import { RepoIcon } from '../Icons';
 
 export const tabList = [
   {

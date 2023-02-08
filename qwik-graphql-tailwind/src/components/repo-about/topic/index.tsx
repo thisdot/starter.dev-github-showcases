@@ -1,5 +1,4 @@
 import { component$ } from '@builder.io/qwik';
-import * as styles from '../repo-about.className';
 
 interface TopicsProps {
   topics?: string[];
@@ -10,9 +9,12 @@ export const Topics = component$(({ topics }: TopicsProps) => {
     return null;
   }
   return (
-    <div className="space-y-1">
+    <div class="space-y-1">
       {topics.map((topic) => (
-        <span key={topic} className={styles.topic}>
+        <span
+          key={topic}
+          class="inline-block bg-blue-100 text-blue-600 text-xs font-medium py-1 px-2 rounded-xl mr-1.5 hover:text-white hover:bg-blue-600 transition-colors cursor-pointer"
+        >
           {topic}
         </span>
       ))}

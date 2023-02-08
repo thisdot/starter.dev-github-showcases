@@ -3,9 +3,12 @@
   import DropdownMenu from '$lib/components/shared/Dropdown/DropdownMenu.svelte';
   import BranchesSelectList from './BranchesSelectList.svelte';
   import type { BranchOption } from '../models';
+  import Breadcrumbs from '$lib/components/shared/Breadcrumbs/Breadcrumbs.svelte';
+  import type { Breadcrumb } from '$lib/components/shared/Breadcrumbs/models';
   export let branches: BranchOption[];
   export let defaultBranch: string;
   export let currentBranch: string;
+  export let breadcrumbs: Breadcrumb[];
 
   let searchTerm = String();
 
@@ -15,7 +18,7 @@
   };
 </script>
 
-<nav class="file-explorer-container">
+<div class="file-explorer-container">
   <DropdownMenu description="Select branches">
     <button class="dropdown-button" on:click={reset} on:keypress={reset}>
       <GitBranch16 />
@@ -39,7 +42,10 @@
       </div>
     </svelte:fragment>
   </DropdownMenu>
-</nav>
+  {#if breadcrumbs}
+    <Breadcrumbs {breadcrumbs} />
+  {/if}
+</div>
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
@@ -50,6 +56,8 @@
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     align-items: center;
+    gap: 1em;
+    flex-wrap: wrap;
     .dropdown-button {
       display: inline-flex;
       align-items: center;

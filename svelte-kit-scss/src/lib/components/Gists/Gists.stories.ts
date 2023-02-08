@@ -1,17 +1,27 @@
+import type { Meta, StoryObj } from '@storybook/svelte';
+
+import { gistsFixture } from '$lib/fixtures';
 import Gists from './Gists.svelte';
 
-export default {
-  component: Gists,
+const meta = {
   title: 'Home/Gists',
-  excludeStories: /.*Data$/,
-  argTypes: {
-    message: 'from Storybook',
+  component: Gists,
+  parameters: {
+    layout: 'fullscreen',
+  },
+} satisfies Meta<Gists>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    gists: gistsFixture,
   },
 };
 
-const Template = ({ ...args }) => ({
-  Component: Gists,
-  props: args,
-});
-
-export const Default = Template.bind({});
+export const Empty: Story = {
+  args: {
+    gists: [],
+  },
+};

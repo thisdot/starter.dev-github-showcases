@@ -1,4 +1,4 @@
-import axios from 'axios';
+import fetch from 'node-fetch';
 import { ACCESS_TOKEN_COOKIE } from './constants';
 
 /**
@@ -17,21 +17,20 @@ export default async (req, res) => {
       throw new Error('No code provided.');
     }
 
-    const result = await axios({
-      url: `${process.env.GITHUB_OAUTH_URL}/access_token`,
+    const result = await fetch(`${process.env.GITHUB_OAUTH_URL}/access_token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
-      data: {
+      body: JSON.stringify({
         client_id: process.env.GITHUB_CLIENT_ID ?? '',
         client_secret: process.env.GITHUB_CLIENT_SECRET ?? '',
-        code,
-      },
+        code: code,
+      }),
     });
-
-    const accessToken = result.data['access_token'];
+    const data = await result.json();
+    const accessToken = data['access_token'];
     const redirectUrl = Buffer.from(state, 'base64').toString();
 
     res

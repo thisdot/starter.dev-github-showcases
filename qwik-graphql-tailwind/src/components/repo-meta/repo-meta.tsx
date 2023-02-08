@@ -1,7 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { formatDistance } from 'date-fns';
 import { GitBranchIcon, StarIcon } from '../icons';
-import * as styles from './repo-meta.classNames';
 
 export interface RepoMetaProps {
   language?: string | null;
@@ -14,28 +13,28 @@ export interface RepoMetaProps {
 export const RepoMeta = component$(
   ({ language, languageColor, stargazerCount, forkCount, updatedAt }: RepoMetaProps) => {
     return (
-      <div className={styles.metadata}>
+      <div class="flex mt-4 text-xs text-gray-600 space-x-1">
         {language && (
           <div data-testid="repository language">
             <span
               style={{
                 backgroundColor: languageColor || '#ccc',
               }}
-              className={styles.languageColor}
+              class="w-3 h-3 inline-block rounded-full mr-1 relative top-0.5"
             />
             {language}
           </div>
         )}
         {(stargazerCount > 0 || forkCount > 0) && (
-          <div className="space-x-4">
+          <div class="space-x-4">
             {stargazerCount > 0 && (
-              <span className={styles.socialCount} data-testid="repository star count">
-                <StarIcon className={styles.socialIcon} /> {stargazerCount}
+              <span class="hover:cursor-pointer hover:text-blue-600" data-testid="repository star count">
+                <StarIcon className="w-4 h-4 inline mb-0.5" /> {stargazerCount}
               </span>
             )}
             {forkCount > 0 && (
-              <span className={styles.socialCount} data-testid="repository fork count">
-                <GitBranchIcon className={styles.socialIcon} /> {forkCount}
+              <span class="hover:cursor-pointer hover:text-blue-600" data-testid="repository fork count">
+                <GitBranchIcon className="w-4 h-4 inline mb-0.5" /> {forkCount}
               </span>
             )}
           </div>

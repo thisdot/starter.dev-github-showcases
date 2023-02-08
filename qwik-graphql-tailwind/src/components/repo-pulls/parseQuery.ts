@@ -1,24 +1,4 @@
-import { RepoPullRequestsQuery } from './types';
-
-export interface Label {
-  color: string;
-  name: string;
-}
-
-export interface PullRequest {
-  id: string;
-  login?: string | null;
-  title: string;
-  number: number;
-  closed: boolean;
-  closedAt?: Date | null;
-  merged: boolean;
-  mergedAt?: Date | null;
-  createdAt: Date;
-  labels: Label[];
-  commentCount: number;
-  labelCount: number;
-}
+import { Label, ParsedPullRequestQuery, PullRequest, RepoPullRequestsQuery } from './types';
 
 function parsePullRequests(connection?: any) {
   if (!connection) {
@@ -30,7 +10,7 @@ function parsePullRequests(connection?: any) {
   }
 
   const pageInfo = connection.pageInfo;
-  const nodes = connection.nodes || [];
+  const nodes = connection?.nodes || [];
   const totalCount = connection.totalCount;
 
   const pullRequests = nodes.reduce((pullRequests: PullRequest[], pullRequest: any) => {
@@ -68,6 +48,8 @@ function parsePullRequests(connection?: any) {
         createdAt: pullRequest.createdAt,
         closedAt: pullRequest.closedAt,
         mergedAt: pullRequest.mergedAt,
+        state: pullRequest.state,
+        url: pullRequest.url,
       },
     ];
   }, []);
@@ -75,9 +57,9 @@ function parsePullRequests(connection?: any) {
   return { pullRequests, totalCount, pageInfo };
 }
 
-export function parseQuery(data: RepoPullRequestsQuery) {
-  const openPullRequests = parsePullRequests(data.repository?.openPullRequests);
-  const closedPullRequests = parsePullRequests(data.repository?.closedPullRequests);
+export function parseQuery(data: { data: RepoPullRequestsQuery }): ParsedPullRequestQuery {
+  const openPullRequests = parsePullRequests(data.data.repository?.openPullRequest);
+  const closedPullRequests = parsePullRequests(data.data.repository?.closedPullRequest);
 
   const labelMap = [...closedPullRequests.pullRequests, ...openPullRequests.pullRequests].reduce(
     (acc: { [key: string]: Label }, issue: PullRequest) => {
@@ -92,7 +74,6 @@ export function parseQuery(data: RepoPullRequestsQuery) {
     },
     {}
   );
-
   return {
     openPullRequests,
     closedPullRequests,

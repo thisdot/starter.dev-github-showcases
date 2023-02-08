@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.user$.pipe(takeUntil(this.destroy$)).subscribe((user) => {
-      this.store.dispatch(fetchUserData({ username: user }));
+      if (user !== '') {
+        this.store.dispatch(fetchUserData({ username: user }));
+      }
     });
   }
 

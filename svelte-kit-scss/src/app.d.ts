@@ -2,12 +2,12 @@
 // for information about these interfaces
 // and what to do when importing types
 
-import type { UserApiResponse } from '$lib/interfaces';
+import type { PublicProfileInformation } from '$lib/interfaces';
 declare global {
   declare namespace App {
     interface Locals {
       accessToken?: string;
-      user?: UserApiResponse;
+      user?: PublicProfileInformation;
     }
   }
 }

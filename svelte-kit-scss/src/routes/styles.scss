@@ -6,7 +6,7 @@
     'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
   --font-mono: 'Fira Mono', monospace;
-  --color-text: #000000;
+  --color-text: variables.$gray800;
   font-family: var(--font-body);
   color: var(--color-text);
 }
@@ -15,7 +15,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji';
@@ -36,94 +36,8 @@ a {
 }
 
 .octicon {
-  display: inline-block;
-  vertical-align: text-top;
   fill: currentColor;
   overflow: visible;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.grid {
-  display: grid;
-}
-
-.grid-cols-12 {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-}
-
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-
-.col-span-9 {
-  grid-column: span 9 / span 9;
-}
-
-.col-span-12 {
-  grid-column: span 12 / span 12;
-}
-
-@media (max-width: variables.$sm) {
-  .col-sm-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .col-sm-span-9 {
-    grid-column: span 9 / span 9;
-  }
-
-  .col-sm-span-12 {
-    grid-column: span 12 / span 12;
-  }
-}
-
-@media (max-width: variables.$md) {
-  .col-md-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .col-md-span-9 {
-    grid-column: span 9 / span 9;
-  }
-
-  .col-md-span-12 {
-    grid-column: span 12 / span 12;
-  }
-}
-
-@media (max-width: variables.$lg) {
-  .col-lg-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .col-lg-span-9 {
-    grid-column: span 9 / span 9;
-  }
-
-  .col-lg-span-12 {
-    grid-column: span 12 / span 12;
-  }
-}
-
-@media (min-width: variables.$xl + 1) {
-  .col-xl-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .col-xl-span-9 {
-    grid-column: span 9 / span 9;
-  }
-
-  .col-xl-span-12 {
-    grid-column: span 12 / span 12;
-  }
-}
-
-.subpage {
-  padding: 2rem 1rem;
 }
 
 .container {
@@ -150,5 +64,43 @@ a.link-anchor {
   text-decoration: none;
   &:hover {
     color: variables.$blue600;
+  }
+}
+
+.markdown {
+  table {
+    border-collapse: collapse;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+
+    td,
+    th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  }
+  pre {
+    margin-bottom: 16px;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 6px;
+  }
+  p {
+    code {
+      padding: 0.2em 0.4em;
+      margin: 0;
+      font-size: 85%;
+      white-space: break-spaces;
+      background-color: #afb8c133;
+      border-radius: 6px;
+    }
   }
 }

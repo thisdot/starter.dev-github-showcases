@@ -1,11 +1,10 @@
 import { $, component$, useContext } from '@builder.io/qwik';
-import * as styles from './repo-filters.classNames';
-import cn from 'classnames';
 import { LanguageFilter, TypeFilter, RepositoryOrderField, DefaultLanguage } from './types';
 import { FilterDropdown } from '../filter-dropdown/filter-dropdown';
-import { XmarkIcon, CheckIcon } from '../icons';
+import { CheckIcon } from '../icons';
 import { SearchInput } from '../search-input/search-input';
 import filterStore from '../../context/repo-filter';
+import { ClearFilterAndSortBtn } from '../clear-filter-and-sort-button/index';
 
 export type RepoFiltersProps = {
   languages: LanguageFilter[];
@@ -50,11 +49,11 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
 
   return (
     <>
-      <div className={styles.container}>
-        <div className="grow">
-          <SearchInput className={styles.searchInput} placeholder="Search repositories..." />
+      <div class="flex relative mb-4 space-x-4">
+        <div class="grow">
+          <SearchInput className="w-full" placeholder="Find a repositories..." />
         </div>
-        <div className={styles.filters}>
+        <div class="flex items-center space-x-1.5">
           <div>
             <FilterDropdown name="Type" description="Select type">
               {filteOptions.map(({ label, value }: { label: string; value: string }) => (
@@ -63,9 +62,9 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
                     onClick$={() => (filters.type = value)}
                     type="button"
                     name={'Type'}
-                    className={styles.itemButton}
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
-                    {value === filters.type && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === filters.type && <CheckIcon className="inline w-4 h-4 absolute left-4" />} {label}
                   </button>
                 </div>
               ))}
@@ -79,9 +78,9 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
                     onClick$={() => (filters.language = value)}
                     type="button"
                     name={'language'}
-                    className={styles.itemButton}
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
-                    {value === filters.language && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === filters.language && <CheckIcon className="inline w-4 h-4 absolute left-4" />} {label}
                   </button>
                 </div>
               ))}
@@ -95,9 +94,9 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
                     onClick$={() => (filters.sortBy = value)}
                     type="button"
                     name={'order'}
-                    className={styles.itemButton}
+                    class="relative w-full text-left text-xs py-2 px-10 border-t border-gray-300 hover:bg-gray-100 capitalize"
                   >
-                    {value === filters.sortBy && <CheckIcon className={styles.itemActiveIcon} />} {label}
+                    {value === filters.sortBy && <CheckIcon className="inline w-4 h-4 absolute left-4" />} {label}
                   </button>
                 </div>
               ))}
@@ -106,32 +105,25 @@ export const RepoFilters = component$(({ languages, resultCount }: RepoFiltersPr
         </div>
       </div>
       {isFiltersActive && (
-        <div className={styles.filtersDetail}>
-          <div className="text-sm">
-            <span className="font-semibold" data-testid="filterText">
+        <div class="py-4 border-t flex items-center justify-between">
+          <div class="text-sm">
+            <span class="font-semibold" data-testid="filterText">
               {resultCount}
             </span>{' '}
-            results for {isTypeActive && <span className="font-semibold">{filters.type}</span>} repositories{' '}
+            results for {isTypeActive && <span class="font-semibold">{filters.type}</span>} repositories{' '}
             {isQueryActive && (
               <>
-                matching <span className="font-semibold">{filters.search}</span>
+                matching <span class="font-semibold">{filters.search}</span>
               </>
             )}{' '}
             {isLanguageActive && (
               <>
-                written in <span className="font-semibold capitalize">{filters.language}</span>
+                written in <span class="font-semibold capitalize">{filters.language}</span>
               </>
             )}{' '}
-            sorted by <span className="font-semibold">{filters.sortBy.split('_').join(' ').toLowerCase()}.</span>
+            sorted by <span class="font-semibold">{filters.sortBy.split('_').join(' ').toLowerCase()}.</span>
           </div>
-          <div>
-            <button onClick$={resetFilters$} className={cn(styles.clearBtn, 'group')}>
-              <span className={cn(styles.clearBtnIconContainer, 'group-hover:bg-blue-500')}>
-                <XmarkIcon className={styles.clearBtnIcon} />
-              </span>
-              <span className={cn(styles.clearBtnText, 'group-hover:text-blue-500')}>Clear filter</span>
-            </button>
-          </div>
+          <ClearFilterAndSortBtn clearFn={resetFilters$} />
         </div>
       )}
     </>

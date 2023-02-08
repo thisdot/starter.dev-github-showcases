@@ -12,7 +12,7 @@ export const CommentIcon = component$(({ className }: IconProps) => {
       aria-hidden="true"
       fill="currentColor"
       viewBox="0 0 16 16"
-      className={className ?? ''}
+      class={className ?? ''}
     >
       <path
         fill-rule="evenodd"

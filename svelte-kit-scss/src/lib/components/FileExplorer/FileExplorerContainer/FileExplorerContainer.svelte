@@ -10,14 +10,14 @@
   $: items = sortFolderContentItems(contents);
 </script>
 
-<div class="container file-list">
+<div class="file-list">
   {#if parentHref}
     <div class="item up-to-parent">
-      <a href={parentHref} class="parent-link">. .</a>
+      <a href={parentHref} class="parent-link" data-testid="file-list-parent-link">. .</a>
     </div>
   {/if}
   {#each items as item}
-    <div class="item">
+    <div class="item" data-testid="file-list-item">
       {#if item.type === GithubRepoContentsItemType.Dir}
         <FileDirectoryFill16 color="#60a5fa" fill="#60a5fa" />
       {:else}

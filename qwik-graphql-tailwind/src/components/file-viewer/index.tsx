@@ -1,16 +1,12 @@
-import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
+import { component$, useClientEffect$, useStore, useContext } from '@builder.io/qwik';
 import { REPO_FILE_QUERY } from '~/utils/queries/file-query';
+import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
 import { useQuery } from '~/utils';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
 import { mapExtensionToLanguage } from './mapExtensionToLanguage';
 import { FileViewerView } from './view';
-
-interface FileViewerProps {
-  name: string;
-  path: string;
-  owner: string;
-  branch: string;
-}
+import { useLocation } from '@builder.io/qwik-city';
+import { BranchNavigation } from '../branch-navigation';
 
 interface FileQueryParams {
   owner: string;
@@ -26,7 +22,10 @@ interface FileStore {
   isLoading: boolean;
 }
 
-export const FileViewer = component$(({ branch, owner, name, path }: FileViewerProps) => {
+export const FileViewer = component$(() => {
+  const globalStore = useContext(RepoContext);
+  const { path, name, owner, branch: pathBranch } = useLocation().params;
+
   const store = useStore<FileStore>({
     text: '',
     lines: 0,
@@ -40,21 +39,27 @@ export const FileViewer = component$(({ branch, owner, name, path }: FileViewerP
       {
         owner,
         name,
-        expression: `${branch}:${path}`,
+        expression: `${globalStore.branch || pathBranch}:${path.replace(/\/+$/, '') || ''}`,
       },
       abortController
     );
+
     updateFile(store, response);
   });
 
   if (store.isLoading) {
-    return <div>Loading...</div>;
+    return <div />;
   }
 
-  const extension = path.split('.').pop();
+  const extension = globalStore.path?.split('.').pop();
   const language = mapExtensionToLanguage(extension);
 
-  return <FileViewerView text={store.text} lines={store.lines} language={language} byteSize={store.byteSize} />;
+  return (
+    <>
+      <BranchNavigation />
+      <FileViewerView text={store.text} lines={store.lines} language={language} byteSize={store.byteSize} />
+    </>
+  );
 });
 
 export function updateFile(store: FileStore, response: any) {

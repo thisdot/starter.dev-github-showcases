@@ -47,7 +47,7 @@
     position: relative;
     .menu {
       font-size: 12px;
-      line-height: 1;
+      line-height: 1.5em;
       position: absolute;
       z-index: 1;
       top: 100%;

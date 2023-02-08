@@ -10,12 +10,13 @@ export const composeDirHref = (
   defaultBranch: string
 ) => {
   const repoRootHrefSegments = [username, repo];
-  const isRootFolder = !path.split('/').filter(Boolean).length;
+  const pathSegments = path.split('/').filter(Boolean);
+  const isRootFolder = !pathSegments.length;
   const isDefaultBranch = branch === defaultBranch;
   const hrefSegments =
     isRootFolder && isDefaultBranch
       ? repoRootHrefSegments
-      : repoRootHrefSegments.concat(['tree', branch, path]);
+      : repoRootHrefSegments.concat(['tree', branch, ...pathSegments]);
   return `/${hrefSegments.join('/')}`;
 };
 

@@ -1,7 +1,6 @@
 import { component$, useClientEffect$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { AUTH_TOKEN, GET_TOKEN_URL } from '~/utils/constants';
-import * as styles from '../signin/signin.classNames';
 
 export default component$(() => {
   useClientEffect$(async () => {
@@ -16,8 +15,8 @@ export default component$(() => {
   });
 
   return (
-    <section className={styles.section}>
-      <p className="text-white">Redirecting...</p>
+    <section class="flex h-screen w-full items-center justify-center bg-black">
+      <p class="text-white">Redirecting...</p>
     </section>
   );
 });

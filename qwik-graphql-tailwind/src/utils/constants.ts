@@ -45,6 +45,4 @@ export const REPOS_URL = `${GITHUB_URL_BASE}/user/repos`;
 // ) =>
 //   `${GITHUB_URL_BASE}/search/issues?q=repo:${user}/${repo}%20is:${type}%20state:${state}&per_page=${per_page}&page=${page}`;
 
-export const SPECIAL_PERIOD_CHAR = '․';
-
-export const SPECIAL_PERIOD_CHAR_URL_ENCODED_REGEX = /%E2%80%A4/g;
+export const DEFAULT_PAGE_SIZE = 30;

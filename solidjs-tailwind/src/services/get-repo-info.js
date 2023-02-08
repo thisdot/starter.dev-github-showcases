@@ -1,7 +1,7 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
 import { REPO_INFO_QUERY } from './queries/repo-info';
-import { GITHUB_GRAPHQL } from '../helper/constants';
+import { GITHUB_GRAPHQL } from '../utils/constants';
 
 export function parseTopics(topics) {
   if (!topics) {
@@ -47,11 +47,11 @@ const getRepoInfo = async (variables) => {
       description: repository?.description,
       homepageUrl: repository?.homepageUrl,
       stargazerCount: repository?.stargazerCount,
-      watcherCount: repository?.watchers.totalCount,
-      openIssueCount: repository?.issues.totalCount,
+      watcherCount: repository?.watchers?.totalCount,
+      openIssueCount: repository?.issues?.totalCount,
       topics: parseTopics(repository?.topics?.nodes),
       isOrg: typeof repository?.owner?.orgName === 'string',
-      openPullRequestCount: repository?.pullRequests.totalCount,
+      openPullRequestCount: repository?.pullRequests?.totalCount,
     },
   };
 };

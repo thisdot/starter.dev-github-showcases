@@ -8,6 +8,7 @@ export const SEARCH_QUERY_PARAMETER_QUALIFIER = {
   REPO: 'repo',
   MILESTONE: 'milestone',
   SORT: 'sort',
+  LABEL: 'label',
 } as const;
 
 type SearchQueryParameterQualifier =

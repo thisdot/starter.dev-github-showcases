@@ -1,55 +1,52 @@
 import { component$, useContext } from '@builder.io/qwik';
-import { RepoContext } from '~/routes/[owner]/[name]';
 import { FolderIcon, DocumentIcon } from '~/components/icons';
-import * as styles from './file-explorer.classNames';
-import { SPECIAL_PERIOD_CHAR } from '~/utils/constants';
+import { Link, useLocation } from '@builder.io/qwik-city';
+import { BranchNavigation } from '../branch-navigation';
+import { RepoContext } from '~/routes/[owner]/[name]/layout-named';
 
-export const FileExplorer = component$(() => {
-  const store = useContext(RepoContext);
+export interface TreeState {
+  isLoading: boolean;
+  branches: { name: string }[];
+  tree: { name: string; type: string; path: string }[];
+}
 
-  const {
-    branch,
-    owner,
-    name,
-    path: repoPath,
-    tree: { data },
-  } = store;
+export const FileExplorer = component$(({ tree }: { tree: any[] }) => {
+  const globalStore = useContext(RepoContext);
+
+  const { path, name, owner, branch: pathBranch } = useLocation().params;
+
   const basePath = `/${owner}/${name}`;
-  const backLink = `${basePath}/tree/${branch}/${repoPath}`;
+  const backLink = `${basePath}/tree/${globalStore.branch || pathBranch}/${path || ''}`;
 
   return (
-    <div className={styles.container}>
-      {repoPath && (
-        <a href={backLink}>
-          <a className={styles.cellBack}>
-            <div className="text-blue-600">..</div>
-          </a>
-        </a>
-      )}
-      {data?.tree?.map((item) => (
-        <div key={item.path} className={styles.cell}>
-          <div className="flex items-center">
-            <div className="mr-2.5">
-              {item.type === 'tree' ? (
-                <FolderIcon className={styles.iconDir} />
-              ) : (
-                <DocumentIcon className={styles.iconFile} />
-              )}
+    <>
+      <BranchNavigation branch={globalStore.branch || pathBranch} />
+      <div class="border rounded border-gray-300 text-sm">
+        {path && (
+          <Link href={backLink}>
+            <span class="block py-2 px-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer">
+              <div class="text-blue-600">..</div>
+            </span>
+          </Link>
+        )}
+
+        {tree?.map((item) => (
+          <div key={item.path} class="py-2 px-4 border-b border-gray-300 last-of-type:border-none hover:bg-gray-50">
+            <div class="flex items-center">
+              <div class="mr-2.5">
+                {item.type === 'tree' ? (
+                  <FolderIcon className="w-5 h-5 text-blue-400" />
+                ) : (
+                  <DocumentIcon className="w-5 h-5 text-gray-500" />
+                )}
+              </div>
+              <Link href={`${basePath}/${item.type}/${globalStore.branch || pathBranch}/${item.path}`}>
+                <span class="hover:text-blue-600 hover:underline">{item.name}</span>
+              </Link>
             </div>
-            <a
-              href={`${basePath}/${item.type}/${branch}/${item.path.replace(/\./g, SPECIAL_PERIOD_CHAR)}?forkCount=${
-                store.info.data?.forkCount || 0
-              }&watcherCount=${store.info.data?.watcherCount || 0}&stargazerCount=${
-                store.info.data?.stargazerCount || 0
-              }&issuesCount=${store.info.data?.openIssueCount || 0}&prCount=${
-                store.info.data?.openPullRequestCount || 0
-              }`}
-            >
-              <span className={styles.link}>{item.name}</span>
-            </a>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 });

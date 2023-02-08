@@ -1,4 +1,3 @@
-import { useLocation } from '@solidjs/router';
 import { Show, splitProps } from 'solid-js';
 import { CloseIcon } from '../Icons';
 import { defaultFilterType, defaultLanguage } from './data';
@@ -17,8 +16,16 @@ const modifyFilterTypeText = (filterText = 'test') => {
 };
 
 const FilterText = (props) => {
-  const [local] = splitProps(props, ['filteredRepoCount']);
-  const location = useLocation();
+  const [local] = splitProps(props, [
+    'filteredRepoCount',
+    'setFilterType',
+    'setLanguage',
+  ]);
+
+  const clearFilters = () => {
+    local.setFilterType(defaultFilterType);
+    local.setLanguage(defaultLanguage);
+  };
 
   return (
     <div class={styles.filterTextContainer}>
@@ -47,8 +54,8 @@ const FilterText = (props) => {
           </span>
         </small>
       </div>
-      <div>
-        <a href={location.pathname} class={styles.clearFilter}>
+      <div onClick={() => clearFilters()}>
+        <a class={styles.clearFilter}>
           <span class={styles.closeIconSpan}>
             <CloseIcon />
           </span>

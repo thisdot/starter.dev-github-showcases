@@ -30,7 +30,7 @@ describe('PullRequestCardComponent', () => {
       title: 'Get PRs information',
       number: 45,
       state: 'open',
-      createdAt: new Date('01/01/2021'),
+      createdAt: new Date('01/01/2022'),
       labels: [
         {
           id: 2,

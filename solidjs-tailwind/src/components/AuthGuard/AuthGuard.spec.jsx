@@ -1,35 +1,17 @@
-import { Router, Route } from '@solidjs/router';
+import { Router } from '@solidjs/router';
 import { render } from 'solid-testing-library';
-import { beforeEach, describe, expect, it, afterAll } from 'vitest';
-import ROUTES from '../../routes';
+import { beforeEach, describe, expect, it, afterAll, vi } from 'vitest';
+import 'whatwg-fetch';
 import AuthGuard from './AuthGuard';
 import { useAuth } from '../../auth';
-import { Routes } from '@solidjs/router';
+const { setAuth } = useAuth();
 
 describe('Auth guard', () => {
-  const { setAuth } = useAuth();
   let wrapper;
   beforeEach(async () => {
-    window.scrollTo = (x, y) => {
-      document.documentElement.scrollTop = y;
-    };
+    window.scrollTo = vi.fn();
 
-    window.fetch = () => {
-      return new Promise((resolve) => {
-        resolve({
-          json: () => {
-            return new Promise((resolve) => {
-              resolve({
-                login: 'test',
-                avatarUrl: 'test',
-              });
-            });
-          },
-        });
-      });
-    };
-
-    setAuth({
+    await setAuth({
       token: '12345',
       user: {
         avatarUrl: 'https://avatars.githubusercontent.com/u/22839396?v=4',
@@ -39,9 +21,7 @@ describe('Auth guard', () => {
 
     wrapper = await render(() => (
       <Router>
-        <Route component={AuthGuard} path="/">
-          <div>Hello World!</div>
-        </Route>
+        <AuthGuard />
       </Router>
     ));
   });
@@ -58,43 +38,14 @@ describe('Auth guard', () => {
   });
 
   it('should allow access to home page', async () => {
-    const PrivateComponent = () => <>Private!</>;
-    const PublicComponent = () => <>Redirected!</>;
-
-    wrapper = await render(() => (
-      <Router>
-        <Routes>
-          <Route component={PublicComponent} path={ROUTES.SIGNIN} />
-          <Route component={AuthGuard} path="/">
-            <Route component={PrivateComponent} path={ROUTES.HOME} />
-          </Route>
-        </Routes>
-      </Router>
-    ));
-    expect(wrapper.queryByText('Private!')).toBeInTheDocument();
-    expect(wrapper.queryByText('Redirected!')).not.toBeInTheDocument();
+    expect(await wrapper.queryByTestId('guard')).toBeInTheDocument();
   });
 
   it('redirects unauthenticated users to SignIn', async () => {
-    setAuth({
-        token: null,
-        user: null,
-      });
-      
-    const PrivateComponent = () => <>Private!</>;
-    const PublicComponent = () => <>Redirected!</>;
-    wrapper = await render(() => (
-      <Router>
-        <Routes>
-          <Route component={PublicComponent} path={ROUTES.SIGNIN} />
-          <Route component={AuthGuard} path="/">
-            <Route component={PrivateComponent} path={ROUTES.HOME} />
-          </Route>
-        </Routes>
-      </Router>
-    ));
-
-    expect(wrapper.queryByText('Private!')).not.toBeInTheDocument();
-    expect(wrapper.queryByText('Redirected!')).toBeInTheDocument();
+    await setAuth({
+      token: null,
+      user: null,
+    });
+    expect(await wrapper.queryByTestId('guard')).not.toBeInTheDocument();
   });
 });

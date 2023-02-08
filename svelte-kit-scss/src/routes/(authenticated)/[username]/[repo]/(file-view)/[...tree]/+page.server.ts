@@ -1,17 +1,23 @@
 import { ENV } from '$lib/constants/env';
 import {
+  buildContentItemBreadcrumbs,
+  buildRepositoryFolderBranchOptions,
   composeDirHref,
-  remapBranchOption,
   remapFileExplorerFolderContentsItem,
 } from '$lib/helpers';
-import type { ReadmeApiResponse, GithubRepoContentsItem, GithubBranch } from '$lib/interfaces';
+import { buildMarkdownPreviewHtml } from '$lib/server/helpers';
+import type {
+  GithubFileContentsItem,
+  GithubRepoContentsItem,
+} from '$lib/interfaces/data-contract/github';
+import { BranchService } from '$lib/services';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad, PageServerParentData } from './$types';
 
-export const load: PageServerLoad = async ({ params, parent, fetch }) => {
+export const load: PageServerLoad = async ({ params: { username, repo, tree }, parent, fetch }) => {
   const layoutData: PageServerParentData = await parent();
-  const { repoInfo, username, repo } = layoutData;
-  const treePath = params.tree || `tree/${repoInfo.defaultBranch}`;
+  const { repositoryState } = layoutData;
+  const treePath = tree || `tree/${repositoryState.defaultBranch}`;
   const [, branch, ...folderPathSegments] = treePath.split('/');
   const folderPath = folderPathSegments.join('/');
 
@@ -42,36 +48,41 @@ export const load: PageServerLoad = async ({ params, parent, fetch }) => {
   const parentFolderPath = folderPathSegments.slice(0, -1).join('/');
   const parentHref = isRoot
     ? undefined
-    : composeDirHref(parentFolderPath, username, repo, branch, repoInfo.defaultBranch);
+    : composeDirHref(parentFolderPath, username, repo, branch, repositoryState.defaultBranch);
   const contents = contentsData.map((item) =>
-    remapFileExplorerFolderContentsItem(item, username, repo, branch, repoInfo.defaultBranch)
+    remapFileExplorerFolderContentsItem(item, username, repo, branch, repositoryState.defaultBranch)
   );
 
-  const readmeData = await fetch(getRepoReadmeUrl).then(
-    (response) => response.json() as Promise<ReadmeApiResponse>
+  const readmeData = await fetch(getRepoReadmeUrl).then((response) =>
+    response.ok ? (response.json() as Promise<GithubFileContentsItem>) : Promise.resolve(undefined)
   );
 
-  const getRepoBranchesUrl = new URL(`/repos/${username}/${repo}/branches`, ENV.GITHUB_URL);
-
-  const branches = await fetch(getRepoBranchesUrl).then(
-    (response) => response.json() as Promise<GithubBranch>
+  const branchService = new BranchService(fetch);
+  const repositoryBranches = await branchService.getBranchesForRepository(username, repo);
+  const branches = buildRepositoryFolderBranchOptions(
+    folderPath,
+    username,
+    repo,
+    repositoryBranches,
+    repositoryState.defaultBranch
   );
 
-  if (!Array.isArray(branches)) {
-    throw error(400, 'Unable to fetch branches');
-  }
+  const breadcrumbs = buildContentItemBreadcrumbs(
+    username,
+    repo,
+    branch,
+    repositoryState.defaultBranch,
+    folderPathSegments
+  );
 
   return {
     ...layoutData,
     parentHref,
     contents,
-    readme: readmeData.content,
-    branches: branches.map((branch) =>
-      remapBranchOption(branch, (branchName: string) =>
-        composeDirHref(folderPath, username, repo, branchName, repoInfo.defaultBranch)
-      )
-    ),
-    defaultBranch: repoInfo.defaultBranch,
+    readmeHtml: readmeData ? buildMarkdownPreviewHtml(readmeData) : String(),
+    branches,
+    defaultBranch: repositoryState.defaultBranch,
     currentBranch: branch,
+    breadcrumbs,
   };
 };

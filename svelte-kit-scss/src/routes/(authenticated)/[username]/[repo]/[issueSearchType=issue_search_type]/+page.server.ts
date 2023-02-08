@@ -4,7 +4,7 @@ import {
   IssuesSearchQuerySort,
 } from '$lib/constants/issues-search-query-filters';
 
-import { IssueMilestoneService, IssuesSearchService } from '$lib/services';
+import { IssueLabelService, IssueMilestoneService, IssuesSearchService } from '$lib/services';
 import { IssueSearchPageTypeFiltersMap, type IssueSearchTypePage } from '$lib/constants/matchers';
 import {
   buildFilterParameter,
@@ -13,8 +13,11 @@ import {
   SEARCH_QUERY_PARAMETER_QUALIFIER,
   splitFilterParameters,
 } from '$lib/helpers/issues-search-query-builder';
-import type { NavigationFilterOption } from '$lib/components/IssueSearch/IssueSearchControls/models';
+import type { NavigationFilterOption } from '$lib/components/shared/models/navigation-filter-option';
 import { redirect } from '@sveltejs/kit';
+import { PAGE_IDS } from '$lib/constants/page-ids';
+import type { PaginationViewModel } from '$lib/components/shared/Pagination/view-models';
+import { buildPageUrl } from '$lib/helpers';
 
 const DEFAULT_PER_PAGE = 25;
 const PAGE_SEARCH_PARAM_QUERY = 'q';
@@ -25,7 +28,8 @@ const buildNavigationFilterOptions = <TParameter extends string>(
   queryBase: string,
   labelParameterDictionary: Record<string, TParameter>,
   decorateLabelFn?: (label: string, parameter: TParameter) => string,
-  optional?: boolean
+  optional?: boolean,
+  extrasBuilderFn?: (label: string, parameter: TParameter) => Record<string, unknown> | undefined
 ): NavigationFilterOption[] => {
   return Object.entries(labelParameterDictionary).map(([label, queryParameter]) => {
     const url = new URL(currentUrlHref);
@@ -43,6 +47,7 @@ const buildNavigationFilterOptions = <TParameter extends string>(
       label: decorateLabelFn ? decorateLabelFn(label, queryParameter) : label,
       href: url.toString(),
       active,
+      extras: extrasBuilderFn ? extrasBuilderFn(label, queryParameter) : undefined,
     } as NavigationFilterOption;
   });
 };
@@ -72,13 +77,13 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
   redirectIfRequired(event);
   const {
     fetch,
-    params,
+    params: { username, repo, issueSearchType },
     url: { searchParams, href },
   } = event;
 
-  const service = new IssuesSearchService(fetch, DEFAULT_PER_PAGE);
+  const service = new IssuesSearchService(fetch);
   const milestoneService = new IssueMilestoneService(fetch);
-  const { username, repo, issueSearchType } = params;
+  const issueLabelService = new IssueLabelService(fetch);
 
   const defaultSearchQuery = [
     IssueSearchPageTypeFiltersMap[issueSearchType as IssueSearchTypePage],
@@ -88,14 +93,17 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
 
   const currentSearchQuery = searchParams.get(PAGE_SEARCH_PARAM_QUERY);
   const currentPageString = searchParams.get(PAGE_SEARCH_PARAM_PAGE);
-  const currentPage = currentPageString ? Number(currentPageString) : null;
+  const currentPage = currentPageString ? Number(currentPageString) : 1;
 
   const searchQuery = currentSearchQuery || defaultSearchQuery;
 
   const pageDefaultRepo = `${username}/${repo}`;
   const requestSearchQuery = ensureRepoParameter(searchQuery, pageDefaultRepo);
 
-  const issuesPromise = service.getIssues(requestSearchQuery, { page: currentPage });
+  const issuesCollectionPromise = service.getIssuesCollection(requestSearchQuery, {
+    page: currentPage,
+    perPage: DEFAULT_PER_PAGE,
+  });
 
   const searchQueryOpen = estimateSearchQueryForParameter(
     requestSearchQuery,
@@ -111,12 +119,16 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
 
   const openMilestonesPromise = milestoneService.getOpenMilestones(username, repo);
 
-  const [issues, openIssuesCount, closedIssuesCount, openMilestones] = await Promise.all([
-    issuesPromise,
-    openIssuesCountPromise,
-    closedIssuesCountPromise,
-    openMilestonesPromise,
-  ]);
+  const issueLabelsPromise = issueLabelService.getLabelsForRepository(username, repo);
+
+  const [issuesCollection, openIssuesCount, closedIssuesCount, openMilestones, issueLabels] =
+    await Promise.all([
+      issuesCollectionPromise,
+      openIssuesCountPromise,
+      closedIssuesCountPromise,
+      openMilestonesPromise,
+      issueLabelsPromise,
+    ]);
 
   const sortFilters = buildNavigationFilterOptions(href, searchQuery, IssuesSearchQuerySort);
   const stateFilters = buildNavigationFilterOptions(
@@ -138,6 +150,7 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
     }
   );
 
+  //filter: Milestone
   const labelParameterDictionaryMilestones = openMilestones.reduce((dict, x) => {
     dict[x.title] = buildFilterParameter(
       SEARCH_QUERY_PARAMETER_QUALIFIER.MILESTONE,
@@ -152,10 +165,43 @@ export const load: PageServerLoad = async (event: PageServerLoadEvent) => {
     (label) => label,
     true
   );
+
+  //filtering: Label
+  const labelParameterDictionaryIssueLabels = issueLabels.reduce((dict, x) => {
+    dict[x.name] = buildFilterParameter(SEARCH_QUERY_PARAMETER_QUALIFIER.LABEL, `"${x.name}"`);
+    return dict;
+  }, {} as Record<string, string>);
+  const labelFilters = buildNavigationFilterOptions(
+    href,
+    searchQuery,
+    labelParameterDictionaryIssueLabels,
+    (label) => label,
+    true,
+    (label) => {
+      const issueLabel = issueLabels.find((x) => x.name === label);
+      return issueLabel;
+    }
+  );
+
+  // pagination
+  const totalPagesCount = Math.ceil(issuesCollection.totalCount / DEFAULT_PER_PAGE);
+  const canNavigateNext = currentPage < totalPagesCount;
+  const pagesHrefsEntries = [...Array(totalPagesCount).keys()]
+    .map((index) => ++index)
+    .map((pageNumber) => [pageNumber, buildPageUrl(event.url, pageNumber).href]);
+  const pagination: PaginationViewModel = {
+    previousPageHref: currentPage > 1 ? buildPageUrl(event.url, currentPage - 1).href : undefined,
+    nextPageHref: canNavigateNext ? buildPageUrl(event.url, currentPage + 1).href : undefined,
+    pagesHrefs: Object.fromEntries(pagesHrefsEntries),
+    currentPage,
+  };
   return {
-    issues,
+    issues: issuesCollection.items,
     sortFilters,
     stateFilters,
     milestoneFilters,
+    labelFilters,
+    pageId: issueSearchType === 'issues' ? PAGE_IDS.REPOSITORY.ISSUES : PAGE_IDS.REPOSITORY.PULLS,
+    pagination,
   };
 };

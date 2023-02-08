@@ -1,15 +1,22 @@
 import { Router } from '@solidjs/router';
 import { render } from 'solid-testing-library';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { aboutData } from './data';
+import 'whatwg-fetch';
 import { RepoAboutWidget } from './RepoAbout';
+import { RepoProvider } from '../../contexts/RepoContext';
+import { setupMswServer } from '../../../msw/server';
+import { repoInforResponse } from '../../../msw/data';
+
+setupMswServer();
 
 describe('Repo About', () => {
   let wrapper;
   beforeEach(async () => {
-    wrapper = render(() => (
+    wrapper = await render(() => (
       <Router>
-        <RepoAboutWidget {...aboutData} />
+        <RepoProvider>
+          <RepoAboutWidget />
+        </RepoProvider>
       </Router>
     ));
   });
@@ -18,10 +25,14 @@ describe('Repo About', () => {
     expect(wrapper).toBeTruthy();
   });
 
-  it('should show show contents', async () => {
-    const contents = await wrapper.getByTestId('about-info');
-    const topic = await wrapper.getByText(aboutData.info.data.topics[0]);
+  it('should show contents', async () => {
+    const loading = await wrapper.findByText('Loading...');
+    expect(loading).toBeInTheDocument();
+    const contents = await wrapper.findByTestId('about-info');
+    const topic = await wrapper.findByText(
+      repoInforResponse.data.repository.description
+    );
     expect(contents.innerHTML).toBeTruthy();
     expect(topic).toBeVisible();
-  })
-})
+  });
+});

@@ -3,7 +3,7 @@ export const aboutData = {
     data: {
       description: 'This is a description',
       homepageUrl: 'https://www.google.com',
-      topics: ['topic1', 'topic2', 'topic3']
-    }
-  }
-}
+      topics: ['topic1', 'topic2', 'topic3'],
+    },
+  },
+};

@@ -14,8 +14,8 @@ describe('User dropdown', () => {
       <Router>
         <UserDropdown {...data} />
       </Router>
-    ))
-  })
+    ));
+  });
 
   it('should mount', () => {
     expect(wrapper).toBeTruthy();
@@ -23,11 +23,11 @@ describe('User dropdown', () => {
 
   it('should show avatar', async () => {
     const avatar = await wrapper.getByAltText('Profile Photo');
-    expect(avatar).toBeVisible()
-  })
+    expect(avatar).toBeVisible();
+  });
 
   it('should show dropdown options', async () => {
     const option = await wrapper.getByText('Profile');
-    expect(option).toBeVisible()
-  })
-})
+    expect(option).toBeVisible();
+  });
+});

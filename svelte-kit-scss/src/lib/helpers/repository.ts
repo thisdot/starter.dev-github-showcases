@@ -1,21 +1,49 @@
-import type { RepoApiResponse, RepoState } from '$lib/interfaces';
+import type { Repository, RepositoryLicenseSimple, RepositoryState } from '$lib/interfaces';
+import type {
+  GithubRepository,
+  GithubRepositoryLicenseSimple,
+} from '$lib/interfaces/data-contract/github';
+import { remapSimpleUser, resolveRepositoryHref } from '$lib/helpers';
+import type { RepositoryCardViewModel } from '$lib/components/RepositoryList/view-models';
+import { remapTopicReference } from './topic';
 
-export const mapRepoResToRepoState = (
-  data: RepoApiResponse,
+export const remapRepositoryLicenseSimple = (
+  license: GithubRepositoryLicenseSimple
+): RepositoryLicenseSimple => ({
+  name: license.name,
+});
+
+export const remapRepository = (repository: GithubRepository): Repository => ({
+  defaultBranch: repository.default_branch,
+  description: repository.description,
+  forksCount: repository.forks_count,
+  homepage: repository.homepage,
+  name: repository.name,
+  openIssuesCount: repository.open_issues_count,
+  owner: remapSimpleUser(repository.owner),
+  stargazersCount: repository.stargazers_count,
+  topics: repository.topics,
+  visibility: repository.visibility,
+  watchersCount: repository.watchers_count,
+  language: repository.language,
+  updatedAt: repository.updated_at,
+  license: repository.license ? remapRepositoryLicenseSimple(repository.license) : null,
+  archived: repository.archived,
+  fork: repository.fork,
+});
+
+export const buildRepositoryState = (
+  repository: Repository,
   openPullRequestsCount: number
-): RepoState => {
+): RepositoryState => {
   return {
-    repoName: data.name,
-    description: data.description,
-    website: data.homepage,
-    visibility: data.visibility,
-    watchCount: data.watchers_count,
-    starCount: data.stargazers_count,
-    forkCount: data.forks_count,
-    openIssuesCount: data.open_issues_count,
+    ...repository,
     openPullRequestsCount,
-    tags: data.topics,
-    defaultBranch: data.default_branch,
-    ownerName: data.owner.login,
+    topics: repository.topics.map(remapTopicReference),
   };
 };
+
+export const buildRepositoryCardViewModel = (repository: Repository): RepositoryCardViewModel => ({
+  ...repository,
+  routeHref: resolveRepositoryHref(repository),
+});

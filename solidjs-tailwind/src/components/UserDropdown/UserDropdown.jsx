@@ -1,10 +1,10 @@
 import { NavLink } from '@solidjs/router';
 import { createSignal } from 'solid-js';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import { clickOutside } from '../../utils/onclick-outside';
+import { ChevronDownIcon } from '../Icons';
+import { clickOutside } from '../../utils/onclickOutside';
 import styles from './UserDropdown.module.css';
 import { useAuth } from '../../auth';
-import { SIGN_OUT_URL } from '../../helper/constants';
+import { SIGN_OUT_URL } from '../../utils/constants';
 
 const UserDropdown = (props) => {
   const [expanded, setExpanded] = createSignal(false);
@@ -41,9 +41,7 @@ const UserDropdown = (props) => {
               />
             )}
           </div>
-          <div class="w-4 ml-1">
-            <ChevronDownIcon />
-          </div>
+          <ChevronDownIcon class="-mr-1 ml-2 h-3 w-3" aria-hidden="true" />
         </button>
         <nav
           class={
@@ -53,7 +51,11 @@ const UserDropdown = (props) => {
           <ul class="py-1">
             {props.username && (
               <li data-menu-item>
-                <NavLink href={`/${props.username}`} class={styles.menuBtn}>
+                <NavLink
+                  href={`/${props.username}`}
+                  class={styles.menuBtn}
+                  onClick={() => setExpanded(false)}
+                >
                   Profile
                 </NavLink>
               </li>

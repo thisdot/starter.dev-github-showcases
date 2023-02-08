@@ -11,7 +11,7 @@ import {
   MergedPrIcon,
   ClosedPrIcon,
 } from '../icons';
-import * as styles from './issue-pr-card.classNames';
+import { Label } from '../repo-pulls/types';
 
 export interface IssuePrCardProps {
   data: {
@@ -25,6 +25,7 @@ export interface IssuePrCardProps {
     createdAt: string;
     authorName: string;
     commentsCount: number;
+    labels?: Label[];
   };
   type: 'issue' | 'pr';
 }
@@ -45,14 +46,14 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
   });
 
   return (
-    <div className={styles.card_container}>
-      <div className="flex">
-        <label className={styles.card_checkbox}>
+    <div class="flex relative items-baseline border-y border-gray-300 pt-2 pb-3">
+      <div class="flex">
+        <label class="flex-shrink-0 pl-3 hidden md:block">
           <input type="checkbox" name="issues[]" autoComplete="off" />
         </label>
 
-        <div className="flex-shrink-0 pl-4">
-          <span className={iconColor}>
+        <div class="flex-shrink-0 pl-4">
+          <span class={iconColor}>
             {type == 'issue' ? (
               data.isOpen ? (
                 <IssuesIcon className="w-5 h-5" />
@@ -74,12 +75,24 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
         </div>
       </div>
 
-      <div className={styles.card_title_container}>
-        <a className={styles.card_title} href={data.url}>
-          {data.title}
-        </a>
-        <div className={styles.card_subtitle}>
-          <span className="opened-by">
+      <div class="flex-auto min-width-0 pr-3 pl-2">
+        <div>
+          <a class="align-middle no-underline markdown-title font-semibold" target="_blank" href={data.url}>
+            {data.title}
+          </a>
+          {data.labels &&
+            data.labels.map((label: Label, i) => (
+              <span
+                key={i}
+                class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm', `bg-[#${label.color}]`)}
+                style={{ backgroundColor: `#${label.color}` }}
+              >
+                {label.name}
+              </span>
+            ))}
+        </div>
+        <div class="flex mt-1 text-sm text-gray-500">
+          <span class="opened-by">
             #{data.number}
             {' by '}
             <a href="#">{data.authorName}</a> was {data.isOpen ? 'opened' : 'closed'} on{' '}
@@ -88,13 +101,13 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
         </div>
       </div>
 
-      <div className={styles.card_right_side}>
-        <span className="ml-2 pt-1 flex-1 flex-shrink-0">
+      <div class="flex-shrink-0 w-1/5 text-right pr-3 flex-nowrap flex">
+        <span class="ml-2 pt-1 flex-1 flex-shrink-0">
           {data.commentsCount > 0 && (
-            <a href="#" className="">
-              <div className="flex items-center justify-end">
+            <a href="#" class="">
+              <div class="flex items-center justify-end">
                 <CommentIcon className="w-5 h-5" />
-                <span className="ml-1 text-sm font-bold">{data.commentsCount}</span>
+                <span class="ml-1 text-sm font-bold">{data.commentsCount}</span>
               </div>
             </a>
           )}

@@ -1,4 +1,3 @@
-import type { FileContents, GithubFileContentsItem } from '$lib/interfaces';
 import type { Language } from '$lib/components/FileViewer/types/language';
 
 export const mapLanguageExt = (extension?: string): Language | undefined => {
@@ -79,17 +78,4 @@ export const mapLanguageExt = (extension?: string): Language | undefined => {
     default:
       return undefined;
   }
-};
-
-export const remapFileContents = (
-  responseData?: GithubFileContentsItem
-): FileContents | undefined => {
-  return responseData
-    ? {
-        content: Buffer.from(responseData.content, 'base64').toString('binary'),
-        name: responseData.name,
-        size: responseData.size,
-        type: responseData.type,
-      }
-    : undefined;
 };

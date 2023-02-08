@@ -28,15 +28,15 @@ describe('Repo Meta data', () => {
   it('should show repo language', async () => {
     const ele = await wrapper.getByText(data.language);
     expect(ele.innerHTML).toContain(data.language);
-  })
+  });
 
   it('should not show "repository star count"', async () => {
-    const ele = await wrapper.queryByTestId("repository star count");
+    const ele = await wrapper.queryByTestId('repository star count');
     expect(ele).toBeNull();
-  })
+  });
 
   it('should show "repository fork count"', async () => {
-    const ele = await wrapper.queryByTestId("repository fork count");
+    const ele = await wrapper.queryByTestId('repository fork count');
     expect(ele.innerHTML).toContain(data.forkCount);
-  })
-})
+  });
+});

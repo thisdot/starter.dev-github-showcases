@@ -1,5 +1,4 @@
 export interface UserReposProps {
-  repos: Repositories;
   owner: string;
 }
 
@@ -7,9 +6,9 @@ export interface Repositories {
   nodes: UserRepo[];
   pageInfo:
     | {
-        __typename?: 'PageInfo' | undefined;
-        endCursor?: string | null | undefined;
-        startCursor?: string | null | undefined;
+        __typename?: 'PageInfo';
+        endCursor?: string;
+        startCursor?: string;
         hasNextPage: boolean;
         hasPreviousPage: boolean;
       }

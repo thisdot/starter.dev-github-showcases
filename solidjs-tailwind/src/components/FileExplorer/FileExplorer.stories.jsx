@@ -1,28 +1,24 @@
 import { Router } from '@solidjs/router';
 import FileExplorer from './FileExplorer';
-import { repositoryviewItems } from './data';
+import { RepoProvider } from '../../contexts/RepoContext';
+import { mockRepoTree } from '../../../msw/mockRepoTree';
 
 export default {
   title: 'Components/File Explorer',
   component: FileExplorer,
-  argTypes: {
-    items: {},
-    branch: {},
-    basePath: {},
-    repoPath: {},
-  },
 };
 
-const Template = (args) => (
+const Template = () => (
   <Router>
-    <FileExplorer {...args} />
+    <RepoProvider>
+      <FileExplorer />
+    </RepoProvider>
   </Router>
 );
 
 export const RootDir = Template.bind({});
-RootDir.args = {
-  items: repositoryviewItems,
-  branch: 'main',
-  basePath: `/testowner/testrepos`,
-  repoPath: '',
+RootDir.parameters = {
+  msw: {
+    handlers: [mockRepoTree],
+  },
 };

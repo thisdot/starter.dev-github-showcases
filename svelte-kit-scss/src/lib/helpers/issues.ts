@@ -1,34 +1,11 @@
-import {
-  type GithubSearchIssueLabel,
-  type GithubSearchIssue,
-  type GithubSearchIssueApiResponse,
-  type Issue,
-  type IssueCollection,
-  type IssueLabel,
-  type IssueUser,
-  type GithubSearchIssueUser,
-  type GithubSearchIssueAssignee,
-  type IssueAssignee,
-  IssueState,
-} from '$lib/interfaces';
+import { type Issue, IssueState, type IssuePullRequest } from '$lib/interfaces';
 
-const remapIssueLabel = (label: GithubSearchIssueLabel): IssueLabel => ({
-  id: label.id,
-  nodeId: label.node_id,
-  url: label.url,
-  name: label.name,
-  color: label.color,
-});
-
-const remapIssueUser = (user: GithubSearchIssueUser): IssueUser => ({
-  login: user.login,
-  avatarUrl: user.avatar_url,
-});
-
-const remapIssueAssignee = (user: GithubSearchIssueAssignee): IssueAssignee => ({
-  login: user.login,
-  avatarUrl: user.avatar_url,
-});
+import type {
+  GithubSearchIssuePullRequest,
+  GithubSearchIssue,
+} from '$lib/interfaces/data-contract/github';
+import { remapSimpleUser } from './common';
+import { remapIssueLabel } from './issue-label';
 
 const remapIssueState = (state: string): IssueState => {
   if (!Object.values(IssueState).map(String).includes(state)) {
@@ -37,27 +14,29 @@ const remapIssueState = (state: string): IssueState => {
   return <IssueState>state;
 };
 
-export const remapIssue = (issue: GithubSearchIssue): Issue => {
+const remapIssuePullRequest = (
+  issuePullRequest: GithubSearchIssuePullRequest
+): IssuePullRequest => {
   return {
-    id: issue.id,
-    user: remapIssueUser(issue.user),
-    title: issue.title,
-    number: issue.number,
-    state: remapIssueState(issue.state),
-    closedAt: issue.closed_at,
-    createdAt: issue.created_at,
-    labels: issue.labels.map(remapIssueLabel),
-    commentsCount: issue.comments,
-    labelCount: issue.labels?.length || 0,
-    assignees: issue.assignees.map(remapIssueAssignee),
+    url: issuePullRequest.url,
+    htmlUrl: issuePullRequest.html_url,
+    mergedAt: issuePullRequest.merged_at,
   };
 };
 
-export const remapRepoIssueCollection = (
-  responseBody: GithubSearchIssueApiResponse
-): IssueCollection => {
+export const remapIssue = (issue: GithubSearchIssue): Issue => {
   return {
-    totalCount: responseBody.total_count,
-    issues: responseBody.items.map(remapIssue).filter(Boolean) as Issue[],
+    assignees: issue.assignees.map(remapSimpleUser),
+    closedAt: issue.closed_at,
+    commentsCount: issue.comments,
+    createdAt: issue.created_at,
+    id: issue.id,
+    labels: issue.labels.map(remapIssueLabel),
+    number: issue.number,
+    state: remapIssueState(issue.state),
+    title: issue.title,
+    user: issue.user ? remapSimpleUser(issue.user) : null,
+    htmlUrl: issue.html_url,
+    pullRequest: issue.pull_request ? remapIssuePullRequest(issue.pull_request) : undefined,
   };
 };

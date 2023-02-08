@@ -1,48 +1,28 @@
+import { OrderDirection, PullRequestOrderField } from './types';
+
 export const sortOptions = [
   {
-    value: 'Newest',
+    value: `${PullRequestOrderField.CreatedAt}^${OrderDirection.Desc}`,
     label: 'Newest',
   },
   {
-    value: 'Oldest',
+    value: `${PullRequestOrderField.CreatedAt}^${OrderDirection.Asc}`,
     label: 'Oldest',
   },
   {
-    value: 'Most Commented',
-    label: 'Most Commented',
+    label: 'Most commented',
+    value: `${PullRequestOrderField.Comments}^${OrderDirection.Desc}`,
   },
   {
-    value: 'Least Commented',
-    label: 'Least Commented',
+    label: 'Least commented',
+    value: `${PullRequestOrderField.Comments}^${OrderDirection.Asc}`,
   },
   {
-    value: 'Resently Updated',
-    label: 'Resently Updated',
-  },
-];
-
-export const labelOptions = [
-  {
-    value: 'enhancement',
-    label: 'enhancement',
-    color: '#a2eeef',
-    description: 'New feature or request',
+    label: 'Recently updated',
+    value: `${PullRequestOrderField.UpdatedAt}^${OrderDirection.Desc}`,
   },
   {
-    value: 'WIP DO NOT MERGE',
-    label: 'WIP DO NOT MERGE',
-    color: '#FA3C07',
-  },
-  {
-    value: 'invalid',
-    label: 'invalid',
-    color: '#e4e669',
-    description: "This doesn't seem right",
-  },
-];
-export const milestonesOptions = [
-  {
-    value: 'Issue With No Milestone',
-    label: 'Issue With No Milestone',
+    label: 'Least reecently updated',
+    value: `${PullRequestOrderField.UpdatedAt}^${OrderDirection.Asc}`,
   },
 ];

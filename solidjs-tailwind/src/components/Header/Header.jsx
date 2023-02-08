@@ -1,7 +1,7 @@
 import { NavLink } from '@solidjs/router';
 import { useAuth } from '../../auth';
 import { UserDropdown } from '../UserDropdown';
-import { SIGN_IN_BASE_URL } from '../../helper/constants';
+import { SIGN_IN_BASE_URL } from '../../utils/constants';
 
 import { GithubLogo } from './GithubLogo';
 import styles from './Header.module.css';

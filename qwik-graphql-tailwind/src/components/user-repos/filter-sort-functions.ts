@@ -1,3 +1,4 @@
+import { getTime } from '~/utils/helpers';
 import { TypeFilter, RepositoryOrderField, DefaultLanguage } from '../repo-filters/types';
 import { UserRepo } from './types';
 
@@ -14,8 +15,6 @@ export const repoDataFilteredBySearch = (search: string, repos: UserRepo[]): Use
     return [...acc, repo];
   }, []);
 };
-
-const getTime = (time: string) => new Date(time).getTime();
 
 // Function to sort filtered repos
 export const sortedRepoData = (sortByData: string, repos: UserRepo[]): UserRepo[] => {

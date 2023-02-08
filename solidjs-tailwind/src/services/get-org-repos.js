@@ -1,6 +1,6 @@
 import FetchApi from './api';
 import { useAuth } from '../auth';
-import { GITHUB_GRAPHQL } from '../helper/constants';
+import { GITHUB_GRAPHQL } from '../utils/constants';
 import { ORGANIZATION_REPOS_QUERY } from './queries/org-repos';
 
 /**
@@ -26,8 +26,8 @@ const getOrgRepos = async (variables) => {
       avatarUrl: resp.data?.organization?.avatarUrl,
       name: resp.data?.organization?.name,
     },
-    repositories: resp?.data?.organization?.repositories
-  }
+    repositories: resp?.data?.organization?.repositories,
+  };
 };
 
 export default getOrgRepos;

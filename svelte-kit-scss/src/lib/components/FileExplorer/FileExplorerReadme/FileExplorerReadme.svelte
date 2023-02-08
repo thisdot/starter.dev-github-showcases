@@ -1,62 +1,41 @@
 <script lang="ts">
   import { ListUnordered16 } from 'svelte-octicons';
-  import MarkdownIt from 'markdown-it';
-  import sanitizeHtml from 'sanitize-html';
-  import { Buffer } from 'buffer';
 
-  export let readme: string;
-  const md = new MarkdownIt();
-
-  function encodeReadmeURI(text: string) {
-    const encoded = text;
-    const decoded = Buffer.from(encoded, 'base64').toString('utf8');
-    return sanitizeHtml(md.render(decoded), {
-      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'details', 'summary']),
-      allowedAttributes: {
-        img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
-      },
-    });
-  }
+  export let html: string;
 </script>
 
-{#if readme}
-  <div id="readme">
-    <div class="header">
-      <span class="icon">
-        <ListUnordered16 />
-      </span>
-      <span class="filename">README.md</span>
-    </div>
-    <div class="content">
-      <span>
-        {@html encodeReadmeURI(readme)}
-      </span>
-    </div>
+{#if html}
+  <div class="header">
+    <ListUnordered16 />
+    <span class="filename">README.md</span>
+  </div>
+  <div class="content">
+    <span class="markdown">
+      {@html html}
+    </span>
   </div>
 {/if}
 
 <style lang="scss">
   @use 'src/lib/styles/variables.scss';
-
   .header {
     position: sticky;
-    z-index: 3;
     top: 0;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    border-bottom: 1px solid variables.$gray300;
     background-color: variables.$white;
+    padding: 1em;
     font-weight: 600;
-    padding: 0.625rem;
-    border: 1px solid variables.$gray300;
-    border-radius: 0.25rem;
-
-    .icon {
-      margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    .filename {
+      font-size: 0.875em;
+      line-height: 1;
     }
   }
-
   .content {
-    padding: 0.625rem;
-    border: 1px solid variables.$gray300;
-    border-radius: 0.25rem;
-    border-top: none;
+    padding: 1em 2em;
   }
 </style>

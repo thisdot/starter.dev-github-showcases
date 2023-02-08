@@ -1,18 +1,18 @@
 import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
 import { TOP_REPOS_QUERY } from '~/utils/queries/top-repos-query';
 import { AUTH_TOKEN, GITHUB_GRAPHQL } from '~/utils/constants';
-import TopReposListItems from './top-repos-card';
 import { useQuery } from '~/utils/useQuery';
 import { parseQuery } from './parseQuery';
 import { TopRepo } from './types';
+import { LoadingPulseDot } from '../Loading/loading-pulse-dot';
+import { TopReposListItems } from './top-repos-card';
 
 interface RepoStore {
   login: '';
   data: TopRepo[];
   isLoading: boolean;
 }
-
-export default component$(() => {
+export const TopRepos = component$(() => {
   const store = useStore<RepoStore>({
     login: '',
     data: [],
@@ -26,11 +26,11 @@ export default component$(() => {
   });
 
   return (
-    <div className="p-12">
-      <h2 data-testid="show repo list" className="text-lg font-medium mb-4">
+    <div class="p-12">
+      <h2 data-testid="show repo list" class="text-lg font-medium mb-4">
         Top Repositories
       </h2>
-      {store.isLoading ? <div>Loading...</div> : <TopReposListItems repos={store.data} login={store.login} />}
+      {store.isLoading ? <LoadingPulseDot /> : <TopReposListItems repos={store.data} login={store.login} />}
     </div>
   );
 });

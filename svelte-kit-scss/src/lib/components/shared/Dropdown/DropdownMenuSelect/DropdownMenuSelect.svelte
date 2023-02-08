@@ -52,6 +52,7 @@
   .dropdown-menu-item-layout {
     border-bottom: 1px solid variables.$gray300;
     padding: 0.75em 1.25em;
+    min-width: 24em;
     cursor: pointer;
     &:hover {
       background: variables.$gray100;

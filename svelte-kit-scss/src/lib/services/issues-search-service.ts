@@ -1,7 +1,13 @@
 import { ENV } from '$lib/constants/env';
-import { remapIssue } from '$lib/helpers';
-import type { GithubSearchIssueApiResponse, Issue } from '$lib/interfaces';
-import { error } from '@sveltejs/kit';
+import { remapCollectionPage, remapIssue } from '$lib/helpers';
+import type {
+  CollectionPage,
+  GithubCollectionPage,
+  GithubSearchIssue,
+  Issue,
+} from '$lib/interfaces';
+import type { NonNegativeIntegerRange } from '$lib/interfaces/type-utls';
+import { AbstractFetchService } from './abstract-fetch-service';
 
 const SEARCH_PARAM_NAME_QUERY = 'q';
 const SEARCH_PARAM_NAME_PAGE = 'page';
@@ -9,56 +15,47 @@ const SEARCH_PARAM_NAME_PER_PAGE = 'per_page';
 
 type IssuesSearchPaginationInfo = {
   page?: number | null;
-  perPage?: number;
+  perPage?: NonNegativeIntegerRange<1, 100>;
 };
 
-export class IssuesSearchService {
+export class IssuesSearchService extends AbstractFetchService {
+  private readonly endpoint = '/search/issues';
+
   constructor(
-    private fetch: (input: URL | RequestInfo, init?: RequestInit | undefined) => Promise<Response>,
-    private perPage = 30
-  ) {}
+    fetch: (input: URL | RequestInfo, init?: RequestInit | undefined) => Promise<Response>
+  ) {
+    super(fetch);
+  }
 
   async getIssuesCount(searchQuery: string): Promise<number> {
-    const data = await this.requestIssues(searchQuery, { perPage: 1 });
-    return data.total_count;
+    const data = await this.requestIssuesInternal(searchQuery, { perPage: 1 });
+    return data.totalCount;
   }
 
-  async getIssues(
+  async getIssuesCollection(
     searchQuery: string,
     paginationInfo?: IssuesSearchPaginationInfo
-  ): Promise<Issue[]> {
-    const responseData = await this.requestIssues(
-      searchQuery,
-      this.ensurePaginationInfo(paginationInfo)
-    );
-    return responseData.items.map(remapIssue);
+  ): Promise<CollectionPage<Issue>> {
+    const collectionPage = await this.requestIssuesInternal(searchQuery, paginationInfo);
+    return collectionPage;
   }
 
-  private async requestIssues(
+  private async requestIssuesInternal(
     searchQuery: string,
     paginationInfo?: IssuesSearchPaginationInfo
-  ): Promise<GithubSearchIssueApiResponse> {
-    const getItemsUrl = new URL(`/search/issues`, ENV.GITHUB_URL);
-    getItemsUrl.searchParams.append(SEARCH_PARAM_NAME_QUERY, searchQuery);
+  ): Promise<CollectionPage<Issue>> {
+    const url = new URL(this.endpoint, ENV.GITHUB_URL);
+    url.searchParams.append(SEARCH_PARAM_NAME_QUERY, searchQuery);
     if (paginationInfo?.perPage) {
-      getItemsUrl.searchParams.append(SEARCH_PARAM_NAME_PER_PAGE, String(paginationInfo?.perPage));
+      url.searchParams.append(SEARCH_PARAM_NAME_PER_PAGE, String(paginationInfo?.perPage));
     }
     if (paginationInfo?.page) {
-      getItemsUrl.searchParams.append(SEARCH_PARAM_NAME_PAGE, String(paginationInfo?.page));
+      url.searchParams.append(SEARCH_PARAM_NAME_PAGE, String(paginationInfo?.page));
     }
-    const response = await this.fetch(getItemsUrl.toString());
-    if (!response.ok) {
-      const body = await response.json();
-      throw error(response.status, body?.message || response.statusText);
-    }
-    const responseBodyJson = (await response.json()) as Promise<GithubSearchIssueApiResponse>;
-    return responseBodyJson;
-  }
 
-  private ensurePaginationInfo(
-    paginationInfo?: IssuesSearchPaginationInfo
-  ): IssuesSearchPaginationInfo {
-    const extras = !paginationInfo?.perPage ? { perPage: this.perPage } : undefined;
-    return { ...paginationInfo, ...extras };
+    const collectionPage = await this.rejectableFetchJson<GithubCollectionPage<GithubSearchIssue>>(
+      url
+    );
+    return remapCollectionPage(collectionPage, remapIssue);
   }
 }

@@ -14,7 +14,7 @@ export const CarretDropdownIcon = component$(({ className }: IconProps) => {
       width="1rem"
       data-view-component="true"
       fill="currentColor"
-      className={className ?? ''}
+      class={className ?? ''}
     >
       <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z"></path>
     </svg>

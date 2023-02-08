@@ -25,7 +25,7 @@ describe('RepoCard for profilepage', () => {
 });
 describe('RepoCard for non profile page', () => {
   let wrapper;
-  const notProfileData = {
+  const profileData = {
     ...repoCardProps,
     isProfilePage: false,
   };
@@ -33,7 +33,7 @@ describe('RepoCard for non profile page', () => {
   beforeEach(async () => {
     wrapper = await render(() => (
       <Router>
-        <RepoCard {...notProfileData} />
+        <RepoCard {...profileData} />
       </Router>
     ));
   });
@@ -44,7 +44,7 @@ describe('RepoCard for non profile page', () => {
 
   it('a tag text should contain owner/name', async () => {
     const repowithOwner = await wrapper.getByText(
-      `${notProfileData.owner.login}/${notProfileData.name}`
+      `${profileData.owner.login}/${profileData.name}`
     );
     expect(repowithOwner).toBeVisible();
   });

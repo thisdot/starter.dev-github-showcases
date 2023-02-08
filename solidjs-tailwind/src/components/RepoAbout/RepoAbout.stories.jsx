@@ -1,32 +1,24 @@
 import { Router } from '@solidjs/router';
 import { RepoAboutWidget } from './RepoAbout';
-import { aboutData } from './data';
+import { RepoProvider } from '../../contexts/RepoContext';
+import { mockRepoInfo } from '../../../msw/mockRepoInfo';
 export default {
   title: 'Components/RepoAboutWidget',
   parameters: {
-    mockData: [
-      {
-        ...aboutData
+    msw: {
+      handlers: {
+        repoAbout: mockRepoInfo,
       },
-    ],
+    },
   },
 };
 
-const Template = (args) => (
-    <Router>
-        <RepoAboutWidget {...args} />
-    </Router>
+const Template = () => (
+  <Router>
+    <RepoProvider>
+      <RepoAboutWidget />
+    </RepoProvider>
+  </Router>
 );
 
 export const Default = Template.bind({});
-
-
-Default.args = {
-    info: {
-        data: {
-            description: 'This is a description',
-            homepageUrl: 'https://www.google.com',
-            topics: ['topic1', 'topic2', 'topic3']
-        }
-    }
-};
