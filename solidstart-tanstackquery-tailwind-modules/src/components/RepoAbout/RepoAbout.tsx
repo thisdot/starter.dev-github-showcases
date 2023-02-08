@@ -6,10 +6,11 @@ import styles from './RepoAbout.module.css';
 
 export const RepoAboutWidget = () => {
   const info = {
-      description: 'A SolidJS starter template with TailwindCSS, TypeScript, and Jest',
-      homepageUrl: '',
-      topics: ['solidjs', 'tailwindcss', 'typescript', 'jest'],
-  }
+    description:
+      'A SolidJS starter template with TailwindCSS, TypeScript, and Jest',
+    homepageUrl: '',
+    topics: ['solidjs', 'tailwindcss', 'typescript', 'jest'],
+  };
 
   return (
     <div class={styles.container}>

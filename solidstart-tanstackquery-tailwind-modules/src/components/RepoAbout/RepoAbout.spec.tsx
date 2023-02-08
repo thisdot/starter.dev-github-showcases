@@ -22,7 +22,9 @@ describe('Repo About', () => {
     ));
 
     const contents = await wrapper.findByTestId('about-info');
-    const topic = await wrapper.findByText('A SolidJS starter template with TailwindCSS, TypeScript, and Jest');
+    const topic = await wrapper.findByText(
+      'A SolidJS starter template with TailwindCSS, TypeScript, and Jest'
+    );
     expect(contents.innerHTML).toBeTruthy();
     expect(topic).toBeVisible();
   });
