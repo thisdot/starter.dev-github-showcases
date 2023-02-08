@@ -3,7 +3,9 @@ import { JSX } from 'solid-js';
 import { setSearch } from './RepoFilter.store';
 
 const SearchInput = () => {
-  const handleChange: JSX.EventHandler<HTMLInputElement, KeyboardEvent> = (e: KeyboardEvent) => {
+  const handleChange: JSX.EventHandler<HTMLInputElement, KeyboardEvent> = (
+    e: KeyboardEvent
+  ) => {
     setSearch((e.target as HTMLInputElement).value || '');
   };
 
