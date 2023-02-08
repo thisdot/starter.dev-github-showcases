@@ -10,3 +10,4 @@ export { default as PullRequestIcon } from './PullRequestIcon';
 export { default as InformationCircleIcon } from './InformationCircleIcon';
 export { default as CodeIcon } from './CodeIcon';
 export { default as EyeIcon } from './EyeIcon';
+export { default as RepoIcon } from './RepoIcon';

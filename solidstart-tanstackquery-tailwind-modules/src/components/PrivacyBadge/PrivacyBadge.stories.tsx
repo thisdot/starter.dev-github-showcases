@@ -1,9 +1,15 @@
+import { visibilityTypes } from '../RepoHeading/data';
 import PrivacyBadge from './PrivacyBadge';
 
 export default {
   title: 'Components/PrivacyBadge',
   argTypes: {
-    visibility: {},
+    visibility: {
+      options: Object.values(visibilityTypes),
+      control: {
+        type: 'select',
+      },
+    },
   },
 };
 

@@ -1,4 +1,6 @@
-function CodeIcon(props) {
+import { IconProps } from './types';
+
+function CodeIcon(props: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

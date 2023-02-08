@@ -1,0 +1,13 @@
+@tailwind utilities;
+
+.wrapper {
+  @apply pt-6 px-12 bg-gray-100 border-b border-gray-300;
+}
+
+.topRow {
+  @apply flex flex-col space-y-8 lg:space-y-0 lg:flex-row lg:items-center justify-between;
+}
+
+.bottomRow {
+  @apply mt-6;
+}
