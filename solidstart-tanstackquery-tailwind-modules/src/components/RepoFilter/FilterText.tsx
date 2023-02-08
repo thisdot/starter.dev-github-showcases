@@ -1,4 +1,4 @@
-import { Show, splitProps } from 'solid-js';
+import { Setter, Show, splitProps } from 'solid-js';
 import { CloseIcon } from '../Icons';
 import { defaultFilterType, defaultLanguage } from './data';
 import { filterType, language, search, sortBy } from './RepoFilter.store';
@@ -15,7 +15,13 @@ const modifyFilterTypeText = (filterText = 'test') => {
   return filterText;
 };
 
-const FilterText = (props) => {
+type FilterTextProps = {
+  filteredRepoCount?: number;
+  setFilterType: Setter<string>;
+  setLanguage: Setter<string>;
+}
+
+const FilterText = (props: FilterTextProps) => {
   const [local] = splitProps(props, [
     'filteredRepoCount',
     'setFilterType',

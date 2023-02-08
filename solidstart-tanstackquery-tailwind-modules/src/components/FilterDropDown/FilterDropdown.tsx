@@ -3,7 +3,15 @@ import { CaretIcon, CloseIcon, CorrectIcon } from '../Icons';
 import { clickOutside } from '../../utils/onclickOutside';
 import styles from '../RepoFilter/RepoFilter.module.css';
 
-const FilterDropdown = (props) => {
+type FilterDropDownProps = {
+  name: string;
+  title?: string;
+  items: string[];
+  selected: string;
+  selectOption: (value: string) => void;
+}
+
+const FilterDropdown = (props: FilterDropDownProps) => {
   const [local, others] = splitProps(props, [
     'name',
     'title',
@@ -17,15 +25,16 @@ const FilterDropdown = (props) => {
 
   return (
     <div
-      data-testid="filter-dropdown"
+      data-testid={`filter-dropdown-${local.name}`}
       class={styles.dropDownContainer}
+      //@ts-ignore
       use:_clickOutside={() => setShowOptions(false)}
     >
       <div>
         <button
           onClick={toggleOption}
           type="button"
-          data-testid="filter-dropdown-button"
+          data-testid={`filter-dropdown-button-${local.name}`}
           class={styles.dropDownButton}
           id="menu-button"
           aria-expanded="true"

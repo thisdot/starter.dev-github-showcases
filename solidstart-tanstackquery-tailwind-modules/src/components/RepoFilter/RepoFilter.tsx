@@ -13,7 +13,13 @@ import {
 import SearchInput from './SearchInput';
 import styles from './RepoFilter.module.css';
 
-const RepoFilter = (props) => {
+type RepoFilterProps = {
+  repoBtnText?: string;
+  languages: string[];
+  filteredRepoCount: number;
+}
+
+const RepoFilter = (props: RepoFilterProps) => {
   const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
   const sortOptions = Object.values(SORT_OPTIONS);
   const languageOptions = ['All', 'HTML', 'CSS', 'PHP'];
