@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { Show, splitProps } from 'solid-js';
 import { useLocation } from 'solid-start/router';
 import styles from './ProfilePage.module.css';
 import { ProfileNav } from '~/components/ProfileNav';
@@ -7,8 +7,8 @@ import { PageInfo, UserRepo } from '~/types/user-repo-type';
 import UserProfile from '../UserProfile';
 
 type ProfilePageProps = {
-  user?: UserProfileType;
-  reposInfo?: {
+  user: UserProfileType;
+  reposInfo: {
     pageInfo: PageInfo;
     repos: UserRepo[];
   };
@@ -34,16 +34,18 @@ const ProfilePage = (props: ProfilePageProps) => {
             data-testid="user-profile"
             class="pt-8 relative z-20 col-span-12 md:-top-20 md:col-span-4 xl:col-span-3"
           >
-            {local.user ? <UserProfile {...local.user} /> : null}
+            <Show when={local.user}>
+              <UserProfile {...local.user} />
+            </Show>
           </div>
           <div class="col-span-12 md:col-span-8 xl:col-span-9">
             <ProfileNav
               pathname={location.pathname}
               class="border-none md:hidden"
             />
-            {local.reposInfo ? (
+            <Show when={local.reposInfo}>
               <span>Here should be the repos list</span>
-            ) : null}
+            </Show>
           </div>
         </div>
       </div>
