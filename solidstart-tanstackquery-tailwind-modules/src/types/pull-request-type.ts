@@ -1,4 +1,4 @@
-import { Label } from "./label-type";
+import { Label } from './label-type';
 
 export interface PullRequest {
   id: string;
