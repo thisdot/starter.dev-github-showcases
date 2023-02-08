@@ -28,7 +28,7 @@ const FilterText = (props: FilterTextProps) => {
     'setLanguage',
   ]);
 
-  const clearFilters = () => 'clear';
+  const clearFilters = () => 'Clear';
 
   return (
     <div class={styles.filterTextContainer}>
