@@ -19,7 +19,7 @@ type FilterTextProps = {
   filteredRepoCount?: number;
   setFilterType: Setter<string>;
   setLanguage: Setter<string>;
-}
+};
 
 const FilterText = (props: FilterTextProps) => {
   const [local] = splitProps(props, [

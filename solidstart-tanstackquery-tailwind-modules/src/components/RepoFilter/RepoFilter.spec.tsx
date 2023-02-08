@@ -25,7 +25,9 @@ describe('Repo Meta data', () => {
   });
 
   it('should open and close dropdown', async () => {
-    const typeDropdown = await wrapper.queryByTestId('filter-dropdown-button-Type');
+    const typeDropdown = await wrapper.queryByTestId(
+      'filter-dropdown-button-Type'
+    );
     fireEvent.click(typeDropdown);
     let dropdownTitle = await wrapper.findByText('Select Type');
     expect(dropdownTitle).toBeTruthy();
@@ -35,17 +37,18 @@ describe('Repo Meta data', () => {
   });
   const dropdownOptions = ['Type', 'Language', 'Sort'];
   const dropDownBtn = [
-    [`filter-dropdown-button-${ dropdownOptions[0]}`, dropdownOptions[0]],
-    [`filter-dropdown-button-${ dropdownOptions[1]}`, dropdownOptions[1]],
-    [`filter-dropdown-button-${ dropdownOptions[2]}`, dropdownOptions[2]],
-  ]
+    [`filter-dropdown-button-${dropdownOptions[0]}`, dropdownOptions[0]],
+    [`filter-dropdown-button-${dropdownOptions[1]}`, dropdownOptions[1]],
+    [`filter-dropdown-button-${dropdownOptions[2]}`, dropdownOptions[2]],
+  ];
 
   it.each(dropDownBtn)(
-    'should find all drop down button and fire click event on each to display it content', 
+    'should find all drop down button and fire click event on each to display it content',
     async (accessor, expectation) => {
       const btn = await wrapper.queryByTestId(accessor);
       await fireEvent.click(btn);
       const dropdownTitle = await wrapper.findByText(`Select ${expectation}`);
       expect(dropdownTitle).toBeTruthy();
-  });
+    }
+  );
 });

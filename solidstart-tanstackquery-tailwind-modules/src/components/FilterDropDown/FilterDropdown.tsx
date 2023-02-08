@@ -9,7 +9,7 @@ type FilterDropDownProps = {
   items: string[];
   selected: string;
   selectOption: (value: string) => void;
-}
+};
 
 const FilterDropdown = (props: FilterDropDownProps) => {
   const [local, others] = splitProps(props, [

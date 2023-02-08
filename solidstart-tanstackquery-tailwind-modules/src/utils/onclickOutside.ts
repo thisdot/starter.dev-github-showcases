@@ -1,6 +1,6 @@
 import { Setter, onCleanup } from 'solid-js';
 
-export function clickOutside(el: Element, accessor: () => Setter<any> ) {
+export function clickOutside(el: Element, accessor: () => Setter<any>) {
   const onClick = (e: MouseEvent) => {
     !el.contains(e.target as Element) && accessor()?.();
   };

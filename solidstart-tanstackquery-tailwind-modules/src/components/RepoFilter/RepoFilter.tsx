@@ -17,7 +17,7 @@ type RepoFilterProps = {
   repoBtnText?: string;
   languages: string[];
   filteredRepoCount: number;
-}
+};
 
 const RepoFilter = (props: RepoFilterProps) => {
   const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
