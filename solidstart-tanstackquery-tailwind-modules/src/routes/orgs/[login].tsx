@@ -1,19 +1,22 @@
-import { createSignal, For } from 'solid-js';
+import { createEffect, createSignal, For } from 'solid-js';
 import { OrgAbout } from '~/components/OrgAbout';
-// import { createQuery } from '@tanstack/solid-query';
-// import { useParams } from 'solid-start';
+import { createQuery } from '@tanstack/solid-query';
+import { useParams } from 'solid-start';
 import { RepoCard } from '~/components/RepoCard';
-import { repoCardMockedData } from '~/components/RepoCard/data';
 
-// import getOrgRepos from '../services/get-org-repos';
+import getOrgRepos from '~/services/get-org-repos';
+import { Repository } from '~/types/org-repos';
 
-// const parseRepoData = (repos) => {
-//   return repos?.edges.map((res) => res.node);
-// };
+const parseRepoData = (repos: {
+  edges: {node: Repository;}[];
+}) => {
+  return repos?.edges?.map((res) => res.node);
+};
 
 export default function OrgProfile() {
-  // const params = useParams();
-  const [orgInfo] = createSignal<{
+  const params = useParams();
+  const [repos, setRepos] = createSignal<Repository[]>([]);
+  const [orgInfo, setOrgInfo] = createSignal<{
     name: string;
     avatarUrl: string;
   }>({
@@ -21,19 +24,23 @@ export default function OrgProfile() {
     avatarUrl: '',
   });
 
-  // const orgRepos = createQuery(() => ['org-repos'], getOrgRepos({organization: params?.org, first: 10,}));
+  const orgRepos = createQuery(
+    () => ['org-repos'], 
+    () => getOrgRepos({ organization: params?.login, first: 10 })
+  );
 
-  // createEffect(() => {
-  //   if (orgRepos.isSuccess && orgRepos.data) {
-  //     const result = parseRepoData(orgRepos.data.repositories);
-  //     setOrgInfo(orgRepos.data.orgInfo);
-  //   }
-  // });
+  createEffect(() => {
+    if (orgRepos.isSuccess && orgRepos.data) {
+      const reposResults = parseRepoData(orgRepos.data.repositories);
+      setOrgInfo(orgRepos.data.orgInfo);
+      setRepos(reposResults);
+    }
+  });
 
   return (
-    <div class="relative pt-4">
+    <div class="relative">
       <div class="border-b border-gray-200 sticky top-0 bg-white hidden md:block z-30">
-        <div class="grid grid-cols-12 max-w-screen-lg mx-auto bg-red-300">
+        <div class="grid grid-cols-12 max-w-screen-lg mx-auto">
           <div class="col-span-12 md:col-span-8 xl:col-span-12 px-2">
             <OrgAbout {...orgInfo()} />
           </div>
@@ -47,8 +54,7 @@ export default function OrgProfile() {
           <div class="col-span-12 md:col-span-8 xl:col-span-12">
             {/* TODO:  <ProfileNav /> goes here with class="border-none */}
             {/* TODO:  <RepoFilter /> goes here */}
-            {/* TODO: replace repoCardProps with real data */}
-            <For each={[repoCardMockedData]}>
+            <For each={repos()}>
               {(props) => <RepoCard {...props} isProfilePage />}
             </For>
           </div>

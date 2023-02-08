@@ -7,7 +7,7 @@ interface OrgAboutProps {
 
 const OrgAbout = (props: OrgAboutProps) => {
   return (
-    <div class="flex items-center my-2 bg-red-300">
+    <div class="flex items-center my-2">
       <img
         src={props.avatarUrl}
         height="30"
