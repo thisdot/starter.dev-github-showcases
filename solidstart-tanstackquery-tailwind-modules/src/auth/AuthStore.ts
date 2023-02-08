@@ -1,5 +1,4 @@
 import { SetStoreFunction, createStore } from 'solid-js/store';
-import { isServer } from 'solid-js/web';
 
 export type StoreProps = {
   token: string | null;
@@ -8,7 +7,7 @@ export type StoreProps = {
 };
 
 const [authStore, setAuth] = createStore<StoreProps>({
-  token: !isServer && window.sessionStorage.getItem('token'),
+  token: null,
   user: null,
   get isAuthenticated() {
     return !!this.token;

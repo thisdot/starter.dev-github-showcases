@@ -20,25 +20,34 @@ import { useAuth } from './auth';
 import protectedPaths from './utils/protected-paths';
 import { StoreProps } from './auth/AuthStore';
 import Layout from './components/layout';
+import { isServer } from 'solid-js/web';
+import { SetStoreFunction } from 'solid-js/store';
 
 export default function Root() {
-  const { authStore }: { authStore: StoreProps } = useAuth();
+  const {
+    authStore,
+    setAuth,
+  }: { authStore: StoreProps; setAuth: SetStoreFunction<StoreProps> } =
+    useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        refetchOnMount: true,
-        staleTime: 1000,
+        refetchOnMount: false,
+        staleTime: Infinity,
       },
     },
   });
   createEffect(() => {
+    const isToken = !isServer && window.sessionStorage.getItem('token');
     if (
       protectedPaths.includes(location.pathname) &&
       !authStore.isAuthenticated
     ) {
       navigate('/signin');
+    } else if (isToken) {
+      setAuth({ user: authStore.user, token: isToken });
     }
   });
 
