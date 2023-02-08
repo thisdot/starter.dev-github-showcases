@@ -18,6 +18,7 @@ query UserTopRepos {
           name
           color
         }
+        visibility
         isPrivate
         stargazerCount
         forkCount
