@@ -6,7 +6,7 @@ const SearchInput = () => {
   const handleChange: JSX.EventHandler<HTMLInputElement, KeyboardEvent> = (
     e: KeyboardEvent
   ) => {
-    setSearch((e.target as HTMLInputElement).value || '');
+    setSearch((e.target as HTMLInputElement).value);
   };
 
   return (
