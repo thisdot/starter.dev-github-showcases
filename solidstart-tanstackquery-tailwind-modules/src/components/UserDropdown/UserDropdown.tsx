@@ -24,14 +24,14 @@ const UserDropdown = (props: IProps) => {
           onClick={() => setExpanded(!expanded())}
         >
           <div class={styles.avatarContainer}>
-            {props.image && (
+            <Show when={props.image}>
               <img
                 src={props.image}
                 alt="Profile Photo"
                 width={32}
                 height={32}
               />
-            )}
+            </Show>
           </div>
           <ChevronDownIcon class="-mr-1 ml-2 h-3 w-3" aria-hidden="true" />
         </button>
