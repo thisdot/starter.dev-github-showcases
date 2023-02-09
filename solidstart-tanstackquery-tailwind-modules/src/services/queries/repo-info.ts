@@ -4,6 +4,7 @@ export const REPO_INFO_QUERY = `
       defaultBranchRef {
         name
       }
+      visibility
       isPrivate
       stargazerCount
       forkCount
