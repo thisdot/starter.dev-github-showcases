@@ -4,7 +4,7 @@ import styles from './RepoActionButtons.module.css';
 const formatCountString = (count: number) => {
   let countText = `${count}`;
   if (count && count > 1000) {
-    let digits = countText.split('');
+    const digits = countText.split('');
     digits.splice(digits.length - 3, 3);
     countText = `${digits.join('')}k`;
   }
@@ -19,7 +19,7 @@ type CountButtonGroupProps = {
 function CountButtonGroup(props: CountButtonGroupProps) {
   const merged = mergeProps({ count: 0 }, props);
   const c = children(() => props.children);
-  let buttonText = c()
+  const buttonText = c()
     ?.toString()
     .replace('[object Object],', '')
     .toLowerCase();
