@@ -1,1 +1,1 @@
-export { default as PRAndIssuesListItem } from './PRAndIssueCard';
+export { default as PRAndIssueCard } from './PRAndIssueCard';

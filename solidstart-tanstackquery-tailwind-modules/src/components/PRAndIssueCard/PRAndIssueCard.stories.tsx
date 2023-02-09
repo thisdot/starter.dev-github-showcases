@@ -1,5 +1,5 @@
 import { Router } from '@solidjs/router';
-import PRAndIssuesCard, { PRAndIssuesCardProps } from './PRAndIssueCard';
+import PRAndIssueCard, { PRAndIssueCardProps } from './PRAndIssueCard';
 import { testData } from './data';
 
 export default {
@@ -8,24 +8,29 @@ export default {
     number: {},
     title: {},
     url: {},
-    state: {},
-    createdAt: {},
-    closedAt: {},
-    authorName: {},
-    commentCount: {},
-    labels: {},
+    state: {
+      options: ['OPEN', 'CLOSED', 'MERGED'],
+      control: {
+        type: 'select',
+      },
+    },
     type: {
       options: ['pr', 'issue'],
       control: {
         type: 'select',
       },
     },
+    createdAt: {},
+    closedAt: {},
+    authorName: {},
+    commentCount: {},
+    labels: {},
   },
 };
 
-const Template = (args: PRAndIssuesCardProps) => (
+const Template = (args: PRAndIssueCardProps) => (
   <Router>
-    <PRAndIssuesCard {...args} />
+    <PRAndIssueCard {...args} />
   </Router>
 );
 

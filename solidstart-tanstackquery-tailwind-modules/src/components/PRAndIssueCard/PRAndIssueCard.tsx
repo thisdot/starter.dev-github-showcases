@@ -16,13 +16,13 @@ export type Labels = {
   name: string;
 };
 
-export type States = 'MERGED' | 'CLOSED' | 'OPEN';
+export type StateOption = 'MERGED' | 'CLOSED' | 'OPEN';
 
-export type PRAndIssuesCardProps = {
+export type PRAndIssueCardProps = {
   number: number;
   title: string;
   url: string;
-  state: States;
+  state: StateOption;
   createdAt: string;
   closedAt?: string;
   authorName: string;
@@ -31,7 +31,7 @@ export type PRAndIssuesCardProps = {
   type: 'pr' | 'issue';
 };
 
-const PRAndIssuesCard = (props: PRAndIssuesCardProps) => {
+const PRAndIssueCard = (props: PRAndIssueCardProps) => {
   const [local] = splitProps(props, [
     'number',
     'title',
@@ -112,7 +112,7 @@ const PRAndIssuesCard = (props: PRAndIssuesCardProps) => {
               <Match when={local.closedAt}>
                 <span>closed</span>
               </Match>
-            </Switch>
+            </Switch>{' '}
             on {format(new Date(local.createdAt), 'MMM d, yyyy')}
           </span>
         </div>
@@ -134,4 +134,4 @@ const PRAndIssuesCard = (props: PRAndIssuesCardProps) => {
   );
 };
 
-export default PRAndIssuesCard;
+export default PRAndIssueCard;

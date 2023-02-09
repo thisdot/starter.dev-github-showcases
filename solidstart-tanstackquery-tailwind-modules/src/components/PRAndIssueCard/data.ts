@@ -1,8 +1,9 @@
 export const testData = {
   number: 10,
-  title: 'New title for this card gies here',
+  title: 'New title for this card goes here',
   url: '/',
-  // state: 'OPEN',
+  state: 'OPEN',
+  type: 'pr',
   createdAt: '03-03-2018',
   closedAt: undefined,
   authorName: 'hdjerry',
@@ -17,5 +18,4 @@ export const testData = {
       name: 'WIP DO NOT MERGE',
     },
   ],
-  type: 'pr',
 };
