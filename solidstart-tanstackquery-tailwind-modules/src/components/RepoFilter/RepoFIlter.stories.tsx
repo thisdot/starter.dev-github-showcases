@@ -1,13 +1,13 @@
-import RepoFilter from './RepoFilter';
+import RepoFilter, { RepoFilterProps } from './RepoFilter';
 
 export default {
   title: 'components/ Repo filter',
   argTypes: {},
 };
 
-const Template = (args) => <RepoFilter {...args} />;
+const Template = (args: RepoFilterProps) => <RepoFilter {...args} />;
 
-export const Default = Template.bind({});
+export const Default: any = Template.bind({});
 Default.args = {
-  repoText: 'New',
+  repoBtnText: 'New',
 };

@@ -13,7 +13,7 @@ import {
 import SearchInput from './SearchInput';
 import styles from './RepoFilter.module.css';
 
-type RepoFilterProps = {
+export type RepoFilterProps = {
   repoBtnText?: string;
   languages: string[];
   filteredRepoCount: number;

@@ -3,7 +3,6 @@ import { initializeWorker, mswDecorator } from "msw-storybook-addon/dist/mswDeco
 import { render } from "solid-js/web";
 import '../src/root.css';
 
-import { initializeWorker, mswDecorator } from "msw-storybook-addon/dist/mswDecorator";
 
 // Initialize MSW
 initializeWorker();
