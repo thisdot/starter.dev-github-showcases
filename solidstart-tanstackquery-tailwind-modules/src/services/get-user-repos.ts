@@ -10,7 +10,7 @@ type UserReposVariables = {
   beforeCursor: string;
   orderBy: { field: string; direction: string };
   first: number;
-  last: number;
+  last?: number;
 };
 type Response = {
   data: UserRepoInfo;
