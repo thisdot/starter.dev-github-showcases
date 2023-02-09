@@ -9,7 +9,7 @@ import { Repository } from '~/types/org-repos';
 import { RepoFilter } from '~/components/RepoFilter';
 
 const parseRepoData = (repos: { edges: { node: Repository }[] }) => {
-  return repos?.edges?.map((res) => res.node);
+  return repos.edges.map((res) => res.node);
 };
 
 export default function OrgProfile() {
