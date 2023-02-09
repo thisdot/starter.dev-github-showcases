@@ -31,7 +31,7 @@ const RepoFilter = (props: RepoFilterProps) => {
   );
 
   const selectLanguage = () => null;
-  const selectType = () => null;
+  const selectType = (value: string) => setFilterType(value);
   const selectSort = () => null;
 
   return (
