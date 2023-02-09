@@ -12,3 +12,7 @@ export { default as IssuesIcon } from './IssuesIcon';
 export { default as MergedPrIcon } from './MergedPrIcon';
 export { default as CommentIcon } from './CommentIcon';
 export { default as ClosedPrIcon } from './ClosedPrIcon';
+export { default as InformationCircleIcon } from './InformationCircleIcon';
+export { default as CodeIcon } from './CodeIcon';
+export { default as EyeIcon } from './EyeIcon';
+export { default as RepoIcon } from './RepoIcon';
