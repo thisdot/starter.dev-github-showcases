@@ -13,6 +13,7 @@ type Response = {
   data: RepoPullRequestsQuery;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function parsePullRequests(connection?: any) {
   if (!connection) {
     return {
@@ -27,6 +28,7 @@ function parsePullRequests(connection?: any) {
   const totalCount = connection.totalCount;
 
   const pullRequests = nodes.reduce(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (pullRequests: PullRequest[], pullRequest: any) => {
       if (!pullRequest) {
         return pullRequests;
