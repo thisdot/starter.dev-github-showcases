@@ -41,7 +41,6 @@ function RepoHeader(props: RepoHeaderProps) {
       </div>
       <div class={styles.bottomRow}>
         <TabNavigation
-          //@ts-ignore
           tabs={createTabList({
             issueCount: local.openIssueCount,
             pullRequestCount: local.openPullRequestCount,

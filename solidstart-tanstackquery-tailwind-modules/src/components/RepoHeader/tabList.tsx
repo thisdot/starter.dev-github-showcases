@@ -1,12 +1,13 @@
 import { mergeProps } from 'solid-js';
 import { PullRequestIcon, InformationCircleIcon, CodeIcon } from '../Icons';
+import { Tab } from '../TabNavigation/TabNavigation';
 
 type CreateTabListProps = {
   issueCount: number;
   pullRequestCount: number;
 };
 
-export function createTabList(props: CreateTabListProps) {
+export const createTabList = (props: CreateTabListProps): Tab[] => {
   const merged = mergeProps({ issuesCount: 0, pullRequestsCount: 0 }, props);
 
   return [
@@ -30,4 +31,4 @@ export function createTabList(props: CreateTabListProps) {
       count: merged.pullRequestCount,
     },
   ];
-}
+};

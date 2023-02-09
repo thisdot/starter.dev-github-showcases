@@ -1,26 +1,26 @@
 import { NavLink } from '@solidjs/router';
-import { For, Show } from 'solid-js';
+import { For, JSXElement, Show } from 'solid-js';
 import cn from 'classnames';
 import styles from './TabNavigation.module.css';
+import { IconProps } from '../Icons/types';
 
-type Tabs = {
+export type Tab = {
   path: string;
   title: string;
-  count: number;
-  Icon: Element;
+  count?: number;
+  Icon: (props: IconProps) => JSXElement;
 };
 
 type TabNavigationProps = {
   pathname: string;
   class: string;
-  tabs: () => Tabs[];
+  tabs: Tab[];
   basePath: string;
 };
 
 const TabNavigation = (props: TabNavigationProps) => {
   const isCurrentTab = (pathName: string) => {
     const otherPaths = props.tabs
-      //@ts-ignore
       .filter(({ path }: { path: string }) => path !== pathName)
       .map(({ path }: { path: string }) => path);
     return pathName !== ''
@@ -31,12 +31,8 @@ const TabNavigation = (props: TabNavigationProps) => {
   return (
     <div class={`${styles.container} ${props.class}`}>
       <nav class={styles.nav} aria-label="Tabs">
-        <For
-          //@ts-ignore
-          each={props.tabs}
-          fallback={<div>Loading...</div>}
-        >
-          {(item, index) => {
+        <For each={props.tabs} fallback={<div>Loading...</div>}>
+          {(item) => {
             const href =
               item.path === ''
                 ? `/${props.basePath}`
@@ -44,8 +40,6 @@ const TabNavigation = (props: TabNavigationProps) => {
             return (
               <NavLink
                 href={href}
-                //@ts-ignore
-                key={index}
                 class={`${
                   isCurrentTab(item.path)
                     ? styles.tabActive
