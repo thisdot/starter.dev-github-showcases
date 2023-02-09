@@ -20,6 +20,10 @@ export interface OrgRepoInfo {
   organization: {
     avatarUrl: string;
     name: string;
-    repositories: Repository[];
+    repositories: {
+      edges: {
+        node: Repository;
+      }[];
+    };
   };
 }
