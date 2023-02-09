@@ -1,5 +1,6 @@
 import { For, splitProps } from 'solid-js';
-import { RepoCard } from '../RepoCard';
+import { RepoCard } from '~/components/RepoCard';
+import { RepoFilter } from '~/components/RepoFilter';
 
 const UserRepos = (props) => {
   const [local] = splitProps(props, [
@@ -12,10 +13,10 @@ const UserRepos = (props) => {
 
   return (
     <>
-      {/* <RepoFilter
+      <RepoFilter
         languages={local.languages}
         filteredRepoCount={local.repos.length}
-      /> */}
+      />
       {local.loading ? (
         <div>Loading...</div>
       ) : (

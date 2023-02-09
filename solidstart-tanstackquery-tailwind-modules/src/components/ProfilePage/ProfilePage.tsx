@@ -4,7 +4,8 @@ import styles from './ProfilePage.module.css';
 import { ProfileNav } from '~/components/ProfileNav';
 import { UserProfile as UserProfileType } from '~/types/user-profile-type';
 import { PageInfo, UserRepo } from '~/types/user-repo-type';
-import UserProfile from '../UserProfile';
+import UserProfile from '~/components/UserProfile';
+import { UserRepos } from '~/components/UserRepos';
 
 type ProfilePageProps = {
   user: UserProfileType;
@@ -44,7 +45,7 @@ const ProfilePage = (props: ProfilePageProps) => {
               class="border-none md:hidden"
             />
             <Show when={local.reposInfo}>
-              <span>Here should be the repos list</span>
+              <UserRepos {...local.reposInfo} />
             </Show>
           </div>
         </div>

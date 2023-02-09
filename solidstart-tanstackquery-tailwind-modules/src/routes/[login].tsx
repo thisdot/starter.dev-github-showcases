@@ -15,11 +15,35 @@ type GetUserRepos = {
 const Profile = () => {
   const params = useParams();
   const location = useLocation();
-  const [profile, setProfile] = createSignal<UserProfile>();
-  const [userReposInfo, setReposInfo] = createSignal<GetUserRepos>();
+  const [profile, setProfile] = createSignal<UserProfile>({
+    avatarUrl: '',
+    bio: '',
+    company: '',
+    username: '',
+    followers: 0,
+    following: 0,
+    location: '',
+    login: '',
+    name: '',
+    organizations: {
+      nodes: [],
+    },
+    starredRepos: 0,
+    twitterUsername: '',
+    websiteUrl: '',
+  });
+  const [userReposInfo, setReposInfo] = createSignal<GetUserRepos>({
+    pageInfo: {
+      hasNextPage: false,
+      hasPreviousPage: false,
+      startCursor: '',
+      endCursor: '',
+    },
+    repos: [],
+  });
 
   const queryProfile = createQuery(
-    () => [params.login],
+    () => ['query-profile'],
     () =>
       userProfile({
         username: params?.login,
@@ -27,7 +51,7 @@ const Profile = () => {
   );
 
   const queryRepos = createQuery(
-    () => [{ username: params.login}],
+    () => ['query-repos'],
     () =>
       getUserRepos({
         username: params?.login,
@@ -42,13 +66,13 @@ const Profile = () => {
   );
 
   createEffect(() => {
-    if (queryProfile.isSuccess) {
+    if (queryProfile.isSuccess && queryProfile.data) {
       setProfile(queryProfile.data);
     }
   });
 
   createEffect(() => {
-    if (queryRepos.isSuccess) {
+    if (queryRepos.isSuccess && queryRepos.data) {
       setReposInfo(queryRepos.data);
     }
   });
