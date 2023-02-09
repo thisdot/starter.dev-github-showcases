@@ -11,4 +11,4 @@ const Template = () => (
   </Router>
 );
 
-export const Default = Template.bind({});
+export const Default: any = Template.bind({});
