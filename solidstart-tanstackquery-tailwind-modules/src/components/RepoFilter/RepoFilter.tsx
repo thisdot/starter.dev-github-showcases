@@ -39,7 +39,6 @@ const RepoFilter = (props: RepoFilterProps) => {
     setIsOnlySorted(!search());
   });
 
-
   return (
     <>
       <div class={styles.repoFilterContainer}>
