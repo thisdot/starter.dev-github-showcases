@@ -22,9 +22,7 @@ describe('Repo About', () => {
     ));
 
     const contents = await wrapper.findByTestId('about-info');
-    const topic = await wrapper.findByText(
-      'This is a description'
-    );
+    const topic = await wrapper.findByText('This is a description');
     expect(contents.innerHTML).toBeTruthy();
     expect(topic).toBeVisible();
   });
