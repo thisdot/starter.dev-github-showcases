@@ -1,5 +1,5 @@
+import { A } from '@solidjs/router';
 import { Show } from 'solid-js';
-import { A } from 'solid-start';
 import { LinkIcon } from '../Icons';
 import styles from './RepoAbout.module.css';
 

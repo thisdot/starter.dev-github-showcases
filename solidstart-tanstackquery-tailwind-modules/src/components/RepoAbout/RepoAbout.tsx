@@ -18,9 +18,9 @@ export const RepoAboutWidget = () => {
         </div>
       </div>
       <div>
-        <a class={styles.readmeLink}>
+        <span class={styles.readmeLink}>
           <BookOpenIcon class={styles.readmeIcon} /> Readme
-        </a>
+        </span>
       </div>
     </div>
   );
