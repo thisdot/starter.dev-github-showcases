@@ -15,14 +15,16 @@ const RepoReadMe = () => {
   const params = useParams();
   const [readme, setReadme] = createSignal<string>();
 
-  const resReadMe = createQuery(() => ['read-me'], () =>
-    getReadme({
-      owner: params.owner,
-      name: params.name,
-      expression: params.path
-        ? `HEAD:${params.path}/README.md`
-        : 'HEAD:README.md',
-    })
+  const resReadMe = createQuery(
+    () => ['read-me'],
+    () =>
+      getReadme({
+        owner: params.owner,
+        name: params.name,
+        expression: params.path
+          ? `HEAD:${params.path}/README.md`
+          : 'HEAD:README.md',
+      })
   );
 
   createEffect(() => {
@@ -30,7 +32,6 @@ const RepoReadMe = () => {
       setReadme(resReadMe.data);
     }
   });
-
 
   return (
     <>
