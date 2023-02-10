@@ -3,7 +3,10 @@ import { useParams } from '@solidjs/router';
 import styles from './FileViewer.module.css';
 import FileCode from './FileCode';
 import FileText from './FileText';
-import { mapExtensionToLanguage, ExtensionType } from './mapExtensionToLanguage';
+import {
+  mapExtensionToLanguage,
+  ExtensionType,
+} from './mapExtensionToLanguage';
 import { RepoFile } from '~/types/repo-file-type';
 import { createQuery } from '@tanstack/solid-query';
 import getRepoFile from '~/services/get-repo-file';
@@ -13,25 +16,27 @@ const FileViewer = () => {
   const params = useParams();
   const [resBlob, setResBlob] = createSignal<RepoFile['blob']>({
     byteSize: 0,
-    text: ''
-  })
+    text: '',
+  });
 
-  const query = createQuery(() => ['repo-file'], () => getRepoFile({
-    owner: params.owner,
-    name: params.name,
-    expression: `${branch}:${params.path || ''}`,
-  }));
-
+  const query = createQuery(
+    () => ['repo-file'],
+    () =>
+      getRepoFile({
+        owner: params.owner,
+        name: params.name,
+        expression: `${branch}:${params.path || ''}`,
+      })
+  );
 
   const branch = params.branch;
   const path = params.path;
 
   createEffect(() => {
     if (query.isSuccess && !query.isLoading && query.data) {
-      setResBlob(query.data)
+      setResBlob(query.data);
     }
-  })
-
+  });
 
   const extension = path.split('.').pop() as ExtensionType;
   const language = mapExtensionToLanguage(extension);
