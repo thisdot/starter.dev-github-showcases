@@ -13,6 +13,7 @@ export default function OrgProfile() {
   const params = useParams();
   const location = useLocation();
   const [repos, setRepos] = createSignal<Repo[]>([]);
+  const [repoLanguages, setRepoLanguages] = createSignal<string[]>([]);
   const [orgInfo, setOrgInfo] = createSignal<{
     name: string;
     avatarUrl: string;
@@ -38,9 +39,10 @@ export default function OrgProfile() {
 
   createEffect(() => {
     if (orgRepos.isSuccess && orgRepos.data) {
-      const [reposResults] = useRepoSortFilter(orgRepos.data.repos);
+      const [reposResults, languages] = useRepoSortFilter(orgRepos.data.repos);
       setOrgInfo(orgRepos.data.orgInfo);
       setRepos(reposResults);
+      setRepoLanguages(languages);
     }
   });
 
@@ -67,7 +69,10 @@ export default function OrgProfile() {
         <div class="grid grid-cols-12 gap-8">
           <div class="col-span-12 md:col-span-8 xl:col-span-12">
             {/* TODO:  <TabNav /> goes here with class="border-none */}
-            <RepoFilter languages={[]} filteredRepoCount={repos().length} />
+            <RepoFilter
+              languages={repoLanguages()}
+              filteredRepoCount={repos().length}
+            />
             <For each={repos()}>
               {(props) => <RepoCard {...props} isProfilePage />}
             </For>
