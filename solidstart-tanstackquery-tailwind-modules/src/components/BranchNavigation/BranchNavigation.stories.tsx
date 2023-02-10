@@ -8,7 +8,7 @@ export default {
 
 const Template = () => (
   <Router>
-      <BranchNavigation branch='main' />
+    <BranchNavigation branch="main" />
   </Router>
 );
 
