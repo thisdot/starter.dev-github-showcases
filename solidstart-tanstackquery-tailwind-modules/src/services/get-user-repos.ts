@@ -2,7 +2,7 @@ import { useAuth } from '../auth';
 import FetchApi, { ApiProps } from './api';
 import { GITHUB_GRAPHQL } from '../utils/constants';
 import { USER_REPOS_QUERY } from './queries/user-repos';
-import { UserRepo, UserRepoInfo } from '~/types/user-repo-type';
+import { Repo, UserRepoInfo } from '~/types/user-repo-type';
 
 type UserReposVariables = {
   username: string;
@@ -33,7 +33,7 @@ const getUserRepos = async (variables: UserReposVariables) => {
   if (!nodes) {
     return undefined;
   }
-  const repos = nodes?.reduce((acc: UserRepo[], repo: UserRepo) => {
+  const repos = nodes?.reduce((acc: Repo[], repo: Repo) => {
     return repo
       ? [
           ...acc,

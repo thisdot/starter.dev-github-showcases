@@ -1,20 +1,15 @@
 import { For, Show, splitProps } from 'solid-js';
 import { RepoCard } from '~/components/RepoCard';
 import { RepoFilter } from '~/components/RepoFilter';
+import { RepoInfos } from '../ProfilePage/ProfilePage';
 
-const UserRepos = (props) => {
-  const [local] = splitProps(props, [
-    'loading',
-    'owner',
-    'repos',
-    'pageInfo',
-    'languages',
-  ]);
+const UserRepos = (props: RepoInfos) => {
+  const [local] = splitProps(props, ['repos', 'pageInfo']);
 
   return (
     <>
       <RepoFilter
-        languages={local.languages}
+        languages={['test', 'test2']}
         filteredRepoCount={local.repos.length}
       />
       <Show when={local.repos.length > 0}>

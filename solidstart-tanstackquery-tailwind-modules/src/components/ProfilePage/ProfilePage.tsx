@@ -1,23 +1,32 @@
-import { Show, splitProps } from 'solid-js';
+import { Show, createEffect, createSignal, splitProps } from 'solid-js';
 import { useLocation } from 'solid-start/router';
 import styles from './ProfilePage.module.css';
 import { ProfileNav } from '~/components/ProfileNav';
 import { UserProfile as UserProfileType } from '~/types/user-profile-type';
-import { PageInfo, UserRepo } from '~/types/user-repo-type';
+import { PageInfo, Repo } from '~/types/user-repo-type';
 import UserProfile from '~/components/UserProfile';
 import { UserRepos } from '~/components/UserRepos';
+import useRepoSortFilter from '~/utils/useRepoSortFilter';
+
+export type RepoInfos = {
+  pageInfo: PageInfo;
+  repos: Repo[];
+};
 
 type ProfilePageProps = {
   user: UserProfileType;
-  reposInfo: {
-    pageInfo: PageInfo;
-    repos: UserRepo[];
-  };
+  reposInfo: RepoInfos;
 };
 
 const ProfilePage = (props: ProfilePageProps) => {
   const location = useLocation();
+  const [reposToshow, setReposToShow] = createSignal<Repo[]>([]);
   const [local] = splitProps(props, ['reposInfo', 'user']);
+
+  createEffect(() => {
+    const [reposResults] = useRepoSortFilter(local.reposInfo.repos);
+    setReposToShow(reposResults);
+  });
 
   return (
     <div class={styles.container}>
@@ -45,7 +54,10 @@ const ProfilePage = (props: ProfilePageProps) => {
               class="border-none md:hidden"
             />
             <Show when={local.reposInfo}>
-              <UserRepos {...local.reposInfo} />
+              <UserRepos
+                repos={reposToshow()}
+                pageInfo={local.reposInfo.pageInfo}
+              />
             </Show>
           </div>
         </div>
