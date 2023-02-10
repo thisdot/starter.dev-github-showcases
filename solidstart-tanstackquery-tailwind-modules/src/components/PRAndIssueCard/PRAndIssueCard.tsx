@@ -12,7 +12,7 @@ import {
 import { A } from '@solidjs/router';
 
 export type Labels = {
-  color?: string;
+  color: string;
   name: string;
 };
 
