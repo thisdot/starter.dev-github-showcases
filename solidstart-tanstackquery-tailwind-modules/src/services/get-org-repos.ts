@@ -35,7 +35,7 @@ const getOrgRepos = async (variables: OrgReposVariable) => {
   const pageInfo = resp.data?.organization?.repositories?.pageInfo;
 
   if (!nodes) {
-    return undefined;
+    return null;
   }
   const repos = nodes?.reduce((acc: Repo[], repo: Repo) => {
     return repo
