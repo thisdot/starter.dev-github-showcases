@@ -1,25 +1,18 @@
-export interface Repository {
-  name: string;
-  description: string;
-  url: string;
-  forkCount: number;
-  stargazerCount: number;
-  primaryLanguage: {
-    color: string;
-    name: string;
-    id: string;
-  };
-  updatedAt: string;
-  owner: {
-    login: string;
-  };
-  visibility: string;
+import { Repo } from './user-repo-type';
+export interface PageInfo {
+  endCursor?: string | null;
+  startCursor?: string | null;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
 }
 
 export interface OrgRepoInfo {
   organization: {
     avatarUrl: string;
     name: string;
-    repositories: Repository[];
+    repositories: {
+      nodes: Repo[];
+      pageInfo: PageInfo;
+    };
   };
 }

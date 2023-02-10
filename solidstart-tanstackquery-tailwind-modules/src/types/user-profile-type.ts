@@ -2,12 +2,9 @@ export interface UserProfile {
   avatarUrl: string;
   bio: string;
   company: string;
-  followers: {
-    totalCount: number;
-  };
-  following: {
-    totalCount: number;
-  };
+  username: string;
+  followers: number;
+  following: number;
   location: string;
   login: string;
   name: string;
@@ -15,11 +12,10 @@ export interface UserProfile {
     nodes: {
       avatarUrl: string;
       login: string;
+      name: string;
     }[];
   };
-  starredRepositories: {
-    totalCount: number;
-  };
+  starredRepos: number;
   twitterUsername: string;
   websiteUrl: string;
 }

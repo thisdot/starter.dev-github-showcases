@@ -9,6 +9,7 @@ export interface RepoInfo {
     name: string;
   };
   isPrivate: boolean;
+  visibility: string;
   stargazerCount: number;
   forkCount: number;
   description: string;

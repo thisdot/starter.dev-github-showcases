@@ -23,6 +23,8 @@ gitignore
 .DS_Store
 Thumbs.db
 
+yarn-error.log
+
 yarn.lock
 package-lock.json
 

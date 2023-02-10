@@ -14,7 +14,7 @@ import {
 import SearchInput from './SearchInput';
 import styles from './RepoFilter.module.css';
 
-type RepoFilterProps = {
+export type RepoFilterProps = {
   repoBtnText?: string;
   languages: string[];
   filteredRepoCount: number;
@@ -32,7 +32,7 @@ const RepoFilter = (props: RepoFilterProps) => {
   );
 
   const selectLanguage = () => null;
-  const selectType = () => null;
+  const selectType = (value: string) => setFilterType(value);
   const selectSort = (value: string) => setSortBy(value);
 
   return (

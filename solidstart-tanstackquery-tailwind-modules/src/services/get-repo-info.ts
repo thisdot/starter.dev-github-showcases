@@ -55,6 +55,7 @@ const getRepoInfo = async (variables: RepoInfoVariables) => {
     branch: repository?.defaultBranchRef?.name ?? 'HEAD',
     info: {
       isPrivate: repository?.isPrivate,
+      visibility: repository?.visibility,
       forkCount: repository?.forkCount,
       description: repository?.description,
       homepageUrl: repository?.homepageUrl,
