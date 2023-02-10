@@ -1,6 +1,6 @@
 import { FILTER_TYPE_OPTIONS } from '../components/RepoFilter/data';
 import { filterType } from '../components/RepoFilter/RepoFilter.store';
-import { Repo } from '../types/user-repo-type';
+import { Repo } from '~/types/user-repo-type';
 
 export const repoDataFilteredByType = (repos: Repo[]): Repo[] => {
   let response = repos.slice();
