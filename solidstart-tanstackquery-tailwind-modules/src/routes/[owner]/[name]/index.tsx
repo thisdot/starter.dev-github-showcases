@@ -1,14 +1,27 @@
-import { Switch, Match } from 'solid-js';
+import { Switch, Match, createSignal, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import { useParams } from 'solid-start';
-import { RepoAbout } from '~/components/RepoAbout';
-import { RepoHeader } from '~/components/RepoHeader/';
 import getRepoInfo from '~/services/get-repo-info';
 import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
 import { Info } from '~/types/repo-info-type';
+import { RepoHeader } from '~/components/RepoHeader';
+import { RepoAbout } from '~/components/RepoAbout';
 
 const Repository = () => {
   const params = useParams();
+  const [info, setInfo] = createSignal<Info>({
+    isPrivate: false,
+    visibility: '',
+    forkCount: 0,
+    description: '',
+    homepageUrl: '',
+    stargazerCount: 0,
+    watcherCount: 0,
+    openIssueCount: 0,
+    topics: [],
+    isOrg: false,
+    openPullRequestCount: 0,
+  });
 
   const isOwnerAndNameValid =
     typeof params.owner === 'string' && typeof params.name === 'string';
@@ -23,6 +36,12 @@ const Repository = () => {
       )
   );
 
+  createEffect(() => {
+    if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
+      setInfo(repoInfo.data.info);
+    }
+  });
+
   return (
     <div class="bg-white h-screen">
       <Switch>
@@ -31,16 +50,11 @@ const Repository = () => {
         </Match>
         <Match when={repoInfo.isLoading}>
           <div class="mt-2">
-            <p>loading</p>
             <LoadingPulseDot />
           </div>
         </Match>
-        <Match
-          when={
-            repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data?.info
-          }
-        >
-          <RepoHeader {...(repoInfo.data?.info as Info)} />
+        <Match when={repoInfo.isSuccess && !repoInfo.isLoading}>
+          <RepoHeader {...info()} />
           <div class="max-w-screen-2xl mx-auto md:py-8 px-4">
             <div class="grid grid-cols-12 gap-8">
               <div class="col-span-12 md:col-span-7 xl:col-span-9">
@@ -48,9 +62,9 @@ const Repository = () => {
               </div>
               <div class="col-span-12 md:col-span-5 xl:col-span-3">
                 <RepoAbout
-                  description={repoInfo.data?.info.description}
-                  homepageUrl={repoInfo.data?.info?.homepageUrl}
-                  topics={repoInfo.data?.info?.topics}
+                  description={info().description || ''}
+                  homepageUrl={info().homepageUrl || ''}
+                  topics={info().topics || []}
                 />
               </div>
             </div>
