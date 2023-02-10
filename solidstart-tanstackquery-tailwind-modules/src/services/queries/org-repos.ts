@@ -54,5 +54,3 @@ organization(login: $organization) {
   }
 }
 `;
-
-

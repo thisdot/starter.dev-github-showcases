@@ -9,7 +9,6 @@ import { RepoFilter } from '~/components/RepoFilter';
 import useRepoSortFilter from '~/utils/useRepoSortFilter';
 import { Repo } from '~/types/user-repo-type';
 
-
 export default function OrgProfile() {
   const params = useParams();
   const location = useLocation();
@@ -24,16 +23,17 @@ export default function OrgProfile() {
 
   const orgRepos = createQuery(
     () => ['org-repos'],
-    () => getOrgRepos({
-      organization: params?.login,
-      afterCursor: location.query?.after,
-      beforeCursor: location.query?.before,
-      orderBy: {
-        direction: 'DESC',
-        field: 'UPDATED_AT',
-      },
-      first: 10,
-    })
+    () =>
+      getOrgRepos({
+        organization: params?.login,
+        afterCursor: location.query?.after,
+        beforeCursor: location.query?.before,
+        orderBy: {
+          direction: 'DESC',
+          field: 'UPDATED_AT',
+        },
+        first: 10,
+      })
   );
 
   createEffect(() => {

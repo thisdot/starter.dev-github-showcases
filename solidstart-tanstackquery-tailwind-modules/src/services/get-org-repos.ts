@@ -62,7 +62,7 @@ const getOrgRepos = async (variables: OrgReposVariable) => {
   }, []);
 
   return {
-    orgInfo:{
+    orgInfo: {
       avatarUrl: resp.data?.organization?.avatarUrl,
       name: resp.data?.organization?.name,
     },

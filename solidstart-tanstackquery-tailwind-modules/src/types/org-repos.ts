@@ -1,4 +1,4 @@
-import { Repo } from "./user-repo-type";
+import { Repo } from './user-repo-type';
 export interface PageInfo {
   endCursor?: string | null;
   startCursor?: string | null;
