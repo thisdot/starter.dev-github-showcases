@@ -9,6 +9,7 @@ import {
   filterType,
   setFilterType,
   sortBy,
+  setSortBy,
 } from './RepoFilter.store';
 import SearchInput from './SearchInput';
 import styles from './RepoFilter.module.css';
@@ -32,7 +33,7 @@ const RepoFilter = (props: RepoFilterProps) => {
 
   const selectLanguage = (value: string) => setLanguage(value);
   const selectType = (value: string) => setFilterType(value);
-  const selectSort = () => null;
+  const selectSort = (value: string) => setSortBy(value);
 
   return (
     <>
