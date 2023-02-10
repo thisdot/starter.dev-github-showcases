@@ -27,23 +27,23 @@ const getGists = async () => {
 
   const resp = (await FetchApi(data)) as Response;
 
-  const gists = resp.data?.viewer.gists.nodes?.reduce((acc: any, gist) => {
+  const gists = resp.data?.viewer.gists.nodes?.reduce((acc: Gists[] | { name: string }[], gist) => {
     if (!gist) {
       return acc;
     }
     const files = gist.files ?? [];
     const gists = files.reduce(
-      (_acc, file) =>
+      (_acc: { name: string }[], file) =>
         file
           ? [
-              ..._acc,
-              {
-                id: gist.id,
-                description: gist.description,
-                name: file.name || gist.name,
-                url: gist.url,
-              },
-            ]
+            ..._acc,
+            {
+              id: gist.id,
+              description: gist.description,
+              name: file.name || gist.name,
+              url: gist.url,
+            },
+          ]
           : acc,
       []
     );
