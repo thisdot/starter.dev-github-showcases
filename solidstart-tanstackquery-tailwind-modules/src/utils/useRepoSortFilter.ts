@@ -1,5 +1,9 @@
 import { Repo } from '~/types/user-repo-type';
-import { filterType, search, sortBy } from '../components/RepoFilter/RepoFilter.store';
+import {
+  filterType,
+  search,
+  sortBy,
+} from '../components/RepoFilter/RepoFilter.store';
 import { repoDataFilteredBySearch } from './searchFunction';
 import { repoDataFilteredByType } from './typeFilterFunction';
 import { sortedRepoData } from './sortRepoFunction';
