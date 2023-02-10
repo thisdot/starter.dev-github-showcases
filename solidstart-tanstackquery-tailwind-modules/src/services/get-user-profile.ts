@@ -27,7 +27,7 @@ const userProfile = async (variables: UserProfileVariables) => {
   };
   const resp = (await FetchApi(data)) as Response;
 
-  return resp.data?.user;
+  return resp.data?.user || null;
 };
 
 export default userProfile;
