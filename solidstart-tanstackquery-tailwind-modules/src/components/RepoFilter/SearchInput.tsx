@@ -3,8 +3,8 @@ import { JSX } from 'solid-js';
 import { setSearch } from './RepoFilter.store';
 
 const SearchInput = () => {
-  const handleChange: JSX.EventHandler<HTMLInputElement, KeyboardEvent> = (
-    e: KeyboardEvent
+  const handleChange: JSX.EventHandler<HTMLInputElement, InputEvent> = (
+    e: InputEvent
   ) => {
     setSearch((e.target as HTMLInputElement).value);
   };
@@ -15,7 +15,7 @@ const SearchInput = () => {
       placeholder="find a repository.."
       role="search"
       type="search"
-      onKeyUp={handleChange}
+      onInput={handleChange}
       class={styles.searchInput}
     />
   );
