@@ -74,9 +74,8 @@ const FileExplorerView = (props: IProps) => {
                     </Switch>
                   </div>
                   <A
-                    href={`${basePath()}/${item.type}/${local.branch}/${
-                      item.path
-                    }`}
+                    href={`${basePath()}/${item.type}/${local.branch}/${item.path
+                      }`}
                     data-testid={`file explorer list ${item.name}`}
                     class={styles.link}
                   >

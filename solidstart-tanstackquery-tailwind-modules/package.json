@@ -67,6 +67,7 @@
     "rehype-raw": "^6.1.1",
     "remark-gfm": "^3.0.1",
     "solid-heroicons": "^3.1.1",
+    "solid-highlight": "^0.1.12",
     "solid-js": "^1.6.9",
     "solid-markdown": "^1.2.0",
     "solid-start": "0.2.15",

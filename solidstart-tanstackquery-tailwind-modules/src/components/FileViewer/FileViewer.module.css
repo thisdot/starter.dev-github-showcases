@@ -1,0 +1,27 @@
+@tailwind utilities;
+
+.container {
+  @apply border border-gray-300 rounded-lg overflow-hidden;
+}
+
+.fileHeader {
+  @apply px-4 py-3 bg-gray-100 border-b border-gray-300 font-mono text-xs text-gray-800;
+}
+
+.fileHeaderLines {
+  @apply px-2;
+}
+
+.fileHeaderBytes {
+  @apply px-2 border-l border-gray-300;
+}
+
+.codeBlock {
+  border-spacing: 5px;
+  background-color: #ffffff !important;
+  @apply text-left text-xs py-1 px-8 overflow-auto;
+}
+
+.lineNumber {
+  @apply table-cell text-right pr-4 select-none text-gray-500;
+}
