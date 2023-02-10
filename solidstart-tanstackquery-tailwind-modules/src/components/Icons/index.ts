@@ -11,3 +11,5 @@ export { default as InformationCircleIcon } from './InformationCircleIcon';
 export { default as CodeIcon } from './CodeIcon';
 export { default as EyeIcon } from './EyeIcon';
 export { default as RepoIcon } from './RepoIcon';
+export { default as BookOpenIcon } from './BookOpenIcon';
+export { default as LinkIcon } from './LinkIcon';
