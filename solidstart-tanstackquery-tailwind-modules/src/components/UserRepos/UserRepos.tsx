@@ -4,12 +4,12 @@ import { RepoFilter } from '~/components/RepoFilter';
 import { RepoInfos } from '../ProfilePage/ProfilePage';
 
 const UserRepos = (props: RepoInfos) => {
-  const [local] = splitProps(props, ['repos', 'pageInfo']);
+  const [local] = splitProps(props, ['repos', 'pageInfo', 'languages']);
 
   return (
     <>
       <RepoFilter
-        languages={['test', 'test2']}
+        languages={local.languages}
         filteredRepoCount={local.repos.length}
       />
       <Show when={local.repos.length > 0}>

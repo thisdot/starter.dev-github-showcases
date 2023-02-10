@@ -8,24 +8,30 @@ import UserProfile from '~/components/UserProfile';
 import { UserRepos } from '~/components/UserRepos';
 import useRepoSortFilter from '~/utils/useRepoSortFilter';
 
-export type RepoInfos = {
+interface RepoInfoProps {
   pageInfo: PageInfo;
   repos: Repo[];
-};
+}
+
+export interface RepoInfos extends RepoInfoProps {
+  languages: string[];
+}
 
 type ProfilePageProps = {
   user: UserProfileType;
-  reposInfo: RepoInfos;
+  reposInfo: RepoInfoProps;
 };
 
 const ProfilePage = (props: ProfilePageProps) => {
   const location = useLocation();
   const [reposToshow, setReposToShow] = createSignal<Repo[]>([]);
+  const [repoLanguages, setRepoLanguages] = createSignal<string[]>([]);
   const [local] = splitProps(props, ['reposInfo', 'user']);
 
   createEffect(() => {
-    const [reposResults] = useRepoSortFilter(local.reposInfo.repos);
+    const [reposResults, languages] = useRepoSortFilter(local.reposInfo.repos);
     setReposToShow(reposResults);
+    setRepoLanguages(languages);
   });
 
   return (
@@ -55,6 +61,7 @@ const ProfilePage = (props: ProfilePageProps) => {
             />
             <Show when={local.reposInfo}>
               <UserRepos
+                languages={repoLanguages()}
                 repos={reposToshow()}
                 pageInfo={local.reposInfo.pageInfo}
               />
