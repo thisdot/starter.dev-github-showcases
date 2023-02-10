@@ -38,9 +38,11 @@ export function parseTopics(topics: Topics[]) {
  * }
  */
 
-const getRepoInfo = async (variables: RepoInfoVariables) : Promise<{
+const getRepoInfo = async (
+  variables: RepoInfoVariables
+): Promise<{
   branch: string;
-  info: Info
+  info: Info;
 }> => {
   const { authStore } = useAuth();
 

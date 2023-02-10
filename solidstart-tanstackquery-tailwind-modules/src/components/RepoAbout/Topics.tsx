@@ -7,7 +7,7 @@ interface TopicsProps {
 
 export const Topics = (props: TopicsProps) => {
   const local = mergeProps({ topics: [] }, props);
-  
+
   return (
     <Show when={local.topics?.length > 0}>
       <div class="space-y-1">
