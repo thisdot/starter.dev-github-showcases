@@ -1,4 +1,4 @@
-export interface UserRepo {
+export interface Repo {
   id: string;
   name: string;
   description: string;
@@ -26,7 +26,7 @@ export interface PageInfo {
 export interface UserRepoInfo {
   owner: {
     repositories: {
-      nodes: UserRepo[];
+      nodes: Repo[];
       pageInfo: PageInfo;
     };
   };
