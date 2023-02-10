@@ -4,7 +4,7 @@ import { LinkIcon } from '../Icons';
 import styles from './RepoAbout.module.css';
 
 interface HomepageUrlProps {
-  homepageUrl: string;
+  homepageUrl?: string;
 }
 
 export const HomepageUrl = (props: HomepageUrlProps) => {
@@ -12,7 +12,7 @@ export const HomepageUrl = (props: HomepageUrlProps) => {
     <Show when={props.homepageUrl}>
       <div class={styles.linkContainer}>
         <LinkIcon class={styles.linkIcon} />
-        <A href={props.homepageUrl} class={styles.link} target="_blank">
+        <A href={props.homepageUrl ?? ""} class={styles.link} target="_blank">
           {props.homepageUrl}
         </A>
       </div>
