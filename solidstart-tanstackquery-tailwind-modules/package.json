@@ -63,8 +63,12 @@
   "dependencies": {
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.6.0",
+    "@tailwindcss/typography": "^0.5.9",
+    "rehype-raw": "^6.1.1",
+    "remark-gfm": "^3.0.1",
     "solid-heroicons": "^3.1.1",
     "solid-js": "^1.6.9",
+    "solid-markdown": "^1.2.0",
     "solid-start": "0.2.15",
     "undici": "^5.15.1"
   },
