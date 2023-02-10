@@ -1,6 +1,11 @@
-import { createSignal, mergeProps, Show } from 'solid-js';
+import { createEffect, createSignal, mergeProps, Show } from 'solid-js';
 import { RepoBookIcon } from '../Icons';
-import { FILTER_TYPE_OPTIONS, SORT_OPTIONS } from './data';
+import {
+  defaultFilterType,
+  defaultLanguage,
+  FILTER_TYPE_OPTIONS,
+  SORT_OPTIONS,
+} from './data';
 import FilterDropdown from '../FilterDropDown/FilterDropdown';
 import FilterText from './FilterText';
 import {
@@ -10,6 +15,7 @@ import {
   setFilterType,
   sortBy,
   setSortBy,
+  search,
 } from './RepoFilter.store';
 import SearchInput from './SearchInput';
 import styles from './RepoFilter.module.css';
@@ -24,7 +30,7 @@ const RepoFilter = (props: RepoFilterProps) => {
   const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
   const sortOptions = Object.values(SORT_OPTIONS);
   const languageOptions = ['All', 'HTML', 'CSS', 'PHP'];
-  const [isOnlySorted] = createSignal(true);
+  const [isOnlySorted, setIsOnlySorted] = createSignal<boolean>(true);
 
   const merged = mergeProps(
     { repoBtnText: 'New', languages: languageOptions, filteredRepoCount: 0 },
@@ -34,6 +40,17 @@ const RepoFilter = (props: RepoFilterProps) => {
   const selectLanguage = (value: string) => setLanguage(value);
   const selectType = (value: string) => setFilterType(value);
   const selectSort = (value: string) => setSortBy(value);
+
+  createEffect(() => {
+    setIsOnlySorted(
+      !!sortBy() &&
+        !(
+          language() !== defaultLanguage ||
+          filterType() !== defaultFilterType ||
+          search()
+        )
+    );
+  });
 
   return (
     <>
@@ -71,11 +88,7 @@ const RepoFilter = (props: RepoFilterProps) => {
         </div>
       </div>
       <Show when={!isOnlySorted()}>
-        <FilterText
-          filteredRepoCount={merged.filteredRepoCount}
-          setFilterType={setFilterType}
-          setLanguage={setLanguage}
-        />
+        <FilterText filteredRepoCount={merged.filteredRepoCount} />
       </Show>
     </>
   );

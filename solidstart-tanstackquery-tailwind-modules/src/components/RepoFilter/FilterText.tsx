@@ -1,7 +1,13 @@
-import { Setter, Show, splitProps } from 'solid-js';
+import { Show, splitProps } from 'solid-js';
 import { CloseIcon } from '../Icons';
 import { defaultFilterType, defaultLanguage } from './data';
-import { filterType, language, search, sortBy } from './RepoFilter.store';
+import {
+  filterType,
+  language,
+  resetFilter,
+  search,
+  sortBy,
+} from './RepoFilter.store';
 import styles from './RepoFilter.module.css';
 
 const modifyFilterTypeText = (filterText = 'test') => {
@@ -17,18 +23,10 @@ const modifyFilterTypeText = (filterText = 'test') => {
 
 type FilterTextProps = {
   filteredRepoCount?: number;
-  setFilterType: Setter<string>;
-  setLanguage: Setter<string>;
 };
 
 const FilterText = (props: FilterTextProps) => {
-  const [local] = splitProps(props, [
-    'filteredRepoCount',
-    'setFilterType',
-    'setLanguage',
-  ]);
-
-  const clearFilters = () => 'clear';
+  const [local] = splitProps(props, ['filteredRepoCount']);
 
   return (
     <div class={styles.filterTextContainer}>
@@ -57,9 +55,17 @@ const FilterText = (props: FilterTextProps) => {
           </span>
         </small>
       </div>
-      <div onClick={() => clearFilters()}>
-        <a class={styles.clearFilter}>
-          <span class={styles.closeIconSpan}>
+      <div onClick={resetFilter}>
+        <a
+          class={
+            'flex items-center group hover:text-blue-600 transition-colors delay-[60ms] no-underline gap-2 text-sm cursor-pointer'
+          }
+        >
+          <span
+            class={
+              'text-white rounded-md bg-gray-500 group-hover:bg-blue-600 transition-colors delay-[60ms] w-4 h-4'
+            }
+          >
             <CloseIcon />
           </span>
           Clear filter
