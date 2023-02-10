@@ -1,5 +1,9 @@
 import { Repo } from '~/types/user-repo-type';
-import { language, search, filterType } from '../components/RepoFilter/RepoFilter.store';
+import {
+  language,
+  search,
+  filterType,
+} from '../components/RepoFilter/RepoFilter.store';
 import { repoDataFilteredBySearch } from './searchFunction';
 import { repoDataFilteredByLanguage } from './languageFilterFunction';
 import { getLanguages } from './getLanguages';
@@ -20,7 +24,7 @@ const useRepoSortFilter = (repos: Repo[]): [Repo[], string[]] => {
   if (filterType()) {
     result = repoDataFilteredByType(result);
   }
-  
+
   return [result, languages];
 };
 
