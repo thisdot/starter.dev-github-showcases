@@ -1,13 +1,15 @@
-import { For, Show } from 'solid-js';
+import { For, mergeProps, Show } from 'solid-js';
 import styles from './RepoAbout.module.css';
 
 interface TopicsProps {
-  topics: string[];
+  topics?: string[];
 }
 
 export const Topics = (props: TopicsProps) => {
+  const local = mergeProps({ topics: [] }, props);
+  
   return (
-    <Show when={props.topics.length > 0}>
+    <Show when={local.topics?.length > 0}>
       <div class="space-y-1">
         <For each={props.topics}>
           {(topic) => <span class={styles.topic}>{topic}</span>}

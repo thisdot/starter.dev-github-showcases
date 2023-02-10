@@ -4,6 +4,20 @@ export type Topics = {
   };
 };
 
+export interface Info {
+  isPrivate: boolean;
+  visibility: string;
+  forkCount: number;
+  description: string;
+  homepageUrl: string;
+  stargazerCount: number;
+  watcherCount: number;
+  openIssueCount: number;
+  topics: string[];
+  isOrg: boolean;
+  openPullRequestCount: number;
+}
+
 export interface RepoInfo {
   defaultBranchRef: {
     name: string;

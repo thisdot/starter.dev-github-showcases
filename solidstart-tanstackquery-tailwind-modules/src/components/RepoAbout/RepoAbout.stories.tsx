@@ -1,4 +1,5 @@
 import { Router } from '@solidjs/router';
+import { aboutData } from './data';
 import { RepoAboutWidget } from './RepoAbout';
 
 export default {
@@ -7,7 +8,11 @@ export default {
 
 const Template = () => (
   <Router>
-    <RepoAboutWidget />
+    <RepoAboutWidget
+      homepageUrl={aboutData.homepageUrl}
+      description={aboutData.description}
+      topics={aboutData.topics}
+    />
   </Router>
 );
 

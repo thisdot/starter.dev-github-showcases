@@ -5,18 +5,9 @@ import { RepoHeading } from '../RepoHeading';
 import { RepoActionButtons } from '../RepoActionButtons';
 import { TabNavigation } from '../TabNavigation';
 import { splitProps } from 'solid-js';
+import { Info } from '~/types/repo-info-type';
 
-export type RepoHeaderProps = {
-  openIssueCount: number;
-  openPullRequestCount: number;
-  forkCount: number;
-  stargazerCount: number;
-  watcherCount: number;
-  visibility: string;
-  isOrg: boolean;
-};
-
-function RepoHeader(props: RepoHeaderProps) {
+function RepoHeader(props: Info) {
   const [local] = splitProps(props, [
     'openIssueCount',
     'openPullRequestCount',

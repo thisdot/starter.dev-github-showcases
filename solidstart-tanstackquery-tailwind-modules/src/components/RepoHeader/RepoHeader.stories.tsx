@@ -1,6 +1,7 @@
 import { Router } from '@solidjs/router';
+import { Info } from '~/types/repo-info-type';
 import { visibilityTypes } from '../RepoHeading/data';
-import RepoHeader, { RepoHeaderProps } from './RepoHeader';
+import RepoHeader from './RepoHeader';
 
 export default {
   title: 'components/Repo Header',
@@ -24,7 +25,7 @@ export default {
   },
 };
 
-const Template = (args: RepoHeaderProps) => (
+const Template = (args: Info) => (
   <Router>
     <RepoHeader {...args} />
   </Router>
