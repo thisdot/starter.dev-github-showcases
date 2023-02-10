@@ -26,7 +26,7 @@ const useRepoSortFilter = (repos: Repo[]): [Repo[], string[]] => {
   if (filterType()) {
     result = repoDataFilteredByType(result);
   }
-  
+
   if (sortBy()) {
     result = sortedRepoData(result);
   }
