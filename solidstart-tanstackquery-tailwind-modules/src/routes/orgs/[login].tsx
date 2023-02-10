@@ -1,20 +1,19 @@
 import { createEffect, createSignal, For, Match, Switch } from 'solid-js';
 import { OrgAbout, Skeleton } from '~/components/OrgAbout';
 import { createQuery } from '@tanstack/solid-query';
-import { useParams } from 'solid-start';
+import { useLocation, useParams } from 'solid-start';
 import { RepoCard } from '~/components/RepoCard';
 
 import getOrgRepos from '~/services/get-org-repos';
-import { Repository } from '~/types/org-repos';
 import { RepoFilter } from '~/components/RepoFilter';
+import useRepoSortFilter from '~/utils/useRepoSortFilter';
+import { Repo } from '~/types/user-repo-type';
 
-const parseRepoData = (repos: { edges: { node: Repository }[] }) => {
-  return repos.edges.map((res) => res.node);
-};
 
 export default function OrgProfile() {
   const params = useParams();
-  const [repos, setRepos] = createSignal<Repository[]>([]);
+  const location = useLocation();
+  const [repos, setRepos] = createSignal<Repo[]>([]);
   const [orgInfo, setOrgInfo] = createSignal<{
     name: string;
     avatarUrl: string;
@@ -25,12 +24,21 @@ export default function OrgProfile() {
 
   const orgRepos = createQuery(
     () => ['org-repos'],
-    () => getOrgRepos({ organization: params?.login, first: 10 })
+    () => getOrgRepos({
+      organization: params?.login,
+      afterCursor: location.query?.after,
+      beforeCursor: location.query?.before,
+      orderBy: {
+        direction: 'DESC',
+        field: 'UPDATED_AT',
+      },
+      first: 10,
+    })
   );
 
   createEffect(() => {
     if (orgRepos.isSuccess && orgRepos.data) {
-      const reposResults = parseRepoData(orgRepos.data.repositories);
+      const [reposResults] = useRepoSortFilter(orgRepos.data.repos);
       setOrgInfo(orgRepos.data.orgInfo);
       setRepos(reposResults);
     }

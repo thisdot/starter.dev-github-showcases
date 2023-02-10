@@ -3,14 +3,14 @@ import { useLocation } from 'solid-start/router';
 import styles from './ProfilePage.module.css';
 import { ProfileNav } from '~/components/ProfileNav';
 import { UserProfile as UserProfileType } from '~/types/user-profile-type';
-import { PageInfo, UserRepo } from '~/types/user-repo-type';
+import { PageInfo, Repo } from '~/types/user-repo-type';
 import UserProfile from '~/components/UserProfile';
 import { UserRepos } from '~/components/UserRepos';
 import useRepoSortFilter from '~/utils/useRepoSortFilter';
 
 export type RepoInfos = {
   pageInfo: PageInfo;
-  repos: UserRepo[];
+  repos: Repo[];
 };
 
 type ProfilePageProps = {
@@ -20,7 +20,7 @@ type ProfilePageProps = {
 
 const ProfilePage = (props: ProfilePageProps) => {
   const location = useLocation();
-  const [reposToshow, setReposToShow] = createSignal<UserRepo[]>([]);
+  const [reposToshow, setReposToShow] = createSignal<Repo[]>([]);
   const [local] = splitProps(props, ['reposInfo', 'user']);
 
   createEffect(() => {

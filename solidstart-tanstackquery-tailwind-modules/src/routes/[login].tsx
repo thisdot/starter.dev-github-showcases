@@ -5,11 +5,11 @@ import { ProfilePage } from '~/components/ProfilePage';
 import userProfile from '~/services/get-user-profile';
 import getUserRepos from '~/services/get-user-repos';
 import { UserProfile } from '~/types/user-profile-type';
-import { PageInfo, UserRepo } from '~/types/user-repo-type';
+import { PageInfo, Repo } from '~/types/user-repo-type';
 
 type GetUserRepos = {
   pageInfo: PageInfo;
-  repos: UserRepo[];
+  repos: Repo[];
 };
 
 const Profile = () => {
