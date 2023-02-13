@@ -39,8 +39,8 @@ const FileExplorerView = (props: IProps) => {
   );
 
   createEffect(() => {
-    if (resTree.isSuccess && !resTree.isLoading && resTree?.data.tree) {
-      setTree(parseQueryData(resTree?.data.tree));
+    if (resTree.isSuccess && !resTree.isLoading && resTree.data.tree) {
+      setTree(parseQueryData(resTree.data.tree));
     }
   });
 
