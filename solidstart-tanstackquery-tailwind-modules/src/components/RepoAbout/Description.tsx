@@ -1,5 +1,5 @@
 interface DescriptionProps {
-  text: string;
+  text?: string;
 }
 
 export const Description = (props: DescriptionProps) => {

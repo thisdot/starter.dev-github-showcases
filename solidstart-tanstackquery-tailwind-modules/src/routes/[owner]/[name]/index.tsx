@@ -73,8 +73,8 @@ const Repository = () => {
               </div>
               <div class="col-span-12 md:col-span-5 xl:col-span-3">
                 <RepoAbout
-                  description={info().description || ''}
-                  homepageUrl={info().homepageUrl || ''}
+                  description={info().description}
+                  homepageUrl={info().homepageUrl}
                   topics={info().topics || []}
                 />
               </div>

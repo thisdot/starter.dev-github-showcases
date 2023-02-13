@@ -7,8 +7,8 @@ import styles from './RepoAbout.module.css';
 import { splitProps } from 'solid-js';
 
 interface Props {
-  description: string;
-  homepageUrl: string;
+  description?: string;
+  homepageUrl?: string;
   topics: string[];
 }
 
