@@ -19,14 +19,14 @@ export const githubTypeDefs = gql`
   }
 
   """
-  A Owner object used in Repo
+  A User object used in Repo
   """
   type User {
     login: String
   }
 
   """
-  A User object
+  An Owner object
   """
   type Owner {
     bio: String
@@ -43,7 +43,7 @@ export const githubTypeDefs = gql`
   }
 
   """
-  A Organization object used in Owner
+  An Organization object used in Owner
   """
   type Orgs {
     avatar_url: String

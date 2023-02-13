@@ -86,7 +86,7 @@ export type Repo = {
   updated_at?: Maybe<Scalars['String']>;
 };
 
-/** A Owner object used in Repo */
+/** An Owner object used in Repo */
 export type User = {
   __typename?: 'User';
   login?: Maybe<Scalars['String']>;
