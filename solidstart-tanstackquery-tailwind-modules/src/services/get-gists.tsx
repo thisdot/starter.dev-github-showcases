@@ -7,7 +7,11 @@ import { Gists } from '~/types/gists-type';
 
 interface Response {
   data: {
-    gists: Gists[];
+    viewer: {
+      gists: {
+        nodes: Gists[];
+      };
+    };
   };
 }
 
@@ -22,7 +26,31 @@ const getGists = async () => {
   };
 
   const resp = (await FetchApi(data)) as Response;
-  return resp?.data.gists || null;
+
+  const gists = resp.data?.viewer.gists.nodes?.reduce((acc: Gists[] | { name: string }[], gist) => {
+    if (!gist) {
+      return acc;
+    }
+    const files = gist.files ?? [];
+    const gists = files.reduce(
+      (_acc: { name: string }[], file) =>
+        file
+          ? [
+            ..._acc,
+            {
+              id: gist.id,
+              description: gist.description,
+              name: file.name || gist.name,
+              url: gist.url,
+            },
+          ]
+          : acc,
+      []
+    );
+    return [...acc, ...gists];
+  }, []);
+
+  return gists;
 };
 
 export default getGists;
