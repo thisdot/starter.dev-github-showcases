@@ -2,7 +2,7 @@ import { For, mergeProps, Show } from 'solid-js';
 import styles from './RepoAbout.module.css';
 
 interface TopicsProps {
-  topics?: string[];
+  topics: string[];
 }
 
 export const Topics = (props: TopicsProps) => {

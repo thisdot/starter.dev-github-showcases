@@ -7,9 +7,9 @@ import styles from './RepoAbout.module.css';
 import { splitProps } from 'solid-js';
 
 interface Props {
-  description?: string;
-  homepageUrl?: string;
-  topics?: string[];
+  description: string;
+  homepageUrl: string;
+  topics: string[];
 }
 
 export const RepoAboutWidget = (props: Props) => {

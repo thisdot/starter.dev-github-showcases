@@ -4,7 +4,7 @@ import { LinkIcon } from '../Icons';
 import styles from './RepoAbout.module.css';
 
 interface HomepageUrlProps {
-  homepageUrl?: string;
+  homepageUrl: string;
 }
 
 export const HomepageUrl = (props: HomepageUrlProps) => {
