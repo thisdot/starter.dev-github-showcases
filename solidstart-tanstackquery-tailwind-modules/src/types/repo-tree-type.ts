@@ -5,10 +5,12 @@ export interface RepoTree {
     }[];
   };
   tree: {
-    entries: {
-      name: string;
-      type: string;
-      path: string;
-    };
+    entries: TreeProps[];
   };
+}
+
+export interface TreeProps {
+  name: string;
+  type: string;
+  path: string;
 }

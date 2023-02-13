@@ -1,15 +1,18 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
 import { Router } from '@solidjs/router';
-import RepoReadMe from './RepoReadMe';
-import { mockReadme } from '../../../msw/mockReadMe';
+import FileExplorer from './FileExplorer';
+import { mockRepoTree } from '../../../msw/mockRepoTree';
 
 export default {
-  title: 'Components/RepoReadMe',
-  parameters: {
-    msw: {
-      handlers: [mockReadme],
-    },
-  },
+  title: 'Components/File Explorer',
+  component: FileExplorer,
+};
+
+const data = {
+  branch: 'main',
+  owner: 'tanstack',
+  name: 'solidstart',
+  path: '',
 };
 
 const queryClient = new QueryClient({
@@ -24,9 +27,15 @@ const queryClient = new QueryClient({
 const Template = () => (
   <QueryClientProvider client={queryClient}>
     <Router>
-      <RepoReadMe />
+      <FileExplorer {...data} />
     </Router>
   </QueryClientProvider>
 );
 
-export const Default = Template.bind({});
+export const RootDir: any = Template.bind({});
+
+RootDir.parameters = {
+  msw: {
+    handlers: [mockRepoTree],
+  },
+};

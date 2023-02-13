@@ -16,17 +16,6 @@ type Response = {
   };
 };
 
-/**
- *
- * @param {
- *  variable: {
- *    owner
- *    name
- *    expression
- *  }
- * }
- */
-
 const getRepoTree = async (variables: RepoTreeVariables) => {
   const { authStore } = useAuth();
 
