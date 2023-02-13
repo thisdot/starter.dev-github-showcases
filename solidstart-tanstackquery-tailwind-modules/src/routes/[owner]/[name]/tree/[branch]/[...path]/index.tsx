@@ -28,7 +28,7 @@ const RepoTree = () => {
     typeof params.owner === 'string' && typeof params.name === 'string';
 
   const repoInfo = createQuery(
-    () => ['repository-info', params.owner, params.name],
+    () => [`repository-info_${params.owner}_${params.name}`],
     () =>
       getRepoInfo(
         isOwnerAndNameValid
