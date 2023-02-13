@@ -29,7 +29,7 @@ const FileExplorerView = (props: IProps) => {
   const basePath = () => `/${local.owner}/${local.name}`;
 
   const resTree = createQuery(
-    () => [`${local.owner}_${local.owner}_${local.branch}_${local.path || ''}`],
+    () => [`${local.owner}_${local.name}_${local.branch}_${local.path || ''}`],
     () =>
       getRepoTree({
         owner: local.owner,
