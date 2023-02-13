@@ -34,7 +34,7 @@ const RepoReadMe = () => {
   );
 
   createEffect(() => {
-    if (resReadMe.isSuccess && !resReadMe.isLoading && resReadMe.data ) {
+    if (resReadMe.isSuccess && !resReadMe.isLoading && resReadMe.data) {
       setReadme(resReadMe.data);
     }
   });
