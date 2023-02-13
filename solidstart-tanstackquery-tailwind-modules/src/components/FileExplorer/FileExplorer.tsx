@@ -67,7 +67,11 @@ const FileExplorerView = (props: IProps) => {
               <div class={styles.cell}>
                 <div class="flex items-center">
                   <div class="mr-2.5">
-                    {item.type === 'tree' ? (
+                    <Switch fallback={<DocumentIcon class={styles.iconFile} />}>
+                         <Match when={item.type === 'tree'}>
+                              <FolderIcon class={styles.iconDir} />
+                         </Match>
+                    </Switch>
                       <FolderIcon class={styles.iconDir} />
                     ) : (
                       <DocumentIcon class={styles.iconFile} />
