@@ -1,4 +1,4 @@
-import { For, Show } from 'solid-js';
+import { For, Match, Show, Switch } from 'solid-js';
 import { A, useParams } from '@solidjs/router';
 import { GitBranchIcon } from '../Icons';
 import styles from './BranchNavigation.module.css';
@@ -9,6 +9,7 @@ interface Props {
 
 const BranchNavigation = (props: Props) => {
   const params = useParams();
+  const crumbs = () => params.path?.split('/').filter(Boolean) || [];
 
   // creates a proper GitHub url path from a repo path
   const hrefPath = (index: number) => {
@@ -26,7 +27,7 @@ const BranchNavigation = (props: Props) => {
         <GitBranchIcon class={styles.btnIcon} /> {props.branch}{' '}
         <span class={styles.btnCaret}>{'\u25BC'}</span>
       </button>
-      <Show when={params.path?.split('/').filter(Boolean).length > 0}>
+      <Show when={crumbs().length > 0}>
         <div class={styles.crumbs}>
           <A
             href={`/${params.owner}/${params.name}`}
@@ -36,37 +37,31 @@ const BranchNavigation = (props: Props) => {
             {params.name}
           </A>
           <span class={styles.separator}>/</span>
-          <For each={params.path?.split('/').filter(Boolean)}>
+          <For each={crumbs()}>
             {(crumb, index) => (
-              <>
-                <Show
-                  when={
-                    index() < params.path?.split('/').filter(Boolean).length - 1
-                  }
-                >
+              <Switch
+                fallback={() => (
+                  <>
+                    <A
+                      href={`${hrefPath(index())}`}
+                      data-testid={`file explorer nav crumb ${crumb}`}
+                      class={styles.crumbLink}
+                    >
+                      {crumb}
+                    </A>
+                    <span class={styles.separator}>/</span>
+                  </>
+                )}
+              >
+                <Match when={index() === crumbs().length - 1}>
                   <span
                     data-testid={`file explorer nav end ${crumb}`}
                     class={styles.crumbEnd}
                   >
                     {crumb}
                   </span>
-                </Show>
-                <Show
-                  when={
-                    index() >=
-                    params.path?.split('/').filter(Boolean).length - 1
-                  }
-                >
-                  <A
-                    href={`${hrefPath(index())}`}
-                    data-testid={`file explorer nav crumb ${crumb}`}
-                    class={styles.crumbLink}
-                  >
-                    {crumb}
-                  </A>
-                  <span class={styles.separator}>/</span>
-                </Show>
-              </>
+                </Match>
+              </Switch>
             )}
           </For>
         </div>
