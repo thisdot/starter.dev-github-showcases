@@ -4,6 +4,7 @@ import {
 } from '@apollo/datasource-rest';
 
 // TODO: follow up PR will cover formatters and testing
+// https://github.com/thisdot/starter.dev-github-showcases/issues/1040
 // import { repoFormatter, orgFormatter, ownerFormatter } from 'src/formatters';
 
 export class GitHubAPI extends RESTDataSource {
@@ -33,6 +34,7 @@ export class GitHubAPI extends RESTDataSource {
   // https://docs.github.com/en/rest/orgs/orgs?apiVersion=2022-11-28#list-organizations-for-a-user
   async getOrgs(login: string) {
     const data = await this.get(`/users/${login}/orgs`);
+    // https://github.com/thisdot/starter.dev-github-showcases/issues/1040
     // return orgFormatter(data);
     return data;
   }
@@ -44,6 +46,7 @@ export class GitHubAPI extends RESTDataSource {
   // https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#about-the-users-api
   async getOwner() {
     const data = await this.get('/user');
+    // https://github.com/thisdot/starter.dev-github-showcases/issues/1040
     // return ownerFormatter(data);
     return data;
   }
@@ -51,6 +54,7 @@ export class GitHubAPI extends RESTDataSource {
   // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
   async getRepo(owner: string, repoName: string) {
     const data = await this.get(`/repos/${owner}/${repoName}`);
+    // https://github.com/thisdot/starter.dev-github-showcases/issues/1040
     // return repoFormatter(data);
     return data;
   }
@@ -60,6 +64,7 @@ export class GitHubAPI extends RESTDataSource {
     const data = await this
       .get(`/users/${username}/repos?sort=updated&per_page=${perPage}
     `);
+    // https://github.com/thisdot/starter.dev-github-showcases/issues/1040
     // return repoFormatter(data);
     return data;
   }
