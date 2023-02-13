@@ -34,13 +34,13 @@ const RepoReadMe = () => {
   );
 
   createEffect(() => {
-    if (resReadMe.isSuccess && !resReadMe.isLoading) {
+    if (resReadMe.isSuccess && !resReadMe.isLoading && resReadMe.data ) {
       setReadme(resReadMe.data);
     }
   });
 
   return (
-    <Show when={!resReadMe.isLoading && resReadMe.data}>
+    <Show when={resReadMe.isSuccess && !resReadMe.isLoading}>
       <Switch>
         <Match when={readme()}>
           <div class={styles.container} data-testid="readme">
