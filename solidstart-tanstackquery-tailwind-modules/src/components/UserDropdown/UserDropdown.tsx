@@ -3,6 +3,9 @@ import { createSignal, Show } from 'solid-js';
 import { ChevronDownIcon } from '../Icons';
 import { clickOutside } from '../../utils/onclickOutside';
 import styles from './UserDropdown.module.css';
+import { SIGN_OUT_URL } from '~/utils/constants';
+import { isServer } from 'solid-js/web';
+import { useAuth } from '~/auth';
 
 interface IProps {
   image: string;
@@ -11,8 +14,26 @@ interface IProps {
 
 const UserDropdown = (props: IProps) => {
   const [expanded, setExpanded] = createSignal(false);
+  const { setAuth } = useAuth();
 
   const _clickOutside = clickOutside;
+
+  const logOutUser = async () => {
+    const response = await fetch(SIGN_OUT_URL, {
+      method: 'POST',
+      credentials: 'include',
+    });
+    const status = await response.status;
+
+    if (status === 200 && !isServer) {
+      setAuth({
+        token: null,
+        user: null,
+        isAuthenticated: false,
+      });
+      window.sessionStorage.removeItem('token');
+    }
+  };
 
   return (
     // @ts-ignore
@@ -53,7 +74,9 @@ const UserDropdown = (props: IProps) => {
               </li>
             </Show>
             <li data-menu-item>
-              <button class={styles.menuBtn}>Sign Out</button>
+              <button class={styles.menuBtn} onClick={logOutUser}>
+                Sign Out
+              </button>
             </li>
           </ul>
         </nav>
