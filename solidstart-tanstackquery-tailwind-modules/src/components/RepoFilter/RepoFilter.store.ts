@@ -6,6 +6,13 @@ const [language, setLanguage] = createSignal(defaultLanguage);
 const [sortBy, setSortBy] = createSignal(SORT_OPTIONS.default);
 const [filterType, setFilterType] = createSignal(FILTER_TYPE_OPTIONS.default);
 
+const resetFilter = () => {
+  setSearch('');
+  setLanguage(defaultLanguage);
+  setSortBy(SORT_OPTIONS.default);
+  setFilterType(FILTER_TYPE_OPTIONS.default);
+};
+
 export {
   search,
   language,
@@ -15,4 +22,5 @@ export {
   setLanguage,
   setSortBy,
   setFilterType,
+  resetFilter,
 };

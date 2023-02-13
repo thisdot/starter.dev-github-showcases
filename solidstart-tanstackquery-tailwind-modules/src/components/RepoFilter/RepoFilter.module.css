@@ -1,4 +1,5 @@
 @tailwind utilities;
+@tailwind base;
 
 .repoFilterContainer {
   @apply flex relative mb-4 space-x-4 border-b border-b-gray-300 pb-4;
@@ -46,14 +47,6 @@
 
 .filterText {
   @apply text-sm lowercase flex items-baseline gap-1;
-}
-
-.clearFilter {
-  @apply flex items-center hover:text-blue-600 transition-colors delay-[60ms] no-underline gap-2 text-sm cursor-pointer;
-}
-
-.closeIconSpan {
-  @apply text-white rounded-md bg-gray-500 group-hover:bg-blue-600 transition-colors delay-[60ms] w-4 h-4;
 }
 
 .searchInput {

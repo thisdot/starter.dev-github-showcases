@@ -1,6 +1,6 @@
 import styles from './RepoFilter.module.css';
 import { JSX } from 'solid-js';
-import { setSearch } from './RepoFilter.store';
+import { search, setSearch } from './RepoFilter.store';
 
 const SearchInput = () => {
   const handleChange: JSX.EventHandler<HTMLInputElement, InputEvent> = (
@@ -15,6 +15,7 @@ const SearchInput = () => {
       placeholder="find a repository.."
       role="search"
       type="search"
+      value={search()}
       onInput={handleChange}
       class={styles.searchInput}
     />
