@@ -6,9 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
 export default {
   title: 'Components/RepoReadMe',
   parameters: {
-    msw: {
-      handlers: [mockReadme],
-    },
+    msw: [mockReadme],
   },
 };
 

@@ -3,7 +3,6 @@ const Solid = require('vite-plugin-solid');
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
-    'storybook-addon-mock',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
@@ -13,7 +12,7 @@ module.exports = {
     builder: '@storybook/builder-vite',
   },
   features: {
-    storyStoreV7: true,
+    storyStoreV7: false,
   },
   async viteFinal(config, { configType }) {
     config.resolve.dedupe = ['@storybook/client-api'];
