@@ -68,14 +68,10 @@ const FileExplorerView = (props: IProps) => {
                 <div class="flex items-center">
                   <div class="mr-2.5">
                     <Switch fallback={<DocumentIcon class={styles.iconFile} />}>
-                         <Match when={item.type === 'tree'}>
-                              <FolderIcon class={styles.iconDir} />
-                         </Match>
+                      <Match when={item.type === 'tree'}>
+                        <FolderIcon class={styles.iconDir} />
+                      </Match>
                     </Switch>
-                      <FolderIcon class={styles.iconDir} />
-                    ) : (
-                      <DocumentIcon class={styles.iconFile} />
-                    )}
                   </div>
                   <A
                     href={`${basePath()}/${item.type}/${local.branch}/${
