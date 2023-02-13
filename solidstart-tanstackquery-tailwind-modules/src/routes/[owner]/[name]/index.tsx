@@ -7,6 +7,8 @@ import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '~/components/RepoHeader';
 import { RepoAbout } from '~/components/RepoAbout';
 import { BranchNavigation } from '~/components/BranchNavigation';
+import { RepoReadMe } from '~/components/RepoReadMe';
+import FileExplorer from '~/components/FileExplorer';
 
 const Repository = () => {
   const params = useParams();
@@ -62,8 +64,12 @@ const Repository = () => {
             <div class="grid grid-cols-12 gap-8">
               <div class="col-span-12 md:col-span-7 xl:col-span-9">
                 <BranchNavigation branch={branch()} />
-                {/* file explorer here */}
-                {/* read me here */}
+                <FileExplorer
+                  branch={branch()}
+                  owner={params.owner}
+                  name={params.name}
+                />
+                <RepoReadMe />
               </div>
               <div class="col-span-12 md:col-span-5 xl:col-span-3">
                 <RepoAbout
