@@ -19,3 +19,5 @@ export { default as RepoIcon } from './RepoIcon';
 export { default as BookOpenIcon } from './BookOpenIcon';
 export { default as LinkIcon } from './LinkIcon';
 export { default as TocIcon } from './TocIcon';
+export { default as FolderIcon } from './FolderIcon';
+export { default as DocumentIcon } from './DocumentIcon';
