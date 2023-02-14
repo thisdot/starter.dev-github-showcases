@@ -6,9 +6,7 @@ import { mockReadme } from '../../../msw/mockReadMe';
 export default {
   title: 'Components/RepoReadMe',
   parameters: {
-    msw: {
-      handlers: [mockReadme],
-    },
+    msw: [mockReadme],
   },
 };
 

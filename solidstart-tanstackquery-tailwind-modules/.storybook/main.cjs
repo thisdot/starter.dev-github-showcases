@@ -12,7 +12,7 @@ module.exports = {
     builder: '@storybook/builder-vite',
   },
   features: {
-    storyStoreV7: true,
+    storyStoreV7: false,
   },
   async viteFinal(config, { configType }) {
     config.resolve.dedupe = ['@storybook/client-api'];
