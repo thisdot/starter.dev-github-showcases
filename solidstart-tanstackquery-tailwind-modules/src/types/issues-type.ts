@@ -77,11 +77,11 @@ export type Variables = {
   name: string;
   orderBy: string;
   direction: string;
-  filterBy: string;
-  before: string;
-  after: string;
-  first: string;
-  last: string;
+  filterBy: { labels: undefined[] | undefined; milestone: undefined };
+  before?: string;
+  after?: string;
+  first?: number;
+  last?: number;
 };
 
 export type Response = {

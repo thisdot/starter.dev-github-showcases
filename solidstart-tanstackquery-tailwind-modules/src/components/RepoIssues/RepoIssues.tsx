@@ -58,7 +58,7 @@ const RepoIssues = () => {
 
   createEffect(() => {
     if (resp() && !resp.loading) {
-      setLabelOpt(resp().labels);
+      setLabelOpt(resp()?.labels);
       setMilestoneOpt(resp().milestones);
       setOpenCount(resp().openIssues.totalCount);
       setClosedCount(resp().closedIssues.totalCount);

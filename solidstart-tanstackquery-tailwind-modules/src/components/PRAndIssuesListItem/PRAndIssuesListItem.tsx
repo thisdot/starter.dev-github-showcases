@@ -2,7 +2,7 @@
 // elsint brokes my class declaration at line #38 and the icon hasn't the right color
 
 /* eslint-disable */
-import { splitProps } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import { format } from 'date-fns';
 import cn from 'classnames';
 import {
@@ -33,7 +33,7 @@ const PRAndIssuesListItem = (props) => {
     <div class="flex relative items-baseline border-y border-gray-300 pt-2 pb-3">
       <div class="flex">
         <label class="flex-shrink-0 pl-3 hidden md:block">
-          <input type="checkbox" name="issues[]" autoComplete="off" />
+          <input type="checkbox" name="issues[]" autocomplete="off" />
         </label>
 
         <div class="flex-shrink-0 pl-4 translate-y-1">
@@ -79,17 +79,30 @@ const PRAndIssuesListItem = (props) => {
           >
             {local.title}
           </a>
-          {local.labels?.map((label) => (
-            <span
-              class={cn(
-                'mt-2 ml-2 py-1 px-2 rounded-full text-sm',
-                `bg-[#${label.color}]`
-              )}
-              style={{ 'background-color': `#${label.color}` }}
-            >
-              {label.name}
-            </span>
-          ))}
+          {local.labels?.map(
+            (label: {
+              color: any;
+              name:
+                | number
+                | boolean
+                | Node
+                | JSX.ArrayElement
+                | JSX.FunctionElement
+                | (string & {})
+                | null
+                | undefined;
+            }) => (
+              <span
+                class={cn(
+                  'mt-2 ml-2 py-1 px-2 rounded-full text-sm',
+                  `bg-[#${label.color}]`
+                )}
+                style={{ 'background-color': `#${label.color}` }}
+              >
+                {label.name}
+              </span>
+            )
+          )}
         </div>
         <div class="flex mt-1 text-sm text-gray-500">
           <span class="opened-by">
