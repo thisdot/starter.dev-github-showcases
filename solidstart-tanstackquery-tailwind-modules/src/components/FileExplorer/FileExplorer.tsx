@@ -19,7 +19,7 @@ export type IProps = {
   branch: string;
   owner: string;
   name: string;
-  path: string;
+  path?: string;
 };
 
 const FileExplorerView = (props: IProps) => {
@@ -29,7 +29,7 @@ const FileExplorerView = (props: IProps) => {
   const basePath = () => `/${local.owner}/${local.name}`;
 
   const resTree = createQuery(
-    () => [`${local.branch}_${local.path}`],
+    () => [`${local.owner}_${local.name}_${local.branch}_${local.path || ''}`],
     () =>
       getRepoTree({
         owner: local.owner,
@@ -52,7 +52,7 @@ const FileExplorerView = (props: IProps) => {
       <Match when={resTree.isError}>
         <div>Error</div>
       </Match>
-      <Match when={resTree.isSuccess && resTree?.data}>
+      <Match when={resTree.isSuccess && !resTree.isLoading}>
         <div class={styles.container}>
           <Show when={local.path && local.path !== ''}>
             <A

@@ -27,28 +27,31 @@ const getGists = async () => {
 
   const resp = (await FetchApi(data)) as Response;
 
-  const gists = resp.data?.viewer.gists.nodes?.reduce((acc: Gists[] | { name: string }[], gist) => {
-    if (!gist) {
-      return acc;
-    }
-    const files = gist.files ?? [];
-    const gists = files.reduce(
-      (_acc: { name: string }[], file) =>
-        file
-          ? [
-            ..._acc,
-            {
-              id: gist.id,
-              description: gist.description,
-              name: file.name || gist.name,
-              url: gist.url,
-            },
-          ]
-          : acc,
-      []
-    );
-    return [...acc, ...gists];
-  }, []);
+  const gists = resp.data?.viewer.gists.nodes?.reduce(
+    (acc: Gists[] | { name: string; url: string }[], gist) => {
+      if (!gist) {
+        return acc;
+      }
+      const files = gist.files ?? [];
+      const gists = files.reduce(
+        (_acc: { name: string; url: string }[], file) =>
+          file
+            ? [
+                ..._acc,
+                {
+                  id: gist.id,
+                  description: gist.description,
+                  name: file.name || gist.name,
+                  url: gist.url,
+                },
+              ]
+            : acc,
+        []
+      );
+      return [...acc, ...gists];
+    },
+    []
+  );
 
   return gists;
 };

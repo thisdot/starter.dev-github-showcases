@@ -2,7 +2,7 @@ import FetchApi, { ApiProps } from './api';
 import { useAuth } from '../auth';
 import { REPO_INFO_QUERY } from './queries/repo-info';
 import { GITHUB_GRAPHQL } from '../utils/constants';
-import { RepoInfo, Topics } from '~/types/repo-info-type';
+import { Info, RepoInfo, Topics } from '~/types/repo-info-type';
 
 type RepoInfoVariables = {
   owner: string;
@@ -38,7 +38,12 @@ export function parseTopics(topics: Topics[]) {
  * }
  */
 
-const getRepoInfo = async (variables: RepoInfoVariables) => {
+const getRepoInfo = async (
+  variables: RepoInfoVariables
+): Promise<{
+  branch: string;
+  info: Info;
+}> => {
   const { authStore } = useAuth();
 
   const data: ApiProps<RepoInfoVariables> = {
