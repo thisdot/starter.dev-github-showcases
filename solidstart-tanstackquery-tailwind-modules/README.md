@@ -16,6 +16,10 @@ This starter kit features **SolidStart**, combined with **TanStack Query**, and 
 
 ## Overview
 
+This project was developed using the starter.dev kit, and it features **SolidStart**, combined with **TanStack Query**, and **Tailwind CSS**, and **CSS Modules**. It is a great starting point for building a Solid application with a GraphQL API.
+
+SolidStart is a meta framework for solidJS that is built on top of the React API and offers a leaner and more performant alternative to React. TanStack Query makes fetching, caching, synchronizing and updating server state in your web applications a breeze. Tailwind CSS is a utility-first CSS framework that offers a lot of flexibility and is easy to use. It is also very performant and offers a lot of customization options. CSS Modules helps us to eailsy group our tailwind/custom classes. 
+
 ### Tech Stack
 
 - [SolidStart](https://start.solidjs.com/getting-started/what-is-solidstart/)
@@ -30,18 +34,6 @@ This starter kit features **SolidStart**, combined with **TanStack Query**, and 
 - [Typescript](https://www.typescriptlang.org/) - Type checking
 - [ESLint](https://eslint.org/) - Code linting
 - [Prettier](https://prettier.io/) - Code formatting
-
-### Example Components
-
-#### Counter `src/components/CounterExample`
-
-A small counter example that showcases how to use state in SolidStart. You can view the example on the `src/pages/Counter`.
-
-Signals can live outside of components. Each relevant component subscribes to its value by using it.
-
-#### Fetch `src/components/FetchExample`
-
-Demonstrates how to retrieve data from a third-party API by using `createResource`.
 
 ## Installation
 
