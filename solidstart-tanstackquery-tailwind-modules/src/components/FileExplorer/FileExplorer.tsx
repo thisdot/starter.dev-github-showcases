@@ -52,7 +52,7 @@ const FileExplorerView = (props: IProps) => {
       <Match when={resTree.isError}>
         <div>Error</div>
       </Match>
-      <Match when={resTree.isSuccess}>
+      <Match when={resTree.isSuccess && !resTree.isLoading}>
         <div class={styles.container}>
           <Show when={local.path && local.path !== ''}>
             <A
