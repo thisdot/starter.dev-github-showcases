@@ -17,14 +17,15 @@
     "target": "es2019",
     "sourceMap": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "composite": true
   },
   "files": [],
-  "include": [],
+  "include": ["src/formatters/**.ts", "src/formatters/index.js"],
   "references": [
     {
       "path": "./tsconfig.spec.json"
     }
   ],
-  "exclude": ["node_modules", "handler", "lib", "generated"]
+  "exclude": ["node_modules"]
 }
