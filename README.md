@@ -16,6 +16,8 @@ See some of the projects we've built:
 | [nuxt-pinia-tailwind](/nuxt-pinia-tailwind)               | Nuxt Pinia Tailwind CSS          | [https://nuxt-pinia-tailwind.starter.dev](https://nuxt-pinia-tailwind.starter.dev)               |
 | [svelte-kit-scss](/svelte-kit-scss)                       | Svelte SCSS                      | [https://svelte-kit-scss.starter.dev](https://svelte-kit-scss.starter.dev)                       |
 | [vite-apollo-vanilla](/vite-apollo-vanilla)               | Vite Apollo Vanilla              | [https://vite-apollo-vanilla.starter.dev](https://vite-apollo-vanilla.starter.dev)               |
+| [solidstart-tanstackquery-tailwind-modules](/solidstart-tanstackquery-tailwind-modules) | SolidStart TanStack Query Tailwind CSS, CSS Modules       | [https://solidstart-tanstackquery-tailwind-modules.starter.dev](https://solidstart-tanstackquery-tailwind-modules.starter.dev) |
+
 
 ## Showcase Implementations
 
