@@ -1,4 +1,3 @@
-import 'highlight.js/styles/stackoverflow-light.css';
 import { unstable_clientOnly } from 'solid-start';
 
 // Highlight doesn't work with SSR so we need to use unstable_clientOnly
