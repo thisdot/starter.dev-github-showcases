@@ -3,7 +3,6 @@ import { useParams } from '@solidjs/router';
 import styles from './FileViewer.module.css';
 import FileText from './FileText';
 
-
 import { RepoFile } from '~/types/repo-file-type';
 import { createQuery } from '@tanstack/solid-query';
 import getRepoFile from '~/services/get-repo-file';
@@ -33,7 +32,6 @@ const FileViewer = () => {
       setResBlob(query.data);
     }
   });
-
 
   return (
     <>
