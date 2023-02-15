@@ -7,7 +7,10 @@ import { RepoFile } from '~/types/repo-file-type';
 import { createQuery } from '@tanstack/solid-query';
 import getRepoFile from '~/services/get-repo-file';
 import { LoadingPulseDot } from '../LoadingPulseDot/LoadingPulseDot';
-import { ExtensionType, mapExtensionToLanguage } from './mapExtensionToLanguage';
+import {
+  ExtensionType,
+  mapExtensionToLanguage,
+} from './mapExtensionToLanguage';
 import FileCode from './FileCode';
 
 const FileViewer = () => {
