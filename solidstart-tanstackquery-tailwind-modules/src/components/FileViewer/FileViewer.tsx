@@ -1,4 +1,4 @@
-import { createSignal, createEffect, Switch, Match } from 'solid-js';
+import { createSignal, createEffect, Switch, Match, Show } from 'solid-js';
 import { useParams } from '@solidjs/router';
 import styles from './FileViewer.module.css';
 import FileText from './FileText';
@@ -7,6 +7,8 @@ import { RepoFile } from '~/types/repo-file-type';
 import { createQuery } from '@tanstack/solid-query';
 import getRepoFile from '~/services/get-repo-file';
 import { LoadingPulseDot } from '../LoadingPulseDot/LoadingPulseDot';
+import { ExtensionType, mapExtensionToLanguage } from './mapExtensionToLanguage';
+import FileCode from './FileCode';
 
 const FileViewer = () => {
   const params = useParams();
@@ -26,12 +28,16 @@ const FileViewer = () => {
   );
 
   const branch = params.branch;
+  const path = params.path;
 
   createEffect(() => {
     if (query.isSuccess && !query.isLoading && query.data) {
       setResBlob(query.data);
     }
   });
+
+  const extension = path.split('.').pop() as ExtensionType;
+  const language = mapExtensionToLanguage(extension);
 
   return (
     <>
@@ -58,7 +64,9 @@ const FileViewer = () => {
                 {resBlob().byteSize} Bytes
               </span>
             </div>
-            <FileText text={resBlob().text} />
+            <Show when={language} fallback={<FileText text={resBlob().text} />}>
+              <FileCode text={resBlob().text} language={language} />
+            </Show>
           </div>
         </Match>
       </Switch>
