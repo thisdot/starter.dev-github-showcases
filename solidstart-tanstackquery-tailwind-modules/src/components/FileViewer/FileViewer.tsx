@@ -1,12 +1,9 @@
-import { createSignal, createEffect, Switch, Match, Show } from 'solid-js';
+import { createSignal, createEffect, Switch, Match } from 'solid-js';
 import { useParams } from '@solidjs/router';
 import styles from './FileViewer.module.css';
-import FileCode from './FileCode';
 import FileText from './FileText';
-import {
-  mapExtensionToLanguage,
-  ExtensionType,
-} from './mapExtensionToLanguage';
+
+
 import { RepoFile } from '~/types/repo-file-type';
 import { createQuery } from '@tanstack/solid-query';
 import getRepoFile from '~/services/get-repo-file';
@@ -20,7 +17,7 @@ const FileViewer = () => {
   });
 
   const query = createQuery(
-    () => ['repo-file'],
+    () => [`repo-file_${params.path}`],
     () =>
       getRepoFile({
         owner: params.owner,
@@ -30,7 +27,6 @@ const FileViewer = () => {
   );
 
   const branch = params.branch;
-  const path = params.path;
 
   createEffect(() => {
     if (query.isSuccess && !query.isLoading && query.data) {
@@ -38,8 +34,6 @@ const FileViewer = () => {
     }
   });
 
-  const extension = path.split('.').pop() as ExtensionType;
-  const language = mapExtensionToLanguage(extension);
 
   return (
     <>
@@ -66,9 +60,7 @@ const FileViewer = () => {
                 {resBlob().byteSize} Bytes
               </span>
             </div>
-            <Show when={language} fallback={<FileText text={resBlob().text} />}>
-              <FileCode text={resBlob().text} language={language} />
-            </Show>
+            <FileText text={resBlob().text} />
           </div>
         </Match>
       </Switch>
