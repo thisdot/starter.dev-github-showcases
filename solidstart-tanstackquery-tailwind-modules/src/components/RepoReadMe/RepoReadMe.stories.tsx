@@ -1,13 +1,13 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
 import { Router } from '@solidjs/router';
-import RepoReadMe from './RepoReadMe';
-import { mockReadme } from '../../../msw/mockReadMe';
+import styles from './RepoReadMe.module.css';
+import SolidMarkdown from 'solid-markdown';
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
+import { TocIcon } from '../Icons';
 
 export default {
   title: 'Components/RepoReadMe',
-  parameters: {
-    msw: [mockReadme],
-  },
 };
 
 const queryClient = new QueryClient({
@@ -22,7 +22,20 @@ const queryClient = new QueryClient({
 const Template = () => (
   <QueryClientProvider client={queryClient}>
     <Router>
-      <RepoReadMe />
+      <div class={styles.container} data-testid="readme">
+        <header class={styles.header}>
+          <span class={styles.tocIconContainer}>
+            <TocIcon class={styles.tocIcon} />
+          </span>
+          <span class={styles.filename}>README.md</span>
+        </header>
+        <article class={styles.article}>
+          <SolidMarkdown
+            rehypePlugins={[rehypeRaw, remarkGfm]}
+            children={'text'}
+          />
+        </article>
+      </div>
     </Router>
   </QueryClientProvider>
 );

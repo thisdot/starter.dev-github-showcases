@@ -2,6 +2,7 @@ import { createQuery } from '@tanstack/solid-query';
 import { createEffect, createSignal } from 'solid-js';
 import { useParams } from 'solid-start';
 import { BranchNavigation } from '~/components/BranchNavigation';
+import { FileViewer } from '~/components/FileViewer';
 import { RepoHeader } from '~/components/RepoHeader';
 import getRepoInfo from '~/services/get-repo-info';
 import { Info } from '~/types/repo-info-type';
@@ -50,7 +51,7 @@ const RepoBlob = () => {
         <div class="grid grid-cols-12 gap-8">
           <div class="col-span-12 md:col-span-7 xl:col-span-9">
             <BranchNavigation branch={branch()} />
-            {/* FileViewer */}
+            <FileViewer />
           </div>
         </div>
       </div>
