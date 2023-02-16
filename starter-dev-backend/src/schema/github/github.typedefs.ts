@@ -6,16 +6,16 @@ export const githubTypeDefs = gql`
   """
   type Repo {
     description: String
-    forks_count: Int
-    full_name: String
+    forkCount: Int
+    fullName: String
     id: ID
     language: String
     name: String
     owner: User
     private: Boolean
-    stargazers_count: Int
+    stargazersCount: Int
     title: String
-    updated_at: String
+    updatedAt: String
     readme: String
   }
 
@@ -39,19 +39,19 @@ export const githubTypeDefs = gql`
     login: String
     name: String
     orgs: [Orgs]
-    starred_url: String
-    twitter_username: String
+    starCount: String
+    twitterUsername: String
   }
 
   """
   An Organization object used in Owner
   """
   type Orgs {
-    avatar_url: String
+    avatar: String
     login: String
     name: String
-    members_url: String
-    repos_url: String
+    membersCount: String
+    reposCount: String
   }
 
   """

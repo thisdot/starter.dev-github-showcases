@@ -1,28 +1,23 @@
 export const GithubResolvers = {
   Owner: {
-    // retrieves orgs
     orgs: async ({ login }: any, test: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOrgs(login);
       return data;
     },
-    // retrieves star count
-    starred_url: async ({ login }: any, __: any, { dataSources }: any) => {
+    starCount: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOwnerStarCount(login);
       return data.length;
     },
   },
   Orgs: {
-    // retrieves public repos
-    repos_url: async ({ login }: any, __: any, { dataSources }: any) => {
+    reposCount: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOrgRepos(login);
       return data.public_repos;
     },
-    // retrieves org members count
-    members_url: async ({ login }: any, __: any, { dataSources }: any) => {
+    membersCount: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOrgsMemberCount(login);
       return data.length;
     },
-    // retrieves org name
     name: async ({ login }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getOrgRepos(login);
       return data.name;
@@ -31,7 +26,10 @@ export const GithubResolvers = {
   Repo: {
     readme: async ({ owner, name }: any, __: any, { dataSources }: any) => {
       const data = await dataSources.githubAPI.getReadMe(owner.login, name);
-      return data.content;
+      if (data === null) {
+        return null;
+      }
+      return Buffer.from(data?.content, 'base64').toString('ascii');
     },
   },
   Query: {
