@@ -18,8 +18,7 @@ This starter kit features **SolidStart**, combined with **TanStack Query**, and 
 
 This project was developed using the starter.dev kit, and it features **SolidStart**, combined with **TanStack Query**, and **Tailwind CSS**, and **CSS Modules**. It is a great starting point for building a Solid application with a GraphQL API.
 
-SolidStart is a meta framework for solidJS that is built on top of the React API and offers a leaner and more performant alternative to React. TanStack Query makes fetching, caching, synchronizing and updating server state in your web applications a breeze. Tailwind CSS is a utility-first CSS framework that offers a lot of flexibility and is easy to use. It is also very performant and offers a lot of customization options. CSS Modules helps us to eailsy group our tailwind/custom classes. 
-
+SolidStart is a meta framework for SolidJS that is built on top of the React API and offers a leaner and more performant alternative to React. TanStack Query makes fetching, caching, synchronizing and updating server state in your web applications a breeze. Tailwind CSS is a utility-first CSS framework that offers a lot of flexibility and is easy to use. It is also very performant and offers a lot of customization options. CSS Modules helps us to eailsy group our tailwind/custom classes. 
 ### Tech Stack
 
 - [SolidStart](https://start.solidjs.com/getting-started/what-is-solidstart/)
