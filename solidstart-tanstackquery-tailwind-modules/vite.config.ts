@@ -27,4 +27,7 @@ export default defineConfig({
   resolve: {
     conditions: ['development', 'browser'],
   },
+  ssr: {
+    external: ['solid-highlight', 'solid-markdown'],
+  },
 });
