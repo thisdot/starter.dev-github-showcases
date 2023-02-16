@@ -5,7 +5,7 @@ import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
 import { ProfilePage } from '~/components/ProfilePage';
 import userProfile from '~/services/get-user-profile';
 import getUserRepos from '~/services/get-user-repos';
-import { UserProfile } from '~/types/user-profile-type';
+import { Profile } from '~/types/user-profile-type';
 import { PageInfo, Repo } from '~/types/user-repo-type';
 
 type GetUserRepos = {
@@ -13,23 +13,29 @@ type GetUserRepos = {
   repos: Repo[];
 };
 
-const Profile = () => {
+const UserProps = () => {
   const params = useParams();
   const location = useLocation();
-  const [profile, setProfile] = createSignal<UserProfile>({
+  const [profile, setProfile] = createSignal<Profile>({
     avatarUrl: '',
     bio: '',
     company: '',
     username: '',
-    followers: 0,
-    following: 0,
+    followers: {
+      totalCount: 0,
+    },
+    following: {
+      totalCount: 0,
+    },
     location: '',
     login: '',
     name: '',
     organizations: {
       nodes: [],
     },
-    starredRepos: 0,
+    starredRepositories: {
+      totalCount: 0,
+    },
     twitterUsername: '',
     websiteUrl: '',
   });
@@ -87,4 +93,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProps;
