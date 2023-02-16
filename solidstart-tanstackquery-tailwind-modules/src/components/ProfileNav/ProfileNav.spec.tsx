@@ -4,7 +4,6 @@ import { describe, expect, it } from 'vitest';
 import ProfileNav from './ProfileNav';
 
 describe('RepoCard for profilepage', () => {
-
   it('should mount', async () => {
     const wrapper = await render(() => (
       <Router>
