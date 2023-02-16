@@ -14,7 +14,7 @@ export type Scalars = {
   Float: number;
 };
 
-/** A Organization object used in Owner */
+/** An Organization object used in Owner */
 export type Orgs = {
   __typename?: 'Orgs';
   avatar_url?: Maybe<Scalars['String']>;
@@ -24,7 +24,7 @@ export type Orgs = {
   repos_url?: Maybe<Scalars['String']>;
 };
 
-/** A User object */
+/** An Owner object */
 export type Owner = {
   __typename?: 'Owner';
   bio?: Maybe<Scalars['String']>;
@@ -83,10 +83,21 @@ export type Repo = {
   private?: Maybe<Scalars['Boolean']>;
   stargazers_count?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
+  tree: Array<Maybe<TreeEntry>>;
   updated_at?: Maybe<Scalars['String']>;
 };
 
-/** An Owner object used in Repo */
+/** File Tree */
+export type TreeEntry = {
+  __typename?: 'TreeEntry';
+  mode: Scalars['String'];
+  path: Scalars['String'];
+  sha: Scalars['String'];
+  type: Scalars['String'];
+  url: Scalars['String'];
+};
+
+/** A User object used in Repo */
 export type User = {
   __typename?: 'User';
   login?: Maybe<Scalars['String']>;
@@ -169,6 +180,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   Repo: ResolverTypeWrapper<Repo>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  TreeEntry: ResolverTypeWrapper<TreeEntry>;
   User: ResolverTypeWrapper<User>;
 };
 
@@ -182,6 +194,7 @@ export type ResolversParentTypes = {
   Query: {};
   Repo: Repo;
   String: Scalars['String'];
+  TreeEntry: TreeEntry;
   User: User;
 };
 
@@ -227,7 +240,17 @@ export type RepoResolvers<ContextType = any, ParentType extends ResolversParentT
   private?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   stargazers_count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  tree?: Resolver<Array<Maybe<ResolversTypes['TreeEntry']>>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TreeEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['TreeEntry'] = ResolversParentTypes['TreeEntry']> = {
+  mode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  path?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sha?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -241,6 +264,7 @@ export type Resolvers<ContextType = any> = {
   Owner?: OwnerResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Repo?: RepoResolvers<ContextType>;
+  TreeEntry?: TreeEntryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };
 

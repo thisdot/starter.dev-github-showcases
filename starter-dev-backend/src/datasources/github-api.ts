@@ -68,4 +68,11 @@ export class GitHubAPI extends RESTDataSource {
     // return repoFormatter(data);
     return data;
   }
+
+  // https://docs.github.com/rest/reference/git#get-a-tree
+  async getTree(owner: string, repoName: string) {
+    return await this.get(
+      `/repos/${owner}/${repoName}/git/trees/HEAD?recursive=1`,
+    );
+  }
 }
