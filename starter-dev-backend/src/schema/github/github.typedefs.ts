@@ -2,6 +2,17 @@ import gql from 'graphql-tag';
 
 export const githubTypeDefs = gql`
   """
+  File Tree
+  """
+  type TreeEntry {
+    path: String!
+    mode: String!
+    type: String!
+    sha: String!
+    url: String!
+  }
+
+  """
   A Repo object
   """
   type Repo {
@@ -16,6 +27,7 @@ export const githubTypeDefs = gql`
     stargazers_count: Int
     title: String
     updated_at: String
+    tree: [TreeEntry]!
   }
 
   """

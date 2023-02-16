@@ -23,6 +23,12 @@ export const GithubResolvers = {
       return data.name;
     },
   },
+  Repo: {
+    tree: async ({ owner, name }: any, __: any, { dataSources }: any) => {
+      const data = await dataSources.githubAPI.getTree(owner.login, name);
+      return data?.tree ?? [];
+    },
+  },
   Query: {
     repos: async (_: any, { username, perPage }: any, { dataSources }: any) => {
       const data = dataSources.githubAPI.getRepos(username, perPage);
@@ -32,7 +38,6 @@ export const GithubResolvers = {
       const data = dataSources.githubAPI.getRepo(owner, repoName);
       return data;
     },
-
     owner: async (_: any, __: any, { dataSources }: any) => {
       const data = dataSources.githubAPI.getOwner();
       return data;
