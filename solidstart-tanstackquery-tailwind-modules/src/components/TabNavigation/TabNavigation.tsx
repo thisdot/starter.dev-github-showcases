@@ -13,9 +13,9 @@ export type Tab = {
 
 type TabNavigationProps = {
   pathname: string;
-  class: string;
+  class?: string;
   tabs: Tab[];
-  basePath: string;
+  basePath?: string;
 };
 
 const TabNavigation = (props: TabNavigationProps) => {
@@ -29,7 +29,7 @@ const TabNavigation = (props: TabNavigationProps) => {
   };
 
   return (
-    <div class={`${styles.container} ${props.class}`}>
+    <div class={`${styles.container} ${props.class || ''}`}>
       <nav class={styles.nav} aria-label="Tabs">
         <For each={props.tabs} fallback={<div>Loading...</div>}>
           {(item) => {
