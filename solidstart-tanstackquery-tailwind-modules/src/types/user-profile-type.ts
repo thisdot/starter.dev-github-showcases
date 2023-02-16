@@ -4,9 +4,9 @@ export interface UserProfileProps {
   username: string;
   bio: string;
   login: string;
-  followers: {totalCount:number};
-  following: {totalCount:number};
-  starredRepositories: {totalCount:number};
+  followers: { totalCount: number };
+  following: { totalCount: number };
+  starredRepositories: { totalCount: number };
   company: string;
   location: string;
   websiteUrl: string;
