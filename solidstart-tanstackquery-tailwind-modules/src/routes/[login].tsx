@@ -58,7 +58,7 @@ const UserProps = () => {
   );
 
   const queryRepos = createQuery(
-    () => ['query-repos'],
+    () => [`query-repos-${location.query?.after}_${location.query?.before}`],
     () =>
       getUserRepos({
         username: params?.login,
