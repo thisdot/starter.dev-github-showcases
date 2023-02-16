@@ -12,9 +12,7 @@ const UserRepos = (props: RepoInfos) => {
         filteredRepoCount={props.repos.length}
       />
       <Show when={props.repos.length > 0}>
-        <For each={props.repos}>
-          {(p) => <RepoCard {...p} isProfilePage />}
-        </For>
+        <For each={props.repos}>{(p) => <RepoCard {...p} isProfilePage />}</For>
         <Show
           when={props.pageInfo?.hasNextPage || props.pageInfo?.hasPreviousPage}
         >
