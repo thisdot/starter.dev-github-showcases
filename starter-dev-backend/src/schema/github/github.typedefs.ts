@@ -16,6 +16,7 @@ export const githubTypeDefs = gql`
     stargazers_count: Int
     title: String
     updated_at: String
+    readme: String
   }
 
   """

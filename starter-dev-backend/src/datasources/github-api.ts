@@ -51,6 +51,12 @@ export class GitHubAPI extends RESTDataSource {
     return data;
   }
 
+  // https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#get-a-repository-readme
+  async getReadMe(owner: string, repoName: string) {
+    const data = await this.get(`/repos/${owner}/${repoName}/readme`);
+    return data;
+  }
+
   // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
   async getRepo(owner: string, repoName: string) {
     const data = await this.get(`/repos/${owner}/${repoName}`);

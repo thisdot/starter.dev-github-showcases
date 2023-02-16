@@ -14,7 +14,7 @@ export type Scalars = {
   Float: number;
 };
 
-/** A Organization object used in Owner */
+/** An Organization object used in Owner */
 export type Orgs = {
   __typename?: 'Orgs';
   avatar_url?: Maybe<Scalars['String']>;
@@ -24,7 +24,7 @@ export type Orgs = {
   repos_url?: Maybe<Scalars['String']>;
 };
 
-/** A User object */
+/** An Owner object */
 export type Owner = {
   __typename?: 'Owner';
   bio?: Maybe<Scalars['String']>;
@@ -86,7 +86,7 @@ export type Repo = {
   updated_at?: Maybe<Scalars['String']>;
 };
 
-/** An Owner object used in Repo */
+/** A User object used in Repo */
 export type User = {
   __typename?: 'User';
   login?: Maybe<Scalars['String']>;
