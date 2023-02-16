@@ -1,21 +1,21 @@
-export interface UserProfile {
+export interface UserProfileProps {
   avatarUrl: string;
-  bio: string;
-  company: string;
-  username: string;
-  followers: number;
-  following: number;
-  location: string;
-  login: string;
   name: string;
+  username: string;
+  bio: string;
+  login: string;
+  followers: {totalCount:number};
+  following: {totalCount:number};
+  starredRepositories: {totalCount:number};
+  company: string;
+  location: string;
+  websiteUrl: string;
+  twitterUsername: string;
   organizations: {
     nodes: {
       avatarUrl: string;
-      login: string;
       name: string;
+      login: string;
     }[];
   };
-  starredRepos: number;
-  twitterUsername: string;
-  websiteUrl: string;
 }

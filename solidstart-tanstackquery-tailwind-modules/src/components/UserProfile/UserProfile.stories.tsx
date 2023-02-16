@@ -1,6 +1,7 @@
 import { Router } from '@solidjs/router';
-import UserProfile, { UserProfileProps } from '.';
+import { UserProfileProps } from '~/types/user-profile-type.js';
 import { userProfileMockedData } from './data.js';
+import UserProfile from '.';
 
 export default {
   title: 'Components/User Profile Card',

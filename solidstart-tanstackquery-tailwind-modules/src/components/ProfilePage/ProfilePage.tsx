@@ -2,7 +2,7 @@ import { Show, createEffect, createSignal, splitProps } from 'solid-js';
 import { useLocation } from 'solid-start/router';
 import styles from './ProfilePage.module.css';
 import { ProfileNav } from '~/components/ProfileNav';
-import { UserProfile as UserProfileType } from '~/types/user-profile-type';
+import { UserProfileProps } from '~/types/user-profile-type';
 import { PageInfo, Repo } from '~/types/user-repo-type';
 import UserProfile from '~/components/UserProfile';
 import { UserRepos } from '~/components/UserRepos';
@@ -18,7 +18,7 @@ export interface RepoInfos extends RepoInfoProps {
 }
 
 type ProfilePageProps = {
-  user: UserProfileType;
+  user: UserProfileProps;
   reposInfo: RepoInfoProps;
 };
 

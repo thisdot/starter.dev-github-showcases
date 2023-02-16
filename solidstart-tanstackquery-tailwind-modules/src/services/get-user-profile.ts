@@ -2,7 +2,7 @@ import FetchApi, { ApiProps } from './api';
 import { useAuth } from '../auth';
 import { GITHUB_GRAPHQL } from '../utils/constants';
 import { USER_PROFILE_QUERY } from './queries/user-profile';
-import { UserProfile } from '~/types/user-profile-type';
+import { UserProfileProps } from '~/types/user-profile-type';
 
 type UserProfileVariables = {
   username: string;
@@ -10,7 +10,7 @@ type UserProfileVariables = {
 
 type Response = {
   data: {
-    user: UserProfile;
+    user: UserProfileProps;
   };
 };
 

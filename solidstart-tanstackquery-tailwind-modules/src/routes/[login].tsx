@@ -4,7 +4,7 @@ import { useParams, useLocation } from 'solid-start';
 import { ProfilePage } from '~/components/ProfilePage';
 import userProfile from '~/services/get-user-profile';
 import getUserRepos from '~/services/get-user-repos';
-import { UserProfile } from '~/types/user-profile-type';
+import { UserProfileProps } from '~/types/user-profile-type';
 import { PageInfo, Repo } from '~/types/user-repo-type';
 
 type GetUserRepos = {
@@ -15,20 +15,26 @@ type GetUserRepos = {
 const Profile = () => {
   const params = useParams();
   const location = useLocation();
-  const [profile, setProfile] = createSignal<UserProfile>({
+  const [profile, setProfile] = createSignal<UserProfileProps>({
     avatarUrl: '',
     bio: '',
     company: '',
     username: '',
-    followers: 0,
-    following: 0,
+    followers: {
+      totalCount: 0,
+    },
+    following: {
+      totalCount: 0,
+    },
     location: '',
     login: '',
     name: '',
     organizations: {
       nodes: [],
     },
-    starredRepos: 0,
+    starredRepositories: {
+      totalCount: 0,
+    },
     twitterUsername: '',
     websiteUrl: '',
   });
