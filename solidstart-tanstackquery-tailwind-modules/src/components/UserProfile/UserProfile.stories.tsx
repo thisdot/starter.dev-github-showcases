@@ -1,5 +1,5 @@
 import { Router } from '@solidjs/router';
-import { UserProfileProps } from '~/types/user-profile-type.js';
+import { Profile } from '~/types/user-profile-type';
 import { userProfileMockedData } from './data.js';
 import UserProfile from '.';
 
@@ -8,7 +8,7 @@ export default {
   component: UserProfile,
 };
 
-const Template = (args: UserProfileProps) => (
+const Template = (args: Profile) => (
   <Router>
     <UserProfile {...args} />
   </Router>

@@ -4,7 +4,7 @@ import { useParams, useLocation } from 'solid-start';
 import { ProfilePage } from '~/components/ProfilePage';
 import userProfile from '~/services/get-user-profile';
 import getUserRepos from '~/services/get-user-repos';
-import { UserProfileProps } from '~/types/user-profile-type';
+import { Profile } from '~/types/user-profile-type';
 import { PageInfo, Repo } from '~/types/user-repo-type';
 
 type GetUserRepos = {
@@ -12,10 +12,10 @@ type GetUserRepos = {
   repos: Repo[];
 };
 
-const Profile = () => {
+const UserProps = () => {
   const params = useParams();
   const location = useLocation();
-  const [profile, setProfile] = createSignal<UserProfileProps>({
+  const [profile, setProfile] = createSignal<Profile>({
     avatarUrl: '',
     bio: '',
     company: '',
@@ -92,4 +92,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProps;

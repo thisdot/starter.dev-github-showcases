@@ -1,4 +1,4 @@
-export interface UserProfileProps {
+export interface Profile {
   avatarUrl: string;
   name: string;
   username: string;
