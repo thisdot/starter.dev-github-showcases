@@ -88,7 +88,10 @@ export default function OrgProfile() {
             </For>
 
             <Show when={pageInfo()?.hasNextPage || pageInfo()?.hasPreviousPage}>
-              <Pagination pageInfo={pageInfo() as PageInfo} owner={`orgs/${params.login}`} />
+              <Pagination
+                pageInfo={pageInfo() as PageInfo}
+                owner={`orgs/${params.login}`}
+              />
             </Show>
           </div>
         </div>
