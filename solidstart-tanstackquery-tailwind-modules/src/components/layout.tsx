@@ -1,6 +1,7 @@
-import { JSXElement, Show, children } from 'solid-js';
+import { JSXElement, Show, children, createEffect } from 'solid-js';
 import Header from '../components/Header/header';
 import { useAuth } from '~/auth';
+import { useLocation } from 'solid-start';
 
 interface LayoutProps {
   children: JSXElement;
@@ -8,7 +9,17 @@ interface LayoutProps {
 
 export const Layout = (props: LayoutProps) => {
   const { authStore } = useAuth();
+  const location = useLocation();
   const c = children(() => props.children);
+
+  createEffect(() => {
+    if (
+      !authStore.isAuthenticated &&
+      !['/signin', '/redirect'].includes(location.pathname)
+    ) {
+      window.location.href = '/signin';
+    }
+  });
 
   return (
     <>
