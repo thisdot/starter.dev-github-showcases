@@ -69,7 +69,10 @@ export default function OrgProfile() {
       <div class="max-w-screen-lg mx-auto py-8 px-2">
         <div class="grid grid-cols-12 gap-8">
           <div class="col-span-12 md:col-span-8 xl:col-span-12">
-            <ProfileNav class="border-none md:hidden" pathname={location.pathname} />
+            <ProfileNav
+              class="border-none md:hidden"
+              pathname={location.pathname}
+            />
             <RepoFilter
               languages={repoLanguages()}
               filteredRepoCount={repos().length}
