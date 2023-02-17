@@ -2,6 +2,7 @@ import { createSignal, Show, splitProps, For, Switch, Match } from 'solid-js';
 import { CaretIcon, CloseIcon, CorrectIcon } from '../Icons';
 import { clickOutside } from '../../utils/onclickOutside';
 import styles from '../RepoFilter/RepoFilter.module.css';
+import classNames from 'classnames';
 
 type FilterDropDownProps = {
   name: string;
@@ -9,6 +10,7 @@ type FilterDropDownProps = {
   items: string[];
   selected: string;
   selectOption: (value: string) => void;
+  class?: string;
 };
 
 const FilterDropdown = (props: FilterDropDownProps) => {
@@ -26,7 +28,7 @@ const FilterDropdown = (props: FilterDropDownProps) => {
   return (
     <div
       data-testid={`filter-dropdown-${local.name}`}
-      class={styles.dropDownContainer}
+      class={classNames(styles.dropDownContainer, props.class)}
       //@ts-ignore
       use:_clickOutside={() => setShowOptions(false)}
     >

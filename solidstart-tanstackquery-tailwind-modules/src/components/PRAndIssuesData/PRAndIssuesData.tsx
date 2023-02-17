@@ -2,7 +2,7 @@ import { For } from 'solid-js';
 import { PRAndIssuesListItem } from '../PRAndIssuesListItem';
 import { PRAndIssuesHeader } from '../PRAndIssuesHeader';
 
-export const PRAndIssuesData = (props) => {
+const PRAndIssuesData = (props: { data: readonly any[] }) => {
   return (
     <div class="border border-gray-300 rounded-lg">
       <PRAndIssuesHeader {...props} />
@@ -21,3 +21,5 @@ export const PRAndIssuesData = (props) => {
     </div>
   );
 };
+
+export default PRAndIssuesData;

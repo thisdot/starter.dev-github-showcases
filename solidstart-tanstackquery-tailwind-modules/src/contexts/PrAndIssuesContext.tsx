@@ -1,4 +1,10 @@
-import { createSignal, createContext, useContext, Accessor } from 'solid-js';
+import {
+  createSignal,
+  createContext,
+  useContext,
+  Accessor,
+  JSX,
+} from 'solid-js';
 import { useLocation } from '@solidjs/router';
 
 interface PrAndIssuesParameters {
@@ -8,21 +14,30 @@ interface PrAndIssuesParameters {
   setActiveTab: (value: string) => void;
   sortBy: Accessor<string>;
   setSortBy: (value: string) => void;
-  selectedLabel: Accessor<undefined>;
-  setSelectedLabel: (value: string | undefined) => void;
+  selectedLabel?: Accessor<string>;
+  setSelectedLabel: (value?: string) => void;
   labelOpt: Accessor<never[]>;
   setLabelOpt: (value: string[]) => void;
-  selectedMilestone: Accessor<undefined>;
-  setSelectedMilestone: (value: string | undefined) => void;
+  selectedMilestone: Accessor<string>;
+  setSelectedMilestone: (value?: string) => void;
   milestoneOpt: Accessor<never[]>;
   setMilestoneOpt: (value: string[]) => void;
-  milestoneId: Accessor<undefined>;
-  setMilestoneId: (value: string | undefined) => void;
+  milestoneId: Accessor<string>;
+  setMilestoneId: (value?: string) => void;
 }
 
 const PrAndIssueContext = createContext<PrAndIssuesParameters>();
 
-export function PrAndIssuesProvider({ children }: { children: any }) {
+export function PrAndIssuesProvider(props: {
+  children:
+    | number
+    | boolean
+    | Node
+    | JSX.ArrayElement
+    | JSX.FunctionElement
+    | null
+    | undefined;
+}) {
   const { pathname } = useLocation();
   const type = pathname.includes('pulls') ? 'pr' : 'issue';
   const [tabActive, setActiveTab] = createSignal('open');
@@ -60,7 +75,7 @@ export function PrAndIssuesProvider({ children }: { children: any }) {
 
   return (
     <PrAndIssueContext.Provider value={PrAndIssuesParameters}>
-      <>{children}</>
+      {props.children}
     </PrAndIssueContext.Provider>
   );
 }

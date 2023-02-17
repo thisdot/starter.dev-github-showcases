@@ -1,6 +1,6 @@
 import { createResource, createSignal, createEffect } from 'solid-js';
 import { useLocation, useParams } from '@solidjs/router';
-import { PRAndIssuesData } from '../PRAndIssuesData/PRAndIssuesData';
+import PRAndIssuesData from '../PRAndIssuesData/PRAndIssuesData';
 import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 import { parseSortParams } from './utils';
 import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../utils/constants';
@@ -12,16 +12,7 @@ import { PRAndIssueLoaderSkeleton } from '../PRAndIssueLoaderSkeleton';
 const RepoIssues = () => {
   const params = useParams();
   const location = useLocation();
-  const {
-    tabActive,
-    sortBy,
-    selectedLabel,
-    setLabelOpt,
-    setMilestoneOpt,
-    clearSortAndFilter,
-    selectedMilestone,
-    milestoneId,
-  } = usePrAndIssuesContext();
+  const prAndIssueContext = usePrAndIssuesContext();
 
   const [data, setData] = createSignal([]);
   const [openCount, setOpenCount] = createSignal();
@@ -31,11 +22,15 @@ const RepoIssues = () => {
   const fetchParameters = () => ({
     owner: params.owner,
     name: params.name,
-    orderBy: parseSortParams(SORT_OPTIONS, sortBy(), 0),
-    direction: parseSortParams(SORT_OPTIONS, sortBy(), 1),
+    orderBy: parseSortParams(SORT_OPTIONS, prAndIssueContext.sortBy(), 0),
+    direction: parseSortParams(SORT_OPTIONS, prAndIssueContext.sortBy(), 1),
     filterBy: {
-      labels: selectedLabel() ? [selectedLabel()] : undefined,
-      milestone: selectedMilestone() ? milestoneId() : undefined,
+      labels: prAndIssueContext.selectedLabel()
+        ? [prAndIssueContext.selectedLabel()]
+        : undefined,
+      milestone: prAndIssueContext.selectedMilestone()
+        ? prAndIssueContext.milestoneId()
+        : undefined,
     },
     before:
       typeof location.query.before === 'string'
@@ -56,20 +51,20 @@ const RepoIssues = () => {
     getIssues(fetchParameters())
   );
 
-  createEffect(() => {
-    if (resp() && !resp.loading) {
-      setLabelOpt(resp()?.labels);
-      setMilestoneOpt(resp().milestones);
-      setOpenCount(resp().openIssues.totalCount);
-      setClosedCount(resp().closedIssues.totalCount);
-      setPageInfo(
-        resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].pageInfo
-      );
-      setData(
-        resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].issues
-      );
-    }
-  });
+  // createEffect(() => {
+  //   if (resp() && !resp.loading) {
+  //     setLabelOpt(resp()?.labels);
+  //     setMilestoneOpt(resp().milestones);
+  //     setOpenCount(resp().openIssues.totalCount);
+  //     setClosedCount(resp().closedIssues.totalCount);
+  //     setPageInfo(
+  //       resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].pageInfo
+  //     );
+  //     setData(
+  //       resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].issues
+  //     );
+  //   }
+  // });
 
   return (
     <div class="md:py-12 max-w-screen-xl mx-auto">
@@ -77,7 +72,8 @@ const RepoIssues = () => {
         <PRAndIssueLoaderSkeleton />
       ) : (
         <>
-          {(selectedLabel() || sortBy() !== 'Newest') && (
+          {(prAndIssueContext.selectedLabel() ||
+            prAndIssueContext.sortBy() !== 'Newest') && (
             <div
               class="flex items-center gap-2 text-sm my-4 ml-2 cursor-pointer"
               onClick={clearSortAndFilter}
@@ -93,14 +89,14 @@ const RepoIssues = () => {
             openCount={openCount()}
             closedCount={closedCount()}
           />
-          {pageInfo() &&
+          {/* {pageInfo() &&
             (pageInfo().hasNextPage || pageInfo().hasPreviousPage) && (
               <Pagination
                 tab={tabActive()}
                 pageInfo={pageInfo()}
                 owner={`${params.owner}/${params.name}/issues`}
               />
-            )}
+            )} */}
         </>
       )}
     </div>

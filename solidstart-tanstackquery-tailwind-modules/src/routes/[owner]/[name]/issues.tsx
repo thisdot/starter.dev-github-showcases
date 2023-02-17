@@ -5,15 +5,10 @@ import getRepoInfo from '~/services/get-repo-info';
 import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
 import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '~/components/RepoHeader';
-import { RepoAbout } from '~/components/RepoAbout';
-import { BranchNavigation } from '~/components/BranchNavigation';
-import { RepoReadMe } from '~/components/RepoReadMe';
-import FileExplorer from '~/components/FileExplorer';
 import RepoIssues from '~/components/RepoIssues/RepoIssues';
 
 const Repository = () => {
   const params = useParams();
-  const [branch, setBranch] = createSignal(params.branch);
   const [info, setInfo] = createSignal<Info>({
     isPrivate: false,
     visibility: '',
@@ -44,7 +39,6 @@ const Repository = () => {
   createEffect(() => {
     if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
       setInfo(repoInfo.data.info);
-      setBranch(repoInfo.data.branch || params.branch);
     }
   });
 

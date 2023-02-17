@@ -2,7 +2,7 @@
 // elsint brokes my class declaration at line #38 and the icon hasn't the right color
 
 /* eslint-disable */
-import { JSX, splitProps } from 'solid-js';
+import { JSX } from 'solid-js';
 import { format } from 'date-fns';
 import cn from 'classnames';
 import {
@@ -15,19 +15,23 @@ import {
 } from '../Icons';
 import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 
-const PRAndIssuesListItem = (props) => {
-  const { type } = usePrAndIssuesContext();
+interface Props {
+  state: string;
+  url: string | undefined;
+  title: string;
+  labels: {
+    color: any;
+    name: string;
+  }[];
+  number: number;
+  authorName: string;
+  isOpen: any;
+  createdAt: string | number | Date;
+  commentCount: number;
+}
 
-  const [local] = splitProps(props, [
-    'number',
-    'title',
-    'url',
-    'state',
-    'createdAt',
-    'authorName',
-    'commentCount',
-    'labels',
-  ]);
+const PRAndIssuesListItem = (props: Props) => {
+  const { type } = usePrAndIssuesContext();
 
   return (
     <div class="flex relative items-baseline border-y border-gray-300 pt-2 pb-3">
@@ -39,27 +43,27 @@ const PRAndIssuesListItem = (props) => {
         <div class="flex-shrink-0 pl-4 translate-y-1">
           <span
             class={cn({
-              'text-green-600': local.state === 'OPEN',
-              'text-gray-500': local.state !== 'OPEN' && type === 'issue',
+              'text-green-600': props.state === 'OPEN',
+              'text-gray-500': props.state !== 'OPEN' && type === 'issue',
               'text-purple-600':
-                (local.state !== 'OPEN' && local.state === 'MERGED') ||
-                (local.state === 'CLOSED' && type === 'issue'),
-              'text-red-600': type === 'pr' && local.state === 'CLOSED',
+                (props.state !== 'OPEN' && props.state === 'MERGED') ||
+                (props.state === 'CLOSED' && type === 'issue'),
+              'text-red-600': type === 'pr' && props.state === 'CLOSED',
             })}
           >
             {type === 'issue' ? (
               <>
-                {local.state === 'CLOSED' ? (
+                {props.state === 'CLOSED' ? (
                   <ClosedIssueIcon class="w-5 h-5" />
                 ) : (
                   <IssuesIcon class="w-5 h-5" />
                 )}
               </>
-            ) : local.state === 'OPEN' ? (
+            ) : props.state === 'OPEN' ? (
               <PullRequestIcon class="w-5 h-5" />
             ) : (
               <>
-                {local.state === 'MERGED' ? (
+                {props.state === 'MERGED' ? (
                   <MergedPrIcon class="w-5 h-5" />
                 ) : (
                   <ClosedPrIcon class="w-5 h-5" />
@@ -75,53 +79,40 @@ const PRAndIssuesListItem = (props) => {
           <a
             class="align-middle no-underline markdown-title font-semibold"
             target="_blank"
-            href={local.url}
+            href={props.url}
           >
-            {local.title}
+            {props.title}
           </a>
-          {local.labels?.map(
-            (label: {
-              color: any;
-              name:
-                | number
-                | boolean
-                | Node
-                | JSX.ArrayElement
-                | JSX.FunctionElement
-                | (string & {})
-                | null
-                | undefined;
-            }) => (
-              <span
-                class={cn(
-                  'mt-2 ml-2 py-1 px-2 rounded-full text-sm',
-                  `bg-[#${label.color}]`
-                )}
-                style={{ 'background-color': `#${label.color}` }}
-              >
-                {label.name}
-              </span>
-            )
-          )}
+          {props.labels?.map((label) => (
+            <span
+              class={cn(
+                'mt-2 ml-2 py-1 px-2 rounded-full text-sm',
+                `bg-[#${label.color}]`
+              )}
+              style={{ 'background-color': `#${label.color}` }}
+            >
+              {label.name}
+            </span>
+          ))}
         </div>
         <div class="flex mt-1 text-sm text-gray-500">
           <span class="opened-by">
-            #{local.number}
+            #{props.number}
             {' by '}
-            <a href="#">{local.authorName}</a> was{' '}
-            {local.isOpen ? 'opened' : 'closed'} on{' '}
-            {format(new Date(local.createdAt), 'MMM d, yyyy')}
+            <a href="#">{props.authorName}</a> was{' '}
+            {props.isOpen ? 'opened' : 'closed'} on{' '}
+            {format(new Date(props.createdAt), 'MMM d, yyyy')}
           </span>
         </div>
       </div>
 
       <div class="flex-shrink-0 w-1/5 text-right pr-3 flex-nowrap flex">
         <span class="ml-2 pt-1 flex-1 flex-shrink-0">
-          {local.commentCount > 0 && (
+          {props.commentCount > 0 && (
             <a href="#" class="">
               <div class="flex items-center justify-end">
                 <CommentIcon class="w-5 h-5" />
-                <span class="ml-1 text-sm font-bold">{local.commentCount}</span>
+                <span class="ml-1 text-sm font-bold">{props.commentCount}</span>
               </div>
             </a>
           )}
