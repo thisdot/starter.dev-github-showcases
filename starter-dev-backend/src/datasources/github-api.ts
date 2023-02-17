@@ -3,9 +3,9 @@ import {
   WillSendRequestOptions,
 } from '@apollo/datasource-rest';
 
-// TODO: follow up PR will cover formatters and testing
+// TODO: follow up PR will cover testing
 // https://github.com/thisdot/starter.dev-github-showcases/issues/1040
-// import { repoFormatter, orgFormatter, ownerFormatter } from 'src/formatters';
+import { repoFormatter, orgFormatter, ownerFormatter } from '../formatters';
 
 export class GitHubAPI extends RESTDataSource {
   context: any;
@@ -34,9 +34,7 @@ export class GitHubAPI extends RESTDataSource {
   // https://docs.github.com/en/rest/orgs/orgs?apiVersion=2022-11-28#list-organizations-for-a-user
   async getOrgs(login: string) {
     const data = await this.get(`/users/${login}/orgs`);
-    // https://github.com/thisdot/starter.dev-github-showcases/issues/1040
-    // return orgFormatter(data);
-    return data;
+    return orgFormatter(data);
   }
 
   async getOwnerStarCount(login: string) {
@@ -46,17 +44,23 @@ export class GitHubAPI extends RESTDataSource {
   // https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#about-the-users-api
   async getOwner() {
     const data = await this.get('/user');
-    // https://github.com/thisdot/starter.dev-github-showcases/issues/1040
-    // return ownerFormatter(data);
-    return data;
+    return ownerFormatter(data);
+  }
+
+  // https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#get-a-repository-readme
+  async getReadMe(owner: string, repoName: string) {
+    try {
+      const data = await this.get(`/repos/${owner}/${repoName}/readme`);
+      return data;
+    } catch (error) {
+      return null;
+    }
   }
 
   // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
   async getRepo(owner: string, repoName: string) {
     const data = await this.get(`/repos/${owner}/${repoName}`);
-    // https://github.com/thisdot/starter.dev-github-showcases/issues/1040
-    // return repoFormatter(data);
-    return data;
+    return repoFormatter(data);
   }
 
   // https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
@@ -64,8 +68,13 @@ export class GitHubAPI extends RESTDataSource {
     const data = await this
       .get(`/users/${username}/repos?sort=updated&per_page=${perPage}
     `);
-    // https://github.com/thisdot/starter.dev-github-showcases/issues/1040
-    // return repoFormatter(data);
-    return data;
+    return repoFormatter(data);
+  }
+
+  // https://docs.github.com/rest/reference/git#get-a-tree
+  async getTree(owner: string, repoName: string) {
+    return await this.get(
+      `/repos/${owner}/${repoName}/git/trees/HEAD?recursive=1`,
+    );
   }
 }

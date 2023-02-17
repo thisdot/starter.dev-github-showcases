@@ -2,15 +2,17 @@ import { Show, createEffect, createSignal, splitProps } from 'solid-js';
 import { useLocation } from 'solid-start/router';
 import styles from './ProfilePage.module.css';
 import { ProfileNav } from '~/components/ProfileNav';
-import { UserProfile as UserProfileType } from '~/types/user-profile-type';
+import { Profile } from '~/types/user-profile-type';
 import { PageInfo, Repo } from '~/types/user-repo-type';
 import UserProfile from '~/components/UserProfile';
 import { UserRepos } from '~/components/UserRepos';
 import useRepoSortFilter from '~/utils/useRepoSortFilter';
+import { useParams } from 'solid-start';
 
 interface RepoInfoProps {
   pageInfo: PageInfo;
   repos: Repo[];
+  owner?: string;
 }
 
 export interface RepoInfos extends RepoInfoProps {
@@ -18,11 +20,12 @@ export interface RepoInfos extends RepoInfoProps {
 }
 
 type ProfilePageProps = {
-  user: UserProfileType;
+  user: Profile;
   reposInfo: RepoInfoProps;
 };
 
 const ProfilePage = (props: ProfilePageProps) => {
+  const params = useParams();
   const location = useLocation();
   const [reposToshow, setReposToShow] = createSignal<Repo[]>([]);
   const [repoLanguages, setRepoLanguages] = createSignal<string[]>([]);
@@ -61,8 +64,9 @@ const ProfilePage = (props: ProfilePageProps) => {
             />
             <Show when={local.reposInfo}>
               <UserRepos
-                languages={repoLanguages()}
+                owner={params.login}
                 repos={reposToshow()}
+                languages={repoLanguages()}
                 pageInfo={local.reposInfo.pageInfo}
               />
             </Show>

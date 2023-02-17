@@ -1,3 +1,6 @@
+import { TabNavigation } from '../TabNavigation';
+import { tabList } from './tab-list';
+
 interface ProfileNavProps {
   pathname: string;
   class?: string;
@@ -6,9 +9,11 @@ interface ProfileNavProps {
 
 const ProfileNav = (props: ProfileNavProps) => {
   return (
-    <div class={props.class}>
-      <span>Here should place the TabNavigation</span>
-    </div>
+    <TabNavigation
+      tabs={tabList}
+      class={props.class}
+      pathname={props.pathname}
+    />
   );
 };
 
