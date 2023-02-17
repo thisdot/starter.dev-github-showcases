@@ -1,7 +1,7 @@
 @tailwind utilities;
 
 .container {
-  @apply relative;
+  @apply relative bg-white;
 }
 
 .stickyNav {

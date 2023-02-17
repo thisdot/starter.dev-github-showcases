@@ -1,25 +1,22 @@
-import { For, Show, splitProps } from 'solid-js';
+import { For, Show } from 'solid-js';
 import { RepoCard } from '~/components/RepoCard';
 import { RepoFilter } from '~/components/RepoFilter';
+import { Pagination } from '../Pagination';
 import { RepoInfos } from '../ProfilePage/ProfilePage';
 
 const UserRepos = (props: RepoInfos) => {
-  const [local] = splitProps(props, ['repos', 'pageInfo', 'languages']);
-
   return (
     <>
       <RepoFilter
-        languages={local.languages}
-        filteredRepoCount={local.repos.length}
+        languages={props.languages}
+        filteredRepoCount={props.repos.length}
       />
-      <Show when={local.repos.length > 0}>
-        <For each={local.repos}>
-          {(props) => <RepoCard {...props} isProfilePage />}
-        </For>
+      <Show when={props.repos.length > 0}>
+        <For each={props.repos}>{(p) => <RepoCard {...p} isProfilePage />}</For>
         <Show
-          when={local.pageInfo?.hasNextPage || local.pageInfo?.hasPreviousPage}
+          when={props.pageInfo?.hasNextPage || props.pageInfo?.hasPreviousPage}
         >
-          <span>Here should be the pagination</span>
+          <Pagination pageInfo={props.pageInfo} owner={props.owner || ''} />
         </Show>
       </Show>
     </>
