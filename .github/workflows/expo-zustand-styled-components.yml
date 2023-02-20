@@ -84,5 +84,5 @@ jobs:
         working-directory: expo-zustand-styled-components
 
       - name: Build Project
-        run: npm run build
+        run: npx expo export:web
         working-directory: expo-zustand-styled-components
