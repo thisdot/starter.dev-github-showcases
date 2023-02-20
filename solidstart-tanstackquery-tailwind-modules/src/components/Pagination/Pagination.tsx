@@ -4,7 +4,7 @@ import { PageInfo } from '~/types/user-repo-type';
 import styles from './Pagination.module.css';
 
 interface IProps {
-  pageInfo: PageInfo;
+  pageInfo?: PageInfo;
   owner: string;
   tab?: string;
 }
@@ -14,14 +14,14 @@ const Pagination = (props: IProps) => {
 
   const handlePreviousClick = () =>
     navigate(
-      `/${props.owner}?before=${props.pageInfo.startCursor}${
+      `/${props.owner}?before=${props.pageInfo?.startCursor || ''}${
         props.tab ? `&tab=${props.tab}` : ''
       }`
     );
 
   const handleNextClick = () =>
     navigate(
-      `/${props.owner}?after=${props.pageInfo.endCursor}${
+      `/${props.owner}?after=${props.pageInfo?.endCursor || ''}${
         props.tab ? `&tab=${props.tab}` : ''
       }`
     );
@@ -33,7 +33,9 @@ const Pagination = (props: IProps) => {
           <button
             type="button"
             disabled={
-              !props.pageInfo.hasPreviousPage || !props.pageInfo.startCursor
+              !props.pageInfo ||
+              !props.pageInfo.hasPreviousPage ||
+              !props.pageInfo.startCursor
             }
             onClick={handlePreviousClick}
             class={styles.btn_container + ' rounded-l-lg'}
@@ -43,7 +45,11 @@ const Pagination = (props: IProps) => {
           <button
             type="button"
             onClick={handleNextClick}
-            disabled={!props.pageInfo.hasNextPage || !props.pageInfo.endCursor}
+            disabled={
+              !props.pageInfo ||
+              !props.pageInfo.hasNextPage ||
+              !props.pageInfo.endCursor
+            }
             class={styles.btn_container + ' rounded-r-lg'}
           >
             Next
