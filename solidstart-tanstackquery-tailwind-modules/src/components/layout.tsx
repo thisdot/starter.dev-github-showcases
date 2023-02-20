@@ -26,7 +26,7 @@ export const Layout = (props: LayoutProps) => {
       <Show when={authStore.isAuthenticated}>
         <Header />
       </Show>
-      <main class="min-h-screen bg-gray-100">{c()}</main>
+      <main class="min-h-screen bg-white">{c()}</main>
     </>
   );
 };
