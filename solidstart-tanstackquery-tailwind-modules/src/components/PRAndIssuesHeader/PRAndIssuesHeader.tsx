@@ -2,9 +2,44 @@ import cn from 'classnames';
 import { CheckIcon, PullRequestIcon, IssuesIcon } from '../Icons';
 import FilterDropdown from '../FilterDropDown/FilterDropdown';
 import { SORT_OPTIONS } from '../../utils/constants';
-import { createMemo, JSX } from 'solid-js';
-import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
+import { createMemo, createSignal } from 'solid-js';
 import { getSelectedMilestoneId } from './utils';
+import { useLocation } from 'solid-start';
+
+export type SortOption = 'Last updated' | 'Newest' | 'Name' | 'Stars';
+export type LabelOption = {
+  name: string;
+  color: string;
+};
+
+export type MilestoneOption = {
+  title: string;
+  id: string;
+};
+
+const [tabActive, setTabActive] = createSignal<'open' | 'closed'>('open');
+const [sortBy, setSortBy] = createSignal<SortOption>('Newest');
+const [selectedLabel, setSelectedLabel] = createSignal<string>();
+const [selectedMilestone, setSelectedMilestone] = createSignal<string>();
+const [labelOpt, setLabelOpt] = createSignal<LabelOption[]>([]);
+const [milestoneOpt, setMilestoneOpt] = createSignal<MilestoneOption[]>([]);
+const [milestoneId, setMilestoneId] = createSignal(undefined);
+export {
+  tabActive,
+  setTabActive,
+  sortBy,
+  setSortBy,
+  selectedLabel,
+  setSelectedLabel,
+  labelOpt,
+  setLabelOpt,
+  selectedMilestone,
+  setSelectedMilestone,
+  milestoneOpt,
+  setMilestoneOpt,
+  milestoneId,
+  setMilestoneId,
+};
 
 interface Props {
   openCount: number;
@@ -12,37 +47,26 @@ interface Props {
 }
 
 const PRAndIssuesHeader = (props: Props) => {
-  const prAndIssuesContext = usePrAndIssuesContext();
-
+  const { pathname } = useLocation();
+  const type = pathname.includes('pulls') ? 'pr' : 'issue';
   const sortOptions = Object.values(SORT_OPTIONS);
-  const selectSort = (value: string) =>
-    prAndIssuesContext.setSortBy(
-      prAndIssuesContext.sortBy() === value ? 'Newest' : value
-    );
+  const selectSort = (value: SortOption) =>
+    setSortBy(sortBy() === value ? 'Newest' : value);
   const labelOptions = createMemo(() =>
     Object.values({
-      ...prAndIssuesContext.labelOpt().map((label) => label.name),
+      ...labelOpt().map((label) => label.name),
     })
   );
   const milestoneOptions = createMemo(() =>
     Object.values({
-      ...prAndIssuesContext.milestoneOpt()?.map((milestone) => milestone.title),
+      ...milestoneOpt()?.map((milestone) => milestone.title),
     })
   );
-  const selectLabel = (value) =>
-    prAndIssuesContext.setSelectedLabel(
-      prAndIssuesContext?.selectedLabel !== value ? value : undefined
-    );
-  const selectMilestone = (value) => {
-    prAndIssuesContext.setSelectedMilestone(
-      prAndIssuesContext.selectedMilestone() !== value ? value : undefined
-    );
-    prAndIssuesContext.setMilestoneId(
-      getSelectedMilestoneId(
-        prAndIssuesContext.milestoneOpt(),
-        prAndIssuesContext.selectedMilestone()
-      )
-    );
+  const selectLabel = (value: string) =>
+    setSelectedLabel(selectedLabel() !== value ? value : undefined);
+  const selectMilestone = (value: string) => {
+    setSelectedMilestone(selectedMilestone() !== value ? value : undefined);
+    setMilestoneId(getSelectedMilestoneId(milestoneOpt(), selectedMilestone()));
   };
 
   return (
@@ -50,12 +74,11 @@ const PRAndIssuesHeader = (props: Props) => {
       <div class="flex space-x-4">
         <button
           class={cn('text-xs flex items-center gap-1 text-gray-600', {
-            'font-semibold text-gray-900':
-              prAndIssuesContext?.tabActive() === 'open',
+            'font-semibold text-gray-900': tabActive() === 'open',
           })}
-          onClick={() => prAndIssuesContext.setActiveTab('open')}
+          onClick={() => setTabActive('open')}
         >
-          {prAndIssuesContext?.type === 'pr' ? (
+          {type === 'pr' ? (
             <PullRequestIcon class="w-4 h-4" />
           ) : (
             <IssuesIcon class="w-4 h-4" />
@@ -65,10 +88,9 @@ const PRAndIssuesHeader = (props: Props) => {
         </button>
         <button
           class={cn('text-xs flex items-center gap-1 text-gray-600', {
-            'font-semibold text-gray-900':
-              prAndIssuesContext?.tabActive() === 'closed',
+            'font-semibold text-gray-900': tabActive() === 'closed',
           })}
-          onClick={() => prAndIssuesContext.setActiveTab('closed')}
+          onClick={() => setTabActive('closed')}
         >
           <CheckIcon class="w-4 h-4" />
           <span>{props.closedCount}</span>
@@ -80,8 +102,8 @@ const PRAndIssuesHeader = (props: Props) => {
           <div>
             <FilterDropdown
               name="Label"
-              selected={prAndIssuesContext.selectedLabel || ''}
-              items={labelOptions()}
+              selected={selectedLabel()}
+              // items={labelOptions()}
               selectOption={selectLabel}
               class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
             />
@@ -91,8 +113,8 @@ const PRAndIssuesHeader = (props: Props) => {
           <div>
             <FilterDropdown
               name="Milestone"
-              selected={prAndIssuesContext.selectedMilestone()}
-              items={milestoneOptions()}
+              selected={selectedMilestone()}
+              // items={milestoneOptions()}
               selectOption={selectMilestone}
               class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
             />
@@ -101,8 +123,8 @@ const PRAndIssuesHeader = (props: Props) => {
         <div>
           <FilterDropdown
             name="Sort"
-            selected={prAndIssuesContext.sortBy()}
-            items={sortOptions}
+            selected={sortBy()}
+            // items={sortOptions}
             selectOption={selectSort}
             class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
           />

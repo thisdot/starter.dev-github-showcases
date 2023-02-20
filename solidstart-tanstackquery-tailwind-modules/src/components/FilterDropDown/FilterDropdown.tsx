@@ -1,33 +1,27 @@
-import { createSignal, Show, splitProps, For, Switch, Match } from 'solid-js';
+import { createSignal, Show, For, Switch, Match } from 'solid-js';
 import { CaretIcon, CloseIcon, CorrectIcon } from '../Icons';
 import { clickOutside } from '../../utils/onclickOutside';
 import styles from '../RepoFilter/RepoFilter.module.css';
 import classNames from 'classnames';
+import { SortOption } from '../PRAndIssuesHeader';
 
 type FilterDropDownProps = {
   name: string;
   title?: string;
-  items: string[];
-  selected: string;
-  selectOption: (value: string) => void;
+  // items: string[];
+  selected?: string;
+  selectOption: (value: SortOption) => void;
   class?: string;
 };
 
 const FilterDropdown = (props: FilterDropDownProps) => {
-  const [local, others] = splitProps(props, [
-    'name',
-    'title',
-    'items',
-    'selected',
-    'selectOption',
-  ]);
   const [showOptions, setShowOptions] = createSignal(false);
   const toggleOption = () => setShowOptions(!showOptions());
   const _clickOutside = clickOutside;
 
   return (
     <div
-      data-testid={`filter-dropdown-${local.name}`}
+      data-testid={`filter-dropdown-${props.name}`}
       class={classNames(styles.dropDownContainer, props.class)}
       //@ts-ignore
       use:_clickOutside={() => setShowOptions(false)}
@@ -36,14 +30,14 @@ const FilterDropdown = (props: FilterDropDownProps) => {
         <button
           onClick={toggleOption}
           type="button"
-          data-testid={`filter-dropdown-button-${local.name}`}
+          data-testid={`filter-dropdown-button-${props.name}`}
           class={styles.dropDownButton}
           id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"
-          {...others}
+          {...props}
         >
-          {local.name}
+          {props.name}
           <CaretIcon />
         </button>
       </div>
@@ -56,22 +50,22 @@ const FilterDropdown = (props: FilterDropDownProps) => {
           tabindex="-1"
         >
           <div class={styles.close}>
-            <strong class="capitalize text-xs">Select {local.name}</strong>
+            <strong class="capitalize text-xs">Select {props.name}</strong>
             <button onClick={() => setShowOptions(false)}>
               <CloseIcon />
             </button>
           </div>
-          <For each={local.items}>
+          {/* <For each={props.items}>
             {(item, index) => (
               <div
                 data-index={index()}
                 class={styles.menuItemContainer}
                 role="none"
-                onClick={() => local.selectOption(item)}
+                onClick={() => props.selectOption(item)}
               >
                 <span class={styles.menuItem} role="menuitem" tabindex="-1">
                   <Switch fallback={<span class="mr-4" />}>
-                    <Match when={item === local.selected}>
+                    <Match when={item === props.selected}>
                       <CorrectIcon />
                     </Match>
                   </Switch>
@@ -79,7 +73,7 @@ const FilterDropdown = (props: FilterDropDownProps) => {
                 </span>
               </div>
             )}
-          </For>
+          </For> */}
         </div>
       </Show>
     </div>
