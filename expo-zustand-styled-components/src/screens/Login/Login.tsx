@@ -1,11 +1,16 @@
 import React from 'react';
+import { Text, View } from 'react-native';
 
 import { AuthStackScreenProps } from '../../../types';
-import { Text, View } from 'react-native';
+import { SafeAreaViewStyled } from './Login.styles';
 
 const Login = ({ navigation }: AuthStackScreenProps<'Login'>) => {
   return (
-      <View><Text>Hello World</Text></View>
+    <SafeAreaViewStyled>
+      <View>
+        <Text>Login Page 2</Text>
+      </View>
+    </SafeAreaViewStyled>
   );
 };
 
