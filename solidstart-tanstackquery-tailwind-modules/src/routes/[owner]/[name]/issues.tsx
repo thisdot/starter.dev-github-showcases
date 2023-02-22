@@ -10,10 +10,11 @@ import { BranchNavigation } from '~/components/BranchNavigation';
 import { RepoReadMe } from '~/components/RepoReadMe';
 import FileExplorer from '~/components/FileExplorer';
 import getIssues from '~/services/get-issues';
+import { setIssuesStore } from '~/stores/issues-store';
+import RepoIssues from '~/components/RepoIssues';
 
 const Issues = () => {
   const params = useParams();
-  const [branch, setBranch] = createSignal(params.branch);
   const [info, setInfo] = createSignal<Info>({
     isPrivate: false,
     visibility: '',
@@ -53,8 +54,8 @@ const Issues = () => {
   createEffect(() => {
     if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
       setInfo(repoInfo.data.info);
-      setBranch(repoInfo.data.branch || params.branch);
       console.log(repoIssues.data);
+      setIssuesStore(repoIssues.data || {});
     }
   });
 
@@ -71,7 +72,9 @@ const Issues = () => {
         </Match>
         <Match when={repoInfo.isSuccess && !repoInfo.isLoading}>
           <RepoHeader {...info()} />
-          <div class="max-w-screen-2xl mx-auto md:py-8 px-4">issues</div>
+          <div class="max-w-screen-2xl mx-auto md:py-8 px-4">
+            <RepoIssues />
+          </div>
         </Match>
       </Switch>
     </div>

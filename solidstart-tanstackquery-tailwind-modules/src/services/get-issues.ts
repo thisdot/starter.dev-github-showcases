@@ -104,12 +104,12 @@ function parseLabels(labels: { nodes: LabelProps[] }) {
 const getIssues = async ({
   owner,
   name,
-  orderBy,
-  direction,
+  orderBy = 'CREATED_AT',
+  direction = 'DESC',
   filterBy,
   before,
   after,
-  first,
+  first = 30,
   last,
 }: Variables) => {
   const { authStore } = useAuth();
