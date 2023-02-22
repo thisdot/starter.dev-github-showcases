@@ -21,7 +21,6 @@ const RepoIssues = () => {
     setSelectedMilestone(undefined);
   };
 
-  console.log(issuesStore());
   return (
     <div class="md:py-12 max-w-screen-xl mx-auto">
       {(selectedLabel() || sortBy() !== 'Newest') && (
@@ -42,7 +41,7 @@ const RepoIssues = () => {
             issuesStore()?.openIssues?.pageInfo?.hasPreviousPage) && (
             <Pagination
               tab={activeTab()}
-              pageInfo={issuesStore()?.openIssues?.pageInfo}
+              pageInfo={issuesStore().openIssues.pageInfo}
               owner={`${params.owner}/${params.name}/issues`}
             />
           )
@@ -50,7 +49,7 @@ const RepoIssues = () => {
             issuesStore()?.closedIssues?.pageInfo?.hasPreviousPage) && (
             <Pagination
               tab={activeTab()}
-              pageInfo={issuesStore()?.closedIssues?.pageInfo}
+              pageInfo={issuesStore().closedIssues.pageInfo}
               owner={`${params.owner}/${params.name}/issues`}
             />
           )}

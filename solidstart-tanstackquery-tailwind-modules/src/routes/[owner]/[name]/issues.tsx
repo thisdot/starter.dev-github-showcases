@@ -5,10 +5,6 @@ import getRepoInfo from '~/services/get-repo-info';
 import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
 import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '~/components/RepoHeader';
-import { RepoAbout } from '~/components/RepoAbout';
-import { BranchNavigation } from '~/components/BranchNavigation';
-import { RepoReadMe } from '~/components/RepoReadMe';
-import FileExplorer from '~/components/FileExplorer';
 import getIssues from '~/services/get-issues';
 import { setIssuesStore } from '~/stores/issues-store';
 import RepoIssues from '~/components/RepoIssues';
@@ -54,8 +50,9 @@ const Issues = () => {
   createEffect(() => {
     if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
       setInfo(repoInfo.data.info);
-      console.log(repoIssues.data);
-      setIssuesStore(repoIssues.data || {});
+    }
+    if (repoIssues.isSuccess && !repoIssues.isLoading && repoIssues.data) {
+      setIssuesStore(repoIssues.data);
     }
   });
 
@@ -72,6 +69,18 @@ const Issues = () => {
         </Match>
         <Match when={repoInfo.isSuccess && !repoInfo.isLoading}>
           <RepoHeader {...info()} />
+        </Match>
+      </Switch>
+      <Switch>
+        <Match when={repoIssues.isError}>
+          <p>Error</p>
+        </Match>
+        <Match when={repoIssues.isLoading}>
+          <div class="mt-2">
+            <LoadingPulseDot />
+          </div>
+        </Match>
+        <Match when={repoIssues.isSuccess && !repoIssues.isLoading}>
           <div class="max-w-screen-2xl mx-auto md:py-8 px-4">
             <RepoIssues />
           </div>

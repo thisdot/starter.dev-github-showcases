@@ -12,8 +12,8 @@ export interface LabelProps {
 }
 
 export interface PageInfo {
-  startCursor: string;
-  endCursor: string;
+  startCursor?: string;
+  endCursor?: string;
   hasNextPage: boolean;
   hasPreviousPage: boolean;
 }

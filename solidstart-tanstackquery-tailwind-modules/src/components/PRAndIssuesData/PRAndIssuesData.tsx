@@ -7,7 +7,7 @@ const PRAndIssuesData = () => {
   return (
     <div class="border border-gray-300 rounded-lg">
       <PRAndIssuesHeader />
-      {(issuesStore()?.openIssues?.totalCount || 0) > 0 ? (
+      {issuesStore().openIssues.totalCount > 0 ? (
         <For each={issuesStore()?.openIssues.issues}>
           {(issue) => <PRAndIssuesListItem {...issue} />}
         </For>

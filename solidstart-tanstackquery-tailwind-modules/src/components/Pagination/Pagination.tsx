@@ -4,7 +4,7 @@ import { PageInfo } from '~/types/user-repo-type';
 import styles from './Pagination.module.css';
 
 interface IProps {
-  pageInfo?: PageInfo;
+  pageInfo: PageInfo;
   owner: string;
   tab?: string;
 }

@@ -6,41 +6,34 @@ import {
   PageInfo,
 } from '~/types/issues-type';
 
-type IssuesStore =
-  | {
-      openIssues:
-        | {
-            issues: never[];
-            totalCount: number;
-            pageInfo: {
-              hasNextPage: boolean;
-              hasPreviousPage: boolean;
-            };
-          }
-        | {
-            issues: Issue[];
-            totalCount: number;
-            pageInfo: PageInfo;
-          };
-      closedIssues:
-        | {
-            issues: never[];
-            totalCount: number;
-            pageInfo: {
-              hasNextPage: boolean;
-              hasPreviousPage: boolean;
-            };
-          }
-        | {
-            issues: Issue[];
-            totalCount: number;
-            pageInfo: PageInfo;
-          };
-      milestones: MilestoneProps[];
-      labels: LabelProps[];
-    }
-  | undefined;
+export type IssuesStore = {
+  openIssues: {
+    issues: Issue[];
+    totalCount: number;
+    pageInfo: PageInfo;
+  };
+  closedIssues: {
+    issues: Issue[];
+    totalCount: number;
+    pageInfo: PageInfo;
+  };
+  milestones: MilestoneProps[];
+  labels: LabelProps[];
+};
 
-const [issuesStore, setIssuesStore] = createSignal<IssuesStore>(undefined);
+const [issuesStore, setIssuesStore] = createSignal<IssuesStore>({
+  openIssues: {
+    issues: [],
+    totalCount: 0,
+    pageInfo: { hasNextPage: false, hasPreviousPage: false },
+  },
+  closedIssues: {
+    issues: [],
+    totalCount: 0,
+    pageInfo: { hasNextPage: false, hasPreviousPage: false },
+  },
+  milestones: [],
+  labels: [],
+});
 
 export { issuesStore, setIssuesStore };
