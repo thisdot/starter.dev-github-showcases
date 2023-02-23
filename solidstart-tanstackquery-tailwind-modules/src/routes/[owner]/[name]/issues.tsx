@@ -8,6 +8,14 @@ import { RepoHeader } from '~/components/RepoHeader';
 import getIssues from '~/services/get-issues';
 import { setIssuesStore } from '~/stores/issues-store';
 import RepoIssues from '~/components/RepoIssues';
+import {
+  milestoneId,
+  selectedLabel,
+  selectedMilestone,
+  sortBy,
+} from '~/components/PRAndIssuesHeader';
+import { parseSortParams } from '~/components/RepoIssues/utils';
+import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '~/utils/constants';
 
 const Issues = () => {
   const params = useParams();
@@ -41,14 +49,30 @@ const Issues = () => {
 
   const repoIssues = createQuery(
     () => [
-      `repository-issues_${params.owner}_${params.name}_${searchParams.before}_${searchParams.after}`,
+      `repository-issues_${params.owner}_${params.name}`,
+      searchParams.after,
+      searchParams.before,
+      sortBy(),
+      selectedLabel(),
     ],
     () =>
       getIssues({
         owner: params.owner,
         name: params.name,
-        after: searchParams.after,
+        orderBy: parseSortParams(SORT_OPTIONS, sortBy(), 0),
+        direction: parseSortParams(SORT_OPTIONS, sortBy(), 1),
+        filterBy: {
+          // @ts-ignore
+          labels: selectedLabel() ? [selectedLabel()] : undefined,
+          milestone: selectedMilestone() ? milestoneId() : undefined,
+        },
         before: searchParams.before,
+        after: searchParams.after,
+        first:
+          searchParams.after || !searchParams.before
+            ? DEFAULT_PAGE_SIZE
+            : undefined,
+        last: searchParams.before ? DEFAULT_PAGE_SIZE : undefined,
       })
   );
 

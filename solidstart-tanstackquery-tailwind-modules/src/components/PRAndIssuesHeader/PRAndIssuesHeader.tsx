@@ -11,7 +11,7 @@ const [activeTab, setActiveTab] = createSignal<'OPEN' | 'CLOSED'>('OPEN');
 const [sortBy, setSortBy] = createSignal('Newest');
 const [selectedLabel, setSelectedLabel] = createSignal<string>();
 const [selectedMilestone, setSelectedMilestone] = createSignal<string>();
-const [milestoneId, setMilestoneId] = createSignal();
+const [milestoneId, setMilestoneId] = createSignal<string>();
 
 export {
   type,
