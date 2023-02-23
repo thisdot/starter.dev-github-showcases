@@ -1,27 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import Home from './src/screens/Home';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import About from './src/screens/About';
+import React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-const Stack = createNativeStackNavigator();
+import useCachedResources from './src/hooks/useCachedResources';
+import useColorScheme from './src/hooks/useColorScheme';
+import Navigation from './src/navigation';
 
 export default function App() {
-  return (
-    <>
-      <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="home"
-            component={Home}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen name="about" component={About} options={{ title: 'About' }} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </>
-  );
+  const isLoadingComplete = useCachedResources();
+  const colorScheme = useColorScheme();
+
+  if (!isLoadingComplete) {
+    return null;
+  } else {
+    return (
+      // context providers should be placed here
+      <SafeAreaProvider>
+          <Navigation colorScheme={colorScheme} />
+      </SafeAreaProvider>
+    );
+  }
 }
