@@ -1,6 +1,6 @@
 import { Switch, Match, createSignal, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
-import { useParams } from 'solid-start';
+import { useParams, useSearchParams } from 'solid-start';
 import getRepoInfo from '~/services/get-repo-info';
 import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
 import { Info } from '~/types/repo-info-type';
@@ -11,6 +11,7 @@ import RepoIssues from '~/components/RepoIssues';
 
 const Issues = () => {
   const params = useParams();
+  const [searchParams] = useSearchParams();
   const [info, setInfo] = createSignal<Info>({
     isPrivate: false,
     visibility: '',
@@ -39,20 +40,31 @@ const Issues = () => {
   );
 
   const repoIssues = createQuery(
-    () => [`repository-issues_${params.owner}_${params.name}`],
+    () => [
+      // `repository-issues_${params.owner}_${params.name}${
+      //   searchParams.before || searchParams.after
+      //     ? `_${searchParams.before || searchParams.after}`
+      //     : ''
+      // }}`,
+      `repository-issues_${params.owner}_${params.name}_${searchParams.before}_${searchParams.after}`,
+    ],
     () =>
       getIssues({
         owner: params.owner,
         name: params.name,
+        after: searchParams.after,
+        before: searchParams.before,
       })
   );
 
   createEffect(() => {
+    console.log(searchParams.after);
     if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
       setInfo(repoInfo.data.info);
     }
     if (repoIssues.isSuccess && !repoIssues.isLoading && repoIssues.data) {
       setIssuesStore(repoIssues.data);
+      console.log(repoIssues.data);
     }
   });
 

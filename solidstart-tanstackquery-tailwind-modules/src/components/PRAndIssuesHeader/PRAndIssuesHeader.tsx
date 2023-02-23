@@ -7,7 +7,7 @@ import { getSelectedMilestoneId } from './utils';
 import { issuesStore } from '~/stores/issues-store';
 
 const [type, setType] = createSignal<'pr' | 'issue'>('pr');
-const [activeTab, setActiveTab] = createSignal<'open' | 'closed'>('open');
+const [activeTab, setActiveTab] = createSignal<'OPEN' | 'CLOSED'>('OPEN');
 const [sortBy, setSortBy] = createSignal('Newest');
 const [selectedLabel, setSelectedLabel] = createSignal<string>();
 const [selectedMilestone, setSelectedMilestone] = createSignal<string>();
@@ -55,9 +55,9 @@ const PRAndIssuesHeader = () => {
       <div class="flex space-x-4">
         <button
           class={cn('text-xs flex items-center gap-1 text-gray-600', {
-            'font-semibold text-gray-900': activeTab() === 'open',
+            'font-semibold text-gray-900': activeTab() === 'OPEN',
           })}
-          onClick={() => setActiveTab('open')}
+          onClick={() => setActiveTab('OPEN')}
         >
           {type() === 'pr' ? (
             <PullRequestIcon class="w-4 h-4" />
@@ -69,9 +69,9 @@ const PRAndIssuesHeader = () => {
         </button>
         <button
           class={cn('text-xs flex items-center gap-1 text-gray-600', {
-            'font-semibold text-gray-900': activeTab() === 'closed',
+            'font-semibold text-gray-900': activeTab() === 'CLOSED',
           })}
-          onClick={() => setActiveTab('closed')}
+          onClick={() => setActiveTab('CLOSED')}
         >
           <CheckIcon class="w-4 h-4" />
           <span>{issuesStore()?.closedIssues?.totalCount || 0}</span>

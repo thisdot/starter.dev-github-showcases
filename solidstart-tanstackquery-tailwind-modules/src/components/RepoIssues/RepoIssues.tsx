@@ -36,7 +36,7 @@ const RepoIssues = () => {
       )}
       <PRAndIssuesData />
 
-      {activeTab() === 'open'
+      {activeTab() === 'OPEN'
         ? (issuesStore()?.openIssues?.pageInfo?.hasNextPage ||
             issuesStore()?.openIssues?.pageInfo?.hasPreviousPage) && (
             <Pagination
