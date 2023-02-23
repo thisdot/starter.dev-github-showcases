@@ -13,9 +13,11 @@
     "format": "prettier --write ./src --ignore-path .gitignore"
   },
   "dependencies": {
+    "@expo/dev-server": "0.1.124",
+    "@expo/vector-icons": "^13.0.0",
+    "@expo/webpack-config": "^18.0.1",
     "@react-navigation/native": "6.1.4",
     "@react-navigation/native-stack": "6.9.10",
-    "@expo/vector-icons": "^13.0.0",
     "expo": "47.0.13",
     "expo-linking": "^3.3.0",
     "expo-splash-screen": "^0.17.5",
