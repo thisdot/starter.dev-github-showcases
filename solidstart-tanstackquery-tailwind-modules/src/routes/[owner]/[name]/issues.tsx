@@ -41,11 +41,6 @@ const Issues = () => {
 
   const repoIssues = createQuery(
     () => [
-      // `repository-issues_${params.owner}_${params.name}${
-      //   searchParams.before || searchParams.after
-      //     ? `_${searchParams.before || searchParams.after}`
-      //     : ''
-      // }}`,
       `repository-issues_${params.owner}_${params.name}_${searchParams.before}_${searchParams.after}`,
     ],
     () =>
@@ -58,13 +53,11 @@ const Issues = () => {
   );
 
   createEffect(() => {
-    console.log(searchParams.after);
     if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
       setInfo(repoInfo.data.info);
     }
     if (repoIssues.isSuccess && !repoIssues.isLoading && repoIssues.data) {
       setIssuesStore(repoIssues.data);
-      console.log(repoIssues.data);
     }
   });
 
