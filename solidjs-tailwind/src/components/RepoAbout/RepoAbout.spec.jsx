@@ -13,7 +13,8 @@ import 'whatwg-fetch';
 import { RepoAboutWidget } from './RepoAbout';
 import { RepoProvider } from '../../contexts/RepoContext';
 import { server } from '../../../msw/server';
-// import { repoInforResponse } from '../../../msw/data';
+import { repoInforResponse } from '../../../msw/data';
+import { vi } from 'vitest';
 
 // setupMswServer();
 
@@ -40,11 +41,12 @@ describe('Repo About', () => {
   it('should show contents', async () => {
     const loading = await wrapper.findByText('Loading...');
     expect(loading).toBeInTheDocument();
-    // const contents = await wrapper.findByTestId('about-info');
-    // const topic = await wrapper.findByText(
-    //   repoInforResponse.data.repository.description
-    // );
-    // expect(contents.innerHTML).toBeTruthy();
-    // expect(topic).toBeVisible();
+    await vi.advanceTimersByTimeAsync(1000);
+    const contents = await wrapper.findByTestId('about-info');
+    const topic = await wrapper.findByText(
+      repoInforResponse.data.repository.description
+    );
+    expect(contents.innerHTML).toBeTruthy();
+    expect(topic).toBeVisible();
   });
 });
