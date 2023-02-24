@@ -10,7 +10,6 @@ describe('Auth guard', () => {
   let wrapper;
   beforeEach(async () => {
     window.scrollTo = vi.fn();
-
     await setAuth({
       token: '12345',
       user: {
