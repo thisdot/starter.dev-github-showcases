@@ -12,8 +12,8 @@ export interface LabelProps {
 }
 
 export interface PageInfo {
-  startCursor: string;
-  endCursor: string;
+  startCursor?: string;
+  endCursor?: string;
   hasNextPage: boolean;
   hasPreviousPage: boolean;
 }
@@ -75,13 +75,20 @@ export interface Issue {
 export type Variables = {
   owner: string;
   name: string;
-  orderBy: string;
-  direction: string;
-  filterBy: string;
-  before: string;
-  after: string;
-  first: string;
-  last: string;
+  orderBy?: string;
+  direction?: string;
+  filterBy?: {
+    assignee?: string;
+    createdBy?: string;
+    mentioned?: string;
+    milestone?: string;
+    labels?: string[];
+    states?: 'OPEN' | 'CLOSED';
+  };
+  before?: string;
+  after?: string;
+  first?: number;
+  last?: number;
 };
 
 export type Response = {

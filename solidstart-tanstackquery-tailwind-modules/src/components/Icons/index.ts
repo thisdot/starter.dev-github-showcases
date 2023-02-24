@@ -21,3 +21,4 @@ export { default as LinkIcon } from './LinkIcon';
 export { default as TocIcon } from './TocIcon';
 export { default as FolderIcon } from './FolderIcon';
 export { default as DocumentIcon } from './DocumentIcon';
+export { default as CheckIcon } from './CheckIcon';

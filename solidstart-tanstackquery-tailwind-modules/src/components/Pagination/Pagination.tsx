@@ -1,30 +1,30 @@
-import { useNavigate } from '@solidjs/router';
+import { useSearchParams } from 'solid-start';
 import { Show } from 'solid-js';
 import { PageInfo } from '~/types/user-repo-type';
 import styles from './Pagination.module.css';
 
 interface IProps {
-  pageInfo?: PageInfo;
+  pageInfo: PageInfo;
   owner: string;
   tab?: string;
 }
 
 const Pagination = (props: IProps) => {
-  const navigate = useNavigate();
+  const [, setSearchParams] = useSearchParams();
 
   const handlePreviousClick = () =>
-    navigate(
-      `/${props.owner}?before=${props.pageInfo?.startCursor || ''}${
-        props.tab ? `&tab=${props.tab}` : ''
-      }`
-    );
+    setSearchParams({
+      before: props.pageInfo?.startCursor || '',
+      tab: props.tab || '',
+      after: null,
+    });
 
   const handleNextClick = () =>
-    navigate(
-      `/${props.owner}?after=${props.pageInfo?.endCursor || ''}${
-        props.tab ? `&tab=${props.tab}` : ''
-      }`
-    );
+    setSearchParams({
+      after: props.pageInfo?.endCursor || '',
+      tab: props.tab || '',
+      before: null,
+    });
 
   return (
     <Show when={props.pageInfo}>

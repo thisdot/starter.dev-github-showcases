@@ -18,8 +18,8 @@ export interface Repo {
 }
 
 export interface PageInfo {
-  endCursor?: string | null;
-  startCursor?: string | null;
+  endCursor?: string;
+  startCursor?: string;
   hasNextPage: boolean;
   hasPreviousPage: boolean;
 }

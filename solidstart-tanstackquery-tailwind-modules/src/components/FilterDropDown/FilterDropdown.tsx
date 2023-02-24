@@ -7,8 +7,9 @@ type FilterDropDownProps = {
   name: string;
   title?: string;
   items: string[];
-  selected: string;
+  selected?: string;
   selectOption: (value: string) => void;
+  class?: string;
 };
 
 const FilterDropdown = (props: FilterDropDownProps) => {
