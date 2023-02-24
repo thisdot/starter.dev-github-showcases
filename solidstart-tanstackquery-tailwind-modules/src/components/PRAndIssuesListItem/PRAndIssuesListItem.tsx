@@ -1,7 +1,3 @@
-// I must disable eslint because otherwise everytime I save the file
-// elsint brokes my class declaration at line #38 and the icon hasn't the right color
-
-/* eslint-disable */
 import { splitProps } from 'solid-js';
 import { format } from 'date-fns';
 import cn from 'classnames';
@@ -14,7 +10,7 @@ import {
   ClosedIssueIcon,
 } from '../Icons';
 import { type } from '../PRAndIssuesHeader';
-import { Issue, LabelProps } from '~/types/issues-type';
+import { Issue } from '~/types/issues-type';
 
 const PRAndIssuesListItem = (props: Issue) => {
   const [local] = splitProps(props, [
