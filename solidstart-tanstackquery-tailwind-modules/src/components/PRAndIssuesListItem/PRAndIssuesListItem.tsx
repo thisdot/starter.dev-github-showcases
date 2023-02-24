@@ -1,4 +1,4 @@
-import { Match, Show, splitProps, Switch } from 'solid-js';
+import { For, Match, Show, splitProps, Switch } from 'solid-js';
 import { format } from 'date-fns';
 import cn from 'classnames';
 import {
@@ -78,17 +78,20 @@ const PRAndIssuesListItem = (props: Issue) => {
           >
             {local.title}
           </a>
-          {local.labels?.map((label) => (
-            <span
-              class={cn(
-                'mt-2 ml-2 py-1 px-2 rounded-full text-sm',
-                `bg-[#${label.color}]`
-              )}
-              style={{ 'background-color': `#${label.color}` }}
-            >
-              {label.name}
-            </span>
-          ))}
+
+          <For each={local.labels}>
+            {(label) => (
+              <span
+                class={cn(
+                  'mt-2 ml-2 py-1 px-2 rounded-full text-sm',
+                  `bg-[#${label.color}]`
+                )}
+                style={{ 'background-color': `#${label.color}` }}
+              >
+                {label.name}
+              </span>
+            )}
+          </For>
         </div>
         <div class="flex mt-1 text-sm text-gray-500">
           <span class="opened-by">
