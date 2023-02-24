@@ -49,6 +49,13 @@ export function RepoProvider(props) {
       setInfo(resInfo());
     }
 
+    // eslint-disable-next-line no-console
+    console.log('====================================');
+    // eslint-disable-next-line no-console
+    console.log(resInfo());
+    // eslint-disable-next-line no-console
+    console.log('====================================');
+
     if (resReadMe() && !resReadMe.loading) {
       setReadme(resReadMe());
     }
