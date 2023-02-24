@@ -29,8 +29,8 @@ specifiers:
   husky: ^8.0.3
   isomorphic-fetch: ^3.0.0
   jsdom: 20.0.1
-  msw: ^1.1.0
-  msw-storybook-addon: ^1.7.0
+  msw: ^0.49.1
+  msw-storybook-addon: ^1.6.3
   postcss: 8.4.18
   prettier: 2.7.1
   prism-react-renderer: ^1.3.5
@@ -90,8 +90,8 @@ devDependencies:
   eslint-plugin-unused-imports: 2.0.0_eslint@8.26.0
   husky: 8.0.3
   jsdom: 20.0.1
-  msw: 1.1.0_typescript@4.8.4
-  msw-storybook-addon: 1.7.0_msw@1.1.0
+  msw: 0.49.3_typescript@4.8.4
+  msw-storybook-addon: 1.7.0_msw@0.49.3
   postcss: 8.4.18
   prettier: 2.7.1
   solid-testing-library: 0.3.0_solid-js@1.6.0
@@ -11263,21 +11263,21 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /msw-storybook-addon/1.7.0_msw@1.1.0:
+  /msw-storybook-addon/1.7.0_msw@0.49.3:
     resolution: {integrity: sha512-G/cYj7Z8NuyFbMsdVJRr17flWed8J7CmKTSPNXmuK65W6uILpqNDpXJC7KVRhOg7lUFR5Hmqwcq6z8Mow/wu5A==}
     peerDependencies:
       msw: '>=0.35.0 <1.0.0'
     dependencies:
       '@storybook/addons': 6.5.13
       is-node-process: 1.0.1
-      msw: 1.1.0_typescript@4.8.4
+      msw: 0.49.3_typescript@4.8.4
     transitivePeerDependencies:
       - react
       - react-dom
     dev: true
 
-  /msw/1.1.0_typescript@4.8.4:
-    resolution: {integrity: sha512-oqMvUXm1bMbwvGpoXAQVz8vXXQyQyx52HBDg3EDOK+dFXkQHssgkXEG4LfMwwZyr2Qt18I/w04XPaY4BkFTkzA==}
+  /msw/0.49.3_typescript@4.8.4:
+    resolution: {integrity: sha512-kRCbDNbNnRq5LC1H/NUceZlrPAvSrMH6Or0mirIuH69NY84xwDruPn/hkXTovIK1KwDwbk+ZdoSyJlpiekLxEA==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
