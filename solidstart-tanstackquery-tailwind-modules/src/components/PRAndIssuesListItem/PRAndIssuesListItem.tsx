@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { Match, Show, splitProps, Switch } from 'solid-js';
 import { format } from 'date-fns';
 import cn from 'classnames';
 import {
@@ -42,25 +42,29 @@ const PRAndIssuesListItem = (props: Issue) => {
               'text-red-600': type() === 'pr' && local.state === 'CLOSED',
             })}
           >
-            {type() === 'issue' ? (
-              <>
-                {local.state === 'CLOSED' ? (
-                  <ClosedIssueIcon class="w-5 h-5" />
-                ) : (
+            <Show when={type() === 'issue'}>
+              <Switch>
+                <Match when={local.state === 'OPEN'}>
                   <IssuesIcon class="w-5 h-5" />
-                )}
-              </>
-            ) : local.state === 'OPEN' ? (
-              <PullRequestIcon class="w-5 h-5" />
-            ) : (
-              <>
-                {local.state === 'MERGED' ? (
+                </Match>
+                <Match when={local.state === 'CLOSED'}>
+                  <ClosedIssueIcon class="w-5 h-5" />
+                </Match>
+              </Switch>
+            </Show>
+            <Show when={type() === 'pr'}>
+              <Switch>
+                <Match when={local.state === 'OPEN'}>
+                  <PullRequestIcon class="w-5 h-5" />
+                </Match>
+                <Match when={local.state === 'MERGED'}>
                   <MergedPrIcon class="w-5 h-5" />
-                ) : (
+                </Match>
+                <Match when={local.state === 'CLOSED'}>
                   <ClosedPrIcon class="w-5 h-5" />
-                )}
-              </>
-            )}
+                </Match>
+              </Switch>
+            </Show>
           </span>
         </div>
       </div>

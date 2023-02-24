@@ -11,6 +11,7 @@ import {
   setSortBy,
   sortBy,
 } from '../PRAndIssuesHeader';
+import { Match, Show, Switch } from 'solid-js';
 
 const RepoIssues = () => {
   const params = useParams();
@@ -23,7 +24,7 @@ const RepoIssues = () => {
 
   return (
     <div class="md:py-12 max-w-screen-xl mx-auto">
-      {(selectedLabel() || sortBy() !== 'Newest') && (
+      <Show when={selectedLabel() || sortBy() !== 'Newest'}>
         <div
           class="flex items-center gap-2 text-sm my-4 ml-2 cursor-pointer"
           onClick={clearSortAndFilter}
@@ -33,26 +34,39 @@ const RepoIssues = () => {
           </span>
           Clear filter
         </div>
-      )}
+      </Show>
       <PRAndIssuesData />
 
-      {activeTab() === 'OPEN'
-        ? (issuesStore().openIssues?.pageInfo?.hasNextPage ||
-          issuesStore().openIssues?.pageInfo?.hasPreviousPage) && (
-          <Pagination
-            tab={activeTab()}
-            pageInfo={issuesStore().openIssues.pageInfo}
-            owner={`${params.owner}/${params.name}/issues`}
-          />
-        )
-        : (issuesStore().closedIssues?.pageInfo?.hasNextPage ||
-          issuesStore().closedIssues?.pageInfo?.hasPreviousPage) && (
-          <Pagination
-            tab={activeTab()}
-            pageInfo={issuesStore().closedIssues.pageInfo}
-            owner={`${params.owner}/${params.name}/issues`}
-          />
-        )}
+      <Show when={activeTab() === 'OPEN'}>
+        <Switch>
+          <Match
+            when={
+              issuesStore().openIssues?.pageInfo?.hasNextPage ||
+              issuesStore().openIssues?.pageInfo?.hasPreviousPage
+            }
+          >
+            <Pagination
+              tab={activeTab()}
+              pageInfo={issuesStore().openIssues.pageInfo}
+              owner={`${params.owner}/${params.name}/issues`}
+            />
+          </Match>
+
+          <Match
+            when={
+              issuesStore().closedIssues?.pageInfo?.hasNextPage ||
+              issuesStore().closedIssues?.pageInfo?.hasPreviousPage
+            }
+          >
+            {' '}
+            <Pagination
+              tab={activeTab()}
+              pageInfo={issuesStore().closedIssues.pageInfo}
+              owner={`${params.owner}/${params.name}/issues`}
+            />
+          </Match>
+        </Switch>
+      </Show>
     </div>
   );
 };

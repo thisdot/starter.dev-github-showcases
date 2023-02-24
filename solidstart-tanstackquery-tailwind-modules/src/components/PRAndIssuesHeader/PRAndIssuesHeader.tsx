@@ -2,7 +2,7 @@ import cn from 'classnames';
 import { CheckIcon, PullRequestIcon, IssuesIcon } from '../Icons';
 import FilterDropdown from '../FilterDropDown/FilterDropdown';
 import { SORT_OPTIONS } from '../../utils/constants';
-import { createMemo, createSignal } from 'solid-js';
+import { createMemo, createSignal, Show } from 'solid-js';
 import { getSelectedMilestoneId } from './utils';
 import { issuesStore } from '~/stores/issues-store';
 
@@ -59,11 +59,12 @@ const PRAndIssuesHeader = () => {
           })}
           onClick={() => setActiveTab('OPEN')}
         >
-          {type() === 'pr' ? (
+          <Show when={type() === 'pr'}>
             <PullRequestIcon class="w-4 h-4" />
-          ) : (
+          </Show>
+          <Show when={type() === 'issue'}>
             <IssuesIcon class="w-4 h-4" />
-          )}
+          </Show>
           <span>{issuesStore().openIssues?.totalCount || 0}</span>
           Open
         </button>
@@ -79,7 +80,7 @@ const PRAndIssuesHeader = () => {
         </button>
       </div>
       <div class="flex items-center space-x-8">
-        {labelOptions && labelOptions()?.length !== 0 && (
+        <Show when={labelOptions && labelOptions()?.length !== 0}>
           <div>
             <FilterDropdown
               name="Label"
@@ -89,8 +90,8 @@ const PRAndIssuesHeader = () => {
               class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
             />
           </div>
-        )}
-        {milestoneOptions && milestoneOptions()?.length !== 0 && (
+        </Show>
+        <Show when={milestoneOptions && milestoneOptions()?.length !== 0}>
           <div>
             <FilterDropdown
               name="Milestone"
@@ -100,7 +101,7 @@ const PRAndIssuesHeader = () => {
               class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
             />
           </div>
-        )}
+        </Show>
         <div>
           <FilterDropdown
             name="Sort"
