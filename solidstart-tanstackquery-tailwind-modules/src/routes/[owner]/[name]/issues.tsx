@@ -54,6 +54,7 @@ const Issues = () => {
       searchParams.before,
       sortBy(),
       selectedLabel(),
+      milestoneId(),
     ],
     () =>
       getIssues({

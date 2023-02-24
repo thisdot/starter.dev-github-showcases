@@ -18,20 +18,23 @@ const PRAndIssuesData = () => {
         {(issue) => <PRAndIssuesListItem {...issue} />}
       </For>
 
-      {(activeTab() === 'OPEN' && issuesStore().openIssues.totalCount === 0) ||
-        (activeTab() === 'CLOSED' &&
-          issuesStore().closedIssues.totalCount === 0 && (
-            <div class="text-center p-3 flex flex-col items-center justify-center">
-              <span class="font-bold mb-4">
-                No results matched your search.
-              </span>
-              <a class=" text-blue-600 underline" href={location.pathname}>
-                Refresh
-              </a>
-            </div>
-          ))}
+      {activeTab() === 'OPEN' && issuesStore().openIssues.totalCount === 0 && (
+        <NoResults />
+      )}
+
+      {activeTab() === 'CLOSED' &&
+        issuesStore().closedIssues.totalCount === 0 && <NoResults />}
     </div>
   );
 };
+
+const NoResults = () => (
+  <div class="text-center p-3 flex flex-col items-center justify-center">
+    <span class="font-bold mb-4">No results matched your search.</span>
+    <a class=" text-blue-600 underline" href={location.pathname}>
+      Refresh
+    </a>
+  </div>
+);
 
 export default PRAndIssuesData;
