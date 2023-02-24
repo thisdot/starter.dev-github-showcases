@@ -28,18 +28,24 @@ const UserProfile = (userProfileProps) => {
       <div class={styles.socials}>
         <Icon path={users} class={styles.icon} />
         <span class="inline-block">
-          <span class={styles.count}>{userProfileProps.followers.totalCount}</span>{' '}
+          <span class={styles.count}>
+            {userProfileProps.followers.totalCount}
+          </span>{' '}
           followers
         </span>
         <span class="mx-1">·</span>
         <span class="inline-block">
-          <span class={styles.count}>{userProfileProps.following.totalCount}</span>{' '}
+          <span class={styles.count}>
+            {userProfileProps.following.totalCount}
+          </span>{' '}
           following
         </span>
         <span class="mx-1">·</span>
         <Icon path={star} class={styles.icon} />
         <span class="inline-block">
-          <span class={styles.count}>{userProfileProps.starredRepositories.totalCount}</span>{' '}
+          <span class={styles.count}>
+            {userProfileProps.starredRepositories.totalCount}
+          </span>{' '}
         </span>
       </div>
       <div class={styles.fields}>

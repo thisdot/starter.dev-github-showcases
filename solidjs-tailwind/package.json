@@ -38,7 +38,7 @@
     "husky": "^8.0.3",
     "jsdom": "20.0.1",
     "msw": "^1.1.0",
-    "msw-storybook-addon": "^1.6.3",
+    "msw-storybook-addon": "^1.7.0",
     "postcss": "8.4.18",
     "prettier": "2.7.1",
     "solid-testing-library": "0.3.0",

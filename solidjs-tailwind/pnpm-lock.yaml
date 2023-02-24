@@ -30,7 +30,7 @@ specifiers:
   isomorphic-fetch: ^3.0.0
   jsdom: 20.0.1
   msw: ^1.1.0
-  msw-storybook-addon: ^1.6.3
+  msw-storybook-addon: ^1.7.0
   postcss: 8.4.18
   prettier: 2.7.1
   prism-react-renderer: ^1.3.5
@@ -91,7 +91,7 @@ devDependencies:
   husky: 8.0.3
   jsdom: 20.0.1
   msw: 1.1.0_typescript@4.8.4
-  msw-storybook-addon: 1.6.3_msw@1.1.0
+  msw-storybook-addon: 1.7.0_msw@1.1.0
   postcss: 8.4.18
   prettier: 2.7.1
   solid-testing-library: 0.3.0_solid-js@1.6.0
@@ -11263,8 +11263,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /msw-storybook-addon/1.6.3_msw@1.1.0:
-    resolution: {integrity: sha512-Ps80WdRmXsmenoTwfrgKMNpQD8INUUFyUFyZOecx8QjuqSlL++UYrLaGyACXN2goOn+/VS6rb0ZapbjrasPClg==}
+  /msw-storybook-addon/1.7.0_msw@1.1.0:
+    resolution: {integrity: sha512-G/cYj7Z8NuyFbMsdVJRr17flWed8J7CmKTSPNXmuK65W6uILpqNDpXJC7KVRhOg7lUFR5Hmqwcq6z8Mow/wu5A==}
     peerDependencies:
       msw: '>=0.35.0 <1.0.0'
     dependencies:
