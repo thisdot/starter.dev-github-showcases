@@ -37,22 +37,22 @@ const RepoIssues = () => {
       <PRAndIssuesData />
 
       {activeTab() === 'OPEN'
-        ? (issuesStore()?.openIssues?.pageInfo?.hasNextPage ||
-            issuesStore()?.openIssues?.pageInfo?.hasPreviousPage) && (
-            <Pagination
-              tab={activeTab()}
-              pageInfo={issuesStore().openIssues.pageInfo}
-              owner={`${params.owner}/${params.name}/issues`}
-            />
-          )
-        : (issuesStore()?.closedIssues?.pageInfo?.hasNextPage ||
-            issuesStore()?.closedIssues?.pageInfo?.hasPreviousPage) && (
-            <Pagination
-              tab={activeTab()}
-              pageInfo={issuesStore().closedIssues.pageInfo}
-              owner={`${params.owner}/${params.name}/issues`}
-            />
-          )}
+        ? (issuesStore().openIssues?.pageInfo?.hasNextPage ||
+          issuesStore().openIssues?.pageInfo?.hasPreviousPage) && (
+          <Pagination
+            tab={activeTab()}
+            pageInfo={issuesStore().openIssues.pageInfo}
+            owner={`${params.owner}/${params.name}/issues`}
+          />
+        )
+        : (issuesStore().closedIssues?.pageInfo?.hasNextPage ||
+          issuesStore().closedIssues?.pageInfo?.hasPreviousPage) && (
+          <Pagination
+            tab={activeTab()}
+            pageInfo={issuesStore().closedIssues.pageInfo}
+            owner={`${params.owner}/${params.name}/issues`}
+          />
+        )}
     </div>
   );
 };

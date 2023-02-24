@@ -33,10 +33,10 @@ const PRAndIssuesHeader = () => {
   const selectSort = (value: string) =>
     setSortBy(sortBy() === value ? 'Newest' : value);
   const labelOptions = createMemo<string[]>(
-    () => issuesStore()?.labels?.map((label) => label.name) || []
+    () => issuesStore().labels?.map((label) => label.name) || []
   );
   const milestoneOptions = createMemo<string[]>(
-    () => issuesStore()?.milestones?.map((milestone) => milestone.title) || []
+    () => issuesStore().milestones?.map((milestone) => milestone.title) || []
   );
   const selectLabel = (value: string) =>
     setSelectedLabel(selectedLabel() !== value ? value : undefined);
@@ -44,7 +44,7 @@ const PRAndIssuesHeader = () => {
     setSelectedMilestone(selectedMilestone() !== value ? value : undefined);
     setMilestoneId(
       getSelectedMilestoneId(
-        issuesStore()?.milestones || [],
+        issuesStore().milestones || [],
         selectedMilestone()
       )
     );
@@ -64,7 +64,7 @@ const PRAndIssuesHeader = () => {
           ) : (
             <IssuesIcon class="w-4 h-4" />
           )}
-          <span>{issuesStore()?.openIssues?.totalCount || 0}</span>
+          <span>{issuesStore().openIssues?.totalCount || 0}</span>
           Open
         </button>
         <button
@@ -74,7 +74,7 @@ const PRAndIssuesHeader = () => {
           onClick={() => setActiveTab('CLOSED')}
         >
           <CheckIcon class="w-4 h-4" />
-          <span>{issuesStore()?.closedIssues?.totalCount || 0}</span>
+          <span>{issuesStore().closedIssues?.totalCount || 0}</span>
           Closed
         </button>
       </div>

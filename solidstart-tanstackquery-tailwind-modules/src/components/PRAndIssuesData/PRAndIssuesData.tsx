@@ -11,8 +11,8 @@ const PRAndIssuesData = () => {
       <For
         each={
           activeTab() === 'OPEN'
-            ? issuesStore()?.openIssues.issues
-            : issuesStore()?.closedIssues.issues
+            ? issuesStore().openIssues.issues
+            : issuesStore().closedIssues.issues
         }
       >
         {(issue) => <PRAndIssuesListItem {...issue} />}

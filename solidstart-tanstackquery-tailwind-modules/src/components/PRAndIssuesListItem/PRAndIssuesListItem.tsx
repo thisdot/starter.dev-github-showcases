@@ -19,8 +19,7 @@ const PRAndIssuesListItem = (props: Issue) => {
     'url',
     'state',
     'createdAt',
-    // @ts-ignore
-    'authorName',
+    'login',
     'commentCount',
     'labels',
   ]);
@@ -91,9 +90,8 @@ const PRAndIssuesListItem = (props: Issue) => {
           <span class="opened-by">
             #{local.number}
             {' by '}
-            {/* @ts-ignore */}
-            <a href="#">{local.authorName}</a> was{' '}
-            {/* {local.isOpen ? 'opened' : 'closed'} on{' '} */}
+            <a href="#">{local.login}</a> was{' '}
+            {local.state === 'OPEN' ? 'open' : 'closed'} on{' '}
             {format(new Date(local.createdAt), 'MMM d, yyyy')}
           </span>
         </div>
