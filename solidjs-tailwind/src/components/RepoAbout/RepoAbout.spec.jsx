@@ -41,7 +41,7 @@ describe('Repo About', () => {
   it('should show contents', async () => {
     const loading = await wrapper.findByText('Loading...');
     expect(loading).toBeInTheDocument();
-    await vi.advanceTimersByTimeAsync(1000);
+    await vi.advanceTimersByTime(1000);
     const contents = await wrapper.findByTestId('about-info');
     const topic = await wrapper.findByText(
       repoInforResponse.data.repository.description
