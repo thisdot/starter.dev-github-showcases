@@ -106,14 +106,14 @@ const PRAndIssuesListItem = (props: Issue) => {
 
       <div class="flex-shrink-0 w-1/5 text-right pr-3 flex-nowrap flex">
         <span class="ml-2 pt-1 flex-1 flex-shrink-0">
-          {local.commentCount > 0 && (
+          <Show when={local.commentCount > 0}>
             <a href="#" class="">
               <div class="flex items-center justify-end">
                 <CommentIcon class="w-5 h-5" />
                 <span class="ml-1 text-sm font-bold">{local.commentCount}</span>
               </div>
             </a>
-          )}
+          </Show>
         </span>
       </div>
     </div>
