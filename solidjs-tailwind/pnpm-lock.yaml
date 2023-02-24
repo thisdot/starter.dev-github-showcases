@@ -25,15 +25,19 @@ specifiers:
   eslint: 8.26.0
   eslint-plugin-solid: 0.7.4
   eslint-plugin-unused-imports: 2.0.0
+  highlight.js: ^11.7.0
+  husky: ^8.0.3
   isomorphic-fetch: ^3.0.0
   jsdom: 20.0.1
-  msw: ^0.49.1
+  msw: ^1.1.0
   msw-storybook-addon: ^1.6.3
   postcss: 8.4.18
   prettier: 2.7.1
+  prism-react-renderer: ^1.3.5
   rehype-raw: ^6.1.1
   remark-gfm: ^3.0.1
   solid-heroicons: ^3.1.1
+  solid-highlight: ^0.1.12
   solid-icons: ^1.0.2
   solid-js: 1.6.0
   solid-markdown: 1.1.0
@@ -44,6 +48,7 @@ specifiers:
   vite: 3.1.8
   vite-plugin-solid: 2.3.10
   vitest: 0.24.3
+  whatwg-fetch: ^3.6.2
 
 dependencies:
   '@heroicons/react': 1.0.5
@@ -52,10 +57,13 @@ dependencies:
   classnames: 2.3.2
   date-fns: 2.29.3
   dayjs: 1.11.6
+  highlight.js: 11.7.0
   isomorphic-fetch: 3.0.0
+  prism-react-renderer: 1.3.5
   rehype-raw: 6.1.1
   remark-gfm: 3.0.1
   solid-heroicons: 3.1.1_solid-js@1.6.0
+  solid-highlight: 0.1.12
   solid-icons: 1.0.2_solid-js@1.6.0
   solid-js: 1.6.0
   solid-markdown: 1.1.0_solid-js@1.6.0
@@ -80,9 +88,10 @@ devDependencies:
   eslint: 8.26.0
   eslint-plugin-solid: 0.7.4_wyqvi574yv7oiwfeinomdzmc3m
   eslint-plugin-unused-imports: 2.0.0_eslint@8.26.0
+  husky: 8.0.3
   jsdom: 20.0.1
-  msw: 0.49.1_typescript@4.8.4
-  msw-storybook-addon: 1.6.3_msw@0.49.1
+  msw: 1.1.0_typescript@4.8.4
+  msw-storybook-addon: 1.6.3_msw@1.1.0
   postcss: 8.4.18
   prettier: 2.7.1
   solid-testing-library: 0.3.0_solid-js@1.6.0
@@ -91,6 +100,7 @@ devDependencies:
   vite: 3.1.8
   vite-plugin-solid: 2.3.10_solid-js@1.6.0+vite@3.1.8
   vitest: 0.24.3_jsdom@20.0.1
+  whatwg-fetch: 3.6.2
 
 packages:
 
@@ -9220,6 +9230,11 @@ packages:
     resolution: {integrity: sha512-tWCK4biJ6hcLqTviLXVR9DTRfYGQMXEIUj3gwJ2rZ5wO/at3XtkI4g8mCvFdUF9l1KMBNCfmNAdnahm1cgavQA==}
     dev: true
 
+  /highlight.js/11.7.0:
+    resolution: {integrity: sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==}
+    engines: {node: '>=12.0.0'}
+    dev: false
+
   /hmac-drbg/1.0.1:
     resolution: {integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==}
     dependencies:
@@ -9381,6 +9396,12 @@ packages:
   /human-signals/2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
+    dev: true
+
+  /husky/8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /iconv-lite/0.4.24:
@@ -11242,21 +11263,21 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /msw-storybook-addon/1.6.3_msw@0.49.1:
+  /msw-storybook-addon/1.6.3_msw@1.1.0:
     resolution: {integrity: sha512-Ps80WdRmXsmenoTwfrgKMNpQD8INUUFyUFyZOecx8QjuqSlL++UYrLaGyACXN2goOn+/VS6rb0ZapbjrasPClg==}
     peerDependencies:
       msw: '>=0.35.0 <1.0.0'
     dependencies:
       '@storybook/addons': 6.5.13
       is-node-process: 1.0.1
-      msw: 0.49.1_typescript@4.8.4
+      msw: 1.1.0_typescript@4.8.4
     transitivePeerDependencies:
       - react
       - react-dom
     dev: true
 
-  /msw/0.49.1_typescript@4.8.4:
-    resolution: {integrity: sha512-JpIIq4P65ofj0HVmDMkJuRwgP9s5kcdutpZ15evMTb2k91/USB7IKWRLV9J1Mzc3OqTdwNj4RwtOWJ5y/FulQQ==}
+  /msw/1.1.0_typescript@4.8.4:
+    resolution: {integrity: sha512-oqMvUXm1bMbwvGpoXAQVz8vXXQyQyx52HBDg3EDOK+dFXkQHssgkXEG4LfMwwZyr2Qt18I/w04XPaY4BkFTkzA==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
@@ -11282,7 +11303,7 @@ packages:
       node-fetch: 2.6.7
       outvariant: 1.3.0
       path-to-regexp: 6.2.1
-      strict-event-emitter: 0.2.8
+      strict-event-emitter: 0.4.6
       type-fest: 2.19.0
       typescript: 4.8.4
       yargs: 17.6.2
@@ -12207,6 +12228,15 @@ packages:
     resolution: {integrity: sha512-66hKPCr+72mlfiSjlEB1+45IjXSqvVAIy6mocupoww4tBFE9R9IhwwUGoI4G++Tc9Aq+2rxOt0RFU6gPcrte0A==}
     engines: {node: '>= 0.8'}
     dev: true
+
+  /prism-react-renderer/1.3.5:
+    resolution: {integrity: sha512-IJ+MSwBWKG+SM3b2SUfdrhC+gu01QkV2KmRQgREThBfSQRoufqRfxfHUxpG1WcaFjP+kojcFyO9Qqtpgt3qLCg==}
+    peerDependencies:
+      react: '>=0.14.9'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dev: false
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
@@ -13235,6 +13265,14 @@ packages:
       solid-js: 1.6.0
     dev: false
 
+  /solid-highlight/0.1.12:
+    resolution: {integrity: sha512-1zTiNeuD8SDjil//wcdNGeYVrsgkhVdyHD65WBuO2SV33onTRHXZR8agH60Kpe9GcFmjDmz0UwKWj1zFXesnig==}
+    engines: {node: '>=10', yarn: '>=1.22.5'}
+    dependencies:
+      highlight.js: 11.7.0
+      solid-js: 1.6.0
+    dev: false
+
   /solid-icons/1.0.2_solid-js@1.6.0:
     resolution: {integrity: sha512-Pockp4vkCFFW+uubuRpb50pqKZNzjLhUUDm5VPpcZJWSgDw7fOxnMLcO1fC2bK8l+kYbJOr52y+pB5fnoZXg3Q==}
     engines: {node: '>= 16'}
@@ -13487,6 +13525,10 @@ packages:
     resolution: {integrity: sha512-KDf/ujU8Zud3YaLtMCcTI4xkZlZVIYxTLr+XIULexP+77EEVWixeXroLUXQXiVtH4XH2W7jr/3PT1v3zBuvc3A==}
     dependencies:
       events: 3.3.0
+    dev: true
+
+  /strict-event-emitter/0.4.6:
+    resolution: {integrity: sha512-12KWeb+wixJohmnwNFerbyiBrAlq5qJLwIt38etRtKtmmHyDSoGlIqFE9wx+4IwG0aDjI7GV8tc8ZccjWZZtTg==}
     dev: true
 
   /string-width/4.2.3:
@@ -14839,7 +14881,6 @@ packages:
 
   /whatwg-fetch/3.6.2:
     resolution: {integrity: sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==}
-    dev: false
 
   /whatwg-mimetype/3.0.0:
     resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}
