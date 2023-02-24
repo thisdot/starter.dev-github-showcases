@@ -1,5 +1,5 @@
-const FetchApi = ({ url, query, variables, headersOptions }) => {
-  return new Promise((resolve, reject) => {
+const FetchApi = async ({ url, query, variables, headersOptions }) => {
+  return await new Promise((resolve, reject) => {
     fetch(url, {
       method: 'POST',
       headers: {

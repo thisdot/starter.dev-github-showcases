@@ -1,10 +1,8 @@
 import { setupServer } from 'msw/node';
 import { beforeAll, afterAll, afterEach } from 'vitest';
-import { mockReadme } from './mockReadMe';
 import { mockRepoInfo } from './mockRepoInfo';
-import { mockRepoTree } from './mockRepoTree';
 
-const handlers = [mockRepoInfo, mockReadme, mockRepoTree];
+const handlers = [mockRepoInfo];
 
 export const server = setupServer(...handlers);
 
