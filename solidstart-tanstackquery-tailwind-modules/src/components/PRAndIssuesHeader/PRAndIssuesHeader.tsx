@@ -5,8 +5,8 @@ import { SORT_OPTIONS } from '../../utils/constants';
 import { createMemo, createSignal, Show } from 'solid-js';
 import { getSelectedMilestoneId } from './utils';
 import { issuesStore } from '~/stores/issues-store';
+import { pullRequestsStore } from '~/stores/pull-requests-store';
 
-const [type, setType] = createSignal<'pr' | 'issue'>('pr');
 const [activeTab, setActiveTab] = createSignal<'OPEN' | 'CLOSED'>('OPEN');
 const [sortBy, setSortBy] = createSignal('Newest');
 const [selectedLabel, setSelectedLabel] = createSignal<string>();
@@ -14,8 +14,6 @@ const [selectedMilestone, setSelectedMilestone] = createSignal<string>();
 const [milestoneId, setMilestoneId] = createSignal<string>();
 
 export {
-  type,
-  setType,
   activeTab,
   setActiveTab,
   sortBy,
@@ -28,12 +26,19 @@ export {
   setMilestoneId,
 };
 
-const PRAndIssuesHeader = () => {
+interface PRAndIssuesHeaderProps {
+  type: 'pr' | 'issue';
+}
+
+const PRAndIssuesHeader = ({ type }: PRAndIssuesHeaderProps) => {
   const sortOptions = Object.values(SORT_OPTIONS);
   const selectSort = (value: string) =>
     setSortBy(sortBy() === value ? 'Newest' : value);
   const labelOptions = createMemo<string[]>(
-    () => issuesStore().labels?.map((label) => label.name) || []
+    () =>
+      issuesStore().labels?.map((label) => label.name) ||
+      pullRequestsStore().labels?.map((label) => label.name) ||
+      []
   );
   const milestoneOptions = createMemo<string[]>(
     () => issuesStore().milestones?.map((milestone) => milestone.title) || []
@@ -59,13 +64,17 @@ const PRAndIssuesHeader = () => {
           })}
           onClick={() => setActiveTab('OPEN')}
         >
-          <Show when={type() === 'pr'}>
+          <Show when={type === 'pr'}>
             <PullRequestIcon class="w-4 h-4" />
           </Show>
-          <Show when={type() === 'issue'}>
+          <Show when={type === 'issue'}>
             <IssuesIcon class="w-4 h-4" />
           </Show>
-          <span>{issuesStore().openIssues?.totalCount || 0}</span>
+          <span>
+            {type === 'pr'
+              ? pullRequestsStore().openPullRequests?.totalCount || 0
+              : issuesStore().openIssues?.totalCount || 0}
+          </span>
           Open
         </button>
         <button
@@ -75,7 +84,11 @@ const PRAndIssuesHeader = () => {
           onClick={() => setActiveTab('CLOSED')}
         >
           <CheckIcon class="w-4 h-4" />
-          <span>{issuesStore().closedIssues?.totalCount || 0}</span>
+          <span>
+            {type === 'pr'
+              ? pullRequestsStore().closedPullRequests?.totalCount || 0
+              : issuesStore().closedIssues?.totalCount || 0}
+          </span>
           Closed
         </button>
       </div>
@@ -91,7 +104,13 @@ const PRAndIssuesHeader = () => {
             />
           </div>
         </Show>
-        <Show when={milestoneOptions && milestoneOptions()?.length !== 0}>
+        <Show
+          when={
+            type === 'issue' &&
+            milestoneOptions &&
+            milestoneOptions()?.length !== 0
+          }
+        >
           <div>
             <FilterDropdown
               name="Milestone"

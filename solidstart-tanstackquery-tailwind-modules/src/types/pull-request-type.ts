@@ -15,133 +15,59 @@ export interface PullRequest {
   commentCount: number;
   labelCount: number;
 }
-
 export type RepoPullRequestsQuery = {
-  __typename?: 'Query';
-  repository?:
-    | {
-        __typename?: 'Repository';
-        openPullRequests: {
-          __typename?: 'PullRequestConnection';
-          totalCount: number;
-          pageInfo: {
-            __typename?: 'PageInfo';
-            hasPreviousPage: boolean;
-            hasNextPage: boolean;
-            startCursor?: string | null | undefined;
-            endCursor?: string | null | undefined;
-          };
-          nodes?:
-            | Array<
-                | {
-                    __typename?: 'PullRequest';
-                    id: string;
-                    closed: boolean;
-                    closedAt?: any | null | undefined;
-                    merged: boolean;
-                    mergedAt?: any | null | undefined;
-                    title: string;
-                    number: number;
-                    createdAt: any;
-                    author?:
-                      | { __typename?: 'Bot'; login: string }
-                      | { __typename?: 'EnterpriseUserAccount'; login: string }
-                      | { __typename?: 'Mannequin'; login: string }
-                      | { __typename?: 'Organization'; login: string }
-                      | { __typename?: 'User'; login: string }
-                      | null
-                      | undefined;
-                    comments: {
-                      __typename?: 'IssueCommentConnection';
-                      totalCount: number;
-                    };
-                    labels?:
-                      | {
-                          __typename?: 'LabelConnection';
-                          totalCount: number;
-                          nodes?:
-                            | Array<
-                                | {
-                                    __typename?: 'Label';
-                                    color: string;
-                                    name: string;
-                                  }
-                                | null
-                                | undefined
-                              >
-                            | null
-                            | undefined;
-                        }
-                      | null
-                      | undefined;
-                  }
-                | null
-                | undefined
-              >
-            | null
-            | undefined;
-        };
-        closedPullRequests: {
-          __typename?: 'PullRequestConnection';
-          totalCount: number;
-          pageInfo: {
-            __typename?: 'PageInfo';
-            hasPreviousPage: boolean;
-            hasNextPage: boolean;
-            startCursor?: string | null | undefined;
-            endCursor?: string | null | undefined;
-          };
-          nodes?:
-            | Array<
-                | {
-                    __typename?: 'PullRequest';
-                    id: string;
-                    closed: boolean;
-                    closedAt?: any | null | undefined;
-                    merged: boolean;
-                    mergedAt?: any | null | undefined;
-                    title: string;
-                    number: number;
-                    createdAt: any;
-                    author?:
-                      | { __typename?: 'Bot'; login: string }
-                      | { __typename?: 'EnterpriseUserAccount'; login: string }
-                      | { __typename?: 'Mannequin'; login: string }
-                      | { __typename?: 'Organization'; login: string }
-                      | { __typename?: 'User'; login: string }
-                      | null
-                      | undefined;
-                    comments: {
-                      __typename?: 'IssueCommentConnection';
-                      totalCount: number;
-                    };
-                    labels?:
-                      | {
-                          __typename?: 'LabelConnection';
-                          totalCount: number;
-                          nodes?:
-                            | Array<
-                                | {
-                                    __typename?: 'Label';
-                                    color: string;
-                                    name: string;
-                                  }
-                                | null
-                                | undefined
-                              >
-                            | null
-                            | undefined;
-                        }
-                      | null
-                      | undefined;
-                  }
-                | null
-                | undefined
-              >
-            | null
-            | undefined;
-        };
-      }
-    | null
-    | undefined;
+  repository: {
+    openPullRequests: {
+      totalCount: number;
+      pageInfo: {
+        hasPreviousPage: boolean;
+        hasNextPage: boolean;
+        startCursor?: string | undefined;
+        endCursor?: string | undefined;
+      };
+      nodes: PullRequestNodeProps[];
+    };
+    closedPullRequests: {
+      totalCount: number;
+      pageInfo: {
+        hasPreviousPage: boolean;
+        hasNextPage: boolean;
+        startCursor?: string | undefined;
+        endCursor?: string | undefined;
+      };
+      nodes: PullRequestNodeProps[];
+    };
+  };
 };
+
+export interface PageInfo {
+  startCursor?: string;
+  endCursor?: string;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+}
+
+export interface PullRequestProps {
+  totalCount: number;
+  pageInfo: PageInfo;
+  nodes: PullRequestNodeProps[];
+}
+
+export interface PullRequestNodeProps {
+  state: string;
+  createdAt: string;
+  closedAt: string;
+  title: string;
+  author: {
+    login: string;
+  };
+  url: string;
+  labels: {
+    totalCount: number;
+    nodes: Label[];
+  };
+  comments: {
+    totalCount: number;
+  };
+  number: number;
+}
