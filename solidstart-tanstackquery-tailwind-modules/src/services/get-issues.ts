@@ -109,7 +109,7 @@ const getIssues = async ({
   filterBy,
   before,
   after,
-  first = 30,
+  first,
   last,
 }: Variables) => {
   const { authStore } = useAuth();
