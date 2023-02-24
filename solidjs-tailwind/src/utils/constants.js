@@ -7,7 +7,9 @@ export const REDIRECT_URL = `${APP_BASE_URL}/auth/redirect`;
 export const SIGN_IN_BASE_URL = `${API_URL}/auth/signin`;
 export const SIGN_OUT_URL = `${API_URL}/auth/signout`;
 
-export const GITHUB_GRAPHQL = `${GITHUB_URL_BASE}/graphql`;
+export const GITHUB_GRAPHQL = `${
+  GITHUB_URL_BASE || 'https://api.github.com'
+}/graphql`;
 
 export const OrderField = {
   /** Order issues by comment count */

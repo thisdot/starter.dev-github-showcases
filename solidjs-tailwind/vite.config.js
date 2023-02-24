@@ -24,6 +24,11 @@ export default defineConfig({
     deps: {
       inline: [/solid-js/, /solid-testing-library/],
     },
+    env: {
+      VITE_API_URL: 'https://api.starter.dev/.netlify/functions/server/api',
+      VITE_GITHUB_URL: 'https://api.github.com',
+      VITE_BASE_URL:'http://localhost:3000'
+    }
   },
   resolve: {
     conditions: ['development', 'browser'],

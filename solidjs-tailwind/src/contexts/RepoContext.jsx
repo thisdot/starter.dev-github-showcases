@@ -8,6 +8,7 @@ import {
 } from 'solid-js';
 import getRepoInfo from '../services/get-repo-info';
 import getReadme from '../services/get-readme';
+import { GITHUB_GRAPHQL } from '../utils/constants';
 
 const RepoContext = createContext();
 
@@ -48,6 +49,13 @@ export function RepoProvider(props) {
     if (resInfo() && !resInfo.loading) {
       setInfo(resInfo());
     }
+
+    // eslint-disable-next-line no-console
+    console.log('====================================');
+    // eslint-disable-next-line no-console
+    console.log(resInfo(), GITHUB_GRAPHQL);
+    // eslint-disable-next-line no-console
+    console.log('====================================');
 
     if (resReadMe() && !resReadMe.loading) {
       setReadme(resReadMe());
