@@ -1,6 +1,14 @@
 import { Router } from '@solidjs/router';
 import { render } from 'solid-testing-library';
-import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+} from 'vitest';
 import 'whatwg-fetch';
 import { RepoAboutWidget } from './RepoAbout';
 import { RepoProvider } from '../../contexts/RepoContext';
