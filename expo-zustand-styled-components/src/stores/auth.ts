@@ -1,10 +1,10 @@
 // zustand store for everything related to authentication / user profile
 import { create } from 'zustand';
-import { ViewerInfo } from '../types/profile';
+import { UserProfile, ViewerInfo } from '../types/profile';
 // import services
 
 interface IAuthStore {
-  //   user?: {}; UserProfile;
+  user?: UserProfile;
   viewer?: ViewerInfo;
   token?: string;
   error?: string;

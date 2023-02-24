@@ -1,15 +1,39 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import {useEffect } from 'react';
+import * as WebBrowser from 'expo-web-browser';
+import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 
-import { AuthStackScreenProps } from '../../../types';
-import { SafeAreaViewStyled } from './Login.styles';
+import { ButtonStyled, ButtonTextStyled, SafeAreaViewStyled } from './Login.styles';
+import { RootStackScreenProps } from '../../../types';
+import { AUTH_RESOURCE } from '../../utils/constants';
+import { authStore } from '../../stores/auth';
 
-const Login = ({ navigation }: AuthStackScreenProps<'Login'>) => {
+WebBrowser.maybeCompleteAuthSession();
+
+const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
+  const [request, response, promptAsync] = useAuthRequest(
+    {
+      clientId: 'CLIENT_ID',
+      scopes: ['identity'],
+      redirectUri: makeRedirectUri({
+        scheme: 'com.starter.dev'
+      }),
+    },
+    AUTH_RESOURCE
+  );
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { code } = response.params;
+      authStore.setState({ token: code });
+      navigation.navigate("AppNavigator", {screen: "Home"});
+    }
+  }, [response]);
+
   return (
     <SafeAreaViewStyled>
-      <View>
-        <Text>Login Page 2</Text>
-      </View>
+      <ButtonStyled disabled={!request} onPress={() => promptAsync()}>
+        <ButtonTextStyled>Sign in with GitHub</ButtonTextStyled>
+      </ButtonStyled>
     </SafeAreaViewStyled>
   );
 };

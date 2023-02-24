@@ -16,7 +16,7 @@ import HomeScreen from '../../screens/Home';
  */
 const Stack = createNativeStackNavigator();
 
-function AuthNavigator() {
+function AppNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
@@ -24,4 +24,4 @@ function AuthNavigator() {
   );
 }
 
-export default AuthNavigator;
+export default AppNavigator;
