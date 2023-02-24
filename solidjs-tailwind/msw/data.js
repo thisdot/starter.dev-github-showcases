@@ -55,15 +55,15 @@ export const repoTreeResponse = {
             type: 'tree',
             path: '/'
           },
-           {
-             name: '.gitignore',
-             path: '.gitignore',
-             type: 'blob',
-           }, {
-             name: '.prettierrc',
-             path: '.prettierrc',
-             type: 'blob',
-           },
+          {
+            name: '.gitignore',
+            path: '.gitignore',
+            type: 'blob',
+          }, {
+            name: '.prettierrc',
+            path: '.prettierrc',
+            type: 'blob',
+          },
         ]
       }
     }
