@@ -23,7 +23,6 @@ export interface PageInfo {
   hasNextPage: boolean;
   hasPreviousPage: boolean;
 }
-
 export interface UserRepoInfo {
   owner: {
     repositories: {
