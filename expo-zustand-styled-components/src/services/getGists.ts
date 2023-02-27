@@ -25,7 +25,6 @@ const getGists = async () => {
 
   const resp = (await FetchApi(data)) as Response;
 
-
   const gists = resp.data?.viewer.gists.nodes?.reduce(
     (acc: Gists[] | { name: string; url: string }[], gist) => {
       if (!gist) {
