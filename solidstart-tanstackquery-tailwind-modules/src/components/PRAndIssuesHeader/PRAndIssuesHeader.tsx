@@ -36,9 +36,9 @@ const PRAndIssuesHeader = ({ type }: PRAndIssuesHeaderProps) => {
     setSortBy(sortBy() === value ? 'Newest' : value);
   const labelOptions = createMemo<string[]>(
     () =>
-      issuesStore().labels?.map((label) => label.name) ||
-      pullRequestsStore().labels?.map((label) => label.name) ||
-      []
+      (type === 'issue'
+        ? issuesStore().labels?.map((label) => label.name)
+        : pullRequestsStore().labels?.map((label) => label.name)) || []
   );
   const milestoneOptions = createMemo<string[]>(
     () => issuesStore().milestones?.map((milestone) => milestone.title) || []
