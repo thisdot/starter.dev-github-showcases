@@ -1,37 +1,58 @@
-import {useEffect } from 'react';
+/* eslint-disable no-console */
+import { useEffect } from 'react';
+import { useURL, openURL } from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
-import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
+import { REDIRECT_URL } from '@env';
+
+import { RootStackScreenProps } from '../../../types';
+import { SIGN_IN_BASE_URL, GET_TOKEN_URL } from '../../utils/constants';
+import { authStore } from '../../stores/auth';
 
 import { ButtonStyled, ButtonTextStyled, SafeAreaViewStyled } from './Login.styles';
-import { RootStackScreenProps } from '../../../types';
-import { AUTH_RESOURCE } from '../../utils/constants';
-import { authStore } from '../../stores/auth';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
-  const [request, response, promptAsync] = useAuthRequest(
-    {
-      clientId: 'CLIENT_ID',
-      scopes: ['identity'],
-      redirectUri: makeRedirectUri({
-        scheme: 'com.starter.dev'
-      }),
-    },
-    AUTH_RESOURCE
-  );
+  const url = useURL();
+
+  const handleSignIn = async () => openURL(`${SIGN_IN_BASE_URL}?redirect_url=${REDIRECT_URL}`);
 
   useEffect(() => {
-    if (response?.type === 'success') {
-      const { code } = response.params;
-      authStore.setState({ token: code });
-      navigation.navigate("AppNavigator", {screen: "Home"});
+    if (url !== null) {
+      const urlCallback = new URL(url);
+      const code = urlCallback.searchParams.get('code');
+
+
+      const resp = async () => {
+        const response = await fetch(GET_TOKEN_URL, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          credentials: 'include',
+        });
+
+        const data = await response.json();
+
+        const token = await data.access_token;
+
+        if (token) {
+          console.log('token', token);
+          authStore.setState({ token });
+          // store the token in the async storage
+          // redirect to the home screen
+          navigation.navigate('AppNavigator', { screen: 'Home' });
+        }
+      };
+
+      if (code) {
+        resp();
+      }
     }
-  }, [response]);
+  }, [url]);
 
   return (
     <SafeAreaViewStyled>
-      <ButtonStyled disabled={!request} onPress={() => promptAsync()}>
+      <ButtonStyled onPress={handleSignIn}>
         <ButtonTextStyled>Sign in with GitHub</ButtonTextStyled>
       </ButtonStyled>
     </SafeAreaViewStyled>
