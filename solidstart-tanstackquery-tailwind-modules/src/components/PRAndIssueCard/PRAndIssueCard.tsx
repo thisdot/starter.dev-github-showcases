@@ -72,7 +72,7 @@ const PRAndIssueCard = (props: PRAndIssueCardProps) => {
                   <MergedPrIcon class="w-5 h-5" />
                 </Match>
                 <Match when={local.state === 'CLOSED'}>
-                  <ClosedPrIcon class="w-5 h-5" /> test
+                  <ClosedPrIcon class="w-5 h-5" />
                 </Match>
               </Switch>
             </Show>

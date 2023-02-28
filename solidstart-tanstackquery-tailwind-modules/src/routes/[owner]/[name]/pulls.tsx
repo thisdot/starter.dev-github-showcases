@@ -84,7 +84,6 @@ const Issues = () => {
       repoPullrequests.data
     ) {
       setPullRequestsStore(repoPullrequests.data as PullRequestsStore);
-      console.log(pullRequestsStore());
     }
   });
 

@@ -2,7 +2,7 @@ import cn from 'classnames';
 import { CheckIcon, PullRequestIcon, IssuesIcon } from '../Icons';
 import FilterDropdown from '../FilterDropDown/FilterDropdown';
 import { SORT_OPTIONS } from '../../utils/constants';
-import { createMemo, createSignal, Show } from 'solid-js';
+import { createMemo, createSignal, Show, splitProps } from 'solid-js';
 import { getSelectedMilestoneId } from './utils';
 import { issuesStore } from '~/stores/issues-store';
 import { pullRequestsStore } from '~/stores/pull-requests-store';
@@ -30,13 +30,13 @@ interface PRAndIssuesHeaderProps {
   type: 'pr' | 'issue';
 }
 
-const PRAndIssuesHeader = ({ type }: PRAndIssuesHeaderProps) => {
+const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
   const sortOptions = Object.values(SORT_OPTIONS);
   const selectSort = (value: string) =>
     setSortBy(sortBy() === value ? 'Newest' : value);
   const labelOptions = createMemo<string[]>(
     () =>
-      (type === 'issue'
+      (props.type === 'issue'
         ? issuesStore().labels?.map((label) => label.name)
         : pullRequestsStore().labels?.map((label) => label.name)) || []
   );
@@ -64,14 +64,14 @@ const PRAndIssuesHeader = ({ type }: PRAndIssuesHeaderProps) => {
           })}
           onClick={() => setActiveTab('OPEN')}
         >
-          <Show when={type === 'pr'}>
+          <Show when={props.type === 'pr'}>
             <PullRequestIcon class="w-4 h-4" />
           </Show>
-          <Show when={type === 'issue'}>
+          <Show when={props.type === 'issue'}>
             <IssuesIcon class="w-4 h-4" />
           </Show>
           <span>
-            {type === 'pr'
+            {props.type === 'pr'
               ? pullRequestsStore().openPullRequests?.totalCount || 0
               : issuesStore().openIssues?.totalCount || 0}
           </span>
@@ -85,7 +85,7 @@ const PRAndIssuesHeader = ({ type }: PRAndIssuesHeaderProps) => {
         >
           <CheckIcon class="w-4 h-4" />
           <span>
-            {type === 'pr'
+            {props.type === 'pr'
               ? pullRequestsStore().closedPullRequests?.totalCount || 0
               : issuesStore().closedIssues?.totalCount || 0}
           </span>
@@ -106,7 +106,7 @@ const PRAndIssuesHeader = ({ type }: PRAndIssuesHeaderProps) => {
         </Show>
         <Show
           when={
-            type === 'issue' &&
+            props.type === 'issue' &&
             milestoneOptions &&
             milestoneOptions()?.length !== 0
           }

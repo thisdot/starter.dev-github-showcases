@@ -100,13 +100,9 @@ const getRepoPullRequests = async (variables: PullRequestVariables) => {
   };
   const resp = (await FetchApi(data)) as Response;
 
-  console.log('resp', resp);
-
   const openPullRequests = parsePullRequests(
     resp.data.repository?.openPullRequests
   );
-
-  console.log('openPullRequests', openPullRequests);
 
   const closedPullRequests = parsePullRequests(
     resp.data.repository?.closedPullRequests
