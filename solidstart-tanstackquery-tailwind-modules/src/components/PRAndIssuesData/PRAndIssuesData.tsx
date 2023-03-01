@@ -1,13 +1,13 @@
 import { For, Show } from 'solid-js';
 import PRAndIssuesListItem from '../PRAndIssuesListItem';
 import { activeTab } from '../PRAndIssuesHeader';
-import { IssueNodeProps } from '~/types/issues-type';
-import { PullRequestNodeProps } from '~/types/pull-request-type';
+import { Issue } from '~/types/issues-type';
+import { PullRequest } from '~/types/pull-request-type';
 
 interface PRAndIssuesDataProps {
   type: 'pr' | 'issue';
-  openItems: IssueNodeProps[] | PullRequestNodeProps[];
-  closedItems: IssueNodeProps[] | PullRequestNodeProps[];
+  openItems: Issue[] | PullRequest[];
+  closedItems: Issue[] | PullRequest[];
 }
 
 const PRAndIssuesData = (props: PRAndIssuesDataProps) => {

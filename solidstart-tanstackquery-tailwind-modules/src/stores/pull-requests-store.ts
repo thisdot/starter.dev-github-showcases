@@ -1,15 +1,15 @@
 import { createSignal } from 'solid-js';
 import { Label } from '~/types/label-type';
-import { PageInfo, PullRequestNodeProps } from '~/types/pull-request-type';
+import { PageInfo, PullRequest } from '~/types/pull-request-type';
 
 export type PullRequestsStore = {
   openPullRequests: {
-    pullRequests: PullRequestNodeProps[];
+    pullRequests: PullRequest[];
     totalCount: number;
     pageInfo: PageInfo;
   };
   closedPullRequests: {
-    pullRequests: PullRequestNodeProps[];
+    pullRequests: PullRequest[];
     totalCount: number;
     pageInfo: PageInfo;
   };

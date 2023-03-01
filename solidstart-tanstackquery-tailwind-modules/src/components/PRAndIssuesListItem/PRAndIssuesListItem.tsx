@@ -9,19 +9,21 @@ import {
   CommentIcon,
   ClosedIssueIcon,
 } from '../Icons';
-import { IssueNodeProps } from '~/types/issues-type';
-import { PullRequestNodeProps } from '~/types/pull-request-type';
+import { Issue, IssueNodeProps } from '~/types/issues-type';
+import { PullRequest, PullRequestNodeProps } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
 
 interface PRAndIssuesListItemProps {
-  issue?: IssueNodeProps;
-  pullRequest?: PullRequestNodeProps;
+  issue?: Issue;
+  pullRequest?: PullRequest;
 }
 
 const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
   const [local] = splitProps(props, ['issue', 'pullRequest']);
 
   const item = local.issue || local.pullRequest;
+
+  console.log(item);
 
   const type = local.issue ? 'issue' : 'pr';
 
@@ -73,7 +75,7 @@ const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
             {item?.title}
           </a>
 
-          <For each={item?.labels.nodes as Label[]}>
+          <For each={item?.labels as Label[]}>
             {(label) => (
               <span
                 class={cn(
@@ -91,7 +93,7 @@ const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
           <span class="opened-by">
             #{item?.number}
             {' by '}
-            <a href="#">{item?.author?.login}</a> was{' '}
+            <a href="#">{item?.login}</a> was{' '}
             {item?.state === 'OPEN' ? 'open' : 'closed'} on{' '}
             {format(new Date(item?.createdAt as string), 'MMM d, yyyy')}
           </span>
@@ -100,13 +102,11 @@ const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
 
       <div class="flex-shrink-0 w-1/5 text-right pr-3 flex-nowrap flex">
         <span class="ml-2 pt-1 flex-1 flex-shrink-0">
-          <Show when={(item?.comments?.totalCount as number) > 0}>
+          <Show when={(item?.commentCount as number) > 0}>
             <a href="#" class="">
               <div class="flex items-center justify-end">
                 <CommentIcon class="w-5 h-5" />
-                <span class="ml-1 text-sm font-bold">
-                  {item?.comments?.totalCount}
-                </span>
+                <span class="ml-1 text-sm font-bold">{item?.commentCount}</span>
               </div>
             </a>
           </Show>
