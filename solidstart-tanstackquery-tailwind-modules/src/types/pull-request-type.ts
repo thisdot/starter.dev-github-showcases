@@ -1,20 +1,20 @@
 /*eslint-disable @typescript-eslint/no-explicit-any */
+import { LabelProps } from './issues-type';
 import { Label } from './label-type';
 
 export interface PullRequest {
-  id: string;
-  login?: string | null;
-  title: string;
-  number: number;
-  closed: boolean;
-  closedAt?: Date | null;
-  merged: boolean;
-  mergedAt?: Date | null;
-  createdAt: Date;
-  labels: Label[];
+  login: string;
   commentCount: number;
   labelCount: number;
+  labels: LabelProps[];
+  title: string;
+  number: number;
+  createdAt: string;
+  closedAt: string;
+  state: string;
+  url: string;
 }
+
 export type RepoPullRequestsQuery = {
   repository: {
     openPullRequests: {
@@ -36,6 +36,10 @@ export type RepoPullRequestsQuery = {
         endCursor?: string | undefined;
       };
       nodes: PullRequestNodeProps[];
+    };
+    labels: {
+      totalCount: number;
+      nodes: LabelProps[];
     };
   };
 };

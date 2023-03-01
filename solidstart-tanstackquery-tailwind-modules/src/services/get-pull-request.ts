@@ -8,6 +8,7 @@ import {
   RepoPullRequestsQuery,
 } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
+import { LabelProps } from '~/types/issues-type';
 
 type PullRequestVariables = {
   owner: string;
@@ -37,7 +38,6 @@ function parsePullRequests(data?: PullRequestProps) {
   const nodes = data.nodes || [];
   const totalCount = data.totalCount;
   const pullRequests = nodes.reduce(
-    // @ts-ignore
     (pullRequests: PullRequest[], pullRequest) => {
       if (!pullRequest) {
         return pullRequests;
@@ -80,6 +80,26 @@ function parsePullRequests(data?: PullRequestProps) {
   return { pullRequests, totalCount, pageInfo };
 }
 
+function parseLabels(labels: {
+  totalCount: number;
+  nodes: LabelProps[];
+}) {
+  const nodes = labels?.nodes || [];
+  return nodes.reduce((labels: LabelProps[], label: LabelProps) => {
+    if (!label) {
+      return labels;
+    }
+
+    return [
+      ...labels,
+      {
+        color: label.color,
+        name: label.name,
+      },
+    ];
+  }, []);
+}
+
 const getRepoPullRequests = async (variables: PullRequestVariables) => {
   const { authStore } = useAuth();
   const data: ApiProps<PullRequestVariables> = {
@@ -100,24 +120,12 @@ const getRepoPullRequests = async (variables: PullRequestVariables) => {
     resp.data.repository?.closedPullRequests
   );
 
-  const labelMap = [
-    ...(closedPullRequests.pullRequests as PullRequest[]),
-    ...(openPullRequests.pullRequests as PullRequest[]),
-  ].reduce((acc: { [key: string]: Label }, issue: PullRequest) => {
-    const map: { [key: string]: Label } = {};
-    issue.labels.forEach((label) => {
-      map[label.name] = label;
-    });
-    return {
-      ...acc,
-      ...map,
-    };
-  }, {});
+  const labelMap = parseLabels(resp.data.repository?.labels);
 
   return {
     openPullRequests,
     closedPullRequests,
-    labels: Object.values(labelMap) as Label[],
+    labels: labelMap,
   };
 };
 
