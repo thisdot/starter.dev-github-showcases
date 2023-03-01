@@ -36,7 +36,6 @@ function parsePullRequests(data?: PullRequestProps) {
   const pageInfo = data.pageInfo;
   const nodes = data.nodes || [];
   const totalCount = data.totalCount;
-  // @ts-ignore
   const pullRequests = nodes.reduce(
     // @ts-ignore
     (pullRequests: PullRequest[], pullRequest) => {

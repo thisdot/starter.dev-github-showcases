@@ -63,7 +63,6 @@ const Issues = () => {
         orderBy: parseSortParams(SORT_OPTIONS, sortBy(), 0),
         direction: parseSortParams(SORT_OPTIONS, sortBy(), 1),
         filterBy: {
-          // @ts-ignore
           labels: selectedLabel() ? [selectedLabel()] : undefined,
           milestone: selectedMilestone() ? milestoneId() : undefined,
         },
