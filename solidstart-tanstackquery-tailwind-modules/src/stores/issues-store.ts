@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js';
+import { Issue } from '../types/issues-type';
 import {
-  IssueNodeProps,
   LabelProps,
   MilestoneProps,
   PageInfo,
@@ -8,12 +8,12 @@ import {
 
 export type IssuesStore = {
   openIssues: {
-    issues: IssueNodeProps[];
+    issues: Issue[];
     totalCount: number;
     pageInfo: PageInfo;
   };
   closedIssues: {
-    issues: IssueNodeProps[];
+    issues: Issue[];
     totalCount: number;
     pageInfo: PageInfo;
   };

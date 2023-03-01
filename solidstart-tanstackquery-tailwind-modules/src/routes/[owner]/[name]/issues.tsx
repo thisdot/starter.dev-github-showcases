@@ -81,7 +81,6 @@ const Issues = () => {
       setInfo(repoInfo.data.info);
     }
     if (repoIssues.isSuccess && !repoIssues.isLoading && repoIssues.data) {
-      // @ts-ignore
       setIssuesStore(repoIssues.data);
     }
   });
