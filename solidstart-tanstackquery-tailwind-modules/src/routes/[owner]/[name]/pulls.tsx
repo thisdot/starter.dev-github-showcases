@@ -8,7 +8,6 @@ import { RepoHeader } from '~/components/RepoHeader';
 import getRepoPullRequests from '~/services/get-pull-request';
 import {
   PullRequestsStore,
-  pullRequestsStore,
   setPullRequestsStore,
 } from '~/stores/pull-requests-store';
 import { selectedLabel, sortBy } from '~/components/PRAndIssuesHeader';
@@ -60,10 +59,7 @@ const Issues = () => {
         name: params.name,
         orderBy: parseSortParams(SORT_OPTIONS, sortBy(), 0),
         direction: parseSortParams(SORT_OPTIONS, sortBy(), 1),
-        filterBy: {
-          // @ts-ignore
-          labels: selectedLabel() ? [selectedLabel()] : undefined,
-        },
+        labels: selectedLabel() ? [selectedLabel()] : undefined,
         before: searchParams.before,
         after: searchParams.after,
         first:

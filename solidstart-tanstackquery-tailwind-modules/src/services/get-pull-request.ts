@@ -1,4 +1,4 @@
-import { PULL_REQUEST_QUERY } from './queries/pull-request';
+import { REPO_PULL_REQUESTS } from './queries/pull-request';
 import { useAuth } from '../auth';
 import FetchApi, { ApiProps } from './api';
 import { GITHUB_GRAPHQL } from '../utils/constants';
@@ -14,14 +14,7 @@ type PullRequestVariables = {
   name: string;
   orderBy?: string;
   direction?: string;
-  filterBy?: {
-    assignee?: string;
-    createdBy?: string;
-    mentioned?: string;
-    milestone?: string;
-    labels?: string[];
-    states?: 'OPEN' | 'CLOSED';
-  };
+  labels?: (string | undefined)[];
   before?: string;
   after?: string;
   first?: number;
@@ -92,7 +85,7 @@ const getRepoPullRequests = async (variables: PullRequestVariables) => {
   const { authStore } = useAuth();
   const data: ApiProps<PullRequestVariables> = {
     url: `${GITHUB_GRAPHQL}`,
-    query: PULL_REQUEST_QUERY,
+    query: REPO_PULL_REQUESTS,
     variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
