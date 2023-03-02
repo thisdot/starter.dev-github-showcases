@@ -1,4 +1,4 @@
-import { For, Show, splitProps } from 'solid-js';
+import { For, Show } from 'solid-js';
 import { format } from 'date-fns';
 import cn from 'classnames';
 import {
@@ -9,23 +9,19 @@ import {
   CommentIcon,
   ClosedIssueIcon,
 } from '../Icons';
-import { Issue, IssueNodeProps } from '~/types/issues-type';
-import { PullRequest, PullRequestNodeProps } from '~/types/pull-request-type';
+import { Issue } from '~/types/issues-type';
+import { PullRequest } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
 
 interface PRAndIssuesListItemProps {
-  issue?: Issue;
-  pullRequest?: PullRequest;
+  type: 'issue' | 'pr';
+  item: Issue | PullRequest;
 }
 
 const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
-  const [local] = splitProps(props, ['issue', 'pullRequest']);
+  // const item = props.issue || props.pullRequest;
 
-  const item = local.issue || local.pullRequest;
-
-  console.log(item);
-
-  const type = local.issue ? 'issue' : 'pr';
+  // const type = props.issue ? 'issue' : 'pr';
 
   return (
     <div class="flex relative items-baseline border-y border-gray-300 pt-2 pb-3">
@@ -37,28 +33,33 @@ const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
         <div class="flex-shrink-0 pl-4 translate-y-1">
           <span
             class={cn({
-              'text-green-600': item?.state === 'OPEN',
-              'text-gray-500': item?.state !== 'OPEN' && type === 'issue',
+              'text-green-600': props.item?.state === 'OPEN',
+              'text-gray-500':
+                props.item?.state !== 'OPEN' && props.type === 'issue',
               'text-purple-600':
-                (item?.state !== 'OPEN' && item?.state === 'MERGED') ||
-                (item?.state === 'CLOSED' && type === 'issue'),
-              'text-red-600': type === 'pr' && item?.state === 'CLOSED',
+                (props.item?.state !== 'OPEN' &&
+                  props.item?.state === 'MERGED') ||
+                (props.item?.state === 'CLOSED' && props.type === 'issue'),
+              'text-red-600':
+                props.type === 'pr' && props.item?.state === 'CLOSED',
             })}
           >
-            <Show when={item?.state === 'OPEN' && type === 'issue'}>
+            <Show when={props.item?.state === 'OPEN' && props.type === 'issue'}>
               <IssuesIcon class="w-5 h-5" />
             </Show>
-            <Show when={item?.state === 'CLOSED' && type === 'issue'}>
+            <Show
+              when={props.item?.state === 'CLOSED' && props.type === 'issue'}
+            >
               <ClosedIssueIcon class="w-5 h-5" />
             </Show>
 
-            <Show when={item?.state === 'OPEN' && type === 'pr'}>
+            <Show when={props.item?.state === 'OPEN' && props.type === 'pr'}>
               <PullRequestIcon class="w-5 h-5" />
             </Show>
-            <Show when={item?.state === 'MERGED'}>
+            <Show when={props.item?.state === 'MERGED'}>
               <MergedPrIcon class="w-5 h-5" />
             </Show>
-            <Show when={item?.state === 'CLOSED' && type === 'pr'}>
+            <Show when={props.item?.state === 'CLOSED' && props.type === 'pr'}>
               <ClosedPrIcon class="w-5 h-5" />
             </Show>
           </span>
@@ -70,12 +71,12 @@ const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
           <a
             class="align-middle no-underline markdown-title font-semibold"
             target="_blank"
-            href={item?.url}
+            href={props.item?.url}
           >
-            {item?.title}
+            {props.item?.title}
           </a>
 
-          <For each={item?.labels as Label[]}>
+          <For each={props.item?.labels as Label[]}>
             {(label) => (
               <span
                 class={cn(
@@ -91,22 +92,24 @@ const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
         </div>
         <div class="flex mt-1 text-sm text-gray-500">
           <span class="opened-by">
-            #{item?.number}
+            #{props.item?.number}
             {' by '}
-            <a href="#">{item?.login}</a> was{' '}
-            {item?.state === 'OPEN' ? 'open' : 'closed'} on{' '}
-            {format(new Date(item?.createdAt as string), 'MMM d, yyyy')}
+            <a href="#">{props.item?.login}</a> was{' '}
+            {props.item?.state === 'OPEN' ? 'open' : 'closed'} on{' '}
+            {format(new Date(props.item?.createdAt as string), 'MMM d, yyyy')}
           </span>
         </div>
       </div>
 
       <div class="flex-shrink-0 w-1/5 text-right pr-3 flex-nowrap flex">
         <span class="ml-2 pt-1 flex-1 flex-shrink-0">
-          <Show when={(item?.commentCount as number) > 0}>
+          <Show when={(props.item?.commentCount as number) > 0}>
             <a href="#" class="">
               <div class="flex items-center justify-end">
                 <CommentIcon class="w-5 h-5" />
-                <span class="ml-1 text-sm font-bold">{item?.commentCount}</span>
+                <span class="ml-1 text-sm font-bold">
+                  {props.item?.commentCount}
+                </span>
               </div>
             </a>
           </Show>

@@ -1,12 +1,10 @@
-/*eslint-disable @typescript-eslint/no-explicit-any */
-import { LabelProps } from './issues-type';
 import { Label } from './label-type';
 
 export interface PullRequest {
   login: string;
   commentCount: number;
   labelCount: number;
-  labels: LabelProps[];
+  labels: Label[];
   title: string;
   number: number;
   createdAt: string;
@@ -39,7 +37,7 @@ export type RepoPullRequestsQuery = {
     };
     labels: {
       totalCount: number;
-      nodes: LabelProps[];
+      nodes: Label[];
     };
   };
 };

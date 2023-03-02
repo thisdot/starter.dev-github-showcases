@@ -4,8 +4,8 @@ import FilterDropdown from '../FilterDropDown/FilterDropdown';
 import { SORT_OPTIONS } from '../../utils/constants';
 import { createMemo, createSignal, Show } from 'solid-js';
 import { getSelectedMilestoneId } from './utils';
-import { issuesStore } from '~/stores/issues-store';
-import { pullRequestsStore } from '~/stores/pull-requests-store';
+import { issues } from '~/routes/[owner]/[name]/issues';
+import { pullRequests } from '~/routes/[owner]/[name]/pulls';
 
 const [activeTab, setActiveTab] = createSignal<'OPEN' | 'CLOSED'>('OPEN');
 const [sortBy, setSortBy] = createSignal('Newest');
@@ -37,21 +37,18 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
   const labelOptions = createMemo<string[]>(
     () =>
       (props.type === 'issue'
-        ? issuesStore().labels?.map((label) => label.name)
-        : pullRequestsStore().labels?.map((label) => label.name)) || []
+        ? issues().labels?.map((label) => label.name)
+        : pullRequests().labels?.map((label) => label.name)) || []
   );
   const milestoneOptions = createMemo<string[]>(
-    () => issuesStore().milestones?.map((milestone) => milestone.title) || []
+    () => issues().milestones?.map((milestone) => milestone.title) || []
   );
   const selectLabel = (value: string) =>
     setSelectedLabel(selectedLabel() !== value ? value : undefined);
   const selectMilestone = (value: string) => {
     setSelectedMilestone(selectedMilestone() !== value ? value : undefined);
     setMilestoneId(
-      getSelectedMilestoneId(
-        issuesStore().milestones || [],
-        selectedMilestone()
-      )
+      getSelectedMilestoneId(issues().milestones || [], selectedMilestone())
     );
   };
 
@@ -72,8 +69,8 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
           </Show>
           <span>
             {props.type === 'pr'
-              ? pullRequestsStore().openPullRequests?.totalCount || 0
-              : issuesStore().openIssues?.totalCount || 0}
+              ? pullRequests().openPullRequests?.totalCount || 0
+              : issues().openIssues?.totalCount || 0}
           </span>
           Open
         </button>
@@ -86,8 +83,8 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
           <CheckIcon class="w-4 h-4" />
           <span>
             {props.type === 'pr'
-              ? pullRequestsStore().closedPullRequests?.totalCount || 0
-              : issuesStore().closedIssues?.totalCount || 0}
+              ? pullRequests().closedPullRequests?.totalCount || 0
+              : issues().closedIssues?.totalCount || 0}
           </span>
           Closed
         </button>
@@ -104,13 +101,7 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
             />
           </div>
         </Show>
-        <Show
-          when={
-            props.type === 'issue' &&
-            milestoneOptions &&
-            milestoneOptions()?.length !== 0
-          }
-        >
+        <Show when={props.type === 'issue' && milestoneOptions()?.length !== 0}>
           <div>
             <FilterDropdown
               name="Milestone"

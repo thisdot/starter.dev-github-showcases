@@ -14,7 +14,7 @@ const PRAndIssuesData = (props: PRAndIssuesDataProps) => {
   return (
     <>
       <For each={activeTab() === 'OPEN' ? props.openItems : props.closedItems}>
-        {(issue) => <PRAndIssuesListItem issue={issue} />}
+        {(item) => <PRAndIssuesListItem item={item} type={props.type} />}
       </For>
 
       <Show

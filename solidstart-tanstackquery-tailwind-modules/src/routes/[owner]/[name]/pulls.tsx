@@ -6,16 +6,44 @@ import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
 import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '~/components/RepoHeader';
 import getRepoPullRequests from '~/services/get-pull-request';
-import {
-  PullRequestsStore,
-  setPullRequestsStore,
-} from '~/stores/pull-requests-store';
 import { selectedLabel, sortBy } from '~/components/PRAndIssuesHeader';
 import { parseSortParams } from '~/components/RepoIssues/utils';
 import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '~/utils/constants';
 import RepoPullRequests from '~/components/RepoPullRequests';
+import { PageInfo, PullRequest } from '~/types/pull-request-type';
+import { Label } from '~/types/label-type';
 
-const Issues = () => {
+export type PullRequestsSignal = {
+  openPullRequests: {
+    pullRequests: PullRequest[];
+    totalCount: number;
+    pageInfo: PageInfo;
+  };
+  closedPullRequests: {
+    pullRequests: PullRequest[];
+    totalCount: number;
+    pageInfo: PageInfo;
+  };
+  labels: Label[];
+};
+
+const [pullRequests, setPullRequests] = createSignal<PullRequestsSignal>({
+  openPullRequests: {
+    pullRequests: [],
+    totalCount: 0,
+    pageInfo: { hasNextPage: false, hasPreviousPage: false },
+  },
+  closedPullRequests: {
+    pullRequests: [],
+    totalCount: 0,
+    pageInfo: { hasNextPage: false, hasPreviousPage: false },
+  },
+  labels: [],
+});
+
+export { pullRequests, setPullRequests };
+
+const PullRequests = () => {
   const params = useParams();
   const [searchParams] = useSearchParams();
   const [info, setInfo] = createSignal<Info>({
@@ -79,7 +107,7 @@ const Issues = () => {
       !repoPullrequests.isLoading &&
       repoPullrequests.data
     ) {
-      setPullRequestsStore(repoPullrequests.data as PullRequestsStore);
+      setPullRequests(repoPullrequests.data as PullRequestsSignal);
     }
   });
 
@@ -117,4 +145,4 @@ const Issues = () => {
   );
 };
 
-export default Issues;
+export default PullRequests;

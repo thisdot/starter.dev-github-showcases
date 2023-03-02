@@ -6,7 +6,6 @@ import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
 import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '~/components/RepoHeader';
 import getIssues from '~/services/get-issues';
-import { setIssuesStore } from '~/stores/issues-store';
 import RepoIssues from '~/components/RepoIssues';
 import {
   milestoneId,
@@ -16,6 +15,44 @@ import {
 } from '~/components/PRAndIssuesHeader';
 import { parseSortParams } from '~/components/RepoIssues/utils';
 import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '~/utils/constants';
+import {
+  Issue,
+  LabelProps,
+  MilestoneProps,
+  PageInfo,
+} from '~/types/issues-type';
+
+export type IssuesSignal = {
+  openIssues: {
+    issues: Issue[];
+    totalCount: number;
+    pageInfo: PageInfo;
+  };
+  closedIssues: {
+    issues: Issue[];
+    totalCount: number;
+    pageInfo: PageInfo;
+  };
+  milestones: MilestoneProps[];
+  labels: LabelProps[];
+};
+
+const [issues, setIssues] = createSignal<IssuesSignal>({
+  openIssues: {
+    issues: [],
+    totalCount: 0,
+    pageInfo: { hasNextPage: false, hasPreviousPage: false },
+  },
+  closedIssues: {
+    issues: [],
+    totalCount: 0,
+    pageInfo: { hasNextPage: false, hasPreviousPage: false },
+  },
+  milestones: [],
+  labels: [],
+});
+
+export { issues, setIssues };
 
 const Issues = () => {
   const params = useParams();
@@ -81,7 +118,7 @@ const Issues = () => {
       setInfo(repoInfo.data.info);
     }
     if (repoIssues.isSuccess && !repoIssues.isLoading && repoIssues.data) {
-      setIssuesStore(repoIssues.data);
+      setIssues(repoIssues.data);
     }
   });
 

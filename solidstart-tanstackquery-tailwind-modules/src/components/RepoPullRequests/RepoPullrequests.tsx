@@ -2,7 +2,6 @@ import { useParams } from '@solidjs/router';
 import PRAndIssuesData from '../PRAndIssuesData';
 import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination';
-import { pullRequestsStore } from '~/stores/pull-requests-store';
 import PRAndIssuesHeader, {
   activeTab,
   selectedLabel,
@@ -12,6 +11,7 @@ import PRAndIssuesHeader, {
   sortBy,
 } from '../PRAndIssuesHeader';
 import { Match, Show, Switch } from 'solid-js';
+import { pullRequests } from '~/routes/[owner]/[name]/pulls';
 
 const RepoPullRequests = () => {
   const params = useParams();
@@ -39,35 +39,35 @@ const RepoPullRequests = () => {
         <PRAndIssuesHeader type="pr" />
         <PRAndIssuesData
           type="pr"
-          openItems={pullRequestsStore().openPullRequests.pullRequests}
-          closedItems={pullRequestsStore().closedPullRequests.pullRequests}
+          openItems={pullRequests().openPullRequests.pullRequests}
+          closedItems={pullRequests().closedPullRequests.pullRequests}
         />
       </div>
       <Show when={activeTab() === 'OPEN'}>
         <Switch>
           <Match
             when={
-              pullRequestsStore().openPullRequests?.pageInfo?.hasNextPage ||
-              pullRequestsStore().openPullRequests?.pageInfo?.hasPreviousPage
+              pullRequests().openPullRequests?.pageInfo?.hasNextPage ||
+              pullRequests().openPullRequests?.pageInfo?.hasPreviousPage
             }
           >
             <Pagination
               tab={activeTab()}
-              pageInfo={pullRequestsStore().openPullRequests.pageInfo}
+              pageInfo={pullRequests().openPullRequests.pageInfo}
               owner={`${params.owner}/${params.name}/issues`}
             />
           </Match>
 
           <Match
             when={
-              pullRequestsStore().closedPullRequests?.pageInfo?.hasNextPage ||
-              pullRequestsStore().closedPullRequests?.pageInfo?.hasPreviousPage
+              pullRequests().closedPullRequests?.pageInfo?.hasNextPage ||
+              pullRequests().closedPullRequests?.pageInfo?.hasPreviousPage
             }
           >
             {' '}
             <Pagination
               tab={activeTab()}
-              pageInfo={pullRequestsStore().closedPullRequests.pageInfo}
+              pageInfo={pullRequests().closedPullRequests.pageInfo}
               owner={`${params.owner}/${params.name}/pulls`}
             />
           </Match>

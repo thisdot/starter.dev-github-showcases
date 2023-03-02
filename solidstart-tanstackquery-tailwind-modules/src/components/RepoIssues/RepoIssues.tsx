@@ -2,7 +2,7 @@ import { useParams } from '@solidjs/router';
 import PRAndIssuesData from '../PRAndIssuesData';
 import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination';
-import { issuesStore } from '~/stores/issues-store';
+import { issues } from '~/routes/[owner]/[name]/issues';
 import PRAndIssuesHeader, {
   activeTab,
   selectedLabel,
@@ -39,8 +39,8 @@ const RepoIssues = () => {
         <PRAndIssuesHeader type="issue" />
         <PRAndIssuesData
           type="issue"
-          openItems={issuesStore().openIssues.issues}
-          closedItems={issuesStore().closedIssues.issues}
+          openItems={issues().openIssues.issues}
+          closedItems={issues().closedIssues.issues}
         />
       </div>
 
@@ -48,27 +48,27 @@ const RepoIssues = () => {
         <Switch>
           <Match
             when={
-              issuesStore().openIssues?.pageInfo?.hasNextPage ||
-              issuesStore().openIssues?.pageInfo?.hasPreviousPage
+              issues().openIssues?.pageInfo?.hasNextPage ||
+              issues().openIssues?.pageInfo?.hasPreviousPage
             }
           >
             <Pagination
               tab={activeTab()}
-              pageInfo={issuesStore().openIssues.pageInfo}
+              pageInfo={issues().openIssues.pageInfo}
               owner={`${params.owner}/${params.name}/issues`}
             />
           </Match>
 
           <Match
             when={
-              issuesStore().closedIssues?.pageInfo?.hasNextPage ||
-              issuesStore().closedIssues?.pageInfo?.hasPreviousPage
+              issues().closedIssues?.pageInfo?.hasNextPage ||
+              issues().closedIssues?.pageInfo?.hasPreviousPage
             }
           >
             {' '}
             <Pagination
               tab={activeTab()}
-              pageInfo={issuesStore().closedIssues.pageInfo}
+              pageInfo={issues().closedIssues.pageInfo}
               owner={`${params.owner}/${params.name}/issues`}
             />
           </Match>
