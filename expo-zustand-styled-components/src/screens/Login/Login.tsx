@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import { View } from 'react-native';
 import { AuthStackScreenProps } from '../../../types';
-import { SafeAreaViewStyled, LoginButtonStyled, LoginButtonTextStyled } from './Login.styles';
+import {
+  SafeAreaViewStyled,
+  LoginContainerStyled,
+  LoginButtonStyled,
+  LoginButtonTextStyled,
+} from './Login.styles';
 import * as WebBrowser from 'expo-web-browser';
-import { A } from '@expo/html-elements';
+import { useTokenStore } from '../../stores/token';
 
 WebBrowser.maybeCompleteAuthSession();
 const Login = ({ navigation }: AuthStackScreenProps<'Login'>) => {
   const [result, setResult] = useState(null);
   const _handlePressButtonAsync = async () => {
     let result = await WebBrowser.openAuthSessionAsync(
-      'https://api.starter.dev/.netlify/functions/server/api/auth/signin?redirect_url=http://localhost:19006'
+      'http://localhost:9999/.netlify/functions/signin?redirect_url=http://localhost:19006'
     );
-    let token = await WebBrowser.openAuthSessionAsync(
-      'https://api.starter.dev/.netlify/functions/server/api/auth/token'
-    );
-    console.log('token', token);
-    setResult(result);
+
+    if (result.type === 'success') {
+      setResult(result.url);
+      const url = new URL(result.url);
+      const access_token = url.searchParams.get('access_token');
+      useTokenStore.setState({ access_token });
+    }
   };
 
   useEffect(() => {
@@ -25,16 +32,9 @@ const Login = ({ navigation }: AuthStackScreenProps<'Login'>) => {
 
   return (
     <SafeAreaViewStyled>
-      <View>
-        {/* <LoginButtonStyled onPress={_handlePressButtonAsync}>
-          <LoginButtonTextStyled>Sign in with Gitub</LoginButtonTextStyled>
-        </LoginButtonStyled> */}
-        <A href="https://api.starter.dev/.netlify/functions/server/api/auth/signin?redirect_url=http://localhost:19006">
-          <LoginButtonStyled>
-            <LoginButtonTextStyled>Sign in with Gitub</LoginButtonTextStyled>
-          </LoginButtonStyled>
-        </A>
-      </View>
+      <LoginButtonStyled onPress={_handlePressButtonAsync}>
+        <LoginButtonTextStyled>Sign in with Gitub</LoginButtonTextStyled>
+      </LoginButtonStyled>
     </SafeAreaViewStyled>
   );
 };

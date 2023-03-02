@@ -16,17 +16,31 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   const redirect_url = Buffer.from(state, 'base64').toString('ascii');
 
   // exchange the code for an access token
-  const params = new URLSearchParams({
+  const tokenParams = new URLSearchParams({
     client_id: process.env.GITHUB_CLIENT_ID ?? '',
     client_secret: process.env.GITHUB_CLIENT_SECRET ?? '',
     code,
-    redirect_uri: `${process.env.SERVER_BASE_URL}/api/auth/signin/callback`,
+    redirect_uri: `${process.env.SERVER_BASE_URL}/.netlify/functions/callback`,
+  });
+
+  const response = await fetch('https://github.com/login/oauth/access_token', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+    },
+    body: tokenParams,
+  });
+
+  const data = await response.json();
+
+  const redirectParams = new URLSearchParams({
+    access_token: data['access_token'],
   });
 
   return {
     statusCode: 302,
     headers: {
-      Location: '',
+      Location: `${redirect_url}?${redirectParams.toString()}`,
     },
   };
 };

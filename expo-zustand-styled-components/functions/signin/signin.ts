@@ -16,7 +16,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
   const params = new URLSearchParams({
     client_id: process.env.GITHUB_CLIENT_ID ?? '',
-    redirect_uri: `${process.env.SERVER_BASE_URL}/api/auth/signin/callback`,
+    redirect_uri: `${process.env.SERVER_BASE_URL}/.netlify/functions/callback`,
     state,
   });
 
