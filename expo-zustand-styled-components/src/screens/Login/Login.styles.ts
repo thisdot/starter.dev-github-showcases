@@ -8,13 +8,6 @@ export const SafeAreaViewStyled = styled.SafeAreaView`
   justify-content: center;
 `;
 
-export const LoginContainerStyled = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
 export const LoginButtonStyled = styled.TouchableOpacity`
   background-color: #000;
   border: 1px solid #fff;

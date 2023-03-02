@@ -1,11 +1,6 @@
 import React from 'react';
 import { AuthStackScreenProps } from '../../../types';
-import {
-  SafeAreaViewStyled,
-  LoginContainerStyled,
-  LoginButtonStyled,
-  LoginButtonTextStyled,
-} from './Login.styles';
+import { SafeAreaViewStyled, LoginButtonStyled, LoginButtonTextStyled } from './Login.styles';
 import * as WebBrowser from 'expo-web-browser';
 import { useTokenStore } from '../../stores/token';
 
