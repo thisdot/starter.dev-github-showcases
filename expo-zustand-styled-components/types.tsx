@@ -18,7 +18,6 @@ declare global {
 
 // #region ROOT
 export type RootStackParamList = {
-  Splash: undefined;
   AuthNavigator: NavigatorScreenParams<AuthStackParamList> | undefined;
   AppNavigator: NavigatorScreenParams<AppStackParamList> | undefined;
 };
