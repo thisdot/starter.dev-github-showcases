@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import React from 'react';
 import { AuthStackScreenProps } from '../../../types';
 import {
   SafeAreaViewStyled,
@@ -12,23 +11,17 @@ import { useTokenStore } from '../../stores/token';
 
 WebBrowser.maybeCompleteAuthSession();
 const Login = ({ navigation }: AuthStackScreenProps<'Login'>) => {
-  const [result, setResult] = useState(null);
   const _handlePressButtonAsync = async () => {
     let result = await WebBrowser.openAuthSessionAsync(
       'http://localhost:9999/.netlify/functions/signin?redirect_url=http://localhost:19006'
     );
 
     if (result.type === 'success') {
-      setResult(result.url);
       const url = new URL(result.url);
       const access_token = url.searchParams.get('access_token');
       useTokenStore.setState({ access_token });
     }
   };
-
-  useEffect(() => {
-    console.log('result');
-  }, [result]);
 
   return (
     <SafeAreaViewStyled>
