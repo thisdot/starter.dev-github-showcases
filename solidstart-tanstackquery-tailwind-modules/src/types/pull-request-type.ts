@@ -20,8 +20,8 @@ export type RepoPullRequestsQuery = {
       pageInfo: {
         hasPreviousPage: boolean;
         hasNextPage: boolean;
-        startCursor?: string | undefined;
-        endCursor?: string | undefined;
+        startCursor?: string;
+        endCursor?: string;
       };
       nodes: PullRequestNodeProps[];
     };
@@ -30,8 +30,8 @@ export type RepoPullRequestsQuery = {
       pageInfo: {
         hasPreviousPage: boolean;
         hasNextPage: boolean;
-        startCursor?: string | undefined;
-        endCursor?: string | undefined;
+        startCursor?: string;
+        endCursor?: string;
       };
       nodes: PullRequestNodeProps[];
     };

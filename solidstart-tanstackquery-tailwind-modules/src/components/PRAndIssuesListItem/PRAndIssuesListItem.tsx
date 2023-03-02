@@ -19,10 +19,6 @@ interface PRAndIssuesListItemProps {
 }
 
 const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
-  // const item = props.issue || props.pullRequest;
-
-  // const type = props.issue ? 'issue' : 'pr';
-
   return (
     <div class="flex relative items-baseline border-y border-gray-300 pt-2 pb-3">
       <div class="flex">
@@ -96,14 +92,14 @@ const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
             {' by '}
             <a href="#">{props.item?.login}</a> was{' '}
             {props.item?.state === 'OPEN' ? 'open' : 'closed'} on{' '}
-            {format(new Date(props.item?.createdAt as string), 'MMM d, yyyy')}
+            {format(new Date(props.item?.createdAt), 'MMM d, yyyy')}
           </span>
         </div>
       </div>
 
       <div class="flex-shrink-0 w-1/5 text-right pr-3 flex-nowrap flex">
         <span class="ml-2 pt-1 flex-1 flex-shrink-0">
-          <Show when={(props.item?.commentCount as number) > 0}>
+          <Show when={props.item?.commentCount > 0}>
             <a href="#" class="">
               <div class="flex items-center justify-end">
                 <CommentIcon class="w-5 h-5" />
