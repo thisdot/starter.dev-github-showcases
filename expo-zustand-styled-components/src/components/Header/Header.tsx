@@ -9,12 +9,7 @@ const Header = () => {
       {/* <Link to="/"> */}
       <GitHubLogo />
       {/* </Link> */}
-      <UserDropdown username={'test'} />
-      {/* <Link
-        to="/login"
-      >
-        <Text>Sign In</Text>
-      </Link> */}
+      <UserDropdown image={'https://reactjs.org/logo-og.png'} />
     </StyledHeader >
   );
 };

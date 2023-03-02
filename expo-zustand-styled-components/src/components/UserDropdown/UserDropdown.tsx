@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { DropdownNav, DropdownBtn, UserDropdownAvatarContainer, UserDropdownAvatarSpan, UserDropdownAvatarImage, IconContainer, UserDropdownMenuItems, UserDropdownMenuItemsPaddingDiv, UserDropdownMenuItemAnchorTag, UserDropdownMenuItemSignoutBtn } from './UserDropdown.styles';
-import { ImageSourcePropType, Text } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
+import { DropdownWrapper, ProfileImage, UserMenu, ListItem } from './UserDropdown.styles';
 
 
 interface IProps {
-  image?: ImageSourcePropType;
+  image: string;
   username?: string;
 }
 
@@ -13,35 +13,19 @@ const UserDropdown = (props: IProps) => {
   const toggleDropdown = () => setOpenDropdown(!openDropdown);
 
   return (
-    <DropdownNav>
-      <DropdownBtn onPress={toggleDropdown}>
-        <UserDropdownAvatarContainer>
-          <UserDropdownAvatarSpan>
-            {props.image && props.username && (
-              <UserDropdownAvatarImage source={props.image} />
-            )}
-          </UserDropdownAvatarSpan>
-        </UserDropdownAvatarContainer>
-        <IconContainer>
-          {/* <DropdownIcon /> */}
-        </IconContainer>
-      </DropdownBtn>
-      {openDropdown ? (
-        <UserDropdownMenuItems>
-          <UserDropdownMenuItemsPaddingDiv>
-            <UserDropdownMenuItemAnchorTag>
-              {/* <Link to="/"> */}
-              <Text>Profile</Text>
-              {/* </Link> */}
-            </UserDropdownMenuItemAnchorTag>
-            <UserDropdownMenuItemSignoutBtn onPress={() => console.log("press")}>
-              <Text>Sign out</Text>
-            </UserDropdownMenuItemSignoutBtn>
-          </UserDropdownMenuItemsPaddingDiv>
-        </UserDropdownMenuItems>
-      ) : null
-      }
-    </DropdownNav >
+    <DropdownWrapper>
+      <TouchableOpacity testID='profile-image' onPress={() => toggleDropdown()}>
+        <ProfileImage source={{ uri: props.image }} />
+      </TouchableOpacity>
+      {openDropdown && <UserMenu>
+        <ListItem>
+          <Text>Profile</Text>
+        </ListItem>
+        <ListItem>
+          <Text>Sign Out</Text>
+        </ListItem>
+      </UserMenu>}
+    </DropdownWrapper>
   );
 };
 
