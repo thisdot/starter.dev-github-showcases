@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { DropdownWrapper, ProfileImage, UserMenu, ListItem } from './UserDropdown.styles';
+import { Link } from '@react-navigation/native';
 
 
 interface IProps {
@@ -19,7 +20,9 @@ const UserDropdown = (props: IProps) => {
       </TouchableOpacity>
       {openDropdown && <UserMenu>
         <ListItem>
-          <Text>Profile</Text>
+          <Link to='/profile'>
+            <Text>Profile</Text>
+          </Link>
         </ListItem>
         <ListItem>
           <Text>Sign Out</Text>
