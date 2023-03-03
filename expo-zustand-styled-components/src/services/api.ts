@@ -1,22 +1,22 @@
+import { useAuthStore } from '../hooks/stores';
+import { GITHUB_GRAPHQL } from '../utils/constants';
+
+
 export type ApiProps<VariablesType> = {
-  url: string;
   query: string | null;
   variables?: VariablesType;
-  headersOptions: Record<string, string>;
 };
 
 const FetchApi = async <VariablesType>({
-  url,
   query,
   variables,
-  headersOptions,
 }: ApiProps<VariablesType>) => {
   return (
     (await new Promise((resolve, reject) => {
-      fetch(url, {
+      fetch(`${GITHUB_GRAPHQL}`, {
         method: 'POST',
         headers: {
-          ...headersOptions,
+          authorization: `Bearer ${useAuthStore.getState().token}`,
           Accept: 'application/vnd.github+json',
           'Content-Type': 'application/json',
         },
