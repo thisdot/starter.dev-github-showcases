@@ -17,3 +17,12 @@ export interface OrgRepoInfo {
     };
   };
 }
+
+export type OrgReposVariable = {
+  organization: string;
+  afterCursor: string;
+  beforeCursor: string;
+  orderBy: { field: string; direction: string };
+  first: number;
+  last?: number;
+};

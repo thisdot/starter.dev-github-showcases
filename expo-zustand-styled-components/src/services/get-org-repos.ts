@@ -1,16 +1,7 @@
 import FetchApi, { ApiProps } from './api';
 import { ORGANIZATION_REPOS_QUERY } from './queries/org-repos';
-import { OrgRepoInfo } from '../types/org-repos';
+import { OrgRepoInfo, OrgReposVariable } from '../types/org-repos';
 import { Repo } from '../types/user-repos-type';
-
-export type OrgReposVariable = {
-  organization: string;
-  afterCursor: string;
-  beforeCursor: string;
-  orderBy: { field: string; direction: string };
-  first: number;
-  last?: number;
-};
 
 type Response = {
   data: OrgRepoInfo;
