@@ -2,8 +2,9 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from "zustand/middleware"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
-import getOrgRepos, { OrgReposVariable } from '../../services/get-org-repos';
+import getOrgRepos from '../../services/get-org-repos';
 import { PageInfo, Repo } from '../../types/user-repos-type';
+import { OrgReposVariable } from '../../types/org-repos';
 
 interface IOrgReposStore {
   error?: string;
