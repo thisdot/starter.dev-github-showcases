@@ -1,5 +1,6 @@
-import { createResource, createSignal, createEffect } from 'solid-js';
-import { useLocation, useParams } from '@solidjs/router';
+import { batch, createEffect, createResource, on, Show } from 'solid-js';
+import { useParams, useSearchParams } from '@solidjs/router';
+
 import { PRAndIssuesData } from '../PRAndIssuesData/PRAndIssuesData';
 import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
 import { parseSortParams } from './utils';
@@ -8,10 +9,11 @@ import getIssues from '../../services/get-issues';
 import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination';
 import { PRAndIssueLoaderSkeleton } from '../PRAndIssueLoaderSkeleton';
+import { createStore } from 'solid-js/store';
 
 const RepoIssues = () => {
   const params = useParams();
-  const location = useLocation();
+  const [query] = useSearchParams();
   const {
     tabActive,
     sortBy,
@@ -23,11 +25,6 @@ const RepoIssues = () => {
     milestoneId,
   } = usePrAndIssuesContext();
 
-  const [data, setData] = createSignal([]);
-  const [openCount, setOpenCount] = createSignal();
-  const [closedCount, setClosedCount] = createSignal();
-  const [pageInfo, setPageInfo] = createSignal();
-
   const fetchParameters = () => ({
     owner: params.owner,
     name: params.name,
@@ -37,72 +34,71 @@ const RepoIssues = () => {
       labels: selectedLabel() ? [selectedLabel()] : undefined,
       milestone: selectedMilestone() ? milestoneId() : undefined,
     },
-    before:
-      typeof location.query.before === 'string'
-        ? location.query.before
-        : undefined,
-    after:
-      typeof location.query.after === 'string'
-        ? location.query.after
-        : undefined,
-    first:
-      location.query.after || !location.query.before
-        ? DEFAULT_PAGE_SIZE
-        : undefined,
-    last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+    before: query.before,
+    after: query.after,
+    first: query.after || !query.before ? DEFAULT_PAGE_SIZE : undefined,
+    last: query.before ? DEFAULT_PAGE_SIZE : undefined,
   });
 
-  const [resp] = createResource(fetchParameters, () =>
-    getIssues(fetchParameters())
+  const [repo] = createResource(fetchParameters, getIssues, {
+    storage() {
+      const [store, setStore] = createStore({
+        labels: [],
+        milestones: [],
+        get type() {
+          return tabActive() === 'open' ? 'openIssues' : 'closedIssues';
+        },
+        get issues() {
+          return this[this.type].issues;
+        },
+        get pageInfo() {
+          return this[this.type].pageInfo;
+        },
+      });
+      return [() => store, setStore];
+    },
+  });
+
+  createEffect(
+    on(
+      () => [repo().labels, repo().milestones],
+      () =>
+        batch(() => {
+          setLabelOpt(repo().labels);
+          setMilestoneOpt(repo().milestones);
+        }),
+      { defer: true }
+    )
   );
-
-  createEffect(() => {
-    if (resp() && !resp.loading) {
-      setLabelOpt(resp().labels);
-      setMilestoneOpt(resp().milestones);
-      setOpenCount(resp().openIssues.totalCount);
-      setClosedCount(resp().closedIssues.totalCount);
-      setPageInfo(
-        resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].pageInfo
-      );
-      setData(
-        resp()[tabActive() === 'open' ? 'openIssues' : 'closedIssues'].issues
-      );
-    }
-  });
 
   return (
     <div class="md:py-12 max-w-screen-xl mx-auto">
-      {resp.loading ? (
-        <PRAndIssueLoaderSkeleton />
-      ) : (
-        <>
-          {(selectedLabel() || sortBy() !== 'Newest') && (
-            <div
-              class="flex items-center gap-2 text-sm my-4 ml-2 cursor-pointer"
-              onClick={clearSortAndFilter}
-            >
-              <span class="text-white rounded-md bg-gray-500 w-4 h-4">
-                <CloseIcon />
-              </span>
-              Clear filter
-            </div>
-          )}
-          <PRAndIssuesData
-            data={data()}
-            openCount={openCount()}
-            closedCount={closedCount()}
-          />
-          {pageInfo() &&
-            (pageInfo().hasNextPage || pageInfo().hasPreviousPage) && (
-              <Pagination
-                tab={tabActive()}
-                pageInfo={pageInfo()}
-                owner={`${params.owner}/${params.name}/issues`}
-              />
-            )}
-        </>
-      )}
+      <Show when={!repo.loading} fallback={<PRAndIssueLoaderSkeleton />}>
+        <Show when={selectedLabel() || sortBy() !== 'Newest'}>
+          <button
+            type="button"
+            class="flex items-center gap-2 text-sm my-4 ml-2 cursor-pointer"
+            onClick={clearSortAndFilter}
+          >
+            <span class="text-white rounded-md bg-gray-500 w-4 h-4">
+              <CloseIcon />
+            </span>
+            Clear filter
+          </button>
+        </Show>
+
+        <PRAndIssuesData
+          data={repo().issues}
+          openCount={repo().openIssues.totalCount}
+          closedCount={repo().closedIssues.totalCount}
+        />
+
+        <Show
+          when={repo().pageInfo.hasNextPage || repo().pageInfo.hasPreviousPage}
+        >
+          <Pagination pageInfo={repo().pageInfo} />
+        </Show>
+      </Show>
     </div>
   );
 };
