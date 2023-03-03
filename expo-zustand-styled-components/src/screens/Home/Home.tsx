@@ -3,11 +3,12 @@ import { Text, View } from 'react-native';
 
 import { SafeAreaViewStyled } from './Home.styles';
 import { AppStackScreenProps } from '../../../types';
-import { authStore } from '../../stores/auth';
+import { useAuthStore } from '../../stores';
+
 import Button from '../../components/Button';
 
 const Home = ({ navigation }: AppStackScreenProps<'Home'>) => {
-  const { token, logout } = authStore();
+  const { token, logout } = useAuthStore();
 
   return (
     <SafeAreaViewStyled>

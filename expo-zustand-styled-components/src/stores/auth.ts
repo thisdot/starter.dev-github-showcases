@@ -23,7 +23,7 @@ const initialState: IAuthStore = {
   getViewerInfo: async () => null,
 };
 
-export const authStore = create(persist<IAuthStore>((set) => ({
+const useAuthStore = create(persist<IAuthStore>((set) => ({
   ...initialState,
   getViewerInfo: async () => {
     try {
@@ -40,6 +40,8 @@ export const authStore = create(persist<IAuthStore>((set) => ({
   }
 }),
 {
-  name: 'authStore',
+  name: 'useAuthStore',
   storage: createJSONStorage(() => Platform.OS === 'web' ? window.sessionStorage : AsyncStorage),
 }));
+
+export default useAuthStore;

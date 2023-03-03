@@ -13,7 +13,7 @@ import AppNavigator from './app';
 
 import { RootStackParamList } from '../../types';
 import LinkingConfiguration from './LinkingConfiguration';
-import { authStore } from '../stores/auth';
+import { useAuthStore } from '../stores';
 
 export default function Navigation() {
   return (
@@ -30,7 +30,7 @@ export default function Navigation() {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  const { token } = authStore();
+  const { token } = useAuthStore();
   const navigation = useNavigation();
 
   React.useEffect(() => {
