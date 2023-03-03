@@ -3,7 +3,7 @@ import { ORGANIZATION_REPOS_QUERY } from './queries/org-repos';
 import { OrgRepoInfo } from '../types/org-repos';
 import { Repo } from '../types/user-repos-type';
 
-type OrgReposVariable = {
+export type OrgReposVariable = {
   organization: string;
   afterCursor: string;
   beforeCursor: string;
@@ -19,12 +19,8 @@ type Response = {
 const getOrgRepos = async (variables: OrgReposVariable) => {
 
   const data: ApiProps<OrgReposVariable> = {
-    url: ``, // missing url
     query: ORGANIZATION_REPOS_QUERY,
     variables,
-    headersOptions: {
-      authorization: `Bearer `, // missing token
-    },
   };
   const resp = (await FetchApi(data)) as Response;
 
