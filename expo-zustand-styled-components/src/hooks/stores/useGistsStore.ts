@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from "zustand/middleware"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
-import getGists from '../../services/getGists';
+import getGists from '../../services/get-gists';
 
 interface IGistsStore {
   error?: string;
