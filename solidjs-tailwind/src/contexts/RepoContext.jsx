@@ -10,11 +10,11 @@ export function RepoProvider(props) {
     ...params,
     owner: typeof params.owner === 'string' ? params.owner : '',
     name: typeof params.name === 'string' ? params.name : 'name',
-    expression: `HEAD:${params.path ? params.path + '/' : ':'}README.md`,
+    expression: `HEAD:${params.path ? params.path + '/' : ''}README.md`,
   }))(useParams());
 
-  const [info] = createResource(async () => getRepoInfo(params));
-  const [readme] = createResource(async () => getReadme(params));
+  const [info] = createResource(() => getRepoInfo(params));
+  const [readme] = createResource(() => getReadme(params));
 
   return (
     <Show

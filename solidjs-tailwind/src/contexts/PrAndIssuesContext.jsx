@@ -1,4 +1,4 @@
-import { createSignal, createContext, useContext } from 'solid-js';
+import { createContext, createSignal, useContext } from 'solid-js';
 import { useLocation } from '@solidjs/router';
 
 const PrAndIssueContext = createContext();
@@ -41,7 +41,7 @@ export function PrAndIssuesProvider(props) {
 
   return (
     <PrAndIssueContext.Provider value={PrAndIssuesParameters}>
-      <>{props.children}</>
+      {props.children}
     </PrAndIssueContext.Provider>
   );
 }
