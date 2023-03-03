@@ -1,9 +1,10 @@
 import styled from 'styled-components/native';
 
 export const SafeAreaViewStyled = styled.SafeAreaView`
-  height: 95%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  background-color: #000;
+  flex-direction: column;
+  justify-content: center;
 `;
