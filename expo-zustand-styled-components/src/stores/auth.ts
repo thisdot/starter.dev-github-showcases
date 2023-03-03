@@ -4,6 +4,7 @@ import { persist, createJSONStorage } from "zustand/middleware"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { UserProfile, ViewerInfo } from '../types/profile';
+import { Platform } from 'react-native';
 
 interface IAuthStore {
   user?: UserProfile;
@@ -40,5 +41,5 @@ export const authStore = create(persist<IAuthStore>((set) => ({
 }),
 {
   name: 'authStore',
-  storage: createJSONStorage(() => AsyncStorage),
+  storage: createJSONStorage(() => Platform.OS === 'web' ? window.sessionStorage : AsyncStorage),
 }));
