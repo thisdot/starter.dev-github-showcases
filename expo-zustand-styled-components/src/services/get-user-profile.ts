@@ -1,6 +1,6 @@
 import { USER_PROFILE_QUERY } from './queries/user-profile';
-import { Profile } from '../types/user-profile-type';
 import FetchApi, { ApiProps } from './api';
+import { UserProfile } from '../types/user-profile-type';
 
 type UserProfileVariables = {
   username: string;
@@ -8,7 +8,7 @@ type UserProfileVariables = {
 
 type Response = {
   data: {
-    user: Profile;
+    user: UserProfile;
   };
 };
 

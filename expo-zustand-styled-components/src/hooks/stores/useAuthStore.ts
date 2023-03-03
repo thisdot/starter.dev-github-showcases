@@ -3,8 +3,10 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from "zustand/middleware"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { UserProfile, ViewerInfo } from '../../types/profile';
+import { UserProfile, ViewerInfo } from '../../types/user-profile-type';
 import { Platform } from 'react-native';
+import getUserProfile from '../../services/get-user-profile';
+import getViewerProfile from '../../services/get-viewer-info';
 
 interface IAuthStore {
   user?: UserProfile;
@@ -14,6 +16,7 @@ interface IAuthStore {
   isLoading: boolean;
   logout: () => void;
   getViewerInfo: () => Promise<void>;
+  getUserProfileData: () => Promise<void>
 }
 
 const initialState: IAuthStore = {
@@ -21,15 +24,27 @@ const initialState: IAuthStore = {
   isLoading: false,
   logout: async () => null,
   getViewerInfo: async () => null,
+  getUserProfileData: async () => null,
 };
 
-const useAuthStore = create(persist<IAuthStore>((set) => ({
+const useAuthStore = create(persist<IAuthStore>((set, get) => ({
   ...initialState,
   getViewerInfo: async () => {
     try {
       set(() => ({ isLoading: true }));
-      //   call getViewerProfile service
-      //   set(() => ({ isLoading: false, viewer: data }));
+      const data = await getViewerProfile();
+      set(() => ({ isLoading: false, viewer: data }));
+    } catch (err) {
+      set(() => ({ isLoading: false, error: err.message }));
+    }
+  },
+  getUserProfileData: async () => {
+    try {
+      set(() => ({ isLoading: true }));
+      const data = await getUserProfile({
+        username: get().viewer.login
+      })
+      set(() => ({ isLoading: false, user: data }));
     } catch (err) {
       set(() => ({ isLoading: false, error: err.message }));
     }
