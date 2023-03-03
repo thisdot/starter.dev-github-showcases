@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import * as WebBrowser from 'expo-web-browser';
+import { URLSearchParams } from 'react-native-url-polyfill';
 
 import { RootStackScreenProps } from '../../../types';
 import { AUTH_URL } from '../../utils/constants';
@@ -17,8 +18,11 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
     const result = await WebBrowser.openAuthSessionAsync(AUTH_URL);
 
     if (result.type === 'success') {
-      const url = new URL(result.url);
-      const access_token = url.searchParams.get('access_token');
+      // TODO: so expo web has a bug with using react-native-url-polyfill globally
+      // and I resort to using it locally here with the following line of code. 
+      const url = new URLSearchParams(result.url);
+      // TODO: this is a hacky way to get the access_token from the url
+      const access_token = url.toString().split('access_token=')[1];
       authStore.setState({ token: access_token, isLoading: false });
     }
   };
