@@ -1,29 +1,43 @@
-import React from 'react';
-import { AuthStackScreenProps } from '../../../types';
-import { SafeAreaViewStyled, LoginButtonStyled, LoginButtonTextStyled } from './Login.styles';
+import { useEffect } from 'react';
 import * as WebBrowser from 'expo-web-browser';
-import { useTokenStore } from '../../stores/token';
-import { SERVER_BASE_URL, REDIRECT_URI } from '@env';
+
+import { RootStackScreenProps } from '../../../types';
+import { AUTH_URL } from '../../utils/constants';
+import { authStore } from '../../stores/auth';
+import Button from '../../components/Button';
+
+import { SafeAreaViewStyled } from './Login.styles';
 
 WebBrowser.maybeCompleteAuthSession();
-const Login = ({ navigation }: AuthStackScreenProps<'Login'>) => {
+const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
+  const { token, isLoading } = authStore();
+
   const _handlePressButtonAsync = async () => {
-    let result = await WebBrowser.openAuthSessionAsync(
-      `${SERVER_BASE_URL}/.netlify/functions/signin?redirect_url=${REDIRECT_URI}`
-    );
+    authStore.setState({ isLoading: true });
+    const result = await WebBrowser.openAuthSessionAsync(AUTH_URL);
 
     if (result.type === 'success') {
       const url = new URL(result.url);
       const access_token = url.searchParams.get('access_token');
-      useTokenStore.setState({ access_token });
+      authStore.setState({ token: access_token, isLoading: false });
     }
   };
 
+  useEffect(() => {
+    if (token) {
+      navigation.navigate('AppNavigator', { screen: 'Home' });
+    }
+  }, [token]);
+
   return (
     <SafeAreaViewStyled>
-      <LoginButtonStyled onPress={_handlePressButtonAsync}>
-        <LoginButtonTextStyled>Sign in with Gitub</LoginButtonTextStyled>
-      </LoginButtonStyled>
+      <Button
+        primary
+        isLoading={isLoading}
+        title="Sign in with GitHub"
+        loadingText="Loging in..."
+        onPress={_handlePressButtonAsync}
+      />
     </SafeAreaViewStyled>
   );
 };

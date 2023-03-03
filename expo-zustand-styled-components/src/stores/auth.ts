@@ -1,24 +1,29 @@
 // zustand store for everything related to authentication / user profile
 import { create } from 'zustand';
-import { ViewerInfo } from '../types/profile';
-// import services
+import { persist, createJSONStorage } from "zustand/middleware"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { UserProfile, ViewerInfo } from '../types/profile';
+import { Platform } from 'react-native';
 
 interface IAuthStore {
-  //   user?: {}; UserProfile;
+  user?: UserProfile;
   viewer?: ViewerInfo;
   token?: string;
   error?: string;
   isLoading: boolean;
+  logout: () => void;
   getViewerInfo: () => Promise<void>;
 }
 
 const initialState: IAuthStore = {
+  token: undefined,
   isLoading: false,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  getViewerInfo: async () => {},
+  logout: async () => null,
+  getViewerInfo: async () => null,
 };
 
-export const authStore = create<IAuthStore>((set) => ({
+export const authStore = create(persist<IAuthStore>((set) => ({
   ...initialState,
   getViewerInfo: async () => {
     try {
@@ -29,4 +34,12 @@ export const authStore = create<IAuthStore>((set) => ({
       set(() => ({ isLoading: false, error: err.message }));
     }
   },
+  logout: () => {
+    AsyncStorage.clear()
+    set(() => ({ ...initialState }));
+  }
+}),
+{
+  name: 'authStore',
+  storage: createJSONStorage(() => Platform.OS === 'web' ? window.sessionStorage : AsyncStorage),
 }));

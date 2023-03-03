@@ -1,16 +1,26 @@
 import React from 'react';
-import { TouchableOpacityStyled, TextStyled } from './Button.styles';
+import { ActivityIndicator } from 'react-native';
+import { ButtonStyled, ButtonViewStyled, ButtonTextStyled } from './Button.styles';
 
 interface ButtonProps {
   title: string;
-  onPress: () => void;
+  primary?: boolean;
+  disabled?: boolean;
+  onPress?: () => void;
+  isLoading?: boolean;
+  loadingText?: string;
 }
 
-const Button = ({ title, onPress }: ButtonProps) => {
+const Button = ({ title, primary, isLoading, loadingText, ...rest }: ButtonProps) => {
   return (
-    <TouchableOpacityStyled onPress={onPress}>
-      <TextStyled>{title}</TextStyled>
-    </TouchableOpacityStyled>
+    <ButtonStyled {...rest} primary={primary}>
+      <ButtonViewStyled>
+        {isLoading && <ActivityIndicator size="small" color={primary ? "white" : "black"} />}
+        <ButtonTextStyled primary={primary}>
+        {isLoading ? loadingText ?? "Loading..." : title}
+        </ButtonTextStyled>
+      </ButtonViewStyled>
+    </ButtonStyled>
   );
 };
 
