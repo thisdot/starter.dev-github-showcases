@@ -17,7 +17,7 @@ interface IUserReposStore {
 const initialState: IUserReposStore = {
   isLoading: false,
   userRepos: [],
-  getUserRepos: (p) => null,
+  getUserRepos: (p) => p.first as unknown as Promise<void>,
 }
 
 const useUserRepos = create(persist<IUserReposStore>((set) => ({
