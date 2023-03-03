@@ -1,2 +1,2 @@
 // get viewer info service
-export default {}
+export default {};
