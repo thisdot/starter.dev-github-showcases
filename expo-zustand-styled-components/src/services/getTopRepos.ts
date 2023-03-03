@@ -1,22 +1,15 @@
-import FetchApi, { ApiProps } from './api';
-import { GITHUB_GRAPHQL } from '../utils/constants';
+import FetchApi from './api';
 import { TOP_REPOS_QUERY } from './queries/top-repos';
 import { TopRepositories, TopRepository } from '../types/top-repos-type';
-import { useAuthStore } from '../hooks/stores';
 
 type Response = {
   data: TopRepositories;
 };
 
 const getTopRepos = async () => {
-  const data: ApiProps<undefined> = {
-    url: `${GITHUB_GRAPHQL}`,
+  const resp = (await FetchApi({
     query: TOP_REPOS_QUERY,
-    headersOptions: {
-      authorization: `Bearer ${useAuthStore.getState().token}`,
-    },
-  };
-  const resp = (await FetchApi(data)) as Response;
+  })) as Response;
 
   const repos = resp.data?.viewer.topRepositories?.nodes.reduce((acc, repo) => {
     if (!repo) {
