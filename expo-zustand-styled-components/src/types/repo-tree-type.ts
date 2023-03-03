@@ -14,3 +14,10 @@ export interface TreeProps {
   type: string;
   path: string;
 }
+
+
+export type RepoTreeVariables = {
+  owner: string;
+  name: string;
+  expression: string;
+};

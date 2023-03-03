@@ -1,13 +1,6 @@
 import FetchApi from './api';
 import { REPO_README_QUERY } from './queries/repo-readme';
-import { ApiProps } from './api';
-import { RepoReadme } from '../types/repo-readme-type';
-
-type RepoReadmeVariables = {
-  owner: string;
-  name: string;
-  expression: string;
-};
+import { RepoReadme, RepoReadmeVariables } from '../types/repo-readme-type';
 
 type Response = {
   data: {
@@ -15,30 +8,10 @@ type Response = {
   };
 };
 
-/**
- *
- * @param {
- *  variable: {
- *    owner
- *    name
- *    expression
- *  }
- * }
- */
-const getReadme = async (variables: RepoReadmeVariables) => {
-
-  const data: ApiProps<RepoReadmeVariables> = {
-    url: ``, // Missing url
-    query: REPO_README_QUERY,
-    variables,
-    headersOptions: {
-      authorization: `Bearer `, // Missing token
-    },
-  };
-
-  const resp = (await FetchApi(data)) as Response;
+const getRepoReadMe = async (variables: RepoReadmeVariables) => {
+  const resp = (await FetchApi({ query: REPO_README_QUERY, variables })) as Response;
 
   return resp.data.repository?.readme?.text;
 };
 
-export default getReadme;
+export default getRepoReadMe;

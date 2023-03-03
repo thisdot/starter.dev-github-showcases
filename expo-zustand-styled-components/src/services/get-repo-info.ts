@@ -1,11 +1,6 @@
-import FetchApi, { ApiProps } from './api';
+import FetchApi from './api';
 import { REPO_INFO_QUERY } from './queries/repo-info';
-import { Info, RepoInfo, Topics } from '../types/repo-info-type';
-
-type RepoInfoVariables = {
-  owner: string;
-  name: string;
-};
+import { Info, RepoInfo, Topics, RepoInfoVariables } from '../types/repo-info-type';
 
 type Response = {
   data: {
@@ -26,32 +21,13 @@ export function parseTopics(topics: Topics[]) {
   }, [] as string[]);
 }
 
-/**
- *
- * @param {
- *  variable: {
- *    owner
- *    name
- *  }
- * }
- */
-
 const getRepoInfo = async (
   variables: RepoInfoVariables
 ): Promise<{
   branch: string;
   info: Info;
 }> => {
-
-  const data: ApiProps<RepoInfoVariables> = {
-    url: ``, //Missing url
-    query: REPO_INFO_QUERY,
-    variables,
-    headersOptions: {
-      authorization: `Bearer `, //Missing token
-    },
-  };
-  const resp = (await FetchApi(data)) as Response;
+  const resp = (await FetchApi({ query: REPO_INFO_QUERY, variables })) as Response;
   const repository = resp.data?.repository;
   return {
     branch: repository?.defaultBranchRef?.name ?? 'HEAD',

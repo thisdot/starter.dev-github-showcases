@@ -45,3 +45,8 @@ export interface RepoInfo {
     orgAvatarUrl: string;
   };
 }
+
+export type RepoInfoVariables = {
+  owner: string;
+  name: string;
+};
