@@ -1,21 +1,32 @@
-import { PULL_REQUEST_QUERY } from './queries/pull-request';
+import { REPO_PULL_REQUESTS } from './queries/pull-request';
 import { useAuth } from '../auth';
 import FetchApi, { ApiProps } from './api';
 import { GITHUB_GRAPHQL } from '../utils/constants';
-import { PullRequest, RepoPullRequestsQuery } from '~/types/pull-request-type';
+import {
+  PullRequest,
+  PullRequestProps,
+  RepoPullRequestsQuery,
+} from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
+import { LabelProps } from '~/types/issues-type';
 
 type PullRequestVariables = {
   owner: string;
   name: string;
+  orderBy?: string;
+  direction?: string;
+  labels?: (string | undefined)[];
+  before?: string;
+  after?: string;
+  first?: number;
+  last?: number;
 };
 type Response = {
   data: RepoPullRequestsQuery;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function parsePullRequests(connection?: any) {
-  if (!connection) {
+function parsePullRequests(data?: PullRequestProps) {
+  if (!data) {
     return {
       pullRequests: [],
       totalCount: 0,
@@ -23,31 +34,41 @@ function parsePullRequests(connection?: any) {
     };
   }
 
-  const pageInfo = connection.pageInfo;
-  const nodes = connection.nodes || [];
-  const totalCount = connection.totalCount;
-
+  const pageInfo = data.pageInfo;
+  const nodes = data.nodes || [];
+  const totalCount = data.totalCount;
   const pullRequests = nodes.reduce(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (pullRequests: PullRequest[], pullRequest: any) => {
+    (pullRequests: PullRequest[], pullRequest) => {
       if (!pullRequest) {
         return pullRequests;
       }
 
+      const labelNodes: Label[] = pullRequest.labels?.nodes || [];
+      const labels = labelNodes.reduce(
+        (labels: Label[], label) =>
+          label
+            ? [
+                ...labels,
+                {
+                  color: label.color,
+                  name: label.name,
+                },
+              ]
+            : labels,
+        []
+      );
+
       return [
         ...pullRequests,
         {
-          id: pullRequest.id,
           login: pullRequest.author?.login,
           commentCount: pullRequest.comments.totalCount,
           labelCount: pullRequest.labels.totalCount,
-          closed: pullRequest.closed,
-          merged: pullRequest.merged,
+          labels,
           title: pullRequest.title,
           number: pullRequest.number,
           createdAt: pullRequest.createdAt,
           closedAt: pullRequest.closedAt,
-          mergedAt: pullRequest.mergedAt,
           state: pullRequest.state,
           url: pullRequest.url,
         },
@@ -59,11 +80,31 @@ function parsePullRequests(connection?: any) {
   return { pullRequests, totalCount, pageInfo };
 }
 
+function parseLabels(labels: {
+  totalCount: number;
+  nodes: LabelProps[];
+}) {
+  const nodes = labels?.nodes || [];
+  return nodes.reduce((labels: LabelProps[], label: LabelProps) => {
+    if (!label) {
+      return labels;
+    }
+
+    return [
+      ...labels,
+      {
+        color: label.color,
+        name: label.name,
+      },
+    ];
+  }, []);
+}
+
 const getRepoPullRequests = async (variables: PullRequestVariables) => {
   const { authStore } = useAuth();
   const data: ApiProps<PullRequestVariables> = {
     url: `${GITHUB_GRAPHQL}`,
-    query: PULL_REQUEST_QUERY,
+    query: REPO_PULL_REQUESTS,
     variables,
     headersOptions: {
       authorization: `Bearer ${authStore.token}`,
@@ -74,28 +115,17 @@ const getRepoPullRequests = async (variables: PullRequestVariables) => {
   const openPullRequests = parsePullRequests(
     resp.data.repository?.openPullRequests
   );
+
   const closedPullRequests = parsePullRequests(
     resp.data.repository?.closedPullRequests
   );
 
-  const labelMap = [
-    ...closedPullRequests.pullRequests,
-    ...openPullRequests.pullRequests,
-  ].reduce((acc: { [key: string]: Label }, issue: PullRequest) => {
-    const map: { [key: string]: Label } = {};
-    issue.labels.forEach((label) => {
-      map[label.name] = label;
-    });
-    return {
-      ...acc,
-      ...map,
-    };
-  }, {});
+  const labelMap = parseLabels(resp.data.repository?.labels);
 
   return {
     openPullRequests,
     closedPullRequests,
-    labels: Object.values(labelMap) as Label[],
+    labels: labelMap,
   };
 };
 

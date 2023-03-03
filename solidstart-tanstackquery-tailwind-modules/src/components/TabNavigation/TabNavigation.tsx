@@ -3,6 +3,11 @@ import { For, JSXElement, Show } from 'solid-js';
 import cn from 'classnames';
 import styles from './TabNavigation.module.css';
 import { IconProps } from '../Icons/types';
+import {
+  setMilestoneId,
+  setSelectedLabel,
+  setSelectedMilestone,
+} from '../PRAndIssuesHeader';
 
 export type Tab = {
   path: string;
@@ -28,6 +33,13 @@ const TabNavigation = (props: TabNavigationProps) => {
       : otherPaths.every((path: string) => !props.pathname.includes(path));
   };
 
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+    setSelectedLabel(undefined);
+    setSelectedMilestone(undefined);
+    setMilestoneId(undefined);
+  };
+
   return (
     <div class={`${styles.container} ${props.class || ''}`}>
       <nav class={styles.nav} aria-label="Tabs">
@@ -45,6 +57,7 @@ const TabNavigation = (props: TabNavigationProps) => {
                     ? styles.tabActive
                     : styles.tabInactive
                 } ${styles.tab}`}
+                onClick={handleClick}
               >
                 <item.Icon
                   class={cn(

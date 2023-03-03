@@ -2,7 +2,6 @@ import { useParams } from '@solidjs/router';
 import PRAndIssuesData from '../PRAndIssuesData';
 import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination';
-import { issues } from '~/routes/[owner]/[name]/issues';
 import PRAndIssuesHeader, {
   activeTab,
   selectedLabel,
@@ -12,8 +11,9 @@ import PRAndIssuesHeader, {
   sortBy,
 } from '../PRAndIssuesHeader';
 import { Match, Show, Switch } from 'solid-js';
+import { pullRequests } from '~/routes/[owner]/[name]/pulls';
 
-const RepoIssues = () => {
+const RepoPullRequests = () => {
   const params = useParams();
 
   const clearSortAndFilter = () => {
@@ -36,40 +36,39 @@ const RepoIssues = () => {
         </div>
       </Show>
       <div class="border border-gray-300 rounded-lg">
-        <PRAndIssuesHeader type="issue" />
+        <PRAndIssuesHeader type="pr" />
         <PRAndIssuesData
-          type="issue"
-          openItems={issues().openIssues.issues}
-          closedItems={issues().closedIssues.issues}
+          type="pr"
+          openItems={pullRequests().openPullRequests.pullRequests}
+          closedItems={pullRequests().closedPullRequests.pullRequests}
         />
       </div>
-
       <Show when={activeTab() === 'OPEN'}>
         <Switch>
           <Match
             when={
-              issues().openIssues?.pageInfo?.hasNextPage ||
-              issues().openIssues?.pageInfo?.hasPreviousPage
+              pullRequests().openPullRequests?.pageInfo?.hasNextPage ||
+              pullRequests().openPullRequests?.pageInfo?.hasPreviousPage
             }
           >
             <Pagination
               tab={activeTab()}
-              pageInfo={issues().openIssues.pageInfo}
+              pageInfo={pullRequests().openPullRequests.pageInfo}
               owner={`${params.owner}/${params.name}/issues`}
             />
           </Match>
 
           <Match
             when={
-              issues().closedIssues?.pageInfo?.hasNextPage ||
-              issues().closedIssues?.pageInfo?.hasPreviousPage
+              pullRequests().closedPullRequests?.pageInfo?.hasNextPage ||
+              pullRequests().closedPullRequests?.pageInfo?.hasPreviousPage
             }
           >
             {' '}
             <Pagination
               tab={activeTab()}
-              pageInfo={issues().closedIssues.pageInfo}
-              owner={`${params.owner}/${params.name}/issues`}
+              pageInfo={pullRequests().closedPullRequests.pageInfo}
+              owner={`${params.owner}/${params.name}/pulls`}
             />
           </Match>
         </Switch>
@@ -78,4 +77,4 @@ const RepoIssues = () => {
   );
 };
 
-export default RepoIssues;
+export default RepoPullRequests;

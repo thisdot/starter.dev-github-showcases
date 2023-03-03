@@ -82,7 +82,7 @@ export type Variables = {
     createdBy?: string;
     mentioned?: string;
     milestone?: string;
-    labels?: string[];
+    labels?: (string | undefined)[];
     states?: 'OPEN' | 'CLOSED';
   };
   before?: string;

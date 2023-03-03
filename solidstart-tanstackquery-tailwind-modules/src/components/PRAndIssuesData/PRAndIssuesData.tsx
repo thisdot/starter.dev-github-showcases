@@ -1,29 +1,26 @@
 import { For, Show } from 'solid-js';
 import PRAndIssuesListItem from '../PRAndIssuesListItem';
-import PRAndIssuesHeader, { activeTab } from '../PRAndIssuesHeader';
-import { issuesStore } from '~/stores/issues-store';
+import { activeTab } from '../PRAndIssuesHeader';
+import { Issue } from '~/types/issues-type';
+import { PullRequest } from '~/types/pull-request-type';
 
-const PRAndIssuesData = () => {
+interface PRAndIssuesDataProps {
+  type: 'pr' | 'issue';
+  openItems: Issue[] | PullRequest[];
+  closedItems: Issue[] | PullRequest[];
+}
+
+const PRAndIssuesData = (props: PRAndIssuesDataProps) => {
   return (
-    <div class="border border-gray-300 rounded-lg">
-      <PRAndIssuesHeader />
-
-      <For
-        each={
-          activeTab() === 'OPEN'
-            ? issuesStore().openIssues.issues
-            : issuesStore().closedIssues.issues
-        }
-      >
-        {(issue) => <PRAndIssuesListItem {...issue} />}
+    <>
+      <For each={activeTab() === 'OPEN' ? props.openItems : props.closedItems}>
+        {(item) => <PRAndIssuesListItem item={item} type={props.type} />}
       </For>
 
       <Show
         when={
-          (activeTab() === 'OPEN' &&
-            issuesStore().openIssues.issues.length === 0) ||
-          (activeTab() === 'CLOSED' &&
-            issuesStore().closedIssues.issues.length === 0)
+          (activeTab() === 'OPEN' && props.openItems.length === 0) ||
+          (activeTab() === 'CLOSED' && props.closedItems.length === 0)
         }
       >
         <div class="text-center p-3 flex flex-col items-center justify-center">
@@ -33,7 +30,7 @@ const PRAndIssuesData = () => {
           </a>
         </div>
       </Show>
-    </div>
+    </>
   );
 };
 
