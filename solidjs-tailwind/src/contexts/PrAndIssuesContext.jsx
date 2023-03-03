@@ -1,12 +1,16 @@
 import { createContext, createSignal, useContext } from 'solid-js';
-import { useLocation } from '@solidjs/router';
+import { useLocation, useSearchParams } from '@solidjs/router';
 
 const PrAndIssueContext = createContext();
 
 export function PrAndIssuesProvider(props) {
+  const [params, setParams] = useSearchParams();
   const { pathname } = useLocation();
   const type = pathname.includes('pulls') ? 'pr' : 'issue';
-  const [tabActive, setActiveTab] = createSignal('open');
+  const [tabActive, setActiveTab] = [
+    () => params.tab || 'open',
+    (tab) => setParams({ tab }),
+  ];
   const [sortBy, setSortBy] = createSignal('Newest');
   const [selectedLabel, setSelectedLabel] = createSignal(undefined);
   const [selectedMilestone, setSelectedMilestone] = createSignal(undefined);
