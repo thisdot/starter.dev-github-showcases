@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from "zustand/middleware"
+import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import getOrgRepos from '../../services/get-org-repos';
@@ -15,9 +15,9 @@ interface IOrgReposStore {
       name: string;
     };
     pageInfo: PageInfo;
-    repos: Repo[]
+    repos: Repo[];
   };
-  getOrgReposData: (p: OrgReposVariable) => Promise<void>
+  getOrgReposData: (p: OrgReposVariable) => Promise<void>;
 }
 
 const initialState: IOrgReposStore = {
@@ -31,26 +31,32 @@ const initialState: IOrgReposStore = {
       hasNextPage: false,
       hasPreviousPage: false,
     },
-    repos: []
+    repos: [],
   },
-  getOrgReposData: () => null
-}
+  getOrgReposData: () => null,
+};
 
-const useOrgReposStore = create(persist<IOrgReposStore>((set) => ({
-  ...initialState,
-  getOrgReposData: async (payload: OrgReposVariable) => {
-    try {
-      set(() => ({ isLoading: true }));
-      const data = await getOrgRepos(payload)
-      set(() => ({ isLoading: false, orgRepos: data }));
-    } catch (err) {
-      set(() => ({ isLoading: false, error: err.message }));
+const useOrgReposStore = create(
+  persist<IOrgReposStore>(
+    (set) => ({
+      ...initialState,
+      getOrgReposData: async (payload: OrgReposVariable) => {
+        try {
+          set(() => ({ isLoading: true }));
+          const data = await getOrgRepos(payload);
+          set(() => ({ isLoading: false, orgRepos: data }));
+        } catch (err) {
+          set(() => ({ isLoading: false, error: err.message }));
+        }
+      },
+    }),
+    {
+      name: 'useOrgReposStore',
+      storage: createJSONStorage(() =>
+        Platform.OS === 'web' ? window.sessionStorage : AsyncStorage
+      ),
     }
-  },
-}),
-{
-  name: 'useOrgReposStore',
-  storage: createJSONStorage(() => Platform.OS === 'web' ? window.sessionStorage : AsyncStorage),
-}));
+  )
+);
 
 export default useOrgReposStore;

@@ -12,11 +12,11 @@ interface ButtonProps extends React.ComponentProps<typeof ButtonStyled> {
 
 const Button = ({ title, primary, isLoading, loadingText, ...rest }: ButtonProps) => {
   return (
-    <ButtonStyled  {...rest} primary={primary}>
+    <ButtonStyled {...rest} primary={primary}>
       <ButtonViewStyled>
-        {isLoading && <ActivityIndicator size="small" color={primary ? "white" : "black"} />}
+        {isLoading && <ActivityIndicator size="small" color={primary ? 'white' : 'black'} />}
         <ButtonTextStyled primary={primary}>
-        {isLoading ? loadingText ?? "Loading..." : title}
+          {isLoading ? loadingText ?? 'Loading...' : title}
         </ButtonTextStyled>
       </ButtonViewStyled>
     </ButtonStyled>

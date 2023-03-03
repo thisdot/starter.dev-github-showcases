@@ -63,7 +63,7 @@ export const MetaData = styled.View`
   ${flex_row};
   align-items: center;
   margin-top: 8px;
-  flexShrink: 1;
+  flexshrink: 1;
   flex-wrap: wrap;
 `;
 
@@ -97,7 +97,6 @@ export const MetaIcon = styled.View<{ isFirstChild?: boolean }>`
   margin-right: ${({ isFirstChild }) => (isFirstChild ? '0px' : '12px')};
 `;
 
-
 export const Description = styled.Text`
   margin-top: 8px;
-`
+`;

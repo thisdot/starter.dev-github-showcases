@@ -13,7 +13,6 @@ type Response = {
 };
 
 const getUserProfile = async (variables: UserProfileVariables) => {
-
   const data: ApiProps<UserProfileVariables> = {
     query: USER_PROFILE_QUERY,
     variables,

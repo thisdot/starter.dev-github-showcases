@@ -1,16 +1,12 @@
 import { useAuthStore } from '../hooks/stores';
 import { GITHUB_GRAPHQL } from '../utils/constants';
 
-
 export type ApiProps<VariablesType> = {
   query: string | null;
   variables?: VariablesType;
 };
 
-const FetchApi = async <VariablesType>({
-  query,
-  variables,
-}: ApiProps<VariablesType>) => {
+const FetchApi = async <VariablesType>({ query, variables }: ApiProps<VariablesType>) => {
   return (
     (await new Promise((resolve, reject) => {
       fetch(`${GITHUB_GRAPHQL}`, {

@@ -8,7 +8,6 @@ type Response = {
 };
 
 const getOrgRepos = async (variables: OrgReposVariable) => {
-
   const data: ApiProps<OrgReposVariable> = {
     query: ORGANIZATION_REPOS_QUERY,
     variables,

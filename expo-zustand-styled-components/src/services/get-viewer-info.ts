@@ -12,7 +12,6 @@ type Response = {
 };
 
 const getViewerProfile = async () => {
-
   const data: ApiProps<undefined> = {
     query: LOGGEDIN_USER_PROFILE,
   };
