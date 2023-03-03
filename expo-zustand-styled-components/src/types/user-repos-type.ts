@@ -23,6 +23,7 @@ export interface PageInfo {
   hasNextPage: boolean;
   hasPreviousPage: boolean;
 }
+
 export interface UserRepoInfo {
   owner: {
     repositories: {
@@ -31,3 +32,12 @@ export interface UserRepoInfo {
     };
   };
 }
+
+export type UserReposVariables = {
+  username: string;
+  afterCursor?: string;
+  beforeCursor?: string;
+  orderBy: { field: string; direction: string };
+  first: number;
+  last?: number;
+};

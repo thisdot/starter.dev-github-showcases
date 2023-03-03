@@ -1,27 +1,15 @@
 import FetchApi, { ApiProps } from './api';
 import { USER_REPOS_QUERY } from './queries/user-repos';
-import { Repo, UserRepoInfo } from '../types/user-repos-type';
+import { Repo, UserRepoInfo, UserReposVariables } from '../types/user-repos-type';
 
-type UserReposVariables = {
-  username: string;
-  afterCursor: string;
-  beforeCursor: string;
-  orderBy: { field: string; direction: string };
-  first: number;
-  last?: number;
-};
 type Response = {
   data: UserRepoInfo;
 };
 
 const getUserRepos = async (variables: UserReposVariables) => {
   const data: ApiProps<UserReposVariables> = {
-    url: ``, //Missing url
     query: USER_REPOS_QUERY,
     variables,
-    headersOptions: {
-      authorization: `Bearer `, //Missing token
-    },
   };
   const resp = (await FetchApi(data)) as Response;
   const nodes = resp.data?.owner?.repositories?.nodes;
