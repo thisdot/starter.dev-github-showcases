@@ -1,32 +1,14 @@
-import FetchApi, { ApiProps } from './api';
+import FetchApi from './api';
 import { ORGANIZATION_REPOS_QUERY } from './queries/org-repos';
-import { OrgRepoInfo } from '../types/org-repos';
+import { OrgRepoInfo, OrgReposVariable } from '../types/org-repos';
 import { Repo } from '../types/user-repos-type';
-
-type OrgReposVariable = {
-  organization: string;
-  afterCursor: string;
-  beforeCursor: string;
-  orderBy: { field: string; direction: string };
-  first: number;
-  last?: number;
-};
 
 type Response = {
   data: OrgRepoInfo;
 };
 
 const getOrgRepos = async (variables: OrgReposVariable) => {
-
-  const data: ApiProps<OrgReposVariable> = {
-    url: ``, // missing url
-    query: ORGANIZATION_REPOS_QUERY,
-    variables,
-    headersOptions: {
-      authorization: `Bearer `, // missing token
-    },
-  };
-  const resp = (await FetchApi(data)) as Response;
+  const resp = (await FetchApi({ query: ORGANIZATION_REPOS_QUERY, variables })) as Response;
 
   const nodes = resp.data?.organization?.repositories?.nodes;
   const pageInfo = resp.data?.organization?.repositories?.pageInfo;
