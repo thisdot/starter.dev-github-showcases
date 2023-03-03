@@ -1,7 +1,6 @@
 declare module '@env' {
-  export const API_URL: string;
   export const GITHUB_URL: string;
-  export const CLIENT_ID: string;
-  export const CLIENT_SECRET: string;
-  export const REDIRECT_URL: string;
+  export const SERVER_BASE_URL: string;
+  export const WEB_REDIRECT_URI: string;
+  export const MOBILE_REDIRECT_URI: string;
 }

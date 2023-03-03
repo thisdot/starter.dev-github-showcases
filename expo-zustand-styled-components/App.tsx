@@ -14,7 +14,7 @@ export default function App() {
     return (
       // context providers should be placed here
       <SafeAreaProvider>
-          <Navigation />
+        <Navigation />
       </SafeAreaProvider>
     );
   }

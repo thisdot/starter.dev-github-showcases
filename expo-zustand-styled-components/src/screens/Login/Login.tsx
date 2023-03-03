@@ -1,37 +1,28 @@
 import { useEffect } from 'react';
 import * as WebBrowser from 'expo-web-browser';
-import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
-import { CLIENT_ID, REDIRECT_URL } from '@env';
 
 import { RootStackScreenProps } from '../../../types';
-
-import { AUTH_PAYLOAD } from '../../utils/constants';
+import { AUTH_URL } from '../../utils/constants';
 import { authStore } from '../../stores/auth';
+import Button from '../../components/Button';
 
 import { SafeAreaViewStyled } from './Login.styles';
-import Button from '../../components/Button';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
-  const { token, isLoading, getToken } = authStore();
-  const [request, response, promptAsync] = useAuthRequest(
-    {
-      clientId: CLIENT_ID,
-      scopes: ['identity', 'repo', 'gist'],
-      redirectUri: makeRedirectUri({
-        scheme: REDIRECT_URL,
-      }),
-    },
-    AUTH_PAYLOAD
-  );
+  const { token, isLoading } = authStore();
 
-  useEffect(() => {
-    const call = async (code: string) => await getToken(code);
-    if (response?.type === 'success') {
-      call(response.params.code);
+  const _handlePressButtonAsync = async () => {
+    authStore.setState({ isLoading: true });
+    const result = await WebBrowser.openAuthSessionAsync(AUTH_URL);
+
+    if (result.type === 'success') {
+      const url = new URL(result.url);
+      const access_token = url.searchParams.get('access_token');
+      authStore.setState({ token: access_token, isLoading: false });
     }
-  }, [response]);
+  };
 
   useEffect(() => {
     if (token) {
@@ -43,11 +34,10 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
     <SafeAreaViewStyled>
       <Button
         primary
-        disabled={!request}
-        loadingText="Loging in..."
         isLoading={isLoading}
         title="Sign in with GitHub"
-        onPress={() => promptAsync()}
+        loadingText="Loging in..."
+        onPress={() => _handlePressButtonAsync()}
       />
     </SafeAreaViewStyled>
   );

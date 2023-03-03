@@ -1,13 +1,5 @@
-import { API_URL, GITHUB_URL, CLIENT_ID } from '@env';
+import { SERVER_BASE_URL, WEB_REDIRECT_URI, MOBILE_REDIRECT_URI, GITHUB_URL } from '@env';
+import { Platform } from 'react-native';
 
-export const SIGN_IN_BASE_URL = `${API_URL}/auth/signin`;
-export const SIGN_OUT_URL = `${API_URL}/auth/signout`;
-export const GET_TOKEN_URL = `${API_URL}/auth/token`;
-
+export const AUTH_URL = `${SERVER_BASE_URL}/.netlify/functions/signin?redirect_url=${Platform.OS === 'web' ? WEB_REDIRECT_URI : MOBILE_REDIRECT_URI}`;
 export const GITHUB_GRAPHQL = `${GITHUB_URL}/graphql`;
-
-export const AUTH_PAYLOAD = {
-  authorizationEndpoint: 'https://github.com/login/oauth/authorize',
-  tokenEndpoint: 'https://github.com/login/oauth/access_token',
-  revocationEndpoint: `https://github.com/settings/connections/applications/${CLIENT_ID}`,
-};
