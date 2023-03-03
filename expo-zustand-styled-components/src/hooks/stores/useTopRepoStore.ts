@@ -3,7 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
-import getTopRepos from '../../services/get-top-tepos';
+import getTopRepos from '../../services/get-top-repos';
 import { TopRepository } from '../../types/top-repos-type';
 
 interface ITopReposStore {
