@@ -1,6 +1,8 @@
 import { USER_GISTS_QUERY } from './queries/gists';
 import FetchApi, { ApiProps } from './api';
 import { Gists } from '../types/gists-type';
+import { GITHUB_GRAPHQL } from '../utils/constants';
+import { useAuthStore } from '../hooks/stores';
 
 interface Response {
   data: {
@@ -14,14 +16,15 @@ interface Response {
 
 const getGists = async () => {
   const data: ApiProps<undefined> = {
-    url: ``, // Missing URL
+    url: `${GITHUB_GRAPHQL}`, 
     query: USER_GISTS_QUERY,
     headersOptions: {
-      authorization: `Bearer `, //Missing auth key
+      authorization: `Bearer ${useAuthStore.getState().token}`,
     },
   };
 
   const resp = (await FetchApi(data)) as Response;
+
 
   const gists = resp.data?.viewer.gists.nodes?.reduce(
     (acc: Gists[] | { name: string; url: string }[], gist) => {
