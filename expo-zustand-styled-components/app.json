@@ -3,7 +3,7 @@
     "name": "expo-zustand-styled-component",
     "slug": "expo-zustand-styled-component",
     "version": "1.0.0",
-    "scheme": "com.starter.dev",
+    "scheme": "expo-zustand-styled-component",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

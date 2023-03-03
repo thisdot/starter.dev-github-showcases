@@ -9,7 +9,6 @@ import Button from '../../components/Button';
 import { SafeAreaViewStyled } from './Login.styles';
 
 WebBrowser.maybeCompleteAuthSession();
-
 const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
   const { token, isLoading } = authStore();
 
@@ -37,7 +36,7 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
         isLoading={isLoading}
         title="Sign in with GitHub"
         loadingText="Loging in..."
-        onPress={() => _handlePressButtonAsync()}
+        onPress={_handlePressButtonAsync}
       />
     </SafeAreaViewStyled>
   );
