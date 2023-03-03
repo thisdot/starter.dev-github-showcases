@@ -1,7 +1,14 @@
-export const PULL_REQUEST_QUERY = `
+export const REPO_PULL_REQUESTS = `
   query PullRequests($owner: String!, $name: String!, $first: Int, $last: Int, $before: String, $after: String, $labels: [String!], $orderBy: IssueOrderField!, $direction: OrderDirection!) {
     repository(owner: $owner, name: $name) {
-      openPullRequest: pullRequests(first: $first, last: $last, states: [OPEN], after: $after, before: $before, labels: $labels, orderBy:{ field: $orderBy, direction: $direction}) {
+      labels(first: 100) {
+        totalCount
+        nodes {
+          color
+          name
+        }
+      }
+      openPullRequests: pullRequests(first: $first, last: $last, states: [OPEN], after: $after, before: $before, labels: $labels, orderBy:{ field: $orderBy, direction: $direction}) {
         totalCount
         pageInfo {
           endCursor
@@ -32,7 +39,7 @@ export const PULL_REQUEST_QUERY = `
             url
         }
       }
-      closedPullRequest: pullRequests(first: $first, last: $last, states: [CLOSED, MERGED], after: $after, before: $before, labels: $labels, orderBy:{ field: $orderBy, direction: $direction}) {
+      closedPullRequests: pullRequests(first: $first, last: $last, states: [CLOSED, MERGED], after: $after, before: $before, labels: $labels, orderBy:{ field: $orderBy, direction: $direction}) {
         totalCount
         pageInfo {
           endCursor
