@@ -7,9 +7,7 @@ type Response = {
 };
 
 const getTopRepos = async () => {
-  const resp = (await FetchApi({
-    query: TOP_REPOS_QUERY,
-  })) as Response;
+  const resp = (await FetchApi({ query: TOP_REPOS_QUERY })) as Response;
 
   const repos = resp.data?.viewer.topRepositories?.nodes.reduce((acc, repo) => {
     if (!repo) {
