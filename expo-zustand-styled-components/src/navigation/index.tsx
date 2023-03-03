@@ -13,7 +13,7 @@ import AppNavigator from './app';
 
 import { RootStackParamList } from '../../types';
 import LinkingConfiguration from './LinkingConfiguration';
-import { useAuthStore } from '../stores';
+import { useAuthStore } from '../hooks/stores';
 
 export default function Navigation() {
   return (

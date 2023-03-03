@@ -4,7 +4,7 @@ import { URLSearchParams } from 'react-native-url-polyfill';
 
 import { RootStackScreenProps } from '../../../types';
 import { AUTH_URL } from '../../utils/constants';
-import { useAuthStore } from '../../stores';
+import { useAuthStore } from '../../hooks/stores';
 import Button from '../../components/Button';
 
 import { SafeAreaViewStyled } from './Login.styles';

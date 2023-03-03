@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 
 import { SafeAreaViewStyled } from './Home.styles';
 import { AppStackScreenProps } from '../../../types';
-import { useAuthStore } from '../../stores';
+import { useAuthStore } from '../../hooks/stores';
 
 import Button from '../../components/Button';
 
