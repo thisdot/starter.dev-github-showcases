@@ -5,7 +5,7 @@
  */
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
 import AuthNavigator from './auth';
@@ -30,10 +30,10 @@ export default function Navigation() {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  const { token } = useAuthStore();
+  const token = useAuthStore((state) => state.token);
   const navigation = useNavigation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!token) {
       navigation.navigate('AuthNavigator', { screen: 'Login' });
     }
