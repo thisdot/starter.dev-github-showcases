@@ -8,7 +8,7 @@ import { TreeProps } from '../../types/repo-tree-type';
 import { Info } from '../../types/repo-info-type';
 import { TopRepository } from '../../types/top-repos-type';
 
-interface IRepoStore {
+interface IAppStore {
   info?: Info;
   error?: string;
   login?: string;
@@ -38,7 +38,7 @@ interface IRepoStore {
   branches?: { name: string }[];
 }
 
-const initialState: IRepoStore = {
+const initialState: IAppStore = {
   tree: [],
   topRepos: [],
   userRepos: [],
@@ -58,7 +58,7 @@ const initialState: IRepoStore = {
 };
 
 const useAppStore = create(
-  persist<IRepoStore>(() => ({ ...initialState }), {
+  persist<IAppStore>(() => ({ ...initialState }), {
     name: 'useAppStore',
     storage: createJSONStorage(() =>
       Platform.OS === 'web' ? window.sessionStorage : AsyncStorage
