@@ -8,17 +8,13 @@ describe('User dropdown', () => {
   };
 
   it('should mount', () => {
-    const wrapper = render(
-      <UserDropdown {...data} />
-    );
+    const wrapper = render(<UserDropdown {...data} />);
     expect(wrapper).toBeTruthy();
   });
 
   it('should show dropdown options', async () => {
-    const wrapper = render(
-      <UserDropdown {...data} />
-    );
-    fireEvent.press(wrapper.getByTestId('profile-image'))
+    const wrapper = render(<UserDropdown {...data} />);
+    fireEvent.press(wrapper.getByTestId('profile-image'));
     const option = wrapper.getByText('Profile');
     expect(option).toBeDefined();
   });

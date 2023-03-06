@@ -8,8 +8,8 @@ export const DropdownWrapper = styled.View`
 export const ProfileImage = styled.Image`
   width: 32px;
   height: 32px;
-  border-radius: 16px
-`
+  border-radius: 16px;
+`;
 
 export const UserMenu = styled.View`
   position: absolute;
@@ -20,7 +20,7 @@ export const UserMenu = styled.View`
   border-radius: 8px,
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const ListItem = styled.TouchableOpacity`
   height: 60px;
@@ -29,4 +29,4 @@ export const ListItem = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   padding: 8px 16px;
-`
+`;

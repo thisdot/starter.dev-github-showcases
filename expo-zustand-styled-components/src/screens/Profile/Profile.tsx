@@ -6,7 +6,9 @@ import { SafeAreaViewStyled } from './Profile.styles';
 const Profile = ({ navigation }: AppStackScreenProps<'Profile'>) => {
   return (
     <SafeAreaViewStyled>
-      <View><Text>Hello this is profile screen</Text></View>
+      <View>
+        <Text>Hello this is profile screen</Text>
+      </View>
     </SafeAreaViewStyled>
   );
 };

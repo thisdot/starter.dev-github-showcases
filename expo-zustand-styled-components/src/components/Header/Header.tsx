@@ -10,7 +10,7 @@ const Header = () => {
       <GitHubLogo />
       {/* </Link> */}
       <UserDropdown image={'https://reactjs.org/logo-og.png'} />
-    </StyledHeader >
+    </StyledHeader>
   );
 };
 
