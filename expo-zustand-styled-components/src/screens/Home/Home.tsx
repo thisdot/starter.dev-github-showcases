@@ -10,12 +10,6 @@ import Button from '../../components/Button';
 const Home = ({ navigation }: AppStackScreenProps<'Home'>) => {
   const { token, logout } = useAuthStore();
 
-  // useEffect(() => {
-  //   getIssues({
-
-  //   })
-  // }, [])
-
   return (
     <SafeAreaViewStyled>
       <View>

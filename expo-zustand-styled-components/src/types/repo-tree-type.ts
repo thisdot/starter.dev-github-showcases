@@ -15,7 +15,6 @@ export interface TreeProps {
   path: string;
 }
 
-
 export type RepoTreeVariables = {
   owner: string;
   name: string;

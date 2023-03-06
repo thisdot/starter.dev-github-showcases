@@ -21,8 +21,8 @@ interface IAppStore {
   pageInfo?: PageInfo;
   gists?: {
     name: string;
-    url: string
-  }[],
+    url: string;
+  }[];
   file?: {
     byteSize: number;
     text: string;
@@ -39,18 +39,18 @@ interface IAppStore {
   branches?: { name: string }[];
   issues: {
     openIssues: {
-        issues: Issue[];
-        totalCount: number;
-        pageInfo: PageInfo;
+      issues: Issue[];
+      totalCount: number;
+      pageInfo: PageInfo;
     };
     closedIssues: {
-        issues: Issue[];
-        totalCount: number;
-        pageInfo: PageInfo;
+      issues: Issue[];
+      totalCount: number;
+      pageInfo: PageInfo;
     };
     milestones: MilestoneProps[];
     labels: LabelProps[];
-  }
+  };
 }
 
 const initialState: IAppStore = {
@@ -80,12 +80,12 @@ const initialState: IAppStore = {
       },
     },
     closedIssues: {
-        issues: [],
-        totalCount: 0,
-        pageInfo: {
-          hasNextPage: false,
-          hasPreviousPage: false,
-        },
+      issues: [],
+      totalCount: 0,
+      pageInfo: {
+        hasNextPage: false,
+        hasPreviousPage: false,
+      },
     },
     milestones: [],
     labels: [],
