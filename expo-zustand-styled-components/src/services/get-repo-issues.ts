@@ -1,7 +1,6 @@
 import FetchApi from './api';
 import { ISSUES_QUERY } from './queries/issues';
 import {
-  LabelProps,
   MilestoneProps,
   Variables,
   Response,
@@ -9,6 +8,7 @@ import {
   Issue,
 } from '../types/issues-type';
 import { useAppStore } from '../hooks/stores';
+import { Label } from '../types/label-type';
 
 function parseIssues(data: IssueProps) {
   if (!data) {
@@ -28,9 +28,9 @@ function parseIssues(data: IssueProps) {
       return issues;
     }
 
-    const labelNodes: LabelProps[] = issue.labels?.nodes || [];
+    const labelNodes: Label[] = issue.labels?.nodes || [];
     const labels = labelNodes.reduce(
-      (labels: LabelProps[], label) =>
+      (labels: Label[], label) =>
         label
           ? [
               ...labels,
@@ -83,9 +83,9 @@ function parseMilestones(milestones: { nodes: MilestoneProps[] }) {
   }, []);
 }
 
-function parseLabels(labels: { nodes: LabelProps[] }) {
+function parseLabels(labels: { nodes: Label[] }) {
   const nodes = labels?.nodes || [];
-  return nodes.reduce((labels: LabelProps[], label) => {
+  return nodes.reduce((labels: Label[], label) => {
     if (!label) {
       return labels;
     }

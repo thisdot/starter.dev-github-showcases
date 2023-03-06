@@ -7,7 +7,9 @@ import { PageInfo, Repo } from '../../types/user-repos-type';
 import { TreeProps } from '../../types/repo-tree-type';
 import { Info } from '../../types/repo-info-type';
 import { TopRepository } from '../../types/top-repos-type';
-import { Issue, LabelProps, MilestoneProps } from '../../types/issues-type';
+import { Issue, MilestoneProps } from '../../types/issues-type';
+import { Label } from '../../types/label-type';
+import { PullRequest } from '../../types/pull-requests-type';
 
 interface IAppStore {
   info?: Info;
@@ -49,8 +51,21 @@ interface IAppStore {
       pageInfo: PageInfo;
     };
     milestones: MilestoneProps[];
-    labels: LabelProps[];
+    labels: Label[];
   };
+  pullRequests: {
+    openPullRequests: {
+        pullRequests: PullRequest[];
+        totalCount: number;
+        pageInfo: PageInfo;
+    };
+    closedPullRequests: {
+        pullRequests: PullRequest[];
+        totalCount: number;
+        pageInfo: PageInfo;
+    };
+    labels: Label[];
+  }
 }
 
 const initialState: IAppStore = {
@@ -90,6 +105,26 @@ const initialState: IAppStore = {
     milestones: [],
     labels: [],
   },
+  pullRequests: {
+      openPullRequests: {
+          pullRequests: [],
+          totalCount: 0,
+          pageInfo: {
+            hasNextPage: false,
+            hasPreviousPage: false,
+          },
+      },
+      closedPullRequests: {
+          pullRequests: [],
+          totalCount: 0,
+          pageInfo: {
+            hasNextPage: false,
+            hasPreviousPage: false,
+          },
+      },
+      labels: [],
+    }
+  
 };
 
 const useAppStore = create(
