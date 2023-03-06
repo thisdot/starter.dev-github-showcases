@@ -1,4 +1,5 @@
-import FetchApi, { ApiProps } from './api';
+import { useAuthStore } from '../hooks/stores';
+import FetchApi from './api';
 import { LOGGEDIN_USER_PROFILE } from './queries/viewer-info';
 
 type Response = {
@@ -12,13 +13,13 @@ type Response = {
 };
 
 const getViewerProfile = async () => {
-
-  const data: ApiProps<undefined> = {
-    query: LOGGEDIN_USER_PROFILE,
-  };
-  const resp = (await FetchApi(data)) as Response;
-
-  return resp.data?.viewer || null;
+  try {
+    useAuthStore.setState({ isLoading: true });
+    const resp = (await FetchApi({ query: LOGGEDIN_USER_PROFILE })) as Response;
+    useAuthStore.setState({ isLoading: false, viewer: resp.data?.viewer || null });
+  } catch (err) {
+    useAuthStore.setState({ isLoading: false, error: err.message });
+  }
 };
 
 export default getViewerProfile;
