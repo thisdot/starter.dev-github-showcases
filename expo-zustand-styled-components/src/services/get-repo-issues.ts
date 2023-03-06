@@ -8,6 +8,7 @@ import {
   IssueProps,
   Issue,
 } from '../types/issues-type';
+import { useAppStore } from '../hooks/stores';
 
 function parseIssues(data: IssueProps) {
   if (!data) {
@@ -110,38 +111,40 @@ const getIssues = async ({
   first,
   last,
 }: Variables) => {
+  try {
+    useAppStore.setState({ isLoading: true });
+    const data = {
+      query: ISSUES_QUERY,
+      variables: {
+        owner,
+        name,
+        first,
+        last,
+        orderBy,
+        direction,
+        filterBy,
+        before,
+        after,
+      },
+    };
+    const resp = (await FetchApi(data)) as Response;
+    const repository = resp.data?.repository;
+    const closedIssues = parseIssues(repository?.closedIssues);
+    const openIssues = parseIssues(repository?.openIssues);
+    const milestones = parseMilestones(repository?.milestones);
+    const labels = parseLabels(repository?.labels);
 
-  const data = {
-    url: ``, // Missing url
-    query: ISSUES_QUERY,
-    variables: {
-      owner,
-      name,
-      first,
-      last,
-      orderBy,
-      direction,
-      filterBy,
-      before,
-      after,
-    },
-    headersOptions: {
-      authorization: `Bearer `, // Missing token
-    },
-  };
-  const resp = (await FetchApi(data)) as Response;
-  const repository = resp.data?.repository;
-  const closedIssues = parseIssues(repository?.closedIssues);
-  const openIssues = parseIssues(repository?.openIssues);
-  const milestones = parseMilestones(repository?.milestones);
-  const labels = parseLabels(repository?.labels);
+    const issues = {
+      openIssues,
+      closedIssues,
+      milestones,
+      labels,
+    };
 
-  return {
-    openIssues,
-    closedIssues,
-    milestones,
-    labels,
-  };
+    useAppStore.setState({ isLoading: false, issues });
+  } catch (err) {
+    useAppStore.setState({ isLoading: false, error: err.message });
+  }
 };
 
 export default getIssues;

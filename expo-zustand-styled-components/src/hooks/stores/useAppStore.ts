@@ -7,6 +7,7 @@ import { PageInfo, Repo } from '../../types/user-repos-type';
 import { TreeProps } from '../../types/repo-tree-type';
 import { Info } from '../../types/repo-info-type';
 import { TopRepository } from '../../types/top-repos-type';
+import { Issue, LabelProps, MilestoneProps } from '../../types/issues-type';
 
 interface IAppStore {
   info?: Info;
@@ -36,6 +37,20 @@ interface IAppStore {
   };
   topRepos: TopRepository[];
   branches?: { name: string }[];
+  issues: {
+    openIssues: {
+        issues: Issue[];
+        totalCount: number;
+        pageInfo: PageInfo;
+    };
+    closedIssues: {
+        issues: Issue[];
+        totalCount: number;
+        pageInfo: PageInfo;
+    };
+    milestones: MilestoneProps[];
+    labels: LabelProps[];
+  }
 }
 
 const initialState: IAppStore = {
@@ -54,6 +69,26 @@ const initialState: IAppStore = {
       hasPreviousPage: false,
     },
     repos: [],
+  },
+  issues: {
+    openIssues: {
+      issues: [],
+      totalCount: 0,
+      pageInfo: {
+        hasNextPage: false,
+        hasPreviousPage: false,
+      },
+    },
+    closedIssues: {
+        issues: [],
+        totalCount: 0,
+        pageInfo: {
+          hasNextPage: false,
+          hasPreviousPage: false,
+        },
+    },
+    milestones: [],
+    labels: [],
   },
 };
 
