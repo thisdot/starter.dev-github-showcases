@@ -1,8 +1,27 @@
 import { REPO_PULL_REQUESTS } from './queries/pull-requests';
-import FetchApi from './api';
+import FetchApi, { ApiProps } from './api';
+import { PullRequest, PullRequestProps, RepoPullRequestsQuery } from '../types/pull-requests-type';
+import { Label } from '../types/label-type';
+import { useAppStore } from '../hooks/stores';
 
-function parsePullRequests(connection) {
-  if (!connection) {
+type PullRequestVariables = {
+  owner: string;
+  name: string;
+  orderBy?: string;
+  direction?: string;
+  labels?: (string | undefined)[];
+  before?: string;
+  after?: string;
+  first?: number;
+  last?: number;
+};
+
+type Response = {
+  data: RepoPullRequestsQuery;
+};
+
+function parsePullRequests(data?: PullRequestProps) {
+  if (!data) {
     return {
       pullRequests: [],
       totalCount: 0,
@@ -10,57 +29,58 @@ function parsePullRequests(connection) {
     };
   }
 
-  const pageInfo = connection.pageInfo;
-  const nodes = connection.nodes || [];
-  const totalCount = connection.totalCount;
+  const pageInfo = data.pageInfo;
+  const nodes = data.nodes || [];
+  const totalCount = data.totalCount;
+  const pullRequests = nodes.reduce(
+    (pullRequests: PullRequest[], pullRequest) => {
+      if (!pullRequest) {
+        return pullRequests;
+      }
 
-  const pullRequests = nodes.reduce((pullRequests, pullRequest) => {
-    if (!pullRequest) {
-      return pullRequests;
-    }
+      const labelNodes: Label[] = pullRequest.labels?.nodes || [];
+      const labels = labelNodes.reduce(
+        (labels: Label[], label) =>
+          label
+            ? [
+                ...labels,
+                {
+                  color: label.color,
+                  name: label.name,
+                },
+              ]
+            : labels,
+        []
+      );
 
-    const labelNodes = pullRequest.labels?.nodes || [];
-    const labels = labelNodes.reduce(
-      (labels, label) =>
-        label
-          ? [
-              ...labels,
-              {
-                color: label.color,
-                name: label.name,
-              },
-            ]
-          : labels,
-      []
-    );
-
-    return [
-      ...pullRequests,
-      {
-        id: pullRequest.id,
-        login: pullRequest.author?.login,
-        commentCount: pullRequest.comments.totalCount,
-        labelCount: pullRequest.labels.totalCount,
-        labels,
-        closed: pullRequest.closed,
-        merged: pullRequest.merged,
-        title: pullRequest.title,
-        number: pullRequest.number,
-        createdAt: pullRequest.createdAt,
-        closedAt: pullRequest.closedAt,
-        mergedAt: pullRequest.mergedAt,
-        state: pullRequest.state,
-        url: pullRequest.url,
-      },
-    ];
-  }, []);
+      return [
+        ...pullRequests,
+        {
+          login: pullRequest.author?.login,
+          commentCount: pullRequest.comments.totalCount,
+          labelCount: pullRequest.labels.totalCount,
+          labels,
+          title: pullRequest.title,
+          number: pullRequest.number,
+          createdAt: pullRequest.createdAt,
+          closedAt: pullRequest.closedAt,
+          state: pullRequest.state,
+          url: pullRequest.url,
+        },
+      ];
+    },
+    []
+  );
 
   return { pullRequests, totalCount, pageInfo };
 }
 
-function parseLabels(labels) {
+function parseLabels(labels: {
+  totalCount: number;
+  nodes: Label[];
+}) {
   const nodes = labels?.nodes || [];
-  return nodes.reduce((labels, label) => {
+  return nodes.reduce((labels: Label[], label: Label) => {
     if (!label) {
       return labels;
     }
@@ -75,65 +95,36 @@ function parseLabels(labels) {
   }, []);
 }
 
-/**
- *
- * @param {
- *  variable: {
- *    owner
- *    name
- *    first
- *    labels
- *    orderBy
- *    direction
- *  }
- * }
- */
+const getRepoPullRequests = async (variables: PullRequestVariables) => {
+  try {
+    useAppStore.setState({ isLoading: true });
 
-const getRepoPullRequests = async ({
-  owner,
-  name,
-  orderBy,
-  direction,
-  labels,
-  before,
-  after,
-  first,
-  last,
-}) => {
-  const data = {
-    url: ``, // Missing url
-    query: REPO_PULL_REQUESTS,
-    variables: {
-      owner,
-      name,
-      first,
-      last,
-      labels,
-      orderBy,
-      direction,
-      before,
-      after,
-    },
-    headersOptions: {
-      authorization: `Bearer `, //Missing token
-    },
-  };
-  const resp: any = await FetchApi(data); // waiting for right type
+    const data: ApiProps<PullRequestVariables> = {
+      query: REPO_PULL_REQUESTS,
+      variables,
+    };
+    const resp = (await FetchApi(data)) as Response;
 
-  const openPullRequests = parsePullRequests(
-    resp.data.repository?.openPullRequest
-  );
-  const closedPullRequests = parsePullRequests(
-    resp.data.repository?.closedPullRequest
-  );
+    const openPullRequests = parsePullRequests(
+      resp.data.repository?.openPullRequest
+    );
 
-  const labelMap = parseLabels(resp.data.repository?.labels);
+    const closedPullRequests = parsePullRequests(
+      resp.data.repository?.closedPullRequest
+    );
 
-  return {
-    openPullRequests,
-    closedPullRequests,
-    labels: labelMap,
-  };
+    const labelMap = parseLabels(resp.data.repository?.labels);
+
+    const pullRequests = {
+      openPullRequests,
+      closedPullRequests,
+      labels: labelMap,
+    };
+   
+    useAppStore.setState({ isLoading: false, pullRequests });
+  } catch (err) {
+    useAppStore.setState({ isLoading: false, error: err.message });
+  }
 };
 
 export default getRepoPullRequests;
