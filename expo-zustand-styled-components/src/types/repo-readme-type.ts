@@ -1,4 +1,4 @@
-import { RepoTreeVariables } from "./repo-tree-type";
+import { RepoTreeVariables } from './repo-tree-type';
 
 export interface RepoReadme {
   readme: {
@@ -6,4 +6,4 @@ export interface RepoReadme {
   };
 }
 
-export type RepoReadmeVariables = RepoTreeVariables
+export type RepoReadmeVariables = RepoTreeVariables;

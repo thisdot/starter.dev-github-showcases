@@ -19,7 +19,7 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
 
     if (result.type === 'success') {
       // TODO: so expo web has a bug with using react-native-url-polyfill globally
-      // and I resort to using it locally here with the following line of code. 
+      // and I resort to using it locally here with the following line of code.
       const url = new URLSearchParams(result.url);
       // TODO: this is a hacky way to get the access_token from the url that works for both web and mobile
       const access_token = url.toString().split('access_token=')[1];

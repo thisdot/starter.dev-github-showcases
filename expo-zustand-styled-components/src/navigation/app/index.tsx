@@ -6,7 +6,6 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-
 // screens
 import HomeScreen from '../../screens/Home';
 
@@ -19,7 +18,7 @@ const Stack = createNativeStackNavigator();
 function AuthNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   );
 }
