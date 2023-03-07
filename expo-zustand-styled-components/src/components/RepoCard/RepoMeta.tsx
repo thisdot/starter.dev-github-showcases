@@ -15,7 +15,7 @@ import { BranchLogo } from '../Icons/BranchLogo';
 import { colors } from '../../utils/style-variables';
 
 interface RepoMetaProps {
-  language?: string | null;
+  language?: string;
   stargazerCount: number;
   forkCount: number;
   updatedAt: Date;

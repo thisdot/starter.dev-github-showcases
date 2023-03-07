@@ -12,8 +12,7 @@ export const Card = styled.View`
   max-width: 370px;
   border-bottom-width: 1px;
   border-bottom-color: ${colors.gray200};
-  padding-horizontal: 16px;
-  padding-vertical: 16px;
+  padding: 20px;
 `;
 
 export const Content = styled.View`
@@ -32,9 +31,11 @@ export const Badge = styled.View`
 `;
 
 export const BadgeText = styled.Text`
-  color: ${colors.gray400};
-  font-size: 12px;
+  color: ${colors.gray600};
+  font-size: 10px;
+  font-weight: 700;
   text-align: center;
+  // text-transform: capitalize;
 `;
 
 export const Heading = styled.View`

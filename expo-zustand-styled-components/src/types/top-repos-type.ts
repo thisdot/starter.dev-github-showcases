@@ -18,9 +18,9 @@ export type TopRepository = {
     name: string;
     color: string;
   };
-  visibility: string;
+  visibility: 'public' | 'private';
   isPrivate: boolean;
   stargazerCount: number;
   forkCount: number;
-  updatedAt: string;
+  updatedAt: Date;
 };

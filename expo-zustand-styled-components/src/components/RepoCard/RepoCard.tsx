@@ -17,30 +17,33 @@ import { Text, TouchableWithoutFeedback } from 'react-native';
 import { Repository } from '../../interface/repositories.interface';
 
 interface RepoCardProps {
-  repo: Repository;
   star?: boolean;
+  full_name: string;
+  visibility: 'public' | 'private';
+  description: string;
+  forks_count: number;
+  stargazers_count: number;
+  language: string;
+  updated_at: Date;
 }
 
-const RepoCard = ({ repo, star }: RepoCardProps) => {
-  const {
-    id,
-    name,
-    owner,
-    description,
-    stargazers_count,
-    forks_count,
-    language,
-    updated_at,
-    visibility,
-  } = repo;
-
+const RepoCard = ({
+  full_name,
+  visibility,
+  description,
+  forks_count,
+  stargazers_count,
+  language,
+  updated_at,
+  star,
+}: RepoCardProps) => {
   return (
-    <Card key={id}>
+    <Card>
       <Content>
         <Heading>
-          <Link>Repo name here</Link>
+          <Link>{full_name}</Link>
           <Badge>
-            <BadgeText>{visibility.charAt(0).toUpperCase() + visibility.slice(1)}</BadgeText>
+            <BadgeText>{visibility}</BadgeText>
           </Badge>
         </Heading>
         <Description>{description}</Description>

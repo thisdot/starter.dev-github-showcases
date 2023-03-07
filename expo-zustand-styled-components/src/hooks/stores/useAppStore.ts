@@ -21,10 +21,6 @@ interface IAppStore {
   tree: TreeProps[];
   isLoading: boolean;
   pageInfo?: PageInfo;
-  gists?: {
-    name: string;
-    url: string;
-  }[];
   file?: {
     byteSize: number;
     text: string;
@@ -55,17 +51,17 @@ interface IAppStore {
   };
   pullRequests: {
     openPullRequests: {
-        pullRequests: PullRequest[];
-        totalCount: number;
-        pageInfo: PageInfo;
+      pullRequests: PullRequest[];
+      totalCount: number;
+      pageInfo: PageInfo;
     };
     closedPullRequests: {
-        pullRequests: PullRequest[];
-        totalCount: number;
-        pageInfo: PageInfo;
+      pullRequests: PullRequest[];
+      totalCount: number;
+      pageInfo: PageInfo;
     };
     labels: Label[];
-  }
+  };
 }
 
 const initialState: IAppStore = {
@@ -106,29 +102,28 @@ const initialState: IAppStore = {
     labels: [],
   },
   pullRequests: {
-      openPullRequests: {
-          pullRequests: [],
-          totalCount: 0,
-          pageInfo: {
-            hasNextPage: false,
-            hasPreviousPage: false,
-          },
+    openPullRequests: {
+      pullRequests: [],
+      totalCount: 0,
+      pageInfo: {
+        hasNextPage: false,
+        hasPreviousPage: false,
       },
-      closedPullRequests: {
-          pullRequests: [],
-          totalCount: 0,
-          pageInfo: {
-            hasNextPage: false,
-            hasPreviousPage: false,
-          },
+    },
+    closedPullRequests: {
+      pullRequests: [],
+      totalCount: 0,
+      pageInfo: {
+        hasNextPage: false,
+        hasPreviousPage: false,
       },
-      labels: [],
-    }
-  
+    },
+    labels: [],
+  },
 };
 
 const useAppStore = create(
-  persist<IAppStore>(() => ({ ...initialState }), {
+  persist<IAppStore>(() => initialState, {
     name: 'useAppStore',
     storage: createJSONStorage(() =>
       Platform.OS === 'web' ? window.sessionStorage : AsyncStorage
