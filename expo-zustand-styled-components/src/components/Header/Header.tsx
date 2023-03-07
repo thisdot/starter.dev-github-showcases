@@ -1,13 +1,13 @@
 import React from 'react';
-import { GitHubLogo } from './GitHubLogo';
 import { StyledHeader } from './Header.styles';
 import UserDropdown from '../UserDropdown';
+import { GitHubLogo } from './GitHubLogo';
 
 const Header = () => {
   return (
     <StyledHeader>
       <GitHubLogo />
-      <UserDropdown image={'https://reactjs.org/logo-og.png'} />
+      <UserDropdown />
     </StyledHeader>
   );
 };

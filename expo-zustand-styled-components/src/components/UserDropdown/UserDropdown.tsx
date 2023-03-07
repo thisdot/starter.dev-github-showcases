@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { DropdownWrapper, ProfileImage, UserMenu, ListItem } from './UserDropdown.styles';
+import { Text } from 'react-native';
+import {
+  DropdownWrapper,
+  ProfileImage,
+  UserMenu,
+  ListItem,
+  ArrowImage,
+  ProfileImageWrapper,
+} from './UserDropdown.styles';
 import { Link } from '@react-navigation/native';
+import useAuthStore from '../../hooks/stores/useAuthStore';
 
-interface IProps {
-  image: string;
-  username?: string;
-}
-
-const UserDropdown = (props: IProps) => {
+const UserDropdown = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const toggleDropdown = () => setOpenDropdown(!openDropdown);
+  const { logout } = useAuthStore();
+  const viewer = useAuthStore((state) => state.viewer);
 
   return (
     <DropdownWrapper>
-      <TouchableOpacity testID="profile-image" onPress={() => toggleDropdown()}>
-        <ProfileImage source={{ uri: props.image }} />
-      </TouchableOpacity>
+      <ProfileImageWrapper testID="profile-image" onPress={() => toggleDropdown()}>
+        <ProfileImage source={{ uri: viewer?.avatarUrl || '' }} />
+        <ArrowImage source={require('../../../assets/arrow-down-icon.png')} />
+      </ProfileImageWrapper>
       {openDropdown && (
         <UserMenu>
           <ListItem>
@@ -24,7 +30,7 @@ const UserDropdown = (props: IProps) => {
               <Text>Profile</Text>
             </Link>
           </ListItem>
-          <ListItem>
+          <ListItem onPress={() => logout()}>
             <Text>Sign Out</Text>
           </ListItem>
         </UserMenu>

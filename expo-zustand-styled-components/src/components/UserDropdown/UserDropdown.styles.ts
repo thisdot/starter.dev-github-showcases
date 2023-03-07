@@ -20,6 +20,8 @@ export const UserMenu = styled.View`
   border-radius: 8px,
   display: flex;
   flex-direction: column;
+  background-color: #ffffff;
+  z-index: 999;
 `;
 
 export const ListItem = styled.TouchableOpacity`
@@ -29,4 +31,17 @@ export const ListItem = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   padding: 8px 16px;
+  z-index: 999;
+`;
+
+export const ProfileImageWrapper = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ArrowImage = styled.Image`
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
 `;

@@ -11,6 +11,5 @@ export const StyledHeader = styled.View`
   align-items: center;
   padding: 8px 16px;
   box-sizing: border-box;
-  grid-area: header;
   border: 1px solid rgb(17, 24, 39);
 `;
