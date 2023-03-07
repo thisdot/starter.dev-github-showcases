@@ -43,6 +43,7 @@ export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = Nati
 // #region APP
 export type AppStackParamList = {
   Home: undefined;
+  Profile: undefined;
 };
 
 export type AppStackScreenProps<Screen extends keyof AppStackParamList> = NativeStackScreenProps<
