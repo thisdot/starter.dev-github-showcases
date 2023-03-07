@@ -1,6 +1,7 @@
 import { USER_PROFILE_QUERY } from './queries/user-profile';
-import FetchApi, { ApiProps } from './api';
+import FetchApi from './api';
 import { UserProfile } from '../types/user-profile-type';
+import { useAuthStore } from '../hooks/stores';
 
 type UserProfileVariables = {
   username: string;
@@ -13,13 +14,13 @@ type Response = {
 };
 
 const getUserProfile = async (variables: UserProfileVariables) => {
-  const data: ApiProps<UserProfileVariables> = {
-    query: USER_PROFILE_QUERY,
-    variables,
-  };
-  const resp = (await FetchApi(data)) as Response;
-
-  return resp.data?.user || null;
+  try {
+    useAuthStore.setState({ isLoading: true });
+    const resp = (await FetchApi({ query: USER_PROFILE_QUERY, variables })) as Response;
+    useAuthStore.setState({ isLoading: false, user: resp.data?.user || null });
+  } catch (err) {
+    useAuthStore.setState({ isLoading: false, error: err.message });
+  }
 };
 
 export default getUserProfile;
