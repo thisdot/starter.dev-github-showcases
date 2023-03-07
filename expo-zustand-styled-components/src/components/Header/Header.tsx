@@ -6,9 +6,7 @@ import UserDropdown from '../UserDropdown';
 const Header = () => {
   return (
     <StyledHeader>
-      {/* <Link to="/"> */}
       <GitHubLogo />
-      {/* </Link> */}
       <UserDropdown image={'https://reactjs.org/logo-og.png'} />
     </StyledHeader>
   );
