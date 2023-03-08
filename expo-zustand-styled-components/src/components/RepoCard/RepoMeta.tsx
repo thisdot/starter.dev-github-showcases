@@ -15,7 +15,7 @@ import { BranchLogo } from '../Icons/BranchLogo';
 import { colors } from '../../utils/style-variables';
 
 interface RepoMetaProps {
-  language?: string | null;
+  language?: string;
   stargazerCount: number;
   forkCount: number;
   updatedAt: Date;
@@ -53,7 +53,7 @@ const RepoMeta = ({ language, stargazerCount, forkCount, updatedAt }: RepoMetaPr
           </SocialWrapper>
         )}
         <DateWrapper>
-          <Text style={{ flex: 0 }}>
+          <Text>
             Updated{' '}
             {formatDistance(new Date(updatedAt), Date.now(), {
               addSuffix: true,
