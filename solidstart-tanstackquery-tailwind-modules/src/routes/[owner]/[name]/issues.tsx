@@ -142,7 +142,7 @@ const Issues = () => {
           <p>Error</p>
         </Match>
         <Match when={repoIssues.isLoading}>
-          <div class="mt-2">
+          <div class="mt-4 ml-4">
             <LoadingPulseDot />
           </div>
         </Match>
