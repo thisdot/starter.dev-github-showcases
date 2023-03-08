@@ -4,6 +4,7 @@ import cn from 'classnames';
 import styles from './TabNavigation.module.css';
 import { IconProps } from '../Icons/types';
 import {
+  setActiveTab,
   setMilestoneId,
   setSelectedLabel,
   setSelectedMilestone,
@@ -38,6 +39,7 @@ const TabNavigation = (props: TabNavigationProps) => {
     setSelectedLabel(undefined);
     setSelectedMilestone(undefined);
     setMilestoneId(undefined);
+    setActiveTab('OPEN')
   };
 
   return (
@@ -52,11 +54,10 @@ const TabNavigation = (props: TabNavigationProps) => {
             return (
               <NavLink
                 href={href}
-                class={`${
-                  isCurrentTab(item.path)
-                    ? styles.tabActive
-                    : styles.tabInactive
-                } ${styles.tab}`}
+                class={`${isCurrentTab(item.path)
+                  ? styles.tabActive
+                  : styles.tabInactive
+                  } ${styles.tab}`}
                 onClick={handleClick}
               >
                 <item.Icon

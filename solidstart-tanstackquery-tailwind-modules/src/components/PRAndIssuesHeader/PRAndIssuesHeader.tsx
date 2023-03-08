@@ -6,6 +6,7 @@ import { createMemo, createSignal, Show } from 'solid-js';
 import { getSelectedMilestoneId } from './utils';
 import { issues } from '../../routes/[owner]/[name]/issues';
 import { pullRequests } from '../../routes/[owner]/[name]/pulls';
+import { useSearchParams } from 'solid-start';
 
 const [activeTab, setActiveTab] = createSignal<'OPEN' | 'CLOSED'>('OPEN');
 const [sortBy, setSortBy] = createSignal('Newest');
@@ -31,26 +32,42 @@ interface PRAndIssuesHeaderProps {
 }
 
 const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
+  const [, setSearchParams] = useSearchParams();
+
   const sortOptions = Object.values(SORT_OPTIONS);
+
   const selectSort = (value: string) =>
     setSortBy(sortBy() === value ? 'Newest' : value);
+
   const labelOptions = createMemo<string[]>(
     () =>
       (props.type === 'issue'
         ? issues().labels?.map((label) => label.name)
         : pullRequests().labels?.map((label) => label.name)) || []
   );
+
   const milestoneOptions = createMemo<string[]>(
     () => issues().milestones?.map((milestone) => milestone.title) || []
   );
+
   const selectLabel = (value: string) =>
     setSelectedLabel(selectedLabel() !== value ? value : undefined);
+
   const selectMilestone = (value: string) => {
     setSelectedMilestone(selectedMilestone() !== value ? value : undefined);
     setMilestoneId(
       getSelectedMilestoneId(issues().milestones || [], selectedMilestone())
     );
   };
+
+  const toggleTab = (activeTab: 'OPEN' | 'CLOSED') => {
+    setSearchParams({
+      before: '',
+      tab: activeTab,
+      after: null,
+    });
+    setActiveTab(activeTab)
+  }
 
   return (
     <div class="flex flex-wrap space-x-1 space-y-2 md:space-x-0 md:space-y-0 items-center justify-between p-4 bg-gray-100 border-b rounded-t-lg">
@@ -59,7 +76,7 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
           class={cn('text-xs flex items-center gap-1 text-gray-600', {
             'font-semibold text-gray-900': activeTab() === 'OPEN',
           })}
-          onClick={() => setActiveTab('OPEN')}
+          onClick={() => toggleTab('OPEN')}
         >
           <Show when={props.type === 'pr'}>
             <PullRequestIcon class="w-4 h-4" />
@@ -78,7 +95,7 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
           class={cn('text-xs flex items-center gap-1 text-gray-600', {
             'font-semibold text-gray-900': activeTab() === 'CLOSED',
           })}
-          onClick={() => setActiveTab('CLOSED')}
+          onClick={() => toggleTab('CLOSED')}
         >
           <CheckIcon class="w-4 h-4" />
           <span>
