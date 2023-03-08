@@ -1,4 +1,4 @@
-import FetchApi, { ApiProps } from './api';
+import FetchApi from './api';
 import { USER_REPOS_QUERY } from './queries/user-repos';
 import { Repo, UserRepoInfo, UserReposVariables } from '../types/user-repos-type';
 import { useAppStore } from '../hooks/stores';
@@ -10,11 +10,7 @@ type Response = {
 const getUserRepos = async (variables: UserReposVariables) => {
   try {
     useAppStore.setState({ isLoading: true });
-    const data: ApiProps<UserReposVariables> = {
-      query: USER_REPOS_QUERY,
-      variables,
-    };
-    const resp = (await FetchApi(data)) as Response;
+    const resp = (await FetchApi({ query: USER_REPOS_QUERY, variables })) as Response;
     const nodes = resp.data?.owner?.repositories?.nodes;
     const pageInfo = resp.data?.owner?.repositories?.pageInfo;
 

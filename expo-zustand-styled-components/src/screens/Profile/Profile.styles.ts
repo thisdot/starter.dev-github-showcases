@@ -1,30 +1,36 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 export const SafeAreaViewStyled = styled.SafeAreaView`
+  flex: 1;
+  width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #FFF;
-  justify-content: space-between;
+  background-color: #fff;
 `;
 
-export const ProfileCardViewStyled = styled.View`
+export const ContainerStyled = styled.ScrollView`
+  flex: 1;
+  width: 100%;
+  height: 100%;
   display: flex;
-  padding: 20px;
+  position: relative;
+  flex-direction: column;
+`;
+
+export const MainContentLayout = styled.View`
+  flex: 1;
+  width: 100%;
+  flex-direction: ${Platform.OS === 'web' ? 'row' : 'column'};
+  padding-horizontal: ${Platform.OS === 'web' ? '10%' : '16px' };
+`;
+
+export const ContentLayout = styled.View`
+  flex: 1;
+  width: 100%;
 `;
 
 export const ProfileNavViewStyled = styled.View`
-  display: flex;
-  padding: 20px;
-`;
-
-export const ProfileSearchViewStyled = styled.View`
-  display: flex;
-  padding: 20px;
-`;
-
-export const ProfileRepoViewStyled = styled.View`
-  display: flex;
-  padding: 20px;
+  padding-vertical: 16px;
+  border-bottom-width: 1px;
+  border-bottom-color: #e1e4e8;
 `;

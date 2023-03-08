@@ -1,18 +1,19 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 type ScreenWidth = {
   screenWidth: number | undefined;
 };
 
 export const UserProfileCardWrapper = styled.View<ScreenWidth>`
-  max-width: ${({ screenWidth }) => (screenWidth >= 768 ? '33.3%' : '90%')};
-  display: flex;
   flex-grow: 0;
-  padding-horizontal: 24px;
+  display: flex;
+  margin-top: ${Platform.OS === 'web' ? -20 : 0}px;
+  width: ${({ screenWidth }) => (screenWidth >= 768 ? '33.3%' : '100%')};
 `;
 
 export const UserDetails = styled.View<ScreenWidth>`
-  flex-direction: ${({ screenWidth }) => (screenWidth >= 768 ? 'column' : 'row')};
   gap: 8px;
+  flex-direction: ${({ screenWidth }) => (screenWidth >= 768 ? 'column' : 'row')};
   align-items: ${({ screenWidth }) => (screenWidth >= 768 ? 'flex-start' : 'center')};
 `;
 

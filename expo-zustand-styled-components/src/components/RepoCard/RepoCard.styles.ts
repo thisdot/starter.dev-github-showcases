@@ -10,10 +10,9 @@ export const Card = styled.View`
   ${flex_row};
   min-width: 100%;
   max-width: 370px;
+  padding-vertical: 20px;
   border-bottom-width: 1px;
   border-bottom-color: ${colors.gray200};
-  padding-horizontal: 16px;
-  padding-vertical: 16px;
 `;
 
 export const Content = styled.View`
@@ -43,10 +42,10 @@ export const Heading = styled.View`
   flex-wrap: wrap;
 `;
 
-export const Link = styled.Text`
+export const LinkText = styled.Text`
   color: ${colors.blue600};
   font-size: 18px;
-  text-decoration-line: underline;
+  font-weight: 600;
 `;
 
 export const StarBtn = styled.View`
@@ -63,7 +62,7 @@ export const MetaData = styled.View`
   ${flex_row};
   align-items: center;
   margin-top: 8px;
-  flexshrink: 1;
+  flex-shrink: 1;
   flex-wrap: wrap;
 `;
 
@@ -89,12 +88,12 @@ export const SocialWrapper = styled.View`
 export const DateWrapper = styled.View`
   ${flex_row};
   align-items: center;
+  margin-left: 8px;
 `;
 
-export const MetaIcon = styled.View<{ isFirstChild?: boolean }>`
+export const MetaIcon = styled.View`
   ${flex_row};
   align-items: center;
-  margin-right: ${({ isFirstChild }) => (isFirstChild ? '0px' : '12px')};
 `;
 
 export const Description = styled.Text`

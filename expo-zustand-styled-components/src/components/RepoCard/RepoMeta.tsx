@@ -18,7 +18,7 @@ interface RepoMetaProps {
   language?: string | null;
   stargazerCount: number;
   forkCount: number;
-  updatedAt: Date;
+  updatedAt: string;
 }
 
 const RepoMeta = ({ language, stargazerCount, forkCount, updatedAt }: RepoMetaProps) => {
@@ -53,7 +53,7 @@ const RepoMeta = ({ language, stargazerCount, forkCount, updatedAt }: RepoMetaPr
           </SocialWrapper>
         )}
         <DateWrapper>
-          <Text style={{ flex: 0 }}>
+          <Text>
             Updated{' '}
             {formatDistance(new Date(updatedAt), Date.now(), {
               addSuffix: true,

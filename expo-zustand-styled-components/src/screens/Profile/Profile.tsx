@@ -1,31 +1,55 @@
-import React from 'react';
-import { Text } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, Platform } from 'react-native';
 
 import {
+  ContentLayout,
+  ContainerStyled,
+  MainContentLayout,
   SafeAreaViewStyled,
-  ProfileCardViewStyled,
   ProfileNavViewStyled,
-  ProfileSearchViewStyled,
-  ProfileRepoViewStyled,
 } from './Profile.styles';
-import { AppStackScreenProps } from '../../../types';
-// import { useAuthStore } from '../../hooks/stores';
 
-const Profile = ({ navigation }: AppStackScreenProps<'Profile'>) => {
+import UserCard from '../../components/Profile/UserCard';
+import LoaderErrorView from '../../components/LoaderErrorView';
+import Repositories from '../../components/Profile/Repositories';
+
+import { useAuthStore } from '../../hooks/stores';
+
+import getUserProfile from '../../services/get-user-profile';
+
+const Profile = () => {
+  const { user, error, viewer, isLoading } = useAuthStore();
+
+  useEffect(() => {
+    if (viewer?.login) {
+      getUserProfile({ username: viewer.login });
+    }
+  }, [viewer]);
+
   return (
     <SafeAreaViewStyled>
-      <ProfileCardViewStyled>
-        <Text>Profile Card</Text>
-      </ProfileCardViewStyled>
-      <ProfileNavViewStyled>
-        <Text>Tab Navigation</Text>
-      </ProfileNavViewStyled>
-      <ProfileSearchViewStyled>
-        <Text>Search & Filter Dropdown Buttons</Text>
-      </ProfileSearchViewStyled>
-      <ProfileRepoViewStyled>
-        <Text>Repos</Text>
-      </ProfileRepoViewStyled>
+      {isLoading || error ? (
+        <LoaderErrorView error={error} />
+      ) : (
+        <ContainerStyled>
+          {Platform.OS === 'web' && (
+            <ProfileNavViewStyled>
+              <Text>Web Tab Navigation</Text>
+            </ProfileNavViewStyled>
+          )}
+          <MainContentLayout>
+            <UserCard user={user} />
+            <ContentLayout>
+              {Platform.OS !== 'web' && (
+                <ProfileNavViewStyled>
+                  <Text>Mobile Tab Navigation</Text>
+                </ProfileNavViewStyled>
+              )}
+              <Repositories username={viewer.login} />
+            </ContentLayout>
+          </MainContentLayout>
+        </ContainerStyled>
+      )}
     </SafeAreaViewStyled>
   );
 };
