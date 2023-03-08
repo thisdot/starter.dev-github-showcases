@@ -1,7 +1,7 @@
 @tailwind utilities;
 
 .dropdown {
-  @apply relative top-1 inline-block text-left;
+  @apply relative top-1 inline-block text-left z-50;
 }
 
 .dropdownBtn {
