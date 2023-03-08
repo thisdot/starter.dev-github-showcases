@@ -13,12 +13,14 @@ type Response = {
 };
 
 const getViewerProfile = async () => {
-  try {
-    useAuthStore.setState({ isLoading: true });
-    const resp = (await FetchApi({ query: LOGGEDIN_USER_PROFILE })) as Response;
-    useAuthStore.setState({ isLoading: false, viewer: resp.data?.viewer || null });
-  } catch (err) {
-    useAuthStore.setState({ isLoading: false, error: err.message });
+  if (!useAuthStore.getState().viewer) {
+    try {
+      useAuthStore.setState({ isLoading: true });
+      const resp = (await FetchApi({ query: LOGGEDIN_USER_PROFILE })) as Response;
+      useAuthStore.setState({ isLoading: false, viewer: resp.data?.viewer || null });
+    } catch (err) {
+      useAuthStore.setState({ isLoading: false, error: err.message });
+    }
   }
 };
 

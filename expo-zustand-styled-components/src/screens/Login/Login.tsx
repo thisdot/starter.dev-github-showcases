@@ -8,6 +8,7 @@ import { useAuthStore } from '../../hooks/stores';
 import Button from '../../components/Button';
 
 import { SafeAreaViewStyled } from './Login.styles';
+import getViewerProfile from '../../services/get-viewer-info';
 
 WebBrowser.maybeCompleteAuthSession();
 const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
@@ -29,6 +30,7 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
 
   useEffect(() => {
     if (token) {
+      getViewerProfile();
       navigation.navigate('AppNavigator', { screen: 'Home' });
     }
   }, [token]);
