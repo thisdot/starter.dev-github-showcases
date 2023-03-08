@@ -16,7 +16,6 @@ const Home = ({ navigation }: AppStackScreenProps<'Home'>) => {
       <View>
         <Text>Hello World</Text>
         <Text>Here is the token{token}</Text>
-        {/* <Button title="Logout" onPress={() => logout()} /> */}
       </View>
     </SafeAreaViewStyled>
   );
