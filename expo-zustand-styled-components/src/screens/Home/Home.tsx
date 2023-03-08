@@ -2,16 +2,14 @@ import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
 import { SafeAreaViewStyled } from './Home.styles';
-import { AppStackScreenProps } from '../../../types';
 import { useAuthStore } from '../../hooks/stores';
 
-import Button from '../../components/Button';
 import LoaderErrorView from '../../components/LoaderErrorView';
 
 import getViewerProfile from '../../services/get-viewer-info';
 
-const Home = ({ navigation }: AppStackScreenProps<'Home'>) => {
-  const { error, token, viewer, isLoading } = useAuthStore();
+const Home = () => {
+  const { error, viewer, isLoading } = useAuthStore();
 
   useEffect(() => {
     if (!viewer) {
@@ -26,8 +24,6 @@ const Home = ({ navigation }: AppStackScreenProps<'Home'>) => {
       ) : (
         <View>
           <Text>Hello World</Text>
-          <Text>Here is the token{token}</Text>
-          <Button title="Profile" onPress={() => navigation.navigate('Profile')} />
         </View>
       )}
     </SafeAreaViewStyled>

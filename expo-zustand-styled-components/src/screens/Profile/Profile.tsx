@@ -28,7 +28,7 @@ const Profile = () => {
 
   return (
     <SafeAreaViewStyled>
-      {isLoading || error ? (
+      {(isLoading || error || !user) ? (
         <LoaderErrorView error={error} />
       ) : (
         <ContainerStyled>

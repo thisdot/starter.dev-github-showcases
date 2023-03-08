@@ -14,8 +14,7 @@ import useAuthStore from '../../hooks/stores/useAuthStore';
 const UserDropdown = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const toggleDropdown = () => setOpenDropdown(!openDropdown);
-  const { logout } = useAuthStore();
-  const viewer = useAuthStore((state) => state.viewer);
+  const { logout, viewer } = useAuthStore();
 
   return (
     <DropdownWrapper>

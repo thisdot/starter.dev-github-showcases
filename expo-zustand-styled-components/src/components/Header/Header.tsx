@@ -1,13 +1,15 @@
 import React from 'react';
-import { StyledHeader } from './Header.styles';
+import { StyledHeader, StyledHeaderContainer } from './Header.styles';
 import UserDropdown from '../UserDropdown';
 import { GitHubLogo } from './GitHubLogo';
 
 const Header = () => {
   return (
     <StyledHeader>
-      <GitHubLogo />
-      <UserDropdown />
+      <StyledHeaderContainer>
+        <GitHubLogo />
+        <UserDropdown />
+      </StyledHeaderContainer>
     </StyledHeader>
   );
 };

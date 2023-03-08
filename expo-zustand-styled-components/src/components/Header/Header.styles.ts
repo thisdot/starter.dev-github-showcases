@@ -1,15 +1,21 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 export const StyledHeader = styled.View`
-  position: relative;
   width: 100%;
-  height: 70px;
+  padding-horizontal: 16px;
   background-color: rgb(17, 24, 39);
+  padding-top: ${Platform.OS === 'web' ? '0px' : '32px'};
+`;
+
+export const StyledHeaderContainer = styled.View`
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  position: relative;
   align-items: center;
-  padding: 8px 16px;
+  flex-direction: row;
   box-sizing: border-box;
+  justify-content: space-between;
   border: 1px solid rgb(17, 24, 39);
+  height: ${Platform.OS === 'web' ? '70px' : '60px'};
 `;
