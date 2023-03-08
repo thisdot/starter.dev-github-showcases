@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
 
-export const SafeAreaViewStyled = styled.SafeAreaView<{ screenWidth: number }>`
+export const SafeAreaViewStyled = styled.SafeAreaView``;
+
+export const ContainerStyled = styled.View<{ screenWidth: number }>`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -9,9 +11,9 @@ export const SafeAreaViewStyled = styled.SafeAreaView<{ screenWidth: number }>`
   ${({ screenWidth }) => {
     if (screenWidth > breakpoints.laptop) {
       return `
-        flex-direction: row;
-        justify-content: space-between;
-      `;
+      flex-direction: row;
+      justify-content: space-between;
+    `;
     }
   }}
 `;

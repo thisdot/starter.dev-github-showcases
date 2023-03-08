@@ -9,7 +9,6 @@ const flex_row = `
 export const Card = styled.View`
   ${flex_row};
   min-width: 100%;
-  max-width: 370px;
   border-bottom-width: 1px;
   border-bottom-color: ${colors.gray200};
   padding: 20px;
@@ -27,7 +26,6 @@ export const Badge = styled.View`
   padding-horizontal: 6px;
   justify-content: center
   align-items: center;
-  margin-horizontal: 12px;
 `;
 
 export const BadgeText = styled.Text`
@@ -35,13 +33,13 @@ export const BadgeText = styled.Text`
   font-size: 10px;
   font-weight: 700;
   text-align: center;
-  // text-transform: capitalize;
 `;
 
 export const Heading = styled.View`
   ${flex_row};
   width: 100%;
   flex-wrap: wrap;
+  gap: 8px;
 `;
 
 export const Link = styled.Text`
@@ -66,6 +64,7 @@ export const MetaData = styled.View`
   margin-top: 8px;
   flexshrink: 1;
   flex-wrap: wrap;
+  gap: 8px;
 `;
 
 export const Language = styled.View`
