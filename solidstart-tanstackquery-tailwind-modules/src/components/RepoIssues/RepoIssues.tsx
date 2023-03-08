@@ -2,7 +2,7 @@ import { useParams } from '@solidjs/router';
 import PRAndIssuesData from '../PRAndIssuesData';
 import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination';
-import { issues } from '~/routes/[owner]/[name]/issues';
+import { issues } from '../../routes/[owner]/[name]/issues';
 import PRAndIssuesHeader, {
   activeTab,
   selectedLabel,

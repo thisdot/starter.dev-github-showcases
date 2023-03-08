@@ -1,12 +1,6 @@
 import FetchApi from './api';
 import { ISSUES_QUERY } from './queries/issues';
-import {
-  MilestoneProps,
-  Variables,
-  Response,
-  IssueProps,
-  Issue,
-} from '../types/issues-type';
+import { MilestoneProps, Variables, Response, IssueProps, Issue } from '../types/issues-type';
 import { useAppStore } from '../hooks/stores';
 import { Label } from '../types/label-type';
 

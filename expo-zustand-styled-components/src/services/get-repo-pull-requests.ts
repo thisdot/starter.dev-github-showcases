@@ -32,53 +32,47 @@ function parsePullRequests(data?: PullRequestProps) {
   const pageInfo = data.pageInfo;
   const nodes = data.nodes || [];
   const totalCount = data.totalCount;
-  const pullRequests = nodes.reduce(
-    (pullRequests: PullRequest[], pullRequest) => {
-      if (!pullRequest) {
-        return pullRequests;
-      }
+  const pullRequests = nodes.reduce((pullRequests: PullRequest[], pullRequest) => {
+    if (!pullRequest) {
+      return pullRequests;
+    }
 
-      const labelNodes: Label[] = pullRequest.labels?.nodes || [];
-      const labels = labelNodes.reduce(
-        (labels: Label[], label) =>
-          label
-            ? [
-                ...labels,
-                {
-                  color: label.color,
-                  name: label.name,
-                },
-              ]
-            : labels,
-        []
-      );
+    const labelNodes: Label[] = pullRequest.labels?.nodes || [];
+    const labels = labelNodes.reduce(
+      (labels: Label[], label) =>
+        label
+          ? [
+              ...labels,
+              {
+                color: label.color,
+                name: label.name,
+              },
+            ]
+          : labels,
+      []
+    );
 
-      return [
-        ...pullRequests,
-        {
-          login: pullRequest.author?.login,
-          commentCount: pullRequest.comments.totalCount,
-          labelCount: pullRequest.labels.totalCount,
-          labels,
-          title: pullRequest.title,
-          number: pullRequest.number,
-          createdAt: pullRequest.createdAt,
-          closedAt: pullRequest.closedAt,
-          state: pullRequest.state,
-          url: pullRequest.url,
-        },
-      ];
-    },
-    []
-  );
+    return [
+      ...pullRequests,
+      {
+        login: pullRequest.author?.login,
+        commentCount: pullRequest.comments.totalCount,
+        labelCount: pullRequest.labels.totalCount,
+        labels,
+        title: pullRequest.title,
+        number: pullRequest.number,
+        createdAt: pullRequest.createdAt,
+        closedAt: pullRequest.closedAt,
+        state: pullRequest.state,
+        url: pullRequest.url,
+      },
+    ];
+  }, []);
 
   return { pullRequests, totalCount, pageInfo };
 }
 
-function parseLabels(labels: {
-  totalCount: number;
-  nodes: Label[];
-}) {
+function parseLabels(labels: { totalCount: number; nodes: Label[] }) {
   const nodes = labels?.nodes || [];
   return nodes.reduce((labels: Label[], label: Label) => {
     if (!label) {
@@ -105,13 +99,9 @@ const getRepoPullRequests = async (variables: PullRequestVariables) => {
     };
     const resp = (await FetchApi(data)) as Response;
 
-    const openPullRequests = parsePullRequests(
-      resp.data.repository?.openPullRequest
-    );
+    const openPullRequests = parsePullRequests(resp.data.repository?.openPullRequest);
 
-    const closedPullRequests = parsePullRequests(
-      resp.data.repository?.closedPullRequest
-    );
+    const closedPullRequests = parsePullRequests(resp.data.repository?.closedPullRequest);
 
     const labelMap = parseLabels(resp.data.repository?.labels);
 
@@ -120,7 +110,7 @@ const getRepoPullRequests = async (variables: PullRequestVariables) => {
       closedPullRequests,
       labels: labelMap,
     };
-   
+
     useAppStore.setState({ isLoading: false, pullRequests });
   } catch (err) {
     useAppStore.setState({ isLoading: false, error: err.message });
