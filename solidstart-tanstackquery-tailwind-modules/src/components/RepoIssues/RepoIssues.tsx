@@ -48,8 +48,8 @@ const RepoIssues = () => {
         <Switch>
           <Match
             when={
-              issues().openIssues?.pageInfo?.hasNextPage ||
-              issues().openIssues?.pageInfo?.hasPreviousPage
+              issues().openIssues.pageInfo?.hasNextPage ||
+              issues().openIssues.pageInfo?.hasPreviousPage
             }
           >
             <Pagination
@@ -58,14 +58,16 @@ const RepoIssues = () => {
               owner={`${params.owner}/${params.name}/issues`}
             />
           </Match>
-
+        </Switch>
+      </Show>
+      <Show when={activeTab() !== 'OPEN'}>
+        <Switch>
           <Match
             when={
-              issues().closedIssues?.pageInfo?.hasNextPage ||
-              issues().closedIssues?.pageInfo?.hasPreviousPage
+              issues().closedIssues.pageInfo?.hasNextPage ||
+              issues().closedIssues.pageInfo?.hasPreviousPage
             }
           >
-            {' '}
             <Pagination
               tab={activeTab()}
               pageInfo={issues().closedIssues.pageInfo}
@@ -74,7 +76,7 @@ const RepoIssues = () => {
           </Match>
         </Switch>
       </Show>
-    </div>
+    </div >
   );
 };
 
