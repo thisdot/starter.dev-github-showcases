@@ -11,7 +11,7 @@ import PRAndIssuesHeader, {
   sortBy,
 } from '../PRAndIssuesHeader';
 import { Match, Show, Switch } from 'solid-js';
-import { pullRequests } from '~/routes/[owner]/[name]/pulls';
+import { pullRequests } from '../../routes/[owner]/[name]/pulls';
 
 const RepoPullRequests = () => {
   const params = useParams();

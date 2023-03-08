@@ -1,7 +1,12 @@
+import { For, Show } from "solid-js";
 import { Router } from '@solidjs/router';
-import { Info } from '~/types/repo-info-type';
 import { visibilityTypes } from '../RepoHeading/data';
-import RepoHeader from './RepoHeader';
+import styles from './RepoHeader.module.css';
+import stylesTab from '../TabNavigation/TabNavigation.module.css';
+import { RepoHeading } from '../RepoHeading';
+import { RepoActionButtons } from '../RepoActionButtons';
+import { createTabList } from "./tabList";
+
 
 export default {
   title: 'components/Repo Header',
@@ -25,9 +30,44 @@ export default {
   },
 };
 
-const Template = (args: Info) => (
+const Template = () => (
   <Router>
-    <RepoHeader {...args} />
+    <div class={styles.wrapper}>
+      <div class={styles.topRow}>
+        <RepoHeading visibility={visibilityTypes.public} isOrg={false} />
+        <RepoActionButtons
+          forkCount={3}
+          stargazerCount={23}
+          watcherCount={3}
+        />
+      </div>
+      <div class={styles.bottomRow}>
+        <div class={stylesTab.container}>
+          <nav class={stylesTab.nav} aria-label="Tabs">
+            <For
+              each={createTabList({
+                issueCount: 10,
+                pullRequestCount: 23,
+              })}
+              fallback={<div>Loading...</div>}>
+              {(item) => {
+                return (
+                  <div class={stylesTab.tab}>
+                    <item.Icon class={stylesTab.icon} />
+                    <span>{item.title}</span>
+                    <Show when={item.count && item.count > 0}>
+                      <span class="ml-2 rounded-xl bg-gray-200 py-0.5 px-2 text-xs font-medium text-gray-800">
+                        {item.count}
+                      </span>
+                    </Show>
+                  </div>
+                );
+              }}
+            </For>
+          </nav>
+        </div>
+      </div>
+    </div>
   </Router>
 );
 
