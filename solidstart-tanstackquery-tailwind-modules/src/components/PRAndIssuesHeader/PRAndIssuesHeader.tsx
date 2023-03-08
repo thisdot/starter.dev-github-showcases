@@ -6,6 +6,7 @@ import { createMemo, createSignal, Show } from 'solid-js';
 import { getSelectedMilestoneId } from './utils';
 import { issues } from '../../routes/[owner]/[name]/issues';
 import { pullRequests } from '../../routes/[owner]/[name]/pulls';
+import { useSearchParams } from 'solid-start';
 
 const [activeTab, setActiveTab] = createSignal<'OPEN' | 'CLOSED'>('OPEN');
 const [sortBy, setSortBy] = createSignal('Newest');
