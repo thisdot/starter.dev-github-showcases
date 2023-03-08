@@ -35,7 +35,7 @@ export const BadgeText = styled.Text`
   text-align: center;
 `;
 
-export const Heading = styled.View`
+export const Heading = styled.TouchableOpacity`
   ${flex_row};
   width: 100%;
   flex-wrap: wrap;
