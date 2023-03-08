@@ -17,7 +17,7 @@ export default function OrgProfile() {
   const [repos, setRepos] = createSignal<Repo[]>([]);
   const [pageInfo, setPageInfo] = createSignal<PageInfo>({
     hasNextPage: false,
-    hasPreviousPage: false
+    hasPreviousPage: false,
   });
   const [repoLanguages, setRepoLanguages] = createSignal<string[]>([]);
   const [orgInfo, setOrgInfo] = createSignal<{
@@ -55,7 +55,6 @@ export default function OrgProfile() {
       setRepoLanguages(languages);
     }
   });
-
 
   return (
     <div class="relative">
