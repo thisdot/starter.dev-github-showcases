@@ -1,12 +1,11 @@
-import { For, Show } from "solid-js";
+import { For, Show } from 'solid-js';
 import { Router } from '@solidjs/router';
 import { visibilityTypes } from '../RepoHeading/data';
 import styles from './RepoHeader.module.css';
 import stylesTab from '../TabNavigation/TabNavigation.module.css';
 import { RepoHeading } from '../RepoHeading';
 import { RepoActionButtons } from '../RepoActionButtons';
-import { createTabList } from "./tabList";
-
+import { createTabList } from './tabList';
 
 export default {
   title: 'components/Repo Header',
@@ -35,11 +34,7 @@ const Template = () => (
     <div class={styles.wrapper}>
       <div class={styles.topRow}>
         <RepoHeading visibility={visibilityTypes.public} isOrg={false} />
-        <RepoActionButtons
-          forkCount={3}
-          stargazerCount={23}
-          watcherCount={3}
-        />
+        <RepoActionButtons forkCount={3} stargazerCount={23} watcherCount={3} />
       </div>
       <div class={styles.bottomRow}>
         <div class={stylesTab.container}>
@@ -49,7 +44,8 @@ const Template = () => (
                 issueCount: 10,
                 pullRequestCount: 23,
               })}
-              fallback={<div>Loading...</div>}>
+              fallback={<div>Loading...</div>}
+            >
               {(item) => {
                 return (
                   <div class={stylesTab.tab}>

@@ -1,5 +1,5 @@
 export const getSelectedMilestoneId = (
-  milestoneOptions: {id: string, title: string}[],
+  milestoneOptions: { id: string; title: string }[],
   selectedMilestone: string | undefined
 ) =>
   selectedMilestone

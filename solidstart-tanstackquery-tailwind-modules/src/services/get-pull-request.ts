@@ -80,10 +80,7 @@ function parsePullRequests(data?: PullRequestProps) {
   return { pullRequests, totalCount, pageInfo };
 }
 
-function parseLabels(labels: {
-  totalCount: number;
-  nodes: LabelProps[];
-}) {
+function parseLabels(labels: { totalCount: number; nodes: LabelProps[] }) {
   const nodes = labels?.nodes || [];
   return nodes.reduce((labels: LabelProps[], label: LabelProps) => {
     if (!label) {
