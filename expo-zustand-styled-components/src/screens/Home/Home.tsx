@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { FlatList, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
+import {
+  FlatList,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  ActivityIndicator,
+} from 'react-native';
 import {
   GistsListContainerStyled,
   GistsStyled,
@@ -8,6 +14,7 @@ import {
   TitleStyled,
   RepositoriesListContainerStyled,
   ContainerStyled,
+  ViewAllReposButtonStyled,
 } from './Home.styles';
 import { AppStackScreenProps } from '../../../types';
 
@@ -22,7 +29,9 @@ import Header from '../../components/Header';
 const Home = ({ navigation }: AppStackScreenProps<'Home'>) => {
   const { width } = useWindowDimensions();
   const gists = useGistsStore((state) => state.gists);
+  const gistsIsLoading = useGistsStore((state) => state.isLoading);
   const topRepos = useTopReposStore((state) => state.topRepos);
+  const topReposIsLoading = useTopReposStore((state) => state.isLoading);
 
   useEffect(() => {
     getGists();
@@ -35,34 +44,47 @@ const Home = ({ navigation }: AppStackScreenProps<'Home'>) => {
         <GistsStyled screenWidth={width}>
           <GistsListContainerStyled>
             <TitleStyled>Gists</TitleStyled>
-            <FlatList
-              data={gists}
-              renderItem={({ item }) => (
-                <TouchableOpacity>
-                  <Text>{item.name}</Text>
-                </TouchableOpacity>
-              )}
-            />
+            {gistsIsLoading ? (
+              <ActivityIndicator size="large" color="black" />
+            ) : (
+              <FlatList
+                data={gists}
+                renderItem={({ item }) => (
+                  <TouchableOpacity>
+                    <Text>{item.name}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            )}
           </GistsListContainerStyled>
         </GistsStyled>
         <RepositoriesStyled screenWidth={width}>
           <TitleStyled>Top Repositories</TitleStyled>
           <RepositoriesListContainerStyled>
-            <FlatList
-              data={topRepos}
-              renderItem={({ item }) => (
-                <RepoCard
-                  full_name={item.name}
-                  visibility={item.visibility}
-                  description={item.description}
-                  forks_count={item.forkCount}
-                  stargazers_count={item.stargazerCount}
-                  language={item.primaryLanguage?.name}
-                  updated_at={item.updatedAt}
-                  star={true}
+            {topReposIsLoading ? (
+              <ActivityIndicator size="large" color="black" />
+            ) : (
+              <>
+                <FlatList
+                  data={topRepos}
+                  renderItem={({ item }) => (
+                    <RepoCard
+                      full_name={item.name}
+                      visibility={item.visibility}
+                      description={item.description}
+                      forks_count={item.forkCount}
+                      stargazers_count={item.stargazerCount}
+                      language={item.primaryLanguage?.name}
+                      updated_at={item.updatedAt}
+                      star={true}
+                    />
+                  )}
                 />
-              )}
-            />
+                <ViewAllReposButtonStyled>
+                  <Text>View all repositories</Text>
+                </ViewAllReposButtonStyled>
+              </>
+            )}
           </RepositoriesListContainerStyled>
         </RepositoriesStyled>
       </ContainerStyled>

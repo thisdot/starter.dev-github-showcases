@@ -33,6 +33,7 @@ export const GistsListContainerStyled = styled.View`
   border-bottom-color: #e1e4e8;
   margin-bottom: 20px;
   padding-bottom: 20px;
+  height: 100%;
 `;
 
 export const RepositoriesStyled = styled.View<{ screenWidth: number }>`
@@ -62,4 +63,11 @@ export const TitleStyled = styled.Text`
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 20px;
+`;
+
+export const ViewAllReposButtonStyled = styled.TouchableOpacity`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 `;
