@@ -17,10 +17,10 @@ import { parseSortParams } from '../../../components/RepoIssues/utils';
 import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../../utils/constants';
 import {
   Issue,
-  LabelProps,
   MilestoneProps,
   PageInfo,
 } from '~/types/issues-type';
+import { Label } from '~/types/label-type';
 
 export type IssuesSignal = {
   openIssues: {
@@ -34,7 +34,7 @@ export type IssuesSignal = {
     pageInfo: PageInfo;
   };
   milestones: MilestoneProps[];
-  labels: LabelProps[];
+  labels: Label[];
 };
 
 const [issues, setIssues] = createSignal<IssuesSignal>({
