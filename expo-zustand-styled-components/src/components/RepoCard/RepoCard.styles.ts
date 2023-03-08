@@ -10,7 +10,7 @@ export const Card = styled.View`
   ${flex_row};
   min-width: 100%;
   max-width: 370px;
-  padding-vertical: 20px;
+  padding: 20px;
   border-bottom-width: 1px;
   border-bottom-color: ${colors.gray200};
 `;
@@ -27,19 +27,20 @@ export const Badge = styled.View`
   padding-horizontal: 6px;
   justify-content: center
   align-items: center;
-  margin-horizontal: 12px;
 `;
 
 export const BadgeText = styled.Text`
-  color: ${colors.gray400};
-  font-size: 12px;
+  color: ${colors.gray600};
+  font-size: 10px;
+  font-weight: 700;
   text-align: center;
 `;
 
-export const Heading = styled.View`
+export const Heading = styled.TouchableOpacity`
   ${flex_row};
   width: 100%;
   flex-wrap: wrap;
+  gap: 8px;
 `;
 
 export const LinkText = styled.Text`
@@ -64,6 +65,7 @@ export const MetaData = styled.View`
   margin-top: 8px;
   flex-shrink: 1;
   flex-wrap: wrap;
+  gap: 8px;
 `;
 
 export const Language = styled.View`

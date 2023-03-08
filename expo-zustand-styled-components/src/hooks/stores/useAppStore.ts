@@ -21,10 +21,6 @@ interface IAppStore {
   tree: TreeProps[];
   isLoading: boolean;
   pageInfo?: PageInfo;
-  gists?: {
-    name: string;
-    url: string;
-  }[];
   file?: {
     byteSize: number;
     text: string;
@@ -127,7 +123,7 @@ const initialState: IAppStore = {
 };
 
 const useAppStore = create(
-  persist<IAppStore>(() => ({ ...initialState }), {
+  persist<IAppStore>(() => initialState, {
     name: 'useAppStore',
     storage: createJSONStorage(() =>
       Platform.OS === 'web' ? window.sessionStorage : AsyncStorage

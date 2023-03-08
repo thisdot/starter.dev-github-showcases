@@ -131,7 +131,7 @@ const PullRequests = () => {
           <p>Error</p>
         </Match>
         <Match when={repoPullrequests.isLoading}>
-          <div class="mt-2">
+          <div class="mt-4 ml-4">
             <LoadingPulseDot />
           </div>
         </Match>

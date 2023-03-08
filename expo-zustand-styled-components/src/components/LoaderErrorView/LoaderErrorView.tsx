@@ -1,17 +1,9 @@
 import { View, Text, ViewStyle, StyleProp, ActivityIndicator } from 'react-native';
 
-const LoaderErrorView = ({ error, style }: { error?: string, style?: StyleProp<ViewStyle> }) => {
-  if (error) {
-    return (
-      <View>
-        <Text>{error}</Text>
-      </View>
-    );
-  }
-
+const LoaderErrorView = ({ error, style }: { error?: string; style?: StyleProp<ViewStyle> }) => {
   return (
-    <View style={style}>
-      <ActivityIndicator size="small" color="black" />
+    <View style={[{height: 200, justifyContent: 'center'}, style]}>
+      {error ? <Text>{error}</Text> : <ActivityIndicator size="small" color="black" />}
     </View>
   );
 };

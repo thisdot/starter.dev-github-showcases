@@ -4,13 +4,13 @@ import { View, Text } from 'react-native';
 import { ContainerStyled, ContentViewStyled, ProfileRepoViewStyled } from './Repositories.styles';
 
 import getUserRepos from '../../../services/get-user-repos';
-import { useAppStore } from '../../../hooks/stores';
+import { useUserReposStore } from '../../../hooks/stores';
 
 import LoaderErrorView from '../../LoaderErrorView';
 import RepoCard from '../../RepoCard';
 
 const Repositories = ({ username }: { username: string }) => {
-  const { error, userRepos, isLoading } = useAppStore();
+  const { error, userRepos, isLoading } = useUserReposStore();
 
   useEffect(() => {
     getUserRepos({
