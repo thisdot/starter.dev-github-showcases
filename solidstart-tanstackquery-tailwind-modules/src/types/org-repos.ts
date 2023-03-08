@@ -1,7 +1,7 @@
 import { Repo } from './user-repo-type';
 export interface PageInfo {
-  endCursor?: string | null;
-  startCursor?: string | null;
+  endCursor?: string;
+  startCursor?: string;
   hasNextPage: boolean;
   hasPreviousPage: boolean;
 }

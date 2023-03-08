@@ -15,7 +15,10 @@ export default function OrgProfile() {
   const params = useParams();
   const location = useLocation();
   const [repos, setRepos] = createSignal<Repo[]>([]);
-  const [pageInfo, setPageInfo] = createSignal<PageInfo>();
+  const [pageInfo, setPageInfo] = createSignal<PageInfo>({
+    hasNextPage: false,
+    hasPreviousPage: false
+  });
   const [repoLanguages, setRepoLanguages] = createSignal<string[]>([]);
   const [orgInfo, setOrgInfo] = createSignal<{
     name: string;
@@ -27,7 +30,7 @@ export default function OrgProfile() {
 
   const orgRepos = createQuery(
     () => [
-      'query-repos',
+      'org-query-repos',
       { after: location.query?.after, before: location.query?.before },
     ],
     () =>
@@ -52,6 +55,7 @@ export default function OrgProfile() {
       setRepoLanguages(languages);
     }
   });
+
 
   return (
     <div class="relative">
