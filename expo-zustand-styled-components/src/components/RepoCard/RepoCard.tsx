@@ -14,8 +14,6 @@ import { StarLogo } from '../Icons/StarLogo';
 import { colors } from '../../utils/style-variables';
 import { Text, TouchableWithoutFeedback } from 'react-native';
 
-import { Repository } from '../../interface/repositories.interface';
-
 interface RepoCardProps {
   star?: boolean;
   full_name: string;
