@@ -1,10 +1,6 @@
+import { openURL } from 'expo-linking';
 import React, { useEffect } from 'react';
-import {
-  Text,
-  FlatList,
-  TouchableOpacity,
-  useWindowDimensions,
-} from 'react-native';
+import { Text, FlatList, TouchableOpacity, useWindowDimensions } from 'react-native';
 import {
   GistsStyled,
   TitleStyled,
@@ -19,11 +15,10 @@ import {
 import getGists from '../../services/get-gists';
 import getTopRepos from '../../services/get-top-repos';
 
-import { useGistsStore } from '../../hooks/stores/useGistsStore';
-import { useTopReposStore } from '../../hooks/stores/useTopReposStore';
+import { useGistsStore, useTopReposStore } from '../../hooks/stores';
+
 import RepoCard from '../../components/RepoCard';
 import LoaderErrorView from '../../components/LoaderErrorView';
-import { openURL } from 'expo-linking';
 
 const Home = () => {
   const { width } = useWindowDimensions();
@@ -45,8 +40,8 @@ const Home = () => {
         <GistsStyled screenWidth={width}>
           <GistsListContainerStyled>
             <TitleStyled>Gists</TitleStyled>
-            {(gistsIsLoading || gistsError) ? (
-              <LoaderErrorView error={gistsError}/>
+            {gistsIsLoading || gistsError ? (
+              <LoaderErrorView error={gistsError} />
             ) : (
               <FlatList
                 data={gists}
@@ -62,8 +57,8 @@ const Home = () => {
         <RepositoriesStyled screenWidth={width}>
           <TitleStyled>Top Repositories</TitleStyled>
           <RepositoriesListContainerStyled>
-            {(topReposIsLoading || topReposError) ? (
-              <LoaderErrorView error={topReposError}/>
+            {topReposIsLoading || topReposError ? (
+              <LoaderErrorView error={topReposError} />
             ) : (
               <>
                 <FlatList data={topRepos} renderItem={({ item }) => <RepoCard repo={item} />} />

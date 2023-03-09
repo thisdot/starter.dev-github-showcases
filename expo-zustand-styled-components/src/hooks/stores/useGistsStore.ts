@@ -9,7 +9,9 @@ export interface IGistsStore {
   error?: string;
 }
 
-export const useGistsStore = create<IGistsStore>(() => ({
+const useGistsStore = create<IGistsStore>(() => ({
   gists: undefined,
   isLoading: true,
 }));
+
+export default useGistsStore;

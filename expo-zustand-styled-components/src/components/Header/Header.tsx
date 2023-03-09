@@ -7,14 +7,28 @@ import { StyledHeader, StyledHeaderContainer } from './Header.styles';
 import UserDropdown from '../UserDropdown';
 import { GitHubLogo } from './GitHubLogo';
 
-const Header = ({ width, navigation }: { width: number, navigation: NativeStackNavigationProp<ParamListBase, string, undefined> }) => {
+import { useAuthStore } from '../../hooks/stores';
+
+const Header = ({
+  width,
+  navigation,
+}: {
+  width: number;
+  navigation: NativeStackNavigationProp<ParamListBase, string, undefined>;
+}) => {
+  const { toggleMenu } = useAuthStore();
+
   return (
     <StyledHeader screenWidth={width}>
       <StyledHeaderContainer screenWidth={width}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity
+          onPress={() => {
+            toggleMenu();
+            navigation.navigate('Home');
+          }}>
           <GitHubLogo />
         </TouchableOpacity>
-        <UserDropdown navigation={navigation}/>
+        <UserDropdown width={width} navigation={navigation} />
       </StyledHeaderContainer>
     </StyledHeader>
   );

@@ -1,7 +1,7 @@
 import FetchApi from './api';
 import { TOP_REPOS_QUERY } from './queries/top-repos';
 import { TopRepositories, TopRepository } from '../types/top-repos-type';
-import { useTopReposStore } from '../hooks/stores/useTopReposStore';
+import { useTopReposStore } from '../hooks/stores';
 
 type Response = {
   data: TopRepositories;
@@ -30,7 +30,6 @@ const getTopRepos = async () => {
             },
             visibility: repo.visibility,
             updatedAt: repo.updatedAt,
-            isPrivate: repo.isPrivate,
           },
         ];
       }, [] as TopRepository[]);
