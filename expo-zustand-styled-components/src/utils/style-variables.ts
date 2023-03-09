@@ -17,6 +17,7 @@ export const colors = {
   blue700: 'rgb(30, 64, 175)',
   blue800: 'rgb(30, 58, 138)',
   blue900: 'rgb(17, 24, 39)',
+  primaryGreen: '#2da44e',
 };
 const blackShadow = '0 10px 15px -3px rgb(0 0 0/0.1), 0 4px 6px -4px rgb(0 0 0/0.1)';
 export const shadow = {
