@@ -8,7 +8,6 @@ import {
   RepoPullRequestsQuery,
 } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
-import { LabelProps } from '~/types/issues-type';
 
 type PullRequestVariables = {
   owner: string;
@@ -82,10 +81,10 @@ function parsePullRequests(data?: PullRequestProps) {
 
 function parseLabels(labels: {
   totalCount: number;
-  nodes: LabelProps[];
+  nodes: Label[];
 }) {
   const nodes = labels?.nodes || [];
-  return nodes.reduce((labels: LabelProps[], label: LabelProps) => {
+  return nodes.reduce((labels: Label[], label: Label) => {
     if (!label) {
       return labels;
     }

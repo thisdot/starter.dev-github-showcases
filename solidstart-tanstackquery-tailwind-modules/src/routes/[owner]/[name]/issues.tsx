@@ -1,26 +1,26 @@
 import { Switch, Match, createSignal, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import { useParams, useSearchParams } from 'solid-start';
-import getRepoInfo from '~/services/get-repo-info';
-import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
+import getRepoInfo from '../../../services/get-repo-info';
+import { LoadingPulseDot } from '../../../components/LoadingPulseDot/LoadingPulseDot';
 import { Info } from '~/types/repo-info-type';
-import { RepoHeader } from '~/components/RepoHeader';
-import getIssues from '~/services/get-issues';
-import RepoIssues from '~/components/RepoIssues';
+import { RepoHeader } from '../../../components/RepoHeader';
+import getIssues from '../../../services/get-issues';
+import RepoIssues from '../../../components/RepoIssues';
 import {
   milestoneId,
   selectedLabel,
   selectedMilestone,
   sortBy,
-} from '~/components/PRAndIssuesHeader';
-import { parseSortParams } from '~/components/RepoIssues/utils';
-import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '~/utils/constants';
+} from '../../../components/PRAndIssuesHeader';
+import { parseSortParams } from '../../../components/RepoIssues/utils';
+import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../../utils/constants';
 import {
   Issue,
-  LabelProps,
   MilestoneProps,
   PageInfo,
 } from '~/types/issues-type';
+import { Label } from '~/types/label-type';
 
 export type IssuesSignal = {
   openIssues: {
@@ -34,7 +34,7 @@ export type IssuesSignal = {
     pageInfo: PageInfo;
   };
   milestones: MilestoneProps[];
-  labels: LabelProps[];
+  labels: Label[];
 };
 
 const [issues, setIssues] = createSignal<IssuesSignal>({
@@ -142,7 +142,7 @@ const Issues = () => {
           <p>Error</p>
         </Match>
         <Match when={repoIssues.isLoading}>
-          <div class="mt-2">
+          <div class="mt-4 ml-4">
             <LoadingPulseDot />
           </div>
         </Match>

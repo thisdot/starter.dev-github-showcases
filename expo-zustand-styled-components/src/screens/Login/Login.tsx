@@ -5,11 +5,10 @@ import { URLSearchParams } from 'react-native-url-polyfill';
 import { RootStackScreenProps } from '../../../types';
 import { AUTH_URL } from '../../utils/constants';
 import { useAuthStore } from '../../hooks/stores';
-// import Button from '../../components/Button';
+import Button from '../../components/Button';
 
-// import { SafeAreaViewStyled } from './Login.styles';
-import { View } from 'react-native';
-import RepoFilter from '../../components/RepoFilter';
+import { SafeAreaViewStyled } from './Login.styles';
+import getViewerProfile from '../../services/get-viewer-info';
 
 WebBrowser.maybeCompleteAuthSession();
 const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
@@ -31,23 +30,21 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
 
   useEffect(() => {
     if (token) {
+      getViewerProfile();
       navigation.navigate('AppNavigator', { screen: 'Home' });
     }
   }, [token]);
 
   return (
-    <View style={{marginTop: 48}}>
-      <RepoFilter />
-    </View>
-    // <SafeAreaViewStyled>
-    //   <Button
-    //     primary
-    //     isLoading={isLoading}
-    //     title="Sign in with GitHub"
-    //     loadingText="Loging in..."
-    //     onPress={_handlePressButtonAsync}
-    //   />
-    // </SafeAreaViewStyled>
+    <SafeAreaViewStyled>
+      <Button
+        primary
+        isLoading={isLoading}
+        title="Sign in with GitHub"
+        loadingText="Loging in..."
+        onPress={_handlePressButtonAsync}
+      />
+    </SafeAreaViewStyled>
   );
 };
 

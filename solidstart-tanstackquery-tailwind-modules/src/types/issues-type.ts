@@ -1,14 +1,11 @@
+import { Label } from "./label-type";
+
 export interface MilestoneProps {
   id: string;
   closed: boolean;
   description: string;
   number: number;
   title: string;
-}
-
-export interface LabelProps {
-  color: string;
-  name: string;
 }
 
 export interface PageInfo {
@@ -35,7 +32,7 @@ export interface IssueNodeProps {
   url: string;
   labels: {
     totalCount: number;
-    nodes: LabelProps[];
+    nodes: Label[];
   };
   comments: {
     totalCount: number;
@@ -52,7 +49,7 @@ export interface IssuesInfo {
     };
     labels: {
       totalCount: number;
-      nodes: LabelProps[];
+      nodes: Label[];
     };
     openIssues: IssueProps;
     closedIssues: IssueProps;
@@ -63,7 +60,7 @@ export interface Issue {
   login: string;
   commentCount: number;
   labelCount: number;
-  labels: LabelProps[];
+  labels: Label[];
   title: string;
   number: number;
   createdAt: string;

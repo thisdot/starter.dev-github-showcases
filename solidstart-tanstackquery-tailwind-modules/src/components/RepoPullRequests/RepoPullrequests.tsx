@@ -11,7 +11,7 @@ import PRAndIssuesHeader, {
   sortBy,
 } from '../PRAndIssuesHeader';
 import { Match, Show, Switch } from 'solid-js';
-import { pullRequests } from '~/routes/[owner]/[name]/pulls';
+import { pullRequests } from '../../routes/[owner]/[name]/pulls';
 
 const RepoPullRequests = () => {
   const params = useParams();
@@ -57,14 +57,16 @@ const RepoPullRequests = () => {
               owner={`${params.owner}/${params.name}/issues`}
             />
           </Match>
-
+        </Switch>
+      </Show>
+      <Show when={activeTab() !== 'OPEN'}>
+        <Switch>
           <Match
             when={
               pullRequests().closedPullRequests?.pageInfo?.hasNextPage ||
               pullRequests().closedPullRequests?.pageInfo?.hasPreviousPage
             }
           >
-            {' '}
             <Pagination
               tab={activeTab()}
               pageInfo={pullRequests().closedPullRequests.pageInfo}
@@ -73,7 +75,7 @@ const RepoPullRequests = () => {
           </Match>
         </Switch>
       </Show>
-    </div>
+    </div >
   );
 };
 
