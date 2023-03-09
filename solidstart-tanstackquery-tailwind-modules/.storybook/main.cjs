@@ -22,7 +22,7 @@ module.exports = {
       })
     );
     config.optimizeDeps = {
-      include: [...config.optimizeDeps.include, 'msw'],
+      include: config.optimizeDeps ? [...config.optimizeDeps.include, 'msw'] : ['msw'],
     };
 
     return config;

@@ -76,7 +76,7 @@ const RepoIssues = () => {
           </Match>
         </Switch>
       </Show>
-    </div >
+    </div>
   );
 };
 

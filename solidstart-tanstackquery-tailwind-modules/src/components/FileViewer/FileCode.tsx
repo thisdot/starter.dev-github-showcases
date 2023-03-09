@@ -1,5 +1,5 @@
 import { unstable_clientOnly } from 'solid-start';
-import 'highlight.js/styles/stackoverflow-light.css';
+import './FileCode.css';
 
 const Highlight = unstable_clientOnly(() => import('solid-highlight'));
 
