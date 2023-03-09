@@ -22,7 +22,7 @@ module.exports = {
       })
     );
     config.optimizeDeps = {
-      include: ['@tanstack/solid-query', 'msw', 'msw-storybook-addon', 'solid-heroicons/outline', '@tanstack/query-core', 'date-fns', 'classnames'],
+      include: config.optimizeDeps ? [...config.optimizeDeps.include, 'msw'] : ['msw'],
     };
 
     return config;
