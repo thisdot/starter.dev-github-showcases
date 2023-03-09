@@ -1,4 +1,4 @@
-import { Switch, Match, createEffect } from 'solid-js';
+import { Switch, Match } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import getGists from '~/services/get-gists';
 import { GistsData } from '~/components/GistPanel';
@@ -9,10 +9,6 @@ import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
 const Home = () => {
   const gists = createQuery(() => ['gists'], getGists);
   const topRepos = createQuery(() => ['topRepos'], getTopRepos);
-
-  createEffect(() => {
-  console.log('topRepos.data?.repos', topRepos.data?.repos);
-  });
 
   return (
     <div class="w-full min-h-[calc(100vh-70px)] flex flex-col-reverse lg:flex-row bg-gray-100">
