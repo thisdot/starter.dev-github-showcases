@@ -66,8 +66,8 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
       tab: activeTab,
       after: null,
     });
-    setActiveTab(activeTab)
-  }
+    setActiveTab(activeTab);
+  };
 
   return (
     <div class="flex flex-wrap space-x-1 space-y-2 md:space-x-0 md:space-y-0 items-center justify-between p-4 bg-gray-100 border-b rounded-t-lg">
