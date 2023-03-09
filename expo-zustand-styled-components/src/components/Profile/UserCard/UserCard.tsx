@@ -37,7 +37,7 @@ const UserProfileCard = ({ user }: { user: UserProfile }) => {
         following={user.following.totalCount}
         starredRepositories={user.starredRepositories.totalCount}
       />
-      <View style={{ marginVertical: 8 }}>
+      <View style={{ marginTop: 8, paddingLeft: 16 }}>
         {user.company && (
           <FieldWrapper>
             <OfficeBuildingIcon color={'#57606a'} />

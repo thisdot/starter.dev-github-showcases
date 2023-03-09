@@ -1,7 +1,13 @@
 import { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { Text, useWindowDimensions } from 'react-native';
 
-import { ContainerStyled, ContentViewStyled, ProfileRepoViewStyled } from './Repositories.styles';
+import {
+  ReposContainer,
+  ContainerStyled,
+  ContentViewStyled,
+  PaginationContainer,
+  ProfileSearchViewStyled,
+} from './Repositories.styles';
 
 import getUserRepos from '../../../services/get-user-repos';
 import { useUserReposStore } from '../../../hooks/stores';
@@ -10,6 +16,8 @@ import LoaderErrorView from '../../LoaderErrorView';
 import RepoCard from '../../RepoCard';
 
 const Repositories = ({ username }: { username: string }) => {
+  const { width } = useWindowDimensions();
+
   const { error, userRepos, isLoading } = useUserReposStore();
 
   useEffect(() => {
@@ -26,26 +34,27 @@ const Repositories = ({ username }: { username: string }) => {
   }, [username]);
 
   return (
-    <ContainerStyled style={{ justifyContent: isLoading || error ? 'center' : 'flex-start' }}>
+    <ContainerStyled
+      style={{ justifyContent: isLoading || error ? 'center' : 'flex-start' }}
+      screenWidth={width}>
       {isLoading || error ? (
         <LoaderErrorView error={error} />
       ) : (
         <ContentViewStyled>
-          <View>
+          <ProfileSearchViewStyled>
             <Text>Search & Filter Dropdown Buttons</Text>
-          </View>
-          <View style={{ flex: 1 }}>
-            <ProfileRepoViewStyled>
-              {/* TODO: using map() to render the list of repos, because flatlist is not working properly 
-                    with scrollview and this screen requires scrollview */}
-              {userRepos.map((item, index) => (
-                <RepoCard key={item.id + index} repo={item} isProfilePage />
-              ))}
-            </ProfileRepoViewStyled>
-            <View style={{ flex: 1 }}>
+          </ProfileSearchViewStyled>
+          <ReposContainer>
+            {/* using map() to render the list of repos, because flatlist is not working properly 
+            with scrollview and this screen requires scrollview also the data is not so huge 
+            to consider using flatlist */}
+            {userRepos.map((item, index) => (
+              <RepoCard key={item.id + index} repo={item} isProfilePage />
+            ))}
+            <PaginationContainer>
               <Text>Pagination</Text>
-            </View>
-          </View>
+            </PaginationContainer>
+          </ReposContainer>
         </ContentViewStyled>
       )}
     </ContainerStyled>

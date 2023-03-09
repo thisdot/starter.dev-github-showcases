@@ -1,5 +1,5 @@
-import { Platform } from 'react-native';
 import styled from 'styled-components/native';
+import { breakpoints } from '../../utils/breakpoints';
 
 export const SafeAreaViewStyled = styled.SafeAreaView`
   flex: 1;
@@ -17,20 +17,21 @@ export const ContainerStyled = styled.ScrollView`
   flex-direction: column;
 `;
 
-export const MainContentLayout = styled.View`
+export const MainContentLayout = styled.View<{ screenWidth: number }>`
   flex: 1;
   width: 100%;
-  flex-direction: ${Platform.OS === 'web' ? 'row' : 'column'};
-  padding-horizontal: ${Platform.OS === 'web' ? '10%' : '16px' };
+  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'row' : 'column')};
+  padding-horizontal: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '10%' : 0)};
 `;
 
-export const ContentLayout = styled.View`
+export const ContentLayout = styled.View<{ screenWidth: number }>`
   flex: 1;
   width: 100%;
+  padding-left: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '2.5%' : 0)};
 `;
 
 export const ProfileNavViewStyled = styled.View`
-  padding-vertical: 16px;
+  padding: 16px;
   border-bottom-width: 1px;
   border-bottom-color: #e1e4e8;
 `;

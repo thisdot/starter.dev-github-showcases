@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Text, Platform } from 'react-native';
+import { Text, useWindowDimensions } from 'react-native';
 
 import {
   ContentLayout,
@@ -8,6 +8,8 @@ import {
   SafeAreaViewStyled,
   ProfileNavViewStyled,
 } from './Profile.styles';
+
+import { breakpoints } from '../../utils/breakpoints';
 
 import UserCard from '../../components/Profile/UserCard';
 import LoaderErrorView from '../../components/LoaderErrorView';
@@ -18,38 +20,41 @@ import { useAuthStore } from '../../hooks/stores';
 import getUserProfile from '../../services/get-user-profile';
 
 const Profile = () => {
+  const { width } = useWindowDimensions();
+
   const { user, error, viewer, isLoading } = useAuthStore();
 
   useEffect(() => {
-    if (viewer?.login) {
-      getUserProfile({ username: viewer.login });
-    }
+    getUserProfile({ username: viewer.login });
   }, [viewer]);
 
   return (
     <SafeAreaViewStyled>
-      {(isLoading || error || !user) ? (
-        <LoaderErrorView error={error} />
-      ) : (
-        <ContainerStyled>
-          {Platform.OS === 'web' && (
-            <ProfileNavViewStyled>
-              <Text>Web Tab Navigation</Text>
-            </ProfileNavViewStyled>
-          )}
-          <MainContentLayout>
+      <ContainerStyled>
+        {width >= breakpoints.tablet && (
+          <ProfileNavViewStyled>
+            <Text>Web Tab Navigation</Text>
+          </ProfileNavViewStyled>
+        )}
+        <MainContentLayout screenWidth={width}>
+          {isLoading || error || !user ? (
+            <LoaderErrorView
+              error={error}
+              style={{ width: width >= breakpoints.tablet ? 300 : undefined }}
+            />
+          ) : (
             <UserCard user={user} />
-            <ContentLayout>
-              {Platform.OS !== 'web' && (
-                <ProfileNavViewStyled>
-                  <Text>Mobile Tab Navigation</Text>
-                </ProfileNavViewStyled>
-              )}
-              <Repositories username={viewer.login} />
-            </ContentLayout>
-          </MainContentLayout>
-        </ContainerStyled>
-      )}
+          )}
+          <ContentLayout screenWidth={width}>
+            {width < breakpoints.tablet && (
+              <ProfileNavViewStyled>
+                <Text>Mobile Tab Navigation</Text>
+              </ProfileNavViewStyled>
+            )}
+            <Repositories username={viewer.login} />
+          </ContentLayout>
+        </MainContentLayout>
+      </ContainerStyled>
     </SafeAreaViewStyled>
   );
 };

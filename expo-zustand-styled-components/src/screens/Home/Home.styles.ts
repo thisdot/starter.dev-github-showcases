@@ -2,9 +2,7 @@ import styled from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
 
 export const SafeAreaViewStyled = styled.SafeAreaView`
-  flex: 1;
-  flex-grow: 1;
-  background-color: red;
+  background-color: #f3f4f6;
 `;
 
 export const ContainerStyled = styled.View<{ screenWidth: number }>`

@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
+import { ParamListBase } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
-  DropdownWrapper,
-  ProfileImage,
   UserMenu,
   ListItem,
   ArrowImage,
+  ProfileImage,
+  DropdownWrapper,
   ProfileImageWrapper,
 } from './UserDropdown.styles';
-import { Link } from '@react-navigation/native';
+
 import useAuthStore from '../../hooks/stores/useAuthStore';
 
-const UserDropdown = () => {
+const UserDropdown = ({
+  navigation,
+}: {
+  navigation: NativeStackNavigationProp<ParamListBase, string, undefined>;
+}) => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const toggleDropdown = () => setOpenDropdown(!openDropdown);
   const { logout, viewer } = useAuthStore();
@@ -25,9 +31,13 @@ const UserDropdown = () => {
       {openDropdown && (
         <UserMenu>
           <ListItem>
-            <Link to="/profile">
+            <TouchableOpacity
+              onPress={() => {
+                toggleDropdown();
+                navigation.navigate('Profile');
+              }}>
               <Text>Profile</Text>
-            </Link>
+            </TouchableOpacity>
           </ListItem>
           <ListItem onPress={() => logout()}>
             <Text>Sign Out</Text>

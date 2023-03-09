@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import {
-  FlatList,
   Text,
+  FlatList,
   TouchableOpacity,
   useWindowDimensions,
 } from 'react-native';
 import {
-  GistsListContainerStyled,
   GistsStyled,
+  TitleStyled,
+  ContainerStyled,
   RepositoriesStyled,
   SafeAreaViewStyled,
-  TitleStyled,
-  RepositoriesListContainerStyled,
-  ContainerStyled,
+  GistsListContainerStyled,
   ViewAllReposButtonStyled,
+  RepositoriesListContainerStyled,
 } from './Home.styles';
 
 import getGists from '../../services/get-gists';
@@ -46,7 +46,7 @@ const Home = () => {
           <GistsListContainerStyled>
             <TitleStyled>Gists</TitleStyled>
             {(gistsIsLoading || gistsError) ? (
-              <LoaderErrorView error={gistsError} />
+              <LoaderErrorView error={gistsError}/>
             ) : (
               <FlatList
                 data={gists}
@@ -63,7 +63,7 @@ const Home = () => {
           <TitleStyled>Top Repositories</TitleStyled>
           <RepositoriesListContainerStyled>
             {(topReposIsLoading || topReposError) ? (
-              <LoaderErrorView error={topReposError} />
+              <LoaderErrorView error={topReposError}/>
             ) : (
               <>
                 <FlatList data={topRepos} renderItem={({ item }) => <RepoCard repo={item} />} />

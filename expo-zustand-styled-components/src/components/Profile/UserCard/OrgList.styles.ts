@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const OrganizationsWrapper = styled.View`
   margin-top: 20px;
+  padding-horizontal: 16px;
   border-top-width: 1px;
   border-style: solid;
   border-top-color: #e1e4e8;

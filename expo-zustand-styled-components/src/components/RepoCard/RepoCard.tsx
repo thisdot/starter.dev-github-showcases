@@ -39,7 +39,7 @@ const RepoCard = ({ repo, isProfilePage }: RepoCardProps) => {
             </BadgeText>
           </Badge>
         </Heading>
-        <Description>{repo.description}</Description>
+        <Description numberOfLines={2}>{repo.description}</Description>
         <RepoMeta
           language={repo.primaryLanguage.name}
           updatedAt={repo.updatedAt}

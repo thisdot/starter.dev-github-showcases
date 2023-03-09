@@ -4,6 +4,7 @@
  *
  */
 import * as React from 'react';
+import { useWindowDimensions } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // screens
@@ -20,16 +21,18 @@ import Header from '../../components/Header';
 const Stack = createNativeStackNavigator();
 
 function AuthNavigator() {
+  const { width } = useWindowDimensions();
+
   return (
     <Stack.Navigator
       screenOptions={{
         title: '',
-        header: Header,
         headerShown: true,
         headerShadowVisible: false,
+        header: (props) => <Header width={width} {...props} />,
       }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
+      <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
     </Stack.Navigator>
   );
 }
