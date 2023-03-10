@@ -18,7 +18,7 @@ interface RepoMetaProps {
   language?: string;
   stargazerCount: number;
   forkCount: number;
-  updatedAt: Date;
+  updatedAt: string;
 }
 
 const RepoMeta = ({ language, stargazerCount, forkCount, updatedAt }: RepoMetaProps) => {

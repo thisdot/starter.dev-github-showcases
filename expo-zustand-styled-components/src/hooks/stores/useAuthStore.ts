@@ -10,20 +10,25 @@ interface IAuthStore {
   viewer?: ViewerInfo;
   token?: string;
   error?: string;
+  isMenuOpen: boolean;
   isLoading: boolean;
   logout: () => void;
+  toggleMenu: (v?: boolean) => void;
 }
 
 const initialState: IAuthStore = {
   token: undefined,
   isLoading: false,
-  logout: async () => null,
+  isMenuOpen: false,
+  logout: () => null,
+  toggleMenu: () => null,
 };
 
 const useAuthStore = create(
   persist<IAuthStore>(
-    (set) => ({
+    (set, get) => ({
       ...initialState,
+      toggleMenu: (v) => set(() => ({ isMenuOpen: v ?? !get().isMenuOpen })),
       logout: () => {
         AsyncStorage.clear();
         set(() => ({ ...initialState }));

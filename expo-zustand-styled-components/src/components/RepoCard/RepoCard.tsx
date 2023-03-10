@@ -1,58 +1,53 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { Text, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+
 import {
-  Badge,
-  BadgeText,
   Card,
+  Badge,
   Content,
   Heading,
-  Link,
   StarBtn,
+  LinkText,
+  BadgeText,
   Description,
 } from './RepoCard.styles';
-import RepoMeta from './RepoMeta';
-import { StarLogo } from '../Icons/StarLogo';
-import { colors } from '../../utils/style-variables';
-import { Text, TouchableWithoutFeedback } from 'react-native';
 
+import { colors } from '../../utils/style-variables';
+import { Repo } from '../../types/user-repos-type';
+
+import { StarLogo } from '../Icons/StarLogo';
+import RepoMeta from './RepoMeta';
 interface RepoCardProps {
-  star?: boolean;
-  full_name: string;
-  visibility: 'public' | 'private';
-  description: string;
-  forks_count: number;
-  stargazers_count: number;
-  language: string;
-  updated_at: Date;
+  repo: Repo;
+  isProfilePage?: boolean;
 }
 
-const RepoCard = ({
-  full_name,
-  visibility,
-  description,
-  forks_count,
-  stargazers_count,
-  language,
-  updated_at,
-  star,
-}: RepoCardProps) => {
+const RepoCard = ({ repo, isProfilePage }: RepoCardProps) => {
+  const navigation = useNavigation();
+
   return (
     <Card>
       <Content>
         <Heading>
-          <Link>{full_name}</Link>
+          <TouchableOpacity onPress={() => navigation.navigate('AppNavigator', { screen: 'Home' })}>
+            <LinkText>{repo.name}</LinkText>
+          </TouchableOpacity>
           <Badge>
-            <BadgeText>{visibility}</BadgeText>
+            <BadgeText>
+              {repo.visibility.charAt(0).toUpperCase() + repo.visibility.slice(1).toLowerCase()}
+            </BadgeText>
           </Badge>
         </Heading>
-        <Description>{description}</Description>
+        <Description numberOfLines={2}>{repo.description}</Description>
         <RepoMeta
-          language={language}
-          updatedAt={updated_at}
-          stargazerCount={stargazers_count}
-          forkCount={forks_count}
+          language={repo.primaryLanguage.name}
+          updatedAt={repo.updatedAt}
+          stargazerCount={repo.stargazerCount}
+          forkCount={repo.forkCount}
         />
       </Content>
-      {star && (
+      {isProfilePage && (
         <TouchableWithoutFeedback>
           <StarBtn>
             <StarLogo color={colors.gray700} width={18} height={18} />

@@ -1,3 +1,5 @@
+import { Repo } from "./user-repos-type";
+
 export interface TopRepositories {
   viewer: {
     login: string;
@@ -7,20 +9,5 @@ export interface TopRepositories {
   };
 }
 
-export type TopRepository = {
-  id: string;
-  name: string;
-  description: string;
-  owner: {
-    login: string;
-  };
-  primaryLanguage: {
-    name: string;
-    color: string;
-  };
-  visibility: 'public' | 'private';
-  isPrivate: boolean;
-  stargazerCount: number;
-  forkCount: number;
-  updatedAt: Date;
-};
+export type TopRepository = Repo
+

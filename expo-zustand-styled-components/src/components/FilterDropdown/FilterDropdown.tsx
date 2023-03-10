@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, FlatList, useWindowDimensions } from 'react-native';
+import { View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import React from 'react';
 import {
   Dropdown,
@@ -49,19 +49,16 @@ const FilterDropdown = ({
             <CloseIcon color={colors.gray600} width={20} height={20} />
           </TouchableOpacity>
         </DropdownOptionsHeading>
-        <FlatList
-          data={items}
-          renderItem={({ item }) => (
-            <DropdownOption onPress={() => selectOption(item)}>
-              {selected === item ? (
-                <CorrectIcon color={colors.gray600} />
-              ) : (
-                <View style={{ marginRight: 16 }} />
-              )}
-              <Text>{item}</Text>
-            </DropdownOption>
-          )}
-        />
+        {items.map((item) => (
+          <DropdownOption key={item} onPress={() => selectOption(item)}>
+            {selected === item ? (
+              <CorrectIcon color={colors.gray600} />
+            ) : (
+              <View style={{ marginRight: 16 }} />
+            )}
+            <Text>{item}</Text>
+          </DropdownOption>
+        ))}
       </DropdownOptions>
     </Dropdown>
   );

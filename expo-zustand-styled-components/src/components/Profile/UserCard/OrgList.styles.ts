@@ -2,9 +2,10 @@ import styled from 'styled-components/native';
 
 export const OrganizationsWrapper = styled.View`
   margin-top: 20px;
+  padding-horizontal: 16px;
   border-top-width: 1px;
   border-style: solid;
-  border-top-color: rgb(31, 41, 55);
+  border-top-color: #e1e4e8;
 `;
 export const Heading = styled.Text`
   margin-top: 8px;
@@ -31,5 +32,5 @@ export const Organisation = styled.View`
 export const OrgImage = styled.Image`
   width: 100%;
   height: 100%;
-  resizemode: cover;
+  resize-mode: cover;
 `;

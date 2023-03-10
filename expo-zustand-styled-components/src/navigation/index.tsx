@@ -41,7 +41,7 @@ function RootNavigator() {
 
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
         <Stack.Screen name="AppNavigator" component={AppNavigator} />

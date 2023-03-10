@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
 
-export const SafeAreaViewStyled = styled.SafeAreaView``;
+export const SafeAreaViewStyled = styled.SafeAreaView`
+  background-color: #f3f4f6;
+`;
 
 export const ContainerStyled = styled.View<{ screenWidth: number }>`
   height: 100%;
@@ -33,7 +35,6 @@ export const GistsListContainerStyled = styled.View`
   border-bottom-color: #e1e4e8;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  height: 100%;
 `;
 
 export const RepositoriesStyled = styled.View<{ screenWidth: number }>`

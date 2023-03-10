@@ -1,36 +1,45 @@
-import React, { useState } from 'react';
-import { Text } from 'react-native';
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
+import { ParamListBase } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
-  DropdownWrapper,
-  ProfileImage,
   UserMenu,
   ListItem,
   ArrowImage,
+  ProfileImage,
+  DropdownWrapper,
   ProfileImageWrapper,
 } from './UserDropdown.styles';
-import { Link } from '@react-navigation/native';
+
 import useAuthStore from '../../hooks/stores/useAuthStore';
 
-const UserDropdown = () => {
-  const [openDropdown, setOpenDropdown] = useState(false);
-  const toggleDropdown = () => setOpenDropdown(!openDropdown);
-  const { logout } = useAuthStore();
-  const viewer = useAuthStore((state) => state.viewer);
+const UserDropdown = ({
+  width,
+  navigation,
+}: {
+  width: number;
+  navigation: NativeStackNavigationProp<ParamListBase, string, undefined>;
+}) => {
+  const { logout, viewer, isMenuOpen, toggleMenu } = useAuthStore();
 
   return (
     <DropdownWrapper>
-      <ProfileImageWrapper testID="profile-image" onPress={() => toggleDropdown()}>
+      <ProfileImageWrapper testID="profile-image" onPress={() => toggleMenu()}>
         <ProfileImage source={{ uri: viewer?.avatarUrl || '' }} />
         <ArrowImage source={require('../../../assets/arrow-down-icon.png')} />
       </ProfileImageWrapper>
-      {openDropdown && (
-        <UserMenu>
-          <ListItem>
-            <Link to="/profile">
+      {isMenuOpen && (
+        <UserMenu screenWidth={width}>
+          <ListItem screenWidth={width}>
+            <TouchableOpacity
+              onPress={() => {
+                toggleMenu();
+                navigation.navigate('Profile');
+              }}>
               <Text>Profile</Text>
-            </Link>
+            </TouchableOpacity>
           </ListItem>
-          <ListItem onPress={() => logout()}>
+          <ListItem onPress={() => logout()} screenWidth={width}>
             <Text>Sign Out</Text>
           </ListItem>
         </UserMenu>

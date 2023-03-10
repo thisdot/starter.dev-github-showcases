@@ -31,7 +31,7 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
     <>
       <RepoFilterWrapper screenWidth={width}>
         <SearchInput />
-        <FiltersWrapper screenWidth={width}>
+        <FiltersWrapper horizontal screenWidth={width} contentContainerStyle={{ flexGrow: 1 }}>
           <FilterDropdown
             name="Type"
             items={typeOptions}
@@ -59,11 +59,12 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
             showOptions={showOptions}
             setShowOptions={(value) => setShowOptions(value)}
           />
+
+          <RepoBtn activeOpacity={0.8}>
+            <RepoBookIcon color={'#FFF'} />
+            <RepoBtnText>{repoBtnText || 'New'}</RepoBtnText>
+          </RepoBtn>
         </FiltersWrapper>
-        <RepoBtn activeOpacity={0.8}>
-          <RepoBookIcon color={'#FFF'} />
-          <RepoBtnText>{repoBtnText || 'New'}</RepoBtnText>
-        </RepoBtn>
       </RepoFilterWrapper>
       {/* Should show when repos are not just sorted */}
       <FilterText filteredRepoCount={filteredRepoCount} />

@@ -4,11 +4,15 @@
  *
  */
 import * as React from 'react';
+import { useWindowDimensions } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // screens
 import HomeScreen from '../../screens/Home';
 import ProfileScreen from '../../screens/Profile';
+
+// components
+import Header from '../../components/Header';
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
@@ -17,10 +21,18 @@ import ProfileScreen from '../../screens/Profile';
 const Stack = createNativeStackNavigator();
 
 function AuthNavigator() {
+  const { width } = useWindowDimensions();
+
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Navigator
+      screenOptions={{
+        title: '',
+        headerShown: true,
+        headerShadowVisible: false,
+        header: (props) => <Header width={width} {...props} />,
+      }}>
+      <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
+      <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
     </Stack.Navigator>
   );
 }
