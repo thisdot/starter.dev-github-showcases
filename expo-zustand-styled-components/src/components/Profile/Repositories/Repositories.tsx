@@ -10,15 +10,17 @@ import {
 } from './Repositories.styles';
 
 import getUserRepos from '../../../services/get-user-repos';
-import { useUserReposStore } from '../../../hooks/stores';
+import { useUserReposStore, useRepoFilterStore } from '../../../hooks/stores';
 
 import LoaderErrorView from '../../LoaderErrorView';
 import RepoCard from '../../RepoCard';
+import FilterDropdown from '../../FilterDropdown';
 
 const Repositories = ({ username }: { username: string }) => {
   const { width } = useWindowDimensions();
 
   const { error, userRepos, isLoading } = useUserReposStore();
+  const { search } = useRepoFilterStore();
 
   useEffect(() => {
     getUserRepos({
@@ -42,7 +44,15 @@ const Repositories = ({ username }: { username: string }) => {
       ) : (
         <ContentViewStyled>
           <ProfileSearchViewStyled>
-            <Text>Search & Filter Dropdown Buttons</Text>
+            <FilterDropdown
+              name={'Type'}
+              items={['A','B','C']}
+              selected={''}
+              selectOption={() => null}
+              zIndex={1000}
+              showOptions={''}
+              setShowOptions={() => null}
+             />
           </ProfileSearchViewStyled>
           <ReposContainer>
             {/* using map() to render the list of repos, because flatlist is not working properly 
