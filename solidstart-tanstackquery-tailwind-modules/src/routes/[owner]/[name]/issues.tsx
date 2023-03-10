@@ -2,7 +2,7 @@ import { Switch, Match, createSignal, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import { useParams, useSearchParams } from 'solid-start';
 import getRepoInfo from '../../../services/get-repo-info';
-import { LoadingPulseDot } from '../../../components/LoadingPulseDot/LoadingPulseDot';
+import { LoadingPulseDot } from '../../../components/LoadingPulseDot';
 import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '../../../components/RepoHeader';
 import getIssues from '../../../services/get-issues';
@@ -15,11 +15,7 @@ import {
 } from '../../../components/PRAndIssuesHeader';
 import { parseSortParams } from '../../../components/RepoIssues/utils';
 import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../../utils/constants';
-import {
-  Issue,
-  MilestoneProps,
-  PageInfo,
-} from '~/types/issues-type';
+import { Issue, MilestoneProps, PageInfo } from '~/types/issues-type';
 import { Label } from '~/types/label-type';
 
 export type IssuesSignal = {

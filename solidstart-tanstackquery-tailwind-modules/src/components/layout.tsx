@@ -1,5 +1,5 @@
 import { JSXElement, Show, children, createEffect } from 'solid-js';
-import Header from '../components/Header/header';
+import { Header } from './Header';
 import { useAuth } from '~/auth';
 import { useLocation } from 'solid-start';
 

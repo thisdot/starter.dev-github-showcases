@@ -2,7 +2,7 @@ import { For, Show } from 'solid-js';
 import { RepoCard } from '~/components/RepoCard';
 import { RepoFilter } from '~/components/RepoFilter';
 import { Pagination } from '../Pagination';
-import { RepoInfos } from '../ProfilePage/ProfilePage';
+import { RepoInfos } from '~/types/user-repo-type';
 
 const UserRepos = (props: RepoInfos) => {
   return (
