@@ -8,19 +8,28 @@ type ScreenWidth = {
 
 export const RepoFilterWrapper = styled.View<ScreenWidth>`
   flex-direction: ${({screenWidth}) => screenWidth >= breakpoints.laptop ? 'row' : 'column'}
-  gap: 14px;
+  gap: 10px;
+  padding: 16px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: ${colors.gray300};
-  padding-bottom: 14px;
+`;
+
+export const FiltersWrapper = styled.ScrollView<ScreenWidth>`
+  gap: 10px;
+  z-index: 500;
+  elevation: 500;
+  flex-direction: row;
+  background-color: #fff;
+  width: 100%;
 `;
 
 export const FilterTextWrapper = styled.View`
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: ${colors.gray300};
-  margin-top: 14px;
-  padding-bottom: 14px;
+  padding-horizontal: 16px;
+  padding-vertical: 10px;
   flex-direction: row;
   gap: 12px;
   justify-content: space-between;
@@ -33,13 +42,6 @@ export const FilterTextContent = styled.View`
   align-items: center;
   flex-wrap: wrap;
   flex-grow: 1;
-`;
-
-export const FiltersWrapper = styled.View<ScreenWidth>`
-  flex-direction: ${({screenWidth}) => screenWidth >= breakpoints.tablet ? 'row' : 'column'}
-  gap: 4px;
-  z-index: 500;
-  elevation: 500;
 `;
 
 export const SearchTextInput = styled.TextInput`

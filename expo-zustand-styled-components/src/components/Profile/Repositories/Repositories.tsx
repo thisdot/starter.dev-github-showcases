@@ -6,7 +6,6 @@ import {
   ContainerStyled,
   ContentViewStyled,
   PaginationContainer,
-  ProfileSearchViewStyled,
 } from './Repositories.styles';
 
 import getUserRepos from '../../../services/get-user-repos';
@@ -14,7 +13,7 @@ import { useUserReposStore, useRepoFilterStore } from '../../../hooks/stores';
 
 import LoaderErrorView from '../../LoaderErrorView';
 import RepoCard from '../../RepoCard';
-import FilterDropdown from '../../FilterDropdown';
+import RepoFilter from '../../RepoFilter';
 
 const Repositories = ({ username }: { username: string }) => {
   const { width } = useWindowDimensions();
@@ -43,17 +42,7 @@ const Repositories = ({ username }: { username: string }) => {
         <LoaderErrorView error={error} />
       ) : (
         <ContentViewStyled>
-          <ProfileSearchViewStyled>
-            <FilterDropdown
-              name={'Type'}
-              items={['A','B','C']}
-              selected={''}
-              selectOption={() => null}
-              zIndex={1000}
-              showOptions={''}
-              setShowOptions={() => null}
-             />
-          </ProfileSearchViewStyled>
+          <RepoFilter languages={[]} filteredRepoCount={0} repoBtnText="New" />
           <ReposContainer>
             {/* using map() to render the list of repos, because flatlist is not working properly 
             with scrollview and this screen requires scrollview also the data is not so huge 

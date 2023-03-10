@@ -14,6 +14,8 @@ export const ContentViewStyled = styled.View`
 export const ProfileSearchViewStyled = styled.View`
   padding: 16px;
   display: flex;
+  gap: 10px;
+  flex-direction: row;
   background-color: #fff;
 `;
 
