@@ -7,67 +7,67 @@ type ScreenWidth = {
 };
 
 export const RepoFilterWrapper = styled.View<ScreenWidth>`
-  flex-direction: ${({screenWidth}) => screenWidth >= breakpoints.laptop ? 'row' : 'column'}
   gap: 10px;
   padding: 16px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: ${colors.gray300};
+  flex-direction: ${({screenWidth}) => screenWidth >= breakpoints.laptop ? 'row' : 'column'}
 `;
 
 export const FiltersWrapper = styled.ScrollView<ScreenWidth>`
   gap: 10px;
+  width: 100%;
   z-index: 500;
   elevation: 500;
   flex-direction: row;
   background-color: #fff;
-  width: 100%;
 `;
 
 export const FilterTextWrapper = styled.View`
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: ${colors.gray300};
-  padding-horizontal: 16px;
-  padding-vertical: 10px;
-  flex-direction: row;
   gap: 12px;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
+  padding-vertical: 10px;
+  border-bottom-width: 1px;
+  padding-horizontal: 16px;
+  border-bottom-style: solid;
+  justify-content: space-between;
+  border-bottom-color: ${colors.gray300};
 `;
 
 export const FilterTextContent = styled.View`
-  flex-direction: row;
   gap: 4px;
-  align-items: center;
-  flex-wrap: wrap;
   flex-grow: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const SearchTextInput = styled.TextInput`
   width: 100%;
-  border: 1px solid ${colors.gray300};
+  font-size: 16px;
   padding: 8px 12px;
   border-radius: 8px;
-  color: ${colors.gray500};
   background-color: #FFF;
-  font-size: 16px;
+  color: ${colors.gray500};
+  border: 1px solid ${colors.gray300};
 `;
 
 export const RepoBtn = styled.TouchableOpacity`
+  gap: 8px;
+  padding: 6px 12px;
   flex-direction: row;
+  border-radius: 6px;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  border-radius: 6px;
-  padding: 6px 12px;
   background-color: ${colors.primaryGreen};
 `;
 
 export const RepoBtnText = styled.Text`
   color: #FFF;
-  font-weight: 700;
   font-size: 14px;
+  font-weight: 700;
 `;
 
 
@@ -78,16 +78,16 @@ export const ClearFilter = styled.TouchableOpacity`
 `;
 
 export const ClearIcon = styled.TouchableOpacity`
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: ${colors.blue600};
-  border-radius: 8px;
   width: 25px;
   height: 25px;
+  border-radius: 8px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.blue600};
 `;
 
 export const ClearText = styled.Text<ScreenWidth>`
-  display: ${({screenWidth}) => screenWidth > breakpoints.tablet ? 'flex' : 'none'};
   color:  ${colors.blue600};
+  display: ${({screenWidth}) => screenWidth > breakpoints.tablet ? 'flex' : 'none'};
 `;

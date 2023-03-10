@@ -23,7 +23,7 @@ const Header = ({
       <StyledHeaderContainer screenWidth={width}>
         <TouchableOpacity
           onPress={() => {
-            toggleMenu();
+            toggleMenu(false);
             navigation.navigate('Home');
           }}>
           <GitHubLogo />

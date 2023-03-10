@@ -44,6 +44,7 @@ export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = Nati
 export type AppStackParamList = {
   Home: undefined;
   Profile: undefined;
+  Organization: { login: string };
 };
 
 export type AppStackScreenProps<Screen extends keyof AppStackParamList> = NativeStackScreenProps<
