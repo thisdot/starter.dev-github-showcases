@@ -1,4 +1,4 @@
-export const LoadingPulseDot = () => {
+const LoadingPulseDot = () => {
   return (
     <div class="flex space-x-1">
       <div
@@ -16,3 +16,5 @@ export const LoadingPulseDot = () => {
     </div>
   );
 };
+
+export default LoadingPulseDot;

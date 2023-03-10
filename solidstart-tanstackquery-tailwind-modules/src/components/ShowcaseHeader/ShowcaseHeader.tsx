@@ -1,14 +1,14 @@
 import { A } from '@solidjs/router';
 import { useAuth } from '../../auth';
 import { GitHubLogo } from './github-logo';
-import styles from './Header.module.css';
+import styles from './ShowcaseHeader.module.css';
 import { SIGN_IN_BASE_URL } from '../../utils/constants';
 import { UserDropdown } from '../UserDropdown';
 import { createQuery } from '@tanstack/solid-query';
 import { Match, Switch, createEffect } from 'solid-js';
 import getViewerProfile from '~/services/get-viewer-profile';
 
-const Header = () => {
+const ShowcaseHeader = () => {
   const { authStore, setAuth } = useAuth();
 
   const query = createQuery(() => ['viewer'], getViewerProfile);
@@ -52,4 +52,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default ShowcaseHeader;

@@ -2,9 +2,9 @@ import { Switch, Match } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import getGists from '~/services/get-gists';
 import { GistsData } from '~/components/GistPanel';
-import TopRepos from '~/components/TopRepos/TopRepos';
 import getTopRepos from '~/services/get-top-repos';
-import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
+import { TopRepos } from '~/components/TopRepos';
+import { LoadingPulseDot } from '~/components/LoadingPulseDot';
 
 const Home = () => {
   const gists = createQuery(() => ['gists'], getGists);
@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <div class="w-full min-h-[calc(100vh-70px)] flex flex-col-reverse lg:flex-row bg-gray-100">
-      <aside class="w-full lg:w-96 bg-white p-8">
+      <aside class="w-full lg:w-96 bg-white p-12">
         <Switch>
           <Match when={gists.isError}>
             <p>Error</p>

@@ -79,10 +79,7 @@ function parsePullRequests(data?: PullRequestProps) {
   return { pullRequests, totalCount, pageInfo };
 }
 
-function parseLabels(labels: {
-  totalCount: number;
-  nodes: Label[];
-}) {
+function parseLabels(labels: { totalCount: number; nodes: Label[] }) {
   const nodes = labels?.nodes || [];
   return nodes.reduce((labels: Label[], label: Label) => {
     if (!label) {

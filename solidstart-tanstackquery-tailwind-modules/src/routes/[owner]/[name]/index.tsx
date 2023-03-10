@@ -2,13 +2,13 @@ import { Switch, Match, createSignal, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import { useParams } from 'solid-start';
 import getRepoInfo from '~/services/get-repo-info';
-import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
 import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '~/components/RepoHeader';
 import { RepoAbout } from '~/components/RepoAbout';
 import { BranchNavigation } from '~/components/BranchNavigation';
 import { RepoReadMe } from '~/components/RepoReadMe';
 import FileExplorer from '~/components/FileExplorer';
+import { LoadingPulseDot } from '~/components/LoadingPulseDot';
 
 const Repository = () => {
   const params = useParams();

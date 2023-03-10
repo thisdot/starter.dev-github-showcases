@@ -3,21 +3,11 @@ import { useLocation } from 'solid-start/router';
 import styles from './ProfilePage.module.css';
 import { ProfileNav } from '~/components/ProfileNav';
 import { Profile } from '~/types/user-profile-type';
-import { PageInfo, Repo } from '~/types/user-repo-type';
+import { Repo, RepoInfoProps } from '~/types/user-repo-type';
 import UserProfile from '~/components/UserProfile';
 import { UserRepos } from '~/components/UserRepos';
 import useRepoSortFilter from '~/utils/useRepoSortFilter';
 import { useParams } from 'solid-start';
-
-interface RepoInfoProps {
-  pageInfo: PageInfo;
-  repos: Repo[];
-  owner?: string;
-}
-
-export interface RepoInfos extends RepoInfoProps {
-  languages: string[];
-}
 
 type ProfilePageProps = {
   user: Profile;
