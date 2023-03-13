@@ -1,8 +1,12 @@
 import { create } from 'zustand';
-import { defaultLanguage, FILTER_TYPE_OPTIONS, SORT_OPTIONS } from '../../components/RepoFilter/data';
+import {
+  defaultLanguage,
+  FILTER_TYPE_OPTIONS,
+  SORT_OPTIONS,
+} from '../../components/RepoFilter/data';
 
-export type FilterType = 'All' | 'Forks' | 'Archived'
-export type SortByType = 'Last updated' | 'Stars' | 'Name'
+export type FilterType = 'All' | 'Forks' | 'Archived';
+export type SortByType = 'Last updated' | 'Stars' | 'Name';
 interface UseRepoFilterStore {
   search: string;
   language: string;
@@ -23,10 +27,10 @@ const initialState = {
 
 const useRepoFilterStore = create<UseRepoFilterStore>((set) => ({
   ...initialState,
-  setSearch: (value) => set(() => ({search: value})),
-  setLanguage: (value) => set(() => ({language: value})),
-  setSortBy: (value) => set(() => ({sortBy: value})),
-  setFilterType: (value) => set(() => ({filterType: value})),
+  setSearch: (value) => set(() => ({ search: value })),
+  setLanguage: (value) => set(() => ({ language: value })),
+  setSortBy: (value) => set(() => ({ sortBy: value })),
+  setFilterType: (value) => set(() => ({ filterType: value })),
 }));
 
 export default useRepoFilterStore;

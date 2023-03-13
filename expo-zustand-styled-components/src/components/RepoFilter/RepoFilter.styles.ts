@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
 import { colors } from '../../utils/style-variables';
-import {breakpoints} from '../../utils/breakpoints';
+import { breakpoints } from '../../utils/breakpoints';
 
 type ScreenWidth = {
   screenWidth: number | undefined;
 };
 
 export const RepoFilterWrapper = styled.View<ScreenWidth>`
-  flex-direction: ${({screenWidth}) => screenWidth >= breakpoints.laptop ? 'row' : 'column'}
+  flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 'row' : 'column')}
   gap: 10px;
   padding: 16px;
   border-bottom-width: 1px;
@@ -21,7 +21,7 @@ export const FiltersWrapper = styled.View<ScreenWidth>`
   elevation: 500;
   display: flex;
   justify-content: space-around;
-  flex-direction: ${({screenWidth}) => screenWidth >= breakpoints.laptop ? 'row' : 'column'}
+  flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 'row' : 'column')}
   background-color: #fff;
 `;
 
@@ -52,7 +52,7 @@ export const SearchTextInput = styled.TextInput`
   padding: 8px 12px;
   border-radius: 8px;
   color: ${colors.gray500};
-  background-color: #FFF;
+  background-color: #fff;
   font-size: 16px;
 `;
 
@@ -67,11 +67,10 @@ export const RepoBtn = styled.TouchableOpacity`
 `;
 
 export const RepoBtnText = styled.Text`
-  color: #FFF;
+  color: #fff;
   font-weight: 700;
   font-size: 14px;
 `;
-
 
 export const ClearFilter = styled.TouchableOpacity`
   flex-direction: row;
@@ -90,6 +89,6 @@ export const ClearIcon = styled.TouchableOpacity`
 `;
 
 export const ClearText = styled.Text<ScreenWidth>`
-  display: ${({screenWidth}) => screenWidth > breakpoints.tablet ? 'flex' : 'none'};
-  color:  ${colors.blue600};
+  display: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'flex' : 'none')};
+  color: ${colors.blue600};
 `;

@@ -28,7 +28,11 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
   const selectSort = (value) => setSortBy(value);
 
   // change this const when we'll add also the other sort functions
-  const isSomeFilterSelected = search !== '' || filterType !== FILTER_TYPE_OPTIONS.default || sortBy !== SORT_OPTIONS.default || language !== defaultLanguage
+  const isSomeFilterSelected =
+    search !== '' ||
+    filterType !== FILTER_TYPE_OPTIONS.default ||
+    sortBy !== SORT_OPTIONS.default ||
+    language !== defaultLanguage;
 
   return (
     <>

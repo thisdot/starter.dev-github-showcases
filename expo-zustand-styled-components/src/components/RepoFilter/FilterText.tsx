@@ -27,13 +27,14 @@ interface FilterTextProps {
 
 const FilterText = ({ filteredRepoCount }: FilterTextProps) => {
   const { width } = useWindowDimensions();
-  const { filterType, language, search, sortBy, setFilterType, setLanguage, setSearch, setSortBy } = useRepoFilterStore();
+  const { filterType, language, search, sortBy, setFilterType, setLanguage, setSearch, setSortBy } =
+    useRepoFilterStore();
 
   const clearFilters = () => {
     setFilterType(defaultFilterType);
     setLanguage(defaultLanguage);
-    setSortBy(defaultSortBy)
-    setSearch('')
+    setSortBy(defaultSortBy);
+    setSearch('');
   };
 
   return (
@@ -63,12 +64,12 @@ const FilterText = ({ filteredRepoCount }: FilterTextProps) => {
         </Text>
       </FilterTextContent>
       <ClearFilter onPress={() => clearFilters()}>
-        <ClearIcon onPress={() => clearFilters()} >
+        <ClearIcon onPress={() => clearFilters()}>
           <CloseIcon color="#FFF" />
         </ClearIcon>
         <ClearText screenWidth={width}>Clear filter</ClearText>
       </ClearFilter>
-    </FilterTextWrapper >
+    </FilterTextWrapper>
   );
 };
 

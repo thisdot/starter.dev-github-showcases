@@ -23,8 +23,7 @@ const Repositories = ({ username }: { username: string }) => {
 
   const { search, filterType, sortBy, language } = useRepoFilterStore();
 
-  const { result, languages } = useRepoSortFilter(userRepos, search, filterType, sortBy, language)
-
+  const { result, languages } = useRepoSortFilter(userRepos, search, filterType, sortBy, language);
 
   useEffect(() => {
     getUserRepos({
@@ -40,10 +39,8 @@ const Repositories = ({ username }: { username: string }) => {
   }, [username]);
 
   useEffect(() => {
-    useRepoSortFilter(userRepos, search, filterType, sortBy, language)
+    useRepoSortFilter(userRepos, search, filterType, sortBy, language);
   }, [search, userRepos, filterType]);
-
-
 
   return (
     <ContainerStyled
