@@ -41,7 +41,7 @@ const Repositories = ({ username }: { username: string }) => {
 
   useEffect(() => {
     useRepoSortFilter(userRepos, search)
-  }, [search]);
+  }, [search, userRepos]);
 
 
 
