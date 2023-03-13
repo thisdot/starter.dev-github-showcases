@@ -1,10 +1,8 @@
 
-import { useRepoFilterStore } from '../hooks/stores';
 import { Repo } from '../types/user-repos-type';
 
 // Function to filter repos by search
-export const repoDataFilteredBySearch = (repos: Repo[]) => {
-  const { search } = useRepoFilterStore();
+export const repoDataFilteredBySearch = (repos: Repo[], search: string) => {
   if (repos.length < 1) {
     return repos;
   }

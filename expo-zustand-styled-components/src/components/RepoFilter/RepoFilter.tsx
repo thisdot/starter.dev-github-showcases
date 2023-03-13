@@ -19,13 +19,16 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
   const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
   const sortOptions = Object.values(SORT_OPTIONS);
   const languageOptions = ['All', 'HTML', 'CSS', 'PHP']; //To be replaced with the actual languages for the repos
-  const { language, sortBy, filterType, setLanguage, setSortBy, setFilterType } =
+  const { language, sortBy, filterType, setLanguage, setSortBy, setFilterType, search } =
     useRepoFilterStore();
   const [showOptions, setShowOptions] = useState(null);
 
   const selectLanguage = (value) => setLanguage(value);
   const selectType = (value) => setFilterType(value);
   const selectSort = (value) => setSortBy(value);
+
+  // change this const when we'll add also the other sort functions
+  const isSomeFilterSelected = search !== ''
 
   return (
     <>
@@ -66,8 +69,7 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
           </RepoBtn>
         </FiltersWrapper>
       </RepoFilterWrapper>
-      {/* Should show when repos are not just sorted */}
-      <FilterText filteredRepoCount={filteredRepoCount} />
+      {isSomeFilterSelected && <FilterText filteredRepoCount={filteredRepoCount} />}
     </>
   );
 };
