@@ -1,17 +1,14 @@
 import { Repo } from '../types/user-repos-type';
 import { repoDataFilteredBySearch } from './searchFunction';
-import { useRepoFilterStore } from '../hooks/stores';
+import { useRepoFilterStore, useUserReposStore } from '../hooks/stores';
 
-const useRepoSortFilter = (repos: Repo[]): {result: Repo[]} => {
+const useRepoSortFilter = (repos: Repo[]) => {
   const { search } = useRepoFilterStore();
 
-  let result = repos;
-
   if (search) {
-    result = repoDataFilteredBySearch(result);
+    useUserReposStore.setState({ isLoading: false, userRepos: repoDataFilteredBySearch(repos) });
   }
 
-  return {result};
 };
 
 export default useRepoSortFilter;

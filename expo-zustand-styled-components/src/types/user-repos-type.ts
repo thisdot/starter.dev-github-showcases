@@ -6,6 +6,8 @@ export interface Repo {
   forkCount: number;
   visibility: string;
   updatedAt: string;
+  isFork: boolean;
+  isArchived: boolean;
   owner: {
     login: string;
   };

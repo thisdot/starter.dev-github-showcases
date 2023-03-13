@@ -34,6 +34,8 @@ const Repositories = ({ username }: { username: string }) => {
     });
   }, [username]);
 
+  console.log(userRepos)
+
   return (
     <ContainerStyled
       style={{ justifyContent: isLoading || error ? 'center' : 'flex-start' }}
