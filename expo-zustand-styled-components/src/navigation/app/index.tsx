@@ -34,7 +34,11 @@ function AuthNavigator() {
       }}>
       <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
       <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
-      <Stack.Screen name="Repository" component={RepositoryScreen} options={{ title: 'Profile' }} />
+      <Stack.Screen
+        name="Repository"
+        component={RepositoryScreen}
+        options={{ title: 'Repository' }}
+      />
     </Stack.Navigator>
   );
 }

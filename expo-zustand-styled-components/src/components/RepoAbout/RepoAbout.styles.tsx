@@ -2,8 +2,10 @@ import styled from 'styled-components/native';
 import { colors } from '../../utils/style-variables';
 
 export const AboutContainerStyled = styled.View`
-  border-bottom: 2px solid ${colors.gray300};
+  border-bottom-width: 2px;
+  border-bottom-color: ${colors.gray300};
   width: 100%;
+  padding: 1rem 0;
 `;
 
 export const HeaderStyled = styled.Text`
@@ -59,4 +61,15 @@ export const TagTextStyled = styled.Text`
   padding: 0.2rem 0.5rem;
   font-size: 0.8em;
   font-weight: 600;
+`;
+
+export const ReadmeHoverEffectStyled = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const ReadmeTextStyled = styled.Text`
+  margin-left: 0.5rem;
 `;

@@ -1,6 +1,7 @@
 import * as WebBrowser from 'expo-web-browser';
 import { ActivityIndicator } from 'react-native';
 import LinkIcon from '../Icons/LinkIcon';
+import { ReadmeBookIcon } from '../Icons/ReadmeBookIcon';
 import {
   AboutContainerStyled,
   HeaderStyled,
@@ -10,7 +11,10 @@ import {
   SpacingContainerStyled,
   LinkContainerStyled,
   WebsiteLinkStyled,
+  ReadmeHoverEffectStyled,
+  ReadmeTextStyled,
   DescriptionTextStyled,
+  //   ReadmeIconStyled,
   TagsContainerStyled,
 } from './RepoAbout.styles';
 
@@ -54,6 +58,11 @@ export default function RepoAbout({ description, homepageUrl, topics, isLoading 
           </>
         )}
       </SpacingContainerStyled>
+
+      <ReadmeHoverEffectStyled>
+        <ReadmeBookIcon />
+        <ReadmeTextStyled>Readme</ReadmeTextStyled>
+      </ReadmeHoverEffectStyled>
     </AboutContainerStyled>
   );
 }
