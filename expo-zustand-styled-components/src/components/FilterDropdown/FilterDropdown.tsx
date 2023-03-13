@@ -35,7 +35,6 @@ const FilterDropdown = ({
 }: FilterDropdownProps) => {
   const { width } = useWindowDimensions();
   const toggleOption = () => setShowOptions(showOptions === name ? null : name);
-
   return (
     <Dropdown zIndex={zIndex} screenWidth={width}>
       <DropdownBtn onPress={toggleOption} activeOpacity={0.8} screenWidth={width}>
@@ -44,7 +43,7 @@ const FilterDropdown = ({
       </DropdownBtn>
       <DropdownOptions show={showOptions === name}>
         <DropdownOptionsHeading>
-          <DropdownOptionsHeadingText style={{}}>Name</DropdownOptionsHeadingText>
+          <DropdownOptionsHeadingText style={{}}>{name}</DropdownOptionsHeadingText>
           <TouchableOpacity onPress={() => setShowOptions(null)} activeOpacity={0.6}>
             <CloseIcon color={colors.gray600} width={20} height={20} />
           </TouchableOpacity>

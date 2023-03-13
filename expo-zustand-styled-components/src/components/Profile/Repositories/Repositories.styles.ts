@@ -9,6 +9,7 @@ export const ContainerStyled = styled.View<{ screenWidth: number }>`
 
 export const ContentViewStyled = styled.View`
   display: flex;
+  z-index: -1;
 `;
 
 export const ProfileSearchViewStyled = styled.View`

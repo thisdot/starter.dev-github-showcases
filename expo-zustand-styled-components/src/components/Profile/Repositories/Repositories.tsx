@@ -21,9 +21,9 @@ const Repositories = ({ username }: { username: string }) => {
 
   const { error, userRepos, isLoading } = useUserReposStore();
 
-  const { search } = useRepoFilterStore();
+  const { search, filterType } = useRepoFilterStore();
 
-  const { result } = useRepoSortFilter(userRepos, search)
+  const { result } = useRepoSortFilter(userRepos, search, filterType)
 
 
   useEffect(() => {
@@ -40,8 +40,8 @@ const Repositories = ({ username }: { username: string }) => {
   }, [username]);
 
   useEffect(() => {
-    useRepoSortFilter(userRepos, search)
-  }, [search, userRepos]);
+    useRepoSortFilter(userRepos, search, filterType)
+  }, [search, userRepos, filterType]);
 
 
 
@@ -49,11 +49,11 @@ const Repositories = ({ username }: { username: string }) => {
     <ContainerStyled
       style={{ justifyContent: isLoading || error ? 'center' : 'flex-start' }}
       screenWidth={width}>
+      <RepoFilter languages={[]} filteredRepoCount={result.length} repoBtnText="New" />
       {isLoading || error ? (
         <LoaderErrorView error={error} />
       ) : (
         <ContentViewStyled>
-          <RepoFilter languages={[]} filteredRepoCount={result.length} repoBtnText="New" />
           <ReposContainer>
             {/* using map() to render the list of repos, because flatlist is not working properly 
             with scrollview and this screen requires scrollview also the data is not so huge 

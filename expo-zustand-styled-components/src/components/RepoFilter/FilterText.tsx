@@ -41,7 +41,7 @@ const FilterText = ({ filteredRepoCount }: FilterTextProps) => {
         <Text style={{ alignItems: 'baseline' }}>
           <Text style={{ fontWeight: '700' }}>{filteredRepoCount}</Text> results for
           {filterType && filterType !== defaultFilterType && (
-            <Text style={{ fontWeight: '700' }}>{modifyFilterTypeText(filterType)}</Text>
+            <Text style={{ fontWeight: '700' }}> {modifyFilterTypeText(filterType)} </Text>
           )}{' '}
           repositories
           {search && (
@@ -62,12 +62,12 @@ const FilterText = ({ filteredRepoCount }: FilterTextProps) => {
         </Text>
       </FilterTextContent>
       <ClearFilter onPress={() => clearFilters()}>
-        <ClearIcon>
+        <ClearIcon onPress={() => clearFilters()} >
           <CloseIcon color="#FFF" />
         </ClearIcon>
         <ClearText screenWidth={width}>Clear filter</ClearText>
       </ClearFilter>
-    </FilterTextWrapper>
+    </FilterTextWrapper >
   );
 };
 
