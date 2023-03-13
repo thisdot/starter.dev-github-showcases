@@ -10,8 +10,6 @@
     "strict": true,
     "types": [
       "solid-start/env",
-      "jest",
-      "@testing-library/jest-dom"
     ],
     "baseUrl": "./",
     "paths": {

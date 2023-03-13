@@ -1,56 +1,52 @@
+import { openURL } from 'expo-linking';
 import React, { useEffect } from 'react';
+import { Text, FlatList, TouchableOpacity, useWindowDimensions } from 'react-native';
 import {
-  FlatList,
-  Text,
-  TouchableOpacity,
-  useWindowDimensions,
-  ActivityIndicator,
-} from 'react-native';
-import {
-  GistsListContainerStyled,
   GistsStyled,
+  TitleStyled,
+  ContainerStyled,
   RepositoriesStyled,
   SafeAreaViewStyled,
-  TitleStyled,
-  RepositoriesListContainerStyled,
-  ContainerStyled,
+  GistsListContainerStyled,
   ViewAllReposButtonStyled,
+  RepositoriesListContainerStyled,
 } from './Home.styles';
-import { AppStackScreenProps } from '../../../types';
 
 import getGists from '../../services/get-gists';
 import getTopRepos from '../../services/get-top-repos';
 
-import { useGistsStore } from '../../hooks/stores/useGistsStore';
-import { useTopReposStore } from '../../hooks/stores/useTopReposStore';
-import RepoCard from '../../components/RepoCard';
-import Header from '../../components/Header';
+import { useGistsStore, useTopReposStore } from '../../hooks/stores';
 
-const Home = ({ navigation }: AppStackScreenProps<'Home'>) => {
+import RepoCard from '../../components/RepoCard';
+import LoaderErrorView from '../../components/LoaderErrorView';
+
+const Home = () => {
   const { width } = useWindowDimensions();
   const gists = useGistsStore((state) => state.gists);
+  const gistsError = useGistsStore((state) => state.error);
   const gistsIsLoading = useGistsStore((state) => state.isLoading);
   const topRepos = useTopReposStore((state) => state.topRepos);
+  const topReposError = useTopReposStore((state) => state.error);
   const topReposIsLoading = useTopReposStore((state) => state.isLoading);
 
   useEffect(() => {
     getGists();
     getTopRepos();
   }, []);
+
   return (
     <SafeAreaViewStyled>
-      <Header />
       <ContainerStyled screenWidth={width}>
         <GistsStyled screenWidth={width}>
           <GistsListContainerStyled>
             <TitleStyled>Gists</TitleStyled>
-            {gistsIsLoading ? (
-              <ActivityIndicator size="large" color="black" />
+            {gistsIsLoading || gistsError ? (
+              <LoaderErrorView error={gistsError} />
             ) : (
               <FlatList
                 data={gists}
                 renderItem={({ item }) => (
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => openURL(item.url)}>
                     <Text>{item.name}</Text>
                   </TouchableOpacity>
                 )}
@@ -61,25 +57,11 @@ const Home = ({ navigation }: AppStackScreenProps<'Home'>) => {
         <RepositoriesStyled screenWidth={width}>
           <TitleStyled>Top Repositories</TitleStyled>
           <RepositoriesListContainerStyled>
-            {topReposIsLoading ? (
-              <ActivityIndicator size="large" color="black" />
+            {topReposIsLoading || topReposError ? (
+              <LoaderErrorView error={topReposError} />
             ) : (
               <>
-                <FlatList
-                  data={topRepos}
-                  renderItem={({ item }) => (
-                    <RepoCard
-                      full_name={item.name}
-                      visibility={item.visibility}
-                      description={item.description}
-                      forks_count={item.forkCount}
-                      stargazers_count={item.stargazerCount}
-                      language={item.primaryLanguage?.name}
-                      updated_at={item.updatedAt}
-                      star={true}
-                    />
-                  )}
-                />
+                <FlatList data={topRepos} renderItem={({ item }) => <RepoCard repo={item} />} />
                 <ViewAllReposButtonStyled>
                   <Text>View all repositories</Text>
                 </ViewAllReposButtonStyled>

@@ -75,7 +75,7 @@ const RepoPullRequests = () => {
           </Match>
         </Switch>
       </Show>
-    </div >
+    </div>
   );
 };
 

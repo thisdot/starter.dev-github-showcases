@@ -1,7 +1,7 @@
 import { USER_GISTS_QUERY } from './queries/gists';
 import FetchApi from './api';
 import { Gists } from '../types/gists-type';
-import { useGistsStore } from '../hooks/stores/useGistsStore';
+import { useGistsStore } from '../hooks/stores';
 
 interface Response {
   data: {

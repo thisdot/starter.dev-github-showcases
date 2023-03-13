@@ -17,10 +17,8 @@ interface IAppStore {
   login?: string;
   readMe?: string;
   branch?: string;
-  userRepos: Repo[];
   tree: TreeProps[];
   isLoading: boolean;
-  pageInfo?: PageInfo;
   file?: {
     byteSize: number;
     text: string;
@@ -67,7 +65,6 @@ interface IAppStore {
 const initialState: IAppStore = {
   tree: [],
   topRepos: [],
-  userRepos: [],
   login: undefined,
   isLoading: false,
   orgRepos: {

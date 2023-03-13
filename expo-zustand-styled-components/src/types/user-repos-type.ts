@@ -4,8 +4,6 @@ export interface Repo {
   description: string;
   stargazerCount: number;
   forkCount: number;
-  isFork: boolean;
-  isArchived: boolean;
   visibility: string;
   updatedAt: string;
   owner: {

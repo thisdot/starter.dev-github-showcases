@@ -1,25 +1,29 @@
+import { breakpoints } from '../../../utils/breakpoints';
+
 import styled from 'styled-components/native';
 type ScreenWidth = {
-  screenWidth: number | undefined;
+  screenWidth: number;
 };
 
 export const UserProfileCardWrapper = styled.View<ScreenWidth>`
-  max-width: ${({ screenWidth }) => (screenWidth >= 768 ? '33.3%' : '90%')};
-  display: flex;
   flex-grow: 0;
-  padding-horizontal: 24px;
+  display: flex;
+  padding-right: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 2.5 : 0 )}%;
+  margin-top: ${({ screenWidth }) => (screenWidth>= breakpoints.tablet ? -20 : 0)}px;
+  width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 33.3 : 100)}%;
 `;
 
 export const UserDetails = styled.View<ScreenWidth>`
-  flex-direction: ${({ screenWidth }) => (screenWidth >= 768 ? 'column' : 'row')};
   gap: 8px;
-  align-items: ${({ screenWidth }) => (screenWidth >= 768 ? 'flex-start' : 'center')};
+  padding: 16px;
+  flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'column' : 'row')};
+  align-items: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'flex-start' : 'center')};
 `;
 
 export const Avatar = styled.Image<ScreenWidth>`
   border-radius: 260px;
-  width: ${({ screenWidth }) => (screenWidth >= 768 ? '260px' : '80px')};
-  height: ${({ screenWidth }) => (screenWidth >= 768 ? '260px' : '80px')};
+  width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '260px' : '80px')};
+  height: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '260px' : '80px')};
 `;
 
 export const NameContainer = styled.View`
@@ -27,20 +31,20 @@ export const NameContainer = styled.View`
 `;
 
 export const Name = styled.Text<ScreenWidth>`
-  font-size: ${({ screenWidth }) => (screenWidth >= 768 ? '24px' : '16px')};
+  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '24px' : '16px')};
   color: rgb(31, 41, 55);
   font-weight: 700;
 `;
 
 export const Username = styled.Text<ScreenWidth>`
-  font-size: ${({ screenWidth }) => (screenWidth >= 768 ? '20px' : '14px')};
+  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '14px')};
   color: rgb(107, 114, 128);
   font-weight: 300;
 `;
 
 export const Bio = styled.Text`
   color: rgb(31, 41, 55);
-  margin-top: 16px;
+  padding-horizontal: 16px;
 `;
 
 export const FieldWrapper = styled.View`
@@ -72,8 +76,8 @@ export const SpaceSpan = styled.Text`
 `;
 
 export const Socials = styled.View`
+  padding-left: 16px;
   flex-direction: row;
   align-items: center;
   margin-top: 16px;
-  margin-bottom: 16px;
 `;

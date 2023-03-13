@@ -31,3 +31,13 @@ export interface UserRepoInfo {
     };
   };
 }
+
+export interface RepoInfoProps {
+  pageInfo: PageInfo;
+  repos: Repo[];
+  owner?: string;
+}
+
+export interface RepoInfos extends RepoInfoProps {
+  languages: string[];
+}

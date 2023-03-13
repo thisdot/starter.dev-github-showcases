@@ -1,7 +1,7 @@
 import { createQuery } from '@tanstack/solid-query';
 import { createSignal, createEffect, Switch, Match } from 'solid-js';
 import { useParams, useLocation } from 'solid-start';
-import { LoadingPulseDot } from '~/components/LoadingPulseDot/LoadingPulseDot';
+import { LoadingPulseDot } from '~/components/LoadingPulseDot';
 import { ProfilePage } from '~/components/ProfilePage';
 import userProfile from '~/services/get-user-profile';
 import getUserRepos from '~/services/get-user-repos';
@@ -88,7 +88,13 @@ const UserProps = () => {
   });
 
   return (
-    <Switch fallback={<LoadingPulseDot />}>
+    <Switch
+      fallback={
+        <div class="mt-4 ml-4">
+          <LoadingPulseDot />
+        </div>
+      }
+    >
       <Match when={queryProfile.isSuccess && queryRepos.isSuccess}>
         <ProfilePage user={profile()} reposInfo={userReposInfo()} />
       </Match>

@@ -7,7 +7,9 @@ export interface ITopReposStore {
   error?: string;
 }
 
-export const useTopReposStore = create<ITopReposStore>(() => ({
+const useTopReposStore = create<ITopReposStore>(() => ({
   topRepos: undefined,
   isLoading: true,
 }));
+
+export default useTopReposStore;

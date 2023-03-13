@@ -1,24 +1,23 @@
 # SolidStart-TanStackQuery-Tailwind-Modules
 
-This starter kit features **SolidStart**, combined with **TanStack Query**, and **Tailwind CSS**, and **CSS Modules**.
+This starter kit features **SolidStart**, combined with **TanStack Query**, **Tailwind CSS**, and **CSS Modules**.
 
 ## Table of Contents
 
 - [Overview](#overview)
   - [Tech Stack](#tech-stack)
   - [Included Tooling](#included-tooling)
-  - [Example Components](#example-components)
 - [Installation](#installation)
-  - [CLI](#cli)
+  - [CLI](#cli-(Recommended))
   - [Manual](#manual)
 - [Commands](#commands)
 - [Demo Implementation](#demo-implementation)
 
 ## Overview
 
-This project was developed using the starter.dev kit, and it features **SolidStart**, combined with **TanStack Query**, and **Tailwind CSS**, and **CSS Modules**. It is a great starting point for building a Solid application with a GraphQL API.
+This project was developed using the starter.dev kit, and it features **SolidStart**, combined with **TanStack Query**, **Tailwind CSS**, and **CSS Modules**. It is a great starting point for building a Solid application with a GraphQL API.
 
-SolidStart is a meta framework for SolidJS that is built on top of the React API and offers a leaner and more performant alternative to React. TanStack Query makes fetching, caching, synchronizing and updating server state in your web applications a breeze. Tailwind CSS is a utility-first CSS framework that offers a lot of flexibility and is easy to use. It is also very performant and offers a lot of customization options. CSS Modules helps us to eailsy group our tailwind/custom classes. 
+SolidStart is a meta framework for SolidJS that is built on top of the React API and offers a leaner and more performant alternative to React. TanStack Query makes fetching, caching, synchronizing and updating server state in your web applications a breeze. Tailwind CSS is a utility-first CSS framework that offers a lot of flexibility and is easy to use. It is also very performant and offers a lot of customization options. CSS Modules helps us to easily group our tailwind/custom classes. 
 ### Tech Stack
 
 - [SolidStart](https://start.solidjs.com/getting-started/what-is-solidstart/)
@@ -64,10 +63,10 @@ git clone https://github.com/thisdot/starter.dev.git
 
 - `dev` - Starts a development server backed by Vite on localhost port 5173 with HMR
 - `build` - Builds a production version of the app to deploy
-- `start` - Starts the production build with a local version of adapter.
+- `start` - Starts the production build with a local version of adapter
 - `test` - Runs the test suite
-- `storbook` - To showcase the component library
-- `lint` - Uses eslint to find potential issues in the codebase
+- `storybook` - To showcase the component library
+- `lint` - Uses ESLint to find potential issues in the codebase
 - `lint-fix` - Tries to auto-fix potential issues
 - `format` - Fixes formatting issues in the codebase
 

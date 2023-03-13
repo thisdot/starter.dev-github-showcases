@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Socials, SpanCount, Count, SpaceSpan } from './UserProfileCard.styles';
-import UsersIcon from '../Icons/UsersIcon';
-import StarIcon from '../Icons/StarIcon';
+import { Socials, SpanCount, Count, SpaceSpan } from './UserCard.styles';
+import UsersIcon from '../../Icons/UsersIcon';
+import StarIcon from '../../Icons/StarIcon';
 
 interface SocialCountsProps {
   followers: number | undefined;
