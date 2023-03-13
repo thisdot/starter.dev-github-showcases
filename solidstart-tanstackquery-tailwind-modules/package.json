@@ -2,7 +2,7 @@
   "name": "solidstart-tanstackquery-tailwind-modules",
   "version": "0.1.0",
   "private": true,
-  "description": "Solid Start, Tanstack Query and Tailwind CSS with CSS Modules",
+  "description": "SolidStart, TanStack Query and Tailwind CSS with CSS Modules",
   "keywords": [
     "solidstart",
     "tanstack-query",
@@ -67,7 +67,7 @@
   "dependencies": {
     "@solidjs/meta": "0.28.2",
     "@solidjs/router": "0.6.0",
-    "@tailwindcss/typography": "^0.5.9",
+    "@tailwindcss/typography": "0.5.9",
     "rehype-raw": "6.1.1",
     "remark-gfm": "3.0.1",
     "solid-heroicons": "3.1.1",
