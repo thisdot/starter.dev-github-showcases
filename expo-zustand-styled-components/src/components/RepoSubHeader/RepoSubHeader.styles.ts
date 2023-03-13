@@ -16,8 +16,8 @@ export const Wrapper = styled.View`
 `;
 
 export const TopRow = styled.View<ScreenWidth>`
-  flex-direction: ${({screenWidth}) => screenWidth > breakpoints.tablet ? 'row' : 'column'};
-  align-items: ${({screenWidth}) => screenWidth > breakpoints.tablet ? 'center' : 'flex-start'};
+  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'row' : 'column')};
+  align-items: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'center' : 'flex-start')};
   justify-content: space-between;
   gap: 20px;
 `;

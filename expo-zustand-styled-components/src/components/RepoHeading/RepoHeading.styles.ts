@@ -22,8 +22,8 @@ export const HeadingContent = styled.View`
 
 export const OwnerLink = styled.Text<ScreenWidth>`
   color: ${colors.blue600};
-   text-decoration-line: underline;
-   font-size: ${({screenWidth}) => screenWidth >= breakpoints.tablet ? '20px' : '18px'};
+  text-decoration-line: underline;
+  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '18px')};
 `;
 
 export const Separator = styled.Text`

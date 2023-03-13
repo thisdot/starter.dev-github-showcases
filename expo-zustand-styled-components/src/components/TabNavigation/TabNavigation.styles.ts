@@ -1,11 +1,5 @@
 import styled from 'styled-components/native';
 import { colors } from '../../utils/style-variables';
-// import { breakpoints } from '../../utils/breakpoints';
-
-// type ScreenWidth = {
-//   screenWidth: number | undefined;
-// };
-
 
 export const Container = styled.View`
   border-bottom-width: 1px;
@@ -23,11 +17,24 @@ export const Tab = styled.TouchableOpacity<{ isActive: boolean }>`
   align-items: center;
   border-bottom-width: 2px;
   border-bottom-style: solid;
-  border-bottom-color: ${({isActive}) => isActive ? 'orange': 'transparent'};
+  border-bottom-color: ${({ isActive }) => (isActive ? 'orange' : 'transparent')};
   padding: 6px;
   gap: 4px;
+  margin-right: 4px;
+`;
+export const CountView = styled.View`
+  background-color: ${colors.gray200};
+  margin-left: 8px;
+  padding: 4px 6px;
+  border-radius: 20px;
+`;
+
+export const CountText = styled.Text`
+  color: ${colors.gray800};
+  font-size: 12px;
 `;
 
 export const TabText = styled.Text<{ isActive: boolean }>`
-  font-weight: ${({isActive}) => isActive ? '800' : '500'};
+  font-weight: ${({ isActive }) => (isActive ? '800' : '500')};
+  margin-left: 3px;
 `;

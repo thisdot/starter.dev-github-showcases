@@ -8,11 +8,7 @@ interface createTabListProps {
   pullRequestsCount: number;
 }
 
-
-
-export function createTabList({issuesCount, pullRequestsCount}: createTabListProps) {
- 
-
+export function createTabList({ issuesCount, pullRequestsCount }: createTabListProps) {
   return [
     {
       title: REPO_TABS.code,

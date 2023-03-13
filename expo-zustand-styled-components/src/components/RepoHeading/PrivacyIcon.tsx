@@ -10,7 +10,7 @@ interface PrivacyIconProps {
 }
 const PrivacyIcon = ({ visibility }: PrivacyIconProps) => {
   const isPrivate = 'private'.localeCompare(visibility) > 0;
-  
+
   if (!visibility) <IconPlaceholder />;
 
   return (
@@ -19,6 +19,5 @@ const PrivacyIcon = ({ visibility }: PrivacyIconProps) => {
     </View>
   );
 };
-
 
 export default PrivacyIcon;

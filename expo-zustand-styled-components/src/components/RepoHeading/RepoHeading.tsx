@@ -1,9 +1,15 @@
-import PrivacyBadge from "../PrivacyBadge";
-import PrivacyIcon from "./PrivacyIcon";
-import { BadgePlaceholder, Heading, HeadingContent, NameLink, OwnerLink, Separator } from "./RepoHeading.styles";
+import PrivacyBadge from '../PrivacyBadge';
+import PrivacyIcon from './PrivacyIcon';
+import {
+  BadgePlaceholder,
+  Heading,
+  HeadingContent,
+  NameLink,
+  OwnerLink,
+  Separator,
+} from './RepoHeading.styles';
 
 import { useWindowDimensions } from 'react-native';
-
 
 const RepoHeading = () => {
   const { width } = useWindowDimensions();
@@ -19,9 +25,7 @@ const RepoHeading = () => {
         <Separator>/</Separator>
         <NameLink screenWidth={width}>repo-name</NameLink>
       </HeadingContent>
-      {info.visibility ? (
-        <PrivacyBadge visibility={info.visibility} />
-      ): <BadgePlaceholder />}
+      {info.visibility ? <PrivacyBadge visibility={info.visibility} /> : <BadgePlaceholder />}
     </Heading>
   );
 };
