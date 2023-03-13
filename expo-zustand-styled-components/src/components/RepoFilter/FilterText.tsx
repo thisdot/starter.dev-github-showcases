@@ -1,5 +1,5 @@
 import CloseIcon from '../Icons/CloseIcon';
-import { defaultFilterType, defaultLanguage } from './data';
+import { defaultFilterType, defaultLanguage, defaultSortBy } from './data';
 import {
   FilterTextWrapper,
   ClearFilter,
@@ -27,11 +27,12 @@ interface FilterTextProps {
 
 const FilterText = ({ filteredRepoCount }: FilterTextProps) => {
   const { width } = useWindowDimensions();
-  const { filterType, language, search, sortBy, setFilterType, setLanguage, setSearch } = useRepoFilterStore();
+  const { filterType, language, search, sortBy, setFilterType, setLanguage, setSearch, setSortBy } = useRepoFilterStore();
 
   const clearFilters = () => {
     setFilterType(defaultFilterType);
     setLanguage(defaultLanguage);
+    setSortBy(defaultSortBy)
     setSearch('')
   };
 

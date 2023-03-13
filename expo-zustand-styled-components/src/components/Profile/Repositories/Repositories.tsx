@@ -21,9 +21,9 @@ const Repositories = ({ username }: { username: string }) => {
 
   const { error, userRepos, isLoading } = useUserReposStore();
 
-  const { search, filterType } = useRepoFilterStore();
+  const { search, filterType, sortBy, language } = useRepoFilterStore();
 
-  const { result } = useRepoSortFilter(userRepos, search, filterType)
+  const { result, languages } = useRepoSortFilter(userRepos, search, filterType, sortBy, language)
 
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Repositories = ({ username }: { username: string }) => {
   }, [username]);
 
   useEffect(() => {
-    useRepoSortFilter(userRepos, search, filterType)
+    useRepoSortFilter(userRepos, search, filterType, sortBy, language)
   }, [search, userRepos, filterType]);
 
 
@@ -49,7 +49,7 @@ const Repositories = ({ username }: { username: string }) => {
     <ContainerStyled
       style={{ justifyContent: isLoading || error ? 'center' : 'flex-start' }}
       screenWidth={width}>
-      <RepoFilter languages={[]} filteredRepoCount={result.length} repoBtnText="New" />
+      <RepoFilter languages={languages} filteredRepoCount={result.length} repoBtnText="New" />
       {isLoading || error ? (
         <LoaderErrorView error={error} />
       ) : (

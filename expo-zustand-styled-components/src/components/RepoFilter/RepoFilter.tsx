@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SearchInput from './SearchInput';
 import FilterDropdown from '../FilterDropdown';
 import { RepoFilterWrapper, FiltersWrapper, RepoBtn, RepoBtnText } from './RepoFilter.styles';
-import { FILTER_TYPE_OPTIONS, SORT_OPTIONS } from './data';
+import { FILTER_TYPE_OPTIONS, SORT_OPTIONS, defaultLanguage } from './data';
 import { useRepoFilterStore } from '../../hooks/stores';
 import RepoBookIcon from '../Icons/RepoBookIcon';
 import FilterText from './FilterText';
@@ -19,7 +19,6 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
 
   const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
   const sortOptions = Object.values(SORT_OPTIONS);
-  const languageOptions = ['All', 'HTML', 'CSS', 'PHP']; //To be replaced with the actual languages for the repos
   const { language, sortBy, filterType, setLanguage, setSortBy, setFilterType, search } =
     useRepoFilterStore();
   const [showOptions, setShowOptions] = useState(null);
@@ -29,7 +28,7 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
   const selectSort = (value) => setSortBy(value);
 
   // change this const when we'll add also the other sort functions
-  const isSomeFilterSelected = search !== '' || filterType !== FILTER_TYPE_OPTIONS.default
+  const isSomeFilterSelected = search !== '' || filterType !== FILTER_TYPE_OPTIONS.default || sortBy !== SORT_OPTIONS.default || language !== defaultLanguage
 
   return (
     <>
@@ -55,7 +54,7 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
             />
             <FilterDropdown
               name="Langauge"
-              items={languageOptions}
+              items={languages}
               selectOption={selectLanguage}
               selected={language}
               showOptions={showOptions}
