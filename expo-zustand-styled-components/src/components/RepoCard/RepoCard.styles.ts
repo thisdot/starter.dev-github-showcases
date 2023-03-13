@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { breakpoints } from '../../utils/breakpoints';
 import { colors } from '../../utils/style-variables';
 
 const flex_row = `
@@ -43,10 +44,10 @@ export const Heading = styled.TouchableOpacity`
   gap: 8px;
 `;
 
-export const LinkText = styled.Text`
-  color: ${colors.blue600};
-  font-size: 18px;
+export const LinkText = styled.Text<{ screenWidth: number }>`
   font-weight: 600;
+  color: ${colors.blue600};
+  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 18 : 14)}px;
 `;
 
 export const StarBtn = styled.View`

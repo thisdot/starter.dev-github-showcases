@@ -10,15 +10,14 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList { }
-    interface AuthParamList extends AuthStackParamList { }
-    interface AppParamList extends AppStackParamList { }
+    interface RootParamList extends RootStackParamList {}
+    interface AuthParamList extends AuthStackParamList {}
+    interface AppParamList extends AppStackParamList {}
   }
 }
 
 // #region ROOT
 export type RootStackParamList = {
-  Splash: undefined;
   AuthNavigator: NavigatorScreenParams<AuthStackParamList> | undefined;
   AppNavigator: NavigatorScreenParams<AppStackParamList> | undefined;
 };
@@ -44,6 +43,7 @@ export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = Nati
 export type AppStackParamList = {
   Home: undefined;
   Profile: undefined;
+  RepoNavigator: NavigatorScreenParams<RepoStackParamList> | { owner: string; name: string };
 };
 
 export type AppStackScreenProps<Screen extends keyof AppStackParamList> = NativeStackScreenProps<
@@ -52,3 +52,15 @@ export type AppStackScreenProps<Screen extends keyof AppStackParamList> = Native
 >;
 // #endregion
 
+// #region REPO
+export type RepoStackParamList = {
+  Code: { owner: string; name: string };
+  Issues: { owner: string; name: string };
+  PullRequests: { owner: string; name: string };
+  Blob: { owner: string; name: string, branch: string, path: string };
+  Tree: { owner: string; name: string, branch: string, path: string  };
+};
+
+export type RepoStackScreenProps<Screen extends keyof RepoStackParamList> =
+  NativeStackScreenProps<RepoStackParamList, Screen>;
+// #endregion

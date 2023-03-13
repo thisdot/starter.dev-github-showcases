@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Text, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { Text, TouchableOpacity, TouchableWithoutFeedback, useWindowDimensions } from 'react-native';
 
 import {
   Card,
@@ -25,13 +25,26 @@ interface RepoCardProps {
 
 const RepoCard = ({ repo, isProfilePage }: RepoCardProps) => {
   const navigation = useNavigation();
+  const { width } = useWindowDimensions();
 
   return (
     <Card>
       <Content>
         <Heading>
-          <TouchableOpacity onPress={() => navigation.navigate('AppNavigator', { screen: 'Home' })}>
-            <LinkText>{repo.name}</LinkText>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('AppNavigator', {
+                screen: 'RepoNavigator',
+                params: {
+                  screen: 'Code',
+                  params: {
+                    owner: repo.owner.login,
+                    name: repo.name,
+                  },
+                },
+              })
+            }>
+            <LinkText screenWidth={width}>{repo.name}</LinkText>
           </TouchableOpacity>
           <Badge>
             <BadgeText>
