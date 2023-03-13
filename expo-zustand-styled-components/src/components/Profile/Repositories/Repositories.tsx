@@ -14,12 +14,17 @@ import { useUserReposStore, useRepoFilterStore } from '../../../hooks/stores';
 import LoaderErrorView from '../../LoaderErrorView';
 import RepoCard from '../../RepoCard';
 import RepoFilter from '../../RepoFilter';
+import useRepoSortFilter from '../../../utils/useRepoSortFiler';
 
 const Repositories = ({ username }: { username: string }) => {
   const { width } = useWindowDimensions();
 
   const { error, userRepos, isLoading } = useUserReposStore();
+
   const { search } = useRepoFilterStore();
+
+  const { result } = useRepoSortFilter(userRepos, search)
+
 
   useEffect(() => {
     getUserRepos({
@@ -34,6 +39,12 @@ const Repositories = ({ username }: { username: string }) => {
     });
   }, [username]);
 
+  useEffect(() => {
+    useRepoSortFilter(userRepos, search)
+  }, [search, userRepos]);
+
+
+
   return (
     <ContainerStyled
       style={{ justifyContent: isLoading || error ? 'center' : 'flex-start' }}
@@ -42,12 +53,12 @@ const Repositories = ({ username }: { username: string }) => {
         <LoaderErrorView error={error} />
       ) : (
         <ContentViewStyled>
-          <RepoFilter languages={[]} filteredRepoCount={0} repoBtnText="New" />
+          <RepoFilter languages={[]} filteredRepoCount={result.length} repoBtnText="New" />
           <ReposContainer>
             {/* using map() to render the list of repos, because flatlist is not working properly 
             with scrollview and this screen requires scrollview also the data is not so huge 
             to consider using flatlist */}
-            {userRepos.map((item, index) => (
+            {result.map((item, index) => (
               <RepoCard key={item.id + index} repo={item} isProfilePage />
             ))}
             <PaginationContainer>

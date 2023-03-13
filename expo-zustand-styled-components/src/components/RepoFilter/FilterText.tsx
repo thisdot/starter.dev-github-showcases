@@ -27,11 +27,12 @@ interface FilterTextProps {
 
 const FilterText = ({ filteredRepoCount }: FilterTextProps) => {
   const { width } = useWindowDimensions();
-  const { filterType, language, search, sortBy, setFilterType, setLanguage } = useRepoFilterStore();
+  const { filterType, language, search, sortBy, setFilterType, setLanguage, setSearch } = useRepoFilterStore();
 
   const clearFilters = () => {
     setFilterType(defaultFilterType);
     setLanguage(defaultLanguage);
+    setSearch('')
   };
 
   return (
