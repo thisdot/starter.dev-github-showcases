@@ -46,23 +46,25 @@ const Repositories = ({ username }: { username: string }) => {
     <ContainerStyled
       style={{ justifyContent: isLoading || error ? 'center' : 'flex-start' }}
       screenWidth={width}>
-      <RepoFilter languages={languages} filteredRepoCount={result.length} repoBtnText="New" />
       {isLoading || error ? (
         <LoaderErrorView error={error} />
       ) : (
-        <ContentViewStyled>
-          <ReposContainer>
-            {/* using map() to render the list of repos, because flatlist is not working properly 
+        <>
+          <RepoFilter languages={languages} filteredRepoCount={result.length} repoBtnText="New" />
+          <ContentViewStyled>
+            <ReposContainer>
+              {/* using map() to render the list of repos, because flatlist is not working properly 
             with scrollview and this screen requires scrollview also the data is not so huge 
             to consider using flatlist */}
-            {result.map((item, index) => (
-              <RepoCard key={item.id + index} repo={item} isProfilePage />
-            ))}
-            <PaginationContainer>
-              <Text>Pagination</Text>
-            </PaginationContainer>
-          </ReposContainer>
-        </ContentViewStyled>
+              {result.map((item, index) => (
+                <RepoCard key={item.id + index} repo={item} isProfilePage />
+              ))}
+              <PaginationContainer>
+                <Text>Pagination</Text>
+              </PaginationContainer>
+            </ReposContainer>
+          </ContentViewStyled>
+        </>
       )}
     </ContainerStyled>
   );
