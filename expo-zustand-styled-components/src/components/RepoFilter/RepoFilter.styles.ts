@@ -1,27 +1,28 @@
 import styled from 'styled-components/native';
 import { colors } from '../../utils/style-variables';
-import {breakpoints} from '../../utils/breakpoints';
+import { breakpoints } from '../../utils/breakpoints';
 
 type ScreenWidth = {
   screenWidth: number | undefined;
 };
 
 export const RepoFilterWrapper = styled.View<ScreenWidth>`
-  flex-direction: ${({screenWidth}) => screenWidth >= breakpoints.laptop ? 'row' : 'column'}
+  flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 'row' : 'column')}
   gap: 10px;
   padding: 16px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: ${colors.gray300};
+  display: inline-block;
 `;
 
-export const FiltersWrapper = styled.ScrollView<ScreenWidth>`
+export const FiltersWrapper = styled.View<ScreenWidth>`
   gap: 10px;
-  z-index: 500;
   elevation: 500;
-  flex-direction: row;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 'row' : 'column')}
   background-color: #fff;
-  width: 100%;
 `;
 
 export const FilterTextWrapper = styled.View`
@@ -34,6 +35,7 @@ export const FilterTextWrapper = styled.View`
   gap: 12px;
   justify-content: space-between;
   align-items: center;
+  z-index: -1;
 `;
 
 export const FilterTextContent = styled.View`
@@ -45,12 +47,12 @@ export const FilterTextContent = styled.View`
 `;
 
 export const SearchTextInput = styled.TextInput`
-  width: 100%;
+  flex-grow: 1;
   border: 1px solid ${colors.gray300};
   padding: 8px 12px;
   border-radius: 8px;
   color: ${colors.gray500};
-  background-color: #FFF;
+  background-color: #fff;
   font-size: 16px;
 `;
 
@@ -65,11 +67,10 @@ export const RepoBtn = styled.TouchableOpacity`
 `;
 
 export const RepoBtnText = styled.Text`
-  color: #FFF;
+  color: #fff;
   font-weight: 700;
   font-size: 14px;
 `;
-
 
 export const ClearFilter = styled.TouchableOpacity`
   flex-direction: row;
@@ -88,6 +89,6 @@ export const ClearIcon = styled.TouchableOpacity`
 `;
 
 export const ClearText = styled.Text<ScreenWidth>`
-  display: ${({screenWidth}) => screenWidth > breakpoints.tablet ? 'flex' : 'none'};
-  color:  ${colors.blue600};
+  display: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'flex' : 'none')};
+  color: ${colors.blue600};
 `;
