@@ -12,7 +12,7 @@ export const ProfileImage = styled.Image`
   border-radius: 16px;
 `;
 
-export const UserMenu = styled.View<{screenWidth: number}>`
+export const UserMenu = styled.View<{ screenWidth: number }>`
   top: 54px;
   right: 0;
   z-index: 999;
@@ -22,17 +22,17 @@ export const UserMenu = styled.View<{screenWidth: number}>`
   border: 1px solid #ccc;
   flex-direction: column;
   background-color: #fff;
-  width: ${({ screenWidth }) =>screenWidth > breakpoints.tablet ? 220 : 160}px;
+  width: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 220 : 160)}px;
 `;
 
-export const ListItem = styled.TouchableOpacity<{screenWidth: number}>`
+export const ListItem = styled.TouchableOpacity<{ screenWidth: number }>`
   width: 100%;
   z-index: 999;
   display: flex;
   margin-bottom: 1px;
   align-items: center;
   flex-direction: row;
-  padding: ${({ screenWidth }) =>screenWidth > breakpoints.tablet ? 16 : 10}px;
+  padding: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 16 : 10)}px;
 `;
 
 export const ProfileImageWrapper = styled.TouchableOpacity`

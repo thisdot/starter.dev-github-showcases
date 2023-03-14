@@ -1,5 +1,5 @@
 import CloseIcon from '../Icons/CloseIcon';
-import { defaultFilterType, defaultLanguage } from './data';
+import { defaultFilterType, defaultLanguage, defaultSortBy } from './data';
 import {
   FilterTextWrapper,
   ClearFilter,
@@ -27,11 +27,14 @@ interface FilterTextProps {
 
 const FilterText = ({ filteredRepoCount }: FilterTextProps) => {
   const { width } = useWindowDimensions();
-  const { filterType, language, search, sortBy, setFilterType, setLanguage } = useRepoFilterStore();
+  const { filterType, language, search, sortBy, setFilterType, setLanguage, setSearch, setSortBy } =
+    useRepoFilterStore();
 
   const clearFilters = () => {
     setFilterType(defaultFilterType);
     setLanguage(defaultLanguage);
+    setSortBy(defaultSortBy);
+    setSearch('');
   };
 
   return (
@@ -40,7 +43,7 @@ const FilterText = ({ filteredRepoCount }: FilterTextProps) => {
         <Text style={{ alignItems: 'baseline' }}>
           <Text style={{ fontWeight: '700' }}>{filteredRepoCount}</Text> results for
           {filterType && filterType !== defaultFilterType && (
-            <Text style={{ fontWeight: '700' }}>{modifyFilterTypeText(filterType)}</Text>
+            <Text style={{ fontWeight: '700' }}> {modifyFilterTypeText(filterType)} </Text>
           )}{' '}
           repositories
           {search && (
@@ -61,7 +64,7 @@ const FilterText = ({ filteredRepoCount }: FilterTextProps) => {
         </Text>
       </FilterTextContent>
       <ClearFilter onPress={() => clearFilters()}>
-        <ClearIcon>
+        <ClearIcon onPress={() => clearFilters()}>
           <CloseIcon color="#FFF" />
         </ClearIcon>
         <ClearText screenWidth={width}>Clear filter</ClearText>

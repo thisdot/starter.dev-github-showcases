@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { colors } from '../../utils/style-variables';
-import {breakpoints} from '../../utils/breakpoints';
+import { breakpoints } from '../../utils/breakpoints';
 
 type ScreenWidth = {
   screenWidth: number | undefined;
@@ -9,23 +9,26 @@ type ScreenWidth = {
 export const RepoFilterWrapper = styled.View<ScreenWidth>`
   gap: 10px;
   padding: 16px;
+  display: inline-block;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: ${colors.gray300};
   flex-direction: ${({screenWidth}) => screenWidth >= breakpoints.laptop ? 'row' : 'column'}
 `;
 
-export const FiltersWrapper = styled.ScrollView<ScreenWidth>`
+export const FiltersWrapper = styled.View<ScreenWidth>`
   gap: 10px;
-  width: 100%;
-  z-index: 500;
   elevation: 500;
-  flex-direction: row;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 'row' : 'column')}
   background-color: #fff;
 `;
 
 export const FilterTextWrapper = styled.View`
   gap: 12px;
+  z-index: -1;
+  align-items: center;
   flex-direction: row;
   align-items: center;
   padding-vertical: 10px;
@@ -34,6 +37,7 @@ export const FilterTextWrapper = styled.View`
   border-bottom-style: solid;
   justify-content: space-between;
   border-bottom-color: ${colors.gray300};
+
 `;
 
 export const FilterTextContent = styled.View`
@@ -45,11 +49,11 @@ export const FilterTextContent = styled.View`
 `;
 
 export const SearchTextInput = styled.TextInput`
-  width: 100%;
+  flex-grow: 1;
   font-size: 16px;
   padding: 8px 12px;
   border-radius: 8px;
-  background-color: #FFF;
+  background-color: #fff;
   color: ${colors.gray500};
   border: 1px solid ${colors.gray300};
 `;
@@ -65,11 +69,10 @@ export const RepoBtn = styled.TouchableOpacity`
 `;
 
 export const RepoBtnText = styled.Text`
-  color: #FFF;
+  color: #fff;
   font-size: 14px;
   font-weight: 700;
 `;
-
 
 export const ClearFilter = styled.TouchableOpacity`
   flex-direction: row;

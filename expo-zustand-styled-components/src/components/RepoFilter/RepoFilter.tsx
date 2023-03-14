@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import SearchInput from './SearchInput';
 import FilterDropdown from '../FilterDropdown';
 import { RepoFilterWrapper, FiltersWrapper, RepoBtn, RepoBtnText } from './RepoFilter.styles';
-import { FILTER_TYPE_OPTIONS, SORT_OPTIONS } from './data';
+import { FILTER_TYPE_OPTIONS, SORT_OPTIONS, defaultLanguage } from './data';
 import { useRepoFilterStore } from '../../hooks/stores';
 import RepoBookIcon from '../Icons/RepoBookIcon';
 import FilterText from './FilterText';
+import { FilterType } from '../../hooks/stores/useRepoFilterStore';
 
 interface RepoFilterProps {
   languages: string[];
@@ -18,56 +19,59 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
 
   const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
   const sortOptions = Object.values(SORT_OPTIONS);
-  const languageOptions = ['All', 'HTML', 'CSS', 'PHP']; //To be replaced with the actual languages for the repos
-  const { language, sortBy, filterType, setLanguage, setSortBy, setFilterType } =
+  const { language, sortBy, filterType, setLanguage, setSortBy, setFilterType, search } =
     useRepoFilterStore();
   const [showOptions, setShowOptions] = useState(null);
 
   const selectLanguage = (value) => setLanguage(value);
-  const selectType = (value) => setFilterType(value);
+  const selectType = (value: FilterType) => setFilterType(value);
   const selectSort = (value) => setSortBy(value);
+
+  // change this const when we'll add also the other sort functions
+  const isSomeFilterSelected =
+    search !== '' ||
+    filterType !== FILTER_TYPE_OPTIONS.default ||
+    sortBy !== SORT_OPTIONS.default ||
+    language !== defaultLanguage;
 
   return (
     <>
       <RepoFilterWrapper screenWidth={width}>
-        <SearchInput />
-        <FiltersWrapper horizontal screenWidth={width} contentContainerStyle={{ flexGrow: 1 }}>
-          <FilterDropdown
-            name="Type"
-            items={typeOptions}
-            selectOption={selectType}
-            zIndex={2000}
-            selected={filterType}
-            showOptions={showOptions}
-            setShowOptions={(value) => setShowOptions(value)}
-          />
-          <FilterDropdown
-            name="Sort"
-            items={sortOptions}
-            selectOption={selectSort}
-            zIndex={1000}
-            selected={sortBy}
-            showOptions={showOptions}
-            setShowOptions={(value) => setShowOptions(value)}
-          />
-          <FilterDropdown
-            name="Langauge"
-            items={languageOptions}
-            selectOption={selectLanguage}
-            zIndex={500}
-            selected={language}
-            showOptions={showOptions}
-            setShowOptions={(value) => setShowOptions(value)}
-          />
-
-          <RepoBtn activeOpacity={0.8}>
-            <RepoBookIcon color={'#FFF'} />
-            <RepoBtnText>{repoBtnText || 'New'}</RepoBtnText>
-          </RepoBtn>
+        <FiltersWrapper screenWidth={width}>
+          <SearchInput />
+          <>
+            <FilterDropdown
+              name="Type"
+              items={typeOptions}
+              selectOption={selectType}
+              selected={filterType}
+              showOptions={showOptions}
+              setShowOptions={(value) => setShowOptions(value)}
+            />
+            <FilterDropdown
+              name="Sort"
+              items={sortOptions}
+              selectOption={selectSort}
+              selected={sortBy}
+              showOptions={showOptions}
+              setShowOptions={(value) => setShowOptions(value)}
+            />
+            <FilterDropdown
+              name="Langauge"
+              items={languages}
+              selectOption={selectLanguage}
+              selected={language}
+              showOptions={showOptions}
+              setShowOptions={(value) => setShowOptions(value)}
+            />
+            <RepoBtn activeOpacity={0.8}>
+              <RepoBookIcon color={'#FFF'} />
+              <RepoBtnText>{repoBtnText || 'New'}</RepoBtnText>
+            </RepoBtn>
+          </>
         </FiltersWrapper>
       </RepoFilterWrapper>
-      {/* Should show when repos are not just sorted */}
-      <FilterText filteredRepoCount={filteredRepoCount} />
+      {isSomeFilterSelected && <FilterText filteredRepoCount={filteredRepoCount} />}
     </>
   );
 };

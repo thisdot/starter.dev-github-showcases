@@ -8,7 +8,7 @@ This starter kit features **SolidStart**, combined with **TanStack Query**, **Ta
   - [Tech Stack](#tech-stack)
   - [Included Tooling](#included-tooling)
 - [Installation](#installation)
-  - [CLI](#cli-(Recommended))
+  - [CLI](#cli-recommended)
   - [Manual](#manual)
 - [Commands](#commands)
 - [Demo Implementation](#demo-implementation)

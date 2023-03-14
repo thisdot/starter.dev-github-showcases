@@ -7,20 +7,18 @@ type ScreenWidth = {
 };
 
 export const Dropdown = styled.View<{ zIndex: number; screenWidth: number }>`
-  margin-right: 8px;
-  z-index: ${({ zIndex }) => zIndex || '0'};
-  flex: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '1' : 'none')};
+  gap: 8px;
 `;
 
 export const DropdownOptions = styled.View<{ show: boolean }>`
   position: absolute;
   right: 0;
-  z-index: 3;
-  elevation: 3;
   width: 224px;
   margin-top: 40px;
+  border: 1px solid ${colors.gray300};
+  elevation: 3;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #ffffff;
   display: ${({ show }) => (show ? 'flex' : 'none')};
 `;
 
@@ -35,12 +33,13 @@ export const DropdownOptionsHeadingText = styled.Text`
 `;
 
 export const DropdownBtn = styled.TouchableOpacity<ScreenWidth>`
-elevation: 1;
-border-radius: 8px;
-flex-direction: row;
-padding-vertical: 10px;
-padding-horizontal: 10px;
-justify-content: space-between;
+  flex-grow: 1;
+  elevation: 1;
+  border-radius: 8px;
+  flex-direction: row;
+  padding-vertical: 8px;
+  padding-horizontal: 8px;
+  justify-content: space-between;
   border: 1px solid ${colors.gray300};
   background-color: ${colors.gray100};
   gap: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 8 : 4)}px;
@@ -54,6 +53,7 @@ export const DropdownOption = styled.TouchableOpacity`
   border-top-width: 1px;
   border-top-style: solid;
   border-top-color: ${colors.gray300};
+  background-color: #ffffff;
 `;
 
 export const DropdownBtnText = styled.Text`
