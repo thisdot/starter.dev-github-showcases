@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { Path, SvgProps } from 'react-native-svg';
 
-export const ReadmeBookIcon = () => {
+export const ReadmeBookIcon = (props: SvgProps) => {
   return (
     <Svg width="1em" height="1em" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <Path

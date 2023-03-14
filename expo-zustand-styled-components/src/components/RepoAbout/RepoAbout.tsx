@@ -14,7 +14,6 @@ import {
   ReadmeHoverEffectStyled,
   ReadmeTextStyled,
   DescriptionTextStyled,
-  //   ReadmeIconStyled,
   TagsContainerStyled,
 } from './RepoAbout.styles';
 
