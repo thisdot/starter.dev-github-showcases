@@ -7,15 +7,12 @@ import {
   PaginationContainer,
 } from './Repositories.styles';
 
-import { useRepoFilterStore } from '../../../hooks/stores';
-
 import RepoCard from '../../RepoCard';
 import RepoFilter from '../../RepoFilter';
 import { Repo } from '../../../types/user-repos-type';
 
 const Repositories = ({ repos }: { repos: Repo[] }) => {
   const { width } = useWindowDimensions();
-  const { search } = useRepoFilterStore();
 
   return (
     <ContainerStyled style={{ justifyContent: 'flex-start' }} screenWidth={width}>

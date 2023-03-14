@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
+import { colors } from '../../utils/style-variables';
 
 export const SafeAreaViewStyled = styled.SafeAreaView`
   height: 100%;
@@ -27,5 +28,5 @@ export const TabNavContainer = styled.View`
   padding-top: 8px;
   padding-horizontal: 16px;
   border-bottom-width: 1px;
-  border-bottom-color: #e1e4e8;
+  border-bottom-color: ${colors.gray100};
 `;

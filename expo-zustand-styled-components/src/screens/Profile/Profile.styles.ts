@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
+import { colors } from '../../utils/style-variables';
 
 export const SafeAreaViewStyled = styled.SafeAreaView`
   flex: 1;
@@ -33,5 +34,5 @@ export const ContentLayout = styled.View<{ screenWidth: number }>`
 export const ProfileNavViewStyled = styled.View`
   padding: 16px;
   border-bottom-width: 1px;
-  border-bottom-color: #e1e4e8;
+  border-bottom-color: ${colors.gray100};
 `;
