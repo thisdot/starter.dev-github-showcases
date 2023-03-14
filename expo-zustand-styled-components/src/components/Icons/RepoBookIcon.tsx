@@ -1,15 +1,8 @@
 import * as React from 'react';
 import Svg, { Path, SvgProps } from 'react-native-svg';
 
-
 const RepoBookIcon = (props: SvgProps) => (
-  <Svg
-    height="16"
-    viewBox="0 0 16 16"
-    width="16"
-    fill="none"
-    {...props}
-  >
+  <Svg height="16" viewBox="0 0 16 16" width="16" fill="none" {...props}>
     <Path
       fill="currentColor"
       fillRule="evenodd"

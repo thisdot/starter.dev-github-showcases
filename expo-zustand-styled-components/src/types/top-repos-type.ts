@@ -1,4 +1,4 @@
-import { Repo } from "./user-repos-type";
+import { Repo } from './user-repos-type';
 
 export interface TopRepositories {
   viewer: {
@@ -9,5 +9,4 @@ export interface TopRepositories {
   };
 }
 
-export type TopRepository = Repo
-
+export type TopRepository = Repo;
