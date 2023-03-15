@@ -6,20 +6,11 @@ type ScreenWidth = {
   screenWidth: number | undefined;
 };
 
-export const Dropdown = styled.View<{ zIndex: number; screenWidth: number }>`
+export const DropdownContainer = styled.View`
   gap: 8px;
-`;
-
-export const DropdownOptions = styled.View<{ show: boolean }>`
-  position: absolute;
-  right: 0;
-  width: 224px;
-  margin-top: 40px;
-  border: 1px solid ${colors.gray300};
-  elevation: 3;
-  border-radius: 8px;
-  background-color: #ffffff;
-  display: ${({ show }) => (show ? 'flex' : 'none')};
+  height: 35px;
+  flex-grow: 1;
+  margin-right: 8px;
 `;
 
 export const DropdownOptionsHeading = styled.View`
@@ -27,6 +18,7 @@ export const DropdownOptionsHeading = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
+
 export const DropdownOptionsHeadingText = styled.Text`
   font-weight: 700;
   font-size: 14px;
@@ -34,8 +26,8 @@ export const DropdownOptionsHeadingText = styled.Text`
 
 export const DropdownBtn = styled.TouchableOpacity<ScreenWidth>`
   flex-grow: 1;
-  elevation: 1;
   border-radius: 8px;
+  align-items: center;
   flex-direction: row;
   padding-vertical: 8px;
   padding-horizontal: 8px;

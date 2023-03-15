@@ -8,21 +8,27 @@ type ScreenWidth = {
 
 export const RepoFilterWrapper = styled.View<ScreenWidth>`
   gap: 10px;
-  padding: 16px;
-  display: inline-block;
+  width: 100%;
+  padding-vertical: 10px;
+  padding-horizontal: 16px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: ${colors.gray300};
   flex-direction: ${({screenWidth}) => screenWidth >= breakpoints.laptop ? 'row' : 'column'}
 `;
 
-export const FiltersWrapper = styled.View<ScreenWidth>`
-  gap: 10px;
-  elevation: 500;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 'row' : 'column')}
-  background-color: #fff;
+export const FiltersWrapper = styled.ScrollView<ScreenWidth>`
+  width: 100%;
+  flex-direction: row;
+  ${({screenWidth}) => {
+    if (screenWidth < breakpoints.desktop) {
+      if (screenWidth >= breakpoints.laptop) {
+        return 'flex: 0.6';
+      }
+    }else{
+      return 'flex: 0.45';
+    }
+  }}
 `;
 
 export const FilterTextWrapper = styled.View`
@@ -48,22 +54,33 @@ export const FilterTextContent = styled.View`
   align-items: center;
 `;
 
-export const SearchTextInput = styled.TextInput`
-  flex-grow: 1;
+export const SearchTextInput = styled.TextInput<ScreenWidth>`
+  width: 100%;
   font-size: 16px;
   padding: 8px 12px;
   border-radius: 8px;
   background-color: #fff;
   color: ${colors.gray500};
   border: 1px solid ${colors.gray300};
+  ${({screenWidth}) => {
+    if (screenWidth < breakpoints.desktop) {
+      if (screenWidth >= breakpoints.laptop) {
+        return 'flex: 0.4';
+      }
+    }else{
+      return 'flex: 0.55';
+    }
+  }}
 `;
 
 export const RepoBtn = styled.TouchableOpacity`
   gap: 8px;
+  height: 35px;
   padding: 6px 12px;
+  border-radius: 8px;
   flex-direction: row;
-  border-radius: 6px;
   align-items: center;
+  flex-grow: 1;
   justify-content: center;
   background-color: ${colors.primaryGreen};
 `;
