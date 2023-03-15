@@ -30,6 +30,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.71.3",
     "react-native-dotenv": "^3.4.8",
+    "react-native-marked": "^1.6.13",
     "react-native-safe-area-context": "4.5.0",
     "react-native-screens": "~3.20.0",
     "react-native-svg": "13.4.0",
