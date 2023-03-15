@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleProp, ViewProps } from 'react-native';
 import { calculateDropdownHeight } from '../utils/calculateDropdownHeight';
 const { height } = Dimensions.get('window');
 
@@ -26,16 +26,12 @@ export const useLayoutDropdown = (data) => {
 
   const dropdownWindowStyle = useMemo(() => {
     return {
-      ...{
-        borderTopWidth: 0,
-        overflow: 'hidden',
-      },
-      ...{
-        top: dropdownPY,
-        position: 'absolute',
-      },
+      top: dropdownPY,
       left: dropdownPX,
-    };
+      borderTopWidth: 0,
+      overflow: 'hidden',
+      position: 'absolute',
+    } as StyleProp<ViewProps>;
   }, [dropdownPX, dropdownPY, dropdownHEIGHT]);
 
   return { dropdownWindowStyle, onDropdownButtonLayout };

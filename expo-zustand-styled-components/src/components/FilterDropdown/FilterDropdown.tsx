@@ -1,5 +1,4 @@
-import React from 'react';
-import { useWindowDimensions } from 'react-native';
+import { useWindowDimensions, View } from 'react-native';
 
 import { DropdownBtn, DropdownBtnText, DropdownContainer } from './FilterDropdown.styles';
 
@@ -35,7 +34,7 @@ const FilterDropdown = ({
   const closeDropdown = () => setShowOptions(null);
   const openDropdown = () => {
     if (dropdownButtonRef?.current) {
-      (dropdownButtonRef?.current as any).measure((fx, fy, w, h, px, py) => {
+      (dropdownButtonRef?.current as View).measure((fx, fy, w, h, px, py) => {
         onDropdownButtonLayout(h, px, py);
         toggleOption();
       });
@@ -45,21 +44,23 @@ const FilterDropdown = ({
   return (
     <DropdownContainer>
       <DropdownBtn
-        ref={dropdownButtonRef}
-        onPress={openDropdown}
         activeOpacity={0.8}
-        screenWidth={width}>
+        screenWidth={width}
+        onPress={openDropdown}
+        ref={dropdownButtonRef}
+      >
         <DropdownBtnText>{name}</DropdownBtnText>
         <CaretIcon color={colors.gray400} />
       </DropdownBtn>
       <Dropdown
         name={name}
         data={items}
+        screenWidth={width}
         selected={selected}
-        layoutStyle={dropdownWindowStyle}
-        isVisible={showOptions === name}
-        closeDropdown={closeDropdown}
         selectOption={selectOption}
+        closeDropdown={closeDropdown}
+        isVisible={showOptions === name}
+        layoutStyle={dropdownWindowStyle}
       />
     </DropdownContainer>
   );

@@ -1,43 +1,45 @@
-import { View, Text, FlatList, TouchableOpacity, StyleProp } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleProp, ViewProps } from 'react-native';
 
-import DropdownOverlay from './DropdownOverlay';
-import DropdownModal from './DropdownModal';
-import DropdownWindow from './DropdownWindow';
 import CorrectIcon from '../Icons/CorrectIcon';
 import CloseIcon from '../Icons/CloseIcon';
 
-import { colors } from '../../utils/style-variables';
-
 import {
+  DropdownWindow,
   DropdownOption,
+  DropdownOverlay,
   DropdownOptionsHeading,
   DropdownOptionsHeadingText,
 } from './FilterDropdown.styles';
+import DropdownModal from './DropdownModal';
+
 import { useRefs } from '../../hooks/useRefs';
+import { colors } from '../../utils/style-variables';
 
 const Dropdown = ({
   name,
   data,
   selected,
   isVisible,
-  closeDropdown,
   layoutStyle,
+  screenWidth,
   selectOption,
+  closeDropdown,
 }: {
   data: string[];
   name: string;
   selected: string;
   isVisible: boolean;
+  screenWidth: number;
   closeDropdown: () => void;
   selectOption: (i: string) => void;
-  layoutStyle: Partial<StyleProp<View>>;
+  layoutStyle?: StyleProp<ViewProps>;
 }) => {
-  const { dropDownFlatlistRef} = useRefs();
+  const { dropDownFlatlistRef } = useRefs();
 
   return (
     <DropdownModal visible={isVisible}>
-      <DropdownOverlay onPress={closeDropdown} />
-      <DropdownWindow layoutStyle={layoutStyle}>
+      <DropdownOverlay activeOpacity={1} onPress={closeDropdown} screenWidth={screenWidth} />
+      <DropdownWindow style={layoutStyle}>
         <FlatList
           data={data}
           ref={dropDownFlatlistRef}

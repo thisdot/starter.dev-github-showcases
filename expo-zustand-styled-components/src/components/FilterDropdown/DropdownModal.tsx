@@ -1,7 +1,6 @@
-import React from 'react';
-import {Modal} from 'react-native';
+import { Modal } from 'react-native';
 
-const DropdownModal = ({visible, children}) => {
+const DropdownModal = ({ visible, children }) => {
   return (
     <Modal
       supportedOrientations={['portrait', 'landscape']}

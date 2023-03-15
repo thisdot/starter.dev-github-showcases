@@ -43,12 +43,30 @@ export const DropdownOption = styled.TouchableOpacity`
   padding: 8px;
   flex-direction: row;
   border-top-width: 1px;
+  background-color: #fff;
   border-top-style: solid;
   border-top-color: ${colors.gray300};
-  background-color: #ffffff;
 `;
 
 export const DropdownBtnText = styled.Text`
   font-weight: 500;
   font-size: 14px;
+`;
+
+export const DropdownOverlay = styled.TouchableOpacity<ScreenWidth>`
+  width: 100%;
+  height: 100%;
+`;
+
+export const DropdownWindow = styled.View`
+  elevation: 10;
+  min-width: 150px;
+  border-radius: 10px;
+  shadow-color: #000;
+  shadow-opacity: 0.1;
+  border-width: 0.5px;
+  shadow-radius: 10px;
+  shadow-offset: 0px 10px;
+  border-color: ${colors.gray300};
+  background-color: ${colors.gray200};
 `;
