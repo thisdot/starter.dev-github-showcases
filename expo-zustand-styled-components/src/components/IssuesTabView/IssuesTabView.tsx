@@ -3,13 +3,16 @@ import { Container, Pagination, PaginationBtn } from './IssuesTabView.styles';
 import { issues } from './data';
 import IssuePullRequestCard from '../IssuePullRequestCard';
 import { View, Text } from 'react-native';
+import { usePRAndIssueHeaderStore } from '../../hooks/stores';
 
 const IssuesTabView = () => {
+  const { activeTab } = usePRAndIssueHeaderStore();
+
   return (
     <View>
       <Container>
         <PRAndIssueHeader cardType="pr" openCount={3} closedCount={5} />
-        {issues.map((data, index) => (
+        {issues[activeTab].map((data, index) => (
           <IssuePullRequestCard {...data} key={index} />
         ))}
       </Container>

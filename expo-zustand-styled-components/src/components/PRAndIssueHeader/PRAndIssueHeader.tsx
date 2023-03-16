@@ -13,6 +13,11 @@ interface PRAndIssueHeaderProps {
 
 const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeaderProps) => {
   const { activeTab, setActiveTab } = usePRAndIssueHeaderStore();
+  const filterDropdownStyle = {
+    borderWidth: 0,
+    elevation: 0,
+    flexGrow: 0,
+  };
   return (
     <Wrapper>
       <Tabs>
@@ -21,7 +26,7 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
           <TabText isActive={activeTab === PR_ISSUE_TABS.open}>{openCount}</TabText>
           <TabText isActive={activeTab === PR_ISSUE_TABS.open}>Open</TabText>
         </Tab>
-        <Tab activeOpacity={0.7} onPress={() => setActiveTab(PR_ISSUE_TABS.open)}>
+        <Tab activeOpacity={0.7} onPress={() => setActiveTab(PR_ISSUE_TABS.closed)}>
           <TabText isActive={activeTab === PR_ISSUE_TABS.closed}>{closedCount}</TabText>
           <TabText isActive={activeTab === PR_ISSUE_TABS.closed}>Closed</TabText>
         </Tab>
@@ -33,33 +38,21 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
           selected={''}
           items={[]}
           selectOption={() => null}
-          style={{
-            borderWidth: 0,
-            elevation: 0,
-            flexGrow: 0,
-          }}
+          style={filterDropdownStyle}
         />
         <FilterDropdown
           name="Milestone"
           selected={''}
           items={[]}
           selectOption={() => null}
-          style={{
-            borderWidth: 0,
-            elevation: 0,
-            flexGrow: 0,
-          }}
+          style={filterDropdownStyle}
         />
         <FilterDropdown
           name="Sort"
           selected={''}
           items={[]}
           selectOption={() => null}
-          style={{
-            borderWidth: 0,
-            elevation: 0,
-            flexGrow: 0,
-          }}
+          style={filterDropdownStyle}
         />
       </Dropdowns>
     </Wrapper>
