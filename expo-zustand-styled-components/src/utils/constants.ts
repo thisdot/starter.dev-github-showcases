@@ -11,3 +11,8 @@ export const REPO_TABS = {
   pull_requests: 'Pull Requests',
   issues: 'Issues',
 };
+
+export const PR_ISSUE_TABS = {
+  open: 'open',
+  closed: 'closed',
+};

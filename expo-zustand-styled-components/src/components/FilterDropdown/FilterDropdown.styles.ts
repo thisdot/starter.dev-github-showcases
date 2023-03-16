@@ -37,6 +37,7 @@ export const DropdownBtn = styled.TouchableOpacity<ScreenWidth>`
   elevation: 1;
   border-radius: 8px;
   flex-direction: row;
+  align-items: center;
   padding-vertical: 8px;
   padding-horizontal: 8px;
   justify-content: space-between;

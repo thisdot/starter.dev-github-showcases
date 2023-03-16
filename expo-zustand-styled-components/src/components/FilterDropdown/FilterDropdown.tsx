@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { View, Text, TouchableOpacity, useWindowDimensions} from 'react-native';
 import React from 'react';
 import {
   Dropdown,
@@ -22,6 +22,7 @@ interface FilterDropdownProps {
   zIndex?: number;
   selectOption?: (value: string) => void;
   setShowOptions?: (value: string) => void;
+  style?: any;
 }
 
 const FilterDropdown = ({
@@ -32,12 +33,13 @@ const FilterDropdown = ({
   zIndex,
   showOptions,
   setShowOptions,
+  style
 }: FilterDropdownProps) => {
   const { width } = useWindowDimensions();
   const toggleOption = () => setShowOptions(showOptions === name ? null : name);
   return (
     <Dropdown zIndex={zIndex} screenWidth={width}>
-      <DropdownBtn onPress={toggleOption} activeOpacity={0.8} screenWidth={width}>
+      <DropdownBtn onPress={toggleOption} activeOpacity={0.8} screenWidth={width} style={style}>
         <DropdownBtnText>{name}</DropdownBtnText>
         <CaretIcon color={colors.gray400} />
       </DropdownBtn>

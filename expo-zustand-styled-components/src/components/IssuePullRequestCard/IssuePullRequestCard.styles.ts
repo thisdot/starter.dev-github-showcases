@@ -6,8 +6,8 @@ export const Card = styled.View`
   border-top-width: 1px;
   border-top-style: solid;
   border-top-color: ${colors.gray300};
-  padding-top: 8px;
-  padding-bottom: 10px;
+  padding-vertical: 8px;
+  padding-horizontal: 10px;
 `;
 
 export const Content = styled.View`
