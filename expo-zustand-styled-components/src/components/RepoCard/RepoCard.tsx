@@ -30,7 +30,8 @@ const RepoCard = ({ repo, isProfilePage }: RepoCardProps) => {
     <Card>
       <Content>
         <Heading>
-          <TouchableOpacity onPress={() => navigation.navigate('AppNavigator', { screen: 'Home' })}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('AppNavigator', { screen: 'Repository' })}>
             <LinkText>{repo.name}</LinkText>
           </TouchableOpacity>
           <Badge>

@@ -14,6 +14,7 @@ import OrganizationScreen from '../../screens/Organization';
 
 // components
 import Header from '../../components/Header';
+import RepositoryScreen from '../../screens/Repository';
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
@@ -35,6 +36,11 @@ function AuthNavigator() {
       <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
       <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
       <Stack.Screen name="Organization" component={OrganizationScreen} />
+      <Stack.Screen
+        name="Repository"
+        component={RepositoryScreen}
+        options={{ title: 'Repository' }}
+      />
     </Stack.Navigator>
   );
 }
