@@ -6,7 +6,7 @@ export const Wrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
+  padding: 12px;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   background-color: ${colors.gray100};

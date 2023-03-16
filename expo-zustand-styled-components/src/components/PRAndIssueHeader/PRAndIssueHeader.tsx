@@ -1,9 +1,10 @@
 import FilterDropdown from '../FilterDropdown/FilterDropdown';
-import IssueIcon from '../Icons/IssueIcon';
 import PullRequestIcon from '../Icons/PullRequestIcon';
 import { Dropdowns, Tab, TabText, Tabs, Wrapper } from './PRAndIssueHeader.styles';
 import { usePRAndIssueHeaderStore } from '../../hooks/stores';
 import { PR_ISSUE_TABS } from '../../utils/constants';
+import IssuesIcon from '../Icons/IssuesIcon';
+import { colors } from '../../utils/style-variables';
 
 interface PRAndIssueHeaderProps {
   cardType: 'pr' | 'issue';
@@ -22,7 +23,7 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
     <Wrapper>
       <Tabs>
         <Tab activeOpacity={0.7} onPress={() => setActiveTab(PR_ISSUE_TABS.open)}>
-          {cardType === 'pr' ? <PullRequestIcon /> : <IssueIcon />}
+          {cardType === 'pr' ? <PullRequestIcon color={colors.gray500} style={{marginRight: 4}} /> : <IssuesIcon color={colors.gray500} style={{marginRight: 4}} />}
           <TabText isActive={activeTab === PR_ISSUE_TABS.open}>{openCount}</TabText>
           <TabText isActive={activeTab === PR_ISSUE_TABS.open}>Open</TabText>
         </Tab>

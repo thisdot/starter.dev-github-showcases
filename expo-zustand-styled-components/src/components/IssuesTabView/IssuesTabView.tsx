@@ -11,7 +11,7 @@ const IssuesTabView = () => {
   return (
     <View>
       <Container>
-        <PRAndIssueHeader cardType="pr" openCount={3} closedCount={5} />
+        <PRAndIssueHeader cardType="issue" openCount={3} closedCount={5} />
         {issues[activeTab].map((data, index) => (
           <IssuePullRequestCard {...data} key={index} />
         ))}
