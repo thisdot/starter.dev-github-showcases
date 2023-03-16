@@ -44,6 +44,7 @@ export type AppStackParamList = {
   Home: undefined;
   Profile: undefined;
   RepoNavigator: NavigatorScreenParams<RepoStackParamList> | { owner: string; name: string };
+  Organization: { login: string };
 };
 
 export type AppStackScreenProps<Screen extends keyof AppStackParamList> = NativeStackScreenProps<

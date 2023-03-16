@@ -37,38 +37,36 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
   return (
     <>
       <RepoFilterWrapper screenWidth={width}>
-        <FiltersWrapper screenWidth={width}>
-          <SearchInput />
-          <>
-            <FilterDropdown
-              name="Type"
-              items={typeOptions}
-              selectOption={selectType}
-              selected={filterType}
-              showOptions={showOptions}
-              setShowOptions={(value) => setShowOptions(value)}
-            />
-            <FilterDropdown
-              name="Sort"
-              items={sortOptions}
-              selectOption={selectSort}
-              selected={sortBy}
-              showOptions={showOptions}
-              setShowOptions={(value) => setShowOptions(value)}
-            />
-            <FilterDropdown
-              name="Langauge"
-              items={languages}
-              selectOption={selectLanguage}
-              selected={language}
-              showOptions={showOptions}
-              setShowOptions={(value) => setShowOptions(value)}
-            />
-            <RepoBtn activeOpacity={0.8}>
-              <RepoBookIcon color={'#FFF'} />
-              <RepoBtnText>{repoBtnText || 'New'}</RepoBtnText>
-            </RepoBtn>
-          </>
+        <SearchInput screenWidth={width} />
+        <FiltersWrapper screenWidth={width} horizontal contentContainerStyle={{ flexGrow: 1 }}>
+          <FilterDropdown
+            name="Type"
+            items={typeOptions}
+            selectOption={selectType}
+            selected={filterType}
+            showOptions={showOptions}
+            setShowOptions={(value) => setShowOptions(value)}
+          />
+          <FilterDropdown
+            name="Sort"
+            items={sortOptions}
+            selectOption={selectSort}
+            selected={sortBy}
+            showOptions={showOptions}
+            setShowOptions={(value) => setShowOptions(value)}
+          />
+          <FilterDropdown
+            name="Langauge"
+            items={languages}
+            selectOption={selectLanguage}
+            selected={language}
+            showOptions={showOptions}
+            setShowOptions={(value) => setShowOptions(value)}
+          />
+          <RepoBtn activeOpacity={0.8}>
+            <RepoBookIcon color="#fff" />
+            <RepoBtnText>{repoBtnText || 'New'}</RepoBtnText>
+          </RepoBtn>
         </FiltersWrapper>
       </RepoFilterWrapper>
       {isSomeFilterSelected && <FilterText filteredRepoCount={filteredRepoCount} />}

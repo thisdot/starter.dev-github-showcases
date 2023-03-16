@@ -1,11 +1,12 @@
 import styled from 'styled-components/native';
+import { colors } from '../../../utils/style-variables';
 
 export const OrganizationsWrapper = styled.View`
   margin-top: 20px;
   padding-horizontal: 16px;
   border-top-width: 1px;
   border-style: solid;
-  border-top-color: #e1e4e8;
+  border-top-color: ${colors.gray100};
 `;
 export const Heading = styled.Text`
   margin-top: 8px;

@@ -8,6 +8,9 @@ import { AppStackParamList } from '../../../types';
 // screens
 import HomeScreen from '../../screens/Home';
 import ProfileScreen from '../../screens/Profile';
+import OrganizationScreen from '../../screens/Organization';
+
+// navigators
 import RepoNavigator from './RepoNavigator';
 
 // components
@@ -44,6 +47,7 @@ function AuthNavigator() {
           ),
         }}
       />
+      <Stack.Screen name="Organization" component={OrganizationScreen} />
     </Stack.Navigator>
   );
 }

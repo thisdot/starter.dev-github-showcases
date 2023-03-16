@@ -63,6 +63,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               },
             },
           },
+          Organization: {
+            screens: {
+              OrganizationScreen: 'organization',
+            },
+          },
         },
       },
     },

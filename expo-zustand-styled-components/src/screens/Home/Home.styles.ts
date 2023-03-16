@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
+import { colors } from '../../utils/style-variables';
 
 export const SafeAreaViewStyled = styled.SafeAreaView`
   background-color: #f3f4f6;
@@ -27,14 +28,14 @@ export const GistsStyled = styled.View<{ screenWidth: number }>`
 `;
 
 export const GistsListContainerStyled = styled.View`
-  border-top-width: 1px;
-  border-top-color: #e1e4e8;
   margin-top: 20px;
   padding-top: 20px;
-  border-bottom-width: 1px;
-  border-bottom-color: #e1e4e8;
   margin-bottom: 20px;
   padding-bottom: 20px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-top-color: ${colors.gray100};
+  border-bottom-color: ${colors.gray100};
 `;
 
 export const RepositoriesStyled = styled.View<{ screenWidth: number }>`
@@ -50,10 +51,10 @@ export const RepositoriesStyled = styled.View<{ screenWidth: number }>`
 `;
 
 export const RepositoriesListContainerStyled = styled.View`
-  background-color: white;
   border-width: 1px;
-  border-color: #e1e4e8;
   border-radius: 6px;
+  background-color: white;
+  border-color: ${colors.gray100};
 `;
 
 export const GistsListStyled = styled.FlatList`
