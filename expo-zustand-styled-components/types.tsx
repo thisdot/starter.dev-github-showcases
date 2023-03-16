@@ -10,9 +10,9 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList { }
-    interface AuthParamList extends AuthStackParamList { }
-    interface AppParamList extends AppStackParamList { }
+    interface RootParamList extends RootStackParamList {}
+    interface AuthParamList extends AuthStackParamList {}
+    interface AppParamList extends AppStackParamList {}
   }
 }
 
@@ -44,6 +44,8 @@ export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = Nati
 export type AppStackParamList = {
   Home: undefined;
   Profile: undefined;
+  Organization: { login: string };
+  Repository: undefined;
 };
 
 export type AppStackScreenProps<Screen extends keyof AppStackParamList> = NativeStackScreenProps<
@@ -51,4 +53,3 @@ export type AppStackScreenProps<Screen extends keyof AppStackParamList> = Native
   Screen
 >;
 // #endregion
-

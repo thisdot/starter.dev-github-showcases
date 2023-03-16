@@ -35,6 +35,16 @@ const linking: LinkingOptions<RootStackParamList> = {
               ProfileScreen: 'profile',
             },
           },
+          Organization: {
+            screens: {
+              OrganizationScreen: 'organization',
+            },
+          },
+          Repository: {
+            screens: {
+              RepositoryScreen: 'repository',
+            },
+          },
         },
       },
     },

@@ -1,21 +1,22 @@
 import PRAndIssueHeader from '../PRAndIssueHeader';
-import { Container, Pagination, PaginationBtn } from './IssuesTabView.styles';
+import { ContentContainer, Pagination, PaginationBtn, MainContainer } from './IssuesTabView.styles';
 import { issues } from './data';
 import IssuePullRequestCard from '../IssuePullRequestCard';
-import { View, Text } from 'react-native';
+import { Text, useWindowDimensions } from 'react-native';
 import { usePRAndIssueHeaderStore } from '../../hooks/stores';
 
 const IssuesTabView = () => {
   const { activeTab } = usePRAndIssueHeaderStore();
+  const { width } = useWindowDimensions();
 
   return (
-    <View>
-      <Container>
+    <MainContainer screenWidth={width}>
+      <ContentContainer>
         <PRAndIssueHeader cardType="issue" openCount={3} closedCount={5} />
         {issues[activeTab].map((data, index) => (
           <IssuePullRequestCard {...data} key={index} />
         ))}
-      </Container>
+      </ContentContainer>
       <Pagination>
         <PaginationBtn>
           <Text>{'<'}</Text>
@@ -26,7 +27,7 @@ const IssuesTabView = () => {
           <Text>{'>'}</Text>
         </PaginationBtn>
       </Pagination>
-    </View>
+    </MainContainer>
   );
 };
 

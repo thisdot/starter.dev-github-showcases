@@ -6,20 +6,11 @@ type ScreenWidth = {
   screenWidth: number | undefined;
 };
 
-export const Dropdown = styled.View<{ zIndex: number; screenWidth: number }>`
+export const DropdownContainer = styled.View`
   gap: 8px;
-`;
-
-export const DropdownOptions = styled.View<{ show: boolean }>`
-  position: absolute;
-  right: 0;
-  width: 224px;
-  margin-top: 40px;
-  border: 1px solid ${colors.gray300};
-  elevation: 3;
-  border-radius: 8px;
-  background-color: #ffffff;
-  display: ${({ show }) => (show ? 'flex' : 'none')};
+  height: 35px;
+  flex-grow: 1;
+  margin-right: 8px;
 `;
 
 export const DropdownOptionsHeading = styled.View`
@@ -27,6 +18,7 @@ export const DropdownOptionsHeading = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
+
 export const DropdownOptionsHeadingText = styled.Text`
   font-weight: 700;
   font-size: 14px;
@@ -34,8 +26,8 @@ export const DropdownOptionsHeadingText = styled.Text`
 
 export const DropdownBtn = styled.TouchableOpacity<ScreenWidth>`
   flex-grow: 1;
-  elevation: 1;
   border-radius: 8px;
+  align-items: center;
   flex-direction: row;
   align-items: center;
   padding-vertical: 8px;
@@ -52,12 +44,30 @@ export const DropdownOption = styled.TouchableOpacity`
   padding: 8px;
   flex-direction: row;
   border-top-width: 1px;
+  background-color: #fff;
   border-top-style: solid;
   border-top-color: ${colors.gray300};
-  background-color: #ffffff;
 `;
 
 export const DropdownBtnText = styled.Text`
   font-weight: 500;
   font-size: 14px;
+`;
+
+export const DropdownOverlay = styled.TouchableOpacity<ScreenWidth>`
+  width: 100%;
+  height: 100%;
+`;
+
+export const DropdownWindow = styled.View`
+  elevation: 10;
+  min-width: 150px;
+  border-radius: 10px;
+  shadow-color: #000;
+  shadow-opacity: 0.1;
+  border-width: 0.5px;
+  shadow-radius: 10px;
+  shadow-offset: 0px 10px;
+  border-color: ${colors.gray300};
+  background-color: ${colors.gray200};
 `;

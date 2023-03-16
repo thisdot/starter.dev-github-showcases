@@ -5,6 +5,7 @@ import { usePRAndIssueHeaderStore } from '../../hooks/stores';
 import { PR_ISSUE_TABS } from '../../utils/constants';
 import IssuesIcon from '../Icons/IssuesIcon';
 import { colors } from '../../utils/style-variables';
+import { useState } from 'react';
 
 interface PRAndIssueHeaderProps {
   cardType: 'pr' | 'issue';
@@ -14,6 +15,8 @@ interface PRAndIssueHeaderProps {
 
 const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeaderProps) => {
   const { activeTab, setActiveTab } = usePRAndIssueHeaderStore();
+  const [showOptions, setShowOptions] = useState(null);
+
   const filterDropdownStyle = {
     borderWidth: 0,
     elevation: 0,
@@ -23,7 +26,11 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
     <Wrapper>
       <Tabs>
         <Tab activeOpacity={0.7} onPress={() => setActiveTab(PR_ISSUE_TABS.open)}>
-          {cardType === 'pr' ? <PullRequestIcon color={colors.gray500} style={{marginRight: 4}} /> : <IssuesIcon color={colors.gray500} style={{marginRight: 4}} />}
+          {cardType === 'pr' ? (
+            <PullRequestIcon color={colors.gray500} style={{ marginRight: 4 }} />
+          ) : (
+            <IssuesIcon color={colors.gray500} style={{ marginRight: 4 }} />
+          )}
           <TabText isActive={activeTab === PR_ISSUE_TABS.open}>{openCount}</TabText>
           <TabText isActive={activeTab === PR_ISSUE_TABS.open}>Open</TabText>
         </Tab>
@@ -36,23 +43,29 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
       <Dropdowns>
         <FilterDropdown
           name="Label"
+          showOptions={showOptions}
           selected={''}
           items={[]}
           selectOption={() => null}
+          setShowOptions={(value) => setShowOptions(value)}
           style={filterDropdownStyle}
         />
         <FilterDropdown
           name="Milestone"
+          showOptions={showOptions}
           selected={''}
           items={[]}
           selectOption={() => null}
+          setShowOptions={(value) => setShowOptions(value)}
           style={filterDropdownStyle}
         />
         <FilterDropdown
           name="Sort"
+          showOptions={showOptions}
           selected={''}
           items={[]}
           selectOption={() => null}
+          setShowOptions={(value) => setShowOptions(value)}
           style={filterDropdownStyle}
         />
       </Dropdowns>

@@ -11,6 +11,8 @@ export interface Repo {
   owner: {
     login: string;
   };
+  isFork?: boolean;
+  isArchived?: boolean;
   primaryLanguage: {
     name: string;
     color: string;
