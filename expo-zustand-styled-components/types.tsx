@@ -44,6 +44,7 @@ export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = Nati
 export type AppStackParamList = {
   Home: undefined;
   Profile: undefined;
+  Organization: { login: string };
   Repository: undefined;
 };
 

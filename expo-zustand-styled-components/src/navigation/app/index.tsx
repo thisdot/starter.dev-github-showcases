@@ -10,6 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // screens
 import HomeScreen from '../../screens/Home';
 import ProfileScreen from '../../screens/Profile';
+import OrganizationScreen from '../../screens/Organization';
 
 // components
 import Header from '../../components/Header';
@@ -34,6 +35,7 @@ function AuthNavigator() {
       }}>
       <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
       <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
+      <Stack.Screen name="Organization" component={OrganizationScreen} />
       <Stack.Screen
         name="Repository"
         component={RepositoryScreen}
