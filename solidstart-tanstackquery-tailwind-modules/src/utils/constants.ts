@@ -29,7 +29,7 @@ export const SORT_OPTIONS = {
   [`${OrderField.Comments}^${OrderDirection.Desc}`]: 'Most commented',
   [`${OrderField.Comments}^${OrderDirection.Asc}`]: 'Least commented',
   [`${OrderField.UpdatedAt}^${OrderDirection.Desc}`]: 'Recently updated',
-  [`${OrderField.UpdatedAt}^${OrderDirection.Asc}`]: 'Least reecently updated',
+  [`${OrderField.UpdatedAt}^${OrderDirection.Asc}`]: 'Least recently updated',
 };
 
 export const DEFAULT_PAGE_SIZE = 30;
