@@ -25,39 +25,41 @@ type Props = {
 
 export default function RepoAbout({ description, homepageUrl, topics }: Props) {
   const { width } = useWindowDimensions();
-  
+
   return (
     <AboutWrapper screenWidth={width}>
-    <AboutContainerStyled>
-      <HeaderStyled>About</HeaderStyled>
-      {description ? (
-        <DescriptionTextStyled>{description}</DescriptionTextStyled>
-      ) : (
-        <DefaultRepoTextStyled>No description, website, or topics provided.</DefaultRepoTextStyled>
-      )}
+      <AboutContainerStyled>
+        <HeaderStyled>About</HeaderStyled>
+        {description ? (
+          <DescriptionTextStyled>{description}</DescriptionTextStyled>
+        ) : (
+          <DefaultRepoTextStyled>
+            No description, website, or topics provided.
+          </DefaultRepoTextStyled>
+        )}
 
-      {homepageUrl ? (
-        <LinkContainerStyled onPress={() => WebBrowser.openBrowserAsync(homepageUrl)}>
-          <LinkIcon />
-          <WebsiteLinkStyled>{homepageUrl}</WebsiteLinkStyled>
-        </LinkContainerStyled>
-      ) : null}
+        {homepageUrl ? (
+          <LinkContainerStyled onPress={() => WebBrowser.openBrowserAsync(homepageUrl)}>
+            <LinkIcon />
+            <WebsiteLinkStyled>{homepageUrl}</WebsiteLinkStyled>
+          </LinkContainerStyled>
+        ) : null}
 
-      {topics?.length > 0 ? (
-        <TagsContainerStyled>
-          {topics.map((topic, index) => (
-            <TagStyled key={index}>
-              <TagTextStyled>{topic}</TagTextStyled>
-            </TagStyled>
-          ))}
-        </TagsContainerStyled>
-      ) : null}
+        {topics?.length > 0 ? (
+          <TagsContainerStyled>
+            {topics.map((topic, index) => (
+              <TagStyled key={index}>
+                <TagTextStyled>{topic}</TagTextStyled>
+              </TagStyled>
+            ))}
+          </TagsContainerStyled>
+        ) : null}
 
-      <ReadmeHoverEffectStyled>
-        <ReadmeBookIcon />
-        <ReadmeTextStyled>Readme</ReadmeTextStyled>
-      </ReadmeHoverEffectStyled>
-    </AboutContainerStyled>
+        <ReadmeHoverEffectStyled>
+          <ReadmeBookIcon />
+          <ReadmeTextStyled>Readme</ReadmeTextStyled>
+        </ReadmeHoverEffectStyled>
+      </AboutContainerStyled>
     </AboutWrapper>
   );
 }

@@ -37,17 +37,15 @@ export const BtnMainText = styled.View`
   color: ${colors.gray700};
 `;
 
-
 export const BtnSide = styled.View`
   padding-vertical: 2px;
-  background-color: #FFF;
+  background-color: #fff;
   justify-content: center;
   padding-horizontal: 10px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   border: 1px solid ${colors.gray300};
 `;
-
 
 export const BtnSideText = styled.Text`
   font-size: 12px;

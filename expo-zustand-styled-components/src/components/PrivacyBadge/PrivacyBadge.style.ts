@@ -21,5 +21,5 @@ export const BadgeText = styled.Text<ScreenWidth>`
   text-align: center;
   color: ${colors.gray600};
   text-transform: capitalize;
-  font-size: ${({screenWidth}) => screenWidth >= breakpoints.tablet ? '14px' : '12px'};
+  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '14px' : '12px')};
 `;

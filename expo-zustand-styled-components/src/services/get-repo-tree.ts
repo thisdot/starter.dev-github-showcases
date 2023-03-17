@@ -34,19 +34,19 @@ const getRepoTree = async (variables: RepoTreeVariables) => {
     const data = useRepoInfoStore.getState()._treeCache.get(key);
     useRepoInfoStore.setState({ isLoading: false, tree: data });
   } else {
-  try {
-    useRepoInfoStore.setState({ isLoading: true });
-    const resp = (await FetchApi({ query: REPO_TREE_QUERY, variables })) as Response;
-    const tree = parseQueryData(resp.data?.repository?.tree?.entries)
-    useRepoInfoStore.setState({
-      isLoading: false,
-      tree,
-    });
-    useRepoInfoStore.getState()._treeCache.set(key, tree);
-  } catch (err) {
-    useRepoInfoStore.setState({ isLoading: false, error: err.message });
+    try {
+      useRepoInfoStore.setState({ isLoading: true });
+      const resp = (await FetchApi({ query: REPO_TREE_QUERY, variables })) as Response;
+      const tree = parseQueryData(resp.data?.repository?.tree?.entries);
+      useRepoInfoStore.setState({
+        isLoading: false,
+        tree,
+      });
+      useRepoInfoStore.getState()._treeCache.set(key, tree);
+    } catch (err) {
+      useRepoInfoStore.setState({ isLoading: false, error: err.message });
+    }
   }
-}
 };
 
 export default getRepoTree;

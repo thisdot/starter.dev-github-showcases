@@ -1,4 +1,4 @@
-import {useRef} from 'react';
+import { useRef } from 'react';
 
 export const useRefs = () => {
   const dropdownButtonRef = useRef(); // button ref to get positions

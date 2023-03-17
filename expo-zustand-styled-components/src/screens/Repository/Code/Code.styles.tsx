@@ -11,7 +11,8 @@ export const ContainerStyled = styled.View<{ screenWidth: number }>`
   height: 100%;
   flex-direction: column;
   gap: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 20 : 14)}px;
-  padding: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '50px 5% 10px 15%' : '16px')};
+  padding: ${({ screenWidth }) =>
+    screenWidth >= breakpoints.tablet ? '50px 5% 10px 15%' : '16px'};
 `;
 
 export const MainContent = styled.View<{ screenWidth: number }>`
@@ -20,15 +21,16 @@ export const MainContent = styled.View<{ screenWidth: number }>`
   width: 100%;
   flex-grow: 1;
   flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'row' : 'column')};
-  justify-content: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'space-between' : 'flex-start')};
+  justify-content: ${({ screenWidth }) =>
+    screenWidth >= breakpoints.tablet ? 'space-between' : 'flex-start'};
 `;
-  
+
 export const Containter = styled.View<{ screenWidth: number }>`
   gap: 10px;
   flex-grow: 1;
   ${({ screenWidth }) => {
-    if(screenWidth >= breakpoints.tablet) {
-      return `flex: 0.75`
+    if (screenWidth >= breakpoints.tablet) {
+      return `flex: 0.75`;
     }
   }}
 `;

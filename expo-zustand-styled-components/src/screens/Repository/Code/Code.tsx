@@ -13,13 +13,13 @@ import { Containter, MainContent, ContainerStyled, SafeAreaViewStyled } from './
 const Code = () => {
   const { width } = useWindowDimensions();
   const { info, name, owner, error, branch, isLoading } = useRepoInfoStore();
-  
+
   return (
     <SafeAreaViewStyled>
       {isLoading || error || !info ? (
         <LoaderErrorView error={error} />
       ) : (
-        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <ContainerStyled screenWidth={width}>
             <BranchNavigation branch={branch} name={name} owner={owner} />
             <MainContent screenWidth={width}>
@@ -35,7 +35,6 @@ const Code = () => {
             </MainContent>
           </ContainerStyled>
         </ScrollView>
-
       )}
     </SafeAreaViewStyled>
   );

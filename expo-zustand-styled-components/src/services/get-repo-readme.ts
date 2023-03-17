@@ -15,15 +15,15 @@ const getRepoReadMe = async (variables: RepoReadmeVariables) => {
     const readMe = useRepoInfoStore.getState()._readMe.get(key);
     useRepoInfoStore.setState({ isLoading: false, readMe });
   } else {
-  try {
-    useRepoInfoStore.setState({ isLoading: true });
-    const resp = (await FetchApi({ query: REPO_README_QUERY, variables })) as Response;
-    useRepoInfoStore.setState({ isLoading: false, readMe: resp.data.repository?.readme?.text });
-    useRepoInfoStore.getState()._readMe.set(key, resp.data.repository?.readme?.text);
-  } catch (err) {
-    useRepoInfoStore.setState({ isLoading: false, error: err.message });
+    try {
+      useRepoInfoStore.setState({ isLoading: true });
+      const resp = (await FetchApi({ query: REPO_README_QUERY, variables })) as Response;
+      useRepoInfoStore.setState({ isLoading: false, readMe: resp.data.repository?.readme?.text });
+      useRepoInfoStore.getState()._readMe.set(key, resp.data.repository?.readme?.text);
+    } catch (err) {
+      useRepoInfoStore.setState({ isLoading: false, error: err.message });
+    }
   }
-}
 };
 
 export default getRepoReadMe;

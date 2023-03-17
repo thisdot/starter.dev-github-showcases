@@ -6,7 +6,7 @@ import { REPO_TABS } from '../../utils/constants';
 
 interface IRepoInfoStore {
   info?: Info;
-  name?: string
+  name?: string;
   error?: string;
   path?: string;
   branch?: string;
@@ -15,10 +15,13 @@ interface IRepoInfoStore {
   activeTab: string;
   isLoading: boolean;
   tree?: TreeProps[];
-  _cache: Map<string, {
-    info: Info;
-    branch: string;
-  }>;
+  _cache: Map<
+    string,
+    {
+      info: Info;
+      branch: string;
+    }
+  >;
   _treeCache: Map<string, TreeProps[]>;
   _readMe: Map<string, string>;
 }

@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { BtnGroup, BtnMain, BtnMainText, BtnSide, BtnSideText } from "./RepoActionButtons.styles"
+import { ReactNode } from 'react';
+import { BtnGroup, BtnMain, BtnMainText, BtnSide, BtnSideText } from './RepoActionButtons.styles';
 
 const formatCountString = (props) => {
   const count = () => props || 0;
@@ -12,13 +12,13 @@ const formatCountString = (props) => {
   return countText;
 };
 
-interface CountButtonGroupProps{
+interface CountButtonGroupProps {
   count: number;
-  children: ReactNode
+  children: ReactNode;
 }
 
-const CountButtonGroup = ({count, children}: CountButtonGroupProps) => {
-const countText = formatCountString(count);
+const CountButtonGroup = ({ count, children }: CountButtonGroupProps) => {
+  const countText = formatCountString(count);
 
   return (
     <BtnGroup>

@@ -47,8 +47,7 @@ const FilterDropdown = ({
         activeOpacity={0.8}
         screenWidth={width}
         onPress={openDropdown}
-        ref={dropdownButtonRef}
-      >
+        ref={dropdownButtonRef}>
         <DropdownBtnText>{name}</DropdownBtnText>
         <CaretIcon color={colors.gray400} />
       </DropdownBtn>

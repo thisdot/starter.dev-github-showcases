@@ -9,10 +9,10 @@ export const AboutContainerStyled = styled.View`
   border-bottom-color: ${colors.gray300};
 `;
 
-export const AboutWrapper = styled.View<{screenWidth: number}>`
+export const AboutWrapper = styled.View<{ screenWidth: number }>`
   ${({ screenWidth }) => {
-    if(screenWidth >= breakpoints.tablet) {
-      return `flex: 0.25`
+    if (screenWidth >= breakpoints.tablet) {
+      return `flex: 0.25`;
     }
   }}
 `;

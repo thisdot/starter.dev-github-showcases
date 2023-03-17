@@ -1,1 +1,1 @@
-export { default as BranchNavigation} from './BranchNavigation';
+export { default as BranchNavigation } from './BranchNavigation';

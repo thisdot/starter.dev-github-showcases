@@ -20,11 +20,11 @@ import { useRepoInfoStore } from '../../../hooks/stores';
 const Stack = createNativeStackNavigator<RepoStackParamList>();
 
 const RepoNavigator = ({ navigation }: AppStackScreenProps<'RepoNavigator'>) => {
-  const { name, owner, } = useRepoInfoStore();
+  const { name, owner } = useRepoInfoStore();
 
   useEffect(() => {
-    useRepoInfoStore.setState({ activeTab: 'Code' })
-  }, [])
+    useRepoInfoStore.setState({ activeTab: 'Code' });
+  }, []);
 
   useEffect(() => {
     if (name && owner) {

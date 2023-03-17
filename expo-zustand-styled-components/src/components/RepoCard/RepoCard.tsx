@@ -8,12 +8,10 @@ import {
 
 import {
   Card,
-  // Badge,
   Content,
   Heading,
   StarBtn,
   LinkText,
-  // BadgeText,
   Description,
 } from './RepoCard.styles';
 

@@ -9,7 +9,6 @@ export const OrgInfoContainer = styled.View`
   flex-direction: row;
 `;
 
-
 export const OrgLogoContainter = styled.View`
   padding: 1px;
   border-width: 1px;

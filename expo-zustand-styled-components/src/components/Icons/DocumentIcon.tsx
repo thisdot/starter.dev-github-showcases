@@ -2,12 +2,7 @@ import Svg, { Path, SvgProps } from 'react-native-svg';
 
 function DocumentIcon(props: SvgProps) {
   return (
-    <Svg
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      {...props}
-    >
+    <Svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
       <Path
         stroke-linecap="round"
         stroke-linejoin="round"

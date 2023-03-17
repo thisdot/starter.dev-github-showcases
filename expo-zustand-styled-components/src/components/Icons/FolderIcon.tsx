@@ -2,12 +2,7 @@ import Svg, { Path, SvgProps } from 'react-native-svg';
 
 function FolderIcon(props: SvgProps) {
   return (
-    <Svg
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      {...props}
-    >
+    <Svg fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" {...props}>
       <Path
         stroke-linecap="round"
         stroke-linejoin="round"

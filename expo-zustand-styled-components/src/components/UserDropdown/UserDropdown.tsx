@@ -38,7 +38,7 @@ const UserDropdown = ({
               }}>
               <Text>Profile</Text>
             </TouchableOpacity>
-          </ListItem> 
+          </ListItem>
           <ListItem onPress={() => logout()} screenWidth={width}>
             <Text>Sign Out</Text>
           </ListItem>

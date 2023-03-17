@@ -8,8 +8,9 @@ type ScreenWidth = {
 
 export const NavViewContainer = styled.View<ScreenWidth>`
   gap: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 10 : 4)}px;
-  align-items: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'center' : 'flex-start')};
-	flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'row' : 'column')};
+  align-items: ${({ screenWidth }) =>
+    screenWidth >= breakpoints.tablet ? 'center' : 'flex-start'};
+  flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'row' : 'column')};
 `;
 
 export const ButtonStyled = styled.View`
