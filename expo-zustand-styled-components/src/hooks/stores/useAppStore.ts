@@ -4,25 +4,19 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { PageInfo } from '../../types/user-repos-type';
-import { TreeProps } from '../../types/repo-tree-type';
-import { Info } from '../../types/repo-info-type';
 import { Issue, MilestoneProps } from '../../types/issues-type';
 import { Label } from '../../types/label-type';
 import { PullRequest } from '../../types/pull-requests-type';
 
 interface IAppStore {
-  info?: Info;
   error?: string;
   login?: string;
-  readMe?: string;
   branch?: string;
-  tree: TreeProps[];
   isLoading: boolean;
   file?: {
     byteSize: number;
     text: string;
   };
-  branches?: { name: string }[];
   issues: {
     openIssues: {
       issues: Issue[];
@@ -53,7 +47,6 @@ interface IAppStore {
 }
 
 const initialState: IAppStore = {
-  tree: [],
   login: undefined,
   isLoading: false,
   issues: {

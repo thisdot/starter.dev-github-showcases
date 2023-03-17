@@ -20,8 +20,8 @@ export const DropdownOptionsHeading = styled.View`
 `;
 
 export const DropdownOptionsHeadingText = styled.Text`
+  font-size: 12px;
   font-weight: 700;
-  font-size: 14px;
 `;
 
 export const DropdownBtn = styled.TouchableOpacity<ScreenWidth>`
@@ -49,13 +49,14 @@ export const DropdownOption = styled.TouchableOpacity`
 `;
 
 export const DropdownBtnText = styled.Text`
-  font-weight: 500;
   font-size: 14px;
+  font-weight: 500;
 `;
 
-export const DropdownOverlay = styled.TouchableOpacity<ScreenWidth>`
+export const DropdownOverlay = styled.TouchableOpacity`
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
 `;
 
 export const DropdownWindow = styled.View`

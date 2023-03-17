@@ -13,14 +13,14 @@ export const TabContainer = styled.ScrollView`
 `;
 
 export const Tab = styled.TouchableOpacity<{ isActive: boolean }>`
+  gap: 4px;
+  padding: 6px;
+  margin-right: 4px;
   flex-direction: row;
   align-items: center;
   border-bottom-width: 2px;
   border-bottom-style: solid;
   border-bottom-color: ${({ isActive }) => (isActive ? 'orange' : 'transparent')};
-  padding: 6px;
-  gap: 4px;
-  margin-right: 4px;
 `;
 export const CountView = styled.View`
   background-color: ${colors.gray200};
@@ -35,6 +35,6 @@ export const CountText = styled.Text`
 `;
 
 export const TabText = styled.Text<{ isActive: boolean }>`
-  font-weight: ${({ isActive }) => (isActive ? '800' : '500')};
+  font-weight: ${({ isActive }) => (isActive ? '600' : '500')};
   margin-left: 3px;
 `;
