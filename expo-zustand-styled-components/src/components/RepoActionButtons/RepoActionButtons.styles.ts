@@ -1,51 +1,56 @@
 import styled from 'styled-components/native';
+import { breakpoints } from '../../utils/breakpoints';
 import { colors } from '../../utils/style-variables';
 
-export const Container = styled.View`
-  flex-direction: row;
+type ScreenWidth = {
+  screenWidth: number | undefined;
+};
+
+export const Container = styled.View<ScreenWidth>`
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '21%' : '100%')};
 `;
 
 export const BtnGroup = styled.View`
-  flex-direction: row;
   border-radius: 8px;
-  margin-horizontal: 4px;
+  flex-direction: row;
 `;
 
 export const BtnMain = styled.TouchableOpacity`
-  padding-horizontal: 12px;
   padding-vertical: 6px;
-  background-color: transparent;
-  border: 1px solid ${colors.gray300};
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
   border-right-width: 0;
+  padding-horizontal: 12px;
+  border-top-left-radius: 8px;
+  background-color: transparent;
+  border-bottom-left-radius: 8px;
+  border: 1px solid ${colors.gray300};
 `;
 
 export const BtnMainText = styled.View`
-  color: ${colors.gray700};
-  font-weight: 500;
   font-size: 12px;
+  font-weight: 500;
   flex-direction: row;
   align-items: center;
+  color: ${colors.gray700};
 `;
 
 
 export const BtnSide = styled.View`
+  padding-vertical: 2px;
+  background-color: #FFF;
   justify-content: center;
   padding-horizontal: 10px;
-  padding-vertical: 2px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-  background-color: #FFF;
   border: 1px solid ${colors.gray300};
 `;
 
 
 export const BtnSideText = styled.Text`
-  color: ${colors.gray700};
-  font-weight: 700;
   font-size: 12px;
+  font-weight: 700;
+  color: ${colors.gray700};
 `;

@@ -1,37 +1,41 @@
-import React, { useEffect } from 'react';
-import { Text, useWindowDimensions } from 'react-native';
+import { ScrollView, useWindowDimensions } from 'react-native';
 
-import { RepoStackScreenProps } from '../../../../types';
+import FileTree from '../../../components/FileTree';
+import RepoAbout from '../../../components/RepoAbout';
 import LoaderErrorView from '../../../components/LoaderErrorView';
-
 import { BranchNavigation } from '../../../components/Repository';
+import RepoReadme from '../../../components/RepoReadme/RepoReadme';
+
 import { useRepoInfoStore } from '../../../hooks/stores';
-import getRepoInfo from '../../../services/get-repo-info';
 
-import { MainContent, ContainerStyled, SafeAreaViewStyled } from './Code.styles';
+import { Containter, MainContent, ContainerStyled, SafeAreaViewStyled } from './Code.styles';
 
-const Code = ({ route, navigation }: RepoStackScreenProps<'Code'>) => {
+const Code = () => {
   const { width } = useWindowDimensions();
-  const { info, error, branch, isLoading } = useRepoInfoStore();
-
-  useEffect(() => {
-    getRepoInfo({
-      name: route.params?.name,
-      owner: route.params?.owner,
-    });
-  }, [route.params]);
-
+  const { info, name, owner, error, branch, isLoading } = useRepoInfoStore();
+  
   return (
     <SafeAreaViewStyled>
       {isLoading || error || !info ? (
         <LoaderErrorView error={error} />
       ) : (
-        <ContainerStyled screenWidth={width} contentContainerStyle={{ flexGrow: 1, flexShrink: 1 }}>
-          <BranchNavigation branch={branch} name={route.params?.name} owner={route.params?.owner} />
-          <MainContent screenWidth={width}>
-            <Text>Right Content</Text>
-          </MainContent>
-        </ContainerStyled>
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <ContainerStyled screenWidth={width}>
+            <BranchNavigation branch={branch} name={name} owner={owner} />
+            <MainContent screenWidth={width}>
+              <Containter screenWidth={width}>
+                <FileTree />
+                <RepoReadme />
+              </Containter>
+              <RepoAbout
+                description={info?.description}
+                homepageUrl={info?.homepageUrl}
+                topics={info?.topics}
+              />
+            </MainContent>
+          </ContainerStyled>
+        </ScrollView>
+
       )}
     </SafeAreaViewStyled>
   );

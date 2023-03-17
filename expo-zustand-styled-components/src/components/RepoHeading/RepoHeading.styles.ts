@@ -6,24 +6,30 @@ type ScreenWidth = {
   screenWidth: number | undefined;
 };
 
-export const Heading = styled.View`
+export const Heading = styled.View<ScreenWidth>`
+  gap: 6px;
+  overflow: hidden;
   flex-direction: row;
   align-items: center;
-  gap: 6px;
-  align-items: center;
+  width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '50%' : '100%')};
+`;
+
+export const RepoContentWrapper = styled.View<ScreenWidth>`
+  gap: 5px;
+  align-items: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '' : 'flex-start')};
+  justify-content: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'center' : '')};
 `;
 
 export const HeadingContent = styled.View`
-  flex-direction: row;
-  align-items: center;
   gap: 6px;
   margin-right: 6px;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const OwnerLink = styled.Text<ScreenWidth>`
   color: ${colors.blue600};
-  text-decoration-line: underline;
-  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '18px')};
+  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '16px')};
 `;
 
 export const Separator = styled.Text`
@@ -31,10 +37,9 @@ export const Separator = styled.Text`
 `;
 
 export const NameLink = styled.Text<ScreenWidth>`
+  font-weight: 600;
   color: ${colors.blue600};
-  text-decoration-line: underline;
-  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '18px')};
-  font-weight: 700;
+  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '16px')};
 `;
 
 export const BadgePlaceholder = styled.View`
@@ -45,7 +50,7 @@ export const BadgePlaceholder = styled.View`
 export const IconPlaceholder = styled.View`
   width: 18px;
   height: 16px;
-  background-color: ${colors.gray200};
-  border-radius: 20px;
   opacity: 0.25;
+  border-radius: 20px;
+  background-color: ${colors.gray200};
 `;

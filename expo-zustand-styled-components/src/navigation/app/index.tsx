@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // types
@@ -15,6 +15,7 @@ import RepoNavigator from './RepoNavigator';
 
 // components
 import Header from '../../components/Header';
+import RepoSubHeader from '../../components/RepoSubHeader';
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -40,10 +41,10 @@ function AuthNavigator() {
           headerShown: true,
           headerShadowVisible: false,
           header: (props) => (
-            <View style={{ backgroundColor: 'rgb(243, 244, 246)' }}>
+            <>
               <Header width={width} {...props} />
-              <Text>RepoHeader</Text>
-            </View>
+              <RepoSubHeader />
+            </>
           ),
         }}
       />

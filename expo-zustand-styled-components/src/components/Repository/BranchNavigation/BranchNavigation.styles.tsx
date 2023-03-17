@@ -2,14 +2,18 @@ import styled from 'styled-components/native';
 import { breakpoints } from '../../../utils/breakpoints';
 import { colors } from '../../../utils/style-variables';
 
-export const NavViewContainer = styled.View<{ screenWidth: number }>`
+type ScreenWidth = {
+  screenWidth: number;
+};
+
+export const NavViewContainer = styled.View<ScreenWidth>`
   gap: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 10 : 4)}px;
   align-items: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'center' : 'flex-start')};
 	flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'row' : 'column')};
 `;
 
 export const ButtonStyled = styled.View`
-  width: 110px;
+  gap: 4px;
   border-radius: 8px;
   border-width: 0.5px;
 	flex-direction: row;
@@ -33,18 +37,18 @@ export const CrumbsContainer = styled.View`
   flex-direction: row;
 `;
 
-export const RootLink = styled.Text<{ screenWidth: number }>`
+export const RootLink = styled.Text<ScreenWidth>`
   font-weight: 600;
   color: ${colors.blue600};
   font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 18 : 14)}px;
 `;
 
-export const CrumbLink = styled.Text<{ screenWidth: number }>`
+export const CrumbLink = styled.Text<ScreenWidth>`
   color: ${colors.blue600};
   font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 18 : 14)}px;
 `;
 
-export const CrumbEnd = styled.Text<{ screenWidth: number }>`
+export const CrumbEnd = styled.Text<ScreenWidth>`
   font-weight: 600;
   font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 18 : 14)}px;
 `;

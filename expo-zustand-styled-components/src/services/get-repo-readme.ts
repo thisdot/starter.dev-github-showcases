@@ -1,7 +1,7 @@
 import FetchApi from './api';
 import { REPO_README_QUERY } from './queries/repo-readme';
 import { RepoReadme, RepoReadmeVariables } from '../types/repo-readme-type';
-import { useAppStore } from '../hooks/stores';
+import { useRepoInfoStore } from '../hooks/stores';
 
 type Response = {
   data: {
@@ -10,13 +10,20 @@ type Response = {
 };
 
 const getRepoReadMe = async (variables: RepoReadmeVariables) => {
+  const key = `${variables.name}-${variables.owner}-${variables.expression}`;
+  if (useRepoInfoStore.getState()._readMe.has(key)) {
+    const readMe = useRepoInfoStore.getState()._readMe.get(key);
+    useRepoInfoStore.setState({ isLoading: false, readMe });
+  } else {
   try {
-    useAppStore.setState({ isLoading: true });
+    useRepoInfoStore.setState({ isLoading: true });
     const resp = (await FetchApi({ query: REPO_README_QUERY, variables })) as Response;
-    useAppStore.setState({ isLoading: false, readMe: resp.data.repository?.readme?.text });
+    useRepoInfoStore.setState({ isLoading: false, readMe: resp.data.repository?.readme?.text });
+    useRepoInfoStore.getState()._readMe.set(key, resp.data.repository?.readme?.text);
   } catch (err) {
-    useAppStore.setState({ isLoading: false, error: err.message });
+    useRepoInfoStore.setState({ isLoading: false, error: err.message });
   }
+}
 };
 
 export default getRepoReadMe;

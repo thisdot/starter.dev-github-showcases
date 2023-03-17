@@ -39,7 +39,7 @@ const BranchNavigation = ({ path, owner, name, branch }: IProps) => {
   return (
     <NavViewContainer screenWidth={width}>
       <ButtonStyled>
-        <GitBranchIcon color={colors.gray600} width={20} height={20} />
+        <GitBranchIcon color={colors.gray600} />
         <ButtonTextStyled>{branch}</ButtonTextStyled>
         <Text>{'\u25BC'}</Text>
       </ButtonStyled>

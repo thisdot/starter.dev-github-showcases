@@ -7,19 +7,19 @@ type ScreenWidth = {
 };
 
 export const Badge = styled.View`
-  border-radius: 14px;
   border-width: 1px;
-  border-color: ${colors.gray300};
-  padding-vertical: 1px;
-  padding-horizontal: 6px;
-  justify-content: center
+  border-radius: 14px;
   align-items: center;
+  padding-vertical: 1px;
+  justify-content: center;
+  padding-horizontal: 6px;
+  border-color: ${colors.gray300};
 `;
 
 export const BadgeText = styled.Text<ScreenWidth>`
-  color: ${colors.gray600};
-  font-size: ${({screenWidth}) => screenWidth >= breakpoints.tablet ? '14px' : '12px'};
   font-weight: 600;
   text-align: center;
+  color: ${colors.gray600};
   text-transform: capitalize;
+  font-size: ${({screenWidth}) => screenWidth >= breakpoints.tablet ? '14px' : '12px'};
 `;
