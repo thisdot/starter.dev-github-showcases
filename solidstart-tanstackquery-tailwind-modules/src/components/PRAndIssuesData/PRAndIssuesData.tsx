@@ -26,7 +26,7 @@ const PRAndIssuesData = (props: PRAndIssuesDataProps) => {
         <div class="text-center p-3 flex flex-col items-center justify-center">
           <span class="font-bold mb-4">No results matched your search.</span>
           <a class=" text-blue-600 underline" href={location.pathname}>
-            Refresh
+            Clear Filters
           </a>
         </div>
       </Show>
