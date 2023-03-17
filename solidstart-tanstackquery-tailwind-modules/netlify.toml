@@ -1,5 +1,5 @@
 [build]
-  publish = "solidstart-tanstackquery-tailwind-modules/dist"
+  publish = "/dist"
 
 [[redirects]]
   from = "/*"
