@@ -81,7 +81,7 @@ const RepoFilter = (props: RepoFilterProps) => {
           </div>
         </div>
         <div>
-          <a href="https://github.com/new" class={styles.iconLink}>
+          <a href="https://github.com/new" target='_blank' class={styles.iconLink}>
             <RepoBookIcon />
             <span> {merged.repoBtnText} </span>
           </a>
