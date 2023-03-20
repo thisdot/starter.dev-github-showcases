@@ -19,7 +19,7 @@ function getLuminance(hexColor: string) {
 function getContrast(f: string, b: string) {
   const L1 = getLuminance(f);
   const L2 = getLuminance(b);
-  return (Math.max(L1, L2) + 0.10) / (Math.min(L1, L2) + 0.10);
+  return (Math.max(L1, L2) + 0.1) / (Math.min(L1, L2) + 0.1);
 }
 
 export function getTextColor(bgColor: string) {
@@ -28,4 +28,3 @@ export function getTextColor(bgColor: string) {
 
   return whiteContrast > blackContrast ? '#ffffff' : '#000000';
 }
- 
