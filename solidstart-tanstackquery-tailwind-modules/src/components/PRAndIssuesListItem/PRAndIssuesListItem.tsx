@@ -12,6 +12,7 @@ import {
 import { Issue } from '~/types/issues-type';
 import { PullRequest } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
+import { getTextColor } from '~/utils/dynamicColor';
 
 interface PRAndIssuesListItemProps {
   type: 'issue' | 'pr';
@@ -78,9 +79,10 @@ const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
                 class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm')}
                 style={{
                   'background-color': `#${label.color}`,
+                  color: getTextColor(`#${label.color}` || '#ccc'),
                 }}
               >
-                <span style={{ filter: 'invert(100%)' }}>{label.name}</span>
+                {label.name}
               </span>
             )}
           </For>
