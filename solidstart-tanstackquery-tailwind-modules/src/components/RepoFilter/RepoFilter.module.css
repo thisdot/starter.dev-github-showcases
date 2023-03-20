@@ -52,3 +52,11 @@
 .searchInput {
   @apply border p-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md outline-none;
 }
+
+.menuItemContent {
+  @apply flex gap-3 items-center
+}
+
+.menuItemContentColor {
+  @apply w-4 h-4 rounded-lg flex-shrink-0 border border-gray-300
+}

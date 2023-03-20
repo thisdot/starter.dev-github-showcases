@@ -46,6 +46,13 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
         : pullRequests().labels?.map((label) => label.name)) || []
   );
 
+  const labelOptionsColors = createMemo<string[]>(
+    () =>
+      (props.type === 'issue'
+        ? issues().labels?.map((label) => label.color)
+        : pullRequests().labels?.map((label) => label.color)) || []
+  );
+
   const milestoneOptions = createMemo<string[]>(
     () => issues().milestones?.map((milestone) => milestone.title) || []
   );
@@ -113,6 +120,7 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
               name="Label"
               selected={selectedLabel()}
               items={labelOptions()}
+              itemsColors={labelOptionsColors()}
               selectOption={selectLabel}
               class="border-none text-sm inline-flex w-full justify-center items-center gap-2"
             />
