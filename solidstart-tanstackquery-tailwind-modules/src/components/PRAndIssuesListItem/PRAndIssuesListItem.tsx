@@ -75,13 +75,12 @@ const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
           <For each={props.item?.labels as Label[]}>
             {(label) => (
               <span
-                class={cn(
-                  'mt-2 ml-2 py-1 px-2 rounded-full text-sm',
-                  `bg-[#${label.color}]`
-                )}
-                style={{ 'background-color': `#${label.color}` }}
+                class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm')}
+                style={{
+                  'background-color': `#${label.color}`,
+                }}
               >
-                {label.name}
+                <span style={{ filter: 'invert(100%)' }}>{label.name}</span>
               </span>
             )}
           </For>

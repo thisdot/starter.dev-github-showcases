@@ -94,9 +94,11 @@ const PRAndIssueCard = (props: PRAndIssueCardProps) => {
               <span
                 class={cn(
                   'mt-2 ml-2 py-1 px-2 rounded-full text-sm',
-                  `bg-[${label.color}]`
                 )}
-                style={{ 'background-color': `${label.color}` }}
+                style={{
+                  // 'background-color': `${label.color}`,
+                  'mix-blend-mode': 'difference',
+                }}
               >
                 {label.name}
               </span>
