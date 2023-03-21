@@ -48,7 +48,7 @@ const Repository = () => {
   });
 
   return (
-    <div class="bg-white h-screen">
+    <div class="bg-white min-h-[calc(100vh-70px)]">
       <Switch>
         <Match when={repoInfo.isError}>
           <p>Error</p>

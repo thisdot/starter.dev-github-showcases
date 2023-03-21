@@ -45,7 +45,7 @@ const RepoBlob = () => {
   });
 
   return (
-    <div class="bg-white h-screen">
+    <div class="bg-white  min-h-[calc(100vh-70px)]">
       <RepoHeader {...info()} />
       <div class="max-w-screen-2xl mx-auto md:py-8 px-4">
         <div class="grid grid-cols-12 gap-8">
