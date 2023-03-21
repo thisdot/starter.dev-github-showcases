@@ -9,6 +9,8 @@ import Button from '../../components/Button';
 
 import { SafeAreaViewStyled } from './Login.styles';
 import getViewerProfile from '../../services/get-viewer-info';
+import { MOBILE_REDIRECT_URI } from '@env';
+import { Platform } from 'react-native';
 
 WebBrowser.maybeCompleteAuthSession();
 const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
@@ -16,7 +18,10 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
 
   const _handlePressButtonAsync = async () => {
     useAuthStore.setState({ isLoading: true });
-    const result = await WebBrowser.openAuthSessionAsync(AUTH_URL);
+    const result =
+      Platform.OS === 'android'
+        ? await WebBrowser.openAuthSessionAsync(AUTH_URL, MOBILE_REDIRECT_URI)
+        : await WebBrowser.openAuthSessionAsync(AUTH_URL);
 
     if (result.type === 'success') {
       // TODO: so expo web has a bug with using react-native-url-polyfill globally
