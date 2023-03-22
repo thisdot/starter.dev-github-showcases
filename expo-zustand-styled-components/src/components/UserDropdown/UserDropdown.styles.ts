@@ -18,7 +18,7 @@ export const UserMenu = styled.View<{ screenWidth: number }>`
   z-index: 999;
   display: flex;
   position: absolute;
-  border-radius: 8px,
+  border-radius: 8px;
   border: 1px solid #ccc;
   flex-direction: column;
   background-color: #fff;

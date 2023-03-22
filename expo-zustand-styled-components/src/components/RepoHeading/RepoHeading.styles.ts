@@ -16,8 +16,17 @@ export const Heading = styled.View<ScreenWidth>`
 
 export const RepoContentWrapper = styled.View<ScreenWidth>`
   gap: 5px;
-  align-items: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '' : 'flex-start')};
-  justify-content: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'center' : '')};
+  ${({ screenWidth }) => {
+    if (screenWidth >= breakpoints.tablet) {
+      return `
+        justify-content: center;
+      `;
+    }else{
+      return `
+        align-items: flex-start;
+      `;
+    }
+  }};
 `;
 
 export const HeadingContent = styled.View`
