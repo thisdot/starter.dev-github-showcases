@@ -13,10 +13,6 @@ interface IAppStore {
   login?: string;
   branch?: string;
   isLoading: boolean;
-  file?: {
-    byteSize: number;
-    text: string;
-  };
   issues: {
     openIssues: {
       issues: Issue[];
