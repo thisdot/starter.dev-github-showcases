@@ -1,9 +1,7 @@
 import { Switch, Match, createSignal, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import { useParams, useSearchParams } from 'solid-start';
-// import getRepoInfo from '../../../services/get-repo-info';
 import { LoadingPulseDot } from '../../../components/LoadingPulseDot';
-// import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '../../../components/RepoHeader';
 import getIssues from '../../../services/get-issues';
 import RepoIssues from '../../../components/RepoIssues';
