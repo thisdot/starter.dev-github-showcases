@@ -1,6 +1,5 @@
 import { createQuery } from "@tanstack/solid-query";
-import { createEffect } from "solid-js";
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from 'solid-js';
 import { useParams } from "solid-start";
 import getRepoInfo from "~/services/get-repo-info";
 import { Info } from "~/types/repo-info-type";

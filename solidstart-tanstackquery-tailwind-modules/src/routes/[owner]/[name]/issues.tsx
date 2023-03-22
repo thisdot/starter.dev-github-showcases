@@ -85,9 +85,6 @@ const Issues = () => {
   );
 
   createEffect(() => {
-    // if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
-    //   setInfo(repoInfo.data.info);
-    // }
     if (repoIssues.isSuccess && !repoIssues.isLoading && repoIssues.data) {
       setIssues(repoIssues.data);
     }
