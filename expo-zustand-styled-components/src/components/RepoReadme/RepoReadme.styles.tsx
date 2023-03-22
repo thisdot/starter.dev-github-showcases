@@ -1,34 +1,28 @@
 import styled from 'styled-components/native';
+import { breakpoints } from '../../utils/breakpoints';
+import { colors } from '../../utils/style-variables';
+
 export const ReadmeContainer = styled.View`
-  margin: 1rem 0;
   border-radius: 6px;
   border-width: 1px;
-  border-color: #e1e4e8;
+  border-color: ${colors.gray300};
 `;
 
 export const ReadmeHeader = styled.View`
-  z-index: 30;
-  border-bottom-width: 1px;
-  border-color: #e1e4e8;
-  background-color: rgb(255 255 255 / 0);
-  padding: 0.625rem;
-  display: flex;
+  gap: 6px;
+  padding: 10px;
   flex-direction: row;
   align-items: center;
-`;
-
-export const ReadmeDiv = styled.View`
-  padding: 24px 40px;
-`;
-
-export const ReadmeIconContainer = styled.View`
-  margin-right: 4px;
-  border-radius: 4px;
-  padding: 6px;
+  border-bottom-width: 1px;
+  border-color: ${colors.gray300};
 `;
 
 export const ReadmeText = styled.Text`
   font-size: 14px;
-  line-height: 20px;
   font-weight: 600;
+  line-height: 20px;
+`;
+
+export const ReadmeDiv = styled.View<{ screenWidth: number }>`
+  padding: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '24px 40px' : '8px 16px')};
 `;

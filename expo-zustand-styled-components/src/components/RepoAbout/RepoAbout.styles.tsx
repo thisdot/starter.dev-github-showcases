@@ -1,21 +1,26 @@
 import styled from 'styled-components/native';
+import { breakpoints } from '../../utils/breakpoints';
 import { colors } from '../../utils/style-variables';
 
 export const AboutContainerStyled = styled.View`
+  gap: 10px;
+  padding: 16px 0px;
   border-bottom-width: 2px;
   border-bottom-color: ${colors.gray300};
-  width: 100%;
-  padding: 1rem 0;
+`;
+
+export const AboutWrapper = styled.View<{ screenWidth: number }>`
+  ${({ screenWidth }) => {
+    if (screenWidth >= breakpoints.tablet) {
+      return `flex: 0.25`;
+    }
+  }}
 `;
 
 export const HeaderStyled = styled.Text`
+  font-size: 16px;
   font-weight: 600;
   color: ${colors.gray700};
-  font-size: 1.1em;
-`;
-
-export const SpacingContainerStyled = styled.View`
-  margin-top: 1rem;
 `;
 
 export const DefaultRepoTextStyled = styled.Text`
@@ -24,52 +29,50 @@ export const DefaultRepoTextStyled = styled.Text`
 `;
 
 export const DescriptionTextStyled = styled.Text`
-  font-size: inherit;
-  line-height: 1.4em;
+  line-height: 24px;
   color: ${colors.gray600};
 `;
 
 export const LinkContainerStyled = styled.TouchableOpacity`
+  display: flex;
+  margin: 32px 0;
   max-width: 100%;
   overflow: hidden;
-  display: flex;
   flex-direction: row;
-  margin: 2rem 0;
 `;
 
 export const WebsiteLinkStyled = styled.Text`
-  margin-left: 0.5rem;
+  margin-left: 8px;
   text-decoration: none;
   color: ${colors.blue600};
 `;
 
 export const TagsContainerStyled = styled.View`
-  margin-top: 1rem;
+  gap: 8px;
   display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  flex-direction: row;
 `;
 
 export const TagStyled = styled.TouchableOpacity`
-  background-color: ${colors.blue100};
   border-radius: 999rem;
+  background-color: ${colors.blue100};
 `;
 
 export const TagTextStyled = styled.Text`
-  color: ${colors.blue600};
-  padding: 0.2rem 0.5rem;
-  font-size: 0.8em;
+  font-size: 12px;
   font-weight: 600;
+  padding: 3.2px 8px;
+  color: ${colors.blue600};
 `;
 
 export const ReadmeHoverEffectStyled = styled.TouchableOpacity`
   display: flex;
+  cursor: pointer;
   flex-direction: row;
   align-items: center;
-  cursor: pointer;
 `;
 
 export const ReadmeTextStyled = styled.Text`
-  margin-left: 0.5rem;
+  margin-left: 8px;
 `;

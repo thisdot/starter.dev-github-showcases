@@ -38,17 +38,7 @@ const UserDropdown = ({
               }}>
               <Text>Profile</Text>
             </TouchableOpacity>
-          </ListItem> 
-          <ListItem screenWidth={width}>
-            <TouchableOpacity
-              onPress={() => {
-                toggleMenu(false);
-                navigation.navigate('Organization', { login: 'thisdot' });
-              }}>
-              <Text>Organization</Text>
-            </TouchableOpacity>
           </ListItem>
-
           <ListItem onPress={() => logout()} screenWidth={width}>
             <Text>Sign Out</Text>
           </ListItem>

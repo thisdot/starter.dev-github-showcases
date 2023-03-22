@@ -21,7 +21,6 @@ const Dropdown = ({
   selected,
   isVisible,
   layoutStyle,
-  screenWidth,
   selectOption,
   closeDropdown,
 }: {
@@ -29,7 +28,6 @@ const Dropdown = ({
   name: string;
   selected: string;
   isVisible: boolean;
-  screenWidth: number;
   closeDropdown: () => void;
   selectOption: (i: string) => void;
   layoutStyle?: StyleProp<ViewProps>;
@@ -38,14 +36,14 @@ const Dropdown = ({
 
   return (
     <DropdownModal visible={isVisible}>
-      <DropdownOverlay activeOpacity={1} onPress={closeDropdown} screenWidth={screenWidth} />
+      <DropdownOverlay activeOpacity={1} onPress={closeDropdown} />
       <DropdownWindow style={layoutStyle}>
         <FlatList
           data={data}
           ref={dropDownFlatlistRef}
           ListHeaderComponent={() => (
             <DropdownOptionsHeading>
-              <DropdownOptionsHeadingText>{name}</DropdownOptionsHeadingText>
+              <DropdownOptionsHeadingText>Select {name}</DropdownOptionsHeadingText>
               <TouchableOpacity onPress={closeDropdown} activeOpacity={0.6}>
                 <CloseIcon color={colors.gray600} width={20} height={20} />
               </TouchableOpacity>

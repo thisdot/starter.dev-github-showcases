@@ -13,7 +13,6 @@ const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.createURL('/')],
   config: {
     screens: {
-      Splash: 'splash',
       AuthNavigator: {
         screens: {
           Login: {
@@ -35,14 +34,38 @@ const linking: LinkingOptions<RootStackParamList> = {
               ProfileScreen: 'profile',
             },
           },
+          RepoNavigator: {
+            screens: {
+              Code: {
+                screens: {
+                  CodeScreen: 'code',
+                },
+              },
+              Blob: {
+                screens: {
+                  BlobScreen: 'blob',
+                },
+              },
+              Tree: {
+                screens: {
+                  TreeScreen: 'tree',
+                },
+              },
+              Issues: {
+                screens: {
+                  IssuesScreen: 'issues',
+                },
+              },
+              PullRequests: {
+                screens: {
+                  PullRequestsScreen: 'pull-requests',
+                },
+              },
+            },
+          },
           Organization: {
             screens: {
               OrganizationScreen: 'organization',
-            },
-          },
-          Repository: {
-            screens: {
-              RepositoryScreen: 'repository',
             },
           },
         },

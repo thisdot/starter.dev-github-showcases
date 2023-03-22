@@ -18,7 +18,6 @@ declare global {
 
 // #region ROOT
 export type RootStackParamList = {
-  Splash: undefined;
   AuthNavigator: NavigatorScreenParams<AuthStackParamList> | undefined;
   AppNavigator: NavigatorScreenParams<AppStackParamList> | undefined;
 };
@@ -44,12 +43,27 @@ export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = Nati
 export type AppStackParamList = {
   Home: undefined;
   Profile: undefined;
+  RepoNavigator: NavigatorScreenParams<RepoStackParamList> | undefined;
   Organization: { login: string };
-  Repository: undefined;
 };
 
 export type AppStackScreenProps<Screen extends keyof AppStackParamList> = NativeStackScreenProps<
   AppStackParamList,
+  Screen
+>;
+// #endregion
+
+// #region REPO
+export type RepoStackParamList = {
+  Code: undefined;
+  Issues: undefined;
+  PullRequests: undefined;
+  Blob: undefined;
+  Tree: undefined;
+};
+
+export type RepoStackScreenProps<Screen extends keyof RepoStackParamList> = NativeStackScreenProps<
+  RepoStackParamList,
   Screen
 >;
 // #endregion

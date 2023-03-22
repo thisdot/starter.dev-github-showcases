@@ -12,18 +12,18 @@ export function createTabList({ issuesCount, pullRequestsCount }: createTabListP
   return [
     {
       title: REPO_TABS.code,
-      path: '',
+      path: 'Code',
       Icon: CodeIcon,
     },
     {
       title: REPO_TABS.issues,
-      path: 'issues',
+      path: 'Issues',
       Icon: IssueIcon,
       count: issuesCount || 0,
     },
     {
       title: REPO_TABS.pull_requests,
-      path: 'pulls',
+      path: 'PullRequests',
       Icon: PullRequestIcon,
       count: pullRequestsCount || 0,
     },

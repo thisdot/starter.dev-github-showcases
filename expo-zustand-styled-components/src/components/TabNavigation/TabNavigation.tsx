@@ -6,21 +6,40 @@ import {
   CountText,
   CountView,
 } from './TabNavigation.styles';
-import { colors } from '../../utils/style-variables';
-import { useRepoHeaderTabStore } from '../../hooks/stores';
 
-const TabNavigation = ({ tabs }) => {
-  const { activeTab, setActiveTab } = useRepoHeaderTabStore();
+import { colors } from '../../utils/style-variables';
+import { SvgProps } from 'react-native-svg';
+import { useWindowDimensions } from 'react-native';
+import { breakpoints } from '../../utils/breakpoints';
+
+interface TabNavigationProps {
+  tabs: {
+    title: string;
+    Icon: (props: SvgProps) => JSX.Element;
+    count?: number;
+    path?: string;
+  }[];
+  activeTab: string;
+  onChange: (title: string, path: string) => void;
+}
+
+const TabNavigation = ({ tabs, activeTab, onChange }: TabNavigationProps) => {
+  const { width } = useWindowDimensions();
 
   return (
     <Container>
-      <TabContainer horizontal={true}>
-        {tabs.map(({ title, Icon, count }, index) => (
+      <TabContainer
+        horizontal
+        contentContainerStyle={{
+          flexGrow: width >= breakpoints.tablet ? 0 : 1,
+          justifyContent: 'space-between',
+        }}>
+        {tabs.map(({ title, Icon, count, path }, index) => (
           <Tab
             key={index}
-            isActive={activeTab === title}
             activeOpacity={0.5}
-            onPress={() => setActiveTab(title)}>
+            isActive={activeTab === title}
+            onPress={() => onChange(title, path)}>
             <Icon color={activeTab === title ? colors.gray700 : colors.gray500} />
             <TabText isActive={activeTab === title}>{title}</TabText>
             {typeof count === 'number' && count > 0 && (

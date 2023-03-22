@@ -14,18 +14,18 @@ export const RepoFilterWrapper = styled.View<ScreenWidth>`
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: ${colors.gray300};
-  flex-direction: ${({screenWidth}) => screenWidth >= breakpoints.laptop ? 'row' : 'column'}
+  flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 'row' : 'column')};
 `;
 
 export const FiltersWrapper = styled.ScrollView<ScreenWidth>`
   width: 100%;
   flex-direction: row;
-  ${({screenWidth}) => {
+  ${({ screenWidth }) => {
     if (screenWidth < breakpoints.desktop) {
       if (screenWidth >= breakpoints.laptop) {
         return 'flex: 0.6';
       }
-    }else{
+    } else {
       return 'flex: 0.45';
     }
   }}
@@ -43,7 +43,6 @@ export const FilterTextWrapper = styled.View`
   border-bottom-style: solid;
   justify-content: space-between;
   border-bottom-color: ${colors.gray300};
-
 `;
 
 export const FilterTextContent = styled.View`
@@ -62,12 +61,12 @@ export const SearchTextInput = styled.TextInput<ScreenWidth>`
   background-color: #fff;
   color: ${colors.gray500};
   border: 1px solid ${colors.gray300};
-  ${({screenWidth}) => {
+  ${({ screenWidth }) => {
     if (screenWidth < breakpoints.desktop) {
       if (screenWidth >= breakpoints.laptop) {
         return 'flex: 0.4';
       }
-    }else{
+    } else {
       return 'flex: 0.55';
     }
   }}
@@ -108,6 +107,6 @@ export const ClearIcon = styled.TouchableOpacity`
 `;
 
 export const ClearText = styled.Text<ScreenWidth>`
-  color:  ${colors.blue600};
-  display: ${({screenWidth}) => screenWidth > breakpoints.tablet ? 'flex' : 'none'};
+  color: ${colors.blue600};
+  display: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'flex' : 'none')};
 `;
