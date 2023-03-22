@@ -1,9 +1,9 @@
 import { Switch, Match, createSignal, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import { useParams, useSearchParams } from 'solid-start';
-import getRepoInfo from '../../../services/get-repo-info';
+// import getRepoInfo from '../../../services/get-repo-info';
 import { LoadingPulseDot } from '../../../components/LoadingPulseDot';
-import { Info } from '~/types/repo-info-type';
+// import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '../../../components/RepoHeader';
 import getIssues from '../../../services/get-issues';
 import RepoIssues from '../../../components/RepoIssues';
@@ -18,6 +18,7 @@ import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../../utils/constants';
 import { Issue, MilestoneProps, PageInfo } from '~/types/issues-type';
 import { Label } from '~/types/label-type';
 import styles from '../style.module.css';
+import useGetRepoInfo from '~/hooks/useGetRepoInfo';
 
 export type IssuesSignal = {
   openIssues: {
@@ -54,32 +55,7 @@ export { issues, setIssues };
 const Issues = () => {
   const params = useParams();
   const [searchParams] = useSearchParams();
-  const [info, setInfo] = createSignal<Info>({
-    isPrivate: false,
-    visibility: '',
-    forkCount: 0,
-    description: '',
-    homepageUrl: '',
-    stargazerCount: 0,
-    watcherCount: 0,
-    openIssueCount: 0,
-    topics: [],
-    isOrg: false,
-    openPullRequestCount: 0,
-  });
-
-  const isOwnerAndNameValid =
-    typeof params.owner === 'string' && typeof params.name === 'string';
-
-  const repoInfo = createQuery(
-    () => [`repository-info_${params.owner}_${params.name}`],
-    () =>
-      getRepoInfo(
-        isOwnerAndNameValid
-          ? { owner: params.owner, name: params.name }
-          : { owner: '', name: '' }
-      )
-  );
+  const [info, ,repoInfo] = useGetRepoInfo();
 
   const repoIssues = createQuery(
     () => [
@@ -111,9 +87,9 @@ const Issues = () => {
   );
 
   createEffect(() => {
-    if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
-      setInfo(repoInfo.data.info);
-    }
+    // if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
+    //   setInfo(repoInfo.data.info);
+    // }
     if (repoIssues.isSuccess && !repoIssues.isLoading && repoIssues.data) {
       setIssues(repoIssues.data);
     }

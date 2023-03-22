@@ -1,9 +1,7 @@
 import { Switch, Match, createSignal, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import { useParams, useSearchParams } from 'solid-start';
-import getRepoInfo from '../../../services/get-repo-info';
 import { LoadingPulseDot } from '../../../components/LoadingPulseDot';
-import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '../../../components/RepoHeader';
 import getRepoPullRequests from '../../../services/get-pull-request';
 import { selectedLabel, sortBy } from '../../../components/PRAndIssuesHeader';
@@ -13,6 +11,7 @@ import RepoPullRequests from '../../../components/RepoPullRequests';
 import { PageInfo, PullRequest } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
 import styles from '../style.module.css';
+import useGetRepoInfo from '~/hooks/useGetRepoInfo';
 
 export type PullRequestsSignal = {
   openPullRequests: {
@@ -47,32 +46,7 @@ export { pullRequests, setPullRequests };
 const PullRequests = () => {
   const params = useParams();
   const [searchParams] = useSearchParams();
-  const [info, setInfo] = createSignal<Info>({
-    isPrivate: false,
-    visibility: '',
-    forkCount: 0,
-    description: '',
-    homepageUrl: '',
-    stargazerCount: 0,
-    watcherCount: 0,
-    openIssueCount: 0,
-    topics: [],
-    isOrg: false,
-    openPullRequestCount: 0,
-  });
-
-  const isOwnerAndNameValid =
-    typeof params.owner === 'string' && typeof params.name === 'string';
-
-  const repoInfo = createQuery(
-    () => [`repository-info_${params.owner}_${params.name}`],
-    () =>
-      getRepoInfo(
-        isOwnerAndNameValid
-          ? { owner: params.owner, name: params.name }
-          : { owner: '', name: '' }
-      )
-  );
+  const [info, ,repoInfo] = useGetRepoInfo();
 
   const repoPullrequests = createQuery(
     () => [
@@ -100,9 +74,6 @@ const PullRequests = () => {
   );
 
   createEffect(() => {
-    if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
-      setInfo(repoInfo.data.info);
-    }
     if (
       repoPullrequests.isSuccess &&
       !repoPullrequests.isLoading &&
