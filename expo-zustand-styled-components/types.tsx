@@ -58,8 +58,6 @@ export type RepoStackParamList = {
   Code: undefined;
   Issues: undefined;
   PullRequests: undefined;
-  Blob: undefined;
-  Tree: undefined;
 };
 
 export type RepoStackScreenProps<Screen extends keyof RepoStackParamList> = NativeStackScreenProps<
