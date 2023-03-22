@@ -1,12 +1,25 @@
-import React from 'react';
+import  { useLayoutEffect } from 'react';
 import { View, Text } from 'react-native';
 
-const PullRequest = () => {
+import { RepoStackScreenProps } from '../../../../types';
+
+import { useRepoInfoStore } from '../../../hooks/stores';
+
+const PullRequests = ({ navigation }: RepoStackScreenProps<'PullRequests'>) => {
+  const { name, owner } = useRepoInfoStore();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: `Pull Requests - ${owner}/${name}`,
+    });
+  }, [navigation, owner, name]);
+
   return (
     <View>
-      <Text>PullRequest</Text>
+      <Text>PullRequests</Text>
     </View>
   );
 };
 
-export default PullRequest;
+export default PullRequests;
+
