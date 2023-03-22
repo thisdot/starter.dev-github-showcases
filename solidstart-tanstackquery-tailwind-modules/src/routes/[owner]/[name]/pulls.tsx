@@ -12,6 +12,7 @@ import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../../utils/constants';
 import RepoPullRequests from '../../../components/RepoPullRequests';
 import { PageInfo, PullRequest } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
+import styles from '../style.module.css';
 
 export type PullRequestsSignal = {
   openPullRequests: {
@@ -112,7 +113,7 @@ const PullRequests = () => {
   });
 
   return (
-    <div class="bg-white min-h-[calc(100vh-70px)]">
+    <div class={styles.wrapper}>
       <Switch>
         <Match when={repoInfo.isError}>
           <p>Error</p>

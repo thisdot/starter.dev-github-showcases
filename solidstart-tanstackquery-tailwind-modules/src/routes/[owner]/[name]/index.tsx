@@ -9,6 +9,7 @@ import { BranchNavigation } from '~/components/BranchNavigation';
 import { RepoReadMe } from '~/components/RepoReadMe';
 import FileExplorer from '~/components/FileExplorer';
 import { LoadingPulseDot } from '~/components/LoadingPulseDot';
+import styles from '../style.module.css';
 
 const Repository = () => {
   const params = useParams();
@@ -48,7 +49,7 @@ const Repository = () => {
   });
 
   return (
-    <div class="bg-white min-h-[calc(100vh-70px)]">
+    <div class={styles.wrapper}>
       <Switch>
         <Match when={repoInfo.isError}>
           <p>Error</p>

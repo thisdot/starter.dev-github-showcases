@@ -6,6 +6,7 @@ import FileExplorer from '~/components/FileExplorer';
 import { RepoHeader } from '~/components/RepoHeader';
 import getRepoInfo from '~/services/get-repo-info';
 import { Info } from '~/types/repo-info-type';
+import styles from '../../../../style.module.css';
 
 const RepoTree = () => {
   const params = useParams();
@@ -45,7 +46,7 @@ const RepoTree = () => {
   });
 
   return (
-    <div class="bg-white min-h-[calc(100vh-70px)]">
+    <div class={styles.wrapper}>
       <RepoHeader {...info()} />
       <div class="max-w-screen-2xl mx-auto md:py-8 px-4">
         <div class="grid grid-cols-12 gap-8">

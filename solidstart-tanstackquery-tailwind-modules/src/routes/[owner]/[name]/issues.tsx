@@ -17,6 +17,7 @@ import { parseSortParams } from '../../../components/RepoIssues/utils';
 import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../../utils/constants';
 import { Issue, MilestoneProps, PageInfo } from '~/types/issues-type';
 import { Label } from '~/types/label-type';
+import styles from '../style.module.css';
 
 export type IssuesSignal = {
   openIssues: {
@@ -119,7 +120,7 @@ const Issues = () => {
   });
 
   return (
-    <div class="bg-white min-h-[calc(100vh-70px)]">
+    <div class={styles.wrapper}>
       <Switch>
         <Match when={repoInfo.isError}>
           <p>Error</p>
