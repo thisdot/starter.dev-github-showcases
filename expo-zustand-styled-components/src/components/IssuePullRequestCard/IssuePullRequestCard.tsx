@@ -21,6 +21,8 @@ import { Text, View } from 'react-native';
 import { format } from 'date-fns';
 import { Link } from '@react-navigation/native';
 import CommentIcon from '../Icons/CommentIcon';
+import { usePRAndIssueHeaderStore } from '../../hooks/stores';
+import { PR_ISSUE_TABS } from '../../utils/constants';
 
 const IssuePullRequestCard = ({
   number,
@@ -28,12 +30,12 @@ const IssuePullRequestCard = ({
   url,
   state,
   createdAt,
-  authorName,
+  login,
   commentCount,
   labels,
   cardType,
-  isOpen,
 }: IssuePullRequestCardProps) => {
+  const { activeTab } = usePRAndIssueHeaderStore();
   const getIcon = () => {
     let icon = null;
     if (cardType === cardTypes.issue) {
@@ -80,7 +82,7 @@ const IssuePullRequestCard = ({
           <Text>
             #{number}
             {' by '}
-            <Link to="#">{authorName}</Link> was {isOpen ? 'opened' : 'closed'} on{' '}
+            <Link to="#">{login}</Link> was {activeTab === PR_ISSUE_TABS.open ? 'opened' : 'closed'} on{' '}
             {format(new Date(createdAt), 'MMM d, yyyy')}
           </Text>
         </ContentFooter>

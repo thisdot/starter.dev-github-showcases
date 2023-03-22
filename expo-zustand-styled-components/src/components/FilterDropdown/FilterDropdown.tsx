@@ -16,6 +16,7 @@ interface FilterDropdownProps {
   showOptions?: string;
   selectOption?: (value: string) => void;
   setShowOptions?: (value: string) => void;
+  style?: any;
 }
 
 const FilterDropdown = ({
@@ -25,6 +26,7 @@ const FilterDropdown = ({
   selectOption,
   showOptions,
   setShowOptions,
+  style
 }: FilterDropdownProps) => {
   const { width } = useWindowDimensions();
   const { dropdownButtonRef } = useRefs();
@@ -47,7 +49,9 @@ const FilterDropdown = ({
         activeOpacity={0.8}
         screenWidth={width}
         onPress={openDropdown}
-        ref={dropdownButtonRef}>
+        ref={dropdownButtonRef}
+        style={style}
+        >
         <DropdownBtnText>{name}</DropdownBtnText>
         <CaretIcon color={colors.gray400} />
       </DropdownBtn>

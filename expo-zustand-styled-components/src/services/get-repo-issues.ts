@@ -1,7 +1,7 @@
 import FetchApi from './api';
 import { ISSUES_QUERY } from './queries/issues';
 import { MilestoneProps, Variables, Response, IssueProps, Issue } from '../types/issues-type';
-import { useAppStore } from '../hooks/stores';
+import { useIssuesStore } from '../hooks/stores';
 import { Label } from '../types/label-type';
 
 function parseIssues(data: IssueProps) {
@@ -106,7 +106,7 @@ const getIssues = async ({
   last,
 }: Variables) => {
   try {
-    useAppStore.setState({ isLoading: true });
+    useIssuesStore.setState({ isLoading: true });
     const data = {
       query: ISSUES_QUERY,
       variables: {
@@ -135,9 +135,9 @@ const getIssues = async ({
       labels,
     };
 
-    useAppStore.setState({ isLoading: false, issues });
+    useIssuesStore.setState({ isLoading: false, issues });
   } catch (err) {
-    useAppStore.setState({ isLoading: false, error: err.message });
+    useIssuesStore.setState({ isLoading: false, error: err.message });
   }
 };
 
