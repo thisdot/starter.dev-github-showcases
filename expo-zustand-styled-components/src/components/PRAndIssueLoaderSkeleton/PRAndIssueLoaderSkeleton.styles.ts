@@ -17,17 +17,7 @@ export const ContentContainer = styled.View`
   border-radius: 16px;
 `;
 
-export const Pagination = styled.View`
-  flex-direction: row;
+export const LoadingContainer = styled.View`
   align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-vertical: 16px;
-  margin-horizontal: auto;
-`;
-
-export const PaginationBtn = styled.TouchableOpacity`
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
+  padding: 8px;
 `;

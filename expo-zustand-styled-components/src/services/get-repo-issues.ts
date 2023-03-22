@@ -105,10 +105,8 @@ const getIssues = async ({
   first,
   last,
 }: Variables) => {
-  const { setLoading, setIssues, setErrorMsg } = useIssuesStore();
   try {
-    setLoading(true);
-
+    useIssuesStore.setState({ isLoading: true });
     const data = {
       query: ISSUES_QUERY,
       variables: {
@@ -137,11 +135,9 @@ const getIssues = async ({
       labels,
     };
 
-    setLoading(false);
-    setIssues(issues);
+    useIssuesStore.setState({ isLoading: false, issues });
   } catch (err) {
-    setLoading(false);
-    setErrorMsg(err.message);
+    useIssuesStore.setState({ isLoading: false, error: err.message });
   }
 };
 

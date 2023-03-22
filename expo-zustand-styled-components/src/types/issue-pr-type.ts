@@ -1,5 +1,4 @@
 import { Label } from './label-type';
-// export type CardType = 'issue' | 'pr';
 
 export interface IssuePullRequestCardProps {
   number: string;
@@ -8,8 +7,7 @@ export interface IssuePullRequestCardProps {
   url: string;
   state: string;
   createdAt: string;
-  authorName: string;
+  login: string;
   commentCount: number;
   labels: Label[];
-  isOpen?: boolean;
 }
