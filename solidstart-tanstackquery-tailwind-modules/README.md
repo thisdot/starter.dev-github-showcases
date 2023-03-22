@@ -33,6 +33,11 @@ SolidStart is a meta framework for SolidJS that is built on top of the React API
 - [ESLint](https://eslint.org/) - Code linting
 - [Prettier](https://prettier.io/) - Code formatting
 
+#### Note*
+We encountered an issue using Storybook in this showcase involving routes, you can follow the discord discussion [here](https://discord.com/channels/722131463138705510/1072093687892426843)  
+
+
+
 ## Installation
 
 This README is written with npm in mind but you can use other manager runners (yarn, pnpm, etc.)
