@@ -9,5 +9,5 @@ export function getLanguages(repos: Repo[]) {
     }
   });
 
-  return [...languages];
+  return [...languages].sort();
 }
