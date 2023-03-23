@@ -11,7 +11,7 @@ import getRepoPullRequests from '../../../services/get-repo-pull-requests';
 import PRAndIssueLoaderSkeleton from '../../../components/PRAndIssueLoaderSkeleton';
 import PullRequestsTabView from '../../../components/PullRequestsTabView';
 
-const PullRequest = () => {
+const PullRequests = () => {
   const { after, before, isLoading, pullRequests } = usePullRequestsStore();
   const { sortBy, label, setLabels } = usePRAndIssueHeaderStore();
   const { name, owner } = useRepoInfoStore();
