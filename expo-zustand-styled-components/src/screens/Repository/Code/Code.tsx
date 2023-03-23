@@ -1,10 +1,11 @@
-import { ScrollView, useWindowDimensions } from 'react-native';
+import { Platform, ScrollView, useWindowDimensions } from 'react-native';
 
 import FileTree from '../../../components/FileTree';
 import RepoAbout from '../../../components/RepoAbout';
+import FileViewer from '../../../components/FileViewer';
 import LoaderErrorView from '../../../components/LoaderErrorView';
-import BranchNavigation from '../../../components/BranchNavigation';
 import RepoReadme from '../../../components/RepoReadme/RepoReadme';
+import BranchNavigation from '../../../components/BranchNavigation';
 
 import { useRepoInfoStore } from '../../../hooks/stores';
 
@@ -12,7 +13,7 @@ import { Containter, MainContent, ContainerStyled, SafeAreaViewStyled } from './
 
 const Code = () => {
   const { width } = useWindowDimensions();
-  const { path, info, error, isLoading } = useRepoInfoStore();
+  const { path, info, isBlob, error, isLoading } = useRepoInfoStore();
 
   return (
     <SafeAreaViewStyled>
@@ -22,9 +23,11 @@ const Code = () => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <ContainerStyled screenWidth={width}>
             <BranchNavigation />
-            <MainContent screenWidth={width}>
+            <MainContent
+              screenWidth={width}
+              style={{ flexBasis: Platform.OS === 'web' ? 'fit-content' : undefined }}>
               <Containter screenWidth={width}>
-                <FileTree />
+                {isBlob ? <FileViewer /> : <FileTree />}
                 {!path ? <RepoReadme /> : null}
               </Containter>
               {!path ? (
