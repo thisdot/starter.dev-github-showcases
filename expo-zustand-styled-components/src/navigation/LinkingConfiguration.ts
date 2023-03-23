@@ -25,13 +25,12 @@ const linking: LinkingOptions<RootStackParamList> = {
           Home: '',
           Profile: ':username',
           RepoNavigator: {
-            path: ':owner/:name',
             screens: {
-              Code: '',
-              Tree: 'tree/:path*', // * means that it can be anything
-              Blob: 'blob/:path*', // * means that it can be anything
-              Issues: 'issues',
-              PullRequests: 'pulls',
+              Code: ':owner/:name',
+              Tree: ':owner/:name/tree/:path*', // * means that it can be anything
+              Blob: ':owner/:name/blob/:path*', // * means that it can be anything
+              Issues: ':owner/:name/issues',
+              PullRequests: ':owner/:name/pulls',
             },
           },
           Organization: 'orgs:org',

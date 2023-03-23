@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ScrollView, useWindowDimensions } from 'react-native';
 
 import FileTree from '../../../components/FileTree';
@@ -7,12 +8,26 @@ import { BranchNavigation } from '../../../components/Repository';
 import RepoReadme from '../../../components/RepoReadme/RepoReadme';
 
 import { useRepoInfoStore } from '../../../hooks/stores';
+import getRepoInfo from '../../../services/get-repo-info';
 
 import { Containter, MainContent, ContainerStyled, SafeAreaViewStyled } from './Code.styles';
+import { RepoStackScreenProps } from '../../../../types';
 
-const Code = () => {
+const Code = ({route}: RepoStackScreenProps<'Code'>) => {
   const { width } = useWindowDimensions();
   const { info, name, owner, error, branch, isLoading } = useRepoInfoStore();
+
+  useEffect(() => {
+    if(route.params){
+      useRepoInfoStore.setState({ activeTab: 'Code', name: route.params?.name, owner: route.params?.owner });
+    }
+  }, [route]);
+
+  useEffect(() => {
+    if (name && owner) {
+      getRepoInfo({ name, owner });
+    }
+  }, [name, owner]);
 
   return (
     <SafeAreaViewStyled>
