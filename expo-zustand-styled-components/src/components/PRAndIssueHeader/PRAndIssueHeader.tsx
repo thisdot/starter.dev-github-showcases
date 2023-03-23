@@ -19,6 +19,7 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
   const [showOptions, setShowOptions] = useState(null);
   const sortOptions = Object.values(SORT_OPTIONS);
    const labelOptions = (): string[] => labels.map((label) => label.name);
+   const labelOptionsColors = (): string[] => labels.map((label) => label.color);
    const milestoneOptions = (): string[] => milestones.map((label) => label.title);
    const selectSortBy = (value) => setSortBy(sortBy === value ? Object.values(SORT_OPTIONS)[0] : value);
    const selectLabel = (value) => setLabel(label === value ? undefined : value);
@@ -53,6 +54,7 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
           showOptions={showOptions}
           selected={label}
           items={labelOptions()}
+          itemsColors={labelOptionsColors()}
           selectOption={selectLabel}
           setShowOptions={(value) => setShowOptions(value)}
           style={filterDropdownStyle}

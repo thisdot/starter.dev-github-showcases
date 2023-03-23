@@ -72,3 +72,17 @@ export const DropdownWindow = styled.View`
   border-color: ${colors.gray300};
   background-color: ${colors.gray200};
 `;
+
+export const DropdownItemContent = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+`;
+
+export const DropdownItemContentColor = styled.View`
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  flex-shrink: 0;
+  border: 1px solid ${colors.gray300};
+`;
