@@ -1,54 +1,20 @@
-import { Switch, Match, createSignal, createEffect } from 'solid-js';
-import { createQuery } from '@tanstack/solid-query';
+import { Switch, Match } from 'solid-js';
 import { useParams } from 'solid-start';
-import getRepoInfo from '~/services/get-repo-info';
-import { Info } from '~/types/repo-info-type';
 import { RepoHeader } from '~/components/RepoHeader';
 import { RepoAbout } from '~/components/RepoAbout';
 import { BranchNavigation } from '~/components/BranchNavigation';
 import { RepoReadMe } from '~/components/RepoReadMe';
 import FileExplorer from '~/components/FileExplorer';
 import { LoadingPulseDot } from '~/components/LoadingPulseDot';
+import styles from '../style.module.css';
+import useGetRepoInfo from '~/hooks/useGetRepoInfo';
 
 const Repository = () => {
   const params = useParams();
-  const [branch, setBranch] = createSignal(params.branch);
-  const [info, setInfo] = createSignal<Info>({
-    isPrivate: false,
-    visibility: '',
-    forkCount: 0,
-    description: '',
-    homepageUrl: '',
-    stargazerCount: 0,
-    watcherCount: 0,
-    openIssueCount: 0,
-    topics: [],
-    isOrg: false,
-    openPullRequestCount: 0,
-  });
-
-  const isOwnerAndNameValid =
-    typeof params.owner === 'string' && typeof params.name === 'string';
-
-  const repoInfo = createQuery(
-    () => [`repository-info_${params.owner}_${params.name}`],
-    () =>
-      getRepoInfo(
-        isOwnerAndNameValid
-          ? { owner: params.owner, name: params.name }
-          : { owner: '', name: '' }
-      )
-  );
-
-  createEffect(() => {
-    if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
-      setInfo(repoInfo.data.info);
-      setBranch(repoInfo.data.branch || params.branch);
-    }
-  });
+  const [info, branch, repoInfo] = useGetRepoInfo();
 
   return (
-    <div class="bg-white h-screen">
+    <div class={styles.wrapper}>
       <Switch>
         <Match when={repoInfo.isError}>
           <p>Error</p>

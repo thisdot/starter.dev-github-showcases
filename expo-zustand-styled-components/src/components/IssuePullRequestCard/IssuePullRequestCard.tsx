@@ -23,6 +23,7 @@ import { Link } from '@react-navigation/native';
 import CommentIcon from '../Icons/CommentIcon';
 import { usePRAndIssueHeaderStore } from '../../hooks/stores';
 import { PR_ISSUE_TABS } from '../../utils/constants';
+import { getTextColor } from '../../utils/dynamicColor';
 
 const IssuePullRequestCard = ({
   number,
@@ -73,7 +74,7 @@ const IssuePullRequestCard = ({
           <Labels>
             {labels.map(({ color, name }, index) => (
               <LabelView key={index} color={color}>
-                <Text style={{ fontSize: 12 }}>{name}</Text>
+                <Text style={{ fontSize: 12, color: color ? getTextColor(`#${color}`) : '#FFF' }}>{name}</Text>
               </LabelView>
             ))}
           </Labels>

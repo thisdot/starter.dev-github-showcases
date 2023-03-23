@@ -12,6 +12,7 @@ import { colors } from '../../utils/style-variables';
 interface FilterDropdownProps {
   name: string;
   items?: string[];
+  itemsColors?: string[];
   selected?: string;
   showOptions?: string;
   selectOption?: (value: string) => void;
@@ -22,6 +23,7 @@ interface FilterDropdownProps {
 const FilterDropdown = ({
   name,
   items,
+  itemsColors,
   selected,
   selectOption,
   showOptions,
@@ -50,14 +52,14 @@ const FilterDropdown = ({
         screenWidth={width}
         onPress={openDropdown}
         ref={dropdownButtonRef}
-        style={style}
-        >
+        style={style}>
         <DropdownBtnText>{name}</DropdownBtnText>
         <CaretIcon color={colors.gray400} />
       </DropdownBtn>
       <Dropdown
         name={name}
         data={items}
+        itemsColors={itemsColors}
         selected={selected}
         selectOption={selectOption}
         closeDropdown={closeDropdown}
