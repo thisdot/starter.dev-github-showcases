@@ -44,4 +44,5 @@ const PullRequest = () => {
   );
 };
 
-export default PullRequest;
+export default PullRequests;
+

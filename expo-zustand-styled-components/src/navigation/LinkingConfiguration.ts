@@ -41,16 +41,6 @@ const linking: LinkingOptions<RootStackParamList> = {
                   CodeScreen: 'code',
                 },
               },
-              Blob: {
-                screens: {
-                  BlobScreen: 'blob',
-                },
-              },
-              Tree: {
-                screens: {
-                  TreeScreen: 'tree',
-                },
-              },
               Issues: {
                 screens: {
                   IssuesScreen: 'issues',
