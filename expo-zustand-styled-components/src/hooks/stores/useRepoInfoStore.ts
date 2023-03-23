@@ -15,10 +15,6 @@ interface IRepoInfoStore {
   readMe?: string;
   activeTab: string;
   isLoading: boolean;
-  file?: {
-    byteSize: number;
-    text: string;
-  };
   tree?: TreeProps[];
   _cache: Map<
     string,
