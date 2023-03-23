@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useLinkTo } from '@react-navigation/native';
 import {
   Text,
   TouchableOpacity,
@@ -28,7 +28,7 @@ interface RepoCardProps {
 }
 
 const RepoCard = ({ repo, isProfilePage }: RepoCardProps) => {
-  const navigation = useNavigation();
+  const linkTo = useLinkTo();
   const { width } = useWindowDimensions();
 
   return (
@@ -38,7 +38,7 @@ const RepoCard = ({ repo, isProfilePage }: RepoCardProps) => {
           <TouchableOpacity
             onPress={() => {
               useRepoInfoStore.setState({ owner: repo.owner.login, name: repo.name });
-              navigation.navigate('AppNavigator', { screen: 'RepoNavigator', path: `${repo.owner.login}/${repo.name}` });
+              linkTo(`/${repo.owner.login}/${repo.name}`);
             }}>
             <LinkText screenWidth={width}>{repo.name}</LinkText>
           </TouchableOpacity>

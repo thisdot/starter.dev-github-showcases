@@ -14,13 +14,13 @@ const linking: LinkingOptions<RootStackParamList> = {
   config: {
     screens: {
       AuthNavigator: {
-        path: 'login',
+        initialRouteName: 'Login',
         screens: {
-          Login: '',
+          Login: 'login',
         },
       },
       AppNavigator: {
-        path: '',
+        initialRouteName: 'Home',
         screens: {
           Home: '',
           Profile: ':username',
