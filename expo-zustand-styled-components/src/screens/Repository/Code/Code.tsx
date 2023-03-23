@@ -3,7 +3,7 @@ import { ScrollView, useWindowDimensions } from 'react-native';
 import FileTree from '../../../components/FileTree';
 import RepoAbout from '../../../components/RepoAbout';
 import LoaderErrorView from '../../../components/LoaderErrorView';
-import { BranchNavigation } from '../../../components/Repository';
+import BranchNavigation from '../../../components/BranchNavigation';
 import RepoReadme from '../../../components/RepoReadme/RepoReadme';
 
 import { useRepoInfoStore } from '../../../hooks/stores';
@@ -12,7 +12,7 @@ import { Containter, MainContent, ContainerStyled, SafeAreaViewStyled } from './
 
 const Code = () => {
   const { width } = useWindowDimensions();
-  const { info, name, owner, error, branch, isLoading } = useRepoInfoStore();
+  const { path, info, error, isLoading } = useRepoInfoStore();
 
   return (
     <SafeAreaViewStyled>
@@ -21,17 +21,19 @@ const Code = () => {
       ) : (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <ContainerStyled screenWidth={width}>
-            <BranchNavigation branch={branch} name={name} owner={owner} />
+            <BranchNavigation />
             <MainContent screenWidth={width}>
               <Containter screenWidth={width}>
                 <FileTree />
-                <RepoReadme />
+                {!path ? <RepoReadme /> : null}
               </Containter>
-              <RepoAbout
-                description={info?.description}
-                homepageUrl={info?.homepageUrl}
-                topics={info?.topics}
-              />
+              {!path ? (
+                <RepoAbout
+                  topics={info?.topics}
+                  description={info?.description}
+                  homepageUrl={info?.homepageUrl}
+                />
+              ) : null}
             </MainContent>
           </ContainerStyled>
         </ScrollView>

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { View } from 'react-native';
-import { Link } from '@react-navigation/native';
+import { TouchableOpacity, View } from 'react-native';
 
 import { useRepoInfoStore } from '../../hooks/stores';
 import getRepoTree from '../../services/get-repo-tree';
@@ -11,8 +10,6 @@ import { FolderIcon, DocumentIcon } from '../Icons';
 
 const FileTree = () => {
   const { path, owner, name, tree, branch } = useRepoInfoStore();
-
-  const basePath = () => `/${owner}/${name}`;
 
   useEffect(() => {
     getRepoTree({
@@ -25,9 +22,11 @@ const FileTree = () => {
   return (
     <Containter>
       {path && path !== '' ? (
-        <Link to={`${basePath()}/tree/${branch}/${path}`}>
-          <LinkText>..</LinkText>
-        </Link>
+        <Cell>
+          <TouchableOpacity onPress={() => useRepoInfoStore.setState({ path: undefined })}>
+            <LinkText>..</LinkText>
+          </TouchableOpacity>
+        </Cell>
       ) : null}
       {tree?.map((item) => (
         <Cell key={item.name}>
@@ -39,7 +38,12 @@ const FileTree = () => {
                 <DocumentIcon color={colors.gray500} width={20} height={20} />
               )}
             </View>
-            <Link to={`${basePath()}/${item.type}/${branch}/${item.path}`}>{item.name}</Link>
+            <TouchableOpacity
+              onPress={() => {
+                useRepoInfoStore.setState({ path: item.path, isBlob: item.type !== 'tree' });
+              }}>
+              <LinkText>{item.name}</LinkText>
+            </TouchableOpacity>
           </View>
         </Cell>
       ))}
