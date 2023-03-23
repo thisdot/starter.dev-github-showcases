@@ -6,6 +6,7 @@
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
+import { Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import AuthNavigator from './auth';
@@ -17,7 +18,7 @@ import { useAuthStore } from '../hooks/stores';
 
 export default function Navigation() {
   return (
-    <NavigationContainer linking={LinkingConfiguration}>
+    <NavigationContainer linking={LinkingConfiguration} fallback={<Text>Loading...</Text>}>
       <RootNavigator />
     </NavigationContainer>
   );

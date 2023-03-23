@@ -38,7 +38,7 @@ const RepoCard = ({ repo, isProfilePage }: RepoCardProps) => {
           <TouchableOpacity
             onPress={() => {
               useRepoInfoStore.setState({ owner: repo.owner.login, name: repo.name });
-              navigation.navigate('AppNavigator', { screen: 'RepoNavigator' });
+              navigation.navigate('AppNavigator', { screen: 'RepoNavigator', path: `${repo.owner.login}/${repo.name}` });
             }}>
             <LinkText screenWidth={width}>{repo.name}</LinkText>
           </TouchableOpacity>

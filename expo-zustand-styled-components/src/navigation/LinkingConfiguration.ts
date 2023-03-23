@@ -14,60 +14,27 @@ const linking: LinkingOptions<RootStackParamList> = {
   config: {
     screens: {
       AuthNavigator: {
+        path: 'login',
         screens: {
-          Login: {
-            screens: {
-              LoginScreen: 'login',
-            },
-          },
+          Login: '',
         },
       },
       AppNavigator: {
+        path: '',
         screens: {
-          Home: {
-            screens: {
-              HomeScreen: 'home',
-            },
-          },
-          Profile: {
-            screens: {
-              ProfileScreen: 'profile',
-            },
-          },
+          Home: '',
+          Profile: ':username',
           RepoNavigator: {
+            path: ':owner/:name',
             screens: {
-              Code: {
-                screens: {
-                  CodeScreen: 'code',
-                },
-              },
-              Blob: {
-                screens: {
-                  BlobScreen: 'blob',
-                },
-              },
-              Tree: {
-                screens: {
-                  TreeScreen: 'tree',
-                },
-              },
-              Issues: {
-                screens: {
-                  IssuesScreen: 'issues',
-                },
-              },
-              PullRequests: {
-                screens: {
-                  PullRequestsScreen: 'pull-requests',
-                },
-              },
+              Code: '',
+              Tree: 'tree/:path*', // * means that it can be anything
+              Blob: 'blob/:path*', // * means that it can be anything
+              Issues: 'issues',
+              PullRequests: 'pulls',
             },
           },
-          Organization: {
-            screens: {
-              OrganizationScreen: 'organization',
-            },
-          },
+          Organization: 'orgs:org',
         },
       },
     },

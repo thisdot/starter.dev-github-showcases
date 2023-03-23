@@ -1,11 +1,34 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView, useWindowDimensions } from 'react-native';
+
+import FileTree from '../../../components/FileTree';
+import LoaderErrorView from '../../../components/LoaderErrorView';
+import { BranchNavigation } from '../../../components/Repository';
+
+import { useRepoInfoStore } from '../../../hooks/stores';
+
+import { Containter, MainContent, ContainerStyled, SafeAreaViewStyled } from './Tree.styles';
 
 const Tree = () => {
+  const { width } = useWindowDimensions();
+  const { info, name, owner, error, branch, isLoading } = useRepoInfoStore();
+
   return (
-    <View>
-      <Text>Tree</Text>
-    </View>
+    <SafeAreaViewStyled>
+      {isLoading || error || !info ? (
+        <LoaderErrorView error={error} />
+      ) : (
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <ContainerStyled screenWidth={width}>
+            <BranchNavigation branch={branch} name={name} owner={owner} />
+            <MainContent screenWidth={width}>
+              <Containter screenWidth={width}>
+                <FileTree />
+              </Containter>
+            </MainContent>
+          </ContainerStyled>
+        </ScrollView>
+      )}
+    </SafeAreaViewStyled>
   );
 };
 
