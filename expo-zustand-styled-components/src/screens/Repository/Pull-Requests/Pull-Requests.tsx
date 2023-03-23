@@ -1,12 +1,12 @@
-import React from 'react';
 import { View, Text } from 'react-native';
 
-const PullRequest = () => {
+const PullRequests = () => {
   return (
     <View>
-      <Text>PullRequest</Text>
+      <Text>PullRequests</Text>
     </View>
   );
 };
 
-export default PullRequest;
+export default PullRequests;
+

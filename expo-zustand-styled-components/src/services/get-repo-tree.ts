@@ -30,9 +30,9 @@ export const parseQueryData = (fileTree: TreeProps[]) => {
 
 const getRepoTree = async (variables: RepoTreeVariables) => {
   const key = `${variables.name}-${variables.owner}-${variables.expression}`;
-  if (useRepoInfoStore.getState()._treeCache.has(key)) {
-    const data = useRepoInfoStore.getState()._treeCache.get(key);
-    useRepoInfoStore.setState({ isLoading: false, tree: data });
+  if (useRepoInfoStore.getState()._tree.has(key)) {
+    const data = useRepoInfoStore.getState()._tree.get(key);
+    useRepoInfoStore.setState({ tree: data });
   } else {
     try {
       useRepoInfoStore.setState({ isLoading: true });
@@ -42,7 +42,7 @@ const getRepoTree = async (variables: RepoTreeVariables) => {
         isLoading: false,
         tree,
       });
-      useRepoInfoStore.getState()._treeCache.set(key, tree);
+      useRepoInfoStore.getState()._tree.set(key, tree);
     } catch (err) {
       useRepoInfoStore.setState({ isLoading: false, error: err.message });
     }

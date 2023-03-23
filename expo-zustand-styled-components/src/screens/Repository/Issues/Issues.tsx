@@ -37,6 +37,7 @@ const Issues = () => {
   useEffect(() => {
     getIssues(fetchParameters());
   }, [before, after, sortBy, milestone, label]);
+
   return (
     <Wrapper>
       {isLoading ? <PRAndIssueLoaderSkeleton cardType="issue" /> : <IssuesTabView />}
