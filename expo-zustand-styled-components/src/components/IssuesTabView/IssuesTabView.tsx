@@ -3,14 +3,17 @@ import { ContentContainer, Pagination, PaginationBtn, MainContainer } from './Is
 import IssuePullRequestCard from '../IssuePullRequestCard';
 import { Text, useWindowDimensions } from 'react-native';
 import { useIssuesStore, usePRAndIssueHeaderStore } from '../../hooks/stores';
+import { SORT_OPTIONS } from '../../utils/constants';
+import IssuesPRClearFilter from '../IssuesPRClearFilter';
 
 const IssuesTabView = () => {
-  const { activeTab } = usePRAndIssueHeaderStore();
+  const { activeTab, label, sortBy } = usePRAndIssueHeaderStore();
   const { width } = useWindowDimensions();
   const { issues } = useIssuesStore();
 
   return (
     <MainContainer screenWidth={width}>
+      {label && sortBy !== Object.values(SORT_OPTIONS)[0] && <IssuesPRClearFilter />}
       <ContentContainer>
         <PRAndIssueHeader
           cardType="issue"

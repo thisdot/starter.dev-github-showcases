@@ -2,7 +2,7 @@ import { REPO_PULL_REQUESTS } from './queries/pull-requests';
 import FetchApi, { ApiProps } from './api';
 import { PullRequest, PullRequestProps, RepoPullRequestsQuery } from '../types/pull-requests-type';
 import { Label } from '../types/label-type';
-import { useAppStore } from '../hooks/stores';
+import { usePullRequestsStore } from '../hooks/stores';
 
 type PullRequestVariables = {
   owner: string;
@@ -91,7 +91,7 @@ function parseLabels(labels: { totalCount: number; nodes: Label[] }) {
 
 const getRepoPullRequests = async (variables: PullRequestVariables) => {
   try {
-    useAppStore.setState({ isLoading: true });
+    usePullRequestsStore.setState({ isLoading: true });
 
     const data: ApiProps<PullRequestVariables> = {
       query: REPO_PULL_REQUESTS,
@@ -111,9 +111,9 @@ const getRepoPullRequests = async (variables: PullRequestVariables) => {
       labels: labelMap,
     };
 
-    useAppStore.setState({ isLoading: false, pullRequests });
+    usePullRequestsStore.setState({ isLoading: false, pullRequests });
   } catch (err) {
-    useAppStore.setState({ isLoading: false, error: err.message });
+    usePullRequestsStore.setState({ isLoading: false, error: err.message });
   }
 };
 

@@ -14,15 +14,17 @@ interface PRAndIssueHeaderProps {
 }
 
 const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeaderProps) => {
-  const {milestones, labels, sortBy, label, milestone, setSortBy, setLabel, setMilestone} = usePRAndIssueHeaderStore();
+  const { milestones, labels, sortBy, label, milestone, setSortBy, setLabel, setMilestone } =
+    usePRAndIssueHeaderStore();
   const { activeTab, setActiveTab } = usePRAndIssueHeaderStore();
   const [showOptions, setShowOptions] = useState(null);
   const sortOptions = Object.values(SORT_OPTIONS);
-   const labelOptions = (): string[] => labels.map((label) => label.name);
-   const milestoneOptions = (): string[] => milestones.map((label) => label.title);
-   const selectSortBy = (value) => setSortBy(sortBy === value ? Object.values(SORT_OPTIONS)[0] : value);
-   const selectLabel = (value) => setLabel(label === value ? undefined : value);
-   const selectMilestone = (value) => setMilestone(milestone === value ? undefined : value);
+  const labelOptions = (): string[] => labels.map((label) => label.name);
+  const milestoneOptions = (): string[] => milestones.map((label) => label.title);
+  const selectSortBy = (value) =>
+    setSortBy(sortBy === value ? Object.values(SORT_OPTIONS)[0] : value);
+  const selectLabel = (value) => setLabel(label === value ? undefined : value);
+  const selectMilestone = (value) => setMilestone(milestone === value ? undefined : value);
 
   const filterDropdownStyle = {
     borderWidth: 0,
