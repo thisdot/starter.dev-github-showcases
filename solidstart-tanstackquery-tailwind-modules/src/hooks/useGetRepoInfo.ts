@@ -1,10 +1,20 @@
-import { createQuery } from "@tanstack/solid-query";
-import { createEffect, createSignal } from 'solid-js';
+import { CreateQueryResult, createQuery } from "@tanstack/solid-query";
+import { Accessor, createEffect, createSignal } from 'solid-js';
 import { useParams } from "solid-start";
 import getRepoInfo from "~/services/get-repo-info";
 import { Info } from "~/types/repo-info-type";
 
-const useGetRepoInfo = (): any => {
+interface Result {
+  branch: string;
+  info: Info;
+}
+type Response = [
+  Accessor<Info>,
+  Accessor<string>,
+  CreateQueryResult<Result, unknown>
+];
+
+const useGetRepoInfo = (): Response => {
   const params = useParams();
   const [branch, setBranch] = createSignal(params.branch);
   const [info, setInfo] = createSignal<Info>({
@@ -34,15 +44,15 @@ const useGetRepoInfo = (): any => {
       )
   );
 
-   createEffect(() => {
-     if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
-       setInfo(repoInfo.data.info);
-       setBranch(repoInfo.data.branch || params.branch);
-     }
-   });
+  createEffect(() => {
+    if (repoInfo.isSuccess && !repoInfo.isLoading && repoInfo.data) {
+      setInfo(repoInfo.data.info);
+      setBranch(repoInfo.data.branch || params.branch);
+    }
+  });
 
   return [info, branch, repoInfo];
-}
+};
 
 
 export default useGetRepoInfo;
