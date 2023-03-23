@@ -12,6 +12,7 @@ import {
 import { Issue } from '~/types/issues-type';
 import { PullRequest } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
+import { getTextColor } from '~/utils/dynamicColor';
 
 interface PRAndIssuesListItemProps {
   type: 'issue' | 'pr';
@@ -75,11 +76,11 @@ const PRAndIssuesListItem = (props: PRAndIssuesListItemProps) => {
           <For each={props.item?.labels as Label[]}>
             {(label) => (
               <span
-                class={cn(
-                  'mt-2 ml-2 py-1 px-2 rounded-full text-sm',
-                  `bg-[#${label.color}]`
-                )}
-                style={{ 'background-color': `#${label.color}` }}
+                class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm')}
+                style={{
+                  'background-color': `#${label.color}`,
+                  color: getTextColor(`#${label.color}` || '#ccc'),
+                }}
               >
                 {label.name}
               </span>

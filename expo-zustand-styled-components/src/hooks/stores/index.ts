@@ -6,3 +6,5 @@ export { default as useTopReposStore } from './useTopReposStore';
 export { default as useRepoInfoStore } from './useRepoInfoStore';
 export { default as useUserReposStore } from './useUserReposStore';
 export { default as useRepoFilterStore } from './useRepoFilterStore';
+export { default as usePRAndIssueHeaderStore } from './usePRAndIssueHeaderStore';
+export { default as useIssuesStore } from './useIssuesStore';
