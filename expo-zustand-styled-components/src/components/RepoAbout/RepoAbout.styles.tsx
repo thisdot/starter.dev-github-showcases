@@ -55,7 +55,7 @@ export const TagsContainerStyled = styled.View`
 `;
 
 export const TagStyled = styled.TouchableOpacity`
-  border-radius: 999rem;
+  border-radius: 50px;
   background-color: ${colors.blue100};
 `;
 

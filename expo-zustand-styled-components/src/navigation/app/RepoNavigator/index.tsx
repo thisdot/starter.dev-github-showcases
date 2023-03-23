@@ -1,8 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // screens
-import TreeScreen from '../../../screens/Repository/Tree';
-import BlobScreen from '../../../screens/Repository/Blob';
 import CodeScreen from '../../../screens/Repository/Code';
 import IssuesScreen from '../../../screens/Repository/Issues';
 import PullRequestsScreen from '../../../screens/Repository/Pull-Requests';
@@ -15,14 +13,12 @@ const Stack = createNativeStackNavigator<RepoStackParamList>();
 const RepoNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="Code" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Code" component={CodeScreen} options={{ title: 'Code' }} />
-      <Stack.Screen name="Tree" component={TreeScreen} options={{ title: 'Tree' }} />
-      <Stack.Screen name="Blob" component={BlobScreen} options={{ title: 'Blob' }} />
-      <Stack.Screen name="Issues" component={IssuesScreen} options={{ title: 'Issues' }} />
+      <Stack.Screen name="Code" component={CodeScreen} options={{ title: '' }} />
+      <Stack.Screen name="Issues" component={IssuesScreen} options={{ title: '' }} />
       <Stack.Screen
         name="PullRequests"
         component={PullRequestsScreen}
-        options={{ title: 'Pull Requests' }}
+        options={{ title: '' }}
       />
     </Stack.Navigator>
   );

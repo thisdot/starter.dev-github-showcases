@@ -6,11 +6,12 @@ export const Containter = styled.View`
   border-width: 1px;
   line-height: 20px;
   border-radius: 4px;
+  background-color: #ffffff;
   border-color: ${colors.gray300};
 `;
 
 export const LinkText = styled.Text`
-  color: ${colors.blue300};
+  color: ${colors.gray700};
 `;
 
 export const Cell = styled.View`

@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { ScrollView, useWindowDimensions } from 'react-native';
+import { Platform, ScrollView, useWindowDimensions } from 'react-native';
 
 import FileTree from '../../../components/FileTree';
 import RepoAbout from '../../../components/RepoAbout';
+import FileViewer from '../../../components/FileViewer';
 import LoaderErrorView from '../../../components/LoaderErrorView';
-import { BranchNavigation } from '../../../components/Repository';
 import RepoReadme from '../../../components/RepoReadme/RepoReadme';
+import BranchNavigation from '../../../components/BranchNavigation';
 
 import { useRepoInfoStore } from '../../../hooks/stores';
 import getRepoInfo from '../../../services/get-repo-info';
@@ -15,7 +16,7 @@ import { RepoStackScreenProps } from '../../../../types';
 
 const Code = ({route}: RepoStackScreenProps<'Code'>) => {
   const { width } = useWindowDimensions();
-  const { info, name, owner, error, branch, isLoading } = useRepoInfoStore();
+  const { path, info, name, owner, isBlob, error, isLoading } = useRepoInfoStore();
 
   useEffect(() => {
     if(route.params){
@@ -36,17 +37,21 @@ const Code = ({route}: RepoStackScreenProps<'Code'>) => {
       ) : (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <ContainerStyled screenWidth={width}>
-            <BranchNavigation branch={branch} name={name} owner={owner} />
-            <MainContent screenWidth={width}>
+            <BranchNavigation />
+            <MainContent
+              screenWidth={width}
+              style={{ flexBasis: Platform.OS === 'web' ? 'fit-content' : undefined }}>
               <Containter screenWidth={width}>
-                <FileTree />
-                <RepoReadme />
+                {isBlob ? <FileViewer /> : <FileTree />}
+                {!path ? <RepoReadme /> : null}
               </Containter>
-              <RepoAbout
-                description={info?.description}
-                homepageUrl={info?.homepageUrl}
-                topics={info?.topics}
-              />
+              {!path ? (
+                <RepoAbout
+                  topics={info?.topics}
+                  description={info?.description}
+                  homepageUrl={info?.homepageUrl}
+                />
+              ) : null}
             </MainContent>
           </ContainerStyled>
         </ScrollView>

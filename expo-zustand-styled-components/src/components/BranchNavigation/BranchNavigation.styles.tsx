@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
-import { breakpoints } from '../../../utils/breakpoints';
-import { colors } from '../../../utils/style-variables';
+import { breakpoints } from '../../utils/breakpoints';
+import { colors } from '../../utils/style-variables';
 
 type ScreenWidth = {
   screenWidth: number;
