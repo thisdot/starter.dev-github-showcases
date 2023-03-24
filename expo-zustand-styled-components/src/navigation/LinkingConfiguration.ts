@@ -24,6 +24,7 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           Home: '',
           Profile: ':username',
+          Organization: 'orgs/:login',
           RepoNavigator: {
             path: ':owner/:name',
             screens: {
@@ -34,7 +35,6 @@ const linking: LinkingOptions<RootStackParamList> = {
               'Pull Requests': 'pulls',
             },
           },
-          Organization: 'orgs:org',
         },
       },
     },
@@ -65,11 +65,11 @@ const linking: LinkingOptions<RootStackParamList> = {
                       routes: [
                         {
                           path,
-                          name: isTree ? 'Tree' : 'Blob',
                           params: {
                             branch,
                             path: rest.join('/'),
                           },
+                          name: isTree ? 'Tree' : 'Blob',
                         },
                       ],
                     },
