@@ -19,6 +19,6 @@ export const Wrapper = styled.View<ScreenWidth>`
 export const TopRow = styled.View<ScreenWidth>`
   gap: 10px;
   justify-content: space-between;
-  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'row' : 'column')};
+  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.laptop ? 'row' : 'column')};
   align-items: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'center' : 'flex-start')};
 `;

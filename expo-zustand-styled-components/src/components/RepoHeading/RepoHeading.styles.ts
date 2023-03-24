@@ -8,10 +8,8 @@ type ScreenWidth = {
 
 export const Heading = styled.View<ScreenWidth>`
   gap: 6px;
-  overflow: hidden;
   flex-direction: row;
   align-items: center;
-  overflow: scroll;
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '50%' : '100%')};
 `;
 

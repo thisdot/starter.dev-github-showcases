@@ -10,7 +10,7 @@ export const Container = styled.View<ScreenWidth>`
   flex-wrap: nowrap;
   align-items: center;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 'space-between' : 'flex-start')};;
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'none' : '100%')};
   gap: 16px;
 `;
