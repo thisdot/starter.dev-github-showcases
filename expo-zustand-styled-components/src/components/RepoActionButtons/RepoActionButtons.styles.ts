@@ -7,11 +7,12 @@ type ScreenWidth = {
 };
 
 export const Container = styled.View<ScreenWidth>`
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '21%' : '100%')};
+  width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'none' : '100%')};
+  gap: 16px;
 `;
 
 export const BtnGroup = styled.View`

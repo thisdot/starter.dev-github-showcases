@@ -11,6 +11,7 @@ export const Heading = styled.View<ScreenWidth>`
   overflow: hidden;
   flex-direction: row;
   align-items: center;
+  overflow: scroll;
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '50%' : '100%')};
 `;
 
@@ -21,7 +22,7 @@ export const RepoContentWrapper = styled.View<ScreenWidth>`
       return `
         justify-content: center;
       `;
-    }else{
+    } else {
       return `
         align-items: flex-start;
       `;
