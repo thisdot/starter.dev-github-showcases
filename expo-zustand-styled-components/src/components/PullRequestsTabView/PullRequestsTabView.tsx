@@ -1,27 +1,32 @@
 import PRAndIssueHeader from '../PRAndIssueHeader';
-import { ContentContainer, Pagination, PaginationBtn, MainContainer } from './IssuesTabView.styles';
+import {
+  ContentContainer,
+  Pagination,
+  PaginationBtn,
+  MainContainer,
+} from './PullRequestsTabView.styles';
 import IssuePullRequestCard from '../IssuePullRequestCard';
 import { Text, useWindowDimensions } from 'react-native';
-import { useIssuesStore, usePRAndIssueHeaderStore } from '../../hooks/stores';
+import { usePRAndIssueHeaderStore, usePullRequestsStore } from '../../hooks/stores';
 import { SORT_OPTIONS } from '../../utils/constants';
 import IssuesPRClearFilter from '../IssuesPRClearFilter';
 
-const IssuesTabView = () => {
+const PullRequestsTabView = () => {
   const { activeTab, label, sortBy } = usePRAndIssueHeaderStore();
   const { width } = useWindowDimensions();
-  const { issues } = useIssuesStore();
+  const { pullRequests } = usePullRequestsStore();
 
   return (
     <MainContainer screenWidth={width}>
       {label && sortBy !== Object.values(SORT_OPTIONS)[0] && <IssuesPRClearFilter />}
       <ContentContainer>
         <PRAndIssueHeader
-          cardType="issue"
-          openCount={issues.openIssues.totalCount}
-          closedCount={issues.closedIssues.totalCount}
+          cardType="pr"
+          openCount={pullRequests.openPullRequests.totalCount}
+          closedCount={pullRequests.closedPullRequests.totalCount}
         />
-        {issues[activeTab + 'Issues'].issues.map((data, index) => (
-          <IssuePullRequestCard {...data} cardType="issue" key={index} />
+        {pullRequests[activeTab + 'PullRequests'].pullRequests.map((data, index) => (
+          <IssuePullRequestCard {...data} cardType="pr" key={index} />
         ))}
       </ContentContainer>
       <Pagination>
@@ -38,4 +43,4 @@ const IssuesTabView = () => {
   );
 };
 
-export default IssuesTabView;
+export default PullRequestsTabView;

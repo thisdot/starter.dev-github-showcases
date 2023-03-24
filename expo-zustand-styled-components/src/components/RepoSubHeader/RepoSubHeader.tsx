@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useWindowDimensions } from 'react-native';
 
 import RepoHeading from '../RepoHeading/RepoHeading';
 import TabNavigation from '../TabNavigation/TabNavigation';
@@ -8,14 +7,14 @@ import RepoActionButtons from '../RepoActionButtons/RepoActionButtons';
 import { createTabList } from './tabList';
 import { Wrapper, TopRow } from './RepoSubHeader.styles';
 
-import { useRepoInfoStore } from '../../hooks/stores';
 import { REPO_TABS } from '../../utils/constants';
 
+import { useRepoInfoStore, usePRAndIssueHeaderStore } from '../../hooks/stores';
 import { RepoStackParamList } from '../../../types';
 
-const RepoSubHeader = ({ route, navigation }) => {
-  const { width } = useWindowDimensions();
+const RepoSubHeader = ({ route, width, navigation }) => {
   const { info, activeTab } = useRepoInfoStore();
+  const { clearFilter, setActiveTab } = usePRAndIssueHeaderStore();
 
   useEffect(() => {
     const routes = route?.state?.routes;
@@ -28,6 +27,8 @@ const RepoSubHeader = ({ route, navigation }) => {
   }, [route]);
 
   const onChange = (tab: keyof RepoStackParamList) => {
+    clearFilter();
+    setActiveTab('open');
     useRepoInfoStore.setState({ activeTab: tab });
     tab && navigation.navigate(tab);
   };
