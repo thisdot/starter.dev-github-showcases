@@ -20,20 +20,21 @@ interface Issues {
 interface IssueStore {
   isLoading: boolean;
   error?: string;
-  before?: string;
-  after?: string;
+  before?: string | null;
+  after?: string | null;
   issues: Issues;
   setLoading: (value: boolean) => void;
   setIssues: (value: Issues) => void;
   setBefore: (value: string) => void;
   setAfter: (value: string) => void;
   setErrorMsg: (value: string) => void;
+  resetBeforeAndAfter: () => void;
 }
 
 const initialState = {
   isLoading: true,
-  before: undefined,
-  after: undefined,
+  before: null,
+  after: null,
   issues: {
     openIssues: {
       issues: [],
@@ -62,6 +63,7 @@ const useIssuesStore = create<IssueStore>((set) => ({
   setIssues: (value) => set(() => ({ issues: value })),
   setBefore: (value) => set(() => ({ before: value })),
   setAfter: (value) => set(() => ({ after: value })),
+  resetBeforeAndAfter: () => set(() => ({ after: null, before: null })),
   setErrorMsg: (value) => set(() => ({ error: value })),
 }));
 
