@@ -3,9 +3,22 @@ import { Text, View, Platform, TouchableOpacity } from 'react-native';
 import { useLinkProps } from '@react-navigation/native';
 
 import { colors } from '../../utils/style-variables';
+import { StyleProp, ViewStyle } from 'react-native';
 
-const LinkButton = ({ to, action, children, ...rest }: {to: string; action?: any; children: ReactNode }) => {
-  const { onPress, ...props } = useLinkProps({ to, action });
+interface LinkButtonProps {
+  to: string;
+  hasLine?: boolean;
+  children: ReactNode;
+  style?: StyleProp<ViewStyle>;
+}
+
+const LinkButton = ({
+  to,
+  children,
+  hasLine = false,
+  ...rest
+}: LinkButtonProps) => {
+  const { onPress, ...props } = useLinkProps({ to });
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -20,10 +33,9 @@ const LinkButton = ({ to, action, children, ...rest }: {to: string; action?: any
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         // @ts-ignore
-        style={{ textDecoration: isHovered ?  `underline ${colors.blue600}`: 'none' }}
+        style={{ textDecoration: hasLine ? (isHovered ? `underline ${colors.blue600}` : 'none') : 'none' }}
         {...props}
-        {...rest}
-      >
+        {...rest}>
         <Text>{children}</Text>
       </View>
     );

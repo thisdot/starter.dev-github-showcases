@@ -43,7 +43,7 @@ function AuthNavigator() {
           header: (props) => (
             <>
               <Header width={width} {...props} />
-              <RepoSubHeader />
+              <RepoSubHeader {...props} />
             </>
           ),
         }}

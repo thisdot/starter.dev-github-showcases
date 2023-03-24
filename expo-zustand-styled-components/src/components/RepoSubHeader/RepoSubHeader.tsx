@@ -1,24 +1,35 @@
+import { useEffect } from 'react';
 import { useWindowDimensions } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 
-import { Wrapper, TopRow } from './RepoSubHeader.styles';
 import RepoHeading from '../RepoHeading/RepoHeading';
-import RepoActionButtons from '../RepoActionButtons/RepoActionButtons';
 import TabNavigation from '../TabNavigation/TabNavigation';
+import RepoActionButtons from '../RepoActionButtons/RepoActionButtons';
 
 import { createTabList } from './tabList';
+import { Wrapper, TopRow } from './RepoSubHeader.styles';
 
 import { useRepoInfoStore } from '../../hooks/stores';
+import { REPO_TABS } from '../../utils/constants';
+
 import { RepoStackParamList } from '../../../types';
 
-const RepoSubHeader = () => {
+const RepoSubHeader = ({ route, navigation }) => {
   const { width } = useWindowDimensions();
-  const { navigate } = useNavigation<NavigationProp<RepoStackParamList>>();
   const { info, activeTab } = useRepoInfoStore();
 
-  const onChange = (tab: string, path?: keyof RepoStackParamList) => {
+  useEffect(() => {
+    const routes = route?.state?.routes;
+    if (routes) {
+      const name = routes[routes.length - 1].name;
+      if (Object.values(REPO_TABS).includes(name)) {
+        useRepoInfoStore.setState({ activeTab: name });
+      }
+    }
+  }, [route]);
+
+  const onChange = (tab: keyof RepoStackParamList) => {
     useRepoInfoStore.setState({ activeTab: tab });
-    path && navigate(path);
+    tab && navigation.navigate(tab);
   };
 
   return (

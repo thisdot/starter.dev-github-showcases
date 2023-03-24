@@ -43,9 +43,7 @@ export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = Nati
 export type AppStackParamList = {
   Home: undefined;
   Profile: undefined;
-  RepoNavigator:
-    | NavigatorScreenParams<RepoStackParamList>
-    | { params: { name: string; owner: string } };
+  RepoNavigator: { name: string; owner: string, params?: { path?: string, branch?: string } },
   Organization: { login: string };
 };
 
@@ -57,11 +55,11 @@ export type AppStackScreenProps<Screen extends keyof AppStackParamList> = Native
 
 // #region REPO
 export type RepoStackParamList = {
-  Code: { name: string; owner: string };
-  Issues: { name: string; owner: string };
-  PullRequests: { name: string; owner: string };
-  Blob: { name: string; owner: string };
-  Tree: { name: string; owner: string };
+  Code: undefined
+  Issues: undefined;
+  'Pull Requests': undefined;
+  Blob: { branch: string; path: string };
+  Tree: { branch: string; path: string };
 };
 
 export type RepoStackScreenProps<Screen extends keyof RepoStackParamList> = NativeStackScreenProps<

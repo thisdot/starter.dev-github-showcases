@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Text, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { Text, useWindowDimensions } from 'react-native';
 
 import { GitBranchIcon } from '../Icons';
 import { colors } from '../../utils/style-variables';
@@ -14,38 +14,38 @@ import {
   ButtonTextStyled,
 } from './BranchNavigation.styles';
 import { useRepoInfoStore } from '../../hooks/stores';
+import LinkButton from '../LinkButton/LinkButton';
 
-const BranchNavigation = () => {
+const BranchNavigation = (props: { path?: string; branch?: string }) => {
   const { width } = useWindowDimensions();
-  const { path, name, branch } = useRepoInfoStore();
+  const { name, owner, branch } = useRepoInfoStore();
 
-  const crumbs = () => path?.split('/').filter(Boolean) || [];
+  const crumbs = () => props.path?.split('/').filter(Boolean) || [];
+  const _branch = props.branch || branch;
 
   // creates a proper GitHub url path from a repo path
   const hrefPath = (index: number) => {
-    return path
+    const crumbPath = props.path
       ?.split('/')
       .filter(Boolean)
       .slice(0, index + 1)
       .join('/');
+    return `/${owner}/${name}/tree/${_branch}/${crumbPath}`;
   };
 
   return (
     <NavViewContainer screenWidth={width}>
       <ButtonStyled>
         <GitBranchIcon color={colors.gray600} />
-        <ButtonTextStyled>{branch}</ButtonTextStyled>
+        <ButtonTextStyled>{_branch}</ButtonTextStyled>
         <Text>{'\u25BC'}</Text>
       </ButtonStyled>
 
       {crumbs().length > 0 ? (
         <CrumbsContainer>
-          <TouchableOpacity
-            onPress={() => {
-              useRepoInfoStore.setState({ path: undefined, isBlob: false  });
-            }}>
+          <LinkButton to={`/${owner}/${name}`}>
             <RootLink screenWidth={width}>{name}</RootLink>
-          </TouchableOpacity>
+          </LinkButton>
           <Text>/</Text>
 
           {crumbs().map((crumb, index) => {
@@ -58,12 +58,9 @@ const BranchNavigation = () => {
             }
             return (
               <Fragment key={index}>
-                <TouchableOpacity
-                  onPress={() => {
-                    useRepoInfoStore.setState({ path: hrefPath(index), isBlob: false });
-                  }}>
+                <LinkButton to={hrefPath(index)}>
                   <CrumbLink screenWidth={width}>{crumb}</CrumbLink>
-                </TouchableOpacity>
+                </LinkButton>
                 <Text>/</Text>
               </Fragment>
             );

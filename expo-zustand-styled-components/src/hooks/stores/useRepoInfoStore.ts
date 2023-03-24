@@ -9,7 +9,6 @@ interface IRepoInfoStore {
   name?: string;
   error?: string;
   isBlob: boolean;
-  path?: string;
   branch?: string;
   owner?: string;
   readMe?: string;

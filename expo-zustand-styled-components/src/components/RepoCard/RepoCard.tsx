@@ -1,7 +1,5 @@
-// import { useLinkTo } from '@react-navigation/native';
 import {
   Text,
-  // TouchableOpacity,
   TouchableWithoutFeedback,
   useWindowDimensions,
 } from 'react-native';
@@ -20,7 +18,6 @@ import { Repo } from '../../types/user-repos-type';
 
 import { StarLogo } from '../Icons/StarLogo';
 import RepoMeta from './RepoMeta';
-// import { useRepoInfoStore } from '../../hooks/stores';
 import PrivacyBadge from '../PrivacyBadge';
 import LinkButton from '../LinkButton/LinkButton';
 interface RepoCardProps {
@@ -29,21 +26,13 @@ interface RepoCardProps {
 }
 
 const RepoCard = ({ repo, isProfilePage }: RepoCardProps) => {
-  // const linkTo = useLinkTo();
   const { width } = useWindowDimensions();
 
   return (
     <Card>
       <Content>
         <Heading>
-          {/* <TouchableOpacity
-            onPress={() => {
-              useRepoInfoStore.setState({ owner: repo.owner.login, name: repo.name });
-              linkTo(`/${repo.owner.login}/${repo.name}`);
-            }}>
-            <LinkText screenWidth={width}>{repo.name}</LinkText>
-          </TouchableOpacity> */}
-          <LinkButton to={`/${repo.owner.login}/${repo.name}`}>
+          <LinkButton to={`/${repo.owner.login}/${repo.name}`} hasLine>
             <LinkText screenWidth={width}>{repo.name}</LinkText>
           </LinkButton>
           <PrivacyBadge visibility={repo.visibility} />

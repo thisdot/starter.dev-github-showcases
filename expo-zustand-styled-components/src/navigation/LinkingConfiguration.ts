@@ -4,7 +4,7 @@
  * https://reactnavigation.org/docs/configuring-links
  */
 
-import { LinkingOptions } from '@react-navigation/native';
+import { getStateFromPath, LinkingOptions } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
 
 import { RootStackParamList } from '../../types';
@@ -25,18 +25,63 @@ const linking: LinkingOptions<RootStackParamList> = {
           Home: '',
           Profile: ':username',
           RepoNavigator: {
+            path: ':owner/:name',
             screens: {
-              Code: ':owner/:name',
-              Tree: ':owner/:name/tree/:path*', // * means that it can be anything
-              Blob: ':owner/:name/blob/:path*', // * means that it can be anything
-              Issues: ':owner/:name/issues',
-              PullRequests: ':owner/:name/pulls',
+              Code: '',
+              Tree: 'tree/:branch/:path',
+              Blob: 'blob/:branch/:path',
+              Issues: 'issues',
+              'Pull Requests': 'pulls',
             },
           },
           Organization: 'orgs:org',
         },
       },
     },
+  },
+  getStateFromPath: (path, options) => {
+    let state = getStateFromPath(path, options);
+    // if the state is undefined, it means that the path doesn't match any route, we handle it here
+    if (!state) {
+      const [, owner, name, , branch, ...rest] = path.split('/');
+      const isTree = path.includes('tree');
+      const isBlob = path.includes('blob');
+
+      // if the path contains 'tree' or 'blob', we modify our state and return it.
+      if (isTree || isBlob) {
+        state = {
+          routes: [
+            {
+              name: 'AppNavigator',
+              state: {
+                routes: [
+                  {
+                    name: 'RepoNavigator',
+                    params: {
+                      owner,
+                      name,
+                    },
+                    state: {
+                      routes: [
+                        {
+                          path,
+                          name: isTree ? 'Tree' : 'Blob',
+                          params: {
+                            branch,
+                            path: rest.join('/'),
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        };
+      }
+    }
+    return state;
   },
 };
 

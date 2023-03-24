@@ -1,34 +1,21 @@
-import { ScrollView, useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 
 import FileTree from '../../../components/FileTree';
-import LoaderErrorView from '../../../components/LoaderErrorView';
-import { BranchNavigation } from '../../../components/Repository';
+import RepoLayout from '../../../components/RepoLayout';
 
-import { useRepoInfoStore } from '../../../hooks/stores';
+import { RepoStackScreenProps } from '../../../../types';
 
-import { Containter, MainContent, ContainerStyled, SafeAreaViewStyled } from './Tree.styles';
+import { Containter } from '../Repository.styles';
 
-const Tree = () => {
+const Tree = ({ route }: RepoStackScreenProps<'Tree'>) => {
   const { width } = useWindowDimensions();
-  const { info, name, owner, error, branch, isLoading } = useRepoInfoStore();
 
   return (
-    <SafeAreaViewStyled>
-      {isLoading || error || !info ? (
-        <LoaderErrorView error={error} />
-      ) : (
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <ContainerStyled screenWidth={width}>
-            <BranchNavigation branch={branch} name={name} owner={owner} />
-            <MainContent screenWidth={width}>
-              <Containter screenWidth={width}>
-                <FileTree />
-              </Containter>
-            </MainContent>
-          </ContainerStyled>
-        </ScrollView>
-      )}
-    </SafeAreaViewStyled>
+    <RepoLayout {...route.params}>
+      <Containter screenWidth={width}>
+        <FileTree {...route.params}/>
+      </Containter>
+    </RepoLayout>
   );
 };
 

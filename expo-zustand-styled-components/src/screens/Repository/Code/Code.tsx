@@ -1,62 +1,23 @@
-import { useEffect } from 'react';
-import { Platform, ScrollView, useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 
 import FileTree from '../../../components/FileTree';
 import RepoAbout from '../../../components/RepoAbout';
-import FileViewer from '../../../components/FileViewer';
-import LoaderErrorView from '../../../components/LoaderErrorView';
-import RepoReadme from '../../../components/RepoReadme/RepoReadme';
-import BranchNavigation from '../../../components/BranchNavigation';
+import RepoLayout from '../../../components/RepoLayout';
+import RepoReadme from '../../../components/RepoReadme';
 
-import { useRepoInfoStore } from '../../../hooks/stores';
-import getRepoInfo from '../../../services/get-repo-info';
+import { Containter } from '../Repository.styles';
 
-import { Containter, MainContent, ContainerStyled, SafeAreaViewStyled } from './Code.styles';
-import { RepoStackScreenProps } from '../../../../types';
-
-const Code = ({route}: RepoStackScreenProps<'Code'>) => {
+const Code = () => {
   const { width } = useWindowDimensions();
-  const { path, info, name, owner, isBlob, error, isLoading } = useRepoInfoStore();
-
-  useEffect(() => {
-    if(route.params){
-      useRepoInfoStore.setState({ activeTab: 'Code', name: route.params?.name, owner: route.params?.owner });
-    }
-  }, [route]);
-
-  useEffect(() => {
-    if (name && owner) {
-      getRepoInfo({ name, owner });
-    }
-  }, [name, owner]);
 
   return (
-    <SafeAreaViewStyled>
-      {isLoading || error || !info ? (
-        <LoaderErrorView error={error} />
-      ) : (
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <ContainerStyled screenWidth={width}>
-            <BranchNavigation />
-            <MainContent
-              screenWidth={width}
-              style={{ flexBasis: Platform.OS === 'web' ? 'fit-content' : undefined }}>
-              <Containter screenWidth={width}>
-                {isBlob ? <FileViewer /> : <FileTree />}
-                {!path ? <RepoReadme /> : null}
-              </Containter>
-              {!path ? (
-                <RepoAbout
-                  topics={info?.topics}
-                  description={info?.description}
-                  homepageUrl={info?.homepageUrl}
-                />
-              ) : null}
-            </MainContent>
-          </ContainerStyled>
-        </ScrollView>
-      )}
-    </SafeAreaViewStyled>
+    <RepoLayout>
+      <Containter screenWidth={width}>
+        <FileTree />
+        <RepoReadme />
+      </Containter>
+      <RepoAbout />
+    </RepoLayout>
   );
 };
 
