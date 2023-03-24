@@ -14,6 +14,7 @@ export const Badge = styled.View`
   justify-content: center;
   padding-horizontal: 6px;
   border-color: ${colors.gray300};
+  flex-grow: 0;
 `;
 
 export const BadgeText = styled.Text<ScreenWidth>`
