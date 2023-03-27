@@ -8,7 +8,6 @@ type ScreenWidth = {
 
 export const Heading = styled.View<ScreenWidth>`
   gap: 6px;
-  overflow: hidden;
   flex-direction: row;
   align-items: center;
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '50%' : '100%')};
@@ -16,12 +15,14 @@ export const Heading = styled.View<ScreenWidth>`
 
 export const RepoContentWrapper = styled.View<ScreenWidth>`
   gap: 5px;
+  flex-direction: row;
+  align-items: center;
   ${({ screenWidth }) => {
     if (screenWidth >= breakpoints.tablet) {
       return `
         justify-content: center;
       `;
-    }else{
+    } else {
       return `
         align-items: flex-start;
       `;
