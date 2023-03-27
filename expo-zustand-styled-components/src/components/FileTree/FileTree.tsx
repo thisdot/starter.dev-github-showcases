@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 
 import { useRepoInfoStore } from '../../hooks/stores';
 import getRepoTree from '../../services/get-repo-tree';
@@ -7,43 +7,44 @@ import getRepoTree from '../../services/get-repo-tree';
 import { Cell, LinkText, Containter } from './FileTree.styles';
 import { colors } from '../../utils/style-variables';
 import { FolderIcon, DocumentIcon } from '../Icons';
+import LinkButton from '../LinkButton/LinkButton';
 
-const FileTree = () => {
-  const { path, owner, name, tree, branch } = useRepoInfoStore();
+const FileTree = (props: { path?: string; branch?: string }) => {
+  const { owner, name, tree, branch } = useRepoInfoStore();
+
+  const basePath = () => `/${owner}/${name}`;
+  const _branch = props.branch || branch;
 
   useEffect(() => {
     getRepoTree({
       owner,
       name,
-      expression: `${branch}:${path || ''}`,
+      expression: `${_branch}:${props.path || ''}`,
     });
-  }, [owner, name, branch, path]);
+  }, [owner, name, props]);
 
   return (
     <Containter>
-      {path && path !== '' ? (
+      {props.path && props.path !== '' ? (
         <Cell>
-          <TouchableOpacity onPress={() => useRepoInfoStore.setState({ path: undefined })}>
+          <LinkButton to={`${basePath()}/tree/${_branch}/${props.path}`} style={{ marginLeft: 10 }}>
             <LinkText>..</LinkText>
-          </TouchableOpacity>
+          </LinkButton>
         </Cell>
       ) : null}
       {tree?.map((item) => (
         <Cell key={item.name}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View style={{ marginLeft: 10 }}>
+            <View style={{ marginLeft: 10, marginRight: 2 }}>
               {item.type === 'tree' ? (
                 <FolderIcon color={colors.blue400} width={20} height={20} />
               ) : (
                 <DocumentIcon color={colors.gray500} width={20} height={20} />
               )}
             </View>
-            <TouchableOpacity
-              onPress={() => {
-                useRepoInfoStore.setState({ path: item.path, isBlob: item.type !== 'tree' });
-              }}>
+            <LinkButton to={`${basePath()}/${item.type}/${_branch}/${item.path}`}>
               <LinkText>{item.name}</LinkText>
-            </TouchableOpacity>
+            </LinkButton>
           </View>
         </Cell>
       ))}

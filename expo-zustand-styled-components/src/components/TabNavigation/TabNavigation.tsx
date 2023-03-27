@@ -17,10 +17,9 @@ interface TabNavigationProps {
     title: string;
     Icon: (props: SvgProps) => JSX.Element;
     count?: number;
-    path?: string;
   }[];
   activeTab: string;
-  onChange: (title: string, path: string) => void;
+  onChange: (title: string) => void;
 }
 
 const TabNavigation = ({ tabs, activeTab, onChange }: TabNavigationProps) => {
@@ -34,12 +33,12 @@ const TabNavigation = ({ tabs, activeTab, onChange }: TabNavigationProps) => {
           flexGrow: width >= breakpoints.tablet ? 0 : 1,
           justifyContent: 'space-between',
         }}>
-        {tabs.map(({ title, Icon, count, path }, index) => (
+        {tabs.map(({ title, Icon, count }, index) => (
           <Tab
             key={index}
             activeOpacity={0.5}
             isActive={activeTab === title}
-            onPress={() => onChange(title, path)}>
+            onPress={() => onChange(title)}>
             <Icon color={activeTab === title ? colors.gray700 : colors.gray500} />
             <TabText isActive={activeTab === title}>{title}</TabText>
             {typeof count === 'number' && count > 0 && (

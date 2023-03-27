@@ -12,8 +12,8 @@ import FileText from './FileText';
 
 import { ByteSize, Containter, Header, LineCount } from './FileViewer.styles';
 
-const FileViewer = () => {
-  const { path, owner, name, file, branch } = useRepoInfoStore();
+const FileViewer = ({ path, branch }: { path: string; branch: string }) => {
+  const { file, name, owner } = useRepoInfoStore();
 
   useEffect(() => {
     getRepoFile({
@@ -23,7 +23,7 @@ const FileViewer = () => {
     });
   }, [owner, name, branch, path]);
 
-  const extension = path.split('.').pop();
+  const extension = path?.split('.').pop();
   const language = mapExtensionToLanguage(extension);
 
   return (

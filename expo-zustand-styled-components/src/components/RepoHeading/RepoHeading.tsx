@@ -14,6 +14,7 @@ import {
 } from './RepoHeading.styles';
 
 import { useRepoInfoStore } from '../../hooks/stores';
+import LinkButton from '../LinkButton/LinkButton';
 
 const RepoHeading = () => {
   const { name, owner, info } = useRepoInfoStore();
@@ -26,11 +27,15 @@ const RepoHeading = () => {
         screenWidth={width}
         >
         <HeadingContent>
-          <OwnerLink screenWidth={width}>{owner}</OwnerLink>
+          <LinkButton to={`/orgs/${owner}`} hasLine>
+            <OwnerLink screenWidth={width}>{owner}</OwnerLink>
+          </LinkButton>
           <Separator>/</Separator>
-          <NameLink screenWidth={width} numberOfLines={1}>
-            {name}
-          </NameLink>
+          <LinkButton to={`/${owner}/${name}`} hasLine>
+            <NameLink screenWidth={width} numberOfLines={1}>
+              {name}
+            </NameLink>
+          </LinkButton>
         </HeadingContent>
         {info?.visibility ? <PrivacyBadge visibility={info?.visibility} /> : <BadgePlaceholder />}
       </RepoContentWrapper>
