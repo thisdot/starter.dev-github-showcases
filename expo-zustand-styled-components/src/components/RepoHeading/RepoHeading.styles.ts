@@ -14,7 +14,7 @@ export const Heading = styled.View<ScreenWidth>`
 `;
 
 export const RepoContentWrapper = styled.View<ScreenWidth>`
-  gap: 5px;
+  gap: 8px;
   flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.mobile ? 'row' : 'column')};
   align-items: center;
   ${({ screenWidth }) => {
@@ -31,11 +31,11 @@ export const RepoContentWrapper = styled.View<ScreenWidth>`
   flex-wrap: wrap;
 `;
 
-export const HeadingContent = styled.View`
+export const HeadingContent = styled.View<ScreenWidth>`
   gap: 6px;
   margin-right: 6px;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.mobile ? 'row' : 'column')};
+  align-items: ${({ screenWidth }) => (screenWidth > breakpoints.mobile ? 'center' : 'flex-start')};
 `;
 
 export const OwnerLink = styled.Text<ScreenWidth>`
@@ -49,9 +49,8 @@ export const Separator = styled.Text`
 
 export const NameLink = styled.Text<ScreenWidth>`
   font-weight: 600;
-  flex: 1;
   color: ${colors.blue600};
-  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '16px')};
+  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '22px')};
 `;
 
 export const BadgePlaceholder = styled.View`
