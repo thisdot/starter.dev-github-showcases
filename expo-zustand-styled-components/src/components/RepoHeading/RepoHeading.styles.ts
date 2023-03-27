@@ -49,6 +49,7 @@ export const Separator = styled.Text`
 
 export const NameLink = styled.Text<ScreenWidth>`
   font-weight: 600;
+  flex: 1;
   color: ${colors.blue600};
   font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '16px')};
 `;

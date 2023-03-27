@@ -14,6 +14,7 @@ import {
 } from './RepoHeading.styles';
 
 import { useRepoInfoStore } from '../../hooks/stores';
+import { truncateString } from '../../utils/truncateString';
 
 const RepoHeading = () => {
   const { name, owner, info } = useRepoInfoStore();
@@ -22,14 +23,12 @@ const RepoHeading = () => {
   return (
     <Heading screenWidth={width}>
       <PrivacyIcon visibility={info?.visibility} />
-      <RepoContentWrapper
-        screenWidth={width}
-        >
+      <RepoContentWrapper screenWidth={width}>
         <HeadingContent>
           <OwnerLink screenWidth={width}>{owner}</OwnerLink>
           <Separator>/</Separator>
           <NameLink screenWidth={width} numberOfLines={1}>
-            {name}
+            {width <= 330 ? truncateString(name, 22) : name}
           </NameLink>
         </HeadingContent>
         {info?.visibility ? <PrivacyBadge visibility={info?.visibility} /> : <BadgePlaceholder />}
