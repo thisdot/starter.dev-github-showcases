@@ -20,14 +20,15 @@ interface PullRequests {
 interface PullRequeststore {
   isLoading: boolean;
   error?: string;
-  before?: string;
-  after?: string;
+  before?: string | null;
+  after?: string | null;
   pullRequests: PullRequests;
   setLoading: (value: boolean) => void;
   setPullRequests: (value: PullRequests) => void;
   setBefore: (value: string) => void;
   setAfter: (value: string) => void;
   setErrorMsg: (value: string) => void;
+  resetBeforeAndAfter: () => void;
 }
 
 const initialState = {
@@ -61,6 +62,7 @@ const usePullRequestsStore = create<PullRequeststore>((set) => ({
   setPullRequests: (value) => set(() => ({ pullRequests: value })),
   setBefore: (value) => set(() => ({ before: value })),
   setAfter: (value) => set(() => ({ after: value })),
+  resetBeforeAndAfter: () => set(() => ({ after: null, before: null })),
   setErrorMsg: (value) => set(() => ({ error: value })),
 }));
 

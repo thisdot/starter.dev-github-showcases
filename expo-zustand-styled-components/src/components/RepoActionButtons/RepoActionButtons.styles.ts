@@ -7,7 +7,7 @@ type ScreenWidth = {
 };
 
 export const Container = styled.View<ScreenWidth>`
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   flex-direction: row;
   justify-content: ${({ screenWidth }) =>

@@ -1,7 +1,7 @@
 import FilterDropdown from '../FilterDropdown/FilterDropdown';
 import PullRequestIcon from '../Icons/PullRequestIcon';
 import { Dropdowns, Tab, TabText, Tabs, Wrapper } from './PRAndIssueHeader.styles';
-import { usePRAndIssueHeaderStore } from '../../hooks/stores';
+import { usePRAndIssueHeaderStore, useIssuesStore, usePullRequestsStore } from '../../hooks/stores';
 import { PR_ISSUE_TABS, SORT_OPTIONS } from '../../utils/constants';
 import IssuesIcon from '../Icons/IssuesIcon';
 import { colors } from '../../utils/style-variables';
@@ -14,19 +14,39 @@ interface PRAndIssueHeaderProps {
 }
 
 const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeaderProps) => {
-  const { milestones, labels, sortBy, label, milestone, setSortBy, setLabel, setMilestone } =
-    usePRAndIssueHeaderStore();
-  const { activeTab, setActiveTab } = usePRAndIssueHeaderStore();
+  const {
+    milestones,
+    labels,
+    sortBy,
+    label,
+    milestone,
+    setSortBy,
+    setLabel,
+    setMilestone,
+    activeTab,
+    setActiveTab,
+  } = usePRAndIssueHeaderStore();
+  const { resetBeforeAndAfter: resetIssuesBeforeAndAfter } = useIssuesStore();
+  const { setBefore: setPullRequestsBefore, setAfter: setPullRequestsAfter } =
+    usePullRequestsStore();
   const [showOptions, setShowOptions] = useState(null);
   const sortOptions = Object.values(SORT_OPTIONS);
-  
-   const labelOptions = (): string[] => labels.map((label) => label.name);
-   const labelOptionsColors = (): string[] => labels.map((label) => label.color);
-   const milestoneOptions = (): string[] => milestones.map((label) => label.title);
-   const selectSortBy = (value) => setSortBy(sortBy === value ? Object.values(SORT_OPTIONS)[0] : value);
-   const selectLabel = (value) => setLabel(label === value ? undefined : value);
-   const selectMilestone = (value) => setMilestone(milestone === value ? undefined : value);
-   
+
+  const labelOptions = (): string[] => labels.map((label) => label.name);
+  const labelOptionsColors = (): string[] => labels.map((label) => label.color);
+  const milestoneOptions = (): string[] => milestones.map((label) => label.title);
+  const selectSortBy = (value) =>
+    setSortBy(sortBy === value ? Object.values(SORT_OPTIONS)[0] : value);
+  const selectLabel = (value) => setLabel(label === value ? undefined : value);
+  const selectMilestone = (value) => setMilestone(milestone === value ? undefined : value);
+
+  const handleTabPress = (value: string) => {
+    resetIssuesBeforeAndAfter();
+    setPullRequestsBefore(null);
+    setPullRequestsAfter(null);
+    setActiveTab(value);
+  };
+
   const filterDropdownStyle = {
     borderWidth: 0,
     elevation: 0,
@@ -36,7 +56,11 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
   return (
     <Wrapper>
       <Tabs>
-        <Tab activeOpacity={0.7} onPress={() => setActiveTab(PR_ISSUE_TABS.open)}>
+        <Tab
+          activeOpacity={0.7}
+          onPress={() => {
+            handleTabPress(PR_ISSUE_TABS.open);
+          }}>
           {cardType === 'pr' ? (
             <PullRequestIcon color={colors.gray500} style={{ marginRight: 4 }} />
           ) : (
@@ -45,7 +69,7 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
           <TabText isActive={activeTab === PR_ISSUE_TABS.open}>{openCount}</TabText>
           <TabText isActive={activeTab === PR_ISSUE_TABS.open}>Open</TabText>
         </Tab>
-        <Tab activeOpacity={0.7} onPress={() => setActiveTab(PR_ISSUE_TABS.closed)}>
+        <Tab activeOpacity={0.7} onPress={() => handleTabPress(PR_ISSUE_TABS.closed)}>
           <TabText isActive={activeTab === PR_ISSUE_TABS.closed}>{closedCount}</TabText>
           <TabText isActive={activeTab === PR_ISSUE_TABS.closed}>Closed</TabText>
         </Tab>
