@@ -45,4 +45,3 @@ const PullRequests = () => {
 };
 
 export default PullRequests;
-

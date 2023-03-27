@@ -7,8 +7,8 @@ import {
 import { colors } from '../../utils/style-variables';
 
 interface Props {
-  goToNext: () => null;
-  goToPrev: () => null;
+  goToNext: () => void;
+  goToPrev: () => void;
   hasNextPage: boolean;
   hasPrevPage: boolean;
 }
