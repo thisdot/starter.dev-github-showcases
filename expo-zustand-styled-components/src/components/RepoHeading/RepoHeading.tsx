@@ -15,6 +15,7 @@ import {
 
 import { useRepoInfoStore } from '../../hooks/stores';
 import { breakpoints } from '../../utils/breakpoints';
+import LinkButton from '../LinkButton/LinkButton';
 
 const RepoHeading = () => {
   const { name, owner, info } = useRepoInfoStore();
@@ -23,13 +24,19 @@ const RepoHeading = () => {
   return (
     <Heading screenWidth={width}>
       <PrivacyIcon visibility={info?.visibility} />
-      <RepoContentWrapper screenWidth={width}>
+      <RepoContentWrapper
+        screenWidth={width}
+        >
         <HeadingContent screenWidth={width}>
-          <OwnerLink screenWidth={width}>{owner}</OwnerLink>
+          <LinkButton to={`/orgs/${owner}`} hasLine>
+            <OwnerLink screenWidth={width}>{owner}</OwnerLink>
+          </LinkButton>
           {width > breakpoints.mobile ? <Separator>/</Separator> : null}
-          <NameLink screenWidth={width} numberOfLines={1}>
-            {name}
-          </NameLink>
+          <LinkButton to={`/${owner}/${name}`} hasLine>
+            <NameLink screenWidth={width} numberOfLines={1}>
+              {name}
+            </NameLink>
+          </LinkButton>
         </HeadingContent>
         {info?.visibility ? <PrivacyBadge visibility={info?.visibility} /> : <BadgePlaceholder />}
       </RepoContentWrapper>

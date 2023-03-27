@@ -1,4 +1,4 @@
-import { useWindowDimensions, View } from 'react-native';
+import { View, ViewProps, StyleProp, useWindowDimensions } from 'react-native';
 
 import { DropdownBtn, DropdownBtnText, DropdownContainer } from './FilterDropdown.styles';
 
@@ -12,23 +12,23 @@ import { colors } from '../../utils/style-variables';
 interface FilterDropdownProps {
   name: string;
   items?: string[];
-  itemsColors?: string[];
   selected?: string;
   showOptions?: string;
+  itemsColors?: string[];
+  style?: StyleProp<ViewProps>;
   selectOption?: (value: string) => void;
   setShowOptions?: (value: string) => void;
-  style?: any;
 }
 
 const FilterDropdown = ({
   name,
   items,
-  itemsColors,
+  style,
   selected,
-  selectOption,
+  itemsColors,
   showOptions,
+  selectOption,
   setShowOptions,
-  style
 }: FilterDropdownProps) => {
   const { width } = useWindowDimensions();
   const { dropdownButtonRef } = useRefs();

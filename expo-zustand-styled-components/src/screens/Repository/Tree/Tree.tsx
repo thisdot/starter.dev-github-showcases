@@ -1,24 +1,22 @@
 import { useWindowDimensions } from 'react-native';
 
 import FileTree from '../../../components/FileTree';
-import RepoAbout from '../../../components/RepoAbout';
 import RepoLayout from '../../../components/RepoLayout';
-import RepoReadme from '../../../components/RepoReadme';
+
+import { RepoStackScreenProps } from '../../../../types';
 
 import { Containter } from '../Repository.styles';
 
-const Code = () => {
+const Tree = ({ route }: RepoStackScreenProps<'Tree'>) => {
   const { width } = useWindowDimensions();
 
   return (
-    <RepoLayout>
+    <RepoLayout {...route.params}>
       <Containter screenWidth={width}>
-        <FileTree />
-        <RepoReadme />
+        <FileTree {...route.params}/>
       </Containter>
-      <RepoAbout />
     </RepoLayout>
   );
 };
 
-export default Code;
+export default Tree;

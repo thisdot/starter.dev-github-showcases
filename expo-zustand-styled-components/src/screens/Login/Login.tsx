@@ -36,7 +36,7 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
   useEffect(() => {
     if (token) {
       getViewerProfile();
-      navigation.navigate('AppNavigator', { screen: 'Home' });
+      navigation.navigate('AppNavigator', { screen: 'Home', path: '' });
     }
   }, [token]);
 

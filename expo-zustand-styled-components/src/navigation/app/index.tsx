@@ -33,6 +33,7 @@ function AuthNavigator() {
       }}>
       <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
       <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
+      <Stack.Screen name="Organization" component={OrganizationScreen} />
       <Stack.Screen
         name="RepoNavigator"
         component={RepoNavigator}
@@ -43,12 +44,11 @@ function AuthNavigator() {
           header: (props) => (
             <>
               <Header width={width} {...props} />
-              <RepoSubHeader />
+              <RepoSubHeader width={width} {...props} />
             </>
           ),
         }}
       />
-      <Stack.Screen name="Organization" component={OrganizationScreen} />
     </Stack.Navigator>
   );
 }

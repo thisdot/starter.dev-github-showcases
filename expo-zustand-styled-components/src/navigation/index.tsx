@@ -6,6 +6,7 @@
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
+import { Platform, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import AuthNavigator from './auth';
@@ -17,7 +18,7 @@ import { useAuthStore } from '../hooks/stores';
 
 export default function Navigation() {
   return (
-    <NavigationContainer linking={LinkingConfiguration}>
+    <NavigationContainer linking={LinkingConfiguration} fallback={<Text>Loading...</Text>}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -35,16 +36,21 @@ function RootNavigator() {
 
   useEffect(() => {
     if (!token) {
-      navigation.navigate('AuthNavigator', { screen: 'Login' });
+      navigation.navigate('AuthNavigator', { screen: 'Login', path: 'login' });
     }
   }, [token]);
+
+  const isWeb = Platform.OS === 'web';
+
+  const AppStack = <Stack.Screen name="AppNavigator" component={AppNavigator} />
 
   return (
     <>
       <StatusBar style="light" />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
-        <Stack.Screen name="AppNavigator" component={AppNavigator} />
+        {isWeb && token && AppStack}
+        {!isWeb && AppStack}
       </Stack.Navigator>
     </>
   );

@@ -1,12 +1,12 @@
 import styled from 'styled-components/native';
-import { breakpoints } from '../../../utils/breakpoints';
+import { breakpoints } from '../../utils/breakpoints';
 
 export const SafeAreaViewStyled = styled.SafeAreaView`
   height: 100%;
   background-color: #fff;
 `;
 
-export const ContainerStyled = styled.View<{ screenWidth: number }>`
+export const Containter = styled.View<{ screenWidth: number }>`
   width: 100%;
   height: 100%;
   flex-direction: column;
@@ -23,14 +23,4 @@ export const MainContent = styled.View<{ screenWidth: number }>`
   flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'row' : 'column')};
   justify-content: ${({ screenWidth }) =>
     screenWidth >= breakpoints.tablet ? 'space-between' : 'flex-start'};
-`;
-
-export const Containter = styled.View<{ screenWidth: number }>`
-  gap: 10px;
-  flex-grow: 1;
-  ${({ screenWidth }) => {
-    if (screenWidth >= breakpoints.tablet) {
-      return `flex: 0.75`;
-    }
-  }}
 `;

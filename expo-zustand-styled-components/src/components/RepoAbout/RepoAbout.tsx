@@ -1,5 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import { useWindowDimensions } from 'react-native';
+import { useRepoInfoStore } from '../../hooks/stores';
 import LinkIcon from '../Icons/LinkIcon';
 import { ReadmeBookIcon } from '../Icons/ReadmeBookIcon';
 import {
@@ -17,37 +18,32 @@ import {
   ReadmeHoverEffectStyled,
 } from './RepoAbout.styles';
 
-type Props = {
-  description?: string | null;
-  homepageUrl?: string | null;
-  topics?: string[];
-};
-
-export default function RepoAbout({ description, homepageUrl, topics }: Props) {
+export default function RepoAbout() {
   const { width } = useWindowDimensions();
+  const { info } = useRepoInfoStore();
 
   return (
     <AboutWrapper screenWidth={width}>
       <AboutContainerStyled>
         <HeaderStyled>About</HeaderStyled>
-        {description ? (
-          <DescriptionTextStyled>{description}</DescriptionTextStyled>
+        {info?.description ? (
+          <DescriptionTextStyled>{info.description}</DescriptionTextStyled>
         ) : (
           <DefaultRepoTextStyled>
             No description, website, or topics provided.
           </DefaultRepoTextStyled>
         )}
 
-        {homepageUrl ? (
-          <LinkContainerStyled onPress={() => WebBrowser.openBrowserAsync(homepageUrl)}>
+        {info?.homepageUrl ? (
+          <LinkContainerStyled onPress={() => WebBrowser.openBrowserAsync(info.homepageUrl)}>
             <LinkIcon />
-            <WebsiteLinkStyled>{homepageUrl}</WebsiteLinkStyled>
+            <WebsiteLinkStyled>{info.homepageUrl}</WebsiteLinkStyled>
           </LinkContainerStyled>
         ) : null}
 
-        {topics?.length > 0 ? (
+        {info?.topics?.length > 0 ? (
           <TagsContainerStyled>
-            {topics.map((topic, index) => (
+            {info?.topics.map((topic, index) => (
               <TagStyled key={index}>
                 <TagTextStyled>{topic}</TagTextStyled>
               </TagStyled>
