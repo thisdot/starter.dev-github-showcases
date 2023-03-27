@@ -14,6 +14,7 @@ import {
 } from './RepoHeading.styles';
 
 import { useRepoInfoStore } from '../../hooks/stores';
+import { breakpoints } from '../../utils/breakpoints';
 import LinkButton from '../LinkButton/LinkButton';
 
 const RepoHeading = () => {
@@ -26,11 +27,11 @@ const RepoHeading = () => {
       <RepoContentWrapper
         screenWidth={width}
         >
-        <HeadingContent>
+        <HeadingContent screenWidth={width}>
           <LinkButton to={`/orgs/${owner}`} hasLine>
             <OwnerLink screenWidth={width}>{owner}</OwnerLink>
           </LinkButton>
-          <Separator>/</Separator>
+          {width > breakpoints.mobile ? <Separator>/</Separator> : null}
           <LinkButton to={`/${owner}/${name}`} hasLine>
             <NameLink screenWidth={width} numberOfLines={1}>
               {name}
