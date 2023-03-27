@@ -1,20 +1,37 @@
 import PRAndIssueHeader from '../PRAndIssueHeader';
-import {
-  ContentContainer,
-  Pagination,
-  PaginationBtn,
-  MainContainer,
-} from './PullRequestsTabView.styles';
+import { ContentContainer, MainContainer } from './PullRequestsTabView.styles';
 import IssuePullRequestCard from '../IssuePullRequestCard';
-import { Text, useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import { usePRAndIssueHeaderStore, usePullRequestsStore } from '../../hooks/stores';
 import { SORT_OPTIONS } from '../../utils/constants';
 import IssuesPRClearFilter from '../IssuesPRClearFilter';
+import Pagination from '../Pagination';
 
 const PullRequestsTabView = () => {
   const { activeTab, label, sortBy } = usePRAndIssueHeaderStore();
   const { width } = useWindowDimensions();
-  const { pullRequests } = usePullRequestsStore();
+  const { pullRequests, setAfter, setBefore } = usePullRequestsStore();
+
+  const selectedPullRequests = pullRequests[activeTab + 'PullRequests'];
+  const selectedPullRequestsPageInfo = selectedPullRequests.pageInfo;
+
+  const hasPrevPage =
+    selectedPullRequestsPageInfo &&
+    selectedPullRequestsPageInfo.hasPreviousPage &&
+    selectedPullRequestsPageInfo.startCursor;
+  const hasNxtPage =
+    selectedPullRequestsPageInfo &&
+    selectedPullRequestsPageInfo.hasNextPage &&
+    selectedPullRequestsPageInfo.endCursor;
+
+  const handleNextPress = () => {
+    setAfter(selectedPullRequestsPageInfo.endCursor);
+    setBefore(null);
+  };
+  const handlePreviousPress = () => {
+    setBefore(selectedPullRequestsPageInfo.startCursor);
+    setAfter(null);
+  };
 
   return (
     <MainContainer screenWidth={width}>
@@ -29,16 +46,12 @@ const PullRequestsTabView = () => {
           <IssuePullRequestCard {...data} cardType="pr" key={index} />
         ))}
       </ContentContainer>
-      <Pagination>
-        <PaginationBtn>
-          <Text>{'<'}</Text>
-          <Text>Prev</Text>
-        </PaginationBtn>
-        <PaginationBtn>
-          <Text>Next</Text>
-          <Text>{'>'}</Text>
-        </PaginationBtn>
-      </Pagination>
+      <Pagination
+        hasPrevPage={hasPrevPage ? true : false}
+        hasNextPage={hasNxtPage ? true : false}
+        goToNext={handleNextPress}
+        goToPrev={handlePreviousPress}
+      />
     </MainContainer>
   );
 };
