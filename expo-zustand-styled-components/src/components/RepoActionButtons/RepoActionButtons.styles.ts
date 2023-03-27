@@ -7,12 +7,13 @@ type ScreenWidth = {
 };
 
 export const Container = styled.View<ScreenWidth>`
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   flex-direction: row;
-  justify-content: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 'space-between' : 'flex-start')};;
+  justify-content: ${({ screenWidth }) =>
+    screenWidth >= breakpoints.laptop ? 'space-between' : 'flex-start'};
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'none' : '100%')};
-  gap: 16px;
+  gap: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? '16px' : '8px')};
 `;
 
 export const BtnGroup = styled.View`

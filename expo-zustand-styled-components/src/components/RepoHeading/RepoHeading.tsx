@@ -28,7 +28,7 @@ const RepoHeading = () => {
         <HeadingContent>
           <OwnerLink screenWidth={width}>{owner}</OwnerLink>
           <Separator>/</Separator>
-          <NameLink screenWidth={width} numberOfLines={1}>
+          <NameLink screenWidth={width} numberOfLines={2}>
             {name}
           </NameLink>
         </HeadingContent>

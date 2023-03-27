@@ -9,13 +9,13 @@ type ScreenWidth = {
 export const Heading = styled.View<ScreenWidth>`
   gap: 6px;
   flex-direction: row;
-  align-items: center;
+  align-items: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'center' : 'flex-start')};
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '50%' : '100%')};
 `;
 
 export const RepoContentWrapper = styled.View<ScreenWidth>`
   gap: 5px;
-  flex-direction: row;
+  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.mobile ? 'row' : 'column')};
   align-items: center;
   ${({ screenWidth }) => {
     if (screenWidth >= breakpoints.tablet) {
@@ -28,6 +28,7 @@ export const RepoContentWrapper = styled.View<ScreenWidth>`
       `;
     }
   }};
+  flex-wrap: wrap;
 `;
 
 export const HeadingContent = styled.View`
