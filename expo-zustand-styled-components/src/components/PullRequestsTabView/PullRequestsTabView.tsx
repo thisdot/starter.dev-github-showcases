@@ -1,11 +1,12 @@
 import PRAndIssueHeader from '../PRAndIssueHeader';
-import { ContentContainer, MainContainer } from './PullRequestsTabView.styles';
+import { ContentContainer, MainContainer, EmptyPullRequest } from './PullRequestsTabView.styles';
 import IssuePullRequestCard from '../IssuePullRequestCard';
 import { useWindowDimensions } from 'react-native';
 import { usePRAndIssueHeaderStore, usePullRequestsStore } from '../../hooks/stores';
 import { SORT_OPTIONS } from '../../utils/constants';
 import IssuesPRClearFilter from '../IssuesPRClearFilter';
 import Pagination from '../Pagination';
+import { Text } from 'react-native';
 
 const PullRequestsTabView = () => {
   const { activeTab, label, sortBy } = usePRAndIssueHeaderStore();
@@ -42,9 +43,14 @@ const PullRequestsTabView = () => {
           openCount={pullRequests.openPullRequests.totalCount}
           closedCount={pullRequests.closedPullRequests.totalCount}
         />
-        {pullRequests[activeTab + 'PullRequests'].pullRequests.map((data, index) => (
+        {selectedPullRequests.pullRequests.map((data, index) => (
           <IssuePullRequestCard {...data} cardType="pr" key={index} />
         ))}
+        {selectedPullRequests.pullRequests.length === 0 && (
+          <EmptyPullRequest>
+            <Text style={{textTransform: 'uppercase'}}>No {activeTab} Pull Request found.</Text>
+          </EmptyPullRequest>
+        )}
       </ContentContainer>
       <Pagination
         hasPrevPage={hasPrevPage ? true : false}
