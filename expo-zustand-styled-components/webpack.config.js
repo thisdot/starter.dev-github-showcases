@@ -1,6 +1,6 @@
-import createExpoWebpackConfigAsync from '@expo/webpack-config';
+const createExpoWebpackConfigAsync = require('@expo/webpack-config');
 
-export default async function(env, argv) {
+module.exports = async function(env, argv) {
     const config = await createExpoWebpackConfigAsync({
         ...env,
         babel: {
@@ -8,4 +8,4 @@ export default async function(env, argv) {
         }
     }, argv);
     return config;
-}
+};
