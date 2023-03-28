@@ -18,23 +18,18 @@ interface Issues {
 }
 
 interface IssueStore {
-  isLoading: boolean;
   error?: string;
-  before?: string | null;
-  after?: string | null;
   issues: Issues;
-  setLoading: (value: boolean) => void;
-  setIssues: (value: Issues) => void;
-  setBefore: (value: string) => void;
-  setAfter: (value: string) => void;
-  setErrorMsg: (value: string) => void;
-  resetBeforeAndAfter: () => void;
+  isLoading: boolean;
+  _issues: Map<string, Issues>;
 }
 
+const _issues = new Map();
+
+
 const initialState = {
-  isLoading: true,
-  before: null,
-  after: null,
+  _issues,
+  isLoading: false,
   issues: {
     openIssues: {
       issues: [],
@@ -57,14 +52,6 @@ const initialState = {
   },
 };
 
-const useIssuesStore = create<IssueStore>((set) => ({
-  ...initialState,
-  setLoading: (value) => set(() => ({ isLoading: value })),
-  setIssues: (value) => set(() => ({ issues: value })),
-  setBefore: (value) => set(() => ({ before: value })),
-  setAfter: (value) => set(() => ({ after: value })),
-  resetBeforeAndAfter: () => set(() => ({ after: null, before: null })),
-  setErrorMsg: (value) => set(() => ({ error: value })),
-}));
+const useIssuesStore = create<IssueStore>(() => initialState);
 
 export default useIssuesStore;

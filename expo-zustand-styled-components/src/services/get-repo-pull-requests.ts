@@ -1,5 +1,5 @@
 import { REPO_PULL_REQUESTS } from './queries/pull-requests';
-import FetchApi, { ApiProps } from './api';
+import FetchApi from './api';
 import { PullRequest, PullRequestProps, RepoPullRequestsQuery } from '../types/pull-requests-type';
 import { Label } from '../types/label-type';
 import { usePullRequestsStore } from '../hooks/stores';
@@ -90,30 +90,30 @@ function parseLabels(labels: { totalCount: number; nodes: Label[] }) {
 }
 
 const getRepoPullRequests = async (variables: PullRequestVariables) => {
-  try {
-    usePullRequestsStore.setState({ isLoading: true });
-
-    const data: ApiProps<PullRequestVariables> = {
-      query: REPO_PULL_REQUESTS,
-      variables,
-    };
-    const resp = (await FetchApi(data)) as Response;
-
-    const openPullRequests = parsePullRequests(resp.data.repository?.openPullRequest);
-
-    const closedPullRequests = parsePullRequests(resp.data.repository?.closedPullRequest);
-
-    const labelMap = parseLabels(resp.data.repository?.labels);
-
-    const pullRequests = {
-      openPullRequests,
-      closedPullRequests,
-      labels: labelMap,
-    };
-
+  const key = JSON.stringify(variables);
+  if (usePullRequestsStore.getState()._pullRequests.has(key)) {
+    const pullRequests = usePullRequestsStore.getState()._pullRequests.get(key);
     usePullRequestsStore.setState({ isLoading: false, pullRequests });
-  } catch (err) {
-    usePullRequestsStore.setState({ isLoading: false, error: err.message });
+  } else {
+    try {
+      usePullRequestsStore.setState({ isLoading: true });
+
+      const resp = (await FetchApi({ query: REPO_PULL_REQUESTS, variables })) as Response;
+      const openPullRequests = parsePullRequests(resp.data.repository?.openPullRequest);
+      const closedPullRequests = parsePullRequests(resp.data.repository?.closedPullRequest);
+      const labelMap = parseLabels(resp.data.repository?.labels);
+
+      const pullRequests = {
+        openPullRequests,
+        closedPullRequests,
+        labels: labelMap,
+      };
+
+      usePullRequestsStore.setState({ isLoading: false, pullRequests });
+      usePullRequestsStore.getState()._pullRequests.set(key, pullRequests);
+    } catch (err) {
+      usePullRequestsStore.setState({ isLoading: false, error: err.message });
+    }
   }
 };
 

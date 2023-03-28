@@ -105,39 +105,33 @@ const getIssues = async ({
   first,
   last,
 }: Variables) => {
-  try {
-    useIssuesStore.setState({ isLoading: true });
-    const data = {
-      query: ISSUES_QUERY,
-      variables: {
-        owner,
-        name,
-        first,
-        last,
-        orderBy,
-        direction,
-        filterBy,
-        before,
-        after,
-      },
-    };
-    const resp = (await FetchApi(data)) as Response;
-    const repository = resp.data?.repository;
-    const closedIssues = parseIssues(repository?.closedIssues);
-    const openIssues = parseIssues(repository?.openIssues);
-    const milestones = parseMilestones(repository?.milestones);
-    const labels = parseLabels(repository?.labels);
-
-    const issues = {
-      openIssues,
-      closedIssues,
-      milestones,
-      labels,
-    };
-
+  const variables = { owner, name, orderBy, direction, filterBy, before, after, first, last };
+  const key = JSON.stringify(variables);
+  if (useIssuesStore.getState()._issues.has(key)) {
+    const issues = useIssuesStore.getState()._issues.get(key);
     useIssuesStore.setState({ isLoading: false, issues });
-  } catch (err) {
-    useIssuesStore.setState({ isLoading: false, error: err.message });
+  } else {
+    try {
+      useIssuesStore.setState({ isLoading: true });
+      const resp = (await FetchApi({ query: ISSUES_QUERY, variables })) as Response;
+      const repository = resp.data?.repository;
+      const closedIssues = parseIssues(repository?.closedIssues);
+      const openIssues = parseIssues(repository?.openIssues);
+      const milestones = parseMilestones(repository?.milestones);
+      const labels = parseLabels(repository?.labels);
+
+      const issues = {
+        openIssues,
+        closedIssues,
+        milestones,
+        labels,
+      };
+
+      useIssuesStore.setState({ isLoading: false, issues });
+      useIssuesStore.getState()._issues.set(key, issues);
+    } catch (err) {
+      useIssuesStore.setState({ isLoading: false, error: err.message });
+    }
   }
 };
 

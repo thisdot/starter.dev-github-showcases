@@ -1,53 +1,58 @@
+import { FlatList, ScrollView, useWindowDimensions } from 'react-native';
+
+import Pagination from '../Pagination';
 import PRAndIssueHeader from '../PRAndIssueHeader';
-import { ContentContainer, MainContainer } from './IssuesTabView.styles';
+import IssuesPRClearFilter from '../IssuesPRClearFilter';
 import IssuePullRequestCard from '../IssuePullRequestCard';
-import { useWindowDimensions } from 'react-native';
+import { ContentContainer, MainContainer } from './IssuesTabView.styles';
+
 import { useIssuesStore, usePRAndIssueHeaderStore } from '../../hooks/stores';
 import { SORT_OPTIONS } from '../../utils/constants';
-import IssuesPRClearFilter from '../IssuesPRClearFilter';
-import Pagination from '../Pagination';
 
-const IssuesTabView = () => {
-  const { activeTab, label, sortBy } = usePRAndIssueHeaderStore();
+const IssuesTabView = ({ navigation }) => {
   const { width } = useWindowDimensions();
-  const { issues, setBefore, setAfter } = useIssuesStore();
-  const selectedIssue = issues[activeTab + 'Issues'];
-  const selectedIssuePageInfo = selectedIssue.pageInfo;
+  const { issues } = useIssuesStore();
+  const { activeTab, label, sortBy } = usePRAndIssueHeaderStore();
+  const selectedIssue = issues[(activeTab + 'Issues') as 'openIssues' | 'closedIssues'];
 
-  const hasPrevPage =
-    selectedIssuePageInfo &&
-    selectedIssuePageInfo.hasPreviousPage &&
-    selectedIssuePageInfo.startCursor;
-  const hasNxtPage =
-    selectedIssuePageInfo && selectedIssuePageInfo.hasNextPage && selectedIssuePageInfo.endCursor;
+  const pageInfo = selectedIssue.pageInfo;
 
-  const handleNextPress = () => {
-    setAfter(selectedIssuePageInfo.endCursor);
-    setBefore(null);
+  const hasPrevPage = Boolean(pageInfo?.hasPreviousPage && pageInfo?.startCursor);
+  const hasNxtPage = Boolean(pageInfo?.hasNextPage && pageInfo?.endCursor);
+
+  const goToNext = () => {
+    navigation.navigate('Issues', { afterCursor: pageInfo.endCursor });
   };
-  const handlePreviousPress = () => {
-    setBefore(selectedIssuePageInfo.startCursor);
-    setAfter(null);
+
+  const goToPrev = () => {
+    navigation.navigate('Issues', { beforeCursor: pageInfo.startCursor });
   };
 
   return (
     <MainContainer screenWidth={width}>
       {label && sortBy !== Object.values(SORT_OPTIONS)[0] && <IssuesPRClearFilter />}
       <ContentContainer>
-        <PRAndIssueHeader
-          cardType="issue"
-          openCount={issues.openIssues.totalCount}
-          closedCount={issues.closedIssues.totalCount}
-        />
-        {issues[activeTab + 'Issues'].issues.map((data, index) => (
-          <IssuePullRequestCard {...data} cardType="issue" key={index} />
-        ))}
+        <ScrollView horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
+          <FlatList
+            ListHeaderComponent={
+              <PRAndIssueHeader
+                cardType="issue"
+                openCount={issues.openIssues.totalCount}
+                closedCount={issues.closedIssues.totalCount}
+              />
+            }
+            scrollEnabled={false}
+            data={selectedIssue.issues}
+            keyExtractor={(item, index) => item.url + index}
+            renderItem={({ item }) => <IssuePullRequestCard {...item} cardType="issue" />}
+          />
+        </ScrollView>
       </ContentContainer>
       <Pagination
-        hasPrevPage={hasPrevPage ? true : false}
-        hasNextPage={hasNxtPage ? true : false}
-        goToNext={handleNextPress}
-        goToPrev={handlePreviousPress}
+        goToNext={goToNext}
+        goToPrev={goToPrev}
+        hasNextPage={hasNxtPage}
+        hasPrevPage={hasPrevPage}
       />
     </MainContainer>
   );

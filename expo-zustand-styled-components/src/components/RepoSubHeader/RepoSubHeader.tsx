@@ -12,16 +12,13 @@ import { REPO_TABS } from '../../utils/constants';
 import {
   useRepoInfoStore,
   usePRAndIssueHeaderStore,
-  useIssuesStore,
-  usePullRequestsStore,
 } from '../../hooks/stores';
+
 import { RepoStackParamList } from '../../../types';
 
 const RepoSubHeader = ({ route, width, navigation }) => {
   const { info, activeTab } = useRepoInfoStore();
   const { clearFilter, setActiveTab } = usePRAndIssueHeaderStore();
-  const { resetBeforeAndAfter: resetIssuesBeforeAndAfter } = useIssuesStore();
-  const { resetBeforeAndAfter: resetPullRequestsBeforeAndAfter } = usePullRequestsStore();
 
   useEffect(() => {
     const routes = route?.state?.routes;
@@ -36,8 +33,6 @@ const RepoSubHeader = ({ route, width, navigation }) => {
   const onChange = (tab: keyof RepoStackParamList) => {
     clearFilter();
     setActiveTab('open');
-    resetIssuesBeforeAndAfter();
-    resetPullRequestsBeforeAndAfter();
     useRepoInfoStore.setState({ activeTab: tab });
     tab && navigation.navigate(tab);
   };
