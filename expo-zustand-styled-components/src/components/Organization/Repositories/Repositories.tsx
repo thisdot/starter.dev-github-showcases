@@ -24,7 +24,7 @@ const Repositories = ({
   const { width } = useWindowDimensions();
 
   return (
-    <ContainerStyled style={{ justifyContent: 'flex-start', flex: 0 }} screenWidth={width}>
+    <ContainerStyled style={{ justifyContent: 'flex-start', flex: 1 }} screenWidth={width}>
       <RepoFilter languages={[]} filteredRepoCount={0} repoBtnText="New" />
       <FlatList
         data={repos}
