@@ -24,7 +24,7 @@ const UserDropdown = ({
 
   return (
     <DropdownWrapper>
-      <ProfileImageWrapper testID="profile-image" onPress={() => toggleMenu()}>
+      <ProfileImageWrapper testID="profile-image" onPress={() => useAuthStore.setState({isMenuOpen: !isMenuOpen})}>
         <ProfileImage source={{ uri: viewer?.avatarUrl || '' }} />
         <ArrowImage source={require('../../../assets/arrow-down-icon.png')} />
       </ProfileImageWrapper>
