@@ -6,6 +6,7 @@ export const StyledHeader = styled.View<{ screenWidth: number }>`
   padding-horizontal: 16px;
   background-color: rgb(17, 24, 39);
   padding-top: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '0px' : '32px')};
+  z-index: 999;
 `;
 
 export const StyledHeaderContainer = styled.View<{ screenWidth: number }>`
