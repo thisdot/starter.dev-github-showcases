@@ -1,6 +1,12 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
 import { colors } from '../../utils/style-variables';
+
+const profileImage = css `
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+`;
 
 export const DropdownWrapper = styled.View`
   display: flex;
@@ -8,9 +14,11 @@ export const DropdownWrapper = styled.View`
 `;
 
 export const ProfileImage = styled.Image`
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
+  ${profileImage};
+`;
+
+export const ProfileImageContainer = styled.View`
+  ${profileImage};
   background-color: ${colors.gray300};
 `;
 

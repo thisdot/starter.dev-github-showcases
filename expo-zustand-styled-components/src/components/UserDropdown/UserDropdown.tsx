@@ -9,6 +9,7 @@ import {
   ProfileImage,
   DropdownWrapper,
   ProfileImageWrapper,
+  ProfileImageContainer,
 } from './UserDropdown.styles';
 
 import useAuthStore from '../../hooks/stores/useAuthStore';
@@ -25,7 +26,9 @@ const UserDropdown = ({
   return (
     <DropdownWrapper>
       <ProfileImageWrapper testID="profile-image" onPress={() => toggleMenu()}>
-        <ProfileImage source={{ uri: viewer?.avatarUrl}} />
+        <ProfileImageContainer>
+          {viewer.avatarUrl && <ProfileImage source={{ uri: viewer.avatarUrl }} />}
+        </ProfileImageContainer>
         <ArrowImage source={require('../../../assets/arrow-down-icon.png')} />
       </ProfileImageWrapper>
       {isMenuOpen && (
