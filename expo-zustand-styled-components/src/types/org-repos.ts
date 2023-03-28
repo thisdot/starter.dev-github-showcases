@@ -1,12 +1,6 @@
-import { Repo } from './user-repos-type';
+import { Repo, PageInfo as UserPageInfo  } from './user-repos-type';
 
-export interface PageInfo {
-  endCursor?: string | null;
-  startCursor?: string | null;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
-}
-
+export type PageInfo = UserPageInfo
 export interface OrgRepoInfo {
   organization: {
     avatarUrl: string;

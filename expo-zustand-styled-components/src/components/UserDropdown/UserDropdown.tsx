@@ -1,7 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import { ParamListBase } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Text } from 'react-native';
 import {
   UserMenu,
   ListItem,
@@ -12,14 +10,9 @@ import {
 } from './UserDropdown.styles';
 
 import useAuthStore from '../../hooks/stores/useAuthStore';
+import LinkButton from '../LinkButton/LinkButton';
 
-const UserDropdown = ({
-  width,
-  navigation,
-}: {
-  width: number;
-  navigation: NativeStackNavigationProp<ParamListBase, string, undefined>;
-}) => {
+const UserDropdown = ({ width }: { width: number }) => {
   const { logout, viewer, isMenuOpen, toggleMenu } = useAuthStore();
 
   return (
@@ -31,13 +24,9 @@ const UserDropdown = ({
       {isMenuOpen && (
         <UserMenu screenWidth={width}>
           <ListItem screenWidth={width}>
-            <TouchableOpacity
-              onPress={() => {
-                toggleMenu(false);
-                navigation.navigate('Profile');
-              }}>
+            <LinkButton to={`/${viewer.login}`} onClick={() => toggleMenu(false)}>
               <Text>Profile</Text>
-            </TouchableOpacity>
+            </LinkButton>
           </ListItem>
           <ListItem onPress={() => logout()} screenWidth={width}>
             <Text>Sign Out</Text>

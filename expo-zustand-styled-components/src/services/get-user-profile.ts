@@ -15,7 +15,7 @@ type Response = {
 
 const getUserProfile = async (variables: UserProfileVariables) => {
   try {
-    useAuthStore.setState({ isLoading: true });
+    useAuthStore.setState({ isLoading: true, error: null });
     const resp = (await FetchApi({ query: USER_PROFILE_QUERY, variables })) as Response;
     useAuthStore.setState({ isLoading: false, user: resp.data?.user || null });
   } catch (err) {
