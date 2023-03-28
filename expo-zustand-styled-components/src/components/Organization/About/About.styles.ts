@@ -14,6 +14,7 @@ export const OrgLogoContainter = styled.View`
   border-width: 1px;
   border-radius: 4px;
   border-color: ${colors.gray200};
+  background-color: ${colors.gray300};
 `;
 
 export const OrgLogo = styled.Image`

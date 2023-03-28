@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
+import { colors } from '../../utils/style-variables';
 
 export const DropdownWrapper = styled.View`
   display: flex;
@@ -10,6 +11,7 @@ export const ProfileImage = styled.Image`
   width: 32px;
   height: 32px;
   border-radius: 16px;
+  background-color: ${colors.gray300};
 `;
 
 export const UserMenu = styled.View<{ screenWidth: number }>`
