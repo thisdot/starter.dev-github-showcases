@@ -30,7 +30,10 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
       // TODO: this is a hacky way to get the access_token from the url that works for both web and mobile
       const access_token = url.toString().split('access_token=')[1];
       useAuthStore.setState({ token: access_token, isLoading: false });
+    } else {
+      useAuthStore.setState({isLoading: false });
     }
+
   };
 
   useEffect(() => {
@@ -48,6 +51,7 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
         title="Sign in with GitHub"
         loadingText="Loging in..."
         onPress={_handlePressButtonAsync}
+        disabled={isLoading}
       />
     </SafeAreaViewStyled>
   );
