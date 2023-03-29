@@ -12,12 +12,3 @@ export const ProfileSearchViewStyled = styled.View`
   flex-direction: row;
   background-color: #fff;
 `;
-
-export const ReposContainer = styled.View`
-  flex: 1;
-`;
-
-export const PaginationContainer = styled.View`
-  flex: 1;
-  align-items: center;
-`;

@@ -17,15 +17,16 @@ import { useAuthStore } from '../../hooks/stores';
 import { breakpoints } from '../../utils/breakpoints';
 
 import getUserProfile from '../../services/get-user-profile';
+import { AppStackScreenProps } from '../../../types';
 
-const Profile = () => {
+const Profile = ({ route }: AppStackScreenProps<'Profile'>) => {
   const { width } = useWindowDimensions();
 
-  const { user, error, viewer, isLoading } = useAuthStore();
+  const { user, error, isLoading } = useAuthStore();
 
   useEffect(() => {
-    getUserProfile({ username: viewer.login });
-  }, [viewer]);
+    getUserProfile({ username: route.params.username });
+  }, [route.params.username]);
 
   return (
     <SafeAreaViewStyled>
@@ -50,7 +51,7 @@ const Profile = () => {
                 <Text>Mobile Tab Navigation</Text>
               </ProfileNavViewStyled>
             )}
-            <Repositories username={viewer.login} />
+            <Repositories {...route.params} />
           </ContentLayout>
         </MainContentLayout>
       </ContainerStyled>

@@ -1,5 +1,5 @@
 import { useState, ReactNode } from 'react';
-import { Text, View, Platform, TouchableOpacity } from 'react-native';
+import { View, Platform, TouchableOpacity } from 'react-native';
 import { useLinkProps } from '@react-navigation/native';
 
 import { colors } from '../../utils/style-variables';
@@ -7,17 +7,13 @@ import { StyleProp, ViewStyle } from 'react-native';
 
 interface LinkButtonProps {
   to: string;
+  onClick?: () => void;
   hasLine?: boolean;
   children: ReactNode;
   style?: StyleProp<ViewStyle>;
 }
 
-const LinkButton = ({
-  to,
-  children,
-  hasLine = false,
-  ...rest
-}: LinkButtonProps) => {
+const LinkButton = ({ to, children, hasLine = false, onClick, ...rest }: LinkButtonProps) => {
   const { onPress, ...props } = useLinkProps({ to });
 
   const [isHovered, setIsHovered] = useState(false);
@@ -29,21 +25,32 @@ const LinkButton = ({
     // You can add hover effects using `onMouseEnter` and `onMouseLeave`
     return (
       <View
-        onClick={onPress}
+        onClick={() => {
+          onClick && onClick();
+          onPress();
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        // @ts-ignore
-        style={{ textDecoration: hasLine ? (isHovered ? `underline ${colors.blue600}` : 'none') : 'none' }}
+        style={{
+          // @ts-ignore
+          textDecoration: hasLine ? (isHovered ? `underline ${colors.blue600}` : 'none') : 'none',
+        }}
         {...props}
         {...rest}>
-        <Text>{children}</Text>
+        {children}
       </View>
     );
   }
 
   return (
-    <TouchableOpacity onPress={onPress} {...props} {...rest}>
-      <Text>{children}</Text>
+    <TouchableOpacity
+      onPress={() => {
+        onClick && onClick();
+        onPress();
+      }}
+      {...props}
+      {...rest}>
+      {children}
     </TouchableOpacity>
   );
 };

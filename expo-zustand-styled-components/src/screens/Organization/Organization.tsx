@@ -13,25 +13,40 @@ import { About, Repositories } from '../../components/Organization';
 
 const Organization = ({ route, navigation }: AppStackScreenProps<'Organization'>) => {
   const { width } = useWindowDimensions();
-  const { data, error, isLoading, afterCursor, beforeCursor } = useOrgStore();
+  const { data, error, isLoading } = useOrgStore();
+  const { login, afterCursor, beforeCursor } = route.params;
 
   useEffect(() => {
-    if (route.params?.login) {
+    if (login) {
       getOrgRepos({
         first: 10,
-        afterCursor,
-        beforeCursor,
-        organization: route.params.login,
+        organization: login,
+        afterCursor: afterCursor,
+        beforeCursor: beforeCursor,
         orderBy: { direction: 'DESC', field: 'UPDATED_AT' },
       });
     } else {
       navigation.goBack();
     }
-  }, [route.params, afterCursor, beforeCursor]);
+  }, [route.params]);
 
   useLayoutEffect(() => {
     navigation.setOptions({ title: `Organization . ${data.orgInfo.name}` });
   }, [navigation, data]);
+
+  const goToNext = () => {
+    navigation.navigate('Organization', {
+      login,
+      afterCursor: data.pageInfo.endCursor,
+    });
+  };
+
+  const goToPrev = () => {
+    navigation.navigate('Organization', {
+      login,
+      beforeCursor: data.pageInfo.startCursor,
+    });
+  };
 
   return (
     <SafeAreaViewStyled>
@@ -43,7 +58,13 @@ const Organization = ({ route, navigation }: AppStackScreenProps<'Organization'>
           <TabNavContainer>
             <Text>Tab Navigation</Text>
           </TabNavContainer>
-          <Repositories repos={data.repos} />
+          <Repositories
+            repos={data.repos}
+            goToNext={goToNext}
+            goToPrev={goToPrev}
+            hasNextPage={data.pageInfo.hasNextPage}
+            hasPrevPage={data.pageInfo.hasPreviousPage}
+          />
         </ContainerStyled>
       )}
     </SafeAreaViewStyled>

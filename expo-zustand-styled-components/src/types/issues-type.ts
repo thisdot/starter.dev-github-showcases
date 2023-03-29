@@ -1,4 +1,5 @@
 import { Label } from './label-type';
+import { PageInfo as UserPageInfo } from './user-repos-type';
 
 export interface MilestoneProps {
   id: string;
@@ -8,12 +9,7 @@ export interface MilestoneProps {
   title: string;
 }
 
-export interface PageInfo {
-  startCursor?: string;
-  endCursor?: string;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
-}
+export type PageInfo = UserPageInfo
 
 export interface IssueProps {
   totalCount: number;
