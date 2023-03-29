@@ -1,9 +1,8 @@
-import styled from 'styled-components/native';
+import styled, {css} from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
 import { colors } from '../../utils/style-variables';
 
-const flex_row = `
-  display: flex;
+const flex_row = css`
   flex-direction: row;
 `;
 
@@ -21,8 +20,8 @@ export const Content = styled.View`
 `;
 
 export const Heading = styled.TouchableOpacity`
-  ${flex_row};
   gap: 8px;
+  ${flex_row};
   width: 100%;
   flex-wrap: wrap;
 `;
@@ -44,8 +43,8 @@ export const StarBtn = styled.View`
 `;
 
 export const MetaData = styled.View`
+  gap: 6px;
   ${flex_row};
-  gap: 8px;
   flex-shrink: 1;
   margin-top: 8px;
   flex-wrap: wrap;
@@ -66,14 +65,13 @@ export const LanguageColor = styled.View<{ color?: string }>`
 `;
 
 export const SocialWrapper = styled.View`
+  gap: 6px;
   ${flex_row};
-  margin-left: 8px;
   align-items: center;
 `;
 
 export const DateWrapper = styled.View`
   ${flex_row};
-  margin-left: 8px;
   align-items: center;
 `;
 
