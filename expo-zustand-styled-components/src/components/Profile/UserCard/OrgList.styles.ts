@@ -28,6 +28,7 @@ export const Organisation = styled.View`
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid rgb(209, 213, 219);
+  background-color: ${colors.gray300};
 `;
 
 export const OrgImage = styled.Image`

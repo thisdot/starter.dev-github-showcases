@@ -20,7 +20,7 @@ const OrgList = ({ organizations }: Organization) => (
     <Organizations>
       {organizations.map(({ avatarUrl, login }) => (
         <Organisation key={login}>
-          <OrgImage source={{ uri: avatarUrl }} />
+          {avatarUrl && <OrgImage source={{ uri: avatarUrl }} />}
         </Organisation>
       ))}
     </Organizations>
