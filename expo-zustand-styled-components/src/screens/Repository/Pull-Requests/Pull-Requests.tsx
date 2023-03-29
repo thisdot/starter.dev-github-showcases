@@ -36,7 +36,7 @@ const PullRequests = () => {
 
   useEffect(() => {
     getRepoPullRequests(fetchParameters());
-  }, [before, sortBy, label, after]);
+  }, [before, sortBy, label, after, owner, name]);
   return (
     <Wrapper>
       {isLoading ? <PRAndIssueLoaderSkeleton cardType="pr" /> : <PullRequestsTabView />}

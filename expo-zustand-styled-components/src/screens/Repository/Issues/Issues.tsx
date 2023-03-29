@@ -36,7 +36,7 @@ const Issues = () => {
 
   useEffect(() => {
     getIssues(fetchParameters());
-  }, [before, after, sortBy, milestone, label]);
+  }, [before, after, sortBy, milestone, label, owner, name]);
 
   return (
     <Wrapper>

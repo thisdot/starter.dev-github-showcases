@@ -31,3 +31,8 @@ export const PaginationBtn = styled.TouchableOpacity`
   align-items: center;
   gap: 8px;
 `;
+
+export const EmptyIssue = styled.View`
+  align-items: center;
+  padding: 16px;
+`;
