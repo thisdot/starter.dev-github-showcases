@@ -66,11 +66,15 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
           ) : (
             <IssuesIcon color={colors.gray500} style={{ marginRight: 4 }} />
           )}
-          <TabText isActive={activeTab === PR_ISSUE_TABS.open}>{openCount}</TabText>
+          {openCount > 0 && (
+            <TabText isActive={activeTab === PR_ISSUE_TABS.open}>{openCount}</TabText>
+          )}
           <TabText isActive={activeTab === PR_ISSUE_TABS.open}>Open</TabText>
         </Tab>
         <Tab activeOpacity={0.7} onPress={() => handleTabPress(PR_ISSUE_TABS.closed)}>
-          <TabText isActive={activeTab === PR_ISSUE_TABS.closed}>{closedCount}</TabText>
+          {closedCount > 0 && (
+            <TabText isActive={activeTab === PR_ISSUE_TABS.closed}>{closedCount}</TabText>
+          )}
           <TabText isActive={activeTab === PR_ISSUE_TABS.closed}>Closed</TabText>
         </Tab>
       </Tabs>

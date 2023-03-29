@@ -1,7 +1,7 @@
 import PRAndIssueHeader from '../PRAndIssueHeader';
-import { ContentContainer, MainContainer } from './IssuesTabView.styles';
+import { ContentContainer, MainContainer, EmptyIssue } from './IssuesTabView.styles';
 import IssuePullRequestCard from '../IssuePullRequestCard';
-import { useWindowDimensions } from 'react-native';
+import { Text, useWindowDimensions } from 'react-native';
 import { useIssuesStore, usePRAndIssueHeaderStore } from '../../hooks/stores';
 import { SORT_OPTIONS } from '../../utils/constants';
 import IssuesPRClearFilter from '../IssuesPRClearFilter';
@@ -42,6 +42,12 @@ const IssuesTabView = () => {
         {issues[activeTab + 'Issues'].issues.map((data, index) => (
           <IssuePullRequestCard {...data} cardType="issue" key={index} />
         ))}
+
+        {selectedIssue.issues.length === 0 && (
+          <EmptyIssue>
+            <Text style={{ textTransform: 'uppercase' }}>No {activeTab} Issues found.</Text>
+          </EmptyIssue>
+        )}
       </ContentContainer>
       <Pagination
         hasPrevPage={hasPrevPage ? true : false}
