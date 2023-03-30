@@ -35,7 +35,7 @@ const Profile = ({ route, navigation }: AppStackScreenProps<'Profile'>) => {
 
   useEffect(() => {
     if (Platform.OS === 'web') {
-      document.querySelectorAll('[class*=css-view-]').forEach((e) => {
+      document.querySelectorAll('[class*=css-view-]').forEach((e: Elm) => {
         // we want to skip elements that have a z-index class
         if (!/r-zIndex-/.test(e.className)) {
           // check if element has a direct child of type 'img'
