@@ -28,12 +28,18 @@ interface RepoCardProps {
 const RepoCard = ({ repo, isProfilePage }: RepoCardProps) => {
   const { width } = useWindowDimensions();
 
+  const repoNameWithOwnerLink = () =>
+    repo.owner?.login ? `/${repo.owner.login}/${repo.name || ''}` : '';
+
+  const repoNameWithOwner = () =>
+    `${!isProfilePage ? `${repo.owner?.login + '/' || ''}` : ''}${repo.name || ''}`;
+
   return (
     <Card>
       <Content>
         <Heading>
-          <LinkButton to={`/${repo.owner.login}/${repo.name}`} hasLine>
-            <LinkText screenWidth={width}>{repo.name}</LinkText>
+          <LinkButton to={repoNameWithOwnerLink()} hasLine>
+            <LinkText screenWidth={width}>{repoNameWithOwner()}</LinkText>
           </LinkButton>
           <PrivacyBadge visibility={repo.visibility} />
         </Heading>
