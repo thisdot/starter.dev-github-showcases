@@ -21,7 +21,7 @@ const RepoActionButtons = () => {
     {
       text: 'Star',
       Icon: StarIcon,
-      count: info.stargazerCount,
+      count: info?.stargazerCount,
     },
     {
       text: 'Fork',
