@@ -1,15 +1,17 @@
 import { useEffect, useLayoutEffect } from 'react';
-import { Text, useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 
 import { AppStackScreenProps } from '../../../types';
 
 import getOrgRepos from '../../services/get-org-repos';
 import { useOrgStore } from '../../hooks/stores';
+import { tabs } from '../../utils/constants';
 
-import { ContainerStyled, TabNavContainer, SafeAreaViewStyled } from './Organization.styles';
+import { ContainerStyled, SafeAreaViewStyled } from './Organization.styles';
 
 import LoaderErrorView from '../../components/LoaderErrorView';
 import { About, Repositories } from '../../components/Organization';
+import TabNavigation from '../../components/TabNavigation';
 
 const Organization = ({ route, navigation }: AppStackScreenProps<'Organization'>) => {
   const { width } = useWindowDimensions();
@@ -55,9 +57,7 @@ const Organization = ({ route, navigation }: AppStackScreenProps<'Organization'>
       ) : (
         <ContainerStyled screenWidth={width}>
           <About {...data.orgInfo} />
-          <TabNavContainer>
-            <Text>Tab Navigation</Text>
-          </TabNavContainer>
+          <TabNavigation pl={16} tabs={tabs} activeTab={tabs[0].title} />
           <Repositories
             repos={data.repos}
             goToNext={goToNext}

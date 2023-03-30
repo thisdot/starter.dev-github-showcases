@@ -6,15 +6,15 @@ type ScreenWidth = {
 };
 
 export const UserProfileCardWrapper = styled.View<ScreenWidth>`
-  flex-grow: 0;
-  display: flex;
-  padding-right: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 2.5 : 0)}%;
-  margin-top: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? -20 : 0)}px;
+  z-index: unset;
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 33.3 : 100)}%;
+  margin-top: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? -80 : 0)}px;
+  padding-right: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 2.5 : 0)}%;
 `;
 
 export const UserDetails = styled.View<ScreenWidth>`
   gap: 8px;
+  z-index: unset;
   padding: 16px;
   flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'column' : 'row')};
   align-items: ${({ screenWidth }) =>
@@ -22,9 +22,10 @@ export const UserDetails = styled.View<ScreenWidth>`
 `;
 
 export const Avatar = styled.Image<ScreenWidth>`
-  border-radius: 260px;
+  z-index: 999;
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '260px' : '80px')};
   height: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '260px' : '80px')};
+  border-radius: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '260px' : '80px')};
 `;
 
 export const NameContainer = styled.View`
