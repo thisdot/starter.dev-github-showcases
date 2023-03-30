@@ -16,7 +16,7 @@ const RepoActionButtons = () => {
     {
       text: 'Watch',
       Icon: EyeIcon,
-      count: info?.watcherCount,
+      count: info?.watcherCount || 0,
     },
     {
       text: 'Star',
