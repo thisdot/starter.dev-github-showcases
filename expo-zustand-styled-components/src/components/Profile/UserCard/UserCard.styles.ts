@@ -6,7 +6,13 @@ type ScreenWidth = {
 };
 
 export const UserProfileCardWrapper = styled.View<ScreenWidth>`
-  z-index: unset;
+  ${({ screenWidth }) => {
+    if (screenWidth >= breakpoints.tablet) {
+      return `
+        z-index: unset
+      `;
+    }
+  }}
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 33.3 : 100)}%;
   margin-top: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? -80 : 0)}px;
   padding-right: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 2.5 : 0)}%;
@@ -14,7 +20,13 @@ export const UserProfileCardWrapper = styled.View<ScreenWidth>`
 
 export const UserDetails = styled.View<ScreenWidth>`
   gap: 8px;
-  z-index: unset;
+  ${({ screenWidth }) => {
+    if (screenWidth >= breakpoints.tablet) {
+      return `
+        z-index: unset
+      `;
+    }
+  }}
   padding: 16px;
   flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'column' : 'row')};
   align-items: ${({ screenWidth }) =>

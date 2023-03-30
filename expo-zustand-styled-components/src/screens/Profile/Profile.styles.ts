@@ -11,7 +11,13 @@ export const SafeAreaViewStyled = styled.SafeAreaView`
 export const MainContentLayout = styled.View<{ screenWidth: number }>`
   width: 100%;
   height: 100%;
-  z-index: unset;
+  ${({ screenWidth }) => {
+    if (screenWidth >= breakpoints.tablet) {
+      return `
+        z-index: unset
+      `;
+    }
+  }}
   padding-horizontal: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '5%' : 0)};
   flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'row' : 'column')};
 `;
