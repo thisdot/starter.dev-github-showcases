@@ -1,5 +1,5 @@
 import { useEffect, useState, useLayoutEffect } from 'react';
-import { ScrollView, useWindowDimensions } from 'react-native';
+import { Platform, ScrollView, useWindowDimensions } from 'react-native';
 
 import { MainContentLayout, SafeAreaViewStyled, ProfileNavViewStyled } from './Profile.styles';
 
@@ -14,17 +14,18 @@ import { breakpoints } from '../../utils/breakpoints';
 import getUserProfile from '../../services/get-user-profile';
 
 import { AppStackScreenProps } from '../../../types';
-import { Platform } from 'react-native';
+
+interface Elm extends Element {
+  style: {
+    zIndex: string;
+  }
+}
 
 const Profile = ({ route, navigation }: AppStackScreenProps<'Profile'>) => {
   const [leftPadding, setLeftPadding] = useState(0);
   const { width, height } = useWindowDimensions();
   const { user, error, isLoading } = useAuthStore();
- interface Elm extends Element {
-    style: {
-      zIndex: string;
-    }
-  }
+
   useEffect(() => {
     getUserProfile({ username: route.params.username });
   }, [route.params.username]);

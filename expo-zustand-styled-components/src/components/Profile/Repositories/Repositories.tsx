@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { FlatList, ScrollView, useWindowDimensions } from 'react-native';
+import { View, FlatList, Platform, ScrollView, useWindowDimensions } from 'react-native';
 
 import getUserRepos from '../../../services/get-user-repos';
 import { useUserReposStore, useRepoFilterStore } from '../../../hooks/stores';
@@ -67,12 +67,12 @@ const Repositories = ({
       {isLoading || error ? (
         <LoaderErrorView error={error} style={{ flex: 1 }} />
       ) : (
-        <>
+        <View>
           <RepoFilter languages={languages} filteredRepoCount={result.length} repoBtnText="New" />
           <ScrollView horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
             <FlatList
               data={result}
-              scrollEnabled={false}
+              scrollEnabled={Platform.OS === 'web'}
               keyExtractor={(item, index) => item.id + index}
               renderItem={({ item }) => <RepoCard repo={item} isProfilePage />}
               ListFooterComponent={
@@ -85,7 +85,7 @@ const Repositories = ({
               }
             />
           </ScrollView>
-        </>
+        </View>
       )}
     </ContainerStyled>
   );

@@ -7,11 +7,10 @@ import getOrgRepos from '../../services/get-org-repos';
 import { useOrgStore } from '../../hooks/stores';
 import { tabs } from '../../utils/constants';
 
-import { ContainerStyled, SafeAreaViewStyled } from './Organization.styles';
-
+import TabNavigation from '../../components/TabNavigation';
 import LoaderErrorView from '../../components/LoaderErrorView';
 import { About, Repositories } from '../../components/Organization';
-import TabNavigation from '../../components/TabNavigation';
+import { ContainerStyled, SafeAreaViewStyled } from './Organization.styles';
 
 const Organization = ({ route, navigation }: AppStackScreenProps<'Organization'>) => {
   const { width } = useWindowDimensions();
