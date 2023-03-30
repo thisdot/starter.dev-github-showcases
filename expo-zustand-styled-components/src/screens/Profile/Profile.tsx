@@ -42,7 +42,6 @@ const Profile = ({ route, navigation }: AppStackScreenProps<'Profile'>) => {
           if (!e.querySelectorAll(':scope > img')?.length) {
             // if yes, unset the z-index. This is to prevent the image from
             // being hidden behind the header when the user scrolls up
-            // @ts-ignore
             e.style.zIndex = 'unset';
           }
         }
