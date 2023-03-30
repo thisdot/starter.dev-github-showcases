@@ -1,13 +1,14 @@
-import { FlatList, ScrollView, useWindowDimensions } from 'react-native';
+import { FlatList, Text, useWindowDimensions } from 'react-native';
 
 import Pagination from '../Pagination';
 import PRAndIssueHeader from '../PRAndIssueHeader';
 import IssuesPRClearFilter from '../IssuesPRClearFilter';
 import IssuePullRequestCard from '../IssuePullRequestCard';
-import { ContentContainer, MainContainer } from './IssuesTabView.styles';
 
 import { useIssuesStore, usePRAndIssueHeaderStore } from '../../hooks/stores';
 import { SORT_OPTIONS } from '../../utils/constants';
+
+import { ContentContainer, MainContainer, EmptyIssue } from './IssuesTabView.styles';
 
 const IssuesTabView = ({ navigation }) => {
   const { width } = useWindowDimensions();
@@ -29,24 +30,27 @@ const IssuesTabView = ({ navigation }) => {
   };
 
   return (
-    <MainContainer screenWidth={width}>
+    <MainContainer screenWidth={width} showsVerticalScrollIndicator={false}>
       {label && sortBy !== Object.values(SORT_OPTIONS)[0] && <IssuesPRClearFilter />}
-      <ContentContainer>
-        <ScrollView horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
-          <FlatList
-            ListHeaderComponent={
-              <PRAndIssueHeader
-                cardType="issue"
-                openCount={issues.openIssues.totalCount}
-                closedCount={issues.closedIssues.totalCount}
-              />
-            }
-            scrollEnabled={false}
-            data={selectedIssue.issues}
-            keyExtractor={(item, index) => item.url + index}
-            renderItem={({ item }) => <IssuePullRequestCard {...item} cardType="issue" />}
-          />
-        </ScrollView>
+      <ContentContainer horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
+        <FlatList
+          ListHeaderComponent={
+            <PRAndIssueHeader
+              cardType="issue"
+              openCount={issues.openIssues.totalCount}
+              closedCount={issues.closedIssues.totalCount}
+            />
+          }
+          scrollEnabled={false}
+          data={selectedIssue.issues}
+          ListEmptyComponent={
+            <EmptyIssue>
+              <Text style={{ textTransform: 'uppercase' }}>No {activeTab} Issues found.</Text>
+            </EmptyIssue>
+          }
+          keyExtractor={(item, index) => item.url + index}
+          renderItem={({ item }) => <IssuePullRequestCard {...item} cardType="issue" />}
+        />
       </ContentContainer>
       <Pagination
         goToNext={goToNext}

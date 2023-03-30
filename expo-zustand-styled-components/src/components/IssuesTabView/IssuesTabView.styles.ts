@@ -6,13 +6,13 @@ type ScreenWidth = {
   screenWidth: number | undefined;
 };
 
-export const MainContainer = styled.View<ScreenWidth>`
+export const MainContainer = styled.ScrollView<ScreenWidth>`
   width: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '80%' : '100%')};
   margin-horizontal: auto;
-  margin-top: 40px;
+  padding-top: 40px;
 `;
 
-export const ContentContainer = styled.View`
+export const ContentContainer = styled.ScrollView`
   border: 1px solid ${colors.gray300};
   border-radius: 16px;
 `;
@@ -30,4 +30,9 @@ export const PaginationBtn = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   gap: 8px;
+`;
+
+export const EmptyIssue = styled.View`
+  align-items: center;
+  padding: 16px;
 `;

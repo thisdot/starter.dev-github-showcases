@@ -1,53 +1,72 @@
-import { Platform } from 'react-native';
 import { useEffect } from 'react';
-import { ScrollView, useWindowDimensions, View } from 'react-native';
-
-// FIXME: react-native-marked is does not show tables and html elements
-import Markdown from 'react-native-marked';
-// Makes use of system default theme, needs to be changed.
+import { StyleSheet, useWindowDimensions } from 'react-native';
+import Markdown from '@ronradtke/react-native-markdown-display';
 
 import { ReadmeListIcon } from '../Icons/ReadmeListIcon';
+import { ReadmeHeader, ReadmeDiv, ReadmeContainer, ReadmeText } from './RepoReadme.styles';
 
 import { useRepoInfoStore } from '../../hooks/stores';
 import getRepoReadMe from '../../services/get-repo-readme';
-
-import { ReadmeHeader, ReadmeDiv, ReadmeContainer, ReadmeText } from './RepoReadme.styles';
+import { colors } from '../../utils/style-variables';
 
 const RepoReadme = () => {
   const { width } = useWindowDimensions();
-  const { path, owner, name, readMe, branch } = useRepoInfoStore();
+  const { owner, name, readMe, branch } = useRepoInfoStore();
 
   useEffect(() => {
     getRepoReadMe({
       owner,
       name,
-      expression: path ? `HEAD:${path}/README.md` : 'HEAD:README.md',
+      expression: 'HEAD:README.md',
     });
-  }, [owner, name, branch, path]);
+  }, [owner, name, branch]);
 
   return readMe ? (
-    <View>
-      <ScrollView
-        scrollEnabled={false}
-        horizontal={Platform.OS !== 'web'}
-        contentContainerStyle={{ flexShrink: 1 }}>
-        <ReadmeContainer>
-          <ReadmeHeader>
-            <ReadmeListIcon />
-            <ReadmeText>README.md</ReadmeText>
-          </ReadmeHeader>
-          <ReadmeDiv screenWidth={width}>
-            <Markdown
-              value={readMe}
-              flatListProps={{
-                initialNumToRender: 8,
-              }}
-            />
-          </ReadmeDiv>
-        </ReadmeContainer>
-      </ScrollView>
-    </View>
+    <ReadmeContainer>
+      <ReadmeHeader>
+        <ReadmeListIcon />
+        <ReadmeText>README.md</ReadmeText>
+      </ReadmeHeader>
+      <ReadmeDiv screenWidth={width}>
+        <Markdown style={styles}>{readMe}</Markdown>
+      </ReadmeDiv>
+    </ReadmeContainer>
   ) : null;
 };
 
 export default RepoReadme;
+
+const styles = StyleSheet.create({
+  heading1: {
+    fontSize: 36,
+    fontWeight: '500',
+  },
+  heading3: {
+    fontSize: 20,
+    fontWeight: '500',
+  },
+  table: {
+    borderWidth: 0,
+    marginBottom: 20,
+  },
+  th: {
+    flex: 1,
+    paddingVertical: 10,
+  },
+  tr: {
+    borderBottomWidth: 1,
+    borderColor: colors.gray300,
+    flexDirection: 'row',
+  },
+  paragraph: {
+    lineHeight: 24,
+  },
+  bullet_list: {
+    lineHeight: 24,
+    marginBottom: 5,
+  },
+  link: {
+    color: colors.blue600,
+    textDecorationLine: 'none',
+  }
+});

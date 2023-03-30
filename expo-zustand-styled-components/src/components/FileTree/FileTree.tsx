@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { useRepoInfoStore } from '../../hooks/stores';
 import getRepoTree from '../../services/get-repo-tree';
 
-import { Cell, LinkText, Containter } from './FileTree.styles';
+import { Cell, LinkText, Containter, Item } from './FileTree.styles';
 import { colors } from '../../utils/style-variables';
 import { FolderIcon, DocumentIcon } from '../Icons';
 import LinkButton from '../LinkButton/LinkButton';
@@ -34,7 +34,7 @@ const FileTree = (props: { path?: string; branch?: string }) => {
       ) : null}
       {tree?.map((item) => (
         <Cell key={item.name}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Item>
             <View style={{ marginLeft: 10, marginRight: 2 }}>
               {item.type === 'tree' ? (
                 <FolderIcon color={colors.blue400} width={20} height={20} />
@@ -45,7 +45,7 @@ const FileTree = (props: { path?: string; branch?: string }) => {
             <LinkButton to={`${basePath()}/${item.type}/${_branch}/${item.path}`}>
               <LinkText>{item.name}</LinkText>
             </LinkButton>
-          </View>
+          </Item>
         </Cell>
       ))}
     </Containter>

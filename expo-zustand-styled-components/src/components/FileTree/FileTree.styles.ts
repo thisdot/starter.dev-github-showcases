@@ -19,3 +19,9 @@ export const Cell = styled.View`
   border-bottom-width: 1px;
   border-bottom-color: ${colors.gray300};
 `;
+
+export const Item = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+`;

@@ -13,7 +13,6 @@ declare global {
     interface RootParamList extends RootStackParamList {}
     interface AuthParamList extends AuthStackParamList {}
     interface AppParamList extends AppStackParamList {}
-    interface RepoParamList extends RepoStackParamList {}
   }
 }
 
