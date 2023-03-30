@@ -20,7 +20,7 @@ interface PullRequests {
 interface PullRequeststore {
   error?: string;
   isLoading: boolean;
-  pullRequests: PullRequests;
+  pullRequests?: PullRequests;
   _pullRequests: Map<string, PullRequests>;
 }
 
@@ -28,25 +28,6 @@ const _pullRequests = new Map();
 
 const initialState = {
   isLoading: true,
-  pullRequests: {
-    openPullRequests: {
-      pullRequests: [],
-      totalCount: 0,
-      pageInfo: {
-        hasNextPage: false,
-        hasPreviousPage: false,
-      },
-    },
-    closedPullRequests: {
-      pullRequests: [],
-      totalCount: 0,
-      pageInfo: {
-        hasNextPage: false,
-        hasPreviousPage: false,
-      },
-    },
-    labels: [],
-  },
   _pullRequests,
 };
 

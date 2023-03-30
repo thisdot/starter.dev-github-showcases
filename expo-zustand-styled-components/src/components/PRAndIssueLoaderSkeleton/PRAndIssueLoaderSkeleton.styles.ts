@@ -16,8 +16,3 @@ export const ContentContainer = styled.View`
   border: 1px solid ${colors.gray300};
   border-radius: 16px;
 `;
-
-export const LoadingContainer = styled.View`
-  align-items: center;
-  padding: 8px;
-`;

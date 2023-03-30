@@ -5,16 +5,15 @@ import PRAndIssueHeader from '../PRAndIssueHeader';
 import IssuesPRClearFilter from '../IssuesPRClearFilter';
 import IssuePullRequestCard from '../IssuePullRequestCard';
 
-import { useIssuesStore, usePRAndIssueHeaderStore } from '../../hooks/stores';
+import { usePRAndIssueHeaderStore } from '../../hooks/stores';
 import { SORT_OPTIONS } from '../../utils/constants';
 
 import { ContentContainer, MainContainer, EmptyIssue } from './IssuesTabView.styles';
 
-const IssuesTabView = ({ navigation }) => {
+const IssuesTabView = ({ issues, navigation }) => {
   const { width } = useWindowDimensions();
-  const { issues } = useIssuesStore();
   const { activeTab, label, sortBy } = usePRAndIssueHeaderStore();
-  const selectedIssue = issues[(activeTab + 'Issues') as 'openIssues' | 'closedIssues'];
+  const selectedIssue = issues?.[(activeTab + 'Issues') as 'openIssues' | 'closedIssues'];
 
   const pageInfo = selectedIssue.pageInfo;
 
@@ -30,9 +29,15 @@ const IssuesTabView = ({ navigation }) => {
   };
 
   return (
-    <MainContainer screenWidth={width} showsVerticalScrollIndicator={false}>
+    <MainContainer
+      screenWidth={width}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingTop: 40, paddingBottom: 10 }}>
       {label && sortBy !== Object.values(SORT_OPTIONS)[0] && <IssuesPRClearFilter />}
-      <ContentContainer horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
+      <ContentContainer
+        horizontal
+        scrollEnabled={false}
+        contentContainerStyle={{ flexGrow: 1, flexShrink: 1 }}>
         <FlatList
           ListHeaderComponent={
             <PRAndIssueHeader

@@ -19,7 +19,7 @@ interface Issues {
 
 interface IssueStore {
   error?: string;
-  issues: Issues;
+  issues?: Issues;
   isLoading: boolean;
   _issues: Map<string, Issues>;
 }
@@ -30,26 +30,6 @@ const _issues = new Map();
 const initialState = {
   _issues,
   isLoading: false,
-  issues: {
-    openIssues: {
-      issues: [],
-      totalCount: 0,
-      pageInfo: {
-        hasNextPage: false,
-        hasPreviousPage: false,
-      },
-    },
-    closedIssues: {
-      issues: [],
-      totalCount: 0,
-      pageInfo: {
-        hasNextPage: false,
-        hasPreviousPage: false,
-      },
-    },
-    milestones: [],
-    labels: [],
-  },
 };
 
 const useIssuesStore = create<IssueStore>(() => initialState);

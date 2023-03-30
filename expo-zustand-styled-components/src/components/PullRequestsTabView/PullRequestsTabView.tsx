@@ -1,18 +1,17 @@
-import { FlatList, ScrollView, useWindowDimensions } from 'react-native';
+import { Text, FlatList, useWindowDimensions } from 'react-native';
 
 import Pagination from '../Pagination';
 import PRAndIssueHeader from '../PRAndIssueHeader';
 import IssuesPRClearFilter from '../IssuesPRClearFilter';
+import { ContentContainer, MainContainer, EmptyPullRequest } from './PullRequestsTabView.styles';
 import IssuePullRequestCard from '../IssuePullRequestCard';
-import { ContentContainer, MainContainer } from './PullRequestsTabView.styles';
 
-import { usePRAndIssueHeaderStore, usePullRequestsStore } from '../../hooks/stores';
+import { usePRAndIssueHeaderStore } from '../../hooks/stores';
 import { SORT_OPTIONS } from '../../utils/constants';
 
-const PullRequestsTabView = ({ navigation }) => {
-  const { activeTab, label, sortBy } = usePRAndIssueHeaderStore();
-  const { pullRequests } = usePullRequestsStore();
+const PullRequestsTabView = ({ navigation, pullRequests }) => {
   const { width } = useWindowDimensions();
+  const { activeTab, label, sortBy } = usePRAndIssueHeaderStore();
 
   const selectedPullRequests =
     pullRequests[(activeTab + 'PullRequests') as 'openPullRequests' | 'closedPullRequests'];
@@ -30,24 +29,27 @@ const PullRequestsTabView = ({ navigation }) => {
   };
 
   return (
-    <MainContainer screenWidth={width}>
+    <MainContainer screenWidth={width} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingTop: 40, paddingBottom: 10 }}>
       {label && sortBy !== Object.values(SORT_OPTIONS)[0] && <IssuesPRClearFilter />}
-      <ContentContainer>
-        <ScrollView horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
-          <FlatList
-            ListHeaderComponent={
-              <PRAndIssueHeader
+      <ContentContainer horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1, flexShrink: 1 }}>
+        <FlatList
+          ListHeaderComponent={
+            <PRAndIssueHeader
               cardType="pr"
               openCount={pullRequests.openPullRequests.totalCount}
               closedCount={pullRequests.closedPullRequests.totalCount}
             />
-            }
-            scrollEnabled={false}
-            data={selectedPullRequests.pullRequests}
-            keyExtractor={(item, index) => item.url + index}
-            renderItem={({ item }) => <IssuePullRequestCard {...item} cardType="pr" />}
-          />
-        </ScrollView>
+          }
+          scrollEnabled={false}
+          data={selectedPullRequests.pullRequests}
+          keyExtractor={(item, index) => item.url + index}
+          renderItem={({ item }) => <IssuePullRequestCard {...item} cardType="pr" />}
+          ListEmptyComponent={
+            <EmptyPullRequest>
+              <Text style={{ textTransform: 'uppercase' }}>No {activeTab} Pull Request found.</Text>
+            </EmptyPullRequest>
+          }
+        />
       </ContentContainer>
       <Pagination
         goToNext={goToNext}

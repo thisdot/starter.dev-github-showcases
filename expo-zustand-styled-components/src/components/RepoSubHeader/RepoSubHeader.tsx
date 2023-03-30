@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import RepoHeading from '../RepoHeading/RepoHeading';
 import TabNavigation from '../TabNavigation/TabNavigation';
 import RepoActionButtons from '../RepoActionButtons/RepoActionButtons';
@@ -17,10 +15,6 @@ import { RepoStackParamList } from '../../../types';
 const RepoSubHeader = ({ width, navigation }) => {
   const { info, activeTab } = useRepoInfoStore();
   const { clearFilter, setActiveTab } = usePRAndIssueHeaderStore();
-
-  useEffect(() => {
-    useRepoInfoStore.setState({ activeTab: 'Code' });
-  }, []);
 
   const onChange = (tab: keyof RepoStackParamList) => {
     clearFilter();

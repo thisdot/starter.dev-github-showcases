@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 
 import { RepoStackScreenProps } from '../../../../types';
 
@@ -13,8 +13,8 @@ import IssuesTabView from '../../../components/IssuesTabView';
 import { Wrapper } from './Issues.style';
 
 const Issues = ({ route, navigation }: RepoStackScreenProps<'Issues'>) => {
-  const { name, owner } = useRepoInfoStore();
-  const { isLoading, issues } = useIssuesStore();
+  const { name, owner, info } = useRepoInfoStore();
+  const { error, issues, isLoading } = useIssuesStore();
   const { sortBy, label, milestone, setLabels, setMilestones } = usePRAndIssueHeaderStore();
 
   const fetchParameters = ({
@@ -39,22 +39,31 @@ const Issues = ({ route, navigation }: RepoStackScreenProps<'Issues'>) => {
   });
 
   useEffect(() => {
-    if (!isLoading) {
-      setLabels(issues.labels);
-      setMilestones(issues.milestones);
+    if (!isLoading && issues) {
+      setLabels(issues?.labels);
+      setMilestones(issues?.milestones);
     }
-  }, [isLoading]);
+  }, [issues, isLoading]);
 
   useEffect(() => {
-    getIssues(fetchParameters(route.params || {}));
-  }, [name, owner, label, sortBy, milestone, route.params, ]);
+    if(name && owner) {
+      getIssues(fetchParameters(route.params || {}));
+    }
+  }, [name, owner, label, sortBy, milestone, route.params]);
+
+  useLayoutEffect(() => {
+    useRepoInfoStore.setState({ activeTab: 'Issues' });
+    if(info && name && owner){
+      navigation.setOptions({ title: `${name}/${owner} . Issues (${info?.openIssueCount}) ` });
+    }
+  }, [info, name, owner]);
 
   return (
     <Wrapper>
-      {isLoading ? (
-        <PRAndIssueLoaderSkeleton cardType="issue" />
+      {(isLoading || error || !issues) ? (
+        <PRAndIssueLoaderSkeleton error={error} cardType="issue" />
       ) : (
-        <IssuesTabView navigation={navigation} />
+        <IssuesTabView navigation={navigation} issues={issues}/>
       )}
     </Wrapper>
   );

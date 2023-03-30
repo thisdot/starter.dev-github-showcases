@@ -9,7 +9,6 @@ type ScreenWidth = {
 export const MainContainer = styled.ScrollView<ScreenWidth>`
   width: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '80%' : '100%')};
   margin-horizontal: auto;
-  padding-top: 40px;
 `;
 
 export const ContentContainer = styled.ScrollView`

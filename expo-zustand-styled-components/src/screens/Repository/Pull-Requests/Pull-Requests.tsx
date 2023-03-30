@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 
 import { Wrapper } from './Pull-Requests.style';
 import {
@@ -17,9 +17,9 @@ import PullRequestsTabView from '../../../components/PullRequestsTabView';
 import { RepoStackScreenProps } from '../../../../types';
 
 const PullRequests = ({ route, navigation }: RepoStackScreenProps<'Pull Requests'>) => {
-  const { isLoading, pullRequests } = usePullRequestsStore();
+  const { error, isLoading, pullRequests } = usePullRequestsStore();
   const { sortBy, label, setLabels } = usePRAndIssueHeaderStore();
-  const { name, owner } = useRepoInfoStore();
+  const { name, owner, info } = useRepoInfoStore();
 
   const fetchParameters = ({
     afterCursor,
@@ -46,15 +46,24 @@ const PullRequests = ({ route, navigation }: RepoStackScreenProps<'Pull Requests
   }, [isLoading]);
 
   useEffect(() => {
-    getRepoPullRequests(fetchParameters(route.params || {}));
+    if (name && owner) {
+      getRepoPullRequests(fetchParameters(route.params || {}));
+    }
   }, [name, owner, label, sortBy, route.params]);
+
+  useLayoutEffect(() => {
+    useRepoInfoStore.setState({ activeTab: 'Pull Requests' });
+    if(info && name && owner){
+      navigation.setOptions({ title: `${name}/${owner} . PRs (${info?.openPullRequestCount}) ` });
+    }
+  }, [info, name, owner]);
 
   return (
     <Wrapper>
-      {isLoading ? (
-        <PRAndIssueLoaderSkeleton cardType="pr" />
+      {isLoading || error || !pullRequests ? (
+        <PRAndIssueLoaderSkeleton error={error} cardType="pr" />
       ) : (
-        <PullRequestsTabView navigation={navigation} />
+        <PullRequestsTabView navigation={navigation} pullRequests={pullRequests} />
       )}
     </Wrapper>
   );
