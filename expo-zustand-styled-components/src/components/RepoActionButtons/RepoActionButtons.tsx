@@ -6,25 +6,27 @@ import StarIcon from '../Icons/StarIcon';
 import CountButtonGroup from './CountButtonGroup';
 import { Container } from './RepoActionButtons.styles';
 import { colors } from '../../utils/style-variables';
+import { useRepoInfoStore } from '../../hooks/stores';
 
 const RepoActionButtons = () => {
   const { width } = useWindowDimensions();
+  const { info } = useRepoInfoStore();
 
   const btns = [
     {
       text: 'Watch',
       Icon: EyeIcon,
-      count: 2,
+      count: info?.watcherCount,
     },
     {
       text: 'Star',
       Icon: StarIcon,
-      count: 2,
+      count: info?.stargazerCount,
     },
     {
       text: 'Fork',
       Icon: GitBranchIcon,
-      count: 2,
+      count: info?.forkCount,
     },
   ];
 
