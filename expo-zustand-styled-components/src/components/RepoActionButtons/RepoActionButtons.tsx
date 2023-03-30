@@ -26,7 +26,7 @@ const RepoActionButtons = () => {
     {
       text: 'Fork',
       Icon: GitBranchIcon,
-      count: info.forkCount,
+      count: info?.forkCount,
     },
   ];
 
