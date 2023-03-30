@@ -16,11 +16,20 @@ import RepoNavigator from './RepoNavigator';
 // components
 import Header from '../../components/Header';
 import RepoSubHeader from '../../components/RepoSubHeader';
+import { useAuthStore } from '../../hooks/stores';
+import getViewerProfile from '../../services/get-viewer-info';
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
 function AuthNavigator() {
   const { width } = useWindowDimensions();
+  const { token } = useAuthStore();
+
+  React.useEffect(() => {
+    if (token) {
+      getViewerProfile();
+    }
+  }, [token]);
 
   return (
     <Stack.Navigator

@@ -13,7 +13,7 @@ import UserCard from '../../components/Profile/UserCard';
 import LoaderErrorView from '../../components/LoaderErrorView';
 import Repositories from '../../components/Profile/Repositories';
 
-import { useAuthStore } from '../../hooks/stores';
+import { useAppStore } from '../../hooks/stores';
 import { breakpoints } from '../../utils/breakpoints';
 
 import getUserProfile from '../../services/get-user-profile';
@@ -22,7 +22,7 @@ import { AppStackScreenProps } from '../../../types';
 const Profile = ({ route }: AppStackScreenProps<'Profile'>) => {
   const { width } = useWindowDimensions();
 
-  const { user, error, isLoading } = useAuthStore();
+  const { user, error, isLoading } = useAppStore();
 
   useEffect(() => {
     getUserProfile({ username: route.params.username });
