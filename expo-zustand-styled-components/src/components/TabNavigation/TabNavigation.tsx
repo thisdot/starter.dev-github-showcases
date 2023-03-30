@@ -43,7 +43,7 @@ const TabNavigation = ({ pl, tabs, activeTab, onChange }: TabNavigationProps) =>
             key={index}
             activeOpacity={0.5}
             isActive={activeTab === title}
-            onPress={() => onChange ? onChange(title) : {}}>
+            onPress={() => onChange ? onChange(title) : null}>
             <Icon color={activeTab === title ? colors.gray700 : colors.gray500} />
             <TabText isActive={activeTab === title}>{title}</TabText>
             {typeof count === 'number' && count > 0 && (
