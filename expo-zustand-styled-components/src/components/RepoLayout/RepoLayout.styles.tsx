@@ -12,7 +12,7 @@ export const Containter = styled.View<{ screenWidth: number }>`
   flex-direction: column;
   gap: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 20 : 14)}px;
   padding: ${({ screenWidth }) =>
-    screenWidth >= breakpoints.tablet ? '50px 5% 10px 15%' : '16px'};
+    screenWidth > breakpoints.tablet ? '50px 5% 10px 10%' : '16px'};
 `;
 
 export const MainContent = styled.View<{ screenWidth: number }>`
