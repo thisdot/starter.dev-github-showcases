@@ -24,11 +24,9 @@ const RepoHeading = () => {
   return (
     <Heading screenWidth={width}>
       <PrivacyIcon visibility={info?.visibility} />
-      <RepoContentWrapper
-        screenWidth={width}
-        >
+      <RepoContentWrapper screenWidth={width}>
         <HeadingContent screenWidth={width}>
-          <LinkButton to={`/orgs/${owner}`} hasLine>
+          <LinkButton to={info?.isOrg ? `/orgs/${owner}` : `/${owner}`} hasLine>
             <OwnerLink screenWidth={width}>{owner}</OwnerLink>
           </LinkButton>
           {width > breakpoints.mobile ? <Separator>/</Separator> : null}
