@@ -20,7 +20,11 @@ const Profile = ({ route, navigation }: AppStackScreenProps<'Profile'>) => {
   const [leftPadding, setLeftPadding] = useState(0);
   const { width, height } = useWindowDimensions();
   const { user, error, isLoading } = useAuthStore();
-
+ interface Elm extends Element {
+    style: {
+      zIndex: string;
+    }
+  }
   useEffect(() => {
     getUserProfile({ username: route.params.username });
   }, [route.params.username]);
