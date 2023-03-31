@@ -4,17 +4,14 @@ import BranchNavigation from './BranchNavigation';
 import { useRepoInfoStore } from '../../hooks/stores';
 
 jest.mock('../../hooks/stores', () => ({
-  useRepoInfoStore: jest.fn(),
-}));
-
-describe('BranchNavigation', () => {
-  beforeEach(() => {
-    (useRepoInfoStore as jest.Mock).mockReturnValue({
+  useRepoInfoStore: jest.fn().mockReturnValue({
       name: 'test-repo',
       owner: 'test-owner',
       branch: 'main',
-    });
-  });
+    });,
+}));
+
+describe('BranchNavigation', () => {
 
   test('renders branch navigation without path', () => {
     render(<BranchNavigation />);
