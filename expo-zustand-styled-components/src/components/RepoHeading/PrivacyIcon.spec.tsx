@@ -7,27 +7,27 @@ describe('PrivacyIcon component', () => {
     render(<PrivacyIcon visibility="private" />);
   });
 
-//   it('renders PadlockIcon for private visibility', () => {
-//     const { getByTestId } = render(<PrivacyIcon visibility="private" />);
-//     const padlockIcon = getByTestId('padlock-icon');
-//     expect(padlockIcon).toBeDefined();
-//   });
+  it('renders PadlockIcon for private visibility', () => {
+    const { getByTestId } = render(<PrivacyIcon visibility="private" />);
+    const padlockIcon = getByTestId('padlock-icon');
+    expect(padlockIcon).toBeDefined();
+  });
 
-//   it('renders RepoIcon for public visibility', () => {
-//     const { getByTestId } = render(<PrivacyIcon visibility="public" />);
-//     const repoIcon = getByTestId('repo-icon');
-//     expect(repoIcon).toBeDefined();
-//   });
+  it('renders RepoIcon for public visibility', () => {
+    const { getByTestId } = render(<PrivacyIcon visibility="public" />);
+    const repoIcon = getByTestId('repo-icon');
+    expect(repoIcon).toBeDefined();
+  });
 
-//   it('renders IconPlaceholder for falsy visibility prop', () => {
-//     const { getByTestId } = render(<PrivacyIcon visibility={null} />);
-//     const iconPlaceholder = getByTestId('icon-placeholder');
-//     expect(iconPlaceholder).toBeDefined();
-//   });
+  it('renders IconPlaceholder for falsy visibility prop', () => {
+    const { getByTestId } = render(<PrivacyIcon visibility={null} />);
+    const iconPlaceholder = getByTestId('icon-placeholder');
+    expect(iconPlaceholder).toBeDefined();
+  });
 
-//   it('passes the correct color prop to the rendered icon', () => {
-//     const { getByTestId } = render(<PrivacyIcon visibility="private" />);
-//     const padlockIcon = getByTestId('padlock-icon');
-//     expect(padlockIcon.props.color).toBe('#8b8b8b');
-//   });
+  it('passes the correct color prop to the rendered icon', () => {
+    const { getByTestId } = render(<PrivacyIcon visibility="private" />);
+    const padlockIcon = getByTestId('padlock-icon');
+    expect(padlockIcon.props.color).toBe('#8b8b8b');
+  });
 });
