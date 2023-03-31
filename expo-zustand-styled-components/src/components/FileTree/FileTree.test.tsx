@@ -1,38 +1,31 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react-native';
 import FileTree from './FileTree';
-import { useRepoInfoStore } from '../../hooks/stores';
 import getRepoTree from '../../services/get-repo-tree';
 
 jest.mock('../../hooks/stores', () => ({
-  useRepoInfoStore: jest.fn(),
+  useRepoInfoStore: jest.fn().mockReturnValue({
+    owner: 'test-owner',
+    name: 'test-repo',
+    tree: [
+      {
+        name: 'folder',
+        type: 'tree',
+        path: 'folder',
+      },
+      {
+        name: 'file.txt',
+        type: 'blob',
+        path: 'file.txt',
+      },
+    ],
+    branch: 'main',
+  }),
 }));
 
-jest.mock('../../services/get-repo-tree', () => jest.fn());
+jest.mock('../../services/get-repo-tree', () => jest.fn().mockResolvedValue(1));
 
 describe('FileTree', () => {
-  beforeEach(() => {
-    (useRepoInfoStore as jest.Mock).mockReturnValue({
-      owner: 'test-owner',
-      name: 'test-repo',
-      tree: [
-        {
-          name: 'folder',
-          type: 'tree',
-          path: 'folder',
-        },
-        {
-          name: 'file.txt',
-          type: 'blob',
-          path: 'file.txt',
-        },
-      ],
-      branch: 'main',
-    });
-
-    (getRepoTree as jest.Mock).mockResolvedValue();
-  });
-
   test('renders file tree without path', () => {
     render(<FileTree />);
     expect(screen.queryByText('..')).toBeFalsy();
