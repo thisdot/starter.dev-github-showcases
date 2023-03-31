@@ -1,7 +1,7 @@
 import Repositories from './Repositories';
-import { render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 
-describe('User dropdown', () => {
+describe('Repositories', () => {
   const mockedRepo = {
     id: 'id',
     name: 'name',
@@ -16,27 +16,33 @@ describe('User dropdown', () => {
     primaryLanguage: {
       name: 'js',
       color: 'blue',
-    }
-  }
+    },
+  };
 
   it('should mount', () => {
-    const wrapper = render(<Repositories
-      repos={[mockedRepo]}
-      goToNext={() => 'next'}
-      goToPrev={() => 'prev'}
-      hasNextPage={false}
-      hasPrevPage={false} />);
+    const wrapper = render(
+      <Repositories
+        repos={[mockedRepo]}
+        goToNext={() => 'next'}
+        goToPrev={() => 'prev'}
+        hasNextPage={false}
+        hasPrevPage={false}
+      />
+    );
 
     expect(wrapper).toBeTruthy();
   });
 
   it('should show info', () => {
-    const wrapper = render(<Repositories
-      repos={[mockedRepo]}
-      goToNext={() => 'next'}
-      goToPrev={() => 'prev'}
-      hasNextPage={false}
-      hasPrevPage={false} />);
+    const wrapper = render(
+      <Repositories
+        repos={[mockedRepo]}
+        goToNext={() => 'next'}
+        goToPrev={() => 'prev'}
+        hasNextPage={false}
+        hasPrevPage={false}
+      />
+    );
 
     expect(wrapper).toBeTruthy();
     const description = wrapper.getByText('description');
@@ -44,18 +50,27 @@ describe('User dropdown', () => {
   });
 
   it('should show pagination buttons', () => {
-    const wrapper = render(<Repositories
-      repos={[mockedRepo]}
-      goToNext={() => 'next'}
-      goToPrev={() => 'prev'}
-      hasNextPage={true}
-      hasPrevPage={true} />);
+    const nextFn = jest.fn()
+    const prevFn = jest.fn()
+
+    const wrapper = render(
+      <Repositories
+        repos={[mockedRepo]}
+        goToNext={nextFn}
+        goToPrev={prevFn}
+        hasNextPage={true}
+        hasPrevPage={true}
+      />
+    );
 
     expect(wrapper).toBeTruthy();
     const nextBtn = wrapper.getByText('Next');
     expect(nextBtn).toBeDefined();
     const prevBtn = wrapper.getByText('Prev');
     expect(prevBtn).toBeDefined();
+    fireEvent.press(wrapper.getByText('Prev'));
+    expect(prevFn).toBeCalled();
+    fireEvent.press(wrapper.getByText('Next'));
+    expect(nextFn).toBeCalled()
   });
-
 });

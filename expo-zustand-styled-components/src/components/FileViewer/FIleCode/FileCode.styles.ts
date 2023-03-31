@@ -7,7 +7,6 @@ export const Container = styled.ScrollView`
   width: 100%;
 `;
 
-
 export const CountColumn = styled.Text`
   text-align: left;
   padding-right: 16px;

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
 import { colors } from '../../utils/style-variables';
 
-const profileImage = css `
+const profileImage = css`
   width: 32px;
   height: 32px;
   border-radius: 16px;

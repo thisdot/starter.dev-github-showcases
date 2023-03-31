@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, FlatList, Platform, ScrollView, useWindowDimensions } from 'react-native';
 
@@ -69,23 +69,25 @@ const Repositories = ({
       ) : (
         <View>
           <RepoFilter languages={languages} filteredRepoCount={result.length} repoBtnText="New" />
-          <ScrollView horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
-            <FlatList
-              data={result}
-              scrollEnabled={Platform.OS === 'web'}
-              keyExtractor={(item, index) => item.id + index}
-              renderItem={({ item }) => <RepoCard repo={item} isProfilePage />}
-              ListFooterComponent={
-                <Pagination
-                  goToNext={goToNext}
-                  goToPrev={goToPrev}
-                  hasNextPage={pageInfo.hasNextPage}
-                  hasPrevPage={pageInfo.hasPreviousPage}
-                />
-              }
-            />
-          </ScrollView>
-        </View>
+          <ContentViewStyled>
+            <ScrollView horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
+              <FlatList
+                data={result}
+                scrollEnabled={false}
+                keyExtractor={(item, index) => item.id + index}
+                renderItem={({ item }) => <RepoCard repo={item} isProfilePage />}
+                ListFooterComponent={
+                  <Pagination
+                    goToNext={goToNext}
+                    goToPrev={goToPrev}
+                    hasNextPage={pageInfo.hasNextPage}
+                    hasPrevPage={pageInfo.hasPreviousPage}
+                  />
+                }
+              />
+            </ScrollView>
+          </ContentViewStyled>
+        </>
       )}
     </ContainerStyled>
   );
