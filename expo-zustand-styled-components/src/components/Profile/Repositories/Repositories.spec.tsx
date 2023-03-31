@@ -1,4 +1,4 @@
-import { act, render } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import Repositories from '.';
 import { NavigationContainer } from '@react-navigation/native';
 import { userRepos, pageInfo } from './data';
