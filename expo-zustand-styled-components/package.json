@@ -53,6 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.53.0",
     "babel-loader": "^9.1.2",
+    "css-tree": "^2.3.1",
     "date-fns": "^2.29.3",
     "eslint": "^8.34.0",
     "eslint-config-universe": "^11.1.1",

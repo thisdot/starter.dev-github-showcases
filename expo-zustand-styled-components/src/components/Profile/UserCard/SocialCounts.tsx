@@ -5,9 +5,9 @@ import UsersIcon from '../../Icons/UsersIcon';
 import StarIcon from '../../Icons/StarIcon';
 
 interface SocialCountsProps {
-  followers: number | undefined;
-  following: number | undefined;
-  starredRepositories: number | undefined;
+  followers?: number;
+  following?: number;
+  starredRepositories?: number;
 }
 
 export default function SocialCounts({
