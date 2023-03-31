@@ -18,52 +18,19 @@ interface PullRequests {
 }
 
 interface PullRequeststore {
-  isLoading: boolean;
   error?: string;
-  before?: string | null;
-  after?: string | null;
-  pullRequests: PullRequests;
-  setLoading: (value: boolean) => void;
-  setPullRequests: (value: PullRequests) => void;
-  setBefore: (value: string) => void;
-  setAfter: (value: string) => void;
-  setErrorMsg: (value: string) => void;
-  resetBeforeAndAfter: () => void;
+  isLoading: boolean;
+  pullRequests?: PullRequests;
+  _pullRequests: Map<string, PullRequests>;
 }
+
+const _pullRequests = new Map();
 
 const initialState = {
   isLoading: true,
-  before: undefined,
-  after: undefined,
-  pullRequests: {
-    openPullRequests: {
-      pullRequests: [],
-      totalCount: 0,
-      pageInfo: {
-        hasNextPage: false,
-        hasPreviousPage: false,
-      },
-    },
-    closedPullRequests: {
-      pullRequests: [],
-      totalCount: 0,
-      pageInfo: {
-        hasNextPage: false,
-        hasPreviousPage: false,
-      },
-    },
-    labels: [],
-  },
+  _pullRequests,
 };
 
-const usePullRequestsStore = create<PullRequeststore>((set) => ({
-  ...initialState,
-  setLoading: (value) => set(() => ({ isLoading: value })),
-  setPullRequests: (value) => set(() => ({ pullRequests: value })),
-  setBefore: (value) => set(() => ({ before: value })),
-  setAfter: (value) => set(() => ({ after: value })),
-  resetBeforeAndAfter: () => set(() => ({ after: null, before: null })),
-  setErrorMsg: (value) => set(() => ({ error: value })),
-}));
+const usePullRequestsStore = create<PullRequeststore>(() => initialState);
 
 export default usePullRequestsStore;

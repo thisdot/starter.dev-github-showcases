@@ -15,7 +15,7 @@ interface FilterDropdownProps {
   selected?: string;
   showOptions?: string;
   itemsColors?: string[];
-  style?: StyleProp<ViewProps>;
+  style?: StyleProp<Partial<ViewProps>>;
   selectOption?: (value: string) => void;
   setShowOptions?: (value: string) => void;
 }
