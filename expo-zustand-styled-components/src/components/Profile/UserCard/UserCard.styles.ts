@@ -7,10 +7,10 @@ type ScreenWidth = {
 
 export const UserProfileCardWrapper = styled.View<ScreenWidth>`
   flex-grow: 0;
-  display: flex;
-  padding-right: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 2.5 : 0)}%;
-  margin-top: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? -20 : 0)}px;
-  width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 33.3 : 100)}%;
+  background-color: #fff;
+  padding-right: ${({ screenWidth }) => (screenWidth > breakpoints.laptop ? 2.5 : 0)}%;
+  margin-top: ${({ screenWidth }) => (screenWidth > breakpoints.laptop ? -20 : 0)}px;
+  width: ${({ screenWidth }) => (screenWidth > breakpoints.laptop ? 33.3 : 100)}%;
 `;
 
 export const UserDetails = styled.View<ScreenWidth>`

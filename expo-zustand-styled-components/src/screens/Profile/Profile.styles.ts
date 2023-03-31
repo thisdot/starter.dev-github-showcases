@@ -19,7 +19,7 @@ export const ContainerStyled = styled.ScrollView`
 export const MainContentLayout = styled.View<{ screenWidth: number }>`
   flex: 1;
   width: 100%;
-  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'row' : 'column')};
+  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.laptop ? 'row' : 'column')};
   padding-horizontal: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '10%' : 0)};
 `;
 
