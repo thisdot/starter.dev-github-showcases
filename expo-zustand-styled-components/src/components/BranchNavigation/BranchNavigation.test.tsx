@@ -12,7 +12,6 @@ jest.mock('../../hooks/stores', () => ({
 }));
 
 describe('BranchNavigation', () => {
-
   test('renders branch navigation without path', () => {
     render(<BranchNavigation />);
     expect(screen.getByText('main')).toBeTruthy();
