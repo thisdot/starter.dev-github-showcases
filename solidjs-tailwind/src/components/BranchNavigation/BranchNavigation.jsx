@@ -51,7 +51,7 @@ function BranchNavigation() {
                   </span>
                 ) : (
                   <>
-                    <div onClick={() => navigate(`${hrefPath(index())}`)}>
+                    <div onClick={() => navigate(hrefPath(index()))}>
                       <a
                         data-testid={`file explorer nav crumb ${crumb}`}
                         class={styles.crumbLink}
