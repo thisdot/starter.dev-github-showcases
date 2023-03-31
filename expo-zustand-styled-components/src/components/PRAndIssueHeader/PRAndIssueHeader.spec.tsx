@@ -5,7 +5,7 @@ describe('User dropdown', () => {
   it('should mount', () => {
     const wrapper = render(<PRAndIssueHeader cardType="pr" openCount={10} closedCount={9} />);
     expect(wrapper).toBeTruthy();
-    const option = wrapper.getByText('10');
-    expect(option).toBeDefined();
+    const openCount = wrapper.getByText('10');
+    expect(openCount).toBeDefined();
   });
 });
