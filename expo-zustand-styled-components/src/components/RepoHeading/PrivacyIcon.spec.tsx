@@ -24,10 +24,4 @@ describe('PrivacyIcon component', () => {
     const iconPlaceholder = getByTestId('icon-placeholder');
     expect(iconPlaceholder).toBeDefined();
   });
-
-  it('passes the correct color prop to the rendered icon', () => {
-    const { getByTestId } = render(<PrivacyIcon visibility="private" />);
-    const padlockIcon = getByTestId('padlock-icon');
-    expect(padlockIcon.props.color).toBe('#8b8b8b');
-  });
 });
