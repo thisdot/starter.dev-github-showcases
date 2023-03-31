@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
-import { colors } from '../../utils/style-variables';
 
 export const SafeAreaViewStyled = styled.SafeAreaView`
   flex: 1;
@@ -9,28 +8,31 @@ export const SafeAreaViewStyled = styled.SafeAreaView`
   background-color: #fff;
 `;
 
-export const ContainerStyled = styled.ScrollView`
-  flex: 1;
+export const MainContentLayout = styled.View<{ screenWidth: number }>`
   width: 100%;
   height: 100%;
-  flex-direction: column;
-`;
-
-export const MainContentLayout = styled.View<{ screenWidth: number }>`
-  flex: 1;
-  width: 100%;
+  ${({ screenWidth }) => {
+    if (screenWidth >= breakpoints.tablet) {
+      return `
+        z-index: unset
+      `;
+    }
+  }}
+  padding-horizontal: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '5%' : 0)};
   flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'row' : 'column')};
-  padding-horizontal: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '10%' : 0)};
 `;
 
-export const ContentLayout = styled.View<{ screenWidth: number }>`
-  flex: 1;
-  width: 100%;
-  padding-left: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '2.5%' : 0)};
-`;
-
-export const ProfileNavViewStyled = styled.View`
-  padding: 16px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${colors.gray100};
+export const ProfileNavViewStyled = styled.View<{ isWeb?: boolean }>`
+  background-color: #fff;
+  ${({ isWeb }) => {
+    if (isWeb) {
+      return `
+        padding-top: 40px;
+      `;
+    }
+    return `
+      padding-top: 16px;
+      padding-bottom: 6px;
+    `;
+  }}
 `;

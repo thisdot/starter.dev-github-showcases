@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
 import { colors } from '../../utils/style-variables';
 
-export const Container = styled.View`
+export const Container = styled.View<{ pl?: number }>`
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: ${colors.gray200};
+  ${({ pl }) => pl && `padding-left: ${pl}px;`}
 `;
 
 export const TabContainer = styled.ScrollView`
