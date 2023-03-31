@@ -49,7 +49,7 @@ describe('Repositories', () => {
     expect(description).toBeDefined();
   });
 
-  it('should show pagination buttons', () => {
+  it('should show pagination buttons and call relatives functions when clicked', () => {
     const nextFn = jest.fn()
     const prevFn = jest.fn()
 
