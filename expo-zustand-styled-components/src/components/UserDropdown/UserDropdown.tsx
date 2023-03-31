@@ -17,7 +17,7 @@ const UserDropdown = ({ width }: { width: number }) => {
   const { logout, viewer, isMenuOpen, toggleMenu } = useAuthStore();
 
   return (
-    <DropdownWrapper>
+    <DropdownWrapper testID="user-dropdown">
       <ProfileImageWrapper testID="profile-image" onPress={() => useAuthStore.setState({isMenuOpen: !isMenuOpen})}>
         <ProfileImageContainer>
           {viewer?.avatarUrl && <ProfileImage source={{ uri: viewer.avatarUrl }} />}
