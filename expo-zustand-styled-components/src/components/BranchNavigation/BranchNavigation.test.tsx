@@ -1,14 +1,12 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react-native';
 import BranchNavigation from './BranchNavigation';
-import { useRepoInfoStore } from '../../hooks/stores';
 
 jest.mock('../../hooks/stores', () => ({
   useRepoInfoStore: jest.fn().mockReturnValue({
       name: 'test-repo',
       owner: 'test-owner',
       branch: 'main',
-    });,
+    }),
 }));
 
 describe('BranchNavigation', () => {
