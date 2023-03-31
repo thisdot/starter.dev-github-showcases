@@ -13,7 +13,7 @@ const parseRepoData = (repos) => {
 const OrgProfile = () => {
   const [repos, setRepos] = createSignal([]);
   const [orgInfo, setOrgInfo] = createSignal({});
-  const [reposlanguages, setReposLanguages] = createSignal([]);
+  const [reposLanguages, setReposLanguages] = createSignal([]);
   const params = useParams();
 
   const [resp] = createResource(() =>
@@ -52,7 +52,7 @@ const OrgProfile = () => {
             <UserRepos
               loading={resp.loading}
               repos={repos()}
-              languages={reposlanguages()}
+              languages={reposLanguages()}
             />
           </div>
         </div>

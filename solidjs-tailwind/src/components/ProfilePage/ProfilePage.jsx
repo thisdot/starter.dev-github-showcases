@@ -1,5 +1,5 @@
 import { useLocation, useParams } from '@solidjs/router';
-import { createEffect, createSignal, splitProps } from 'solid-js';
+import { batch, createEffect, createSignal, splitProps } from 'solid-js';
 import useRepoSortFilter from '../../utils/useRepoSortFilter';
 import { ProfileNav } from '../ProfileNav';
 import { UserProfile } from '../UserProfile';
@@ -13,13 +13,15 @@ const ProfilePage = (props) => {
   const [local] = splitProps(props, ['reposInfo', 'user']);
   const [repoState, setRepoState] = createSignal([]);
   const [pageInfo, setPageInfo] = createSignal({});
-  const [reposlanguages, setReposLanguages] = createSignal([]);
+  const [reposLanguages, setReposLanguages] = createSignal([]);
 
   createEffect(() => {
     const [reposResults, languages] = useRepoSortFilter(local.reposInfo.repos);
-    setRepoState(reposResults);
-    setPageInfo(local.reposInfo.pageInfo);
-    setReposLanguages(languages);
+    batch(() => {
+      setRepoState(reposResults);
+      setPageInfo(local.reposInfo.pageInfo);
+      setReposLanguages(languages);
+    });
   });
 
   return (
@@ -47,7 +49,7 @@ const ProfilePage = (props) => {
             />
             {local.reposInfo ? (
               <UserRepos
-                languages={reposlanguages()}
+                languages={reposLanguages()}
                 repos={repoState()}
                 pageInfo={pageInfo()}
                 owner={params.login}
