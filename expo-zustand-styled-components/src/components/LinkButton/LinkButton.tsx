@@ -23,6 +23,8 @@ const LinkButton = ({ to, children, hasLine = false, onClick, ...rest }: LinkBut
     // Otherwise React Native for Web omits the `onClick` prop that's passed
     // You'll also need to pass `onPress` as `onClick` to the `View`
     // You can add hover effects using `onMouseEnter` and `onMouseLeave`
+    const { style, ...wrest } = rest;
+
     return (
       <View
         onClick={() => {
@@ -31,12 +33,15 @@ const LinkButton = ({ to, children, hasLine = false, onClick, ...rest }: LinkBut
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        style={{
-          // @ts-ignore
-          textDecoration: hasLine ? (isHovered ? `underline ${colors.blue600}` : 'none') : 'none',
-        }}
+        style={[
+          {
+            // @ts-ignore
+            textDecoration: hasLine ? (isHovered ? `underline ${colors.blue600}` : 'none') : 'none',
+          },
+          style ?? {},
+        ]}
         {...props}
-        {...rest}>
+        {...wrest}>
         {children}
       </View>
     );
