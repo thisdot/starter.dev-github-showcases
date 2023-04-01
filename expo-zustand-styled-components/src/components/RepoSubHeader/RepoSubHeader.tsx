@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import RepoHeading from '../RepoHeading/RepoHeading';
 import TabNavigation from '../TabNavigation/TabNavigation';
 import RepoActionButtons from '../RepoActionButtons/RepoActionButtons';
@@ -7,37 +5,20 @@ import RepoActionButtons from '../RepoActionButtons/RepoActionButtons';
 import { createTabList } from './tabList';
 import { Wrapper, TopRow } from './RepoSubHeader.styles';
 
-import { REPO_TABS } from '../../utils/constants';
-
 import {
   useRepoInfoStore,
   usePRAndIssueHeaderStore,
-  useIssuesStore,
-  usePullRequestsStore,
 } from '../../hooks/stores';
+
 import { RepoStackParamList } from '../../../types';
 
-const RepoSubHeader = ({ route, width, navigation }) => {
+const RepoSubHeader = ({ width, navigation }) => {
   const { info, activeTab } = useRepoInfoStore();
   const { clearFilter, setActiveTab } = usePRAndIssueHeaderStore();
-  const { resetBeforeAndAfter: resetIssuesBeforeAndAfter } = useIssuesStore();
-  const { resetBeforeAndAfter: resetPullRequestsBeforeAndAfter } = usePullRequestsStore();
-
-  useEffect(() => {
-    const routes = route?.state?.routes;
-    if (routes) {
-      const name = routes[routes.length - 1].name;
-      if (Object.values(REPO_TABS).includes(name)) {
-        useRepoInfoStore.setState({ activeTab: name });
-      }
-    }
-  }, [route]);
 
   const onChange = (tab: keyof RepoStackParamList) => {
     clearFilter();
     setActiveTab('open');
-    resetIssuesBeforeAndAfter();
-    resetPullRequestsBeforeAndAfter();
     useRepoInfoStore.setState({ activeTab: tab });
     tab && navigation.navigate(tab);
   };

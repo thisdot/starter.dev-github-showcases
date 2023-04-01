@@ -1,24 +1,20 @@
-import { Text, useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
+import LoaderErrorView from '../LoaderErrorView';
 import PRAndIssueHeader from '../PRAndIssueHeader';
-import {
-  ContentContainer,
-  MainContainer,
-  LoadingContainer,
-} from './PRAndIssueLoaderSkeleton.styles';
+import { ContentContainer, MainContainer } from './PRAndIssueLoaderSkeleton.styles';
 
 interface PRAndIssueLoaderSkeletonProps {
+  error: string;
   cardType: 'pr' | 'issue';
 }
 
-const PRAndIssueLoaderSkeleton = ({ cardType }: PRAndIssueLoaderSkeletonProps) => {
+const PRAndIssueLoaderSkeleton = ({ error, cardType }: PRAndIssueLoaderSkeletonProps) => {
   const { width } = useWindowDimensions();
   return (
     <MainContainer screenWidth={width}>
       <ContentContainer>
         <PRAndIssueHeader cardType={cardType} openCount={0} closedCount={0} />
-        <LoadingContainer>
-          <Text>Loading...</Text>
-        </LoadingContainer>
+        <LoaderErrorView error={error} />
       </ContentContainer>
     </MainContainer>
   );
