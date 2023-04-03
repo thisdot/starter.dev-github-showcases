@@ -17,10 +17,10 @@ jest.mock('@react-navigation/native', () => {
 });
 
 describe('Header', () => {
-  const mockUseRepoInfoStore = useAuthStore as jest.MockedFunction<typeof useAuthStore>;
+  const mockUseAuthStore = useAuthStore as jest.MockedFunction<typeof useAuthStore>;
 
   beforeEach(() => {
-    mockUseRepoInfoStore.mockReturnValue({ toggleMenu: jest.fn() });
+    mockUseAuthStore.mockReturnValue({ toggleMenu: jest.fn() });
   });
 
   afterEach(() => {
@@ -37,7 +37,7 @@ describe('Header', () => {
     await act(async () => {
       const logo = await getByTestId('github-logo');
       fireEvent.press(logo);
-      expect(mockUseRepoInfoStore().toggleMenu).toHaveBeenCalled();
+      expect(mockUseAuthStore().toggleMenu).toHaveBeenCalled();
     });
   });
 
