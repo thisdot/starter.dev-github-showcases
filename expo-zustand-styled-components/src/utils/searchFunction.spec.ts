@@ -67,4 +67,10 @@ describe('repoDataFilteredBySearch', () => {
     const result = repoDataFilteredBySearch(mockRepos, 'Repo 4');
     expect(result).toEqual([]);
   });
+  it('returns empty array if repos is empty', () => {
+    const repos = [];
+    const search = '';
+    const result = repoDataFilteredBySearch(repos, search);
+    expect(result).toEqual([]);
+  });
 });
