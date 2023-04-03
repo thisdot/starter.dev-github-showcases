@@ -25,7 +25,7 @@ describe('Repoositories', () => {
   beforeEach(async () => {
     wrapper = await render(
       <NavigationContainer>
-        <Repositories username={'hdjerry'} />
+        <Repositories username={'hdjerry'} setLeftPadding={() => null} />
       </NavigationContainer>
     );
   });
