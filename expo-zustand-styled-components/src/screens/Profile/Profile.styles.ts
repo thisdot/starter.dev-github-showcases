@@ -19,7 +19,7 @@ export const MainContentLayout = styled.View<{ screenWidth: number }>`
     }
   }}
   padding-horizontal: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? '5%' : 0)};
-  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.tablet ? 'row' : 'column')};
+  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.laptop ? 'row' : 'column')};
 `;
 
 export const ProfileNavViewStyled = styled.View<{ isWeb?: boolean }>`

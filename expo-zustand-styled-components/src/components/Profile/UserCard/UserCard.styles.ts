@@ -13,9 +13,9 @@ export const UserProfileCardWrapper = styled.View<ScreenWidth>`
       `;
     }
   }}
-  width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 33.3 : 100)}%;
-  margin-top: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? -80 : 0)}px;
-  padding-right: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 2.5 : 0)}%;
+  width: ${({ screenWidth }) => (screenWidth > breakpoints.laptop ? 33.3 : 100)}%;
+  margin-top: ${({ screenWidth }) => (screenWidth > breakpoints.laptop ? -80 : 0)}px;
+  padding-right: ${({ screenWidth }) => (screenWidth > breakpoints.laptop ? 2.5 : 0)}%;
 `;
 
 export const UserDetails = styled.View<ScreenWidth>`
