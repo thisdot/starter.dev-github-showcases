@@ -4,11 +4,6 @@ import CountButtonGroup from './CountButtonGroup';
 import { Text } from 'react-native';
 
 describe('CountButtonGroup', () => {
-
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should render the count number as "0" if no count prop is passed', () => {
     render(<CountButtonGroup><Text>Test</Text></CountButtonGroup>);
     const countText = screen.getByText('0');
