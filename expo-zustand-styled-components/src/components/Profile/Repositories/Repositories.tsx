@@ -1,27 +1,29 @@
 import { useEffect } from 'react';
-import { FlatList, useWindowDimensions } from 'react-native';
-
-import { ContainerStyled, ContentViewStyled } from './Repositories.styles';
+import { useNavigation } from '@react-navigation/native';
+import { View, FlatList, Platform, ScrollView, useWindowDimensions } from 'react-native';
 
 import getUserRepos from '../../../services/get-user-repos';
 import { useUserReposStore, useRepoFilterStore } from '../../../hooks/stores';
 
-import LoaderErrorView from '../../LoaderErrorView';
 import RepoCard from '../../RepoCard';
-import RepoFilter from '../../RepoFilter';
-import useRepoSortFilter from '../../../utils/useRepoSortFiler';
 import Pagination from '../../Pagination';
-import { useNavigation } from '@react-navigation/native';
-import { ScrollView } from 'react-native';
+import RepoFilter from '../../RepoFilter';
+import LoaderErrorView from '../../LoaderErrorView';
+
+import useRepoSortFilter from '../../../utils/useRepoSortFiler';
+
+import { ContainerStyled } from './Repositories.styles';
 
 const Repositories = ({
   username,
   afterCursor,
   beforeCursor,
+  setLeftPadding,
 }: {
   username?: string;
   afterCursor?: string;
   beforeCursor?: string;
+  setLeftPadding: (left: number) => void;
 }) => {
   const { navigate } = useNavigation();
   const { width } = useWindowDimensions();
@@ -43,13 +45,13 @@ const Repositories = ({
     useRepoSortFilter(userRepos, search, filterType, sortBy, language);
   }, [search, userRepos, filterType]);
 
+  const onLayout = (e) => setLeftPadding(e.nativeEvent.layout?.left || 300);
   const goToNext = () => {
     navigate('AppNavigator', {
       screen: 'Profile',
       params: { username, afterCursor: pageInfo.endCursor },
     });
   };
-
   const goToPrev = () => {
     navigate('AppNavigator', {
       screen: 'Profile',
@@ -59,36 +61,34 @@ const Repositories = ({
 
   return (
     <ContainerStyled
+      onLayout={onLayout}
       style={{ justifyContent: isLoading || error ? 'center' : 'flex-start' }}
       screenWidth={width}>
       {isLoading || error ? (
-        <LoaderErrorView error={error} />
+        <LoaderErrorView error={error} style={{ flex: 1 }} />
       ) : (
-        <>
+        <View>
           <RepoFilter languages={languages} filteredRepoCount={result.length} repoBtnText="New" />
-          <ContentViewStyled>
-            <ScrollView
-              horizontal
-              scrollEnabled={false}
-              contentContainerStyle={{ flexGrow: 1 }}>
-              <FlatList
-                testID={'flatList'}
-                data={result}
-                scrollEnabled={false}
-                keyExtractor={(item, index) => item.id + index}
-                renderItem={({ item }) => <RepoCard testID={`repocard_${item.id}`} repo={item} isProfilePage />}
-                ListFooterComponent={
-                  <Pagination
-                    goToNext={goToNext}
-                    goToPrev={goToPrev}
-                    hasNextPage={pageInfo?.hasNextPage}
-                    hasPrevPage={pageInfo?.hasPreviousPage}
-                  />
-                }
-              />
-            </ScrollView>
-          </ContentViewStyled>
-        </>
+          <ScrollView horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
+            <FlatList
+              testID={'flatList'}
+              data={result}
+              scrollEnabled={Platform.OS === 'web'}
+              keyExtractor={(item, index) => item.id + index}
+              renderItem={({ item }) => (
+                <RepoCard testID={`repocard_${item.id}`} repo={item} isProfilePage />
+              )}
+              ListFooterComponent={
+                <Pagination
+                  goToNext={goToNext}
+                  goToPrev={goToPrev}
+                  hasNextPage={pageInfo?.hasNextPage}
+                  hasPrevPage={pageInfo?.hasPreviousPage}
+                />
+              }
+            />
+          </ScrollView>
+        </View>
       )}
     </ContainerStyled>
   );

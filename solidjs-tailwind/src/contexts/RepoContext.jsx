@@ -1,74 +1,30 @@
 import { useParams } from '@solidjs/router';
-import {
-  createSignal,
-  createEffect,
-  createContext,
-  useContext,
-  createResource,
-} from 'solid-js';
+import { createContext, createResource, Show, useContext } from 'solid-js';
 import getRepoInfo from '../services/get-repo-info';
 import getReadme from '../services/get-readme';
 
 const RepoContext = createContext();
 
 export function RepoProvider(props) {
-  const [loading, setLoading] = createSignal(false);
-  const [readme, setReadme] = createSignal(null);
-  const [info, setInfo] = createSignal({});
-  const params = useParams();
+  const params = ((params) => ({
+    ...params,
+    owner: typeof params.owner === 'string' ? params.owner : '',
+    name: typeof params.name === 'string' ? params.name : 'name',
+    expression: `HEAD:${params.path ? params.path + '/' : ''}README.md`,
+  }))(useParams());
 
-  const isOwnerAndNameValid =
-    typeof params.owner === 'string' && typeof params.name === 'string';
-
-  const [resInfo] = createResource(() =>
-    getRepoInfo(
-      isOwnerAndNameValid
-        ? {
-            owner: params.owner,
-            name: params.name,
-          }
-        : {
-            owner: '',
-            name: '',
-          }
-    )
-  );
-
-  const [resReadMe] = createResource(() =>
-    getReadme({
-      owner: params.owner,
-      name: params.name,
-      expression: params.path
-        ? `HEAD:${params.path}/README.md`
-        : 'HEAD:README.md',
-    })
-  );
-
-  createEffect(() => {
-    if (resInfo() && !resInfo.loading) {
-      setInfo(resInfo());
-    }
-
-    if (resReadMe() && !resReadMe.loading) {
-      setReadme(resReadMe());
-    }
-
-    if (resInfo.loading || resReadMe.loading) {
-      setLoading(true);
-    } else {
-      setLoading(false);
-    }
-  });
-
-  const repo = {
-    info,
-    readme,
-  };
+  const [info] = createResource(() => getRepoInfo(params));
+  const [readme] = createResource(() => getReadme(params));
 
   return (
-    <RepoContext.Provider value={repo}>
-      <>{loading() ? <div>Loading...</div> : props.children}</>
-    </RepoContext.Provider>
+    <Show
+      fallback={<div>Loading...</div>}
+      when={!info.loading && !readme.loading}
+    >
+      <RepoContext.Provider value={{ info, readme }}>
+        {props.children}
+      </RepoContext.Provider>
+    </Show>
   );
 }
 

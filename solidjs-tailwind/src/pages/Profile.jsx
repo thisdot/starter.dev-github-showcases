@@ -1,11 +1,5 @@
-import { useParams, useLocation } from '@solidjs/router';
-import {
-  createEffect,
-  createResource,
-  createSignal,
-  Match,
-  Switch,
-} from 'solid-js';
+import { useLocation, useParams } from '@solidjs/router';
+import { createResource, Show } from 'solid-js';
 import { ProfilePage } from '../components/ProfilePage';
 import userProfile from '../services/user-profile';
 import getUserRepos from '../services/user-repos';
@@ -13,10 +7,8 @@ import getUserRepos from '../services/user-repos';
 const Profile = () => {
   const params = useParams();
   const location = useLocation();
-  const [profile, setProfile] = createSignal({});
-  const [userReposInfo, setReposInfo] = createSignal({});
 
-  const [resp] = createResource(() =>
+  const [profile] = createResource(() =>
     userProfile({
       username: params?.login,
     })
@@ -33,24 +25,13 @@ const Profile = () => {
       })
   );
 
-  createEffect(() => {
-    if (resp() && !resp.loading) {
-      setProfile(resp());
-    }
-  });
-
-  createEffect(() => {
-    if (repos() && !repos.loading) {
-      setReposInfo(repos());
-    }
-  });
-
   return (
-    <Switch fallback={<div>Loading...</div>}>
-      <Match when={!resp.loading && !repos.loading}>
-        <ProfilePage user={profile()} reposInfo={userReposInfo()} />
-      </Match>
-    </Switch>
+    <Show
+      when={!profile.loading && !repos.loading}
+      fallback={<div>Loading...</div>}
+    >
+      <ProfilePage user={profile()} reposInfo={repos()} />
+    </Show>
   );
 };
 

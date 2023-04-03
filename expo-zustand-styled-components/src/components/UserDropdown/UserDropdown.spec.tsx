@@ -8,7 +8,7 @@ describe('User dropdown', () => {
   });
 
   it('should show dropdown options', async () => {
-    const wrapper = render(<UserDropdown width={200}/>);
+    const wrapper = render(<UserDropdown width={200} />);
     fireEvent.press(wrapper.getByTestId('profile-image'));
     const option = wrapper.getByText('Profile');
     expect(option).toBeDefined();
