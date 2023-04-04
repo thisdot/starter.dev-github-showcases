@@ -46,24 +46,24 @@ const Issues = ({ route, navigation }: RepoStackScreenProps<'Issues'>) => {
   }, [issues, isLoading]);
 
   useEffect(() => {
-    if(name && owner) {
+    if (name && owner) {
       getIssues(fetchParameters(route.params || {}));
     }
   }, [name, owner, label, sortBy, milestone, route.params]);
 
   useLayoutEffect(() => {
     useRepoInfoStore.setState({ activeTab: 'Issues' });
-    if(info && name && owner){
+    if (info && name && owner) {
       navigation.setOptions({ title: `${name}/${owner} . Issues (${info?.openIssueCount}) ` });
     }
   }, [info, name, owner]);
 
   return (
     <Wrapper>
-      {(isLoading || error || !issues) ? (
+      {isLoading || error || !issues ? (
         <PRAndIssueLoaderSkeleton error={error} cardType="issue" />
       ) : (
-        <IssuesTabView navigation={navigation} issues={issues}/>
+        <IssuesTabView navigation={navigation} issues={issues} />
       )}
     </Wrapper>
   );

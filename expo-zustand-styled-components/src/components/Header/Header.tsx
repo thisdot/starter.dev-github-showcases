@@ -4,12 +4,11 @@ import { StyledHeader, StyledHeaderContainer } from './Header.styles';
 import UserDropdown from '../UserDropdown';
 import { GitHubLogo } from '../Icons';
 
-import { useAppStore} from '../../hooks/stores';
+import { useAppStore } from '../../hooks/stores';
 import LinkButton from '../LinkButton/LinkButton';
 
 const Header = ({ width }: { width: number }) => {
   const { toggleMenu } = useAppStore();
-
 
   return (
     <StyledHeader testID="header" screenWidth={width}>

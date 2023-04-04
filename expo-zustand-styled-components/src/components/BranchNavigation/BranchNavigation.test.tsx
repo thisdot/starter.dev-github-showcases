@@ -3,10 +3,10 @@ import BranchNavigation from './BranchNavigation';
 
 jest.mock('../../hooks/stores', () => ({
   useRepoInfoStore: jest.fn().mockReturnValue({
-      name: 'test-repo',
-      owner: 'test-owner',
-      branch: 'main',
-    }),
+    name: 'test-repo',
+    owner: 'test-owner',
+    branch: 'main',
+  }),
 }));
 
 describe('BranchNavigation', () => {

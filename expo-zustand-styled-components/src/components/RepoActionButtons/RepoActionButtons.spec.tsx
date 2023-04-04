@@ -9,7 +9,7 @@ jest.mock('../../hooks/stores', () => ({
 
 describe('RepoActionButtons', () => {
   const mockUseRepoInfoStore = useRepoInfoStore as jest.MockedFunction<typeof useRepoInfoStore>;
-  
+
   it('renders three buttons', () => {
     mockUseRepoInfoStore.mockReturnValue({
       name: 'my-repo',

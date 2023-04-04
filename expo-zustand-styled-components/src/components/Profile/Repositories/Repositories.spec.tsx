@@ -3,22 +3,21 @@ import Repositories from '.';
 import { NavigationContainer } from '@react-navigation/native';
 import { userRepos, pageInfo } from './data';
 
-
-  global.fetch = jest.fn(() =>
-    Promise.resolve({
-      json: () =>
-        Promise.resolve({
-          data: {
-            owner: {
-              repositories: {
-                nodes: userRepos,
-                pageInfo,
-              },
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () =>
+      Promise.resolve({
+        data: {
+          owner: {
+            repositories: {
+              nodes: userRepos,
+              pageInfo,
             },
           },
-        }),
-    })
-  );
+        },
+      }),
+  })
+);
 
 describe('Repoositories', () => {
   let wrapper;

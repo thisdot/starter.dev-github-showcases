@@ -18,10 +18,9 @@ import { AppStackScreenProps } from '../../../types';
 interface Elm extends Element {
   style: {
     zIndex: string;
-  }
+  };
 }
 
-  
 const Profile = ({ route, navigation }: AppStackScreenProps<'Profile'>) => {
   const [leftPadding, setLeftPadding] = useState(0);
   const { width, height } = useWindowDimensions();

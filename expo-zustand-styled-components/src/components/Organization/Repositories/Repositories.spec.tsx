@@ -50,8 +50,8 @@ describe('Repositories', () => {
   });
 
   it('should show pagination buttons and call relatives functions when clicked', () => {
-    const nextFn = jest.fn()
-    const prevFn = jest.fn()
+    const nextFn = jest.fn();
+    const prevFn = jest.fn();
 
     const wrapper = render(
       <Repositories
@@ -71,6 +71,6 @@ describe('Repositories', () => {
     fireEvent.press(wrapper.getByText('Prev'));
     expect(prevFn).toBeCalled();
     fireEvent.press(wrapper.getByText('Next'));
-    expect(nextFn).toBeCalled()
+    expect(nextFn).toBeCalled();
   });
 });

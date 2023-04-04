@@ -43,7 +43,7 @@ describe('FilterDropdown', () => {
 
     const option = getByText('item1');
     fireEvent.press(option);
-  
+
     expect(selectOption).toHaveBeenCalledWith('item1');
   });
 });
