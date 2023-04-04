@@ -29,9 +29,15 @@ const PullRequestsTabView = ({ navigation, pullRequests }) => {
   };
 
   return (
-    <MainContainer screenWidth={width} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingTop: 40, paddingBottom: 10 }}>
+    <MainContainer
+      screenWidth={width}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingTop: 40, paddingBottom: 10 }}>
       {label && sortBy !== Object.values(SORT_OPTIONS)[0] && <IssuesPRClearFilter />}
-      <ContentContainer horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1, flexShrink: 1 }}>
+      <ContentContainer
+        horizontal
+        scrollEnabled={false}
+        contentContainerStyle={{ flexGrow: 1, flexShrink: 1 }}>
         <FlatList
           ListHeaderComponent={
             <PRAndIssueHeader

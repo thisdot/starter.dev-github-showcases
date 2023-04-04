@@ -26,7 +26,6 @@ interface IssueStore {
 
 const _issues = new Map();
 
-
 const initialState = {
   _issues,
   isLoading: false,

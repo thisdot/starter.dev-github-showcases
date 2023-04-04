@@ -18,7 +18,7 @@ import { AppStackScreenProps } from '../../../types';
 interface Elm extends Element {
   style: {
     zIndex: string;
-  }
+  };
 }
 
   
