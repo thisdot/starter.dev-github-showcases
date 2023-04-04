@@ -46,6 +46,7 @@ const IssuesTabView = ({ issues, navigation }) => {
               closedCount={issues.closedIssues.totalCount}
             />
           }
+          testID={activeTab + '-issues'}
           scrollEnabled={false}
           data={selectedIssue.issues}
           ListEmptyComponent={
@@ -54,7 +55,9 @@ const IssuesTabView = ({ issues, navigation }) => {
             </EmptyIssue>
           }
           keyExtractor={(item, index) => item.url + index}
-          renderItem={({ item }) => <IssuePullRequestCard {...item} cardType="issue" />}
+          renderItem={({ item }) => (
+            <IssuePullRequestCard testID={activeTab + '-items'} {...item} cardType="issue" />
+          )}
         />
       </ContentContainer>
       <Pagination
