@@ -22,7 +22,7 @@ const useAuthStore = create(
     (set) => ({
       ...initialState,
       logout: () => {
-        AsyncStorage.clear();
+        Platform.OS !== 'web' && AsyncStorage.clear();
         set(() => ({ ...initialState }));
       },
     }),
