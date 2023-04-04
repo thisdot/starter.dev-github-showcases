@@ -1,6 +1,6 @@
-import { render } from "@testing-library/react-native"
-import OrgList from "./OrgList"
-import { userData } from "./data"
+import { render } from '@testing-library/react-native';
+import OrgList from './OrgList';
+import { userData } from './data';
 
 describe('Org List', () => {
   let wrapper;

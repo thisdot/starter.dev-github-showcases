@@ -21,7 +21,6 @@ interface Elm extends Element {
   };
 }
 
-  
 const Profile = ({ route, navigation }: AppStackScreenProps<'Profile'>) => {
   const [leftPadding, setLeftPadding] = useState(0);
   const { width, height } = useWindowDimensions();

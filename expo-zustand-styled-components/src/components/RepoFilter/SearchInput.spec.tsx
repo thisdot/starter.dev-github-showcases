@@ -4,22 +4,22 @@ import SearchInput from './SearchInput';
 import { useRepoFilterStore } from '../../hooks/stores';
 
 jest.mock('../../hooks/stores', () => ({
-    useRepoFilterStore: jest.fn(),
+  useRepoFilterStore: jest.fn(),
 }));
 
 describe('SearchInput', () => {
   const mockedStore = useRepoFilterStore as jest.MockedFunction<typeof useRepoFilterStore>;
 
-    beforeEach(() => {
-        mockedStore.mockReturnValue({
-            search: '',
-            setSearch: jest.fn(),
-        });
+  beforeEach(() => {
+    mockedStore.mockReturnValue({
+      search: '',
+      setSearch: jest.fn(),
     });
+  });
 
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('should render the search input', () => {
     const { getByPlaceholderText } = render(<SearchInput screenWidth={360} />);
@@ -27,9 +27,7 @@ describe('SearchInput', () => {
   });
 
   it('should update the search text when the input value changes', () => {
-    const { getByPlaceholderText } = render(
-      <SearchInput screenWidth={360} />
-    );
+    const { getByPlaceholderText } = render(<SearchInput screenWidth={360} />);
     const input = getByPlaceholderText('Find a repository...');
     fireEvent.changeText(input, 'test');
     expect(mockedStore().setSearch).toHaveBeenCalledWith('test');

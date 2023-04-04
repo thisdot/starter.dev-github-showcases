@@ -23,7 +23,7 @@ const initialState: IAppStore = {
 
 const useAppStore = create<IAppStore>((set, get) => ({
   ...initialState,
-    toggleMenu: (v) => set(() => ({ isMenuOpen: v ?? !get().isMenuOpen })),
-  }));
+  toggleMenu: (v) => set(() => ({ isMenuOpen: v ?? !get().isMenuOpen })),
+}));
 
 export default useAppStore;
