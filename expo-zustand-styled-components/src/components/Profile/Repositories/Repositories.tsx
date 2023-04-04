@@ -76,12 +76,15 @@ const Repositories = ({
               keyExtractor={(item, index) => item.id + index}
               renderItem={({ item }) => <RepoCard repo={item} isProfilePage />}
               ListFooterComponent={
-                <Pagination
-                  goToNext={goToNext}
-                  goToPrev={goToPrev}
-                  hasNextPage={pageInfo.hasNextPage}
-                  hasPrevPage={pageInfo.hasPreviousPage}
-                />
+                result.length > 0 &&
+                pageInfo.hasNextPage && (
+                  <Pagination
+                    goToNext={goToNext}
+                    goToPrev={goToPrev}
+                    hasNextPage={pageInfo.hasNextPage}
+                    hasPrevPage={pageInfo.hasPreviousPage}
+                  />
+                )
               }
             />
           </ScrollView>
