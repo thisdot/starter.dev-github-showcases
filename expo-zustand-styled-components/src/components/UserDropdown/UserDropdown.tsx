@@ -20,9 +20,7 @@ const UserDropdown = ({ width }: { width: number }) => {
 
   return (
     <DropdownWrapper testID="user-dropdown">
-      <ProfileImageWrapper
-        testID="profile-image"
-        onPress={() => useAppStore.setState({ isMenuOpen: !isMenuOpen })}>
+      <ProfileImageWrapper testID="profile-image" onPress={() => toggleMenu()}>
         <ProfileImageContainer>
           {viewer?.avatarUrl && <ProfileImage source={{ uri: viewer.avatarUrl }} />}
         </ProfileImageContainer>
@@ -31,11 +29,20 @@ const UserDropdown = ({ width }: { width: number }) => {
       {isMenuOpen && (
         <UserMenu screenWidth={width}>
           <ListItem screenWidth={width}>
-            <LinkButton to={`/${viewer?.login}`} onClick={() => toggleMenu(false)}>
+            <LinkButton
+              to={`/${viewer?.login}`}
+              onClick={() => {
+                toggleMenu(false);
+              }}>
               <Text>Profile</Text>
             </LinkButton>
           </ListItem>
-          <ListItem onPress={() => logout()} screenWidth={width}>
+          <ListItem
+            onPress={() => {
+              logout();
+              toggleMenu(false);
+            }}
+            screenWidth={width}>
             <Text>Sign Out</Text>
           </ListItem>
         </UserMenu>

@@ -8,10 +8,6 @@ interface IAppStore {
   branch?: string;
   isLoading: boolean;
   isMenuOpen: boolean;
-  file?: {
-    byteSize: number;
-    text: string;
-  };
   toggleMenu: (v?: boolean) => void;
 }
 
