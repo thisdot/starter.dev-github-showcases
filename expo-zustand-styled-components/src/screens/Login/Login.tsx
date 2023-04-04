@@ -46,7 +46,7 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
         primary
         isLoading={isLoading}
         title="Sign in with GitHub"
-        loadingText="Loging in..."
+        loadingText="Logging in..."
         onPress={_handlePressButtonAsync}
         disabled={isLoading}
       />
