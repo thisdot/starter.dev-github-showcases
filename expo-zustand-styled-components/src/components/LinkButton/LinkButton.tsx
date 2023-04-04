@@ -35,8 +35,8 @@ const LinkButton = ({
     return (
       <View
         onClick={(e: Event) => {
+          e.preventDefault();
           if (isBlank) {
-            e.preventDefault();
             window.open(to, '_blank');
           } else {
             onClick && onClick();
