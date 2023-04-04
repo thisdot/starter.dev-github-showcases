@@ -50,14 +50,6 @@ const PullRequestsTabView = ({ navigation, pullRequests }) => {
             </EmptyPullRequest>
           }
         />
-        {selectedPullRequests.pullRequests.map((data, index) => (
-          <IssuePullRequestCard {...data} cardType="pr" key={index} />
-        ))}
-        {selectedPullRequests.pullRequests.length === 0 && (
-          <EmptyPullRequest>
-            <Text style={{ textTransform: 'uppercase' }}>No {activeTab} Pull Request found.</Text>
-          </EmptyPullRequest>
-        )}
       </ContentContainer>
       <Pagination
         goToNext={goToNext}
