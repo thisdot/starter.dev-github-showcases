@@ -17,10 +17,11 @@ interface LinkButtonProps {
 
 const LinkButton = ({
   to,
-  children,
-  hasLine = false,
+  style,
   onClick,
   isBlank,
+  hasLine = false,
+  children,
   ...rest
 }: LinkButtonProps) => {
   const { onPress, ...props } = useLinkProps({ to });
@@ -32,8 +33,6 @@ const LinkButton = ({
     // Otherwise React Native for Web omits the `onClick` prop that's passed
     // You'll also need to pass `onPress` as `onClick` to the `View`
     // You can add hover effects using `onMouseEnter` and `onMouseLeave`
-    const { style, ...wrest } = rest;
-
     return (
       <View
         onClick={(e: Event) => {
@@ -55,7 +54,7 @@ const LinkButton = ({
           style ?? {},
         ]}
         {...props}
-        {...wrest}>
+        {...rest}>
         {children}
       </View>
     );
@@ -67,6 +66,7 @@ const LinkButton = ({
         onClick && onClick();
         onPress();
       }}
+      style={style}
       {...props}
       {...rest}>
       {children}
