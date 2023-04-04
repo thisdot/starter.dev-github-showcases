@@ -27,7 +27,7 @@ const RepoNavigator = ({ route, navigation }: AppStackScreenProps<'RepoNavigator
     if (route.params) {
       const { name, owner } = route.params;
       useRepoInfoStore.setState({ name, owner });
-    }else{
+    } else {
       navigation.navigate('Home');
     }
   }, [route.params, navigation]);

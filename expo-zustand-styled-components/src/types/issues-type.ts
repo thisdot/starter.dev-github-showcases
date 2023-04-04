@@ -9,7 +9,7 @@ export interface MilestoneProps {
   title: string;
 }
 
-export type PageInfo = UserPageInfo
+export type PageInfo = UserPageInfo;
 
 export interface IssueProps {
   totalCount: number;

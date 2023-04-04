@@ -15,7 +15,7 @@ export default function useCachedResources() {
         // Load fonts
         await Font.loadAsync({
           ...FontAwesome.font,
-          'Courier': require('../../assets/fonts/courier.ttf'),
+          Courier: require('../../assets/fonts/courier.ttf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

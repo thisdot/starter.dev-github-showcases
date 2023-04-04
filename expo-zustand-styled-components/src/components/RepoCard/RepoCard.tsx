@@ -1,17 +1,6 @@
-import {
-  Text,
-  TouchableWithoutFeedback,
-  useWindowDimensions,
-} from 'react-native';
+import { Text, TouchableWithoutFeedback, useWindowDimensions } from 'react-native';
 
-import {
-  Card,
-  Content,
-  Heading,
-  StarBtn,
-  LinkText,
-  Description,
-} from './RepoCard.styles';
+import { Card, Content, Heading, StarBtn, LinkText, Description } from './RepoCard.styles';
 
 import { colors } from '../../utils/style-variables';
 import { Repo } from '../../types/user-repos-type';
