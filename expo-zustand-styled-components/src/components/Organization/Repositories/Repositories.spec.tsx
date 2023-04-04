@@ -22,6 +22,7 @@ describe('Repositories', () => {
   it('should mount', () => {
     const wrapper = render(
       <Repositories
+        languages={['js']}
         repos={[mockedRepo]}
         goToNext={() => 'next'}
         goToPrev={() => 'prev'}
@@ -36,6 +37,7 @@ describe('Repositories', () => {
   it('should show info', () => {
     const wrapper = render(
       <Repositories
+        languages={['js']}
         repos={[mockedRepo]}
         goToNext={() => 'next'}
         goToPrev={() => 'prev'}
@@ -55,6 +57,7 @@ describe('Repositories', () => {
 
     const wrapper = render(
       <Repositories
+        languages={['js']}
         repos={[mockedRepo]}
         goToNext={nextFn}
         goToPrev={prevFn}
