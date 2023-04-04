@@ -1,5 +1,5 @@
-import { useWindowDimensions } from 'react-native';
 import React, { useState } from 'react';
+import { useWindowDimensions, View } from 'react-native';
 import SearchInput from './SearchInput';
 import FilterDropdown from '../FilterDropdown';
 import { RepoFilterWrapper, FiltersWrapper, RepoBtn, RepoBtnText } from './RepoFilter.styles';
@@ -35,7 +35,7 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
     language !== defaultLanguage;
 
   return (
-    <>
+    <View style={{ backgroundColor: 'white' }}>
       <RepoFilterWrapper screenWidth={width}>
         <SearchInput screenWidth={width} />
         <FiltersWrapper screenWidth={width} horizontal contentContainerStyle={{ flexGrow: 1 }}>
@@ -70,7 +70,7 @@ const RepoFilter = ({ languages, filteredRepoCount, repoBtnText }: RepoFilterPro
         </FiltersWrapper>
       </RepoFilterWrapper>
       {isSomeFilterSelected && <FilterText filteredRepoCount={filteredRepoCount} />}
-    </>
+    </View>
   );
 };
 

@@ -13,7 +13,7 @@ const Tree = ({ route }: RepoStackScreenProps<'Tree'>) => {
   return (
     <RepoLayout {...route.params}>
       <Containter screenWidth={width}>
-        <FileTree {...route.params}/>
+        <FileTree {...route.params} />
       </Containter>
     </RepoLayout>
   );

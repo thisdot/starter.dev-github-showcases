@@ -43,7 +43,7 @@ export type RepoPullRequestsQuery = {
   };
 };
 
-export type PageInfo = UserPageInfo
+export type PageInfo = UserPageInfo;
 
 export interface PullRequestProps {
   totalCount: number;

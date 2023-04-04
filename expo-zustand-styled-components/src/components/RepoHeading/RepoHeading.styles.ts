@@ -9,7 +9,8 @@ type ScreenWidth = {
 export const Heading = styled.View<ScreenWidth>`
   gap: 6px;
   flex-direction: row;
-  align-items: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'center' : 'flex-start')};
+  align-items: ${({ screenWidth }) =>
+    screenWidth >= breakpoints.tablet ? 'center' : 'flex-start'};
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '50%' : '100%')};
 `;
 

@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 import { colors } from '../../utils/style-variables';
 
-
 export const Wrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -28,9 +27,9 @@ export const Tab = styled.TouchableOpacity`
   gap: 4px;
 `;
 
-export const TabText = styled.Text<{isActive: boolean}>`
-  color: ${({isActive}) => isActive ? colors.gray600 : colors.gray900};
-  font-weight: ${({isActive}) => isActive ? '800': '500'};
+export const TabText = styled.Text<{ isActive: boolean }>`
+  color: ${({ isActive }) => (isActive ? colors.gray600 : colors.gray900)};
+  font-weight: ${({ isActive }) => (isActive ? '800' : '500')};
   font-size: 14px;
 `;
 

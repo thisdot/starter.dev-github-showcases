@@ -2,4 +2,9 @@
   functions = "functions"
 
 [dev]
-  publish = "dist"
+  publish = "web-build"
+
+[[redirects]]
+  from="/*"
+  to="/index.html"
+  status=200

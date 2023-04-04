@@ -1,6 +1,6 @@
-import { Repo, PageInfo as UserPageInfo  } from './user-repos-type';
+import { Repo, PageInfo as UserPageInfo } from './user-repos-type';
 
-export type PageInfo = UserPageInfo
+export type PageInfo = UserPageInfo;
 export interface OrgRepoInfo {
   organization: {
     avatarUrl: string;

@@ -1,5 +1,6 @@
 import { SERVER_BASE_URL, WEB_REDIRECT_URI, MOBILE_REDIRECT_URI, GITHUB_URL } from '@env';
 import { Platform } from 'react-native';
+import RepoIcon from '../components/Icons/RepoIcon';
 
 export const AUTH_URL = `${SERVER_BASE_URL}/.netlify/functions/signin?redirect_url=${
   Platform.OS === 'web' ? WEB_REDIRECT_URI : MOBILE_REDIRECT_URI
@@ -30,6 +31,8 @@ export const OrderDirection = {
   Asc: 'ASC',
   Desc: 'DESC',
 };
+
+export const tabs = [{ title: 'Repositories', Icon: RepoIcon }];
 
 export const SORT_OPTIONS = {
   [`${OrderField.CreatedAt}^${OrderDirection.Desc}`]: 'Newest',

@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { breakpoints } from '../../utils/breakpoints';
 import { colors } from '../../utils/style-variables';
 

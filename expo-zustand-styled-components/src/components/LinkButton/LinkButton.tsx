@@ -10,6 +10,7 @@ interface LinkButtonProps {
   onClick?: () => void;
   hasLine?: boolean;
   children: ReactNode;
+  testID?: string;
   style?: StyleProp<ViewStyle>;
 }
 
