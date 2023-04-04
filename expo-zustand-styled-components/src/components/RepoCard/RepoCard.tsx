@@ -23,7 +23,6 @@ import LinkButton from '../LinkButton/LinkButton';
 interface RepoCardProps {
   repo: Repo;
   isProfilePage?: boolean;
-  testID?: string;
 }
 
 const RepoCard = ({ repo, isProfilePage }: RepoCardProps) => {

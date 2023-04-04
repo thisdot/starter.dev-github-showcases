@@ -76,7 +76,7 @@ const Repositories = ({
               scrollEnabled={Platform.OS === 'web'}
               keyExtractor={(item, index) => item.id + index}
               renderItem={({ item }) => (
-                <RepoCard testID={`repocard_${item.id}`} repo={item} isProfilePage />
+                <RepoCard repo={item} isProfilePage />
               )}
               ListFooterComponent={
                 <Pagination
