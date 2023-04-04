@@ -1,11 +1,11 @@
 import React from 'react';
 import { fireEvent, render, act } from '@testing-library/react-native';
 import Header from './Header';
-import { useAuthStore } from '../../hooks/stores';
+import { useAppStore } from '../../hooks/stores';
 
-// Mock the useAuthStore hook
+// Mock the useAppStore hook
 jest.mock('../../hooks/stores', () => ({
-  useAuthStore: jest.fn(),
+  useAppStore: jest.fn(),
 }));
 
 jest.mock('@react-navigation/native', () => {
@@ -16,10 +16,10 @@ jest.mock('@react-navigation/native', () => {
 });
 
 describe('Header', () => {
-  const mockUseAuthStore = useAuthStore as jest.MockedFunction<typeof useAuthStore>;
+  const mockUseAppStore = useAppStore as jest.MockedFunction<typeof useAppStore>;
 
   beforeEach(() => {
-    mockUseAuthStore.mockReturnValue({ toggleMenu: jest.fn() });
+    mockUseAppStore.mockReturnValue({ toggleMenu: jest.fn() });
   });
 
   afterEach(() => {
@@ -36,7 +36,7 @@ describe('Header', () => {
     await act(async () => {
       const logo = getByTestId('github-logo');
       fireEvent.press(logo);
-      expect(mockUseAuthStore().toggleMenu).toHaveBeenCalled();
+      expect(mockUseAppStore().toggleMenu).toHaveBeenCalled();
     });
   });
 
