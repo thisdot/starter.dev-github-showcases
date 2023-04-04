@@ -19,7 +19,7 @@ const UserDropdown = ({ width }: { width: number }) => {
   const { isMenuOpen, toggleMenu, viewer } = useAppStore();
 
   return (
-    <DropdownWrapper>
+    <DropdownWrapper testID="user-dropdown">
       <ProfileImageWrapper
         testID="profile-image"
         onPress={() => useAppStore.setState({ isMenuOpen: !isMenuOpen })}>

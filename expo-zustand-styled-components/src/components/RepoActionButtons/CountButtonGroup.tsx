@@ -13,7 +13,7 @@ const formatCountString = (props) => {
 };
 
 interface CountButtonGroupProps {
-  count: number;
+  count?: number;
   children: ReactNode;
 }
 
@@ -21,7 +21,7 @@ const CountButtonGroup = ({ count, children }: CountButtonGroupProps) => {
   const countText = formatCountString(count);
 
   return (
-    <BtnGroup>
+    <BtnGroup testID="count-button-group">
       <BtnMain>
         <BtnMainText>{children}</BtnMainText>
       </BtnMain>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StyledHeader, StyledHeaderContainer } from './Header.styles';
 import UserDropdown from '../UserDropdown';
-import { GitHubLogo } from './GitHubLogo';
+import { GitHubLogo } from '../Icons';
 
 import { useAppStore} from '../../hooks/stores';
 import LinkButton from '../LinkButton/LinkButton';
@@ -12,10 +12,10 @@ const Header = ({ width }: { width: number }) => {
 
 
   return (
-    <StyledHeader screenWidth={width}>
-      <StyledHeaderContainer screenWidth={width}>
+    <StyledHeader testID="header" screenWidth={width}>
+      <StyledHeaderContainer testID="header-container" screenWidth={width}>
         <LinkButton to="/" onClick={() => toggleMenu(false)}>
-          <GitHubLogo />
+          <GitHubLogo testID="github-logo" />
         </LinkButton>
         <UserDropdown width={width} />
       </StyledHeaderContainer>
