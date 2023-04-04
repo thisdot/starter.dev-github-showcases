@@ -17,10 +17,11 @@ interface LinkButtonProps {
 
 const LinkButton = ({
   to,
-  children,
-  hasLine = false,
+  style,
   onClick,
   isBlank,
+  hasLine = false,
+  children,
   ...rest
 }: LinkButtonProps) => {
   const { onPress, ...props } = useLinkProps({ to });
@@ -45,10 +46,13 @@ const LinkButton = ({
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        style={{
-          // @ts-ignore
-          textDecoration: hasLine ? (isHovered ? `underline ${colors.blue600}` : 'none') : 'none',
-        }}
+        style={[
+          {
+            // @ts-ignore
+            textDecoration: hasLine ? (isHovered ? `underline ${colors.blue600}` : 'none') : 'none',
+          },
+          style ?? {},
+        ]}
         {...props}
         {...rest}>
         {children}
@@ -62,6 +66,7 @@ const LinkButton = ({
         onClick && onClick();
         onPress();
       }}
+      style={style}
       {...props}
       {...rest}>
       {children}
