@@ -10,10 +10,12 @@ const Repositories = ({
   repos,
   goToNext,
   goToPrev,
+  languages,
   hasNextPage,
   hasPrevPage,
 }: {
   repos: Repo[];
+  languages: string[];
   goToNext: () => void;
   goToPrev: () => void;
   hasNextPage: boolean;
@@ -26,7 +28,7 @@ const Repositories = ({
       showsVerticalScrollIndicator={false}
       keyExtractor={(item, index) => item.id + index}
       renderItem={({ item }) => <RepoCard repo={item} />}
-      ListHeaderComponent={<RepoFilter languages={[]} filteredRepoCount={0} repoBtnText="New" />}
+      ListHeaderComponent={<RepoFilter languages={languages} filteredRepoCount={repos.length} repoBtnText="New" />}
       ListFooterComponent={
         repos.length > 0 &&
         hasNextPage && (
