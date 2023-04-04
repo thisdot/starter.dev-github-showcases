@@ -9,6 +9,7 @@
     "web": "expo start --web --clear",
     "dev": "netlify dev",
     "test": "jest",
+    "build": "npx expo export:web",
     "lint": "eslint --ext .ts,.tsx ./src",
     "lint-fix": "eslint --ext .ts,.tsx ./src --fix",
     "format": "prettier --write ./src --ignore-path .gitignore"
