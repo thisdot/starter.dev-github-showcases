@@ -49,13 +49,13 @@ const Repositories = ({
   const goToNext = () => {
     navigate('AppNavigator', {
       screen: 'Profile',
-      params: { username, afterCursor: pageInfo.endCursor },
+      params: { username, afterCursor: pageInfo?.endCursor },
     });
   };
   const goToPrev = () => {
     navigate('AppNavigator', {
       screen: 'Profile',
-      params: { username, beforeCursor: pageInfo.startCursor },
+      params: { username, beforeCursor: pageInfo?.startCursor },
     });
   };
 
@@ -76,13 +76,12 @@ const Repositories = ({
               keyExtractor={(item, index) => item.id + index}
               renderItem={({ item }) => <RepoCard repo={item} isProfilePage />}
               ListFooterComponent={
-                result.length > 0 &&
-                pageInfo.hasNextPage && (
+                result.length > 0 && (
                   <Pagination
                     goToNext={goToNext}
                     goToPrev={goToPrev}
-                    hasNextPage={pageInfo.hasNextPage}
-                    hasPrevPage={pageInfo.hasPreviousPage}
+                    hasNextPage={pageInfo?.hasNextPage}
+                    hasPrevPage={pageInfo?.hasPreviousPage}
                   />
                 )
               }

@@ -30,8 +30,7 @@ const Repositories = ({
       renderItem={({ item }) => <RepoCard repo={item} />}
       ListHeaderComponent={<RepoFilter languages={languages} filteredRepoCount={repos.length} repoBtnText="New" />}
       ListFooterComponent={
-        repos.length > 0 &&
-        hasNextPage && (
+        repos.length > 0 && (
         <Pagination
           goToNext={goToNext}
           goToPrev={goToPrev}
