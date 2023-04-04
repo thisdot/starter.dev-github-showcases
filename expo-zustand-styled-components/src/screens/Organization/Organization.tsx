@@ -3,9 +3,10 @@ import { useWindowDimensions } from 'react-native';
 
 import { AppStackScreenProps } from '../../../types';
 
-import getOrgRepos from '../../services/get-org-repos';
-import { useOrgStore } from '../../hooks/stores';
 import { tabs } from '../../utils/constants';
+import getOrgRepos from '../../services/get-org-repos';
+import useRepoSortFilter from '../../utils/useRepoSortFiler';
+import { useOrgStore, useRepoFilterStore } from '../../hooks/stores';
 
 import TabNavigation from '../../components/TabNavigation';
 import LoaderErrorView from '../../components/LoaderErrorView';
@@ -16,6 +17,8 @@ const Organization = ({ route, navigation }: AppStackScreenProps<'Organization'>
   const { width } = useWindowDimensions();
   const { data, error, isLoading } = useOrgStore();
   const { login, afterCursor, beforeCursor } = route.params;
+  const { search, filterType, sortBy, language } = useRepoFilterStore();
+  const { result, languages } = useRepoSortFilter(data.repos, search, filterType, sortBy, language);
 
   useEffect(() => {
     if (login) {
@@ -58,9 +61,10 @@ const Organization = ({ route, navigation }: AppStackScreenProps<'Organization'>
           <About {...data.orgInfo} />
           <TabNavigation pl={16} tabs={tabs} activeTab={tabs[0].title} />
           <Repositories
-            repos={data.repos}
+            repos={result}
             goToNext={goToNext}
             goToPrev={goToPrev}
+            languages={languages}
             hasNextPage={data.pageInfo.hasNextPage}
             hasPrevPage={data.pageInfo.hasPreviousPage}
           />

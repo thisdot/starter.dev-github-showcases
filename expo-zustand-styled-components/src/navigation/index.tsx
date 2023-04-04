@@ -42,7 +42,7 @@ function RootNavigator() {
 
   const isWeb = Platform.OS === 'web';
 
-  const AppStack = <Stack.Screen name="AppNavigator" component={AppNavigator} />
+  const AppStack = <Stack.Screen name="AppNavigator" component={AppNavigator} />;
 
   return (
     <>

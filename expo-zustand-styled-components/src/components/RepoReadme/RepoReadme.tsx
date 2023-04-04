@@ -68,5 +68,5 @@ const styles = StyleSheet.create({
   link: {
     color: colors.blue600,
     textDecorationLine: 'none',
-  }
+  },
 });

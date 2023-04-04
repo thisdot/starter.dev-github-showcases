@@ -22,8 +22,8 @@ describe('RepoAbout', () => {
         topics: [],
         isOrg: true,
         openPullRequestCount: 1,
-      }
-    })
+      },
+    });
 
     const wrapper = render(<RepoAbout />);
     expect(wrapper).toBeTruthy();

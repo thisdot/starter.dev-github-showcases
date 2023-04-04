@@ -1,31 +1,25 @@
 import { create } from 'zustand';
-import { Platform } from 'react-native';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserProfile, ViewerInfo } from '../../types/user-profile-type';
 
 interface IAppStore {
   error?: string;
-  login?: string;
+  user?: UserProfile;
+  viewer?: ViewerInfo;
   branch?: string;
   isLoading: boolean;
-  file?: {
-    byteSize: number;
-    text: string;
-  };
+  isMenuOpen: boolean;
+  toggleMenu: (v?: boolean) => void;
 }
 
 const initialState: IAppStore = {
-  login: undefined,
+  isMenuOpen: false,
   isLoading: false,
+  toggleMenu: () => null,
 };
 
-const useAppStore = create(
-  persist<IAppStore>(() => initialState, {
-    name: 'useAppStore',
-    storage: createJSONStorage(() =>
-      Platform.OS === 'web' ? window.sessionStorage : AsyncStorage
-    ),
-  })
-);
+const useAppStore = create<IAppStore>((set, get) => ({
+  ...initialState,
+  toggleMenu: (v) => set(() => ({ isMenuOpen: v ?? !get().isMenuOpen })),
+}));
 
 export default useAppStore;

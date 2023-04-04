@@ -2,40 +2,33 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { UserProfile, ViewerInfo } from '../../types/user-profile-type';
 import { Platform } from 'react-native';
 
 interface IAuthStore {
-  user?: UserProfile;
-  viewer?: ViewerInfo;
   token?: string;
   error?: string;
-  isMenuOpen: boolean;
-  isLoading: boolean;
-  logout: () => void;
-  toggleMenu: (v?: boolean) => void;
+  isLoading?: boolean;
+  logout?: () => void;
 }
 
 const initialState: IAuthStore = {
   token: undefined,
   isLoading: false,
-  isMenuOpen: false,
   logout: () => null,
-  toggleMenu: () => null,
 };
 
 const useAuthStore = create(
   persist<IAuthStore>(
-    (set, get) => ({
+    (set) => ({
       ...initialState,
-      toggleMenu: (v) => set(() => ({ isMenuOpen: v ?? !get().isMenuOpen })),
       logout: () => {
-        AsyncStorage.clear();
+        Platform.OS !== 'web' && AsyncStorage.clear();
         set(() => ({ ...initialState }));
       },
     }),
     {
       name: 'useAuthStore',
+      partialize: (state) => ({ token: state.token }),
       storage: createJSONStorage(() =>
         Platform.OS === 'web' ? window.sessionStorage : AsyncStorage
       ),

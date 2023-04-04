@@ -9,12 +9,12 @@ type ScreenWidth = {
 export const RepoFilterWrapper = styled.View<ScreenWidth>`
   gap: 10px;
   width: 100%;
-  padding-vertical: 10px;
-  padding-horizontal: 16px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: ${colors.gray300};
   flex-direction: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 'row' : 'column')};
+  padding-horizontal: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 0 : 16)}px;
+  padding-vertical: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? 16 : 10)}px;
 `;
 
 export const FiltersWrapper = styled.ScrollView<ScreenWidth>`
