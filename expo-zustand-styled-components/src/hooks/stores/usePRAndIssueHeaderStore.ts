@@ -7,7 +7,7 @@ interface UsePRAndIssueHeaderStoreProps {
   sortBy: string;
   milestone?: string;
   milestones: { title: string }[];
-  labels: { name: string; color?: string; }[];
+  labels: { name: string; color?: string }[];
   setActiveTab: (value: string) => void;
   setSortBy: (value: string) => void;
   setLabel: (value: string) => void;

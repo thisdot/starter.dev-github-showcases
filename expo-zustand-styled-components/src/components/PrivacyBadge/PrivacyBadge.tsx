@@ -8,7 +8,7 @@ interface PrivacyBadgeProps {
 const PrivacyBadge = ({ visibility }: PrivacyBadgeProps) => {
   const { width } = useWindowDimensions();
   return (
-    <Badge>
+    <Badge testID="privacy-badge">
       <BadgeText screenWidth={width}>{visibility.toLowerCase()}</BadgeText>
     </Badge>
   );
