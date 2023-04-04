@@ -12,15 +12,17 @@ import {
 
 import useAuthStore from '../../hooks/stores/useAuthStore';
 import LinkButton from '../LinkButton/LinkButton';
+import { useAppStore } from '../../hooks/stores';
 
 const UserDropdown = ({ width }: { width: number }) => {
-  const { logout, viewer, isMenuOpen, toggleMenu } = useAuthStore();
+  const { logout } = useAuthStore();
+  const { isMenuOpen, toggleMenu, viewer } = useAppStore();
 
   return (
     <DropdownWrapper testID="user-dropdown">
       <ProfileImageWrapper
         testID="profile-image"
-        onPress={() => useAuthStore.setState({ isMenuOpen: !isMenuOpen })}>
+        onPress={() => useAppStore.setState({ isMenuOpen: !isMenuOpen })}>
         <ProfileImageContainer>
           {viewer?.avatarUrl && <ProfileImage source={{ uri: viewer.avatarUrl }} />}
         </ProfileImageContainer>

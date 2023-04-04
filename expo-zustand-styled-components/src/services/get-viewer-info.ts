@@ -1,4 +1,4 @@
-import { useAuthStore } from '../hooks/stores';
+import { useAppStore } from '../hooks/stores';
 import FetchApi from './api';
 import { LOGGEDIN_USER_PROFILE } from './queries/viewer-info';
 
@@ -13,13 +13,13 @@ type Response = {
 };
 
 const getViewerProfile = async () => {
-  if (!useAuthStore.getState().viewer) {
+  if (!useAppStore.getState().viewer) {
     try {
-      useAuthStore.setState({ isLoading: true });
+      useAppStore.setState({ isLoading: true });
       const resp = (await FetchApi({ query: LOGGEDIN_USER_PROFILE })) as Response;
-      useAuthStore.setState({ isLoading: false, viewer: resp.data?.viewer || null });
+      useAppStore.setState({ isLoading: false, viewer: resp.data?.viewer || null });
     } catch (err) {
-      useAuthStore.setState({ isLoading: false, error: err.message });
+      useAppStore.setState({ isLoading: false, error: err.message });
     }
   }
 };
