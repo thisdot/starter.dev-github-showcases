@@ -1,12 +1,16 @@
-import FilterDropdown from '../FilterDropdown/FilterDropdown';
-import PullRequestIcon from '../Icons/PullRequestIcon';
-import { Dropdowns, Tab, TabText, Tabs, Wrapper } from './PRAndIssueHeader.styles';
-import { usePRAndIssueHeaderStore, useIssuesStore, usePullRequestsStore } from '../../hooks/stores';
-import { PR_ISSUE_TABS, SORT_OPTIONS } from '../../utils/constants';
-import IssuesIcon from '../Icons/IssuesIcon';
-import { colors } from '../../utils/style-variables';
 import { useState } from 'react';
+import { StyleProp, ViewProps } from 'react-native';
 
+import IssuesIcon from '../Icons/IssuesIcon';
+import PullRequestIcon from '../Icons/PullRequestIcon';
+
+import FilterDropdown from '../FilterDropdown/FilterDropdown';
+import { Dropdowns, Tab, TabText, Tabs, Wrapper } from './PRAndIssueHeader.styles';
+
+import { usePRAndIssueHeaderStore} from '../../hooks/stores';
+
+import { PR_ISSUE_TABS, SORT_OPTIONS } from '../../utils/constants';
+import { colors } from '../../utils/style-variables';
 interface PRAndIssueHeaderProps {
   cardType: 'pr' | 'issue';
   openCount: number;
@@ -14,53 +18,40 @@ interface PRAndIssueHeaderProps {
 }
 
 const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeaderProps) => {
-  const {
-    milestones,
-    labels,
-    sortBy,
-    label,
-    milestone,
-    setSortBy,
-    setLabel,
-    setMilestone,
-    activeTab,
-    setActiveTab,
-  } = usePRAndIssueHeaderStore();
-  const { resetBeforeAndAfter: resetIssuesBeforeAndAfter } = useIssuesStore();
-  const { setBefore: setPullRequestsBefore, setAfter: setPullRequestsAfter } =
-    usePullRequestsStore();
   const [showOptions, setShowOptions] = useState(null);
   const sortOptions = Object.values(SORT_OPTIONS);
+  const {
+    label,
+    labels,
+    sortBy,
+    setLabel,
+    milestone,
+    activeTab,
+    setSortBy,
+    milestones,
+    setActiveTab,
+    setMilestone,
+  } = usePRAndIssueHeaderStore();
 
   const labelOptions = (): string[] => labels.map((label) => label.name);
   const labelOptionsColors = (): string[] => labels.map((label) => label.color);
   const milestoneOptions = (): string[] => milestones.map((label) => label.title);
   const selectSortBy = (value) =>
     setSortBy(sortBy === value ? Object.values(SORT_OPTIONS)[0] : value);
-  const selectLabel = (value) => setLabel(label === value ? undefined : value);
-  const selectMilestone = (value) => setMilestone(milestone === value ? undefined : value);
-
-  const handleTabPress = (value: string) => {
-    resetIssuesBeforeAndAfter();
-    setPullRequestsBefore(null);
-    setPullRequestsAfter(null);
-    setActiveTab(value);
-  };
+  const selectLabel = (value: string) => setLabel(label === value ? undefined : value);
+  const selectMilestone = (value: string) => setMilestone(milestone === value ? undefined : value);
+  const handleTabPress = (value: string) => setActiveTab(value);
 
   const filterDropdownStyle = {
     borderWidth: 0,
     elevation: 0,
     flexGrow: 0,
-  };
+  } as StyleProp<ViewProps>;
 
   return (
     <Wrapper>
       <Tabs>
-        <Tab
-          activeOpacity={0.7}
-          onPress={() => {
-            handleTabPress(PR_ISSUE_TABS.open);
-          }}>
+        <Tab activeOpacity={0.7} onPress={() => handleTabPress(PR_ISSUE_TABS.open)}>
           {cardType === 'pr' ? (
             <PullRequestIcon color={colors.gray500} style={{ marginRight: 4 }} />
           ) : (
@@ -81,33 +72,33 @@ const PRAndIssueHeader = ({ cardType, openCount, closedCount }: PRAndIssueHeader
       <Dropdowns>
         <FilterDropdown
           name="Label"
-          showOptions={showOptions}
           selected={label}
           items={labelOptions()}
-          itemsColors={labelOptionsColors()}
+          showOptions={showOptions}
           selectOption={selectLabel}
-          setShowOptions={(value) => setShowOptions(value)}
           style={filterDropdownStyle}
+          itemsColors={labelOptionsColors()}
+          setShowOptions={(value) => setShowOptions(value)}
         />
         {milestoneOptions() && milestoneOptions().length > 0 && (
           <FilterDropdown
             name="Milestone"
-            showOptions={showOptions}
             selected={milestone}
+            showOptions={showOptions}
             items={milestoneOptions()}
+            style={filterDropdownStyle}
             selectOption={selectMilestone}
             setShowOptions={(value) => setShowOptions(value)}
-            style={filterDropdownStyle}
           />
         )}
         <FilterDropdown
           name="Sort"
-          showOptions={showOptions}
           selected={sortBy}
           items={sortOptions}
+          showOptions={showOptions}
           selectOption={selectSortBy}
-          setShowOptions={(value) => setShowOptions(value)}
           style={filterDropdownStyle}
+          setShowOptions={(value) => setShowOptions(value)}
         />
       </Dropdowns>
     </Wrapper>

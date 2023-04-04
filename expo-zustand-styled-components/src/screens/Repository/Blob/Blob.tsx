@@ -13,7 +13,7 @@ const Blob = ({ route }: RepoStackScreenProps<'Blob'>) => {
   return (
     <RepoLayout {...route.params}>
       <Containter screenWidth={width}>
-        <FileViewer {...route.params}/>
+        <FileViewer {...route.params} />
       </Containter>
     </RepoLayout>
   );

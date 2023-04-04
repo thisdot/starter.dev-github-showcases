@@ -20,7 +20,9 @@ const UserDropdown = ({ width }: { width: number }) => {
 
   return (
     <DropdownWrapper>
-      <ProfileImageWrapper testID="profile-image" onPress={() => useAppStore.setState({isMenuOpen: !isMenuOpen})}>
+      <ProfileImageWrapper
+        testID="profile-image"
+        onPress={() => useAppStore.setState({ isMenuOpen: !isMenuOpen })}>
         <ProfileImageContainer>
           {viewer?.avatarUrl && <ProfileImage source={{ uri: viewer.avatarUrl }} />}
         </ProfileImageContainer>

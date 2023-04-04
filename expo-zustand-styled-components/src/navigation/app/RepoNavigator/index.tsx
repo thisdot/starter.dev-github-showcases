@@ -27,7 +27,7 @@ const RepoNavigator = ({ route, navigation }: AppStackScreenProps<'RepoNavigator
     if (route.params) {
       const { name, owner } = route.params;
       useRepoInfoStore.setState({ name, owner });
-    }else{
+    } else {
       navigation.navigate('Home');
     }
   }, [route.params, navigation]);
@@ -38,11 +38,13 @@ const RepoNavigator = ({ route, navigation }: AppStackScreenProps<'RepoNavigator
     }
   }, [name, owner, navigation]);
 
+  const title = `${name}/${owner}`;
+
   return (
     <Stack.Navigator initialRouteName="Code" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Code" component={CodeScreen} options={{ title: '' }} />
-      <Stack.Screen name="Tree" component={TreeScreen} options={{ title: '' }} />
-      <Stack.Screen name="Blob" component={BlobScreen} options={{ title: '' }} />
+      <Stack.Screen name="Code" component={CodeScreen} options={{ title: `${title} . Code` }}  />
+      <Stack.Screen name="Tree" component={TreeScreen} options={{ title: `${title} . Tree`  }} />
+      <Stack.Screen name="Blob" component={BlobScreen} options={{ title: `${title} . Blob`  }} />
       <Stack.Screen name="Issues" component={IssuesScreen} options={{ title: '' }} />
       <Stack.Screen name="Pull Requests" component={PullRequestsScreen} options={{ title: '' }} />
     </Stack.Navigator>

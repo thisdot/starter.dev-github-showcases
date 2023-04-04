@@ -38,19 +38,19 @@ const Dropdown = ({
 }) => {
   const { dropDownFlatlistRef } = useRefs();
 
-    const allItems = (): {name: string; color: string | null;}[] => {
-      if (itemsColors && itemsColors.length === data.length) {
-        return data.map((item, index) => ({
-          name: item,
-          color: itemsColors && (itemsColors[index] || 'ccc'),
-        }));
-      } else {
-        return data.map((item) => ({
-          name: item,
-          color: null,
-        }));
-      }
-    };
+  const allItems = (): { name: string; color: string | null }[] => {
+    if (itemsColors && itemsColors.length === data.length) {
+      return data.map((item, index) => ({
+        name: item,
+        color: itemsColors && (itemsColors[index] || 'ccc'),
+      }));
+    } else {
+      return data.map((item) => ({
+        name: item,
+        color: null,
+      }));
+    }
+  };
 
   return (
     <DropdownModal visible={isVisible}>
@@ -67,7 +67,7 @@ const Dropdown = ({
               </TouchableOpacity>
             </DropdownOptionsHeading>
           )}
-          renderItem={({ item: {name, color} }) => (
+          renderItem={({ item: { name, color } }) => (
             <DropdownOption onPress={() => selectOption(name)}>
               {selected === name ? (
                 <CorrectIcon color={colors.gray600} />
@@ -75,9 +75,7 @@ const Dropdown = ({
                 <View style={{ marginRight: 16 }} />
               )}
               <DropdownItemContent>
-                {color && (
-                  <DropdownItemContentColor style={{backgroundColor: `#${color}`}} />
-                )}
+                {color && <DropdownItemContentColor style={{ backgroundColor: `#${color}` }} />}
                 <Text>{name}</Text>
               </DropdownItemContent>
             </DropdownOption>
