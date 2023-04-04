@@ -30,6 +30,7 @@ import { getTextColor } from '../../utils/dynamicColor';
 import { colors } from '../../utils/style-variables';
 
 import { Issue } from '../../types/issues-type';
+import LinkButton from '../LinkButton/LinkButton';
 
 const IssuePullRequestCard = ({
   url,
@@ -74,9 +75,9 @@ const IssuePullRequestCard = ({
       <View>{getIcon()}</View>
       <Content>
         <TitleLabelsWrapper>
-          <Link to={url}>
+          <LinkButton to={url} isBlank>
             <ContentTitle>{title}</ContentTitle>
-          </Link>
+          </LinkButton>
           <Labels>
             {labels.map(({ color, name }, index) => (
               <LabelView key={index} color={color}>

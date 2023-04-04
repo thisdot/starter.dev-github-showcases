@@ -12,9 +12,17 @@ interface LinkButtonProps {
   children: ReactNode;
   testID?: string;
   style?: StyleProp<ViewStyle>;
+  isBlank?: boolean;
 }
 
-const LinkButton = ({ to, children, hasLine = false, onClick, ...rest }: LinkButtonProps) => {
+const LinkButton = ({
+  to,
+  children,
+  hasLine = false,
+  onClick,
+  isBlank,
+  ...rest
+}: LinkButtonProps) => {
   const { onPress, ...props } = useLinkProps({ to });
 
   const [isHovered, setIsHovered] = useState(false);
@@ -26,9 +34,14 @@ const LinkButton = ({ to, children, hasLine = false, onClick, ...rest }: LinkBut
     // You can add hover effects using `onMouseEnter` and `onMouseLeave`
     return (
       <View
-        onClick={() => {
-          onClick && onClick();
-          onPress();
+        onClick={(e: Event) => {
+          if (isBlank) {
+            e.preventDefault();
+            window.open(to, '_blank');
+          } else {
+            onClick && onClick();
+            onPress();
+          }
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
