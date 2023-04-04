@@ -8,7 +8,6 @@ import { useAuthStore } from '../../hooks/stores';
 import Button from '../../components/Button';
 
 import { SafeAreaViewStyled } from './Login.styles';
-import getViewerProfile from '../../services/get-viewer-info';
 import { MOBILE_REDIRECT_URI } from '@env';
 import { Platform } from 'react-native';
 
@@ -37,7 +36,6 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
 
   useEffect(() => {
     if (token) {
-      getViewerProfile();
       navigation.navigate('AppNavigator', { screen: 'Home', path: '' });
     }
   }, [token]);
@@ -48,7 +46,7 @@ const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {
         primary
         isLoading={isLoading}
         title="Sign in with GitHub"
-        loadingText="Loging in..."
+        loadingText="Logging in..."
         onPress={_handlePressButtonAsync}
         disabled={isLoading}
       />

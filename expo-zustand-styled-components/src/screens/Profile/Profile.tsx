@@ -8,8 +8,8 @@ import TabNavigation from '../../components/TabNavigation';
 import LoaderErrorView from '../../components/LoaderErrorView';
 import Repositories from '../../components/Profile/Repositories';
 
+import { useAppStore } from '../../hooks/stores';
 import { tabs } from '../../utils/constants';
-import { useAuthStore } from '../../hooks/stores';
 import { breakpoints } from '../../utils/breakpoints';
 import getUserProfile from '../../services/get-user-profile';
 
@@ -18,13 +18,13 @@ import { AppStackScreenProps } from '../../../types';
 interface Elm extends Element {
   style: {
     zIndex: string;
-  }
+  };
 }
 
 const Profile = ({ route, navigation }: AppStackScreenProps<'Profile'>) => {
   const [leftPadding, setLeftPadding] = useState(0);
   const { width, height } = useWindowDimensions();
-  const { user, error, isLoading } = useAuthStore();
+  const { user, error, isLoading } = useAppStore();
 
   useEffect(() => {
     getUserProfile({ username: route.params.username });

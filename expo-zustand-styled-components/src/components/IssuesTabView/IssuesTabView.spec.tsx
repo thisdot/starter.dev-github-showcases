@@ -1,4 +1,3 @@
-
 import { render, act } from '@testing-library/react-native';
 import IssuesTabView from '.';
 import { NavigationContainer } from '@react-navigation/native';
@@ -52,19 +51,19 @@ describe('Issues Tab View', () => {
     const openIssues = await wrapper.getByTestId('open' + '-issues');
     await expect(openIssues.props.data.length).toBe(1);
   });
-  
+
   it('should show closed issues', () => {
     act(() => {
-      usePRAndIssueHeaderStore.setState({activeTab: 'closed'});
-    })
+      usePRAndIssueHeaderStore.setState({ activeTab: 'closed' });
+    });
     const closedIssues = wrapper.getByTestId('closed' + '-issues');
     expect(closedIssues).toBeDefined();
   });
 
   it('should have content in closed issue', async () => {
-     act(() => {
-       usePRAndIssueHeaderStore.setState({ activeTab: 'closed' });
-     });
+    act(() => {
+      usePRAndIssueHeaderStore.setState({ activeTab: 'closed' });
+    });
     props.issues.closedIssues.issues = issuesTestData;
     wrapper = await render(
       <NavigationContainer>
@@ -74,5 +73,4 @@ describe('Issues Tab View', () => {
     const closedIssues = await wrapper.getByTestId('closed' + '-issues');
     await expect(closedIssues.props.data.length).toBe(1);
   });
-
 });

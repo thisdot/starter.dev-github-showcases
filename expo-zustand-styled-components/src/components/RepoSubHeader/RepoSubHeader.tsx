@@ -5,10 +5,7 @@ import RepoActionButtons from '../RepoActionButtons/RepoActionButtons';
 import { createTabList } from './tabList';
 import { Wrapper, TopRow } from './RepoSubHeader.styles';
 
-import {
-  useRepoInfoStore,
-  usePRAndIssueHeaderStore,
-} from '../../hooks/stores';
+import { useRepoInfoStore, usePRAndIssueHeaderStore } from '../../hooks/stores';
 
 import { RepoStackParamList } from '../../../types';
 

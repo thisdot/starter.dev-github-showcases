@@ -11,11 +11,15 @@ interface PrivacyIconProps {
 const PrivacyIcon = ({ visibility }: PrivacyIconProps) => {
   const isPrivate = 'private'.localeCompare(visibility) === 0;
 
-  if (!visibility) return <IconPlaceholder testID='icon-placeholder' />;
+  if (!visibility) return <IconPlaceholder testID="icon-placeholder" />;
 
   return (
-    <View testID='privacy-icon'>
-      {isPrivate ? <PadlockIcon testID="padlock-icon" color={colors.gray400} /> : <RepoIcon testID="repo-icon" color={colors.gray400} />}
+    <View testID="privacy-icon">
+      {isPrivate ? (
+        <PadlockIcon testID="padlock-icon" color={colors.gray400} />
+      ) : (
+        <RepoIcon testID="repo-icon" color={colors.gray400} />
+      )}
     </View>
   );
 };

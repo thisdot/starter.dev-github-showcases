@@ -53,7 +53,7 @@ const PullRequests = ({ route, navigation }: RepoStackScreenProps<'Pull Requests
 
   useLayoutEffect(() => {
     useRepoInfoStore.setState({ activeTab: 'Pull Requests' });
-    if(info && name && owner){
+    if (info && name && owner) {
       navigation.setOptions({ title: `${name}/${owner} . PRs (${info?.openPullRequestCount}) ` });
     }
   }, [info, name, owner]);

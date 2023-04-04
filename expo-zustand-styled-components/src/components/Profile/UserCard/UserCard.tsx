@@ -19,7 +19,7 @@ import OrgList from './OrgList';
 import SocialCounts from './SocialCounts';
 import { UserProfile } from '../../../types/user-profile-type';
 
-const UserProfileCard = ({ user }: { user: UserProfile }) => {
+const UserProfileCard = ({ user }: { user?: UserProfile }) => {
   const { width } = useWindowDimensions();
 
   return (

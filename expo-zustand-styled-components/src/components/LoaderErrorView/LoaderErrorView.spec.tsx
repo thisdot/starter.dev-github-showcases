@@ -8,7 +8,7 @@ describe('LoaderErrorView', () => {
   });
 
   it('should show the error message', () => {
-    const wrapper = render(<LoaderErrorView error='error text' />);
+    const wrapper = render(<LoaderErrorView error="error text" />);
     expect(wrapper).toBeTruthy();
     const errorMsg = wrapper.getByText('error text');
     expect(errorMsg).toBeDefined();

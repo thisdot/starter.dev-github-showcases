@@ -7,7 +7,7 @@ import PullRequestIcon from '../Icons/PullRequestIcon';
 import FilterDropdown from '../FilterDropdown/FilterDropdown';
 import { Dropdowns, Tab, TabText, Tabs, Wrapper } from './PRAndIssueHeader.styles';
 
-import { usePRAndIssueHeaderStore} from '../../hooks/stores';
+import { usePRAndIssueHeaderStore } from '../../hooks/stores';
 
 import { PR_ISSUE_TABS, SORT_OPTIONS } from '../../utils/constants';
 import { colors } from '../../utils/style-variables';
