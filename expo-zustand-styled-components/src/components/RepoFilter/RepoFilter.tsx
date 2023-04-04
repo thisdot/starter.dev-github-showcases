@@ -1,5 +1,5 @@
-import { useWindowDimensions, View } from 'react-native';
 import React, { useState } from 'react';
+import { useWindowDimensions, View } from 'react-native';
 import SearchInput from './SearchInput';
 import FilterDropdown from '../FilterDropdown';
 import { RepoFilterWrapper, FiltersWrapper, RepoBtn, RepoBtnText } from './RepoFilter.styles';
