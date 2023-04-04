@@ -22,6 +22,7 @@ describe('Repositories', () => {
   it('should mount', () => {
     const wrapper = render(
       <Repositories
+        languages={['js']}
         repos={[mockedRepo]}
         goToNext={() => 'next'}
         goToPrev={() => 'prev'}
@@ -36,6 +37,7 @@ describe('Repositories', () => {
   it('should show info', () => {
     const wrapper = render(
       <Repositories
+        languages={['js']}
         repos={[mockedRepo]}
         goToNext={() => 'next'}
         goToPrev={() => 'prev'}
@@ -50,11 +52,12 @@ describe('Repositories', () => {
   });
 
   it('should show pagination buttons and call relatives functions when clicked', () => {
-    const nextFn = jest.fn()
-    const prevFn = jest.fn()
+    const nextFn = jest.fn();
+    const prevFn = jest.fn();
 
     const wrapper = render(
       <Repositories
+        languages={['js']}
         repos={[mockedRepo]}
         goToNext={nextFn}
         goToPrev={prevFn}
@@ -71,6 +74,6 @@ describe('Repositories', () => {
     fireEvent.press(wrapper.getByText('Prev'));
     expect(prevFn).toBeCalled();
     fireEvent.press(wrapper.getByText('Next'));
-    expect(nextFn).toBeCalled()
+    expect(nextFn).toBeCalled();
   });
 });
