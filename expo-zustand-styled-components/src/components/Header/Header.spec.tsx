@@ -1,7 +1,6 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render, act } from '@testing-library/react-native';
 import Header from './Header';
-import { act } from 'react-test-renderer';
 import { useAuthStore } from '../../hooks/stores';
 
 // Mock the useAuthStore hook
@@ -35,7 +34,7 @@ describe('Header', () => {
     const { getByTestId } = render(<Header width={100} />);
 
     await act(async () => {
-      const logo = await getByTestId('github-logo');
+      const logo = getByTestId('github-logo');
       fireEvent.press(logo);
       expect(mockUseAuthStore().toggleMenu).toHaveBeenCalled();
     });
