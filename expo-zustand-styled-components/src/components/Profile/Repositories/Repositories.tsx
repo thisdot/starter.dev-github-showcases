@@ -20,7 +20,7 @@ const Repositories = ({
   beforeCursor,
   setLeftPadding,
 }: {
-  username: string;
+  username?: string;
   afterCursor?: string;
   beforeCursor?: string;
   setLeftPadding: (left: number) => void;
@@ -71,16 +71,19 @@ const Repositories = ({
           <RepoFilter languages={languages} filteredRepoCount={result.length} repoBtnText="New" />
           <ScrollView horizontal scrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
             <FlatList
+              testID={'flatList'}
               data={result}
               scrollEnabled={Platform.OS === 'web'}
               keyExtractor={(item, index) => item.id + index}
-              renderItem={({ item }) => <RepoCard repo={item} isProfilePage />}
+              renderItem={({ item }) => (
+                <RepoCard repo={item} isProfilePage />
+              )}
               ListFooterComponent={
                 <Pagination
                   goToNext={goToNext}
                   goToPrev={goToPrev}
-                  hasNextPage={pageInfo.hasNextPage}
-                  hasPrevPage={pageInfo.hasPreviousPage}
+                  hasNextPage={pageInfo?.hasNextPage}
+                  hasPrevPage={pageInfo?.hasPreviousPage}
                 />
               }
             />
