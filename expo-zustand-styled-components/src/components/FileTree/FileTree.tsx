@@ -3,9 +3,9 @@ import { View } from 'react-native';
 
 import { useRepoInfoStore } from '../../hooks/stores';
 import getRepoTree from '../../services/get-repo-tree';
+import { colors } from '../../utils/style-variables';
 
 import { Cell, LinkText, Containter, Item } from './FileTree.styles';
-import { colors } from '../../utils/style-variables';
 import { FolderIcon, DocumentIcon } from '../Icons';
 import LinkButton from '../LinkButton/LinkButton';
 
@@ -21,7 +21,7 @@ const FileTree = (props: { path?: string; branch?: string }) => {
       name,
       expression: `${_branch}:${props.path || ''}`,
     });
-  }, [owner, name, props]);
+  }, [owner, name, props.path, _branch]);
 
   return (
     <Containter>

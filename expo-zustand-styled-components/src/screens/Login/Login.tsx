@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { Platform } from 'react-native';
+import { MOBILE_REDIRECT_URI } from '@env';
 import * as WebBrowser from 'expo-web-browser';
 import { URLSearchParams } from 'react-native-url-polyfill';
 
@@ -8,8 +10,6 @@ import { useAuthStore } from '../../hooks/stores';
 import Button from '../../components/Button';
 
 import { SafeAreaViewStyled } from './Login.styles';
-import { MOBILE_REDIRECT_URI } from '@env';
-import { Platform } from 'react-native';
 
 WebBrowser.maybeCompleteAuthSession();
 const Login = ({ navigation }: RootStackScreenProps<'AuthNavigator'>) => {

@@ -1,6 +1,7 @@
 import { useState, ReactNode } from 'react';
-import { View, Platform, TouchableOpacity } from 'react-native';
+import { View, Platform, TouchableOpacity, Alert } from 'react-native';
 import { useLinkProps } from '@react-navigation/native';
+import * as Linking from 'expo-linking';
 
 import { colors } from '../../utils/style-variables';
 import { StyleProp, ViewStyle } from 'react-native';
@@ -63,8 +64,12 @@ const LinkButton = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        onClick && onClick();
-        onPress();
+        if (isBlank) {
+          Linking.openURL(to).catch(() => Alert.alert('Error', 'Could not open link'));
+        } else {
+          onClick && onClick();
+          onPress();
+        }
       }}
       style={style}
       {...props}
