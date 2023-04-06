@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { View } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { useRepoInfoStore } from '../../hooks/stores';
 import getRepoTree from '../../services/get-repo-tree';
@@ -15,13 +16,15 @@ const FileTree = (props: { path?: string; branch?: string }) => {
   const basePath = () => `/${owner}/${name}`;
   const _branch = props.branch || branch;
 
-  useEffect(() => {
-    getRepoTree({
-      owner,
-      name,
-      expression: `${_branch}:${props.path || ''}`,
-    });
-  }, [owner, name, props.path, _branch]);
+  useFocusEffect(
+    useCallback(() => {
+      getRepoTree({
+        owner,
+        name,
+        expression: `${_branch}:${props.path || ''}`,
+      });
+    }, [owner, name, props.path, _branch])
+  );
 
   return (
     <Containter>
