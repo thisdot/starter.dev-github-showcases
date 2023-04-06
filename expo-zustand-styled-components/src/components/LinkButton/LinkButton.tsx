@@ -36,13 +36,12 @@ const LinkButton = ({
     // You can add hover effects using `onMouseEnter` and `onMouseLeave`
     return (
       <View
-        onClick={(e: Event) => {
-          e.preventDefault();
+        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
           if (isBlank) {
             window.open(to, '_blank');
           } else {
             onClick && onClick();
-            onPress();
+            onPress(e);
           }
         }}
         onMouseEnter={() => setIsHovered(true)}
@@ -63,12 +62,12 @@ const LinkButton = ({
 
   return (
     <TouchableOpacity
-      onPress={() => {
+      onPress={(e) => {
         if (isBlank) {
           Linking.openURL(to).catch(() => Alert.alert('Error', 'Could not open link'));
         } else {
           onClick && onClick();
-          onPress();
+          onPress(e);
         }
       }}
       style={style}
