@@ -29,7 +29,7 @@ export const parseQueryData = (fileTree: TreeProps[]) => {
 };
 
 const getRepoTree = async (variables: RepoTreeVariables) => {
-  const key = `${variables.name}-${variables.owner}-${variables.expression}`;
+  const key = JSON.stringify(variables);
   if (useRepoInfoStore.getState()._tree.has(key)) {
     const data = useRepoInfoStore.getState()._tree.get(key);
     useRepoInfoStore.setState({ tree: data });

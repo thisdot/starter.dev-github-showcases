@@ -1,6 +1,7 @@
 import { useState, ReactNode } from 'react';
-import { View, Platform, TouchableOpacity } from 'react-native';
+import { View, Platform, TouchableOpacity, Alert } from 'react-native';
 import { useLinkProps } from '@react-navigation/native';
+import * as Linking from 'expo-linking';
 
 import { colors } from '../../utils/style-variables';
 import { StyleProp, ViewStyle } from 'react-native';
@@ -35,13 +36,12 @@ const LinkButton = ({
     // You can add hover effects using `onMouseEnter` and `onMouseLeave`
     return (
       <View
-        onClick={(e: Event) => {
-          e.preventDefault();
+        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
           if (isBlank) {
             window.open(to, '_blank');
           } else {
             onClick && onClick();
-            onPress();
+            onPress(e);
           }
         }}
         onMouseEnter={() => setIsHovered(true)}
@@ -62,9 +62,13 @@ const LinkButton = ({
 
   return (
     <TouchableOpacity
-      onPress={() => {
-        onClick && onClick();
-        onPress();
+      onPress={(e) => {
+        if (isBlank) {
+          Linking.openURL(to).catch(() => Alert.alert('Error', 'Could not open link'));
+        } else {
+          onClick && onClick();
+          onPress(e);
+        }
       }}
       style={style}
       {...props}
