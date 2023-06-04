@@ -11,6 +11,7 @@ export const SIGN_IN_BASE_URL = `${API_URL_BASE}/auth/signin`;
 export const SIGN_IN_URL = (() => {
 	const url = new URL(SIGN_IN_BASE_URL);
 	url.searchParams.set('redirect_url', REDIRECT_URL);
+	console.log(url.toString());
 	return url.toString();
 })();
 
