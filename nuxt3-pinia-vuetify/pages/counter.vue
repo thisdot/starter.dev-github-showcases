@@ -1,3 +1,0 @@
-<template>
-	<CounterExample />
-</template>

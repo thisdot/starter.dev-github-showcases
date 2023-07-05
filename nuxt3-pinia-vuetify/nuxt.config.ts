@@ -13,8 +13,13 @@ export default defineNuxtConfig({
 			'process.env.DEBUG': false,
 		},
 	},
+	axios: {
+		baseURL: process.env.GITHUB_API_URL,
+	},
 	runtimeConfig: {
 		public: {
+			GITHUB_API_URL: process.env.GITHUB_API_URL,
+			STARTER_API_URL: process.env.STARTER_API_URL,
 			baseUrl: process.env.BASE_URL || '/',
 		},
 	},

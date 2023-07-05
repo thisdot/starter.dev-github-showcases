@@ -8,6 +8,9 @@ useHead({
 		},
 	],
 });
+definePageMeta({
+	middleware: ['auth']
+})
 </script>
 
 <template>
@@ -17,13 +20,5 @@ useHead({
 				Nuxt 3, Pinia and Vuetify
 			</h1>
 		</header>
-		<div class="d-flex flex-column justify-center align-center mt-4">
-			<NuxtLink to="/counter" class="text-subtitle-1 text-blue-darken-2">
-				See Counter example component
-			</NuxtLink>
-			<NuxtLink to="/greet" class="text-subtitle-1 text-blue-darken-2 mt-2">
-				See Fetch example component
-			</NuxtLink>
-		</div>
 	</main>
 </template>
