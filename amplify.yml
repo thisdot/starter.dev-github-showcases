@@ -202,3 +202,22 @@ applications:
       cache:
         paths:
           - node_modules/**/*
+
+
+    - appRoot: nuxt3-pinia-vuetify
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm install --lts=gallium
+            - yarn install
+        build:
+          commands:
+            - yarn run build
+      artifacts:
+        baseDirectory: .nuxt
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
