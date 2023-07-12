@@ -1,8 +1,8 @@
-import useFetchAPI from "~~/hooks/useFetchApI";
-import { IUserApiResponse } from "~~/types/users/interface";
+import useFetchAPI from '~~/hooks/useFetchApI';
+import { IUser, IUserOrg } from '~~/types/users/interface';
 
 export interface IProfileRootState {
-	user: IUserApiResponse | null;
+	user: IUser | null;
 	login: string | null;
 	avatar_url: string | null;
 }
@@ -23,7 +23,26 @@ export const useProfileStore = defineStore('profileStore', {
 					},
 				});
 
-				this.user = data.value as IUserApiResponse;
+				const resp = data.value as IUser;
+
+				this.user = resp;
+				const companyURL = resp.organizations_url;
+
+				const { data: companyData } = await useFetchAPI(
+					companyURL,
+					{
+						headers: {
+							Accept: 'application/vnd.github+json',
+						},
+					}
+				);
+
+				const orgs = companyData.value as IUserOrg[];
+
+				this.user = {
+					...this.user,
+					orgs,
+				};
 			} catch (error: any) {
 				if (error && error?.response) {
 					throw error;
