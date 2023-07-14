@@ -53,7 +53,13 @@
     >
       <div class="header">
         <div class="description">{description}</div>
-        <div class="close" on:click={closeDropdown} on:keypress={closeDropdown}>
+        <div
+          class="close"
+          on:click={closeDropdown}
+          on:keypress={closeDropdown}
+          role="button"
+          tabindex="0"
+        >
           <span class:invisible={current?.value === defaultFilter}>
             <X16 />
           </span>
@@ -62,15 +68,17 @@
 
       <ul class="items">
         {#each items as item}
-          <li
-            class="item noselect"
-            on:click={() => handleFilterOptionClick(item)}
-            on:keypress={() => handleFilterOptionClick(item)}
-          >
-            <span class="icon" class:invisible={item !== current}>
-              <Check16 />
-            </span>
-            <span>{item.label}</span>
+          <li class="item noselect">
+            <button
+              type="button"
+              on:click={() => handleFilterOptionClick(item)}
+              on:keypress={() => handleFilterOptionClick(item)}
+            >
+              <span class="icon" class:invisible={item !== current}>
+                <Check16 />
+              </span>
+              <span>{item.label}</span>
+            </button>
           </li>
         {/each}
       </ul>

@@ -12,7 +12,7 @@ export const SEARCH_QUERY_PARAMETER_QUALIFIER = {
 } as const;
 
 type SearchQueryParameterQualifier =
-  typeof SEARCH_QUERY_PARAMETER_QUALIFIER[keyof typeof SEARCH_QUERY_PARAMETER_QUALIFIER];
+  (typeof SEARCH_QUERY_PARAMETER_QUALIFIER)[keyof typeof SEARCH_QUERY_PARAMETER_QUALIFIER];
 
 export const buildFilterParameter = (qualifier: SearchQueryParameterQualifier, value: string) =>
   [qualifier, value].join(QUALIFIER_SEPARATOR);
