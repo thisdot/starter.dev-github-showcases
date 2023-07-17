@@ -27,6 +27,8 @@
         class:current={isCurrent(option)}
         on:click={async () => await handleItemClick(option)}
         on:keypress={async () => await handleItemClick(option)}
+        role="button"
+        tabindex="0"
       >
         <div class="checkbox">
           <Check16 />

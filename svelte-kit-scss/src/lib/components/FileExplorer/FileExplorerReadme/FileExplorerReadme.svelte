@@ -11,6 +11,7 @@
   </div>
   <div class="content">
     <span class="markdown">
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       {@html html}
     </span>
   </div>

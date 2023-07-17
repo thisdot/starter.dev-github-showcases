@@ -4,7 +4,7 @@
   import DropdownItemTemplateCheckbox from '../item-templates/DropdownItemTemplateCheckbox.svelte';
   export let description: string | undefined;
 
-  type TOption = $$Generic;
+  type TOption = $$Generic; /* eslint-disable-line no-undef */
   export let options: TOption[];
   export let labelAccessor = (option: TOption) => String(option);
   export let checkedPredicate: (option: TOption) => boolean = () => false;
@@ -26,6 +26,8 @@
         class="dropdown-menu-item-layout"
         on:click={() => handleOptionClick(option)}
         on:keypress={() => handleOptionClick(option)}
+        role="button"
+        tabindex="0"
       >
         {#if $$slots.option}
           <slot

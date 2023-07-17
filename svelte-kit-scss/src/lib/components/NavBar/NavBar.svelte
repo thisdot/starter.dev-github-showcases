@@ -39,12 +39,13 @@
         <MarkGithub16 height="32" width="32" fill="white" />
       </a>
     </li>
-    <li on:click={closeDropdown} on:keypress={closeDropdown} class="dropdown">
+    <li class="dropdown">
       <button
         type="button"
         class="dropdown-title"
         aria-controls="nav-dropdown"
         on:click|stopPropagation={toggleMenu}
+        on:blur={closeDropdown}
         data-testid="nav-dropdown"
       >
         <img src={userAvatar} alt="{username} avatar" />
