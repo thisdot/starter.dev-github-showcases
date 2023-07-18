@@ -93,7 +93,7 @@
     "ng-packagr": "^13.0.0",
     "postcss": "^7",
     "prettier": "^2.5.1",
-    "stylelint": "^14.9.1",
+    "stylelint": "^15.10.1",
     "stylelint-config-standard": "^26.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "~4.4.3"
