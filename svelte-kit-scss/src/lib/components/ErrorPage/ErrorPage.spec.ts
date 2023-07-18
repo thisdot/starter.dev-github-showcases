@@ -13,7 +13,7 @@ describe('ErrorFlash', () => {
 
   it('should should render error message', () => {
     const errorMessage = screen.getByText(message);
-    expect(errorMessage).toBeTruthy();
+    expect(errorMessage).toBeInTheDocument();
   });
 });
 
