@@ -98,6 +98,6 @@ export function parseQuery(data: RepoIssuesQuery) {
     openIssues,
     closedIssues,
     milestones,
-    labels: Object.values(labelMap) as Label[],
+    labels: Object.values(labelMap),
   };
 }
