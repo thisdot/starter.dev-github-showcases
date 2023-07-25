@@ -17,7 +17,7 @@ export const useProfileStore = defineStore('profileStore', {
 		async getProfile() {
 			try {
 				const url = `/users/${this.login}`;
-				const { data } = await useFetchAPI(url, {
+				const { data } = await useFetchAPI<IUser>(url, {
 					headers: {
 						Accept: 'application/vnd.github+json',
 					},
@@ -28,11 +28,12 @@ export const useProfileStore = defineStore('profileStore', {
 				this.user = resp;
 				const companyURL = resp.organizations_url;
 
-				const { data: companyData } = await useFetchAPI<IUserOrg>(companyURL, {
-					headers: {
-						Accept: 'application/vnd.github+json',
-					},
-				});
+				const { data: companyData } =
+					await useFetchAPI<IUserOrg>(companyURL, {
+						headers: {
+							Accept: 'application/vnd.github+json',
+						},
+					});
 
 				const orgs = companyData.value;
 
