@@ -28,12 +28,11 @@ export const useProfileStore = defineStore('profileStore', {
 				this.user = resp;
 				const companyURL = resp.organizations_url;
 
-				const { data: companyData } =
-					await useFetchAPI<IUserOrg>(companyURL, {
-						headers: {
-							Accept: 'application/vnd.github+json',
-						},
-					});
+				const { data: companyData } = await useFetchAPI<IUserOrg>(companyURL, {
+					headers: {
+						Accept: 'application/vnd.github+json',
+					},
+				});
 
 				const orgs = companyData.value;
 
