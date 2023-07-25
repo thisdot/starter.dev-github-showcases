@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import cn from 'classnames';
-import { XIcon } from '@heroicons/react/outline';
+import { XIcon } from '@heroicons/react/24/outline';
 import styles from './IssuesContainer.module.css';
 
 interface IssuesContainerProps {

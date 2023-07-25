@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LinkIcon } from '@heroicons/react/outline';
+import { LinkIcon } from '@heroicons/react/24/outline';
 import styles from './RepoAboutWidget.module.css';
 
 interface HomepageUrlProps {
@@ -14,10 +14,8 @@ function HomepageUrl({ homepageUrl }: HomepageUrlProps) {
   return (
     <div className={styles.linkContainer}>
       <LinkIcon className={styles.linkIcon} />
-      <Link href={homepageUrl}>
-        <a className={styles.link} target="_blank">
-          {homepageUrl}
-        </a>
+      <Link href={homepageUrl} className={styles.link} target="_blank">
+        {homepageUrl}
       </Link>
     </div>
   );

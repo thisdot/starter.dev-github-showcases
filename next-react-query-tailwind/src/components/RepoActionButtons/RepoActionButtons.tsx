@@ -1,5 +1,5 @@
 import { EyeIcon, GitBranchIcon } from '@components/Icons';
-import { StarIcon } from '@heroicons/react/outline';
+import { StarIcon } from '@heroicons/react/24/outline';
 import { useRepo } from '@context/RepoContext';
 import CountButtonGroup from './CountButtonGroup';
 import styles from './RepoActionButtons.module.css';

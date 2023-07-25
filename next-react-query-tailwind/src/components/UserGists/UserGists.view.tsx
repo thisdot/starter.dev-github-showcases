@@ -13,14 +13,13 @@ function UserGistsView({ gists = [] }: UserGistsProps) {
       <div className="mt-3">
         {gists.map((gist) => (
           <div key={gist.id} className="my-1">
-            <Link href={gist.url}>
-              <a
-                className={styles.link}
-                target="_blank"
-                data-testid={`user gist list item ${gist.name}`}
-              >
-                {gist.name}
-              </a>
+            <Link
+              href={gist.url}
+              className={styles.link}
+              target="_blank"
+              data-testid={`user gist list item ${gist.name}`}
+            >
+              {gist.name}
             </Link>
           </div>
         ))}

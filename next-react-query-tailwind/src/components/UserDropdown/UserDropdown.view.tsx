@@ -3,8 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import { signOut } from 'next-auth/client';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import { signOut } from 'next-auth/react';
 import styles from './UserDropdown.module.css';
 
 interface UserDropdownViewProps {
@@ -50,8 +50,8 @@ function UserDropdownView({ image, username }: UserDropdownViewProps) {
           <div className="py-1">
             {username && (
               <Menu.Item>
-                <Link href={`/${username}`}>
-                  <a className={styles.menuBtn}>Profile</a>
+                <Link href={`/${username}`} className={styles.menuBtn}>
+                  Profile
                 </Link>
               </Menu.Item>
             )}

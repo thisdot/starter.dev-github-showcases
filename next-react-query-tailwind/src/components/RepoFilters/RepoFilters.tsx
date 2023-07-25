@@ -1,7 +1,7 @@
 import type { FiltersAPI, LanguageFilter } from './useRepoFilters';
 import cn from 'classnames';
 import { useEffect } from 'react';
-import { XIcon } from '@heroicons/react/solid';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 import { RepositoryOrderField } from '@lib/github';
 import FilterDropdown from './FilterDropdown';
 import { TypeFilter } from './useRepoFilters';
@@ -138,7 +138,7 @@ function RepoFilters({
                   'group-hover:bg-blue-500'
                 )}
               >
-                <XIcon className={styles.clearBtnIcon} />
+                <XMarkIcon className={styles.clearBtnIcon} />
               </span>
               <span
                 className={cn(styles.clearBtnText, 'group-hover:text-blue-500')}

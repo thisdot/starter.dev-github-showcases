@@ -1,6 +1,6 @@
 import type { Repo } from './types';
 import Link from 'next/link';
-import { StarIcon } from '@heroicons/react/outline';
+import { StarIcon } from '@heroicons/react/24/outline';
 import PrivacyBadge from '@components/PrivacyBadge';
 import RepoMeta from '@components/RepoMeta';
 import styles from './UserRepos.module.css';
@@ -32,15 +32,24 @@ function UserReposView({ repos, owner }: UserReposViewProps) {
           >
             <div data-testid="profile repos" className={styles.content}>
               <h3 data-testid="profile repo list heading" className="mb-2">
-                <Link href={`/${owner}/${name}`}>
-                  <a className={styles.headingLink} data-testid="repository name">{name}</a>
+                <Link
+                  href={`/${owner}/${name}`}
+                  className={styles.headingLink}
+                  data-testid="repository name"
+                >
+                  {name}
                 </Link>
                 <PrivacyBadge
                   isPrivate={isPrivate}
                   className="relative bottom-0.5"
                 />
               </h3>
-              <div className={styles.description} data-testid="repository description">{description}</div>
+              <div
+                className={styles.description}
+                data-testid="repository description"
+              >
+                {description}
+              </div>
               <RepoMeta
                 language={language}
                 languageColor={languageColor}

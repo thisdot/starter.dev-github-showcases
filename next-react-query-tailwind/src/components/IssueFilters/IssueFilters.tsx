@@ -2,7 +2,7 @@ import type { IssueFilterAPI } from './useIssueFilters';
 import type { Label } from '@components/RepoIssues';
 import type { Milestone } from './types';
 import cn from 'classnames';
-import { CheckIcon, MinusCircleIcon } from '@heroicons/react/outline';
+import { CheckIcon, MinusCircleIcon } from '@heroicons/react/24/outline';
 import { PullRequestIcon } from '@components/Icons';
 import { IssueState, IssueOrderField, OrderDirection } from '@lib/github';
 import FilterDropdown from '@components/FilterDropdown';

@@ -1,6 +1,10 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon, XIcon, CheckIcon } from '@heroicons/react/solid';
+import {
+  ChevronDownIcon,
+  XMarkIcon,
+  CheckIcon,
+} from '@heroicons/react/24/solid';
 import styles from './FilterDropdown.module.css';
 
 interface Option {
@@ -55,7 +59,7 @@ function Dropdown({
               <div className={styles.menuHeader}>
                 <div className={styles.description}>{description}</div>
                 <Menu.Button>
-                  <XIcon
+                  <XMarkIcon
                     className={styles.closeButtonIcon}
                     aria-hidden="true"
                   />

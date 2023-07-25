@@ -1,4 +1,4 @@
-import { MinusCircleIcon } from '@heroicons/react/outline';
+import { MinusCircleIcon } from '@heroicons/react/24/outline';
 import gqlClient from '@lib/gqlClient';
 import { useRepoIssuesQuery, IssueState } from '@lib/github';
 import { useRepo } from '@context/RepoContext';

@@ -1,4 +1,4 @@
-import { BookOpenIcon } from '@heroicons/react/outline';
+import { BookOpenIcon } from '@heroicons/react/24/outline';
 import { useRepo } from '@context/RepoContext';
 import Description from './Description';
 import HomepageUrl from './HomepageUrl';

@@ -1,6 +1,6 @@
 import type { PullRequest } from './types';
 import cn from 'classnames';
-import { ChatAltIcon } from '@heroicons/react/outline';
+import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/outline';
 import { formatDistance } from 'date-fns';
 import {
   PullRequestIcon,
@@ -102,7 +102,7 @@ function RepoPullsView({ pullRequests }: RepoPullsViewProps) {
                   className={styles.comments}
                   data-testid="pull request comment count"
                 >
-                  <ChatAltIcon className={styles.commentsIcon} />
+                  <ChatBubbleLeftEllipsisIcon className={styles.commentsIcon} />
                   {pullRequest.commentCount}
                 </span>
               </div>

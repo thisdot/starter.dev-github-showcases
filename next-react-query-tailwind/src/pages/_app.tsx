@@ -1,11 +1,10 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { useEffect } from 'react';
+import type { Session } from 'next-auth';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { useSession, signOut } from 'next-auth/client';
-import { useRouter } from 'next/router';
-import { REFRESH_TOKEN_ERROR } from '@lib/jwt';
+import { SessionProvider } from 'next-auth/react';
+
 import NavBar from '@components/NavBar';
 
 const queryClient = new QueryClient({
@@ -18,23 +17,22 @@ const queryClient = new QueryClient({
   },
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const [session] = useSession();
-  const { replace } = useRouter();
-  useEffect(() => {
-    // If token expired and refresh fails signout and redirect to sign in
-    if (session?.error === REFRESH_TOKEN_ERROR) {
-      signOut().finally(() => {
-        replace('/api/auth/signin');
-      });
-    }
-  }, [session?.error, replace]);
-
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps<{ session: Session }>) {
   return (
     <QueryClientProvider client={queryClient}>
-      <NavBar />
-      <Component {...pageProps} />
-      <ReactQueryDevtools />
+      <SessionProvider
+        session={session}
+        refetchWhenOffline={false}
+        refetchOnWindowFocus={false}
+        refetchInterval={60 * 5}
+      >
+        <NavBar />
+        <Component {...pageProps} />
+        <ReactQueryDevtools />
+      </SessionProvider>
     </QueryClientProvider>
   );
 }

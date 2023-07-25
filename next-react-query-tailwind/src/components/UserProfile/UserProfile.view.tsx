@@ -3,10 +3,10 @@ import Image from 'next/image';
 import {
   UsersIcon,
   StarIcon,
-  OfficeBuildingIcon,
-  LocationMarkerIcon,
+  BuildingOfficeIcon,
+  MapPinIcon,
   LinkIcon,
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 import { TwitterIcon } from '@components/Icons';
 import OrgList from './OrgList';
 import styles from './UserProfile.module.css';
@@ -51,35 +51,47 @@ function UserProfileView({
         className={styles.avatar}
       />
       <h1 className="mt-2">
-        <div data-testid="profile page name" className={styles.name}>{name}</div>
-        <div data-testid="profile page username" className={styles.username}>{username}</div>
+        <div data-testid="profile page name" className={styles.name}>
+          {name}
+        </div>
+        <div data-testid="profile page username" className={styles.username}>
+          {username}
+        </div>
       </h1>
       <div className={styles.bio}>{bio}</div>
       <div className={styles.socials}>
         <UsersIcon className={styles.icon} />
         <span className="inline-block">
-          <span data-testid="profile followers count" className={styles.count}>{followers}</span> followers
+          <span data-testid="profile followers count" className={styles.count}>
+            {followers}
+          </span>{' '}
+          followers
         </span>
         <span className="mx-1">·</span>
         <span className="inline-block">
-          <span data-testid="profile following count" className={styles.count}>{following}</span> following
+          <span data-testid="profile following count" className={styles.count}>
+            {following}
+          </span>{' '}
+          following
         </span>
         <span className="mx-1">·</span>
         <StarIcon className={styles.icon} />
         <span className="inline-block">
-          <span data-testid="profile starred count" className={styles.count}>{starredRepos}</span>{' '}
+          <span data-testid="profile starred count" className={styles.count}>
+            {starredRepos}
+          </span>{' '}
         </span>
       </div>
       <div className={styles.fields}>
         {company && (
           <div>
-            <OfficeBuildingIcon className={styles.icon} />
+            <BuildingOfficeIcon className={styles.icon} />
             {company}
           </div>
         )}
         {location && (
           <div>
-            <LocationMarkerIcon className={styles.icon} />
+            <MapPinIcon className={styles.icon} />
             {location}
           </div>
         )}

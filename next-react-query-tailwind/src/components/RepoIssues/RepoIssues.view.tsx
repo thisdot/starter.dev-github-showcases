@@ -3,8 +3,8 @@ import cn from 'classnames';
 import {
   MinusCircleIcon,
   CheckCircleIcon,
-  ChatAltIcon,
-} from '@heroicons/react/outline';
+  ChatBubbleLeftEllipsisIcon,
+} from '@heroicons/react/24/outline';
 import { formatDistance } from 'date-fns';
 import styles from './RepoIssues.module.css';
 
@@ -78,7 +78,7 @@ function RepoIssuesView({ issues }: RepoIssuesViewProps) {
                 className={styles.comments}
                 data-testid="issue comment count"
               >
-                <ChatAltIcon className={styles.commentsIcon} />
+                <ChatBubbleLeftEllipsisIcon className={styles.commentsIcon} />
                 {issue.commentCount}
               </span>
             </div>
