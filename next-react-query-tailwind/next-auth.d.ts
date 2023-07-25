@@ -6,7 +6,6 @@ declare module 'next-auth/jwt' {
   interface Session {
     user: {
       accessToken: string;
-      refreshToken: string;
       name: string;
       email: string;
       picture: string;
