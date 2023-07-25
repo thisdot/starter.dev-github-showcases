@@ -1,6 +1,6 @@
 import { UseFetchOptions } from "nuxt/app";
 
-export default function useFetchAPI(url: string, opts?: UseFetchOptions<unknown>) {
+export default function useFetchAPI(url: string, opts?: UseFetchOptions<Record<string, any>>): Record<string, any> {
 	const config = useRuntimeConfig();
 	const { GITHUB_API_URL } = config;
 	const token = useCookie('token');

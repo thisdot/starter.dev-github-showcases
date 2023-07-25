@@ -1,8 +1,8 @@
 import useFetchAPI from '~~/hooks/useFetchApI';
-import { IUser, IUserOrg } from '~~/types/users/interface';
+import { IUser } from '~~/types/users/interface';
 
 export interface IProfileRootState {
-	user: IUser | null;
+	user: IUser | Record<string, any> | null;
 	login: string | null;
 	avatar_url: string | null;
 }
@@ -23,21 +23,19 @@ export const useProfileStore = defineStore('profileStore', {
 					},
 				});
 
-				const resp = data.value as IUser;
+				const resp = data.value;
 
 				this.user = resp;
 				const companyURL = resp.organizations_url;
 
-				const { data: companyData } = await useFetchAPI(
-					companyURL,
-					{
+				const { data: companyData } =
+					await useFetchAPI(companyURL, {
 						headers: {
 							Accept: 'application/vnd.github+json',
 						},
-					}
-				);
+					});
 
-				const orgs = companyData.value as IUserOrg[];
+				const orgs = companyData.value;
 
 				this.user = {
 					...this.user,
@@ -48,7 +46,7 @@ export const useProfileStore = defineStore('profileStore', {
 					throw error;
 				}
 
-				throw new Error('Error fetching user top repos');
+				throw new Error('Error fetching user profile');
 			}
 		},
 		async getAuthUser() {
@@ -60,7 +58,7 @@ export const useProfileStore = defineStore('profileStore', {
 					},
 				});
 
-				const user = data.value as { login: string; avatar_url: string | null };
+				const user = data.value;
 				this.login = user.login;
 				this.avatar_url = user.avatar_url;
 				this.getProfile();
@@ -69,7 +67,7 @@ export const useProfileStore = defineStore('profileStore', {
 					throw error;
 				}
 
-				throw new Error('Error fetching user top repos');
+				throw new Error('Error fetching authenticated user');
 			}
 		},
 	},
