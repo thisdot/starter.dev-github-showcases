@@ -1,4 +1,4 @@
-import { setLogger } from 'react-query';
+import { setLogger } from '@tanstack/react-query';
 import { screen } from '@testing-library/react';
 import { renderWithClient } from '@lib/testUtils';
 import { setupMswServer } from '@lib/mswServer';
