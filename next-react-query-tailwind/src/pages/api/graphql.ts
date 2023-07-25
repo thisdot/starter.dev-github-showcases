@@ -1,6 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-// import { getToken } from 'next-auth/jwt';
-// import { getJwtOptions } from '@lib/jwt';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from './auth/[...nextauth]';
 
@@ -16,21 +14,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
 
   const session = await getServerSession(req, res, authOptions);
 
-  // const token = await getToken({
-  //   req,
-  //   // ...getJwtOptions(),
-  // });
-
   if (session === null) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
   try {
-    console.log('session', session);
     const data = await fetch(GRAPHQL_ENDPOINT, {
       method: 'POST',
       headers: {
-        authorization: `Bearer ${session?.user.accessToken}`,
+        authorization: `Bearer ${session?.user?.accessToken}`,
       },
       body: JSON.stringify(req.body),
     });
