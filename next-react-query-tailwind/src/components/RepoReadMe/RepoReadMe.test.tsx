@@ -1,4 +1,3 @@
-import { setLogger } from '@tanstack/react-query';
 import { screen } from '@testing-library/react';
 import { renderWithClient } from '@lib/testUtils';
 import { setupMswServer } from '@lib/mswServer';
@@ -6,12 +5,6 @@ import RepoReadMe from './RepoReadMe.data';
 import { RepoProvider } from '@context/RepoContext';
 
 jest.mock('react-markdown', () => () => null);
-
-setLogger({
-  log: console.log,
-  warn: console.warn,
-  error: () => {},
-});
 
 setupMswServer();
 

@@ -1,14 +1,7 @@
-import { setLogger } from '@tanstack/react-query';
 import { screen } from '@testing-library/react';
 import { renderWithClient, createRouterProvider } from '@lib/testUtils';
 import { setupMswServer } from '@lib/mswServer';
 import UserRepos from './UserRepos.data';
-
-setLogger({
-  log: console.log,
-  warn: console.warn,
-  error: () => {},
-});
 
 setupMswServer();
 

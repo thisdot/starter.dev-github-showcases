@@ -13,6 +13,11 @@ const queryClientOptions = {
       retry: false,
     },
   },
+  logger: {
+    log: console.log,
+    warn: console.warn,
+    error: () => {},
+  },
 };
 
 export function renderWithClient(ui: React.ReactElement) {
@@ -74,6 +79,7 @@ const createMockRouter = (router: Partial<NextRouter> = {}) => {
     isLocaleDomain: false,
     isReady: true,
     isPreview: false,
+    forward: jest.fn().mockResolvedValue(Promise.resolve()),
   };
   return { ...mockRouter, ...router };
 };

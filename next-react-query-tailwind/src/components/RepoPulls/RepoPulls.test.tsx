@@ -1,15 +1,8 @@
-import { setLogger } from '@tanstack/react-query';
 import { screen, fireEvent } from '@testing-library/react';
 import { renderWithClient } from '@lib/testUtils';
 import { setupMswServer } from '@lib/mswServer';
 import RepoPulls from './RepoPulls.data';
 import { RepoProvider } from '@context/RepoContext';
-
-setLogger({
-  log: console.log,
-  warn: console.warn,
-  error: () => {},
-});
 
 setupMswServer();
 

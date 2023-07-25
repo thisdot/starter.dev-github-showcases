@@ -14,6 +14,11 @@ const queryClient = new QueryClient({
       staleTime: 1000 * 60 * 60, // 1 hour
     },
   },
+  logger: {
+    log: console.log,
+    warn: console.warn,
+    error: () => {},
+  },
 });
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
