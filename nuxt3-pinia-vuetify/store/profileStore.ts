@@ -41,11 +41,7 @@ export const useProfileStore = defineStore('profileStore', {
 					...this.user,
 					orgs,
 				};
-			} catch (error: any) {
-				if (error && error?.response) {
-					throw error;
-				}
-
+			} catch (error) {
 				throw new Error('Error fetching user profile');
 			}
 		},
@@ -62,11 +58,7 @@ export const useProfileStore = defineStore('profileStore', {
 				this.login = user.login;
 				this.avatar_url = user.avatar_url;
 				this.getProfile();
-			} catch (error: any) {
-				if (error && error?.response) {
-					throw error;
-				}
-
+			} catch (error) {
 				throw new Error('Error fetching authenticated user');
 			}
 		},
