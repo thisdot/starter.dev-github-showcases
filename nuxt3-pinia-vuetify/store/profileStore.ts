@@ -1,5 +1,5 @@
 import useFetchAPI from '~~/hooks/useFetchApI';
-import { IUser } from '~~/types/users/interface';
+import { IUser, IUserOrg } from '~~/types/users/interface';
 
 export interface IProfileRootState {
 	user: IUser | Record<string, any> | null;
@@ -29,7 +29,7 @@ export const useProfileStore = defineStore('profileStore', {
 				const companyURL = resp.organizations_url;
 
 				const { data: companyData } =
-					await useFetchAPI(companyURL, {
+					await useFetchAPI<IUserOrg>(companyURL, {
 						headers: {
 							Accept: 'application/vnd.github+json',
 						},
@@ -48,7 +48,7 @@ export const useProfileStore = defineStore('profileStore', {
 		async getAuthUser() {
 			try {
 				const url = `/user`;
-				const { data } = await useFetchAPI(url, {
+				const { data } = await useFetchAPI<IUser>(url, {
 					headers: {
 						Accept: 'application/vnd.github+json',
 					},
