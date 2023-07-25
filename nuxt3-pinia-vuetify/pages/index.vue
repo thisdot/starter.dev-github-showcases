@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useProfileStore } from '~/store/profileStore';
 useHead({
 	title: 'Nuxt 3, Pinia and Vuetify',
 	meta: [
@@ -11,6 +12,8 @@ useHead({
 definePageMeta({
 	middleware: ['auth']
 })
+const profileStore = useProfileStore();
+profileStore.getAuthUser();
 </script>
 
 <template>

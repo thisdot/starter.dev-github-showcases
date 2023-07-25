@@ -13,7 +13,7 @@ export const useUserStore = defineStore('userStore', {
 		async getUserTopRepos() {
 			try {
 				const url = `/user/repos`;
-				const { data } = await useFetchAPI(url, {
+				const { data } = await useFetchAPI<IRepository>(url, {
 					headers: {
 						Accept: 'application/vnd.github+json',
 					},
@@ -24,13 +24,10 @@ export const useUserStore = defineStore('userStore', {
 					},
 				});
 
-				const topRepos = data.value as IRepository[];
+				const topRepos = data.value;
 				this.topRepos = topRepos;
 
 			} catch (error: any) {
-				if (error && error?.response) {
-					throw error;
-				}
 
 				throw new Error('Error fetching user top repos');
 			}
