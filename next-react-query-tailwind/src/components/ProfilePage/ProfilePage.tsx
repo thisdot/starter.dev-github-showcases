@@ -27,7 +27,12 @@ function ProfilePage({ owner, children }: ProfilePageProps) {
     <ErrorBoundary>
       {children({ username: owner })}
       <div className="flex justify-center mt-auto pb-5 pt-6">
-        <a target="_blank" rel="noreferrer noopener" href="https://www.netlify.com">
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://www.netlify.com"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://www.netlify.com/v3/img/components/netlify-light.svg"
             alt="Deploys by Netlify"
