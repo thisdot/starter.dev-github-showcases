@@ -11,9 +11,9 @@
     "lint": "next lint",
     "test": "jest",
     "format": "prettier --write ./src",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@headlessui/react": "1.7.15",

@@ -14,6 +14,7 @@ import {
 import Pagination from '@components/Pagination';
 import RepoIssuesView from './RepoIssues.view';
 import { useRouter } from 'next/router';
+import type { Label } from '@components/RepoIssues';
 
 function RepoIssues() {
   const { owner, name } = useRepo();
@@ -82,7 +83,7 @@ function RepoIssues() {
       openCount={openIssues.totalCount}
       closedCount={closedIssues.totalCount}
       milestones={milestones}
-      labels={labels}
+      labels={labels as Label[]}
       type={IssueType.Issue}
       {...filters}
     />

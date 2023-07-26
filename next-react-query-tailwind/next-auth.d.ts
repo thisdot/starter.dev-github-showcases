@@ -1,5 +1,4 @@
-import 'next-auth/jwt';
-
+import NextAuth, { DefaultSession } from "next-auth"
 // Read more at: https://next-auth.js.org/getting-started/typescript#module-augmentation
 
 declare module 'next-auth/jwt' {
@@ -13,6 +12,6 @@ declare module 'next-auth/jwt' {
       iat: number;
       exp: number;
       jti: string;
-    };
+    } & DefaultSession["user"]
   }
 }

@@ -1,8 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth, { NextAuthOptions } from 'next-auth';
+import NextAuth, { AuthOptions } from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: AuthOptions = {
   callbacks: {
     jwt: async ({ token, account }) => {
       if (account) {
@@ -42,7 +41,4 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.AUTH_SECRET,
 };
 
-const handler = (req: NextApiRequest, res: NextApiResponse) =>
-  NextAuth(req, res, authOptions);
-
-export default handler;
+export default NextAuth(authOptions);

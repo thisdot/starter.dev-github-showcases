@@ -2,7 +2,11 @@ import type { ComponentType } from 'react';
 import styles from './IssuesEmpty.module.css';
 
 interface IssuesEmptyProps {
-  Icon?: ComponentType<{ className: string }>;
+  Icon?:
+    | ComponentType<{ className: string }>
+    | React.ForwardRefExoticComponent<
+        Omit<React.SVGProps<SVGSVGElement>, 'ref'>
+      >;
 }
 
 function IssuesEmpty({ Icon }: IssuesEmptyProps) {
