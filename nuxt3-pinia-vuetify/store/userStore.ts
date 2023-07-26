@@ -1,19 +1,44 @@
-import useFetchAPI from "~~/hooks/useFetchApI";
-import { IRepository } from "~~/types/interfaces";
+import { useProfileStore } from './profileStore';
+
+import useFetchAPI from '~~/hooks/useFetchApI';
+import { IRepository } from '~~/types/interfaces';
+import { UserGist } from '~~/types/users/interface';
 
 export interface IUserRootState {
 	topRepos: IRepository[];
+	repos: IRepository[];
+	gists: UserGist[];
 }
 
 export const useUserStore = defineStore('userStore', {
 	state: (): IUserRootState => ({
 		topRepos: [],
+		repos: [],
+		gists: [],
 	}),
 	actions: {
+		async getUserRepos() {
+			try {
+				const url = '/user/repos';
+				const { data } = await useFetchAPI<IRepository[]>(url, {
+					headers: {
+						Accept: 'application/vnd.github+json',
+					},
+					params: {
+						sort: 'updated',
+						per_page: '10',
+					},
+				});
+
+				this.repos = data.value;
+			} catch (error) {
+				throw new Error('Error fetching user repos');
+			}
+		},
 		async getUserTopRepos() {
 			try {
 				const url = `/user/repos`;
-				const { data } = await useFetchAPI<IRepository>(url, {
+				const { data } = await useFetchAPI<IRepository[]>(url, {
 					headers: {
 						Accept: 'application/vnd.github+json',
 					},
@@ -26,10 +51,27 @@ export const useUserStore = defineStore('userStore', {
 
 				const topRepos = data.value;
 				this.topRepos = topRepos;
-
 			} catch (error: any) {
-
 				throw new Error('Error fetching user top repos');
+			}
+		},
+		async getUserGists() {
+			const profileStore = useProfileStore();
+			const url = `/users/${profileStore.login}/gists`;
+
+			try {
+				const { data } = await useFetchAPI<UserGist[]>(url, {
+					headers: {
+						Accept: 'application/vnd.github+json',
+					},
+					params: {
+						per_page: '10',
+					},
+				});
+
+				this.gists = data.value;
+			} catch (error) {
+				throw new Error('Error fetching user gists');
 			}
 		},
 	},

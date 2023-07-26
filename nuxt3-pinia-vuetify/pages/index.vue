@@ -10,10 +10,11 @@ useHead({
 	],
 });
 definePageMeta({
-	middleware: ['auth']
-})
+	middleware: ['auth'],
+});
 const profileStore = useProfileStore();
-profileStore.getAuthUser();
+await profileStore.getAuthUser();
+await profileStore.getUserOrgs();
 </script>
 
 <template>
