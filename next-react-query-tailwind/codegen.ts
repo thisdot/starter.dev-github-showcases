@@ -17,7 +17,7 @@ const config: CodegenConfig = {
     },
   },
   hooks: {
-    afterAllFileWrite: ["sed -i '' '/types.dom/d' ./src/lib/github.ts"],
+    afterAllFileWrite: ["sed -i'' '/types.dom/d' ./src/lib/github.ts"],
   },
 };
 
