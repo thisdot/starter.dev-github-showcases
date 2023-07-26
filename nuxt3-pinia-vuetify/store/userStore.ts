@@ -6,15 +6,35 @@ import { UserGist } from '~~/types/users/interface';
 
 export interface IUserRootState {
 	topRepos: IRepository[];
+	repos: IRepository[];
 	gists: UserGist[];
 }
 
 export const useUserStore = defineStore('userStore', {
 	state: (): IUserRootState => ({
 		topRepos: [],
+		repos: [],
 		gists: [],
 	}),
 	actions: {
+		async getUserRepos() {
+			try {
+				const url = '/user/repos';
+				const { data } = await useFetchAPI<IRepository[]>(url, {
+					headers: {
+						Accept: 'application/vnd.github+json',
+					},
+					params: {
+						sort: 'updated',
+						per_page: '10',
+					},
+				});
+
+				this.repos = data.value;
+			} catch (error) {
+				throw new Error('Error fetching user repos');
+			}
+		},
 		async getUserTopRepos() {
 			try {
 				const url = `/user/repos`;
