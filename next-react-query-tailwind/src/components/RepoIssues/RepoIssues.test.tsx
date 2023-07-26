@@ -30,6 +30,7 @@ describe('RepoIssues', () => {
   test('successfully queries and renders issue list', async () => {
     expect(true).toBe(true);
   });
+  // TODO - fix tests
   // test('successfully queries and renders issue list', async () => {
   //   renderWithClient(
   //     <RepoProvider value={mockRepoContext}>
