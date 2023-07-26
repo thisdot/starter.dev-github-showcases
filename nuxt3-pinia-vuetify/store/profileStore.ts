@@ -14,6 +14,28 @@ export const useProfileStore = defineStore('profileStore', {
 		avatar_url: null,
 	}),
 	actions: {
+		async getUserOrgs() {
+			try {
+				const companyURL = `/users/${this.login}/orgs`;
+				const { data: companyData } = await useFetchAPI<IUserOrg[]>(
+					companyURL,
+					{
+						headers: {
+							Accept: 'application/vnd.github+json',
+						},
+					}
+				);
+
+				const orgs = companyData.value;
+
+				this.user = {
+					...this.user,
+					orgs,
+				};
+			} catch (error) {
+				throw new Error('Error fetching user organizations');
+			}
+		},
 		async getProfile() {
 			try {
 				const url = `/users/${this.login}`;
@@ -24,23 +46,7 @@ export const useProfileStore = defineStore('profileStore', {
 				});
 
 				const resp = data.value;
-
 				this.user = resp;
-				const companyURL = resp.organizations_url;
-
-				const { data: companyData } =
-					await useFetchAPI<IUserOrg>(companyURL, {
-						headers: {
-							Accept: 'application/vnd.github+json',
-						},
-					});
-
-				const orgs = companyData.value;
-
-				this.user = {
-					...this.user,
-					orgs,
-				};
 			} catch (error) {
 				throw new Error('Error fetching user profile');
 			}
@@ -57,7 +63,6 @@ export const useProfileStore = defineStore('profileStore', {
 				const user = data.value;
 				this.login = user.login;
 				this.avatar_url = user.avatar_url;
-				this.getProfile();
 			} catch (error) {
 				throw new Error('Error fetching authenticated user');
 			}

@@ -57,3 +57,14 @@ export interface IUser extends IUserApiResponse {
 	orgs?: IUserOrg[];
 	stars?: IUserStar[];
 }
+
+export interface UserGist {
+	url: string;
+	id: string;
+	html_url: string;
+	files: {
+		[key: string]: {
+			filename: string;
+		};
+	};
+}
