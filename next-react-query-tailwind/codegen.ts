@@ -10,14 +10,16 @@ const config: CodegenConfig = {
         'typescript',
         'typescript-operations',
         'typescript-react-query',
+        {
+          add: {
+            content: '// @ts-nocheck',
+          },
+        },
       ],
       config: {
         fetcher: 'graphql-request',
       },
     },
-  },
-  hooks: {
-    afterAllFileWrite: ["sed -i'' '/types.dom/d' ./src/lib/github.ts"],
   },
 };
 
