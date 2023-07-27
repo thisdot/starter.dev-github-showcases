@@ -1,0 +1,14 @@
+node_modules
+dist
+yarn.lock
+pnpm-lock.yaml
+package-lock.json
+
+# env file
+.env.development
+.env.production
+.env.local
+.env
+
+# .vscode
+.vscode/*

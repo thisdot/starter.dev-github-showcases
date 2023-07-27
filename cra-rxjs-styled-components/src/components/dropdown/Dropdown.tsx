@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSignOut } from '../../hooks/auth/use-sign-out';
-import { DropdownIcon } from '../icons/index';
+import { DropdownIcon } from '../icons/DropdownIcon';
 import { useUser } from '../../context/UserProvider';
 import {
 	DropdownNav,

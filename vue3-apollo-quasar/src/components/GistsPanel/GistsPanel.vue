@@ -30,6 +30,9 @@ const { data: gistList, loading } = getUserGists();
 </script>
 
 <style lang="scss" scoped>
+.ellipsis {
+  min-height: unset;
+}
 .card--gists-panel {
   width: 100%;
   min-height: 30rem;

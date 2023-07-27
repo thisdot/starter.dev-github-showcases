@@ -1,6 +1,6 @@
 import { Layout } from '../components/layouts/Layout';
-import RepoCard from '../components/repo-card';
-import UserGists from '../components/user-gists';
+import RepoCard from '../components/repo-card/RepoCard';
+import UserGists from '../components/user-gists/UserGist';
 import styled from 'styled-components';
 import { useGists } from '../hooks/gists/use-gists';
 import { useRepos } from '../hooks/repositories/use-repos';
@@ -12,10 +12,11 @@ const Page = styled.div`
 `;
 
 const Main = styled.main`
+	grid-area: content;
 	width: 100%;
 	background-color: rgb(243, 244, 246);
 	max-width: 1024px;
-	min-height: calc(100vh - 70px);
+	min-height: calc(100vh - 172px);
 	@media (max-width: 850px) {
 		padding: 2rem;
 	}
@@ -51,6 +52,14 @@ const ViewRepositoriesLink = styled.a`
 	&:hover {
 		color: rgb(59 130 246);
 	}
+`;
+
+const NetlifyBadgeContainer = styled.div`
+	grid-area: footer;
+	padding-top: 2rem;
+	padding-bottom: 1rem;
+	text-align: center;
+	background-color: white;
 `;
 
 export default function TopRepos() {
@@ -95,6 +104,18 @@ export default function TopRepos() {
 						</RepositoriesContainer>
 					</Page>
 				</Main>
+				<NetlifyBadgeContainer>
+					<a
+						target="_blank"
+						rel="noreferrer noopener"
+						href="https://www.netlify.com"
+					>
+						<img
+							src="https://www.netlify.com/v3/img/components/netlify-light.svg"
+							alt="Deploys by Netlify"
+						/>
+					</a>
+				</NetlifyBadgeContainer>
 			</Layout>
 		</>
 	);

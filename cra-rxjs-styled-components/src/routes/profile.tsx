@@ -1,12 +1,15 @@
-import UserProfileView from '../components/user-profile';
-import { Layout } from '../components/layouts/ProfileLayout';
-import Header from '../components/header';
+import UserProfileView from '../components/user-profile/UserProfile';
+import {
+	Layout,
+	NetlifyBadgeContainer,
+} from '../components/layouts/ProfileLayout';
+import Header from '../components/header/Header';
 import { useUser } from '../context/UserProvider';
 import { useRepos } from '../hooks/repositories/use-repos';
-import RepoCard from '../components/repo-card';
+import RepoCard from '../components/repo-card/RepoCard';
 import styled from 'styled-components';
 import { PaginateWrapper } from '../components/paginate-button/PaginateButton.style';
-import PaginateButton from '../components/paginate-button';
+import PaginateButton from '../components/paginate-button/PaginateButton';
 import LoadingRepoCard from '../components/repo-card/LoadingRepoCard';
 
 function Profile() {
@@ -42,6 +45,18 @@ function Profile() {
 						</>
 					)}
 				</ContentLayout>
+				<NetlifyBadgeContainer>
+					<a
+						target="_blank"
+						rel="noreferrer noopener"
+						href="https://www.netlify.com"
+					>
+						<img
+							src="https://www.netlify.com/v3/img/components/netlify-light.svg"
+							alt="Deploys by Netlify"
+						/>
+					</a>
+				</NetlifyBadgeContainer>
 			</Layout>
 		</>
 	);
