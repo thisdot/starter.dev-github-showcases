@@ -20,9 +20,6 @@ export const useRepoReadMe = (): UseRepoReadMe => {
       name,
       expression: path ? `${branch}:${path}` : `${branch}:README.md`,
     };
-    console.log('====================================');
-    console.log(queryData);
-    console.log('====================================');
     const { result, loading } = useQuery(REPO_README_QUERY, queryData);
 
     const readme = useResult(result, [], (data) => {
