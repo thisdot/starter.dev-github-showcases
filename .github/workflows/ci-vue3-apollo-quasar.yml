@@ -29,15 +29,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'yarn'
           cache-dependency-path: vue3-apollo-quasar/yarn.lock
 
       - name: Install dependencies
-        run: npm run install --frozen-lockfile
+        run: yarn install --frozen-lockfile
         working-directory: vue3-apollo-quasar
 
       - name: Lint files
-        run: npm run lint
+        run: yarn lint
         working-directory: vue3-apollo-quasar
   
 
@@ -53,15 +53,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: "yarn"
           cache-dependency-path: vue3-apollo-quasar/yarn.lock
 
       - name: Install dependencies
-        run: npm run install --frozen-lockfile
+        run: yarn install --frozen-lockfile
         working-directory: vue3-apollo-quasar
 
       - name: Run tests
-        run: npm run test
+        run: yarn test
         working-directory: vue3-apollo-quasar
 
   
@@ -83,13 +83,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: "yarn"
           cache-dependency-path: vue3-apollo-quasar/yarn.lock
 
       - name: Install dependencies
-        run: npm run install --frozen-lockfile
+        run: yarn install --frozen-lockfile
         working-directory: vue3-apollo-quasar
 
       - name: Build Project
-        run: npm run build
+        run: yarn build
         working-directory: vue3-apollo-quasar
