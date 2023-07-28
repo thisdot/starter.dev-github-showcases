@@ -90,6 +90,7 @@ jobs:
         run: npm run install --frozen-lockfile
         working-directory: vue3-apollo-quasar
 
+
       - name: Build Project
         run: npm run build
         working-directory: vue3-apollo-quasar
