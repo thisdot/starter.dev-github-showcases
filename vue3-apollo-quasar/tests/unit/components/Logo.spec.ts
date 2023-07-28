@@ -13,6 +13,13 @@ const testData = {
   lightImg: { type: String, default: 'logos/gh-logo-light-bg.svg' },
 };
 
+jest.mock('@vue/apollo-composable', () => {
+  return {
+    useQuery: jest.fn(() => []),
+    useResult: jest.fn(() => []),
+  };
+});
+
 describe('Logo', () => {
   it('should mount', () => {
     const wrapper = shallowMount(Logo, {
