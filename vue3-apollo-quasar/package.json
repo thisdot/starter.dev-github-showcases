@@ -75,6 +75,9 @@
     "vue-jest": "^5.0.0-0",
     "vue-loader": "^16.8.3"
   },
+  "engines": {
+    "node": ">=16"
+  },
   "msw": {
     "workerDirectory": "public"
   }
