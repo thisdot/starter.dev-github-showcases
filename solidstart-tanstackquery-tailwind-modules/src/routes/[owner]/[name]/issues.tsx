@@ -5,18 +5,13 @@ import { LoadingPulseDot } from '../../../components/LoadingPulseDot';
 import { RepoHeader } from '../../../components/RepoHeader';
 import getIssues from '../../../services/get-issues';
 import RepoIssues from '../../../components/RepoIssues';
-import {
-  milestoneId,
-  selectedLabel,
-  selectedMilestone,
-  sortBy,
-} from '../../../components/PRAndIssuesHeader';
 import { parseSortParams } from '../../../components/RepoIssues/utils';
 import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../../utils/constants';
 import { Issue, MilestoneProps, PageInfo } from '~/types/issues-type';
 import { Label } from '~/types/label-type';
 import styles from '../style.module.css';
 import useGetRepoInfo from '~/hooks/useGetRepoInfo';
+import { milestoneId, selectedLabel, selectedMilestone, sortBy } from '~/store';
 
 export type IssuesSignal = {
   openIssues: {
