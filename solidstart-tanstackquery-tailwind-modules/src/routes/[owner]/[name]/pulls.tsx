@@ -11,7 +11,7 @@ import { PageInfo, PullRequest } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
 import styles from '../style.module.css';
 import useGetRepoInfo from '~/hooks/useGetRepoInfo';
-import { selectedLabel, sortBy } from '~/store';
+import { selectedLabel, setPullRequests, sortBy } from '~/store';
 
 export type PullRequestsSignal = {
   openPullRequests: {
@@ -26,22 +26,6 @@ export type PullRequestsSignal = {
   };
   labels: Label[];
 };
-
-const [pullRequests, setPullRequests] = createSignal<PullRequestsSignal>({
-  openPullRequests: {
-    pullRequests: [],
-    totalCount: 0,
-    pageInfo: { hasNextPage: false, hasPreviousPage: false },
-  },
-  closedPullRequests: {
-    pullRequests: [],
-    totalCount: 0,
-    pageInfo: { hasNextPage: false, hasPreviousPage: false },
-  },
-  labels: [],
-});
-
-export { pullRequests, setPullRequests };
 
 const PullRequests = () => {
   const params = useParams();

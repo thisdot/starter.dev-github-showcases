@@ -11,7 +11,7 @@ import { Issue, MilestoneProps, PageInfo } from '~/types/issues-type';
 import { Label } from '~/types/label-type';
 import styles from '../style.module.css';
 import useGetRepoInfo from '~/hooks/useGetRepoInfo';
-import { milestoneId, selectedLabel, selectedMilestone, sortBy } from '~/store';
+import { milestoneId, selectedLabel, selectedMilestone, setIssues, sortBy } from '~/store';
 
 export type IssuesSignal = {
   openIssues: {
@@ -27,23 +27,6 @@ export type IssuesSignal = {
   milestones: MilestoneProps[];
   labels: Label[];
 };
-
-const [issues, setIssues] = createSignal<IssuesSignal>({
-  openIssues: {
-    issues: [],
-    totalCount: 0,
-    pageInfo: { hasNextPage: false, hasPreviousPage: false },
-  },
-  closedIssues: {
-    issues: [],
-    totalCount: 0,
-    pageInfo: { hasNextPage: false, hasPreviousPage: false },
-  },
-  milestones: [],
-  labels: [],
-});
-
-export { issues, setIssues };
 
 const Issues = () => {
   const params = useParams();

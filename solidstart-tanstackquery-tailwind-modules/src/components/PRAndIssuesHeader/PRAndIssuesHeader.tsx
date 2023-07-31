@@ -4,8 +4,6 @@ import FilterDropdown from '../FilterDropDown/FilterDropdown';
 import { SORT_OPTIONS } from '../../utils/constants';
 import { createMemo, Show } from 'solid-js';
 import { getSelectedMilestoneId } from './utils';
-import { issues } from '../../routes/[owner]/[name]/issues';
-import { pullRequests } from '../../routes/[owner]/[name]/pulls';
 import { useSearchParams } from 'solid-start';
 import {
   setSelectedLabel,
@@ -17,6 +15,8 @@ import {
   activeTab,
   setSortBy,
   sortBy,
+  pullRequests,
+  issues,
 } from '~/store';
 
 interface PRAndIssuesHeaderProps {

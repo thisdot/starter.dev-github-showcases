@@ -4,9 +4,9 @@ import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination';
 import PRAndIssuesHeader from '../PRAndIssuesHeader';
 import { Match, Show, Switch } from 'solid-js';
-import { pullRequests } from '../../routes/[owner]/[name]/pulls';
 import {
   activeTab,
+  pullRequests,
   selectedLabel,
   setSelectedLabel,
   setSelectedMilestone,
