@@ -1,4 +1,4 @@
-import { Switch, Match, createSignal, createEffect } from 'solid-js';
+import { Switch, Match, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import { useParams, useSearchParams } from 'solid-start';
 import { LoadingPulseDot } from '../../../components/LoadingPulseDot';
