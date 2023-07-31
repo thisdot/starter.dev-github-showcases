@@ -7,25 +7,17 @@ import { getSelectedMilestoneId } from './utils';
 import { issues } from '../../routes/[owner]/[name]/issues';
 import { pullRequests } from '../../routes/[owner]/[name]/pulls';
 import { useSearchParams } from 'solid-start';
-
-const [activeTab, setActiveTab] = createSignal<'OPEN' | 'CLOSED'>('OPEN');
-const [sortBy, setSortBy] = createSignal('Newest');
-const [selectedLabel, setSelectedLabel] = createSignal<string>();
-const [selectedMilestone, setSelectedMilestone] = createSignal<string>();
-const [milestoneId, setMilestoneId] = createSignal<string>();
-
-export {
-  activeTab,
-  setActiveTab,
-  sortBy,
-  setSortBy,
-  selectedLabel,
+import {
   setSelectedLabel,
-  selectedMilestone,
+  selectedLabel,
   setSelectedMilestone,
-  milestoneId,
+  selectedMilestone,
   setMilestoneId,
-};
+  setActiveTab,
+  activeTab,
+  setSortBy,
+  sortBy,
+} from '~/store';
 
 interface PRAndIssuesHeaderProps {
   type: 'pr' | 'issue';

@@ -8,7 +8,7 @@ import {
   setMilestoneId,
   setSelectedLabel,
   setSelectedMilestone,
-} from '../PRAndIssuesHeader';
+} from '~/store';
 
 export type Tab = {
   path: string;
