@@ -1,5 +1,4 @@
 import { createSignal, createEffect, Switch, Match, Show } from 'solid-js';
-import { useParams } from '@solidjs/router';
 import styles from './FileViewer.module.css';
 import FileText from './FileText';
 
@@ -12,6 +11,7 @@ import {
 } from './mapExtensionToLanguage';
 import FileCode from './FileCode';
 import { LoadingPulseDot } from '../LoadingPulseDot';
+import { useParams } from 'solid-start';
 
 const FileViewer = () => {
   const params = useParams();
@@ -20,18 +20,18 @@ const FileViewer = () => {
     text: '',
   });
 
+  const branch = params.branch;
+  const path = params.path || params['path/'];
+
   const query = createQuery(
-    () => [`repo-file_${params.path}`],
+    () => [`repo-file_${path || ''}`],
     () =>
       getRepoFile({
         owner: params.owner,
         name: params.name,
-        expression: `${branch}:${params.path || ''}`,
+        expression: `${branch}:${path || ''}`,
       })
   );
-
-  const branch = params.branch;
-  const path = params.path;
 
   createEffect(() => {
     if (query.isSuccess && !query.isLoading && query.data) {
@@ -39,7 +39,7 @@ const FileViewer = () => {
     }
   });
 
-  const extension = path.split('.').pop() as ExtensionType;
+  const extension = path?.split('.').pop() as ExtensionType;
   const language = mapExtensionToLanguage(extension);
 
   return (
