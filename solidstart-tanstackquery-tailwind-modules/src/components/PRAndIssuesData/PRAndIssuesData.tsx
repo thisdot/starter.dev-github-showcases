@@ -1,8 +1,8 @@
 import { For, Show } from 'solid-js';
 import PRAndIssuesListItem from '../PRAndIssuesListItem';
-import { activeTab } from '../PRAndIssuesHeader';
 import { Issue } from '~/types/issues-type';
 import { PullRequest } from '~/types/pull-request-type';
+import { activeTab } from '~/store';
 
 interface PRAndIssuesDataProps {
   type: 'pr' | 'issue';

@@ -3,15 +3,16 @@ import PRAndIssuesData from '../PRAndIssuesData';
 import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination';
 import { issues } from '../../routes/[owner]/[name]/issues';
-import PRAndIssuesHeader, {
+import PRAndIssuesHeader from '../PRAndIssuesHeader';
+import { Match, Show, Switch } from 'solid-js';
+import {
   activeTab,
   selectedLabel,
   setSelectedLabel,
   setSelectedMilestone,
   setSortBy,
   sortBy,
-} from '../PRAndIssuesHeader';
-import { Match, Show, Switch } from 'solid-js';
+} from '~/store';
 
 const RepoIssues = () => {
   const params = useParams();
