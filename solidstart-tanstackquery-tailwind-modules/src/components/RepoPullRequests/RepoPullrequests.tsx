@@ -2,16 +2,17 @@ import { useParams } from '@solidjs/router';
 import PRAndIssuesData from '../PRAndIssuesData';
 import { CloseIcon } from '../Icons';
 import { Pagination } from '../Pagination';
-import PRAndIssuesHeader, {
+import PRAndIssuesHeader from '../PRAndIssuesHeader';
+import { Match, Show, Switch } from 'solid-js';
+import { pullRequests } from '../../routes/[owner]/[name]/pulls';
+import {
   activeTab,
   selectedLabel,
   setSelectedLabel,
   setSelectedMilestone,
   setSortBy,
   sortBy,
-} from '../PRAndIssuesHeader';
-import { Match, Show, Switch } from 'solid-js';
-import { pullRequests } from '../../routes/[owner]/[name]/pulls';
+} from '~/store';
 
 const RepoPullRequests = () => {
   const params = useParams();
