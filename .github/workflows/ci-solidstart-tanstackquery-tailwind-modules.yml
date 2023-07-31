@@ -30,11 +30,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: yarn
         working-directory: solidstart-tanstackquery-tailwind-modules
 
       - name: Lint files
-        run: npm run lint
+        run: yarn lint
         working-directory: solidstart-tanstackquery-tailwind-modules
   
 
@@ -52,11 +52,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: yarn
         working-directory: solidstart-tanstackquery-tailwind-modules
 
       - name: Run tests
-        run: npm run test
+        run: yarn test
         working-directory: solidstart-tanstackquery-tailwind-modules
 
   
@@ -80,9 +80,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: yarn
         working-directory: solidstart-tanstackquery-tailwind-modules
 
       - name: Build Project
-        run: npm run build
+        run: yarn build
         working-directory: solidstart-tanstackquery-tailwind-modules
