@@ -23,3 +23,4 @@ describe('Profile Navigation', () => {
     expect(text).toBeDefined();
   });
 });
+
