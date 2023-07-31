@@ -1,10 +1,13 @@
-interface Edges {
+export interface Edges {
   node: {
+    id: string;
     name: string;
     description: string;
     url: string;
     forkCount: number;
     stargazerCount: number;
+    isArchived: boolean;
+    isFork: boolean;
     primaryLanguage: {
       color: string;
       name: string;
@@ -12,6 +15,10 @@ interface Edges {
     };
     updatedAt: string;
     visibility: string;
+    owner: {
+      login: string;
+    };
+    nameWithOwner: string;
   };
 }
 

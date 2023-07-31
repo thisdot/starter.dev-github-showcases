@@ -2,7 +2,7 @@
   <div class="repo_search_header q-pt-lg">
     <SearchInput />
     <SearchDropdowns dropdownType="type" v-if="!changingFilterType">
-      <template v-slot:filtertype>
+      <template #filtertype>
         <q-item
           clickable
           v-close-popup
@@ -15,7 +15,7 @@
           >
             <q-icon
               v-show="filterType() === defaultFilterType"
-              name="svguse:app-icons/correct.svg#correct"
+              name="svguse:/app-icons/correct.svg#correct"
             />
           </span>
           {{ defaultFilterType }}</q-item
@@ -32,7 +32,7 @@
           >
             <q-icon
               v-show="filterType() === FILTER_TYPE_OPTIONS.forks"
-              name="svguse:app-icons/correct.svg#correct"
+              name="svguse:/app-icons/correct.svg#correct"
             />
           </span>
           {{ FILTER_TYPE_OPTIONS.forks }}</q-item
@@ -51,7 +51,7 @@
           >
             <q-icon
               v-show="filterType() === FILTER_TYPE_OPTIONS.archived"
-              name="svguse:app-icons/correct.svg#correct"
+              name="svguse:/app-icons/correct.svg#correct"
             />
           </span>
           {{ FILTER_TYPE_OPTIONS.archived }}</q-item
@@ -91,7 +91,7 @@
           >
             <q-icon
               v-show="filteredLanguage() === language.name"
-              name="svguse:app-icons/correct.svg#correct"
+              name="svguse:/app-icons/correct.svg#correct"
             />
           </span>
           {{ language.name }}
@@ -112,7 +112,7 @@
           >
             <q-icon
               v-show="sortBy() === defaultSortBy"
-              name="svguse:app-icons/correct.svg#correct"
+              name="svguse:/app-icons/correct.svg#correct"
             />
           </span>
           {{ SORT_OPTIONS.default }}
@@ -129,7 +129,7 @@
           >
             <q-icon
               v-show="sortBy() === SORT_OPTIONS.name"
-              name="svguse:app-icons/correct.svg#correct"
+              name="svguse:/app-icons/correct.svg#correct"
             />
           </span>
           {{ SORT_OPTIONS.name }}
@@ -146,7 +146,7 @@
           >
             <q-icon
               v-show="sortBy() === SORT_OPTIONS.stars"
-              name="svguse:app-icons/correct.svg#correct"
+              name="svguse:/app-icons/correct.svg#correct"
             />
           </span>
           {{ SORT_OPTIONS.stars }}
@@ -157,7 +157,7 @@
       <a href="https://github.com/new" class="flexbox new_repo">
         <q-icon
           class="text-h5 custom-icon"
-          name="svguse:app-icons/book.svg#book"
+          name="svguse:/app-icons/book.svg#book"
         ></q-icon>
         <span class="new_repo_btn"> {{ repoBtnText }} </span>
       </a>
@@ -166,7 +166,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, PropType } from 'vue';
 
 import { SearchDropdowns, SearchInput } from '@/components';
 import { FILTER_TYPE_OPTIONS, defaultFilterType } from './data';
@@ -176,6 +176,10 @@ import { sortBy } from '@/globals/sortBy';
 import { defaultLanguage } from './data';
 import { filteredLanguage } from '@/globals/filteredLanguage';
 
+type Languages = {
+  name: string;
+};
+
 export default defineComponent({
   name: 'SearchFilter',
   props: {
@@ -184,7 +188,7 @@ export default defineComponent({
       default: 'New',
     },
     languages: {
-      type: Array,
+      type: Array as PropType<Languages[]>,
       default: () => [],
     },
   },

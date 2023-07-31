@@ -1,6 +1,13 @@
 import { shallowMount } from '@vue/test-utils';
 import { IssuesPullRequestsCard } from '@/components';
 
+jest.mock('@vue/apollo-composable', () => {
+  return {
+    useQuery: jest.fn(() => []),
+    useResult: jest.fn(() => []),
+  };
+});
+
 describe('IssuesPullRequestsCard', () => {
   it('should mount without errors', () => {
     const wrapper = shallowMount(IssuesPullRequestsCard, {

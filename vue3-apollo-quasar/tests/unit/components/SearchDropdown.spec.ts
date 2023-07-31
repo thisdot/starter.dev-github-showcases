@@ -1,23 +1,18 @@
 import { shallowMount } from '@vue/test-utils';
-import { QItem, QSeparator, QList, QBtnDropdown, ClosePopup } from 'quasar';
 import { SearchDropdowns } from '@/components';
+
+jest.mock('@vue/apollo-composable', () => {
+  return {
+    useQuery: jest.fn(() => []),
+    useResult: jest.fn(() => []),
+  };
+});
 
 describe('SearchDropdown', () => {
   it('should mount', async () => {
     const wrapper = shallowMount(SearchDropdowns, {
       props: {
         dropdownType: 'type',
-      },
-      global: {
-        components: {
-          QItem,
-          QSeparator,
-          QList,
-          QBtnDropdown,
-        },
-        directives: {
-          ClosePopup,
-        },
       },
     });
     expect(wrapper).toBeTruthy();

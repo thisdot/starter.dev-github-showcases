@@ -20,6 +20,7 @@ const Template = (args) => ({
   <ProfilePageLayout v-bind="args">
     <template #repositories="{ repo }">
       <RepoCard
+        :nameWithOwner="repo.nameWithOwner"
         :name="repo.name"
         :visibility="repo.visibility"
         :description="repo.description"
@@ -27,6 +28,7 @@ const Template = (args) => ({
         :stargazerCount="repo.stargazerCount"
         :forkCount="repo.forkCount"
         :updatedAt="repo.updatedAt"
+        :isProfilePage="true"
       />
     </template>
   </ProfilePageLayout>
