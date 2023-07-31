@@ -1,4 +1,4 @@
-import { useWindowDimensions, View } from 'react-native';
+import { View, ViewProps, StyleProp, useWindowDimensions } from 'react-native';
 
 import { DropdownBtn, DropdownBtnText, DropdownContainer } from './FilterDropdown.styles';
 
@@ -14,6 +14,8 @@ interface FilterDropdownProps {
   items?: string[];
   selected?: string;
   showOptions?: string;
+  itemsColors?: string[];
+  style?: StyleProp<Partial<ViewProps>>;
   selectOption?: (value: string) => void;
   setShowOptions?: (value: string) => void;
 }
@@ -21,9 +23,11 @@ interface FilterDropdownProps {
 const FilterDropdown = ({
   name,
   items,
+  style,
   selected,
-  selectOption,
+  itemsColors,
   showOptions,
+  selectOption,
   setShowOptions,
 }: FilterDropdownProps) => {
   const { width } = useWindowDimensions();
@@ -47,13 +51,15 @@ const FilterDropdown = ({
         activeOpacity={0.8}
         screenWidth={width}
         onPress={openDropdown}
-        ref={dropdownButtonRef}>
+        ref={dropdownButtonRef}
+        style={style}>
         <DropdownBtnText>{name}</DropdownBtnText>
         <CaretIcon color={colors.gray400} />
       </DropdownBtn>
       <Dropdown
         name={name}
         data={items}
+        itemsColors={itemsColors}
         selected={selected}
         selectOption={selectOption}
         closeDropdown={closeDropdown}

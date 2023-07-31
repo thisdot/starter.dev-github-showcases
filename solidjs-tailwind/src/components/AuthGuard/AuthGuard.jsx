@@ -1,5 +1,5 @@
-import { Show, createEffect, createResource } from 'solid-js';
-import { useNavigate, useLocation, Outlet } from '@solidjs/router';
+import { createEffect, createResource, Show } from 'solid-js';
+import { Outlet, useLocation, useNavigate } from '@solidjs/router';
 import ROUTES from '../../routes';
 import { useAuth } from '../../auth';
 import { Header } from '../Header';
@@ -14,10 +14,8 @@ const AuthGuard = () => {
   createEffect(() => {
     if (!authStore.isAuthenticated) {
       navigate(ROUTES.SIGNIN, { replace: true });
-    } else {
-      if (data() && !data.loading) {
-        setAuth({ ...authStore, user: data() });
-      }
+    } else if (data() && !data.loading) {
+      setAuth({ ...authStore, user: data() });
     }
     sessionStorage.setItem('auth_return_path', location.pathname);
   });

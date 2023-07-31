@@ -17,10 +17,10 @@ interface Organization {
 const OrgList = ({ organizations }: Organization) => (
   <OrganizationsWrapper>
     <Heading>Organizations</Heading>
-    <Organizations>
+    <Organizations testID="organizations">
       {organizations.map(({ avatarUrl, login }) => (
-        <Organisation key={login}>
-          <OrgImage source={{ uri: avatarUrl }} />
+        <Organisation key={login} testID={login}>
+          {avatarUrl && <OrgImage source={{ uri: avatarUrl }} />}
         </Organisation>
       ))}
     </Organizations>

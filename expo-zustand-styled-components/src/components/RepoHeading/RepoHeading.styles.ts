@@ -8,23 +8,35 @@ type ScreenWidth = {
 
 export const Heading = styled.View<ScreenWidth>`
   gap: 6px;
-  overflow: hidden;
   flex-direction: row;
-  align-items: center;
+  align-items: ${({ screenWidth }) =>
+    screenWidth >= breakpoints.tablet ? 'center' : 'flex-start'};
   width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '50%' : '100%')};
 `;
 
 export const RepoContentWrapper = styled.View<ScreenWidth>`
-  gap: 5px;
-  align-items: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '' : 'flex-start')};
-  justify-content: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'center' : '')};
+  gap: 8px;
+  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.mobile ? 'row' : 'column')};
+  align-items: center;
+  ${({ screenWidth }) => {
+    if (screenWidth >= breakpoints.tablet) {
+      return `
+        justify-content: center;
+      `;
+    } else {
+      return `
+        align-items: flex-start;
+      `;
+    }
+  }};
+  flex-wrap: wrap;
 `;
 
-export const HeadingContent = styled.View`
+export const HeadingContent = styled.View<ScreenWidth>`
   gap: 6px;
   margin-right: 6px;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: ${({ screenWidth }) => (screenWidth > breakpoints.mobile ? 'row' : 'column')};
+  align-items: ${({ screenWidth }) => (screenWidth > breakpoints.mobile ? 'center' : 'flex-start')};
 `;
 
 export const OwnerLink = styled.Text<ScreenWidth>`
@@ -39,7 +51,7 @@ export const Separator = styled.Text`
 export const NameLink = styled.Text<ScreenWidth>`
   font-weight: 600;
   color: ${colors.blue600};
-  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '16px')};
+  font-size: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '20px' : '22px')};
 `;
 
 export const BadgePlaceholder = styled.View`

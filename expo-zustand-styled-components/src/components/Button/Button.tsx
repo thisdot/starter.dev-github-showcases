@@ -15,7 +15,7 @@ const Button = ({ title, primary, isLoading, loadingText, ...rest }: ButtonProps
     <ButtonStyled {...rest} primary={primary}>
       <ButtonViewStyled>
         {isLoading && <ActivityIndicator size="small" color={primary ? 'white' : 'black'} />}
-        <ButtonTextStyled primary={primary}>
+        <ButtonTextStyled primary={primary} isLoading={isLoading}>
           {isLoading ? loadingText ?? 'Loading...' : title}
         </ButtonTextStyled>
       </ButtonViewStyled>

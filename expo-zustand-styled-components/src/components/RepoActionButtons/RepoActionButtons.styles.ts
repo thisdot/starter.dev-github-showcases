@@ -10,8 +10,10 @@ export const Container = styled.View<ScreenWidth>`
   flex-wrap: wrap;
   align-items: center;
   flex-direction: row;
-  justify-content: space-between;
-  width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? '21%' : '100%')};
+  justify-content: ${({ screenWidth }) =>
+    screenWidth >= breakpoints.laptop ? 'space-between' : 'flex-start'};
+  width: ${({ screenWidth }) => (screenWidth >= breakpoints.tablet ? 'none' : '100%')};
+  gap: ${({ screenWidth }) => (screenWidth >= breakpoints.laptop ? '16px' : '8px')};
 `;
 
 export const BtnGroup = styled.View`

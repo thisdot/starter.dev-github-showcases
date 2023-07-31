@@ -8,12 +8,16 @@ interface IRepoInfoStore {
   info?: Info;
   name?: string;
   error?: string;
-  path?: string;
+  isBlob: boolean;
   branch?: string;
   owner?: string;
   readMe?: string;
   activeTab: string;
   isLoading: boolean;
+  file?: {
+    byteSize: number;
+    text: string;
+  };
   tree?: TreeProps[];
   _cache: Map<
     string,
@@ -22,21 +26,25 @@ interface IRepoInfoStore {
       branch: string;
     }
   >;
-  _treeCache: Map<string, TreeProps[]>;
+  _tree: Map<string, TreeProps[]>;
   _readMe: Map<string, string>;
+  _file: Map<string, { byteSize: number; text: string }>;
 }
 
 const _cache = new Map();
-const _treeCache = new Map();
+const _tree = new Map();
 const _readMe = new Map();
+const _file = new Map();
 
 const initialState: IRepoInfoStore = {
-  isLoading: false,
-  tree: [],
-  activeTab: REPO_TABS.code,
+  _file,
+  _tree,
   _cache,
-  _treeCache,
   _readMe,
+  tree: [],
+  isBlob: false,
+  isLoading: false,
+  activeTab: REPO_TABS.code,
 };
 
 const useRepoInfoStore = create<IRepoInfoStore>(() => initialState);

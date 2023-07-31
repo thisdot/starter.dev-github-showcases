@@ -1,26 +1,45 @@
-import { Text, useWindowDimensions } from 'react-native';
-
-import { ReposContainer, ContainerStyled, PaginationContainer } from './Repositories.styles';
+import { FlatList } from 'react-native';
 
 import RepoCard from '../../RepoCard';
 import RepoFilter from '../../RepoFilter';
+import Pagination from '../../Pagination';
+
 import { Repo } from '../../../types/user-repos-type';
 
-const Repositories = ({ repos }: { repos: Repo[] }) => {
-  const { width } = useWindowDimensions();
-
+const Repositories = ({
+  repos,
+  goToNext,
+  goToPrev,
+  languages,
+  hasNextPage,
+  hasPrevPage,
+}: {
+  repos: Repo[];
+  languages: string[];
+  goToNext: () => void;
+  goToPrev: () => void;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}) => {
   return (
-    <ContainerStyled style={{ justifyContent: 'flex-start' }} screenWidth={width}>
-      <RepoFilter languages={[]} filteredRepoCount={0} repoBtnText="New" />
-      <ReposContainer>
-        {repos.map((item, index) => (
-          <RepoCard key={item.id + index} repo={item} isProfilePage />
-        ))}
-        <PaginationContainer>
-          <Text>Pagination</Text>
-        </PaginationContainer>
-      </ReposContainer>
-    </ContainerStyled>
+    <FlatList
+      data={repos}
+      stickyHeaderIndices={[0]}
+      showsVerticalScrollIndicator={false}
+      keyExtractor={(item, index) => item.id + index}
+      renderItem={({ item }) => <RepoCard repo={item} />}
+      ListHeaderComponent={<RepoFilter languages={languages} filteredRepoCount={repos.length} repoBtnText="New" />}
+      ListFooterComponent={
+        repos.length > 0 && (
+        <Pagination
+          goToNext={goToNext}
+          goToPrev={goToPrev}
+          hasNextPage={hasNextPage}
+          hasPrevPage={hasPrevPage}
+        />
+        )
+      }
+    />
   );
 };
 

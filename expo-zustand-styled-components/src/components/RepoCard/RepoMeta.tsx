@@ -1,5 +1,6 @@
-import React from 'react';
 import { Text } from 'react-native';
+import { formatDistance } from 'date-fns';
+
 import {
   LanguageColor,
   Language,
@@ -9,7 +10,6 @@ import {
   DateWrapper,
 } from './RepoCard.styles';
 import { getColorForLanguage } from '../../utils/language-colors';
-import { formatDistance } from 'date-fns';
 import { StarLogo } from '../Icons/StarLogo';
 import { BranchLogo } from '../Icons/BranchLogo';
 import { colors } from '../../utils/style-variables';
@@ -34,34 +34,34 @@ const RepoMeta = ({ language, stargazerCount, forkCount, updatedAt }: RepoMetaPr
   ].filter((o) => o.count > 0);
 
   return (
-    <>
-      <MetaData>
-        {language && (
-          <Language>
-            <LanguageColor color={getColorForLanguage(language)} />
-            <Text>{language}</Text>
-          </Language>
-        )}
-        {socialIcons.length > 0 && (
-          <SocialWrapper>
-            {socialIcons.map(({ count, Icon }, i) => (
-              <MetaIcon key={i}>
-                {Icon}
-                <Text style={{ marginLeft: 4 }}>{count}</Text>
-              </MetaIcon>
-            ))}
-          </SocialWrapper>
-        )}
-        <DateWrapper>
-          <Text>
-            Updated{' '}
-            {formatDistance(new Date(updatedAt), Date.now(), {
-              addSuffix: true,
-            })}
-          </Text>
-        </DateWrapper>
-      </MetaData>
-    </>
+    <MetaData>
+      {language && (
+        <Language>
+          <LanguageColor color={getColorForLanguage(language)} />
+          <Text>{language}</Text>
+        </Language>
+      )}
+
+      {socialIcons.length > 0 && (
+        <SocialWrapper>
+          {socialIcons.map(({ count, Icon }, i) => (
+            <MetaIcon key={i}>
+              {Icon}
+              <Text style={{ marginLeft: 2 }}>{count}</Text>
+            </MetaIcon>
+          ))}
+        </SocialWrapper>
+      )}
+
+      <DateWrapper>
+        <Text>
+          Updated{' '}
+          {formatDistance(new Date(updatedAt), Date.now(), {
+            addSuffix: true,
+          })}
+        </Text>
+      </DateWrapper>
+    </MetaData>
   );
 };
 

@@ -15,9 +15,9 @@ export const ButtonViewStyled = styled.View<{ primary?: boolean }>`
   align-items: center;
 `;
 
-export const ButtonTextStyled = styled.Text<{ primary?: boolean }>`
+export const ButtonTextStyled = styled.Text<{ primary?: boolean; isLoading?: boolean }>`
   color: ${(p) => (p.primary ? '#fff' : '#000')};
   font-size: 16px;
-  margin-left: 10px;
+  margin-left: ${(p) => (p.isLoading ? '10px' : '0px')};
   text-align: center;
 `;

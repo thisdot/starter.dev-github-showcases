@@ -4,9 +4,7 @@ import { OrgLogo, OrgName, OrgInfoContainer, OrgLogoContainter } from './About.s
 const About = ({ name, avatarUrl }: { name: string; avatarUrl: string }) => {
   return (
     <OrgInfoContainer>
-      <OrgLogoContainter>
-        <OrgLogo source={{ uri: avatarUrl }} />
-      </OrgLogoContainter>
+      <OrgLogoContainter>{avatarUrl && <OrgLogo source={{ uri: avatarUrl }} />}</OrgLogoContainter>
       <OrgName>{name}</OrgName>
     </OrgInfoContainer>
   );

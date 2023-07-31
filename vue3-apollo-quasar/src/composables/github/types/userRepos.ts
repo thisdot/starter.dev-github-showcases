@@ -13,4 +13,5 @@ export interface Repo {
   owner: {
     login: string;
   };
+  nameWithOwner: string;
 }

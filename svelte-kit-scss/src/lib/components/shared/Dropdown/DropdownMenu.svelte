@@ -19,7 +19,12 @@
 </script>
 
 <div class="dropdown-container noselect" use:clickOutside on:clickoutside={close}>
-  <div on:click|stopPropagation={toggle} on:keypress|stopPropagation={toggle}>
+  <div
+    role="button"
+    tabindex="0"
+    on:click|stopPropagation={toggle}
+    on:keypress|stopPropagation={toggle}
+  >
     <slot />
   </div>
   {#if isOpen}
@@ -30,7 +35,7 @@
     >
       <div class="header">
         <div class="description">{descriptionDisplay}</div>
-        <div class="close" on:click={close} on:keypress={close}>
+        <div class="close" on:click={close} on:keypress={close} role="button" tabindex="0">
           <X16 class="close-icon" />
         </div>
       </div>

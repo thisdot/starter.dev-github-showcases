@@ -1,5 +1,5 @@
 export interface OrgsProfile {
-  avartarUrl: string;
+  avatarUrl: string;
   description: string;
   login: string;
   websiteUrl: string;

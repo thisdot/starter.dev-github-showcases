@@ -1,24 +1,23 @@
-import { useWindowDimensions } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-
-import { Wrapper, TopRow } from './RepoSubHeader.styles';
 import RepoHeading from '../RepoHeading/RepoHeading';
-import RepoActionButtons from '../RepoActionButtons/RepoActionButtons';
 import TabNavigation from '../TabNavigation/TabNavigation';
+import RepoActionButtons from '../RepoActionButtons/RepoActionButtons';
 
 import { createTabList } from './tabList';
+import { Wrapper, TopRow } from './RepoSubHeader.styles';
 
-import { useRepoInfoStore } from '../../hooks/stores';
+import { useRepoInfoStore, usePRAndIssueHeaderStore } from '../../hooks/stores';
+
 import { RepoStackParamList } from '../../../types';
 
-const RepoSubHeader = () => {
-  const { width } = useWindowDimensions();
-  const { navigate } = useNavigation<NavigationProp<RepoStackParamList>>();
+const RepoSubHeader = ({ width, navigation }) => {
   const { info, activeTab } = useRepoInfoStore();
+  const { clearFilter, setActiveTab } = usePRAndIssueHeaderStore();
 
-  const onChange = (tab: string, path?: keyof RepoStackParamList) => {
+  const onChange = (tab: keyof RepoStackParamList) => {
+    clearFilter();
+    setActiveTab('open');
     useRepoInfoStore.setState({ activeTab: tab });
-    path && navigate(path);
+    tab && navigation.navigate(tab);
   };
 
   return (

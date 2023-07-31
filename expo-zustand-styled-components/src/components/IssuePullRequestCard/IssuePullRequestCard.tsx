@@ -1,4 +1,7 @@
-import { IssuePullRequestCardProps } from '../../types/issue-pr-type';
+import { Text, View } from 'react-native';
+import { format } from 'date-fns';
+import { Link } from '@react-navigation/native';
+
 import {
   Card,
   CommentCount,
@@ -10,30 +13,37 @@ import {
   TitleLabelsWrapper,
   Labels,
 } from './IssuePullRequestCard.styles';
-import IssuesIcon from '../Icons/IssuesIcon';
+
 import { STATES, cardTypes } from './data';
+
 import ClosedIssueIcon from '../Icons/ClosedIssueIcon';
-import { colors } from '../../utils/style-variables';
 import PullRequestIcon from '../Icons/PullRequestIcon';
 import MergedPrIcon from '../Icons/MergedPrIcon';
 import ClosedPrIcon from '../Icons/ClosedPrIcon';
-import { Text, View } from 'react-native';
-import { format } from 'date-fns';
-import { Link } from '@react-navigation/native';
 import CommentIcon from '../Icons/CommentIcon';
+import IssuesIcon from '../Icons/IssuesIcon';
+
+import { usePRAndIssueHeaderStore } from '../../hooks/stores';
+
+import { PR_ISSUE_TABS } from '../../utils/constants';
+import { getTextColor } from '../../utils/dynamicColor';
+import { colors } from '../../utils/style-variables';
+
+import { Issue } from '../../types/issues-type';
+import LinkButton from '../LinkButton/LinkButton';
 
 const IssuePullRequestCard = ({
-  number,
-  title,
   url,
+  title,
   state,
-  createdAt,
-  authorName,
-  commentCount,
+  login,
+  number,
   labels,
   cardType,
-  isOpen,
-}: IssuePullRequestCardProps) => {
+  createdAt,
+  commentCount,
+}: Issue & { cardType: string }) => {
+  const { activeTab } = usePRAndIssueHeaderStore();
   const getIcon = () => {
     let icon = null;
     if (cardType === cardTypes.issue) {
@@ -65,13 +75,15 @@ const IssuePullRequestCard = ({
       <View>{getIcon()}</View>
       <Content>
         <TitleLabelsWrapper>
-          <Link to={url}>
+          <LinkButton to={url} isBlank>
             <ContentTitle>{title}</ContentTitle>
-          </Link>
+          </LinkButton>
           <Labels>
             {labels.map(({ color, name }, index) => (
               <LabelView key={index} color={color}>
-                <Text style={{ fontSize: 12 }}>{name}</Text>
+                <Text style={{ fontSize: 12, color: color ? getTextColor(`#${color}`) : '#FFF' }}>
+                  {name}
+                </Text>
               </LabelView>
             ))}
           </Labels>
@@ -80,8 +92,8 @@ const IssuePullRequestCard = ({
           <Text>
             #{number}
             {' by '}
-            <Link to="#">{authorName}</Link> was {isOpen ? 'opened' : 'closed'} on{' '}
-            {format(new Date(createdAt), 'MMM d, yyyy')}
+            <Link to="#">{login}</Link> was {activeTab === PR_ISSUE_TABS.open ? 'opened' : 'closed'}{' '}
+            on {format(new Date(createdAt), 'MMM d, yyyy')}
           </Text>
         </ContentFooter>
       </Content>

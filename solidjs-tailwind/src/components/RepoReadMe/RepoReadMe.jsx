@@ -1,3 +1,4 @@
+import { Switch, Match } from 'solid-js';
 import { useLocation } from '@solidjs/router';
 import SolidMarkdown from 'solid-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -13,8 +14,8 @@ const RepoReadMe = () => {
   const { readme } = useRepo();
 
   return (
-    <>
-      {readme() ? (
+    <Switch>
+      <Match when={readme()}>
         <div class={styles.container} data-testid="readme">
           <header class={styles.header}>
             <span class={styles.tocIconContainer}>
@@ -29,10 +30,11 @@ const RepoReadMe = () => {
             />
           </article>
         </div>
-      ) : (
-        <>{!pathname.includes('tree') ? <Empty /> : null}</>
-      )}
-    </>
+      </Match>
+      <Match when={!pathname.includes('tree')}>
+        <Empty />
+      </Match>
+    </Switch>
   );
 };
 

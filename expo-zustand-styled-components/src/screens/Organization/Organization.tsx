@@ -1,37 +1,56 @@
 import { useEffect, useLayoutEffect } from 'react';
-import { Text, useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 
 import { AppStackScreenProps } from '../../../types';
 
+import { tabs } from '../../utils/constants';
 import getOrgRepos from '../../services/get-org-repos';
-import { useOrgStore } from '../../hooks/stores';
+import useRepoSortFilter from '../../utils/useRepoSortFiler';
+import { useOrgStore, useRepoFilterStore } from '../../hooks/stores';
 
-import { ContainerStyled, TabNavContainer, SafeAreaViewStyled } from './Organization.styles';
-
+import TabNavigation from '../../components/TabNavigation';
 import LoaderErrorView from '../../components/LoaderErrorView';
 import { About, Repositories } from '../../components/Organization';
+import { ContainerStyled, SafeAreaViewStyled } from './Organization.styles';
 
 const Organization = ({ route, navigation }: AppStackScreenProps<'Organization'>) => {
   const { width } = useWindowDimensions();
-  const { data, error, isLoading, afterCursor, beforeCursor } = useOrgStore();
+  const { data, error, isLoading } = useOrgStore();
+  const { login, afterCursor, beforeCursor } = route.params;
+  const { search, filterType, sortBy, language } = useRepoFilterStore();
+  const { result, languages } = useRepoSortFilter(data.repos, search, filterType, sortBy, language);
 
   useEffect(() => {
-    if (route.params?.login) {
+    if (login) {
       getOrgRepos({
         first: 10,
-        afterCursor,
-        beforeCursor,
-        organization: route.params.login,
+        organization: login,
+        afterCursor: afterCursor,
+        beforeCursor: beforeCursor,
         orderBy: { direction: 'DESC', field: 'UPDATED_AT' },
       });
     } else {
       navigation.goBack();
     }
-  }, [route.params, afterCursor, beforeCursor]);
+  }, [route.params]);
 
   useLayoutEffect(() => {
     navigation.setOptions({ title: `Organization . ${data.orgInfo.name}` });
   }, [navigation, data]);
+
+  const goToNext = () => {
+    navigation.navigate('Organization', {
+      login,
+      afterCursor: data.pageInfo.endCursor,
+    });
+  };
+
+  const goToPrev = () => {
+    navigation.navigate('Organization', {
+      login,
+      beforeCursor: data.pageInfo.startCursor,
+    });
+  };
 
   return (
     <SafeAreaViewStyled>
@@ -40,10 +59,15 @@ const Organization = ({ route, navigation }: AppStackScreenProps<'Organization'>
       ) : (
         <ContainerStyled screenWidth={width}>
           <About {...data.orgInfo} />
-          <TabNavContainer>
-            <Text>Tab Navigation</Text>
-          </TabNavContainer>
-          <Repositories repos={data.repos} />
+          <TabNavigation pl={16} tabs={tabs} activeTab={tabs[0].title} />
+          <Repositories
+            repos={result}
+            goToNext={goToNext}
+            goToPrev={goToPrev}
+            languages={languages}
+            hasNextPage={data.pageInfo.hasNextPage}
+            hasPrevPage={data.pageInfo.hasPreviousPage}
+          />
         </ContainerStyled>
       )}
     </SafeAreaViewStyled>

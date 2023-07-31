@@ -15,8 +15,6 @@ interface IData {
 
 export interface IOrgStore {
   data: IData;
-  afterCursor?: string;
-  beforeCursor?: string;
   isLoading: boolean;
   error?: string;
   _cache: Map<string, IData>;

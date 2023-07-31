@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 
 import PrivacyBadge from '../PrivacyBadge';
@@ -15,39 +14,29 @@ import {
 } from './RepoHeading.styles';
 
 import { useRepoInfoStore } from '../../hooks/stores';
+import { breakpoints } from '../../utils/breakpoints';
+import LinkButton from '../LinkButton/LinkButton';
 
 const RepoHeading = () => {
-  const [flexDirection, setFlexDirection] = useState<'row' | 'column'>();
-  const [widths, setWidths] = useState({ A: 0, B: 0 });
   const { name, owner, info } = useRepoInfoStore();
   const { width } = useWindowDimensions();
 
-  const onLayoutA = (A: number) => setWidths((p) => ({ ...p, A }));
-  const onLayoutB = (B: number) => setWidths((p) => ({ ...p, B }));
-
-  useEffect(() => {
-    if (!flexDirection && widths.A && widths.B) {
-      if (widths.B >= widths.A) {
-        setFlexDirection('column');
-      } else {
-        setFlexDirection('row');
-      }
-    }
-  }, [widths, flexDirection]);
-
   return (
-    <Heading screenWidth={width} onLayout={(e) => onLayoutA(e.nativeEvent.layout.width)}>
+    <Heading screenWidth={width}>
       <PrivacyIcon visibility={info?.visibility} />
-      <RepoContentWrapper
-        screenWidth={width}
-        style={{ flexDirection }}
-        onLayout={(e) => onLayoutB(e.nativeEvent.layout.width + 100)}>
-        <HeadingContent>
-          <OwnerLink screenWidth={width}>{owner}</OwnerLink>
-          <Separator>/</Separator>
-          <NameLink screenWidth={width} numberOfLines={1}>
-            {name}
-          </NameLink>
+      <RepoContentWrapper screenWidth={width}>
+        <HeadingContent screenWidth={width}>
+          <LinkButton testID="owner-link" to={info?.isOrg ? `/orgs/${owner}` : `/${owner}`} hasLine>
+            <OwnerLink testID="owner-text" screenWidth={width}>
+              {owner}
+            </OwnerLink>
+          </LinkButton>
+          {width > breakpoints.mobile ? <Separator>/</Separator> : null}
+          <LinkButton testID="name-link" to={`/${owner}/${name}`} hasLine>
+            <NameLink testID="name-text" screenWidth={width} numberOfLines={1}>
+              {name}
+            </NameLink>
+          </LinkButton>
         </HeadingContent>
         {info?.visibility ? <PrivacyBadge visibility={info?.visibility} /> : <BadgePlaceholder />}
       </RepoContentWrapper>

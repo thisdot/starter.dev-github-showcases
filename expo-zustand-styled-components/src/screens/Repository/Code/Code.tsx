@@ -1,42 +1,29 @@
-import { ScrollView, useWindowDimensions } from 'react-native';
+import { useEffect } from 'react';
+import { useWindowDimensions } from 'react-native';
 
 import FileTree from '../../../components/FileTree';
 import RepoAbout from '../../../components/RepoAbout';
-import LoaderErrorView from '../../../components/LoaderErrorView';
-import { BranchNavigation } from '../../../components/Repository';
-import RepoReadme from '../../../components/RepoReadme/RepoReadme';
-
+import RepoLayout from '../../../components/RepoLayout';
+import RepoReadme from '../../../components/RepoReadme';
 import { useRepoInfoStore } from '../../../hooks/stores';
 
-import { Containter, MainContent, ContainerStyled, SafeAreaViewStyled } from './Code.styles';
+import { Containter } from '../Repository.styles';
 
 const Code = () => {
   const { width } = useWindowDimensions();
-  const { info, name, owner, error, branch, isLoading } = useRepoInfoStore();
+
+  useEffect(() => {
+    useRepoInfoStore.setState({ activeTab: 'Code' });
+  }, []);
 
   return (
-    <SafeAreaViewStyled>
-      {isLoading || error || !info ? (
-        <LoaderErrorView error={error} />
-      ) : (
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <ContainerStyled screenWidth={width}>
-            <BranchNavigation branch={branch} name={name} owner={owner} />
-            <MainContent screenWidth={width}>
-              <Containter screenWidth={width}>
-                <FileTree />
-                <RepoReadme />
-              </Containter>
-              <RepoAbout
-                description={info?.description}
-                homepageUrl={info?.homepageUrl}
-                topics={info?.topics}
-              />
-            </MainContent>
-          </ContainerStyled>
-        </ScrollView>
-      )}
-    </SafeAreaViewStyled>
+    <RepoLayout>
+      <Containter screenWidth={width}>
+        <FileTree />
+        <RepoReadme />
+      </Containter>
+      <RepoAbout />
+    </RepoLayout>
   );
 };
 

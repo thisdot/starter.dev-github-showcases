@@ -13,33 +13,37 @@ import { useWindowDimensions } from 'react-native';
 import { breakpoints } from '../../utils/breakpoints';
 
 interface TabNavigationProps {
+  /**
+   * @description Padding left for the container
+   * @type number
+   */
+  pl?: number;
   tabs: {
     title: string;
     Icon: (props: SvgProps) => JSX.Element;
     count?: number;
-    path?: string;
   }[];
   activeTab: string;
-  onChange: (title: string, path: string) => void;
+  onChange?: (title: string) => void;
 }
 
-const TabNavigation = ({ tabs, activeTab, onChange }: TabNavigationProps) => {
+const TabNavigation = ({ pl, tabs, activeTab, onChange }: TabNavigationProps) => {
   const { width } = useWindowDimensions();
 
   return (
-    <Container>
+    <Container pl={pl}>
       <TabContainer
         horizontal
         contentContainerStyle={{
           flexGrow: width >= breakpoints.tablet ? 0 : 1,
           justifyContent: 'space-between',
         }}>
-        {tabs.map(({ title, Icon, count, path }, index) => (
+        {tabs.map(({ title, Icon, count }, index) => (
           <Tab
             key={index}
             activeOpacity={0.5}
             isActive={activeTab === title}
-            onPress={() => onChange(title, path)}>
+            onPress={() => (onChange ? onChange(title) : null)}>
             <Icon color={activeTab === title ? colors.gray700 : colors.gray500} />
             <TabText isActive={activeTab === title}>{title}</TabText>
             {typeof count === 'number' && count > 0 && (

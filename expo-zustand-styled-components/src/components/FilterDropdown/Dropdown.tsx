@@ -9,6 +9,8 @@ import {
   DropdownOverlay,
   DropdownOptionsHeading,
   DropdownOptionsHeadingText,
+  DropdownItemContent,
+  DropdownItemContentColor,
 } from './FilterDropdown.styles';
 import DropdownModal from './DropdownModal';
 
@@ -18,6 +20,7 @@ import { colors } from '../../utils/style-variables';
 const Dropdown = ({
   name,
   data,
+  itemsColors,
   selected,
   isVisible,
   layoutStyle,
@@ -25,6 +28,7 @@ const Dropdown = ({
   closeDropdown,
 }: {
   data: string[];
+  itemsColors?: string[];
   name: string;
   selected: string;
   isVisible: boolean;
@@ -34,12 +38,26 @@ const Dropdown = ({
 }) => {
   const { dropDownFlatlistRef } = useRefs();
 
+  const allItems = (): { name: string; color: string | null }[] => {
+    if (itemsColors && itemsColors.length === data.length) {
+      return data.map((item, index) => ({
+        name: item,
+        color: itemsColors && (itemsColors[index] || 'ccc'),
+      }));
+    } else {
+      return data.map((item) => ({
+        name: item,
+        color: null,
+      }));
+    }
+  };
+
   return (
     <DropdownModal visible={isVisible}>
       <DropdownOverlay activeOpacity={1} onPress={closeDropdown} />
       <DropdownWindow style={layoutStyle}>
         <FlatList
-          data={data}
+          data={allItems()}
           ref={dropDownFlatlistRef}
           ListHeaderComponent={() => (
             <DropdownOptionsHeading>
@@ -49,14 +67,17 @@ const Dropdown = ({
               </TouchableOpacity>
             </DropdownOptionsHeading>
           )}
-          renderItem={({ item }) => (
-            <DropdownOption onPress={() => selectOption(item)}>
-              {selected === item ? (
+          renderItem={({ item: { name, color } }) => (
+            <DropdownOption onPress={() => selectOption(name)}>
+              {selected === name ? (
                 <CorrectIcon color={colors.gray600} />
               ) : (
                 <View style={{ marginRight: 16 }} />
               )}
-              <Text>{item}</Text>
+              <DropdownItemContent>
+                {color && <DropdownItemContentColor style={{ backgroundColor: `#${color}` }} />}
+                <Text>{name}</Text>
+              </DropdownItemContent>
             </DropdownOption>
           )}
           keyExtractor={(item, index) => index.toString()}

@@ -1,6 +1,6 @@
 # starter.dev GitHub Showcases
 
-Welcome to stater.dev GitHub Showcases! Here you can see some of the projects that we've built using a variety of technologies to demonstrate architectural patterns and best practices using these tools.
+Welcome to starter.dev GitHub Showcases! Here you can see some of the projects that we've built using a variety of technologies to demonstrate architectural patterns and best practices using these tools.
 
 See some of the projects we've built:
 

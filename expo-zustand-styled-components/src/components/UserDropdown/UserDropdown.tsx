@@ -1,7 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import { ParamListBase } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Text } from 'react-native';
 import {
   UserMenu,
   ListItem,
@@ -9,37 +7,42 @@ import {
   ProfileImage,
   DropdownWrapper,
   ProfileImageWrapper,
+  ProfileImageContainer,
 } from './UserDropdown.styles';
 
 import useAuthStore from '../../hooks/stores/useAuthStore';
+import LinkButton from '../LinkButton/LinkButton';
+import { useAppStore } from '../../hooks/stores';
 
-const UserDropdown = ({
-  width,
-  navigation,
-}: {
-  width: number;
-  navigation: NativeStackNavigationProp<ParamListBase, string, undefined>;
-}) => {
-  const { logout, viewer, isMenuOpen, toggleMenu } = useAuthStore();
+const UserDropdown = ({ width }: { width: number }) => {
+  const { logout } = useAuthStore();
+  const { isMenuOpen, toggleMenu, viewer } = useAppStore();
 
   return (
-    <DropdownWrapper>
+    <DropdownWrapper testID="user-dropdown">
       <ProfileImageWrapper testID="profile-image" onPress={() => toggleMenu()}>
-        <ProfileImage source={{ uri: viewer?.avatarUrl || '' }} />
+        <ProfileImageContainer>
+          {viewer?.avatarUrl && <ProfileImage source={{ uri: viewer.avatarUrl }} />}
+        </ProfileImageContainer>
         <ArrowImage source={require('../../../assets/arrow-down-icon.png')} />
       </ProfileImageWrapper>
       {isMenuOpen && (
         <UserMenu screenWidth={width}>
           <ListItem screenWidth={width}>
-            <TouchableOpacity
-              onPress={() => {
+            <LinkButton
+              to={`/${viewer?.login}`}
+              onClick={() => {
                 toggleMenu(false);
-                navigation.navigate('Profile');
               }}>
               <Text>Profile</Text>
-            </TouchableOpacity>
+            </LinkButton>
           </ListItem>
-          <ListItem onPress={() => logout()} screenWidth={width}>
+          <ListItem
+            onPress={() => {
+              logout();
+              toggleMenu(false);
+            }}
+            screenWidth={width}>
             <Text>Sign Out</Text>
           </ListItem>
         </UserMenu>

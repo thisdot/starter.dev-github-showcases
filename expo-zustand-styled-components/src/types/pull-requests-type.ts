@@ -1,4 +1,5 @@
 import { Label } from './label-type';
+import { PageInfo as UserPageInfo } from './user-repos-type';
 
 export interface PullRequest {
   login: string;
@@ -42,12 +43,7 @@ export type RepoPullRequestsQuery = {
   };
 };
 
-export interface PageInfo {
-  startCursor?: string;
-  endCursor?: string;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
-}
+export type PageInfo = UserPageInfo;
 
 export interface PullRequestProps {
   totalCount: number;
