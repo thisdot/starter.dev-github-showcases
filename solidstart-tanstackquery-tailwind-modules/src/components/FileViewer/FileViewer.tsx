@@ -11,7 +11,7 @@ import {
 } from './mapExtensionToLanguage';
 import FileCode from './FileCode';
 import { LoadingPulseDot } from '../LoadingPulseDot';
-import { useParams } from 'solid-start';
+import { useParams } from '@solidjs/router';
 
 const FileViewer = () => {
   const params = useParams();

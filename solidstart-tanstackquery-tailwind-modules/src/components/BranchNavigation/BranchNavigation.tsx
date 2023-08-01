@@ -43,13 +43,13 @@ const BranchNavigation = (props: Props) => {
               <Switch
                 fallback={
                   <>
-                    <A
+                    <a
                       href={`${hrefPath(index())}`}
                       data-testid={`file explorer nav crumb ${crumb}`}
                       class={styles.crumbLink}
                     >
                       {crumb}
-                    </A>
+                    </a>
                     <span class={styles.separator}>/</span>
                   </>
                 }

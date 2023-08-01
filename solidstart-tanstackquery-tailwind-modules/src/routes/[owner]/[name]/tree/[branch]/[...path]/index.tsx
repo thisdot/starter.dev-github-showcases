@@ -1,4 +1,4 @@
-import { useParams } from 'solid-start';
+import { useParams } from '@solidjs/router';
 import { BranchNavigation } from '~/components/BranchNavigation';
 import FileExplorer from '~/components/FileExplorer';
 import { RepoHeader } from '~/components/RepoHeader';

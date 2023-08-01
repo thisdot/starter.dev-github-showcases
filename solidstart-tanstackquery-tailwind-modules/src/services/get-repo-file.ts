@@ -41,7 +41,7 @@ const getRepoFile = async (variables: RepoFileVariables) => {
   };
   const resp = (await FetchApi(data)) as Response;
 
-  return resp?.data?.repository?.blob;
+  return resp?.data?.repository?.blob || null;
 };
 
 export default getRepoFile;
