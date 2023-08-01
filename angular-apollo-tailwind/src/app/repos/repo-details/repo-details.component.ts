@@ -19,7 +19,7 @@ export class RepoDetailsComponent {
             expression: `${branch}:`,
           })
           .valueChanges.pipe(
-            map((res) => ({
+            map(() => ({
               owner,
               name,
               login,
