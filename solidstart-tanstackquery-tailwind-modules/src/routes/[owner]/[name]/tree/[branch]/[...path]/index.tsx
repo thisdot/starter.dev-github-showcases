@@ -1,4 +1,4 @@
-import { useParams } from 'solid-start';
+import { useParams } from '@solidjs/router';
 import { BranchNavigation } from '~/components/BranchNavigation';
 import FileExplorer from '~/components/FileExplorer';
 import { RepoHeader } from '~/components/RepoHeader';
@@ -7,7 +7,8 @@ import useGetRepoInfo from '~/hooks/useGetRepoInfo';
 
 const RepoTree = () => {
   const params = useParams();
-  const [info, branch,] = useGetRepoInfo();
+  const [info, branch] = useGetRepoInfo();
+  const path = params.path || params['path/'];
 
   return (
     <div class={styles.wrapper}>
@@ -17,7 +18,7 @@ const RepoTree = () => {
           <div class="col-span-12 md:col-span-7 xl:col-span-9">
             <BranchNavigation branch={branch()} />
             <FileExplorer
-              path={params.path}
+              path={path}
               branch={branch()}
               owner={params.owner}
               name={params.name}

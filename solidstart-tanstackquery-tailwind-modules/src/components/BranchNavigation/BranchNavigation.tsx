@@ -9,11 +9,12 @@ interface Props {
 
 const BranchNavigation = (props: Props) => {
   const params = useParams();
-  const crumbs = () => params.path?.split('/').filter(Boolean) || [];
+  const path = params.path || params['path/'];
+  const crumbs = () => path?.split('/').filter(Boolean) || [];
 
   // creates a proper GitHub url path from a repo path
   const hrefPath = (index: number) => {
-    const crumbPath = params.path
+    const crumbPath = path
       ?.split('/')
       .filter(Boolean)
       .slice(0, index + 1)
@@ -40,18 +41,18 @@ const BranchNavigation = (props: Props) => {
           <For each={crumbs()}>
             {(crumb, index) => (
               <Switch
-                fallback={() => (
+                fallback={
                   <>
-                    <A
+                    <a
                       href={`${hrefPath(index())}`}
                       data-testid={`file explorer nav crumb ${crumb}`}
                       class={styles.crumbLink}
                     >
                       {crumb}
-                    </A>
+                    </a>
                     <span class={styles.separator}>/</span>
                   </>
-                )}
+                }
               >
                 <Match when={index() === crumbs().length - 1}>
                   <span

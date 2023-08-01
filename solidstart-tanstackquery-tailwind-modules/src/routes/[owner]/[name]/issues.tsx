@@ -1,22 +1,17 @@
-import { Switch, Match, createSignal, createEffect } from 'solid-js';
+import { Switch, Match, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import { useParams, useSearchParams } from 'solid-start';
 import { LoadingPulseDot } from '../../../components/LoadingPulseDot';
 import { RepoHeader } from '../../../components/RepoHeader';
 import getIssues from '../../../services/get-issues';
 import RepoIssues from '../../../components/RepoIssues';
-import {
-  milestoneId,
-  selectedLabel,
-  selectedMilestone,
-  sortBy,
-} from '../../../components/PRAndIssuesHeader';
 import { parseSortParams } from '../../../components/RepoIssues/utils';
 import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../../utils/constants';
 import { Issue, MilestoneProps, PageInfo } from '~/types/issues-type';
 import { Label } from '~/types/label-type';
 import styles from '../style.module.css';
 import useGetRepoInfo from '~/hooks/useGetRepoInfo';
+import { milestoneId, selectedLabel, selectedMilestone, setIssues, sortBy } from '~/store';
 
 export type IssuesSignal = {
   openIssues: {
@@ -32,23 +27,6 @@ export type IssuesSignal = {
   milestones: MilestoneProps[];
   labels: Label[];
 };
-
-const [issues, setIssues] = createSignal<IssuesSignal>({
-  openIssues: {
-    issues: [],
-    totalCount: 0,
-    pageInfo: { hasNextPage: false, hasPreviousPage: false },
-  },
-  closedIssues: {
-    issues: [],
-    totalCount: 0,
-    pageInfo: { hasNextPage: false, hasPreviousPage: false },
-  },
-  milestones: [],
-  labels: [],
-});
-
-export { issues, setIssues };
 
 const Issues = () => {
   const params = useParams();
