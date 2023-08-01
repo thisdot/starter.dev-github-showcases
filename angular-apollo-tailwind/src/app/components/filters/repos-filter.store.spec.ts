@@ -6,7 +6,9 @@ describe('ReposFilterStore', () => {
   let service: ReposFilterStore;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [ReposFilterStore],
+    });
     service = TestBed.inject(ReposFilterStore);
   });
 

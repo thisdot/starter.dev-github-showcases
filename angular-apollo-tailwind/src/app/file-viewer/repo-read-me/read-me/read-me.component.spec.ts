@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReadMeComponent } from './read-me.component';
+import { MarkdownPipe } from '@shared';
 
 describe('ReadMeComponent', () => {
   let component: ReadMeComponent;
@@ -8,7 +9,7 @@ describe('ReadMeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ReadMeComponent],
+      declarations: [ReadMeComponent, MarkdownPipe],
     }).compileComponents();
   });
 

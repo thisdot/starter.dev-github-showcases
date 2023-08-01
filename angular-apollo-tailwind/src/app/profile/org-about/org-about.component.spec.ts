@@ -1,13 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrgProfileAboutComponent } from './org-about.component';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 
-describe('OrgProfileComponent', () => {
+describe('OrgAboutComponent', () => {
   let component: OrgProfileAboutComponent;
   let fixture: ComponentFixture<OrgProfileAboutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ApolloTestingModule],
       declarations: [OrgProfileAboutComponent],
     }).compileComponents();
   });
@@ -15,6 +17,7 @@ describe('OrgProfileComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OrgProfileAboutComponent);
     component = fixture.componentInstance;
+    component.profile = {} as any;
     fixture.detectChanges();
   });
 

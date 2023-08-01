@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RepoActionButtonsComponent } from './repo-action-buttons.component';
 
-describe('RepoComponent', () => {
+describe('RepoActionComponent', () => {
   let component: RepoActionButtonsComponent;
   let fixture: ComponentFixture<RepoActionButtonsComponent>;
 

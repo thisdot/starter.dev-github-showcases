@@ -15,6 +15,9 @@ describe('ReposFilterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ReposFiltersComponent);
     component = fixture.componentInstance;
+    component.state = {
+      sort: {},
+    } as any;
     fixture.detectChanges();
   });
 

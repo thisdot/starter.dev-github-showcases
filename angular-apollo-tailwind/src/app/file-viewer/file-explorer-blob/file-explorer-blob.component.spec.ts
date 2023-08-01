@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FileExplorerBlobComponent } from './file-explorer-blob.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { RouteConfigService } from '@this-dot/route-config';
 
 describe('FileExplorerBlobComponent', () => {
   let component: FileExplorerBlobComponent;
@@ -7,7 +9,9 @@ describe('FileExplorerBlobComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [FileExplorerBlobComponent],
+      providers: [RouteConfigService],
     }).compileComponents();
   });
 

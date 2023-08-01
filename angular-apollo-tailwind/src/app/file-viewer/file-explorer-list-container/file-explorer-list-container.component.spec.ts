@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FileExplorerListContainerComponent } from './file-explorer-list-container.component';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 
 describe('FileExplorerListContainerComponent', () => {
   let component: FileExplorerListContainerComponent;
@@ -8,6 +9,7 @@ describe('FileExplorerListContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ApolloTestingModule],
       declarations: [FileExplorerListContainerComponent],
     }).compileComponents();
   });

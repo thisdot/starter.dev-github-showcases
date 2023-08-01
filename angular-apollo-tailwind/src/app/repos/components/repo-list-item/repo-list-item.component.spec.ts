@@ -15,6 +15,7 @@ describe('RepoListItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RepoListItemComponent);
     component = fixture.componentInstance;
+    component.repo = {} as any;
     fixture.detectChanges();
   });
 

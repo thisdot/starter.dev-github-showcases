@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReposComponent } from './repos.component';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 
 describe('ReposComponent', () => {
   let component: ReposComponent;
@@ -8,6 +9,7 @@ describe('ReposComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ApolloTestingModule],
       declarations: [ReposComponent],
     }).compileComponents();
   });

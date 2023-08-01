@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrgProfileComponent } from './org-profile.component';
+import { ApolloTestingModule } from 'apollo-angular/testing';
+import { OrgProfileGQL } from '../../gql';
 
 describe('OrgProfileComponent', () => {
   let component: OrgProfileComponent;
@@ -8,7 +10,9 @@ describe('OrgProfileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ApolloTestingModule],
       declarations: [OrgProfileComponent],
+      providers: [OrgProfileGQL],
     }).compileComponents();
   });
 

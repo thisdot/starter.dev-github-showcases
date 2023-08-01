@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RepoHeaderSkeletonComponent } from './repo-header-skeleton.component';
 
-describe('RepoComponent', () => {
+describe('RepoHeaderSkeletonComponent', () => {
   let component: RepoHeaderSkeletonComponent;
   let fixture: ComponentFixture<RepoHeaderSkeletonComponent>;
 

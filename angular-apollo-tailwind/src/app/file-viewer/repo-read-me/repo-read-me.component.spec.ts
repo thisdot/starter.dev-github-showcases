@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RepoReadMeComponent } from './repo-read-me.component';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 
 describe('RepoReadMeComponent', () => {
   let component: RepoReadMeComponent;
@@ -8,6 +9,7 @@ describe('RepoReadMeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ApolloTestingModule],
       declarations: [RepoReadMeComponent],
     }).compileComponents();
   });
