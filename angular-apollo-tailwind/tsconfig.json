@@ -17,13 +17,21 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
-      "@shared": ["dist/shared/shared", "dist/shared"],
-      "@prism": ["dist/prism/prism", "dist/prism"]
+      "@shared": [
+        "projects/shared/src/public-api.ts"
+      ],
+      "@prism": [
+        "dist/prism"
+      ]
     },
     "target": "es2022",
     "useDefineForClassFields": false,
     "module": "es2022",
-    "lib": ["es2022", "dom", "esnext.asynciterable"]
+    "lib": [
+      "es2022",
+      "dom",
+      "esnext.asynciterable"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
