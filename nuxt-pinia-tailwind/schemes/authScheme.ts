@@ -2,13 +2,6 @@ import { LocalScheme } from '@nuxtjs/auth-next/dist/runtime';
 import { HTTPRequest, HTTPResponse } from '@nuxtjs/auth-next';
 import { IUser } from '@/types/user/interfaces';
 
-const getPageCount = (pageData: string) => {
-  return (
-    pageData.split(',')[1].match(/.*page=(?<page_num>\d+)/)?.groups?.page_num ||
-    0
-  );
-};
-
 export default class CustomLoginScheme extends LocalScheme {
   //  Add any custom options
 
@@ -42,29 +35,26 @@ export default class CustomLoginScheme extends LocalScheme {
       };
 
       const getOrgs = this.$auth.requestWith(this.name, orgsEndpoint);
-      //
 
       // Fetch stars
       const starsEndpoint: HTTPRequest = {
         ...endpoint,
-        url: `users/${user.login}/starred?per_page=1`,
-        headers: {
-          Accept: 'application/vnd.github.preview',
-        },
+        url: `users/${user.login}/starred`,
       };
 
       const getStars = this.$auth.requestWith(this.name, starsEndpoint);
-      //
 
-      const [orgs, stars] = await Promise.all([getOrgs, getStars]);
-
-      const starsCount = getPageCount(stars.headers.link);
-      const orgsCount = getPageCount(orgs.headers.link);
+      const [{ data: orgs }, { data: stars }] = await Promise.all([
+        getOrgs,
+        getStars,
+      ]);
 
       const customUser: IUser = {
         ...user,
-        orgs_count: orgsCount,
-        stars_count: starsCount,
+        orgs,
+        stars,
+        orgs_count: orgs.length,
+        stars_count: stars.length,
       };
 
       this.$auth.setUser(customUser);
