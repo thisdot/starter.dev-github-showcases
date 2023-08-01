@@ -1,0 +1,17 @@
+@tailwind utilities;
+
+.container {
+  @apply relative bg-white;
+}
+
+.stickyNav {
+  @apply border-b border-gray-200 sticky top-0 bg-white z-20 hidden md:block;
+}
+
+.gridNav {
+  @apply grid grid-cols-12 gap-8 max-w-screen-2xl mx-auto;
+}
+
+.profileNav {
+  @apply col-span-12 md:col-span-8 xl:col-span-9;
+}

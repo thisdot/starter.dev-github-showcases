@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+pre {
+  font-size: 0.85rem !important;
+}

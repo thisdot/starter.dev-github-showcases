@@ -7,7 +7,7 @@ import {
 	ReadmeIconContainer,
 	ReadmeText,
 } from './Readme.styles';
-import { ReadmeListIcon } from '../icons/index';
+import { ReadmeListIcon } from '../icons/ReadmeListIcon';
 
 export default function Readme({
 	username,

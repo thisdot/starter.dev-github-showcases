@@ -1,0 +1,33 @@
+@tailwind utilities;
+
+.container {
+  @apply border-b border-gray-200;
+}
+
+.nav {
+  @apply -mb-px flex;
+}
+
+.tab {
+  @apply inline-flex items-center p-4 border-b-2 font-medium text-sm;
+}
+
+.tabInactive {
+  @apply border-transparent text-gray-600 hover:border-gray-300;
+}
+
+.tabActive {
+  @apply border-yellow-500 text-gray-900 font-semibold;
+}
+
+.icon {
+  @apply -ml-0.5 mr-2 h-5 w-5 border-none;
+}
+
+.iconInactive {
+  @apply text-gray-500;
+}
+
+.iconActive {
+  @apply text-gray-700;
+}

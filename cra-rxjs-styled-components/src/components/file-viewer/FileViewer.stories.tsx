@@ -3,24 +3,24 @@ import { Routes, Route, MemoryRouter } from 'react-router-dom';
 import FileViewer from './FileViewer.view';
 
 export default {
-  title: 'Navbar/FileViewer',
-  component: FileViewer,
+	title: 'Navbar/FileViewer',
+	component: FileViewer,
 } as ComponentMeta<typeof FileViewer>;
 
 const Template: ComponentStory<typeof FileViewer> = (args) => (
-  <MemoryRouter>
-    <Routes>
-      <Route path="/" element={<FileViewer {...args} />}></Route>
-    </Routes>
-  </MemoryRouter>
+	<MemoryRouter>
+		<Routes>
+			<Route path="/" element={<FileViewer {...args} />}></Route>
+		</Routes>
+	</MemoryRouter>
 );
 
 export const JsxFile = Template.bind({});
 JsxFile.args = {
-  byteSize: 534,
-  lines: 23,
-  language: 'jsx',
-  text: `import React from "react";
+	byteSize: 534,
+	lines: 23,
+	language: 'jsx',
+	text: `import React from "react";
 
   class Card extends React.Component {
     render() {
@@ -47,10 +47,10 @@ JsxFile.args = {
 
 export const TypescriptFile = Template.bind({});
 TypescriptFile.args = {
-  byteSize: 1775,
-  lines: 64,
-  language: 'typescript',
-  text: `import { Request, Response } from "express";
+	byteSize: 1775,
+	lines: 64,
+	language: 'typescript',
+	text: `import { Request, Response } from "express";
   import {
     requestPasswordReset,
     resetPassword,

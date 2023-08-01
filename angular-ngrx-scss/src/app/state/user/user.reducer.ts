@@ -16,7 +16,7 @@ const initialUserState: UserState = {
   following: 0,
   location: '',
   name: '',
-  twitter_username: '',
+  twitterUsername: '',
   username: '',
   type: '',
 };

@@ -1,0 +1,44 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "plugin:solid/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "unused-imports",
+    "solid"
+  ],
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "no-console": "error"
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.spec.ts",
+        "*.spec.tsx",
+        "*.stories.ts",
+        "*.stories.tsx"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    }
+  ]
+}

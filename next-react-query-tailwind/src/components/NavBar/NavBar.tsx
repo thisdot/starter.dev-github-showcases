@@ -9,22 +9,22 @@ function NavBar() {
   const user = session?.user;
   return (
     <header className={styles.header}>
-      <Link href="/">
-        <a>
-          <GitHubLogo />
-        </a>
-      </Link>
-      <div>
-        <div>
-          {user ? (
-            <UserDropdown image={user.image} />
-          ) : (
-            <Link href="/api/auth/signin">
-              <a className={styles.navLink}>Sign In</a>
-            </Link>
-          )}
-        </div>
-      </div>
+      {user ? (
+        <>
+          <Link href="/">
+            <a>
+              <GitHubLogo />
+            </a>
+          </Link>
+          <div>
+            <div>
+              <UserDropdown image={user.image} />
+            </div>
+          </div>
+        </>
+      ) : (
+        ''
+      )}
     </header>
   );
 }

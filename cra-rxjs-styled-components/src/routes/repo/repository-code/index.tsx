@@ -11,7 +11,7 @@ import { useRepo } from '../../../context/RepoContext';
 import { useRepoExplorer } from '../../../hooks/repo-explorer/use-repo-explorer';
 
 export default function RepoBranchRoot() {
-	const { owner, name, branch, path, basePath, data } = useRepo();
+	const { owner, name, branch, path, basePath, data, isRepoLoading } = useRepo();
 	const { files, directories } = useRepoExplorer();
 
 	return (
@@ -25,6 +25,7 @@ export default function RepoBranchRoot() {
 							basePath={basePath}
 							directories={directories}
 							files={files}
+							isRepoLoading={isRepoLoading}
 						/>
 						<Readme branch={branch} username={owner} repository={name} />
 					</RepoMain>
@@ -33,6 +34,7 @@ export default function RepoBranchRoot() {
 							topics={data?.topics}
 							description={data?.description}
 							homepageUrl={data?.homepageUrl}
+							isLoading={isRepoLoading}
 						/>
 					</RepoAside>
 				</RepoGrid>

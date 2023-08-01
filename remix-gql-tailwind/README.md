@@ -31,3 +31,9 @@ Remix's `<Link>` component does not play nice with Storybook, so we include an a
 #### Authenticating with GitHub
 
 This app uses an OAuth flow to authenticate with GitHub and use their API. You will need to create an OAuth GitHub app and use the provided client and secret IDs in `.env`. Your GitHub app will need to point to `{{you app's URL or localhost}}/auth/github/callback`.
+
+## Live Demo
+
+This demo app gets deployed to Netlify on changes to the `main` branch.
+
+https://remix-gql-tailwind.starter.dev

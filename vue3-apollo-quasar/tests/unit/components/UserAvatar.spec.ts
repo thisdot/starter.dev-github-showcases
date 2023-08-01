@@ -7,6 +7,13 @@ const testData = {
   img: 'https://place-hold.it/64x64',
 };
 
+jest.mock('@vue/apollo-composable', () => {
+  return {
+    useQuery: jest.fn(() => []),
+    useResult: jest.fn(() => []),
+  };
+});
+
 describe('UserAvatar', () => {
   it('should mount', () => {
     const wrapper = shallowMount(UserAvatar, {

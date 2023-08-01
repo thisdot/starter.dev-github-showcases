@@ -28,6 +28,7 @@ export interface UserTopRepo {
   stargazerCount: number;
   forkCount: number;
   updatedAt: string;
+  nameWithOwner: string;
 }
 
 export interface TopRepo {
