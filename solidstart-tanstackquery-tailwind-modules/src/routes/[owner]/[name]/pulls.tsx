@@ -1,10 +1,9 @@
-import { Switch, Match, createSignal, createEffect } from 'solid-js';
+import { Switch, Match, createEffect } from 'solid-js';
 import { createQuery } from '@tanstack/solid-query';
 import { useParams, useSearchParams } from 'solid-start';
 import { LoadingPulseDot } from '../../../components/LoadingPulseDot';
 import { RepoHeader } from '../../../components/RepoHeader';
 import getRepoPullRequests from '../../../services/get-pull-request';
-import { selectedLabel, sortBy } from '../../../components/PRAndIssuesHeader';
 import { parseSortParams } from '../../../components/RepoIssues/utils';
 import { DEFAULT_PAGE_SIZE, SORT_OPTIONS } from '../../../utils/constants';
 import RepoPullRequests from '../../../components/RepoPullRequests';
@@ -12,6 +11,7 @@ import { PageInfo, PullRequest } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
 import styles from '../style.module.css';
 import useGetRepoInfo from '~/hooks/useGetRepoInfo';
+import { selectedLabel, setPullRequests, sortBy } from '~/store';
 
 export type PullRequestsSignal = {
   openPullRequests: {
@@ -26,22 +26,6 @@ export type PullRequestsSignal = {
   };
   labels: Label[];
 };
-
-const [pullRequests, setPullRequests] = createSignal<PullRequestsSignal>({
-  openPullRequests: {
-    pullRequests: [],
-    totalCount: 0,
-    pageInfo: { hasNextPage: false, hasPreviousPage: false },
-  },
-  closedPullRequests: {
-    pullRequests: [],
-    totalCount: 0,
-    pageInfo: { hasNextPage: false, hasPreviousPage: false },
-  },
-  labels: [],
-});
-
-export { pullRequests, setPullRequests };
 
 const PullRequests = () => {
   const params = useParams();

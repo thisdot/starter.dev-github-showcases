@@ -7,13 +7,13 @@ import {
   Switch,
   Match,
 } from 'solid-js';
-import { A } from '@solidjs/router';
 import { DocumentIcon, FolderIcon } from '../Icons';
 import styles from './FileExplorer.module.css';
 import getRepoTree from '../../services/get-repo-tree';
 import { parseQueryData } from './parseTree';
 import { createQuery } from '@tanstack/solid-query';
 import { TreeProps } from '~/types/repo-tree-type';
+import { A } from '@solidjs/router';
 
 export type IProps = {
   branch: string;
@@ -58,6 +58,7 @@ const FileExplorerView = (props: IProps) => {
             <A
               href={`${basePath()}/tree/${local.branch}/${local.path}`}
               class={styles.cellBack}
+              replace
             >
               <div class="text-blue-600">..</div>
             </A>
@@ -73,7 +74,7 @@ const FileExplorerView = (props: IProps) => {
                       </Match>
                     </Switch>
                   </div>
-                  <A
+                  <a
                     href={`${basePath()}/${item.type}/${local.branch}/${
                       item.path
                     }`}
@@ -81,7 +82,7 @@ const FileExplorerView = (props: IProps) => {
                     class={styles.link}
                   >
                     {item.name}
-                  </A>
+                  </a>
                 </div>
               </div>
             )}

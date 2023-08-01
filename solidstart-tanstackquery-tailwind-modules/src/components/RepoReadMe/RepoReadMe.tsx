@@ -21,15 +21,15 @@ const RepoReadMe = () => {
   const params = useParams();
   const [readme, setReadme] = createSignal<string>();
 
+  const path = params.path || params['path/'];
+
   const resReadMe = createQuery(
     () => [`read-me_${params.owner}_${params.name}`],
     () =>
       getReadme({
         owner: params.owner,
         name: params.name,
-        expression: params.path
-          ? `HEAD:${params.path}/README.md`
-          : 'HEAD:README.md',
+        expression: path ? `HEAD:${path}/README.md` : 'HEAD:README.md',
       })
   );
 

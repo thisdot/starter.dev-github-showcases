@@ -1,21 +1,32 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 import netlify from 'solid-start-netlify';
-import solid from "solid-start/vite";
-import { defineConfig } from "vite";
+import solid from 'solid-start/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [solid({
-    adapter: netlify({})
-  })],
+  plugins: [
+    solid({
+      adapter: netlify({}),
+    }),
+  ],
   server: {
     port: 3000,
     hmr: {
-      overlay: false
-    }
+      overlay: false,
+    },
   },
   optimizeDeps: {
-    include: ['@tanstack/solid-query', 'msw', 'msw-storybook-addon', 'solid-heroicons/outline', 'date-fns', 'classnames']
+    include: [
+      '@tanstack/solid-query',
+      'msw',
+      'msw-storybook-addon',
+      'solid-heroicons/outline',
+      'date-fns',
+      'classnames',
+      'solid-highlight',
+      'solid-markdown',
+    ],
   },
   test: {
     globals: true,
@@ -24,9 +35,9 @@ export default defineConfig({
       web: [/.[jt]sx?/],
     },
     deps: {
-        inline: [/solid-start/, /solid-testing-library/],
-      },
+      inline: [/solid-start/, /solid-testing-library/],
     },
+  },
   resolve: {
     conditions: ['development', 'browser'],
   },
