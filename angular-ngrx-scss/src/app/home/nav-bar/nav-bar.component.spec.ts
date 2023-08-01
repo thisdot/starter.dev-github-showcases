@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { signOut } from 'src/app/state/auth/auth.actions';
+import { signOutUser } from 'src/app/state/auth/auth.actions';
 import { NavBarComponent } from './nav-bar.component';
 
 describe('NavbarComponent', () => {
@@ -36,6 +36,6 @@ describe('NavbarComponent', () => {
     const dispatchSpy = spyOn(store, 'dispatch').and.callThrough();
 
     component.signOut();
-    expect(dispatchSpy).toHaveBeenCalledWith(signOut());
+    expect(dispatchSpy).toHaveBeenCalledWith(signOutUser());
   });
 });

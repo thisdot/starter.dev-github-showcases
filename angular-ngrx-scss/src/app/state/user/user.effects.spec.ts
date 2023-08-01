@@ -1,17 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Observable, of } from 'rxjs';
+import { UserService } from '../../user/services/user.service';
+import {
+  UserGistsApiResponse,
+  UserGistsState,
+  UserRepo,
+  UserReposApiResponse,
+  UserReposState,
+} from '../profile/profile.state';
 import {
   fetchUserData,
   fetchUserDataSuccess,
   fetchUserGistsSuccess,
   fetchUserTopReposSuccess,
 } from './user.actions';
-import { UserService } from '../../user/services/user.service';
 import { UserEffects } from './user.effects';
-import { UserState } from './user.state';
-import { UserGistsState, UserReposState } from '../profile/profile.state';
+import { selectUserLoginName } from './user.selectors';
+import { UserApiResponse, UserState } from './user.state';
 
 const USER_STATE_MOCK: UserState = {
   username: 'thisdot',
@@ -24,24 +32,112 @@ const USER_STATE_MOCK: UserState = {
   following: 0,
   location: '',
   name: '',
-  twitter_username: '',
-  type: '',
+  twitterUsername: '',
+  type: 'User',
 };
+
+const MOCK_USER_API_RESPONSE: UserApiResponse = {
+  avatar_url: '',
+  bio: '',
+  blog: '',
+  company: '',
+  email: '',
+  followers: 0,
+  following: 0,
+  location: '',
+  name: '',
+  twitter_username: '',
+  login: 'thisdot',
+  type: 'User',
+} as UserApiResponse;
+
+const MOCK_USER_GISTS: UserGistsApiResponse = [
+  {
+    comments: 0,
+    comments_url: '',
+    commits_url: '',
+    created_at: '',
+    forks_url: '',
+    git_pull_url: '',
+    git_push_url: '',
+    html_url: 'github.com/gists',
+    id: '',
+    node_id: '',
+    public: true,
+    truncated: false,
+    updated_at: '',
+    url: 'github.com/gists',
+    files: {
+      'textfile1.txt': {
+        filename: 'textfile1.txt',
+      },
+    },
+  },
+];
+
+const MOCK_TOP_REPOS: UserReposApiResponse = [
+  {
+    name: 'Repo-test',
+    description: 'This is a repo test',
+    language: 'TypeScript',
+    stargazers_count: 0,
+    forks_count: 0,
+    private: false,
+    updated_at: '2022-06-17T09:54:38Z',
+    license: null,
+    fork: false,
+    archived: false,
+    owner: {
+      login: 'thisdot',
+    },
+  } as UserRepo,
+  {
+    name: 'Repo-test-2',
+    description: 'This is a repo test 2',
+    language: 'Javascript',
+    stargazers_count: 0,
+    forks_count: 0,
+    private: false,
+    updated_at: '2022-06-17T09:54:38Z',
+    license: null,
+    fork: false,
+    archived: false,
+    owner: {
+      login: 'thisdot',
+    },
+  } as UserRepo,
+  {
+    name: 'Repo-test-3',
+    description: 'This is a repo test 2',
+    language: 'Javascript',
+    stargazers_count: 0,
+    forks_count: 0,
+    private: false,
+    updated_at: '2022-06-17T09:54:38Z',
+    license: null,
+    fork: false,
+    archived: false,
+    owner: {
+      login: 'thisdot',
+    },
+  } as UserRepo,
+];
 
 describe('UserEffects', () => {
   let actions$: Observable<Action>;
   let effects: UserEffects;
+  let store: MockStore;
   let userServiceMock: jasmine.SpyObj<UserService>;
 
   beforeEach(() => {
     userServiceMock = jasmine.createSpyObj('UserService', {
-      getAuthenticatedUserInfo: () => {
-        return of();
-      },
       getUserGists: () => {
         return of();
       },
       getUserTopRepos: () => {
+        return of();
+      },
+      getUserInfo: () => {
         return of();
       },
     });
@@ -52,11 +148,23 @@ describe('UserEffects', () => {
           provide: UserService,
           useValue: userServiceMock,
         },
+        provideMockStore({
+          selectors: [
+            {
+              selector: selectUserLoginName,
+              value: {
+                username: 'thisdot',
+              },
+            },
+          ],
+        }),
         UserEffects,
         provideMockActions(() => actions$),
       ],
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    store = TestBed.inject(MockStore);
     effects = TestBed.inject(UserEffects);
   });
 
@@ -65,25 +173,10 @@ describe('UserEffects', () => {
   });
 
   it('should get the user info from the API', (done) => {
-    actions$ = of(fetchUserData());
-    const expectedUserData: UserState = {
-      avatar: '',
-      bio: '',
-      blog: '',
-      company: '',
-      email: '',
-      followers: 0,
-      following: 0,
-      location: '',
-      name: '',
-      twitter_username: '',
-      username: 'lindakatcodes',
-      type: 'User',
-    };
+    actions$ = of(fetchUserData({ username: 'thisdot' }));
+    const expectedUserData = USER_STATE_MOCK;
 
-    userServiceMock.getAuthenticatedUserInfo.and.returnValue(
-      of(expectedUserData),
-    );
+    userServiceMock.getUserInfo.and.returnValue(of(MOCK_USER_API_RESPONSE));
 
     effects.loadUser$.subscribe((action) => {
       expect(action).toEqual(
@@ -102,7 +195,7 @@ describe('UserEffects', () => {
       },
     ];
 
-    userServiceMock.getUserGists.and.returnValue(of(expectedUserData));
+    userServiceMock.getUserGists.and.returnValue(of(MOCK_USER_GISTS));
 
     effects.loadUserGists$.subscribe((action) => {
       expect(action).toEqual(
@@ -162,7 +255,7 @@ describe('UserEffects', () => {
       },
     ];
 
-    userServiceMock.getUserTopRepos.and.returnValue(of(expectedUserData));
+    userServiceMock.getUserTopRepos.and.returnValue(of(MOCK_TOP_REPOS));
 
     effects.loadUserTopRepos$.subscribe((action) => {
       expect(action).toEqual(

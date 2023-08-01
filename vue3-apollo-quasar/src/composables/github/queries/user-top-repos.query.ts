@@ -13,6 +13,7 @@ export const USER_TOP_REPOS_QUERY = gql`
           id
           name
           description
+          nameWithOwner
           owner {
             login
           }

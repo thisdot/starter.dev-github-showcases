@@ -87,9 +87,7 @@ export default function SubHeader() {
 								</SubHeaderButtonsActionsIcon>
 								{btnInfo.label}
 							</SubHeaderMainButtonSection>
-							<SubHeaderMainButtonCount>
-								{btnInfo.count}
-							</SubHeaderMainButtonCount>
+							<SubHeaderMainButtonCount>{btnInfo.count}</SubHeaderMainButtonCount>
 						</SubHeaderIndividualButtonContainer>
 					))}
 				</SubHeaderButtonsActionsContainer>

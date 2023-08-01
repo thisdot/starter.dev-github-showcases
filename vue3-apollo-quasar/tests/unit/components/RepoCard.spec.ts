@@ -28,6 +28,13 @@ const testData = {
   lastUpdated: 'on 23 Sep 2020',
 };
 
+jest.mock('@vue/apollo-composable', () => {
+  return {
+    useQuery: jest.fn(() => []),
+    useResult: jest.fn(() => []),
+  };
+});
+
 describe('RepoCard', () => {
   it('should mount', () => {
     const wrapper = shallowMount(RepoCard, {

@@ -6,6 +6,9 @@
     <q-page-container>
       <router-view></router-view>
     </q-page-container>
+    <q-footer v-if="user.isLoggedIn">
+      <Footer />
+    </q-footer>
   </q-layout>
 </template>
 
@@ -19,7 +22,7 @@ export default defineComponent({
 
 <script lang="ts" setup>
 //* Components
-import { NavHeader } from '@/components';
+import { Footer, NavHeader } from '@/components';
 import { useUserStore } from '@/store/userStore';
 
 const user = useUserStore();
