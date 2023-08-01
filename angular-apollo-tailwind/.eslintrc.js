@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  ignorePatterns: ['projects/**/*', 'src/app/gql/github.schema.ts'],
+  ignorePatterns: ['projects/**/*'],
   overrides: [
     {
       files: ['*.ts'],
