@@ -3,12 +3,13 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-issues-empty',
   template: `<div class="issues-empty-container" data-testid="issues-empty">
-    <hero-icon
-      name="minus-circle"
-      type="outline"
+    <ng-icon
+      name="heroMinus-circle"
       class="icon"
       aria-hidden="true"
-    ></hero-icon>
+      strokeWidth="2"
+      size="1.5rem"
+    ></ng-icon>
     <h3 class="heading">No results matched your search.</h3>
   </div>`,
   styleUrls: ['./issues-empty.component.css'],

@@ -7,11 +7,12 @@ import { Component, Input } from '@angular/core';
       <div class="w-6 h-6 bg-gray-200 opacity-25 rounded-lg"></div>
     </ng-template>
     <ng-template #thenBlock>
-      <hero-icon
-        name="code"
-        type="outline"
-        class="-ml-1 mr-1 h-4 w-4 text-gray-600"
-      ></hero-icon>
+      <ng-icon
+        name="heroCodeBracket"
+        size="1.25rem"
+        borderWidth="2"
+        class="-ml-1 mr-1 h-6 w-6 text-gray-600"
+      ></ng-icon>
     </ng-template>
     <ng-template #elseBlock
       ><sd-git-repo-icon></sd-git-repo-icon

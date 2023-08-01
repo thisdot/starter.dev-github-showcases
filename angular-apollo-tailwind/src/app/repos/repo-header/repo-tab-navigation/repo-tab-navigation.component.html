@@ -8,12 +8,13 @@
         [ngClass]="{ tabActive: !issuesLink.isActive && !prLink.isActive }"
         #codeLink="routerLinkActive"
       >
-        <hero-icon
-          name="code"
-          type="outline"
+        <ng-icon
+          name="heroCodeBracket"
+          size="1.25rem"
+          strokeWidth="2"
           class="iconInactive icon"
           [ngClass]="{ iconActive: codeLink.isActive }"
-        ></hero-icon>
+        ></ng-icon>
         <span>Code</span>
       </a>
     </div>
@@ -25,12 +26,13 @@
         #issuesLink="routerLinkActive"
         data-testid="repo issues tab"
       >
-        <hero-icon
-          name="information-circle"
-          type="outline"
+        <ng-icon
+          name="heroInformationCircle"
+          size="1.25rem"
+          strokeWidth="2"
           class="iconInactive icon"
           [ngClass]="{ iconActive: issuesLink.isActive }"
-        ></hero-icon>
+        ></ng-icon>
         <span>Issues</span>
         <span
           data-testid="repo issues count"
@@ -48,10 +50,10 @@
         #prLink="routerLinkActive"
         data-testid="repo pull requests tab"
       >
-        <app-pull-request-icon
+        <sd-pull-request-icon
           class="iconInactive icon"
           [ngClass]="{ iconActive: prLink.isActive }"
-        ></app-pull-request-icon>
+        ></sd-pull-request-icon>
         <span>Pull Requests</span>
         <span
           data-testid="repo pull requests count"

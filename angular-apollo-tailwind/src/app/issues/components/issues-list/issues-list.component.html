@@ -3,20 +3,20 @@
     <div class="issues-list-container">
       <div class="flex">
         <ng-container *ngIf="issue.closed; else open">
-          <hero-icon
-            name="check-circle"
-            type="outline"
+          <ng-icon
+            name="heroCheck-circle"
             class="stateIcon purple"
+            size="1.25rem"
             aria-hidden="true"
-          ></hero-icon>
+          ></ng-icon>
         </ng-container>
         <ng-template #open>
-          <hero-icon
-            name="minus-circle"
-            type="outline"
+          <ng-icon
+            name="heroMinus-circle"
+            size="1.25rem"
             class="stateIcon green"
             aria-hidden="true"
-          ></hero-icon>
+          ></ng-icon>
         </ng-template>
         <div>
           <div class="content">
@@ -37,7 +37,7 @@
             #{{ issue.number }}
             <span data-testid="issue created at" *ngIf="issue.closed === false">
               opened
-              {{ issue.createdAt | formatDistance: baseDate }}
+              {{ issue.createdAt | formatDistance : baseDate }}
               ago
             </span>
             by
@@ -46,19 +46,20 @@
             }}</span>
             <span data-testid="issue closed at" *ngIf="issue.closedAt">
               was closed
-              {{ issue.closedAt | formatDistance: baseDate }}
+              {{ issue.closedAt | formatDistance : baseDate }}
               ago
             </span>
           </div>
         </div>
       </div>
       <div class="mt-1 commentsIcon">
-        <hero-icon
-          name="chat-alt"
-          type="outline"
+        <ng-icon
+          name="heroChatBubbleLeftEllipsis"
+          size="1.25rem"
+          strokeWidth="2"
           class="commentsIcon"
           aria-hidden="true"
-        ></hero-icon>
+        ></ng-icon>
         <span data-testid="issue comment count">
           {{ issue.commentCount }}
         </span>

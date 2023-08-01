@@ -18,11 +18,12 @@
           class="hover:cursor-pointer hover:text-blue-600"
           data-testid="repository star count"
         >
-          <hero-icon
-            name="star"
-            type="outline"
-            class="w-4 h-4 inline mb-0.5"
-          ></hero-icon>
+          <ng-icon
+            name="heroStar"
+            size="1rem"
+            strokeWidth="2"
+            class="w-4 h-4 inline align-middle mb-0.5"
+          ></ng-icon>
           {{ stargazerCount }}
         </span>
       </ng-container>
@@ -40,6 +41,6 @@
     </div>
   </ng-container>
   <div data-testid="repository updated at">
-    Updated {{ updatedAt | formatDistance: baseDate:{ addSuffix: true } }}
+    Updated {{ updatedAt | formatDistance : baseDate : { addSuffix: true } }}
   </div>
 </div>

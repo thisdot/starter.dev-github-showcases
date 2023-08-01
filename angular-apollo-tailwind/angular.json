@@ -24,7 +24,8 @@
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
             "styles": ["src/styles.css"],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": ["prismjs"]
           },
           "configurations": {
             "production": {
@@ -178,8 +179,9 @@
       }
     }
   },
-  "defaultProject": "starter-dev-angular",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "cache": {
+      "enabled": false
+    }
   }
 }

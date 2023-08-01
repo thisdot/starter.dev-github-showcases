@@ -7,12 +7,11 @@
       [attr.data-testid]="'filters dropdown ' + name"
     >
       {{ name }}
-      <hero-icon
-        name="chevron-down"
-        type="outline"
+      <ng-icon
+        name="heroChevron-down"
         class="menuButtonIcon"
         aria-hidden="true"
-      ></hero-icon>
+      ></ng-icon>
     </button>
   </div>
 
@@ -21,12 +20,11 @@
       <div class="menuHeader">
         <div class="description">{{ description }}</div>
         <button class="flex" (click)="handleClearFilterClick()">
-          <hero-icon
-            name="x"
-            type="outline"
+          <ng-icon
+            name="heroXMark"
             class="mr-2 h-4 w-4 text-gray-600"
             aria-hidden="true"
-          ></hero-icon>
+          ></ng-icon>
         </button>
       </div>
       <ng-container *ngFor="let item of items">
@@ -36,13 +34,12 @@
           (click)="handleSetFilterClick(item.value)"
           [attr.data-testid]="'filters dropdown item ' + item.label"
         >
-          <hero-icon
+          <ng-icon
             *ngIf="item.value === current"
-            name="check"
-            type="outline"
-            class="itemActiveIcon"
+            name="heroCheck"
+            class="itemActiveIcon align-middle"
             aria-hidden="true"
-          ></hero-icon>
+          ></ng-icon>
           {{ item.label }}
         </button>
       </ng-container>

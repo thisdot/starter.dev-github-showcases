@@ -9,18 +9,17 @@
     >
       <img
         data-testid="user avatar header"
-        [src]="user?.avatarUrl"
+        [src]="user.avatarUrl"
         alt="Profile Photo"
         width="{32}"
         height="{32}"
       />
     </div>
-    <hero-icon
-      name="chevron-down"
-      type="outline"
+    <ng-icon
+      name="heroChevron-down"
       class="-mr-1 ml-2 h-5 w-5"
       aria-hidden="true"
-    ></hero-icon>
+    ></ng-icon>
   </button>
 
   <div
@@ -31,7 +30,7 @@
   >
     <div class="py-1">
       <a
-        [routerLink]="[user?.login]"
+        [routerLink]="[user.login]"
         (click)="closeDropdown()"
         class="block font-medium px-4 py-2 text-gray-900 hover:text-blue-600"
         >Profile</a

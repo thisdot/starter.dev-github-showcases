@@ -3,20 +3,20 @@
     <div class="pull-requests-list-container">
       <div class="flex">
         <ng-container *ngIf="pullRequest.closed; else open">
-          <hero-icon
-            name="check-circle"
-            type="outline"
+          <ng-icon
+            name="heroCheckCircle"
+            size="1.25rem"
             class="stateIcon purple"
             aria-hidden="true"
-          ></hero-icon>
+          ></ng-icon>
         </ng-container>
         <ng-template #open>
-          <hero-icon
-            name="minus-circle"
-            type="outline"
+          <ng-icon
+            name="heroMinusCircle"
+            size="1.25rem"
             class="stateIcon green"
             aria-hidden="true"
-          ></hero-icon>
+          ></ng-icon>
         </ng-template>
         <div>
           <div class="content">
@@ -40,7 +40,7 @@
               *ngIf="pullRequest.closed === false"
             >
               opened
-              {{ pullRequest.createdAt | formatDistance: baseDate }}
+              {{ pullRequest.createdAt | formatDistance : baseDate }}
               ago
             </span>
             by
@@ -52,19 +52,20 @@
               *ngIf="pullRequest.closedAt"
             >
               was closed
-              {{ pullRequest.closedAt | formatDistance: baseDate }}
+              {{ pullRequest.closedAt | formatDistance : baseDate }}
               ago
             </span>
           </div>
         </div>
       </div>
       <div class="mt-1 commentsIcon">
-        <hero-icon
-          name="chat-alt"
-          type="outline"
+        <ng-icon
+          name="heroChatBubbleLeftEllipsis"
+          size="1.25rem"
+          strokeWidth="2"
           class="commentsIcon"
           aria-hidden="true"
-        ></hero-icon>
+        ></ng-icon>
         <span data-testid="pull request comment count">
           {{ pullRequest.commentCount }}
         </span>

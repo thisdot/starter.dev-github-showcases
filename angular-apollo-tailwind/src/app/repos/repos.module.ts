@@ -17,8 +17,8 @@ import {
   CountButtonGroupComponentModule,
   PipesModule,
   ErrorBlockComponentModule,
+  ContainerComponentModule,
 } from '@shared';
-import { ContainerComponentModule } from '@shared';
 import { RepoListItemSkeletonComponent } from './components/repo-list-item-skeleton/repo-list-item-skeleton.component';
 import { RepoHeaderSkeletonComponent } from './repo-header/repo-header-skeleton/repo-header-skeleton.component';
 
@@ -43,9 +43,9 @@ import { RepoHeaderSkeletonComponent } from './repo-header/repo-header-skeleton/
     IconsModule,
     ContentLoadingModule,
     CountButtonGroupComponentModule,
-    ContainerComponentModule,
     PipesModule,
     ErrorBlockComponentModule,
+    ContainerComponentModule,
   ],
   exports: [RepoMetaComponent],
 })

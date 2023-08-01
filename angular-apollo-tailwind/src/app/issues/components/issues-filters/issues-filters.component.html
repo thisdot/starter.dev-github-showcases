@@ -6,12 +6,12 @@
       [ngClass]="getOpenStyle()"
       (click)="handleOpenIssueClick()"
     >
-      <hero-icon
-        name="minus-circle"
-        type="outline"
+      <ng-icon
+        name="heroMinus-circle"
+        size="1.25rem"
         class="typeIcon"
         aria-hidden="true"
-      ></hero-icon>
+      ></ng-icon>
       {{ openCount }} Open
     </button>
     <button
@@ -20,12 +20,12 @@
       [ngClass]="getClosedStyle()"
       (click)="handleCloseIssueClick()"
     >
-      <hero-icon
-        name="check"
-        type="outline"
+      <ng-icon
+        name="heroCheck"
+        size="1.25rem"
         class="typeIcon"
         aria-hidden="true"
-      ></hero-icon>
+      ></ng-icon>
       {{ closedCount }} Closed
     </button>
   </div>

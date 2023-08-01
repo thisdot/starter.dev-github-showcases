@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { APOLLO_OPTIONS } from 'apollo-angular';
+import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 import { environment } from 'src/environments/environment';
@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { onError } from '@apollo/client/link/error';
 import { ToasterService } from '../components/toaster/toaster.service';
 import { ToasterType } from '../components/toaster/toaster.model';
+import { HttpClientModule } from '@angular/common/http';
 
 const uri = environment.graphApiUrl; // <-- add the URL of the GraphQL server here
 
@@ -50,6 +51,7 @@ export function createApollo(
 }
 
 @NgModule({
+  imports: [ApolloModule, HttpClientModule],
   providers: [
     {
       provide: APOLLO_OPTIONS,

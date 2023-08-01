@@ -17,12 +17,12 @@
       </h1>
       <div class="bio">{{ user.bio }}</div>
       <div class="socials">
-        <hero-icon
-          name="users"
-          type="outline"
-          class="w-4 h-4 mb-0.5 mr-1 inline"
+        <ng-icon
+          name="heroUsers"
+          size="1rem"
+          class="w-4 h-4 mb-0.5 mr-1 align-middle"
           aria-hidden="true"
-        ></hero-icon>
+        ></ng-icon>
         <span data-testid="profile followers count" class="inline-block">
           <span class="count">{{ user.followers }}</span> followers
         </span>
@@ -34,12 +34,12 @@
           following
         </span>
         <span class="mx-1">·</span>
-        <hero-icon
-          name="star"
-          type="outline"
-          class="w-4 h-4 mb-0.5 mr-1 inline"
+        <ng-icon
+          name="heroStar"
+          size="1rem"
+          class="w-4 h-4 mb-0.5 mr-1 align-middle"
           aria-hidden="true"
-        ></hero-icon>
+        ></ng-icon>
         <span class="inline-block">
           <span data-testid="profile starred count" class="count">{{
             user.starredRepos
@@ -48,30 +48,28 @@
       </div>
       <div class="fields">
         <div *ngIf="user.company">
-          <hero-icon
-            name="office-building"
-            type="outline"
-            class="w-4 h-4 mb-0.5 mr-1 inline"
+          <ng-icon
+            name="heroBuildingOffice"
+            size="1rem"
+            class="w-4 h-4 mb-0.5 mr-1 align-middle"
             aria-hidden="true"
-          ></hero-icon>
+          ></ng-icon>
           {{ user.company }}
         </div>
         <div *ngIf="user.location" class="flex">
-          <hero-icon
-            name="location-marker"
-            type="outline"
-            class="w-4 h-4 mb-0.5 mr-1 inline"
+          <ng-icon
+            name="heroMapPin"
+            class="w-4 h-4 mb-0.5 mr-1 align-middle"
             aria-hidden="true"
-          ></hero-icon>
+          ></ng-icon>
           {{ user.location }}
         </div>
         <div *ngIf="user.websiteUrl">
-          <hero-icon
-            name="link"
-            type="outline"
-            class="w-4 h-4 mb-0.5 mr-1 inline"
+          <ng-icon
+            name="heroLink"
+            class="w-4 h-4 mb-0.5 mr-1 align-middle"
             aria-hidden="true"
-          ></hero-icon>
+          ></ng-icon>
           <a
             class="link"
             [href]="user.websiteUrl | generateUrlWithProtocol"

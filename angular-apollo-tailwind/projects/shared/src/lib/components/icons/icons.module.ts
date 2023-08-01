@@ -1,27 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  code,
-  informationCircle,
-  lockClosed,
-  star,
-  folder,
-  document,
-  bookOpen,
-  chevronDown,
-  x,
-  minusCircle,
-  check,
-  checkCircle,
-  chatAlt,
-  chevronLeft,
-  chevronRight,
-  users,
-  officeBuilding,
-  locationMarker,
-  link,
-  HeroIconModule,
-} from 'ng-heroicon';
 import { DocumentIconComponent } from './document-icon.component';
 import { FolderIconComponent } from './folder-icon.component';
 import { CodeIconComponent } from './code-icon.component';
@@ -35,6 +13,28 @@ import { PrivacyIconComponent } from './privacy-icon.component';
 import { PrivacyBadgeComponent } from './privacy-badge.component';
 import { TwitterIconComponent } from './twitter-icon.component';
 import { TOCIconComponent } from './toc.component';
+import { NgIconsModule } from '@ng-icons/core';
+import {
+  heroChevronDown,
+  heroCodeBracket,
+  heroInformationCircle,
+  heroLockClosed,
+  heroStar,
+  heroFolder,
+  heroDocument,
+  heroBookOpen,
+  heroXMark,
+  heroMinusCircle,
+  heroCheck,
+  heroCheckCircle,
+  heroChatBubbleLeftEllipsis,
+  heroChevronLeft,
+  heroChevronRight,
+  heroUsers,
+  heroBuildingOffice,
+  heroMapPin,
+  heroLink,
+} from '@ng-icons/heroicons/outline';
 
 const icons = [
   DocumentIconComponent,
@@ -56,28 +56,28 @@ const icons = [
   declarations: [...icons],
   imports: [
     CommonModule,
-    HeroIconModule.withIcons({
-      chevronDown,
-      code,
-      informationCircle,
-      lockClosed,
-      star,
-      folder,
-      document,
-      bookOpen,
-      x,
-      minusCircle,
-      check,
-      checkCircle,
-      chatAlt,
-      chevronLeft,
-      chevronRight,
-      users,
-      officeBuilding,
-      locationMarker,
-      link,
+    NgIconsModule.withIcons({
+      heroChevronDown,
+      heroCodeBracket,
+      heroInformationCircle,
+      heroLockClosed,
+      heroStar,
+      heroFolder,
+      heroDocument,
+      heroBookOpen,
+      heroXMark,
+      heroMinusCircle,
+      heroCheck,
+      heroCheckCircle,
+      heroChatBubbleLeftEllipsis,
+      heroChevronLeft,
+      heroChevronRight,
+      heroUsers,
+      heroBuildingOffice,
+      heroMapPin,
+      heroLink,
     }),
   ],
-  exports: [...icons, HeroIconModule],
+  exports: [...icons, NgIconsModule],
 })
 export class IconsModule {}

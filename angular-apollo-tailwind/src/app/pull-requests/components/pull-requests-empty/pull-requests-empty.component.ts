@@ -6,12 +6,13 @@ import { Component } from '@angular/core';
     class="pull-request-empty-container"
     data-testid="issues-empty"
   >
-    <hero-icon
-      name="minus-circle"
-      type="outline"
+    <ng-icon
+      name="heroMinusCircle"
+      size="2rem"
+      strokeWidth="2"
       class="icon"
       aria-hidden="true"
-    ></hero-icon>
+    ></ng-icon>
     <h3 class="heading">No results matched your search.</h3>
   </div>`,
   styleUrls: ['./pull-requests-empty.component.css'],
