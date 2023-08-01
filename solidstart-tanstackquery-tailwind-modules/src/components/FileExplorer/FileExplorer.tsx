@@ -13,6 +13,7 @@ import getRepoTree from '../../services/get-repo-tree';
 import { parseQueryData } from './parseTree';
 import { createQuery } from '@tanstack/solid-query';
 import { TreeProps } from '~/types/repo-tree-type';
+import { A } from '@solidjs/router';
 
 export type IProps = {
   branch: string;
@@ -54,13 +55,13 @@ const FileExplorerView = (props: IProps) => {
       <Match when={resTree.isSuccess && !resTree.isLoading}>
         <div class={styles.container}>
           <Show when={local.path && local.path !== ''}>
-            <a
+            <A
               href={`${basePath()}/tree/${local.branch}/${local.path}`}
               class={styles.cellBack}
               replace
             >
               <div class="text-blue-600">..</div>
-            </a>
+            </A>
           </Show>
           <For each={tree()}>
             {(item) => (
