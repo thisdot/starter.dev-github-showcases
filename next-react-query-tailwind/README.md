@@ -29,6 +29,7 @@ Netlify URL: https://next-react-query-tailwind.starter.dev
 - [Next.js](https://nextjs.org)
 - [React](https://reactjs.org)
 - [React Query](https://react-query.tanstack.com/)
+- [React Router](https://reactrouter.com/)
 - [Tailwind CSS](https://tailwindcss.com)
 
 ### Included Tooling
