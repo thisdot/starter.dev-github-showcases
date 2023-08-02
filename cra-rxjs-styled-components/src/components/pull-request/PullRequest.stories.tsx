@@ -63,7 +63,8 @@ MergedPullRequests.args = {
 	closedPRCount: 2,
 	pullRequests: [
 		{
-			title: '[Angular-Apollo-Tailwind] fix: Angular Apollo Tailwind - improve config',
+			title:
+				'[Angular-Apollo-Tailwind] fix: Angular Apollo Tailwind - improve config',
 			number: '1',
 			created_at: date,
 			user: { login: 'krtz' },
