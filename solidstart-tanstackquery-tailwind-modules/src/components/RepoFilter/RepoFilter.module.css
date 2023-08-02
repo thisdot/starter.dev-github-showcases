@@ -54,9 +54,9 @@
 }
 
 .menuItemContent {
-  @apply flex gap-2 items-center
+  @apply flex gap-2 items-center;
 }
 
 .menuItemContentColor {
-  @apply w-4 h-4 rounded-lg flex-shrink-0 border border-gray-300
+  @apply w-4 h-4 rounded-lg flex-shrink-0 border border-gray-300;
 }

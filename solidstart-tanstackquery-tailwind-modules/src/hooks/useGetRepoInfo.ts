@@ -1,8 +1,8 @@
-import { CreateQueryResult, createQuery } from "@tanstack/solid-query";
+import { CreateQueryResult, createQuery } from '@tanstack/solid-query';
 import { Accessor, createEffect, createSignal } from 'solid-js';
-import { useParams } from "solid-start";
-import getRepoInfo from "~/services/get-repo-info";
-import { Info } from "~/types/repo-info-type";
+import { useParams } from 'solid-start';
+import getRepoInfo from '~/services/get-repo-info';
+import { Info } from '~/types/repo-info-type';
 
 interface Result {
   branch: string;
@@ -53,6 +53,5 @@ const useGetRepoInfo = (): Response => {
 
   return [info, branch, repoInfo];
 };
-
 
 export default useGetRepoInfo;
