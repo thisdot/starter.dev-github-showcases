@@ -4,7 +4,7 @@ import { FileExplorerBlobComponent } from './file-explorer-blob.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppState } from '../../state';
-import { fetchFileContents, RepoState } from '../../state/repository';
+import { fetchFileContents, RepositoryState } from '../../state/repository';
 import { ActivatedRoute } from '@angular/router';
 import { FileExplorerNavComponent } from '../file-explorer-nav/file-explorer-nav.component';
 import { FileViewerComponent } from '../file-viewer/file-viewer.component';
@@ -15,14 +15,14 @@ describe('FileExplorerBlobComponent', () => {
   let fixture: ComponentFixture<FileExplorerBlobComponent>;
   let store: MockStore;
   const initialState: AppState = {
-    repo: {
+    repository: {
       selectedFile: {
         content: 'this is a readme file',
         name: 'starter.dev-github-showcases',
         type: 'file',
         size: 223,
       },
-    } as RepoState,
+    } as RepositoryState,
   } as AppState;
 
   beforeEach(async () => {

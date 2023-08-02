@@ -1,7 +1,20 @@
-<ng-container *ngIf="user$ | async as user">
-  <app-navbar [user]="user"></app-navbar>
-</ng-container>
+<div class="h-full flex flex-col">
+  <ng-container *ngIf="user$ | async as user">
+    <app-navbar [user]="user"></app-navbar>
+  </ng-container>
 
-<router-outlet></router-outlet>
+  <div class="grow">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="netlify-badge-container">
+    <a target="_blank" href="https://www.netlify.com">
+      <img
+        src="https://www.netlify.com/v3/img/components/netlify-light.svg"
+        alt="Deploys by Netlify"
+      />
+    </a>
+  </div>
+</div>
 
 <app-toaster></app-toaster>

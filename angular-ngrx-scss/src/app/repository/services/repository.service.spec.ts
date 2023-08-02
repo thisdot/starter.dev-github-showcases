@@ -1,10 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { of, delay } from 'rxjs';
+import { delay, of } from 'rxjs';
 import {
-  FileContents,
+  PullRequestAPIResponse,
   RepoApiResponse,
-  RepoContents,
-  RepoState,
+  RepoContentsApiResponse,
 } from 'src/app/state/repository';
 import {
   IssueComments,
@@ -13,6 +12,7 @@ import {
   PullRequests,
 } from './repository.interfaces';
 
+import { generatePullRequestAPIResponseFixture } from '../../fixtures/repository.fixtures';
 import { RepositoryService } from './repository.service';
 
 const MOCK_ISSUES: Issues = [
@@ -214,25 +214,7 @@ describe('RepositoryService', () => {
   });
 
   it('should return information on the provided repository', (done) => {
-    const expectedResponse: RepoState = {
-      description: 'A collection of GitHub clone implementations.',
-      forkCount: 20,
-      issueCount: 30,
-      ownerName: '',
-      prCount: 0,
-      readme: '',
-      repoName: 'starter.dev-github-showcases',
-      starCount: 100,
-      tags: ['react', 'angular', 'vue', 'github'],
-      tree: [],
-      activeBranch: 'main',
-      visibility: 'public',
-      selectedFile: null,
-      watchCount: 10,
-      website: 'https://starter.dev',
-    };
-
-    const expectedHttpResponse: Partial<RepoApiResponse> = {
+    const expectedHttpResponse = {
       name: 'starter.dev-github-showcases',
       description: 'A collection of GitHub clone implementations.',
       homepage: 'https://starter.dev',
@@ -243,31 +225,68 @@ describe('RepositoryService', () => {
       open_issues_count: 30,
       topics: ['react', 'angular', 'vue', 'github'],
       default_branch: 'main',
-    };
+    } as RepoApiResponse;
 
-    httpClientSpy.get.and.returnValue(of(expectedHttpResponse).pipe(delay(0)));
+    httpClientSpy.get.and.returnValue(of(expectedHttpResponse));
 
     repoService
       .getRepositoryInfo('thisdot', 'starter.dev-github-showcases')
-      .subscribe((res) => {
-        expect(res).toEqual(expectedResponse);
-        done();
-      });
+      .subscribe({
+        next: (repoInfo) => {
+          expect(repoInfo).toEqual(expectedHttpResponse);
 
+          expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
+            `https://api.github.com/repos/thisdot/starter.dev-github-showcases`,
+            jasmine.objectContaining({
+              headers: {
+                Accept: 'application/vnd.github.v3+json',
+              },
+            }),
+          );
+          done();
+        },
+        error: done.fail,
+      });
     expect(httpClientSpy.get.calls.count()).withContext('called once').toBe(1);
   });
 
   describe('getRepositoryContents', () => {
-    const expectedResponse: RepoContents[] = [
+    const expectedResponse: RepoContentsApiResponse[] = [
       {
         name: '.github',
-        type: 'file',
         path: '.github',
+        sha: '',
+        size: 1234,
+        url: '',
+        html_url: '',
+        git_url: '',
+        download_url: '',
+        type: 'file',
+        encoding: '',
+        content: 'file contents',
+        _links: {
+          self: '',
+          git: '',
+          html: '',
+        },
       },
       {
         name: 'angular-ngrx-scss',
-        type: 'dir',
         path: 'angular-ngrx-scss',
+        sha: '',
+        size: 1234,
+        url: '',
+        html_url: '',
+        git_url: '',
+        download_url: '',
+        type: 'dir',
+        encoding: '',
+        content: 'file contents',
+        _links: {
+          self: '',
+          git: '',
+          html: '',
+        },
       },
     ];
     beforeEach(() => {
@@ -299,40 +318,11 @@ describe('RepositoryService', () => {
 
       expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
         'https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/README.md',
-      );
-    });
-  });
-
-  describe('getFileContents', () => {
-    it('should make request and return file content response', (done) => {
-      const expectedResponse: FileContents = {
-        content: btoa('This is a readme file'),
-        name: 'starter.dev-github-showcases',
-        type: 'file',
-        size: 223,
-      };
-
-      httpClientSpy.get.and.returnValue(of(expectedResponse).pipe(delay(0)));
-      repoService
-        .getFileContents(
-          'thisdot',
-          'starter.dev-github-showcases',
-          'README.md',
-          'main',
-        )
-        .subscribe((res) => {
-          expect(res).toEqual({
-            ...expectedResponse,
-            content: 'This is a readme file',
-          });
-          done();
-        });
-
-      expect(httpClientSpy.get.calls.count())
-        .withContext('called once')
-        .toBe(1);
-      expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
-        'https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/README.md?ref=main',
+        jasmine.objectContaining({
+          headers: {
+            Accept: 'application/vnd.github.v3+json',
+          },
+        }),
       );
     });
   });
@@ -463,5 +453,32 @@ describe('RepositoryService', () => {
         },
         complete: done,
       });
+  });
+
+  describe('getPullRequests', () => {
+    it('should return pull request for given repository', (done) => {
+      const apiResponse: PullRequestAPIResponse =
+        generatePullRequestAPIResponseFixture();
+
+      httpClientSpy.get.and.returnValue(of(apiResponse).pipe(delay(0)));
+      repoService
+        .getPullRequests('thisdot', 'starter.dev-github-showcases', 'open')
+        .subscribe((res) => {
+          expect(res).toEqual(apiResponse);
+          done();
+        });
+
+      expect(httpClientSpy.get.calls.count())
+        .withContext('called once')
+        .toBe(1);
+      expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
+        'https://api.github.com/search/issues?q=repo:thisdot/starter.dev-github-showcases+type:pr+state:open',
+        jasmine.objectContaining({
+          headers: {
+            Accept: 'application/vnd.github.v3+json',
+          },
+        }),
+      );
+    });
   });
 });

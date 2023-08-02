@@ -1,0 +1,88 @@
+name: Solidjs TailwindCSS CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "solidjs-tailwind/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "solidjs-tailwind/**"
+
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: solidjs-tailwind
+
+      - name: Lint files
+        run: npm run lint
+        working-directory: solidjs-tailwind
+  
+
+  run-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: solidjs-tailwind
+
+      - name: Run tests
+        run: npm run test
+        working-directory: solidjs-tailwind
+
+  
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, run-unit-tests]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [14.x, 16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: solidjs-tailwind
+
+      - name: Build Project
+        run: npm run build
+        working-directory: solidjs-tailwind

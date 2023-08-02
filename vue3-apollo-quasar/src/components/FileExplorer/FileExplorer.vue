@@ -23,7 +23,7 @@ import FileExplorerNav from './FileExplorerNav.vue';
 
 defineProps({
   contentList: {
-    type: Object as () => ExplorerContent[],
+    type: Array as () => ExplorerContent[],
     required: true,
   },
 });

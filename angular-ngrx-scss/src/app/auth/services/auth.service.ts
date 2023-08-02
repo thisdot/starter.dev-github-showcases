@@ -50,7 +50,8 @@ export class AuthService {
    * Determines the host of the page, and uses that to create a redirect url
    */
   getRedirectUrl() {
-    const prPreviewRegex = /pr-(?:\d+)+.(?:[a-z0-9]+)+.amplifyapp.com/;
+    const prPreviewRegex =
+      /deploy-preview-(?:\d+)--angular-ngrx-scss.netlify.app/;
     const currentUrlHost = window.location.host;
     const prMatch = prPreviewRegex.test(currentUrlHost);
     let redirectUrl: string;

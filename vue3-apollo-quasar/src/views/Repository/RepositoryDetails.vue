@@ -9,6 +9,7 @@
       :forks="forkCount"
       :issues-count="openIssueCount"
       :pull-requests-count="openPullRequestCount"
+      :isOrg="isOrg"
     >
       <template #code>
         <Code
@@ -54,6 +55,7 @@ const watcherCount = ref(0);
 const forkCount = ref(0);
 const openIssueCount = ref(0);
 const openPullRequestCount = ref(0);
+const isOrg = ref(false);
 
 //? This structure is defined in the route for this 👇 in routes/index.ts
 const { owner, repo, dirpath } = $route.params as {
@@ -78,12 +80,13 @@ watch(currentRepo, (res) => {
   forkCount.value = res?.data?.forkCount || 0;
   openIssueCount.value = res?.data?.openIssueCount || 0;
   openPullRequestCount.value = res?.data?.openPullRequestCount || 0;
+  isOrg.value = res?.data?.isOrg || false;
 });
 </script>
 
 <style lang="scss" scoped>
 .code-section {
-  max-width: 60rem;
+  max-width: 70rem;
 }
 .file-text {
   white-space: pre-wrap;

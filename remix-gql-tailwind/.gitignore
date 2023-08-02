@@ -17,4 +17,4 @@ sam.yaml
 .vscode
 /app/styles/*.css
 /server/index.js.map
-
+/.netlify

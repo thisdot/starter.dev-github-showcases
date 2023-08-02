@@ -6,14 +6,14 @@ describe('<SignIn />', () => {
   it('Should redirect the user when clicking at the signin button', async () => {
     // Arrange
     const STARTER_API_URL =
-      process.env.STARTER_API_URL || 'https://api.starter.dev/api';
+      process.env.STARTER_API_URL ||
+      'https://api.starter.dev/.netlify/functions/server/api';
     const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 
     // Redefine window.location in order to mock it
     const windowLocation = JSON.stringify(window.location);
 
-    global.window = Object.create(window);
-    Object.defineProperty(window, 'location', {
+    Object.defineProperty(globalThis, 'location', {
       writable: true,
       value: JSON.parse(windowLocation),
     });

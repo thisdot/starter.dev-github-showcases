@@ -21,6 +21,10 @@ export const profileRepoData = {
           },
           isPrivate: true,
           updatedAt: '4 Sep 2022',
+          owner: {
+            login: 'hdjerry',
+          },
+          nameWithOwner: 'hdjerry/someone',
         },
         {
           id: '123',
@@ -41,6 +45,10 @@ export const profileRepoData = {
           },
           isPrivate: true,
           updatedAt: '24 Sep 2021',
+          owner: {
+            login: 'hdjerry',
+          },
+          nameWithOwner: 'hdjerry/someone',
         },
       ],
       pageInfo: {

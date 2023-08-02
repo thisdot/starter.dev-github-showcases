@@ -3,6 +3,7 @@
     <ProfilePageLayout :username="username">
       <template #repositories="{ repo }">
         <RepoCard
+          :nameWithOwner="repo?.nameWithOwner"
           :name="repo?.name"
           :visibility="repo?.visibility"
           :description="repo?.description"
@@ -10,6 +11,7 @@
           :stargazerCount="repo?.stargazerCount"
           :forkCount="repo?.forkCount"
           :updatedAt="repo?.updatedAt"
+          :isProfilePage="true"
         />
       </template>
     </ProfilePageLayout>
@@ -29,5 +31,5 @@ import { useRoute } from 'vue-router';
 import { ProfilePageLayout, RepoCard } from '@/components';
 
 const route = useRoute();
-const username = computed(() => route.params.username as string);
+const username = computed((): string => route.params.username as string);
 </script>

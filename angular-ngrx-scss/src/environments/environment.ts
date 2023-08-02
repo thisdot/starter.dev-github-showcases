@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api.starter.dev',
+  apiUrl: 'https://api.starter.dev/.netlify/functions/server',
   githubUrl: 'https://api.github.com',
   redirectUrl: 'http://localhost:4200/redirect',
 };

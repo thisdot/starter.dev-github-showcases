@@ -1,8 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { RepoState } from './repository.state';
+import { RepositoryState } from './repository.state';
 import * as RepositoryActions from './repository.actions';
 
-export const initialRepoState: RepoState = {
+export const initialRepositoryState: RepositoryState = {
   description: '',
   forkCount: 0,
   issueCount: 0,
@@ -13,6 +13,8 @@ export const initialRepoState: RepoState = {
   starCount: 0,
   tags: [],
   tree: [],
+  openPullRequests: null,
+  closedPullRequests: null,
   selectedFile: null,
   activeBranch: '',
   visibility: '',
@@ -21,7 +23,7 @@ export const initialRepoState: RepoState = {
 };
 
 const reducer = createReducer(
-  initialRepoState,
+  initialRepositoryState,
   on(RepositoryActions.fetchRepositorySuccess, (state, { repoData }) => ({
     ...state,
     ...repoData,
@@ -31,8 +33,24 @@ const reducer = createReducer(
     selectedFile: fileContents,
   })),
   // TODO: handle fetchFileError case
+  on(
+    RepositoryActions.fetchPullRequestsSuccess,
+    (state, { pullRequests, prState }) => {
+      return {
+        ...state,
+        openPullRequests:
+          prState === 'open' ? pullRequests : state.openPullRequests,
+        closedPullRequests:
+          prState === 'closed' ? pullRequests : state.closedPullRequests,
+      };
+    },
+  ),
+  // TODO: handle fetchPullRequestsError case
 );
 
-export function repoReducer(state: RepoState | undefined, action: Action) {
+export function repositoryReducer(
+  state: RepositoryState | undefined,
+  action: Action,
+) {
   return reducer(state, action);
 }
