@@ -32,3 +32,12 @@
     color: variables.$black;
   }
 }
+
+.netlify-badge-container {
+  position: fixed;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}

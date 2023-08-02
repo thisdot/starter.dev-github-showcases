@@ -266,6 +266,9 @@
       <q-tab-panel :name="TABS.ISSUES">
         <slot :name="TABS.ISSUES" />
       </q-tab-panel>
+      <q-tab-panel :name="TABS.PULL_REQUESTS">
+        <slot :name="TABS.PULL_REQUESTS" />
+      </q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
@@ -287,6 +290,7 @@ type Props = {
   forks: number;
   issuesCount: number;
   pullRequestsCount: number;
+  isOrg: boolean;
 };
 
 export default defineComponent({
@@ -324,6 +328,10 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+    isOrg: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     TextWithIconAndCount,
@@ -358,7 +366,9 @@ export default defineComponent({
     const selectNotification = (value: string) => (notify.value = value);
 
     const repo_url = computed(() => `/${props.username}/${props.repoName}`);
-    const profile_url = computed(() => `/${props.username}`);
+    const profile_url = computed(
+      () => `/${props.isOrg ? `orgs/${props.username}` : props.username}`,
+    );
     const stars_count = computed(() => countCalc(props.stars));
     const watch_count = computed(() => countCalc(props.watch));
     const forks_count = computed(() => countCalc(props.forks));
@@ -402,7 +412,8 @@ export default defineComponent({
   }
 }
 
-a:link {
+a:link,
+a:visited {
   text-decoration: none;
   color: $primary;
 }

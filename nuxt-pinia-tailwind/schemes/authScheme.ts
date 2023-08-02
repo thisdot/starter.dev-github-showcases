@@ -35,7 +35,6 @@ export default class CustomLoginScheme extends LocalScheme {
       };
 
       const getOrgs = this.$auth.requestWith(this.name, orgsEndpoint);
-      //
 
       // Fetch stars
       const starsEndpoint: HTTPRequest = {
@@ -44,7 +43,6 @@ export default class CustomLoginScheme extends LocalScheme {
       };
 
       const getStars = this.$auth.requestWith(this.name, starsEndpoint);
-      //
 
       const [{ data: orgs }, { data: stars }] = await Promise.all([
         getOrgs,
@@ -55,6 +53,8 @@ export default class CustomLoginScheme extends LocalScheme {
         ...user,
         orgs,
         stars,
+        orgs_count: orgs.length,
+        stars_count: stars.length,
       };
 
       this.$auth.setUser(customUser);

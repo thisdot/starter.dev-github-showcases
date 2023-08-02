@@ -4,16 +4,18 @@ This is a demo application that re-implements some of GitHub's pages and functio
 
 ## Table of Contents
 
-- [Overview](#overview)
-  - [Featured Tech Stack](#featured-tech-stack)
-  - [Included Tooling](#included-tooling)
-- [Architectural Decisions](#architectural-decisions)
-- [Getting Started](#getting-started)
-  - [Cloning the Repository](#cloning-the-repository)
-  - [Env Setup](#env-setup)
-  - [0Auth Setup](#oauth-setup)
-  - [Installation](#installation)
-- [Development](#development)
+- [CRA-RxJS-SC App](#cra-rxjs-sc-app)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+    - [Featured Tech Stack](#featured-tech-stack)
+    - [Included Tooling](#included-tooling)
+  - [Architectural Decisions](#architectural-decisions)
+  - [Getting Started](#getting-started)
+    - [Cloning the Repository](#cloning-the-repository)
+    - [Env Setup](#env-setup)
+    - [OAuth Setup](#oauth-setup)
+    - [Installation](#installation)
+  - [Development](#development)
 
 ## Overview
 
@@ -43,10 +45,10 @@ This is a demo application that re-implements some of GitHub's pages and functio
 
 ### Cloning the Repository
 
-Clone the starter.dev-showcases repository from https://github.com/thisdot/starter.dev-showcases
+Clone the starter.dev-showcases repository from https://github.com/thisdot/starter.dev-github-showcases
 
 ```bash
-git clone https://github.com/thisdot/starter.dev-showcases.git
+git clone https://github.com/thisdot/starter.dev-github-showcases.git
 ```
 
 ### Env Setup
@@ -63,6 +65,8 @@ While in the project directory, run this command in your terminal.
 ```bash
 cp .env.example .env
 ```
+
+The project connects to a backend which is shared by all the starter showcases to get authentication tokens.
 
 ### OAuth Setup
 
@@ -102,3 +106,9 @@ yarn start
 ```
 
 Open your browser to [http://localhost:3000](http://localhost:3000)
+
+## Live Demo
+
+This demo app gets deployed to Netlify on changes to the `main` branch.
+
+https://cra-rxjs-styled-components.starter.dev

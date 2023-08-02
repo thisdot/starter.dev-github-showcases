@@ -1,6 +1,6 @@
 export type IssuesData = {
   node: {
-    author: { login: string | null };
+    author: { login: string };
     title: string;
     url: string;
     number: number;

@@ -5,9 +5,14 @@ import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 import { filter, map, Subscription, tap } from 'rxjs';
 import { useUser } from '../../context/UserProvider';
 
-export function useGists(): GistWithFilename[] {
+export function useGists(): {
+	gists: GistWithFilename[];
+	loadingGist: boolean;
+} {
 	const [state, setState] = useState<GistWithFilename[]>([]);
-	const user = useUser();
+	const [loadingGist, setLoadingGist] = useState<boolean>(true);
+	const context = useUser();
+	const user = context?.user;
 
 	/**
 	 * @todo Refactor getting the currently authenticated user's username into
@@ -41,7 +46,10 @@ export function useGists(): GistWithFilename[] {
 						};
 					});
 				}),
-				tap(setState)
+				tap((val) => {
+					setLoadingGist(false);
+					setState(val);
+				})
 			)
 			.subscribe();
 
@@ -50,5 +58,5 @@ export function useGists(): GistWithFilename[] {
 		};
 	}, [user]);
 
-	return state;
+	return { gists: state, loadingGist };
 }

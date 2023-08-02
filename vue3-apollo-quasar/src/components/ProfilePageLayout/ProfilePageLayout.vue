@@ -78,16 +78,7 @@
             <q-tab-panel name="repositories">
               <q-list separator>
                 <q-item v-for="repo in filteredAndSortedRepos" :key="repo.id">
-                  <RepoCard
-                    :owner="owner"
-                    :name="repo.name"
-                    :visibility="repo.visibility"
-                    :description="repo.description"
-                    :primaryLanguage="repo.primaryLanguage"
-                    :stargazerCount="repo.stargazerCount"
-                    :forkCount="repo.forkCount"
-                    :updatedAt="repo.updatedAt"
-                  />
+                  <slot name="repositories" :repo="repo"></slot>
                 </q-item>
                 <q-item v-if="!filteredAndSortedRepos.length" class="q-mt-xl">
                   <span class="text-h5 block q-mx-auto text-weight-bold">
@@ -95,7 +86,6 @@
                   </span>
                 </q-item>
               </q-list>
-              <slot name="repositories"></slot>
             </q-tab-panel>
 
             <q-tab-panel name="projects">
@@ -121,7 +111,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, defineProps, ref } from 'vue';
-import { useQuery } from '@vue/apollo-composable';
 import { UserTopRepo } from '@/composables/github/types';
 
 export default defineComponent({
@@ -130,19 +119,10 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import {
-  UserProfileCard,
-  SearchFilter,
-  TabHeader,
-  RepoCard,
-} from '@/components';
-import { useUserRepo } from '@/composables';
-import {
-  SEARCH_QUERY,
-  FILTER_TYPE_QUERY,
-  LANGUAGE_QUERY,
-  SORT_BY_QUERY,
-} from './query';
+import { UserProfileCard, SearchFilter, TabHeader } from '@/components';
+import { useSearch, useUserRepo } from '@/composables';
+import { modifyFilterTypeText, inArray, getTime, matchText } from '@/helpers';
+
 import {
   FILTER_TYPE_OPTIONS,
   defaultFilterType,
@@ -166,43 +146,16 @@ interface Repo extends UserTopRepo {
   isArchived: boolean;
 }
 
-const owner = computed(() => {
-  return {
-    login: props.username,
-  };
-});
-
 const { repos, loading } = getUserRepos(props.username);
 
-const { result: searchData, loading: loadingSearch } = useQuery<{
-  search: string;
-  loading: boolean;
-}>(SEARCH_QUERY);
-
-const { result: filterTypeData, loading: loadingFilterType } = useQuery<{
-  filterType: string;
-  loading: boolean;
-}>(FILTER_TYPE_QUERY);
-
-const { result: sortByData, loading: loadingSortBy } = useQuery<{
-  sortby: string;
-  loading: boolean;
-}>(SORT_BY_QUERY);
-
-const { result: languageData, loading: loadingLanguage } = useQuery<{
-  language: string;
-  loading: boolean;
-}>(LANGUAGE_QUERY);
-
-const isOnlySorted = computed(
-  () =>
-    sortByData.value?.sortby &&
-    !(
-      searchData?.value?.search ||
-      languageData?.value?.language !== defaultLanguage ||
-      filterTypeData?.value?.filterType !== defaultFilterType
-    ),
-);
+const {
+  searchData,
+  filterTypeData,
+  sortByData,
+  languageData,
+  isOnlySorted,
+  isQuerying,
+} = useSearch();
 
 const repoDataFilteredByType = (repos: Repo[]) => {
   let response = repos.slice();
@@ -217,14 +170,12 @@ const repoDataFilteredByType = (repos: Repo[]) => {
   return response;
 };
 
-const getTime = (time: string) => new Date(time).getTime();
-
 // Function to sort filtered repos
 const sortedRepoData = (repos: Repo[]) => {
   let response = repos.slice(); //need because repos.value is a read only and can't bemodified.
   if (sortByData.value?.sortby === SORT_OPTIONS.name) {
     response.sort((a, b) =>
-      b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1,
+      a.name.toLowerCase().localeCompare(b.name.toLowerCase()),
     );
   } else if (sortByData.value?.sortby === SORT_OPTIONS.stars) {
     response.sort((a, b) => (b.stargazerCount > a.stargazerCount ? 1 : -1));
@@ -234,10 +185,6 @@ const sortedRepoData = (repos: Repo[]) => {
     );
   }
   return response;
-};
-
-const inArray = (array, target) => {
-  return array.find((arr) => arr.name === target);
 };
 
 const getLanguages = computed(() => {
@@ -255,9 +202,6 @@ const getLanguages = computed(() => {
   languages.sort((a, b) => (a.name > b.name ? 1 : -1));
   return languages;
 });
-
-const matchText = (target, value): boolean =>
-  target?.match(new RegExp(value, 'i'));
 
 // Function to filter repos by language
 const repoDataFilteredByLanguage = (repos: Repo[]) => {
@@ -277,7 +221,7 @@ const repoDataFilteredByLanguage = (repos: Repo[]) => {
 // Function to filter repos by search
 const repoDataFilteredBySearch = (search: string) => {
   if (repos.value.length < 1) {
-    return repos;
+    return repos.value;
   }
   return repos.value.reduce((acc, repo) => {
     if (
@@ -290,22 +234,6 @@ const repoDataFilteredBySearch = (search: string) => {
     return [...acc, repo];
   }, []);
 };
-
-const modifyFilterTypeText = (filterText: string) => {
-  if (filterText.endsWith('s')) {
-    if (filterText.match(new RegExp('forks', 'i'))) {
-      filterText = filterText.replace('s', 'ed');
-    } else {
-      filterText = filterText.replace('s', '');
-    }
-  }
-  return filterText;
-};
-
-const isQuerying = computed(
-  (): boolean =>
-    !!(loadingLanguage || loadingFilterType || loadingSearch || loadingSortBy),
-);
 
 const filteredAndSortedRepos = computed(() => {
   let response: Repo[];

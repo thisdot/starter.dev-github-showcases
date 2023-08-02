@@ -12,7 +12,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api.starter.dev',
+  apiUrl: 'https://api.starter.dev/.netlify/functions/server',
   graphApiUrl: 'https://api.github.com/graphql',
   redirectUrl: 'http://localhost:4200/redirect',
 };
