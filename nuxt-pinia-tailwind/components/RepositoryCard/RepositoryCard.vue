@@ -6,7 +6,7 @@
           {{ name }}
         </p>
       </nuxt-link>
-      <PrivacyBadge :is-private="false" :custom-class="'relative bottom-0.5'" />
+      <PrivacyBadge :is-private="false" :class="'relative bottom-0.5'" />
     </h3>
 
     <div>

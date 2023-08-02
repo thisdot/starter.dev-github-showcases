@@ -12,7 +12,7 @@
   </svg>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   name: 'GitBranchIcon',
   props: {
