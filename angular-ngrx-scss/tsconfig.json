@@ -16,20 +16,21 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "paths": {
       "@prism": [
-        "dist/prism/prism",
         "dist/prism"
       ]
     },
-    "resolveJsonModule": true,
-    "target": "es2017",
-    "module": "es2020",
+    "target": "es2022",
+    "useDefineForClassFields": false,
+    "module": "es2022",
     "lib": [
-      "es2020",
-      "dom"
-    ],
-    "allowSyntheticDefaultImports": true
+      "es2022",
+      "dom",
+      "esnext.asynciterable"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

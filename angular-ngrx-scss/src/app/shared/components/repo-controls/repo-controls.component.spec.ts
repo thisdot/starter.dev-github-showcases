@@ -102,19 +102,16 @@ describe('RepoControlsComponent', () => {
     });
   });
 
-  it(
-    'should not show the label if has no active filters',
-    waitForAsync(() => {
-      component.ngOnInit();
+  it('should not show the label if has no active filters', waitForAsync(() => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    component.hasActiveSortAndFilters$.subscribe((hasActiveFilters) => {
       fixture.detectChanges();
-      component.hasActiveSortAndFilters$.subscribe((hasActiveFilters) => {
-        fixture.detectChanges();
-        const resultsContainer = fixture.debugElement.query(By.css('.results'));
-        expect(hasActiveFilters).toBe(false);
-        expect(resultsContainer).toBeNull();
-      });
-    }),
-  );
+      const resultsContainer = fixture.debugElement.query(By.css('.results'));
+      expect(hasActiveFilters).toBe(false);
+      expect(resultsContainer).toBeNull();
+    });
+  }));
 
   it('should get filter by type from selector', (done) => {
     store.select(selectFilterByType).subscribe((search) => {
