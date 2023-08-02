@@ -57,6 +57,13 @@ export default {
         stargazerCount: number;
       }>,
       required: true,
+      default: () => ({
+        language: '',
+        languageColor: undefined,
+        updatedAt: new Date(),
+        forkCount: 0,
+        stargazerCount: 0,
+      }),
     },
   },
 };
