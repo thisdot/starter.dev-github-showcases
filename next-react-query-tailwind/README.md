@@ -2,7 +2,7 @@
 
 This demo application is a small re-implementation of some GitHub pages / functionality built using their GraphQL API.
 
-Amplify URL: https://main.d31pj5m17ne70k.amplifyapp.com
+Netlify URL: https://next-react-query-tailwind.starter.dev
 
 ## Table of Contents
 
@@ -29,6 +29,7 @@ Amplify URL: https://main.d31pj5m17ne70k.amplifyapp.com
 - [Next.js](https://nextjs.org)
 - [React](https://reactjs.org)
 - [React Query](https://react-query.tanstack.com/)
+- [React Router](https://reactrouter.com/)
 - [Tailwind CSS](https://tailwindcss.com)
 
 ### Included Tooling
@@ -148,8 +149,8 @@ yarn dev
 
 Open your browser to [http://localhost:3000](http://localhost:3000)
 
-## Deployment
+## Live Demo
 
-This demo app gets deployed to AWS Amplify on changes to the `main` branch.
+This demo app gets deployed to Netlify on changes to the `main` branch.
 
-https://main.d31pj5m17ne70k.amplifyapp.com
+https://next-react-query-tailwind.starter.dev

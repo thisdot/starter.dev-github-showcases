@@ -13,3 +13,4 @@ export { useRepoPage } from './useRepoPage';
 export { useRepoTree } from './useRepoTree';
 export { useRepoReadMe } from './useRepoReadMe';
 export { useRepoBranch } from './useRepoBranch';
+export { useOrgProfile } from './useOrgProfile';

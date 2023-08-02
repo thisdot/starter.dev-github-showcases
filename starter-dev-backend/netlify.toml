@@ -1,0 +1,17 @@
+[build]
+  command = "yarn run build"
+  functions = "functions"
+
+[functions]
+  included_files = ["src/formatters/**.ts"]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/graphql"
+  to = "/.netlify/functions/graphql"
+  status = 200
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/server/:splat"
+  status = 200

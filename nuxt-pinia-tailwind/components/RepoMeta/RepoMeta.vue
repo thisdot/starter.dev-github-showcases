@@ -14,11 +14,11 @@
         v-if="stargazerCount"
         class="hover:cursor-pointer hover:text-blue-600"
       >
-        <StarIcon custom-class="w-4 h-4 inline mb-0.5" /> {{ stargazerCount }}
+        <StarIcon class="w-4 h-4 inline mb-0.5" /> {{ stargazerCount }}
       </span>
 
       <span v-if="forkCount" class="hover:cursor-pointer hover:text-blue-600">
-        <GitBranchIcon custom-class="w-4 h-4 inline mb-0.5" /> {{ forkCount }}
+        <GitBranchIcon class="w-4 h-4 inline mb-0.5" /> {{ forkCount }}
       </span>
     </div>
 

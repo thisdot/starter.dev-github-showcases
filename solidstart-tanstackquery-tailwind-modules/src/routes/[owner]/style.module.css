@@ -1,0 +1,5 @@
+@tailwind utilities;
+
+.wrappr {
+  @apply bg-white min-h-[calc(100vh-70px)];
+}

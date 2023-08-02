@@ -2,6 +2,13 @@ import { mount } from '@vue/test-utils';
 import RepoTabHeader from '@/components/RepoSubHeader/RepoTabHeader.vue';
 import { TABS } from '@/components/RepoSubHeader/data';
 
+jest.mock('@vue/apollo-composable', () => {
+  return {
+    useQuery: jest.fn(() => []),
+    useResult: jest.fn(() => []),
+  };
+});
+
 describe('RepoTabHeader', () => {
   let wrapper;
 

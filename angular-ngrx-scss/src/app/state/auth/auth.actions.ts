@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
+import { AuthUserData } from './auth.state';
 
-export const startSignIn = createAction('[Auth API] Start sign in process');
-export const signOut = createAction('[Auth API] Sign out Process');
+export const signInUser = createAction('[Auth API] Start sign in process');
+export const signOutUser = createAction('[Auth API] Start sign out process');
 
 export const saveUserToken = createAction('[Auth API] Save user token');
 export const removeUserToken = createAction(
@@ -22,4 +23,18 @@ export const saveUserTokenFailure = createAction(
 export const userTokenExists = createAction(
   '[Auth API] Verified user token exists',
   props<{ isAuthenticated: boolean }>(),
+);
+
+export const authUserSaved = createAction(
+  '[Auth API] Authenticated user data already saved',
+);
+
+export const fetchAuthenticatedUserDataSuccess = createAction(
+  '[Auth API] Successfully fetched authenticated user data',
+  props<{ userData: AuthUserData }>(),
+);
+
+export const fetchAuthenticatedUserDataFailure = createAction(
+  '[Auth API] Unable the fetch authenticated user data',
+  props<{ error: object }>(),
 );

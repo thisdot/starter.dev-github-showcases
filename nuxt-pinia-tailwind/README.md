@@ -53,3 +53,9 @@ Open the project root directory in your terminal and navigate to the `nuxt-pinia
 cd nuxt-pinia-tailwind
 yarn
 ```
+
+## Live Demo
+
+This demo app gets deployed to Netlify on changes to the `main` branch.
+
+https://nuxt-pinia-tailwind.starter.dev

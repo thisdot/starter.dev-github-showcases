@@ -1,0 +1,10 @@
+[build]
+  functions = "functions"
+
+[dev]
+  publish = "web-build"
+
+[[redirects]]
+  from="/*"
+  to="/index.html"
+  status=200

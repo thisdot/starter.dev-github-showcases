@@ -47,6 +47,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@pinia/nuxt',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

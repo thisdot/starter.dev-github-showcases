@@ -1,6 +1,13 @@
 import { BranchMenu } from '@/components';
 import { mount } from '@vue/test-utils';
 
+jest.mock('@vue/apollo-composable', () => {
+  return {
+    useQuery: jest.fn(() => []),
+    useResult: jest.fn(() => []),
+  };
+});
+
 describe('Branch Menu', () => {
   let wrapper;
 

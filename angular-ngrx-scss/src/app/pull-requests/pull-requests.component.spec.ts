@@ -6,21 +6,21 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '../state';
-import { fetchPullRequests, RepoState } from '../state/repository';
+import { fetchPullRequests, RepositoryState } from '../state/repository';
 
 describe('PullRequestsComponent', () => {
   let component: PullRequestsComponent;
   let fixture: ComponentFixture<PullRequestsComponent>;
   let store: MockStore;
   const initialState: AppState = {
-    repo: {
+    repository: {
       selectedFile: {
         content: 'this is a readme file',
         name: 'starter.dev-github-showcases',
         type: 'file',
         size: 223,
       },
-    } as RepoState,
+    } as RepositoryState,
   } as AppState;
 
   beforeEach(async () => {
