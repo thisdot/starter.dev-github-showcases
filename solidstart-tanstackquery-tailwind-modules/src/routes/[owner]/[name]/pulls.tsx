@@ -30,7 +30,7 @@ export type PullRequestsSignal = {
 const PullRequests = () => {
   const params = useParams();
   const [searchParams] = useSearchParams();
-  const [info, ,repoInfo] = useGetRepoInfo();
+  const [info, , repoInfo] = useGetRepoInfo();
 
   const repoPullrequests = createQuery(
     () => [

@@ -11,7 +11,13 @@ import { Issue, MilestoneProps, PageInfo } from '~/types/issues-type';
 import { Label } from '~/types/label-type';
 import styles from '../style.module.css';
 import useGetRepoInfo from '~/hooks/useGetRepoInfo';
-import { milestoneId, selectedLabel, selectedMilestone, setIssues, sortBy } from '~/store';
+import {
+  milestoneId,
+  selectedLabel,
+  selectedMilestone,
+  setIssues,
+  sortBy,
+} from '~/store';
 
 export type IssuesSignal = {
   openIssues: {
@@ -31,7 +37,7 @@ export type IssuesSignal = {
 const Issues = () => {
   const params = useParams();
   const [searchParams] = useSearchParams();
-  const [info, ,repoInfo] = useGetRepoInfo();
+  const [info, , repoInfo] = useGetRepoInfo();
 
   const repoIssues = createQuery(
     () => [

@@ -1,6 +1,6 @@
-import { createSignal } from "solid-js";
-import { PullRequestsSignal } from "./routes/[owner]/[name]/pulls";
-import { IssuesSignal } from "./routes/[owner]/[name]/issues";
+import { createSignal } from 'solid-js';
+import { PullRequestsSignal } from './routes/[owner]/[name]/pulls';
+import { IssuesSignal } from './routes/[owner]/[name]/issues';
 
 const [activeTab, setActiveTab] = createSignal<'OPEN' | 'CLOSED'>('OPEN');
 const [sortBy, setSortBy] = createSignal('Newest');

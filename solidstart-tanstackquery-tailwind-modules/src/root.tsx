@@ -72,7 +72,7 @@ export default function Root() {
             </ErrorBoundary>
           </Suspense>
         </QueryClientProvider>
-      <Scripts />
+        <Scripts />
       </Body>
     </Html>
   );
