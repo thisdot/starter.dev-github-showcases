@@ -1,15 +1,16 @@
 <template>
   <div class="w-full border rounded-lg relative bg-white">
-    <div class="flex items-center justify-between px-4 py-3">
-      <h3 class="font-semibold">Repositories</h3>
-    </div>
-
     <RepositoryCard
       v-for="repo in repos"
       :key="repo.id"
       :name="repo.name"
       :is-private="repo.private"
-      :description="repo.description"
+      :meta="{
+        language: repo.language,
+        updatedAt: repo.updated_at,
+        forkCount: repo.forks_count,
+        stargazerCount: repo.stargazers_count,
+      }"
     />
 
     <div class="flex items-center justify-center py-4">
@@ -36,6 +37,7 @@ export default defineComponent({
 
       return userStore.repos;
     });
+
     return {
       repos,
       username: $auth.$state.user.login,

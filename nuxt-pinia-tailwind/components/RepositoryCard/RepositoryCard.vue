@@ -25,6 +25,7 @@
       :updated-at="meta.updatedAt"
       :fork-count="meta.forkCount"
       :stargazer-count="meta.stargazerCount"
+      :language-color="meta.languageColor"
     />
   </article>
 </template>
@@ -50,12 +51,12 @@ export default {
     meta: {
       type: Object as PropType<{
         language: string;
-        updatedAt: Date;
+        languageColor?: string;
+        updatedAt: Date | string;
         forkCount: number;
         stargazerCount: number;
       }>,
       required: true,
-      default: () => {},
     },
   },
 };
