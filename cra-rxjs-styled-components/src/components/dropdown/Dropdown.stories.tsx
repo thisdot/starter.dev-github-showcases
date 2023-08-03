@@ -3,31 +3,29 @@ import { Routes, Route, MemoryRouter } from 'react-router-dom';
 import Dropdown from './Dropdown';
 
 export default {
-  title: 'Navbar/Dropdown',
-  component: Dropdown,
-  decorators: [
-    (Story) => (
-      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-        <Story />
-      </div>
-    )
-  ],
-  parameters: {
-    backgrounds: {
-      default: 'dark',
-      values: [
-        { name: 'dark', value: '#333' },
-      ]
-    }
-  }
+	title: 'Navbar/Dropdown',
+	component: Dropdown,
+	decorators: [
+		(Story) => (
+			<div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+				<Story />
+			</div>
+		),
+	],
+	parameters: {
+		backgrounds: {
+			default: 'dark',
+			values: [{ name: 'dark', value: '#333' }],
+		},
+	},
 } as ComponentMeta<typeof Dropdown>;
 
 const Template: ComponentStory<typeof Dropdown> = (args) => (
-  <MemoryRouter>
-    <Routes>
-      <Route path="/" element={<Dropdown />}></Route>
-    </Routes>
-  </MemoryRouter>
+	<MemoryRouter>
+		<Routes>
+			<Route path="/" element={<Dropdown />}></Route>
+		</Routes>
+	</MemoryRouter>
 );
 
 export const DefaultValue = Template.bind({});
