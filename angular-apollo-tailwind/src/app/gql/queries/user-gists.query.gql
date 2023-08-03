@@ -1,0 +1,16 @@
+query UserGists {
+  viewer {
+    id
+    gists(last: 20, orderBy: { field: CREATED_AT, direction: DESC }) {
+      nodes {
+        id
+        description
+        url
+        name
+        files {
+          name
+        }
+      }
+    }
+  }
+}

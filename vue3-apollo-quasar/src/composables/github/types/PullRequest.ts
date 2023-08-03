@@ -1,8 +1,23 @@
+export type PullRequestData = {
+  node: {
+    author: { login: string };
+    title: string;
+    url: string;
+    number: number;
+    closedAt?: string | null;
+    createdAt: string;
+    comments: {
+      totalCount: number;
+    };
+    state: string;
+  };
+};
+
 export interface PullRequest {
-  login?: string | null;
-  title: string;
-  number: number;
-  closedAt?: Date | null;
-  createdAt: Date;
-  commentCount: number;
+  openPullRequest: {
+    edges: PullRequestData[];
+  };
+  closedPullRequest: {
+    edges: PullRequestData[];
+  };
 }

@@ -6,6 +6,9 @@ interface ExplorerItem {
   name: string;
   path: string;
   type: string;
+  text?: string;
+  commitResourcePath?: string;
+  byteSize?: number;
 }
 
 interface UseRepoTree {
@@ -32,7 +35,7 @@ export const useRepoTree = (): UseRepoTree => {
     const data = useResult(result, [], (data) => {
       const fileTree = data?.repository?.tree;
       if (fileTree?.text) {
-        return fileTree.text;
+        return fileTree;
       }
       const items: ExplorerItem[] =
         fileTree?.entries?.map(({ name, path, type }) => {

@@ -1,0 +1,7 @@
+query OrgProfile($orgname: String!) {
+  organization(login: $orgname) {
+    id
+    avatarUrl
+    name
+  }
+}

@@ -10,7 +10,7 @@ interface UserRepository {
     loading: Ref<boolean>;
   };
   getUserProfile: (username: string) => {
-    data: Ref<LoggedInUser | null>;
+    data: Ref<User | null>;
     loading: Ref<boolean>;
   };
 }

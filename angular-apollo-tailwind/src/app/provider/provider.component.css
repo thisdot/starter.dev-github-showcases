@@ -18,3 +18,7 @@
 .button {
   @apply w-full mb-3 px-4 py-3 border border-solid border-gray-500 rounded-md font-medium relative;
 }
+
+.netlify-badge-container {
+  @apply fixed bottom-5 left-0 right-0 flex justify-center;
+}

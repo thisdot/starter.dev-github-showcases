@@ -33,6 +33,7 @@ export const useUserRepo = (): UseUserRepo => {
       first: repoFilters.state.first,
       last: repoFilters.state.last,
     });
+
     const repos = useResult(result, [], (data) => {
       const nodes = data?.owner?.repositories?.nodes;
       pageInfo = data?.owner?.repositories?.pageInfo;
@@ -57,6 +58,8 @@ export const useUserRepo = (): UseUserRepo => {
                 },
                 visibility: repo.isPrivate,
                 updatedAt: repo.updatedAt,
+                owner: repo.owner,
+                nameWithOwner: repo.nameWithOwner,
               },
             ]
           : acc;

@@ -40,6 +40,14 @@ const options: NextAuthOptions = {
       session.error = token.error;
       return session;
     },
+    async signIn(user) {
+      const isAllowedToSignIn = user ? true : false;
+      if (isAllowedToSignIn) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   providers: [
     Providers.GitHub({
@@ -48,6 +56,9 @@ const options: NextAuthOptions = {
       scope: ['user', 'read:org'],
     }),
   ],
+  pages: {
+    signIn: '/auth/signin',
+  },
 };
 
 const handler = (req: NextApiRequest, res: NextApiResponse) =>

@@ -1,0 +1,25 @@
+@tailwind utilities;
+
+.dropdown {
+  @apply relative top-1 inline-block text-left z-50;
+}
+
+.dropdownBtn {
+  @apply inline-flex items-center text-gray-200 fill-current;
+}
+
+.avatarContainer {
+  @apply w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-200;
+}
+
+.dropdownMenuBase {
+  @apply z-40 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200;
+}
+
+.dropdownMenuHidden {
+  @apply z-40 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-200 scale-0 opacity-0;
+}
+
+.menuBtn {
+  @apply block font-medium px-4 py-2 text-gray-900 hover:text-blue-600;
+}

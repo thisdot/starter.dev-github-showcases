@@ -3,18 +3,24 @@ import { REPO_README_QUERY } from './queries';
 import { Ref } from 'vue';
 
 interface UseRepoReadMe {
-  getRepoReadMe: (data: { owner: string; name: string; path: string }) => {
+  getRepoReadMe: (data: {
+    owner: string;
+    name: string;
+    path: string;
+    branch: string;
+  }) => {
     readme: Ref<string | null>;
     loading: Ref<boolean>;
   };
 }
 export const useRepoReadMe = (): UseRepoReadMe => {
-  const getRepoReadMe = ({ owner, name, path }) => {
-    const { result, loading } = useQuery(REPO_README_QUERY, {
-      owner: owner,
-      name: name,
-      expression: path ? `HEAD:${path}/README.md` : 'HEAD:README.md',
-    });
+  const getRepoReadMe = ({ owner, name, path, branch }) => {
+    const queryData = {
+      owner,
+      name,
+      expression: path ? `${branch}:${path}` : `${branch}:README.md`,
+    };
+    const { result, loading } = useQuery(REPO_README_QUERY, queryData);
 
     const readme = useResult(result, [], (data) => {
       const readme = data.repository?.readme as Blob;

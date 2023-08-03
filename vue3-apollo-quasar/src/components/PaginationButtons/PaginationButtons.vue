@@ -24,10 +24,8 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { PAGINATION_EVENT } from './data';
-
-const current = ref(3);
+const current = ref(1);
 const emit = defineEmits([PAGINATION_EVENT]);
-
 const paginate = (value) => emit(PAGINATION_EVENT, value);
 </script>
 
@@ -39,7 +37,6 @@ const paginate = (value) => emit(PAGINATION_EVENT, value);
   &:disabled {
     color: $secondary-200;
   }
-
   .q-icon {
     font-size: 0.6rem;
   }

@@ -1,6 +1,13 @@
 import { AppInput } from '@/components';
 import { mount } from '@vue/test-utils';
 
+jest.mock('@vue/apollo-composable', () => {
+  return {
+    useQuery: jest.fn(() => []),
+    useResult: jest.fn(() => []),
+  };
+});
+
 describe('AppInput', () => {
   let wrapper;
 

@@ -74,7 +74,7 @@
           ></hero-icon>
           <a
             class="link"
-            [href]="user.websiteUrl"
+            [href]="user.websiteUrl | generateUrlWithProtocol"
             target="_blank"
             rel="noreferrer"
           >
@@ -88,7 +88,7 @@
           ></sd-twitter-icon>
           <a
             class="link"
-            [href]="'https:/twitter.com/' + user.twitterUsername"
+            [href]="'https://twitter.com/' + user.twitterUsername"
             target="_blank"
             rel="noreferrer"
           >
