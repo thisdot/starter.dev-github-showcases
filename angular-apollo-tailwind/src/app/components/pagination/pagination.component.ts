@@ -1,25 +1,46 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PageInfo, PaginationEvent } from '../../gql';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css'],
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnInit {
   @Input() pageInfo: PageInfo | null = null;
 
   @Output() changePage: EventEmitter<PaginationEvent> = new EventEmitter();
 
-  handlePreviousPageClick() {
-    this.changePage.emit({
-      before: this.pageInfo?.startCursor,
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.router.navigate([], {
+      queryParamsHandling: 'merge',
+      queryParams: {
+        after: null,
+        before: null,
+      },
     });
   }
 
-  handleNextPageClick() {
-    this.changePage.emit({
-      after: this.pageInfo?.endCursor,
+  async handlePreviousPageClick(): Promise<boolean> {
+    return await this.router.navigate([], {
+      queryParamsHandling: 'merge',
+      queryParams: {
+        after: null,
+        before: this.pageInfo?.startCursor,
+      },
+    });
+  }
+
+  async handleNextPageClick(): Promise<boolean> {
+    return await this.router.navigate([], {
+      queryParamsHandling: 'merge',
+      queryParams: {
+        after: this.pageInfo?.endCursor,
+        before: null,
+      },
     });
   }
 }

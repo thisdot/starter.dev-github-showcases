@@ -8,8 +8,9 @@ module.exports = {
   cacheDirectory: './node_modules/.cache/remix',
   assetsBuildDirectory: 'public/build',
   publicPath: '/_static/build/',
-  serverBuildTarget: 'arc',
-  server: './server.ts',
+  serverBuildTarget: "netlify",
+  server: process.env.NETLIFY || process.env.NETLIFY_LOCAL
+  ? "./server.js" : undefined,
   ignoredRouteFiles: ['**/.*', '**/*.css', '**/*.test.{js,jsx,ts,tsx}'],
   routes(defineRoutes) {
     return defineRoutes((route) => {

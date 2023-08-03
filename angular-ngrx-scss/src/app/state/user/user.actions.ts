@@ -2,7 +2,10 @@ import { createAction, props } from '@ngrx/store';
 import { UserGistsState, UserReposState } from '../profile/profile.state';
 import { UserState } from './user.state';
 
-export const fetchUserData = createAction('[User API] User data requested');
+export const fetchUserData = createAction(
+  '[User API] User data requested',
+  props<{ username: string }>(),
+);
 
 export const fetchUserDataSuccess = createAction(
   '[User API] User Data successfully received',

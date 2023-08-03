@@ -3,12 +3,30 @@ import PaginationButtons from './PaginationButtons.vue';
 export default {
   title: 'component/Pagination Buttons',
   component: PaginationButtons,
-  argTypes: {},
+  argTypes: {
+    isPrevActive: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    isNextActive: {
+      control: {
+        type: 'boolean',
+      },
+    },
+  },
 };
 
-const Template = () => ({
+const Template = (args) => ({
   components: { PaginationButtons },
-  template: '<PaginationButtons @paginate="()=>  {}" />',
+  setup() {
+    return { args };
+  },
+  template: '<PaginationButtons v-bind="args" @paginate="()=>  {}" />',
 });
 
 export const Default = Template.bind({});
+Default.args = {
+  isPrevActive: false,
+  isNextActive: true,
+};

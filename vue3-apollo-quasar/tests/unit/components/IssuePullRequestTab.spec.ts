@@ -2,6 +2,13 @@ import { mount } from '@vue/test-utils';
 import { IssuePullRequestTab } from '@/components';
 import { TAB_TYPE, TABS } from '@/components/IssuePullRequestTab/data';
 
+jest.mock('@vue/apollo-composable', () => {
+  return {
+    useQuery: jest.fn(() => []),
+    useResult: jest.fn(() => []),
+  };
+});
+
 let wrapper;
 
 beforeEach(() => {

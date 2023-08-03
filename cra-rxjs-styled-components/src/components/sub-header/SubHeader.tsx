@@ -19,15 +19,13 @@ import {
 	TabNavigationCount,
 	TabNavigationLink,
 } from './SubHeader.styles';
-import {
-	BookIcon,
-	EyeIcon,
-	StarIcon,
-	ForkIcon,
-	CodeIcon,
-	PrIcon,
-	IssuesIcon,
-} from '../icons/index';
+import { BookIcon } from '../icons/BookIcon';
+import { EyeIcon } from '../icons/EyeIcon';
+import { StarIcon } from '../icons/StarIcon';
+import { ForkIcon } from '../icons/ForkIcon';
+import { CodeIcon } from '../icons/CodeIcon';
+import { PrIcon } from '../icons/PrIcon';
+import { IssuesIcon } from '../icons/IssuesIcon';
 import { useRepo } from '../../context/RepoContext';
 
 export default function SubHeader() {

@@ -1,5 +1,5 @@
-import IssueTabHeader from '../issue-tab-header';
-import IssueCard from '../issue-card';
+import IssueTabHeader from '../issue-tab-header/IssueTabHeader';
+import IssueCard from '../issue-card/IssueCard';
 import { PaginationContainer, Content, Wrapper } from './Issue.style';
 import type { Issue } from './Issue.type';
 import type { IssueTabValues } from '../types';
@@ -10,10 +10,11 @@ type IssueProps = {
 };
 
 export default function IssuesView({ issues, changeActiveTab }: IssueProps) {
+	const changeTab = changeActiveTab || (() => {});
 	return (
 		<Wrapper>
 			<Content>
-				<IssueTabHeader toggleTab={changeActiveTab} />
+				<IssueTabHeader toggleTab={changeTab} />
 				{issues.map((issue, index) => (
 					<IssueCard
 						title={issue.title}

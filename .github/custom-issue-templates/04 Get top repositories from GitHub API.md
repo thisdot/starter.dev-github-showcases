@@ -18,11 +18,5 @@ Like the actual GitHub dashboard, we want to show a user their top repositories.
 
 ## Notes
 
-- If you’re using the GraphQL API, there’s a TopRepositories query you can run to retrieve this information easily. Here’s the query we used:
-```
-Insert the query here
-```
-- If you’re using the REST API, an equivalent query doesn’t exist. We’ve opted to use the following request instead: 
-```
-Insert request here
-```
+- If you’re using the GraphQL API, there’s a TopRepositories query you can run to retrieve this information easily. (example [GraphQL](angular-apollo-tailwind/src/app/gql/queries/user-top-repos.query.gql) )
+- If you’re using the REST API, an equivalent query doesn’t exist. We’ve opted to use the following request instead. (example [rest API](angular-ngrx-scss/src/app/user/services/user.service.ts))

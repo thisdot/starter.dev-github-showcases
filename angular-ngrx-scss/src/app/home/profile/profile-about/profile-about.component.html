@@ -35,7 +35,7 @@
         <span class="icon" appOcticon="link"></span>
         <a [href]="profile.user.blog">{{ profile.user.blog }}</a>
       </div>
-      <div *ngIf="profile.user.twitter_username">
+      <div *ngIf="profile.user.twitterUsername">
         <span class="icon twitter-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -50,8 +50,8 @@
             ></path>
           </svg>
         </span>
-        <a href="https://twitter.com/{{ profile.user.twitter_username }}"
-          >@{{ profile.user.twitter_username }}</a
+        <a href="https://twitter.com/{{ profile.user.twitterUsername }}"
+          >@{{ profile.user.twitterUsername }}</a
         >
       </div>
     </div>

@@ -1,0 +1,13 @@
+@tailwind utilities;
+
+.container {
+  @apply py-8 border-t border-b;
+}
+
+.link {
+  @apply text-sm hover:text-blue-500 hover:underline;
+}
+
+.error {
+  @apply text-sm text-gray-600 font-medium;
+}

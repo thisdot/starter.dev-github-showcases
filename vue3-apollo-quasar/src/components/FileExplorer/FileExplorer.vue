@@ -23,11 +23,10 @@ import FileExplorerNav from './FileExplorerNav.vue';
 
 defineProps({
   contentList: {
-    type: Object as () => ExplorerContent[],
+    type: Array as () => ExplorerContent[],
     required: true,
   },
 });
-
 const directoryCheck = (value: boolean): string => (value ? 'dir' : 'file');
 const itemKey = (name: string, isDirectory: boolean): string =>
   `${name}-${directoryCheck(isDirectory)}`;

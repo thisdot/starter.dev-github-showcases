@@ -3,6 +3,13 @@ import { RepoSubHeader } from '@/components';
 import ListItem from '@/components/RepoSubHeader/ListItem.vue';
 import { NOTIFICATIONS } from '@/components/RepoSubHeader/data';
 
+jest.mock('@vue/apollo-composable', () => {
+  return {
+    useQuery: jest.fn(() => []),
+    useResult: jest.fn(() => []),
+  };
+});
+
 describe('RepoSubHeader', () => {
   let wrapper;
 

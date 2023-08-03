@@ -1,16 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
-  UserGist,
   UserGistsApiResponse,
-  UserGistsState,
   UserOrgsApiResponse,
-  UserOrgsState,
   UserReposApiResponse,
-  UserReposState,
 } from 'src/app/state/profile/profile.state';
-import { UserApiResponse, UserState } from 'src/app/state/user';
+import { UserApiResponse } from 'src/app/state/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -19,153 +15,109 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getAuthenticatedUserInfo(): Observable<UserState> {
+  /**
+   * Gets details for the authenticated user
+   * Important to note that this is specifically for the currently authenticated user
+   * @returns the full GH response with the user's account info
+   */
+  getAuthenticatedUserInfo(): Observable<UserApiResponse> {
     const url = `${environment.githubUrl}/user`;
 
-    return this.http.get<UserApiResponse>(url).pipe(
-      map((data) => ({
-        avatar: data.avatar_url,
-        bio: data.bio,
-        blog: data.blog,
-        company: data.company,
-        email: data.email,
-        followers: data.followers,
-        following: data.following,
-        location: data.location,
-        name: data.name,
-        twitter_username: data.twitter_username,
-        username: data.login,
-        type: data.type,
-      })),
-    );
+    return this.http.get<UserApiResponse>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
   }
 
-  getUserInfo(username: string): Observable<UserState> {
-    const url = `${environment.githubUrl}/users/${encodeURIComponent(
-      username,
-    )}`;
+  /**
+   * Gets details on the provided user
+   * @returns the full GH response with the user's account info
+   * @param username (string)
+   */
+  getUserInfo(username: string): Observable<UserApiResponse> {
+    const url = `${environment.githubUrl}/users/${username}`;
 
-    return this.http.get<UserApiResponse>(url).pipe(
-      map((data) => ({
-        avatar: data.avatar_url,
-        bio: data.bio,
-        blog: data.blog,
-        company: data.company,
-        email: data.email,
-        followers: data.followers,
-        following: data.following,
-        location: data.location,
-        name: data.name,
-        twitter_username: data.twitter_username,
-        username: data.login,
-        type: data.type,
-      })),
-    );
+    return this.http.get<UserApiResponse>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
   }
 
-  getUserOrganizations(): Observable<UserOrgsState[]> {
-    const url = `${environment.githubUrl}/user/orgs`;
+  /**
+   * PROFILE API CALLS
+   */
 
-    return this.http.get<UserOrgsApiResponse>(url).pipe(
-      map((data) =>
-        data.map((org) => ({
-          id: org.id,
-          login: org.login,
-          avatar_url: org.avatar_url,
-        })),
-      ),
-    );
+  /**
+   * Gets a list of organizations the user is part of
+   * @returns the full GH response containing a list of the user's organizations
+   * @param username (string)
+   */
+  getUserOrganizations(username: string): Observable<UserOrgsApiResponse> {
+    const url = `${environment.githubUrl}/users/${username}/orgs`;
+
+    return this.http.get<UserOrgsApiResponse>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
   }
 
-  getUserRepos(username: string): Observable<UserReposState[]> {
-    const url = `${environment.githubUrl}/users/${encodeURIComponent(
-      username,
-    )}/repos`;
+  /**
+   * Gets a list of repositories belonging to the user
+   * @returns the full GH response of a list of associated repositories
+   * @param username (string)
+   */
+  getUserRepos(username: string): Observable<UserReposApiResponse> {
+    const url = `${environment.githubUrl}/users/${username}/repos`;
 
-    return this.http.get<UserReposApiResponse>(url).pipe(
-      map((data) =>
-        data.map((repo) => ({
-          name: repo.name,
-          description: repo.description,
-          language: repo.language,
-          stargazers_count: repo.stargazers_count,
-          forks_count: repo.forks_count,
-          private: repo.private,
-          updated_at: repo.updated_at,
-          fork: repo.fork,
-          archived: repo.archived,
-          license: repo.license
-            ? {
-                key: repo.license.key,
-                name: repo.license.name,
-                spdx_id: repo.license.spdx_id,
-                url: repo.license.url,
-                node_id: repo.license.node_id,
-              }
-            : null,
-          owner: {
-            login: repo.owner.login,
-          },
-        })),
-      ),
-    );
+    return this.http.get<UserReposApiResponse>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
   }
 
-  getUserTopRepos(): Observable<UserReposState[]> {
+  /**
+   * DASHBOARD API CALLS
+   */
+
+  /**
+   * Gets the user's "top repositories" - the first 20 most recently updated repositories they have access to
+   * @returns the full GH response of the user's repositories, sorted by update time
+   * @param username (string)
+   */
+  getUserTopRepos(username: string): Observable<UserReposApiResponse> {
     const defaultParams = {
       sort: 'updated',
       per_page: 20,
     };
 
-    const url = `${environment.githubUrl}/user/repos`;
+    const url = `${environment.githubUrl}/users/${username}/repos`;
 
-    return this.http
-      .get<UserReposApiResponse>(url, {
-        params: new HttpParams({
-          fromObject: { ...Object.assign(defaultParams) },
-        }),
-      })
-      .pipe(
-        map((data) =>
-          data.map((repo) => ({
-            name: repo.name,
-            description: repo.description,
-            language: repo.language,
-            stargazers_count: repo.stargazers_count,
-            forks_count: repo.forks_count,
-            private: repo.private,
-            updated_at: repo.updated_at,
-            fork: repo.fork,
-            archived: repo.archived,
-            license: repo.license
-              ? {
-                  key: repo.license.key,
-                  name: repo.license.name,
-                  spdx_id: repo.license.spdx_id,
-                  url: repo.license.url,
-                  node_id: repo.license.node_id,
-                }
-              : null,
-            owner: {
-              login: repo.owner.login,
-            },
-          })),
-        ),
-      );
+    return this.http.get<UserReposApiResponse>(url, {
+      params: new HttpParams({
+        fromObject: { ...Object.assign(defaultParams) },
+      }),
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
   }
 
-  getUserGists(username: string): Observable<UserGistsState[]> {
-    const url = `${environment.githubUrl}/users/${encodeURIComponent(
-      username,
-    )}/gists`;
+  /**
+   * Gets the user's gists
+   * @returns the full GH response of an array of gists the user has created
+   * @param username (string)
+   */
+  getUserGists(username: string): Observable<UserGistsApiResponse> {
+    const url = `${environment.githubUrl}/users/${username}/gists`;
 
-    return this.http.get<UserGistsApiResponse>(url).pipe(
-      map((data) =>
-        data.map((gist: UserGist) => ({
-          url: gist.html_url,
-          fileName: Object.keys(gist.files)[0],
-        })),
-      ),
-    );
+    return this.http.get<UserGistsApiResponse>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
   }
 }

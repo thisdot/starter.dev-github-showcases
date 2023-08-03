@@ -1,4 +1,4 @@
-import FileViewer from '../../../../components/file-viewer';
+import FileViewer from '../../../../components/file-viewer/FileViewer.data';
 import {
 	RepoContainer,
 	RepoCenterWrapper,
