@@ -34,17 +34,17 @@ export const GISTS_URL = (user: string) =>
 	`${GITHUB_URL_BASE}/users/${user}/gists?per_page=10`;
 
 export const PULLS_URL = (
-  owner: string,
-  repoName: string,
-  page: string = '1'
+	owner: string,
+	repoName: string,
+	page: string = '1'
 ) =>
-  `${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}&per_page=30&page=${page}`;
+	`${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}&per_page=30&page=${page}`;
 
 export const OPEN_PULLS_URL = (owner: string, repoName: string, page = 1) =>
-  `${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}+is:open+is:pr&page=${page}&per_page=${PULLS_PER_PAGE}`;
+	`${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}+is:open+is:pr&page=${page}&per_page=${PULLS_PER_PAGE}`;
 
 export const CLOSED_PULLS_URL = (owner: string, repoName: string, page = 1) =>
-  `${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}+is:closed+is:pr&page=${page}&per_page=${PULLS_PER_PAGE}`;
+	`${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}+is:closed+is:pr&page=${page}&per_page=${PULLS_PER_PAGE}`;
 
 export const ISSUE_PR_SEARCH = (
 	user: string,
