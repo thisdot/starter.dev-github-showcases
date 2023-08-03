@@ -3,7 +3,7 @@
     <q-card-section class="row q-pb-none">
       <div class="col-auto flex">
         <h3 class="text-h6 q-my-none">
-          <router-link :to="`/${repoNameWithOwner}`" class="q-mr-sm">
+          <router-link :to="`/${nameWithOwner}`" class="q-mr-sm">
             {{ repoNameWithOwner }}
           </router-link>
           <q-chip
@@ -29,9 +29,9 @@
         {{ description }}
       </p>
 
-      <div class="text-dark q-mt-md row">
+      <div class="text-dark q-mt-md row items-center">
         <!-- Language -->
-        <div v-if="primaryLanguage" class="q-pr-md">
+        <div v-if="primaryLanguage" class="q-pr-md row items-baseline">
           <span
             class="circle q-mr-xs"
             :style="{ backgroundColor: primaryLanguage.color }"
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Star count -->
-        <span v-if="stargazerCount" class="q-pr-md">
+        <span v-if="stargazerCount" class="q-pr-md row items-baseline">
           <q-icon name="far fa-star" class="q-mr-xs"></q-icon>
           <span>
             {{ stargazerCount?.toLocaleString() }}
@@ -68,14 +68,23 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, PropType } from 'vue';
 import { useFormatter } from '@/composables';
+
+type Owner = {
+  __typename?: string;
+  login: string;
+};
 
 const props = defineProps({
   name: {
     type: String,
     default: '',
     required: true,
+  },
+  nameWithOwner: {
+    type: String,
+    default: '',
   },
   visibility: {
     type: String,
@@ -88,8 +97,8 @@ const props = defineProps({
     required: false,
   },
   owner: {
-    type: Object as () => { __typename: string; login: string },
-    required: true,
+    type: Object as PropType<Owner>,
+    required: false,
   },
   primaryLanguage: {
     type: [Object, null],
@@ -109,12 +118,18 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  isProfilePage: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const { getFriendlyDate, upperFirst } = useFormatter();
 const friendlyUpdatedAt = getFriendlyDate(props.updatedAt);
 
-const repoNameWithOwner = computed(() => `${props.owner?.login}/${props.name}`);
+const repoNameWithOwner = computed(
+  () => `${!props.isProfilePage ? props.nameWithOwner : props.name}`,
+);
 </script>
 
 <style lang="scss" scoped>

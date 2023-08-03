@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RepoState } from 'src/app/state/repository';
+import { RepositoryState } from 'src/app/state/repository';
 
 @Component({
   selector: 'app-repo-navigation',
@@ -7,7 +7,7 @@ import { RepoState } from 'src/app/state/repository';
   styleUrls: ['./repo-navigation.component.scss'],
 })
 export class RepositoryNavigationComponent {
-  @Input() repo?: RepoState;
+  @Input() repo?: RepositoryState;
   @Input() issuesCount = 0;
   @Input() pullsCount = 0;
 

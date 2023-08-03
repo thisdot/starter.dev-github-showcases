@@ -1,0 +1,15 @@
+<div class="pull-requests">
+  <div class="pull-requests-list-container">
+    <ng-container *ngIf="pullRequests?.pullRequests?.length; else emptyList">
+      <app-pull-request-card
+        *ngFor="let item of pullRequests?.pullRequests"
+        [pullRequest]="item"
+      ></app-pull-request-card>
+    </ng-container>
+    <ng-template #emptyList>
+      <div class="empty-list">
+        <strong>No results matched your search.</strong>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -158,22 +158,24 @@
         <q-separator></q-separator>
         <q-list>
           <q-item-section>
-            <p-item-label class="text-bold q-pt-md" style="font-size: 16px">
+            <q-item-label class="text-bold q-pt-md" style="font-size: 16px">
               Organizations
-            </p-item-label>
-            <a
-              v-for="organization in userData?.organizations?.nodes"
-              :href="organization?.login"
-              :key="`org-${organization?.login}`"
-              class="q-pt-sm"
-            >
-              <img
-                :src="organization?.avatarUrl"
-                alt="some"
-                class="avatar"
-                style="width: 32px; height: 32px"
-              />
-            </a>
+            </q-item-label>
+            <div class="row q-pt-sm">
+              <a
+                v-for="organization in userData?.organizations?.nodes"
+                :href="organization?.login"
+                :key="`org-${organization?.login}`"
+                class="q-mr-sm"
+              >
+                <img
+                  :src="organization?.avatarUrl"
+                  alt="some"
+                  class="avatar"
+                  style="width: 32px; height: 32px"
+                />
+              </a>
+            </div>
           </q-item-section>
         </q-list>
       </template>

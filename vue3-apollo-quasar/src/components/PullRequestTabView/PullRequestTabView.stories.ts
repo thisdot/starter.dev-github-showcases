@@ -1,3 +1,4 @@
+import { PULL_REQUESTS } from './data';
 import PullRequestTabView from './PullRequestTabView.vue';
 
 export default {
@@ -15,4 +16,11 @@ const Template = (args) => ({
 });
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  openPullRequests: {
+    edges: PULL_REQUESTS.openPullRequest,
+  },
+  closedPullRequests: {
+    edges: PULL_REQUESTS.closedPullRequest,
+  },
+};

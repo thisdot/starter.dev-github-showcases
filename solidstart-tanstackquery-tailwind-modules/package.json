@@ -1,0 +1,87 @@
+{
+  "name": "solidstart-tanstackquery-tailwind-modules",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SolidStart, TanStack Query and Tailwind CSS with CSS Modules",
+  "keywords": [
+    "solidstart",
+    "tanstack-query",
+    "tailwind"
+  ],
+  "contributors": [
+    "Chinedu Okpala <chinedu.okpala@thisdot.co>",
+    "Daian Scuarissi <daian@thisdot.co>",
+    "Mattia Magi <mattia.magi@thisdot.co>",
+    "Mark Shenouda <mark@thisdot.co>",
+    "Jerry Hogan <jerry.hogan@thisdot.co>"
+  ],
+  "scripts": {
+    "dev": "solid-start dev",
+    "build": "solid-start build",
+    "start": "solid-start start",
+    "test": "vitest",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "lint": "eslint --ext .ts,.tsx ./src",
+    "lint-fix": "eslint --ext .ts,.tsx ./src --fix",
+    "format": "prettier --write ./src --ignore-path .gitignore"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@babel/core": "7.22.9",
+    "@storybook/addon-actions": "6.5.13",
+    "@storybook/addon-backgrounds": "6.5.13",
+    "@storybook/addon-docs": "6.5.13",
+    "@storybook/addon-essentials": "6.5.13",
+    "@storybook/addon-interactions": "6.5.13",
+    "@storybook/addon-links": "6.5.13",
+    "@storybook/addon-measure": "6.5.13",
+    "@storybook/addon-outline": "6.5.13",
+    "@storybook/builder-vite": "0.2.4",
+    "@storybook/client-api": "6.5.13",
+    "@storybook/client-logger": "6.5.13",
+    "@storybook/html": "6.5.13",
+    "@storybook/testing-library": "0.2.0",
+    "@tanstack/solid-query": "4.32.0",
+    "@testing-library/jest-dom": "5.17.0",
+    "@typescript-eslint/eslint-plugin": "6.2.0",
+    "@typescript-eslint/parser": "6.2.0",
+    "autoprefixer": "10.4.14",
+    "babel-loader": "9.1.3",
+    "classnames": "2.3.2",
+    "date-fns": "2.30.0",
+    "eslint-plugin-solid": "0.12.1",
+    "eslint-plugin-unused-imports": "3.0.0",
+    "jsdom": "22.1.0",
+    "msw": "0.49.3",
+    "msw-storybook-addon": "1.7.0",
+    "postcss": "8.4.27",
+    "solid-start-netlify": "^0.2.29",
+    "solid-start-node": "0.2.29",
+    "solid-testing-library": "0.5.1",
+    "tailwindcss": "3.3.3",
+    "typescript": "4.8.4",
+    "undici": "5.22.1",
+    "vite": "4.4.7",
+    "vitest": "0.33.0",
+    "whatwg-fetch": "3.6.17"
+  },
+  "dependencies": {
+    "@solidjs/meta": "0.28.6",
+    "@solidjs/router": "0.8.2",
+    "@tailwindcss/typography": "0.5.9",
+    "rehype-raw": "6.1.1",
+    "remark-gfm": "3.0.1",
+    "solid-heroicons": "3.2.4",
+    "solid-highlight": "0.1.12",
+    "solid-js": "1.7.8",
+    "solid-markdown": "1.2.2",
+    "solid-start": "0.2.29"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "msw": {
+    "workerDirectory": "public"
+  }
+}

@@ -36,6 +36,14 @@ const SubmitButton = styled.button`
 	cursor: pointer;
 `;
 
+const NetlifyBadgeContainer = styled.div`
+	display: table-footer-group;
+	background-color: black;
+	height: 70px;
+	padding-bottom: 1rem;
+	text-align: center;
+`;
+
 function SignIn() {
 	const handleOnSubmit = useSignIn();
 
@@ -52,6 +60,14 @@ function SignIn() {
 					</form>
 				</FormContainer>
 			</Page>
+			<NetlifyBadgeContainer>
+				<a target="_blank" rel="noreferrer noopener" href="https://www.netlify.com">
+					<img
+						src="https://www.netlify.com/v3/img/components/netlify-light.svg"
+						alt="Deploys by Netlify"
+					/>
+				</a>
+			</NetlifyBadgeContainer>
 		</Main>
 	);
 }

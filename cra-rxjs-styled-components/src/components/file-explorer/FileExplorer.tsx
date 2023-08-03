@@ -12,8 +12,11 @@ import {
 	FileExplorerFileContainer,
 } from './FileExplorer.styles';
 
-import { ForkIcon, DirectoryIcon, FileIcon } from '../icons/index';
+import { ForkIcon } from '../icons/ForkIcon';
+import { DirectoryIcon } from '../icons/DirectoryIcon';
+import { FileIcon } from '../icons/FileIcon';
 import { FileItem } from '../../types/types';
+import { LoadingBulletList } from '../Loading';
 
 type Props = {
 	branch: string;
@@ -21,6 +24,7 @@ type Props = {
 	basePath: string;
 	directories: FileItem[];
 	files: FileItem[];
+	isRepoLoading?: boolean;
 };
 
 export default function FileExplorer({
@@ -29,6 +33,7 @@ export default function FileExplorer({
 	basePath,
 	path,
 	files,
+	isRepoLoading,
 }: Props) {
 	const removeLastPathPart = (path: string) => {
 		const pathParts = path.split('/');
@@ -41,6 +46,13 @@ export default function FileExplorer({
 		}
 		return `${basePath}/${type}/${branch}/${path}`;
 	};
+	if (isRepoLoading) {
+		return (
+			<FileExplorerContainer>
+				<LoadingBulletList />
+			</FileExplorerContainer>
+		);
+	}
 	return (
 		<FileExplorerWrapper>
 			<FileExplorerButtonNav>

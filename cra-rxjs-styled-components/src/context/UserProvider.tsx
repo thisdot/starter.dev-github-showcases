@@ -1,8 +1,15 @@
 import type { ReactNode } from 'react';
-import { createContext, useContext, useState, useEffect } from 'react';
+import {
+	createContext,
+	useContext,
+	useState,
+	useEffect,
+	useCallback,
+} from 'react';
 import { fromFetchWithAuth } from '../hooks/auth/from-fetch-with-auth';
 import { GITHUB_URL_BASE } from '../constants/url.constants';
-import { tap, forkJoin } from 'rxjs';
+import { tap, forkJoin, Observable, of } from 'rxjs';
+import { AUTH_TOKEN } from '../constants/auth.constants';
 
 export interface IUserContext {
 	avatar_url: string;
@@ -51,46 +58,71 @@ interface UserProviderProps {
 	children: ReactNode;
 }
 
-export const UserContext = createContext<IUserContext | undefined>(undefined);
+type UserContextType = {
+	user: IUserContext | undefined;
+	loading: boolean;
+	loadUser: () => Observable<any>;
+};
+
+export const UserContext = createContext<UserContextType | undefined>(
+	undefined
+);
 
 export function UserProvider({ children }: UserProviderProps) {
 	const [user, setUser] = useState<IUserContext>();
+	const [loading, setLoading] = useState<boolean>(true);
 
-	const request = (url: string) =>
-		fromFetchWithAuth(url, {
+	const request = (url: string) => {
+		if (!sessionStorage.getItem(AUTH_TOKEN)) {
+			return of(undefined);
+		}
+		return fromFetchWithAuth(url, {
 			selector: (response: Response) => {
 				return response.json();
 			},
 		});
+	};
+
+	const loadUser = useCallback(
+		() =>
+			forkJoin([
+				request(`${GITHUB_URL_BASE}/user`),
+				request(`${GITHUB_URL_BASE}/user/orgs`),
+				request(`${GITHUB_URL_BASE}/user/starred`),
+			]).pipe(
+				tap((val) => {
+					setLoading(false);
+					if (val && val.every((v) => v !== undefined)) {
+						setUser({
+							...val[0],
+							organizations: val[1],
+							starredRepos: val[2].length,
+						});
+					}
+				})
+			),
+		[]
+	);
 
 	useEffect(() => {
-		const subscription = forkJoin([
-			request(`${GITHUB_URL_BASE}/user`),
-			request(`${GITHUB_URL_BASE}/user/orgs`),
-			request(`${GITHUB_URL_BASE}/user/starred`),
-		])
-			.pipe(
-				tap((val) => {
-					if (val) {
-					}
-					setUser({
-						...val[0],
-						organizations: val[1],
-						starredRepos: val[2].length,
-					});
-				})
-			)
-			.subscribe();
+		const subscription = loadUser().subscribe();
 
 		return () => {
 			subscription.unsubscribe();
 		};
-	}, []);
+	}, [loadUser]);
 
-	return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+	return (
+		<UserContext.Provider value={{ user, loading, loadUser }}>
+			{children}
+		</UserContext.Provider>
+	);
 }
 
-export function useUser() {
+export function useUser(): UserContextType {
 	const context = useContext(UserContext);
+	if (!context) {
+		throw new Error('useUser must be used within a UserProvider');
+	}
 	return context;
 }

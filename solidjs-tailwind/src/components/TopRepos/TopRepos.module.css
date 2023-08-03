@@ -1,0 +1,25 @@
+@tailwind utilities;
+
+.container {
+  @apply w-full border rounded-lg relative bg-white;
+}
+
+.item {
+  @apply p-4 border-b;
+}
+
+.headingLink {
+  @apply text-xl text-blue-600 font-semibold hover:underline mr-3;
+}
+
+.description {
+  @apply text-gray-600 text-sm max-w-prose -mb-1 -mt-1;
+}
+
+.linkContainer {
+  @apply bg-gray-50 p-5 w-full text-center;
+}
+
+.allRepoLink {
+  @apply font-semibold text-gray-600 hover:text-blue-500;
+}

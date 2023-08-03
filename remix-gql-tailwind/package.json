@@ -22,7 +22,7 @@
     "mock": "concurrently -c magenta,cyan \"npm:mock:*\"",
     "mock:remix": "node -r dotenv/config --require ./mocks ./node_modules/@remix-run/dev/cli.js",
     "mock:css": "npm run build:css -- --w",
-    "start": "remix-serve build",
+    "start": "cross-env NODE_ENV=production netlify dev",
     "storybook": "concurrently -n css,storybook -c cyan,magenta \"npm run dev:css\" \"start-storybook -p 6006\"",
     "build-storybook": "build-storybook"
   },
@@ -41,6 +41,8 @@
     "@remix-run/node": "^1.6.1",
     "@remix-run/react": "^1.6.1",
     "@remix-run/serve": "^1.6.1",
+    "@netlify/functions": "^1.3.0",
+    "@remix-run/netlify": "^1.8.1",
     "bcryptjs": "2.4.3",
     "classnames": "^2.3.1",
     "cuid": "^2.1.8",

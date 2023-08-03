@@ -55,6 +55,7 @@ export interface IUserApiResponse {
   email: string;
   hireable: boolean;
   bio: string;
+  website_url: string;
   twitter_username: string;
   public_repos: number;
   public_gists: number;
@@ -65,6 +66,6 @@ export interface IUserApiResponse {
 }
 
 export interface IUser extends IUserApiResponse {
-  orgs: IUserOrg[];
-  stars: IUserStar[];
+  orgs_count: number;
+  stars_count: number;
 }

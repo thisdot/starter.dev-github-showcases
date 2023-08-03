@@ -10,7 +10,8 @@ To get started at all, we need to setup the application with GitHub authenticati
 - [ ] Set up OAuth functionality
   - [ ] Reach out to starter-dev-backend in `starter.dev-github-showcases` repo
   - [ ] Listen for token endpoint from backend to progress
-- [ ] Ensure it works and redirects to main page (can be blank page)
+- [ ] user to be redirected to "/signin" if not authenticated
+- [ ] User to be redirected to "/" on succesful authentication (can be blank page)
 
 ## Notes
 

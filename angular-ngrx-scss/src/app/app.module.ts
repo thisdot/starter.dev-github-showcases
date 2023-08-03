@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TokenInterceptor } from './auth/services/token.interceptor';
 import { reducers } from './state';
+import { AuthEffects } from './state/auth';
 import { ProfileEffects } from './state/profile/profile.effects';
 import { RepositoryEffects } from './state/repository/repository.effects';
 import { UserEffects } from './state/user';
@@ -27,7 +28,12 @@ import { UserEffects } from './state/user';
       logOnly: environment.production,
       autoPause: true,
     }),
-    EffectsModule.forRoot([UserEffects, ProfileEffects, RepositoryEffects]),
+    EffectsModule.forRoot([
+      AuthEffects,
+      UserEffects,
+      ProfileEffects,
+      RepositoryEffects,
+    ]),
   ],
   declarations: [AppComponent],
   providers: [

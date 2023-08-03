@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSignOut } from '../../hooks/auth/use-sign-out';
-import { DropdownIcon } from '../icons/index';
+import { DropdownIcon } from '../icons/DropdownIcon';
 import { useUser } from '../../context/UserProvider';
 import {
 	DropdownNav,
@@ -17,7 +17,9 @@ import {
 
 export default function Dropdown() {
 	const signOutHandler = useSignOut();
-	const user = useUser();
+	const context = useUser();
+	const user = context?.user;
+
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const toggleDropdown = () => setOpenDropdown(!openDropdown);
 

@@ -1,7 +1,7 @@
 import ClosedIssueIcon from '../../icons/ClosedIssueIcon';
 import MessageIcon from '../../icons/MessageIcon';
 import OpenIssueIcon from '../../icons/OpenIssueIcon';
-import PullRequestIssueInfo from '../../pull-request-issue-info';
+import PullRequestIssueInfo from '../../pull-request-issue-info/PullRequestIssueInfo';
 import { IssueCardWrapper } from './IssueCard.style';
 import type { Status } from '../types';
 import { Link } from 'react-router-dom';

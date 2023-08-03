@@ -1,112 +1,87 @@
 <template>
-  <div class="tab_header" :class="classNames">
+  <div
+    class="tab_header q-py-0 q-mx-auto q-mt-sm justify-center items-center"
+    :class="{ classNames: true, org_tab: isOnlyRepositories }"
+  >
     <div class="wrapper">
       <q-tabs
         v-model="activeTab"
-        style="color: #586069"
+        class="tabs"
         indicator-color="orange"
         dense
         no-caps
         inline-label
       >
-        <q-tab name="overview" style="height: 50px; --gap: 0" v-if="overview">
-          <q-icon>
-            <svg
-              height="16"
-              viewBox="0 0 16 16"
-              version="1.1"
-              width="16"
-              aria-hidden="true"
-              class="allSvg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0111.006 1h4.245a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.507a2.25 2.25 0 00-1.591.659l-.622.621a.75.75 0 01-1.06 0l-.622-.621A2.25 2.25 0 005.258 13H.75a.75.75 0 01-.75-.75V1.75zm8.755 3a2.25 2.25 0 012.25-2.25H14.5v9h-3.757c-.71 0-1.4.201-1.992.572l.004-7.322zm-1.504 7.324l.004-5.073-.002-2.253A2.25 2.25 0 005.003 2.5H1.5v9h3.757a3.75 3.75 0 011.994.574z"
-              ></path>
-            </svg>
-          </q-icon>
-          <span class="tab_label">Overview</span>
-        </q-tab>
-        <q-tab
-          name="repositories"
-          style="height: 50px; --gap: 0"
-          v-if="repositories"
-        >
-          <svg
-            height="16"
-            viewBox="0 0 16 16"
-            version="1.1"
-            width="16"
-            aria-hidden="true"
-            class="allSvg"
+        <q-tab name="overview" class="tab" v-if="overview">
+          <q-icon
+            class="text-h5 custom-icon"
+            name="svguse:/app-icons/repo-overview.svg#repo-overview"
+          />
+          <span
+            class="tab_label q-mx-sm"
+            :class="{ 'text-weight-bold': tab === TABS.overview }"
+            >Overview</span
           >
-            <path
-              fill-rule="evenodd"
-              d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"
-            ></path>
-          </svg>
-          <span class="tab_label" :class="{ active: tab === 'repositories' }">
+        </q-tab>
+        <q-tab name="repositories" class="tab" v-if="repositories">
+          <q-icon
+            class="text-h5 custom-icon"
+            name="svguse:/app-icons/repositories.svg#repositories-icon"
+          />
+          <span
+            class="tab_label q-mx-sm"
+            :class="{ 'text-weight-bold': tab === TABS.repositories }"
+          >
             Repositories
           </span>
-          <span class="num" :class="{ active: tab === 'repositories' }">
+          <span
+            class="num text-caption q-py-xs q-px-xs"
+            :class="{ 'text-weight-bold': tab === TABS.repositories }"
+          >
             85
           </span>
         </q-tab>
-        <q-tab name="projects" style="height: 50px; --gap: 0" v-if="projects">
-          <svg
-            height="16"
-            viewBox="0 0 16 16"
-            version="1.1"
-            width="16"
-            aria-hidden="true"
-            class="allSvg"
+        <q-tab name="projects" class="tab" v-if="projects">
+          <q-icon
+            class="text-h5 custom-icon"
+            name="svguse:/app-icons/repo-projects.svg#repo-projects"
+          />
+          <span
+            class="tab_label q-mx-sm"
+            :class="{ 'text-weight-bold': tab === TABS.projects }"
           >
-            <path
-              fill-rule="evenodd"
-              d="M1.75 0A1.75 1.75 0 000 1.75v12.5C0 15.216.784 16 1.75 16h12.5A1.75 1.75 0 0016 14.25V1.75A1.75 1.75 0 0014.25 0H1.75zM1.5 1.75a.25.25 0 01.25-.25h12.5a.25.25 0 01.25.25v12.5a.25.25 0 01-.25.25H1.75a.25.25 0 01-.25-.25V1.75zM11.75 3a.75.75 0 00-.75.75v7.5a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75zm-8.25.75a.75.75 0 011.5 0v5.5a.75.75 0 01-1.5 0v-5.5zM8 3a.75.75 0 00-.75.75v3.5a.75.75 0 001.5 0v-3.5A.75.75 0 008 3z"
-            ></path>
-          </svg>
-          <span class="tab_label" :class="{ active: tab === 'projects' }">
             Projects
           </span>
         </q-tab>
-        <q-tab name="packages" style="height: 50px; --gap: 0" v-if="packages">
-          <svg
-            height="16"
-            viewBox="0 0 16 16"
-            version="1.1"
-            width="16"
-            aria-hidden="true"
-            class="allSvg"
+        <q-tab name="packages" class="tab" v-if="packages">
+          <q-icon
+            class="text-h5 custom-icon"
+            name="svguse:/app-icons/repo-packages.svg#repo-packages"
+          />
+          <span
+            class="tab_label q-mx-sm"
+            :class="{ 'text-weight-bold': tab === TABS.packages }"
           >
-            <path
-              fill-rule="evenodd"
-              d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.432L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.432v5.516z"
-            ></path>
-          </svg>
-          <span class="tab_label" :class="{ active: tab === 'packages' }">
             Packages
           </span>
         </q-tab>
-        <q-tab name="stars" style="height: 50px; --gap: 0" v-if="stars">
-          <svg
-            aria-hidden="true"
-            height="16"
-            viewBox="0 0 16 16"
-            version="1.1"
-            width="16"
-            data-view-component="true"
-            class="allSvg starIcon"
+        <q-tab name="stars" class="tab" v-if="stars">
+          <q-icon
+            class="text-h5 custom-icon"
+            name="svguse:/app-icons/repo-stars.svg#repo-stars"
+          />
+          <span
+            class="tab_label q-mx-sm"
+            :class="{ 'text-weight-bold': tab === TABS.stars }"
           >
-            <path
-              fill-rule="evenodd"
-              d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"
-            ></path>
-          </svg>
-          <span class="tab_label" :class="{ active: tab === 'stars' }">
             Stars
           </span>
-          <span class="num" :class="{ active: tab === 'stars' }"> 14 </span>
+          <span
+            class="num text-weight-medium text-caption q-py-xs q-px-xs"
+            :class="{ 'text-weight-bold': tab === TABS.stars }"
+          >
+            14
+          </span>
         </q-tab>
       </q-tabs>
     </div>
@@ -145,7 +120,15 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const tab = ref('repositories');
+    const TABS = {
+      repositories: 'repositories',
+      projects: 'projects',
+      packages: 'packages',
+      stars: 'stars',
+      overview: 'overview',
+    };
+
+    const tab = ref<string>(TABS.repositories);
     const activeTab = computed({
       get() {
         emit('triggerTab', tab.value);
@@ -156,47 +139,54 @@ export default defineComponent({
         emit('triggerTab', tab.value);
       },
     });
+    const isOnlyRepositories = computed(
+      (): boolean =>
+        props.repositories &&
+        !props.overview &&
+        !props.stars &&
+        !props.packages &&
+        !props.projects,
+    );
     return {
       tab,
       activeTab,
+      isOnlyRepositories,
+      TABS,
     };
   },
 });
 </script>
 
-<style lang="scss" scoped>
-@import '../../App.css';
+<style lang="scss">
+@import '../../styles/quasar.variables.scss';
+.custom-icon {
+  transform: translateY(0.15rem);
+}
 
+.tabs {
+  color: $secondary;
+}
 .tab_header {
-  margin: 10px auto 0;
-  border-bottom: 1px solid #eaecef;
-  justify-content: center;
   height: 50px;
-  border-bottom: 1px solid var(--color-border);
-  padding-top: 0;
-  padding-bottom: 0;
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 20;
-  background-color: #fff;
-  align-items: flex-end;
+  background-color: transparent;
+}
+.tab {
+  height: 50px;
+  gap: 0;
 }
 .tab_label {
   display: inline-block;
-  margin: 0 8px;
-  &.active {
-    font-weight: bold;
-  }
   & ~ .num {
-    background-color: rgba(209, 213, 218, 0.5);
+    background-color: $secondary-300;
     border-radius: 10px;
-    padding: 2px 6px;
-    font-size: 12px;
-    font-weight: 500;
-    &.active {
-      font-weight: bold;
-    }
+  }
+}
+.org_tab {
+  & .q-tabs__content--align-center {
+    justify-content: start !important;
   }
 }
 </style>
