@@ -23,8 +23,6 @@ export default function Dropdown() {
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const toggleDropdown = () => setOpenDropdown(!openDropdown);
 
-	if (!user) return null;
-
 	return (
 		<DropdownNav>
 			<DropdownBtn onClick={toggleDropdown}>
