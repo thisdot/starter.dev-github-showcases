@@ -1,6 +1,5 @@
-import PullRequest from '../../components/pull-request/pull-request/PullRequest.view';
+import PullRequestCtrl from '../../components/pull-request/pull-request/PullRequest.data';
 
 export default function RepoPullRequest() {
-	// @ts-ignore
-	return <PullRequest />;
+	return <PullRequestCtrl />;
 }
