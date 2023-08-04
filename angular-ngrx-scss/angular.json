@@ -131,6 +131,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/prism/src/test.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/prism/tsconfig.spec.json",
             "karmaConfig": "projects/prism/karma.conf.js"
           }

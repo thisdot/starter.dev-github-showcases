@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FileExplorerNavComponent } from './file-explorer-nav.component';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { FileExplorerComponent } from '../file-explorer/file-explorer.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('FileExplorerNavComponent', () => {
   let component: FileExplorerNavComponent;
@@ -9,7 +11,8 @@ describe('FileExplorerNavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FileExplorerNavComponent],
+      imports: [RouterTestingModule],
+      declarations: [FileExplorerNavComponent, FileExplorerComponent],
     })
       .overrideComponent(FileExplorerNavComponent, {
         set: { changeDetection: ChangeDetectionStrategy.Default },

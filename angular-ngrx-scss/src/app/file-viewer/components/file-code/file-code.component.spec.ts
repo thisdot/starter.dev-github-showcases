@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FileCodeComponent } from './file-code.component';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { PrismModule } from '@prism';
 
 describe('FileCodeComponent', () => {
   let component: FileCodeComponent;
@@ -9,6 +10,7 @@ describe('FileCodeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [PrismModule],
       declarations: [FileCodeComponent],
     })
       .overrideComponent(FileCodeComponent, {

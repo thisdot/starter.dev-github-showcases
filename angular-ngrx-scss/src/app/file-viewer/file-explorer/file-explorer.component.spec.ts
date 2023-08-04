@@ -8,6 +8,12 @@ import { RepositoryState } from '../../state/repository';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { FileExplorerAboutComponent } from '../components/file-explorer-about/file-explorer-about.component';
+import { FileExplorerContainerComponent } from '../file-explorer-container/file-explorer-container.component';
+import { FileExplorerNavComponent } from '../file-explorer-nav/file-explorer-nav.component';
+import { OcticonsDirective } from '../../shared/directives/octicons.directive';
+import { ReadMeComponent } from '../read-me/read-me.component';
+import { CommonModule } from '@angular/common';
 
 describe('FileExplorerComponent', () => {
   let component: FileExplorerComponent;
@@ -47,8 +53,15 @@ describe('FileExplorerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [FileExplorerComponent],
+      imports: [CommonModule, RouterTestingModule],
+      declarations: [
+        FileExplorerComponent,
+        FileExplorerAboutComponent,
+        FileExplorerContainerComponent,
+        FileExplorerNavComponent,
+        ReadMeComponent,
+        OcticonsDirective,
+      ],
       providers: [
         provideMockStore({ initialState }),
         { provide: ActivatedRoute, useValue: activatedRouteStub },

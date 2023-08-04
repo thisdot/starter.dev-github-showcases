@@ -15,6 +15,7 @@ import {
 import { OrderField, TypeFilter } from 'src/app/state/profile/profile.state';
 import { FilterDropdownComponent } from '../filter-dropdown/filter-dropdown.component';
 import { RepoControlsComponent } from './repo-controls.component';
+import { ClickAwayDirective } from '../../directives/click-away.directive';
 
 const MOCK_VALUE_SELECT_FILTER_BY_SEARCH = 'Test Search';
 const MOCK_VALUE_SELECT_FILTER_BY_TYPE = TypeFilter.Forked;
@@ -30,7 +31,11 @@ describe('RepoControlsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RepoControlsComponent, FilterDropdownComponent],
+      declarations: [
+        RepoControlsComponent,
+        FilterDropdownComponent,
+        ClickAwayDirective,
+      ],
       imports: [ReactiveFormsModule],
       providers: [
         provideMockStore({

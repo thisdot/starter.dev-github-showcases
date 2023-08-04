@@ -3,6 +3,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 
 import { HomeComponent } from './home.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ClickAwayDirective } from '../shared/directives/click-away.directive';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -10,7 +11,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeComponent, NavBarComponent],
+      declarations: [HomeComponent, NavBarComponent, ClickAwayDirective],
       providers: [provideMockStore()],
     }).compileComponents();
   });
