@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getToken } from 'next-auth/jwt';
-import { getJwtOptions } from '@lib/jwt';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from './auth/[...nextauth]';
+import { User } from './user';
 
 const GRAPHQL_ENDPOINT = process.env.GITHUB_GRAPHQL_ENDPOINT;
 
@@ -12,12 +13,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
     return res.status(500).json({ message: 'Invalid server configuration' });
   }
 
-  const token = await getToken({
-    req,
-    ...getJwtOptions(),
-  });
+  const session = await getServerSession(req, res, authOptions);
+  const user = session?.user as User;
 
-  if (token === null) {
+  if (session === null) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
@@ -25,7 +24,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
     const data = await fetch(GRAPHQL_ENDPOINT, {
       method: 'POST',
       headers: {
-        authorization: `Bearer ${token.accessToken}`,
+        authorization: `Bearer ${user.accessToken}`,
       },
       body: JSON.stringify(req.body),
     });

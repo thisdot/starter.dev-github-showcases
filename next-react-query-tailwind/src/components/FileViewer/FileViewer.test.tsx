@@ -1,15 +1,8 @@
-import { setLogger } from 'react-query';
 import { screen, waitFor } from '@testing-library/react';
 import { renderWithClient, ErrorBoundaryTestComponent } from '@lib/testUtils';
 import { setupMswServer } from '@lib/mswServer';
 import FileViewer from './FileViewer.data';
 import { RepoProvider } from '@context/RepoContext';
-
-setLogger({
-  log: console.log,
-  warn: console.warn,
-  error: () => {},
-});
 
 setupMswServer();
 

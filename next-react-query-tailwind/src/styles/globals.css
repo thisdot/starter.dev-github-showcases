@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, div#__next {
+html,
+body,
+div#__next {
   height: 100%;
 }
 
-.prose :where(code):not(:where([class~="not-prose"] *))::before,
-.prose :where(code):not(:where([class~="not-prose"] *))::after {
-  content: ""
+.prose :where(code):not(:where([class~='not-prose'] *))::before,
+.prose :where(code):not(:where([class~='not-prose'] *))::after {
+  content: '';
 }

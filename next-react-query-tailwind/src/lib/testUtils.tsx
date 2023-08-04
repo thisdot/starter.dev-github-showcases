@@ -5,13 +5,18 @@ import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { render } from '@testing-library/react';
 import * as React from 'react';
 import { useErrorBoundary } from 'use-error-boundary';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClientOptions = {
   defaultOptions: {
     queries: {
       retry: false,
     },
+  },
+  logger: {
+    log: console.log,
+    warn: console.warn,
+    error: () => {},
   },
 };
 
@@ -74,6 +79,7 @@ const createMockRouter = (router: Partial<NextRouter> = {}) => {
     isLocaleDomain: false,
     isReady: true,
     isPreview: false,
+    forward: jest.fn().mockResolvedValue(Promise.resolve()),
   };
   return { ...mockRouter, ...router };
 };

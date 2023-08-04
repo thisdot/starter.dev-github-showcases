@@ -1,5 +1,8 @@
 import type { TabItem } from '../TabNavigation';
-import { CodeIcon, InformationCircleIcon } from '@heroicons/react/outline';
+import {
+  CodeBracketIcon,
+  InformationCircleIcon,
+} from '@heroicons/react/24/outline';
 import { PullRequestIcon } from '@components/Icons';
 
 export function createTabList({
@@ -13,7 +16,7 @@ export function createTabList({
     {
       title: 'Code',
       path: '',
-      Icon: CodeIcon,
+      Icon: CodeBracketIcon,
     },
     {
       title: 'Issues',

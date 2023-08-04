@@ -1,14 +1,7 @@
-import { setLogger } from 'react-query';
 import { screen, waitFor } from '@testing-library/react';
 import { renderWithClient, ErrorBoundaryTestComponent } from '@lib/testUtils';
 import { setupMswServer } from '@lib/mswServer';
 import UserProfile from './UserProfile.data';
-
-setLogger({
-  log: console.log,
-  warn: console.warn,
-  error: () => {},
-});
 
 setupMswServer();
 

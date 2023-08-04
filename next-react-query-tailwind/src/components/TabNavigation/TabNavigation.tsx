@@ -46,32 +46,27 @@ function TabNavigation({
                 path !== undefined ? (isOrg ? `/orgs/${href}` : href) : asPath
               }
               key={index}
+              data-testid={`repo ${title.toLowerCase()} tab`}
+              className={cn(
+                isCurrentTab(path) ? styles.tabActive : styles.tabInactive,
+                styles.tab
+              )}
             >
-              <a
-                data-testid={`repo ${title.toLowerCase()} tab`}
+              <Icon
                 className={cn(
-                  isCurrentTab(path) ? styles.tabActive : styles.tabInactive,
-                  styles.tab
+                  isCurrentTab(path) ? styles.iconActive : styles.iconInactive,
+                  styles.icon
                 )}
-              >
-                <Icon
-                  className={cn(
-                    isCurrentTab(path)
-                      ? styles.iconActive
-                      : styles.iconInactive,
-                    styles.icon
-                  )}
-                />
-                <span>{title}</span>
-                {typeof count === 'number' && (
-                  <span
-                    data-testid={`repo ${title.toLowerCase()} count`}
-                    className="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl"
-                  >
-                    {count}
-                  </span>
-                )}
-              </a>
+              />
+              <span>{title}</span>
+              {typeof count === 'number' && (
+                <span
+                  data-testid={`repo ${title.toLowerCase()} count`}
+                  className="ml-2 bg-gray-200 font-medium text-xs text-gray-800 py-0.5 px-2 rounded-xl"
+                >
+                  {count}
+                </span>
+              )}
             </Link>
           );
         })}

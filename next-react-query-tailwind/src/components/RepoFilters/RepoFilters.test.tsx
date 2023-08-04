@@ -52,7 +52,7 @@ describe('RepoFilters', () => {
     fireEvent.click(screen.getByText('TypeScript'));
 
     expect(screen.getByText(/written in/i)).toBeInTheDocument();
-    expect(screen.getByText('TypeScript')).toBeInTheDocument();
+    expect(screen.getByText('typescript')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('Sort'));
     fireEvent.click(screen.getByText('Stars'));

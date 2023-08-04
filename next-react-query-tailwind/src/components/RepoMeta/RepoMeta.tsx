@@ -1,5 +1,5 @@
 import { formatDistance } from 'date-fns';
-import { StarIcon } from '@heroicons/react/outline';
+import { StarIcon } from '@heroicons/react/24/outline';
 import { GitBranchIcon } from '@components/Icons';
 import styles from './RepoMeta.module.css';
 

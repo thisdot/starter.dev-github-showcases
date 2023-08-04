@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 
 /**
  * Higher-order function that redirects to sign-in page if a valid session is not set.

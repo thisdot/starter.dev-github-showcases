@@ -1,4 +1,4 @@
-import { LockClosedIcon } from '@heroicons/react/outline';
+import { LockClosedIcon } from '@heroicons/react/24/outline';
 import { GitRepoIcon } from '@components/Icons';
 import styles from './RepoHeading.module.css';
 

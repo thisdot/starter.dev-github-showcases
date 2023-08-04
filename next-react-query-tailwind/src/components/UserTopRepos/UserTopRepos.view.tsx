@@ -31,13 +31,12 @@ function UserTopReposView({ repos, login }: UserTopReposViewProps) {
             data-testid={`user top repos ${name} list item`}
           >
             <h3 className="mb-2">
-              <Link href={`/${owner}/${name}`}>
-                <a
-                  data-testid={`user top repos ${name} link`}
-                  className={styles.headingLink}
-                >
-                  {name}
-                </a>
+              <Link
+                href={`/${owner}/${name}`}
+                data-testid={`user top repos ${name} link`}
+                className={styles.headingLink}
+              >
+                {name}
               </Link>
               <PrivacyBadge
                 isPrivate={isPrivate}
@@ -56,8 +55,8 @@ function UserTopReposView({ repos, login }: UserTopReposViewProps) {
         )
       )}
       <div className={styles.linkContainer}>
-        <Link href={`/${login}`}>
-          <a className={styles.allRepoLink}>View all repositories</a>
+        <Link href={`/${login}`} className={styles.allRepoLink}>
+          View all repositories
         </Link>
       </div>
     </div>

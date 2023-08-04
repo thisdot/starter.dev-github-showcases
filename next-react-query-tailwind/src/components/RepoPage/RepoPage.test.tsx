@@ -1,15 +1,8 @@
-import { setLogger } from 'react-query';
 import { screen, waitFor } from '@testing-library/react';
 import { renderWithClient } from '@lib/testUtils';
 import { setupMswServer } from '@lib/mswServer';
 import RepoPage from './RepoPage.data';
 import RenderContextValue from './RenderContextValue';
-
-setLogger({
-  log: console.log,
-  warn: console.warn,
-  error: () => {},
-});
 
 setupMswServer();
 

@@ -1,7 +1,6 @@
 import type { Language } from 'prism-react-renderer';
 import cn from 'classnames';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-import theme from 'prism-react-renderer/themes/nightOwlLight';
+import { Highlight, themes } from 'prism-react-renderer';
 import styles from './FileViewer.module.css';
 
 interface FileCodeProps {
@@ -11,7 +10,7 @@ interface FileCodeProps {
 
 function FileCode({ text, language }: FileCodeProps) {
   return (
-    <Highlight {...defaultProps} theme={theme} code={text} language={language}>
+    <Highlight theme={themes.nightOwlLight} code={text} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
           data-testid="code-block"

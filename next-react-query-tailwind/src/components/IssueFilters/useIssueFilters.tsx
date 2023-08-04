@@ -43,7 +43,12 @@ type FilterAction =
     }
   | {
       type: ActionType.CHANGE_PAGE;
-      payload: { afterCursor?: string | null; beforeCursor?: string | null, first?: number | undefined, last?: number | undefined };
+      payload: {
+        afterCursor?: string | null;
+        beforeCursor?: string | null;
+        first?: number | undefined;
+        last?: number | undefined;
+      };
     }
   | { type: ActionType.RESET_STATE };
 
@@ -56,7 +61,7 @@ const initialState: FilterState = {
     field: IssueOrderField.CreatedAt,
     direction: OrderDirection.Desc,
   },
-  first: 25
+  first: 25,
 };
 
 function reducer(state: FilterState, action: FilterAction): FilterState {
@@ -98,7 +103,7 @@ function reducer(state: FilterState, action: FilterAction): FilterState {
         afterCursor: action.payload.afterCursor,
         beforeCursor: action.payload.beforeCursor,
         first: action.payload.first,
-        last: action.payload.last
+        last: action.payload.last,
       };
     case ActionType.RESET_STATE:
       return {
@@ -146,11 +151,11 @@ export function useIssueFilters(type: IssueType = IssueType.Issue) {
   }) {
     dispatch({
       type: ActionType.CHANGE_PAGE,
-      payload: { 
-        afterCursor: after, 
-        beforeCursor: before, 
-        first: after ? 25 : undefined, 
-        last: before ? 25 : undefined
+      payload: {
+        afterCursor: after,
+        beforeCursor: before,
+        first: after ? 25 : undefined,
+        last: before ? 25 : undefined,
       },
     });
   }

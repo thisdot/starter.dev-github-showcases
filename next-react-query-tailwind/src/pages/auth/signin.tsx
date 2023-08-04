@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { CtxOrReq, getProviders, signIn } from 'next-auth/client';
+import { getProviders, signIn } from 'next-auth/react';
 import { InferGetServerSidePropsType } from 'next';
 
 export default function SignIn({
@@ -42,7 +42,7 @@ export default function SignIn({
   );
 }
 
-export async function getServerSideProps(context: CtxOrReq) {
+export async function getServerSideProps() {
   const providers = await getProviders();
   return {
     props: { providers },

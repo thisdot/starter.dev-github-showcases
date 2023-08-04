@@ -1,8 +1,8 @@
 import type { ExplorerItem } from './types';
 import Link from 'next/link';
 import { removeLastPathPart } from '@lib/pathUtils';
-import { FolderIcon } from '@heroicons/react/solid';
-import { DocumentIcon } from '@heroicons/react/outline';
+import { FolderIcon } from '@heroicons/react/24/solid';
+import { DocumentIcon } from '@heroicons/react/24/outline';
 import styles from './FileExplorer.module.css';
 
 interface FileExplorerViewProps {
@@ -25,10 +25,8 @@ function FileExplorerView({
   return (
     <div className={styles.container}>
       {repoPath && (
-        <Link href={backLink}>
-          <a className={styles.cellBack}>
-            <div className="text-blue-600">..</div>
-          </a>
+        <Link href={backLink} className={styles.cellBack}>
+          <div className="text-blue-600">..</div>
         </Link>
       )}
       {items.map((item) => (
@@ -41,13 +39,12 @@ function FileExplorerView({
                 <DocumentIcon className={styles.iconFile} />
               )}
             </div>
-            <Link href={`${basePath}/${item.type}/${branch}/${item.path}`}>
-              <a
-                data-testid={`file explorer list ${item.name}`}
-                className={styles.link}
-              >
-                {item.name}
-              </a>
+            <Link
+              href={`${basePath}/${item.type}/${branch}/${item.path}`}
+              data-testid={`file explorer list ${item.name}`}
+              className={styles.link}
+            >
+              {item.name}
             </Link>
           </div>
         </div>

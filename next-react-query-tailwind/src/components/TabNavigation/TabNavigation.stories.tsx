@@ -1,7 +1,10 @@
 import type { Story, ComponentStory, ComponentMeta } from '@storybook/react';
 import TabNavigation from './TabNavigation';
 import { createWrapper } from '@lib/testUtils';
-import { UserIcon, ClipboardListIcon } from '@heroicons/react/outline';
+import {
+  UserIcon,
+  ClipboardDocumentListIcon,
+} from '@heroicons/react/24/outline';
 
 export default {
   component: TabNavigation,
@@ -39,7 +42,7 @@ Default.args = {
     },
     {
       title: 'Repos',
-      Icon: ClipboardListIcon,
+      Icon: ClipboardDocumentListIcon,
     },
   ],
 };

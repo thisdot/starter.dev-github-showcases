@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import cn from 'classnames';
-import { XIcon } from '@heroicons/react/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import styles from './IssuesContainer.module.css';
 
 interface IssuesContainerProps {
@@ -29,7 +29,7 @@ function IssuesContainer({
               'group-hover:bg-blue-500'
             )}
           >
-            <XIcon className={styles.clearButtonIcon} />
+            <XMarkIcon className={styles.clearButtonIcon} />
           </span>
           <span
             className={cn(styles.clearButtonText, 'group-hover:text-blue-500')}
