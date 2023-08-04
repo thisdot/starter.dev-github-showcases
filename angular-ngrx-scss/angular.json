@@ -1,8 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "d9eb1335-6a00-48ce-b9b6-1ffeece4f124",
-    "defaultCollection": "@ngrx/schematics"
+    "analytics": "d9eb1335-6a00-48ce-b9b6-1ffeece4f124"
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -33,7 +32,7 @@
             "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "allowedCommonJsDependencies": ["@primer/octicons"]
+            "allowedCommonJsDependencies": ["@primer/octicons", "prismjs"]
           },
           "configurations": {
             "production": {
