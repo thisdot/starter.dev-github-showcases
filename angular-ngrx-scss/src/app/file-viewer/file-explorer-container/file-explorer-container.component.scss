@@ -1,8 +1,8 @@
-@use '../../shared/styles/variables';
+@use 'variables';
 
 .file-list {
   border: 1px solid variables.$gray300;
-  border-radius: 0.25rem;
+  border-radius: variables.$padding--s;
   display: flex;
   flex-direction: column;
 }

@@ -1,11 +1,12 @@
-@use '../../../shared/styles/variables';
+@use 'variables';
+@use 'functions';
 
 .empty-list {
   display: flex;
-  height: 10rem;
+  height: functions.rem(140);
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: functions.rem(21);
 }
 
 app-pull-request-card {

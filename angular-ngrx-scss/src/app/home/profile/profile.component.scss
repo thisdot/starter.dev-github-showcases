@@ -1,10 +1,13 @@
+@use 'variables';
+@use 'functions';
+
 main {
-  padding-top: 2rem;
+  padding-top: functions.rem(28);
 }
 
 .netlify-badge-container {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
-  padding-bottom: 1rem;
+  margin-top: functions.rem(28);
+  padding-bottom: variables.$padding--l;
 }

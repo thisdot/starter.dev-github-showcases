@@ -1,7 +1,8 @@
-@use '../../shared/styles/variables';
+@use 'variables';
+@use 'functions';
 
 .container {
-  padding: 2rem 0;
+  padding: functions.rem(28) 0;
   border-top: 1px solid variables.$gray300;
   border-bottom: 1px solid variables.$gray300;
   ul {

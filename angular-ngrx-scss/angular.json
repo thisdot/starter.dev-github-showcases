@@ -32,7 +32,10 @@
             "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "allowedCommonJsDependencies": ["@primer/octicons", "prismjs"]
+            "allowedCommonJsDependencies": ["@primer/octicons", "prismjs"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app/shared/styles"]
+            }
           },
           "configurations": {
             "production": {

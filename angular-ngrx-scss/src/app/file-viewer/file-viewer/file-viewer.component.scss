@@ -1,47 +1,48 @@
-@use '../../shared/styles/variables';
+@use 'variables';
+@use 'functions';
 
 .file-viewer-container {
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: variables.$padding;
   border-width: 1px;
   border-color: variables.$gray300;
 }
 
 .fileHeader {
-  padding: 0.75rem 1rem;
+  padding: functions.rem(11) variables.$padding--l;
   background-color: variables.$gray100;
   color: variables.$gray800;
   font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
     monospace;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: functions.rem(11);
+  line-height: variables.$padding--l;
   border-bottom-width: 1px;
   border-color: variables.$gray300;
 }
 
 .fileHeaderLines {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: variables.$padding;
+  padding-right: variables.$padding;
 }
 
 .fileHeaderBytes {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: variables.$padding;
+  padding-right: variables.$padding;
   border-left: 1px solid variables.$gray300;
 }
 
 .codeBlock {
   border-spacing: 5px;
   overflow: auto;
-  padding: 0.25rem 2rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  padding: variables.$padding--s functions.rem(28);
+  font-size: functions.rem(11);
+  line-height: variables.$padding--l;
   text-align: left;
 }
 
 .lineNumber {
   display: table-cell;
-  padding-right: 1rem;
+  padding-right: variables.$padding--l;
   color: variables.$gray500 !important;
   text-align: right;
   user-select: none;
