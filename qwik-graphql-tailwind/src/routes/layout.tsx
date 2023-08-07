@@ -48,6 +48,11 @@ export default component$(() => {
           <main class="min-h-screen bg-gray-100">
             <Slot />
           </main>
+          <div class="flex justify-center pb-5 pt-6 mt-auto">
+            <a target="_blank" rel="noreferrer noopener" href="https://www.netlify.com">
+              <img src="https://www.netlify.com/v3/img/components/netlify-light.svg" alt="Deploys by Netlify" />
+            </a>
+          </div>
         </>
       ) : null}
     </div>
