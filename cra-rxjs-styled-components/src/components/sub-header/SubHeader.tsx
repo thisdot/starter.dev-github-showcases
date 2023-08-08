@@ -62,6 +62,10 @@ export default function SubHeader() {
 		return pathname.includes(matchPath);
 	};
 
+	console.log('====================================');
+	console.log(repo);
+	console.log('====================================');
+
 	return (
 		<SubHeaderWrapper>
 			<SubHeaderTopRow>
@@ -70,9 +74,15 @@ export default function SubHeader() {
 						<BookIcon />
 					</BookIconStyles>
 					<SubHeaderSpanContainer>
-						<SubHeaderUserLink>{repo.owner}</SubHeaderUserLink>
+						<SubHeaderUserLink
+							href={repo.data?.isOrg ? `/orgs/${repo.owner}` : `/${repo.owner}`}
+						>
+							{repo.owner}
+						</SubHeaderUserLink>
 						<SubHeaderSeperator>/</SubHeaderSeperator>
-						<SubHeaderRepoLink>{repo?.name}</SubHeaderRepoLink>
+						<SubHeaderRepoLink href={`/${repo?.owner}/${repo?.name}`}>
+							{repo?.name}
+						</SubHeaderRepoLink>
 					</SubHeaderSpanContainer>
 					<SubHeaderPrivacyBadge>
 						{repo.data?.isPrivate ? 'Private' : 'Public'}

@@ -48,6 +48,7 @@ export const SubHeaderUserLink = styled.a`
 	margin-bottom: 0.125rem;
 	--tw-text-opacity: 1;
 	color: rgb(37 99 235 / var(--tw-text-opacity));
+	text-decoration: none;
 
 	&:hover {
 		text-decoration: underline;
@@ -71,6 +72,7 @@ export const SubHeaderRepoLink = styled.a`
 	--tw-space-x-reverse: 0;
 	margin-right: calc(0.375rem * var(--tw-space-x-reverse));
 	margin-left: calc(0.375rem * calc(1 - var(--tw-space-x-reverse)));
+	text-decoration: none;
 
 	&:hover {
 		text-decoration: underline;
