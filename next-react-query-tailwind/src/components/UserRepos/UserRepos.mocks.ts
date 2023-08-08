@@ -32,7 +32,7 @@ export const mockUserReposQuery = graphql.query(
 //
 
 const reposResponse = {
-  user: {
+  owner: {
     repositories: {
       nodes: [
         {

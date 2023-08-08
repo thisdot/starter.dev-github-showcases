@@ -1,4 +1,4 @@
-import { DefaultSession } from "next-auth";
+import { DefaultSession } from 'next-auth';
 
 export type User = {
   accessToken: string;
@@ -9,4 +9,4 @@ export type User = {
   iat: number;
   exp: number;
   jti: string;
-} & DefaultSession["user"];
+} & DefaultSession['user'];

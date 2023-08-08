@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/auth/signin',
   },
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = (req: NextApiRequest, res: NextApiResponse) =>

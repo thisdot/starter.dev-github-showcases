@@ -38,7 +38,7 @@ function RepoIssuesView({ issues }: RepoIssuesViewProps) {
                   <span className="inline">
                     {issue.labels.map(({ color, name }) => (
                       <span
-                        key={color}
+                        key={color + name}
                         style={{
                           backgroundColor: `#${color}`,
                         }}
