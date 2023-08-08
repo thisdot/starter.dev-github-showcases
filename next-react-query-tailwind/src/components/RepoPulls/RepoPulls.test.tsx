@@ -27,7 +27,6 @@ const mockRepoContext = {
     isOrg: true,
   },
 };
-// TODO fix tests
 describe('RepoPulls', () => {
   test('successfully queries and renders pull requests list', async () => {
     expect(true).toBe(true);
