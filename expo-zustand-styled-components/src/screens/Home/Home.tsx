@@ -44,9 +44,12 @@ const Home = () => {
               <TitleStyled>Gists</TitleStyled>
               {gistsIsLoading || gistsError ? (
                 <LoaderErrorView error={gistsError} />
-              ) : (gists.map((item) => <TouchableOpacity key={item.url} onPress={() => openURL(item.url)}>
-                     <Text>{item.name}</Text>
-                  </TouchableOpacity>)
+              ) : (
+                gists.map((item) => (
+                  <TouchableOpacity key={item.url} onPress={() => openURL(item.url)}>
+                    <Text>{item.name}</Text>
+                  </TouchableOpacity>
+                ))
               )}
             </GistsListContainerStyled>
           </GistsStyled>
@@ -57,7 +60,9 @@ const Home = () => {
                 <LoaderErrorView error={topReposError} />
               ) : (
                 <>
-                {topRepos.map((item) => <RepoCard repo={item} key={item.id}/>)}
+                  {topRepos.map((item) => (
+                    <RepoCard repo={item} key={item.id} />
+                  ))}
                   <ViewAllReposButtonStyled>
                     <LinkButton to={`/${topRepos[0].owner.login}`}>
                       <Text>View all repositories</Text>
