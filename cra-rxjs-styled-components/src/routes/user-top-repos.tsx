@@ -65,7 +65,8 @@ const NetlifyBadgeContainer = styled.div`
 export default function TopRepos() {
 	const context = useUser();
 	const user = context?.user;
-	const { repositories } = useRepos(user?.login);
+	const isTopRepos: boolean = true;
+	const { repositories } = useRepos(user?.login, isTopRepos);
 	const { gists, loadingGist } = useGists();
 	const topRepositories = [...repositories]
 		.sort((a, b) => b.stargazers_count - a.stargazers_count)
