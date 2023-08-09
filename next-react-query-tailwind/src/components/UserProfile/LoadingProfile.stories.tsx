@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import LoadingProfile from './LoadingProfile';
 
 export default {
@@ -6,6 +6,4 @@ export default {
   title: 'Loading/LoadingProfile',
 } as Meta;
 
-const Template: Story = () => <LoadingProfile />;
-
-export const Primary = Template.bind({});
+export const Primary = {};

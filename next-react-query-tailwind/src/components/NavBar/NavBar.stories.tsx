@@ -1,14 +1,15 @@
 import type { RepoContext } from '../../context/RepoContext';
-import { Story, Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import NavBar from './NavBar';
 import { createWrapper } from '@lib/testUtils';
 import { RepoProvider } from '@context/RepoContext';
+import { SessionProvider } from 'next-auth/react';
 
 export default {
   component: NavBar,
   title: 'Components/NavBar',
   decorators: [
-    (Story: Story) => {
+    (Story: StoryFn) => {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
@@ -19,11 +20,14 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<RepoContext> = (args) => (
+const Template: StoryFn<RepoContext> = (args) => (
   <RepoProvider value={args}>
-    <NavBar />
+    <SessionProvider>
+      <NavBar />
+    </SessionProvider>
   </RepoProvider>
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+};

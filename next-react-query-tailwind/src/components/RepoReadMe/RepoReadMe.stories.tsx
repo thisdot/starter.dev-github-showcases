@@ -1,5 +1,5 @@
 import type { RepoContext } from '../../context/RepoContext';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import RepoReadMe from './RepoReadMe.data';
 import { mockRepoReadMeQuery } from './RepoReadMe.mocks';
 import { createWrapper } from '@lib/testUtils';
@@ -12,7 +12,7 @@ export default {
     msw: [mockRepoReadMeQuery],
   },
   decorators: [
-    (Story: Story) => {
+    (Story: StoryFn) => {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
@@ -23,24 +23,30 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<RepoContext> = (args) => (
+const Template: StoryFn<RepoContext> = (args) => (
   <RepoProvider value={args}>
     <RepoReadMe />
   </RepoProvider>
 );
 
-export const NoReadMe = Template.bind({});
-NoReadMe.args = {
-  name: 'noreadme',
-  owner: 'testowner',
-  branch: 'main',
-  path: '',
+export const NoReadMe = {
+  render: Template,
+
+  args: {
+    name: 'noreadme',
+    owner: 'testowner',
+    branch: 'main',
+    path: '',
+  },
 };
 
-export const HasReadMe = Template.bind({});
-HasReadMe.args = {
-  name: 'react',
-  owner: 'facebook',
-  branch: 'main',
-  path: '/',
+export const HasReadMe = {
+  render: Template,
+
+  args: {
+    name: 'react',
+    owner: 'facebook',
+    branch: 'main',
+    path: '/',
+  },
 };

@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import LoadingBulletList from './LoadingBulletList';
 
 export default {
@@ -6,6 +6,4 @@ export default {
   title: 'Loading/LoadingBulletList',
 } as Meta;
 
-const Template: Story = () => <LoadingBulletList />;
-
-export const Default = Template.bind({});
+export const Default = {};

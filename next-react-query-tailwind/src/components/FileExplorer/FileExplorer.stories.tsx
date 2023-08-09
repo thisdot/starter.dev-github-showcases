@@ -1,5 +1,5 @@
 import type { RepoContext } from '../../context/RepoContext';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import FileExplorer from './FileExplorer.data';
 import { mockRepoTreeQuery } from './FileExplorer.mocks';
 import { createWrapper, ErrorBoundaryTestComponent } from '@lib/testUtils';
@@ -12,7 +12,7 @@ export default {
     msw: [mockRepoTreeQuery],
   },
   decorators: [
-    (Story: Story) => {
+    (Story: StoryFn) => {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
@@ -25,32 +25,41 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<RepoContext> = (args) => (
+const Template: StoryFn<RepoContext> = (args) => (
   <RepoProvider value={args}>
     <FileExplorer />
   </RepoProvider>
 );
 
-export const RootDir = Template.bind({});
-RootDir.args = {
-  name: 'testrepos',
-  owner: 'testowner',
-  branch: 'main',
-  path: '',
+export const RootDir = {
+  render: Template,
+
+  args: {
+    name: 'testrepos',
+    owner: 'testowner',
+    branch: 'main',
+    path: '',
+  },
 };
 
-export const SrcDir = Template.bind({});
-SrcDir.args = {
-  name: 'testrepos',
-  owner: 'testowner',
-  branch: 'main',
-  path: 'src',
+export const SrcDir = {
+  render: Template,
+
+  args: {
+    name: 'testrepos',
+    owner: 'testowner',
+    branch: 'main',
+    path: 'src',
+  },
 };
 
-export const BadPathError = Template.bind({});
-BadPathError.args = {
-  name: 'testrepos',
-  owner: 'testowner',
-  branch: 'main',
-  path: 'bad/path',
+export const BadPathError = {
+  render: Template,
+
+  args: {
+    name: 'testrepos',
+    owner: 'testowner',
+    branch: 'main',
+    path: 'bad/path',
+  },
 };

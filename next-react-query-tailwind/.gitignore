@@ -36,4 +36,4 @@ yarn-error.log*
 
 src/lib/github.ts
 
-public/mockServiceWorker.js
+#public/mockServiceWorker.js

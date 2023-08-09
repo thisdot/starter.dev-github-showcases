@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import LoadingTextLine from './LoadingTextLine';
 
 export default {
@@ -6,6 +6,4 @@ export default {
   title: 'Loading/LoadingTextLine',
 } as Meta;
 
-const Template: Story = () => <LoadingTextLine />;
-
-export const Default = Template.bind({});
+export const Default = {};

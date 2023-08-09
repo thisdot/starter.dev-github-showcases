@@ -1,5 +1,5 @@
 import type { RepoContext } from '../../context/RepoContext';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import RepoActionButtons from './RepoActionButtons';
 import { createWrapper } from '@lib/testUtils';
 import { RepoProvider } from '@context/RepoContext';
@@ -8,7 +8,7 @@ export default {
   component: RepoActionButtons,
   title: 'RepoPage/RepoActionButtons',
   decorators: [
-    (Story: Story) => {
+    (Story: StoryFn) => {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
@@ -26,49 +26,42 @@ export default {
   },
 } as Meta;
 
-const Template: Story<RepoContext> = (args) => (
+const Template: StoryFn<RepoContext> = (args) => (
   <RepoProvider value={args}>
     <RepoActionButtons />
   </RepoProvider>
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  name: 'starter.dev',
-  owner: 'thisdot',
-  isRepoLoading: false,
-  data: {
-    isPrivate: false,
-    stargazerCount: 30,
-    forkCount: 10,
-    watcherCount: 5,
-    openIssueCount: 2,
-    openPullRequestCount: 1,
-    topics: [],
-    isOrg: true,
+export const Default = {
+  render: Template,
+
+  args: {
+    name: 'react',
+    owner: 'facebook',
+    isRepoLoading: false,
+    data: {
+      isPrivate: false,
+      stargazerCount: 178350,
+      forkCount: 36801,
+      watcherCount: 6321,
+      openIssueCount: 2,
+      openPullRequestCount: 1,
+      topics: [],
+      isOrg: true,
+    },
   },
 };
 
-export const BigNumbers = Template.bind({});
-Default.args = {
-  name: 'react',
-  owner: 'facebook',
-  isRepoLoading: false,
-  data: {
-    isPrivate: false,
-    stargazerCount: 178350,
-    forkCount: 36801,
-    watcherCount: 6321,
-    openIssueCount: 2,
-    openPullRequestCount: 1,
-    topics: [],
-    isOrg: true,
-  },
+export const BigNumbers = {
+  render: Template,
 };
 
-export const Loading = Template.bind({});
-Loading.args = {
-  name: 'starter.dev',
-  owner: 'thisdot',
-  isRepoLoading: true,
+export const Loading = {
+  render: Template,
+
+  args: {
+    name: 'starter.dev',
+    owner: 'thisdot',
+    isRepoLoading: true,
+  },
 };
