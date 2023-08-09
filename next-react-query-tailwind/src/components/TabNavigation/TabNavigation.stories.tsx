@@ -1,4 +1,4 @@
-import type { Story, ComponentStory, ComponentMeta } from '@storybook/react';
+import type { StoryFn, Meta } from '@storybook/react';
 import TabNavigation from './TabNavigation';
 import { createWrapper } from '@lib/testUtils';
 import {
@@ -10,7 +10,7 @@ export default {
   component: TabNavigation,
   title: 'Components/TabNavigation',
   decorators: [
-    (Story: Story) => {
+    (Story: StoryFn) => {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
@@ -26,23 +26,20 @@ export default {
       query: {},
     },
   },
-} as ComponentMeta<typeof TabNavigation>;
+} as Meta<typeof TabNavigation>;
 
-const Template: ComponentStory<typeof TabNavigation> = (args) => (
-  <TabNavigation {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  tabs: [
-    {
-      title: 'Profile',
-      path: '',
-      Icon: UserIcon,
-    },
-    {
-      title: 'Repos',
-      Icon: ClipboardDocumentListIcon,
-    },
-  ],
+export const Default = {
+  args: {
+    tabs: [
+      {
+        title: 'Profile',
+        path: '',
+        Icon: UserIcon,
+      },
+      {
+        title: 'Repos',
+        Icon: ClipboardDocumentListIcon,
+      },
+    ],
+  },
 };

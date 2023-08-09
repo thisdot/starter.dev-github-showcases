@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import UserDropdown from './UserDropdown.data';
 import { mockCurrentUserQuery } from './UserDropdown.mocks';
 import { createWrapper } from '@lib/testUtils';
@@ -10,7 +10,7 @@ export default {
     msw: [mockCurrentUserQuery],
   },
   decorators: [
-    (Story: Story) => {
+    (Story: StoryFn) => {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
@@ -21,13 +21,14 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<typeof UserDropdown> = (args) => (
-  <div className="bg-gray-900">
-    <UserDropdown {...args} />
-  </div>
-);
+export const Default = {
+  render: (args: typeof UserDropdown) => (
+    <div className="bg-gray-900">
+      <UserDropdown {...args} />
+    </div>
+  ),
 
-export const Default = Template.bind({});
-Default.args = {
-  image: 'https://avatars2.githubusercontent.com/u/17098?v=4',
+  args: {
+    image: 'https://avatars2.githubusercontent.com/u/17098?v=4',
+  },
 };

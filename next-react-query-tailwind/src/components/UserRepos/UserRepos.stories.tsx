@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import UserRepos from './UserRepos.data';
 import { mockUserReposQuery } from './UserRepos.mocks';
 import { createWrapper } from '@lib/testUtils';
@@ -11,7 +11,7 @@ export default {
     msw: [mockUserReposQuery],
   },
   decorators: [
-    (Story: Story) => {
+    (Story: StoryFn) => {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
@@ -22,16 +22,14 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<ComponentProps<typeof UserRepos>> = (args) => (
-  <UserRepos {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  username: 'testuser',
+export const Default = {
+  args: {
+    username: 'testuser',
+  },
 };
 
-export const ErrorMessage = Template.bind({});
-ErrorMessage.args = {
-  username: 'somethingbroken',
+export const ErrorMessage = {
+  args: {
+    username: 'somethingbroken',
+  },
 };

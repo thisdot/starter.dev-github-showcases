@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import OrgProfile from './OrgProfile.data';
 import { mockOrgProfileQuery } from './OrgProfile.mocks';
 import { createWrapper } from '@lib/testUtils';
@@ -11,7 +11,7 @@ export default {
     msw: [mockOrgProfileQuery],
   },
   decorators: [
-    (Story: Story) => {
+    (Story: StoryFn) => {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
@@ -22,11 +22,8 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<ComponentProps<typeof OrgProfile>> = (args) => (
-  <OrgProfile {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  username: 'vercel',
+export const Default = {
+  args: {
+    username: 'vercel',
+  },
 };
