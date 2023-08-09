@@ -1,6 +1,6 @@
 import { openURL } from 'expo-linking';
 import React, { useEffect } from 'react';
-import { Text, FlatList, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { Text, TouchableOpacity, useWindowDimensions, ScrollView } from 'react-native';
 import {
   GistsStyled,
   TitleStyled,
@@ -19,6 +19,7 @@ import { useGistsStore, useTopReposStore } from '../../hooks/stores';
 
 import RepoCard from '../../components/RepoCard';
 import LoaderErrorView from '../../components/LoaderErrorView';
+import LinkButton from '../../components/LinkButton/LinkButton';
 
 const Home = () => {
   const { width } = useWindowDimensions();
@@ -36,40 +37,43 @@ const Home = () => {
 
   return (
     <SafeAreaViewStyled>
-      <ContainerStyled screenWidth={width}>
-        <GistsStyled screenWidth={width}>
-          <GistsListContainerStyled>
-            <TitleStyled>Gists</TitleStyled>
-            {gistsIsLoading || gistsError ? (
-              <LoaderErrorView error={gistsError} />
-            ) : (
-              <FlatList
-                data={gists}
-                renderItem={({ item }) => (
-                  <TouchableOpacity onPress={() => openURL(item.url)}>
+      <ScrollView>
+        <ContainerStyled screenWidth={width}>
+          <GistsStyled screenWidth={width}>
+            <GistsListContainerStyled>
+              <TitleStyled>Gists</TitleStyled>
+              {gistsIsLoading || gistsError ? (
+                <LoaderErrorView error={gistsError} />
+              ) : (
+                gists.map((item) => (
+                  <TouchableOpacity key={item.url} onPress={() => openURL(item.url)}>
                     <Text>{item.name}</Text>
                   </TouchableOpacity>
-                )}
-              />
-            )}
-          </GistsListContainerStyled>
-        </GistsStyled>
-        <RepositoriesStyled screenWidth={width}>
-          <TitleStyled>Top Repositories</TitleStyled>
-          <RepositoriesListContainerStyled>
-            {topReposIsLoading || topReposError ? (
-              <LoaderErrorView error={topReposError} />
-            ) : (
-              <>
-                <FlatList data={topRepos} renderItem={({ item }) => <RepoCard repo={item} />} />
-                <ViewAllReposButtonStyled>
-                  <Text>View all repositories</Text>
-                </ViewAllReposButtonStyled>
-              </>
-            )}
-          </RepositoriesListContainerStyled>
-        </RepositoriesStyled>
-      </ContainerStyled>
+                ))
+              )}
+            </GistsListContainerStyled>
+          </GistsStyled>
+          <RepositoriesStyled screenWidth={width}>
+            <TitleStyled>Top Repositories</TitleStyled>
+            <RepositoriesListContainerStyled>
+              {topReposIsLoading || topReposError ? (
+                <LoaderErrorView error={topReposError} />
+              ) : (
+                <>
+                  {topRepos.map((item) => (
+                    <RepoCard repo={item} key={item.id} />
+                  ))}
+                  <ViewAllReposButtonStyled>
+                    <LinkButton to={`/${topRepos[0].owner.login}`}>
+                      <Text>View all repositories</Text>
+                    </LinkButton>
+                  </ViewAllReposButtonStyled>
+                </>
+              )}
+            </RepositoriesListContainerStyled>
+          </RepositoriesStyled>
+        </ContainerStyled>
+      </ScrollView>
     </SafeAreaViewStyled>
   );
 };

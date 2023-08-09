@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import LoadingRepos from './LoadingRepos';
 
 export default {
@@ -6,6 +6,4 @@ export default {
   title: 'Loading/LoadingRepos',
 } as Meta;
 
-const Template: Story = () => <LoadingRepos />;
-
-export const Primary = Template.bind({});
+export const Primary = {};

@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         refetchOnWindowFocus={false}
         refetchInterval={60 * 5}
       >
-        <NavBar />
+        {session?.user && <NavBar />}
         <Component {...pageProps} />
         <ReactQueryDevtools />
       </SessionProvider>

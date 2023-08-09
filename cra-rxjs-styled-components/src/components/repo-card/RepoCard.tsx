@@ -17,9 +17,10 @@ import {
 interface RepoCardProps {
 	repo: Repository;
 	star?: boolean;
+	isMainPage?: boolean;
 }
 
-function RepoCard({ repo, star }: RepoCardProps) {
+function RepoCard({ repo, star, isMainPage }: RepoCardProps) {
 	const {
 		id,
 		name,
@@ -32,11 +33,19 @@ function RepoCard({ repo, star }: RepoCardProps) {
 		visibility,
 	} = repo;
 
+	const repoNameWithOwnerLink = () =>
+		owner?.login ? `/${owner.login}/${name || ''}` : '';
+
+	const repoNameWithOwner = () =>
+		`${isMainPage ? `${owner?.login + '/' || ''}` : ''}${name || ''}`;
+
 	return (
 		<Containers key={id} star={star}>
 			<Content>
 				<Header>
-					<HeadingLink to={`/${owner.login}/${name}`}>{name}</HeadingLink>
+					<HeadingLink to={repoNameWithOwnerLink()}>
+						{repoNameWithOwner()}
+					</HeadingLink>
 					<BadgeWrapper>
 						<PrivacyBadge visibility={visibility} />
 					</BadgeWrapper>

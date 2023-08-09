@@ -9,20 +9,10 @@ function NavBar() {
   const user = session?.user;
   return (
     <header className={styles.header}>
-      {user ? (
-        <>
-          <Link href="/">
-            <GitHubLogo />
-          </Link>
-          <div>
-            <div>
-              <UserDropdown image={user.image} />
-            </div>
-          </div>
-        </>
-      ) : (
-        ''
-      )}
+      <Link href="/">
+        <GitHubLogo />
+      </Link>
+      <div>{user && <UserDropdown image={user.image} />}</div>
     </header>
   );
 }

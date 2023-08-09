@@ -1,3 +1,4 @@
+import convertObjectToQueryString from '../helpers/objectToQueryString';
 import { IssueType, State } from '../types/types';
 
 export const API_URL_BASE = process.env.REACT_APP_API_URL;
@@ -29,6 +30,17 @@ export const ORG_REPO_LIST = (user: string) =>
 
 export const USER_REPO_LIST = (user: string, page: string = '1') =>
 	`${GITHUB_URL_BASE}/users/${user}/repos?sort=pushed&page=${page}&type=all`;
+
+export const USER_TOP_REPO_LIST = (page: string = '1') => {
+	const params = {
+		sort: 'updated',
+		affiliation: 'owner, collaborator, organization_member',
+		page,
+		per_page: 20,
+	};
+	const queryStrings = convertObjectToQueryString(params);
+	return `${GITHUB_URL_BASE}/user/repos?${queryStrings}`;
+};
 
 export const GISTS_URL = (user: string) =>
 	`${GITHUB_URL_BASE}/users/${user}/gists?per_page=10`;

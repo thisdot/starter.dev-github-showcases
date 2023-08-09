@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import UserTopRepos from './UserTopRepos.data';
 import { mockUserTopReposQuery } from './UserTopRepos.mocks';
 import { createWrapper } from '@lib/testUtils';
@@ -10,7 +10,7 @@ export default {
     msw: [mockUserTopReposQuery],
   },
   decorators: [
-    (Story: Story) => {
+    (Story: StoryFn) => {
       const Wrapper = createWrapper();
       return (
         <Wrapper>
@@ -21,6 +21,4 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => <UserTopRepos />;
-
-export const Default = Template.bind({});
+export const Default = {};
