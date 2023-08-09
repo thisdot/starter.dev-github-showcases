@@ -62,10 +62,6 @@ export default function SubHeader() {
 		return pathname.includes(matchPath);
 	};
 
-	console.log('====================================');
-	console.log(repo);
-	console.log('====================================');
-
 	return (
 		<SubHeaderWrapper>
 			<SubHeaderTopRow>
