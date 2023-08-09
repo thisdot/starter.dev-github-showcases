@@ -93,7 +93,7 @@ export default function TopRepos() {
 							) : (
 								<>
 									{topRepositories.map((repo) => (
-										<RepoCard repo={repo} key={repo.id} />
+										<RepoCard repo={repo} key={repo.id} isMainPage />
 									))}
 									<ViewRepositoriesContainer>
 										<ViewRepositoriesLink href={`/${user?.login}`}>
