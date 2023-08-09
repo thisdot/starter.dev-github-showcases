@@ -76,7 +76,7 @@ export function useRepos(
 				subscription.unsubscribe();
 			};
 		}
-	}, [username, page]);
+	}, [username, page, isTopRepos]);
 
 	const nextPage = () => {
 		setPage(paginationPages.nextPage);
