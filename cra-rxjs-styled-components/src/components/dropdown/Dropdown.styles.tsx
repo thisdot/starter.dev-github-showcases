@@ -65,7 +65,7 @@ export const UserDropdownAvatarImage = styled.img`
 export const UserDropdownMenuItems = styled.div`
 	position: absolute;
 	right: 0;
-	z-index: 30;
+	z-index: 50;
 	margin-top: 0.5rem;
 	width: 14rem;
 	transform-origin: top right;
