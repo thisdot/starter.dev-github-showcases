@@ -11,7 +11,7 @@ const UserProfilePage: NextPage = () => {
   return (
     <ProfilePage owner={query.owner}>
       {({ username }) => (
-        <div className="relative pt-8">
+        <div className="relative">
           <div className="border-b border-gray-200 sticky top-0 bg-white z-20  hidden md:block">
             <div className="grid grid-cols-12 gap-8 max-w-screen-2xl mx-auto">
               <div className="col-span-12 md:col-span-4 xl:col-span-3" />
@@ -22,7 +22,7 @@ const UserProfilePage: NextPage = () => {
           </div>
           <div className="max-w-screen-2xl mx-auto py-8 px-4">
             <div className="grid grid-cols-12 gap-8">
-              <div className="col-span-12 md:col-span-4 xl:col-span-3 relative md:-top-20">
+              <div className="col-span-12 md:col-span-4 xl:col-span-3 md:-top-20">
                 <UserProfile username={username} />
               </div>
               <div className="col-span-12 md:col-span-8 xl:col-span-9">
