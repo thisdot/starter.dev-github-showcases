@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider, useSession } from 'next-auth/react';
 
 import NavBar from '@components/NavBar';
 
@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         refetchOnWindowFocus={false}
         refetchInterval={60 * 5}
       >
-        {session?.user && <NavBar />}
+        <NavBar />
         <Component {...pageProps} />
         <ReactQueryDevtools />
       </SessionProvider>
