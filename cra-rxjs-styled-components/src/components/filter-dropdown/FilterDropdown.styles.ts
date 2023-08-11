@@ -1,7 +1,6 @@
 import colors from '../../constants/colors';
 import styled from 'styled-components';
 
-
 export const DropdownContainer = styled.div`
 	display: flex;
 	position: relative;
@@ -65,8 +64,8 @@ export const DropDownMenu = styled.div`
 	width: 14rem;
 	transform-origin: top right;
 	border-radius: 0.375rem;
-	background-color: #FFF;
-	box-shadow: 0px 0px 10px 1px #CCC;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px 1px #ccc;
 	top: 2rem;
 `;
 
@@ -106,7 +105,6 @@ export const MenuItemContentColor = styled.span`
 	border-radius: 0.5rem;
 	flex-shrink: 0;
 	border: 1px solid ${colors.gray300};
-
 `;
 
 export const CloseWrapper = styled.div`
@@ -114,7 +112,7 @@ export const CloseWrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	font-size: 0.875rem;
-  line-height: 1.25rem;
+	line-height: 1.25rem;
 	padding: 0.25rem 0.75rem;
 `;
 
@@ -132,4 +130,3 @@ export const CloseText = styled.strong`
 	font-size: 0.75rem;
 	line-height: 1rem;
 `;
-
