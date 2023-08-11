@@ -2,6 +2,7 @@ import UserProfileView from '../components/user-profile/UserProfile';
 import {
 	Layout,
 	NetlifyBadgeContainer,
+	ProfileNav,
 } from '../components/layouts/ProfileLayout';
 import Header from '../components/header/Header';
 import { useUser } from '../context/UserProvider';
@@ -11,6 +12,9 @@ import styled from 'styled-components';
 import { PaginateWrapper } from '../components/paginate-button/PaginateButton.style';
 import PaginateButton from '../components/paginate-button/PaginateButton';
 import LoadingRepoCard from '../components/repo-card/LoadingRepoCard';
+import TabNavigation from '../components/tab-nav/TabNav';
+import { tabs } from '../constants/data';
+import RepoFilter from '../components/repo-filter/Repofilter';
 
 function Profile() {
 	const context = useUser();
@@ -31,6 +35,10 @@ function Profile() {
 						<LoadingRepoCard />
 					) : (
 						<>
+							<ProfileNav>
+								<TabNavigation tabs={tabs} activeTab={tabs[0].title} />
+							</ProfileNav>
+							<RepoFilter />
 							{repositories.map((repo) => (
 								<RepoCard repo={repo} key={repo.id} star />
 							))}
