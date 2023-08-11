@@ -20,6 +20,7 @@ const colors = {
 	green800: 'rgb(26, 127, 55)',
 	purple500: ' rgb(130, 80, 223)',
 	red600: 'rgb(207, 34, 46)',
+	primaryGreen: '#2da44e',
 };
 
 export default colors;
