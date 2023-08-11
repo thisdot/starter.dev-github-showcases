@@ -30,7 +30,6 @@ export const FiltersWrapper = styled.div`
 `;
 
 export const SearchTextInput = styled.input`
-	// width: 100%;
 	font-size: 16px;
 	padding: 8px 12px;
 	border-radius: 8px;
@@ -38,7 +37,6 @@ export const SearchTextInput = styled.input`
 	color: ${colors.gray500};
 	border: 1px solid ${colors.gray300};
 	flex: 1;
-	// flex-shrink: 1;
 `;
 
 export const RepoBtn = styled.button`
@@ -49,7 +47,6 @@ export const RepoBtn = styled.button`
 	border-radius: 8px;
 	flex-direction: row;
 	align-items: center;
-	// flex-grow: 1;
 	justify-content: center;
 	background-color: ${colors.primaryGreen};
 	outline: none;
