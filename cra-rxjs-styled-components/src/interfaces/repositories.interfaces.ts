@@ -18,6 +18,8 @@ export interface Repository {
 	pulls: number;
 	default_branch: string;
 	homepage: string;
+	fork: boolean;
+	archived: boolean
 }
 
 export interface RepositoryWithBranchCount extends Repository {
