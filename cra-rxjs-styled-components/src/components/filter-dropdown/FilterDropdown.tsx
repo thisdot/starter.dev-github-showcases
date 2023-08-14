@@ -57,7 +57,7 @@ export default function FilterDropdown({
 	useLayoutEffect(() => {
 		document.addEventListener('click', handleClickOutside, true);
 		return () => {
-			document.removeEventListener('clic', handleClickOutside, true);
+			document.removeEventListener('click', handleClickOutside, true);
 		};
 	});
 	return (
@@ -78,8 +78,12 @@ export default function FilterDropdown({
 							<CloseIcon />
 						</CloseBtn>
 					</CloseWrapper>
-					{allItems.map(({ name, color }, index) => (
-						<MenuItemContainer role="none" onClick={() => selectOption?.(name)}>
+					{allItems.map(({ name, color }) => (
+						<MenuItemContainer
+							role="none"
+							onClick={() => selectOption?.(name)}
+							key={name}
+						>
 							<MenuItem role="menuitem" tabIndex={-1}>
 								{name === selected ? <CorrectIcon /> : <NotSelected />}
 								<MenuItemContent>
