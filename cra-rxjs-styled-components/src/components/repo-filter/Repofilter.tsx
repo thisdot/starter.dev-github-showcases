@@ -1,3 +1,4 @@
+import { useRepoFilter } from '../../context/RepoFilterContext';
 import FilterDropdown from '../filter-dropdown/FilterDropdown';
 import { RepoBookIcon } from '../icons';
 import {
@@ -24,13 +25,14 @@ export default function RepoFilter({
 	const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
 	const sortOptions = Object.values(SORT_OPTIONS);
 	const languageOptions = ['All', 'HTML', 'CSS', 'PHP'];
+	const {filterType, setFilterType} = useRepoFilter();
 
 	return (
 		<Container>
 			<RepoFilterWrapper>
 				<SearchInput />
 				<FiltersWrapper>
-					<FilterDropdown name="Type" items={typeOptions} />
+					<FilterDropdown name="Type" items={typeOptions} selectOption={setFilterType} selected={filterType}/>
 					<FilterDropdown name="Sort" items={sortOptions} />
 					<FilterDropdown
 						name="Language"
