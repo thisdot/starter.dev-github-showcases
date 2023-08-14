@@ -48,7 +48,6 @@ export default function RepoFilter({
 					<RepoBtnText>{repoBtnText || 'New'}</RepoBtnText>
 				</RepoBtn>
 			</RepoFilterWrapper>
-			{language}
 		</Container>
 	);
 }
