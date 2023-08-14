@@ -53,7 +53,7 @@ export default function RepoFilter({
 					search
 				)
 		);
-	}, []);
+	}, [sortBy, language, filterType, search]);
 
 	return (
 		<Container>
