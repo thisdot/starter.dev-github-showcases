@@ -25,7 +25,8 @@ export default function RepoFilter({
 	const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
 	const sortOptions = Object.values(SORT_OPTIONS);
 	const languageOptions = ['All', 'HTML', 'CSS', 'PHP'];
-	const { filterType, setFilterType, language, setLanguage } = useRepoFilter();
+	const { filterType, setFilterType, language, setLanguage, sortBy, setSortBy } =
+		useRepoFilter();
 
 	return (
 		<Container>
@@ -44,7 +45,12 @@ export default function RepoFilter({
 						selectOption={setLanguage}
 						selected={language}
 					/>
-					<FilterDropdown name="Sort" items={sortOptions} />
+					<FilterDropdown
+						name="Sort"
+						items={sortOptions}
+						selected={sortBy}
+						selectOption={setSortBy}
+					/>
 				</FiltersWrapper>
 				<RepoBtn>
 					<RepoBookIcon color="#fff" />
