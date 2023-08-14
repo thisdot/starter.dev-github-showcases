@@ -19,7 +19,7 @@ export interface Repository {
 	default_branch: string;
 	homepage: string;
 	fork: boolean;
-	archived: boolean
+	archived: boolean;
 }
 
 export interface RepositoryWithBranchCount extends Repository {

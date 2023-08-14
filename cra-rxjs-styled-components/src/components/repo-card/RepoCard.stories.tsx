@@ -41,6 +41,6 @@ StarteDevRepo.args = {
 		subscribers_count: 8,
 		default_branch: 'main',
 		fork: false,
-		archived: false
+		archived: false,
 	},
 };

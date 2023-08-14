@@ -79,7 +79,11 @@ export default function FilterDropdown({
 						</CloseBtn>
 					</CloseWrapper>
 					{allItems.map(({ name, color }) => (
-						<MenuItemContainer role="none" onClick={() => selectOption?.(name)} key={name}>
+						<MenuItemContainer
+							role="none"
+							onClick={() => selectOption?.(name)}
+							key={name}
+						>
 							<MenuItem role="menuitem" tabIndex={-1}>
 								{name === selected ? <CorrectIcon /> : <NotSelected />}
 								<MenuItemContent>
