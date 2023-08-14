@@ -22,7 +22,15 @@ export default {
 
 const Template: StoryFn<RepoContext> = (args) => (
   <RepoProvider value={args}>
-    <SessionProvider>
+    <SessionProvider
+      session={{
+        user: {
+          name: 'test',
+          email: 'test@test.com',
+        },
+        expires: '',
+      }}
+    >
       <NavBar />
     </SessionProvider>
   </RepoProvider>

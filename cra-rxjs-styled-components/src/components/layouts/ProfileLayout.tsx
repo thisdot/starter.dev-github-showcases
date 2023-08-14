@@ -28,3 +28,8 @@ export const NetlifyBadgeContainer = styled.div`
 	text-align: center;
 	background-color: white;
 `;
+
+export const ProfileNav = styled.div`
+	background-color: #fff;
+	padding-top: 40px;
+`;
