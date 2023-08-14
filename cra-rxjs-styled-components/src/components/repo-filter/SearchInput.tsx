@@ -4,7 +4,7 @@ import { SearchTextInput } from './RepoFilter.styles';
 export default function SearchInput() {
 	const { search, setSearch } = useRepoFilter();
 
-	const handleChange = (e: any) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value);
 	};
 	return (
