@@ -49,6 +49,9 @@ describe('FileExplorerComponent', () => {
         }
       },
     }),
+    snapshot: {
+      fragment: '',
+    },
   };
 
   beforeEach(async () => {

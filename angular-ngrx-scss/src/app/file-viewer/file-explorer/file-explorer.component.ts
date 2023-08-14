@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -6,7 +13,7 @@ import {
   fetchRepository,
   selectedRepository,
 } from '../../state/repository';
-import { map, takeWhile, tap } from 'rxjs';
+import { map, take, takeWhile, tap } from 'rxjs';
 
 @Component({
   selector: 'app-file-explorer',
@@ -14,6 +21,10 @@ import { map, takeWhile, tap } from 'rxjs';
   styleUrls: ['./file-explorer.component.scss'],
 })
 export class FileExplorerComponent implements OnInit, OnDestroy {
+  @ViewChild('readme') readmeContainer: ElementRef | undefined;
+
+  private componentActive = true;
+
   owner = '';
   repoName = '';
   path = '';
@@ -33,10 +44,22 @@ export class FileExplorerComponent implements OnInit, OnDestroy {
 
       return { ...repo, tree: dirItems.concat(fileItems) };
     }),
+    tap(() => {
+      // make sure the readme is scrolled into view if the fragment is set
+      // we need to wait for the readme to be rendered before we can scroll to it
+      this.zone.onStable.pipe(take(1)).subscribe(() => {
+        if (this.route.snapshot.fragment === 'readme') {
+          this.readmeContainer?.nativeElement?.scrollIntoView();
+        }
+      });
+    }),
   );
-  private componentActive = true;
 
-  constructor(private route: ActivatedRoute, private store: Store) {}
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store,
+    private zone: NgZone,
+  ) {}
 
   ngOnInit() {
     this.route.paramMap
@@ -60,7 +83,7 @@ export class FileExplorerComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.componentActive = false;
   }
 }

@@ -10,4 +10,6 @@ export class FileExplorerAboutComponent {
   @Input() description: string | undefined;
   @Input() homepageUrl!: string;
   @Input() topics!: string[];
+  @Input() owner!: string;
+  @Input() name!: string;
 }

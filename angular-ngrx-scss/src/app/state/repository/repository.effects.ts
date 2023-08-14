@@ -42,6 +42,7 @@ export class RepositoryEffects {
         const repoReadme$ = this.repoService.getRepositoryReadme(
           owner,
           repoName,
+          path,
         );
 
         const repoMilestones$ = this.repoService.getRepositoryMilestones(
@@ -83,7 +84,7 @@ export class RepositoryEffects {
               visibility: info.visibility,
               watchCount: info.watchers_count,
               website: info.homepage,
-              readme: readme.content || '',
+              readme: readme?.content || '',
               milestones: milestones || [],
               labels: labels || [],
               pullsFilterParams: null,
