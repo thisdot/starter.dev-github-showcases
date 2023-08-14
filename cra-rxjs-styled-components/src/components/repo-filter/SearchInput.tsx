@@ -15,6 +15,7 @@ export default function SearchInput() {
 			id="search"
 			placeholder="Find a repository..."
 			value={search}
+			autoFocus
 			onInput={handleChange}
 		/>
 	);

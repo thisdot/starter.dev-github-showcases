@@ -58,3 +58,57 @@ export const RepoBtnText = styled.span`
 	font-size: 14px;
 	font-weight: 700;
 `;
+
+export const FilterTextContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid ${colors.gray300};
+	padding: 16px 0;
+`;
+
+export const FilterTextSmall = styled.small`
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	text-transform: lowercase;
+	display: flex;
+	align-items: baseline;
+	gap: 0.25rem;
+`;
+
+export const ClearButtonContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition-property: color, background-color, border-color,
+		text-decoration-color, fill, stroke;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+	transition-delay: 60ms;
+	gap: 0.5rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	cursor: pointer;
+	&:hover {
+		color: ${colors.blue600};
+		& > span {
+			background-color: ${colors.blue600};
+		}
+	}
+`;
+
+export const ClearButtonText = styled.span`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 0.375rem;
+	color: #ffffff;
+	background-color: ${colors.gray500};
+	width: 16px;
+	height: 16px;
+	transition-property: color, background-color, border-color,
+		text-decoration-color, fill, stroke;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+	transition-delay: 60ms;
+`;
