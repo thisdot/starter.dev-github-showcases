@@ -10,7 +10,7 @@ import {
 
 const modifyFilterTypeText = (filterText = 'test') => {
 	if (filterText.endsWith('s')) {
-		if ((new RegExp('forks', 'i')).exec(filterText)) {
+		if (new RegExp('forks', 'i').exec(filterText)) {
 			filterText = filterText.replace('s', 'ed');
 		} else {
 			filterText = filterText.replace('s', '');
