@@ -32,10 +32,14 @@ function Profile() {
 		grid-area: content;
 	`;
 
+	const Main = styled.div`
+		min-height: calc(100vh - 172px);
+	`;
+
 	const sortAndFilteredRepositories = useRepoSortFilter(repositories);
 
 	return (
-		<>
+		<Main>
 			<Header />
 			<Layout>
 				<UserProfileView />
@@ -78,7 +82,7 @@ function Profile() {
 					</a>
 				</NetlifyBadgeContainer>
 			</Layout>
-		</>
+		</Main>
 	);
 }
 
