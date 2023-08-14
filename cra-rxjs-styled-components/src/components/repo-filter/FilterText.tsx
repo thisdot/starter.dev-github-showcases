@@ -55,11 +55,7 @@ const FilterText = (props: FilterTextProps) => {
 				</FilterTextSmall>
 			</div>
 			<ClearButtonContainer onClick={resetFilter}>
-				<ClearButtonText
-					className={
-						'text-white rounded-md bg-gray-500 group-hover:bg-blue-600 transition-colors delay-[60ms] w-4 h-4'
-					}
-				>
+				<ClearButtonText>
 					<CloseIcon />
 				</ClearButtonText>
 				Clear filter
