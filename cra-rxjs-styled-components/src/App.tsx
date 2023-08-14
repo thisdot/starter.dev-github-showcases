@@ -14,6 +14,7 @@ import RepoBranchTreePath from './routes/repo/repository-code/repository-tree/re
 import RepoBranchBlobPath from './routes/repo/repository-code/repository-blob/repository-blob';
 import { UserProvider } from './context/UserProvider';
 import Index from './routes/Index';
+import { RepoFilterProvider } from './context/RepoFilterContext';
 
 function App() {
 	return (
@@ -56,7 +57,9 @@ function App() {
 						path="/:username"
 						element={
 							<AuthGuard>
-								<UserProfile />
+								<RepoFilterProvider>
+									<UserProfile />
+								</RepoFilterProvider>
 							</AuthGuard>
 						}
 					></Route>
