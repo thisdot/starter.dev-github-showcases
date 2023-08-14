@@ -25,8 +25,7 @@ export default function RepoFilter({
 	const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
 	const sortOptions = Object.values(SORT_OPTIONS);
 	const languageOptions = ['All', 'HTML', 'CSS', 'PHP'];
-	const { setLanguage, language } = useRepoFilter();
-	const { filterType, setFilterType } = useRepoFilter();
+	const { filterType, setFilterType, language, setLanguage } = useRepoFilter();
 
 	return (
 		<Container>
