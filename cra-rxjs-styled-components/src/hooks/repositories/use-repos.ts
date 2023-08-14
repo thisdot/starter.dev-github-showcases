@@ -31,6 +31,7 @@ export function useRepos(
 	isTopRepos?: boolean
 ): UseRepo {
 	const [state, setState] = useState<RepositoryWithBranchCount[]>([]);
+	const [languages, setLanguages] = useState<string[]>([]);
 	const [paginationPages, setPaginationPages] = useState<Pagination>({
 		prevPage: '',
 		nextPage: '1',
@@ -64,6 +65,11 @@ export function useRepos(
 					filter((repos) => !!repos.length),
 					switchMap((repositories: Repository[]) => {
 						const requests = repositories.map(createBranchCountRequest);
+						const reposLaguages = repositories
+							.map((res) => res.language)
+							.filter((res) => res)
+							.sort((a, b) => a.localeCompare(b));
+						setLanguages([...new Set(reposLaguages)]);
 						return zip(...requests).pipe(
 							map(mergeRepositoriesWithBranchCount(repositories))
 						);
@@ -88,6 +94,7 @@ export function useRepos(
 
 	return {
 		repositories: state,
+		languages,
 		prevPage,
 		nextPage,
 		hasNextPage: paginationPages.hasNextPage,

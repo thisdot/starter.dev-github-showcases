@@ -35,6 +35,7 @@ export interface Pagination {
 
 export interface UseRepo {
 	repositories: RepositoryWithBranchCount[];
+	languages: string[];
 	prevPage: () => void;
 	nextPage: () => void;
 	hasNextPage: boolean;
