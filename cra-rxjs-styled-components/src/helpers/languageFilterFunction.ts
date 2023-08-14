@@ -2,7 +2,7 @@ import { defaultLanguage } from '../components/repo-filter/data';
 import { Repository } from '../interfaces/repositories.interfaces';
 
 const matchText = (target: string, value: string) =>
-	target?.match(new RegExp(value, 'i'));
+	new RegExp(value, 'i').exec(target);
 
 // Function to filter repos by language
 export const repoDataFilteredByLanguage = ({
