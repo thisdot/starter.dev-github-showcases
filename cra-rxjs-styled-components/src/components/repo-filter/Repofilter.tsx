@@ -27,8 +27,6 @@ export default function RepoFilter({
 	const languageOptions = ['All', 'HTML', 'CSS', 'PHP'];
 	const { setLanguage, language } = useRepoFilter();
 
-	const selectLanguage = (value: string) => setLanguage(value);
-
 	return (
 		<Container>
 			<RepoFilterWrapper>
@@ -38,7 +36,7 @@ export default function RepoFilter({
 					<FilterDropdown
 						name="Language"
 						items={languages && languages.length > 0 ? languages : languageOptions}
-						selectOption={selectLanguage}
+						selectOption={setLanguage}
 						selected={language}
 					/>
 					<FilterDropdown name="Sort" items={sortOptions} />
