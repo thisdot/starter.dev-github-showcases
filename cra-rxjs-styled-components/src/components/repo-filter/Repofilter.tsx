@@ -1,3 +1,4 @@
+import { useRepoFilter } from '../../context/RepoFilterContext';
 import FilterDropdown from '../filter-dropdown/FilterDropdown';
 import { RepoBookIcon } from '../icons';
 import {
@@ -24,6 +25,9 @@ export default function RepoFilter({
 	const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
 	const sortOptions = Object.values(SORT_OPTIONS);
 	const languageOptions = ['All', 'HTML', 'CSS', 'PHP'];
+	const { setLanguage, language } = useRepoFilter();
+
+	const selectLanguage = (value: string) => setLanguage(value);
 
 	return (
 		<Container>
@@ -31,17 +35,20 @@ export default function RepoFilter({
 				<SearchInput />
 				<FiltersWrapper>
 					<FilterDropdown name="Type" items={typeOptions} />
-					<FilterDropdown name="Sort" items={sortOptions} />
 					<FilterDropdown
 						name="Language"
 						items={languages && languages.length > 0 ? languages : languageOptions}
+						selectOption={selectLanguage}
+						selected={language}
 					/>
+					<FilterDropdown name="Sort" items={sortOptions} />
 				</FiltersWrapper>
 				<RepoBtn>
 					<RepoBookIcon color="#fff" />
 					<RepoBtnText>{repoBtnText || 'New'}</RepoBtnText>
 				</RepoBtn>
 			</RepoFilterWrapper>
+			{language}
 		</Container>
 	);
 }

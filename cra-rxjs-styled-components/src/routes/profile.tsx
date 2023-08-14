@@ -18,8 +18,14 @@ import RepoFilter from '../components/repo-filter/Repofilter';
 
 function Profile() {
 	const context = useUser();
-	const { repositories, prevPage, nextPage, hasNextPage, hasPrevPage } =
-		useRepos(context?.user?.login);
+	const {
+		repositories,
+		languages,
+		prevPage,
+		nextPage,
+		hasNextPage,
+		hasPrevPage,
+	} = useRepos(context?.user?.login);
 
 	const ContentLayout = styled.div`
 		grid-area: content;
@@ -38,7 +44,7 @@ function Profile() {
 							<ProfileNav>
 								<TabNavigation tabs={tabs} activeTab={tabs[0].title} />
 							</ProfileNav>
-							<RepoFilter />
+							<RepoFilter languages={languages} />
 							{repositories.map((repo) => (
 								<RepoCard repo={repo} key={repo.id} star />
 							))}

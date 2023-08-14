@@ -14,9 +14,9 @@ export const repoDataFilteredByLanguage = ({
 }): Repository[] => {
 	let response = repos.slice();
 	if (repos && language && language !== defaultLanguage) {
-		// response = repos.filter((repo: Repository) =>
-		// 	matchText(repo?.primaryLanguage?.name, language)
-		// );
+		response = repos.filter((repo: Repository) =>
+			matchText(repo?.language, language)
+		);
 	} else if (language === defaultLanguage) {
 		response = repos;
 	}
