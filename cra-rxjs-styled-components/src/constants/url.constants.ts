@@ -67,3 +67,5 @@ export const ISSUE_PR_SEARCH = (
 	page: number
 ) =>
 	`${GITHUB_URL_BASE}/search/issues?q=repo:${user}/${repo}%20is:${type}%20state:${state}&per_page=${per_page}&page=${page}`;
+
+export const ORG_INFO = (org: string) => `${GITHUB_URL_BASE}/orgs/${org}`;

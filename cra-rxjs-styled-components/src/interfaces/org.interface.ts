@@ -1,0 +1,59 @@
+export interface Plan {
+	name: string;
+	space: number;
+	private_repos: number;
+	filled_seats: number;
+	seats: number;
+}
+
+export interface IOrg {
+	login: string;
+	id: number;
+	node_id: string;
+	url: string;
+	repos_url: string;
+	events_url: string;
+	hooks_url: string;
+	issues_url: string;
+	members_url: string;
+	public_members_url: string;
+	avatar_url: string;
+	description: string;
+	name: string;
+	company?: any;
+	blog: string;
+	location?: any;
+	email: string;
+	twitter_username: string;
+	is_verified: boolean;
+	has_organization_projects: boolean;
+	has_repository_projects: boolean;
+	public_repos: number;
+	public_gists: number;
+	followers: number;
+	following: number;
+	html_url: string;
+	created_at: string;
+	updated_at: string;
+	archived_at?: any;
+	type: string;
+	total_private_repos: number;
+	owned_private_repos: number;
+	private_gists?: any;
+	disk_usage?: any;
+	collaborators?: any;
+	billing_email?: any;
+	default_repository_permission?: any;
+	members_can_create_repositories: boolean;
+	two_factor_requirement_enabled?: any;
+	members_allowed_repository_creation_type: string;
+	members_can_create_public_repositories: boolean;
+	members_can_create_private_repositories: boolean;
+	members_can_create_internal_repositories: boolean;
+	members_can_create_pages: boolean;
+	members_can_fork_private_repositories: boolean;
+	web_commit_signoff_required: boolean;
+	members_can_create_public_pages: boolean;
+	members_can_create_private_pages: boolean;
+	plan: Plan;
+}

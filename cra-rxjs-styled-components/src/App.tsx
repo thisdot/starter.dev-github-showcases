@@ -7,13 +7,13 @@ import TopRepos from './routes/user-top-repos';
 import RepoPullRequest from './routes/repo/repository-pull-request';
 import RepoIssues from './routes/repo/repository-issues';
 import Repo from './routes/repo';
-import UserRepos from './components/user-repos/UserRepos';
 import UserProfile from './routes/profile';
 import RepoBranchRoot from './routes/repo/repository-code';
 import RepoBranchTreePath from './routes/repo/repository-code/repository-tree/repository-tree';
 import RepoBranchBlobPath from './routes/repo/repository-code/repository-blob/repository-blob';
 import { UserProvider } from './context/UserProvider';
 import Index from './routes/Index';
+import OrgPage from './routes/orgs';
 import { RepoFilterProvider } from './context/RepoFilterContext';
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
 						path="/orgs/:username"
 						element={
 							<AuthGuard>
-								<UserRepos isOrg />
+								<OrgPage />
 							</AuthGuard>
 						}
 					/>
