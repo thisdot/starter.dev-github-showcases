@@ -68,7 +68,7 @@ export function useRepos(
 						const reposLaguages = repositories
 							.map((res) => res.language)
 							.filter((res) => res)
-							.sort((a,b) => a.localeCompare(b));
+							.sort((a, b) => a.localeCompare(b));
 						setLanguages([...new Set(reposLaguages)]);
 						return zip(...requests).pipe(
 							map(mergeRepositoriesWithBranchCount(repositories))
