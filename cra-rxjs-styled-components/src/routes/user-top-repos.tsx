@@ -16,7 +16,7 @@ const Main = styled.main`
 	width: 100%;
 	background-color: rgb(243, 244, 246);
 	max-width: 1024px;
-	min-height: calc(100vh - 172px);
+	height: 100%;
 	@media (max-width: 850px) {
 		padding: 2rem;
 	}
