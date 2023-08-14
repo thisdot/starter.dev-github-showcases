@@ -15,6 +15,7 @@ import LoadingRepoCard from '../components/repo-card/LoadingRepoCard';
 import TabNavigation from '../components/tab-nav/TabNav';
 import { tabs } from '../constants/data';
 import RepoFilter from '../components/repo-filter/Repofilter';
+import useRepoSortFilter from '../hooks/repositories/use-repo-sort-filter';
 
 function Profile() {
 	const context = useUser();
@@ -31,21 +32,26 @@ function Profile() {
 		grid-area: content;
 	`;
 
+	const sortAndFilteredRepositories = useRepoSortFilter(repositories);
+
 	return (
 		<>
 			<Header />
 			<Layout>
 				<UserProfileView />
 				<ContentLayout>
-					{!repositories.length ? (
+					{!sortAndFilteredRepositories.length ? (
 						<LoadingRepoCard />
 					) : (
 						<>
 							<ProfileNav>
 								<TabNavigation tabs={tabs} activeTab={tabs[0].title} />
 							</ProfileNav>
-							<RepoFilter languages={languages} />
-							{repositories.map((repo) => (
+							<RepoFilter
+								languages={languages}
+								filteredRepoCount={sortAndFilteredRepositories.length}
+							/>
+							{sortAndFilteredRepositories.map((repo) => (
 								<RepoCard repo={repo} key={repo.id} star />
 							))}
 							<PaginateWrapper>

@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useRepoFilter } from '../../context/RepoFilterContext';
 import FilterDropdown from '../filter-dropdown/FilterDropdown';
 import { RepoBookIcon } from '../icons';
+import FilterText from './FilterText';
 import {
 	Container,
 	FiltersWrapper,
@@ -9,7 +11,12 @@ import {
 	RepoFilterWrapper,
 } from './RepoFilter.styles';
 import SearchInput from './SearchInput';
-import { FILTER_TYPE_OPTIONS, SORT_OPTIONS } from './data';
+import {
+	FILTER_TYPE_OPTIONS,
+	SORT_OPTIONS,
+	defaultFilterType,
+	defaultLanguage,
+} from './data';
 
 interface RepoFilterProps {
 	languages?: string[];
@@ -25,8 +32,28 @@ export default function RepoFilter({
 	const typeOptions = Object.values(FILTER_TYPE_OPTIONS);
 	const sortOptions = Object.values(SORT_OPTIONS);
 	const languageOptions = ['All', 'HTML', 'CSS', 'PHP'];
-	const { filterType, setFilterType, language, setLanguage, sortBy, setSortBy } =
-		useRepoFilter();
+	const {
+		filterType,
+		setFilterType,
+		language,
+		setLanguage,
+		sortBy,
+		setSortBy,
+		search,
+	} = useRepoFilter();
+
+	const [isOnlySorted, setIsOnlySorted] = useState(true);
+
+	useEffect(() => {
+		setIsOnlySorted(
+			!!sortBy &&
+				!(
+					language !== defaultLanguage ||
+					filterType !== defaultFilterType ||
+					search
+				)
+		);
+	}, [sortBy, language, filterType, search]);
 
 	return (
 		<Container>
@@ -57,6 +84,7 @@ export default function RepoFilter({
 					<RepoBtnText>{repoBtnText || 'New'}</RepoBtnText>
 				</RepoBtn>
 			</RepoFilterWrapper>
+			{!isOnlySorted && <FilterText filteredRepoCount={filteredRepoCount} />}
 		</Container>
 	);
 }

@@ -9,6 +9,7 @@ export default function CloseIcon() {
 			data-view-component="true"
 			height="1em"
 			width="1em"
+			fill="currentColor"
 		>
 			<path
 				fillRule="evenodd"
