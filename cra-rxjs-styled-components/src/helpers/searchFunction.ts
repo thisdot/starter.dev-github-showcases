@@ -1,4 +1,4 @@
-import { Repository } from '@/interfaces/repositories.interfaces';
+import { Repository } from '../interfaces/repositories.interfaces';
 
 // Function to filter repos by search
 export const repoDataFilteredBySearch = ({

@@ -2,7 +2,7 @@ import {
 	FILTER_TYPE_OPTIONS,
 	SORT_OPTIONS,
 	defaultLanguage,
-} from '@/components/repo-filter/data';
+} from '../components/repo-filter/data';
 import { ReactNode, createContext, useContext, useState } from 'react';
 
 export interface RepoFilterContextInterface {
