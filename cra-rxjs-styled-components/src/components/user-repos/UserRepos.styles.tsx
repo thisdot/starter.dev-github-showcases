@@ -19,22 +19,22 @@ export const NetlifyBadgeContainer = styled.div`
 `;
 
 export const OrgHeader = styled.div`
-	border-bottom: 1px solid var(--gray-500);
-	background-color: var(--gray-200);
+	border-bottom: 1px solid var(--gray-300);
+	background-color: var(--gray-100);
 	position: sticky;
 	top: 0px;
 	z-index: 40;
 `;
 
 export const OrgTopHeader = styled.div`
-	padding: 0 8px;
+	padding: 0 32px;
 `;
 
 export const OrgAbout = styled.div`
 	display: flex;
 	align-items: center;
-	margin-top: 0.5rem;
-	margin-bottom: 0.5rem;
+	padding-top: 1rem;
+	margin-bottom: 2rem;
 `;
 
 export const OrgImage = styled.img`

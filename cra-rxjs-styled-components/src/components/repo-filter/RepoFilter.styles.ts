@@ -53,10 +53,11 @@ export const RepoBtn = styled.button`
 	border: none;
 `;
 
-export const RepoBtnText = styled.span`
+export const RepoBtnText = styled.a`
 	color: #fff;
 	font-size: 14px;
 	font-weight: 700;
+	text-decoration: none;
 `;
 
 export const FilterTextContainer = styled.div`

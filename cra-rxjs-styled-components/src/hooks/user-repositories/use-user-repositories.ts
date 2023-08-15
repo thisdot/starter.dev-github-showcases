@@ -6,8 +6,9 @@ import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 import { Repository } from '../../interfaces/repositories.interfaces';
 
 export function useUserRepositories(isOrg = false) {
-	const [repos, setRepos] = useState<Repository[]>();
+	const [repos, setRepos] = useState<Repository[]>([]);
 	const [loading, setLoading] = useState(true);
+	const [languages, setLanguages] = useState<string[]>([]);
 	const { username } = useParams();
 
 	const request = (url: string) =>
@@ -24,9 +25,14 @@ export function useUserRepositories(isOrg = false) {
 		const GITHUB_URL = isOrg ? ORG_REPO_LIST(username) : USER_REPO_LIST(username);
 		const subscription = request(GITHUB_URL)
 			.pipe(
-				tap((data) => {
+				tap((data: Repository[]) => {
 					if (data) {
 						setRepos(data);
+						const reposLaguages = data
+							.map((res) => res.language)
+							.filter((res) => res)
+							.sort((a, b) => a.localeCompare(b));
+						setLanguages([...new Set(reposLaguages)]);
 						setLoading(false);
 					}
 				})
@@ -40,5 +46,6 @@ export function useUserRepositories(isOrg = false) {
 	return {
 		loading,
 		repos,
+		languages,
 	};
 }
