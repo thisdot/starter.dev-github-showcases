@@ -2,6 +2,7 @@ import { Issue } from 'src/app/repository/services/repository.interfaces';
 import { UserApiResponse } from '../user';
 
 export interface RepositoryState {
+  path: string;
   description: string;
   forkCount: number;
   issueCount: number;

@@ -7,6 +7,7 @@ export const initialRepositoryState: RepositoryState = {
   forkCount: 0,
   issueCount: 0,
   ownerName: '',
+  path: '',
   prCount: 0,
   readme: '',
   repoName: '',

@@ -13,7 +13,7 @@ import { map, takeWhile, tap } from 'rxjs';
   templateUrl: './file-explorer.component.html',
   styleUrls: ['./file-explorer.component.scss'],
 })
-export class FileExplorerComponent implements OnInit, OnDestroy {
+export class FileExplorerComponent implements OnDestroy {
   owner = '';
   repoName = '';
   path = '';
@@ -37,28 +37,6 @@ export class FileExplorerComponent implements OnInit, OnDestroy {
   private componentActive = true;
 
   constructor(private route: ActivatedRoute, private store: Store) {}
-
-  ngOnInit() {
-    this.route.paramMap
-      .pipe(
-        takeWhile(() => this.componentActive),
-        tap((params) => {
-          this.owner = params.get('owner') as string;
-          this.repoName = params.get('repo') as string;
-          this.branch = params.get('branch') as string;
-          this.path = params.get('path') as string;
-          this.store.dispatch(
-            fetchRepository({
-              owner: this.owner,
-              repoName: this.repoName,
-              path: this.path,
-              branch: this.branch,
-            }),
-          );
-        }),
-      )
-      .subscribe();
-  }
 
   ngOnDestroy(): void {
     this.componentActive = false;

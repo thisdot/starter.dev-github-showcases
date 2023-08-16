@@ -22,6 +22,7 @@
       name="Label"
       description="Select label"
       [isRepo]="true"
+      [items]="(labels$ | async) ?? []"
     ></app-filter-dropdown>
     <app-filter-dropdown
       name="Sort"

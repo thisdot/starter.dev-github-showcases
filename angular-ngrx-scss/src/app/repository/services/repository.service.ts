@@ -8,6 +8,7 @@ import {
   IssueLabel,
   Milestone,
   PullRequestAPIResponse,
+  PullRequestLabel,
   ReadmeApiResponse,
   RepoApiResponse,
   RepoContentsApiResponse,

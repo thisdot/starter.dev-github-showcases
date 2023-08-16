@@ -66,6 +66,7 @@ export class RepositoryEffects {
         ).pipe(
           map(([info, prList, contents, readme, milestones, labels]) => {
             const allData: RepositoryState = {
+              path: path ?? '',
               description: info.description,
               forkCount: info.forks_count,
               issueCount: info.open_issues_count,
