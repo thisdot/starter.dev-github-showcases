@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build:css:prod && remix build && echo 'Hi' && ls"
+  command = "npm run build:css:prod && remix build && echo 'Explore public directory' && cd ../public && ls"
   publish = "public"
 
 [dev]
