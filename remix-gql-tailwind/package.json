@@ -12,7 +12,7 @@
     "dev:css": "npm run generate:css -- --watch",
     "dev:remix": "remix watch",
     "format": "prettier --write .",
-    "generate:css": "tailwindcss -o ./app/styles/tailwind.css",
+    "generate:css": "tailwindcss -o ./remix-gql-tailwind/app/styles/tailwind-build.css",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "test": "vitest",
     "test:e2e:dev": "start-server-and-test dev http://localhost:3000 \"npx cypress open\"",
