@@ -1,9 +1,16 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpEventType,
+  HttpHeaders,
+  HttpParams,
+  HttpResponse,
+} from '@angular/common/http';
 import { delay, of } from 'rxjs';
 import {
   PullRequestAPIResponse,
   RepoApiResponse,
   RepoContentsApiResponse,
+  RepoIssues,
 } from 'src/app/state/repository';
 import {
   IssueComments,
@@ -129,6 +136,29 @@ const MOCK_ISSUES: Issues = [
     },
   },
 ];
+
+const MOCK_REPO_ISSUES = {
+  total: 3,
+  paginationParams: {
+    canNext: true,
+    canPrev: false,
+    page: 1,
+  },
+  issues: MOCK_ISSUES,
+};
+
+const MOCK_ISSUES_RESPONSE: HttpResponse<Issues> = {
+  headers: new HttpHeaders({
+    Link: '<https://api.github.com/repositories/421063754/issues?state=open&sort=created&direction=desc&per_page=30&page=1&pulls=false>; rel="next", <https://api.github.com/repositories/421063754/issues?state=open&sort=created&direction=desc&per_page=30&page=3&pulls=false>; rel="last"',
+  }),
+  clone: jasmine.createSpy('clone'),
+  type: HttpEventType.Response,
+  status: 200,
+  statusText: 'OK',
+  ok: true,
+  url: 'http://localhost',
+  body: MOCK_ISSUES,
+};
 
 const MOCK_PULL_REQUEST_NUMBER = 11814;
 
@@ -396,11 +426,11 @@ describe('RepositoryService', () => {
   });
 
   it('should return issues associated with a provided repository with default parameters', (done) => {
-    httpClientSpy.get.and.returnValue(of(MOCK_ISSUES));
+    httpClientSpy.get.and.returnValue(of(MOCK_ISSUES_RESPONSE));
 
     repoService.getRepositoryIssues('FakeCo', 'fake-repo').subscribe({
-      next: (repos) => {
-        expect(repos).toBe(MOCK_ISSUES);
+      next: (response) => {
+        expect(response).toEqual(MOCK_REPO_ISSUES);
 
         expect(httpClientSpy.get).toHaveBeenCalledWith(
           'https://api.github.com/repos/FakeCo/fake-repo/issues',
@@ -415,6 +445,7 @@ describe('RepositoryService', () => {
                 direction: 'desc',
                 per_page: 30,
                 page: 1,
+                pulls: false,
               },
             }),
           }),
@@ -425,13 +456,13 @@ describe('RepositoryService', () => {
   });
 
   it('should return issues associated with a provided repository with an overridden parameter', (done) => {
-    httpClientSpy.get.and.returnValue(of(MOCK_ISSUES));
+    httpClientSpy.get.and.returnValue(of(MOCK_ISSUES_RESPONSE));
 
     repoService
       .getRepositoryIssues('FakeCo', 'fake-repo', { state: 'closed' })
       .subscribe({
-        next: (repos) => {
-          expect(repos).toBe(MOCK_ISSUES);
+        next: (response) => {
+          expect(response).toEqual(MOCK_REPO_ISSUES);
 
           expect(httpClientSpy.get).toHaveBeenCalledWith(
             'https://api.github.com/repos/FakeCo/fake-repo/issues',
@@ -446,6 +477,7 @@ describe('RepositoryService', () => {
                   direction: 'desc',
                   per_page: 30,
                   page: 1,
+                  pulls: false,
                 },
               }),
             }),

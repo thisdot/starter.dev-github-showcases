@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
   fetchPullRequests,
-  PR_STATE,
+  ISSUE_STATE,
   selectClosedPullRequests,
   selectOpenPullRequests,
 } from '../state/repository';
@@ -18,7 +18,7 @@ export class PullRequestsComponent implements OnInit {
   repoName!: string;
   openPullRequests$ = this.store.select(selectOpenPullRequests);
   closedPullRequests$ = this.store.select(selectClosedPullRequests);
-  viewState: PR_STATE = 'open';
+  viewState: ISSUE_STATE = 'open';
 
   constructor(private route: ActivatedRoute, private store: Store) {}
 

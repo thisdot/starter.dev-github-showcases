@@ -15,10 +15,21 @@ import {
 import {
   ReadmeApiResponse,
   RepoApiResponse,
+  RepoIssues,
   RepositoryState,
 } from './repository.state';
 import { UserApiResponse } from '../user';
 import { PullRequests } from 'src/app/repository/services/repository.interfaces';
+
+const MOCK_ISSUES: RepoIssues = {
+  total: 0,
+  issues: [],
+  paginationParams: {
+    page: 1,
+    canNext: false,
+    canPrev: false,
+  },
+};
 
 const MOCK_PULL_REQUESTS: PullRequests = [
   {
@@ -198,6 +209,9 @@ describe('RepositoryEffects', () => {
       'getRepositoryContents',
       'getRepositoryReadme',
       'getFileContents',
+      'getRepositoryIssues',
+      'getRepositoryMilestones',
+      'getRepositoryLabels',
     ]);
     TestBed.configureTestingModule({
       providers: [
@@ -238,6 +252,10 @@ describe('RepositoryEffects', () => {
       visibility: 'public',
       watchCount: 10,
       website: 'https://starter.dev',
+      openIssues: null,
+      closedIssues: null,
+      labels: [],
+      milestones: [],
     };
 
     repoServiceMock.getRepositoryInfo.and.returnValue(of(MOCK_REPO_INFO));
@@ -246,6 +264,12 @@ describe('RepositoryEffects', () => {
     );
     repoServiceMock.getRepositoryContents.and.returnValue(of([]));
     repoServiceMock.getRepositoryReadme.and.returnValue(of(MOCK_README));
+
+    repoServiceMock.getRepositoryIssues.and.returnValue(of(MOCK_ISSUES));
+
+    repoServiceMock.getRepositoryMilestones.and.returnValue(of([]));
+
+    repoServiceMock.getRepositoryLabels.and.returnValue(of([]));
 
     effects.fetchRepository$.subscribe((action) => {
       expect(action).toEqual(

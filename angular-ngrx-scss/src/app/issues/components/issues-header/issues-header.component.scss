@@ -21,8 +21,10 @@
     gap: 1rem;
     color: variables.$gray600;
 
-    a {
+    button {
       color: inherit;
+      border: none;
+      cursor: pointer;
 
       .icon {
         margin-right: 0.375rem;

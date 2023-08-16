@@ -8,6 +8,9 @@ import {
   fetchFileContents,
   fetchFileContentsFailure,
   fetchFileContentsSuccess,
+  fetchIssues,
+  fetchIssuesFailure,
+  fetchIssuesSuccess,
   fetchPullRequests,
   fetchPullRequestsFailure,
   fetchPullRequestsSuccess,
@@ -20,6 +23,7 @@ import {
   RepoPullRequests,
   RepositoryState,
 } from './repository.state';
+import { Issue } from 'src/app/repository/services/repository.interfaces';
 
 @Injectable()
 export class RepositoryEffects {
@@ -43,8 +47,26 @@ export class RepositoryEffects {
           repoName,
         );
 
-        return zip(repoInfo$, repoPRList$, repoContents$, repoReadme$).pipe(
-          map(([info, prList, contents, readme]) => {
+        const repoMilestones$ = this.repoService.getRepositoryMilestones(
+          owner,
+          repoName,
+        );
+
+        const repoLabels$ = this.repoService.getRepositoryLabels(
+          owner,
+          repoName,
+        );
+
+        return zip(
+          repoInfo$,
+          repoPRList$,
+          repoContents$,
+          repoReadme$,
+          repoMilestones$,
+          repoLabels$,
+        ).pipe(
+          map(([info, prList, contents, readme, milestones, labels]) => {
+            console.log(info);
             const allData: RepositoryState = {
               description: info.description,
               forkCount: info.forks_count,
@@ -59,10 +81,14 @@ export class RepositoryEffects {
               selectedFile: null,
               openPullRequests: null,
               closedPullRequests: null,
+              openIssues: null,
+              closedIssues: null,
               visibility: info.visibility,
               watchCount: info.watchers_count,
               website: info.homepage,
               readme: readme.content || '',
+              milestones: milestones || [],
+              labels: labels || [],
             };
             return fetchRepositorySuccess({ repoData: allData });
           }),
@@ -122,6 +148,23 @@ export class RepositoryEffects {
           }),
           catchError((error) => of(fetchPullRequestsFailure({ error }))),
         );
+      }),
+    );
+  });
+
+  fetchIssues$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fetchIssues),
+      mergeMap(({ owner, repoName, params }) => {
+        return this.repoService
+          .getRepositoryIssues(owner, repoName, params)
+          .pipe(
+            map((issues) => {
+              console.log(issues, params);
+              return fetchIssuesSuccess({ issues, params });
+            }),
+            catchError((error) => of(fetchIssuesFailure({ error }))),
+          );
       }),
     );
   });

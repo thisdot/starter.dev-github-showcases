@@ -15,11 +15,15 @@ export const initialRepositoryState: RepositoryState = {
   tree: [],
   openPullRequests: null,
   closedPullRequests: null,
+  openIssues: null,
+  closedIssues: null,
   selectedFile: null,
   activeBranch: '',
   visibility: '',
   watchCount: 0,
   website: '',
+  milestones: [],
+  labels: [],
 };
 
 const reducer = createReducer(
@@ -46,6 +50,13 @@ const reducer = createReducer(
     },
   ),
   // TODO: handle fetchPullRequestsError case
+  on(RepositoryActions.fetchIssuesSuccess, (state, { issues, params }) => {
+    return {
+      ...state,
+      openIssues: params.state === 'open' ? issues : state.openIssues,
+      closedIssues: params.state === 'closed' ? issues : state.closedIssues,
+    };
+  }),
 );
 
 export function repositoryReducer(

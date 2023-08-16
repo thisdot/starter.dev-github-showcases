@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { PR_STATE, RepoPullRequests } from '../../../state/repository';
+import { ISSUE_STATE, RepoPullRequests } from '../../../state/repository';
 
 @Component({
   selector: 'app-pull-requests-header',
@@ -16,10 +16,10 @@ import { PR_STATE, RepoPullRequests } from '../../../state/repository';
 export class PullRequestsHeaderComponent {
   @Input() openPullRequests!: RepoPullRequests | null;
   @Input() closedPullRequests!: RepoPullRequests | null;
-  @Input() viewState: PR_STATE = 'open';
-  @Output() viewStateChange = new EventEmitter<PR_STATE>();
+  @Input() viewState: ISSUE_STATE = 'open';
+  @Output() viewStateChange = new EventEmitter<ISSUE_STATE>();
 
-  changeViewState(state: PR_STATE) {
+  changeViewState(state: ISSUE_STATE) {
     this.viewState = state;
     this.viewStateChange.emit(this.viewState);
   }

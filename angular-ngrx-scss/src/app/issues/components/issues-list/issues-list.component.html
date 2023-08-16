@@ -1,6 +1,6 @@
 <div class="issue">
-  <div class="issues-list-container">
-    <ng-container *ngFor="let issue of issues">
+  <div class="issues-list-container" *ngIf="issues">
+    <ng-container *ngFor="let issue of issues.issues">
       <app-repo-issue-pull-card [item]="issue"></app-repo-issue-pull-card>
     </ng-container>
   </div>

@@ -1,16 +1,20 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import {
   FileContentsApiResponse,
-  PR_STATE,
+  ISSUE_STATE,
+  IssueLabel,
+  Milestone,
   PullRequestAPIResponse,
   ReadmeApiResponse,
   RepoApiResponse,
   RepoContentsApiResponse,
+  RepoIssues,
 } from 'src/app/state/repository';
 import { environment } from 'src/environments/environment';
 import {
+  Issue,
   IssueComments,
   Issues,
   PullRequest,
@@ -60,6 +64,48 @@ export class RepositoryService {
     const url = `${environment.githubUrl}/repos/${owner}/${name}/pulls`;
 
     return this.http.get<PullRequests>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  /**
+   * Gets a list of all the milestones for the specified repository
+   * @param repoOwner who the repo belongs to
+   * @param repoName name of the repo
+   * @returns an array of milestones
+   */
+  getRepositoryMilestones(
+    repoOwner: string,
+    repoName: string,
+  ): Observable<Milestone[]> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/milestones`;
+
+    return this.http.get<Milestone[]>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  /**
+   * Gets a list of all the milestones for the specified repository
+   * @param repoOwner who the repo belongs to
+   * @param repoName name of the repo
+   * @returns an array of milestones
+   */
+  getRepositoryLabels(
+    repoOwner: string,
+    repoName: string,
+  ): Observable<IssueLabel[]> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/labels`;
+
+    return this.http.get<IssueLabel[]>(url, {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },
@@ -125,7 +171,7 @@ export class RepositoryService {
   getPullRequests(
     repoOwner: string,
     repoName: string,
-    prState: PR_STATE,
+    prState: ISSUE_STATE,
   ): Observable<PullRequestAPIResponse> {
     const owner = encodeURIComponent(repoOwner);
     const name = encodeURIComponent(repoName);
@@ -150,27 +196,63 @@ export class RepositoryService {
     repoOwner: string,
     repoName: string,
     params?: RepositoryIssuesApiParams,
-  ): Observable<Issues> {
+  ): Observable<RepoIssues> {
     const defaultParams = {
       state: 'all',
       sort: 'created',
       direction: 'desc',
       per_page: 30,
       page: 1,
+      pulls: false,
     };
 
     const owner = encodeURIComponent(repoOwner);
     const name = encodeURIComponent(repoName);
     const url = `${environment.githubUrl}/repos/${owner}/${name}/issues`;
 
-    return this.http.get<Issues>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-      params: new HttpParams({
-        fromObject: { ...Object.assign(defaultParams, params) },
+    return forkJoin([
+      this.http.get(url, {
+        observe: 'response',
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+        params: new HttpParams({
+          fromObject: { ...Object.assign(defaultParams, params) },
+        }),
       }),
-    });
+      this.http.get(url, {
+        observe: 'response',
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+        params: new HttpParams({
+          fromObject: { ...Object.assign(defaultParams, { per_page: 1 }) },
+        }),
+      }),
+    ]).pipe(
+      map(([paginatedIssues, helperIssues]) => {
+        const linkHeader = paginatedIssues.headers.get('Link');
+
+        const canNext = !!(linkHeader && linkHeader.includes('rel="next"'));
+        const canPrev = !!(linkHeader && linkHeader.includes('rel="prev"'));
+
+        const total = this.extractTotalFromLinkHeader(
+          helperIssues.headers.get('Link'),
+        );
+
+        const page = params?.page || 1;
+
+        const paginationParams = {
+          canNext,
+          canPrev,
+          page,
+        };
+
+        const issues = paginatedIssues.body as Issue[];
+
+        return { issues, paginationParams, total } as RepoIssues;
+      }),
+    );
   }
 
   /**
@@ -257,5 +339,34 @@ export class RepositoryService {
         Accept: 'application/vnd.github.v3+json',
       },
     });
+  }
+
+  private extractTotalFromLinkHeader(linkHeader: string | null): number {
+    if (!linkHeader) {
+      return 0;
+    }
+
+    // Find the link with rel="last"
+    const lastLinkPattern = /<([^>]+)>; rel="last"/;
+    const lastLinkMatch = linkHeader.match(lastLinkPattern);
+
+    if (!lastLinkMatch) {
+      return 0;
+    }
+
+    const lastLink = lastLinkMatch[1];
+
+    // Parse as a URL
+    const url = new URL(lastLink);
+
+    // Extract query parameters
+    const queryParams = new URLSearchParams(url.search);
+    const page = parseInt(queryParams.get('page') || '', 10);
+
+    if (isNaN(page)) {
+      return 0;
+    }
+
+    return page;
   }
 }
