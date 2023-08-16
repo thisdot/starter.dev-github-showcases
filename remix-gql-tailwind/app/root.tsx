@@ -13,7 +13,7 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 
-import styles from '../styles/tailwind-build.css';
+import styles from './styles/tailwind.css';
 import NavBar from './components/Navbar/NavBar';
 import { auth } from './services/auth.server';
 import { CURRENT_USER_QUERY } from './lib/queries/UserDropdown';
