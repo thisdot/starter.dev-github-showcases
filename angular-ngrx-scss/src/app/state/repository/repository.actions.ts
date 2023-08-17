@@ -1,12 +1,14 @@
 import { createAction, props } from '@ngrx/store';
 import {
   FileContents,
-  ISSUE_STATE,
   RepoIssues,
   RepoPullRequests,
   RepositoryState,
 } from './repository.state';
-import { RepositoryIssuesApiParams } from 'src/app/repository/services/repository.interfaces';
+import {
+  RepositoryIssuesApiParams,
+  RepositoryPullsApiParams,
+} from 'src/app/repository/services/repository.interfaces';
 
 export const fetchRepository = createAction(
   '[Repository API] Fetch Repository',
@@ -48,7 +50,7 @@ export const fetchPullRequests = createAction(
   props<{
     owner: string;
     repoName: string;
-    prState: ISSUE_STATE;
+    params: RepositoryPullsApiParams;
   }>(),
 );
 
@@ -56,7 +58,7 @@ export const fetchPullRequestsSuccess = createAction(
   '[Repository API] Fetch Pull Requests Success',
   props<{
     pullRequests: RepoPullRequests;
-    prState: ISSUE_STATE;
+    params: RepositoryPullsApiParams;
   }>(),
 );
 

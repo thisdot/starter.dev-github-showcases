@@ -8,11 +8,11 @@ import {
   IssueLabel,
   Milestone,
   PullRequestAPIResponse,
-  PullRequestLabel,
   ReadmeApiResponse,
   RepoApiResponse,
   RepoContentsApiResponse,
   RepoIssues,
+  RepoPullRequests,
 } from 'src/app/state/repository';
 import { environment } from 'src/environments/environment';
 import {
@@ -21,6 +21,7 @@ import {
   PullRequest,
   PullRequests,
   RepositoryIssuesApiParams,
+  RepositoryPullsApiParams,
 } from './repository.interfaces';
 
 @Injectable({
@@ -50,6 +51,34 @@ export class RepositoryService {
     });
   }
 
+  getRepositoryPullRequestsCount(
+    repoOwner: string,
+    repoName: string,
+  ): Observable<number> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/pulls`;
+
+    return this.http
+      .get<PullRequests>(url, {
+        observe: 'response',
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+        params: new HttpParams({
+          fromObject: {
+            state: 'open',
+            per_page: 1,
+          },
+        }),
+      })
+      .pipe(
+        map((response) =>
+          this.extractTotalFromLinkHeader(response.headers.get('Link')),
+        ),
+      );
+  }
+
   /**
    * Gets a list of all the pull requests for the specified repository
    * @param repoOwner who the repo belongs to
@@ -59,16 +88,52 @@ export class RepositoryService {
   getRepositoryPullRequests(
     repoOwner: string,
     repoName: string,
-  ): Observable<PullRequests> {
+    params: RepositoryPullsApiParams,
+  ): Observable<RepoPullRequests> {
+    const defaultParams = {
+      state: 'all',
+      page: 1,
+    };
+
     const owner = encodeURIComponent(repoOwner);
     const name = encodeURIComponent(repoName);
-    const url = `${environment.githubUrl}/repos/${owner}/${name}/pulls`;
+    const state = encodeURIComponent(params.state);
+    const url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:pr+state:${state}`;
 
-    return this.http.get<PullRequests>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http
+      .get(url, {
+        observe: 'response',
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+        params: new HttpParams({
+          fromObject: { ...Object.assign(defaultParams, params) },
+        }),
+      })
+      .pipe(
+        map((response) => {
+          const linkHeader = response.headers.get('Link');
+
+          const canNext = !!(linkHeader && linkHeader.includes('rel="next"'));
+          const canPrev = !!(linkHeader && linkHeader.includes('rel="prev"'));
+
+          const data = response.body as PullRequestAPIResponse;
+
+          const total = data.total_count;
+
+          const page = params?.page || 1;
+
+          const paginationParams = {
+            canNext,
+            canPrev,
+            page,
+          };
+
+          const pullRequests: PullRequest[] = data.items;
+
+          return { pullRequests, paginationParams, total } as RepoPullRequests;
+        }),
+      );
   }
 
   /**
@@ -155,31 +220,6 @@ export class RepositoryService {
     const url = `${environment.githubUrl}/repos/${owner}/${name}/issues/${pullId}/comments`;
 
     return this.http.get<IssueComments>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
-  }
-
-  /**
-   * NOTE: This call uses the search URL to find the information, and is a bit of a duplicate of other calls that use the repo URL. Both work fine and are provided currently.
-   * Gets a list of pull requests matching the provided state
-   * @param repoOwner who the repo belongs to
-   * @param repoName name of the repo
-   * @param prState if the pr is open or closed
-   * @returns the total count of state-matching pull requests and information for each of those pulls
-   */
-  getPullRequests(
-    repoOwner: string,
-    repoName: string,
-    prState: ISSUE_STATE,
-  ): Observable<PullRequestAPIResponse> {
-    const owner = encodeURIComponent(repoOwner);
-    const name = encodeURIComponent(repoName);
-    const state = encodeURIComponent(prState);
-    const url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:pr+state:${state}`;
-
-    return this.http.get<PullRequestAPIResponse>(url, {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },

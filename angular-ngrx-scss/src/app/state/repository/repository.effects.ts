@@ -18,11 +18,7 @@ import {
   fetchRepositoryFailure,
   fetchRepositorySuccess,
 } from './repository.actions';
-import {
-  FileContents,
-  RepoPullRequests,
-  RepositoryState,
-} from './repository.state';
+import { FileContents, RepositoryState } from './repository.state';
 
 @Injectable()
 export class RepositoryEffects {
@@ -31,10 +27,12 @@ export class RepositoryEffects {
       ofType(fetchRepository),
       switchMap(({ owner, repoName, path, branch }) => {
         const repoInfo$ = this.repoService.getRepositoryInfo(owner, repoName);
-        const repoPRList$ = this.repoService.getRepositoryPullRequests(
+
+        const repoPRCount$ = this.repoService.getRepositoryPullRequestsCount(
           owner,
           repoName,
         );
+
         const repoContents$ = this.repoService.getRepositoryContents(
           owner,
           repoName,
@@ -58,20 +56,20 @@ export class RepositoryEffects {
 
         return zip(
           repoInfo$,
-          repoPRList$,
+          repoPRCount$,
           repoContents$,
           repoReadme$,
           repoMilestones$,
           repoLabels$,
         ).pipe(
-          map(([info, prList, contents, readme, milestones, labels]) => {
+          map(([info, prCount, contents, readme, milestones, labels]) => {
             const allData: RepositoryState = {
               path: path ?? '',
               description: info.description,
               forkCount: info.forks_count,
               issueCount: info.open_issues_count,
               ownerName: owner,
-              prCount: prList.length,
+              prCount: prCount,
               repoName: info.name,
               starCount: info.stargazers_count,
               tags: info.topics,
@@ -122,31 +120,15 @@ export class RepositoryEffects {
   fetchPullRequests$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(fetchPullRequests),
-      mergeMap(({ owner, repoName, prState }) => {
-        return this.repoService.getPullRequests(owner, repoName, prState).pipe(
-          map((data) => {
-            const pullRequests: RepoPullRequests = {
-              totalCount: data.total_count,
-              pullRequests: data.items.map((item) => ({
-                id: item.id,
-                login: item.user.login,
-                title: item.title,
-                number: item.number,
-                state: item.state,
-                closedAt: item.closed_at ? new Date(item.closed_at) : null,
-                mergedAt: item.pull_request.merged_at
-                  ? new Date(item.pull_request.merged_at)
-                  : null,
-                createdAt: new Date(item.created_at),
-                labels: item.labels,
-                commentCount: item.comments,
-                labelCount: item.labels.length,
-              })),
-            };
-            return fetchPullRequestsSuccess({ pullRequests, prState });
-          }),
-          catchError((error) => of(fetchPullRequestsFailure({ error }))),
-        );
+      mergeMap(({ owner, repoName, params }) => {
+        return this.repoService
+          .getRepositoryPullRequests(owner, repoName, params)
+          .pipe(
+            map((pullRequests) => {
+              return fetchPullRequestsSuccess({ pullRequests, params });
+            }),
+            catchError((error) => of(fetchPullRequestsFailure({ error }))),
+          );
       }),
     );
   });

@@ -1,12 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import {
-  fetchRepository,
-  RepoContents,
-  selectedRepository,
-} from '../../state/repository';
-import { map, takeWhile, tap } from 'rxjs';
+import { RepoContents, selectedRepository } from '../../state/repository';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-file-explorer',

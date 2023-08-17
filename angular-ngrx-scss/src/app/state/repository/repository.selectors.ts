@@ -46,6 +46,16 @@ export const selectClosedIssuePaginationParams = createSelector(
   (state) => state.closedIssues?.paginationParams,
 );
 
+export const selectClosedPullRequestsPaginationParams = createSelector(
+  selectRepositoryState,
+  (state) => state.closedPullRequests?.paginationParams,
+);
+
+export const selectOpenPullRequestsPaginationParams = createSelector(
+  selectRepositoryState,
+  (state) => state.openPullRequests?.paginationParams,
+);
+
 export const selectMilestones = createSelector(
   selectRepositoryState,
   (state) => state.milestones,

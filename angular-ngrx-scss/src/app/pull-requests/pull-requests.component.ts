@@ -5,9 +5,10 @@ import {
   fetchPullRequests,
   ISSUE_STATE,
   selectClosedPullRequests,
+  selectClosedPullRequestsPaginationParams,
   selectOpenPullRequests,
+  selectOpenPullRequestsPaginationParams,
 } from '../state/repository';
-
 @Component({
   selector: 'app-pull-requests',
   templateUrl: './pull-requests.component.html',
@@ -20,6 +21,14 @@ export class PullRequestsComponent implements OnInit {
   closedPullRequests$ = this.store.select(selectClosedPullRequests);
   viewState: ISSUE_STATE = 'open';
 
+  openPullRequestsPaginationParams$ = this.store.select(
+    selectOpenPullRequestsPaginationParams,
+  );
+
+  closedPullRequestsPaginationParams$ = this.store.select(
+    selectClosedPullRequestsPaginationParams,
+  );
+
   constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit() {
@@ -30,7 +39,9 @@ export class PullRequestsComponent implements OnInit {
       fetchPullRequests({
         owner: this.owner,
         repoName: this.repoName,
-        prState: 'open',
+        params: {
+          state: 'open',
+        },
       }),
     );
 
@@ -38,8 +49,24 @@ export class PullRequestsComponent implements OnInit {
       fetchPullRequests({
         owner: this.owner,
         repoName: this.repoName,
-        prState: 'closed',
+        params: {
+          state: 'closed',
+        },
       }),
     );
+  }
+
+  pageChange(page: number) {
+    this.store.dispatch(
+      fetchPullRequests({
+        owner: this.owner,
+        repoName: this.repoName,
+        params: { state: this.viewState, page },
+      }),
+    );
+  }
+
+  viewStateChange(viewState: ISSUE_STATE) {
+    this.viewState = viewState;
   }
 }

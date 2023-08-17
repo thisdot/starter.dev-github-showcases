@@ -2,7 +2,8 @@
   <app-pull-requests-header
     [openPullRequests]="openPullRequests$ | async"
     [closedPullRequests]="closedPullRequests$ | async"
-    [(viewState)]="viewState"
+    [viewState]="viewState"
+    (viewStateChange)="viewStateChange($event)"
   ></app-pull-requests-header>
   <app-pull-requests-list
     [pullRequests]="
@@ -12,4 +13,11 @@
     "
   ></app-pull-requests-list>
 </div>
-<app-pagination></app-pagination>
+<app-pagination
+  [params]="
+    viewState === 'open'
+      ? (openPullRequestsPaginationParams$ | async)
+      : (closedPullRequestsPaginationParams$ | async)
+  "
+  (pageChange)="pageChange($event)"
+></app-pagination>

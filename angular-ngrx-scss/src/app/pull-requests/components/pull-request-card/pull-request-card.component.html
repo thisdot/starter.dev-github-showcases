@@ -34,7 +34,7 @@
   <div class="comments">
     <span class="icon green" appOcticon="comment" size="16"></span>
     <div class="comment-count">
-      {{ pullRequest.commentCount }}
+      {{ pullRequest.comments }}
     </div>
   </div>
 </div>
@@ -42,14 +42,15 @@
 <ng-template #openPRMeta let-pullRequest="pullRequest">
   <span class="meta">
     #{{ pullRequest.number }} opened
-    {{ pullRequest.createdAt | relativeTime }} by
-    <a href="#">{{ pullRequest.login }}</a>
+    {{ pullRequest.created_at | relativeTime }} by
+    <a href="#">{{ pullRequest.user.login }}</a>
   </span>
 </ng-template>
 
 <ng-template #closedPRMeta let-pullRequest="pullRequest">
   <span class="meta">
-    #{{ pullRequest.number }} by <a href="#">{{ pullRequest.login }}</a> was
-    closed {{ pullRequest.createdAt | relativeTime }}
+    #{{ pullRequest.number }} by
+    <a href="#">{{ pullRequest.user.login }}</a> was closed
+    {{ pullRequest.created_at | relativeTime }}
   </span>
 </ng-template>

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { RepoPullRequest } from '../../../state/repository';
+import { PullRequest } from 'src/app/repository/services/repository.interfaces';
 
 @Component({
   selector: 'app-pull-request-card',
@@ -8,7 +8,7 @@ import { RepoPullRequest } from '../../../state/repository';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PullRequestCardComponent {
-  @Input() pullRequest!: RepoPullRequest;
+  @Input() pullRequest!: PullRequest;
 
   colorMap(color: string): string {
     switch (color) {

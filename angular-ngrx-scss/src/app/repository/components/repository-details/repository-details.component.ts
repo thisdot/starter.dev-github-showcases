@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil, takeWhile, tap } from 'rxjs';
+import { Subject, takeUntil, tap } from 'rxjs';
 import { fetchRepository } from '../../../state/repository';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';

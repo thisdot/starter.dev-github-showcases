@@ -6,7 +6,7 @@
       (click)="changeViewState('open')"
     >
       <span class="icon" appOcticon="no-entry" size="16"></span>
-      <span>{{ openPullRequests?.totalCount ?? 0 }} Open</span>
+      <span>{{ openPullRequests?.total ?? 0 }} Open</span>
     </button>
     <button
       class="tab-button"
@@ -14,7 +14,7 @@
       (click)="changeViewState('closed')"
     >
       <span class="icon" appOcticon="check" size="16"></span
-      ><span>{{ closedPullRequests?.totalCount ?? 0 }} closed</span>
+      ><span>{{ closedPullRequests?.total ?? 0 }} closed</span>
     </button>
   </div>
   <div class="pull-requests-filters">

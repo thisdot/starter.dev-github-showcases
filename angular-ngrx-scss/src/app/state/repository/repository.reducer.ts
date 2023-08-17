@@ -40,13 +40,13 @@ const reducer = createReducer(
   // TODO: handle fetchFileError case
   on(
     RepositoryActions.fetchPullRequestsSuccess,
-    (state, { pullRequests, prState }) => {
+    (state, { pullRequests, params }) => {
       return {
         ...state,
         openPullRequests:
-          prState === 'open' ? pullRequests : state.openPullRequests,
+          params.state === 'open' ? pullRequests : state.openPullRequests,
         closedPullRequests:
-          prState === 'closed' ? pullRequests : state.closedPullRequests,
+          params.state === 'closed' ? pullRequests : state.closedPullRequests,
       };
     },
   ),
