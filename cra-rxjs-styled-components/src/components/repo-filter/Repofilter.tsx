@@ -81,7 +81,9 @@ export default function RepoFilter({
 				</FiltersWrapper>
 				<RepoBtn>
 					<RepoBookIcon color="#fff" />
-					<RepoBtnText>{repoBtnText || 'New'}</RepoBtnText>
+					<RepoBtnText href="https://github.com/new" target="_blank">
+						{repoBtnText || 'New'}
+					</RepoBtnText>
 				</RepoBtn>
 			</RepoFilterWrapper>
 			{!isOnlySorted && <FilterText filteredRepoCount={filteredRepoCount} />}

@@ -14,6 +14,9 @@ import { useParams } from 'react-router-dom';
 import { tap } from 'rxjs';
 import { IOrg } from '../interfaces/org.interface';
 import { LoadingBulletList } from '../components/Loading';
+import { tabs } from '../constants/data';
+import TabNavigation from '../components/tab-nav/TabNav';
+import { RepoFilterProvider } from '../context/RepoFilterContext';
 
 export default function OrgPage() {
 	const [loading, setLoading] = useState(true);
@@ -63,9 +66,12 @@ export default function OrgPage() {
 							<OrgName data-testid="org about name">{orgInfo.name}</OrgName>
 						</OrgAbout>
 					)}
+					<TabNavigation tabs={tabs} activeTab={tabs[0].title} />
 				</OrgTopHeader>
 			</OrgHeader>
-			<UserRepos isOrg />
+			<RepoFilterProvider>
+				<UserRepos isOrg />
+			</RepoFilterProvider>
 		</>
 	);
 }
