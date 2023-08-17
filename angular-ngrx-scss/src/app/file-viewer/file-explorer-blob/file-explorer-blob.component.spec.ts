@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FileExplorerNavComponent } from '../file-explorer-nav/file-explorer-nav.component';
 import { FileViewerComponent } from '../file-viewer/file-viewer.component';
 import { By } from '@angular/platform-browser';
+import { FileTextComponent } from '../components/file-text/file-text.component';
 
 describe('FileExplorerBlobComponent', () => {
   let component: FileExplorerBlobComponent;
@@ -32,6 +33,7 @@ describe('FileExplorerBlobComponent', () => {
         FileExplorerBlobComponent,
         FileExplorerNavComponent,
         FileViewerComponent,
+        FileTextComponent,
       ],
       providers: [
         provideMockStore({ initialState }),
