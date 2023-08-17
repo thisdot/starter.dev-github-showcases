@@ -85,13 +85,14 @@ export const ISSUES_PULLS_URL = ({
 		order: direction,
 	};
 	const queryStrings = convertObjectToQueryString(params);
-	const milestone_check =
+	const milestone_check = `+milestone:"${
 		typeof milestone === 'string'
 			? replaceEncodedSpaceWithPlus(encodeURIComponent(milestone))
-			: milestone;
+			: milestone
+	}"`;
 	const Q = `+is:${state}+is:${type}${
 		labels ? `+label:"${replaceSpaceWithPlus(labels)}"` : ''
-	}${milestone ? `+milestone:"${milestone_check}"` : ''}`;
+	}${milestone ? milestone_check : ''}`;
 	return `${GITHUB_URL_BASE}/search/issues?q=repo:${user}/${repo}${Q}&${queryStrings}`;
 };
 
