@@ -2,7 +2,7 @@ import { RepoIcon } from '../components/icons';
 
 export const tabs = [{ title: 'Repositories', Icon: RepoIcon }];
 
-export const OrderField = {
+const OrderField = {
 	/** Order issues by comment count */
 	Comments: 'comments',
 	/** Order issues by creation time */
@@ -11,7 +11,7 @@ export const OrderField = {
 	UpdatedAt: 'updated',
 };
 
-export const OrderDirection = {
+const OrderDirection = {
 	Asc: 'asc',
 	Desc: 'desc',
 };
