@@ -116,7 +116,19 @@ export default function useIssuesPRs({ searchType, type }: IUseIssuesPRs) {
 		return () => {
 			subscription.unsubscribe();
 		};
-	}, [owner, repo, openPRPage, closedPRPage, sortBy, label, milestone, type]);
+	}, [
+		owner,
+		repo,
+		openPRPage,
+		closedPRPage,
+		sortBy,
+		label,
+		milestone,
+		type,
+		searchType,
+		setLabels,
+		setMilestones,
+	]);
 
 	return {
 		openPRPage,
