@@ -1,5 +1,5 @@
 import colors from '../../constants/colors';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const DropdownContainer = styled.div`
 	display: flex;
@@ -22,7 +22,7 @@ export const DropdownOptionsHeadingText = styled.span`
 	font-weight: 700;
 `;
 
-export const DropdownBtn = styled.button`
+export const DropdownBtn = styled.button<{ flat?: boolean }>`
 	display: flex;
 	flex-grow: 1;
 	border-radius: 8px;
@@ -35,9 +35,19 @@ export const DropdownBtn = styled.button`
 	min-width: 70px;
 	outline: none;
 	@media (min-width: 768px) {
-		gap: 8px;
+		${(props) =>
+			!props.flat &&
+			css`
+				gap: 8px;
+			`}
 		min-width: 80px;
 	}
+	${(props) =>
+		props.flat &&
+		css`
+			border: none;
+			gap: 2px;
+		`}
 `;
 
 export const DropdownOption = styled.li`

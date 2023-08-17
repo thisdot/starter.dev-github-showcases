@@ -1,10 +1,27 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Routes, Route, MemoryRouter } from 'react-router-dom';
 import PullRequest from './pull-request/PullRequest.view';
+import { RepoProvider } from '../../context/RepoContext';
 
 export default {
 	title: 'Repo/PullRequest',
 	component: PullRequest,
+	decorators: [
+		(Story) => (
+			<RepoProvider
+				value={{
+					owner: '',
+					name: '',
+					branch: '',
+					basePath: '',
+					path: '',
+					isRepoLoading: false,
+				}}
+			>
+				<Story />
+			</RepoProvider>
+		),
+	],
 } as ComponentMeta<typeof PullRequest>;
 
 const Template: ComponentStory<typeof PullRequest> = (args) => (

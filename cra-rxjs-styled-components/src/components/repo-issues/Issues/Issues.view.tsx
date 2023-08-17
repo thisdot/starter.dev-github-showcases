@@ -1,9 +1,9 @@
-import IssueTabHeader from '../issue-tab-header/IssueTabHeader';
 import IssueCard from '../issue-card/IssueCard';
 import { Content, Wrapper } from './Issues.view.styles';
 import type { Issue } from './Issue.type';
 import { IssueTabValues } from '../../../types/types';
 import Pagination from '../../pagination/Pagination';
+import IssuePRTabHeader from '../../../components/pr-issue-tab/IssuePRTabHeader';
 
 type IssueProps = {
 	issues: Issue[];
@@ -21,12 +21,13 @@ export default function IssueView({
 	return (
 		<Wrapper>
 			<Content>
-				<IssueTabHeader
+				<IssuePRTabHeader
 					toggleTab={changeActiveTab}
 					closedCount={closedCount}
 					openCount={openCount}
+					type="issue"
 				/>
-				{issues.map((issue, index) => (
+				{(issues || []).map((issue, index) => (
 					<IssueCard issue={issue} key={index} />
 				))}
 			</Content>

@@ -1,5 +1,9 @@
+import {
+	Label,
+	MilestoneProps,
+} from '../components/repo-issues/Issues/Issue.type';
 import type { ReactNode } from 'react';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 export interface RepoContextInterface {
 	name: string;
@@ -20,6 +24,17 @@ export interface RepoContextInterface {
 		topics: string[];
 		isOrg: boolean;
 	};
+	label?: string;
+	milestone?: string;
+	setLabel?: (value: string) => void;
+	setMilestone?: (value: string) => void;
+	labels?: Label[];
+	milestones?: MilestoneProps[];
+	setLabels?: (value: Label[]) => void;
+	setMilestones?: (value: MilestoneProps[]) => void;
+	sortBy?: string;
+	setSortBy?: (value: string) => void;
+	resetFilterValues?: () => void;
 }
 
 interface RepoProviderProps {
@@ -32,11 +47,34 @@ export const RepoContext = createContext<RepoContextInterface | undefined>(
 );
 
 export function RepoProvider({ children, value }: RepoProviderProps) {
+	const [labels, setLabels] = useState<Label[]>([]);
+	const [milestones, setMilestones] = useState<MilestoneProps[]>([]);
+	const [label, setLabel] = useState<string>('');
+	const [milestone, setMilestone] = useState<string>('');
+	const [sortBy, setSortBy] = useState<string>('');
+
+	const resetFilterValues = () => {
+		setLabel('');
+		setMilestone('');
+		setSortBy('');
+	};
+
 	return (
 		<RepoContext.Provider
 			value={{
 				isRepoLoading: false,
 				...value,
+				labels,
+				milestones,
+				label,
+				milestone,
+				sortBy,
+				setLabels,
+				setMilestones,
+				setLabel,
+				setMilestone,
+				setSortBy,
+				resetFilterValues,
 			}}
 		>
 			{children}

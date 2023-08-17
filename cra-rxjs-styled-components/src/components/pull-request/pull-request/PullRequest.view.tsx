@@ -3,10 +3,10 @@ import { Content, PaginationContainer, Wrapper } from './PullRequest.style';
 import type { PRTabValues } from '../types';
 import type { PullRequest } from './PullRequest.type';
 import PullRequestCard from '../pull-request-card/PullRequestCard';
-import PullRequestTabHeader from '../pr-tab-header/PRTabHeader';
 import { getPullsState } from '../../../helpers/getPullsState';
 import ReactPaginate from 'react-paginate';
 import { PULLS_PER_PAGE } from '../../../constants/url.constants';
+import IssuePRTabHeader from '../../../components/pr-issue-tab/IssuePRTabHeader';
 
 type PullRequestProps = {
 	pullRequests: PullRequest[];
@@ -38,19 +38,20 @@ export default function PullRequestView({
 	return (
 		<Wrapper>
 			<Content>
-				<PullRequestTabHeader
-					openPRCount={openPRCount}
-					closedPRCount={closedPRCount}
+				<IssuePRTabHeader
+					closedCount={closedPRCount}
+					openCount={openPRCount}
 					toggleTab={changeActiveTab}
+					type="pr"
 				/>
-				{pullRequests.map((pr, index) => (
+				{(pullRequests || []).map((pr, index) => (
 					<PullRequestCard
 						title={pr.title}
 						number={pr.number}
 						created_at={pr.created_at}
 						openedBy={pr.user.login}
 						state={getPullsState(pr)}
-						messageCount={pr.comments.length}
+						messageCount={pr.comments}
 						key={index}
 					/>
 				))}

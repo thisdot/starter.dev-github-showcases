@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import colors from '../../../constants/colors';
+import colors from '../../constants/colors';
 
 const flex = css`
 	display: flex;
@@ -50,7 +50,7 @@ export const StatusLabel = styled.span`
 	}
 	color: ${colors.gray600};
 	cursor: pointer;
-	${(props: { active: Boolean }) =>
+	${(props: { active: boolean }) =>
 		props.active
 			? css`
 					color: ${colors.gray800};
