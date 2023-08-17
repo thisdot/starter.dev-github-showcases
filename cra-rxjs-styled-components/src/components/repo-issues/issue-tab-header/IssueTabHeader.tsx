@@ -37,7 +37,8 @@ export default function IssueTabHeader(props: Props) {
 
 	const labelOptions = (labels || []).map((label) => label.name) || [];
 	const labelOptionsColors = (labels || []).map((label) => label.color) || [];
-	const milestoneOptions = (milestones || []).map((milestone) => milestone.title) || [];
+	const milestoneOptions =
+		(milestones || []).map((milestone) => milestone.title) || [];
 
 	return (
 		<Container>

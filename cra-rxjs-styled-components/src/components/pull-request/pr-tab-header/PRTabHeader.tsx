@@ -41,7 +41,6 @@ export default function PullRequestTabHeader(props: Props) {
 	const milestoneOptions =
 		(milestones || []).map((milestone) => milestone.title) || [];
 
-
 	return (
 		<Container>
 			<StatusTab className="pr-tab_left">

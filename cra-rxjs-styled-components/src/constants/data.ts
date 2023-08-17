@@ -2,7 +2,6 @@ import { RepoIcon } from '../components/icons';
 
 export const tabs = [{ title: 'Repositories', Icon: RepoIcon }];
 
-
 export const OrderField = {
 	/** Order issues by comment count */
 	Comments: 'comments',
