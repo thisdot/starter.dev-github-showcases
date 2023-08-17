@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Issue } from 'src/app/repository/services/repository.interfaces';
 import { RepoIssues } from 'src/app/state/repository';
 
 @Component({

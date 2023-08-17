@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
@@ -15,7 +15,7 @@ import {
   templateUrl: './issues.component.html',
   styleUrls: ['./issues.component.scss'],
 })
-export class IssuesComponent {
+export class IssuesComponent implements OnInit {
   owner!: string;
   repoName!: string;
   openIssues$ = this.store.select(selectOpenIssues);

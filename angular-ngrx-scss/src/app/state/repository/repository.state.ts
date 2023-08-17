@@ -1,6 +1,5 @@
 import { Issue } from 'src/app/repository/services/repository.interfaces';
 import { UserApiResponse } from '../user';
-import { number } from '@primer/octicons';
 
 export interface RepositoryState {
   description: string;

@@ -15,7 +15,6 @@ export class PaginationComponent {
 
   @Input() set params(params: PaginationParams | null | undefined) {
     if (params) {
-      console.log(params);
       this.paginationParams = params;
     }
   }

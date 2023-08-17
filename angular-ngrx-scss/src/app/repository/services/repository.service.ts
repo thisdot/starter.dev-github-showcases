@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin, map } from 'rxjs';
 import {
@@ -16,7 +16,6 @@ import { environment } from 'src/environments/environment';
 import {
   Issue,
   IssueComments,
-  Issues,
   PullRequest,
   PullRequests,
   RepositoryIssuesApiParams,
@@ -210,6 +209,11 @@ export class RepositoryService {
     const name = encodeURIComponent(repoName);
     const url = `${environment.githubUrl}/repos/${owner}/${name}/issues`;
 
+    // We need to make two calls to get the total count of issues and the issues themselves.
+    // This workaround is needed because the GitHub REST API doesn't return the total count of issues in the response.
+    // We can get the total count from the "Link" HTTP header,
+    // but we need to make a call with per_page=1 to be able to calculate the total count.
+    // See https://developer.github.com/v3/guides/traversing-with-pagination/#calculating-the-pagination-offset
     return forkJoin([
       this.http.get(url, {
         observe: 'response',

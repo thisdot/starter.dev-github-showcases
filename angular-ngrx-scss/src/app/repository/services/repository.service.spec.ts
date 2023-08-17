@@ -10,7 +10,6 @@ import {
   PullRequestAPIResponse,
   RepoApiResponse,
   RepoContentsApiResponse,
-  RepoIssues,
 } from 'src/app/state/repository';
 import {
   IssueComments,

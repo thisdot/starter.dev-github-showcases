@@ -23,7 +23,6 @@ import {
   RepoPullRequests,
   RepositoryState,
 } from './repository.state';
-import { Issue } from 'src/app/repository/services/repository.interfaces';
 
 @Injectable()
 export class RepositoryEffects {
@@ -66,7 +65,6 @@ export class RepositoryEffects {
           repoLabels$,
         ).pipe(
           map(([info, prList, contents, readme, milestones, labels]) => {
-            console.log(info);
             const allData: RepositoryState = {
               description: info.description,
               forkCount: info.forks_count,
@@ -160,7 +158,6 @@ export class RepositoryEffects {
           .getRepositoryIssues(owner, repoName, params)
           .pipe(
             map((issues) => {
-              console.log(issues, params);
               return fetchIssuesSuccess({ issues, params });
             }),
             catchError((error) => of(fetchIssuesFailure({ error }))),
