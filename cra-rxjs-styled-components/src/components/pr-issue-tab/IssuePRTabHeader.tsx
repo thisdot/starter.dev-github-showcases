@@ -1,20 +1,23 @@
 import { useState } from 'react';
-import CorrectIcon from '../../icons/CorrectIcon';
-import OpenIssueIcon from '../../icons/OpenIssueIcon';
-import type { IssueTabValues } from '../../../types/types';
 
-import { Container, StatusLabel, StatusTab } from './IssueTabHeader.styles';
-import { useRepo } from '../../../context/RepoContext';
-import FilterDropdown from '../../../components/filter-dropdown/FilterDropdown';
-import { SORT_OPTIONS } from '../../../constants/data';
+import { Container, StatusLabel, StatusTab } from './IssuePRTabHeader.styles';
+import { useRepo } from '../../context/RepoContext';
+import FilterDropdown from '../filter-dropdown/FilterDropdown';
+import { CorrectIcon } from '../icons';
+import OpenIssueIcon from '../icons/OpenIssueIcon';
+import { SORT_OPTIONS } from '../../constants/data';
+import PullRequestIcon from '../icons/PullRequestIcon';
 
 interface Props {
 	toggleTab: any;
 	closedCount: number;
 	openCount: number;
+	type: 'issue' | 'pr';
 }
 
-export default function IssueTabHeader(props: Props) {
+export type IssuePRTabValues = 'open' | 'close';
+
+export default function IssuePRTabHeader(props: Props) {
 	const {
 		labels,
 		milestones,
@@ -25,10 +28,10 @@ export default function IssueTabHeader(props: Props) {
 		setMilestone,
 		setSortBy,
 	} = useRepo();
-	const [activeTab, setActiveTab] = useState<IssueTabValues>('open');
-	const { toggleTab, closedCount, openCount } = props;
+	const [activeTab, setActiveTab] = useState<IssuePRTabValues>('open');
+	const { toggleTab, closedCount, openCount, type } = props;
 
-	const changeTab = (value: IssueTabValues) => {
+	const changeTab = (value: IssuePRTabValues) => {
 		toggleTab(value);
 		setActiveTab(value);
 	};
@@ -47,16 +50,16 @@ export default function IssueTabHeader(props: Props) {
 					onClick={() => changeTab('open')}
 					active={activeTab === 'open'}
 				>
-					<OpenIssueIcon />
-					<span>{openCount}</span>
+					{type === 'issue' ? <OpenIssueIcon /> : <PullRequestIcon />}
+					<span>{openCount || 0}</span>
 					<span>Open</span>
 				</StatusLabel>
 				<StatusLabel
-					onClick={() => changeTab('closed')}
-					active={activeTab === 'closed'}
+					onClick={() => changeTab('close')}
+					active={activeTab === 'close'}
 				>
 					<CorrectIcon />
-					<span>{closedCount}</span>
+					<span>{closedCount || 0}</span>
 					<span>Closed</span>
 				</StatusLabel>
 			</StatusTab>
