@@ -1,11 +1,12 @@
 import { Container, StatusLabel, StatusTab } from './PRTabHeader.style';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import CorrectIcon from '../../icons/CorrectIcon';
-import DetailsDropdown from '../../details-dropdown/DetailsDropdown';
-import type { DropdownTitle } from '../types';
 import type { PRTabValues } from '../types';
 import PullRequestIcon from '../../icons/PullRequestIcon';
+import { useRepo } from '../../../context/RepoContext';
+import { SORT_OPTIONS } from '../../../constants/data';
+import FilterDropdown from '../../../components/filter-dropdown/FilterDropdown';
 
 interface Props {
 	toggleTab: any;
@@ -15,20 +16,31 @@ interface Props {
 
 export default function PullRequestTabHeader(props: Props) {
 	const [activeTab, setActiveTab] = useState<PRTabValues>('open');
-	const [openDropdown, setOpenDropdown] = useState<DropdownTitle | undefined>();
 	const { toggleTab } = props;
+
+	const {
+		labels,
+		milestones,
+		label,
+		sortBy,
+		milestone,
+		setLabel,
+		setMilestone,
+		setSortBy,
+	} = useRepo();
 
 	const changeTab = (value: PRTabValues) => {
 		toggleTab(value);
 		setActiveTab(value);
 	};
 
-	const toggleDropdown = useCallback(
-		(dropdownName: DropdownTitle) => {
-			setOpenDropdown(openDropdown === dropdownName ? undefined : dropdownName);
-		},
-		[openDropdown]
-	);
+	const sortOptions = Object.values(SORT_OPTIONS);
+
+	const labelOptions = (labels || []).map((label) => label.name) || [];
+	const labelOptionsColors = (labels || []).map((label) => label.color) || [];
+	const milestoneOptions =
+		(milestones || []).map((milestone) => milestone.title) || [];
+
 
 	return (
 		<Container>
@@ -51,28 +63,30 @@ export default function PullRequestTabHeader(props: Props) {
 				</StatusLabel>
 			</StatusTab>
 			<StatusTab className="pr-tab_right">
-				<DetailsDropdown
-					title="Label"
-					DropdownLabel="Filter by label"
-					toggleDropDown={() => toggleDropdown('Label')}
-					isOpen={openDropdown === 'Label'}
-				>
-					<a href="/"> WIP DO NOT MERGE </a>
-					<a href="/"> Enhancement </a>
-				</DetailsDropdown>
-				<DetailsDropdown
-					title="Sort"
-					DropdownLabel="Sort by"
-					toggleDropDown={() => toggleDropdown('Sort')}
-					isOpen={openDropdown === 'Sort'}
-				>
-					<a href="/">Newest </a>
-					<a href="/">Oldest</a>
-					<a href="/">Most Commented</a>
-					<a href="/">Least Commented</a>
-					<a href="/">Resently Updated</a>
-					<a href="/">Least Resently Updated</a>
-				</DetailsDropdown>
+				<FilterDropdown
+					flat
+					name="Label"
+					selected={label}
+					items={labelOptions}
+					itemsColors={labelOptionsColors}
+					selectOption={setLabel}
+				/>
+
+				<FilterDropdown
+					flat
+					name="Milestone"
+					selected={milestone}
+					items={milestoneOptions}
+					selectOption={setMilestone}
+				/>
+
+				<FilterDropdown
+					flat
+					name="Sort"
+					selected={sortBy}
+					items={sortOptions}
+					selectOption={setSortBy}
+				/>
 			</StatusTab>
 		</Container>
 	);

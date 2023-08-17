@@ -30,6 +30,7 @@ import { useRepo } from '../../context/RepoContext';
 
 export default function SubHeader() {
 	const repo = useRepo();
+	const { resetFilterValues } = repo;
 	const pathname = window.location.pathname;
 
 	const btnArr = [
@@ -105,6 +106,7 @@ export default function SubHeader() {
 							key={index}
 							to={`${repo.basePath}${tabInfo.to}`}
 							className={isCurrentTab(tabInfo.to) ? 'active-tab' : ''}
+							onClick={resetFilterValues}
 						>
 							<TabNavigationIcon>{tabInfo.icon}</TabNavigationIcon>
 							<span>{tabInfo.label}</span>

@@ -43,14 +43,14 @@ export default function PullRequestView({
 					closedPRCount={closedPRCount}
 					toggleTab={changeActiveTab}
 				/>
-				{pullRequests.map((pr, index) => (
+				{(pullRequests || []).map((pr, index) => (
 					<PullRequestCard
 						title={pr.title}
 						number={pr.number}
 						created_at={pr.created_at}
 						openedBy={pr.user.login}
 						state={getPullsState(pr)}
-						messageCount={pr.comments.length}
+						messageCount={pr.comments}
 						key={index}
 					/>
 				))}

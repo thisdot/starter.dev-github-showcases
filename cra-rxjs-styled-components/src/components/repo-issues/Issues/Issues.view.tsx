@@ -26,7 +26,7 @@ export default function IssueView({
 					closedCount={closedCount}
 					openCount={openCount}
 				/>
-				{issues.map((issue, index) => (
+				{(issues || []).map((issue, index) => (
 					<IssueCard issue={issue} key={index} />
 				))}
 			</Content>

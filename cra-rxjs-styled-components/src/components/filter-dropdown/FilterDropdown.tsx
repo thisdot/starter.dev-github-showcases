@@ -20,6 +20,7 @@ interface FilterDropdownProps {
 	items?: string[];
 	selected?: string;
 	itemsColors?: string[];
+	flat?: boolean;
 	selectOption?: (value: string) => void;
 }
 export default function FilterDropdown({
@@ -27,6 +28,7 @@ export default function FilterDropdown({
 	items,
 	selected,
 	itemsColors,
+	flat,
 	selectOption,
 }: FilterDropdownProps) {
 	const [showOptions, setShowOptions] = useState(false);
@@ -62,7 +64,7 @@ export default function FilterDropdown({
 	});
 	return (
 		<DropdownContainer ref={ref}>
-			<DropdownBtn onClick={toggleOption}>
+			<DropdownBtn flat={flat} onClick={toggleOption}>
 				<DropdownBtnText>{name}</DropdownBtnText>
 				<CaretIcon active={false} />
 			</DropdownBtn>
