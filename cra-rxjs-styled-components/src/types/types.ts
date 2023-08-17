@@ -1,4 +1,3 @@
-// import { Issue } from "../components/issue/Issue/Issue.type";
 import { Issue } from '@/components/repo-issues/Issues/Issue.type';
 import { PullRequests } from '../components/pull-request/pull-request/PullRequest.type';
 
