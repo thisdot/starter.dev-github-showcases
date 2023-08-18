@@ -5,19 +5,22 @@ import { IssuePRCardWrapper } from './IssuePRCard.styles';
 import { State } from '../../types/types';
 import IssuePRCardInfo from './IssuePRCardInfo';
 import { Issue } from '../repo-issues/Issues/Issue.type';
+import { ClosedPRIcon } from '../icons';
+import OpenPRIcon from '../icons/OpenPRIcon';
 
 interface Props {
 	data: Issue | any;
+	type: 'pr' | 'issue';
 }
 
-export default function IssuePRCard({data}: Props) {
+export default function IssuePRCard({ data, type }: Props) {
 	const getIssueIcon = (state: State) => {
 		switch (state) {
 			case 'closed':
-				return <ClosedIssueIcon />;
+				return type === 'issue' ? <ClosedIssueIcon /> : <ClosedPRIcon />;
 			case 'open':
 			default:
-				return <OpenIssueIcon />;
+				return type === 'issue' ? <OpenIssueIcon /> : <OpenPRIcon />;
 		}
 	};
 	return (

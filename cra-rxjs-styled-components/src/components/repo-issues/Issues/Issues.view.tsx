@@ -69,7 +69,7 @@ export default function IssueView({
 					/>
 				)}
 				{issues.map((issue, index) => (
-					<IssuePRCard data={issue} key={index} />
+					<IssuePRCard type="issue" data={issue} key={index} />
 				))}
 			</Content>
 			<PaginationContainer>

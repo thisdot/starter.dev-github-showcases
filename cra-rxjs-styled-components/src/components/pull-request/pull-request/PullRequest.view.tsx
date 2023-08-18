@@ -74,6 +74,7 @@ export default function PullRequestView({
 				{pullRequests.map((pr, index) => (
 					<IssuePRCard
 						key={pr.number}
+						type="pr"
 						data={{
 							title: pr.title,
 							number: pr.number,
@@ -89,22 +90,24 @@ export default function PullRequestView({
 			</Content>
 
 			<PaginationContainer>
-				{ pageCount > 1 && (<ReactPaginate
-					breakLabel="..."
-					nextLabel="Next >"
-					marginPagesDisplayed={1}
-					onPageChange={handlePageClick}
-					pageRangeDisplayed={7}
-					pageCount={pageCount}
-					previousLabel="< Previous"
-					renderOnZeroPageCount={() => null}
-					containerClassName={'pagination'}
-					pageClassName={'pagination__item'}
-					previousClassName={'pagination__link_end'}
-					nextClassName={'pagination__link_end'}
-					disabledClassName={'pagination__link--disabled'}
-					activeClassName={'pagination__link--active'}
-				/>)}
+				{pageCount > 1 && (
+					<ReactPaginate
+						breakLabel="..."
+						nextLabel="Next >"
+						marginPagesDisplayed={1}
+						onPageChange={handlePageClick}
+						pageRangeDisplayed={7}
+						pageCount={pageCount}
+						previousLabel="< Previous"
+						renderOnZeroPageCount={() => null}
+						containerClassName={'pagination'}
+						pageClassName={'pagination__item'}
+						previousClassName={'pagination__link_end'}
+						nextClassName={'pagination__link_end'}
+						disabledClassName={'pagination__link--disabled'}
+						activeClassName={'pagination__link--active'}
+					/>
+				)}
 			</PaginationContainer>
 		</Wrapper>
 	);

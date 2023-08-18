@@ -48,7 +48,7 @@ OpenPullRequests.args = {
 			merged_at: null,
 			repository_url: '/',
 			comments: '',
-			labels: [{name: 'dependency', color: '633bcc'}],
+			labels: [{ name: 'dependency', color: '633bcc' }],
 		},
 		{
 			title: '[Nuxt - Pinia - Tailwind] Get PRs comments',
