@@ -1,11 +1,11 @@
-export default function PullRequestIcon() {
+export default function PullRequestIcon({height, width}: {height?: number, width?: number}) {
 	return (
 		<svg
 			aria-hidden="true"
-			height="1em"
-			viewBox="0 0 16 16"
+			height={`${height}px` || "1em"}
+			viewBox={`0 0 ${width || "16"} ${height || "16"}`}
 			version="1.1"
-			width="1em"
+			width={`${width}px` || "1em"}
 			data-view-component="true"
 			className="icon"
 		>
