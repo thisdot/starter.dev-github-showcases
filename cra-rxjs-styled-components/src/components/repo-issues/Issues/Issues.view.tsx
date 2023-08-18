@@ -10,9 +10,10 @@ import { useRepo } from '../../../context/RepoContext';
 import ClearFilterAndSortButtonText from '../../../components/clear-filter-and-sort-button/ClearFilterAndSortButtonText';
 import IssuePRCard from '../../../components/issue-pr-card/IssuePRCard';
 import EmptyResult from '../../../components/empty-result/EmptyResult';
+import { IssuePRData } from '@/types/types';
 
 type IssueProps = {
-	issues: Issue[];
+	issues: IssuePRData[];
 	changeActiveTab: (value: IssuePRTabValues) => void;
 	closedCount: number;
 	openCount: number;

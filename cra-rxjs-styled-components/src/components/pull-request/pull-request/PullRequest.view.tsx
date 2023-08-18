@@ -5,7 +5,6 @@ import {
 	Wrapper,
 } from './PullRequest.style';
 import type { PRTabValues } from '../types';
-import type { PullRequest } from './PullRequest.type';
 import { getPullsState } from '../../../helpers/getPullsState';
 import ReactPaginate from 'react-paginate';
 import { PULLS_PER_PAGE } from '../../../constants/url.constants';
@@ -14,9 +13,10 @@ import { useRepo } from '../../../context/RepoContext';
 import ClearFilterAndSortButtonText from '../../../components/clear-filter-and-sort-button/ClearFilterAndSortButtonText';
 import IssuePRCard from '../../../components/issue-pr-card/IssuePRCard';
 import EmptyResult from '../../../components/empty-result/EmptyResult';
+import { IssuePRData } from '@/types/types';
 
 type PullRequestProps = {
-	pullRequests: PullRequest[];
+	pullRequests: IssuePRData[];
 	activeTab: PRTabValues;
 	changeActiveTab: (value: PRTabValues) => void;
 	openPRCount: number;
@@ -84,6 +84,7 @@ export default function PullRequestView({
 							state: getPullsState(pr),
 							comments: pr.comments,
 							labels: pr.labels,
+							url: pr.url,
 						}}
 					/>
 				))}

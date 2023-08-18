@@ -2,14 +2,13 @@ import ClosedIssueIcon from '../icons/ClosedIssueIcon';
 import MessageIcon from '../icons/MessageIcon';
 import OpenIssueIcon from '../icons/OpenIssueIcon';
 import { IssuePRCardWrapper } from './IssuePRCard.styles';
-import { State } from '../../types/types';
+import { IssuePRData, State } from '../../types/types';
 import IssuePRCardInfo from './IssuePRCardInfo';
-import { Issue } from '../repo-issues/Issues/Issue.type';
 import { ClosedPRIcon } from '../icons';
 import OpenPRIcon from '../icons/OpenPRIcon';
 
 interface Props {
-	data: Issue | any;
+	data: IssuePRData;
 	type: 'pr' | 'issue';
 }
 

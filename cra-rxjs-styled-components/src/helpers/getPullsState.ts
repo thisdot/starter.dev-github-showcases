@@ -1,6 +1,6 @@
-import { PullRequest } from '../components/pull-request/pull-request/PullRequest.type';
+import { IssuePRData } from '@/types/types';
 
-export const getPullsState = (pr: PullRequest) => {
+export const getPullsState = (pr: IssuePRData) => {
 	if (pr.state === 'open') {
 		return 'open';
 	}

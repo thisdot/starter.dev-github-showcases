@@ -1,20 +1,8 @@
+import { IssuePRData } from '@/types/types';
 import { getTextColor } from '../../helpers/dynamicColor';
 import { FormatDistance } from '../../helpers/format-distance';
-import { User } from '../repo-issues/Issues/Issue.type';
 
-interface Props {
-	title: string;
-	number: string;
-	created_at: string;
-	openedBy: string;
-	state: string;
-	closed_at?: Date | null;
-	user?: User;
-	url: string;
-	labels: { color: string; name: string }[];
-}
-
-export default function IssuePRCardInfo(data: Props) {
+export default function IssuePRCardInfo(data: IssuePRData) {
 	const baseDate = new Date();
 	const formatDistance = FormatDistance;
 
