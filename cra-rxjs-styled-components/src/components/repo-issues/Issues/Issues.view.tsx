@@ -1,5 +1,5 @@
 import IssueCard from '../issue-card/IssueCard';
-import { Content, Wrapper } from './Issues.view.styles';
+import { Container, Content, Wrapper } from './Issues.view.styles';
 import type { Issue } from './Issue.type';
 import IssuePRTabHeader, {
 	IssuePRTabValues,
@@ -9,6 +9,7 @@ import ReactPaginate from 'react-paginate';
 import { PULLS_PER_PAGE } from '../../../constants/url.constants';
 import { useRepo } from '../../../context/RepoContext';
 import ClearFilterAndSortButtonText from '../../../components/clear-filter-and-sort-button/ClearFilterAndSortButtonText';
+import EmptyResult from '../../../components/empty-result/EmptyResult';
 
 type IssueProps = {
 	issues: Issue[];
@@ -42,11 +43,13 @@ export default function IssueView({
 		<Wrapper>
 			<Content>
 				{isFilteredOrSorted && (
-					<ClearFilterAndSortButtonText
-						variant="repo"
-						resetFilter={resetFilterValues}
-						text={'Clear Filter & Sort'}
-					/>
+					<Container>
+						<ClearFilterAndSortButtonText
+							variant="repo"
+							resetFilter={resetFilterValues}
+							text={'Clear Filter & Sort'}
+						/>
+					</Container>
 				)}
 				<IssuePRTabHeader
 					toggleTab={changeActiveTab}
@@ -55,7 +58,17 @@ export default function IssueView({
 					activeTab={activeTab}
 					type="issue"
 				/>
-				{(issues || []).map((issue, index) => (
+				{(!issues || issues.length === 0) && (
+					<EmptyResult
+						icon="issue"
+						text={
+							isFilteredOrSorted
+								? 'No results matched your search.'
+								: 'No issues found'
+						}
+					/>
+				)}
+				{issues.map((issue, index) => (
 					<IssueCard issue={issue} key={index} />
 				))}
 			</Content>
