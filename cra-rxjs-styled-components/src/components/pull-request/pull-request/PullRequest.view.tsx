@@ -1,5 +1,9 @@
-import { Content, PaginationContainer, Wrapper } from './PullRequest.style';
-
+import {
+	Container,
+	Content,
+	PaginationContainer,
+	Wrapper,
+} from './PullRequest.style';
 import type { PRTabValues } from '../types';
 import type { PullRequest } from './PullRequest.type';
 import { getPullsState } from '../../../helpers/getPullsState';
@@ -9,6 +13,7 @@ import IssuePRTabHeader from '../../../components/pr-issue-tab/IssuePRTabHeader'
 import { useRepo } from '../../../context/RepoContext';
 import ClearFilterAndSortButtonText from '../../../components/clear-filter-and-sort-button/ClearFilterAndSortButtonText';
 import IssuePRCard from '../../../components/issue-pr-card/IssuePRCard';
+import EmptyResult from '../../../components/empty-result/EmptyResult';
 
 type PullRequestProps = {
 	pullRequests: PullRequest[];
@@ -45,19 +50,32 @@ export default function PullRequestView({
 		<Wrapper>
 			<Content>
 				{isFilteredOrSorted && (
-					<ClearFilterAndSortButtonText
-						variant="repo"
-						resetFilter={resetFilterValues}
-						text={'Clear Filter & Sort'}
-					/>
+					<Container>
+						<ClearFilterAndSortButtonText
+							variant="repo"
+							resetFilter={resetFilterValues}
+							text={'Clear Filter & Sort'}
+						/>
+					</Container>
 				)}
 				<IssuePRTabHeader
 					closedCount={closedPRCount}
 					openCount={openPRCount}
 					toggleTab={changeActiveTab}
 					type="pr"
+					activeTab={activeTab}
 				/>
-				{(pullRequests || []).map((pr) => (
+				{(!pullRequests || pullRequests.length === 0) && (
+					<EmptyResult
+						icon="pr"
+						text={
+							isFilteredOrSorted
+								? 'No results matched your search.'
+								: 'No pull requests found'
+						}
+					/>
+				)}
+				{pullRequests.map((pr, index) => (
 					<IssuePRCard
 						key={pr.number}
 						data={{
