@@ -10,9 +10,9 @@ function getsRGB(c: string | number) {
 
 function getLuminance(hexColor: string) {
 	return (
-		0.2126 * getsRGB(hexColor.substr(1, 2)) +
-		0.7152 * getsRGB(hexColor.substr(3, 2)) +
-		0.0722 * getsRGB(hexColor.substr(-2))
+		0.2126 * getsRGB(hexColor.slice(1, 1 + 2)) +
+		0.7152 * getsRGB(hexColor.slice(3, 3 + 2)) +
+		0.0722 * getsRGB(hexColor.slice(-2))
 	);
 }
 
