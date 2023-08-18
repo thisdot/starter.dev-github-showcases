@@ -43,6 +43,7 @@ export default function PullRequestView({
 					openCount={openPRCount}
 					toggleTab={changeActiveTab}
 					type="pr"
+					activeTab={activeTab}
 				/>
 				{(pullRequests || []).map((pr, index) => (
 					<PullRequestCard

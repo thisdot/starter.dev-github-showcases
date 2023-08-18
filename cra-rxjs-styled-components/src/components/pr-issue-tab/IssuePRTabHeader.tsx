@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Container, StatusLabel, StatusTab } from './IssuePRTabHeader.styles';
 import { useRepo } from '../../context/RepoContext';
 import FilterDropdown from '../filter-dropdown/FilterDropdown';
@@ -8,14 +6,15 @@ import OpenIssueIcon from '../icons/OpenIssueIcon';
 import { SORT_OPTIONS } from '../../constants/data';
 import PullRequestIcon from '../icons/PullRequestIcon';
 
+export type IssuePRTabValues = 'open' | 'close';
+
 interface Props {
 	toggleTab: any;
 	closedCount: number;
 	openCount: number;
 	type: 'issue' | 'pr';
+	activeTab: IssuePRTabValues;
 }
-
-export type IssuePRTabValues = 'open' | 'close';
 
 export default function IssuePRTabHeader(props: Props) {
 	const {
@@ -28,12 +27,12 @@ export default function IssuePRTabHeader(props: Props) {
 		setMilestone,
 		setSortBy,
 	} = useRepo();
-	const [activeTab, setActiveTab] = useState<IssuePRTabValues>('open');
-	const { toggleTab, closedCount, openCount, type } = props;
+	// const [activeTab, setActiveTab] = useState<IssuePRTabValues>('open');
+	const { toggleTab, closedCount, openCount, type, activeTab } = props;
 
 	const changeTab = (value: IssuePRTabValues) => {
+		// setActiveTab(value);
 		toggleTab(value);
-		setActiveTab(value);
 	};
 
 	const sortOptions = Object.values(SORT_OPTIONS);
