@@ -11,12 +11,9 @@ import {
   RepoApiResponse,
   RepoContentsApiResponse,
   RepoIssues,
+  RepoPullRequests,
 } from 'src/app/state/repository';
-import {
-  IssueComments,
-  PullRequest,
-  PullRequests,
-} from './repository.interfaces';
+import { IssueComments, PullRequest } from './repository.interfaces';
 
 import { generatePullRequestAPIResponseFixture } from '../../fixtures/repository.fixtures';
 import { RepositoryService } from './repository.service';
@@ -192,7 +189,7 @@ const MOCK_PULL_REQUEST_COMMENTS: IssueComments = [
   },
 ];
 
-const MOCK_PULL_REQUEST: PullRequest = {
+const MOCK_PULL_REQUEST = {
   title: 'Et quis culpa ex sapiente dolores qui quo qui.',
   number: MOCK_PULL_REQUEST_NUMBER,
   user: {
@@ -204,9 +201,9 @@ const MOCK_PULL_REQUEST: PullRequest = {
   },
   closed_at: '2022-07-01T23:46:12Z',
   created_at: '2022-07-01T23:46:12Z',
-};
+} as PullRequest;
 
-const MOCK_PULL_REQUESTS: PullRequests = [
+const MOCK_PULL_REQUESTS = [
   {
     title: 'Et quis culpa ex sapiente dolores qui quo qui.',
     number: MOCK_PULL_REQUEST_NUMBER,
@@ -233,7 +230,32 @@ const MOCK_PULL_REQUESTS: PullRequests = [
     closed_at: '2022-07-02T23:46:12Z',
     created_at: '2022-07-02T23:46:12Z',
   },
-];
+] as PullRequest[];
+
+const EXPECTED_PULL_REQUESTS: RepoPullRequests = {
+  total: 3,
+  paginationParams: {
+    page: 1,
+    canNext: false,
+    canPrev: false,
+  },
+  pullRequests: MOCK_PULL_REQUESTS,
+};
+
+const MOCK_PULL_REQUESTS_RESPONSE: HttpResponse<IssueAPIResponse> = {
+  headers: new HttpHeaders(),
+  clone: jasmine.createSpy('clone'),
+  type: HttpEventType.Response,
+  status: 200,
+  statusText: 'OK',
+  ok: true,
+  url: 'http://localhost',
+  body: {
+    total_count: 3,
+    incomplete_results: false,
+    items: MOCK_PULL_REQUESTS,
+  },
+};
 
 describe('RepositoryService', () => {
   let repoService: RepositoryService;
@@ -381,23 +403,25 @@ describe('RepositoryService', () => {
   });
 
   it('should return multiple pull requests for a given repository', (done) => {
-    httpClientSpy.get.and.returnValue(of(MOCK_PULL_REQUESTS));
+    httpClientSpy.get.and.returnValue(of(MOCK_PULL_REQUESTS_RESPONSE));
 
-    repoService.getRepositoryPullRequests('FakeCo', 'fake-repo').subscribe({
-      next: (pullRequests) => {
-        expect(pullRequests).toBe(MOCK_PULL_REQUESTS);
+    repoService
+      .getRepositoryPullRequests('FakeCo', 'fake-repo', { state: 'all' })
+      .subscribe({
+        next: (pullRequests) => {
+          expect(pullRequests).toEqual(EXPECTED_PULL_REQUESTS);
 
-        expect(httpClientSpy.get).toHaveBeenCalledWith(
-          `https://api.github.com/repos/FakeCo/fake-repo/pulls`,
-          jasmine.objectContaining({
-            headers: {
-              Accept: 'application/vnd.github.v3+json',
-            },
-          }),
-        );
-      },
-      complete: done,
-    });
+          expect(httpClientSpy.get).toHaveBeenCalledWith(
+            `https://api.github.com/search/issues?q=repo:FakeCo/fake-repo+type:pr+state:all`,
+            jasmine.objectContaining({
+              headers: {
+                Accept: 'application/vnd.github.v3+json',
+              },
+            }),
+          );
+        },
+        complete: done,
+      });
   });
 
   it('should return pull request comments when given a pull request number', (done) => {
@@ -468,15 +492,15 @@ describe('RepositoryService', () => {
       });
   });
 
-  describe('getPullRequests', () => {
+  describe('getRepositoryPullRequests', () => {
     it('should return pull request for given repository', (done) => {
-      const apiResponse: PullRequestAPIResponse =
+      const apiResponse: HttpResponse<PullRequestAPIResponse> =
         generatePullRequestAPIResponseFixture();
 
       httpClientSpy.get.and.returnValue(of(apiResponse).pipe(delay(0)));
       repoService
-        .getPullRequests('thisdot', 'starter.dev-github-showcases', 'open')
-        .subscribe((res) => {
+        .getRepositoryPullRequest('thisdot', 'starter.dev-github-showcases', 1)
+        .subscribe((res: unknown) => {
           expect(res).toEqual(apiResponse);
           done();
         });
@@ -485,7 +509,7 @@ describe('RepositoryService', () => {
         .withContext('called once')
         .toBe(1);
       expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
-        'https://api.github.com/search/issues?q=repo:thisdot/starter.dev-github-showcases+type:pr+state:open',
+        'https://api.github.com/repos/thisdot/starter.dev-github-showcases/pulls/1',
         jasmine.objectContaining({
           headers: {
             Accept: 'application/vnd.github.v3+json',

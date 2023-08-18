@@ -4,6 +4,8 @@
     [closedPullRequests]="closedPullRequests$ | async"
     [viewState]="viewState"
     (viewStateChange)="viewStateChange($event)"
+    [owner]="owner"
+    [repoName]="repoName"
   ></app-pull-requests-header>
   <app-pull-requests-list
     [pullRequests]="

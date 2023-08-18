@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import {
   FileContentsApiResponse,
-  ISSUE_STATE,
   IssueAPIResponse,
   IssueLabel,
   Milestone,
@@ -90,15 +89,18 @@ export class RepositoryService {
     repoName: string,
     params: RepositoryPullsApiParams,
   ): Observable<RepoPullRequests> {
-    const defaultParams = {
-      state: 'all',
-      page: 1,
-    };
-
     const owner = encodeURIComponent(repoOwner);
     const name = encodeURIComponent(repoName);
     const state = encodeURIComponent(params.state);
-    const url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:pr+state:${state}`;
+    let url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:pr+state:${state}`;
+
+    if (params?.labels) {
+      url += `+label:"${params.labels}"`;
+    }
+
+    if (params?.sort) {
+      url += `+sort:${params.sort}`;
+    }
 
     return this.http
       .get(url, {
@@ -106,9 +108,6 @@ export class RepositoryService {
         headers: {
           Accept: 'application/vnd.github.v3+json',
         },
-        params: new HttpParams({
-          fromObject: { ...Object.assign(defaultParams, params) },
-        }),
       })
       .pipe(
         map((response) => {
@@ -385,5 +384,34 @@ export class RepositoryService {
         Accept: 'application/vnd.github.v3+json',
       },
     });
+  }
+
+  private extractTotalFromLinkHeader(linkHeader: string | null): number {
+    if (!linkHeader) {
+      return 0;
+    }
+
+    // Find the link with rel="last"
+    const lastLinkPattern = /<([^>]+)>; rel="last"/;
+    const lastLinkMatch = linkHeader.match(lastLinkPattern);
+
+    if (!lastLinkMatch) {
+      return 0;
+    }
+
+    const lastLink = lastLinkMatch[1];
+
+    // Parse as a URL
+    const url = new URL(lastLink);
+
+    // Extract query parameters
+    const queryParams = new URLSearchParams(url.search);
+    const page = parseInt(queryParams.get('page') || '', 10);
+
+    if (isNaN(page)) {
+      return 0;
+    }
+
+    return page;
   }
 }

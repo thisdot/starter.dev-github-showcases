@@ -8,10 +8,14 @@ import {
 import {
   ISSUE_STATE,
   RepoPullRequests,
+  fetchPullRequests,
   selectLabels,
 } from '../../../state/repository';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
+import { FilterOption } from 'src/app/shared/components/filter-dropdown/filter-dropdown.component';
+import { SORTING_OPTIONS } from 'src/app/shared/constants';
+import { Sort } from 'src/app/repository/services/repository.interfaces';
 
 @Component({
   selector: 'app-pull-requests-header',
@@ -20,10 +24,18 @@ import { map } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PullRequestsHeaderComponent {
+  @Input() owner!: string;
+  @Input() repoName!: string;
   @Input() openPullRequests!: RepoPullRequests | null;
   @Input() closedPullRequests!: RepoPullRequests | null;
   @Input() viewState: ISSUE_STATE = 'open';
   @Output() viewStateChange = new EventEmitter<ISSUE_STATE>();
+
+  filterParams: { labels?: string; sort: Sort } = {
+    sort: 'created',
+  };
+
+  sortOptions: FilterOption[] = SORTING_OPTIONS;
 
   labels$ = this.store
     .select(selectLabels)
@@ -38,5 +50,32 @@ export class PullRequestsHeaderComponent {
   changeViewState(state: ISSUE_STATE) {
     this.viewState = state;
     this.viewStateChange.emit(this.viewState);
+  }
+
+  setLabel(label: string) {
+    this.filterParams.labels = label;
+    this.refetchPulls();
+  }
+
+  setSort(sort: string) {
+    this.filterParams.sort = sort as Sort;
+    this.refetchPulls();
+  }
+
+  private refetchPulls() {
+    this.store.dispatch(
+      fetchPullRequests({
+        owner: this.owner,
+        repoName: this.repoName,
+        params: { state: 'open', ...this.filterParams },
+      }),
+    );
+    this.store.dispatch(
+      fetchPullRequests({
+        owner: this.owner,
+        repoName: this.repoName,
+        params: { state: 'closed', ...this.filterParams },
+      }),
+    );
   }
 }

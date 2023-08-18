@@ -22,12 +22,18 @@
       name="Label"
       description="Select label"
       [isRepo]="true"
+      [toggle]="true"
       [items]="(labels$ | async) ?? []"
+      (setFilter)="setLabel($event)"
+      [current]="filterParams.labels"
     ></app-filter-dropdown>
     <app-filter-dropdown
       name="Sort"
       description="Select sort"
       [isRepo]="true"
+      [items]="sortOptions"
+      (setFilter)="setSort($event)"
+      [current]="filterParams.sort"
     ></app-filter-dropdown>
   </div>
 </div>

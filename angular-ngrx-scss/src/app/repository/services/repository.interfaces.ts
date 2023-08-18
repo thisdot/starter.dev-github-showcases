@@ -56,6 +56,8 @@ export interface RepositoryIssuesApiParams {
 
 export interface RepositoryPullsApiParams {
   state: 'open' | 'closed' | 'all';
+  labels?: string;
+  sort?: Sort;
   page?: number;
 }
 
