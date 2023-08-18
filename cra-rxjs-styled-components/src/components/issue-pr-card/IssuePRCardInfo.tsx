@@ -29,8 +29,8 @@ export default function IssuePRCardInfo(data: Props) {
 						key={label.name}
 						className="card_label"
 						style={{
-							backgroundColor: `#${label.color}`,
-							color: getTextColor(`#${label.color}` || '#ccc'),
+							backgroundColor: `#${label.color || 'ccc'}`,
+							color: getTextColor(`#${label.color || 'ccc'}`),
 						}}
 					>
 						{label.name}
