@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { delay, of } from 'rxjs';
 import {
+  IssueAPIResponse,
   PullRequestAPIResponse,
   RepoApiResponse,
   RepoContentsApiResponse,
@@ -145,7 +146,7 @@ const EXPECTED_ISSUES: RepoIssues = {
   issues: MOCK_ISSUES,
 };
 
-const MOCK_ISSUES_RESPONSE: HttpResponse<unknown> = {
+const MOCK_ISSUES_RESPONSE: HttpResponse<IssueAPIResponse> = {
   headers: new HttpHeaders(),
   clone: jasmine.createSpy('clone'),
   type: HttpEventType.Response,
