@@ -27,11 +27,9 @@ export default function IssuePRTabHeader(props: Props) {
 		setMilestone,
 		setSortBy,
 	} = useRepo();
-	// const [activeTab, setActiveTab] = useState<IssuePRTabValues>('open');
 	const { toggleTab, closedCount, openCount, type, activeTab } = props;
 
 	const changeTab = (value: IssuePRTabValues) => {
-		// setActiveTab(value);
 		toggleTab(value);
 	};
 
