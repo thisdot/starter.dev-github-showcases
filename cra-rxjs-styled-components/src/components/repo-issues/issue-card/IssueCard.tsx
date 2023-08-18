@@ -11,6 +11,9 @@ interface Props {
 }
 
 export default function IssueCard({ issue }: Props) {
+	console.log('====================================');
+	console.log(issue.labels);
+	console.log('====================================');
 	const getIssueIcon = (state: State) => {
 		switch (state) {
 			case 'closed':

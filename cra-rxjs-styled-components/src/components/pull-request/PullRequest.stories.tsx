@@ -48,6 +48,7 @@ OpenPullRequests.args = {
 			merged_at: null,
 			repository_url: '/',
 			comments: '',
+			labels: [],
 		},
 		{
 			title: '[Nuxt - Pinia - Tailwind] Get PRs comments',
@@ -59,6 +60,7 @@ OpenPullRequests.args = {
 			merged_at: null,
 			repository_url: '/',
 			comments: '',
+			labels: [],
 		},
 		{
 			title: '[CRA-RXJS-SC] Fix PR API fetch',
@@ -70,6 +72,7 @@ OpenPullRequests.args = {
 			merged_at: null,
 			repository_url: '/',
 			comments: '',
+			labels: [],
 		},
 	],
 };
@@ -91,6 +94,7 @@ MergedPullRequests.args = {
 			merged_at: date,
 			repository_url: '/',
 			comments: '',
+			labels: [],
 		},
 		{
 			title: '[Angular-NgRx-SCSS] Click Away Directive',
@@ -103,6 +107,7 @@ MergedPullRequests.args = {
 			merged_at: date,
 			repository_url: '/',
 			comments: '',
+			labels: [],
 		},
 	],
 };
@@ -122,6 +127,7 @@ ClosedPullRequests.args = {
 			merged_at: null,
 			repository_url: '/',
 			comments: '',
+			labels: [],
 		},
 		{
 			title: '[remix-gql-tailwind] Feature/restructure components',
@@ -133,6 +139,7 @@ ClosedPullRequests.args = {
 			merged_at: null,
 			repository_url: '/',
 			comments: '',
+			labels: [],
 		},
 	],
 };

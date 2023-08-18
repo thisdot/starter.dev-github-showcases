@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
-import colors from '../../../constants/colors';
+import colors from '../../constants/colors';
 
 const flex = css`
 	display: flex;
 	align-items: center;
 `;
-export const IssueCardWrapper = styled.div`
+export const IssuePRCardWrapper = styled.div`
 	${flex};
 	padding: 15px 20px;
 	border-bottom: 1px solid ${colors.gray300};

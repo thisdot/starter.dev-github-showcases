@@ -1,3 +1,4 @@
+import { getTextColor } from '../../../helpers/dynamicColor';
 import { FormatDistance } from '../../../helpers/format-distance';
 import { Issue } from '../Issues/Issue.type';
 
@@ -11,7 +12,22 @@ export default function IssueCardIssueInfo({ issue }: Props) {
 
 	return (
 		<div className="info">
-			<div className="heading">{issue.title}</div>
+			<div className="card_top">
+				<a className="heading" href={issue.url} target="_blank" rel="noreferrer">
+					{issue.title}
+				</a>
+				{issue.labels.map((label) => (
+					<span
+						className="card_label"
+						style={{
+							backgroundColor: `#${label.color}`,
+							color: getTextColor(`#${label.color}` || '#ccc'),
+						}}
+					>
+						{label.name}
+					</span>
+				))}
+			</div>
 			<div className="sub_heading">
 				<span className="opened_num">#{issue.number}</span>
 				{issue.state === 'open' ? (

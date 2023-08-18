@@ -2,13 +2,13 @@ import { Content, PaginationContainer, Wrapper } from './PullRequest.style';
 
 import type { PRTabValues } from '../types';
 import type { PullRequest } from './PullRequest.type';
-import PullRequestCard from '../pull-request-card/PullRequestCard';
 import { getPullsState } from '../../../helpers/getPullsState';
 import ReactPaginate from 'react-paginate';
 import { PULLS_PER_PAGE } from '../../../constants/url.constants';
 import IssuePRTabHeader from '../../../components/pr-issue-tab/IssuePRTabHeader';
 import { useRepo } from '../../../context/RepoContext';
 import ClearFilterAndSortButtonText from '../../../components/clear-filter-and-sort-button/ClearFilterAndSortButtonText';
+import IssuePRCard from '../../../components/issue-pr-card/IssuePRCard';
 
 type PullRequestProps = {
 	pullRequests: PullRequest[];
@@ -37,6 +37,10 @@ export default function PullRequestView({
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
+	console.log('====================================');
+	console.log(pullRequests);
+	console.log('====================================');
+
 	return (
 		<Wrapper>
 			<Content>
@@ -53,15 +57,19 @@ export default function PullRequestView({
 					toggleTab={changeActiveTab}
 					type="pr"
 				/>
-				{(pullRequests || []).map((pr, index) => (
-					<PullRequestCard
-						title={pr.title}
-						number={pr.number}
-						created_at={pr.created_at}
-						openedBy={pr.user.login}
-						state={getPullsState(pr)}
-						messageCount={pr.comments}
-						key={index}
+				{(pullRequests || []).map((pr) => (
+					<IssuePRCard
+						key={pr.number}
+						data={{
+							title: pr.title,
+							number: pr.number,
+							created_at: pr.created_at,
+							openedBy: pr.user.login,
+							user: pr.user,
+							state: getPullsState(pr),
+							comments: pr.comments,
+							labels: pr.labels,
+						}}
 					/>
 				))}
 			</Content>
