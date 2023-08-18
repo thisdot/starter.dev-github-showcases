@@ -1,12 +1,7 @@
 import { useRepoFilter } from '../../context/RepoFilterContext';
 import { defaultFilterType, defaultLanguage } from './data';
-import { CloseIcon } from '../icons';
-import {
-	ClearButtonContainer,
-	ClearButtonText,
-	FilterTextContainer,
-	FilterTextSmall,
-} from './RepoFilter.styles';
+import { FilterTextContainer, FilterTextSmall } from './RepoFilter.styles';
+import ClearFilterAndSortButtonText from '../clear-filter-and-sort-button/ClearFilterAndSortButtonText';
 
 const modifyFilterTypeText = (filterText = 'test') => {
 	if (filterText.endsWith('s')) {
@@ -54,12 +49,11 @@ const FilterText = (props: FilterTextProps) => {
 					</span>
 				</FilterTextSmall>
 			</div>
-			<ClearButtonContainer onClick={resetFilter}>
-				<ClearButtonText>
-					<CloseIcon />
-				</ClearButtonText>
-				Clear filter
-			</ClearButtonContainer>
+			<ClearFilterAndSortButtonText
+				variant="profile"
+				resetFilter={resetFilter}
+				text={'Clear filter'}
+			/>
 		</FilterTextContainer>
 	);
 };

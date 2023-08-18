@@ -35,6 +35,7 @@ export interface RepoContextInterface {
 	sortBy?: string;
 	setSortBy?: (value: string) => void;
 	resetFilterValues?: () => void;
+	isFilteredOrSorted?: boolean;
 }
 
 interface RepoProviderProps {
@@ -59,6 +60,8 @@ export function RepoProvider({ children, value }: RepoProviderProps) {
 		setSortBy('');
 	};
 
+	const isFilteredOrSorted = label !== '' || sortBy !== '' || milestone !== '';
+
 	return (
 		<RepoContext.Provider
 			value={{
@@ -75,6 +78,7 @@ export function RepoProvider({ children, value }: RepoProviderProps) {
 				setMilestone,
 				setSortBy,
 				resetFilterValues,
+				isFilteredOrSorted,
 			}}
 		>
 			{children}
