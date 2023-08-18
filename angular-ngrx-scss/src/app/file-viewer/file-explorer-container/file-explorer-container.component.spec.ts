@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FileExplorerContainerComponent } from './file-explorer-container.component';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { OcticonsDirective } from '../../shared/directives/octicons.directive';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('FileExplorerContainerComponent', () => {
   let component: FileExplorerContainerComponent;
@@ -10,7 +12,8 @@ describe('FileExplorerContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FileExplorerContainerComponent],
+      imports: [RouterTestingModule],
+      declarations: [FileExplorerContainerComponent, OcticonsDirective],
     })
       .overrideComponent(FileExplorerContainerComponent, {
         set: { changeDetection: ChangeDetectionStrategy.Default },

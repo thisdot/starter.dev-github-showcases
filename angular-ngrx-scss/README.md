@@ -1,6 +1,6 @@
 # Angular - NgRx - Scss Github Clone
 
-A GitHub client built with Angular v13, NgRx, and Scss.
+A GitHub client built with Angular v16, NgRx, and Scss.
 
 ## Working Application
 
@@ -26,7 +26,7 @@ cp .env.example .env
 
 ## Building
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
 
 ### Development server
 

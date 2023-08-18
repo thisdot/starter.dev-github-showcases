@@ -7,6 +7,8 @@ import IssuePRTabHeader, {
 import { PaginationContainer } from '../../../components/pull-request/pull-request/PullRequest.style';
 import ReactPaginate from 'react-paginate';
 import { PULLS_PER_PAGE } from '../../../constants/url.constants';
+import { useRepo } from '../../../context/RepoContext';
+import ClearFilterAndSortButtonText from '../../../components/clear-filter-and-sort-button/ClearFilterAndSortButtonText';
 
 type IssueProps = {
 	issues: Issue[];
@@ -34,9 +36,18 @@ export default function IssueView({
 		setPRPage(page);
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
+	const { resetFilterValues, isFilteredOrSorted } = useRepo();
+
 	return (
 		<Wrapper>
 			<Content>
+				{isFilteredOrSorted && (
+					<ClearFilterAndSortButtonText
+						variant="repo"
+						resetFilter={resetFilterValues}
+						text={'Clear Filter & Sort'}
+					/>
+				)}
 				<IssuePRTabHeader
 					toggleTab={changeActiveTab}
 					closedCount={closedCount}

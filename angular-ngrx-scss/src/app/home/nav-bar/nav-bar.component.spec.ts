@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { signOutUser } from 'src/app/state/auth/auth.actions';
 import { NavBarComponent } from './nav-bar.component';
+import { ClickAwayDirective } from '../../shared/directives/click-away.directive';
 
 describe('NavbarComponent', () => {
   let component: NavBarComponent;
@@ -10,7 +11,7 @@ describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NavBarComponent],
+      declarations: [NavBarComponent, ClickAwayDirective],
       providers: [provideMockStore()],
     }).compileComponents();
 

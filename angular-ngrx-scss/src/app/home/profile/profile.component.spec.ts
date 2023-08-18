@@ -9,6 +9,7 @@ import { ProfileNavComponent } from './profile-nav/profile-nav.component';
 import { RepoListComponent } from '../../shared/components/repo-list/repo-list.component';
 
 import { ProfileComponent } from './profile.component';
+import { ClickAwayDirective } from '../../shared/directives/click-away.directive';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -24,6 +25,7 @@ describe('ProfileComponent', () => {
         ProfileAboutComponent,
         RepoListComponent,
         RepoControlsComponent,
+        ClickAwayDirective,
       ],
       providers: [provideMockStore()],
     }).compileComponents();
