@@ -1,19 +1,27 @@
 import { useState } from 'react';
 import IssueView from './Issues.view';
-import type { IssueTabValues, IssueTypes } from '../../../types/types';
+import useIssuesPRs from '../../../hooks/useIssuesPRs';
+import { IssuePRTabValues } from '../../../components/pr-issue-tab/IssuePRTabHeader';
 
-type IssuesProps = {
-	issues: IssueTypes;
-};
+export default function IssueCtrl() {
+	const { open, closed, setClosedPRPage, setOpenPRPage } = useIssuesPRs({
+		searchType: 'issue',
+		type: 'issues',
+	});
+	const [activeTab, setActiveTab] = useState<IssuePRTabValues>('open');
+	const setPRPage = activeTab === 'open' ? setOpenPRPage : setClosedPRPage;
 
-export default function IssueCtrl({ issues }: IssuesProps) {
-	const [activeTab, setActiveTab] = useState<IssueTabValues>('open');
+	const issues = activeTab === 'open' ? open.items : closed.items;
 	return (
-		<IssueView
-			issues={issues[activeTab].items}
-			closedCount={issues?.closed.total_count!}
-			openCount={issues?.open.total_count!}
-			changeActiveTab={setActiveTab}
-		/>
+		<div key={activeTab}>
+			<IssueView
+				issues={issues}
+				closedCount={closed.total_count}
+				openCount={open.total_count}
+				activeTab={activeTab}
+				changeActiveTab={setActiveTab}
+				setPRPage={setPRPage}
+			/>
+		</div>
 	);
 }
