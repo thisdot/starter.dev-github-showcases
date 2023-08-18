@@ -48,7 +48,7 @@ OpenPullRequests.args = {
 			merged_at: null,
 			repository_url: '/',
 			comments: '',
-			labels: [],
+			labels: [{name: 'dependency', color: '633bcc'}],
 		},
 		{
 			title: '[Nuxt - Pinia - Tailwind] Get PRs comments',
@@ -64,7 +64,7 @@ OpenPullRequests.args = {
 		},
 		{
 			title: '[CRA-RXJS-SC] Fix PR API fetch',
-			number: '2',
+			number: '3',
 			created_at: date,
 			user: { login: 'kodejuice' },
 			state: 'open',

@@ -64,6 +64,8 @@ export const IssuePRCardWrapper = styled.div`
 		.message {
 			${flex};
 			justify-content: flex-end;
+			align-items: center;
+			gap: 0.1rem;
 			& .icon {
 				font-size: 1.1rem;
 			}

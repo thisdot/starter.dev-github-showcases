@@ -42,10 +42,6 @@ export default function PullRequestView({
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
-	console.log('====================================');
-	console.log(pullRequests);
-	console.log('====================================');
-
 	return (
 		<Wrapper>
 			<Content>
@@ -93,7 +89,7 @@ export default function PullRequestView({
 			</Content>
 
 			<PaginationContainer>
-				<ReactPaginate
+				{ pageCount > 1 && (<ReactPaginate
 					breakLabel="..."
 					nextLabel="Next >"
 					marginPagesDisplayed={1}
@@ -108,7 +104,7 @@ export default function PullRequestView({
 					nextClassName={'pagination__link_end'}
 					disabledClassName={'pagination__link--disabled'}
 					activeClassName={'pagination__link--active'}
-				/>
+				/>)}
 			</PaginationContainer>
 		</Wrapper>
 	);
