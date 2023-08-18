@@ -18,17 +18,25 @@
       description="Select label"
       [isRepo]="true"
       [items]="(labels$ | async) || []"
+      [toggle]="true"
+      (setFilter)="setLabel($event)"
+      [current]="filterParams.labels"
     ></app-filter-dropdown>
     <app-filter-dropdown
       name="Milestones"
       description="Select milestone"
       [isRepo]="true"
       [items]="(milestones$ | async) || []"
+      (setFilter)="setMilestone($event)"
+      [current]="filterParams.milestone"
     ></app-filter-dropdown>
     <app-filter-dropdown
       name="Sort"
       description="Select sort"
       [isRepo]="true"
+      [items]="sortOptions"
+      (setFilter)="setSort($event)"
+      [current]="filterParams.sort"
     ></app-filter-dropdown>
   </div>
 </div>

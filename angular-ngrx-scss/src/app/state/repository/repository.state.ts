@@ -282,6 +282,12 @@ export interface RepoPullRequests {
   pullRequests: RepoPullRequest[];
 }
 
+export interface IssueAPIResponse {
+  total_count: number;
+  incomplete_results: boolean;
+  items: Issue[];
+}
+
 export interface PaginationParams {
   page: number;
   canNext: boolean;

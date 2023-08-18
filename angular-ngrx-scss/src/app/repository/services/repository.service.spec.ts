@@ -2,7 +2,6 @@ import {
   HttpClient,
   HttpEventType,
   HttpHeaders,
-  HttpParams,
   HttpResponse,
 } from '@angular/common/http';
 import { delay, of } from 'rxjs';
@@ -10,10 +9,10 @@ import {
   PullRequestAPIResponse,
   RepoApiResponse,
   RepoContentsApiResponse,
+  RepoIssues,
 } from 'src/app/state/repository';
 import {
   IssueComments,
-  Issues,
   PullRequest,
   PullRequests,
 } from './repository.interfaces';
@@ -21,7 +20,7 @@ import {
 import { generatePullRequestAPIResponseFixture } from '../../fixtures/repository.fixtures';
 import { RepositoryService } from './repository.service';
 
-const MOCK_ISSUES: Issues = [
+const MOCK_ISSUES = [
   {
     number: 30734,
     state: 'open',
@@ -136,27 +135,29 @@ const MOCK_ISSUES: Issues = [
   },
 ];
 
-const MOCK_REPO_ISSUES = {
+const EXPECTED_ISSUES: RepoIssues = {
   total: 3,
   paginationParams: {
-    canNext: true,
-    canPrev: false,
     page: 1,
+    canNext: false,
+    canPrev: false,
   },
   issues: MOCK_ISSUES,
 };
 
-const MOCK_ISSUES_RESPONSE: HttpResponse<Issues> = {
-  headers: new HttpHeaders({
-    Link: '<https://api.github.com/repositories/421063754/issues?state=open&sort=created&direction=desc&per_page=30&page=1&pulls=false>; rel="next", <https://api.github.com/repositories/421063754/issues?state=open&sort=created&direction=desc&per_page=30&page=3&pulls=false>; rel="last"',
-  }),
+const MOCK_ISSUES_RESPONSE: HttpResponse<unknown> = {
+  headers: new HttpHeaders(),
   clone: jasmine.createSpy('clone'),
   type: HttpEventType.Response,
   status: 200,
   statusText: 'OK',
   ok: true,
   url: 'http://localhost',
-  body: MOCK_ISSUES,
+  body: {
+    total_count: 3,
+    incomplete_results: false,
+    items: MOCK_ISSUES,
+  },
 };
 
 const MOCK_PULL_REQUEST_NUMBER = 11814;
@@ -428,25 +429,15 @@ describe('RepositoryService', () => {
     httpClientSpy.get.and.returnValue(of(MOCK_ISSUES_RESPONSE));
 
     repoService.getRepositoryIssues('FakeCo', 'fake-repo').subscribe({
-      next: (response) => {
-        expect(response).toEqual(MOCK_REPO_ISSUES);
+      next: (repos) => {
+        expect(repos).toEqual(EXPECTED_ISSUES);
 
         expect(httpClientSpy.get).toHaveBeenCalledWith(
-          'https://api.github.com/repos/FakeCo/fake-repo/issues',
+          'https://api.github.com/search/issues?q=repo:FakeCo/fake-repo+type:issue+state:all',
           jasmine.objectContaining({
             headers: {
               Accept: 'application/vnd.github.v3+json',
             },
-            params: new HttpParams({
-              fromObject: {
-                state: 'all',
-                sort: 'created',
-                direction: 'desc',
-                per_page: 30,
-                page: 1,
-                pulls: false,
-              },
-            }),
           }),
         );
       },
@@ -460,25 +451,15 @@ describe('RepositoryService', () => {
     repoService
       .getRepositoryIssues('FakeCo', 'fake-repo', { state: 'closed' })
       .subscribe({
-        next: (response) => {
-          expect(response).toEqual(MOCK_REPO_ISSUES);
+        next: (repos) => {
+          expect(repos).toEqual(EXPECTED_ISSUES);
 
           expect(httpClientSpy.get).toHaveBeenCalledWith(
-            'https://api.github.com/repos/FakeCo/fake-repo/issues',
+            'https://api.github.com/search/issues?q=repo:FakeCo/fake-repo+type:issue+state:closed',
             jasmine.objectContaining({
               headers: {
                 Accept: 'application/vnd.github.v3+json',
               },
-              params: new HttpParams({
-                fromObject: {
-                  state: 'closed',
-                  sort: 'created',
-                  direction: 'desc',
-                  per_page: 30,
-                  page: 1,
-                  pulls: false,
-                },
-              }),
             }),
           );
         },

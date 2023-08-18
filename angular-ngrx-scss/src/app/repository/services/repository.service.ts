@@ -1,9 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import {
   FileContentsApiResponse,
   ISSUE_STATE,
+  IssueAPIResponse,
   IssueLabel,
   Milestone,
   PullRequestAPIResponse,
@@ -207,56 +208,52 @@ export class RepositoryService {
 
     const owner = encodeURIComponent(repoOwner);
     const name = encodeURIComponent(repoName);
-    const url = `${environment.githubUrl}/repos/${owner}/${name}/issues`;
+    const state = encodeURIComponent(params?.state ?? defaultParams.state);
+    let url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:issue+state:${state}`;
 
-    // We need to make two calls to get the total count of issues and the issues themselves.
-    // This workaround is needed because the GitHub REST API doesn't return the total count of issues in the response.
-    // We can get the total count from the "Link" HTTP header,
-    // but we need to make a call with per_page=1 to be able to calculate the total count.
-    // See https://developer.github.com/v3/guides/traversing-with-pagination/#calculating-the-pagination-offset
-    return forkJoin([
-      this.http.get(url, {
+    if (params?.labels) {
+      url += `+label:"${params.labels}"`;
+    }
+
+    if (params?.milestone) {
+      url += `+milestone:"${params.milestone}"`;
+    }
+
+    if (params?.sort) {
+      url += `+sort:${params.sort}`;
+    }
+
+    return this.http
+      .get(url, {
         observe: 'response',
         headers: {
           Accept: 'application/vnd.github.v3+json',
         },
-        params: new HttpParams({
-          fromObject: { ...Object.assign(defaultParams, params) },
+      })
+      .pipe(
+        map((response) => {
+          const linkHeader = response.headers.get('Link');
+
+          const canNext = !!(linkHeader && linkHeader.includes('rel="next"'));
+          const canPrev = !!(linkHeader && linkHeader.includes('rel="prev"'));
+
+          const data = response.body as IssueAPIResponse;
+
+          const total = data.total_count;
+
+          const page = params?.page || 1;
+
+          const paginationParams = {
+            canNext,
+            canPrev,
+            page,
+          };
+
+          const issues: Issue[] = data.items;
+
+          return { issues, paginationParams, total } as RepoIssues;
         }),
-      }),
-      this.http.get(url, {
-        observe: 'response',
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-        },
-        params: new HttpParams({
-          fromObject: { ...Object.assign(defaultParams, { per_page: 1 }) },
-        }),
-      }),
-    ]).pipe(
-      map(([paginatedIssues, helperIssues]) => {
-        const linkHeader = paginatedIssues.headers.get('Link');
-
-        const canNext = !!(linkHeader && linkHeader.includes('rel="next"'));
-        const canPrev = !!(linkHeader && linkHeader.includes('rel="prev"'));
-
-        const total = this.extractTotalFromLinkHeader(
-          helperIssues.headers.get('Link'),
-        );
-
-        const page = params?.page || 1;
-
-        const paginationParams = {
-          canNext,
-          canPrev,
-          page,
-        };
-
-        const issues = paginatedIssues.body as Issue[];
-
-        return { issues, paginationParams, total } as RepoIssues;
-      }),
-    );
+      );
   }
 
   /**
@@ -343,34 +340,5 @@ export class RepositoryService {
         Accept: 'application/vnd.github.v3+json',
       },
     });
-  }
-
-  private extractTotalFromLinkHeader(linkHeader: string | null): number {
-    if (!linkHeader) {
-      return 0;
-    }
-
-    // Find the link with rel="last"
-    const lastLinkPattern = /<([^>]+)>; rel="last"/;
-    const lastLinkMatch = linkHeader.match(lastLinkPattern);
-
-    if (!lastLinkMatch) {
-      return 0;
-    }
-
-    const lastLink = lastLinkMatch[1];
-
-    // Parse as a URL
-    const url = new URL(lastLink);
-
-    // Extract query parameters
-    const queryParams = new URLSearchParams(url.search);
-    const page = parseInt(queryParams.get('page') || '', 10);
-
-    if (isNaN(page)) {
-      return 0;
-    }
-
-    return page;
   }
 }

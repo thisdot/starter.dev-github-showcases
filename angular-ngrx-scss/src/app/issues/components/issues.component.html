@@ -3,6 +3,8 @@
     [viewState]="viewState"
     [openIssues]="openIssues$ | async"
     [closedIssues]="closedIssues$ | async"
+    [owner]="owner"
+    [repoName]="repoName"
     (viewStateChange)="viewStateChange($event)"
   ></app-issues-header>
   <app-issues-list

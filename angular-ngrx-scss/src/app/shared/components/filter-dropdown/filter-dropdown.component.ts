@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   Output,
@@ -42,8 +41,6 @@ export class FilterDropdownComponent {
 
   isOpen = false;
 
-  constructor(private elRef: ElementRef) {}
-
   toggleMenu() {
     this.isOpen = !this.isOpen;
   }
@@ -62,7 +59,11 @@ export class FilterDropdownComponent {
   }
 
   handleClearFilterClick() {
-    this.setFilter.emit(this.items[0].value);
+    if (!this.toggle) {
+      this.setFilter.emit(this.items[0].value);
+    } else {
+      this.setFilter.emit('');
+    }
     this.isOpen = false;
   }
 
