@@ -5,7 +5,6 @@ export const Layout = styled.div`
 	padding: 0 1rem;
   background-color: rgb(255, 255, 255);
   display: grid;
-	overflow: hidden;
 
   grid-template-columns: auto;
     grid-template-areas:

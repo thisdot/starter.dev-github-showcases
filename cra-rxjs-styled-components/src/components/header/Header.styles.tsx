@@ -11,4 +11,7 @@ export const HeaderSection = styled.header`
 	box-sizing: var(--box-sizing-border-box);
 	grid-area: header;
 	border: 1px solid var(--blue-900);
+	position: sticky;
+	top: 0;
+	z-index: 100;
 `;
