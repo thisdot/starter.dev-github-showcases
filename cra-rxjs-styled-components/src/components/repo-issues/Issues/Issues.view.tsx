@@ -1,5 +1,4 @@
 import { Container, Content, Wrapper } from './Issues.view.styles';
-import type { Issue } from './Issue.type';
 import IssuePRTabHeader, {
 	IssuePRTabValues,
 } from '../../../components/pr-issue-tab/IssuePRTabHeader';
@@ -70,7 +69,7 @@ export default function IssueView({
 					/>
 				)}
 				{issues.map((issue, index) => (
-					<IssuePRCard type="issue" data={issue} key={index} />
+					<IssuePRCard type="issue" data={issue} key={issue.number} />
 				))}
 			</Content>
 			<PaginationContainer>
