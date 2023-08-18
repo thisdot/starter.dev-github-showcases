@@ -4,6 +4,8 @@ import type { Issue } from './Issue.type';
 import { IssueTabValues } from '../../../types/types';
 import Pagination from '../../pagination/Pagination';
 import IssuePRTabHeader from '../../../components/pr-issue-tab/IssuePRTabHeader';
+import { useRepo } from '../../../context/RepoContext';
+import ClearFilterAndSortButtonText from '../../../components/clear-filter-and-sort-button/ClearFilterAndSortButtonText';
 
 type IssueProps = {
 	issues: Issue[];
@@ -18,9 +20,18 @@ export default function IssueView({
 	openCount,
 	changeActiveTab,
 }: IssueProps) {
+	const { resetFilterValues, isFilteredOrSorted } = useRepo();
+
 	return (
 		<Wrapper>
 			<Content>
+				{isFilteredOrSorted && (
+					<ClearFilterAndSortButtonText
+						variant="repo"
+						resetFilter={resetFilterValues}
+						text={'Clear Filter & Sort'}
+					/>
+				)}
 				<IssuePRTabHeader
 					toggleTab={changeActiveTab}
 					closedCount={closedCount}

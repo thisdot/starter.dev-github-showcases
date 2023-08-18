@@ -7,6 +7,8 @@ import { getPullsState } from '../../../helpers/getPullsState';
 import ReactPaginate from 'react-paginate';
 import { PULLS_PER_PAGE } from '../../../constants/url.constants';
 import IssuePRTabHeader from '../../../components/pr-issue-tab/IssuePRTabHeader';
+import { useRepo } from '../../../context/RepoContext';
+import ClearFilterAndSortButtonText from '../../../components/clear-filter-and-sort-button/ClearFilterAndSortButtonText';
 
 type PullRequestProps = {
 	pullRequests: PullRequest[];
@@ -27,7 +29,7 @@ export default function PullRequestView({
 }: PullRequestProps) {
 	const totalPRsCount = activeTab === 'open' ? openPRCount : closedPRCount;
 	const pageCount = Math.ceil(totalPRsCount / PULLS_PER_PAGE);
-
+	const { resetFilterValues, isFilteredOrSorted } = useRepo();
 	// Invoke when user click to request another page.
 	const handlePageClick = (event: { selected: number }) => {
 		const page = event.selected + 1;
@@ -38,6 +40,13 @@ export default function PullRequestView({
 	return (
 		<Wrapper>
 			<Content>
+				{isFilteredOrSorted && (
+					<ClearFilterAndSortButtonText
+						variant="repo"
+						resetFilter={resetFilterValues}
+						text={'Clear Filter & Sort'}
+					/>
+				)}
 				<IssuePRTabHeader
 					closedCount={closedPRCount}
 					openCount={openPRCount}
