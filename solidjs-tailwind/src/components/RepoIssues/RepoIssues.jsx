@@ -22,7 +22,7 @@ const RepoIssues = () => {
     setMilestoneOpt,
     clearSortAndFilter,
     selectedMilestone,
-    milestoneId,
+    milestoneNumber,
   } = usePrAndIssuesContext();
 
   const fetchParameters = () => ({
@@ -32,7 +32,7 @@ const RepoIssues = () => {
     direction: parseSortParams(SORT_OPTIONS, sortBy(), 1),
     filterBy: {
       labels: selectedLabel() ? [selectedLabel()] : undefined,
-      milestone: selectedMilestone() ? milestoneId() : undefined,
+      milestoneNumber: selectedMilestone() ? milestoneNumber() : undefined,
     },
     before: query.before,
     after: query.after,

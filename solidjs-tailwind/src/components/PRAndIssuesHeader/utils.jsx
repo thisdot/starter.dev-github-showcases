@@ -1,4 +1,9 @@
-export const getSelectedMilestoneId = (milestoneOptions, selectedMilestone) =>
+export const getSelectedMilestoneNumber = (
+  milestoneOptions,
   selectedMilestone
-    ? milestoneOptions.filter((mo) => mo.title === selectedMilestone)[0].id
+) =>
+  selectedMilestone
+    ? milestoneOptions
+        .filter((mo) => mo.title === selectedMilestone)[0]
+        .number.toString()
     : undefined;

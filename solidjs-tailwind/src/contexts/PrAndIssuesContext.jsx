@@ -16,12 +16,13 @@ export function PrAndIssuesProvider(props) {
   const [selectedMilestone, setSelectedMilestone] = createSignal(undefined);
   const [labelOpt, setLabelOpt] = createSignal([]);
   const [milestoneOpt, setMilestoneOpt] = createSignal([]);
-  const [milestoneId, setMilestoneId] = createSignal(undefined);
+  const [milestoneNumber, setMilestoneNumber] = createSignal(undefined);
 
   const clearSortAndFilter = () => {
     setSortBy('Newest');
     setSelectedLabel(undefined);
     setSelectedMilestone(undefined);
+    setMilestoneNumber(undefined);
   };
 
   const PrAndIssuesParameters = {
@@ -39,8 +40,8 @@ export function PrAndIssuesProvider(props) {
     setSelectedMilestone,
     milestoneOpt,
     setMilestoneOpt,
-    milestoneId,
-    setMilestoneId,
+    milestoneNumber,
+    setMilestoneNumber,
   };
 
   return (

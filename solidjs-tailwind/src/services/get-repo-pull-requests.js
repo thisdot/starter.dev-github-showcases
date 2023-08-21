@@ -2,6 +2,7 @@ import { REPO_PULL_REQUESTS } from './queries/repo-pull-requests';
 import { useAuth } from '../auth';
 import FetchApi from './api';
 import { GITHUB_GRAPHQL } from '../utils/constants';
+import { parseLabels } from '../utils/parseFunctions';
 
 function parsePullRequests(connection) {
   if (!connection) {
@@ -58,23 +59,6 @@ function parsePullRequests(connection) {
   }, []);
 
   return { pullRequests, totalCount, pageInfo };
-}
-
-function parseLabels(labels) {
-  const nodes = labels?.nodes || [];
-  return nodes.reduce((labels, label) => {
-    if (!label) {
-      return labels;
-    }
-
-    return [
-      ...labels,
-      {
-        color: label.color,
-        name: label.name,
-      },
-    ];
-  }, []);
 }
 
 /**
