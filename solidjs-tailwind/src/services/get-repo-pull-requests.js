@@ -1,8 +1,9 @@
 import { REPO_PULL_REQUESTS } from './queries/repo-pull-requests';
 import { useAuth } from '../auth';
 import FetchApi from './api';
-import { GITHUB_GRAPHQL } from '../utils/constants';
-import { parseLabels } from '../utils/parseFunctions';
+import { GITHUB_GRAPHQL, SEARCH_PULLS } from '../utils/constants';
+import { parseLabels, parseMilestones } from '../utils/parseFunctions';
+import parseRestAPIPullRequests from '../utils/parseRestAPIPullRequest';
 
 function parsePullRequests(connection) {
   if (!connection) {
@@ -81,6 +82,7 @@ const getRepoPullRequests = async ({
   orderBy,
   direction,
   labels,
+  milestone,
   before,
   after,
   first,
@@ -105,21 +107,63 @@ const getRepoPullRequests = async ({
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data);
 
-  const openPullRequests = parsePullRequests(
-    resp.data.repository?.openPullRequest
-  );
-  const closedPullRequests = parsePullRequests(
-    resp.data.repository?.closedPullRequest
-  );
+  let openPullRequests;
+  let closedPullRequests;
+  let milestones;
+  let labelMap;
 
-  const labelMap = parseLabels(resp.data.repository?.labels);
+  if (milestone) {
+    //Using REST API for filters involving milestone as filter by milestone isn't supported on the Graphql
+    const pulls_data = {
+      owner,
+      name,
+      labels: labels?.[0] ?? undefined,
+      sort: orderBy,
+      direction,
+      first,
+      type: 'pull-request',
+      milestone,
+    };
+    const restOpenPullRequests = await FetchApi({
+      url: SEARCH_PULLS({
+        ...pulls_data,
+        state: 'open',
+      }),
+      headersOptions: {
+        authorization: `Bearer ${authStore.token}`,
+      },
+    });
+    const restClosedPullRequests = await FetchApi({
+      url: SEARCH_PULLS({
+        ...pulls_data,
+        state: 'closed',
+      }),
+      headersOptions: {
+        authorization: `Bearer ${authStore.token}`,
+      },
+    });
+
+    openPullRequests = parseRestAPIPullRequests(restOpenPullRequests);
+    closedPullRequests = parseRestAPIPullRequests(restClosedPullRequests);
+  } else {
+    const resp = await FetchApi(data);
+    openPullRequests = parsePullRequests(resp.data.repository?.openPullRequest);
+
+    closedPullRequests = parsePullRequests(
+      resp.data.repository?.closedPullRequest
+    );
+
+    milestones = parseMilestones(resp.data.repository?.milestones);
+
+    labelMap = parseLabels(resp.data.repository?.labels);
+  }
 
   return {
     openPullRequests,
     closedPullRequests,
     labels: labelMap,
+    milestones,
   };
 };
 
