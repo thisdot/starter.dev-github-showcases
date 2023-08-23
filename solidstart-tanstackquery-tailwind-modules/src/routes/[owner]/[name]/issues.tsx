@@ -12,7 +12,7 @@ import { Label } from '~/types/label-type';
 import styles from '../style.module.css';
 import useGetRepoInfo from '~/hooks/useGetRepoInfo';
 import {
-  milestoneId,
+  milestoneNumber,
   selectedLabel,
   selectedMilestone,
   setIssues,
@@ -46,7 +46,7 @@ const Issues = () => {
       searchParams.before,
       sortBy(),
       selectedLabel(),
-      milestoneId(),
+      milestoneNumber(),
     ],
     () =>
       getIssues({
@@ -56,7 +56,7 @@ const Issues = () => {
         direction: parseSortParams(SORT_OPTIONS, sortBy(), 1),
         filterBy: {
           labels: selectedLabel() ? [selectedLabel()] : undefined,
-          milestone: selectedMilestone() ? milestoneId() : undefined,
+          milestoneNumber: selectedMilestone() ? milestoneNumber() : undefined,
         },
         before: searchParams.before,
         after: searchParams.after,

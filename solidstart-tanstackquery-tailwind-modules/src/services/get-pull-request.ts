@@ -1,13 +1,23 @@
 import { REPO_PULL_REQUESTS } from './queries/pull-request';
 import { useAuth } from '../auth';
 import FetchApi, { ApiProps } from './api';
-import { GITHUB_GRAPHQL } from '../utils/constants';
+import {
+  GITHUB_GRAPHQL,
+  REPO_LABELS,
+  REPO_MILESTONES,
+  SEARCH_PULLS,
+} from '../utils/constants';
 import {
   PullRequest,
   PullRequestProps,
   RepoPullRequestsQuery,
 } from '~/types/pull-request-type';
 import { Label } from '~/types/label-type';
+import { parseLabels, parseMilestones } from '~/utils/parseFunctions';
+import { MilestoneProps } from '~/types/issues-type';
+import parseRestAPIPullRequests, {
+  IPullRequestProps,
+} from '~/utils/parseResrAPIPullRequest';
 
 type PullRequestVariables = {
   owner: string;
@@ -19,6 +29,7 @@ type PullRequestVariables = {
   after?: string;
   first?: number;
   last?: number;
+  milestone?: string | number;
 };
 type Response = {
   data: RepoPullRequestsQuery;
@@ -79,23 +90,6 @@ function parsePullRequests(data?: PullRequestProps) {
   return { pullRequests, totalCount, pageInfo };
 }
 
-function parseLabels(labels: { totalCount: number; nodes: Label[] }) {
-  const nodes = labels?.nodes || [];
-  return nodes.reduce((labels: Label[], label: Label) => {
-    if (!label) {
-      return labels;
-    }
-
-    return [
-      ...labels,
-      {
-        color: label.color,
-        name: label.name,
-      },
-    ];
-  }, []);
-}
-
 const getRepoPullRequests = async (variables: PullRequestVariables) => {
   const { authStore } = useAuth();
   const data: ApiProps<PullRequestVariables> = {
@@ -106,21 +100,84 @@ const getRepoPullRequests = async (variables: PullRequestVariables) => {
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = (await FetchApi(data)) as Response;
 
-  const openPullRequests = parsePullRequests(
-    resp.data.repository?.openPullRequests
-  );
+  let openPullRequests;
+  let closedPullRequests;
+  let milestones: MilestoneProps[] = [];
+  let labelMap: Label[] = [];
 
-  const closedPullRequests = parsePullRequests(
-    resp.data.repository?.closedPullRequests
-  );
+  if (variables.milestone) {
+    //
+    const pulls_data = {
+      owner: variables.owner,
+      name: variables.name,
+      labels: variables.labels?.[0] ?? undefined,
+      sort: variables.orderBy,
+      direction: variables.direction,
+      first: variables.first,
+      type: 'pull-request',
+      milestone: variables.milestone,
+    };
+    const restOpenPullRequests = (await FetchApi({
+      url: SEARCH_PULLS({
+        ...pulls_data,
+        state: 'open',
+      }),
+      headersOptions: {
+        authorization: `Bearer ${authStore.token}`,
+      },
+    })) as IPullRequestProps;
+    const restClosedPullRequests = (await FetchApi({
+      url: SEARCH_PULLS({
+        ...pulls_data,
+        state: 'closed',
+      }),
+      headersOptions: {
+        authorization: `Bearer ${authStore.token}`,
+      },
+    })) as IPullRequestProps;
+    const restRepoLabels = (await FetchApi({
+      url: REPO_LABELS({
+        user: variables.owner,
+        repo: variables.name,
+      }),
+      headersOptions: {
+        authorization: `Bearer ${authStore.token}`,
+      },
+    })) as Label[];
+    const restRepoMilestone = (await FetchApi({
+      url: REPO_MILESTONES({
+        user: variables.owner,
+        repo: variables.name,
+      }),
+      headersOptions: {
+        authorization: `Bearer ${authStore.token}`,
+      },
+    })) as MilestoneProps[];
 
-  const labelMap = parseLabels(resp.data.repository?.labels);
+    milestones = restRepoMilestone;
+    labelMap = restRepoLabels;
+
+    openPullRequests = parseRestAPIPullRequests(restOpenPullRequests);
+    closedPullRequests = parseRestAPIPullRequests(restClosedPullRequests);
+  } else {
+    const resp = (await FetchApi(data)) as Response;
+
+    openPullRequests = parsePullRequests(
+      resp.data.repository?.openPullRequests
+    );
+
+    closedPullRequests = parsePullRequests(
+      resp.data.repository?.closedPullRequests
+    );
+    milestones = parseMilestones(resp.data.repository?.milestones);
+    labelMap = parseLabels(resp.data.repository?.labels);
+  }
 
   return {
     openPullRequests,
     closedPullRequests,
+    milestones,
     labels: labelMap,
   };
 };

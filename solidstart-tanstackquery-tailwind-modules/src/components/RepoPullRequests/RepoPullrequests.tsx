@@ -9,6 +9,7 @@ import {
   pullRequests,
   selectedLabel,
   setSelectedLabel,
+  selectedMilestone,
   setSelectedMilestone,
   setSortBy,
   sortBy,
@@ -25,8 +26,11 @@ const RepoPullRequests = () => {
 
   return (
     <div class="md:py-12 max-w-screen-xl mx-auto">
-      <Show when={selectedLabel() || sortBy() !== 'Newest'}>
-        <div
+      <Show
+        when={selectedLabel() || selectedMilestone() || sortBy() !== 'Newest'}
+      >
+        <a
+          href={location.pathname}
           class="flex items-center gap-2 text-sm my-4 ml-2 cursor-pointer"
           onClick={clearSortAndFilter}
         >
@@ -34,7 +38,7 @@ const RepoPullRequests = () => {
             <CloseIcon />
           </span>
           Clear filter
-        </div>
+        </a>
       </Show>
       <div class="border border-gray-300 rounded-lg">
         <PRAndIssuesHeader type="pr" />
