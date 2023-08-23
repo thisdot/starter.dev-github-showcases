@@ -7,7 +7,7 @@ const FetchApi = async ({ url, query, variables, headersOptions }) => {
         'Content-Type': 'application/json',
       },
     };
-    if (query && variables) {
+    if (query) {
       fetchObj = {
         ...fetchObj,
         method: 'POST',
