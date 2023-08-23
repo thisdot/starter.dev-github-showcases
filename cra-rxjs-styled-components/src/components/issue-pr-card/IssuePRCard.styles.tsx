@@ -1,17 +1,18 @@
 import styled, { css } from 'styled-components';
-import colors from '../../../constants/colors';
+import colors from '../../constants/colors';
 
 const flex = css`
 	display: flex;
 	align-items: center;
 `;
-export const IssueCardWrapper = styled.div`
+export const IssuePRCardWrapper = styled.div`
 	${flex};
 	padding: 15px 20px;
 	border-bottom: 1px solid ${colors.gray300};
 	justify-content: space-between;
 	& > .left {
 		${flex};
+		flex: 1 1 auto;
 		& > .icon {
 			font-size: 1.1rem;
 			margin-right: 0.8rem;
@@ -25,16 +26,28 @@ export const IssueCardWrapper = styled.div`
 			${flex};
 			flex-direction: column;
 			align-items: start;
-			& > .heading {
-				font-weight: 600 !important;
-				font-size: 16px !important;
-				vertical-align: middle !important;
-				color: ${colors.gray800};
+			& > .card_top {
 				margin-bottom: 0.8rem;
-				&:hover {
-					color: ${colors.blue800};
+				& > .heading {
+					font-weight: 600 !important;
+					font-size: 16px !important;
+					vertical-align: middle !important;
+					color: ${colors.gray800};
+					&:hover {
+						color: ${colors.blue800};
+					}
+				}
+				& > .card_label {
+					padding: 0.25rem 0.5rem;
+					border-radius: 9999px;
+					font-size: 0.875rem;
+					line-height: 1.25rem;
+					margin-top: 0.5rem;
+					margin-left: 0.5rem;
+					white-space: nowrap;
 				}
 			}
+
 			& > .sub_heading {
 				color: ${colors.gray600};
 				font-size: 12px !important;
@@ -46,12 +59,16 @@ export const IssueCardWrapper = styled.div`
 	}
 
 	& > .right {
+		width: 20%;
+		flex-shrink: 0;
 		.message {
 			${flex};
+			justify-content: flex-end;
+			align-items: center;
+			gap: 0.1rem;
 			& .icon {
 				font-size: 1.1rem;
 			}
-			flex-direction: column;
 		}
 	}
 

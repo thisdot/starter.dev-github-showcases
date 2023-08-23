@@ -1,6 +1,4 @@
-import IssueCard from '../issue-card/IssueCard';
 import { Container, Content, Wrapper } from './Issues.view.styles';
-import type { Issue } from './Issue.type';
 import IssuePRTabHeader, {
 	IssuePRTabValues,
 } from '../../../components/pr-issue-tab/IssuePRTabHeader';
@@ -9,10 +7,12 @@ import ReactPaginate from 'react-paginate';
 import { PULLS_PER_PAGE } from '../../../constants/url.constants';
 import { useRepo } from '../../../context/RepoContext';
 import ClearFilterAndSortButtonText from '../../../components/clear-filter-and-sort-button/ClearFilterAndSortButtonText';
+import IssuePRCard from '../../../components/issue-pr-card/IssuePRCard';
 import EmptyResult from '../../../components/empty-result/EmptyResult';
+import { IssuePRData } from '@/types/types';
 
 type IssueProps = {
-	issues: Issue[];
+	issues: IssuePRData[];
 	changeActiveTab: (value: IssuePRTabValues) => void;
 	closedCount: number;
 	openCount: number;
@@ -69,7 +69,7 @@ export default function IssueView({
 					/>
 				)}
 				{issues.map((issue, index) => (
-					<IssueCard issue={issue} key={index} />
+					<IssuePRCard type="issue" data={issue} key={issue.number} />
 				))}
 			</Content>
 			<PaginationContainer>

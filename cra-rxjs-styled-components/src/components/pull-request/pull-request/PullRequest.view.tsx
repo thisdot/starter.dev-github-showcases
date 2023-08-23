@@ -5,18 +5,18 @@ import {
 	Wrapper,
 } from './PullRequest.style';
 import type { PRTabValues } from '../types';
-import type { PullRequest } from './PullRequest.type';
-import PullRequestCard from '../pull-request-card/PullRequestCard';
 import { getPullsState } from '../../../helpers/getPullsState';
 import ReactPaginate from 'react-paginate';
 import { PULLS_PER_PAGE } from '../../../constants/url.constants';
 import IssuePRTabHeader from '../../../components/pr-issue-tab/IssuePRTabHeader';
 import { useRepo } from '../../../context/RepoContext';
 import ClearFilterAndSortButtonText from '../../../components/clear-filter-and-sort-button/ClearFilterAndSortButtonText';
+import IssuePRCard from '../../../components/issue-pr-card/IssuePRCard';
 import EmptyResult from '../../../components/empty-result/EmptyResult';
+import { IssuePRData } from '@/types/types';
 
 type PullRequestProps = {
-	pullRequests: PullRequest[];
+	pullRequests: IssuePRData[];
 	activeTab: PRTabValues;
 	changeActiveTab: (value: PRTabValues) => void;
 	openPRCount: number;
@@ -72,35 +72,43 @@ export default function PullRequestView({
 					/>
 				)}
 				{pullRequests.map((pr, index) => (
-					<PullRequestCard
-						title={pr.title}
-						number={pr.number}
-						created_at={pr.created_at}
-						openedBy={pr.user.login}
-						state={getPullsState(pr)}
-						messageCount={pr.comments}
-						key={index}
+					<IssuePRCard
+						key={pr.number}
+						type="pr"
+						data={{
+							title: pr.title,
+							number: pr.number,
+							created_at: pr.created_at,
+							openedBy: pr.user.login,
+							user: pr.user,
+							state: getPullsState(pr),
+							comments: pr.comments,
+							labels: pr.labels,
+							url: pr.url,
+						}}
 					/>
 				))}
 			</Content>
 
 			<PaginationContainer>
-				<ReactPaginate
-					breakLabel="..."
-					nextLabel="Next >"
-					marginPagesDisplayed={1}
-					onPageChange={handlePageClick}
-					pageRangeDisplayed={7}
-					pageCount={pageCount}
-					previousLabel="< Previous"
-					renderOnZeroPageCount={() => null}
-					containerClassName={'pagination'}
-					pageClassName={'pagination__item'}
-					previousClassName={'pagination__link_end'}
-					nextClassName={'pagination__link_end'}
-					disabledClassName={'pagination__link--disabled'}
-					activeClassName={'pagination__link--active'}
-				/>
+				{pageCount > 1 && (
+					<ReactPaginate
+						breakLabel="..."
+						nextLabel="Next >"
+						marginPagesDisplayed={1}
+						onPageChange={handlePageClick}
+						pageRangeDisplayed={7}
+						pageCount={pageCount}
+						previousLabel="< Previous"
+						renderOnZeroPageCount={() => null}
+						containerClassName={'pagination'}
+						pageClassName={'pagination__item'}
+						previousClassName={'pagination__link_end'}
+						nextClassName={'pagination__link_end'}
+						disabledClassName={'pagination__link--disabled'}
+						activeClassName={'pagination__link--active'}
+					/>
+				)}
 			</PaginationContainer>
 		</Wrapper>
 	);
