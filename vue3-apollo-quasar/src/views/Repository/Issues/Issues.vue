@@ -1,12 +1,11 @@
 <template>
-  <section class="q-mx-auto q-my-xl issues-section">
-    <issue-tab-view :openIssues="openIssues" :closedIssues="closedIssues" />
-  </section>
+  <IssuesWrapper :issueData="issueData" />
 </template>
 
 <script lang="ts">
 import { useIssue } from '@/composables';
-import { defineComponent, defineProps, computed } from 'vue';
+import { defineComponent, defineProps, watch, ref } from 'vue';
+import { IssueResp } from '@/composables/github/types';
 
 export default defineComponent({
   name: 'Issues',
@@ -14,7 +13,10 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { IssueTabView } from '@/components';
+import IssuesWrapper from './IssuesWrapper.vue';
+import { DEFAULT_PAGE_SIZE, parseSortParams, SORT_OPTIONS } from '@/helpers';
+import { useRepoStore } from '@/store/respoStore';
+import { useRoute } from 'vue-router';
 
 const props = defineProps({
   owner: {
@@ -26,12 +28,50 @@ const props = defineProps({
     default: '',
   },
 });
+
+const repoStore = useRepoStore();
+
+const {
+  query,
+}: {
+  query: {
+    before?: string;
+    after?: string;
+  };
+} = useRoute();
+const issueData = ref<{ value: IssueResp }>();
 const { getIssues } = useIssue();
 
-const { data: issueData } = getIssues(props.owner, props.repo);
-
-const openIssues = computed(() => issueData?.value.openIssues || null);
-const closedIssues = computed(() => issueData.value.closedIssues || null);
+watch(
+  [
+    () => repoStore.selectedLabel,
+    () => repoStore.milestoneNumber,
+    () => props.owner,
+    () => props.repo,
+    () => query.before,
+    () => query.after,
+  ],
+  () => {
+    const { data: issueDatax } = getIssues({
+      owner: props.owner,
+      name: props.repo,
+      orderBy: parseSortParams(SORT_OPTIONS, repoStore.sortBy, 0),
+      direction: parseSortParams(SORT_OPTIONS, repoStore.sortBy, 1),
+      filterBy: {
+        labels: repoStore.selectedLabel ? [repoStore.selectedLabel] : undefined,
+        milestoneNumber: repoStore.milestoneNumber,
+      },
+      before: query.before,
+      after: query.after,
+      first: query.after || !query.before ? DEFAULT_PAGE_SIZE : undefined,
+      last: query.before ? DEFAULT_PAGE_SIZE : undefined,
+    });
+    issueData.value = issueDatax;
+  },
+  {
+    immediate: true,
+  },
+);
 </script>
 
 <style lang="scss" scoped>

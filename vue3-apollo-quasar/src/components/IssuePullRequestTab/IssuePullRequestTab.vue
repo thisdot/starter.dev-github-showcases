@@ -17,7 +17,9 @@
             name="svguse:app-icons/issue.svg#issue"
             v-else
           />
-          <span class="q-mr-xs" v-if="openCounts">{{ openCounts }}</span>
+          <span class="q-mr-xs" v-if="!isNaN(openCounts)">{{
+            openCounts
+          }}</span>
           Open
         </button>
         <button
@@ -29,7 +31,9 @@
             class="text-h6 custom-icon"
             name="svguse:app-icons/correct.svg#correct"
           />
-          <span class="q-mr-xs" v-if="closedCounts">{{ closedCounts }}</span>
+          <span class="q-mr-xs" v-if="!isNaN(closedCounts)">{{
+            closedCounts
+          }}</span>
           Closed
         </button>
       </div>
@@ -38,49 +42,106 @@
           label="Label"
           flat
           class="text-capitalize q-px-xs dropdown-label dropdown-label--label text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
-          @click="toggleLabelMenu()"
         >
-          <q-list class="dropdown-menu q-menu" v-if="labelRef">
-            <slot name="label-list">
-              <q-item
-                class="text-center text-caption text-primary text-bold q-py-xs block"
-              >
-                Label options
-              </q-item>
-            </slot>
+          <q-list separator class="dropdown-menu">
+            <div
+              class="q-py-sm q-px-md row justify-between items-center text-caption text-weight-bold"
+            >
+              Select Label
+              <q-icon name="close" size="xs" v-close-popup />
+            </div>
+            <q-separator />
+            <q-item
+              v-for="label in labelsOpt"
+              class="text-caption"
+              :key="label.name"
+              clickable
+              v-close-popup
+              @click="setlabel(label.name)"
+            >
+              <q-item-section>
+                <span class="row items-center q-gutter-x-xs">
+                  <span v-if="repoStore.selectedLabel === label.name">
+                    <q-icon name="check" size="xs" />
+                  </span>
+                  <span class="q-mr-md" v-else />
+                  <span>
+                    {{ label.name }}
+                  </span>
+                </span>
+              </q-item-section>
+            </q-item>
           </q-list>
         </q-btn-dropdown>
         <q-btn-dropdown
-          v-if="tabType === TAB_TYPE.ISSUE"
+          v-if="milestoneOpt.length"
           label="Milestones"
           flat
           class="text-capitalize q-px-xs dropdown-label dropdown-label--milestones text-caption row justify-center items-center bg-transparent no-border cursor-pointer"
-          @click="toggleMilestonesMenu()"
         >
-          <q-list separator class="dropdown-menu q-menu" v-if="milestonesRef">
-            <slot name="sort-list">
-              <q-item
-                class="text-center text-caption text-primary text-bold q-py-xs block"
-              >
-                Milestones options
-              </q-item>
-            </slot>
+          <q-list separator class="dropdown-menu">
+            <div
+              class="q-py-sm q-px-md row justify-between items-center text-caption text-weight-bold"
+            >
+              Select Milestone
+              <q-icon name="close" size="xs" v-close-popup />
+            </div>
+            <q-separator />
+            <q-item
+              v-for="milestone in milestoneOpt"
+              class="text-caption"
+              :key="milestone.id"
+              clickable
+              v-close-popup
+              @click="setMilestone(milestone.title)"
+            >
+              <q-item-section>
+                <span class="row items-center q-gutter-x-xs">
+                  <span v-if="repoStore.selectedMilestone === milestone.title">
+                    <q-icon name="check" size="xs" />
+                  </span>
+                  <span class="q-mr-md" v-else />
+                  <span>
+                    {{ milestone.title }}
+                  </span>
+                </span>
+              </q-item-section>
+            </q-item>
           </q-list>
         </q-btn-dropdown>
         <q-btn-dropdown
           label="Sort"
           flat
           class="text-capitalize q-px-xs dropdown-label dropdown-label--sort text-caption row justify-center items-center bg-transparent no-border cursor-pointer posi"
-          @click="toggleSortMenu()"
         >
-          <q-list separator class="dropdown-menu q-menu" v-if="sortRef">
-            <slot name="sort-list">
-              <q-item
-                class="text-center text-caption text-primary text-bold q-py-xs block"
-              >
-                Sort options
-              </q-item>
-            </slot>
+          <q-list separator class="dropdown-menu">
+            <div
+              class="q-py-sm q-px-md row justify-between items-center text-caption text-weight-bold"
+            >
+              Sort By
+              <q-icon name="close" size="xs" v-close-popup />
+            </div>
+            <q-separator />
+            <q-item
+              v-for="option in sortOptions"
+              class="text-caption"
+              :key="option"
+              clickable
+              v-close-popup
+              @click="setSortBy(option)"
+            >
+              <q-item-section>
+                <span class="row items-center q-gutter-x-xs">
+                  <span v-if="repoStore.sortBy === option">
+                    <q-icon name="check" size="xs" />
+                  </span>
+                  <span class="q-mr-md" v-else />
+                  <span>
+                    {{ option }}
+                  </span>
+                </span>
+              </q-item-section>
+            </q-item>
           </q-list>
         </q-btn-dropdown>
       </div>
@@ -90,8 +151,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { TAB_TYPE, TABS } from './data';
+import { useRepoStore } from '@/store/respoStore';
+import { getSelectedMilestoneNumber, SORT_OPTIONS } from '@/helpers';
 
 export default defineComponent({
   name: 'IssuePullRequestTab',
@@ -116,6 +179,22 @@ export default defineComponent({
     const labelRef = ref(false);
     const sortRef = ref(false);
     const milestonesRef = ref(false);
+    const sortOptions = Object.values(SORT_OPTIONS);
+    const repoStore = useRepoStore();
+
+    const labelsOpt = computed(() => repoStore.labels);
+    const milestoneOpt = computed(() => repoStore.milestones);
+
+    const setMilestone = (value: string) => {
+      repoStore.setSelectedMilestone(value);
+      const milestoneNum = getSelectedMilestoneNumber(
+        repoStore.milestones || [],
+        value,
+      );
+      repoStore.setSelectedMilestoneNumber(milestoneNum);
+    };
+    const setlabel = (value: string) => repoStore.setSelectedLabel(value);
+    const setSortBy = (value: string) => repoStore.setSortBy(value);
 
     const isTab = (value) => value === activeTab.value;
 
@@ -158,11 +237,18 @@ export default defineComponent({
       milestonesRef,
       sortRef,
       TAB_TYPE,
+      milestoneOpt,
+      labelsOpt,
+      repoStore,
+      sortOptions,
       isTab,
       toggleLabelMenu,
       toggleSortMenu,
       updateActiveTab,
       toggleMilestonesMenu,
+      setMilestone,
+      setlabel,
+      setSortBy,
     };
   },
 });
@@ -199,5 +285,12 @@ export default defineComponent({
   .custom-icon {
     transform: translateY(0.1rem);
   }
+}
+
+.dropdown-menu {
+  width: 100%;
+  height: 100%;
+  min-width: 200px;
+  max-height: unset;
 }
 </style>
