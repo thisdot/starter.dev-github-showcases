@@ -40,8 +40,7 @@ export default function parseRestAPIPullRequests(
   const nodes = connection.items || [];
   const totalCount = connection.total_count;
 
-  const pullRequests = nodes.map((pullRequest) =>  {
-
+  const pullRequests = nodes.map((pullRequest) => {
     const labels = (pullRequest.labels || []).map((label) => ({
       color: label.color,
       name: label.name,
@@ -64,61 +63,6 @@ export default function parseRestAPIPullRequests(
       url: pullRequest.url,
     };
   });
-
-  // const pullRequestss = nodes
-  //   .reduce((pullRequests: IPulls[], pullRequest) => {
-  //     if (!pullRequest) {
-  //       return pullRequests;
-  //     }
-
-  //     const labelNodes: Label[] = pullRequest.labels || [];
-  //     const labels = labelNodes.reduce(
-  //       (labels: Label[], label) =>
-  //         label
-  //           ? [
-  //               ...labels,
-  //               {
-  //                 color: label.color,
-  //                 name: label.name,
-  //               },
-  //             ]
-  //           : labels,
-  //       []
-  //     );
-
-  //     return [
-  //       ...pullRequests,
-  //       {
-  //         id: pullRequest.id,
-  //         user: pullRequest.user,
-  //         comments: pullRequest.comments,
-  //         labels,
-  //         title: pullRequest.title,
-  //         number: pullRequest.number,
-  //         created_at: pullRequest.created_at,
-  //         closed_at: pullRequest.closed_at,
-  //         merged_at: pullRequest.merged_at,
-  //         state: pullRequest.state.toUpperCase(),
-  //         url: pullRequest.url,
-  //       },
-  //     ];
-  //   }, [])
-  //   .map((pullRequest) => ({
-  //     id: pullRequest.id,
-  //     login: pullRequest.user?.login,
-  //     commentCount: pullRequest.comments,
-  //     labelCount: pullRequest.labels.length,
-  //     labels: pullRequest.labels,
-  //     closed: Boolean(pullRequest.closed_at),
-  //     merged: Boolean(pullRequest.merged_at),
-  //     title: pullRequest.title,
-  //     number: pullRequest.number,
-  //     createdAt: pullRequest.created_at,
-  //     closedAt: pullRequest.closed_at,
-  //     mergedAt: pullRequest.merged_at,
-  //     state: pullRequest.state.toUpperCase(),
-  //     url: pullRequest.url,
-  //   }));
 
   return { pullRequests, totalCount, pageInfo };
 }
