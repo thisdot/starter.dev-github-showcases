@@ -93,8 +93,10 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import { TextWithIconAndCount } from '@/components';
+import { useRepoStore } from '@/store/respoStore';
 
 const tab = ref(TABS.CODE);
+const repoStore = useRepoStore();
 
 const props = defineProps({
   issuesCount: {
@@ -110,6 +112,7 @@ const props = defineProps({
 const emit = defineEmits(['triggerTab']);
 
 const updateTab = (val: string) => {
+  repoStore.resetFilter();
   tab.value = val;
 };
 

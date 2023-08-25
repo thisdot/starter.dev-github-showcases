@@ -52,6 +52,7 @@ watch(
     () => query.after,
   ],
   () => {
+    repoStore.setLoading(true);
     const { data: issueDatax } = getIssues({
       owner: props.owner,
       name: props.repo,
@@ -66,6 +67,7 @@ watch(
       first: query.after || !query.before ? DEFAULT_PAGE_SIZE : undefined,
       last: query.before ? DEFAULT_PAGE_SIZE : undefined,
     });
+    repoStore.setLoading(false);
     issueData.value = issueDatax;
   },
   {

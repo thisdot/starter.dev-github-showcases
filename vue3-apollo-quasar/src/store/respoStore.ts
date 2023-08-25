@@ -9,6 +9,7 @@ interface IRepoStore {
   selectedMilestone?: string;
   milestoneNumber?: string;
   sortBy?: string;
+  loading: boolean;
 }
 
 export const useRepoStore = defineStore('repoStore', {
@@ -19,6 +20,7 @@ export const useRepoStore = defineStore('repoStore', {
     selectedMilestone: undefined,
     sortBy: undefined,
     milestoneNumber: undefined,
+    loading: true,
   }),
   getters: {},
   actions: {
@@ -39,6 +41,14 @@ export const useRepoStore = defineStore('repoStore', {
     },
     setSortBy(value) {
       this.sortBy = value;
+    },
+    resetFilter() {
+      this.selectedLabel = undefined;
+      this.selectedMilestone = undefined;
+      this.sortBy = undefined;
+    },
+    setLoading(value) {
+      this.loading = value;
     },
   },
 });

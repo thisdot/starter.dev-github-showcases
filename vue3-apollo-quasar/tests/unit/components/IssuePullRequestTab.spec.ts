@@ -1,6 +1,8 @@
 import { mount } from '@vue/test-utils';
 import { IssuePullRequestTab } from '@/components';
 import { TAB_TYPE, TABS } from '@/components/IssuePullRequestTab/data';
+import { createTestingPinia } from '@pinia/testing';
+
 
 jest.mock('@vue/apollo-composable', () => {
   return {
@@ -9,10 +11,21 @@ jest.mock('@vue/apollo-composable', () => {
   };
 });
 
+jest.mock('@/helpers/parseRestAPIPullRequests', () => jest.fn());
+jest.mock('@/helpers', () => ({
+  getSelectedMilestoneNumber: jest.fn(),
+  SORT_OPTIONS: [],
+  useApi: () => ({
+    getRequest: jest.fn(),
+    postReques: jest.fn(),
+  }),
+}));
+
 let wrapper;
 
 beforeEach(() => {
   wrapper = mount(IssuePullRequestTab, {
+    global: { plugins: [createTestingPinia()] },
     props: {
       openCounts: 16,
       closedCounts: 196,

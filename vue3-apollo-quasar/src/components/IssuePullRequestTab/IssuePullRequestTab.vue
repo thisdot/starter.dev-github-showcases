@@ -74,7 +74,6 @@
           </q-list>
         </q-btn-dropdown>
         <q-btn-dropdown
-          v-if="milestoneOpt.length"
           label="Milestones"
           flat
           class="text-capitalize q-px-xs dropdown-label dropdown-label--milestones text-caption row justify-center items-center bg-transparent no-border cursor-pointer"

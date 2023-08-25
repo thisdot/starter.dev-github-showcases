@@ -51,6 +51,7 @@ watch(
     () => query.after,
   ],
   async () => {
+    repoStore.setLoading(true);
     if (repoStore.selectedMilestone) {
       const data = await getPullRequestsRestAPI({
         owner: props.owner,
@@ -65,6 +66,7 @@ watch(
         last: query.before ? DEFAULT_PAGE_SIZE : undefined,
       });
 
+      repoStore.setLoading(false);
       const resp = computed(() => data);
       pullRequestsData.value = resp;
     } else {
@@ -80,6 +82,8 @@ watch(
         first: query.after || !query.before ? DEFAULT_PAGE_SIZE : undefined,
         last: query.before ? DEFAULT_PAGE_SIZE : undefined,
       });
+
+      repoStore.setLoading(false);
       pullRequestsData.value = respData;
     }
   },
