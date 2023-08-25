@@ -1,15 +1,6 @@
 <template>
   <div class="wrapper">
-    <div
-      v-if="isFiltered"
-      class="row items-center text-caption q-my-sm q-ml-2 cursor-pointer clear_wrapper"
-      @click="resetFilter"
-    >
-      <span class="q-mr-sm close_icon row just0fy-center items-center">
-        <q-icon name="close" size="xs" />
-      </span>
-      Clear filter
-    </div>
+    <ClearIssuePRFilter />
     <div class="tab_view">
       <IssuePullRequestTab
         @changeTab="changeTab"
@@ -67,7 +58,6 @@
     </div>
     <PaginationButtons v-if="showPagination(tabRef)" @paginate="paginate" />
   </div>
-  -->
 </template>
 
 <script lang="ts">
@@ -83,6 +73,7 @@ import {
   IssuePullRequestTab,
   IssuesPullRequestsCard,
   PaginationButtons,
+  ClearIssuePRFilter,
 } from '@/components';
 import { TABS } from './data';
 import { useRepoStore } from '@/store/respoStore';
@@ -103,11 +94,6 @@ const repoStore = useRepoStore();
 const tabRef = ref(TABS.OPEN);
 const card_type = 'pullrequest';
 
-const resetFilter = () => repoStore.resetFilter();
-const isFiltered = computed(
-  () =>
-    repoStore.selectedLabel || repoStore.selectedMilestone || repoStore.sortBy,
-);
 const isLoading = computed(() => repoStore.loading);
 
 const openPullRequestsData = computed(() => {
@@ -138,17 +124,5 @@ const showPagination = (tab) => {
   border-radius: 6px;
   border: 1px solid $secondary-100;
   min-height: 10rem;
-}
-.clear_wrapper {
-  &:hover {
-    .close_icon {
-      background-color: rgb(46, 94, 190);
-    }
-  }
-}
-.close_icon {
-  background-color: rgb(107 114 128);
-  color: white;
-  border-radius: 0.375rem;
 }
 </style>

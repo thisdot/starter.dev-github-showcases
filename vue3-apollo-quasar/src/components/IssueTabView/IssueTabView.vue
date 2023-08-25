@@ -1,15 +1,6 @@
 <template>
   <div class="wrapper">
-    <div
-      v-if="isFiltered"
-      class="row items-center text-caption q-my-sm q-ml-2 cursor-pointer clear_wrapper"
-      @click="resetFilter"
-    >
-      <span class="q-mr-sm close_icon row just0fy-center items-center">
-        <q-icon name="close" size="xs" />
-      </span>
-      Clear filter
-    </div>
+    <ClearIssuePRFilter />
     <div class="tab_view">
       <IssuePullRequestTab
         @changeTab="changeTab"
@@ -83,6 +74,7 @@ import {
   IssuePullRequestTab,
   IssuesPullRequestsCard,
   PaginationButtons,
+  ClearIssuePRFilter,
 } from '@/components';
 import { TABS } from './data';
 
@@ -101,11 +93,6 @@ const repoStore = useRepoStore();
 const tabRef = ref(TABS.OPEN);
 const card_type = 'issue';
 
-const resetFilter = () => repoStore.resetFilter();
-const isFiltered = computed(
-  () =>
-    repoStore.selectedLabel || repoStore.selectedMilestone || repoStore.sortBy,
-);
 const isLoading = computed(() => repoStore.loading);
 
 const openIssuesList = computed(() => {
