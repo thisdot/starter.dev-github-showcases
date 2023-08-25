@@ -1,5 +1,6 @@
-import { Issue, IssuesQuery, Milestone, ParsedIssueQuery } from './type';
-import { Label } from '../repo-pulls/types';
+import { Label } from '~/context/pull-request-store';
+import { Issue, IssuesQuery, ParsedIssueQuery } from './type';
+import { parseMilestones } from '~/utils/helpers';
 
 function parseIssues(connection?: any) {
   if (!connection) {
@@ -20,19 +21,10 @@ function parseIssues(connection?: any) {
     }
 
     const labelNodes = issue.labels?.nodes || [];
-    const labels = labelNodes.reduce(
-      (labels: Label[], label: any) =>
-        label
-          ? [
-              ...labels,
-              {
-                color: label.color,
-                name: label.name,
-              },
-            ]
-          : labels,
-      []
-    );
+    const labels = labelNodes.map((label: Label) => ({
+      color: label.color,
+      name: label.name,
+    }));
 
     return [
       ...issues,
@@ -58,48 +50,18 @@ function parseIssues(connection?: any) {
   return { issues, totalCount, pageInfo };
 }
 
-function parseMilestones(milestones?: any) {
-  const nodes = milestones?.nodes || [];
-  return nodes.reduce((milestones: Milestone[], milestone: Milestone) => {
-    if (!milestone) {
-      return milestones;
-    }
-
-    return [
-      ...milestones,
-      {
-        id: milestone.id,
-        closed: milestone.closed,
-        title: milestone.title,
-        number: milestone.number,
-        description: milestone.description,
-      },
-    ];
-  }, []);
-}
-
 export function parseQuery(data: { data: IssuesQuery }): ParsedIssueQuery {
   const openIssues = parseIssues(data.data.repository?.openIssues);
   const closedIssues = parseIssues(data.data.repository?.closedIssues);
   const milestones = parseMilestones(data.data.repository?.milestones);
+  const labels = data.data.repository?.labels;
 
-  const labelMap = [...closedIssues.issues, ...openIssues.issues].reduce(
-    (acc: { [key: string]: Label }, issue: Issue) => {
-      const map: { [key: string]: Label } = {};
-      issue.labels.forEach((label: Label) => {
-        map[label.name] = label;
-      });
-      return {
-        ...acc,
-        ...map,
-      };
-    },
-    {}
-  );
+  const labelMap = (labels?.nodes || []).map((label: Label) => ({ color: label.color, name: label.name }));
+
   return {
     openIssues,
     closedIssues,
     milestones,
-    labels: Object.values(labelMap) as Label[],
+    labels: labelMap,
   };
 }

@@ -1,6 +1,8 @@
-import { Label, ParsedPullRequestQuery, PullRequest, RepoPullRequestsQuery } from './types';
+import { parseMilestones } from '~/utils/helpers';
+import { ParsedPullRequest, ParsedPullRequestQuery, PullRequestProps, RepoPullRequestsQuery } from './types';
+import { Label } from '~/types';
 
-function parsePullRequests(connection?: any) {
+function parsePullRequests(connection?: PullRequestProps): ParsedPullRequest {
   if (!connection) {
     return {
       pullRequests: [],
@@ -13,46 +15,30 @@ function parsePullRequests(connection?: any) {
   const nodes = connection?.nodes || [];
   const totalCount = connection.totalCount;
 
-  const pullRequests = nodes.reduce((pullRequests: PullRequest[], pullRequest: any) => {
-    if (!pullRequest) {
-      return pullRequests;
-    }
-
+  const pullRequests = nodes.map((pullRequest) => {
     const labelNodes = pullRequest.labels?.nodes || [];
-    const labels = labelNodes.reduce(
-      (labels: Label[], label: any) =>
-        label
-          ? [
-              ...labels,
-              {
-                color: label.color,
-                name: label.name,
-              },
-            ]
-          : labels,
-      []
-    );
+    const labels = labelNodes.map((label: Label) => ({
+      color: label.color,
+      name: label.name,
+    }));
 
-    return [
-      ...pullRequests,
-      {
-        id: pullRequest.id,
-        login: pullRequest.author?.login,
-        commentCount: pullRequest.comments.totalCount,
-        labelCount: pullRequest.labels.totalCount,
-        labels,
-        closed: pullRequest.closed,
-        merged: pullRequest.merged,
-        title: pullRequest.title,
-        number: pullRequest.number,
-        createdAt: pullRequest.createdAt,
-        closedAt: pullRequest.closedAt,
-        mergedAt: pullRequest.mergedAt,
-        state: pullRequest.state,
-        url: pullRequest.url,
-      },
-    ];
-  }, []);
+    return {
+      id: pullRequest.id,
+      login: pullRequest.author?.login,
+      commentCount: pullRequest.comments.totalCount,
+      labelCount: pullRequest.labels.totalCount,
+      labels,
+      closed: pullRequest.closed,
+      merged: pullRequest.merged,
+      title: pullRequest.title,
+      number: pullRequest.number,
+      createdAt: pullRequest.createdAt,
+      closedAt: pullRequest.closedAt,
+      mergedAt: pullRequest.mergedAt,
+      state: pullRequest.state,
+      url: pullRequest.url,
+    };
+  });
 
   return { pullRequests, totalCount, pageInfo };
 }
@@ -60,23 +46,14 @@ function parsePullRequests(connection?: any) {
 export function parseQuery(data: { data: RepoPullRequestsQuery }): ParsedPullRequestQuery {
   const openPullRequests = parsePullRequests(data.data.repository?.openPullRequest);
   const closedPullRequests = parsePullRequests(data.data.repository?.closedPullRequest);
+  const milestones = parseMilestones(data.data.repository?.milestones);
+  const labels = data.data.repository?.labels;
+  const labelMap = (labels.nodes || []).map((label: Label) => ({ color: label.color, name: label.name }));
 
-  const labelMap = [...closedPullRequests.pullRequests, ...openPullRequests.pullRequests].reduce(
-    (acc: { [key: string]: Label }, issue: PullRequest) => {
-      const map: { [key: string]: Label } = {};
-      issue.labels.forEach((label) => {
-        map[label.name] = label;
-      });
-      return {
-        ...acc,
-        ...map,
-      };
-    },
-    {}
-  );
   return {
     openPullRequests,
     closedPullRequests,
-    labels: Object.values(labelMap) as Label[],
+    labels: labelMap,
+    milestones,
   };
 }

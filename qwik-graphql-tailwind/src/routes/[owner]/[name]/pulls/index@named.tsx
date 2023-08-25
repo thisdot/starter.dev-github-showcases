@@ -15,6 +15,7 @@ export default component$(() => {
       closedPullRequestCount: 0,
       openPullRequestCount: 0,
       pullRequestLabels: [],
+      pullRequestMilestones: [],
       loading: true,
       openPageInfo: {
         hasNextPage: false,

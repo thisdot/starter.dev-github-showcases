@@ -4,7 +4,7 @@ import { $, component$, useClientEffect$, useTask$, useContext } from '@builder.
 
 import { parseQuery } from './parseQuery';
 import PullRequestData from './repo-pulls-data';
-import { PullRequestOrderField, OrderDirection, ParsedPullRequestQuery, Label } from './types';
+import { PullRequestOrderField, OrderDirection, ParsedPullRequestQuery } from './types';
 
 import { Pagination } from '../pagination/pagination';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
@@ -29,6 +29,7 @@ interface PullRequestsQueryParams {
   last?: number;
   after?: string;
   before?: string;
+  milestone?: string;
   labels?: string[];
   orderBy: string;
   direction: string;
@@ -61,6 +62,7 @@ export default component$(({ owner, name }: PullRequestsProps) => {
         first: afterCursor || !beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
         last: beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
         labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
+        milestone: dropdownStore.selectedMilestones,
         orderBy: PullRequestOrderField.CreatedAt,
         direction: OrderDirection.Desc,
         after: afterCursor,
@@ -94,6 +96,7 @@ export default component$(({ owner, name }: PullRequestsProps) => {
           first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
           last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
           labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
+          milestone: dropdownStore.selectedMilestones,
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],
         },
@@ -115,6 +118,7 @@ export default component$(({ owner, name }: PullRequestsProps) => {
           tabType="pr"
           sortOption={sortOptions}
           labelOption={pullRequestStore.pullRequestLabels}
+          milestonesOption={pullRequestStore.pullRequestMilestones}
           openCount={pullRequestStore.openPullRequestCount}
           closedCount={pullRequestStore.closedPullRequestCount}
         />
@@ -152,12 +156,13 @@ export default component$(({ owner, name }: PullRequestsProps) => {
 });
 
 export function updatePullRequestState(store: PullRequestContextProps, response: ParsedPullRequestQuery) {
-  const { closedPullRequests, openPullRequests, labels } = response;
+  const { closedPullRequests, openPullRequests, labels, milestones } = response;
   store.closedPullRequest = closedPullRequests.pullRequests;
   store.openPullRequest = openPullRequests.pullRequests;
   store.closedPullRequestCount = closedPullRequests.totalCount;
   store.openPullRequestCount = openPullRequests.totalCount;
-  store.pullRequestLabels = labels.map((lab: Label) => ({ label: lab.name, value: lab.name }));
+  store.pullRequestLabels = labels;
+  store.pullRequestMilestones = milestones;
   store.openPageInfo = openPullRequests.pageInfo;
   store.closedPageInfo = closedPullRequests.pageInfo;
   store.loading = false;

@@ -1,138 +1,42 @@
+import { PageInfo, Label, Milestone, MilestoneProps, LabelProps } from '~/types';
+
 export type RepoPullRequestsQuery = {
-  __typename?: 'Query';
-  repository?:
-    | {
-        __typename?: 'Repository';
-        openPullRequest: {
-          __typename?: 'PullRequestConnection';
-          totalCount: number;
-          pageInfo: {
-            __typename?: 'PageInfo';
-            hasPreviousPage: boolean;
-            hasNextPage: boolean;
-            startCursor?: string | null | undefined;
-            endCursor?: string | null | undefined;
-          };
-          nodes?:
-            | Array<
-                | {
-                    __typename?: 'PullRequest';
-                    id: string;
-                    closed: boolean;
-                    closedAt?: any | null | undefined;
-                    merged: boolean;
-                    mergedAt?: any | null | undefined;
-                    title: string;
-                    number: number;
-                    createdAt: any;
-                    author?:
-                      | { __typename?: 'Bot'; login: string }
-                      | { __typename?: 'EnterpriseUserAccount'; login: string }
-                      | { __typename?: 'Mannequin'; login: string }
-                      | { __typename?: 'Organization'; login: string }
-                      | { __typename?: 'User'; login: string }
-                      | null
-                      | undefined;
-                    comments: {
-                      __typename?: 'IssueCommentConnection';
-                      totalCount: number;
-                    };
-                    labels?:
-                      | {
-                          __typename?: 'LabelConnection';
-                          totalCount: number;
-                          nodes?:
-                            | Array<
-                                | {
-                                    __typename?: 'Label';
-                                    color: string;
-                                    name: string;
-                                  }
-                                | null
-                                | undefined
-                              >
-                            | null
-                            | undefined;
-                        }
-                      | null
-                      | undefined;
-                  }
-                | null
-                | undefined
-              >
-            | null
-            | undefined;
-        };
-        closedPullRequest: {
-          __typename?: 'PullRequestConnection';
-          totalCount: number;
-          pageInfo: {
-            __typename?: 'PageInfo';
-            hasPreviousPage: boolean;
-            hasNextPage: boolean;
-            startCursor?: string | null | undefined;
-            endCursor?: string | null | undefined;
-          };
-          nodes?:
-            | Array<
-                | {
-                    __typename?: 'PullRequest';
-                    id: string;
-                    closed: boolean;
-                    closedAt?: any | null | undefined;
-                    merged: boolean;
-                    mergedAt?: any | null | undefined;
-                    title: string;
-                    number: number;
-                    createdAt: any;
-                    author?:
-                      | { __typename?: 'Bot'; login: string }
-                      | { __typename?: 'EnterpriseUserAccount'; login: string }
-                      | { __typename?: 'Mannequin'; login: string }
-                      | { __typename?: 'Organization'; login: string }
-                      | { __typename?: 'User'; login: string }
-                      | null
-                      | undefined;
-                    comments: {
-                      __typename?: 'IssueCommentConnection';
-                      totalCount: number;
-                    };
-                    labels?:
-                      | {
-                          __typename?: 'LabelConnection';
-                          totalCount: number;
-                          nodes?:
-                            | Array<
-                                | {
-                                    __typename?: 'Label';
-                                    color: string;
-                                    name: string;
-                                  }
-                                | null
-                                | undefined
-                              >
-                            | null
-                            | undefined;
-                        }
-                      | null
-                      | undefined;
-                  }
-                | null
-                | undefined
-              >
-            | null
-            | undefined;
-        };
-      }
-    | null
-    | undefined;
+  repository: {
+    openPullRequest: PullRequestProps;
+    closedPullRequest: PullRequestProps;
+    milestones: MilestoneProps;
+    labels: LabelProps;
+  };
 };
+
+export interface PullRequestNodeProps {
+  id: string;
+  state: string;
+  createdAt: string;
+  closedAt: string;
+  title: string;
+  author: {
+    login: string;
+  };
+  url: string;
+  labels: {
+    totalCount: number;
+    nodes: Label[];
+  };
+  merged: boolean;
+  closed: boolean;
+  mergedAt?: string;
+  comments: {
+    totalCount: number;
+  };
+  number: number;
+}
 
 export type PullRequest = {
   id: string;
   url: string;
   state: string;
-  comments: {
+  comments?: {
     totalCount: number;
   };
   login: string;
@@ -141,12 +45,18 @@ export type PullRequest = {
   closed: boolean;
   closedAt?: string | null;
   merged: boolean;
-  mergedAt?: Date | null;
+  mergedAt?: string | null;
   createdAt: string;
   labels: Label[];
   commentCount: number;
   labelCount: number;
 };
+
+export interface PullRequestProps {
+  totalCount: number;
+  pageInfo: PageInfo;
+  nodes: PullRequestNodeProps[];
+}
 
 export enum PullRequestOrderField {
   /** Order issues by comment count */
@@ -162,15 +72,11 @@ export enum OrderDirection {
   Desc = 'DESC',
 }
 
-export interface Label {
-  color: string;
-  name: string;
-}
-
 export interface ParsedPullRequestQuery {
   openPullRequests: ParsedPullRequest;
   closedPullRequests: ParsedPullRequest;
   labels: Label[];
+  milestones: Milestone[];
 }
 
 export interface ParsedPullRequest {

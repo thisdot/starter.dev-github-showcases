@@ -5,10 +5,9 @@ import { useQuery } from '../../utils';
 import { ISSUES_QUERY } from '../../utils/queries/issues-query';
 import { AUTH_TOKEN, DEFAULT_PAGE_SIZE, GITHUB_GRAPHQL } from '../../utils/constants';
 import IssuesData from './issues-data';
-import { IssueOrderField, Milestone, OrderDirection, ParsedIssueQuery } from './type';
+import { IssueOrderField, OrderDirection, ParsedIssueQuery } from './type';
 import { isBrowser } from '@builder.io/qwik/build';
 import { parseQuery } from './parseQuery';
-import { Label } from '../repo-pulls/types';
 import { ClearFilterAndSortBtn } from '../clear-filter-and-sort-button';
 import { useLocation, useNavigate } from '@builder.io/qwik-city';
 import IssuesPRContext, { IssuesPRContextProps } from '../../context/issue-pr-store';
@@ -29,7 +28,7 @@ interface IssuesQueryParams {
   before?: string;
   orderBy: string;
   direction: string;
-  filterBy: { milestone?: string; labels: string[] | undefined };
+  filterBy: { milestone?: string; milestoneNumber?: string; labels: string[] | undefined };
 }
 
 export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
@@ -67,7 +66,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
         orderBy: IssueOrderField.CreatedAt,
         direction: OrderDirection.Desc,
         filterBy: {
-          milestone: dropdownStore.selectedMilestones,
+          milestoneNumber: dropdownStore.selectedMilestoneNumber,
           labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
         },
       },
@@ -99,7 +98,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
           orderBy: dropdownStore.selectedSort.split('^')[0],
           direction: dropdownStore.selectedSort.split('^')[1],
           filterBy: {
-            milestone: dropdownStore.selectedMilestones,
+            milestoneNumber: dropdownStore.selectedMilestoneNumber,
             labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
           },
         },
@@ -159,8 +158,8 @@ export function updateIssueState(store: IssuesPRContextProps, response: ParsedIs
   store.openIssues = openIssues.issues;
   store.closedIssuesCount = closedIssues.totalCount;
   store.openIssuesCount = openIssues.totalCount;
-  store.issuesLabel = labels.map((lab: Label) => ({ label: lab.name, value: lab.name }));
-  store.milestones = milestones.map((milestone: Milestone) => ({ value: milestone.id, label: milestone.title }));
+  store.issuesLabel = labels;
+  store.milestones = milestones;
   store.openPageInfo = openIssues.pageInfo;
   store.closedPageInfo = closedIssues.pageInfo;
   store.loading = false;
@@ -169,7 +168,7 @@ export function updateIssueState(store: IssuesPRContextProps, response: ParsedIs
 export async function fetchRepoIssues(
   { owner, name, first, last, after, before, orderBy, direction, filterBy }: IssuesQueryParams,
   abortController?: AbortController
-): Promise<any> {
+) {
   const { executeQuery$ } = useQuery(ISSUES_QUERY);
   const resp = await executeQuery$({
     signal: abortController?.signal,

@@ -1,157 +1,40 @@
-import { Label } from '../repo-pulls/types';
+import { Label } from '~/context/pull-request-store';
+import { LabelProps, MilestoneProps, PageInfo } from '~/types';
 
 export type IssuesQuery = {
-  __typename?: 'Query';
-  repository?:
-    | {
-        __typename?: 'Repository';
-        milestones?:
-          | {
-              __typename?: 'MilestoneConnection';
-              totalCount: number;
-              nodes?:
-                | Array<
-                    | {
-                        __typename?: 'Milestone';
-                        id: string;
-                        closed: boolean;
-                        description?: string | null | undefined;
-                        number: number;
-                        title: string;
-                      }
-                    | null
-                    | undefined
-                  >
-                | null
-                | undefined;
-              pageInfo: {
-                __typename?: 'PageInfo';
-                startCursor?: string | null | undefined;
-                endCursor?: string | null | undefined;
-                hasNextPage: boolean;
-                hasPreviousPage: boolean;
-              };
-            }
-          | null
-          | undefined;
-        closedIssues: {
-          __typename?: 'IssueConnection';
-          totalCount: number;
-          pageInfo: {
-            __typename?: 'PageInfo';
-            hasNextPage: boolean;
-            endCursor?: string | null | undefined;
-            hasPreviousPage: boolean;
-            startCursor?: string | null | undefined;
-          };
-          nodes?:
-            | Array<
-                | {
-                    __typename?: 'Issue';
-                    id: string;
-                    closed: boolean;
-                    closedAt?: any | null | undefined;
-                    title: string;
-                    number: number;
-                    createdAt: any;
-                    author?:
-                      | { __typename?: 'Bot'; login: string }
-                      | { __typename?: 'EnterpriseUserAccount'; login: string }
-                      | { __typename?: 'Mannequin'; login: string }
-                      | { __typename?: 'Organization'; login: string }
-                      | { __typename?: 'User'; login: string }
-                      | null
-                      | undefined;
-                    comments: {
-                      __typename?: 'IssueCommentConnection';
-                      totalCount: number;
-                    };
-                    labels?:
-                      | {
-                          __typename?: 'LabelConnection';
-                          totalCount: number;
-                          nodes?:
-                            | Array<
-                                | {
-                                    __typename?: 'Label';
-                                    color: string;
-                                    name: string;
-                                  }
-                                | null
-                                | undefined
-                              >
-                            | null
-                            | undefined;
-                        }
-                      | null
-                      | undefined;
-                  }
-                | null
-                | undefined
-              >
-            | null
-            | undefined;
-        };
-        openIssues: {
-          __typename?: 'IssueConnection';
-          totalCount: number;
-          pageInfo: {
-            __typename?: 'PageInfo';
-            hasNextPage: boolean;
-            endCursor?: string | null | undefined;
-            hasPreviousPage: boolean;
-            startCursor?: string | null | undefined;
-          };
-          nodes?:
-            | Array<
-                | {
-                    __typename?: 'Issue';
-                    id: string;
-                    closed: boolean;
-                    title: string;
-                    number: number;
-                    createdAt: any;
-                    author?:
-                      | { __typename?: 'Bot'; login: string }
-                      | { __typename?: 'EnterpriseUserAccount'; login: string }
-                      | { __typename?: 'Mannequin'; login: string }
-                      | { __typename?: 'Organization'; login: string }
-                      | { __typename?: 'User'; login: string }
-                      | null
-                      | undefined;
-                    comments: {
-                      __typename?: 'IssueCommentConnection';
-                      totalCount: number;
-                    };
-                    labels?:
-                      | {
-                          __typename?: 'LabelConnection';
-                          nodes?:
-                            | Array<
-                                | {
-                                    __typename?: 'Label';
-                                    color: string;
-                                    name: string;
-                                  }
-                                | null
-                                | undefined
-                              >
-                            | null
-                            | undefined;
-                        }
-                      | null
-                      | undefined;
-                  }
-                | null
-                | undefined
-              >
-            | null
-            | undefined;
-        };
-      }
-    | null
-    | undefined;
+  repository: {
+    milestones: MilestoneProps;
+    labels: LabelProps;
+    openIssues: IssueProps;
+    closedIssues: IssueProps;
+  };
 };
+
+export interface IssueProps {
+  totalCount: number;
+  pageInfo: PageInfo;
+  nodes: IssueNodeProps[];
+}
+
+export interface IssueNodeProps {
+  state: string;
+  createdAt: string;
+  closedAt: string;
+  title: string;
+  author: {
+    login: string;
+  };
+  url: string;
+  labels: {
+    totalCount: number;
+    nodes: Label[];
+  };
+  comments: {
+    totalCount: number;
+  };
+  number: number;
+}
+
 export interface Issue {
   url: string;
   closedAt: string;
