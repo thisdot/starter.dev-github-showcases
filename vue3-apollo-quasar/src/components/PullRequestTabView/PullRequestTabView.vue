@@ -66,7 +66,8 @@
       </div>
     </div>
     <PaginationButtons v-if="showPagination(tabRef)" @paginate="paginate" />
-  </div> -->
+  </div>
+  -->
 </template>
 
 <script lang="ts">

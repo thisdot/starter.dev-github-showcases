@@ -3,7 +3,6 @@ import { IssuePullRequestTab } from '@/components';
 import { TAB_TYPE, TABS } from '@/components/IssuePullRequestTab/data';
 import { createTestingPinia } from '@pinia/testing';
 
-
 jest.mock('@vue/apollo-composable', () => {
   return {
     useQuery: jest.fn(() => []),
