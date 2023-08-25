@@ -46,6 +46,7 @@ export const useRepoStore = defineStore('repoStore', {
       this.selectedLabel = undefined;
       this.selectedMilestone = undefined;
       this.sortBy = undefined;
+      this.milestoneNumber = undefined;
     },
     setLoading(value) {
       this.loading = value;

@@ -1,5 +1,6 @@
 <template>
-  <div
+  <a
+    :href="$route.path"
     v-if="isFiltered"
     class="row items-center text-caption q-my-sm q-ml-2 cursor-pointer clear_wrapper"
     @click="resetFilter"
@@ -8,19 +9,19 @@
       <q-icon name="close" size="xs" />
     </span>
     Clear filter
-  </div>
+  </a>
 </template>
 
 <script lang="ts" setup>
 import { useRepoStore } from '@/store/respoStore';
 import { computed } from 'vue';
+const repoStore = useRepoStore();
 
 const resetFilter = () => repoStore.resetFilter();
 const isFiltered = computed(
   () =>
     repoStore.selectedLabel || repoStore.selectedMilestone || repoStore.sortBy,
 );
-const repoStore = useRepoStore();
 </script>
 
 <style lang="scss" scoped>
