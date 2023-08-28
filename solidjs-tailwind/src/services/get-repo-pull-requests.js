@@ -108,11 +108,6 @@ const getRepoPullRequests = async ({
     },
   };
 
-  let openPullRequests;
-  let closedPullRequests;
-  let milestones;
-  let labelMap;
-
   if (milestone) {
     //Using REST API for filters involving milestone as filter by milestone isn't supported on the Graphql
     const pulls_data = {
@@ -144,27 +139,34 @@ const getRepoPullRequests = async ({
       },
     });
 
-    openPullRequests = parseRestAPIPullRequests(restOpenPullRequests);
-    closedPullRequests = parseRestAPIPullRequests(restClosedPullRequests);
+    const openPullRequests = parseRestAPIPullRequests(restOpenPullRequests);
+    const closedPullRequests = parseRestAPIPullRequests(restClosedPullRequests);
+
+    return {
+      openPullRequests,
+      closedPullRequests,
+    };
   } else {
     const resp = await FetchApi(data);
-    openPullRequests = parsePullRequests(resp.data.repository?.openPullRequest);
+    const openPullRequests = parsePullRequests(
+      resp.data.repository?.openPullRequest
+    );
 
-    closedPullRequests = parsePullRequests(
+    const closedPullRequests = parsePullRequests(
       resp.data.repository?.closedPullRequest
     );
 
-    milestones = parseMilestones(resp.data.repository?.milestones);
+    const milestones = parseMilestones(resp.data.repository?.milestones);
 
-    labelMap = parseLabels(resp.data.repository?.labels);
+    const labelMap = parseLabels(resp.data.repository?.labels);
+
+    return {
+      openPullRequests,
+      closedPullRequests,
+      labels: labelMap,
+      milestones,
+    };
   }
-
-  return {
-    openPullRequests,
-    closedPullRequests,
-    labels: labelMap,
-    milestones,
-  };
 };
 
 export default getRepoPullRequests;
