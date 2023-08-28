@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { RepoContents, selectedRepository } from '../../state/repository';
-import { map } from 'rxjs';
+import { RepoContents, fetchRepository, selectedRepository } from '../../state/repository';
+import { map, takeWhile, tap } from 'rxjs';
 
 @Component({
   selector: 'app-file-explorer',
@@ -32,7 +32,30 @@ export class FileExplorerComponent implements OnDestroy {
   );
   private componentActive = true;
 
-  constructor(private route: ActivatedRoute, private store: Store) {}
+  constructor(private route: ActivatedRoute, private store: Store) { }
+
+
+  ngOnInit() {
+    this.route.paramMap
+      .pipe(
+        takeWhile(() => this.componentActive),
+        tap((params) => {
+          this.owner = params.get('owner') as string;
+          this.repoName = params.get('repo') as string;
+          this.branch = params.get('branch') as string;
+          this.path = params.get('path') as string;
+          this.store.dispatch(
+            fetchRepository({
+              owner: this.owner,
+              repoName: this.repoName,
+              path: this.path,
+              branch: this.branch,
+            }),
+          );
+        }),
+      )
+      .subscribe();
+  }
 
   ngOnDestroy(): void {
     this.componentActive = false;
