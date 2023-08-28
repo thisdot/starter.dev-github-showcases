@@ -102,6 +102,10 @@ export class RepositoryService {
       url += `+sort:${params.sort}`;
     }
 
+    if (params?.page) {
+      url += `&page=${params.page}`;
+    }
+
     return this.http
       .get(url, {
         observe: 'response',
@@ -391,20 +395,22 @@ export class RepositoryService {
       return 0;
     }
 
-    // Find the link with rel="last"
-    const lastLinkPattern = /<([^>]+?)>; rel="last"/;
-    const lastLinkMatch = linkHeader.match(lastLinkPattern);
+    // Split the linkHeader by commas to separate individual links
+    const links = linkHeader.split(',');
 
-    if (!lastLinkMatch) {
+    // Find the last link in the header
+    const lastLink = links
+      .find((link) => link.includes('rel="last"'))
+      ?.split(';')[0]
+      ?.trim()
+      .slice(1, -1);
+
+    if (!lastLink) {
       return 0;
     }
 
-    const lastLink = lastLinkMatch[1];
-
-    // Parse as a URL
     const url = new URL(lastLink);
 
-    // Extract query parameters
     const queryParams = new URLSearchParams(url.search);
     const page = parseInt(queryParams.get('page') || '', 10);
 
