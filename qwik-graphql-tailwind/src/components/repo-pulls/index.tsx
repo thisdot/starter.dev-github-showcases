@@ -1,6 +1,6 @@
 import { isBrowser } from '@builder.io/qwik/build';
 import { useLocation, useNavigate } from '@builder.io/qwik-city';
-import { $, component$, useClientEffect$, useTask$, useContext } from '@builder.io/qwik';
+import { $, component$, useTask$, useContext } from '@builder.io/qwik';
 
 import { parseQuery } from './parseQuery';
 import PullRequestData from './repo-pulls-data';
@@ -13,9 +13,10 @@ import { ClearFilterAndSortBtn } from '../clear-filter-and-sort-button';
 import { useQuery } from '~/utils';
 import { PULL_REQUEST_QUERY } from '~/utils/queries/pull-request';
 import PullRequestContext, { PullRequestContextProps } from '~/context/pull-request-store';
-import { AUTH_TOKEN, GITHUB_GRAPHQL, DEFAULT_PAGE_SIZE } from '~/utils/constants';
+import { AUTH_TOKEN, GITHUB_GRAPHQL, DEFAULT_PAGE_SIZE, SEARCH_PULLS } from '~/utils/constants';
 import DropdownContext from '~/context/issue-tab-header-dropdown';
 import { sortOptions } from './data';
+import parseRestAPIPullRequests, { IPullRequestProps } from '~/utils/parseRestAPIPullRequests';
 
 export interface PullRequestsProps {
   owner: string;
@@ -41,70 +42,57 @@ export default component$(({ owner, name }: PullRequestsProps) => {
   const pullRequestStore = useContext(PullRequestContext);
   const dropdownStore = useContext(DropdownContext);
 
-  const afterCursor = typeof location.query.after === 'string' ? location.query.after : undefined;
-  const beforeCursor = typeof location.query.before === 'string' ? location.query.before : undefined;
-
-  const hasActiveFilter = dropdownStore.selectedLabel || dropdownStore.selectedSort !== sortOptions[0].value;
+  const hasActiveFilter =
+    dropdownStore.selectedLabel ||
+    dropdownStore.selectedSort !== sortOptions[0].value ||
+    dropdownStore.selectedMilestones !== undefined;
 
   const resetFilters$ = $(() => {
     dropdownStore.selectedLabel = undefined;
     dropdownStore.selectedSort = sortOptions[0].value;
+    dropdownStore.selectedMilestones = undefined;
+    dropdownStore.selectedMilestoneNumber = undefined;
     navigate.path = `${location.pathname}?tab=${pullRequestStore.activeTab}`;
   });
 
-  useClientEffect$(async () => {
-    pullRequestStore.loading = true;
-    const abortController = new AbortController();
-    const response = await fetchRepoPullRequests(
-      {
-        owner,
-        name,
-        first: afterCursor || !beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
-        last: beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
-        labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
-        milestone: dropdownStore.selectedMilestones,
-        orderBy: PullRequestOrderField.CreatedAt,
-        direction: OrderDirection.Desc,
-        after: afterCursor,
-        before: beforeCursor,
-      },
-      abortController
-    );
+  useTask$(
+    async ({ track }) => {
+      const abortController = new AbortController();
+      const after = track(() => location.query.after);
+      const before = track(() => location.query.before);
+      track(() => dropdownStore.selectedSort);
+      track(() => dropdownStore.selectedLabel);
+      track(() => dropdownStore.selectedMilestones);
 
-    updatePullRequestState(pullRequestStore, parseQuery(response));
-  });
-
-  useTask$(async ({ track }) => {
-    const abortController = new AbortController();
-    const after = track(() => location.query.after);
-    const before = track(() => location.query.before);
-    track(() => pullRequestStore.activeTab);
-    track(() => dropdownStore.selectedSort);
-    track(() => dropdownStore.selectedLabel);
-
-    // fetchRepoPullRequests needs auth token.
-    // Because we store auth token in sessionStorage we need to be sure that the storage is defined.
-    // We ask to the useTask to do the following operation only in browser,
-    // where we are sure that sessionStorage is not undefined.
-    if (isBrowser) {
-      const response = await fetchRepoPullRequests(
-        {
-          owner,
-          name,
-          after,
-          before,
-          first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
-          last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
-          labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
-          milestone: dropdownStore.selectedMilestones,
-          orderBy: dropdownStore.selectedSort.split('^')[0],
-          direction: dropdownStore.selectedSort.split('^')[1],
-        },
-        abortController
-      );
-      updatePullRequestState(pullRequestStore, parseQuery(response));
-    }
-  });
+      // fetchRepoPullRequests needs auth token.
+      // Because we store auth token in sessionStorage we need to be sure that the storage is defined.
+      // We ask to the useTask to do the following operation only in browser,
+      // where we are sure that sessionStorage is not undefined.
+      if (isBrowser) {
+        const response = await fetchRepoPullRequests(
+          {
+            owner,
+            name,
+            after,
+            before,
+            first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+            last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+            labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
+            milestone: dropdownStore.selectedMilestones,
+            orderBy: dropdownStore.selectedSort.split('^')[0] || PullRequestOrderField.CreatedAt,
+            direction: dropdownStore.selectedSort.split('^')[1] || OrderDirection.Desc,
+          },
+          abortController
+        );
+        if (dropdownStore.selectedMilestones) {
+          updatePullRequestState(pullRequestStore, response);
+        } else {
+          updatePullRequestState(pullRequestStore, parseQuery(response));
+        }
+      }
+    },
+    { eagerness: 'load' }
+  );
 
   return (
     <>
@@ -161,37 +149,79 @@ export function updatePullRequestState(store: PullRequestContextProps, response:
   store.openPullRequest = openPullRequests.pullRequests;
   store.closedPullRequestCount = closedPullRequests.totalCount;
   store.openPullRequestCount = openPullRequests.totalCount;
-  store.pullRequestLabels = labels;
-  store.pullRequestMilestones = milestones;
+  store.pullRequestLabels = store.pullRequestLabels.length ? store.pullRequestLabels : labels;
+  store.pullRequestMilestones = store.pullRequestMilestones.length ? store.pullRequestMilestones : milestones;
   store.openPageInfo = openPullRequests.pageInfo;
   store.closedPageInfo = closedPullRequests.pageInfo;
   store.loading = false;
 }
 
 export async function fetchRepoPullRequests(
-  { owner, name, first, last, after, before, labels, orderBy, direction }: PullRequestsQueryParams,
+  { owner, name, first, last, after, before, labels, orderBy, direction, milestone }: PullRequestsQueryParams,
   abortController?: AbortController
-): Promise<any> {
-  const { executeQuery$ } = useQuery(PULL_REQUEST_QUERY);
-  const resp = await executeQuery$({
-    signal: abortController?.signal,
-    url: GITHUB_GRAPHQL,
-    variables: {
+) {
+  if (milestone) {
+    //
+    const { executeQuery$ } = useQuery();
+    const pulls_data = {
       owner,
       name,
-      first,
-      last,
-      labels,
-      orderBy,
+      labels: labels?.[0] ?? undefined,
+      sort: orderBy,
       direction,
-      after,
-      before,
-    },
-    headersOpt: {
-      Accept: 'application/vnd.github+json',
-      authorization: `Bearer ${sessionStorage.getItem(AUTH_TOKEN)}`,
-    },
-  });
+      first,
+      type: 'pull-request',
+      milestone,
+    };
+    const restOpenPullRequests = await executeQuery$({
+      url: SEARCH_PULLS({
+        ...pulls_data,
+        state: 'open',
+      }),
+      headersOpt: {
+        authorization: `Bearer ${sessionStorage.getItem(AUTH_TOKEN)}`,
+      },
+    });
+    const restClosedPullRequests = await executeQuery$({
+      url: SEARCH_PULLS({
+        ...pulls_data,
+        state: 'closed',
+      }),
+      headersOpt: {
+        authorization: `Bearer ${sessionStorage.getItem(AUTH_TOKEN)}`,
+      },
+    });
+    const open = (await restOpenPullRequests.json()) as IPullRequestProps;
+    const closed = (await restClosedPullRequests.json()) as IPullRequestProps;
+    const openPullRequests = parseRestAPIPullRequests(open);
+    const closedPullRequests = parseRestAPIPullRequests(closed);
 
-  return await resp.json();
+    return {
+      openPullRequests,
+      closedPullRequests,
+    };
+  } else {
+    const { executeQuery$ } = useQuery(PULL_REQUEST_QUERY);
+    const resp = await executeQuery$({
+      signal: abortController?.signal,
+      url: GITHUB_GRAPHQL,
+      variables: {
+        owner,
+        name,
+        first,
+        last,
+        labels,
+        orderBy,
+        direction,
+        after,
+        before,
+      },
+      headersOpt: {
+        Accept: 'application/vnd.github+json',
+        authorization: `Bearer ${sessionStorage.getItem(AUTH_TOKEN)}`,
+      },
+    });
+
+    return await resp.json();
+  }
 }

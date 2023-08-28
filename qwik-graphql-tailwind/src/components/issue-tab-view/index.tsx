@@ -1,4 +1,4 @@
-import { $, component$, useClientEffect$, useContext, useTask$ } from '@builder.io/qwik';
+import { $, component$, useContext, useTask$ } from '@builder.io/qwik';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
 import { sortOptions } from './data';
 import { useQuery } from '../../utils';
@@ -37,9 +37,6 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
   const issuesStore = useContext(IssuesPRContext);
   const dropdownStore = useContext(DropdownContext);
 
-  const afterCursor = typeof location.query.after === 'string' ? location.query.after : undefined;
-  const beforeCursor = typeof location.query.before === 'string' ? location.query.before : undefined;
-
   const hasActiveFilter =
     dropdownStore.selectedLabel ||
     dropdownStore.selectedSort !== sortOptions[0].value ||
@@ -49,65 +46,44 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
     dropdownStore.selectedLabel = undefined;
     dropdownStore.selectedMilestones = undefined;
     dropdownStore.selectedSort = sortOptions[0].value;
+    dropdownStore.selectedMilestoneNumber = undefined;
     navigate.path = `${location.pathname}?tab=${issuesStore.activeTab}`;
   });
 
-  useClientEffect$(async () => {
-    const abortController = new AbortController();
-    issuesStore.loading = true;
-    const response = await fetchRepoIssues(
-      {
-        owner,
-        name,
-        after: afterCursor,
-        before: beforeCursor,
-        first: afterCursor || !beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
-        last: beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
-        orderBy: IssueOrderField.CreatedAt,
-        direction: OrderDirection.Desc,
-        filterBy: {
-          milestoneNumber: dropdownStore.selectedMilestoneNumber,
-          labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
-        },
-      },
-      abortController
-    );
+  useTask$(
+    async ({ track }) => {
+      const abortController = new AbortController();
+      issuesStore.loading = true;
+      const after = track(() => location.query.after);
+      const before = track(() => location.query.before);
+      track(() => dropdownStore.selectedSort);
+      track(() => dropdownStore.selectedMilestones);
+      track(() => dropdownStore.selectedLabel);
 
-    updateIssueState(issuesStore, parseQuery(response));
-  });
-
-  useTask$(async ({ track }) => {
-    const abortController = new AbortController();
-    issuesStore.loading = true;
-    const after = track(() => location.query.after);
-    const before = track(() => location.query.before);
-    track(() => issuesStore.activeTab);
-    track(() => dropdownStore.selectedSort);
-    track(() => dropdownStore.selectedMilestones);
-    track(() => dropdownStore.selectedLabel);
-
-    if (isBrowser) {
-      const response = await fetchRepoIssues(
-        {
-          owner,
-          name,
-          after,
-          before,
-          first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
-          last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
-          orderBy: dropdownStore.selectedSort.split('^')[0],
-          direction: dropdownStore.selectedSort.split('^')[1],
-          filterBy: {
-            milestoneNumber: dropdownStore.selectedMilestoneNumber,
-            labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
+      if (isBrowser) {
+        const response = await fetchRepoIssues(
+          {
+            owner,
+            name,
+            after,
+            before,
+            first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+            last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+            orderBy: dropdownStore.selectedSort.split('^')[0] || IssueOrderField.CreatedAt,
+            direction: dropdownStore.selectedSort.split('^')[1] || OrderDirection.Desc,
+            filterBy: {
+              milestoneNumber: dropdownStore.selectedMilestoneNumber,
+              labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
+            },
           },
-        },
-        abortController
-      );
+          abortController
+        );
 
-      updateIssueState(issuesStore, parseQuery(response));
-    }
-  });
+        updateIssueState(issuesStore, parseQuery(response));
+      }
+    },
+    { eagerness: 'load' }
+  );
 
   return (
     <>
@@ -158,8 +134,8 @@ export function updateIssueState(store: IssuesPRContextProps, response: ParsedIs
   store.openIssues = openIssues.issues;
   store.closedIssuesCount = closedIssues.totalCount;
   store.openIssuesCount = openIssues.totalCount;
-  store.issuesLabel = labels;
-  store.milestones = milestones;
+  store.issuesLabel = store.issuesLabel.length ? store.issuesLabel : labels;
+  store.milestones = store.milestones.length ? store.milestones : milestones;
   store.openPageInfo = openIssues.pageInfo;
   store.closedPageInfo = closedIssues.pageInfo;
   store.loading = false;
