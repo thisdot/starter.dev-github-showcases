@@ -392,7 +392,7 @@ export class RepositoryService {
     }
 
     // Find the link with rel="last"
-    const lastLinkPattern = /<([^>]+)>; rel="last"/;
+    const lastLinkPattern = /<[^>]+>; rel="last"/;
     const lastLinkMatch = linkHeader.match(lastLinkPattern);
 
     if (!lastLinkMatch) {
