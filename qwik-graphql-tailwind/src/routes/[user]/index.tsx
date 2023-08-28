@@ -77,10 +77,7 @@ export function updateUserProfile(store: UserStore, response: any) {
   store.user = response.data.user;
 }
 
-export async function fetchUserProfile(
-  { username }: ProfileQueryParams,
-  abortController?: AbortController
-): Promise<any> {
+export async function fetchUserProfile({ username }: ProfileQueryParams, abortController?: AbortController) {
   const { executeQuery$ } = useQuery(USER_PROFILE_QUERY);
 
   const resp = await executeQuery$({

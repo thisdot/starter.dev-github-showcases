@@ -148,7 +148,7 @@ export function updateRepos(store: RepoStore, response: any) {
 export async function fetchRepos(
   { username, afterCursor, beforeCursor }: RepoQueryParams,
   abortController?: AbortController
-): Promise<any> {
+) {
   const { executeQuery$ } = useQuery(REPOS_QUERY);
 
   const resp = await executeQuery$({

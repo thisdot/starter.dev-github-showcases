@@ -49,7 +49,7 @@ export function updateTopRepos(store: RepoStore, response: any) {
   store.isLoading = false;
 }
 
-export async function fetchTopRepos(abortController?: AbortController): Promise<any> {
+export async function fetchTopRepos(abortController?: AbortController) {
   const { executeQuery$ } = useQuery(TOP_REPOS_QUERY);
 
   const resp = await executeQuery$({
