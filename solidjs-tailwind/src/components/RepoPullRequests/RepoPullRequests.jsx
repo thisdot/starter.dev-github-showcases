@@ -12,8 +12,17 @@ import { PRAndIssueLoaderSkeleton } from '../PRAndIssueLoaderSkeleton';
 const RepoPullRequests = () => {
   const params = useParams();
   const location = useLocation();
-  const { tabActive, sortBy, selectedLabel, setLabelOpt, clearSortAndFilter } =
-    usePrAndIssuesContext();
+  const {
+    tabActive,
+    sortBy,
+    milestoneOpt,
+    labelOpt,
+    selectedLabel,
+    setLabelOpt,
+    setMilestoneOpt,
+    clearSortAndFilter,
+    selectedMilestone,
+  } = usePrAndIssuesContext();
 
   const [data, setData] = createSignal([]);
   const [openCount, setOpenCount] = createSignal();
@@ -26,6 +35,7 @@ const RepoPullRequests = () => {
     orderBy: parseSortParams(SORT_OPTIONS, sortBy(), 0),
     direction: parseSortParams(SORT_OPTIONS, sortBy(), 1),
     labels: selectedLabel() ? [selectedLabel()] : undefined,
+    milestone: selectedMilestone(),
     before:
       typeof location.query.before === 'string'
         ? location.query.before
@@ -47,7 +57,8 @@ const RepoPullRequests = () => {
 
   createEffect(() => {
     if (resp() && !resp.loading) {
-      setLabelOpt(resp().labels);
+      setLabelOpt(resp().labels || labelOpt());
+      setMilestoneOpt(resp().milestones || milestoneOpt());
       setOpenCount(resp().openPullRequests.totalCount);
       setClosedCount(resp().closedPullRequests.totalCount);
       setPageInfo(
@@ -69,7 +80,9 @@ const RepoPullRequests = () => {
         <PRAndIssueLoaderSkeleton />
       ) : (
         <>
-          {(selectedLabel() || sortBy() !== 'Newest') && (
+          {(selectedLabel() ||
+            selectedMilestone() ||
+            sortBy() !== 'Newest') && (
             <div
               class="flex items-center gap-2 text-sm my-4 ml-2 cursor-pointer"
               onClick={clearSortAndFilter}

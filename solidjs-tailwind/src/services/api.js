@@ -1,17 +1,23 @@
 const FetchApi = async ({ url, query, variables, headersOptions }) => {
   return await new Promise((resolve, reject) => {
-    fetch(url, {
-      method: 'POST',
+    let fetchObj = {
       headers: {
         ...headersOptions,
         Accept: 'application/vnd.github+json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        query,
-        variables,
-      }),
-    })
+    };
+    if (query) {
+      fetchObj = {
+        ...fetchObj,
+        method: 'POST',
+        body: JSON.stringify({
+          query,
+          variables,
+        }),
+      };
+    }
+    fetch(url, fetchObj)
       .then((res) => res.json())
       .then((result) => {
         resolve(result);
