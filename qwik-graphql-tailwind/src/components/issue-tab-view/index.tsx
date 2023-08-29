@@ -1,19 +1,19 @@
-import { $, component$, useClientEffect$, useContext, useTask$ } from '@builder.io/qwik';
+import { $, component$, useContext, useTask$ } from '@builder.io/qwik';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
 import { sortOptions } from './data';
 import { useQuery } from '../../utils';
 import { ISSUES_QUERY } from '../../utils/queries/issues-query';
 import { AUTH_TOKEN, DEFAULT_PAGE_SIZE, GITHUB_GRAPHQL } from '../../utils/constants';
 import IssuesData from './issues-data';
-import { IssueOrderField, Milestone, OrderDirection, ParsedIssueQuery } from './type';
+import { ParsedIssueQuery } from './type';
 import { isBrowser } from '@builder.io/qwik/build';
 import { parseQuery } from './parseQuery';
-import { Label } from '../repo-pulls/types';
 import { ClearFilterAndSortBtn } from '../clear-filter-and-sort-button';
 import { useLocation, useNavigate } from '@builder.io/qwik-city';
 import IssuesPRContext, { IssuesPRContextProps } from '../../context/issue-pr-store';
 import DropdownContext from '../../context/issue-tab-header-dropdown';
 import { Pagination } from '../pagination/pagination';
+import { OrderDirection, OrderField } from '~/utils/types';
 
 export interface IssuesProps {
   owner: string;
@@ -29,7 +29,7 @@ interface IssuesQueryParams {
   before?: string;
   orderBy: string;
   direction: string;
-  filterBy: { milestone?: string; labels: string[] | undefined };
+  filterBy: { milestone?: string; milestoneNumber?: string; labels: string[] | undefined };
 }
 
 export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
@@ -37,9 +37,6 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
   const navigate = useNavigate();
   const issuesStore = useContext(IssuesPRContext);
   const dropdownStore = useContext(DropdownContext);
-
-  const afterCursor = typeof location.query.after === 'string' ? location.query.after : undefined;
-  const beforeCursor = typeof location.query.before === 'string' ? location.query.before : undefined;
 
   const hasActiveFilter =
     dropdownStore.selectedLabel ||
@@ -50,65 +47,44 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
     dropdownStore.selectedLabel = undefined;
     dropdownStore.selectedMilestones = undefined;
     dropdownStore.selectedSort = sortOptions[0].value;
+    dropdownStore.selectedMilestoneNumber = undefined;
     navigate.path = `${location.pathname}?tab=${issuesStore.activeTab}`;
   });
 
-  useClientEffect$(async () => {
-    const abortController = new AbortController();
-    issuesStore.loading = true;
-    const response = await fetchRepoIssues(
-      {
-        owner,
-        name,
-        after: afterCursor,
-        before: beforeCursor,
-        first: afterCursor || !beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
-        last: beforeCursor ? DEFAULT_PAGE_SIZE : undefined,
-        orderBy: IssueOrderField.CreatedAt,
-        direction: OrderDirection.Desc,
-        filterBy: {
-          milestone: dropdownStore.selectedMilestones,
-          labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
-        },
-      },
-      abortController
-    );
+  useTask$(
+    async ({ track }) => {
+      const abortController = new AbortController();
+      issuesStore.loading = true;
+      const after = track(() => location.query.after);
+      const before = track(() => location.query.before);
+      track(() => dropdownStore.selectedSort);
+      track(() => dropdownStore.selectedMilestones);
+      track(() => dropdownStore.selectedLabel);
 
-    updateIssueState(issuesStore, parseQuery(response));
-  });
-
-  useTask$(async ({ track }) => {
-    const abortController = new AbortController();
-    issuesStore.loading = true;
-    const after = track(() => location.query.after);
-    const before = track(() => location.query.before);
-    track(() => issuesStore.activeTab);
-    track(() => dropdownStore.selectedSort);
-    track(() => dropdownStore.selectedMilestones);
-    track(() => dropdownStore.selectedLabel);
-
-    if (isBrowser) {
-      const response = await fetchRepoIssues(
-        {
-          owner,
-          name,
-          after,
-          before,
-          first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
-          last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
-          orderBy: dropdownStore.selectedSort.split('^')[0],
-          direction: dropdownStore.selectedSort.split('^')[1],
-          filterBy: {
-            milestone: dropdownStore.selectedMilestones,
-            labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
+      if (isBrowser) {
+        const response = await fetchRepoIssues(
+          {
+            owner,
+            name,
+            after,
+            before,
+            first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+            last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
+            orderBy: dropdownStore.selectedSort.split('^')[0] || OrderField.CreatedAt,
+            direction: dropdownStore.selectedSort.split('^')[1] || OrderDirection.Desc,
+            filterBy: {
+              milestoneNumber: dropdownStore.selectedMilestoneNumber,
+              labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
+            },
           },
-        },
-        abortController
-      );
+          abortController
+        );
 
-      updateIssueState(issuesStore, parseQuery(response));
-    }
-  });
+        updateIssueState(issuesStore, parseQuery(response));
+      }
+    },
+    { eagerness: 'load' }
+  );
 
   return (
     <>
@@ -159,8 +135,8 @@ export function updateIssueState(store: IssuesPRContextProps, response: ParsedIs
   store.openIssues = openIssues.issues;
   store.closedIssuesCount = closedIssues.totalCount;
   store.openIssuesCount = openIssues.totalCount;
-  store.issuesLabel = labels.map((lab: Label) => ({ label: lab.name, value: lab.name }));
-  store.milestones = milestones.map((milestone: Milestone) => ({ value: milestone.id, label: milestone.title }));
+  store.issuesLabel = store.issuesLabel.length ? store.issuesLabel : labels;
+  store.milestones = store.milestones.length ? store.milestones : milestones;
   store.openPageInfo = openIssues.pageInfo;
   store.closedPageInfo = closedIssues.pageInfo;
   store.loading = false;
@@ -169,7 +145,7 @@ export function updateIssueState(store: IssuesPRContextProps, response: ParsedIs
 export async function fetchRepoIssues(
   { owner, name, first, last, after, before, orderBy, direction, filterBy }: IssuesQueryParams,
   abortController?: AbortController
-): Promise<any> {
+) {
   const { executeQuery$ } = useQuery(ISSUES_QUERY);
   const resp = await executeQuery$({
     signal: abortController?.signal,

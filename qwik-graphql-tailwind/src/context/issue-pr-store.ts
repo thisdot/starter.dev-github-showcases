@@ -1,5 +1,6 @@
 import { createContext } from '@builder.io/qwik';
-import { Label } from '../components/repo-pulls/types';
+import { Milestone } from '~/components/issue-tab-view/type';
+import { Label } from '~/types';
 
 export type Tabs = 'open' | 'closed';
 
@@ -22,8 +23,8 @@ export interface IssuesPRContextProps {
   closedIssuesCount: number;
   openIssuesCount: number;
   loading: boolean;
-  milestones: { value: string; label: string }[];
-  issuesLabel: { value: string; label: string }[];
+  milestones: Milestone[];
+  issuesLabel: Label[];
   openPageInfo: {
     endCursor?: string;
     hasNextPage: boolean;

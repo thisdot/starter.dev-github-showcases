@@ -64,7 +64,7 @@ export function updateUserProfile(store: UserStore, response: any) {
   sessionStorage.setItem('user', JSON.stringify(response.data.viewer));
 }
 
-export async function fetchAuthenticatedUser(token: string | null, abortController?: AbortController): Promise<any> {
+export async function fetchAuthenticatedUser(token: string | null, abortController?: AbortController) {
   const { executeQuery$ } = useQuery(`
     query ViewerQuery {
       viewer {

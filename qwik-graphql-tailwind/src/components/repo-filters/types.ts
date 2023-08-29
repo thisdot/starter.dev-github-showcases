@@ -6,11 +6,6 @@ export enum RepositoryOrderField {
   UpdatedAt = 'UPDATED_AT',
 }
 
-export enum OrderDirection {
-  Asc = 'ASC',
-  Desc = 'DESC',
-}
-
 // export type FiltersAPI = ReturnType<typeof useRepoFilters>;
 
 export enum TypeFilter {

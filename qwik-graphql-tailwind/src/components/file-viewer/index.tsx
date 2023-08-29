@@ -75,7 +75,7 @@ export function updateFile(store: FileStore, response: any) {
   store.isLoading = false;
 }
 
-export async function fetchFile(payload: FileQueryParams, abortController?: AbortController): Promise<any> {
+export async function fetchFile(payload: FileQueryParams, abortController?: AbortController) {
   const { executeQuery$ } = useQuery(REPO_FILE_QUERY);
 
   const resp = await executeQuery$({

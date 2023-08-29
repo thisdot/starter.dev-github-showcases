@@ -57,7 +57,7 @@ export function updateGists(store: GistStore, response: any) {
   store.isLoading = false;
 }
 
-export async function fetchGIst(abortController?: AbortController): Promise<any> {
+export async function fetchGIst(abortController?: AbortController) {
   const { executeQuery$ } = useQuery(USER_GISTS_QUERY);
 
   const resp = await executeQuery$({
