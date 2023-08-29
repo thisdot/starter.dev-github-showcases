@@ -18,9 +18,13 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   openIssues: {
-    edges: ISSUES.openIssue,
+    pullRequests: ISSUES.openIssue,
+    totalCount: 20,
+    pageInfo: { hasNextPage: false, hasPreviousPage: false },
   },
   closedIssues: {
-    edges: ISSUES.closedIssue,
+    pullRequests: ISSUES.closedIssue,
+    totalCount: 20,
+    pageInfo: { hasNextPage: false, hasPreviousPage: false },
   },
 };

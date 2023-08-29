@@ -18,9 +18,13 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   openPullRequests: {
-    edges: PULL_REQUESTS.openPullRequest,
+    pullRequests: PULL_REQUESTS.openPullRequest,
+    totalCount: 20,
+    pageInfo: { hasNextPage: false, hasPreviousPage: false },
   },
   closedPullRequests: {
-    edges: PULL_REQUESTS.closedPullRequest,
+    pullRequests: PULL_REQUESTS.closedPullRequest,
+    totalCount: 20,
+    pageInfo: { hasNextPage: false, hasPreviousPage: false },
   },
 };

@@ -11,3 +11,10 @@ export * from './OrganizationRepositories';
 
 export * from './OrderBy';
 export * from './Label';
+
+export interface PageInfo {
+  startCursor?: string;
+  endCursor?: string;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+}
