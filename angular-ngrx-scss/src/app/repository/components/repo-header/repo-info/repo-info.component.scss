@@ -1,26 +1,27 @@
-@use '../../../../shared/styles/variables.scss';
+@use 'variables';
+@use 'functions';
 
 .info {
   display: flex;
-  gap: 0.9rem;
+  gap: functions.rem(13);
   &__counter {
     display: flex;
     border: 2px solid variables.$gray200;
-    border-radius: 0.5rem;
-    font-size: 0.9rem;
+    border-radius: variables.$padding;
+    font-size: functions.rem(13);
     &__icon {
       display: flex;
       align-items: center;
-      line-height: 0.5rem;
-      padding: 0.125rem 0.9rem;
-      gap: 0.5rem;
+      line-height: variables.$padding;
+      padding: functions.rem(2) functions.rem(13);
+      gap: variables.$padding;
       border-right: 2px solid variables.$gray200;
     }
     &__count {
-      border-top-right-radius: 0.5rem;
-      border-bottom-right-radius: 0.5rem;
+      border-top-right-radius: variables.$padding;
+      border-bottom-right-radius: variables.$padding;
       background-color: variables.$white;
-      padding: 0.125rem 0.9rem;
+      padding: functions.rem(2) functions.rem(13);
     }
   }
 }

@@ -1,3 +1,6 @@
+@use 'variables';
+@use 'functions';
+
 .org-info-container {
   a {
     display: flex;
@@ -6,16 +9,16 @@
     color: inherit;
     .title {
       font-weight: 700;
-      font-size: 1.5rem;
-      line-height: 2rem;
+      font-size: functions.rem(21);
+      line-height: functions.rem(28);
     }
     img {
       display: block;
       width: 32px;
       height: 32px;
-      margin-right: 0.25rem;
+      margin-right: variables.$padding--s;
       aspect-ratio: 1/1;
-      border-radius: 0.25rem;
+      border-radius: variables.$padding--s;
       box-sizing: content-box;
       background-color: white;
     }

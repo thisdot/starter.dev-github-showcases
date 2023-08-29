@@ -1,10 +1,11 @@
-@use '../../styles/variables.scss';
+@use 'variables';
+@use 'functions';
 
 $color-open: variables.$green100;
 $color-closed: variables.$purple100;
 
 .item {
-  padding: 1.125rem;
+  padding: functions.rem(16);
   border-bottom: 1px solid variables.$gray200;
 
   &:hover {
@@ -28,7 +29,7 @@ $color-closed: variables.$purple100;
 }
 
 .icon {
-  margin-right: 0.5rem;
+  margin-right: variables.$padding;
 
   &.open {
     color: $color-open;
@@ -41,9 +42,9 @@ $color-closed: variables.$purple100;
 
 .content {
   .title {
-    font-size: 1.125rem;
+    font-size: functions.rem(16);
     font-weight: 600;
-    margin-right: 0.25rem;
+    margin-right: variables.$padding--s;
 
     &:hover {
       color: variables.$blue300;
@@ -52,18 +53,18 @@ $color-closed: variables.$purple100;
 
   .label {
     font-weight: 500;
-    font-size: 0.875rem;
-    margin: 0 0.385rem;
-    padding: 0.125rem 0.5rem;
+    font-size: functions.rem(12);
+    margin: 0 functions.rem(5);
+    padding: functions.rem(2) variables.$padding;
     cursor: pointer;
-    border-radius: 0.875rem;
+    border-radius: functions.rem(12);
   }
 }
 
 .meta {
-  line-height: 0.875rem;
-  font-size: 0.875rem;
-  margin-top: 0.325rem;
+  line-height: functions.rem(12);
+  font-size: functions.rem(12);
+  margin-top: functions.rem(5);
   color: variables.$gray600;
 
   .created-by {

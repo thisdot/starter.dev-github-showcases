@@ -1,0 +1,4 @@
+@function rem($pxValue, $sizeBase: 14) {
+  $remValue: ($pxValue / $sizeBase) + rem;
+  @return $remValue;
+}

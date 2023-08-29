@@ -1,6 +1,6 @@
-@use '../../shared/styles/variables';
+@use 'variables';
 
 .issues-container {
-  border-radius: 0.5rem;
+  border-radius: variables.$padding;
   border: 1px solid variables.$gray200;
 }

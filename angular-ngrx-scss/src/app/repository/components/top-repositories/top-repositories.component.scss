@@ -1,26 +1,27 @@
-@use '../../../shared/styles/variables';
+@use 'variables';
+@use 'functions';
 
 :host {
   display: grid;
   grid-template-columns: 1fr;
   background: variables.$gray100;
   @media (min-width: variables.$md) {
-    grid-template-columns: 24rem 1fr;
+    grid-template-columns: functions.rem(340) 1fr;
   }
 }
 
 aside {
   background: variables.$white;
-  padding: 2rem;
+  padding: functions.rem(28);
   @media (max-width: variables.$md) {
     order: 2;
   }
 }
 
 .top-repositories-container {
-  padding: 1.5rem;
+  padding: functions.rem(21);
   @media (min-width: variables.$md) {
-    padding: 3rem;
+    padding: functions.rem(42);
   }
 
   h2 {
@@ -32,20 +33,20 @@ aside {
 
   .repo-container {
     background-color: variables.$white;
-    border-radius: 0.5rem;
+    border-radius: variables.$padding;
     border-width: 1px;
   }
 
   .repo-section {
-    padding: 1rem;
+    padding: variables.$padding--l;
     border-bottom: 1px solid variables.$gray300;
     @media (min-width: variables.$md) {
-      padding: 2rem 0 2rem 2rem;
+      padding: functions.rem(28) 0 functions.rem(28) functions.rem(28);
     }
   }
 
   .view-all-link {
-    padding: 1.25rem;
+    padding: functions.rem(18);
     background-color: variables.$gray200;
     display: grid;
     place-items: center;

@@ -1,3 +1,5 @@
+@use 'functions';
+
 .container.subpage {
-  gap: 2rem;
+  gap: functions.rem(28);
 }

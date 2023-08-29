@@ -1,4 +1,5 @@
-@use '../../../shared/styles/variables';
+@use 'variables';
+@use 'functions';
 
 :host {
   border: 1px solid variables.$gray100;
@@ -13,15 +14,15 @@
   border-spacing: 5px;
   background-color: variables.$white;
   overflow: auto;
-  padding: 0.25rem 2rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  padding: variables.$padding--s functions.rem(28);
+  font-size: functions.rem(11);
+  line-height: variables.$padding--l;
   text-align: left;
 }
 
 .lineNumber {
   display: table-cell;
-  padding-right: 1rem;
+  padding-right: variables.$padding--l;
   color: variables.$gray500;
   text-align: right;
   user-select: none;
