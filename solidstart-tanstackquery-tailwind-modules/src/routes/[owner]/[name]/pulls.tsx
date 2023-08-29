@@ -68,19 +68,18 @@ const PullRequests = () => {
               : undefined,
           last: searchParams.before ? DEFAULT_PAGE_SIZE : undefined,
         });
-      const labels = resp.labels || pullRequests().labels;
-      const milestones = resp.milestones || pullRequests().milestones;
-      const data = {
-        ...resp,
-        labels,
-        milestones,
-      } as PullRequestsSignal;
-      setPullRequests(data);
-      return resp;
+        const labels = resp.labels || pullRequests().labels;
+        const milestones = resp.milestones || pullRequests().milestones;
+        const data = {
+          ...resp,
+          labels,
+          milestones,
+        } as PullRequestsSignal;
+        setPullRequests(data);
+        return resp;
       }
-      return null
+      return null;
     }
-
   );
 
   return (

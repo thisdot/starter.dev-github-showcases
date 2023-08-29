@@ -101,13 +101,7 @@ const getRepoPullRequests = async (variables: PullRequestVariables) => {
     },
   };
 
-  let openPullRequests;
-  let closedPullRequests;
-  let milestones: MilestoneProps[] = [];
-  let labelMap: Label[] = [];
-
   if (variables.milestone) {
-    //
     const pulls_data = {
       owner: variables.owner,
       name: variables.name,
@@ -155,31 +149,37 @@ const getRepoPullRequests = async (variables: PullRequestVariables) => {
       },
     })) as MilestoneProps[];
 
-    milestones = restRepoMilestone;
-    labelMap = restRepoLabels;
+    const milestones = restRepoMilestone;
+    const labelMap = restRepoLabels;
 
-    openPullRequests = parseRestAPIPullRequests(restOpenPullRequests);
-    closedPullRequests = parseRestAPIPullRequests(restClosedPullRequests);
+    const openPullRequests = parseRestAPIPullRequests(restOpenPullRequests);
+    const closedPullRequests = parseRestAPIPullRequests(restClosedPullRequests);
+
+    return {
+      openPullRequests,
+      closedPullRequests,
+      milestones,
+      labels: labelMap,
+    };
   } else {
     const resp = (await FetchApi(data)) as Response;
 
-    openPullRequests = parsePullRequests(
+    const openPullRequests = parsePullRequests(
       resp.data.repository?.openPullRequests
     );
 
-    closedPullRequests = parsePullRequests(
+    const closedPullRequests = parsePullRequests(
       resp.data.repository?.closedPullRequests
     );
-    milestones = parseMilestones(resp.data.repository?.milestones);
-    labelMap = parseLabels(resp.data.repository?.labels);
+    const milestones = parseMilestones(resp.data.repository?.milestones);
+    const labelMap = parseLabels(resp.data.repository?.labels);
+    return {
+      openPullRequests,
+      closedPullRequests,
+      milestones,
+      labels: labelMap,
+    };
   }
-
-  return {
-    openPullRequests,
-    closedPullRequests,
-    milestones,
-    labels: labelMap,
-  };
 };
 
 export default getRepoPullRequests;
