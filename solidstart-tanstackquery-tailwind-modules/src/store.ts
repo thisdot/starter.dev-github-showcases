@@ -7,6 +7,7 @@ const [sortBy, setSortBy] = createSignal('Newest');
 const [selectedLabel, setSelectedLabel] = createSignal<string>();
 const [selectedMilestone, setSelectedMilestone] = createSignal<string>();
 const [milestoneId, setMilestoneId] = createSignal<string>();
+const [milestoneNumber, setMilestoneNumber] = createSignal<string>();
 
 const [pullRequests, setPullRequests] = createSignal<PullRequestsSignal>({
   openPullRequests: {
@@ -19,6 +20,7 @@ const [pullRequests, setPullRequests] = createSignal<PullRequestsSignal>({
     totalCount: 0,
     pageInfo: { hasNextPage: false, hasPreviousPage: false },
   },
+  milestones: [],
   labels: [],
 });
 
@@ -52,4 +54,6 @@ export {
   setPullRequests,
   issues,
   setIssues,
+  milestoneNumber,
+  setMilestoneNumber,
 };

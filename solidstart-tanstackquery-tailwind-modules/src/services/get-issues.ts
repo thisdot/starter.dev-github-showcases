@@ -2,14 +2,9 @@ import FetchApi from './api';
 import { useAuth } from '../auth';
 import { ISSUES_QUERY } from './queries/issue-info';
 import { GITHUB_GRAPHQL } from '../utils/constants';
-import {
-  MilestoneProps,
-  Variables,
-  Response,
-  IssueProps,
-  Issue,
-} from '~/types/issues-type';
+import { Variables, Response, IssueProps, Issue } from '~/types/issues-type';
 import { Label } from '~/types/label-type';
+import { parseLabels, parseMilestones } from '~/utils/parseFunctions';
 
 function parseIssues(data: IssueProps) {
   if (!data) {
@@ -62,43 +57,6 @@ function parseIssues(data: IssueProps) {
   }, []);
 
   return { issues, totalCount, pageInfo };
-}
-
-function parseMilestones(milestones: { nodes: MilestoneProps[] }) {
-  const nodes = milestones?.nodes || [];
-  return nodes.reduce((milestones: MilestoneProps[], milestone) => {
-    if (!milestone) {
-      return milestones;
-    }
-
-    return [
-      ...milestones,
-      {
-        id: milestone.id,
-        closed: milestone.closed,
-        title: milestone.title,
-        number: milestone.number,
-        description: milestone.description,
-      },
-    ];
-  }, []);
-}
-
-function parseLabels(labels: { nodes: Label[] }) {
-  const nodes = labels?.nodes || [];
-  return nodes.reduce((labels: Label[], label) => {
-    if (!label) {
-      return labels;
-    }
-
-    return [
-      ...labels,
-      {
-        color: label.color,
-        name: label.name,
-      },
-    ];
-  }, []);
 }
 
 const getIssues = async ({
