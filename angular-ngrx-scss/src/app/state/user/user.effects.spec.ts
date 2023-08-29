@@ -126,7 +126,6 @@ const MOCK_TOP_REPOS: UserReposApiResponse = [
 describe('UserEffects', () => {
   let actions$: Observable<Action>;
   let effects: UserEffects;
-  let store: MockStore;
   let userServiceMock: jasmine.SpyObj<UserService>;
 
   beforeEach(() => {
@@ -164,7 +163,7 @@ describe('UserEffects', () => {
     });
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    store = TestBed.inject(MockStore);
+    TestBed.inject(MockStore);
     effects = TestBed.inject(UserEffects);
   });
 

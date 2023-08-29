@@ -1,12 +1,12 @@
+<app-pull-requests-header
+  [openPullRequests]="openPullRequests$ | async"
+  [closedPullRequests]="closedPullRequests$ | async"
+  [viewState]="viewState"
+  (viewStateChange)="viewStateChange($event)"
+  [owner]="owner"
+  [repoName]="repoName"
+></app-pull-requests-header>
 <div class="container pull-requests-container">
-  <app-pull-requests-header
-    [openPullRequests]="openPullRequests$ | async"
-    [closedPullRequests]="closedPullRequests$ | async"
-    [viewState]="viewState"
-    (viewStateChange)="viewStateChange($event)"
-    [owner]="owner"
-    [repoName]="repoName"
-  ></app-pull-requests-header>
   <app-pull-requests-list
     [pullRequests]="
       viewState === 'open'

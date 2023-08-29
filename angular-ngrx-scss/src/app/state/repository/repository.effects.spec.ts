@@ -269,6 +269,8 @@ describe('RepositoryEffects', () => {
       labels: [],
       milestones: [],
       path: '',
+      issuesFilterParams: null,
+      pullsFilterParams: null,
     };
 
     repoServiceMock.getRepositoryInfo.and.returnValue(of(MOCK_REPO_INFO));

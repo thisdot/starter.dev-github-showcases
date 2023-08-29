@@ -25,6 +25,8 @@ export const initialRepositoryState: RepositoryState = {
   website: '',
   milestones: [],
   labels: [],
+  pullsFilterParams: null,
+  issuesFilterParams: null,
 };
 
 const reducer = createReducer(
@@ -43,6 +45,7 @@ const reducer = createReducer(
     (state, { pullRequests, params }) => {
       return {
         ...state,
+        pullsFilterParams: params,
         openPullRequests:
           params.state === 'open' ? pullRequests : state.openPullRequests,
         closedPullRequests:
@@ -54,6 +57,7 @@ const reducer = createReducer(
   on(RepositoryActions.fetchIssuesSuccess, (state, { issues, params }) => {
     return {
       ...state,
+      issuesFilterParams: params,
       openIssues: params.state === 'open' ? issues : state.openIssues,
       closedIssues: params.state === 'closed' ? issues : state.closedIssues,
     };

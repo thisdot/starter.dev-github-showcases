@@ -2,7 +2,8 @@
 @use 'functions';
 
 .pull-requests-container {
-  border-radius: variables.$padding;
+  border-bottom-left-radius: variables.$padding;
+  border-bottom-right-radius: variables.$padding;
   border: 1px solid variables.$gray200;
-  margin: functions.rem(28) auto;
+  margin-bottom: functions.rem(14);
 }

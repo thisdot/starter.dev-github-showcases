@@ -14,7 +14,7 @@ export type TokenEnv = {
   tokens: Array<string | PrismToken>;
 };
 
-export type StyleObj = { [klass: string]: any } | null;
+export type StyleObj = { [klass: string]: unknown } | null;
 
 export type LineInputProps = {
   style?: StyleObj;

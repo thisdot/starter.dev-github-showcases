@@ -86,6 +86,8 @@ export class RepositoryEffects {
               readme: readme.content || '',
               milestones: milestones || [],
               labels: labels || [],
+              pullsFilterParams: null,
+              issuesFilterParams: null,
             };
             return fetchRepositorySuccess({ repoData: allData });
           }),

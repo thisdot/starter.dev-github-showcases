@@ -1,4 +1,4 @@
-<div class="container issues-container">
+<div class="container">
   <app-issues-header
     [viewState]="viewState"
     [openIssues]="openIssues$ | async"
@@ -7,6 +7,8 @@
     [repoName]="repoName"
     (viewStateChange)="viewStateChange($event)"
   ></app-issues-header>
+</div>
+<div class="container issues-container">
   <app-issues-list
     [issues]="
       viewState === 'open' ? (openIssues$ | async) : (closedIssues$ | async)

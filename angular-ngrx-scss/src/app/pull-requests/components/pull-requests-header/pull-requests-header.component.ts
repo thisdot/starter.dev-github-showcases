@@ -9,6 +9,7 @@ import {
   ISSUE_STATE,
   RepoPullRequests,
   fetchPullRequests,
+  selectHasActivePullRequestFilters,
   selectLabels,
 } from '../../../state/repository';
 import { Store } from '@ngrx/store';
@@ -30,6 +31,8 @@ export class PullRequestsHeaderComponent {
   @Input() closedPullRequests!: RepoPullRequests | null;
   @Input() viewState: ISSUE_STATE = 'open';
   @Output() viewStateChange = new EventEmitter<ISSUE_STATE>();
+
+  hasFilters$ = this.store.select(selectHasActivePullRequestFilters);
 
   filterParams: { labels?: string; sort: Sort } = {
     sort: 'created',
@@ -59,6 +62,11 @@ export class PullRequestsHeaderComponent {
 
   setSort(sort: string) {
     this.filterParams.sort = sort as Sort;
+    this.refetchPulls();
+  }
+
+  clearFilters() {
+    this.filterParams = { sort: 'created' };
     this.refetchPulls();
   }
 

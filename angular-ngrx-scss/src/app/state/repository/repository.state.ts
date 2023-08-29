@@ -1,6 +1,7 @@
 import {
   Issue,
   PullRequest,
+  RepositoryIssuesApiParams,
 } from 'src/app/repository/services/repository.interfaces';
 import { UserApiResponse } from '../user';
 
@@ -27,6 +28,8 @@ export interface RepositoryState {
   website: string;
   milestones: Milestone[];
   labels: IssueLabel[];
+  pullsFilterParams: RepositoryIssuesApiParams | null;
+  issuesFilterParams: RepositoryIssuesApiParams | null;
 }
 
 export interface Milestone {

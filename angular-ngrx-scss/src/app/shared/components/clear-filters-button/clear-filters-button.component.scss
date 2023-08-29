@@ -1,0 +1,36 @@
+@use 'variables';
+@use 'functions';
+
+.button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: variables.$padding;
+  color: variables.$gray500;
+
+  &:hover {
+    color: variables.$blue600;
+  }
+
+  &__icon {
+    background: variables.$gray500;
+    border-radius: variables.$padding--s;
+    width: functions.rem(20);
+    height: functions.rem(20);
+    display: grid;
+    place-items: center;
+  }
+
+  &:hover &__icon {
+    background: variables.$blue600;
+  }
+
+  &__text:empty::after {
+    content: 'Clear filter';
+  }
+}
