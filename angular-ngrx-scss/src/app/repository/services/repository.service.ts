@@ -1,18 +1,22 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import {
   FileContentsApiResponse,
-  PR_STATE,
+  ISSUE_STATE,
+  IssueAPIResponse,
+  IssueLabel,
+  Milestone,
   PullRequestAPIResponse,
   ReadmeApiResponse,
   RepoApiResponse,
   RepoContentsApiResponse,
+  RepoIssues,
 } from 'src/app/state/repository';
 import { environment } from 'src/environments/environment';
 import {
+  Issue,
   IssueComments,
-  Issues,
   PullRequest,
   PullRequests,
   RepositoryIssuesApiParams,
@@ -60,6 +64,48 @@ export class RepositoryService {
     const url = `${environment.githubUrl}/repos/${owner}/${name}/pulls`;
 
     return this.http.get<PullRequests>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  /**
+   * Gets a list of all the milestones for the specified repository
+   * @param repoOwner who the repo belongs to
+   * @param repoName name of the repo
+   * @returns an array of milestones
+   */
+  getRepositoryMilestones(
+    repoOwner: string,
+    repoName: string,
+  ): Observable<Milestone[]> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/milestones`;
+
+    return this.http.get<Milestone[]>(url, {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+  }
+
+  /**
+   * Gets a list of all the milestones for the specified repository
+   * @param repoOwner who the repo belongs to
+   * @param repoName name of the repo
+   * @returns an array of milestones
+   */
+  getRepositoryLabels(
+    repoOwner: string,
+    repoName: string,
+  ): Observable<IssueLabel[]> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/labels`;
+
+    return this.http.get<IssueLabel[]>(url, {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },
@@ -125,7 +171,7 @@ export class RepositoryService {
   getPullRequests(
     repoOwner: string,
     repoName: string,
-    prState: PR_STATE,
+    prState: ISSUE_STATE,
   ): Observable<PullRequestAPIResponse> {
     const owner = encodeURIComponent(repoOwner);
     const name = encodeURIComponent(repoName);
@@ -150,27 +196,68 @@ export class RepositoryService {
     repoOwner: string,
     repoName: string,
     params?: RepositoryIssuesApiParams,
-  ): Observable<Issues> {
+  ): Observable<RepoIssues> {
     const defaultParams = {
       state: 'all',
       sort: 'created',
       direction: 'desc',
       per_page: 30,
       page: 1,
+      pulls: false,
     };
 
     const owner = encodeURIComponent(repoOwner);
     const name = encodeURIComponent(repoName);
-    const url = `${environment.githubUrl}/repos/${owner}/${name}/issues`;
+    const state = encodeURIComponent(params?.state ?? defaultParams.state);
+    let url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:issue+state:${state}`;
 
-    return this.http.get<Issues>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-      params: new HttpParams({
-        fromObject: { ...Object.assign(defaultParams, params) },
-      }),
-    });
+    if (params?.labels) {
+      url += `+label:"${params.labels}"`;
+    }
+
+    if (params?.milestone) {
+      url += `+milestone:"${params.milestone}"`;
+    }
+
+    if (params?.sort) {
+      url += `+sort:${params.sort}`;
+    }
+
+    if (params?.page) {
+      url += `&page=${params.page}`;
+    }
+
+    return this.http
+      .get(url, {
+        observe: 'response',
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+      })
+      .pipe(
+        map((response) => {
+          const linkHeader = response.headers.get('Link');
+
+          const canNext = !!(linkHeader && linkHeader.includes('rel="next"'));
+          const canPrev = !!(linkHeader && linkHeader.includes('rel="prev"'));
+
+          const data = response.body as IssueAPIResponse;
+
+          const total = data.total_count;
+
+          const page = params?.page || 1;
+
+          const paginationParams = {
+            canNext,
+            canPrev,
+            page,
+          };
+
+          const issues: Issue[] = data.items;
+
+          return { issues, paginationParams, total } as RepoIssues;
+        }),
+      );
   }
 
   /**

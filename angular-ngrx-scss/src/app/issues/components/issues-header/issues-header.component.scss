@@ -22,8 +22,10 @@
     gap: variables.$padding--l;
     color: variables.$gray600;
 
-    a {
+    button {
       color: inherit;
+      border: none;
+      cursor: pointer;
 
       .icon {
         margin-right: functions.rem(5);

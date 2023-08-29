@@ -33,15 +33,22 @@ export interface Issue {
 
 export type Issues = Array<Issue>;
 
+export type Sort =
+  | 'created'
+  | 'created-asc'
+  | 'updated'
+  | 'updated-asc'
+  | 'comments'
+  | 'comments-asc';
+
 export interface RepositoryIssuesApiParams {
   milestone?: string;
-  state?: 'open' | 'closed' | 'all';
+  state: 'open' | 'closed' | 'all';
   assignee?: string;
   creator?: string;
   mentioned?: string;
   labels?: string;
-  sort?: 'created' | 'updated' | 'comments';
-  direction?: 'asc' | 'desc';
+  sort?: Sort;
   since?: string;
   per_page?: number;
   page?: number;

@@ -32,5 +32,12 @@
       border-bottom-right-radius: functions.rem(5);
       border-left: 0;
     }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: variables.$gray200;
+      color: variables.$gray400;
+      border-color: variables.$gray200;
+    }
   }
 }

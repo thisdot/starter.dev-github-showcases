@@ -1,3 +1,4 @@
+import { Issue } from 'src/app/repository/services/repository.interfaces';
 import { UserApiResponse } from '../user';
 
 export interface RepositoryState {
@@ -13,11 +14,53 @@ export interface RepositoryState {
   tree: RepoContents[];
   openPullRequests: RepoPullRequests | null;
   closedPullRequests: RepoPullRequests | null;
+  openIssues: RepoIssues | null;
+  closedIssues: RepoIssues | null;
   activeBranch: string;
   selectedFile: FileContents | null;
   visibility: string;
   watchCount: number;
   website: string;
+  milestones: Milestone[];
+  labels: IssueLabel[];
+}
+
+export interface Milestone {
+  url: string;
+  html_url: string;
+  labels_url: string;
+  id: number;
+  node_id: string;
+  number: number;
+  state: ISSUE_STATE;
+  title: string;
+  description: string;
+  creator: {
+    login: string;
+    id: number;
+    node_id: string;
+    avatar_url: string;
+    gravatar_id: string;
+    url: string;
+    html_url: string;
+    followers_url: string;
+    following_url: string;
+    gists_url: string;
+    starred_url: string;
+    subscriptions_url: string;
+    organizations_url: string;
+    repos_url: string;
+    events_url: string;
+    received_events_url: string;
+    type: string;
+    site_admin: boolean;
+  };
+  open_issues: number;
+  closed_issues: number;
+  created_at: Date;
+  updated_at: Date;
+  closed_at: Date;
+  due_on: Date;
 }
 
 export interface RepoApiResponse {
@@ -175,7 +218,7 @@ export interface ReadmeApiResponse {
   };
 }
 
-export interface PullRequestLabel {
+export interface IssueLabel {
   id: number;
   node_id: string;
   url: string;
@@ -197,7 +240,7 @@ export interface PullRequestItemAPIResponse {
   number: number;
   title: string;
   user: Partial<UserApiResponse>;
-  labels: PullRequestLabel[];
+  labels: IssueLabel[];
   state: string;
   locked: boolean;
   assignee: string | null;
@@ -239,6 +282,24 @@ export interface RepoPullRequests {
   pullRequests: RepoPullRequest[];
 }
 
+export interface IssueAPIResponse {
+  total_count: number;
+  incomplete_results: boolean;
+  items: Issue[];
+}
+
+export interface PaginationParams {
+  page: number;
+  canNext: boolean;
+  canPrev: boolean;
+}
+
+export interface RepoIssues {
+  paginationParams: PaginationParams;
+  total: number;
+  issues: Issue[];
+}
+
 export interface RepoPullRequest {
   id: number;
   login?: string | null;
@@ -259,7 +320,7 @@ export interface RepoPullRequest {
   labelCount: number;
 }
 
-export type PR_STATE = 'open' | 'closed';
+export type ISSUE_STATE = 'open' | 'closed';
 
 export enum AUTHOR_ASSOCIATION {
   COLLABORATOR = 'COLLABORATOR',

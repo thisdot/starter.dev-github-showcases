@@ -1,5 +1,23 @@
 <div class="container issues-container">
-  <app-issues-header></app-issues-header>
-  <app-issues-list></app-issues-list>
+  <app-issues-header
+    [viewState]="viewState"
+    [openIssues]="openIssues$ | async"
+    [closedIssues]="closedIssues$ | async"
+    [owner]="owner"
+    [repoName]="repoName"
+    (viewStateChange)="viewStateChange($event)"
+  ></app-issues-header>
+  <app-issues-list
+    [issues]="
+      viewState === 'open' ? (openIssues$ | async) : (closedIssues$ | async)
+    "
+  ></app-issues-list>
 </div>
-<app-pagination></app-pagination>
+<app-pagination
+  [params]="
+    viewState === 'open'
+      ? (openIssuesPaginationParams$ | async)
+      : (closedIssuesPaginationParams$ | async)
+  "
+  (pageChange)="pageChange($event)"
+></app-pagination>

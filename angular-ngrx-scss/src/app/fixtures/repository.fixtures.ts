@@ -1,13 +1,13 @@
 import {
-  PR_STATE,
+  ISSUE_STATE,
   PullRequestAPIResponse,
   PullRequestItemAPIResponse,
-  PullRequestLabel,
+  IssueLabel,
   RepoPullRequests,
 } from '../state/repository';
 
 export const generatePullRequestAPIResponseFixture = (
-  state: PR_STATE = 'open',
+  state: ISSUE_STATE = 'open',
 ): PullRequestAPIResponse => {
   const closedDate = new Date(2022, 2, 1).toISOString();
   return {
@@ -34,7 +34,7 @@ export const generatePullRequestAPIResponseFixture = (
         labels: [
           {
             name: 'bugs',
-          } as PullRequestLabel,
+          } as IssueLabel,
         ],
         comments: 305,
       } as PullRequestItemAPIResponse,
