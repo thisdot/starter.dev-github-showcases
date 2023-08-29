@@ -74,7 +74,9 @@ const RepoIssues = () => {
   return (
     <div class="md:py-12 max-w-screen-xl mx-auto">
       <Show when={!repo.loading} fallback={<PRAndIssueLoaderSkeleton />}>
-        <Show when={selectedLabel() || sortBy() !== 'Newest'}>
+        <Show
+          when={selectedLabel() || sortBy() !== 'Newest' || milestoneNumber()}
+        >
           <button
             type="button"
             class="flex items-center gap-2 text-sm my-4 ml-2 cursor-pointer"
