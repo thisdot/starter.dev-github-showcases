@@ -1,5 +1,4 @@
 <template>
-  {{ repoStore.loading }}
   <pull-request-wrapper :pullRequestsData="pullRequestsData" />
 </template>
 
