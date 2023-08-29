@@ -223,6 +223,10 @@ export class RepositoryService {
       url += `+sort:${params.sort}`;
     }
 
+    if (params?.page) {
+      url += `&page=${params.page}`;
+    }
+
     return this.http
       .get(url, {
         observe: 'response',
