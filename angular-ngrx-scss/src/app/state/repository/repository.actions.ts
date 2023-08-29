@@ -5,10 +5,7 @@ import {
   RepoPullRequests,
   RepositoryState,
 } from './repository.state';
-import {
-  RepositoryIssuesApiParams,
-  RepositoryPullsApiParams,
-} from 'src/app/repository/services/repository.interfaces';
+import { RepositoryIssuesApiParams } from 'src/app/repository/services/repository.interfaces';
 
 export const fetchRepository = createAction(
   '[Repository API] Fetch Repository',
@@ -50,7 +47,7 @@ export const fetchPullRequests = createAction(
   props<{
     owner: string;
     repoName: string;
-    params: RepositoryPullsApiParams;
+    params: RepositoryIssuesApiParams;
   }>(),
 );
 
@@ -58,7 +55,7 @@ export const fetchPullRequestsSuccess = createAction(
   '[Repository API] Fetch Pull Requests Success',
   props<{
     pullRequests: RepoPullRequests;
-    params: RepositoryPullsApiParams;
+    params: RepositoryIssuesApiParams;
   }>(),
 );
 

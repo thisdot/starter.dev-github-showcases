@@ -54,13 +54,6 @@ export interface RepositoryIssuesApiParams {
   page?: number;
 }
 
-export interface RepositoryPullsApiParams {
-  state: 'open' | 'closed' | 'all';
-  labels?: string;
-  sort?: Sort;
-  page?: number;
-}
-
 export interface PullRequest extends Issue {
   merged: boolean;
   mergeable: boolean;

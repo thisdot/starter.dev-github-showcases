@@ -1,7 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { RepoContents, fetchRepository, selectedRepository } from '../../state/repository';
+import {
+  RepoContents,
+  fetchRepository,
+  selectedRepository,
+} from '../../state/repository';
 import { map, takeWhile, tap } from 'rxjs';
 
 @Component({
@@ -9,7 +13,7 @@ import { map, takeWhile, tap } from 'rxjs';
   templateUrl: './file-explorer.component.html',
   styleUrls: ['./file-explorer.component.scss'],
 })
-export class FileExplorerComponent implements OnDestroy {
+export class FileExplorerComponent implements OnInit, OnDestroy {
   owner = '';
   repoName = '';
   path = '';
@@ -32,8 +36,7 @@ export class FileExplorerComponent implements OnDestroy {
   );
   private componentActive = true;
 
-  constructor(private route: ActivatedRoute, private store: Store) { }
-
+  constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit() {
     this.route.paramMap

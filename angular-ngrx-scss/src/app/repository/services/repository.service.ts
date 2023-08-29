@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import {
@@ -6,6 +6,7 @@ import {
   IssueAPIResponse,
   IssueLabel,
   Milestone,
+  PaginationParams,
   PullRequestAPIResponse,
   ReadmeApiResponse,
   RepoApiResponse,
@@ -20,7 +21,6 @@ import {
   PullRequest,
   PullRequests,
   RepositoryIssuesApiParams,
-  RepositoryPullsApiParams,
 } from './repository.interfaces';
 
 @Injectable({
@@ -87,24 +87,14 @@ export class RepositoryService {
   getRepositoryPullRequests(
     repoOwner: string,
     repoName: string,
-    params: RepositoryPullsApiParams,
+    params: RepositoryIssuesApiParams,
   ): Observable<RepoPullRequests> {
     const owner = encodeURIComponent(repoOwner);
     const name = encodeURIComponent(repoName);
     const state = encodeURIComponent(params.state);
     let url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:pr+state:${state}`;
 
-    if (params?.labels) {
-      url += `+label:"${params.labels}"`;
-    }
-
-    if (params?.sort) {
-      url += `+sort:${params.sort}`;
-    }
-
-    if (params?.page) {
-      url += `&page=${params.page}`;
-    }
+    url = this.appendUrlParams(url, params);
 
     return this.http
       .get(url, {
@@ -115,22 +105,16 @@ export class RepositoryService {
       })
       .pipe(
         map((response) => {
-          const linkHeader = response.headers.get('Link');
-
-          const canNext = !!(linkHeader && linkHeader.includes('rel="next"'));
-          const canPrev = !!(linkHeader && linkHeader.includes('rel="prev"'));
-
           const data = response.body as PullRequestAPIResponse;
 
           const total = data.total_count;
 
           const page = params?.page || 1;
 
-          const paginationParams = {
-            canNext,
-            canPrev,
+          const paginationParams = this.getPaginationParams(
+            response.headers,
             page,
-          };
+          );
 
           const pullRequests: PullRequest[] = data.items;
 
@@ -255,21 +239,7 @@ export class RepositoryService {
     const state = encodeURIComponent(params?.state ?? defaultParams.state);
     let url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:issue+state:${state}`;
 
-    if (params?.labels) {
-      url += `+label:"${params.labels}"`;
-    }
-
-    if (params?.milestone) {
-      url += `+milestone:"${params.milestone}"`;
-    }
-
-    if (params?.sort) {
-      url += `+sort:${params.sort}`;
-    }
-
-    if (params?.page) {
-      url += `&page=${params.page}`;
-    }
+    url = this.appendUrlParams(url, params);
 
     return this.http
       .get(url, {
@@ -280,22 +250,16 @@ export class RepositoryService {
       })
       .pipe(
         map((response) => {
-          const linkHeader = response.headers.get('Link');
-
-          const canNext = !!(linkHeader && linkHeader.includes('rel="next"'));
-          const canPrev = !!(linkHeader && linkHeader.includes('rel="prev"'));
-
           const data = response.body as IssueAPIResponse;
 
           const total = data.total_count;
 
           const page = params?.page || 1;
 
-          const paginationParams = {
-            canNext,
-            canPrev,
+          const paginationParams = this.getPaginationParams(
+            response.headers,
             page,
-          };
+          );
 
           const issues: Issue[] = data.items;
 
@@ -419,5 +383,43 @@ export class RepositoryService {
     }
 
     return page;
+  }
+
+  private appendUrlParams(
+    url: string,
+    params?: RepositoryIssuesApiParams,
+  ): string {
+    if (params?.labels) {
+      url += `+label:"${params.labels}"`;
+    }
+
+    if (params?.milestone) {
+      url += `+milestone:"${params.milestone}"`;
+    }
+
+    if (params?.sort) {
+      url += `+sort:${params.sort}`;
+    }
+
+    if (params?.page) {
+      url += `&page=${params.page}`;
+    }
+    return url;
+  }
+
+  private getPaginationParams(
+    headers: HttpHeaders,
+    page: number,
+  ): PaginationParams {
+    const linkHeader = headers.get('Link');
+
+    const canNext = !!(linkHeader && linkHeader.includes('rel="next"'));
+    const canPrev = !!(linkHeader && linkHeader.includes('rel="prev"'));
+
+    return {
+      canNext,
+      canPrev,
+      page,
+    };
   }
 }
