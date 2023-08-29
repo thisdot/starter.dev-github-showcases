@@ -42,10 +42,10 @@ watch([() => props.pullRequestsData.value], () => {
 });
 
 const openPullRequests = computed(
-  () => props.pullRequestsData?.value.openPullRequest || null,
+  () => props.pullRequestsData.value?.openPullRequest || null,
 );
 const closedPullRequests = computed(
-  () => props.pullRequestsData?.value.closedPullRequest || null,
+  () => props.pullRequestsData.value?.closedPullRequest || null,
 );
 </script>
 

@@ -39,19 +39,22 @@ const {
   };
 } = useRoute();
 const pullRequestsData = ref<{ value: PullRequestResp }>();
+const isLoading = ref<boolean>(true);
 const { getPullRequests, getPullRequestsRestAPI } = usePullRequest();
 
 watch(
   [
     () => repoStore.selectedLabel,
     () => repoStore.selectedMilestone,
+    () => repoStore.sortBy,
     () => props.owner,
     () => props.repo,
     () => query.before,
     () => query.after,
   ],
   async () => {
-    repoStore.setLoading(true);
+    isLoading.value = true;
+    repoStore.setLoading(isLoading);
     if (repoStore.selectedMilestone) {
       const data = await getPullRequestsRestAPI({
         owner: props.owner,
@@ -65,12 +68,12 @@ watch(
         first: query.after || !query.before ? DEFAULT_PAGE_SIZE : undefined,
         last: query.before ? DEFAULT_PAGE_SIZE : undefined,
       });
-
-      repoStore.setLoading(false);
+      isLoading.value = false;
+      repoStore.setLoading(isLoading);
       const resp = computed(() => data);
       pullRequestsData.value = resp;
     } else {
-      const { data: respData } = getPullRequests({
+      const { data: respData, loading } = getPullRequests({
         owner: props.owner,
         name: props.repo,
         orderBy: parseSortParams(SORT_OPTIONS, repoStore.sortBy, 0),
@@ -83,7 +86,8 @@ watch(
         last: query.before ? DEFAULT_PAGE_SIZE : undefined,
       });
 
-      repoStore.setLoading(false);
+      isLoading.value = false;
+      repoStore.setLoading(loading);
       pullRequestsData.value = respData;
     }
   },

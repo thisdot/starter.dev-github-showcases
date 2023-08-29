@@ -1,6 +1,7 @@
 import { Label } from '@/composables/github/types';
 import { MilestoneProps } from '@/composables/github/types/Milestones';
 import { defineStore } from 'pinia';
+import { Ref, ref } from 'vue';
 
 interface IRepoStore {
   labels: Label[];
@@ -9,7 +10,7 @@ interface IRepoStore {
   selectedMilestone?: string;
   milestoneNumber?: string;
   sortBy?: string;
-  loading: boolean;
+  loading: Ref<boolean>;
 }
 
 export const useRepoStore = defineStore('repoStore', {
@@ -20,7 +21,7 @@ export const useRepoStore = defineStore('repoStore', {
     selectedMilestone: undefined,
     sortBy: undefined,
     milestoneNumber: undefined,
-    loading: true,
+    loading: ref(true),
   }),
   getters: {},
   actions: {
@@ -48,7 +49,7 @@ export const useRepoStore = defineStore('repoStore', {
       this.sortBy = undefined;
       this.milestoneNumber = undefined;
     },
-    setLoading(value) {
+    setLoading(value: Ref<boolean>) {
       this.loading = value;
     },
   },

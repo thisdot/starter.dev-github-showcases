@@ -24,7 +24,7 @@
         </IssuesPullRequestsCard>
 
         <div
-          v-if="openPullRequestsData.length === 0 && !isLoading"
+          v-if="openPullRequestsData.length === 0 && !repoStore.loading"
           class="row justify-center items-center q-pa-md text-subtitle1 text-weight-medium text-uppercase"
         >
           No Content found
@@ -46,13 +46,16 @@
         >
         </IssuesPullRequestsCard>
         <div
-          v-if="closedPullRequestsData.length === 0 && !isLoading"
+          v-if="closedPullRequestsData.length === 0 && !repoStore.loading"
           class="row justify-center items-center q-pa-md text-subtitle1 text-weight-medium text-uppercase"
         >
           No Content found
         </div>
       </q-list>
-      <div v-if="isLoading" class="row justify-center items-center q-pa-md">
+      <div
+        v-if="repoStore.loading"
+        class="row justify-center items-center q-pa-md"
+      >
         <q-spinner-ios color="primary" size="2em" />
       </div>
     </div>
@@ -93,8 +96,6 @@ const repoStore = useRepoStore();
 
 const tabRef = ref(TABS.OPEN);
 const card_type = 'pullrequest';
-
-const isLoading = computed(() => repoStore.loading);
 
 const openPullRequestsData = computed(() => {
   return props.openPullRequests.pullRequests || [];

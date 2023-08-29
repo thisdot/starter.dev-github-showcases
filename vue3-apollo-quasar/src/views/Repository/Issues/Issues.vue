@@ -46,14 +46,15 @@ watch(
   [
     () => repoStore.selectedLabel,
     () => repoStore.milestoneNumber,
+    () => repoStore.sortBy,
     () => props.owner,
     () => props.repo,
     () => query.before,
     () => query.after,
   ],
   () => {
-    repoStore.setLoading(true);
-    const { data: issueDatax } = getIssues({
+    repoStore.setLoading(ref(true));
+    const { data: issueDatax, loading } = getIssues({
       owner: props.owner,
       name: props.repo,
       orderBy: parseSortParams(SORT_OPTIONS, repoStore.sortBy, 0),
@@ -67,7 +68,7 @@ watch(
       first: query.after || !query.before ? DEFAULT_PAGE_SIZE : undefined,
       last: query.before ? DEFAULT_PAGE_SIZE : undefined,
     });
-    repoStore.setLoading(false);
+    repoStore.setLoading(loading);
     issueData.value = issueDatax;
   },
   {

@@ -57,6 +57,8 @@ export const useIssue = (): UseIssue => {
     });
 
     const data = computed(() => {
+      console.log(loading.value + ' asdasasdxasjhd');
+      console.log(result.value?.repository.openIssues, '====');
       const openIssues = parseIssues(result.value?.repository.openIssues);
       const closedIssues = parseIssues(result.value?.repository.closedIssues);
       const milestones = parseMilestones(result.value?.repository.milestones);
