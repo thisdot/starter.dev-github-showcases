@@ -5,7 +5,7 @@ import { useQuery } from '../../utils';
 import { ISSUES_QUERY } from '../../utils/queries/issues-query';
 import { AUTH_TOKEN, DEFAULT_PAGE_SIZE, GITHUB_GRAPHQL } from '../../utils/constants';
 import IssuesData from './issues-data';
-import { IssueOrderField, OrderDirection, ParsedIssueQuery } from './type';
+import { ParsedIssueQuery } from './type';
 import { isBrowser } from '@builder.io/qwik/build';
 import { parseQuery } from './parseQuery';
 import { ClearFilterAndSortBtn } from '../clear-filter-and-sort-button';
@@ -13,6 +13,7 @@ import { useLocation, useNavigate } from '@builder.io/qwik-city';
 import IssuesPRContext, { IssuesPRContextProps } from '../../context/issue-pr-store';
 import DropdownContext from '../../context/issue-tab-header-dropdown';
 import { Pagination } from '../pagination/pagination';
+import { OrderDirection, OrderField } from '~/utils/types';
 
 export interface IssuesProps {
   owner: string;
@@ -69,7 +70,7 @@ export const IssueTabView = component$(({ owner, name }: IssuesProps) => {
             before,
             first: location.query.after || !location.query.before ? DEFAULT_PAGE_SIZE : undefined,
             last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
-            orderBy: dropdownStore.selectedSort.split('^')[0] || IssueOrderField.CreatedAt,
+            orderBy: dropdownStore.selectedSort.split('^')[0] || OrderField.CreatedAt,
             direction: dropdownStore.selectedSort.split('^')[1] || OrderDirection.Desc,
             filterBy: {
               milestoneNumber: dropdownStore.selectedMilestoneNumber,

@@ -67,17 +67,3 @@ export interface Milestone {
   number: number;
   title: string;
 }
-
-export enum IssueOrderField {
-  /** Order issues by comment count */
-  Comments = 'COMMENTS',
-  /** Order issues by creation time */
-  CreatedAt = 'CREATED_AT',
-  /** Order issues by update time */
-  UpdatedAt = 'UPDATED_AT',
-}
-
-export enum OrderDirection {
-  Asc = 'ASC',
-  Desc = 'DESC',
-}

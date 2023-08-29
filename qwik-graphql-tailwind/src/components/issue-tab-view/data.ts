@@ -1,28 +1,28 @@
-import { IssueOrderField, OrderDirection } from './type';
+import { OrderDirection, OrderField } from '~/utils/types';
 
 export const sortOptions = [
   {
-    value: `${IssueOrderField.CreatedAt}^${OrderDirection.Desc}`,
+    value: `${OrderField.CreatedAt}^${OrderDirection.Desc}`,
     label: 'Newest',
   },
   {
-    value: `${IssueOrderField.CreatedAt}^${OrderDirection.Asc}`,
+    value: `${OrderField.CreatedAt}^${OrderDirection.Asc}`,
     label: 'Oldest',
   },
   {
-    value: `${IssueOrderField.Comments}^${OrderDirection.Desc}`,
+    value: `${OrderField.Comments}^${OrderDirection.Desc}`,
     label: 'Most Commented',
   },
   {
-    value: `${IssueOrderField.Comments}^${OrderDirection.Asc}`,
+    value: `${OrderField.Comments}^${OrderDirection.Asc}`,
     label: 'Least Commented',
   },
   {
     label: 'Recently updated',
-    value: `${IssueOrderField.UpdatedAt}^${OrderDirection.Desc}`,
+    value: `${OrderField.UpdatedAt}^${OrderDirection.Desc}`,
   },
   {
     label: 'Least recently updated',
-    value: `${IssueOrderField.UpdatedAt}^${OrderDirection.Asc}`,
+    value: `${OrderField.UpdatedAt}^${OrderDirection.Asc}`,
   },
 ];

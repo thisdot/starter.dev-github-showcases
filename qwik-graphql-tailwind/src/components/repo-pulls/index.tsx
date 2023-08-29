@@ -4,7 +4,7 @@ import { $, component$, useTask$, useContext } from '@builder.io/qwik';
 
 import { parseQuery } from './parseQuery';
 import PullRequestData from './repo-pulls-data';
-import { PullRequestOrderField, OrderDirection, ParsedPullRequestQuery } from './types';
+import { ParsedPullRequestQuery } from './types';
 
 import { Pagination } from '../pagination/pagination';
 import { PullRequestIssueTab } from '../pull-request-issue-tab/pull-request-issue-tab';
@@ -17,6 +17,7 @@ import { AUTH_TOKEN, GITHUB_GRAPHQL, DEFAULT_PAGE_SIZE, SEARCH_PULLS } from '~/u
 import DropdownContext from '~/context/issue-tab-header-dropdown';
 import { sortOptions } from './data';
 import parseRestAPIPullRequests, { IPullRequestProps } from '~/utils/parseRestAPIPullRequests';
+import { OrderDirection, OrderField } from '~/utils/types';
 
 export interface PullRequestsProps {
   owner: string;
@@ -79,7 +80,7 @@ export default component$(({ owner, name }: PullRequestsProps) => {
             last: location.query.before ? DEFAULT_PAGE_SIZE : undefined,
             labels: dropdownStore.selectedLabel ? [dropdownStore.selectedLabel] : undefined,
             milestone: dropdownStore.selectedMilestones,
-            orderBy: dropdownStore.selectedSort.split('^')[0] || PullRequestOrderField.CreatedAt,
+            orderBy: dropdownStore.selectedSort.split('^')[0] || OrderField.CreatedAt,
             direction: dropdownStore.selectedSort.split('^')[1] || OrderDirection.Desc,
           },
           abortController
