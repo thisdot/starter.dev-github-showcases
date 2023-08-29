@@ -8,7 +8,7 @@ export default defineConfig(() => {
   return {
     plugins: [qwikCity(), qwikVite(), qwikReact(), tsconfigPaths()],
     optimizeDeps: {
-      include: ['date-fns', 'classnames', 'react-markdown', 'rehype-raw', 'remark-gfm', 'msw-storybook-addon', 'msw']
+      include: ['date-fns', 'classnames', 'react-markdown', 'rehype-raw', 'remark-gfm', 'msw-storybook-addon', 'msw'],
     },
     test: {
       // ...

@@ -66,11 +66,10 @@ export const SEARCH_PULLS = ({
   state: 'open' | 'closed';
 }) => {
   const params = {
-    per_page: first,
+    per_page: first?.toString() || DEFAULT_PAGE_SIZE.toString(),
     sort: OrderFieldRest[sort || 'CREATED_AT'],
     order: direction?.toLowerCase() || 'asc',
   };
-  //@ts-ignore
   const queryStrings = convertObjectToQueryString(params);
   const milestone_check = `+milestone:"${
     typeof milestone === 'string' ? replaceEncodedSpaceWithPlus(encodeURIComponent(milestone)) : milestone
