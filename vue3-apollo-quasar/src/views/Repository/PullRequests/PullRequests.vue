@@ -1,4 +1,5 @@
 <template>
+  {{ repoStore.loading }}
   <pull-request-wrapper :pullRequestsData="pullRequestsData" />
 </template>
 
@@ -39,8 +40,19 @@ const {
   };
 } = useRoute();
 const pullRequestsData = ref<{ value: PullRequestResp }>();
-const isLoading = ref<boolean>(true);
 const { getPullRequests, getPullRequestsRestAPI } = usePullRequest();
+const resetData = {
+  openPullRequest: {
+    pullRequests: [],
+    totalCount: 0,
+    pageInfo: undefined,
+  },
+  closedPullRequest: {
+    pullRequests: [],
+    totalCount: 0,
+    pageInfo: undefined,
+  },
+};
 
 watch(
   [
@@ -53,9 +65,9 @@ watch(
     () => query.after,
   ],
   async () => {
-    isLoading.value = true;
-    repoStore.setLoading(isLoading);
+    repoStore.setLoading(ref(true));
     if (repoStore.selectedMilestone) {
+      pullRequestsData.value = ref(resetData);
       const data = await getPullRequestsRestAPI({
         owner: props.owner,
         name: props.repo,
@@ -68,8 +80,7 @@ watch(
         first: query.after || !query.before ? DEFAULT_PAGE_SIZE : undefined,
         last: query.before ? DEFAULT_PAGE_SIZE : undefined,
       });
-      isLoading.value = false;
-      repoStore.setLoading(isLoading);
+      repoStore.setLoading(ref(false));
       const resp = computed(() => data);
       pullRequestsData.value = resp;
     } else {
@@ -86,7 +97,6 @@ watch(
         last: query.before ? DEFAULT_PAGE_SIZE : undefined,
       });
 
-      isLoading.value = false;
       repoStore.setLoading(loading);
       pullRequestsData.value = respData;
     }
