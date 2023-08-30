@@ -15,6 +15,7 @@ import { AuthEffects } from './state/auth';
 import { ProfileEffects } from './state/profile/profile.effects';
 import { RepositoryEffects } from './state/repository/repository.effects';
 import { UserEffects } from './state/user';
+import { AcceptInterceptor } from './accept.interceptor';
 
 @NgModule({
   imports: [
@@ -40,6 +41,11 @@ import { UserEffects } from './state/user';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AcceptInterceptor,
       multi: true,
     },
   ],

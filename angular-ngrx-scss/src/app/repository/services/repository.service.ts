@@ -43,11 +43,7 @@ export class RepositoryService {
     const name = encodeURIComponent(repoName);
     const url = `${environment.githubUrl}/repos/${owner}/${name}`;
 
-    return this.http.get<RepoApiResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<RepoApiResponse>(url);
   }
 
   getRepositoryPullRequestsCount(
@@ -61,9 +57,6 @@ export class RepositoryService {
     return this.http
       .get<PullRequests>(url, {
         observe: 'response',
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-        },
         params: new HttpParams({
           fromObject: {
             state: 'open',
@@ -99,9 +92,6 @@ export class RepositoryService {
     return this.http
       .get(url, {
         observe: 'response',
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-        },
       })
       .pipe(
         map((response) => {
@@ -137,11 +127,7 @@ export class RepositoryService {
     const name = encodeURIComponent(repoName);
     const url = `${environment.githubUrl}/repos/${owner}/${name}/milestones`;
 
-    return this.http.get<Milestone[]>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<Milestone[]>(url);
   }
 
   /**
@@ -158,11 +144,7 @@ export class RepositoryService {
     const name = encodeURIComponent(repoName);
     const url = `${environment.githubUrl}/repos/${owner}/${name}/labels`;
 
-    return this.http.get<IssueLabel[]>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<IssueLabel[]>(url);
   }
 
   /**
@@ -182,11 +164,7 @@ export class RepositoryService {
     const pullId = encodeURIComponent(pullNumber);
     const url = `${environment.githubUrl}/repos/${owner}/${name}/pulls/${pullId}`;
 
-    return this.http.get<PullRequest>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<PullRequest>(url);
   }
 
   /**
@@ -206,11 +184,7 @@ export class RepositoryService {
     const pullId = encodeURIComponent(pullNumber);
     const url = `${environment.githubUrl}/repos/${owner}/${name}/issues/${pullId}/comments`;
 
-    return this.http.get<IssueComments>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<IssueComments>(url);
   }
 
   /**
@@ -244,9 +218,6 @@ export class RepositoryService {
     return this.http
       .get(url, {
         observe: 'response',
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-        },
       })
       .pipe(
         map((response) => {
@@ -295,11 +266,7 @@ export class RepositoryService {
       url += `?ref=${refPath}`;
     }
 
-    return this.http.get<RepoContentsApiResponse[]>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<RepoContentsApiResponse[]>(url);
   }
 
   /**
@@ -326,11 +293,7 @@ export class RepositoryService {
       url += `?ref=${refPath}`;
     }
 
-    return this.http.get<FileContentsApiResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<FileContentsApiResponse>(url);
   }
 
   /**
@@ -347,11 +310,7 @@ export class RepositoryService {
     const name = encodeURIComponent(repoName);
     const url = `${environment.githubUrl}/repos/${owner}/${name}/readme`;
 
-    return this.http.get<ReadmeApiResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<ReadmeApiResponse>(url);
   }
 
   private extractTotalFromLinkHeader(linkHeader: string | null): number {
