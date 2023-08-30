@@ -5,7 +5,7 @@ export const mockRepoIssuesQuery = graphql.query(
   (req, res, ctx) => {
     const { filterBy, orderBy, after, before } = req.variables;
 
-    if (filterBy.milestone) {
+    if (filterBy.milestoneNumber) {
       return res(ctx.data(noResultsResponse));
     }
 

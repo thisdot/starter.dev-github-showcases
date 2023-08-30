@@ -21,6 +21,7 @@ enum ActionType {
 export interface FilterState {
   label: string | null;
   milestone: string | null;
+  milestoneNumber?: string | null;
   state: IssueState;
   type: IssueType;
   sort: {
@@ -34,7 +35,10 @@ export interface FilterState {
 }
 
 type FilterAction =
-  | { type: ActionType.SET_MILESTONE; payload: { milestone: string } }
+  | {
+      type: ActionType.SET_MILESTONE;
+      payload: { milestone: string; milestoneNumber?: string };
+    }
   | { type: ActionType.SET_LABEL; payload: { label: string } }
   | { type: ActionType.CHANGE_STATE; payload: { state: IssueState } }
   | {
@@ -55,6 +59,7 @@ type FilterAction =
 const initialState: FilterState = {
   label: null,
   milestone: null,
+  milestoneNumber: undefined,
   state: IssueState.Open,
   type: IssueType.Issue,
   sort: {
@@ -70,6 +75,7 @@ function reducer(state: FilterState, action: FilterAction): FilterState {
       return {
         ...state,
         milestone: action.payload.milestone,
+        milestoneNumber: action.payload.milestoneNumber,
         afterCursor: undefined,
         beforeCursor: undefined,
       };
@@ -119,8 +125,17 @@ export function useIssueFilters(type: IssueType = IssueType.Issue) {
     type: type,
   });
 
-  function setMilestone(milestone: string) {
-    dispatch({ type: ActionType.SET_MILESTONE, payload: { milestone } });
+  function setMilestone({
+    milestone,
+    milestoneNumber,
+  }: {
+    milestone: string;
+    milestoneNumber?: string;
+  }) {
+    dispatch({
+      type: ActionType.SET_MILESTONE,
+      payload: { milestone, milestoneNumber },
+    });
   }
 
   function setLabel(label: string) {

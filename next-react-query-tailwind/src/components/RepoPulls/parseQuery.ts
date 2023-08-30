@@ -3,7 +3,10 @@ import type { Label } from '@components/RepoIssues/types';
 import { RepoPullRequestsQuery } from '@lib/github';
 import { parseLabels, parseMilestones } from '@lib/parseFunction';
 
-type PullRequestConnectionType = Extract<RepoPullRequestsQuery['repository'], { openPullRequests: any }>['openPullRequests'];
+type PullRequestConnectionType = Extract<
+  RepoPullRequestsQuery['repository'],
+  { openPullRequests: any }
+>['openPullRequests'];
 
 function parsePullRequests(connection?: PullRequestConnectionType) {
   if (!connection) {
@@ -59,8 +62,6 @@ export function parseQuery(data: RepoPullRequestsQuery) {
   const closedPullRequests = parsePullRequests(
     data.repository?.closedPullRequests
   );
-  console.log(data);
-
   const milestones = parseMilestones(data.repository?.milestones);
 
   const labelMap = parseLabels(data.repository?.labels);

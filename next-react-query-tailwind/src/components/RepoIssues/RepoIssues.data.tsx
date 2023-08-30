@@ -38,7 +38,7 @@ function RepoIssues() {
       orderBy: filters.state.sort,
       filterBy: {
         labels: filters.state.label ? [filters.state.label] : undefined,
-        milestone: filters.state.milestone,
+        milestoneNumber: filters.state.milestoneNumber,
       },
       after: afterCursor,
       before: beforeCursor,

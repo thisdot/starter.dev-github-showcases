@@ -43,6 +43,7 @@ function RepoPulls() {
     },
     {
       keepPreviousData: true,
+      enabled: !filters.state.milestone,
     }
   );
 
@@ -70,8 +71,10 @@ function RepoPulls() {
     throw new Error('An error occurred loading pull requests.');
   }
 
-  const { openPullRequests, closedPullRequests, labels, milestones } =
-    parseQuery(data);
+  const { openPullRequests, closedPullRequests, labels, milestones } = !filters
+    .state.milestone
+    ? parseQuery(data)
+    : parseQuery(data);
   const activePullRequests =
     filters.state.state === IssueState.Open
       ? openPullRequests

@@ -8,6 +8,7 @@ import { IssueState, IssueOrderField, OrderDirection } from '@lib/github';
 import FilterDropdown from '@components/FilterDropdown';
 import { IssueType } from './useIssueFilters';
 import styles from './IssueFilters.module.css';
+import { getSelectedMilestoneNumber } from '@lib/getMilestoneNumber';
 
 type IssueFiltersProps = {
   type?: IssueType;
@@ -31,6 +32,10 @@ function IssueFilters({
   setMilestone,
   setSort,
 }: IssueFiltersProps) {
+  const selectMilestone = (milestone: string) => {
+    const milestoneNumber = getSelectedMilestoneNumber(milestones, milestone);
+    setMilestone({ milestone, milestoneNumber });
+  };
   return (
     <div className={cn(className, styles.container)}>
       <div className="space-x-4">
@@ -66,19 +71,21 @@ function IssueFilters({
         </button>
       </div>
       <div className="space-x-8">
-        {labels && <FilterDropdown
-          name="Label"
-          description="Filter by label"
-          current={state.label}
-          items={[
-            ...labels.map((label) => ({
-              label: label.name || '',
-              value: label.name || '',
-            })),
-          ]}
-          onChange={(label) => setLabel(label)}
-          buttonClassName={styles.filterButton}
-        />}
+        {labels && (
+          <FilterDropdown
+            name="Label"
+            description="Filter by label"
+            current={state.label}
+            items={[
+              ...labels.map((label) => ({
+                label: label.name || '',
+                value: label.name || '',
+              })),
+            ]}
+            onChange={(label) => setLabel(label)}
+            buttonClassName={styles.filterButton}
+          />
+        )}
         {milestones && (
           <FilterDropdown
             name="Milestones"
@@ -88,10 +95,10 @@ function IssueFilters({
               { label: 'No milestone', value: null },
               ...milestones.map((milestone) => ({
                 label: milestone.title || '',
-                value: milestone.id || '',
+                value: milestone.title || '',
               })),
             ]}
-            onChange={(milestone) => setMilestone(milestone)}
+            onChange={(milestone) => selectMilestone(milestone)}
             buttonClassName={styles.filterButton}
           />
         )}

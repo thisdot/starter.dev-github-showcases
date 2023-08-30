@@ -8,6 +8,7 @@ import {
   ClosedPullRequestIcon,
 } from '@components/Icons';
 import styles from '@components/RepoIssues/RepoIssues.module.css';
+import { getTextColor } from '@lib/dynamicColor';
 
 interface RepoPullsViewProps {
   pullRequests: PullRequest[];
@@ -49,9 +50,10 @@ function RepoPullsView({ pullRequests }: RepoPullsViewProps) {
                     <span className="inline">
                       {pullRequest.labels.map(({ color, name }) => (
                         <span
-                          key={color}
+                          key={name}
                           style={{
                             backgroundColor: `#${color}`,
+                            color: getTextColor(`#${color || 'ccc'}`),
                           }}
                           className={styles.label}
                           data-testid="pull request label name"

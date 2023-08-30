@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { formatDistance } from 'date-fns';
 import styles from './RepoIssues.module.css';
+import { getTextColor } from '@lib/dynamicColor';
 
 interface RepoIssuesViewProps {
   issues: Issue[];
@@ -38,9 +39,10 @@ function RepoIssuesView({ issues }: RepoIssuesViewProps) {
                   <span className="inline">
                     {issue.labels.map(({ color, name }) => (
                       <span
-                        key={color + name}
+                        key={name}
                         style={{
                           backgroundColor: `#${color}`,
+                          color: getTextColor(`#${color || 'ccc'}`),
                         }}
                         className={styles.label}
                         data-testid="issue label name"
