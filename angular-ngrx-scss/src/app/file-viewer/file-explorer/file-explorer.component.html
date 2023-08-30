@@ -2,18 +2,18 @@
   <div class="container grid grid-cols-12 subpage">
     <section class="col-span-9 col-sm-span-12">
       <app-file-explorer-nav
-        [owner]="owner"
-        [name]="repoName"
+        [owner]="repo.ownerName"
+        [name]="repo.repoName"
         [branch]="repo.activeBranch"
-        [path]="path"
-        [showCrumbs]="!!path"
+        [path]="repo.path"
+        [showCrumbs]="!!repo.path"
       ></app-file-explorer-nav>
 
       <app-file-explorer-container
         [repoPage]="repo.tree"
         [branch]="repo.activeBranch"
-        [owner]="owner"
-        [name]="repoName"
+        [owner]="repo.ownerName"
+        [name]="repo.repoName"
       ></app-file-explorer-container>
     </section>
 

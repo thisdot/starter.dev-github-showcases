@@ -7,6 +7,9 @@
   flex-direction: column;
   padding: variables.$padding--l;
   background-color: variables.$gray100;
+  margin-top: functions.rem(14);
+  border-top-left-radius: variables.$padding;
+  border-top-right-radius: variables.$padding;
 
   @media (min-width: variables.$md) {
     flex-direction: row;

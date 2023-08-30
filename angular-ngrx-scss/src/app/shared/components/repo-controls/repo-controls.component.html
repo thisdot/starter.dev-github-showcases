@@ -53,12 +53,9 @@
           {{ (selectSortFilter$ | async)?.split('_')?.join(' ') | lowercase }}
         </span>
       </p>
-      <button type="button" class="results__clear" (click)="handleClearClick()">
-        <div class="results__clear__icon">
-          <span appOcticon="x" color="white" size="13"></span>
-        </div>
-        <p class="results__clear__text">Clear filter</p>
-      </button>
+      <app-clear-filters-button
+        (clearFilters)="handleClearClick()"
+      ></app-clear-filters-button>
     </div>
     <div class="divider"></div>
   </ng-container>

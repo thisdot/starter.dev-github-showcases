@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PullRequestsListComponent } from './pull-requests-list.component';
 import { ChangeDetectionStrategy, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RepoPullRequest } from '../../../state/repository';
 import { By } from '@angular/platform-browser';
+import { PullRequest } from 'src/app/repository/services/repository.interfaces';
 
 describe('PullRequestsListComponent', () => {
   let component: PullRequestsListComponent;
@@ -42,15 +42,20 @@ describe('PullRequestsListComponent', () => {
 
   it('should render pull request cards', () => {
     component.pullRequests = {
-      totalCount: 1,
+      total: 1,
+      paginationParams: {
+        page: 1,
+        canNext: false,
+        canPrev: false,
+      },
       pullRequests: [
         {
           id: 1,
-          login: 'thisdot',
+          user: { login: 'thisdot' },
           title: 'Get PRs information',
           number: 45,
           state: 'open',
-          createdAt: new Date('01/01/2021'),
+          created_at: new Date('01/01/2021'),
           labels: [
             {
               id: 2,
@@ -61,7 +66,7 @@ describe('PullRequestsListComponent', () => {
             },
           ],
           commentCount: 3,
-        } as RepoPullRequest,
+        } as unknown as PullRequest,
       ],
     };
     fixture.detectChanges();

@@ -1,16 +1,16 @@
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { PullRequest } from '../repository/services/repository.interfaces';
 import {
   ISSUE_STATE,
   PullRequestAPIResponse,
-  PullRequestItemAPIResponse,
   IssueLabel,
-  RepoPullRequests,
 } from '../state/repository';
 
 export const generatePullRequestAPIResponseFixture = (
   state: ISSUE_STATE = 'open',
-): PullRequestAPIResponse => {
+): HttpResponse<PullRequestAPIResponse> => {
   const closedDate = new Date(2022, 2, 1).toISOString();
-  return {
+  const body = {
     incomplete_results: false,
     total_count: 1,
     items: [
@@ -37,30 +37,18 @@ export const generatePullRequestAPIResponseFixture = (
           } as IssueLabel,
         ],
         comments: 305,
-      } as PullRequestItemAPIResponse,
+      } as unknown as PullRequest,
     ],
   };
-};
 
-const prObject = generatePullRequestAPIResponseFixture().items[0];
-
-export const pullRequestFixture: RepoPullRequests = {
-  totalCount: 1,
-  pullRequests: [
-    {
-      id: prObject.id,
-      login: prObject.user.login,
-      title: prObject.title,
-      number: prObject.number,
-      state: prObject.state,
-      closedAt: prObject.closed_at ? new Date(prObject.closed_at) : null,
-      mergedAt: prObject.pull_request.merged_at
-        ? new Date(prObject.pull_request.merged_at)
-        : null,
-      createdAt: new Date(prObject.created_at),
-      labels: prObject.labels,
-      commentCount: prObject.comments,
-      labelCount: prObject.labels.length,
-    },
-  ],
+  return {
+    headers: new HttpHeaders(),
+    status: 200,
+    statusText: 'OK',
+    ok: true,
+    type: 4,
+    url: 'https://api.github.com/search/issues?q=repo:thisdot/open-source/issues+type:pr+state:open',
+    clone: jasmine.createSpy('clone'),
+    body,
+  };
 };

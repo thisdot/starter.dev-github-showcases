@@ -8,6 +8,7 @@ import {
   ISSUE_STATE,
   RepoIssues,
   fetchIssues,
+  selectHasActiveIssueFilters,
   selectLabels,
   selectMilestones,
 } from 'src/app/state/repository';
@@ -21,6 +22,8 @@ export class IssuesHeaderComponent {
   @Input() owner!: string;
 
   @Input() repoName!: string;
+
+  hasFilters$ = this.store.select(selectHasActiveIssueFilters);
 
   filterParams: { labels?: string; milestone?: string; sort: Sort } = {
     sort: 'created',
@@ -79,6 +82,11 @@ export class IssuesHeaderComponent {
 
   setSort(sort: string) {
     this.filterParams.sort = sort as Sort;
+    this.refetchIssues();
+  }
+
+  clearFilters() {
+    this.filterParams = { sort: 'created' };
     this.refetchIssues();
   }
 

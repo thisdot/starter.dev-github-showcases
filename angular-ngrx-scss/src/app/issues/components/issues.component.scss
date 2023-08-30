@@ -1,7 +1,9 @@
 @use 'variables';
+@use 'functions';
 
 .issues-container {
-  border-radius: variables.$padding;
+  border-bottom-left-radius: variables.$padding;
+  border-bottom-right-radius: variables.$padding;
   border: 1px solid variables.$gray200;
-  margin: 1rem auto;
+  margin-bottom: functions.rem(14);
 }

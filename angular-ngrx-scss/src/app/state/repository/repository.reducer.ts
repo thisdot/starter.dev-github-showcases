@@ -7,6 +7,7 @@ export const initialRepositoryState: RepositoryState = {
   forkCount: 0,
   issueCount: 0,
   ownerName: '',
+  path: '',
   prCount: 0,
   readme: '',
   repoName: '',
@@ -24,6 +25,8 @@ export const initialRepositoryState: RepositoryState = {
   website: '',
   milestones: [],
   labels: [],
+  pullsFilterParams: null,
+  issuesFilterParams: null,
 };
 
 const reducer = createReducer(
@@ -39,13 +42,14 @@ const reducer = createReducer(
   // TODO: handle fetchFileError case
   on(
     RepositoryActions.fetchPullRequestsSuccess,
-    (state, { pullRequests, prState }) => {
+    (state, { pullRequests, params }) => {
       return {
         ...state,
+        pullsFilterParams: params,
         openPullRequests:
-          prState === 'open' ? pullRequests : state.openPullRequests,
+          params.state === 'open' ? pullRequests : state.openPullRequests,
         closedPullRequests:
-          prState === 'closed' ? pullRequests : state.closedPullRequests,
+          params.state === 'closed' ? pullRequests : state.closedPullRequests,
       };
     },
   ),
@@ -53,6 +57,7 @@ const reducer = createReducer(
   on(RepositoryActions.fetchIssuesSuccess, (state, { issues, params }) => {
     return {
       ...state,
+      issuesFilterParams: params,
       openIssues: params.state === 'open' ? issues : state.openIssues,
       closedIssues: params.state === 'closed' ? issues : state.closedIssues,
     };

@@ -16,6 +16,7 @@ import {
   ReadmeApiResponse,
   RepoApiResponse,
   RepoIssues,
+  RepoPullRequests,
   RepositoryState,
 } from './repository.state';
 import { UserApiResponse } from '../user';
@@ -58,7 +59,17 @@ const MOCK_PULL_REQUESTS: PullRequests = [
     closed_at: '2022-07-02T23:46:12Z',
     created_at: '2022-07-02T23:46:12Z',
   },
-];
+] as PullRequests;
+
+const EXPECTED_PULL_REQUESTS: RepoPullRequests = {
+  total: 3,
+  paginationParams: {
+    page: 1,
+    canNext: false,
+    canPrev: false,
+  },
+  pullRequests: MOCK_PULL_REQUESTS,
+};
 
 const MOCK_REPO_INFO: RepoApiResponse = {
   id: 1,
@@ -212,6 +223,7 @@ describe('RepositoryEffects', () => {
       'getRepositoryIssues',
       'getRepositoryMilestones',
       'getRepositoryLabels',
+      'getRepositoryPullRequestsCount',
     ]);
     TestBed.configureTestingModule({
       providers: [
@@ -256,11 +268,14 @@ describe('RepositoryEffects', () => {
       closedIssues: null,
       labels: [],
       milestones: [],
+      path: '',
+      issuesFilterParams: null,
+      pullsFilterParams: null,
     };
 
     repoServiceMock.getRepositoryInfo.and.returnValue(of(MOCK_REPO_INFO));
     repoServiceMock.getRepositoryPullRequests.and.returnValue(
-      of(MOCK_PULL_REQUESTS),
+      of(EXPECTED_PULL_REQUESTS),
     );
     repoServiceMock.getRepositoryContents.and.returnValue(of([]));
     repoServiceMock.getRepositoryReadme.and.returnValue(of(MOCK_README));
@@ -270,6 +285,8 @@ describe('RepositoryEffects', () => {
     repoServiceMock.getRepositoryMilestones.and.returnValue(of([]));
 
     repoServiceMock.getRepositoryLabels.and.returnValue(of([]));
+
+    repoServiceMock.getRepositoryPullRequestsCount.and.returnValue(of(2));
 
     effects.fetchRepository$.subscribe((action) => {
       expect(action).toEqual(

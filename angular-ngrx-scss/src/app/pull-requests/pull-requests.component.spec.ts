@@ -68,9 +68,11 @@ describe('PullRequestsComponent', () => {
     store.scannedActions$.subscribe((action) => {
       expect(action).toEqual(
         fetchPullRequests({
-          prState: 'closed',
           owner: 'thisdot',
           repoName: 'starter.dev-github-showcases',
+          params: {
+            state: 'closed',
+          },
         }),
       );
       done();

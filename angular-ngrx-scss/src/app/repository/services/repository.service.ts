@@ -1,17 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import {
   FileContentsApiResponse,
-  ISSUE_STATE,
   IssueAPIResponse,
   IssueLabel,
   Milestone,
+  PaginationParams,
   PullRequestAPIResponse,
   ReadmeApiResponse,
   RepoApiResponse,
   RepoContentsApiResponse,
   RepoIssues,
+  RepoPullRequests,
 } from 'src/app/state/repository';
 import { environment } from 'src/environments/environment';
 import {
@@ -49,6 +50,34 @@ export class RepositoryService {
     });
   }
 
+  getRepositoryPullRequestsCount(
+    repoOwner: string,
+    repoName: string,
+  ): Observable<number> {
+    const owner = encodeURIComponent(repoOwner);
+    const name = encodeURIComponent(repoName);
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/pulls`;
+
+    return this.http
+      .get<PullRequests>(url, {
+        observe: 'response',
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+        params: new HttpParams({
+          fromObject: {
+            state: 'open',
+            per_page: 1,
+          },
+        }),
+      })
+      .pipe(
+        map((response) =>
+          this.extractTotalFromLinkHeader(response.headers.get('Link')),
+        ),
+      );
+  }
+
   /**
    * Gets a list of all the pull requests for the specified repository
    * @param repoOwner who the repo belongs to
@@ -58,16 +87,40 @@ export class RepositoryService {
   getRepositoryPullRequests(
     repoOwner: string,
     repoName: string,
-  ): Observable<PullRequests> {
+    params: RepositoryIssuesApiParams,
+  ): Observable<RepoPullRequests> {
     const owner = encodeURIComponent(repoOwner);
     const name = encodeURIComponent(repoName);
-    const url = `${environment.githubUrl}/repos/${owner}/${name}/pulls`;
+    const state = encodeURIComponent(params.state);
+    let url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:pr+state:${state}`;
 
-    return this.http.get<PullRequests>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    url = this.appendUrlParams(url, params);
+
+    return this.http
+      .get(url, {
+        observe: 'response',
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+      })
+      .pipe(
+        map((response) => {
+          const data = response.body as PullRequestAPIResponse;
+
+          const total = data.total_count;
+
+          const page = params?.page ?? 1;
+
+          const paginationParams = this.getPaginationParams(
+            response.headers,
+            page,
+          );
+
+          const pullRequests: PullRequest[] = data.items;
+
+          return { pullRequests, paginationParams, total } as RepoPullRequests;
+        }),
+      );
   }
 
   /**
@@ -161,31 +214,6 @@ export class RepositoryService {
   }
 
   /**
-   * NOTE: This call uses the search URL to find the information, and is a bit of a duplicate of other calls that use the repo URL. Both work fine and are provided currently.
-   * Gets a list of pull requests matching the provided state
-   * @param repoOwner who the repo belongs to
-   * @param repoName name of the repo
-   * @param prState if the pr is open or closed
-   * @returns the total count of state-matching pull requests and information for each of those pulls
-   */
-  getPullRequests(
-    repoOwner: string,
-    repoName: string,
-    prState: ISSUE_STATE,
-  ): Observable<PullRequestAPIResponse> {
-    const owner = encodeURIComponent(repoOwner);
-    const name = encodeURIComponent(repoName);
-    const state = encodeURIComponent(prState);
-    const url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:pr+state:${state}`;
-
-    return this.http.get<PullRequestAPIResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
-  }
-
-  /**
    * Get a list of issues for the specified repository
    * @param owner who the repo belongs to
    * @param repoName name of repo
@@ -211,21 +239,7 @@ export class RepositoryService {
     const state = encodeURIComponent(params?.state ?? defaultParams.state);
     let url = `${environment.githubUrl}/search/issues?q=repo:${owner}/${name}+type:issue+state:${state}`;
 
-    if (params?.labels) {
-      url += `+label:"${params.labels}"`;
-    }
-
-    if (params?.milestone) {
-      url += `+milestone:"${params.milestone}"`;
-    }
-
-    if (params?.sort) {
-      url += `+sort:${params.sort}`;
-    }
-
-    if (params?.page) {
-      url += `&page=${params.page}`;
-    }
+    url = this.appendUrlParams(url, params);
 
     return this.http
       .get(url, {
@@ -236,22 +250,16 @@ export class RepositoryService {
       })
       .pipe(
         map((response) => {
-          const linkHeader = response.headers.get('Link');
-
-          const canNext = !!(linkHeader && linkHeader.includes('rel="next"'));
-          const canPrev = !!(linkHeader && linkHeader.includes('rel="prev"'));
-
           const data = response.body as IssueAPIResponse;
 
           const total = data.total_count;
 
           const page = params?.page || 1;
 
-          const paginationParams = {
-            canNext,
-            canPrev,
+          const paginationParams = this.getPaginationParams(
+            response.headers,
             page,
-          };
+          );
 
           const issues: Issue[] = data.items;
 
@@ -344,5 +352,74 @@ export class RepositoryService {
         Accept: 'application/vnd.github.v3+json',
       },
     });
+  }
+
+  private extractTotalFromLinkHeader(linkHeader: string | null): number {
+    if (!linkHeader) {
+      return 0;
+    }
+
+    // Split the linkHeader by commas to separate individual links
+    const links = linkHeader.split(',');
+
+    // Find the last link in the header
+    const lastLink = links
+      .find((link) => link.includes('rel="last"'))
+      ?.split(';')[0]
+      ?.trim()
+      .slice(1, -1);
+
+    if (!lastLink) {
+      return 0;
+    }
+
+    const url = new URL(lastLink);
+
+    const queryParams = new URLSearchParams(url.search);
+    const page = parseInt(queryParams.get('page') ?? '', 10);
+
+    if (isNaN(page)) {
+      return 0;
+    }
+
+    return page;
+  }
+
+  private appendUrlParams(
+    url: string,
+    params?: RepositoryIssuesApiParams,
+  ): string {
+    if (params?.labels) {
+      url += `+label:"${params.labels}"`;
+    }
+
+    if (params?.milestone) {
+      url += `+milestone:"${params.milestone}"`;
+    }
+
+    if (params?.sort) {
+      url += `+sort:${params.sort}`;
+    }
+
+    if (params?.page) {
+      url += `&page=${params.page}`;
+    }
+    return url;
+  }
+
+  private getPaginationParams(
+    headers: HttpHeaders,
+    page: number,
+  ): PaginationParams {
+    const linkHeader = headers.get('Link');
+
+    const canNext = !!(linkHeader && linkHeader.includes('rel="next"'));
+    const canPrev = !!(linkHeader && linkHeader.includes('rel="prev"'));
+
+    return {
+      canNext,
+      canPrev,
+      page,
+    };
   }
 }

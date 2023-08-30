@@ -1,3 +1,9 @@
+<div class="container" *ngIf="hasFilters$ | async">
+  <app-clear-filters-button (clearFilters)="clearFilters()"
+    >Clear current search query, filters, and sorts</app-clear-filters-button
+  >
+</div>
+
 <div class="filters-container">
   <div class="issue-status">
     <button [ngClass]="{ active: viewState === 'open' }" (click)="selectOpen()">

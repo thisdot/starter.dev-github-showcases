@@ -9,6 +9,7 @@ import { MarkdownPipe } from './pipes/markdown.pipe';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { RepoIssuePullCardComponent } from './components/repo-issue-pull-card/repo-issue-pull-card.component';
 import { ClickAwayDirective } from './directives/click-away.directive';
+import { ClearFiltersButtonComponent } from './components/clear-filters-button/clear-filters-button.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ClickAwayDirective } from './directives/click-away.directive';
     PaginationComponent,
     RepoIssuePullCardComponent,
     ClickAwayDirective,
+    ClearFiltersButtonComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -31,6 +33,7 @@ import { ClickAwayDirective } from './directives/click-away.directive';
     PaginationComponent,
     RepoIssuePullCardComponent,
     ClickAwayDirective,
+    ClearFiltersButtonComponent,
   ],
 })
 export class SharedModule {}

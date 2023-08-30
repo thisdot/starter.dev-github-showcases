@@ -40,7 +40,7 @@ const normalizeTokens = (tokens: Array<PrismToken | string>): Token[][] => {
 
   let i = 0;
   let stackIndex = 0;
-  let currentLine: any[] = [];
+  let currentLine: Token[] = [];
 
   const acc = [currentLine];
 

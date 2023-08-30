@@ -43,7 +43,7 @@ export const isActiveFilterByType = createSelector(
 
 export const selectFilterByLanguage = createSelector(
   selectProfileState,
-  (state: ProfileState) => state.sortAndFilter?.language || TypeFilter.All,
+  (state: ProfileState) => state.sortAndFilter?.language ?? TypeFilter.All,
 );
 
 export const isActiveFilterByLanguage = createSelector(
@@ -53,7 +53,7 @@ export const isActiveFilterByLanguage = createSelector(
 
 export const selectSortFilter = createSelector(
   selectProfileState,
-  (state: ProfileState) => state.sortAndFilter?.sort || OrderField.UpdatedAt,
+  (state: ProfileState) => state.sortAndFilter?.sort ?? OrderField.UpdatedAt,
 );
 
 export const hasActiveSortAndFilters = createSelector(

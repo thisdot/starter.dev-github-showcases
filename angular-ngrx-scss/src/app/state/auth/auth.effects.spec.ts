@@ -18,7 +18,6 @@ import { AuthEffects } from './auth.effects';
 describe('AuthEffects', () => {
   let actions$: Actions;
   let effects: AuthEffects;
-  let store: MockStore;
   let mockHttpClient: jasmine.SpyObj<HttpClient>;
   let authService: jasmine.SpyObj<AuthService>;
 
@@ -56,8 +55,7 @@ describe('AuthEffects', () => {
       ],
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    store = TestBed.inject(MockStore);
+    TestBed.inject(MockStore);
     actions$ = TestBed.inject(Actions);
     effects = TestBed.inject(AuthEffects);
   });
