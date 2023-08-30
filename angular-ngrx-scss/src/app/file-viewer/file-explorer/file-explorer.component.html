@@ -22,10 +22,12 @@
         [description]="repo.description"
         [homepageUrl]="repo.website"
         [topics]="repo.tags"
+        [owner]="owner"
+        [name]="repoName"
       ></app-file-explorer-about>
     </section>
 
-    <section class="col-span-9">
+    <section class="col-span-9" id="readme" #readme>
       <app-read-me [readme]="repo.readme"></app-read-me>
     </section>
   </div>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import {
   FileContentsApiResponse,
   IssueAPIResponse,
@@ -337,21 +337,33 @@ export class RepositoryService {
    * Gets the contents of the repository's readme file
    * @param owner who the repo belongs to
    * @param repoName name of the repo
+   * @param path (optional) if provided, the path to retrieve the readme from; defaults to the root directory
    * @returns the readme file for the repository
    */
   getRepositoryReadme(
     repoOwner: string,
     repoName: string,
-  ): Observable<ReadmeApiResponse> {
+    path?: string | null,
+  ): Observable<ReadmeApiResponse | null> {
     const owner = encodeURIComponent(repoOwner);
     const name = encodeURIComponent(repoName);
-    const url = `${environment.githubUrl}/repos/${owner}/${name}/readme`;
+    path = path ?? '';
+    const url = `${environment.githubUrl}/repos/${owner}/${name}/readme/${path}`;
 
-    return this.http.get<ReadmeApiResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http
+      .get<ReadmeApiResponse>(url, {
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+      })
+      .pipe(
+        catchError((err) => {
+          if (err.status === 404) {
+            return of(null);
+          }
+          throw err;
+        }),
+      );
   }
 
   private extractTotalFromLinkHeader(linkHeader: string | null): number {

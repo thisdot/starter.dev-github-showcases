@@ -20,9 +20,7 @@
   </div>
 
   <div class="mt-1">
-    <!--    TODO: this should scroll down to the readme section of the repository when it is clicked-->
-    <!--    The id anchor tag approach is modelled after the current behaviour of similar link on github.com-->
-    <a class="readMeLink" routerLink="./" fragment="readme">
+    <a class="readMeLink" [routerLink]="['/', owner, name]" fragment="readme">
       <span class="icon" appOcticon="book"></span> Readme
     </a>
   </div>
