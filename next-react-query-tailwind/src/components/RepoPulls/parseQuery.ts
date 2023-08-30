@@ -3,7 +3,9 @@ import type { Label } from '@components/RepoIssues/types';
 import { RepoPullRequestsQuery } from '@lib/github';
 import { parseLabels, parseMilestones } from '@lib/parseFunction';
 
-function parsePullRequests(connection?: any) {
+type PullRequestConnectionType = Extract<RepoPullRequestsQuery['repository'], { openPullRequests: any }>['openPullRequests'];
+
+function parsePullRequests(connection?: PullRequestConnectionType) {
   if (!connection) {
     return {
       pullRequests: [],

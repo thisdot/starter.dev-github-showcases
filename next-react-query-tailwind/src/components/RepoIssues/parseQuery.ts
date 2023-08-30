@@ -1,9 +1,10 @@
-import type { RepoIssuesQuery } from '@lib/github';
+import type { RepoIssuesQuery, Repository } from '@lib/github';
 import type { Issue, Label } from './types';
 import { parseMilestones } from '@lib/parseFunction';
 
-// sorry, couldn't get a type for issueConnection that made ts happy :(
-function parseIssues(issueConnection?: any) {
+type IssueConnectionType = Extract<RepoIssuesQuery['repository'], { openIssues: any }>['openIssues'];
+
+function parseIssues(issueConnection?: IssueConnectionType) {
   if (!issueConnection) {
     return {
       issues: [],

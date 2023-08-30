@@ -1353,7 +1353,7 @@
   resolved "https://registry.yarnpkg.com/@fal-works/esbuild-plugin-global-externals/-/esbuild-plugin-global-externals-2.1.2.tgz#c05ed35ad82df8e6ac616c68b92c2282bd083ba4"
   integrity sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==
 
-"@graphql-codegen/add@^5.0.0":
+"@graphql-codegen/add@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/add/-/add-5.0.0.tgz#578ebaf4fa87c1e934c381cd679bcedcf79feaba"
   integrity sha512-ynWDOsK2yxtFHwcJTB9shoSkUd7YXd6ZE57f0nk7W5cu/nAgxZZpEsnTPEpZB/Mjf14YRGe2uJHQ7AfElHjqUQ==
@@ -10053,6 +10053,11 @@ next-auth@4.22.3:
     preact "^10.6.3"
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
+
+next-router-mock@0.9.7:
+  version "0.9.7"
+  resolved "https://registry.yarnpkg.com/next-router-mock/-/next-router-mock-0.9.7.tgz#828e699fba6862e3a3defdb67803c3200a5ab699"
+  integrity sha512-y5ioLCIsdkJKwcoPnrUyocNEJT22RK4wKSg6LO0Q2XkBBvkYprEWy5FiCZt+CA8+qpfxpBlNca76F+glEohbRA==
 
 next@13.4.11:
   version "13.4.11"

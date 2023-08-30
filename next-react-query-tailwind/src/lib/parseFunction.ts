@@ -1,9 +1,10 @@
-// import { Label, Milestone } from '@components/RepoIssues';
+import { RepoPullRequestsQuery } from '@lib/github';
 
-import { Label, Milestone, MilestoneConnection } from './github';
+type MilestoneType = Extract<RepoPullRequestsQuery['repository'], { milestones?: any }>['milestones'];
+type LabelsType = Extract<RepoPullRequestsQuery['repository'], { labels?: any }>['labels'];
 
-export function parseMilestones(milestones: any) {
-  return (milestones?.nodes || []).map((milestone: any) => ({
+export function parseMilestones(milestones: MilestoneType) {
+  return (milestones?.nodes || []).map((milestone) => ({
     id: milestone?.id,
     closed: milestone?.closed,
     title: milestone?.title,
@@ -12,9 +13,9 @@ export function parseMilestones(milestones: any) {
   }));
 }
 
-export function parseLabels(labels: any) {
-  return labels.nodes.map((label: any) => ({
-    color: label.color,
-    name: label.name,
+export function parseLabels(labels: LabelsType) {
+  return (labels?.nodes || []).map((label) => ({
+    color: label?.color,
+    name: label?.name,
   }));
 }
