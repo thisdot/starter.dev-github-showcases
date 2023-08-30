@@ -65,7 +65,7 @@ export class RepositoryEffects {
           repoLabels$,
         ).pipe(
           map(([info, prCount, contents, readme, milestones, labels]) => {
-            const repoData = reposApiToRepoStateMapping(
+            const repoData = reposApiToRepoStateMapping({
               info,
               prCount,
               contents,
@@ -75,7 +75,7 @@ export class RepositoryEffects {
               owner,
               path,
               branch,
-            );
+            });
             return fetchRepositorySuccess({ repoData });
           }),
           catchError((error) => of(fetchRepositoryFailure({ error }))),

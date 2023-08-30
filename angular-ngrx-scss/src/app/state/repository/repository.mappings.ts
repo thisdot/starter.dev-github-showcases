@@ -7,40 +7,40 @@ import {
   RepositoryState,
 } from './repository.state';
 
-export function reposApiToRepoStateMapping(
-  info: RepoApiResponse,
-  prCount: number,
-  contents: RepoContentsApiResponse[],
-  readme: ReadmeApiResponse | null,
-  milestones: Milestone[],
-  labels: IssueLabel[],
-  owner: string,
-  path?: string,
-  branch?: string,
-): RepositoryState {
+export function reposApiToRepoStateMapping(data: {
+  info: RepoApiResponse;
+  prCount: number;
+  contents: RepoContentsApiResponse[];
+  readme: ReadmeApiResponse | null;
+  milestones: Milestone[];
+  labels: IssueLabel[];
+  owner: string;
+  path?: string;
+  branch?: string;
+}): RepositoryState {
   return {
-    path: path ?? '',
-    description: info.description,
-    forkCount: info.forks_count,
-    issueCount: info.open_issues_count,
-    ownerName: owner,
-    prCount: prCount,
-    repoName: info.name,
-    starCount: info.stargazers_count,
-    tags: info.topics,
-    tree: contents,
-    activeBranch: branch ?? info.default_branch,
+    path: data.path ?? '',
+    description: data.info.description,
+    forkCount: data.info.forks_count,
+    issueCount: data.info.open_issues_count,
+    ownerName: data.owner,
+    prCount: data.prCount,
+    repoName: data.info.name,
+    starCount: data.info.stargazers_count,
+    tags: data.info.topics,
+    tree: data.contents,
+    activeBranch: data.branch ?? data.info.default_branch,
     selectedFile: null,
     openPullRequests: null,
     closedPullRequests: null,
     openIssues: null,
     closedIssues: null,
-    visibility: info.visibility,
-    watchCount: info.watchers_count,
-    website: info.homepage,
-    readme: readme?.content || '',
-    milestones: milestones || [],
-    labels: labels || [],
+    visibility: data.info.visibility,
+    watchCount: data.info.watchers_count,
+    website: data.info.homepage,
+    readme: data.readme?.content ?? '',
+    milestones: data.milestones || [],
+    labels: data.labels || [],
     pullsFilterParams: null,
     issuesFilterParams: null,
   };
