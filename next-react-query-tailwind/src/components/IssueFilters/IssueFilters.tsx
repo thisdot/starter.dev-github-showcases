@@ -66,29 +66,29 @@ function IssueFilters({
         </button>
       </div>
       <div className="space-x-8">
-        <FilterDropdown
+        {labels && <FilterDropdown
           name="Label"
           description="Filter by label"
           current={state.label}
           items={[
             ...labels.map((label) => ({
-              label: label.name,
-              value: label.name,
+              label: label.name || '',
+              value: label.name || '',
             })),
           ]}
           onChange={(label) => setLabel(label)}
           buttonClassName={styles.filterButton}
-        />
+        />}
         {milestones && (
           <FilterDropdown
             name="Milestones"
             description="Filter by milestone"
             current={state.milestone}
             items={[
-              { label: 'Issue with no milestone', value: null },
+              { label: 'No milestone', value: null },
               ...milestones.map((milestone) => ({
-                label: milestone.title,
-                value: milestone.id,
+                label: milestone.title || '',
+                value: milestone.id || '',
               })),
             ]}
             onChange={(milestone) => setMilestone(milestone)}

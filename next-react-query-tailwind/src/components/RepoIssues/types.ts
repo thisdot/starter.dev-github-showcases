@@ -1,6 +1,6 @@
 export interface Label {
-  color: string;
-  name: string;
+  color: string | undefined;
+  name: string | undefined
 }
 
 export interface Issue {
