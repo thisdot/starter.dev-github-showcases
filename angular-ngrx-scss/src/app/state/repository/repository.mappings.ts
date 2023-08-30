@@ -1,0 +1,47 @@
+import {
+  IssueLabel,
+  Milestone,
+  ReadmeApiResponse,
+  RepoApiResponse,
+  RepoContentsApiResponse,
+  RepositoryState,
+} from './repository.state';
+
+export function reposApiToRepoStateMapping(
+  info: RepoApiResponse,
+  prCount: number,
+  contents: RepoContentsApiResponse[],
+  readme: ReadmeApiResponse | null,
+  milestones: Milestone[],
+  labels: IssueLabel[],
+  owner: string,
+  path?: string,
+  branch?: string,
+): RepositoryState {
+  return {
+    path: path ?? '',
+    description: info.description,
+    forkCount: info.forks_count,
+    issueCount: info.open_issues_count,
+    ownerName: owner,
+    prCount: prCount,
+    repoName: info.name,
+    starCount: info.stargazers_count,
+    tags: info.topics,
+    tree: contents,
+    activeBranch: branch ?? info.default_branch,
+    selectedFile: null,
+    openPullRequests: null,
+    closedPullRequests: null,
+    openIssues: null,
+    closedIssues: null,
+    visibility: info.visibility,
+    watchCount: info.watchers_count,
+    website: info.homepage,
+    readme: readme?.content || '',
+    milestones: milestones || [],
+    labels: labels || [],
+    pullsFilterParams: null,
+    issuesFilterParams: null,
+  };
+}

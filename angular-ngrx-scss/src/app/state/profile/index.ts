@@ -3,3 +3,4 @@ export * from './profile.effects';
 export * from './profile.reducer';
 export * from './profile.selectors';
 export * from './profile.state';
+export * from './profile.mappings';

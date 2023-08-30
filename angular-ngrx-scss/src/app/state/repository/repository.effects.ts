@@ -18,7 +18,8 @@ import {
   fetchRepositoryFailure,
   fetchRepositorySuccess,
 } from './repository.actions';
-import { FileContents, RepositoryState } from './repository.state';
+import { FileContents } from './repository.state';
+import { reposApiToRepoStateMapping } from './repository.mappings';
 
 @Injectable()
 export class RepositoryEffects {
@@ -64,33 +65,18 @@ export class RepositoryEffects {
           repoLabels$,
         ).pipe(
           map(([info, prCount, contents, readme, milestones, labels]) => {
-            const allData: RepositoryState = {
-              path: path ?? '',
-              description: info.description,
-              forkCount: info.forks_count,
-              issueCount: info.open_issues_count,
-              ownerName: owner,
-              prCount: prCount,
-              repoName: info.name,
-              starCount: info.stargazers_count,
-              tags: info.topics,
-              tree: contents,
-              activeBranch: branch ?? info.default_branch,
-              selectedFile: null,
-              openPullRequests: null,
-              closedPullRequests: null,
-              openIssues: null,
-              closedIssues: null,
-              visibility: info.visibility,
-              watchCount: info.watchers_count,
-              website: info.homepage,
-              readme: readme?.content || '',
-              milestones: milestones || [],
-              labels: labels || [],
-              pullsFilterParams: null,
-              issuesFilterParams: null,
-            };
-            return fetchRepositorySuccess({ repoData: allData });
+            const repoData = reposApiToRepoStateMapping(
+              info,
+              prCount,
+              contents,
+              readme,
+              milestones,
+              labels,
+              owner,
+              path,
+              branch,
+            );
+            return fetchRepositorySuccess({ repoData });
           }),
           catchError((error) => of(fetchRepositoryFailure({ error }))),
         );

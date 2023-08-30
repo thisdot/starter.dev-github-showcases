@@ -26,7 +26,7 @@ import {
   userTokenExists,
 } from './auth.actions';
 import { selectAuthUserName } from './auth.selectors';
-import { AuthUserData } from './auth.state';
+import { userApiToAuthUserData } from './auth.mappings';
 
 @Injectable()
 export class AuthEffects {
@@ -81,13 +81,9 @@ export class AuthEffects {
           distinctUntilChanged(),
           exhaustMap(() =>
             this.userService.getAuthenticatedUserInfo().pipe(
-              map((userData) => {
-                const user: AuthUserData = {
-                  avatar: userData.avatar_url,
-                  email: userData.email,
-                  username: userData.login,
-                };
-                return fetchAuthenticatedUserDataSuccess({ userData: user });
+              map((apiResponse) => {
+                const userData = userApiToAuthUserData(apiResponse);
+                return fetchAuthenticatedUserDataSuccess({ userData });
               }),
               catchError((error) =>
                 of(fetchAuthenticatedUserDataFailure({ error })),
