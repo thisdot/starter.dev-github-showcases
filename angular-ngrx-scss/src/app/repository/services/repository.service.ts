@@ -109,7 +109,7 @@ export class RepositoryService {
 
           const total = data.total_count;
 
-          const page = params?.page || 1;
+          const page = params?.page ?? 1;
 
           const paginationParams = this.getPaginationParams(
             response.headers,
@@ -376,7 +376,7 @@ export class RepositoryService {
     const url = new URL(lastLink);
 
     const queryParams = new URLSearchParams(url.search);
-    const page = parseInt(queryParams.get('page') || '', 10);
+    const page = parseInt(queryParams.get('page') ?? '', 10);
 
     if (isNaN(page)) {
       return 0;
