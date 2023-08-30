@@ -31,6 +31,31 @@ export const mockRepoPullsQuery = graphql.query(
 
 const pullsResponse = {
   repository: {
+    milestones: {
+      nodes: [
+        {
+          id: 'MDk6TWlsZXN0b25lMjkzNzc1Ng==',
+          closed: false,
+          description: '',
+          number: 40,
+          title: '18.0.0',
+        },
+      ],
+      pageInfo: {
+        startCursor: 'Y3Vyc29yOnYyOpHOACzTnA==',
+        endCursor: 'Y3Vyc29yOnYyOpHOACzTnA==',
+        hasNextPage: false,
+        hasPreviousPage: false,
+      },
+      totalCount: 1,
+    },
+    labels: {
+      totalCount: 2,
+      nodes: [
+        { color: 'e7e7e7', name: 'CLA Signed' },
+        { color: '9149d1', name: 'React Core Team' },
+      ],
+    },
     openPullRequests: {
       totalCount: 233,
       pageInfo: {

@@ -82,7 +82,7 @@ describe('RepoPulls', () => {
       'Fix streaming SSR in `react-dom/server.browser`'
     );
   });
-  test('can filter issues by label', async () => {
+  test('can filter pr by label', async () => {
     renderWithClient(
       <RepoProvider value={mockRepoContext}>
         <RepoPulls />

@@ -70,7 +70,8 @@ function RepoPulls() {
     throw new Error('An error occurred loading pull requests.');
   }
 
-  const { openPullRequests, closedPullRequests, labels } = parseQuery(data);
+  const { openPullRequests, closedPullRequests, labels, milestones } =
+    parseQuery(data);
   const activePullRequests =
     filters.state.state === IssueState.Open
       ? openPullRequests
@@ -80,6 +81,7 @@ function RepoPulls() {
     <IssueFilters
       openCount={openPullRequests.totalCount}
       closedCount={closedPullRequests.totalCount}
+      milestones={milestones}
       labels={labels}
       type={IssueType.PullRequest}
       {...filters}

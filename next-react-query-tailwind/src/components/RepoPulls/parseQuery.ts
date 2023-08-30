@@ -1,6 +1,7 @@
-import type { RepoPullRequestsQuery } from '@lib/github';
 import type { PullRequest } from './types';
 import type { Label } from '@components/RepoIssues/types';
+import { RepoPullRequestsQuery } from '@lib/github';
+import { parseLabels, parseMilestones } from '@lib/parseFunction';
 
 function parsePullRequests(connection?: any) {
   if (!connection) {
@@ -22,19 +23,10 @@ function parsePullRequests(connection?: any) {
       }
 
       const labelNodes = pullRequest.labels?.nodes || [];
-      const labels = labelNodes.reduce(
-        (labels: Label[], label: any) =>
-          label
-            ? [
-                ...labels,
-                {
-                  color: label.color,
-                  name: label.name,
-                },
-              ]
-            : labels,
-        []
-      );
+      const labels = labelNodes.map((label: Label) => ({
+        color: label.color,
+        name: label.name,
+      }));
 
       return [
         ...pullRequests,
@@ -65,24 +57,16 @@ export function parseQuery(data: RepoPullRequestsQuery) {
   const closedPullRequests = parsePullRequests(
     data.repository?.closedPullRequests
   );
+  console.log(data);
 
-  const labelMap = [
-    ...closedPullRequests.pullRequests,
-    ...openPullRequests.pullRequests,
-  ].reduce((acc: { [key: string]: Label }, issue: PullRequest) => {
-    const map: { [key: string]: Label } = {};
-    issue.labels.forEach((label) => {
-      map[label.name] = label;
-    });
-    return {
-      ...acc,
-      ...map,
-    };
-  }, {});
+  const milestones = parseMilestones(data.repository?.milestones);
+
+  const labelMap = parseLabels(data.repository?.labels);
 
   return {
     openPullRequests,
     closedPullRequests,
-    labels: Object.values(labelMap) as Label[],
+    labels: labelMap,
+    milestones,
   };
 }

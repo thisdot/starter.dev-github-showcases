@@ -28,6 +28,13 @@ export const REPO_ISSUES_QUERY = gql`
         }
         totalCount
       }
+      labels(first: 100) {
+        totalCount
+        nodes {
+          color
+          name
+        }
+      }
       closedIssues: issues(
         first: $first
         last: $last

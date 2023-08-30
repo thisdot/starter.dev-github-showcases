@@ -9,7 +9,7 @@ const RepoPullsPage = () => {
   return (
     <RepoPage {...query}>
       <RepoHeader />
-      <div className="md:py-12 max-w-screen-xl mx-auto">
+      <div className="md:py-12 max-w-screen-xl w-full mx-auto">
         <RepoPulls />
       </div>
     </RepoPage>

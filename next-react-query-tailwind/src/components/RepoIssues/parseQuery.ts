@@ -1,5 +1,6 @@
 import type { RepoIssuesQuery } from '@lib/github';
-import type { Issue, Label, Milestone } from './types';
+import type { Issue, Label } from './types';
+import { parseMilestones } from '@lib/parseFunction';
 
 // sorry, couldn't get a type for issueConnection that made ts happy :(
 function parseIssues(issueConnection?: any) {
@@ -21,19 +22,10 @@ function parseIssues(issueConnection?: any) {
     }
 
     const labelNodes = issue.labels?.nodes || [];
-    const labels = labelNodes.reduce(
-      (labels: Label[], label: any) =>
-        label
-          ? [
-              ...labels,
-              {
-                color: label.color,
-                name: label.name,
-              },
-            ]
-          : labels,
-      []
-    );
+    const labels = labelNodes.map((label: Label) => ({
+      color: label.color,
+      name: label.name,
+    }));
 
     return [
       ...issues,
@@ -55,49 +47,20 @@ function parseIssues(issueConnection?: any) {
   return { issues, totalCount, pageInfo };
 }
 
-function parseMilestones(milestones?: any) {
-  const nodes = milestones.nodes || [];
-  return nodes.reduce((milestones: Milestone[], milestone: any) => {
-    if (!milestone) {
-      return milestones;
-    }
-
-    return [
-      ...milestones,
-      {
-        id: milestone.id,
-        closed: milestone.closed,
-        title: milestone.title,
-        number: milestone.number,
-        description: milestone.description,
-      },
-    ];
-  }, []);
-}
-
 export function parseQuery(data: RepoIssuesQuery) {
   const openIssues = parseIssues(data.repository?.openIssues);
   const closedIssues = parseIssues(data.repository?.closedIssues);
   const milestones = parseMilestones(data.repository?.milestones);
 
-  const labelMap = [...closedIssues.issues, ...openIssues.issues].reduce(
-    (acc: { [key: string]: Label }, issue: Issue) => {
-      const map: { [key: string]: Label } = {};
-      issue.labels.forEach((label) => {
-        map[label.name] = label;
-      });
-      return {
-        ...acc,
-        ...map,
-      };
-    },
-    {}
-  );
+  const labelMap = (data.repository?.labels?.nodes || []).map((label) => ({
+    name: label?.name,
+    color: label?.color,
+  }));
 
   return {
     openIssues,
     closedIssues,
     milestones,
-    labels: Object.values(labelMap),
+    labels: labelMap,
   };
 }

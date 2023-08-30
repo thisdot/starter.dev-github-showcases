@@ -12,6 +12,29 @@ export const REPO_PULLS_QUERY = gql`
     $last: Int
   ) {
     repository(owner: $owner, name: $name) {
+      milestones(first: 100, states: [OPEN]) {
+        nodes {
+          id
+          closed
+          description
+          number
+          title
+        }
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+          hasPreviousPage
+        }
+        totalCount
+      }
+      labels(first: 100) {
+        totalCount
+        nodes {
+          color
+          name
+        }
+      }
       openPullRequests: pullRequests(
         first: $first
         last: $last

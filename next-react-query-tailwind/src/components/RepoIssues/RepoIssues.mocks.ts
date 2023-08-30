@@ -99,6 +99,13 @@ const issuesResponse = {
       },
       totalCount: 1,
     },
+    labels: {
+      nodes: [
+        { color: 'fef2c0', name: 'Type: Discussion' },
+        { color: '26B0E4', name: 'React 18' },
+      ],
+      totalCount: 2,
+    },
     closedIssues: {
       pageInfo: {
         hasNextPage: true,
