@@ -3,3 +3,4 @@ export * from './repository.effects';
 export * from './repository.reducer';
 export * from './repository.selectors';
 export * from './repository.state';
+export * from './repository.mappings';
