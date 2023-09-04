@@ -1,5 +1,5 @@
 [build]
-  command = "yarn build:css:prod && remix build"
+  command = "npm run build:css:prod && remix build && echo 'Explore root directory' && ls && "public folder" && cd /opt/build/repo/remix-gql-tailwind/public && ls"
   publish = "public"
 
 [dev]
