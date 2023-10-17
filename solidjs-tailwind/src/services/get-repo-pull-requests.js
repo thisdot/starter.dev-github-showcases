@@ -1,7 +1,9 @@
 import { REPO_PULL_REQUESTS } from './queries/repo-pull-requests';
 import { useAuth } from '../auth';
 import FetchApi from './api';
-import { GITHUB_GRAPHQL } from '../utils/constants';
+import { GITHUB_GRAPHQL, SEARCH_PULLS } from '../utils/constants';
+import { parseLabels, parseMilestones } from '../utils/parseFunctions';
+import parseRestAPIPullRequests from '../utils/parseRestAPIPullRequest';
 
 function parsePullRequests(connection) {
   if (!connection) {
@@ -60,23 +62,6 @@ function parsePullRequests(connection) {
   return { pullRequests, totalCount, pageInfo };
 }
 
-function parseLabels(labels) {
-  const nodes = labels?.nodes || [];
-  return nodes.reduce((labels, label) => {
-    if (!label) {
-      return labels;
-    }
-
-    return [
-      ...labels,
-      {
-        color: label.color,
-        name: label.name,
-      },
-    ];
-  }, []);
-}
-
 /**
  *
  * @param {
@@ -97,6 +82,7 @@ const getRepoPullRequests = async ({
   orderBy,
   direction,
   labels,
+  milestone,
   before,
   after,
   first,
@@ -121,22 +107,66 @@ const getRepoPullRequests = async ({
       authorization: `Bearer ${authStore.token}`,
     },
   };
-  const resp = await FetchApi(data);
 
-  const openPullRequests = parsePullRequests(
-    resp.data.repository?.openPullRequest
-  );
-  const closedPullRequests = parsePullRequests(
-    resp.data.repository?.closedPullRequest
-  );
+  if (milestone) {
+    //Using REST API for filters involving milestone as filter by milestone isn't supported on the Graphql
+    const pulls_data = {
+      owner,
+      name,
+      labels: labels?.[0] ?? undefined,
+      sort: orderBy,
+      direction,
+      first,
+      type: 'pull-request',
+      milestone,
+    };
+    const restOpenPullRequests = await FetchApi({
+      url: SEARCH_PULLS({
+        ...pulls_data,
+        state: 'open',
+      }),
+      headersOptions: {
+        authorization: `Bearer ${authStore.token}`,
+      },
+    });
+    const restClosedPullRequests = await FetchApi({
+      url: SEARCH_PULLS({
+        ...pulls_data,
+        state: 'closed',
+      }),
+      headersOptions: {
+        authorization: `Bearer ${authStore.token}`,
+      },
+    });
 
-  const labelMap = parseLabels(resp.data.repository?.labels);
+    const openPullRequests = parseRestAPIPullRequests(restOpenPullRequests);
+    const closedPullRequests = parseRestAPIPullRequests(restClosedPullRequests);
 
-  return {
-    openPullRequests,
-    closedPullRequests,
-    labels: labelMap,
-  };
+    return {
+      openPullRequests,
+      closedPullRequests,
+    };
+  } else {
+    const resp = await FetchApi(data);
+    const openPullRequests = parsePullRequests(
+      resp.data.repository?.openPullRequest
+    );
+
+    const closedPullRequests = parsePullRequests(
+      resp.data.repository?.closedPullRequest
+    );
+
+    const milestones = parseMilestones(resp.data.repository?.milestones);
+
+    const labelMap = parseLabels(resp.data.repository?.labels);
+
+    return {
+      openPullRequests,
+      closedPullRequests,
+      labels: labelMap,
+      milestones,
+    };
+  }
 };
 
 export default getRepoPullRequests;

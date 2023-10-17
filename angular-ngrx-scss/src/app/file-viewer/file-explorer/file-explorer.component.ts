@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import {
-  fetchRepository,
   RepoContents,
+  fetchRepository,
   selectedRepository,
 } from '../../state/repository';
 import { map, takeWhile, tap } from 'rxjs';

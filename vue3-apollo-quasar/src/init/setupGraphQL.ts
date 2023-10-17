@@ -18,7 +18,7 @@ const { getAuthToken } = useToken();
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: process.env.VUE_APP_GRAPHQL_URL,
+  uri: `${process.env.VUE_APP_URL}/graphql`,
 });
 
 const authLink = setContext((_, { headers }) => {

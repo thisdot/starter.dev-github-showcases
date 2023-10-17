@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import RepoTabHeader from '@/components/RepoSubHeader/RepoTabHeader.vue';
 import { TABS } from '@/components/RepoSubHeader/data';
+import { createTestingPinia } from '@pinia/testing';
 
 jest.mock('@vue/apollo-composable', () => {
   return {
@@ -14,6 +15,7 @@ describe('RepoTabHeader', () => {
 
   beforeAll(async () => {
     wrapper = mount(RepoTabHeader, {
+      global: { plugins: [createTestingPinia()] },
       props: {
         issuesCount: 10,
         pullRequestsCount: 10,

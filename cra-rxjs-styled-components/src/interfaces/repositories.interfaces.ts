@@ -18,6 +18,8 @@ export interface Repository {
 	pulls: number;
 	default_branch: string;
 	homepage: string;
+	fork: boolean;
+	archived: boolean;
 }
 
 export interface RepositoryWithBranchCount extends Repository {
@@ -33,6 +35,7 @@ export interface Pagination {
 
 export interface UseRepo {
 	repositories: RepositoryWithBranchCount[];
+	languages: string[];
 	prevPage: () => void;
 	nextPage: () => void;
 	hasNextPage: boolean;

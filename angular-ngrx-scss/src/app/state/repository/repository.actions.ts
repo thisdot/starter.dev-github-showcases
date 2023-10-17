@@ -1,10 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 import {
   FileContents,
-  PR_STATE,
+  RepoIssues,
   RepoPullRequests,
   RepositoryState,
 } from './repository.state';
+import { RepositoryIssuesApiParams } from 'src/app/repository/services/repository.interfaces';
 
 export const fetchRepository = createAction(
   '[Repository API] Fetch Repository',
@@ -46,7 +47,7 @@ export const fetchPullRequests = createAction(
   props<{
     owner: string;
     repoName: string;
-    prState: PR_STATE;
+    params: RepositoryIssuesApiParams;
   }>(),
 );
 
@@ -54,11 +55,33 @@ export const fetchPullRequestsSuccess = createAction(
   '[Repository API] Fetch Pull Requests Success',
   props<{
     pullRequests: RepoPullRequests;
-    prState: PR_STATE;
+    params: RepositoryIssuesApiParams;
   }>(),
 );
 
 export const fetchPullRequestsFailure = createAction(
   '[Repository API] Fetch Pull Requests Failure',
+  props<{ error: object }>(),
+);
+
+export const fetchIssues = createAction(
+  '[Repository API] Fetch Issues',
+  props<{
+    owner: string;
+    repoName: string;
+    params: RepositoryIssuesApiParams;
+  }>(),
+);
+
+export const fetchIssuesSuccess = createAction(
+  '[Repository API] Fetch Issues Success',
+  props<{
+    issues: RepoIssues;
+    params: RepositoryIssuesApiParams;
+  }>(),
+);
+
+export const fetchIssuesFailure = createAction(
+  '[Repository API] Fetch Issues Failure',
   props<{ error: object }>(),
 );

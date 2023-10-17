@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PullRequestCardComponent } from './pull-request-card.component';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { RepoPullRequest } from '../../../state/repository';
 import { By } from '@angular/platform-browser';
 import { SharedModule } from '../../../shared/shared.module';
+import { PullRequest } from 'src/app/repository/services/repository.interfaces';
 
 describe('PullRequestCardComponent', () => {
   let component: PullRequestCardComponent;
@@ -26,11 +26,11 @@ describe('PullRequestCardComponent', () => {
     component = fixture.componentInstance;
     component.pullRequest = {
       id: 1,
-      login: 'thisdot',
+      user: { login: 'thisdot' },
       title: 'Get PRs information',
       number: 45,
       state: 'open',
-      createdAt: new Date('01/01/2022'),
+      created_at: new Date('01/01/2022'),
       labels: [
         {
           id: 2,
@@ -40,8 +40,8 @@ describe('PullRequestCardComponent', () => {
           color: 'D4C5F9',
         },
       ],
-      commentCount: 3,
-    } as RepoPullRequest;
+      comments: 3,
+    } as unknown as PullRequest;
     fixture.detectChanges();
   });
 

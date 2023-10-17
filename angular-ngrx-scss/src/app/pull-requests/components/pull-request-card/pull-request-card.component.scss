@@ -1,11 +1,12 @@
-@use '../../../shared/styles/variables';
+@use 'variables';
+@use 'functions';
 
 .item {
   display: flex;
-  padding: 1rem;
+  padding: variables.$padding--l;
 
   & > .icon {
-    margin-right: 1rem;
+    margin-right: variables.$padding--l;
 
     .purple {
       color: variables.$purple600;
@@ -26,7 +27,7 @@
 
     .meta {
       color: variables.$gray600;
-      font-size: 0.85rem;
+      font-size: functions.rem(12);
 
       a {
         color: inherit;
@@ -41,14 +42,14 @@
 
   .label {
     display: inline-block;
-    padding: 0.125rem 0.5rem;
-    margin-left: 0.125rem;
-    margin-right: 0.125rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
+    padding: functions.rem(2) variables.$padding;
+    margin-left: functions.rem(2);
+    margin-right: functions.rem(2);
+    font-size: functions.rem(11);
+    line-height: variables.$padding--l;
     font-weight: 500;
     white-space: nowrap;
-    border-radius: 0.75rem;
+    border-radius: functions.rem(11);
   }
 
   .comments {

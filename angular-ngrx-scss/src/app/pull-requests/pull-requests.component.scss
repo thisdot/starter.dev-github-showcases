@@ -1,7 +1,9 @@
-@use '../shared/styles/variables';
+@use 'variables';
+@use 'functions';
 
 .pull-requests-container {
-  border-radius: 0.5rem;
+  border-bottom-left-radius: variables.$padding;
+  border-bottom-right-radius: variables.$padding;
   border: 1px solid variables.$gray200;
-  margin: 2rem auto;
+  margin-bottom: functions.rem(14);
 }

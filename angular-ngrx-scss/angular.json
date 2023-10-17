@@ -1,8 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "d9eb1335-6a00-48ce-b9b6-1ffeece4f124",
-    "defaultCollection": "@ngrx/schematics"
+    "analytics": "d9eb1335-6a00-48ce-b9b6-1ffeece4f124"
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -33,7 +32,10 @@
             "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "allowedCommonJsDependencies": ["@primer/octicons"]
+            "allowedCommonJsDependencies": ["@primer/octicons", "prismjs"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app/shared/styles"]
+            }
           },
           "configurations": {
             "production": {
@@ -96,7 +98,10 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app/shared/styles"]
+            }
           }
         },
         "lint": {
@@ -132,6 +137,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/prism/src/test.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/prism/tsconfig.spec.json",
             "karmaConfig": "projects/prism/karma.conf.js"
           }
@@ -147,6 +153,5 @@
         }
       }
     }
-  },
-  "defaultProject": "angular-ngrx-scss"
+  }
 }

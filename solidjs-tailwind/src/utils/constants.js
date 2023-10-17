@@ -18,6 +18,15 @@ export const OrderField = {
   UpdatedAt: 'UPDATED_AT',
 };
 
+const OrderFieldRest = {
+  /** Order issues by comment count */
+  COMMENTS: 'comments',
+  /** Order issues by creation time */
+  CREATED_AT: 'created',
+  /** Order issues by update time */
+  UPDATED_AT: 'updated',
+};
+
 export const OrderDirection = {
   Asc: 'ASC',
   Desc: 'DESC',
@@ -33,3 +42,43 @@ export const SORT_OPTIONS = {
 };
 
 export const DEFAULT_PAGE_SIZE = 30;
+
+export function convertObjectToQueryString(object) {
+  return new URLSearchParams(object).toString();
+}
+
+export function replaceSpaceWithPlus(str) {
+  return str.split(' ').join('+');
+}
+
+export const replaceEncodedSpaceWithPlus = (str) => {
+  return str.split(encodeURIComponent(' ')).join('+');
+};
+
+export const SEARCH_PULLS = ({
+  owner,
+  name,
+  first,
+  sort,
+  direction,
+  labels,
+  type,
+  milestone,
+  state,
+}) => {
+  const params = {
+    per_page: first,
+    sort: OrderFieldRest[sort],
+    order: direction.toLowerCase(),
+  };
+  const queryStrings = convertObjectToQueryString(params);
+  const milestone_check = `+milestone:"${
+    typeof milestone === 'string'
+      ? replaceEncodedSpaceWithPlus(encodeURIComponent(milestone))
+      : milestone
+  }"`;
+  const Q = `+is:${state}+is:${type}${
+    labels ? `+label:"${replaceSpaceWithPlus(labels)}"` : ''
+  }${milestone ? milestone_check : ''}`;
+  return `${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${name}${Q}&${queryStrings}`;
+};

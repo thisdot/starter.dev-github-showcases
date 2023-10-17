@@ -1,6 +1,6 @@
 export type ApiProps<VariablesType> = {
   url: string;
-  query: string | null;
+  query?: string | null;
   variables?: VariablesType;
   headersOptions: Record<string, string>;
 };
@@ -13,18 +13,28 @@ const FetchApi = async <VariablesType>({
 }: ApiProps<VariablesType>) => {
   return (
     (await new Promise((resolve, reject) => {
-      fetch(url, {
-        method: 'POST',
+      let fetchObj: {
+        headers: Record<string, string>;
+        method?: string;
+        body?: string;
+      } = {
         headers: {
           ...headersOptions,
           Accept: 'application/vnd.github+json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          query,
-          variables,
-        }),
-      })
+      };
+      if (query) {
+        fetchObj = {
+          ...fetchObj,
+          method: 'POST',
+          body: JSON.stringify({
+            query,
+            variables,
+          }),
+        };
+      }
+      fetch(url, fetchObj)
         .then((res) => res.json())
         .then((result) => {
           resolve(result);

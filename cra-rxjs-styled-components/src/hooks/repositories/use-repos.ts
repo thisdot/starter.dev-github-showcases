@@ -19,12 +19,19 @@ import {
 } from '../../helpers/extract-branch-count';
 import { useEffect, useState } from 'react';
 
-import { USER_REPO_LIST } from '../../constants/url.constants';
+import {
+	USER_REPO_LIST,
+	USER_TOP_REPO_LIST,
+} from '../../constants/url.constants';
 import { fromFetchWithAuth } from '../auth/from-fetch-with-auth';
 import parse from 'parse-link-header';
 
-export function useRepos(username: string | undefined): UseRepo {
+export function useRepos(
+	username: string | undefined,
+	isTopRepos?: boolean
+): UseRepo {
 	const [state, setState] = useState<RepositoryWithBranchCount[]>([]);
+	const [languages, setLanguages] = useState<string[]>([]);
 	const [paginationPages, setPaginationPages] = useState<Pagination>({
 		prevPage: '',
 		nextPage: '1',
@@ -36,7 +43,7 @@ export function useRepos(username: string | undefined): UseRepo {
 	useEffect(() => {
 		if (username) {
 			const subscription: Subscription = fromFetchWithAuth<Repository[]>(
-				USER_REPO_LIST(username, page),
+				isTopRepos ? USER_TOP_REPO_LIST(page) : USER_REPO_LIST(username, page),
 				{
 					selector: (response: Response) => {
 						const links = parse(response.headers.get('Link'));
@@ -58,6 +65,11 @@ export function useRepos(username: string | undefined): UseRepo {
 					filter((repos) => !!repos.length),
 					switchMap((repositories: Repository[]) => {
 						const requests = repositories.map(createBranchCountRequest);
+						const reposLaguages = repositories
+							.map((res) => res.language)
+							.filter((res) => res)
+							.sort((a, b) => a.localeCompare(b));
+						setLanguages([...new Set(reposLaguages)]);
 						return zip(...requests).pipe(
 							map(mergeRepositoriesWithBranchCount(repositories))
 						);
@@ -70,7 +82,7 @@ export function useRepos(username: string | undefined): UseRepo {
 				subscription.unsubscribe();
 			};
 		}
-	}, [username, page]);
+	}, [username, page, isTopRepos]);
 
 	const nextPage = () => {
 		setPage(paginationPages.nextPage);
@@ -82,6 +94,7 @@ export function useRepos(username: string | undefined): UseRepo {
 
 	return {
 		repositories: state,
+		languages,
 		prevPage,
 		nextPage,
 		hasNextPage: paginationPages.hasNextPage,

@@ -1,4 +1,5 @@
-@use '../../styles/variables.scss';
+@use 'variables';
+@use 'functions';
 
 section {
   margin: 1.3em 0 0 2.5em;
@@ -14,20 +15,20 @@ section {
   input {
     flex-grow: 1;
     margin-right: 0.6em;
-    padding: 0.4rem;
-    border-radius: 0.4rem;
+    padding: variables.$padding;
+    border-radius: variables.$padding;
     border: 1px solid variables.$gray200;
-    line-height: 1.5rem;
+    line-height: functions.rem(21);
   }
 
   .control-dropdown {
     display: inline-flex;
     align-items: center;
-    border-radius: 0.375rem;
+    border-radius: functions.rem(5);
     border: 1px solid variables.$gray300;
     background-color: variables.$gray100;
-    padding: 0.375rem 1rem;
-    line-height: 1.25rem;
+    padding: functions.rem(5) variables.$padding--l;
+    line-height: functions.rem(18);
     color: variables.$gray900;
 
     &__name {
@@ -48,39 +49,12 @@ section {
 
 .results {
   display: flex;
-  margin-bottom: 0.25rem;
+  margin-bottom: variables.$padding--s;
   justify-content: flex-end;
   align-items: center;
-  gap: 0.4rem;
+  gap: variables.$padding;
 
   &__text {
     flex-grow: 1;
-  }
-
-  &__clear {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: variables.$gray500;
-    &:hover {
-      color: variables.$blue600;
-    }
-    &__icon {
-      background: variables.$gray500;
-      border-radius: 0.3rem;
-      width: 1.4rem;
-      height: 1.4rem;
-      display: grid;
-      place-items: center;
-    }
-    &:hover &__icon {
-      background: variables.$blue600;
-    }
   }
 }

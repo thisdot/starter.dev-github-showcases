@@ -1,3 +1,7 @@
+import replaceSpaceWithPlus, {
+	replaceEncodedSpaceWithPlus,
+} from '../helpers/replaceSpaceWithPlus';
+import convertObjectToQueryString from '../helpers/objectToQueryString';
 import { IssueType, State } from '../types/types';
 
 export const API_URL_BASE = process.env.REACT_APP_API_URL;
@@ -30,6 +34,17 @@ export const ORG_REPO_LIST = (user: string) =>
 export const USER_REPO_LIST = (user: string, page: string = '1') =>
 	`${GITHUB_URL_BASE}/users/${user}/repos?sort=pushed&page=${page}&type=all`;
 
+export const USER_TOP_REPO_LIST = (page: string = '1') => {
+	const params = {
+		sort: 'updated',
+		affiliation: 'owner, collaborator, organization_member',
+		page,
+		per_page: 20,
+	};
+	const queryStrings = convertObjectToQueryString(params);
+	return `${GITHUB_URL_BASE}/user/repos?${queryStrings}`;
+};
+
 export const GISTS_URL = (user: string) =>
 	`${GITHUB_URL_BASE}/users/${user}/gists?per_page=10`;
 
@@ -40,11 +55,46 @@ export const PULLS_URL = (
 ) =>
 	`${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}&per_page=30&page=${page}`;
 
-export const OPEN_PULLS_URL = (owner: string, repoName: string, page = 1) =>
-	`${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}+is:open+is:pr&page=${page}&per_page=${PULLS_PER_PAGE}`;
-
-export const CLOSED_PULLS_URL = (owner: string, repoName: string, page = 1) =>
-	`${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${repoName}+is:closed+is:pr&page=${page}&per_page=${PULLS_PER_PAGE}`;
+export const ISSUES_PULLS_URL = ({
+	user,
+	repo,
+	type,
+	state,
+	per_page,
+	page,
+	labels,
+	milestone,
+	sort,
+	direction,
+}: {
+	user: string;
+	repo: string;
+	type: string;
+	state: State;
+	per_page: number;
+	page: number;
+	labels?: string;
+	milestone?: string | number;
+	sort?: string;
+	direction?: string;
+}) => {
+	const params = {
+		per_page,
+		page,
+		sort,
+		order: direction,
+	};
+	const queryStrings = convertObjectToQueryString(params);
+	const milestone_check = `+milestone:"${
+		typeof milestone === 'string'
+			? replaceEncodedSpaceWithPlus(encodeURIComponent(milestone))
+			: milestone
+	}"`;
+	const Q = `+is:${state}+is:${type}${
+		labels ? `+label:"${replaceSpaceWithPlus(labels)}"` : ''
+	}${milestone ? milestone_check : ''}`;
+	return `${GITHUB_URL_BASE}/search/issues?q=repo:${user}/${repo}${Q}&${queryStrings}`;
+};
 
 export const ISSUE_PR_SEARCH = (
 	user: string,
@@ -55,3 +105,16 @@ export const ISSUE_PR_SEARCH = (
 	page: number
 ) =>
 	`${GITHUB_URL_BASE}/search/issues?q=repo:${user}/${repo}%20is:${type}%20state:${state}&per_page=${per_page}&page=${page}`;
+
+export const ORG_INFO = (org: string) => `${GITHUB_URL_BASE}/orgs/${org}`;
+
+export const REPO_LABELS = ({ user, repo }: { user: string; repo: string }) =>
+	`${GITHUB_URL_BASE}/repos/${user}/${repo}/labels`;
+
+export const REPO_MILESTONES = ({
+	user,
+	repo,
+}: {
+	user: string;
+	repo: string;
+}) => `${GITHUB_URL_BASE}/repos/${user}/${repo}/milestones`;

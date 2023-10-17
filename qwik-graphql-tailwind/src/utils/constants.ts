@@ -19,30 +19,63 @@ export const GET_TOKEN_URL = `${API_URL_BASE}/auth/token`;
 
 export const AUTH_TOKEN = 'token';
 
-// export const REPOS_URL = (page: string = '1') =>
-//   `${GITHUB_URL_BASE}/user/repos?sort=pushed&affiliation=owner,collaborator&page=${page}`;
-export const REPOS_URL = `${GITHUB_URL_BASE}/user/repos`;
-
-// export const SINGLE_USER_REPO = (user: string, repo: string) => `${GITHUB_URL_BASE}/repos/${user}/${repo}`;
-
-// export const ORG_REPO_LIST = (user: string) => `${GITHUB_URL_BASE}/orgs/${user}/repos?sort=pushed&per_page=10`;
-
-// export const USER_REPO_LIST = (user: string, page: string = '1') =>
-//   `${GITHUB_URL_BASE}/users/${user}/repos?sort=pushed&page=${page}&type=all`;
-
-// export const GISTS_URL = (user: string) => `${GITHUB_URL_BASE}/users/${user}/gists?per_page=10`;
-
-// export const PULLS_URL = (owner: string, repoName: string) =>
-//   `${GITHUB_URL_BASE}/repos/${owner}/${repoName}/pulls?state=all`;
-
-// export const ISSUE_PR_SEARCH = (
-//   user: string,
-//   repo: string,
-//   type: IssueType,
-//   state: State,
-//   per_page: number,
-//   page: number
-// ) =>
-//   `${GITHUB_URL_BASE}/search/issues?q=repo:${user}/${repo}%20is:${type}%20state:${state}&per_page=${per_page}&page=${page}`;
-
 export const DEFAULT_PAGE_SIZE = 30;
+
+const OrderFieldRest: Record<string, string> = {
+  /** Order issues by comment count */
+  COMMENTS: 'comments',
+  /** Order issues by creation time */
+  CREATED_AT: 'created',
+  /** Order issues by update time */
+  UPDATED_AT: 'updated',
+};
+
+export type State = 'open' | 'closed';
+
+export function convertObjectToQueryString(object: Record<string, string>) {
+  return new URLSearchParams(object).toString();
+}
+
+export function replaceSpaceWithPlus(str: string) {
+  return str.split(' ').join('+');
+}
+
+export const replaceEncodedSpaceWithPlus = (str: string) => {
+  return str.split(encodeURIComponent(' ')).join('+');
+};
+
+export const SEARCH_PULLS = ({
+  owner,
+  name,
+  first,
+  sort,
+  direction,
+  labels,
+  type,
+  milestone,
+  state,
+}: {
+  owner: string;
+  name: string;
+  type: string;
+  first?: number;
+  sort?: string;
+  labels?: string;
+  direction?: string;
+  milestone?: string | number;
+  state: 'open' | 'closed';
+}) => {
+  const params = {
+    per_page: first?.toString() || DEFAULT_PAGE_SIZE.toString(),
+    sort: OrderFieldRest[sort || 'CREATED_AT'],
+    order: direction?.toLowerCase() || 'asc',
+  };
+  const queryStrings = convertObjectToQueryString(params);
+  const milestone_check = `+milestone:"${
+    typeof milestone === 'string' ? replaceEncodedSpaceWithPlus(encodeURIComponent(milestone)) : milestone
+  }"`;
+  const Q = `+is:${state}+is:${type}${labels ? `+label:"${replaceSpaceWithPlus(labels)}"` : ''}${
+    milestone ? milestone_check : ''
+  }`;
+  return `${GITHUB_URL_BASE}/search/issues?q=repo:${owner}/${name}${Q}&${queryStrings}`;
+};

@@ -1,4 +1,5 @@
 import { createContext } from '@builder.io/qwik';
+import { Milestone } from '~/components/issue-tab-view/type';
 import { PullRequest } from '~/components/repo-pulls/types';
 
 export type Tabs = 'open' | 'closed';
@@ -6,6 +7,7 @@ export type Tabs = 'open' | 'closed';
 export interface Label {
   color: string;
   name: string;
+  description?: string;
 }
 
 export interface PullRequestContextProps {
@@ -14,7 +16,8 @@ export interface PullRequestContextProps {
   openPullRequest: PullRequest[];
   closedPullRequestCount: number;
   openPullRequestCount: number;
-  pullRequestLabels: { value: string; label: string }[];
+  pullRequestLabels: Label[];
+  pullRequestMilestones: Milestone[];
   openPageInfo: {
     hasNextPage: boolean;
     hasPreviousPage: boolean;

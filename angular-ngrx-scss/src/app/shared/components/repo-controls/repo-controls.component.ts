@@ -7,7 +7,7 @@ import {
   combineLatest,
   Subject,
 } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 import { setSortAndFilterProperties } from 'src/app/state/profile/profile.actions';
 import {
   filteredLanguages,
@@ -104,16 +104,19 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
       startWith(null),
     );
 
-    combineLatest(
-      [searchInput$, typeFilter$, languageFilter$, sortFilter$],
-      (search: string, type: string, language: string, sort: string) => ({
-        search,
-        type,
-        language,
-        sort,
-      }),
-    )
-      .pipe(takeUntil(this.destroy$))
+    combineLatest([searchInput$, typeFilter$, languageFilter$, sortFilter$])
+      .pipe(
+        map(
+          ([search, type, language, sort]) =>
+            ({
+              search,
+              type,
+              language,
+              sort,
+            } as SortAndFilterState),
+        ),
+        takeUntil(this.destroy$),
+      )
       .subscribe((filters: SortAndFilterState) => {
         this.store.dispatch(setSortAndFilterProperties({ filters }));
       });
@@ -125,15 +128,15 @@ export class RepoControlsComponent implements OnInit, OnDestroy {
   }
 
   handleTypeClick(type: string) {
-    this.typeFilter.setValue(type);
+    this.typeFilter.setValue(type as TypeFilter);
   }
 
   handleLanguageClick(language: string) {
-    this.languageFilter.setValue(language);
+    this.languageFilter.setValue(language as TypeFilter);
   }
 
   handleSortClick(sort: string) {
-    this.sortFilter.setValue(sort);
+    this.sortFilter.setValue(sort as OrderField);
   }
 
   handleClearClick(): void {

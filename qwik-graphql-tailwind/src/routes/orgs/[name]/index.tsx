@@ -24,10 +24,7 @@ export default component$(() => {
   );
 });
 
-export async function fetchOrgRepos(
-  { organization, first }: OrgRepoQueryParams,
-  abortController?: AbortController
-): Promise<any> {
+export async function fetchOrgRepos({ organization, first }: OrgRepoQueryParams, abortController?: AbortController) {
   const { executeQuery$ } = useQuery(ORG_REPOS_QUERY);
 
   const resp = await executeQuery$({

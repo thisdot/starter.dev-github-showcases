@@ -1,10 +1,11 @@
 <template>
   <div class="wrapper">
+    <ClearIssuePRFilter />
     <div class="tab_view">
       <IssuePullRequestTab
         @changeTab="changeTab"
-        :openCounts="countList(openIssuesList)"
-        :closedCounts="countList(closedIssuesList)"
+        :openCounts="openIssues?.totalCount"
+        :closedCounts="closedIssues?.totalCount"
         :tabType="card_type"
       />
       <q-list class="open-issue" separator v-if="tabRef === TABS.OPEN">
@@ -13,14 +14,20 @@
           :key="index"
           :state="toLowerCase(data.state)"
           :cardType="card_type"
-          :author="data.author.login"
+          :author="data.login"
           :title="data.title"
           :url="data.url"
-          :commentCount="data.comments.totalCount"
+          :commentCount="data.commentCount"
           :number="data.number"
           :createdAt="data.createdAt"
         >
         </IssuesPullRequestsCard>
+        <div
+          v-if="openIssuesList.length === 0 && !repoStore.loading"
+          class="row justify-center items-center q-pa-md text-subtitle1 text-weight-medium text-uppercase"
+        >
+          No Content found
+        </div>
       </q-list>
 
       <q-list class="closed-issue" separator v-else>
@@ -29,16 +36,28 @@
           :key="index"
           :state="toLowerCase(data.state)"
           :cardType="card_type"
-          :author="data.author.login"
+          :author="data.login"
           :title="data.title"
           :url="data.url"
-          :commentCount="data.comments.totalCount"
+          :commentCount="data.commentCount"
           :number="data.number"
           :createdAt="data.createdAt"
           :closedAt="data.closedAt"
         >
         </IssuesPullRequestsCard>
+        <div
+          v-if="closedIssuesList.length === 0 && !repoStore.loading"
+          class="row justify-center items-center q-pa-md text-subtitle1 text-weight-medium text-uppercase"
+        >
+          No Content found
+        </div>
       </q-list>
+      <div
+        v-if="repoStore.loading"
+        class="row justify-center items-center q-pa-md"
+      >
+        <q-spinner-ios color="primary" size="2em" />
+      </div>
     </div>
     <PaginationButtons v-if="showPagination(tabRef)" @paginate="paginate" />
   </div>
@@ -46,7 +65,8 @@
 
 <script lang="ts">
 import { defineComponent, ref, defineProps, computed } from 'vue';
-import { IssuesData } from '@/composables/github/types';
+import { IIssueParse } from '@/helpers/parseIssue';
+import { useRepoStore } from '@/store/respoStore';
 
 export default defineComponent({
   name: 'IssueTabView',
@@ -57,36 +77,30 @@ import {
   IssuePullRequestTab,
   IssuesPullRequestsCard,
   PaginationButtons,
+  ClearIssuePRFilter,
 } from '@/components';
 import { TABS } from './data';
 
-type Edges = {
-  edges: IssuesData[];
-};
-
 const props = defineProps({
   openIssues: {
-    type: Object as () => Edges,
+    type: Object as () => IIssueParse,
     default: () => null,
   },
   closedIssues: {
-    type: Object as () => Edges,
+    type: Object as () => IIssueParse,
     default: () => null,
   },
 });
 
+const repoStore = useRepoStore();
 const tabRef = ref(TABS.OPEN);
 const card_type = 'issue';
 
 const openIssuesList = computed(() => {
-  const data = props.openIssues?.edges?.slice() || [];
-  const result = data.map((res) => res.node);
-  return result || [];
+  return props.openIssues?.issues || [];
 });
 const closedIssuesList = computed(() => {
-  const data = props.closedIssues?.edges?.slice() || [];
-  const result = data.map((res) => res.node);
-  return result || [];
+  return props.closedIssues?.issues || [];
 });
 
 const changeTab = (tab: string) => {
@@ -95,7 +109,7 @@ const changeTab = (tab: string) => {
 const paginate = (value: number) => null;
 
 const toLowerCase = (value: string) => value.toLowerCase();
-const countList = (array) => array.length;
+
 const showPagination = (tab: string): boolean => {
   const issues = {
     openIssue: openIssuesList.value,

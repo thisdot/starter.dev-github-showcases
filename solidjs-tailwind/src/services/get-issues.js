@@ -2,6 +2,7 @@ import FetchApi from './api';
 import { useAuth } from '../auth';
 import { ISSUES_QUERY } from './queries/issue-info';
 import { GITHUB_GRAPHQL } from '../utils/constants';
+import { parseLabels, parseMilestones } from '../utils/parseFunctions';
 
 function parseIssues(connection) {
   if (!connection) {
@@ -56,43 +57,6 @@ function parseIssues(connection) {
   }, []);
 
   return { issues, totalCount, pageInfo };
-}
-
-function parseMilestones(milestones) {
-  const nodes = milestones?.nodes || [];
-  return nodes.reduce((milestones, milestone) => {
-    if (!milestone) {
-      return milestones;
-    }
-
-    return [
-      ...milestones,
-      {
-        id: milestone.id,
-        closed: milestone.closed,
-        title: milestone.title,
-        number: milestone.number,
-        description: milestone.description,
-      },
-    ];
-  }, []);
-}
-
-function parseLabels(labels) {
-  const nodes = labels?.nodes || [];
-  return nodes.reduce((labels, label) => {
-    if (!label) {
-      return labels;
-    }
-
-    return [
-      ...labels,
-      {
-        color: label.color,
-        name: label.name,
-      },
-    ];
-  }, []);
 }
 
 const getIssues = async ({

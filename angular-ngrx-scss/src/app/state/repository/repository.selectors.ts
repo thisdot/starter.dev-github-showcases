@@ -25,3 +25,66 @@ export const selectClosedPullRequests = createSelector(
   selectRepositoryState,
   (state) => state.closedPullRequests,
 );
+
+export const selectOpenIssues = createSelector(
+  selectRepositoryState,
+  (state) => state.openIssues,
+);
+
+export const selectClosedIssues = createSelector(
+  selectRepositoryState,
+  (state) => state.closedIssues,
+);
+
+export const selectOpenIssuePaginationParams = createSelector(
+  selectRepositoryState,
+  (state) => state.openIssues?.paginationParams,
+);
+
+export const selectClosedIssuePaginationParams = createSelector(
+  selectRepositoryState,
+  (state) => state.closedIssues?.paginationParams,
+);
+
+export const selectClosedPullRequestsPaginationParams = createSelector(
+  selectRepositoryState,
+  (state) => state.closedPullRequests?.paginationParams,
+);
+
+export const selectOpenPullRequestsPaginationParams = createSelector(
+  selectRepositoryState,
+  (state) => state.openPullRequests?.paginationParams,
+);
+
+export const selectMilestones = createSelector(
+  selectRepositoryState,
+  (state) => state.milestones,
+);
+
+export const selectLabels = createSelector(
+  selectRepositoryState,
+  (state) => state.labels,
+);
+
+export const selectHasActiveIssueFilters = createSelector(
+  selectRepositoryState,
+  (state) =>
+    state.issuesFilterParams &&
+    ((state.issuesFilterParams.milestone &&
+      state.issuesFilterParams.milestone?.length > 0) ||
+      (state.issuesFilterParams?.labels &&
+        state.issuesFilterParams.labels.length > 0) ||
+      (state.issuesFilterParams.sort &&
+        state.issuesFilterParams?.sort !== 'created')),
+);
+
+export const selectHasActivePullRequestFilters = createSelector(
+  selectRepositoryState,
+  (state) =>
+    state.pullsFilterParams &&
+    ((state.pullsFilterParams?.labels &&
+      state.pullsFilterParams.labels.length > 0) ||
+      (state.pullsFilterParams?.sort &&
+        state.pullsFilterParams.sort &&
+        state.pullsFilterParams.sort !== 'created')),
+);

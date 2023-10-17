@@ -15,6 +15,7 @@ import {
 import { OrderField, TypeFilter } from 'src/app/state/profile/profile.state';
 import { FilterDropdownComponent } from '../filter-dropdown/filter-dropdown.component';
 import { RepoControlsComponent } from './repo-controls.component';
+import { ClickAwayDirective } from '../../directives/click-away.directive';
 
 const MOCK_VALUE_SELECT_FILTER_BY_SEARCH = 'Test Search';
 const MOCK_VALUE_SELECT_FILTER_BY_TYPE = TypeFilter.Forked;
@@ -30,7 +31,11 @@ describe('RepoControlsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RepoControlsComponent, FilterDropdownComponent],
+      declarations: [
+        RepoControlsComponent,
+        FilterDropdownComponent,
+        ClickAwayDirective,
+      ],
       imports: [ReactiveFormsModule],
       providers: [
         provideMockStore({
@@ -102,19 +107,16 @@ describe('RepoControlsComponent', () => {
     });
   });
 
-  it(
-    'should not show the label if has no active filters',
-    waitForAsync(() => {
-      component.ngOnInit();
+  it('should not show the label if has no active filters', waitForAsync(() => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    component.hasActiveSortAndFilters$.subscribe((hasActiveFilters) => {
       fixture.detectChanges();
-      component.hasActiveSortAndFilters$.subscribe((hasActiveFilters) => {
-        fixture.detectChanges();
-        const resultsContainer = fixture.debugElement.query(By.css('.results'));
-        expect(hasActiveFilters).toBe(false);
-        expect(resultsContainer).toBeNull();
-      });
-    }),
-  );
+      const resultsContainer = fixture.debugElement.query(By.css('.results'));
+      expect(hasActiveFilters).toBe(false);
+      expect(resultsContainer).toBeNull();
+    });
+  }));
 
   it('should get filter by type from selector', (done) => {
     store.select(selectFilterByType).subscribe((search) => {

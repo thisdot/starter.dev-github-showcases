@@ -94,7 +94,7 @@ export async function fetchRepoInfo(
     name: string;
   },
   abortController?: AbortController
-): Promise<any> {
+) {
   const { executeQuery$ } = useQuery(REPO_INFO_QUERY);
 
   const resp = await executeQuery$({

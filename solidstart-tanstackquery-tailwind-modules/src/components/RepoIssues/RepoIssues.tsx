@@ -7,7 +7,9 @@ import { Match, Show, Switch } from 'solid-js';
 import {
   activeTab,
   issues,
+  milestoneNumber,
   selectedLabel,
+  setMilestoneNumber,
   setSelectedLabel,
   setSelectedMilestone,
   setSortBy,
@@ -21,12 +23,16 @@ const RepoIssues = () => {
     setSortBy('Newest');
     setSelectedLabel(undefined);
     setSelectedMilestone(undefined);
+    setMilestoneNumber(undefined);
   };
 
   return (
     <div class="md:py-12 max-w-screen-xl mx-auto">
-      <Show when={selectedLabel() || sortBy() !== 'Newest'}>
-        <div
+      <Show
+        when={selectedLabel() || sortBy() !== 'Newest' || milestoneNumber()}
+      >
+        <a
+          href={location.pathname}
           class="flex items-center gap-2 text-sm my-4 ml-2 cursor-pointer"
           onClick={clearSortAndFilter}
         >
@@ -34,7 +40,7 @@ const RepoIssues = () => {
             <CloseIcon />
           </span>
           Clear filter
-        </div>
+        </a>
       </Show>
       <div class="border border-gray-300 rounded-lg">
         <PRAndIssuesHeader type="issue" />

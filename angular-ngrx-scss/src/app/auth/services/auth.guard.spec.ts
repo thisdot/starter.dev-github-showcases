@@ -29,23 +29,16 @@ describe('AuthGuard', () => {
     guard = TestBed.inject(AuthGuard);
   });
 
-  it(
-    'should return true if the user is logged in',
-    waitForAsync(() => {
-      const mockAccessToken =
-        tokenServiceMock.getToken.and.returnValue('exists');
-      spyOn(window.sessionStorage, 'getItem').and.callFake(mockAccessToken);
-      guard.userIsAuthenticated();
-      expect(guard.canActivate()).toBeTrue();
-    }),
-  );
+  it('should return true if the user is logged in', waitForAsync(() => {
+    const mockAccessToken = tokenServiceMock.getToken.and.returnValue('exists');
+    spyOn(window.sessionStorage, 'getItem').and.callFake(mockAccessToken);
+    guard.userIsAuthenticated();
+    expect(guard.canActivate()).toBeTrue();
+  }));
 
-  it(
-    'should return a url tree if the user is not logged in',
-    waitForAsync(() => {
-      store.overrideSelector(selectIsAuthenticated, false);
-      const expectation = router.createUrlTree(['/signin']);
-      expect(guard.canActivate()).toEqual(expectation);
-    }),
-  );
+  it('should return a url tree if the user is not logged in', waitForAsync(() => {
+    store.overrideSelector(selectIsAuthenticated, false);
+    const expectation = router.createUrlTree(['/signin']);
+    expect(guard.canActivate()).toEqual(expectation);
+  }));
 });

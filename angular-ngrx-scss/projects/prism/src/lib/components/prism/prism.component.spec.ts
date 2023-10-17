@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PrismComponent } from './prism.component';
+import { LineComponent } from './../line/line.component';
+import { TokenComponent } from '../token/token.component';
 
 describe('PrismComponent', () => {
   let component: PrismComponent;
@@ -8,7 +10,7 @@ describe('PrismComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PrismComponent],
+      declarations: [PrismComponent, LineComponent, TokenComponent],
     }).compileComponents();
   });
 

@@ -10,7 +10,12 @@ function UserDropdown({ image }: UserDropdownProps) {
   const { data } = useCurrentUserQuery(gqlClient);
   const username = data?.viewer.login;
 
-  return <UserDropdownView image={image} username={username} />;
+  return (
+    <UserDropdownView
+      image={data?.viewer.avatarUrl || image}
+      username={username}
+    />
+  );
 }
 
 export default UserDropdown;

@@ -11,7 +11,8 @@ import {
   MergedPrIcon,
   ClosedPrIcon,
 } from '../icons';
-import { Label } from '../repo-pulls/types';
+import { Label } from '~/types';
+import { getTextColor } from '~/utils/dynamicColor';
 
 export interface IssuePrCardProps {
   data: {
@@ -84,8 +85,11 @@ export const IssuePrCard = component$(({ data, type }: IssuePrCardProps) => {
             data.labels.map((label: Label, i) => (
               <span
                 key={i}
-                class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm', `bg-[#${label.color}]`)}
-                style={{ backgroundColor: `#${label.color}` }}
+                class={cn('mt-2 ml-2 py-1 px-2 rounded-full text-sm')}
+                style={{
+                  'background-color': `#${label.color}`,
+                  color: getTextColor(`#${label.color}` || '#ccc'),
+                }}
               >
                 {label.name}
               </span>

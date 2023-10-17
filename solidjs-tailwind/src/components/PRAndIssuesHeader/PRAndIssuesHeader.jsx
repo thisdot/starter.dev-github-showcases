@@ -4,7 +4,7 @@ import FilterDropdown from '../FilterDropDown/FilterDropdown';
 import { SORT_OPTIONS } from '../../utils/constants';
 import { createMemo } from 'solid-js';
 import { usePrAndIssuesContext } from '../../contexts/PrAndIssuesContext';
-import { getSelectedMilestoneId } from './utils';
+import { getSelectedMilestoneNumber } from './utils';
 
 const PRAndIssuesHeader = (props) => {
   const {
@@ -19,7 +19,7 @@ const PRAndIssuesHeader = (props) => {
     setSelectedMilestone,
     selectedMilestone,
     milestoneOpt,
-    setMilestoneId,
+    setMilestoneNumber,
   } = usePrAndIssuesContext();
 
   const sortOptions = Object.values(SORT_OPTIONS);
@@ -35,7 +35,9 @@ const PRAndIssuesHeader = (props) => {
     setSelectedLabel(selectedLabel() !== value ? value : undefined);
   const selectMilestone = (value) => {
     setSelectedMilestone(selectedMilestone() !== value ? value : undefined);
-    setMilestoneId(getSelectedMilestoneId(milestoneOpt(), selectedMilestone()));
+    setMilestoneNumber(
+      getSelectedMilestoneNumber(milestoneOpt(), selectedMilestone())
+    );
   };
 
   return (

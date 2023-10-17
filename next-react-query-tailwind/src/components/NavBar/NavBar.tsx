@@ -7,24 +7,14 @@ import styles from './NavBar.module.css';
 function NavBar() {
   const { data: session } = useSession();
   const user = session?.user;
-  return (
+  return user ? (
     <header className={styles.header}>
-      {user ? (
-        <>
-          <Link href="/">
-            <GitHubLogo />
-          </Link>
-          <div>
-            <div>
-              <UserDropdown image={user.image} />
-            </div>
-          </div>
-        </>
-      ) : (
-        ''
-      )}
+      <Link href="/">
+        <GitHubLogo />
+      </Link>
+      <div>{user && <UserDropdown image={user.image} />}</div>
     </header>
-  );
+  ) : null;
 }
 
 export default NavBar;

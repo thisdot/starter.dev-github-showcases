@@ -3,20 +3,20 @@ import { CheckIcon, PullRequestIcon, IssuesIcon } from '../Icons';
 import FilterDropdown from '../FilterDropDown/FilterDropdown';
 import { SORT_OPTIONS } from '../../utils/constants';
 import { createMemo, Show } from 'solid-js';
-import { getSelectedMilestoneId } from './utils';
+import { getSelectedMilestoneNumber } from './utils';
 import { useSearchParams } from 'solid-start';
 import {
   setSelectedLabel,
   selectedLabel,
   setSelectedMilestone,
   selectedMilestone,
-  setMilestoneId,
   setActiveTab,
   activeTab,
   setSortBy,
   sortBy,
   pullRequests,
   issues,
+  setMilestoneNumber,
 } from '~/store';
 
 interface PRAndIssuesHeaderProps {
@@ -45,8 +45,10 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
         : pullRequests().labels?.map((label) => label.color)) || []
   );
 
-  const milestoneOptions = createMemo<string[]>(
-    () => issues().milestones?.map((milestone) => milestone.title) || []
+  const milestoneOptions = createMemo<string[]>(() =>
+    props.type === 'issue'
+      ? issues().milestones?.map((milestone) => milestone.title)
+      : pullRequests().milestones?.map((milestone) => milestone.title)
   );
 
   const selectLabel = (value: string) =>
@@ -54,9 +56,14 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
 
   const selectMilestone = (value: string) => {
     setSelectedMilestone(selectedMilestone() !== value ? value : undefined);
-    setMilestoneId(
-      getSelectedMilestoneId(issues().milestones || [], selectedMilestone())
-    );
+    if (props.type === 'issue') {
+      setMilestoneNumber(
+        getSelectedMilestoneNumber(
+          issues().milestones || [],
+          selectedMilestone()
+        )
+      );
+    }
   };
 
   const toggleTab = (activeTab: 'OPEN' | 'CLOSED') => {
@@ -118,7 +125,7 @@ const PRAndIssuesHeader = (props: PRAndIssuesHeaderProps) => {
             />
           </div>
         </Show>
-        <Show when={props.type === 'issue' && milestoneOptions()?.length !== 0}>
+        <Show when={milestoneOptions()?.length !== 0}>
           <div>
             <FilterDropdown
               name="Milestone"

@@ -1,3 +1,4 @@
+import { MilestoneProps } from './issues-type';
 import { Label } from './label-type';
 
 export interface PullRequest {
@@ -34,6 +35,11 @@ export type RepoPullRequestsQuery = {
         endCursor?: string;
       };
       nodes: PullRequestNodeProps[];
+    };
+    milestones: {
+      nodes: MilestoneProps[];
+      pageInfo: PageInfo;
+      totalCount: number;
     };
     labels: {
       totalCount: number;

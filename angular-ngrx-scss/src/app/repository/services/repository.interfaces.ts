@@ -33,26 +33,38 @@ export interface Issue {
 
 export type Issues = Array<Issue>;
 
+export type Sort =
+  | 'created'
+  | 'created-asc'
+  | 'updated'
+  | 'updated-asc'
+  | 'comments'
+  | 'comments-asc';
+
 export interface RepositoryIssuesApiParams {
   milestone?: string;
-  state?: 'open' | 'closed' | 'all';
+  state: 'open' | 'closed' | 'all';
   assignee?: string;
   creator?: string;
   mentioned?: string;
   labels?: string;
-  sort?: 'created' | 'updated' | 'comments';
-  direction?: 'asc' | 'desc';
+  sort?: Sort;
   since?: string;
   per_page?: number;
   page?: number;
 }
 
-export interface PullRequest {
-  title: string;
-  number: number;
-  user: User;
-  closed_at?: string;
-  created_at: string;
+export interface PullRequest extends Issue {
+  merged: boolean;
+  mergeable: boolean;
+  merged_by: User;
+  merged_at: string;
+  merge_commit_sha: string;
+  comments: number;
+  commits: number;
+  additions: number;
+  deletions: number;
+  changed_files: number;
 }
 
 export type PullRequests = Array<PullRequest>;

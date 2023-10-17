@@ -78,6 +78,7 @@ export type Variables = {
     assignee?: string;
     createdBy?: string;
     mentioned?: string;
+    milestoneNumber?: string;
     milestone?: string;
     labels?: (string | undefined)[];
     states?: 'OPEN' | 'CLOSED';

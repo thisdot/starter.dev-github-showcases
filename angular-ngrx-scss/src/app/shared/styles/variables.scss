@@ -1,3 +1,5 @@
+@use 'functions';
+
 // colors
 $white: rgb(255, 255, 255);
 $gray50: rgb(249, 250, 251);
@@ -30,3 +32,8 @@ $sm: 640px;
 $md: 768px;
 $lg: 1024px;
 $xl: 1280px;
+
+// spacing
+$padding: functions.rem(8);
+$padding--s: functions.rem(4);
+$padding--l: functions.rem(14);

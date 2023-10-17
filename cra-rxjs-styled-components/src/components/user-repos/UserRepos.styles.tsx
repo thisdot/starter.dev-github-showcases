@@ -17,3 +17,36 @@ export const NetlifyBadgeContainer = styled.div`
 	text-align: center;
 	background-color: white;
 `;
+
+export const OrgHeader = styled.div`
+	border-bottom: 1px solid var(--gray-300);
+	background-color: var(--gray-100);
+	position: sticky;
+	top: 0px;
+	z-index: 40;
+`;
+
+export const OrgTopHeader = styled.div`
+	padding: 0 32px;
+`;
+
+export const OrgAbout = styled.div`
+	display: flex;
+	align-items: center;
+	padding-top: 1rem;
+	margin-bottom: 2rem;
+`;
+
+export const OrgImage = styled.img`
+	border-radius: 0.25rem;
+	width: 2rem;
+	height: 2rem;
+	border-width: 1px;
+`;
+export const OrgName = styled.span`
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+	font-weight: 700;
+	margin-left: 0.5rem;
+	color: var(--gray-700);
+`;

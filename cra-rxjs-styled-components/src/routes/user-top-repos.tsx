@@ -16,7 +16,7 @@ const Main = styled.main`
 	width: 100%;
 	background-color: rgb(243, 244, 246);
 	max-width: 1024px;
-	min-height: calc(100vh - 172px);
+	height: 100%;
 	@media (max-width: 850px) {
 		padding: 2rem;
 	}
@@ -65,7 +65,8 @@ const NetlifyBadgeContainer = styled.div`
 export default function TopRepos() {
 	const context = useUser();
 	const user = context?.user;
-	const { repositories } = useRepos(user?.login);
+	const isTopRepos: boolean = true;
+	const { repositories } = useRepos(user?.login, isTopRepos);
 	const { gists, loadingGist } = useGists();
 	const topRepositories = [...repositories]
 		.sort((a, b) => b.stargazers_count - a.stargazers_count)
@@ -92,7 +93,7 @@ export default function TopRepos() {
 							) : (
 								<>
 									{topRepositories.map((repo) => (
-										<RepoCard repo={repo} key={repo.id} />
+										<RepoCard repo={repo} key={repo.id} isMainPage />
 									))}
 									<ViewRepositoriesContainer>
 										<ViewRepositoriesLink href={`/${user?.login}`}>

@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { RepoSubHeader } from '@/components';
 import ListItem from '@/components/RepoSubHeader/ListItem.vue';
 import { NOTIFICATIONS } from '@/components/RepoSubHeader/data';
+import { createTestingPinia } from '@pinia/testing';
 
 jest.mock('@vue/apollo-composable', () => {
   return {
@@ -15,6 +16,7 @@ describe('RepoSubHeader', () => {
 
   beforeAll(() => {
     wrapper = mount(RepoSubHeader, {
+      global: { plugins: [createTestingPinia()] },
       props: {
         username: 'thisdot',
         repoName: 'starter.dev-github-showcases',

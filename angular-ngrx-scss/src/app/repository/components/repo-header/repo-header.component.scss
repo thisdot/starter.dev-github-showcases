@@ -1,7 +1,8 @@
-@use '../../../shared/styles/variables.scss';
+@use 'variables';
+@use 'functions';
 
 .wrapper {
-  padding: 1.5rem 3rem 0;
+  padding: functions.rem(21) functions.rem(42) 0;
   background-color: variables.$gray100;
   border-bottom: 1px solid variables.$gray300;
 
@@ -9,6 +10,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: functions.rem(21);
   }
 }

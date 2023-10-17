@@ -1,4 +1,5 @@
-@use '../../../../shared/styles/variables.scss';
+@use 'variables';
+@use 'functions';
 
 .container {
   max-width: 1536px;
@@ -16,7 +17,7 @@
         display: inline-flex;
         align-items: center;
         text-decoration: none;
-        font-size: 1rem;
+        font-size: variables.$padding--l;
         padding: 16px;
         color: variables.$gray600;
         &.tab {
@@ -39,19 +40,19 @@
         .count {
           display: inline-block;
           text-align: center;
-          padding: 0.125rem 0.5rem;
-          margin-left: 0.5rem;
+          padding: functions.rem(2) variables.$padding;
+          margin-left: variables.$padding;
           background-color: #e5e7eb;
           color: #1f2937;
-          font-size: 0.875rem;
-          line-height: 1.125rem;
+          font-size: functions.rem(12);
+          line-height: functions.rem(16);
           font-weight: 500;
-          border-radius: 0.875rem;
+          border-radius: functions.rem(12);
         }
       }
 
       span {
-        line-height: 1.175rem;
+        line-height: functions.rem(15);
       }
 
       li {
@@ -62,7 +63,7 @@
 
     .icon {
       display: inline-block;
-      margin-right: 0.5rem;
+      margin-right: variables.$padding;
     }
   }
 }

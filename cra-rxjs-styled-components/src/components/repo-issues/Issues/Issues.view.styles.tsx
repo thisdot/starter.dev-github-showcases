@@ -12,3 +12,8 @@ export const Content = styled.div`
 	border: 1px solid ${colors.gray300};
 	border-radius: 6px;
 `;
+
+export const Container = styled.div`
+	display: flex;
+	flex-grow: 1;
+`;

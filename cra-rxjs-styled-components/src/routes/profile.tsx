@@ -2,6 +2,7 @@ import UserProfileView from '../components/user-profile/UserProfile';
 import {
 	Layout,
 	NetlifyBadgeContainer,
+	ProfileNav,
 } from '../components/layouts/ProfileLayout';
 import Header from '../components/header/Header';
 import { useUser } from '../context/UserProvider';
@@ -11,27 +12,50 @@ import styled from 'styled-components';
 import { PaginateWrapper } from '../components/paginate-button/PaginateButton.style';
 import PaginateButton from '../components/paginate-button/PaginateButton';
 import LoadingRepoCard from '../components/repo-card/LoadingRepoCard';
+import TabNavigation from '../components/tab-nav/TabNav';
+import { tabs } from '../constants/data';
+import RepoFilter from '../components/repo-filter/Repofilter';
+import useRepoSortFilter from '../hooks/repositories/use-repo-sort-filter';
 
 function Profile() {
 	const context = useUser();
-	const { repositories, prevPage, nextPage, hasNextPage, hasPrevPage } =
-		useRepos(context?.user?.login);
+	const {
+		repositories,
+		languages,
+		prevPage,
+		nextPage,
+		hasNextPage,
+		hasPrevPage,
+	} = useRepos(context?.user?.login);
 
 	const ContentLayout = styled.div`
 		grid-area: content;
 	`;
 
+	const Main = styled.div`
+		min-height: calc(100vh - 172px);
+	`;
+
+	const sortAndFilteredRepositories = useRepoSortFilter(repositories);
+
 	return (
-		<>
+		<Main>
 			<Header />
 			<Layout>
 				<UserProfileView />
 				<ContentLayout>
-					{!repositories.length ? (
+					{!sortAndFilteredRepositories.length ? (
 						<LoadingRepoCard />
 					) : (
 						<>
-							{repositories.map((repo) => (
+							<ProfileNav>
+								<TabNavigation tabs={tabs} activeTab={tabs[0].title} />
+							</ProfileNav>
+							<RepoFilter
+								languages={languages}
+								filteredRepoCount={sortAndFilteredRepositories.length}
+							/>
+							{sortAndFilteredRepositories.map((repo) => (
 								<RepoCard repo={repo} key={repo.id} star />
 							))}
 							<PaginateWrapper>
@@ -58,7 +82,7 @@ function Profile() {
 					</a>
 				</NetlifyBadgeContainer>
 			</Layout>
-		</>
+		</Main>
 	);
 }
 

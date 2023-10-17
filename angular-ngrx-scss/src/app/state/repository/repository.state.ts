@@ -1,6 +1,12 @@
+import {
+  Issue,
+  PullRequest,
+  RepositoryIssuesApiParams,
+} from 'src/app/repository/services/repository.interfaces';
 import { UserApiResponse } from '../user';
 
 export interface RepositoryState {
+  path: string;
   description: string;
   forkCount: number;
   issueCount: number;
@@ -13,11 +19,55 @@ export interface RepositoryState {
   tree: RepoContents[];
   openPullRequests: RepoPullRequests | null;
   closedPullRequests: RepoPullRequests | null;
+  openIssues: RepoIssues | null;
+  closedIssues: RepoIssues | null;
   activeBranch: string;
   selectedFile: FileContents | null;
   visibility: string;
   watchCount: number;
   website: string;
+  milestones: Milestone[];
+  labels: IssueLabel[];
+  pullsFilterParams: RepositoryIssuesApiParams | null;
+  issuesFilterParams: RepositoryIssuesApiParams | null;
+}
+
+export interface Milestone {
+  url: string;
+  html_url: string;
+  labels_url: string;
+  id: number;
+  node_id: string;
+  number: number;
+  state: ISSUE_STATE;
+  title: string;
+  description: string;
+  creator: {
+    login: string;
+    id: number;
+    node_id: string;
+    avatar_url: string;
+    gravatar_id: string;
+    url: string;
+    html_url: string;
+    followers_url: string;
+    following_url: string;
+    gists_url: string;
+    starred_url: string;
+    subscriptions_url: string;
+    organizations_url: string;
+    repos_url: string;
+    events_url: string;
+    received_events_url: string;
+    type: string;
+    site_admin: boolean;
+  };
+  open_issues: number;
+  closed_issues: number;
+  created_at: Date;
+  updated_at: Date;
+  closed_at: Date;
+  due_on: Date;
 }
 
 export interface RepoApiResponse {
@@ -175,7 +225,7 @@ export interface ReadmeApiResponse {
   };
 }
 
-export interface PullRequestLabel {
+export interface IssueLabel {
   id: number;
   node_id: string;
   url: string;
@@ -185,81 +235,36 @@ export interface PullRequestLabel {
   default: boolean;
 }
 
-export interface PullRequestItemAPIResponse {
-  url: string;
-  repository_url: string;
-  labels_url: string;
-  comments_url: string;
-  events_url: string;
-  html_url: string;
-  id: number;
-  node_id: string;
-  number: number;
-  title: string;
-  user: Partial<UserApiResponse>;
-  labels: PullRequestLabel[];
-  state: string;
-  locked: boolean;
-  assignee: string | null;
-  assignees: unknown[];
-  milestone: null;
-  comments: number;
-  created_at: string;
-  updated_at: string;
-  closed_at: string | null;
-  author_association: AUTHOR_ASSOCIATION;
-  active_lock_reason: string | null;
-  draft: boolean;
-  pull_request: {
-    url: string;
-    html_url: string;
-    diff_url: string;
-    patch_url: string;
-    merged_at: string | null;
-  };
-  body: string;
-
-  diff_url: string;
-  patch_url: string;
-  issue_url: string;
-  commits_url: string;
-  review_comments_url: string;
-  review_comment_url: string;
-  statuses_url: string;
-}
-
 export interface PullRequestAPIResponse {
   total_count: number;
   incomplete_results: boolean;
-  items: PullRequestItemAPIResponse[];
+  items: PullRequest[];
 }
 
 export interface RepoPullRequests {
-  totalCount: number;
-  pullRequests: RepoPullRequest[];
+  paginationParams: PaginationParams;
+  total: number;
+  pullRequests: PullRequest[];
 }
 
-export interface RepoPullRequest {
-  id: number;
-  login?: string | null;
-  title: string;
-  number: number;
-  closedAt?: Date | null;
-  mergedAt?: Date | null;
-  state: string;
-  createdAt: Date;
-  labels: Array<{
-    id: number;
-    node_id: string;
-    url: string;
-    name: string;
-    color: string;
-  }>;
-  commentCount: number;
-  labelCount: number;
+export interface IssueAPIResponse {
+  total_count: number;
+  incomplete_results: boolean;
+  items: Issue[];
 }
 
-export type PR_STATE = 'open' | 'closed';
+export interface PaginationParams {
+  page: number;
+  canNext: boolean;
+  canPrev: boolean;
+}
+
+export interface RepoIssues {
+  paginationParams: PaginationParams;
+  total: number;
+  issues: Issue[];
+}
+export type ISSUE_STATE = 'open' | 'closed';
 
 export enum AUTHOR_ASSOCIATION {
   COLLABORATOR = 'COLLABORATOR',

@@ -93,7 +93,7 @@ export async function fetchRepoTree(
     expression: string;
   },
   abortController?: AbortController
-): Promise<any> {
+) {
   const { executeQuery$ } = useQuery(REPO_TREE_QUERY);
 
   const resp = await executeQuery$({
@@ -124,7 +124,7 @@ export async function fetchRepoReadMe(
     expression: string;
   },
   abortController?: AbortController
-): Promise<any> {
+) {
   const { executeQuery$ } = useQuery(REPO_README_QUERY);
 
   const resp = await executeQuery$({

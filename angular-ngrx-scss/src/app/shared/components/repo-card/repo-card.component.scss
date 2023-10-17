@@ -1,9 +1,12 @@
+@use 'variables';
+@use 'functions';
+
 .name-container {
   display: flex;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 variables.$padding 0;
 
   .name {
-    font-size: 1.25rem;
+    font-size: functions.rem(18);
     line-height: 1.75em;
     font-weight: 600;
     color: rgba(37, 99, 235, 1);
@@ -13,7 +16,7 @@
     display: inline-block;
     padding: 0 7px;
     margin: 2px 2px 2px 8px;
-    font-size: 0.9rem;
+    font-size: functions.rem(13);
     font-weight: 500;
     line-height: 1.8em;
     color: rgba(75, 85, 99, 1);
@@ -29,7 +32,7 @@
 .subline {
   display: flex;
   gap: 16px;
-  font-size: 0.85rem;
+  font-size: functions.rem(12);
   line-height: 1.4em;
   color: rgba(75, 85, 99, 1);
 

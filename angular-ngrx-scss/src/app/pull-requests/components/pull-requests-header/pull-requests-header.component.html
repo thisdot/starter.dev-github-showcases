@@ -1,4 +1,10 @@
-<div class="filters-container">
+<div class="container" *ngIf="hasFilters$ | async">
+  <app-clear-filters-button (clearFilters)="clearFilters()"
+    >Clear current search query, filters, and sorts</app-clear-filters-button
+  >
+</div>
+
+<div class="container filters-container">
   <div class="pull-requests-status">
     <button
       class="tab-button"
@@ -6,7 +12,7 @@
       (click)="changeViewState('open')"
     >
       <span class="icon" appOcticon="no-entry" size="16"></span>
-      <span>{{ openPullRequests?.totalCount ?? 0 }} Open</span>
+      <span>{{ openPullRequests?.total ?? 0 }} Open</span>
     </button>
     <button
       class="tab-button"
@@ -14,7 +20,7 @@
       (click)="changeViewState('closed')"
     >
       <span class="icon" appOcticon="check" size="16"></span
-      ><span>{{ closedPullRequests?.totalCount ?? 0 }} closed</span>
+      ><span>{{ closedPullRequests?.total ?? 0 }} closed</span>
     </button>
   </div>
   <div class="pull-requests-filters">
@@ -22,11 +28,18 @@
       name="Label"
       description="Select label"
       [isRepo]="true"
+      [toggle]="true"
+      [items]="(labels$ | async) ?? []"
+      (setFilter)="setLabel($event)"
+      [current]="filterParams.labels"
     ></app-filter-dropdown>
     <app-filter-dropdown
       name="Sort"
       description="Select sort"
       [isRepo]="true"
+      [items]="sortOptions"
+      (setFilter)="setSort($event)"
+      [current]="filterParams.sort"
     ></app-filter-dropdown>
   </div>
 </div>

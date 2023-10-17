@@ -5,8 +5,7 @@ import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import 'whatwg-fetch';
 import AuthGuard from './AuthGuard';
 
-
-window.scrollTo = vi.fn()
+window.scrollTo = vi.fn();
 
 vi.mock('../../auth', () => {
   return {
