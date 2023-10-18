@@ -6,7 +6,6 @@ export const Layout = styled.div`
 	background-color: rgb(255, 255, 255);
 	display: grid;
 	overflow: hidden;
-
 	grid-template-columns: auto;
 	grid-template-areas:
 		'header'
