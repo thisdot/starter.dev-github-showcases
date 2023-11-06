@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import {
   IBranch,
+  IComments,
   IIssue,
   IPullRequest,
   IReadme,
@@ -51,11 +52,7 @@ export const useRepoStore = defineStore('repositoryStore ', {
         // Prepare the promises to be fetched
         const getRepoInfo = $axios.get<IRepository>(url);
         const getRepoBranches = $axios.get<IBranch[]>(branchesUrl);
-        const getPullRequests = $axios.get<IPullRequest[]>(pullRequestsUrl, {
-          params: {
-            state: 'all',
-          },
-        });
+        const getPullRequests = $axios.get<IPullRequest[]>(pullRequestsUrl);
         const getRepoRootContents =
           $axios.get<IRepoContents[]>(repoContentsUrl);
         const getRepoReadme = $axios.get<IReadme>(repoReadmeUrl);
@@ -127,6 +124,36 @@ export const useRepoStore = defineStore('repositoryStore ', {
         }
 
         throw new Error('Error fetching repository issues');
+      }
+    },
+    async getPullRequestsComments(pullRequest: IPullRequest[]) {
+      try {
+        const { $axios } = this.$nuxt;
+
+        const commentsPromises = pullRequest.map((p) => {
+          return $axios.get<IComments>(`${p.review_comments_url}`);
+        });
+
+        const comments = await Promise.all(commentsPromises);
+
+        // Merge the comments with the pull requests
+        const pullRequestsWithComments = pullRequest.map((p, index) => ({
+          ...p,
+          comments: comments[index].data,
+        }));
+
+        if (this.selectedRepository) {
+          this.selectedRepository = {
+            ...this.selectedRepository,
+            pullsRequests: pullRequestsWithComments,
+          };
+        }
+      } catch (error: any) {
+        if (error && error?.response) {
+          throw error;
+        }
+
+        throw new Error('Error fetching pull request comments');
       }
     },
   },

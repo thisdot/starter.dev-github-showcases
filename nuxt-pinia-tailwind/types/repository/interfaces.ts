@@ -37,6 +37,9 @@ export interface IPullRequest {
   merged_at: string | null;
   review_comments_url: string;
   comments: any;
+  base: {
+    repo: IRepository;
+  };
 }
 
 export interface IRepoContents {
@@ -110,4 +113,20 @@ export interface IIssue {
   created_at: string;
   updated_at: string;
   closed_by: Partial<IUser>;
+}
+
+export interface IComments {
+  body: string;
+  user: IUser;
+  created_at: string;
+  updated_at: string;
+  author_association:
+    | 'COLLABORATOR'
+    | 'CONTRIBUTOR'
+    | 'FIRST_TIMER'
+    | 'FIRST_TIME_CONTRIBUTOR'
+    | 'MANNEQUIN'
+    | 'MEMBER'
+    | 'NONE'
+    | 'OWNER';
 }
