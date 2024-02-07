@@ -45,11 +45,6 @@ describe('UserService', () => {
 
         expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
           `https://api.github.com/user`,
-          jasmine.objectContaining({
-            headers: {
-              Accept: 'application/vnd.github.v3+json',
-            },
-          }),
         );
       },
       complete: done,
@@ -84,11 +79,6 @@ describe('UserService', () => {
       next: () => {
         expect(httpClientSpy.get).toHaveBeenCalledWith(
           `https://api.github.com/users/thisdot/orgs`,
-          jasmine.objectContaining({
-            headers: {
-              Accept: 'application/vnd.github.v3+json',
-            },
-          }),
         );
       },
       complete: done,
@@ -211,11 +201,6 @@ describe('UserService', () => {
       next: () => {
         expect(httpClientSpy.get).toHaveBeenCalledWith(
           `https://api.github.com/users/thisdot/repos`,
-          jasmine.objectContaining({
-            headers: {
-              Accept: 'application/vnd.github.v3+json',
-            },
-          }),
         );
       },
       complete: done,
@@ -339,9 +324,6 @@ describe('UserService', () => {
         expect(httpClientSpy.get).toHaveBeenCalledWith(
           `https://api.github.com/users/thisdot/repos`,
           jasmine.objectContaining({
-            headers: {
-              Accept: 'application/vnd.github.v3+json',
-            },
             params: new HttpParams({
               fromObject: {
                 sort: 'updated',
@@ -369,11 +351,6 @@ describe('UserService', () => {
       next: () => {
         expect(httpClientSpy.get).toHaveBeenCalledWith(
           `https://api.github.com/users/thisdot/gists`,
-          jasmine.objectContaining({
-            headers: {
-              Accept: 'application/vnd.github.v3+json',
-            },
-          }),
         );
       },
       complete: done,

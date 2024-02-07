@@ -290,11 +290,6 @@ describe('RepositoryService', () => {
 
           expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
             `https://api.github.com/repos/thisdot/starter.dev-github-showcases`,
-            jasmine.objectContaining({
-              headers: {
-                Accept: 'application/vnd.github.v3+json',
-              },
-            }),
           );
           done();
         },
@@ -371,11 +366,6 @@ describe('RepositoryService', () => {
 
       expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
         'https://api.github.com/repos/thisdot/starter.dev-github-showcases/contents/README.md',
-        jasmine.objectContaining({
-          headers: {
-            Accept: 'application/vnd.github.v3+json',
-          },
-        }),
       );
     });
   });
@@ -391,11 +381,6 @@ describe('RepositoryService', () => {
 
           expect(httpClientSpy.get).toHaveBeenCalledWith(
             `https://api.github.com/repos/FakeCo/fake-repo/pulls/${MOCK_PULL_REQUEST_NUMBER}`,
-            jasmine.objectContaining({
-              headers: {
-                Accept: 'application/vnd.github.v3+json',
-              },
-            }),
           );
         },
         complete: done,
@@ -414,9 +399,7 @@ describe('RepositoryService', () => {
           expect(httpClientSpy.get).toHaveBeenCalledWith(
             `https://api.github.com/search/issues?q=repo:FakeCo/fake-repo+type:pr+state:all`,
             jasmine.objectContaining({
-              headers: {
-                Accept: 'application/vnd.github.v3+json',
-              },
+              observe: 'response',
             }),
           );
         },
@@ -439,11 +422,6 @@ describe('RepositoryService', () => {
 
           expect(httpClientSpy.get).toHaveBeenCalledWith(
             `https://api.github.com/repos/FakeCo/fake-repo/issues/${MOCK_PULL_REQUEST_NUMBER}/comments`,
-            jasmine.objectContaining({
-              headers: {
-                Accept: 'application/vnd.github.v3+json',
-              },
-            }),
           );
         },
         complete: done,
@@ -460,9 +438,7 @@ describe('RepositoryService', () => {
         expect(httpClientSpy.get).toHaveBeenCalledWith(
           'https://api.github.com/search/issues?q=repo:FakeCo/fake-repo+type:issue+state:all',
           jasmine.objectContaining({
-            headers: {
-              Accept: 'application/vnd.github.v3+json',
-            },
+            observe: 'response',
           }),
         );
       },
@@ -482,9 +458,7 @@ describe('RepositoryService', () => {
           expect(httpClientSpy.get).toHaveBeenCalledWith(
             'https://api.github.com/search/issues?q=repo:FakeCo/fake-repo+type:issue+state:closed',
             jasmine.objectContaining({
-              headers: {
-                Accept: 'application/vnd.github.v3+json',
-              },
+              observe: 'response',
             }),
           );
         },
@@ -510,11 +484,6 @@ describe('RepositoryService', () => {
         .toBe(1);
       expect(httpClientSpy.get).toHaveBeenCalledOnceWith(
         'https://api.github.com/repos/thisdot/starter.dev-github-showcases/pulls/1',
-        jasmine.objectContaining({
-          headers: {
-            Accept: 'application/vnd.github.v3+json',
-          },
-        }),
       );
     });
   });

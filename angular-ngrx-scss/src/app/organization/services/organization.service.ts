@@ -30,9 +30,6 @@ export class OrganizationService {
     )}/repos`;
 
     return this.http.get<OrganizationReposApiResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
       params: new HttpParams({
         fromObject: { ...Object.assign(defaultParams, params) },
       }),

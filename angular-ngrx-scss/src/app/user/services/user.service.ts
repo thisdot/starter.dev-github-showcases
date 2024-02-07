@@ -23,11 +23,7 @@ export class UserService {
   getAuthenticatedUserInfo(): Observable<UserApiResponse> {
     const url = `${environment.githubUrl}/user`;
 
-    return this.http.get<UserApiResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<UserApiResponse>(url);
   }
 
   /**
@@ -38,11 +34,7 @@ export class UserService {
   getUserInfo(username: string): Observable<UserApiResponse> {
     const url = `${environment.githubUrl}/users/${username}`;
 
-    return this.http.get<UserApiResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<UserApiResponse>(url);
   }
 
   /**
@@ -57,11 +49,7 @@ export class UserService {
   getUserOrganizations(username: string): Observable<UserOrgsApiResponse> {
     const url = `${environment.githubUrl}/users/${username}/orgs`;
 
-    return this.http.get<UserOrgsApiResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<UserOrgsApiResponse>(url);
   }
 
   /**
@@ -72,11 +60,7 @@ export class UserService {
   getUserRepos(username: string): Observable<UserReposApiResponse> {
     const url = `${environment.githubUrl}/users/${username}/repos`;
 
-    return this.http.get<UserReposApiResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<UserReposApiResponse>(url);
   }
 
   /**
@@ -100,9 +84,6 @@ export class UserService {
       params: new HttpParams({
         fromObject: { ...Object.assign(defaultParams) },
       }),
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
     });
   }
 
@@ -114,10 +95,6 @@ export class UserService {
   getUserGists(username: string): Observable<UserGistsApiResponse> {
     const url = `${environment.githubUrl}/users/${username}/gists`;
 
-    return this.http.get<UserGistsApiResponse>(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
+    return this.http.get<UserGistsApiResponse>(url);
   }
 }

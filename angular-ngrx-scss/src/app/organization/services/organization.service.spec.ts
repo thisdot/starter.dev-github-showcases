@@ -91,9 +91,6 @@ describe('OrganizationService', () => {
         expect(httpSpy.get).toHaveBeenCalledWith(
           'https://api.github.com/orgs/FakeCo/repos',
           jasmine.objectContaining({
-            headers: {
-              Accept: 'application/vnd.github.v3+json',
-            },
             params: new HttpParams({
               fromObject: {
                 type: 'all',
@@ -120,9 +117,6 @@ describe('OrganizationService', () => {
         expect(httpSpy.get).toHaveBeenCalledWith(
           'https://api.github.com/orgs/OtherFakeCo/repos',
           jasmine.objectContaining({
-            headers: {
-              Accept: 'application/vnd.github.v3+json',
-            },
             params: new HttpParams({
               fromObject: {
                 type: 'public',
